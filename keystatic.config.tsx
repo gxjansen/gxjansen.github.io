@@ -24,7 +24,7 @@ export default config({
   // create a Keystatic Cloud account here: https://keystatic.cloud/
   cloud: { project: "gxjansen/gxjansen" },
   ui: {
-    brand: { name: "Guido's Homepage" },
+    brand: { name: "gui.do admin" },
   },
   collections: {
     blogEN: Collections.Blog("en"),

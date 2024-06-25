@@ -33,7 +33,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
 
 <div {...rest} class="h-full">
   <a
-    href={getRelativeLocaleUrl(currLocale, href)}
+    href={href}
     class="group flex h-full flex-col justify-between overflow-hidden rounded-xl px-4 py-8 text-center transition-all duration-300 hover:bg-white hover:shadow-xl dark:hover:bg-base-900"
   >
     <div>
@@ -48,7 +48,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
     </div>
     <div class="mt-6 flex justify-center">
       <Button variant="outline" arrow="right">
-        Learn more <span class="sr-only">about {title}</span>
+        Listen now<span class="sr-only">about {title}</span>
       </Button>
     </div>
   </a>

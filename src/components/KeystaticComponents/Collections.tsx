@@ -23,7 +23,7 @@ const Blog = (locale: (typeof locales)[number]) =>
   collection({
     label: `Blog`,
     slugField: "title",
-    path: `src/content/blog/*/`,
+    path: `src/content/blog/en/*/`,
     columns: ["title", "pubDate"],
     entryLayout: "content",
     format: { contentField: "content" },
