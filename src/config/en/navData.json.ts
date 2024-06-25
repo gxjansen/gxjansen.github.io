@@ -32,102 +32,102 @@ const navConfig: navItem[] = [
   // },
 
   // mega menu
-  // {
-  //   text: "Pages",
-  //   megaMenuColumns: [
-  //     {
-  //       title: "Landing Pages",
-  //       items: [
-  //         {
-  //           text: "Landing 1",
-  //           link: "/",
-  //           icon: "tabler/star",
-  //         },
-  //         {
-  //           text: "Landing 2",
-  //           link: "/examples/landing2",
-  //           icon: "tabler/diamonds",
-  //         },
-  //         {
-  //           text: "Landing 3",
-  //           link: "/examples/landing3",
-  //           icon: "tabler/circle",
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       title: "Blog",
-  //       items: [
-  //         {
-  //           text: "Blog Index 1",
-  //           link: "/blog",
-  //           icon: "tabler/pencil",
-  //         },
-  //         {
-  //           text: "Blog Index 2",
-  //           link: "/examples/blogIndex2",
-  //           icon: "tabler/pencil",
-  //         },
-  //         {
-  //           text: "Categories",
-  //           link: "/categories",
-  //           icon: "tabler/category",
-  //         },
-  //         {
-  //           text: "Blog Post",
-  //           link: "/blog/tsconfig-paths-setup",
-  //           icon: "tabler/edit-circle",
-  //         },
-  //       ],
-  //     },
-  //     // {
-  //     //   title: "Elements and Forms",
-  //     //   items: [
-  //     //     {
-  //     //       text: "MDX Pages",
-  //     //       link: "/elements",
-  //     //       icon: "tabler/wand",
-  //     //     },
-  //     //     {
-  //     //       text: "Contact",
-  //     //       link: "/contact",
-  //     //       icon: "tabler/address-book",
-  //     //     },
-  //     //   ],
-  //     // },
-  //     // {
-  //     //   title: "Other Pages",
-  //     //   items: [
-  //     //     {
-  //     //       text: "About",
-  //     //       link: "/about",
-  //     //       icon: "tabler/user",
-  //     //     },
-  //     //     {
-  //     //       text: "Privacy Policy",
-  //     //       link: "/privacy-policy",
-  //     //       icon: "tabler/lock-square",
-  //     //     },
-  //     //     {
-  //     //       text: "Terms of Use",
-  //     //       link: "/terms",
-  //     //       icon: "tabler/script",
-  //     //     },
-  //     //     {
-  //     //       text: "Page not found",
-  //     //       link: "/not-a-link",
-  //     //       icon: "tabler/error-404",
-  //     //     },
-  //     //     {
-  //     //       text: "RSS Feed",
-  //     //       link: "/rss.xml",
-  //     //       newTab: true,
-  //     //       icon: "tabler/rss",
-  //     //     },
-  //     //   ],
-  //     // },
-  //   ],
-  // },
+  {
+    text: "Pages",
+    megaMenuColumns: [
+      {
+        title: "Landing Pages",
+        items: [
+          {
+            text: "Landing 1",
+            link: "/",
+            icon: "tabler/star",
+          },
+          {
+            text: "Landing 2",
+            link: "/examples/landing2",
+            icon: "tabler/diamonds",
+          },
+          {
+            text: "Landing 3",
+            link: "/examples/landing3",
+            icon: "tabler/circle",
+          },
+        ],
+      },
+      {
+        title: "Blog",
+        items: [
+          {
+            text: "Blog Index 1",
+            link: "/blog",
+            icon: "tabler/pencil",
+          },
+          {
+            text: "Blog Index 2",
+            link: "/examples/blogIndex2",
+            icon: "tabler/pencil",
+          },
+          {
+            text: "Categories",
+            link: "/categories",
+            icon: "tabler/category",
+          },
+          {
+            text: "Blog Post",
+            link: "/blog/tsconfig-paths-setup",
+            icon: "tabler/edit-circle",
+          },
+        ],
+      },
+      // {
+      //   title: "Elements and Forms",
+      //   items: [
+      //     {
+      //       text: "MDX Pages",
+      //       link: "/elements",
+      //       icon: "tabler/wand",
+      //     },
+      //     {
+      //       text: "Contact",
+      //       link: "/contact",
+      //       icon: "tabler/address-book",
+      //     },
+      //   ],
+      // },
+      // {
+      //   title: "Other Pages",
+      //   items: [
+      //     {
+      //       text: "About",
+      //       link: "/about",
+      //       icon: "tabler/user",
+      //     },
+      //     {
+      //       text: "Privacy Policy",
+      //       link: "/privacy-policy",
+      //       icon: "tabler/lock-square",
+      //     },
+      //     {
+      //       text: "Terms of Use",
+      //       link: "/terms",
+      //       icon: "tabler/script",
+      //     },
+      //     {
+      //       text: "Page not found",
+      //       link: "/not-a-link",
+      //       icon: "tabler/error-404",
+      //     },
+      //     {
+      //       text: "RSS Feed",
+      //       link: "/rss.xml",
+      //       newTab: true,
+      //       icon: "tabler/rss",
+      //     },
+      //   ],
+      // },
+    ],
+  },
 
   // regular dropdown
   // {

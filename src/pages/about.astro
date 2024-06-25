@@ -14,11 +14,6 @@ import Profile from "@components/Profile/Profile.astro";
 import Button from "@components/Button/Button.astro";
 import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
 import Badge from "@components/Badge/Badge.astro";
-import AboutMe from "@components/AboutMe/AboutMe.mdx";
-import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
-import ServicesSideImage from "@components/Services/ServicesSideImage.astro";
-
-
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -34,10 +29,10 @@ const teamData = getTranslatedData("teamData", currLocale);
   description="All about our super awesome small business team!"
 >
   <!-- text section -->
-  <!-- <section
+  <section
     class="site-container mx-auto mt-16 bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark-big.svg')]"
   >
-    <!-- <div class="mb-16 text-center">
+    <div class="mb-16 text-center">
       <Badge>Team</Badge>
       <h1 class="h1 mb-4">Our team is the best in the business.</h1>
       <p class="description mb-8 text-lg md:text-xl">
@@ -52,10 +47,10 @@ const teamData = getTranslatedData("teamData", currLocale);
           Contact Us
         </Button>
       </div>
-    </div> -->
+    </div>
 
     <!-- Team info -->
-    <!-- <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {
         teamData.map((member) => (
           <Profile
@@ -66,9 +61,8 @@ const teamData = getTranslatedData("teamData", currLocale);
           />
         ))
       }
-    </div> -->
-  </section> -->
-  <ServicesSideImage />
-  <FeatureGalleryMarquee />
+    </div>
+  </section>
+
   <CtaCardSplit />
 </BaseLayout>
