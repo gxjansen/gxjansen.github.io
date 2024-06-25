@@ -10,10 +10,10 @@ const siteData: SiteDataProps = {
     "I'm a psychologist working in E-commerce. ‍ I build community & business experimentation teams & programs at innovative businesses.",
   // used on contact page and footer
   contact: {
-    address1: "1234 Main Street",
-    address2: "New York, NY 10001",
-    phone: "(123) 456-7890",
-    email: "x@gui.de",
+    address1: "Ouderkerk aan de Amstel,",
+    address2: "The Netherlands 🇳🇱 🇪🇺",
+    phone: "+31 6 42093976",
+    email: "x@gui.do",
   },
 
   // Your information for blog post purposes

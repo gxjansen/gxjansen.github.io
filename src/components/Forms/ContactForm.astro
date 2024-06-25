@@ -25,7 +25,7 @@ import Button from "@components/Button/Button.astro";
             class="form__input"
             name="fname"
             id="contact-fname"
-            placeholder="first name"
+            placeholder="First name"
             required
           />
         </div>
@@ -39,13 +39,13 @@ import Button from "@components/Button/Button.astro";
             class="form__input"
             name="lname"
             id="contact-lname"
-            placeholder="last name"
+            placeholder="Last name"
             required
           />
         </div>
       </div>
     </div>
-    <div>
+    <!-- <div>
       <label for="contact-address" class="form__label sr-only mb-1"
         >Street Address <span class="text-red-600">*</span></label
       >
@@ -103,7 +103,7 @@ import Button from "@components/Button/Button.astro";
         </div>
       </div>
     </div>
-    <div>
+    <div> -->
       <label for="contact-email" class="form__label sr-only mb-1"
         >Email <span class="text-red-600">*</span></label
       >
@@ -113,11 +113,11 @@ import Button from "@components/Button/Button.astro";
         name="email"
         id="contact-email"
         inputmode="email"
-        placeholder="preferred contact email"
+        placeholder="E-mail"
         required
       />
     </div>
-    <div>
+    <!-- <div>
       <label for="contact-phone" class="form__label sr-only mb-1"
         >Phone Number <span class="text-red-600">*</span></label
       >
@@ -130,8 +130,8 @@ import Button from "@components/Button/Button.astro";
         placeholder="phone number"
         required
       />
-    </div>
-    <div>
+    </div> -->
+    <!-- <div>
       <label for="contact-timeframe" class="form__label sr-only mb-1"
         >Desired Time Frame <span class="text-red-600">*</span></label
       >
@@ -143,7 +143,7 @@ import Button from "@components/Button/Button.astro";
         placeholder="desired time frame for the work to be completed"
         required
       />
-    </div>
+    </div> -->
     <div>
       <label for="contact-services" class="form__label sr-only mb-1"
         >Services Desired <span class="text-red-600">*</span></label
@@ -153,7 +153,7 @@ import Button from "@components/Button/Button.astro";
         class="form__input"
         id="contact-services"
         rows="4"
-        placeholder="Please provide a brief description of the services desired"
+        placeholder="Please provide a brief description of your request"
         required></textarea>
     </div>
     <Button variant="primary" type="submit">Submit</Button>

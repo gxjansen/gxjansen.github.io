@@ -136,190 +136,143 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"authors": {
-"second-author/index.mdx": {
-	id: "second-author/index.mdx";
-  slug: "second-author";
-  body: string;
-  collection: "authors";
-  data: InferEntrySchema<"authors">
-} & { render(): Render[".mdx"] };
-"web-reaper/index.mdx": {
-	id: "web-reaper/index.mdx";
-  slug: "web-reaper";
+"gxjansen/index.mdx": {
+	id: "gxjansen/index.mdx";
+  slug: "gxjansen";
   body: string;
   collection: "authors";
   data: InferEntrySchema<"authors">
 } & { render(): Render[".mdx"] };
 };
 "blog": {
-"en/best-vscode-extensions-front-end-developers/index.mdx": {
-	id: "en/best-vscode-extensions-front-end-developers/index.mdx";
-  slug: "en/best-vscode-extensions-front-end-developers";
+"best-vscode-extensions-front-end-developers/index.mdx": {
+	id: "best-vscode-extensions-front-end-developers/index.mdx";
+  slug: "best-vscode-extensions-front-end-developers";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"en/example-1/index.mdx": {
-	id: "en/example-1/index.mdx";
-  slug: "en/example-1";
+"en/are-you-left-or-right-brain-surprise-youre-both/index.mdx": {
+	id: "en/are-you-left-or-right-brain-surprise-youre-both/index.mdx";
+  slug: "en/are-you-left-or-right-brain-surprise-youre-both";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"en/example-2/index.mdx": {
-	id: "en/example-2/index.mdx";
-  slug: "en/example-2";
+"en/often-confused-commerce-terms/index.mdx": {
+	id: "en/often-confused-commerce-terms/index.mdx";
+  slug: "en/often-confused-commerce-terms";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"en/example-3/index.mdx": {
-	id: "en/example-3/index.mdx";
-  slug: "en/example-3";
+"en/optimization-hierarchy-of-evidence/index.mdx": {
+	id: "en/optimization-hierarchy-of-evidence/index.mdx";
+  slug: "en/optimization-hierarchy-of-evidence";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"en/tailwind-gradient-underline/index.mdx": {
-	id: "en/tailwind-gradient-underline/index.mdx";
-  slug: "en/tailwind-gradient-underline";
+"example-1/index.mdx": {
+	id: "example-1/index.mdx";
+  slug: "example-1";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"en/tsconfig-paths-setup/index.mdx": {
-	id: "en/tsconfig-paths-setup/index.mdx";
-  slug: "en/tsconfig-paths-setup";
+"example-2/index.mdx": {
+	id: "example-2/index.mdx";
+  slug: "example-2";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"fr/best-vscode-extensions-front-end-developers/index.mdx": {
-	id: "fr/best-vscode-extensions-front-end-developers/index.mdx";
-  slug: "fr/best-vscode-extensions-front-end-developers";
+"tailwind-gradient-underline/index.mdx": {
+	id: "tailwind-gradient-underline/index.mdx";
+  slug: "tailwind-gradient-underline";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"fr/example-1/index.mdx": {
-	id: "fr/example-1/index.mdx";
-  slug: "fr/example-1";
+"tips-for-freelance-website-development/index.mdx": {
+	id: "tips-for-freelance-website-development/index.mdx";
+  slug: "tips-for-freelance-website-development";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"fr/example-2/index.mdx": {
-	id: "fr/example-2/index.mdx";
-  slug: "fr/example-2";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"fr/example-3/index.mdx": {
-	id: "fr/example-3/index.mdx";
-  slug: "fr/example-3";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"fr/tailwind-gradient-underline/index.mdx": {
-	id: "fr/tailwind-gradient-underline/index.mdx";
-  slug: "fr/tailwind-gradient-underline";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
-"fr/tsconfig-paths-setup/index.mdx": {
-	id: "fr/tsconfig-paths-setup/index.mdx";
-  slug: "fr/tsconfig-paths-setup";
+"tsconfig-paths-setup/index.mdx": {
+	id: "tsconfig-paths-setup/index.mdx";
+  slug: "tsconfig-paths-setup";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 };
+"events": {
+"en/index.mdx": {
+	id: "en/index.mdx";
+  slug: "en";
+  body: string;
+  collection: "events";
+  data: any
+} & { render(): Render[".mdx"] };
+"fr/index.mdx": {
+	id: "fr/index.mdx";
+  slug: "fr";
+  body: string;
+  collection: "events";
+  data: any
+} & { render(): Render[".mdx"] };
+"nl/index.mdx": {
+	id: "nl/index.mdx";
+  slug: "nl";
+  body: string;
+  collection: "events";
+  data: any
+} & { render(): Render[".mdx"] };
+};
 "otherPages": {
-"en/elements/index.mdx": {
-	id: "en/elements/index.mdx";
-  slug: "en/elements";
+"elements/index.mdx": {
+	id: "elements/index.mdx";
+  slug: "elements";
   body: string;
   collection: "otherPages";
   data: InferEntrySchema<"otherPages">
 } & { render(): Render[".mdx"] };
-"en/privacy-policy/index.mdx": {
-	id: "en/privacy-policy/index.mdx";
-  slug: "en/privacy-policy";
+"privacy-policy/index.mdx": {
+	id: "privacy-policy/index.mdx";
+  slug: "privacy-policy";
   body: string;
   collection: "otherPages";
   data: InferEntrySchema<"otherPages">
 } & { render(): Render[".mdx"] };
-"en/terms/index.mdx": {
-	id: "en/terms/index.mdx";
-  slug: "en/terms";
-  body: string;
-  collection: "otherPages";
-  data: InferEntrySchema<"otherPages">
-} & { render(): Render[".mdx"] };
-"fr/elements/index.mdx": {
-	id: "fr/elements/index.mdx";
-  slug: "fr/elements";
-  body: string;
-  collection: "otherPages";
-  data: InferEntrySchema<"otherPages">
-} & { render(): Render[".mdx"] };
-"fr/privacy-policy/index.mdx": {
-	id: "fr/privacy-policy/index.mdx";
-  slug: "fr/privacy-policy";
-  body: string;
-  collection: "otherPages";
-  data: InferEntrySchema<"otherPages">
-} & { render(): Render[".mdx"] };
-"fr/terms/index.mdx": {
-	id: "fr/terms/index.mdx";
-  slug: "fr/terms";
+"terms/index.mdx": {
+	id: "terms/index.mdx";
+  slug: "terms";
   body: string;
   collection: "otherPages";
   data: InferEntrySchema<"otherPages">
 } & { render(): Render[".mdx"] };
 };
 "services": {
-"en/deck-and-fence-staining/index.mdx": {
-	id: "en/deck-and-fence-staining/index.mdx";
-  slug: "en/deck-and-fence-staining";
+"deck-and-fence-staining/index.mdx": {
+	id: "deck-and-fence-staining/index.mdx";
+  slug: "deck-and-fence-staining";
   body: string;
   collection: "services";
   data: InferEntrySchema<"services">
 } & { render(): Render[".mdx"] };
-"en/exterior-painting/index.mdx": {
-	id: "en/exterior-painting/index.mdx";
-  slug: "en/exterior-painting";
+"exterior-painting/index.mdx": {
+	id: "exterior-painting/index.mdx";
+  slug: "exterior-painting";
   body: string;
   collection: "services";
   data: InferEntrySchema<"services">
 } & { render(): Render[".mdx"] };
-"en/interior-painting/index.mdx": {
-	id: "en/interior-painting/index.mdx";
-  slug: "en/interior-painting";
-  body: string;
-  collection: "services";
-  data: InferEntrySchema<"services">
-} & { render(): Render[".mdx"] };
-"fr/deck-and-fence-staining/index.mdx": {
-	id: "fr/deck-and-fence-staining/index.mdx";
-  slug: "fr/deck-and-fence-staining";
-  body: string;
-  collection: "services";
-  data: InferEntrySchema<"services">
-} & { render(): Render[".mdx"] };
-"fr/exterior-painting/index.mdx": {
-	id: "fr/exterior-painting/index.mdx";
-  slug: "fr/exterior-painting";
-  body: string;
-  collection: "services";
-  data: InferEntrySchema<"services">
-} & { render(): Render[".mdx"] };
-"fr/interior-painting/index.mdx": {
-	id: "fr/interior-painting/index.mdx";
-  slug: "fr/interior-painting";
+"interior-painting/index.mdx": {
+	id: "interior-painting/index.mdx";
+  slug: "interior-painting";
   body: string;
   collection: "services";
   data: InferEntrySchema<"services">
