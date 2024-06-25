@@ -1,0 +1,75 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+// components
+import FooterLink from "@components/Footer/FooterLink.astro";
+import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
+import Button from "@components/Button/Button.astro";
+import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { getTranslatedData } from "@js/translationUtils";
+
+// data
+const currLocale = getLocaleFromUrl(Astro.url);
+const siteData = getTranslatedData("siteData", currLocale);
+
+const today = new Date();
+---
+
+<footer class="overflow-x-clip pb-16 pt-20 font-medium text-base-500">
+  <div class="site-container">
+    <div class="mt-6 flex flex-wrap items-center justify-between gap-6">
+      <SiteLogo />
+      <div class="flex flex-wrap gap-x-4">
+        <FooterLink href={getRelativeLocaleUrl(currLocale, "/overview")}
+          >Overview</FooterLink
+        >
+        <FooterLink href={getRelativeLocaleUrl(currLocale, "/blog")}
+          >Blog</FooterLink
+        >
+        <FooterLink href={getRelativeLocaleUrl(currLocale, "/elements")}
+          >Elements</FooterLink
+        >
+        <FooterLink href={getRelativeLocaleUrl(currLocale, "/contact")}
+          >Contact</FooterLink
+        >
+        <FooterLink href={getRelativeLocaleUrl(currLocale, "/terms")}
+          >Terms</FooterLink
+        >
+        <FooterLink href={getRelativeLocaleUrl(currLocale, "/privacy-policy")}
+          >Privacy</FooterLink
+        >
+      </div>
+    </div>
+  </div>
+  <div class="mt-6 border-t border-t-base-200/50 text-sm text-base-400">
+    <div class="site-container mt-6 flex flex-wrap justify-between gap-6">
+      <div class="my-auto">
+        &copy; {today.getFullYear()}
+        {" "}{siteData.name}. All rights reserved.
+      </div>
+      <!-- Socials -->
+      <div class="flex flex-col">
+        <div class="flex gap-4">
+          <SocialIcon
+            href="https://twitter.com/BowTiedWebReapr"
+            icon="tabler/brand-x"
+            social="twitter (x)"
+          />
+          <SocialIcon
+            href="https://twitter.com/BowTiedWebReapr"
+            icon="tabler/brand-facebook"
+            social="facebook"
+          />
+          <SocialIcon
+            href="https://twitter.com/BowTiedWebReapr"
+            icon="tabler/brand-google-filled"
+            social="google"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

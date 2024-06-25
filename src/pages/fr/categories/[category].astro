@@ -1,0 +1,83 @@
+---
+import {
+  type InferGetStaticPropsType,
+  type InferGetStaticParamsType,
+} from "astro";
+
+// main layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import CategoryCloud from "@components/CategoryCloud/CategoryCloud.astro";
+import Badge from "@components/Badge/Badge.astro";
+import PostCard from "@components/PostCard/PostCardAtlas.astro";
+
+// utils
+import { getAllPosts, countItems, sortByValue } from "@js/blogUtils";
+import { slugify, humanize } from "@js/textUtils";
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { defaultLocale } from "@config/siteSettings.json";
+
+// generate pagination for tag pages if there are a bunch of posts for a single tag
+export async function getStaticPaths() {
+  const posts = await getAllPosts("fr");
+  const allCategories = posts.map((post) => post.data.categories).flat();
+  const countedCategories = countItems(allCategories);
+  const processedCategories = sortByValue(countedCategories);
+
+  return processedCategories.map(([category, count]) => ({
+    params: { category: category },
+  }));
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+
+// const filteredPosts = Astro.props as Props;
+const { category } = Astro.params as Params;
+
+const currLocale = getLocaleFromUrl(Astro.url);
+const posts = await getAllPosts(currLocale);
+const filteredPosts = posts.filter((post) => {
+  // make sure to slugify them for comparison
+  const slugifiedCategory = post.data.categories.map((category) =>
+    slugify(category),
+  );
+
+  return slugifiedCategory.includes(category);
+});
+---
+
+<BaseLayout
+  title={`Our Blog Posts on ${humanize(category)}`}
+  description="Learn from our blog posts about web development, design, and more."
+>
+  <section class="site-container">
+    <div
+      class="overflow-x-clip bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat pt-24 dark:bg-[url('/assets/pattern-dark.svg')] md:pt-32"
+    >
+      <div class="mx-auto flex max-w-[950px] flex-col justify-center">
+        <div class="mx-auto">
+          <Badge>Blog</Badge>
+        </div>
+        <h1 class="h1 text-center">
+          Posts on <span class="underline decoration-primary-500"
+            >{humanize(category).toLowerCase()}</span
+          >
+        </h1>
+      </div>
+
+      <div class="mt-20 flex pb-8 md:mt-28">
+        <CategoryCloud />
+      </div>
+    </div>
+
+    <div class="grid gap-8 gap-y-10 md:grid-cols-2">
+      {
+        filteredPosts.map((post) => (
+          <PostCard post={post} showDescription={true} />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

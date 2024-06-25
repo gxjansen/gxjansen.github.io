@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const databaseIcon: import("react").JSX.Element;

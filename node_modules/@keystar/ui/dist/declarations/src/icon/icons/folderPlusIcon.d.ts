@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const folderPlusIcon: import("react").JSX.Element;

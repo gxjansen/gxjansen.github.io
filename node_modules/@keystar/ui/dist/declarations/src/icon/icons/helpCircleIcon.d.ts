@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const helpCircleIcon: import("react").JSX.Element;

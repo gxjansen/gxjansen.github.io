@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const candyIcon: import("react").JSX.Element;

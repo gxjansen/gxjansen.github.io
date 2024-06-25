@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const shirtIcon: import("react").JSX.Element;

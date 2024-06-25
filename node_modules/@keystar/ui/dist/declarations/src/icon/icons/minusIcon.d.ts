@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const minusIcon: import("react").JSX.Element;

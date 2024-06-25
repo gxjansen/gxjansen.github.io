@@ -1,0 +1,122 @@
+---
+/**
+ * * Dropdown menu that opens on click
+ * This is for non-mobile devices
+ */
+import { Icon } from "astro-icon";
+
+// components
+import NavLink from "@components/Nav/NavLink.astro";
+import { type navDropdownItem } from "@config/types/configDataTypes";
+
+interface Props {
+  navItem: navDropdownItem;
+}
+
+const { navItem } = Astro.props as Props;
+---
+
+<!-- non-mobile dropdown menu -->
+<li class="nav__dropdown group relative">
+  <button
+    class="primary-focus nav__dropdown-button flex w-full items-center gap-0.5 whitespace-nowrap px-3 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300"
+    type="button"
+    id={`${navItem.text} dropdown menu`}
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-controls={`${navItem.text} dropdown menu content`}
+  >
+    {navItem.text}
+    <Icon
+      name="tabler/chevron-down"
+      aria-hidden="true"
+      class="nav__dropdown-chevron size-5 shrink-0 transition-transform"
+    />
+  </button>
+  <div
+    id={`${navItem.text} dropdown menu content`}
+    aria-labelledby={`${navItem.text} dropdown menu`}
+    class="nav__dropdown-content invisible absolute left-0 z-10 opacity-0 transition-all"
+  >
+    <ul
+      class="mt-4 w-[12rem] min-w-[9rem] max-w-[20rem] rounded-md border border-solid border-base-200 bg-base-50 p-1.5 drop-shadow-sm dark:border-base-800 dark:bg-base-900"
+    >
+      {
+        navItem.dropdown.map((dropdownItem) => (
+          <NavLink navItem={dropdownItem} class="w-full" />
+        ))
+      }
+    </ul>
+  </div>
+</li>
+
+<script>
+  function dropdownToggleSetup() {
+    const dropdownMenus = document.querySelectorAll(".nav__dropdown");
+    dropdownMenus.forEach((dropdownMenu) => {
+      const dropdownButton = dropdownMenu.querySelector(
+        ".nav__dropdown-button",
+      );
+      const dropdownChevron = dropdownMenu.querySelector(
+        ".nav__dropdown-chevron",
+      );
+      const dropdownContent = dropdownMenu.querySelector(
+        ".nav__dropdown-content",
+      );
+      if (dropdownButton && dropdownContent && dropdownChevron) {
+        dropdownButton.addEventListener("click", (event) => {
+          if (!dropdownMenu.classList.contains("active")) {
+            // if dropdown is currently closed, so open it
+            dropdownMenu.classList.add("active");
+            dropdownButton.setAttribute("aria-expanded", "true");
+            dropdownContent.classList.add("dropdown--fade-in");
+            dropdownChevron.classList.add("rotate-180");
+          } else {
+            // dropdown is currently open, so close it
+            dropdownMenu.classList.remove("active");
+            dropdownButton.setAttribute("aria-expanded", "false");
+            dropdownContent.classList.remove("dropdown--fade-in");
+            dropdownChevron.classList.remove("rotate-180");
+          }
+          event.preventDefault();
+          return false;
+        });
+
+        // if dropdown menu is open there is a click outside, close the menu
+        document.addEventListener("click", (event) => {
+          if (
+            !dropdownMenu.contains(event.target as Node) &&
+            dropdownMenu.classList.contains("active")
+          ) {
+            dropdownMenu.classList.remove("active");
+            dropdownButton.setAttribute("aria-expanded", "false");
+            dropdownContent.classList.remove("dropdown--fade-in");
+            dropdownChevron.classList.remove("rotate-180");
+          }
+        });
+      }
+    });
+  }
+
+  // runs on initial page load
+  dropdownToggleSetup();
+
+  // runs on view transitions navigation
+  document.addEventListener("astro:after-swap", dropdownToggleSetup);
+</script>
+
+<style lang="scss">
+  .dropdown--fade-in {
+    animation: navDropdownFadeInAnimation ease-out 0.15s forwards;
+    @apply visible opacity-100;
+  }
+
+  @keyframes navDropdownFadeInAnimation {
+    0% {
+      @apply top-[80%];
+    }
+    100% {
+      @apply top-full;
+    }
+  }
+</style>

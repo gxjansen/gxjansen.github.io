@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const shieldCloseIcon: import("react").JSX.Element;

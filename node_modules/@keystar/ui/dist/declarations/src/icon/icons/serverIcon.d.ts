@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const serverIcon: import("react").JSX.Element;

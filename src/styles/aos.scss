@@ -1,0 +1,34 @@
+/* start animated items visibly hidden. Once animation has started, "aos-animate" class is added to make them visible for the animation to play */
+
+/* all animations */
+.use-animations [data-aos] {
+  @apply pointer-events-none;
+
+  &.aos-animate {
+    @apply pointer-events-auto;
+  }
+}
+
+/* fade animations */
+.use-animations [data-aos^="fade"][data-aos^="fade"] {
+  @apply opacity-0;
+}
+
+/* zoom animations */
+.use-animations [data-aos^="zoom"][data-aos^="zoom"] {
+  @apply opacity-0;
+}
+
+/* slide animations */
+.use-animations [data-aos^="slide"][data-aos^="slide"] {
+  @apply invisible;
+
+  &.aos-animate {
+    @apply visible;
+  }
+}
+
+/* flip animations */
+.use-animations [data-aos^="flip"][data-aos^="flip"] {
+  backface-visibility: hidden;
+}

@@ -1,0 +1,10 @@
+/// <reference types="react" />
+import { TooltipTriggerProps } from "./types.js";
+export declare const MOUSE_REST_TIMEOUT = 600;
+/**
+ * TooltipTrigger wraps around a trigger element and a Tooltip. It handles opening and closing
+ * the Tooltip when the user hovers over or focuses the trigger, and positioning the Tooltip
+ * relative to the trigger.
+ */
+declare let _TooltipTrigger: (props: TooltipTriggerProps) => JSX.Element;
+export { _TooltipTrigger as TooltipTrigger };

@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const dice2Icon: import("react").JSX.Element;

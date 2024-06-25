@@ -1,0 +1,133 @@
+---
+import Icon from "astro-icon";
+
+// components
+import Button from "@components/Button/Button.astro";
+
+interface Props {
+  rest?: any; // catch-all for any additional parameters, such as "aria-label"
+}
+
+const { ...rest } = Astro.props as Props;
+
+import video from "@videos/placeholder-space.mp4";
+---
+
+<Button
+  variant="outline"
+  id="video-button__play-button"
+  class="video-button flex gap-1"
+  {...rest}
+>
+  <Icon name="tabler/player-play" class="h-5 w-5" aria-hidden="true" /><span
+    >Watch Video</span
+  >
+</Button>
+
+<!-- html video. Shown when play button is pressed -->
+<div
+  id="video-button__video-items"
+  class="fixed inset-0 z-40 hidden h-screen w-screen"
+>
+  <div class="relative flex h-full w-full items-center justify-center">
+    <!-- backdrop button to close video -->
+    <button
+      id="video-button__backdrop-button"
+      class="absolute inset-0 z-30 h-full w-full bg-base-900 transition-all"
+    >
+    </button>
+
+    <!-- Video -->
+    <div
+      class="site-container relative m-auto h-fit w-fit max-w-[1000px] p-3 sm:p-6"
+    >
+      <!-- HTML video example -->
+      <video
+        id="video-button__video"
+        class="relative z-30 w-full max-w-[1000px] rounded-xl"
+        loop
+        controls
+        muted
+        playsinline
+        preload="metadata"
+      >
+        <source src={video} type="video/mp4" />
+      </video>
+
+      <!-- X button to close video -->
+      <button
+        id="video-button__close-button"
+        aria-label="close video"
+        class="group absolute right-0 top-0 z-30 h-7 w-7 rounded-full border-2 border-base-50 transition-all hover:border-primary-500"
+      >
+        <Icon
+          name="tabler/x"
+          class="m-auto aspect-square h-full max-h-14 w-full text-base-50 transition group-hover:text-primary-500"
+          aria-hidden="true"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupVideoButton() {
+    const video = document.getElementById(
+      "video-button__video",
+    ) as HTMLVideoElement;
+    const playButton = document.getElementById(
+      "video-button__play-button",
+    ) as HTMLButtonElement;
+    const VideoItems = document.getElementById(
+      "video-button__video-items",
+    ) as HTMLElement;
+    const backdropButton = document.getElementById(
+      "video-button__backdrop-button",
+    ) as HTMLButtonElement;
+    const closeButton = document.getElementById(
+      "video-button__close-button",
+    ) as HTMLButtonElement;
+
+    // open video on play button press
+    playButton?.addEventListener("click", () => {
+      VideoItems?.classList.toggle("hidden");
+      backdropButton?.classList.toggle("video-button__backdrop-button--show");
+      video?.play();
+    });
+
+    // close video on backdrop button press
+    backdropButton?.addEventListener("click", () => {
+      video?.pause();
+      VideoItems?.classList.add("hidden");
+      backdropButton?.classList.remove("video-button__backdrop-button--show");
+    });
+
+    // or close video on close button press
+    closeButton?.addEventListener("click", () => {
+      video?.pause();
+      VideoItems?.classList.add("hidden");
+      backdropButton?.classList.remove("video-button__backdrop-button--show");
+    });
+  }
+
+  // runs on initial page load
+  setupVideoButton();
+
+  // runs on view transitions navigation
+  document.addEventListener("astro:after-swap", setupVideoButton);
+</script>
+
+<style lang="scss">
+  .video-button__backdrop-button--show {
+    animation: fadeInAnimation ease-in-out 0.3s forwards;
+  }
+
+  @keyframes fadeInAnimation {
+    0% {
+      @apply invisible opacity-0;
+    }
+    100% {
+      @apply visible opacity-70;
+    }
+  }
+</style>

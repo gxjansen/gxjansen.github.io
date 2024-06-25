@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+
+import { type teamMember } from "@config/types/configDataTypes";
+
+const { image, name, title, bio } = Astro.props as teamMember;
+---
+
+<div class="w-full">
+  <div
+    class="h-full rounded-md bg-base-50 px-10 py-8 text-center dark:bg-base-800"
+  >
+    <Image
+      src={image}
+      alt={name}
+      height={320}
+      class="mx-auto mb-6 aspect-square size-24 rounded-full object-cover"
+    />
+    <h3 class="h2 mb-2 font-semibold">{name}</h3>
+    <span class="mb-6 inline-block text-lg font-medium text-primary-500"
+      >{title}</span
+    >
+    <p class="description">{bio}</p>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+---
+// layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import TestimonialsSwiperQuotes from "@components/Testimonials/TestimonialsSwiperQuotes.astro";
+import TestimonialsColumns from "@components/Testimonials/TestimonialsColumns.astro";
+import FaqAccordions from "@components/Faq/FaqAccordions.astro";
+import FaqCards from "@components/Faq/FaqCards.astro";
+---
+
+<BaseLayout
+  title="Feature sections"
+  description="All of the testimonial and FAQ sections included with the Atlas theme"
+>
+  <hr class="pt-20" />
+  <TestimonialsSwiperQuotes />
+  <FaqCards />
+  <TestimonialsColumns />
+  <FaqAccordions />
+</BaseLayout>

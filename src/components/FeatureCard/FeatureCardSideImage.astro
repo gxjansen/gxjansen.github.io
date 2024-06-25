@@ -1,0 +1,95 @@
+---
+/**
+ * * These are alternating side cards with titles, check-marked list items, and images
+ */
+
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+// components
+import Button from "@components/Button/Button.astro";
+import Badge from "@components/Badge/Badge.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+
+interface Props {
+  badge: string; // small badge
+  title: string; // larger title
+  items: string[]; // list of items that will have check marks next to
+  href: string; // link to learn more
+  image: ImageMetadata; // an imported image
+  imageSide: "left" | "right";
+  idx: number; // determines which "blob" icon svg to use. There are 4 options (0-3)
+  rest?: any; // catch-all for any additional parameters, such as "aria-label"
+}
+
+const { badge, image, title, items, href, idx, imageSide, ...rest } =
+  Astro.props as Props;
+
+const currLocale = getLocaleFromUrl(Astro.url);
+---
+
+<div
+  class="mx-auto grid gap-8 rounded-xl md:grid-cols-2 md:gap-12 lg:gap-20"
+  data-aos=`${imageSide == "left" ? "fade-right" : "fade-left"}`
+  {...rest}
+>
+  <!-- text -->
+  <div
+    class=`${imageSide === "left" ? "md:order-last": ""} col-span-1 flex items-center`
+  >
+    <div>
+      <Badge>{badge}</Badge>
+      <h2 class="h2">{title}</h2>
+      <ul class="mt-6">
+        {
+          items.map((item) => (
+            <li class="description mt-4 flex items-center">
+              <Icon
+                name="tabler/circle-check"
+                class="mr-2 size-6 text-primary-500"
+                aria-hidden="true"
+              />
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="z-20 mt-8 flex">
+        <Button
+          variant="ghost"
+          href={getRelativeLocaleUrl(currLocale, "/contact")}
+          arrow="right"
+        >
+          Get a free quote
+        </Button>
+      </div>
+    </div>
+  </div>
+
+  <!-- image -->
+  <div class="relative mx-auto max-w-4xl">
+    <Icon
+      name="atlas/circle3"
+      class={`absolute -left-8 -top-4 z-10 w-20  md:-top-8 md:w-28 ${
+        imageSide === "right" ? "text-accent-1" : "text-accent-4 rotate-90"
+      }`}
+      aria-hidden="true"
+    />
+    <Icon
+      name="atlas/dots3"
+      class={`absolute -bottom-4 -right-7 z-10 w-20 text-accent-2 md:-bottom-8 md:w-28 ${
+        imageSide === "right" ? "text-accent-2" : "text-accent-3"
+      }`}
+      aria-hidden="true"
+    />
+    <Image
+      class="relative rounded-xl border border-transparent object-cover"
+      src={image}
+      alt={title}
+      height={700}
+    />
+  </div>
+</div>

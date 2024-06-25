@@ -1,0 +1,54 @@
+---
+/**
+ * * CTA split with text left and button on the right, with primary color background and light text
+ */
+
+import { Icon } from "astro-icon";
+
+// components
+import Button from "@components/Button/Button.astro";
+---
+
+<section class="py-10">
+  <div class="site-container">
+    <div
+      class="relative overflow-hidden rounded-md bg-primary-500 px-16 py-11 md:py-20"
+    >
+      <Icon
+        name="atlas/dots3"
+        class="absolute left-4 top-0 z-10 size-16 text-accent-4"
+        aria-hidden="true"
+      />
+      <Icon
+        name="atlas/dots3"
+        class="absolute bottom-0 right-4 z-10 size-16 text-accent-4"
+        aria-hidden="true"
+      />
+      <Icon
+        name="atlas/wave-bg-basic"
+        class="absolute left-1/2 top-1/2 h-full -translate-x-1/2 -translate-y-1/2 object-cover text-black/5"
+        aria-hidden="true"
+      />
+
+      <div class="relative z-20 -m-3 flex flex-wrap items-center">
+        <div class="w-full p-3 md:w-1/2">
+          <h2 class="mb-6 text-4xl font-bold tracking-tighter text-white">
+            What are you waiting for? Get started today.
+          </h2>
+          <p class="font-semibold text-white">Level up with this theme.</p>
+        </div>
+        <div class="flex w-full p-3 md:w-1/2 md:justify-end">
+          <Button
+            variant="outline"
+            href="https://cosmicthemes.com/themes/atlas/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="shadow-none"
+          >
+            Get Atlas
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

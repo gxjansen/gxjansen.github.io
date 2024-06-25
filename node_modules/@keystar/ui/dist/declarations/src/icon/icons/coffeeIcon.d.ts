@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const coffeeIcon: import("react").JSX.Element;

@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const dribbbleIcon: import("react").JSX.Element;

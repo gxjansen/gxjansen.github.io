@@ -1,0 +1,85 @@
+---
+import { Icon } from "astro-icon";
+import { Image } from "astro:assets";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+// main layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import Button from "@components/Button/Button.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+
+// images
+import errorImage from "@images/dog-error.png";
+
+const currLocale = getLocaleFromUrl(Astro.url);
+---
+
+<BaseLayout title="404" description="Error 404 page not found." noindex={true}>
+  <section
+    class="mt-20 bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark-big.svg')]"
+  >
+    <div class="site-container mx-auto px-4">
+      <div class="-mx-4 flex flex-wrap items-center">
+        <div class="relative mb-16 w-full px-4 md:mb-0 md:w-1/2">
+          <Image
+            src={errorImage}
+            class="mx-auto rounded-xl"
+            alt="error 404"
+            loading="eager"
+            width={600}
+            densities={[1.5, 2]}
+          />
+
+          <!-- corner icons -->
+          <Icon
+            name="atlas/dots1"
+            class="absolute -left-6 -top-6 z-10 w-28 text-accent-1"
+            aria-hidden="true"
+          />
+          <Icon
+            name="atlas/dots3"
+            class="absolute -right-6 -top-6 z-10 w-28 text-primary-500"
+            aria-hidden="true"
+          />
+          <Icon
+            name="atlas/dots1"
+            class="absolute -bottom-6 -right-6 w-28 text-accent-4"
+            aria-hidden="true"
+          />
+          <Icon
+            name="atlas/dots3"
+            class="absolute -bottom-6 -left-6 w-28 text-accent-3"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="w-full px-4 md:w-1/2">
+          <div class="text-center md:max-w-xl md:text-left">
+            <span
+              class="mb-4 inline-block rounded-full bg-primary-100 px-2 py-px text-xs font-medium leading-5 text-primary-500 shadow-sm dark:bg-primary-500 dark:text-white"
+              >Error 404</span
+            >
+            <h2
+              class="mb-4 text-4xl font-bold leading-tight tracking-tighter text-base-900 dark:text-base-100 md:text-5xl"
+            >
+              Oh no! Error 404
+            </h2>
+            <p class="mb-6 text-lg text-base-500 md:text-xl">
+              Something went wrong, so this page is broken.
+            </p>
+            <div class="flex flex-wrap justify-center md:justify-start">
+              <Button
+                variant="primary"
+                href={getRelativeLocaleUrl(currLocale, "/")}
+                >Go back to homepage</Button
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

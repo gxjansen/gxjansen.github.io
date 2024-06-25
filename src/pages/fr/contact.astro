@@ -1,0 +1,88 @@
+---
+import { Icon } from "astro-icon";
+
+// main layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import ContactForm from "@components/Forms/ContactForm.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { getTranslatedData } from "@js/translationUtils";
+
+// data
+const currLocale = getLocaleFromUrl(Astro.url);
+const siteData = getTranslatedData("siteData", currLocale);
+---
+
+<BaseLayout
+  title="Contact Me"
+  description="Get in touch! Contact us using this page."
+>
+  <div class="site-container mx-auto mt-16 overflow-x-clip">
+    <div
+      class="w-full bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-20 text-center dark:bg-[url('/assets/pattern-dark.svg')] md:py-32"
+    >
+      <h1 class="h1">Contact Us</h1>
+      <p class="description mx-auto mt-6 max-w-2xl">
+        When you fill out the form below, we will contact you to set up a time
+        and take a look at your project. We look forward to meeting you!
+      </p>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-2">
+      <!-- contact form -->
+      <div class="mb-12 lg:order-2">
+        <ContactForm />
+      </div>
+
+      <!-- Contact info -->
+      <div class="mb-auto grid gap-x-6 gap-y-12 lg:grid-cols-2">
+        <!-- Email -->
+        <div class="flex flex-col items-center gap-3 lg:items-start">
+          <div
+            class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
+          >
+            <Icon name="tabler/mail" class="size-6 text-white" />
+          </div>
+          <h3 class="h3">Email</h3>
+          <a
+            href="mailto:example@email.com"
+            class="description transition hover:text-base-600"
+            >{siteData.contact.email}</a
+          >
+        </div>
+
+        <!-- Phone -->
+        <div class="flex flex-col items-center gap-3 lg:items-start">
+          <div
+            class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
+          >
+            <Icon name="tabler/phone" class="size-6 text-white" />
+          </div>
+          <h3 class="h3">Phone</h3>
+          <a
+            href={`tel:${siteData.contact.phone}`}
+            class="description transition hover:text-base-600"
+            >{siteData.contact.phone}</a
+          >
+        </div>
+
+        <!-- Address -->
+        <div class="flex flex-col items-center gap-3 lg:items-start">
+          <div
+            class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
+          >
+            <Icon name="tabler/map-pin" class="size-6 text-white" />
+          </div>
+          <h3 class="h3">Office</h3>
+          <div class="description flex flex-col items-center lg:items-start">
+            <p>{siteData.contact.address1}</p>
+            <p>{siteData.contact.address2}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

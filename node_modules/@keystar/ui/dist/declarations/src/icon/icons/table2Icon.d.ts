@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const table2Icon: import("react").JSX.Element;

@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const orbitIcon: import("react").JSX.Element;

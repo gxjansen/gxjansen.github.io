@@ -1,0 +1,9 @@
+/// <reference types="react" />
+import { DialogTriggerProps } from "./types.js";
+/**
+ * DialogTrigger serves as a wrapper around a Dialog and its associated trigger, linking the Dialog's
+ * open state with the trigger's press state. Additionally, it allows you to customize the type and
+ * positioning of the Dialog.
+ */
+declare let _DialogTrigger: (props: DialogTriggerProps) => JSX.Element;
+export { _DialogTrigger as DialogTrigger };

@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer */
+@layer base {
+  html {
+    @apply text-base leading-[1.6rem] text-base-900 dark:text-base-100;
+    scroll-behavior: smooth;
+  }
+
+  ::-webkit-scrollbar {
+    @apply h-1 w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-inherit;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-base-300 bg-opacity-90;
+  }
+}
+
+/*  things in the components layer can be overriden with utility classes. 
+    Useful for custom styles on third-party components, and things like 
+    btn, card, badge, etc  */
+@layer components {
+  @import "buttons";
+  @import "prose";
+
+  .h1 {
+    @apply text-3xl font-bold leading-tight tracking-tight text-base-900 dark:text-base-100 lg:text-5xl lg:leading-tight;
+  }
+
+  .h2 {
+    @apply text-3xl font-bold leading-tight text-base-900 dark:text-base-100 md:text-4xl;
+  }
+
+  .h3 {
+    @apply text-xl font-bold leading-tight text-base-900 dark:text-base-100 md:text-2xl;
+  }
+
+  .description {
+    @apply font-medium text-base-500 dark:text-base-400;
+  }
+
+  .site-container {
+    @apply mx-auto max-w-[90rem] px-4;
+  }
+
+  /* used for newsletter, and contact form inputs */
+  .form__input {
+    @apply w-full rounded-md border border-transparent bg-base-100 p-2.5 text-base-900 transition;
+    @apply dark:bg-base-800 dark:text-base-200 dark:focus-visible:border-primary-500 dark:focus-visible:ring-primary-500;
+    @apply focus-visible:border-primary-500/50 focus-visible:ring-2 focus-visible:ring-primary-500/50;
+  }
+}
+
+@layer utilities {
+  @import "aos";
+
+  /* focus utility class (for when user is tabbing through items on page) */
+  .primary-focus {
+    @apply focus:outline-none focus-visible:rounded-sm focus-visible:outline-primary-500;
+  }
+
+  /* use with "animate-pause" to pause a CSS animation */
+  .pause {
+    animation-play-state: paused !important;
+  }
+}

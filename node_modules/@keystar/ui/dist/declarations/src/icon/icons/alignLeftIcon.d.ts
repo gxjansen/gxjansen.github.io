@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const alignLeftIcon: import("react").JSX.Element;

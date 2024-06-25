@@ -1,0 +1,161 @@
+---
+/**
+ * * Long contact form to get details about a customer's project. Modify as needed
+ *
+ * See https://cosmicthemes.com/docs/contact-form/ for more information on how to set up a contact form
+ *
+ * Form inputs are styled in "global.scss" as form__input, so you can use them elsewhere on the site
+ */
+
+// components
+import Button from "@components/Button/Button.astro";
+---
+
+<section id="contact" class="mx-auto min-w-fit max-w-3xl rounded-lg">
+  <form id="contact-form" name="contact" class="flex flex-col gap-4">
+    <input type="hidden" name="form-name" value="contact" />
+    <div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="flex flex-col">
+          <label for="contact-fname" class="form__label sr-only"
+            >First Name <span class="text-red-600">*</span></label
+          >
+          <input
+            type="text"
+            class="form__input"
+            name="fname"
+            id="contact-fname"
+            placeholder="first name"
+            required
+          />
+        </div>
+
+        <div class="flex flex-col">
+          <label for="contact-lname" class="form__label sr-only"
+            >Last Name <span class="text-red-600">*</span></label
+          >
+          <input
+            type="text"
+            class="form__input"
+            name="lname"
+            id="contact-lname"
+            placeholder="last name"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div>
+      <label for="contact-address" class="form__label sr-only mb-1"
+        >Street Address <span class="text-red-600">*</span></label
+      >
+      <input
+        type="text"
+        class="form__input"
+        name="address"
+        id="contact-address"
+        placeholder="street address"
+        required
+      />
+    </div>
+    <div>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="flex flex-col">
+          <label for="contact-city" class="form__label sr-only"
+            >City <span class="text-red-600">*</span></label
+          >
+          <input
+            type="text"
+            class="form__input"
+            name="city"
+            id="contact-city"
+            placeholder="city"
+            required
+          />
+        </div>
+
+        <div class="flex flex-col">
+          <label for="contact-state" class="form__label sr-only"
+            >State <span class="text-red-600">*</span></label
+          >
+          <input
+            type="text"
+            class="form__input"
+            name="state"
+            id="contact-state"
+            placeholder="state"
+            required
+          />
+        </div>
+
+        <div class="flex flex-col">
+          <label for="contact-zip" class="form__label sr-only"
+            >Zip Code <span class="text-red-600">*</span></label
+          >
+          <input
+            type="text"
+            class="form__input"
+            name="zip"
+            id="contact-zip"
+            placeholder="zip code"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div>
+      <label for="contact-email" class="form__label sr-only mb-1"
+        >Email <span class="text-red-600">*</span></label
+      >
+      <input
+        type="email"
+        class="form__input"
+        name="email"
+        id="contact-email"
+        inputmode="email"
+        placeholder="preferred contact email"
+        required
+      />
+    </div>
+    <div>
+      <label for="contact-phone" class="form__label sr-only mb-1"
+        >Phone Number <span class="text-red-600">*</span></label
+      >
+      <input
+        type="tel"
+        class="form__input"
+        name="phone"
+        id="contact-phone"
+        inputmode="tel"
+        placeholder="phone number"
+        required
+      />
+    </div>
+    <div>
+      <label for="contact-timeframe" class="form__label sr-only mb-1"
+        >Desired Time Frame <span class="text-red-600">*</span></label
+      >
+      <input
+        type="text"
+        class="form__input"
+        name="timeframe"
+        id="contact-timeframe"
+        placeholder="desired time frame for the work to be completed"
+        required
+      />
+    </div>
+    <div>
+      <label for="contact-services" class="form__label sr-only mb-1"
+        >Services Desired <span class="text-red-600">*</span></label
+      >
+      <textarea
+        name="services"
+        class="form__input"
+        id="contact-services"
+        rows="4"
+        placeholder="Please provide a brief description of the services desired"
+        required></textarea>
+    </div>
+    <Button variant="primary" type="submit">Submit</Button>
+  </form>
+</section>

@@ -1,0 +1,52 @@
+---
+/**
+ * * CTA centered with background grid
+ */
+
+import { Icon } from "astro-icon";
+
+// components
+import Button from "@components/Button/Button.astro";
+---
+
+<section
+  id="cta-center"
+  class="overflow-x-clip bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-20 dark:bg-[url('/assets/pattern-dark.svg')]"
+>
+  <div class="site-container">
+    <div
+      class="relative z-20 -m-3 mx-auto flex max-w-[760px] flex-col flex-wrap items-center gap-6 text-center"
+    >
+      <h2
+        class="text-pretty text-4xl/tight font-bold dark:text-base-100"
+        data-aos="fade-up"
+        data-aos-trigger="#cta-center"
+      >
+        The fastest way to make a site.
+      </h2>
+      <p
+        class="description text-pretty text-lg"
+        data-aos="fade-up"
+        data-aos-trigger="#cta-center"
+        data-aos-delay=".2"
+      >
+        Level up with this template. Multiple pages and sections, blog, i18n,
+        animations, CMS - all ready to go.
+      </p>
+      <div
+        data-aos="fade-up"
+        data-aos-trigger="#cta-center"
+        data-aos-delay=".4"
+      >
+        <Button
+          variant="primary"
+          href="https://cosmicthemes.com/themes/atlas/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Get Atlas
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>

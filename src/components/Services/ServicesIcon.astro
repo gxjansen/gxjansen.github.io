@@ -1,0 +1,81 @@
+---
+/**
+ * * These are larger cards with icons, titles, and text
+ * Recommend using minimum 3 cards in a row, although this should work for any number of cards
+ * These smaller cards work great if there are a large amount of services to advertise
+ *
+ * ! If you can an error for an icon like "Error: Not Found: "calendar-check" in pack "tabler",
+ * ! You can copy to actual SVG into src/icons, name it whatever, and use similar to below example "tabler/calendar-check"
+ */
+
+import { Icon } from "astro-icon";
+
+// components
+import ServiceCard from "@components/ServiceCard/ServiceCardIcon.astro";
+import Badge from "@components/Badge/Badge.astro";
+// import FeatureCard from "@components/FeatureCard/FeatureCardTest.astro";
+
+interface FeatureData {
+  icon: string;
+  title: string;
+  text: string;
+  href: string;
+}
+
+// data
+const featureData: FeatureData[] = [
+  {
+    icon: "tabler/home",
+    title: "Exterior",
+    text: `Professional home exterior painting, including siding, doors, and trim.`,
+    href: "/services/exterior-painting/",
+  },
+  {
+    icon: "tabler/sofa",
+    title: "Interior",
+    text: `Our experienced staff can paint your home's interior, including walls, ceilings, and trim.`,
+    href: "/services/interior-painting/",
+  },
+  {
+    icon: "tabler/fence",
+    title: "Deck and Fence",
+    text: `Stain your deck or fence to keep it looking great and protected from the elements.`,
+    href: "/services/deck-and-fence-staining/",
+  },
+];
+---
+
+<section id="services-icon" class="py-24 md:py-28">
+  <div
+    class="site-container bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat dark:bg-[url('/assets/pattern-dark.svg')]"
+  >
+    <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+      <Badge>Services</Badge>
+      <h2 class="h2 mb-4">Our professional services</h2>
+      <p class="description text-lg md:text-xl">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis eius
+        sunt autem esse delectus illo vel est optio omnis consectetur eos
+        dignissimos.
+      </p>
+    </div>
+    <div
+      class="grid gap-4 sm:grid-cols-2 md:grid-cols-3"
+      id="services-icon-cards"
+    >
+      {
+        featureData.map((feature, idx) => (
+          <ServiceCard
+            title={feature.title}
+            text={feature.text}
+            icon={feature.icon}
+            href={feature.href}
+            idx={idx}
+            data-aos="zoom-in"
+            data-aos-delay={0.15 * idx}
+            data-aos-trigger="#services-icon-cards"
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
