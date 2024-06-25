@@ -21,9 +21,9 @@ import { locales } from "@config/siteSettings.json";
  */
 const Blog = (locale: (typeof locales)[number]) =>
   collection({
-    label: `Blog (${locale.toUpperCase()})`,
+    label: `Blog`,
     slugField: "title",
-    path: `src/content/blog/${locale}/*/`,
+    path: `src/content/blog/*/`,
     columns: ["title", "pubDate"],
     entryLayout: "content",
     format: { contentField: "content" },
@@ -115,9 +115,9 @@ const Blog = (locale: (typeof locales)[number]) =>
  */
 const Authors = (locale: (typeof locales)[number] | "") =>
   collection({
-    label: `Authors ${locale === "" ? "" : `(${locale.toUpperCase()})`} `,
+    label: `Authors`,
     slugField: "name",
-    path: `src/content/authors/${locale}/*/`,
+    path: `src/content/authors/*/`,
     columns: ["name"],
     entryLayout: "content",
     format: { contentField: "bio" },
@@ -179,14 +179,47 @@ const Authors = (locale: (typeof locales)[number] | "") =>
   });
 
 /**
+ * * Events collection
+ * This gets used by Astro Content Collections, so if you update this, you'll need to update the Astro Content Collections schema
+ */
+const Events = (locale: (typeof locales)[number]) =>
+  collection({
+    label: `Events`,
+    slugField: "title",
+    path: `src/content/events/${locale}/*/`,
+    columns: ["title"],
+    entryLayout: "content",
+    format: { contentField: "content" },
+    schema: {
+      title: fields.slug({
+        name: { label: "Title" },
+        slug: {
+          label: "SEO-friendly slug",
+          description: "Never change the slug once a file is published!",
+        },
+      }),
+      image: fields.image({
+        label: "Country flag",
+        publicPath: "../",
+        validation: { isRequired: true },
+      }),
+      draft: fields.checkbox({
+        label: "Draft",
+        description:
+          "Set this as draft to prevent it from being published.",
+      }),
+    },
+  });
+
+  /**
  * * Services collection
  * This gets used by Astro Content Collections, so if you update this, you'll need to update the Astro Content Collections schema
  */
 const Services = (locale: (typeof locales)[number]) =>
   collection({
-    label: `Services (${locale.toUpperCase()})`,
+    label: `Services`,
     slugField: "title",
-    path: `src/content/services/${locale}/*/`,
+    path: `src/content/services/*/`,
     columns: ["title"],
     entryLayout: "content",
     format: { contentField: "content" },
@@ -246,9 +279,9 @@ const Services = (locale: (typeof locales)[number]) =>
  */
 const OtherPages = (locale: (typeof locales)[number]) =>
   collection({
-    label: `Other Pages (${locale.toUpperCase()})`,
+    label: `Other Pages`,
     slugField: "title",
-    path: `src/content/otherPages/${locale}/*/`,
+    path: `src/content/otherPages/*/`,
     columns: ["title"],
     entryLayout: "content",
     format: { contentField: "content" },

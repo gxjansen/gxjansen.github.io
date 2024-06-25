@@ -20,7 +20,7 @@ module.exports = {
       colors: {
         // use any standard tailwind colors from here https://tailwindcss.com/docs/customizing-colors
         // or generate with https://uicolors.app/create
-        primary: colors.green,
+        primary: colors.teal,
 
         // recommend not changing the base color scheme
         base: {

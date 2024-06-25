@@ -2,32 +2,31 @@ import { type SiteDataProps } from "../types/configDataTypes";
 
 // Update this file with your site specific information
 const siteData: SiteDataProps = {
-  name: "Atlas",
+  name: "Guido X Jansen",
   // Your website's title and description (meta fields)
   title:
-    "Atlas - a small business theme and landing page crafted with Astro and Tailwind CSS",
+    "Global Business & Technology Evangelist",
   description:
-    "Create an amazing website for your small business clients with our beautiful website theme designed using Astro and Tailwind CSS. Perfect for freelancers, developers, startups, and personal use.",
-
+    "I'm a psychologist working in E-commerce. ‍ I build community & business experimentation teams & programs at innovative businesses.",
   // used on contact page and footer
   contact: {
     address1: "1234 Main Street",
     address2: "New York, NY 10001",
     phone: "(123) 456-7890",
-    email: "creator@cosmicthemes.com",
+    email: "x@gui.de",
   },
 
   // Your information for blog post purposes
   author: {
-    name: "Cosmic Themes",
-    email: "creator@cosmicthemes.com",
-    twitter: "Cosmic_Themes",
+    name: "Guido Jansen",
+    email: "x@gui.do",
+    twitter: "guido",
   },
 
   // default image for meta tags if the page doesn't have an image already
   defaultImage: {
-    src: "/images/cosmic-themes-logo.jpg",
-    alt: "Cosmic Themes logo",
+    src: "/images/x-logo.webp",
+    alt: "Guido Jansen logo",
   },
 };
 

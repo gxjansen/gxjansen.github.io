@@ -51,6 +51,78 @@ const servicesCollection = defineCollection({
     }),
 });
 
+// clients
+const clientsCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      image: image(),
+      // items will be excluded from build if draft is "true"
+      draft: z.boolean().optional(),
+    }),
+});
+
+// countries
+const countriesCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      image: image(),
+      // items will be excluded from build if draft is "true"
+      draft: z.boolean().optional(),
+    }),
+});
+
+// events
+const eventsCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      image: image(),
+      // items will be excluded from build if draft is "true"
+      draft: z.boolean().optional(),
+    }),
+});
+
+// linktree
+const linktreeCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      image: image(),
+      // items will be excluded from build if draft is "true"
+      draft: z.boolean().optional(),
+    }),
+});
+
+// press
+const pressCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      image: image(),
+      // items will be excluded from build if draft is "true"
+      draft: z.boolean().optional(),
+    }),
+});
+
+// testimonials
+const testimonialsCollection = defineCollection({
+  type: "content",
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      image: image(),
+      // items will be excluded from build if draft is "true"
+      draft: z.boolean().optional(),
+    }),
+});
+
 // other pages
 const otherPagesCollection = defineCollection({
   type: "content",

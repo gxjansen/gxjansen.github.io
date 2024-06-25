@@ -44,9 +44,9 @@ export const dataTranslations = {
  */
 export const textTranslations = {
   en: {
-    hero_text: "Everything you need for an amazing website.",
+    hero_text: "Hi, I'm Guido 👋",
     hero_description:
-      "A template for small business needs. Multiple pages and sections, blog, i18n, animations, CMS - all ready to go.",
+      "I'm a psychologist working in E-commerce. I've built optimization teams & programs at innovative businesses, turning user data and insights into customer success & business growth. I speak around the world, building an engaged community and helping businesses to go beyond.",
     back_to_all_posts: "Back to all posts",
     updated: "Updated",
   },

@@ -19,7 +19,7 @@ import { useTranslations } from "@js/translationUtils";
 import person1 from "@images/ashton_blackwell.jpg";
 import person2 from "@images/nicola_harris.jpg";
 import person3 from "@images/nic_fassbender.jpg";
-import heroImage from "@assets/images/business-owner-2-min.png";
+import heroImage from "@assets/images/guido-couch.jpg";
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
@@ -36,7 +36,7 @@ const t = useTranslations(currLocale);
           <span
             class="mb-4 inline-flex items-center rounded-full bg-primary-500 px-2 py-px text-xs uppercase leading-5 text-white"
           >
-            Meet Atlas
+            Meet Guido
           </span>
 
           <h1
@@ -63,7 +63,7 @@ const t = useTranslations(currLocale);
             variant="primary"
             href={getRelativeLocaleUrl(currLocale, "/contact")}
           >
-            Contact Us
+            Follow me on LinkedIn
           </Button>
           <Button
             variant="outline"
@@ -71,7 +71,7 @@ const t = useTranslations(currLocale);
             target="_blank"
             rel="noopener noreferrer"
           >
-            Get Atlas
+            Book me for your event
           </Button>
         </div>
 
