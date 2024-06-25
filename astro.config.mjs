@@ -17,6 +17,12 @@ export default defineConfig({
   }),
   redirects: {
     "/admin": "/keystatic",
+    "/press": "/",
+    "/presentation": "/",
+    "/events": "/",
+    "/guidojansen": "/about",
+    "/post/[...slug]": "/blog/[...slug]"
+
   },
   // i18n configuration must match src/config/translations.json.ts
   i18n: {
