@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const arrowBigUpIcon: import("react").JSX.Element;

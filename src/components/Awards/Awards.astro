@@ -1,0 +1,39 @@
+---
+/**
+ * * Awards section, useful for local businesses that have won awards (for social proof)
+ */
+
+import { Image } from "astro:assets";
+
+import award1 from "@images/awards/award-yelp.png";
+import award2 from "@images/awards/award-homeadvisor.png";
+import award3 from "@images/awards/award-angieslist.png";
+---
+
+<section id="awards" class="my-10 w-full">
+  <div class="site-container flex justify-center">
+    <div class="flex flex-wrap gap-12 md:col-span-2">
+      <Image
+        src={award1}
+        alt="yelp award"
+        loading="lazy"
+        height={200}
+        class="h-20 w-auto"
+      />
+      <Image
+        src={award2}
+        alt="home advisor award"
+        loading="lazy"
+        height={200}
+        class="h-20 w-auto"
+      />
+      <Image
+        src={award3}
+        alt="angies list award"
+        loading="lazy"
+        height={200}
+        class="h-20 w-auto"
+      />
+    </div>
+  </div>
+</section>

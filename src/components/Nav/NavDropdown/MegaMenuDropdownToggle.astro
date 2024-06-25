@@ -1,0 +1,150 @@
+---
+import { Icon } from "astro-icon";
+
+// components
+import NavLink from "../NavLink.astro";
+import { type navMegaDropdownItem } from "@config/types/configDataTypes";
+
+interface Props {
+  navItem: navMegaDropdownItem;
+}
+
+const { navItem } = Astro.props as Props;
+
+const cols = navItem.megaMenuColumns.length;
+let gridClass: string;
+let insetClass: string;
+if (cols >= 5) {
+  gridClass = "grid-cols-5";
+  insetClass = "inset-x-4 lg:inset-x-24";
+} else if (cols == 4) {
+  gridClass = "grid-cols-4";
+  insetClass = "inset-x-20 lg:inset-x-48";
+} else if (cols == 3) {
+  gridClass = "grid-cols-3";
+  insetClass = "inset-x-32 lg:inset-x-72";
+} else if (cols == 2) {
+  gridClass = "grid-cols-2";
+  insetClass = "inset-x-48 lg:inset-x-96";
+} else {
+  throw new Error("Mega menu dropdown must have at least 2 columns");
+}
+---
+
+<!-- non-mobile mega menu menu -->
+<li class="mega-menu__dropdown group">
+  <button
+    class="primary-focus mega-menu__dropdown-button flex w-full items-center gap-0.5 whitespace-nowrap px-3 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300"
+    type="button"
+    id={`${navItem.text} mega menu menu`}
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-controls={`${navItem.text} mega menu menu content`}
+  >
+    {navItem.text}
+    <Icon
+      name="tabler/chevron-down"
+      aria-hidden="true"
+      class="mega-menu__dropdown-chevron size-5 shrink-0 transition-transform"
+    />
+  </button>
+  <div
+    id={`${navItem.text} mega menu menu content`}
+    aria-labelledby={`${navItem.text} mega menu menu`}
+    class:list={[
+      "mega-menu__dropdown-content invisible absolute top-full z-10 opacity-0 transition-all",
+      insetClass,
+    ]}
+  >
+    <ul
+      class:list={[
+        "mt-[.9rem] grid w-full min-w-[150px] max-w-full gap-3 rounded-md border border-solid border-base-200 bg-base-50 px-1.5 py-3 drop-shadow-sm dark:border-base-800 dark:bg-base-900",
+        gridClass,
+      ]}
+    >
+      {
+        navItem.megaMenuColumns.map((col) => (
+          <div>
+            <p class="mx-4 mb-2 border-b border-base-200 pb-1 text-lg font-medium text-base-500 dark:border-base-800 dark:text-base-400">
+              {col.title}
+            </p>
+            {col.items.map((navItem) => (
+              <NavLink navItem={navItem} class="w-full" />
+            ))}
+          </div>
+        ))
+      }
+    </ul>
+  </div>
+</li>
+
+<script>
+  function megaMenuToggleSetup() {
+    const megaMenus = document.querySelectorAll(".mega-menu__dropdown");
+    megaMenus.forEach((megaMenu) => {
+      const megaMenuButton = megaMenu.querySelector(
+        ".mega-menu__dropdown-button",
+      );
+      const megaMenuChevron = megaMenu.querySelector(
+        ".mega-menu__dropdown-chevron",
+      );
+      const megaMenuContent = megaMenu.querySelector(
+        ".mega-menu__dropdown-content",
+      );
+      if (megaMenuButton && megaMenuContent && megaMenuChevron) {
+        megaMenuButton.addEventListener("click", (event) => {
+          if (!megaMenu.classList.contains("active")) {
+            // if mega menu is currently closed, so open it
+            megaMenu.classList.add("active");
+            megaMenuButton.setAttribute("aria-expanded", "true");
+            megaMenuContent.classList.add("mega-menu--fade-in");
+            megaMenuChevron.classList.add("rotate-180");
+          } else {
+            // mega menu is currently open, so close it
+            megaMenu.classList.remove("active");
+            megaMenuButton.setAttribute("aria-expanded", "false");
+            megaMenuContent.classList.remove("mega-menu--fade-in");
+            megaMenuChevron.classList.remove("rotate-180");
+          }
+          event.preventDefault();
+          return false;
+        });
+
+        // if mega menu menu is open there is a click outside, close the menu
+        document.addEventListener("click", (event) => {
+          if (
+            !megaMenu.contains(event.target as Node) &&
+            megaMenu.classList.contains("active")
+          ) {
+            megaMenu.classList.remove("active");
+            megaMenuButton.setAttribute("aria-expanded", "false");
+            megaMenuContent.classList.remove("mega-menu--fade-in");
+            megaMenuChevron.classList.remove("rotate-180");
+          }
+        });
+      }
+    });
+  }
+
+  // runs on initial page load
+  megaMenuToggleSetup();
+
+  // runs on view transitions navigation
+  document.addEventListener("astro:after-swap", megaMenuToggleSetup);
+</script>
+
+<style lang="scss">
+  .mega-menu--fade-in {
+    animation: navDropdownFadeInAnimation ease-out 0.15s forwards;
+    @apply visible opacity-100;
+  }
+
+  @keyframes navDropdownFadeInAnimation {
+    0% {
+      @apply top-[80%];
+    }
+    100% {
+      @apply top-full;
+    }
+  }
+</style>

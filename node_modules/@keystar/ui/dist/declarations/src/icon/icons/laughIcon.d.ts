@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const laughIcon: import("react").JSX.Element;

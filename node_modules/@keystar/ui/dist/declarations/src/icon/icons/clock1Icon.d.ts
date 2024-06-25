@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const clock1Icon: import("react").JSX.Element;

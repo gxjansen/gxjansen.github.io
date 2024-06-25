@@ -1,0 +1,1 @@
+var o=(...[e,t=2])=>{if(e===0)return"0 Bytes";const r=Math.floor(Math.log(e)/Math.log(a));return`${Number.parseFloat((e/a**r).toFixed(t<0?0:t))} ${["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"][r]}`};const a=1024;export{a as Kilobyte,o as default};

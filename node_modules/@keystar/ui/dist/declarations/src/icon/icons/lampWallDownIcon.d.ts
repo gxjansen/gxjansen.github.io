@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const lampWallDownIcon: import("react").JSX.Element;

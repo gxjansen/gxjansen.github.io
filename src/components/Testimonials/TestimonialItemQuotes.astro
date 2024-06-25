@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon";
+
+// components
+import Badge from "@components/Badge/Badge.astro";
+
+// utils
+import { type TestimonialItem } from "@config/types/configDataTypes";
+
+const { avatar, name, title, testimonial } = Astro.props as TestimonialItem;
+---
+
+<div class="flex h-full flex-col">
+  <div class="relative mx-auto mb-10 max-w-5xl pb-6 pt-16 text-center sm:px-6">
+    <Icon
+      name="atlas/quotes-top"
+      class="absolute left-0 top-0 size-32 text-primary-200 dark:text-primary-500"
+      aria-hidden="true"
+    />
+    <Icon
+      name="atlas/quotes-bottom"
+      class="absolute -bottom-10 right-0 size-32 text-primary-200 dark:text-primary-500"
+      aria-hidden="true"
+    />
+    <div class="relative">
+      <!-- <Badge>Quotes</Badge> -->
+      <h2
+        class="text-2xl font-semibold leading-relaxed dark:text-base-100 md:text-3xl md:leading-relaxed"
+      >
+        {testimonial}
+      </h2>
+    </div>
+  </div>
+
+  <div class="flex flex-col items-center pb-4">
+    <Image
+      src={avatar}
+      alt={name}
+      height={160}
+      class="size-20 rounded-full object-cover"
+    />
+    <h3 class="h3 mt-4 font-semibold">{name}</h3>
+    <p class="description mt-1 text-lg">{title}</p>
+  </div>
+</div>

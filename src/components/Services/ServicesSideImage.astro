@@ -1,0 +1,84 @@
+---
+/**
+ * * These are alternating side cards with titles, text, and images
+ * Recommend using 2 or 3 cards in a row
+ */
+import { Icon } from "astro-icon";
+
+// components
+import ServiceCard from "@components/ServiceCard/ServiceCardSideImage.astro";
+import Badge from "@components/Badge/Badge.astro";
+
+// images
+import image1 from "@images/house.jpg";
+import image2 from "@images/living-room.jpg";
+import image3 from "@images/paint-swatches.jpg";
+
+interface ServiceItem {
+  image: ImageMetadata; // an imported image
+  title: string;
+  details: string;
+  href: string; // link to learn more
+}
+
+// data
+const serviceData: ServiceItem[] = [
+  {
+    image: image1,
+    title: "Exterior Painting",
+    details: `Professional home exterior painting, including siding, doors, and trim.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nesciunt quia quibusdam, 
+    voluptatem aliquid autem, magnam, doloremque voluptatibus odio esse pariatur harum 
+    odit neque qui earum nam praesentium sint ullam!`,
+    href: "/services/exterior-painting/",
+  },
+  {
+    image: image2,
+    title: "Interior Painting",
+    details: `Our experienced staff can paint your home's interior, including walls, ceilings, and trim.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nesciunt quia quibusdam, voluptatem 
+    aliquid autem, magnam, doloremque voluptatibus odio esse pariatur harum odit neque qui earum 
+    nam praesentium sint ullam!`,
+    href: "/services/interior-painting/",
+  },
+  {
+    image: image3,
+    title: "Deck and Fence Staining",
+    details: `Stain your deck or fence to keep it looking great and protected from the elements.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nesciunt quia quibusdam, 
+    voluptatem aliquid autem, magnam, doloremque voluptatibus odio esse pariatur harum odit neque 
+    qui earum nam praesentium sint ullam!`,
+    href: "/services/deck-and-fence-staining/",
+  },
+];
+---
+
+<section id="services-side-image" class="overflow-hidden py-24 md:py-28">
+  <div class="site-container">
+    <div
+      class="mx-auto mb-16 text-center md:mb-20 md:max-w-4xl"
+      data-aos="fade-up"
+    >
+      <Badge>Services</Badge>
+      <h2 class="h2 mb-4">Our services will blow you away</h2>
+      <p class="description text-lg md:text-xl">
+        We offer a variety of services for every type of project. When you're
+        ready, contact us to get started.
+      </p>
+    </div>
+    <div class="flex flex-col gap-16 md:mt-16 md:gap-24">
+      {
+        serviceData.map((feature, idx) => (
+          <ServiceCard
+            title={feature.title}
+            details={feature.details}
+            image={feature.image}
+            imageSide={idx % 2 === 0 ? "right" : "left"}
+            href={feature.href}
+            idx={idx}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

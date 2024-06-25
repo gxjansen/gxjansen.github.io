@@ -1,0 +1,208 @@
+---
+/**
+ * * Three row image marquee
+ * JS allows the animation to pause while you hover over it.
+ */
+
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon";
+
+// components
+import Badge from "@components/Badge/Badge.astro";
+
+// images
+import image1 from "@assets/images/entry-way.jpg";
+import image2 from "@assets/images/house.jpg";
+import image3 from "@assets/images/happy-family-crop-mobile-min.png";
+import image4 from "@assets/images/kitchen.jpg";
+import image5 from "@assets/images/business-owner-crop.png";
+import image6 from "@assets/images/living-room.jpg";
+import image7 from "@assets/images/paint-swatches.jpg";
+
+interface MarqueeImages {
+  images: ImageMetadata[]; // imported images
+}
+
+// change these images to whatever you want!
+const marqueeTop: MarqueeImages = {
+  images: [image1, image2, image3, image4, image5, image6],
+};
+
+const marqueeMiddle: MarqueeImages = {
+  images: [image1, image6, image4, image2, image7, image3],
+};
+
+const marqueeBottom: MarqueeImages = {
+  images: [image7, image6, image5, image4, image3, image2],
+};
+---
+
+<section
+  id="feature-gallery-marquee"
+  class="bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark-big.svg')] md:py-28"
+>
+  <div class="site-container flex justify-center">
+    <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+      <Badge>Gallery</Badge>
+      <h2 class="h2">Some of our work</h2>
+      <p class="description mt-4 text-pretty text-lg md:text-xl">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+      </p>
+    </div>
+  </div>
+
+  <div class="relative flex flex-col gap-6 overflow-hidden md:gap-10">
+    <!-- marquee top row -->
+    <div class="marquee-top relative flex gap-6 overflow-hidden md:gap-10">
+      <div
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 md:gap-10"
+      >
+        {
+          marqueeTop.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+      <div
+        aria-hidden="true"
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 md:gap-10"
+      >
+        {
+          marqueeTop.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- marquee middle row -->
+    <div class="marquee-middle relative flex gap-6 overflow-hidden md:gap-10">
+      <div
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 [animation-direction:reverse] md:gap-10"
+      >
+        {
+          marqueeMiddle.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+      <div
+        aria-hidden="true"
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 [animation-direction:reverse] md:gap-10"
+      >
+        {
+          marqueeMiddle.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- marquee bottom row -->
+    <div class="marquee-bottom relative flex gap-6 overflow-hidden md:gap-10">
+      <div
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 md:gap-10"
+      >
+        {
+          marqueeBottom.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+      <div
+        aria-hidden="true"
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 md:gap-10"
+      >
+        {
+          marqueeBottom.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const setupMarquee = () => {
+    const marqueeTop = document.querySelector(".marquee-top");
+    const marqueeMiddle = document.querySelector(".marquee-middle");
+    const marqueeBottom = document.querySelector(".marquee-bottom");
+
+    // add the clauss "pause" when the mouse enters the marquee
+    marqueeTop?.addEventListener("mouseover", () => {
+      marqueeTop.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.add("pause");
+      });
+    });
+    marqueeMiddle?.addEventListener("mouseover", () => {
+      marqueeMiddle.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.add("pause");
+      });
+    });
+    marqueeBottom?.addEventListener("mouseover", () => {
+      marqueeBottom.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.add("pause");
+      });
+    });
+
+    // remove the class "pause" when the mouse leaves the marquee
+    marqueeTop?.addEventListener("mouseout", () => {
+      marqueeTop.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.remove("pause");
+      });
+    });
+    marqueeMiddle?.addEventListener("mouseout", () => {
+      marqueeMiddle.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.remove("pause");
+      });
+    });
+    marqueeBottom?.addEventListener("mouseout", () => {
+      marqueeBottom.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.remove("pause");
+      });
+    });
+  };
+
+  // runs on initial page load
+  setupMarquee();
+
+  // runs on view transitions navigation
+  document.addEventListener("astro:after-swap", setupMarquee);
+</script>

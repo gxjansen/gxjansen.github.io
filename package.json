@@ -1,0 +1,47 @@
+{
+  "name": "atlas",
+  "type": "module",
+  "version": "0.1.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^3.1.2",
+    "@astrojs/netlify": "^5.3.2",
+    "@astrojs/react": "^3.6.0",
+    "@astrojs/rss": "^4.0.7",
+    "@astrojs/sitemap": "^3.1.6",
+    "@astrojs/tailwind": "^5.1.0",
+    "@keystatic/astro": "^5.0.0",
+    "@keystatic/core": "^0.5.17",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.13",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "animejs": "^3.2.2",
+    "astro": "^4.11.1",
+    "astro-auto-import": "^0.4.2",
+    "astro-icon": "0.8.2",
+    "astro-seo": "^0.8.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sass": "^1.77.4",
+    "swiper": "^11.1.4",
+    "tailwindcss": "^3.4.3"
+  },
+  "devDependencies": {
+    "@playform/compress": "0.0.10",
+    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
+    "prettier-plugin-astro": "^0.14.0",
+    "prettier-plugin-tailwindcss": "^0.6.1",
+    "svgo": "2.8.0"
+  },
+  "overrides": {
+    "sharp": "^0.33.0"
+  }
+}

@@ -1,0 +1,32 @@
+---
+/**
+ * * These are medium sized cards with icons, titles, and text
+ *
+ * ! I copy all icons into the src/icons folder and recommend you do the same
+ * ! If the icon is at src/icons/tabler/paint.svg then you put in "tabler/paint"
+ */
+
+import { Icon } from "astro-icon";
+
+interface Props {
+  icon: string;
+  title: string;
+  text: string;
+  rest?: any; // catch-all for any additional parameters, such as "aria-label"
+}
+
+const { icon, title, text, ...rest } = Astro.props as Props;
+---
+
+<div
+  class="rounded-md p-8 text-center transition duration-200 hover:bg-white hover:shadow-xl dark:hover:bg-base-900"
+  {...rest}
+>
+  <div
+    class="mx-auto mb-7 inline-flex size-16 items-center justify-center rounded-lg bg-primary-500 text-white"
+  >
+    <Icon name={icon} class="size-6 text-white" aria-hidden="true" />
+  </div>
+  <h3 class="h3 mb-3">{title}</h3>
+  <p class="font-medium text-base-500 dark:text-base-400">{text}</p>
+</div>

@@ -1,0 +1,40 @@
+---
+/**
+ * * These are small cards with icons, titles, and text
+ * This looks best with an even number of cards. They are smaller to
+ * use with more cards in the same section. 6 cards is probably ideal
+ *
+ * ! I copy all icons into the src/icons folder and recommend you do the same
+ * ! If the icon is at src/icons/tabler/paint.svg then you put in "tabler/paint"
+ */
+
+import { Icon } from "astro-icon";
+
+interface Props {
+  icon: string;
+  title: string;
+  text: string;
+  rest?: any; // catch-all for any additional parameters, such as "aria-label"
+}
+
+const { icon, title, text, ...rest } = Astro.props as Props;
+---
+
+<div {...rest}>
+  <div
+    class="h-full rounded-md p-6 transition duration-200 hover:bg-white hover:shadow-xl dark:hover:bg-base-900"
+  >
+    <div class="flex items-start gap-2">
+      <Icon
+        name={icon}
+        class="mt-1 h-5 w-5 text-primary-500"
+        aria-hidden="true"
+      />
+      <h3 class="inline text-lg font-bold text-base-900 dark:text-base-100">
+        {title}
+      </h3>
+    </div>
+
+    <p class="description mt-2">{text}</p>
+  </div>
+</div>

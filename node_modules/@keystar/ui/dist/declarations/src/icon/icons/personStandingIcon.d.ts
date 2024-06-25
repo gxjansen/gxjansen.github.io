@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const personStandingIcon: import("react").JSX.Element;

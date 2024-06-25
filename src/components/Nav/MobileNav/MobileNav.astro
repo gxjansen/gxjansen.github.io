@@ -1,0 +1,233 @@
+---
+import { Icon } from "astro-icon";
+
+//components
+import NavLink from "@components/Nav/NavLink.astro";
+import MobileNavDropdown from "@components/Nav/MobileNav/MobileNavDropdown.astro";
+import Button from "@components/Button/Button.astro";
+import MobileLanguageSelect from "@components/LanguageSelect/MobileLanguageSelect.astro";
+import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { getTranslatedData } from "@js/translationUtils";
+
+// data
+const currLocale = getLocaleFromUrl(Astro.url);
+const navData = getTranslatedData("navData", currLocale);
+import { locales } from "@config/siteSettings.json";
+---
+
+<div id="mobile-nav__container">
+  <button
+    id="mobile-nav__burger"
+    aria-label="open navigation menu"
+    aria-haspopup="true"
+    aria-expanded="false"
+    class="primary-focus h-10 w-10 rounded-md"
+  >
+    <!-- hamburger icon to open menu -->
+    <Icon
+      name="tabler/menu-2"
+      class="m-auto inline-block h-8 w-8 stroke-current text-base-600 dark:text-base-400"
+      aria-hidden="true"
+    />
+  </button>
+  <div
+    id="mobile-nav__content"
+    class="whitepace-nowrap fixed -right-72 top-0 z-20 hidden h-screen w-72 items-center overflow-x-hidden bg-base-50 text-lg font-normal transition-all duration-300 dark:bg-base-950"
+  >
+    <div class="w-full px-2 pb-6">
+      <div class="mx-1 my-2 flex w-full justify-end pl-6 pr-4">
+        <button
+          id="mobile-nav__close"
+          class="primary-focus p-2"
+          aria-label="close navigation menu"
+        >
+          <!-- "X" icon to close menu -->
+          <Icon
+            name="tabler/x"
+            class="h-8 w-8 text-base-600 dark:text-base-400"
+          />
+        </button>
+      </div>
+
+      <!-- nav items -->
+      <hr class="mx-1 border-base-200 dark:border-base-800" />
+      <nav>
+        <ul class="mx-1 mt-2 text-xl">
+          {
+            // if dropdown exists, setup the dropdown, otherwise it is just a link
+            navData.map((navItem) =>
+              "dropdown" in navItem ? (
+                // mobile dropdown menu
+                <>
+                  <MobileNavDropdown navItem={navItem} />
+                  {/* <hr class="mx-4 mb-2 border-base-300 dark:border-base-600/60" /> */}
+                </>
+              ) : "megaMenuColumns" in navItem ? (
+                // mobile mega menu dropdowns
+                <>
+                  {navItem.megaMenuColumns.map((navItem) => (
+                    <MobileNavDropdown navItem={navItem} />
+                  ))}
+                  {/* <hr class="mx-4 my-1 border-base-300 dark:border-base-600/60" /> */}
+                </>
+              ) : (
+                // normal nav link
+                <NavLink {navItem} />
+              ),
+            )
+          }
+        </ul>
+      </nav>
+      <div class="mx-1 mt-3 px-4">
+        <Button
+          variant="secondary"
+          class="w-full shadow-none"
+          href="https://cosmicthemes.com/themes/atlas/"
+        >
+          Get Atlas
+        </Button>
+      </div>
+
+      <div class="mt-4 flex items-start justify-between pl-4 pr-2">
+        <ThemeToggle />
+
+        {
+          locales.length > 1 && (
+            <div class="flex justify-end">
+              <MobileLanguageSelect />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- backdrop button to also close menu -->
+  <button
+    id="mobile-nav__backdrop"
+    class="mobile-nav__backdrop--fade-out fixed left-0 top-0 z-10 h-screen bg-black"
+    aria-label="close navigation menu"></button>
+</div>
+
+<script>
+  let mobileNavContainer: HTMLElement | null;
+  let mobileNavBurger: HTMLElement | null;
+  let mobileNavContent: HTMLElement | null;
+  let mobileNavCloseBtn: HTMLElement | null;
+  let mobileNavBackdrop: HTMLElement | null;
+
+  function toggleMobileNav(event: Event) {
+    if (
+      mobileNavBurger &&
+      mobileNavContent &&
+      mobileNavContainer &&
+      mobileNavBackdrop
+    )
+      if (!mobileNavContainer.classList.contains("open")) {
+        // mobile nav is currently closed, so open it
+        mobileNavContainer.classList.add("open");
+        mobileNavBurger.setAttribute("aria-expanded", "true");
+
+        // mobile nav content drawer
+        mobileNavContent.classList.remove("hidden");
+        mobileNavContent.classList.remove("mobile-nav--slide-out");
+        mobileNavContent.classList.add("mobile-nav--slide-in");
+
+        // backdrop button
+        mobileNavBackdrop.classList.remove("hidden");
+        mobileNavBackdrop.classList.remove("mobile-nav__backdrop--fade-out");
+        mobileNavBackdrop.classList.add("mobile-nav__backdrop--fade-in");
+      } else {
+        // dropdown is currently open, so close it
+        mobileNavContainer.classList.remove("open");
+        mobileNavBurger.setAttribute("aria-expanded", "false");
+
+        // mobile nav content drawer
+        mobileNavContent.classList.remove("mobile-nav--slide-in");
+        mobileNavContent.classList.add("mobile-nav--slide-out");
+        // make hidden after the slide out effect is done
+        setTimeout(() => {
+          mobileNavContent?.classList.add("hidden");
+        }, 300);
+
+        // backdrop button
+        mobileNavBackdrop.classList.remove("mobile-nav__backdrop--fade-in");
+        mobileNavBackdrop.classList.add("mobile-nav__backdrop--fade-out");
+        // set a timeout
+      }
+    event.preventDefault();
+    return false;
+  }
+
+  function initMobileNav() {
+    // every time a view transition or page load occurs, we need to init these variables
+    mobileNavContainer = document.getElementById("mobile-nav__container");
+    mobileNavBurger = document.getElementById("mobile-nav__burger");
+    mobileNavContent = document.getElementById("mobile-nav__content");
+    mobileNavCloseBtn = document.getElementById("mobile-nav__close");
+    mobileNavBackdrop = document.getElementById("mobile-nav__backdrop");
+
+    if (mobileNavBurger && mobileNavCloseBtn && mobileNavBackdrop) {
+      mobileNavBurger.addEventListener("click", toggleMobileNav);
+      mobileNavCloseBtn.addEventListener("click", toggleMobileNav);
+      mobileNavBackdrop.addEventListener("click", toggleMobileNav);
+    }
+  }
+
+  // runs on initial page load
+  initMobileNav();
+
+  // runs on view transitions navigation
+  document.addEventListener("astro:after-swap", initMobileNav);
+</script>
+
+<style lang="scss">
+  // backdrop button to close mobile nav
+  .mobile-nav__backdrop--fade-in {
+    animation: MobileNavFadeInAnimation ease-in-out 0.3s forwards;
+    @apply block w-screen;
+  }
+
+  .mobile-nav__backdrop--fade-out {
+    @apply hidden w-0 opacity-0;
+  }
+
+  @keyframes MobileNavFadeInAnimation {
+    0% {
+      @apply opacity-0;
+    }
+    100% {
+      @apply opacity-40;
+    }
+  }
+
+  // mobile nav content drawer
+  .mobile-nav--slide-in {
+    animation: mobileNavSlideInAnimation ease-in-out 0.3s forwards;
+  }
+
+  .mobile-nav--slide-out {
+    animation: mobileNavSlideOutAnimation ease-in-out 0.3s forwards;
+  }
+
+  @keyframes mobileNavSlideInAnimation {
+    0% {
+      @apply -right-72;
+    }
+    100% {
+      @apply right-0;
+    }
+  }
+
+  @keyframes mobileNavSlideOutAnimation {
+    0% {
+      @apply right-0;
+    }
+    100% {
+      @apply -right-72;
+    }
+  }
+</style>

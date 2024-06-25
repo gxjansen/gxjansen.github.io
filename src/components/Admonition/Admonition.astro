@@ -1,0 +1,55 @@
+---
+import { Icon } from "astro-icon";
+
+interface Props {
+  variant: "tip" | "caution" | "danger" | "info";
+}
+
+const { variant } = Astro.props as Props;
+
+// create a switch statement that switches on "variant" and returns the appropriate icon
+const icon = (() => {
+  switch (variant) {
+    case "tip":
+      return "tabler/bulb";
+    case "caution":
+      return "tabler/alert-triangle";
+    case "danger":
+      return "tabler/flame";
+    case "info":
+      return "tabler/info-circle";
+  }
+})();
+---
+
+<div
+  class:list={[
+    "admonition my-3 rounded-lg border-l-4 px-4 py-3 text-base-600 dark:text-base-300",
+    {
+      "border-success bg-success/10 text-success-content prose-code:bg-success/20 dark:prose-code:bg-success/20":
+        variant === "tip",
+    },
+    {
+      "border-warning bg-warning/10 text-warning-content prose-code:bg-warning/20 dark:prose-code:bg-warning/20":
+        variant === "caution",
+    },
+    {
+      "border-error bg-error/10 text-error-content prose-code:bg-error/20 dark:prose-code:bg-error/20":
+        variant === "danger",
+    },
+    {
+      "border-info bg-info/10 text-info-content prose-code:bg-info/20 dark:prose-code:bg-info/20":
+        variant === "info",
+    },
+  ]}
+>
+  <div class="flex items-center gap-2 pb-2">
+    <Icon
+      name={icon}
+      class="size-7 text-base-600 dark:text-base-300"
+      aria-hidden="true"
+    />
+    <p class="text-sm font-bold">{variant.toUpperCase()}</p>
+  </div>
+  <slot />
+</div>

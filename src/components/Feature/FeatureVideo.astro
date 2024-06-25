@@ -1,0 +1,185 @@
+---
+/**
+ * * Large video feature. This is for a self-hosted video (under src/assets/videos).
+ */
+
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon";
+
+// components
+import Badge from "@components/Badge/Badge.astro";
+
+import videoPlaceholder from "@assets/images/house.jpg";
+import video from "@videos/placeholder-space.mp4";
+---
+
+<section id="feature-video" class="my-8 overflow-x-clip py-8">
+  <div class="site-container">
+    <div class="mx-auto max-w-5xl">
+      <div class="flex justify-center">
+        <Badge>Video</Badge>
+      </div>
+
+      <div class="mx-auto flex max-w-xl justify-center text-center">
+        <h2 class="h2 relative mx-4">See how we can help you</h2>
+      </div>
+      <div class="relative mx-auto mt-10 flex max-w-4xl justify-center">
+        <!-- Button to play video -->
+        <button
+          class="group relative h-full rounded-2xl"
+          aria-label="play video"
+          id="feature-video__play-button"
+        >
+          <Image
+            src={videoPlaceholder}
+            alt="logo"
+            loading="lazy"
+            height={1200}
+            class="z-10 mx-auto rounded-2xl"
+          />
+
+          <div
+            class="absolute left-0 top-0 m-auto flex h-full w-full items-center justify-center"
+          >
+            <div class="relative m-auto aspect-square h-[20%] max-h-16">
+              <!-- background glow of play button -->
+              <div
+                class="absolute inset-2 z-10 rounded-full bg-primary-500/70 motion-safe:animate-ping"
+              >
+              </div>
+              <!-- play button -->
+              <div
+                class="relative z-20 h-full w-full rounded-full bg-primary-500 p-2 transition-all duration-300 group-hover:bg-primary-600 xs:p-4"
+              >
+                <Icon
+                  name="tabler/player-play"
+                  class="m-auto aspect-square h-full w-full text-base-50"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+          </div>
+
+          <Icon
+            name="atlas/wave"
+            class="absolute -left-8 -top-8 z-10 w-40 text-primary-500"
+            aria-hidden="true"
+          />
+          <Icon
+            name="atlas/wave"
+            class="absolute -bottom-8 -right-8 -z-10 w-40 text-accent-1"
+            aria-hidden="true"
+          />
+        </button>
+
+        <!-- html video. Shown when play button is pressed -->
+        <div
+          id="feature-video__video-items"
+          class="fixed inset-0 z-40 hidden h-screen w-screen"
+        >
+          <div class="relative flex h-full w-full items-center justify-center">
+            <!-- backdrop button to close video -->
+            <button
+              id="feature-video__backdrop-button"
+              class="absolute inset-0 z-30 h-full w-full bg-base-900 transition-all"
+            >
+            </button>
+
+            <!-- Video -->
+            <div
+              class="site-container relative m-auto h-fit w-fit max-w-[1000px] p-3 sm:p-6"
+            >
+              <!-- HTML video example -->
+              <video
+                id="feature-video__video"
+                class="relative z-30 w-full max-w-[1000px] rounded-2xl"
+                loop
+                controls
+                muted
+                playsinline
+                preload="metadata"
+              >
+                <source src={video} type="video/mp4" />
+              </video>
+
+              <!-- X button to close video -->
+              <button
+                id="feature-video__close-button"
+                aria-label="close video"
+                class="group absolute right-0 top-0 z-30 h-7 w-7 rounded-full border-2 border-base-50 transition-all hover:border-primary-400"
+              >
+                <Icon
+                  name="tabler/x"
+                  class="m-auto aspect-square h-full max-h-14 w-full text-base-50 transition group-hover:text-primary-400"
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupVideoPlayer() {
+    const video = document.getElementById(
+      "feature-video__video",
+    ) as HTMLVideoElement;
+    const playButton = document.getElementById(
+      "feature-video__play-button",
+    ) as HTMLButtonElement;
+    const VideoItems = document.getElementById(
+      "feature-video__video-items",
+    ) as HTMLElement;
+    const backdropButton = document.getElementById(
+      "feature-video__backdrop-button",
+    ) as HTMLButtonElement;
+    const closeButton = document.getElementById(
+      "feature-video__close-button",
+    ) as HTMLButtonElement;
+
+    // open video on play button press
+    playButton?.addEventListener("click", () => {
+      VideoItems?.classList.toggle("hidden");
+      backdropButton?.classList.toggle("feature-video__backdrop-button--show");
+      video?.play();
+    });
+
+    // close video on backdrop button press
+    backdropButton?.addEventListener("click", () => {
+      video?.pause();
+      VideoItems?.classList.add("hidden");
+      backdropButton?.classList.remove("feature-video__backdrop-button--show");
+    });
+
+    // or close video on close button press
+    closeButton?.addEventListener("click", () => {
+      video?.pause();
+      VideoItems?.classList.add("hidden");
+      backdropButton?.classList.remove("feature-video__backdrop-button--show");
+    });
+  }
+
+  // runs on initial page load
+  setupVideoPlayer();
+
+  // runs on view transitions navigation
+  document.addEventListener("astro:after-swap", setupVideoPlayer);
+</script>
+
+<style lang="scss">
+  .feature-video__backdrop-button--show {
+    animation: fadeInAnimation ease-in-out 0.3s forwards;
+  }
+
+  @keyframes fadeInAnimation {
+    0% {
+      @apply invisible opacity-0;
+    }
+    100% {
+      @apply visible opacity-70;
+    }
+  }
+</style>

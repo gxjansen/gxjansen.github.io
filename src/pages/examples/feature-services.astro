@@ -1,0 +1,29 @@
+---
+// layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import FeatureCardsSmall from "@components/Feature/FeatureCardsSmall.astro";
+import FeatureCardsMedium from "@components/Feature/FeatureCardsMedium.astro";
+import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
+import FeatureVideo from "@components/Feature/FeatureVideo.astro";
+import FeatureSideImage from "@components/Feature/FeatureSideImage.astro";
+import FeatureToggleImage from "@components/Feature/FeatureToggleImage.astro";
+import ServicesIcon from "@components/Services/ServicesIcon.astro";
+import ServicesSideImage from "@components/Services/ServicesSideImage.astro";
+---
+
+<BaseLayout
+  title="Feature sections"
+  description="All of the feature sections included with the Atlas theme"
+>
+  <hr class="pt-20" />
+  <FeatureVideo />
+  <FeatureCardsSmall />
+  <ServicesIcon />
+  <FeatureSideImage />
+  <FeatureGalleryMarquee />
+  <ServicesSideImage />
+  <FeatureToggleImage />
+  <FeatureCardsMedium />
+</BaseLayout>

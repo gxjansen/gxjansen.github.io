@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const pocketKnifeIcon: import("react").JSX.Element;

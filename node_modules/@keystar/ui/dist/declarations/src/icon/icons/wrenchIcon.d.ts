@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const wrenchIcon: import("react").JSX.Element;

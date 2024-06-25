@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const fileJson2Icon: import("react").JSX.Element;

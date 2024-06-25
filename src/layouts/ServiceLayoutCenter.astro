@@ -1,0 +1,59 @@
+---
+/**
+ * * Centered services page layout. This has a title, description, main text, and an image if desired
+ * The CTA and any other sections can be added in here so that all services pages have them
+ */
+import { Image } from "astro:assets";
+
+// main layout
+import BaseLayout from "./BaseLayout.astro";
+
+// components
+import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: ImageMetadata; // an imported image
+}
+
+const { title, description, image = undefined } = Astro.props as Props;
+---
+
+<BaseLayout title={title} description={description} image={image}>
+  <!-- service heading -->
+  <section
+    class="site-container mt-16 flex w-full flex-col items-center overflow-x-clip"
+  >
+    <div
+      class="w-full bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-20 text-center dark:bg-[url('/assets/pattern-dark.svg')] md:py-32"
+    >
+      <h1 class="h1">{title}</h1>
+    </div>
+
+    <!-- service main image -->
+    {
+      image && (
+        <div class="-mt-12 max-w-[800px] overflow-hidden px-4 md:-mt-20">
+          <Image
+            src={image}
+            alt=""
+            width={1600}
+            quality="high"
+            class="max-h-[45vh] rounded-md object-cover"
+            loading="eager"
+          />
+        </div>
+      )
+    }
+  </section>
+
+  <!-- service details -->
+  <section class="my-20">
+    <div class="prose mx-auto max-w-[800px] px-4">
+      <slot />
+    </div>
+  </section>
+
+  <CtaCardSplit />
+</BaseLayout>

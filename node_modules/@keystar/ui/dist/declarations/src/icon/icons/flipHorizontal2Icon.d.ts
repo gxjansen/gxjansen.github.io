@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const flipHorizontal2Icon: import("react").JSX.Element;

@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const arrowDownAZIcon: import("react").JSX.Element;

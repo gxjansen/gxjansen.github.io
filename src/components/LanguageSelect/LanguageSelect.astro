@@ -1,0 +1,147 @@
+---
+/**
+ * * Language select dropdown component
+ * Uses info and utilities from src/js/i18nUtils.ts. Make sure this is updated with the languages you are using (to match the Astro config file)
+ * Multiple dropdowns can be used on the same page
+ */
+import { Icon } from "astro-icon";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { getLocalizedPathname } from "@js/translationUtils";
+
+// config
+import { locales, languageSwitcherMap } from "@config/siteSettings.json";
+
+interface Props {
+  class?: string; // any additional classes
+  rest?: any; // catch-all for any additional parameters, such as "aria-label"
+}
+
+const { class: className, ...rest } = Astro.props as Props;
+
+const currLocale = getLocaleFromUrl(Astro.url);
+---
+
+<div
+  class:list={[
+    "lang-select__dropdown description group relative my-auto flex items-center text-sm",
+    className,
+  ]}
+  {...rest}
+>
+  <button
+    class="primary-focus lang-select__dropdown-button flex items-center gap-0.5 whitespace-nowrap py-1 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 md:flex"
+    type="button"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-controls="lang-select__dropdown-content"
+  >
+    <span class="sr-only">Change language</span>
+    <Icon
+      name="tabler/language"
+      aria-hidden="true"
+      class="size-3.5 shrink-0 transition-transform"
+    />
+    {languageSwitcherMap[currLocale]}
+    <Icon
+      name="tabler/chevron-down"
+      aria-hidden="true"
+      class="lang-select__dropdown-chevron ml-auto size-4 shrink-0 transition-transform"
+    />
+  </button>
+  <div
+    id="lang-select__dropdown-content"
+    aria-labelledby="lang-select"
+    class="lang-select__dropdown-content invisible absolute top-full z-10 mt-2 w-full opacity-0 transition-all"
+  >
+    <ul
+      class="mx-auto mt-3 w-fit max-w-xs whitespace-nowrap rounded-md border border-solid border-base-200 bg-base-50 px-3 py-1.5 drop-shadow-sm dark:border-base-800 dark:bg-base-900"
+    >
+      {
+        locales.map((lang) => (
+          <li class="flex w-full justify-center">
+            <a
+              class="primary-focus relative block w-full whitespace-nowrap py-1 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300"
+              href={getLocalizedPathname(lang, Astro.url)}
+              aria-label={`Change language to ${lang.toUpperCase()}`}
+            >
+              {languageSwitcherMap[lang]}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<script>
+  function dropdownToggleSetup() {
+    const langSelects = document.querySelectorAll(".lang-select__dropdown");
+    langSelects.forEach((langSelect) => {
+      const dropdownButton = langSelect.querySelector(
+        ".lang-select__dropdown-button",
+      );
+      const dropdownChevron = langSelect.querySelector(
+        ".lang-select__dropdown-chevron",
+      );
+      const dropdownContent = langSelect.querySelector(
+        ".lang-select__dropdown-content",
+      );
+      if (dropdownButton && dropdownContent && dropdownChevron) {
+        dropdownButton.addEventListener("click", (event) => {
+          if (!langSelect.classList.contains("active")) {
+            // if dropdown is currently closed, so open it
+            langSelect.classList.add("active");
+            dropdownButton.setAttribute("aria-expanded", "true");
+            dropdownContent.classList.add("dropdown--fade-in");
+            dropdownChevron.classList.add("rotate-180");
+          } else {
+            // dropdown is currently open, so close it
+            langSelect.classList.remove("active");
+            dropdownButton.setAttribute("aria-expanded", "false");
+            dropdownContent.classList.remove("dropdown--fade-in");
+            dropdownChevron.classList.remove("rotate-180");
+          }
+          event.preventDefault();
+          return false;
+        });
+
+        // if dropdown menu is open there is a click outside, close the menu
+        document.addEventListener("click", (event) => {
+          if (
+            !langSelect?.contains(event.target as Node) &&
+            langSelect?.classList.contains("active")
+          ) {
+            langSelect.classList.remove("active");
+            dropdownButton.setAttribute("aria-expanded", "false");
+            dropdownContent.classList.remove("dropdown--fade-in");
+            dropdownChevron.classList.remove("rotate-180");
+          }
+        });
+      }
+    });
+  }
+
+  // runs on initial page load
+  dropdownToggleSetup();
+
+  // runs on view transitions navigation
+  document.addEventListener("astro:after-swap", dropdownToggleSetup);
+</script>
+
+<style lang="scss">
+  .dropdown--fade-in {
+    animation: dropdownFadeInAnimation ease-out 0.15s forwards;
+    @apply visible opacity-100;
+  }
+
+  @keyframes dropdownFadeInAnimation {
+    0% {
+      @apply top-[80%];
+    }
+    100% {
+      @apply top-full;
+    }
+  }
+</style>

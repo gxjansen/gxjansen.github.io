@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const hazeIcon: import("react").JSX.Element;

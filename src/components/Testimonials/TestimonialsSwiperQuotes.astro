@@ -1,0 +1,113 @@
+---
+/**
+ * * Testimonials section swiper with large quote sections
+ */
+
+// swiper style imports
+import "swiper/css";
+import "swiper/css/pagination";
+import "./testimonialSwiper.scss"; // have to define custom styles like this
+
+// components
+import TestimonialItemQuotes from "./TestimonialItemQuotes.astro";
+import Badge from "@components/Badge/Badge.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { getTranslatedData } from "@js/translationUtils";
+
+// data
+const currLocale = getLocaleFromUrl(Astro.url);
+const testimonialData = getTranslatedData("testimonialData", currLocale);
+---
+
+<section
+  id="testimonial-swiper-quotes"
+  class="overflow-hidden bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark-big.svg')] md:pb-28"
+>
+  <div class="site-container">
+    <div
+      class="flex flex-col items-center justify-center"
+      data-aos="fade-right"
+    >
+      <Badge>Testimonials</Badge>
+      <h2 class="h2 text-center">Our customers love us</h2>
+    </div>
+
+    <div class="mt-6 overflow-hidden pb-10 md:mt-10" data-aos="fade-left">
+      <!-- swiper -->
+      <div class="testimonials__swiper--quotes relative">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          {
+            testimonialData.map((testimonial, idx) => (
+              <div class="swiper-slide">
+                <TestimonialItemQuotes {...testimonial} />
+              </div>
+            ))
+          }
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- If we need scrollbar -->
+        <div class="swiper-scrollbar"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Import Swiper and modules
+  import Swiper from "swiper";
+  import type { SwiperOptions } from "swiper/types";
+  import { Pagination } from "swiper/modules";
+  // import { Navigation, Pagination, Scrollbar } from "swiper/modules";
+
+  function swiperSetup() {
+    const SwiperParams: SwiperOptions = {
+      // Install modules
+      modules: [Pagination],
+
+      // Optional parameters
+      direction: "horizontal",
+      spaceBetween: 10,
+      initialSlide: 0,
+      grabCursor: true,
+      centeredSlides: true,
+      // loop: true,
+      // speed: 500,
+
+      // If we need pagination
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+
+      // Navigation arrows
+      // navigation: {
+      //   nextEl: ".swiper-button-next",
+      //   prevEl: ".swiper-button-prev",
+      // },
+
+      // And if we need scrollbar
+      // scrollbar: {
+      //   el: '.swiper-scrollbar',
+      // },
+    };
+
+    // Now you can use Swiper
+    const swiper = new Swiper(".testimonials__swiper--quotes", SwiperParams);
+  }
+
+  // runs on initial page load
+  swiperSetup();
+
+  // runs on view transitions navigation
+  document.addEventListener("astro:after-swap", swiperSetup);
+</script>

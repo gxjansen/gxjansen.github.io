@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const fileSearch2Icon: import("react").JSX.Element;

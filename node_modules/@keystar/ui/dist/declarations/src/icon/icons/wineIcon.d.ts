@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const wineIcon: import("react").JSX.Element;

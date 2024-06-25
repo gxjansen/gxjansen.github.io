@@ -1,0 +1,133 @@
+---
+/**
+ * * Hero centered with video button
+ *
+ * There is a commented out "awards" section below in case you want that
+ */
+import { Icon } from "astro-icon";
+import { Image } from "astro:assets";
+
+// components
+import Button from "@components/Button/Button.astro";
+import VideoButton from "@components/Button/VideoButton.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { useTranslations } from "@js/translationUtils";
+
+// images
+import person1 from "@images/ashton_blackwell.jpg";
+import person2 from "@images/nicola_harris.jpg";
+import person3 from "@images/nic_fassbender.jpg";
+
+const currLocale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(currLocale);
+---
+
+<section
+  id="hero-center"
+  class="mt-20 overflow-x-clip bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat dark:bg-[url('/assets/pattern-dark-big.svg')]"
+>
+  <div class="site-container mx-auto px-4 pb-20 pt-10">
+    <!-- alter the max-w-[750px] here until your text looks nice on large screens -->
+    <div
+      class="mx-auto mb-16 flex w-full max-w-[750px] flex-col justify-center px-4 text-center"
+    >
+      <div data-aos="fade-right" data-aos-trigger="#hero-center">
+        <span
+          class="mb-4 inline-flex items-center rounded-full bg-primary-500 px-2 py-px text-xs uppercase leading-5 text-white"
+        >
+          Meet Atlas
+        </span>
+
+        <h1
+          class="mb-6 text-pretty text-3xl font-bold leading-tight tracking-tight text-base-900 dark:text-base-100 lg:text-5xl lg:leading-tight"
+        >
+          {t("hero_text")}
+        </h1>
+      </div>
+      <p
+        class="description mb-10 text-pretty text-lg lg:text-xl"
+        data-aos="fade-right"
+        data-aos-delay=".1"
+        data-aos-trigger="#hero-center"
+      >
+        {t("hero_description")}
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <Button
+          variant="primary"
+          href="https://cosmicthemes.com/themes/atlas/"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-aos="fade-right"
+          data-aos-delay=".2"
+          data-aos-trigger="#hero-center"
+        >
+          Get Atlas
+        </Button>
+        <VideoButton
+          data-aos="fade-right"
+          data-aos-delay=".2"
+          data-aos-trigger="#hero-center"
+        />
+      </div>
+
+      <!-- social proof -->
+      <div
+        class="mx-auto mt-8 flex max-w-md justify-center"
+        data-aos="fade-right"
+        data-aos-delay=".3"
+        data-aos-trigger="#hero-center"
+      >
+        <div class="-m-1.5 flex flex-wrap items-center">
+          <div class="w-auto p-1.5">
+            <div class="flex flex-wrap">
+              <div
+                class="aspect-square size-10 overflow-hidden rounded-full border-2 border-primary-500 bg-primary-500"
+              >
+                <Image
+                  src={person1}
+                  class="object-cover"
+                  alt="reader"
+                  loading="eager"
+                  width={100}
+                />
+              </div>
+              <div
+                class="-ml-5 aspect-square size-10 overflow-hidden rounded-full border-2 border-primary-500 bg-primary-500"
+              >
+                <Image
+                  src={person2}
+                  class="object-cover"
+                  alt="reader"
+                  loading="eager"
+                  width={100}
+                />
+              </div>
+              <div
+                class="-ml-5 aspect-square size-10 overflow-hidden rounded-full border-2 border-primary-500 bg-primary-500"
+              >
+                <Image
+                  src={person3}
+                  class="object-cover"
+                  alt="reader"
+                  loading="eager"
+                  width={100}
+                />
+              </div>
+            </div>
+          </div>
+          <div class="flex-1 p-1.5 text-left">
+            <p
+              class="description max-w-[14rem] text-sm leading-tight tracking-tight"
+            >
+              Join 200+ happy and<br />
+              satisfied customers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

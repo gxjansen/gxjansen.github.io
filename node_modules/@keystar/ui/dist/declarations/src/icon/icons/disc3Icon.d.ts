@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const disc3Icon: import("react").JSX.Element;

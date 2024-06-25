@@ -1,0 +1,10 @@
+.swiper-pagination-bullet {
+  @apply size-3 translate-y-12 border-2 border-primary-500 bg-primary-300 transition #{!important};
+  &:hover {
+    @apply bg-primary-500 #{!important};
+  }
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-primary-500  #{!important};
+}

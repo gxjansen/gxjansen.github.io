@@ -1,0 +1,52 @@
+---
+/**
+ * * CTA card center with dark background and light text
+ */
+
+import { Icon } from "astro-icon";
+
+// components
+import Button from "@components/Button/Button.astro";
+---
+
+<section class="py-10">
+  <div class="site-container">
+    <div
+      class="relative overflow-hidden rounded-md bg-base-900 px-16 py-11 md:py-20"
+    >
+      <Icon
+        name="atlas/dots3"
+        class="absolute left-4 top-0 z-10 size-16 text-accent-3"
+        aria-hidden="true"
+      />
+      <Icon
+        name="atlas/dots3"
+        class="absolute bottom-0 right-4 z-10 size-16 text-accent-1"
+        aria-hidden="true"
+      />
+      <Icon
+        name="atlas/wave-bg-basic"
+        class="absolute left-1/2 top-1/2 h-full -translate-x-1/2 -translate-y-1/2 object-cover text-black/5"
+        aria-hidden="true"
+      />
+
+      <div
+        class="relative z-20 -m-3 mx-auto flex max-w-lg flex-col flex-wrap items-center gap-4 text-center"
+      >
+        <h2 class="mb-6 text-4xl/normal font-bold text-white">
+          What are you waiting for? Get started today.
+        </h2>
+        <!-- <p class="font-semibold text-base-100">Level up with this theme.</p> -->
+        <Button
+          variant="primary"
+          href="https://cosmicthemes.com/themes/atlas/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="shadow-none"
+        >
+          Get Atlas
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>

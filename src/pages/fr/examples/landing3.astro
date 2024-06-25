@@ -1,0 +1,31 @@
+---
+// layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import Hero from "@components/Hero/HeroCentered.astro";
+import FeatureCardsSmall from "@components/Feature/FeatureCardsSmall.astro";
+import ServicesSideImage from "@components/Services/ServicesSideImage.astro";
+import TestimonialsSwiper from "@components/Testimonials/TestimonialsSwiperQuotes.astro";
+import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
+import CtaCardCenter from "@components/Cta/CtaCardCenter.astro";
+import FaqAccordions from "@components/Faq/FaqAccordions.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { getTranslatedData } from "@js/translationUtils";
+
+// data
+const currLocale = getLocaleFromUrl(Astro.url);
+const siteData = getTranslatedData("siteData", currLocale);
+---
+
+<BaseLayout title={siteData.title} description={siteData.description}>
+  <Hero />
+  <ServicesSideImage />
+  <FeatureCardsSmall />
+  <TestimonialsSwiper />
+  <FeatureGalleryMarquee />
+  <CtaCardCenter />
+  <FaqAccordions />
+</BaseLayout>

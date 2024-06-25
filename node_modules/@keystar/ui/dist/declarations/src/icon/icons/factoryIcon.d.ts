@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const factoryIcon: import("react").JSX.Element;

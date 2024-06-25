@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const music3Icon: import("react").JSX.Element;

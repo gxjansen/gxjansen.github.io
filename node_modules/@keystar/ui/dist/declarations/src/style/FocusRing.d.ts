@@ -1,0 +1,7 @@
+/// <reference types="react" />
+import { FocusRingProps } from '@react-aria/focus';
+/**
+ * A utility component for styling interactions. Applies data-attributes to the
+ * child element when it receives different types of focus.
+ */
+export declare function FocusRing(props: Omit<FocusRingProps, 'focusClass' | 'focusRingClass'>): import("react").ReactElement<any, string | import("react").JSXElementConstructor<any>>;

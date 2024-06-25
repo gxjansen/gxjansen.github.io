@@ -1,0 +1,2 @@
+/// <reference types="react" />
+export declare const tabletsIcon: import("react").JSX.Element;

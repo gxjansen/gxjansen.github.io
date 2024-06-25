@@ -1,0 +1,102 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { type CollectionEntry, getEntries } from "astro:content";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon";
+
+// components
+import Category from "@components/Category/Category.astro";
+
+// utils
+import { slugify, formatDate, humanize } from "@js/textUtils";
+import { getLocaleFromUrl } from "@js/localeUtils";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  showDescription?: boolean;
+  class?: string;
+  rest?: any; // catch-all for any additional parameters, such as "aria-label"
+}
+
+const {
+  post,
+  showDescription = false,
+  class: className,
+  ...rest
+} = Astro.props as Props;
+const { title, description, categories, authors, pubDate, heroImage } =
+  post.data;
+
+const currLocale = getLocaleFromUrl(Astro.url);
+const authorsData = await getEntries(authors);
+---
+
+<article class=`${className}` {...rest}>
+  <a
+    href={getRelativeLocaleUrl(currLocale, `/blog/${post.slug}/`)}
+    class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"
+  >
+    <figure>
+      <Image
+        src={heroImage}
+        alt={`Cover for ${title}`}
+        height={700}
+        quality="high"
+        class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500"
+      />
+    </figure>
+  </a>
+  <div>
+    <!-- categories -->
+    <div class="mt-4 flex flex-wrap gap-4">
+      {categories.map((category) => <Category category={category} />)}
+    </div>
+
+    <div
+      class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"
+    >
+      <!-- first author -->
+      <p class="whitespace-nowrap">
+        {authorsData[0].data.name}
+      </p>
+      <span>&bull;</span>
+
+      <!-- published date -->
+      <p class="whitespace-nowrap">
+        {formatDate(pubDate, currLocale)}
+      </p>
+    </div>
+
+    <!-- title -->
+    <div class="mt-2">
+      <a
+        href={getRelativeLocaleUrl(currLocale, `/blog/${post.slug}/`)}
+        class="decoration-primary-500 hover:underline"
+      >
+        <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl">
+          {title}
+        </h2>
+      </a>
+    </div>
+
+    <!-- description -->
+    {
+      showDescription && (
+        <p class="mt-2 text-sm font-medium text-base-400 md:text-base">
+          {description}
+        </p>
+      )
+    }
+
+    <!-- read post button -->
+    <div class="mt-3">
+      <a
+        href={getRelativeLocaleUrl(currLocale, `/blog/${post.slug}/`)}
+        class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600"
+      >
+        Read Post
+        <Icon name="tabler/arrow-narrow-right" class="size-4" />
+      </a>
+    </div>
+  </div>
+</article>

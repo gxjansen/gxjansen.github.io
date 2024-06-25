@@ -1,0 +1,72 @@
+---
+/**
+ * * These are alternating side cards with titles, text, and images
+ * Recommend using 2 or 3 cards in a row
+ */
+import { Icon } from "astro-icon";
+
+// components
+import FeatureCard from "@components/FeatureCard/FeatureCardSideImage.astro";
+import Badge from "@components/Badge/Badge.astro";
+
+// images
+import image1 from "@images/paint-swatches.jpg";
+import image2 from "@images/living-room.jpg";
+
+interface FeatureItem {
+  badge: string; // badge text
+  image: ImageMetadata; // an imported image
+  title: string;
+  items: string[]; // list of items that will have check marks next to
+  href: string; // link to learn more
+}
+
+// data
+const featureData: FeatureItem[] = [
+  {
+    badge: "Features",
+    image: image1,
+    title: "Highest quality painting services",
+    items: [
+      "Professional painters with years of experience.",
+      "Help you realise your vision.",
+      "Guaranteed satisfaction.",
+    ],
+    href: "/services/exterior-painting/",
+  },
+  {
+    badge: "Features",
+    image: image2,
+    title: "Guaranteed satisfaction",
+    items: [
+      "Professional painters with years of experience.",
+      "Help you realise your vision.",
+      "Guaranteed satisfaction.",
+    ],
+    href: "/services/interior-painting/",
+  },
+];
+---
+
+<section id="feature-side-image" class="my-12 overflow-hidden py-12">
+  <div class="site-container">
+    <!-- <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+      <h2 class="h2 mb-4">The best choice for your needs</h2>
+    </div> -->
+    <div class="flex flex-col gap-16 md:gap-24">
+      {
+        featureData.map((feature, idx) => (
+          <FeatureCard
+            badge={feature.badge}
+            title={feature.title}
+            items={feature.items}
+            image={feature.image}
+            imageSide={idx % 2 === 0 ? "right" : "left"}
+            href={feature.href}
+            idx={idx}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

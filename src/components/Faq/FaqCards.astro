@@ -1,0 +1,62 @@
+---
+/**
+ * * FAQ section columns (not accordions)
+ */
+
+// components
+import FaqCard from "./FaqCard.astro";
+import Badge from "@components/Badge/Badge.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { getTranslatedData } from "@js/translationUtils";
+
+// data
+import { type FaqItem } from "@config/types/configDataTypes";
+const currLocale = getLocaleFromUrl(Astro.url);
+const faqData = getTranslatedData("faqData", currLocale);
+
+type FaqCols = FaqItem[];
+
+// array of columns for faq data
+const faqCols: FaqCols[] = [];
+let faqsPerCol = Math.floor(faqData.length / 2);
+let remainder = faqData.length % 2;
+
+// this assumes more than 2 items for FAQ...
+if (remainder === 0) {
+  // even split
+  faqCols[0] = faqData.slice(0, faqsPerCol);
+  faqCols[1] = faqData.slice(faqsPerCol, 2 * faqsPerCol);
+} else if (remainder === 1) {
+  // extra goes to first column
+  faqCols[0] = faqData.slice(0, faqsPerCol + 1);
+  faqCols[1] = faqData.slice(faqsPerCol + 1, 2 * faqsPerCol + 1);
+} else {
+  console.error("Something went wrong with the FAQ data in FaqCards.astro");
+}
+---
+
+<section
+  id="faq-cards"
+  class="site-container bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark-big.svg')] md:py-28"
+>
+  <div class="flex flex-col items-center">
+    <Badge>FAQ</Badge>
+    <h2 class="h2 text-center">Frequently Asked Questions</h2>
+  </div>
+
+  <div
+    class="mx-auto mt-16 grid w-full gap-x-10 gap-y-3 lg:grid-cols-2 xl:gap-x-24"
+  >
+    {
+      faqCols.map((faqCol) => (
+        <div class="flex w-full flex-col gap-10">
+          {faqCol.map(({ question, answer }, idx) => (
+            <FaqCard {question} {answer} />
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</section>
