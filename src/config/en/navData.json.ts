@@ -26,10 +26,10 @@ const navConfig: navItem[] = [
     text: "Podcasts",
     link: "/podcasts",
   },
-  {
-    text: "Overview",
-    link: "/overview",
-  },
+  // {
+  //   text: "Overview",
+  //   link: "/overview",
+  // },
 
   // mega menu
   {
@@ -80,76 +80,91 @@ const navConfig: navItem[] = [
           },
         ],
       },
-      {
-        title: "Elements and Forms",
-        items: [
-          {
-            text: "MDX Pages",
-            link: "/elements",
-            icon: "tabler/wand",
-          },
-          {
-            text: "Contact",
-            link: "/contact",
-            icon: "tabler/address-book",
-          },
-        ],
-      },
-      {
-        title: "Other Pages",
-        items: [
-          {
-            text: "About",
-            link: "/about",
-            icon: "tabler/user",
-          },
-          {
-            text: "Privacy Policy",
-            link: "/privacy-policy",
-            icon: "tabler/lock-square",
-          },
-          {
-            text: "Terms of Use",
-            link: "/terms",
-            icon: "tabler/script",
-          },
-          {
-            text: "Page not found",
-            link: "/not-a-link",
-            icon: "tabler/error-404",
-          },
-          {
-            text: "RSS Feed",
-            link: "/rss.xml",
-            newTab: true,
-            icon: "tabler/rss",
-          },
-        ],
-      },
+      // {
+      //   title: "Elements and Forms",
+      //   items: [
+      //     {
+      //       text: "MDX Pages",
+      //       link: "/elements",
+      //       icon: "tabler/wand",
+      //     },
+      //     {
+      //       text: "Contact",
+      //       link: "/contact",
+      //       icon: "tabler/address-book",
+      //     },
+      //   ],
+      // },
+      // {
+      //   title: "Other Pages",
+      //   items: [
+      //     {
+      //       text: "About",
+      //       link: "/about",
+      //       icon: "tabler/user",
+      //     },
+      //     {
+      //       text: "Privacy Policy",
+      //       link: "/privacy-policy",
+      //       icon: "tabler/lock-square",
+      //     },
+      //     {
+      //       text: "Terms of Use",
+      //       link: "/terms",
+      //       icon: "tabler/script",
+      //     },
+      //     {
+      //       text: "Page not found",
+      //       link: "/not-a-link",
+      //       icon: "tabler/error-404",
+      //     },
+      //     {
+      //       text: "RSS Feed",
+      //       link: "/rss.xml",
+      //       newTab: true,
+      //       icon: "tabler/rss",
+      //     },
+      //   ],
+      // },
     ],
   },
 
   // regular dropdown
+  // {
+  //   text: "Services",
+  //   dropdown: [
+  //     {
+  //       text: "Exterior Painting",
+  //       link: "/services/exterior-painting",
+  //     },
+  //     {
+  //       text: "Interior Painting",
+  //       link: "/services/interior-painting",
+  //     },
+  //     {
+  //       text: "Deck and Fence",
+  //       link: "/services/deck-and-fence-staining",
+  //     },
+  //   ],
+  // },
   {
-    text: "Services",
-    dropdown: [
-      {
-        text: "Exterior Painting",
-        link: "/services/exterior-painting",
-      },
-      {
-        text: "Interior Painting",
-        link: "/services/interior-painting",
-      },
-      {
-        text: "Deck and Fence",
-        link: "/services/deck-and-fence-staining",
-      },
-    ],
+    text: "Articles",
+    link: "/blog",
   },
   {
-    text: "Blog",
-    link: "/blog",
+    text: "About",
+    dropdown: [
+      {
+        text: "About Guido",
+        link: "/about",
+        icon: "tabler/outline/user",
+      },
+      {
+        text: "Contact",
+        link: "/contact",
+        icon: "tabler/outline/messages",
+      },
+    ],
   },
   // {
   //   // get the categories used in blog posts, to put into a navbar dropdown

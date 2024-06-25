@@ -159,6 +159,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"en/can-you-afford-not-to-know-can-you-afford-to-be-wrong/index.mdx": {
+	id: "en/can-you-afford-not-to-know-can-you-afford-to-be-wrong/index.mdx";
+  slug: "en/can-you-afford-not-to-know-can-you-afford-to-be-wrong";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "en/often-confused-commerce-terms/index.mdx": {
 	id: "en/often-confused-commerce-terms/index.mdx";
   slug: "en/often-confused-commerce-terms";
@@ -169,6 +176,20 @@ declare module 'astro:content' {
 "en/optimization-hierarchy-of-evidence/index.mdx": {
 	id: "en/optimization-hierarchy-of-evidence/index.mdx";
   slug: "en/optimization-hierarchy-of-evidence";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/texas-sharpshooter-fallacy/index.mdx": {
+	id: "en/texas-sharpshooter-fallacy/index.mdx";
+  slug: "en/texas-sharpshooter-fallacy";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/the-story-of-spryker-with-ceo-boris-lokschin/index.mdx": {
+	id: "en/the-story-of-spryker-with-ceo-boris-lokschin/index.mdx";
+  slug: "en/the-story-of-spryker-with-ceo-boris-lokschin";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
