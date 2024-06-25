@@ -5,7 +5,7 @@ const siteData: SiteDataProps = {
   name: "Guido X Jansen",
   // Your website's title and description (meta fields)
   title:
-    "Global Business & Technology Evangelist",
+    "Guido X Jansen | Global Business & Technology Evangelist",
   description:
     "I'm a psychologist working in E-commerce. ‍ I build community & business experimentation teams & programs at innovative businesses.",
   // used on contact page and footer

@@ -23,6 +23,10 @@ import { type navItem } from "../types/configDataTypes";
 // note: 1 level of dropdown is supported
 const navConfig: navItem[] = [
   {
+    text: "Podcasts",
+    link: "/podcasts",
+  },
+  {
     text: "Overview",
     link: "/overview",
   },
