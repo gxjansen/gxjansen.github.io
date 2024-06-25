@@ -17,12 +17,13 @@ import { getLocaleFromUrl } from "@js/localeUtils";
 interface Props {
   title: string; // larger title
   details: string; // text details
+  href: string; // link to learn more
   image: ImageMetadata; // an imported image
   imageSide: "left" | "right";
   idx: number; // determines which "blob" icon svg to use. There are 4 options (0-3)
 }
 
-const { image, title, idx, details, imageSide } = Astro.props as Props;
+const { image, title, href, idx, details, imageSide } = Astro.props as Props;
 
 const currLocale = getLocaleFromUrl(Astro.url);
 ---
@@ -36,6 +37,15 @@ const currLocale = getLocaleFromUrl(Astro.url);
   <div class=`${imageSide === "left" ? "md:order-last": ""} col-span-1`>
     <h3 class="h2 mt-6">{title}</h3>
     <p class="description mt-6">{details}</p>
+    <div class="z-20 mt-8 flex">
+      <Button
+        variant="primary"
+        href={getRelativeLocaleUrl(currLocale, href)}
+        arrow="none"
+      >
+        Learn more <span class="sr-only">about {title}</span>
+      </Button>
+    </div>
   </div>
 
   <!-- image -->

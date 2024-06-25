@@ -18,40 +18,37 @@ interface ServiceItem {
   image: ImageMetadata; // an imported image
   title: string;
   details: string;
+  href: string; // link to learn more
 }
 
 // data
 const serviceData: ServiceItem[] = [
   {
     image: image1,
-    title: "Childhood",
-    details: `I was born in 1982 in Zwolle, in the Netherlands. I lived in Hattem, Tiel, Amersfoort, Utrecht, Breukelen (yes, Brooklyn), Hoofddorp, Amsterdam and I now live in Ouderkerk aan de Amstel (a suburb of Amsterdam).
-
-Until 2004 I spent most of my time swimming, won several Dutch championships and participated in European championship tournaments.`,
+    title: "Exterior Painting",
+    details: `Professional home exterior painting, including siding, doors, and trim.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nesciunt quia quibusdam, 
+    voluptatem aliquid autem, magnam, doloremque voluptatibus odio esse pariatur harum 
+    odit neque qui earum nam praesentium sint ullam!`,
+    href: "/services/exterior-painting/",
   },
   {
     image: image2,
-    title: "University",
-    details: `I studied Applied Cognitive Psychology at the University of Utrecht. I was board member of the Student Group of Social Sciences (SGS) in 2006/2007. For more info about my study/CV you can take a look at my LinkedIn Profile.`,
+    title: "Interior Painting",
+    details: `Our experienced staff can paint your home's interior, including walls, ceilings, and trim.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nesciunt quia quibusdam, voluptatem 
+    aliquid autem, magnam, doloremque voluptatibus odio esse pariatur harum odit neque qui earum 
+    nam praesentium sint ullam!`,
+    href: "/services/interior-painting/",
   },
   {
     image: image3,
-    title: "Professional experience",
-    details: `I have spent the past decade working on improving digital customer experiences;
-Working with mixed teams of stakeholders, analysts, researchers, ux/ui designers and developers, both locally and internationally;
-Setting up and leading user experience and conversion optimisation teams;
-Setting up usability and A/B testing procedures;
-Advance and empower team members through open collaboration, education and thought leadership;
-‍Sharing knowledge: blogging and speaking about E-commerce, (Online) Psychology, digital user experience and community building at conferences around the world.`,
-  },
-  {
-    image: image3,
-    title: "Online Communities & Events",
-    details: `My main involvement lies with web-based software applications and the communities involved with it. I founded one of the largest local Joomla! communities worldwide and I was a Dutch translation coordinator for the platform for quite some time. I also organized the two-day event Joomladays in 2009.
-
-I switched focus to e-commerce and between 2008 and 2021 focussed on one system in particular: Magento.  I organized the first worldwide Meet Magento event in 2009, organized 11 events in total and expanded the conference to over 550 yearly participants. This makes it one of the biggest Magento events worldwide and the start of a global movement of over 60 events.
-
-In 2021 it was time to focus on something new and I became the Global Business & Technology Evangelist at the digital commerce visionairy Spryker.`,
+    title: "Deck and Fence Staining",
+    details: `Stain your deck or fence to keep it looking great and protected from the elements.
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nesciunt quia quibusdam, 
+    voluptatem aliquid autem, magnam, doloremque voluptatibus odio esse pariatur harum odit neque 
+    qui earum nam praesentium sint ullam!`,
+    href: "/services/deck-and-fence-staining/",
   },
 ];
 ---
@@ -62,22 +59,11 @@ In 2021 it was time to focus on something new and I became the Global Business &
       class="mx-auto mb-16 text-center md:mb-20 md:max-w-4xl"
       data-aos="fade-up"
     >
-      <Badge>About</Badge>
-      <h2 class="h2 mb-4">Hi, I'm Guido 👋</h2>
+      <Badge>Services</Badge>
+      <h2 class="h2 mb-4">Our services will blow you away</h2>
       <p class="description text-lg md:text-xl">
-        I'm a cognitive psychologist and customer experience optimization specialist.
-      </p><br/>
-      <p class="description text-lg md:text-xl">
-        With a track record in e-commerce since 2008, I'm currently the Global Business & Technology Evangelist at Spryker.
-      </p><br/>
-      <p class="description text-lg md:text-xl">
-        Notable achievements include building optimization teams, directing global communities, and hosting an award-winning podcast, CRO.CAFE.
-      </p><br/>
-      <p class="description text-lg md:text-xl">
-        I have a knack for transforming user data into customer success and business growth.
-      </p><br/>
-      <p class="description text-lg md:text-xl">
-        A well-known figure on the international stage, and I love to regularly share my expertise at global events.
+        We offer a variety of services for every type of project. When you're
+        ready, contact us to get started.
       </p>
     </div>
     <div class="flex flex-col gap-16 md:mt-16 md:gap-24">
@@ -88,6 +74,7 @@ In 2021 it was time to focus on something new and I became the Global Business &
             details={feature.details}
             image={feature.image}
             imageSide={idx % 2 === 0 ? "right" : "left"}
+            href={feature.href}
             idx={idx}
           />
         ))
