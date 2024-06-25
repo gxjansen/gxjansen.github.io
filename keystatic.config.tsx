@@ -21,13 +21,12 @@ export default config({
   // cloud deployment is free to sign up (up to 3 users per team)
   // docs: https://keystatic.com/docs/cloud
   // create a Keystatic Cloud account here: https://keystatic.cloud/
-  cloud: { project: "cosmic-themes/atlas" },
+  cloud: { project: "gxjansen/gxjansen" },
   ui: {
-    brand: { name: "Cosmic Themes" },
+    brand: { name: "Guido's Homepage" },
   },
   collections: {
     blogEN: Collections.Blog("en"),
-    blogFR: Collections.Blog("fr"),
 
     // for now there is a limitation with keystatic where relationship fields don't work well with i18n features
     // If you need multiple languages here (you might not) just create multiple variants of the same author
@@ -35,9 +34,7 @@ export default config({
     authors: Collections.Authors(""),
 
     servicesEN: Collections.Services("en"),
-    servicesFR: Collections.Services("fr"),
 
     otherPagesEN: Collections.OtherPages("en"),
-    otherPagesFR: Collections.OtherPages("fr"),
   },
 });

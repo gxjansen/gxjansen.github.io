@@ -8,15 +8,10 @@
  * Every {Data} key must exist in the below object
  */
 import siteDataEn from "./en/siteData.json";
-import siteDataFr from "./fr/siteData.json";
 import navDataEn from "./en/navData.json";
-import navDataFr from "./fr/navData.json";
 import faqDataEn from "./en/faqData.json";
-import faqDataFr from "./fr/faqData.json";
 import teamDataEn from "./en/teamData.json";
-import teamDataFr from "./fr/teamData.json";
 import testimonialDataEn from "./en/testimonialData.json";
-import testimonialDataFr from "./fr/testimonialData.json";
 
 export const dataTranslations = {
   en: {
@@ -25,13 +20,6 @@ export const dataTranslations = {
     faqData: faqDataEn,
     teamData: teamDataEn,
     testimonialData: testimonialDataEn,
-  },
-  fr: {
-    siteData: siteDataFr,
-    navData: navDataFr,
-    faqData: faqDataFr,
-    teamData: teamDataFr,
-    testimonialData: testimonialDataFr,
   },
 } as const;
 
@@ -62,13 +50,6 @@ export const textTranslations = {
     back_to_all_posts: "Back to all posts",
     updated: "Updated",
   },
-  fr: {
-    hero_text: "Tout ce dont vous avez besoin pour un site Web incroyable.",
-    hero_description:
-      "Je ne parle pas vraiment français donc j'utilise Google Translate pour quelques parties de cette démo.",
-    back_to_all_posts: "Retour à tous les articles",
-    updated: "Mis à jour",
-  },
 } as const;
 
 /**
@@ -83,8 +64,5 @@ export const textTranslations = {
 export const routeTranslations = {
   en: {
     aboutKey: "about",
-  },
-  fr: {
-    aboutKey: "a-propos",
   },
 } as const;
