@@ -7,6 +7,8 @@
 import { Icon } from "astro-icon";
 import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
+
 
 // components
 import Button from "@components/Button/Button.astro";
@@ -74,9 +76,39 @@ const t = useTranslations(currLocale);
             Book me for your event
           </Button>
         </div>
-
+        <div class="mt-6 flex flex-wrap gap-4"></div>
+            <!-- Socials -->
+            <div class="flex flex-col">
+              <div class="flex gap-4">
+                <SocialIcon
+                  href="https://www.linkedin.com/in/gxjansen/"
+                  icon="tabler/brand-linkedin"
+                  social="linkedin"
+                />
+                <SocialIcon
+                href="https://www.youtube.com/@gxjansen"
+                icon="tabler/brand-youtube"
+                social="youtube"
+              />
+              <SocialIcon
+                  href="https://github.com/gxjansen"
+                  icon="tabler/brand-github"
+                  social="github"
+                />
+                <SocialIcon
+                  href="https://www.instagram.com/gxjansen"
+                  icon="tabler/brand-instagram"
+                  social="instagram"
+                />
+                <SocialIcon
+                href="https://twitter.com/guido"
+                icon="tabler/brand-x"
+                social="twitter (x)"
+              />
+              </div>
+            </div>
         <!-- social proof -->
-        <div
+        <!-- <div
           class="mr-auto mt-8 flex max-w-md"
           data-aos="fade-right"
           data-aos-delay=".3"
@@ -128,8 +160,9 @@ const t = useTranslations(currLocale);
                 event organizers.
               </p>
             </div>
+
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="w-full px-4 md:w-1/2">
         <div
