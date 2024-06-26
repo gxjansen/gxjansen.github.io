@@ -13,6 +13,8 @@ import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.ast
 import FeatureToggleImage from "@components/Feature/FeatureToggleImage.astro";
 import FeatureVideo from "@components/Feature/FeatureVideo.astro";
 import FeatureSideImage from "@components/Feature/FeatureSideImage.astro";
+import SiteContent from "@components/SiteContent/SiteContent.astro";
+
 
 import ServicesSideImage from "@components/Services/ServicesSideImage.astro";
 import ServicesIcon from "@components/Services/ServicesIcon.astro";
@@ -40,7 +42,8 @@ const siteData = getTranslatedData("siteData", currLocale);
   <HeroSideImage />
   <!-- <HeroBgImage /> -->
   <!-- <HeroCentered /> -->
-  <FeatureCardsMedium />
+  <SiteContent />
+  <!-- <FeatureCardsMedium /> -->
   <FeatureCardsSmall />
   <!-- <FeatureVideo /> -->
 
