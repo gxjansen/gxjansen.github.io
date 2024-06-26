@@ -15,6 +15,9 @@ import { formatDate, humanize, slugify } from "@js/textUtils";
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { useTranslations } from "@js/translationUtils";
 
+// images
+import HumanNotAI from "@images/Written-By-Human-Not-By-AI-Badge-black.svg";
+
 interface Props {
   post: CollectionEntry<"blog">;
 }
@@ -87,7 +90,17 @@ const authorsData = await getEntries(authors);
           </div>
         </div>
       </div>
-
+      <div class="flex justify-center pt-5">
+        <a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
+          <Image
+            src={HumanNotAI}
+            alt="Written-By-Human-Not-By-AI"
+            decoding="async"
+            loading="lazy"
+            width={100}
+          />
+        </a>
+      </div>
       <!-- blog post main image -->
       <div class="mt-6 max-w-[1000px] overflow-hidden">
         <Image

@@ -187,6 +187,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"en/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar/index.mdx": {
+	id: "en/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar/index.mdx";
+  slug: "en/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "en/new-domain-and-cms/index.mdx": {
 	id: "en/new-domain-and-cms/index.mdx";
   slug: "en/new-domain-and-cms";
@@ -225,6 +232,13 @@ declare module 'astro:content' {
 "en/proving-the-monetary-value-of-a-b-testing/index.mdx": {
 	id: "en/proving-the-monetary-value-of-a-b-testing/index.mdx";
   slug: "en/proving-the-monetary-value-of-a-b-testing";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/recording-creating-an-optimization-culture/index.mdx": {
+	id: "en/recording-creating-an-optimization-culture/index.mdx";
+  slug: "en/recording-creating-an-optimization-culture";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
