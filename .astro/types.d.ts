@@ -152,6 +152,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"en/999999999/index.mdx": {
+	id: "en/999999999/index.mdx";
+  slug: "en/999999999";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "en/are-you-left-or-right-brain-surprise-youre-both/index.mdx": {
 	id: "en/are-you-left-or-right-brain-surprise-youre-both/index.mdx";
   slug: "en/are-you-left-or-right-brain-surprise-youre-both";
@@ -166,9 +173,23 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"en/nieuwe-website-online/index.mdx": {
+	id: "en/nieuwe-website-online/index.mdx";
+  slug: "en/nieuwe-website-online";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "en/often-confused-commerce-terms/index.mdx": {
 	id: "en/often-confused-commerce-terms/index.mdx";
   slug: "en/often-confused-commerce-terms";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/one-year-com-in-retrospect/index.mdx": {
+	id: "en/one-year-com-in-retrospect/index.mdx";
+  slug: "en/one-year-com-in-retrospect";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
@@ -190,6 +211,20 @@ declare module 'astro:content' {
 "en/the-story-of-spryker-with-ceo-boris-lokschin/index.mdx": {
 	id: "en/the-story-of-spryker-with-ceo-boris-lokschin/index.mdx";
   slug: "en/the-story-of-spryker-with-ceo-boris-lokschin";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/top-tips-for-getting-started-in-ecommerce/index.mdx": {
+	id: "en/top-tips-for-getting-started-in-ecommerce/index.mdx";
+  slug: "en/top-tips-for-getting-started-in-ecommerce";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/website-online/index.mdx": {
+	id: "en/website-online/index.mdx";
+  slug: "en/website-online";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
