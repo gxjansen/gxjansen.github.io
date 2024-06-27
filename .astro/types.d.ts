@@ -387,13 +387,148 @@ declare module 'astro:content' {
 
 	type DataEntryMap = {
 		"countries": {
-"DE/index": {
-	id: "DE/index";
+"argentina/index": {
+	id: "argentina/index";
   collection: "countries";
   data: any
 };
-"NL/index": {
-	id: "NL/index";
+"austria/index": {
+	id: "austria/index";
+  collection: "countries";
+  data: any
+};
+"belarus/index": {
+	id: "belarus/index";
+  collection: "countries";
+  data: any
+};
+"belgium/index": {
+	id: "belgium/index";
+  collection: "countries";
+  data: any
+};
+"brazil/index": {
+	id: "brazil/index";
+  collection: "countries";
+  data: any
+};
+"china/index": {
+	id: "china/index";
+  collection: "countries";
+  data: any
+};
+"croatia/index": {
+	id: "croatia/index";
+  collection: "countries";
+  data: any
+};
+"czech-republic/index": {
+	id: "czech-republic/index";
+  collection: "countries";
+  data: any
+};
+"denmark/index": {
+	id: "denmark/index";
+  collection: "countries";
+  data: any
+};
+"estonia/index": {
+	id: "estonia/index";
+  collection: "countries";
+  data: any
+};
+"france/index": {
+	id: "france/index";
+  collection: "countries";
+  data: any
+};
+"germany/index": {
+	id: "germany/index";
+  collection: "countries";
+  data: any
+};
+"great-britain/index": {
+	id: "great-britain/index";
+  collection: "countries";
+  data: any
+};
+"greece/index": {
+	id: "greece/index";
+  collection: "countries";
+  data: any
+};
+"indonesia/index": {
+	id: "indonesia/index";
+  collection: "countries";
+  data: any
+};
+"ireland/index": {
+	id: "ireland/index";
+  collection: "countries";
+  data: any
+};
+"italy/index": {
+	id: "italy/index";
+  collection: "countries";
+  data: any
+};
+"norway/index": {
+	id: "norway/index";
+  collection: "countries";
+  data: any
+};
+"poland/index": {
+	id: "poland/index";
+  collection: "countries";
+  data: any
+};
+"romania/index": {
+	id: "romania/index";
+  collection: "countries";
+  data: any
+};
+"singapore/index": {
+	id: "singapore/index";
+  collection: "countries";
+  data: any
+};
+"spain/index": {
+	id: "spain/index";
+  collection: "countries";
+  data: any
+};
+"sweden/index": {
+	id: "sweden/index";
+  collection: "countries";
+  data: any
+};
+"switserland/index": {
+	id: "switserland/index";
+  collection: "countries";
+  data: any
+};
+"the-netherlands/index": {
+	id: "the-netherlands/index";
+  collection: "countries";
+  data: any
+};
+"ukraine/index": {
+	id: "ukraine/index";
+  collection: "countries";
+  data: any
+};
+"united-states/index": {
+	id: "united-states/index";
+  collection: "countries";
+  data: any
+};
+"vietnam/index": {
+	id: "vietnam/index";
+  collection: "countries";
+  data: any
+};
+"world/index": {
+	id: "world/index";
   collection: "countries";
   data: any
 };
