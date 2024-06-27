@@ -44,7 +44,6 @@ const Blog = (locale: (typeof locales)[number]) =>
         description:
           "Set this post as draft to prevent it from being published.",
       }),
-
       authors: fields.array(
         fields.relationship({
           label: "Post author",
@@ -89,7 +88,7 @@ const Blog = (locale: (typeof locales)[number]) =>
           table: true,
           link: true,
           image: {
-            directory: `src/content/blog/${locale}/`,
+            directory: `src/content/blog/en/`,
             publicPath: "../",
             // schema: {
             //   title: fields.text({
@@ -186,13 +185,57 @@ const Events = (locale: (typeof locales)[number]) =>
   collection({
     label: `Events`,
     slugField: "title",
-    path: `src/content/events/${locale}/*/`,
-    columns: ["title"],
+    path: `src/content/events/*/`,
+    columns: ["title", "city", "pubDate"],
     entryLayout: "content",
-    format: { contentField: "content" },
+    // format: { contentField: "content" },
     schema: {
       title: fields.slug({
-        name: { label: "Title" },
+        name: { label: "Event name / Organizer" },
+        slug: {
+          label: "SEO-friendly slug",
+          description: "Never change the slug once a file is published!",
+        },
+      }),
+      city: fields.text({ label: "City" }),
+      countries: fields.array(
+        fields.relationship({
+          label: "Country",
+          collection: `countries`,
+          // countries field in keystatic.config.tsx must match the collection name here (like "authorsEN" or "authorsFR")
+          // collection: `authors${locale.toUpperCase()}`,
+        }),
+        {
+          label: "Country",
+          validation: { length: { min: 1 } },
+          itemLabel: (props) => props.value || "Please select a country",
+        },
+      ),
+      pubDate: fields.date({ label: "Start Date" }),
+      image: fields.image({
+        label: "Event logo/icon",
+        publicPath: "../",
+        validation: { isRequired: true },
+      }),
+      draft: fields.checkbox({
+        label: "Draft",
+        description:
+          "Set this as draft to prevent it from being published.",
+      }),
+    },
+  });
+
+const Country = (locale: (typeof locales)[number]) =>
+  collection({
+    label: `Countries`,
+    slugField: "title",
+    path: `src/content/countries/*/`,
+    columns: ["title"],
+    entryLayout: "content",
+    // format: { contentField: "content" },
+    schema: {
+      title: fields.slug({
+        name: { label: "Country" },
         slug: {
           label: "SEO-friendly slug",
           description: "Never change the slug once a file is published!",
@@ -202,11 +245,6 @@ const Events = (locale: (typeof locales)[number]) =>
         label: "Country flag",
         publicPath: "../",
         validation: { isRequired: true },
-      }),
-      draft: fields.checkbox({
-        label: "Draft",
-        description:
-          "Set this as draft to prevent it from being published.",
       }),
     },
   });
@@ -332,6 +370,8 @@ const OtherPages = (locale: (typeof locales)[number]) =>
 export default {
   Blog,
   Authors,
+  Events,
+  Country,
   Services,
   OtherPages,
 };
