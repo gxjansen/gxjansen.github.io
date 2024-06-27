@@ -29,8 +29,6 @@ export default config({
   collections: {
     blogEN: Collections.Blog("en"),
     authors: Collections.Authors("en"),
-    events: Collections.Events("en"),
-    countries: Collections.Countries("en"),
     servicesEN: Collections.Services("en"),
     otherPagesEN: Collections.OtherPages("en"),
   },
