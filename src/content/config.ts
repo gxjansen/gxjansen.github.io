@@ -70,8 +70,6 @@ const countriesCollection = defineCollection({
     z.object({
       title: z.string(),
       image: image(),
-      // items will be excluded from build if draft is "true"
-      draft: z.boolean().optional(),
     }),
 });
 
@@ -82,6 +80,12 @@ const eventsCollection = defineCollection({
     z.object({
       title: z.string(),
       image: image(),
+      city: z.string(),
+      countries: z.array(reference("countries")),
+      pubDate: z
+      .string()
+      .or(z.date())
+      .transform((val) => new Date(val)),
       // items will be excluded from build if draft is "true"
       draft: z.boolean().optional(),
     }),
@@ -137,6 +141,8 @@ const otherPagesCollection = defineCollection({
 export const collections = {
   blog: blogCollection,
   authors: authorsCollection,
+  events: eventsCollection,
+  countries: countriesCollection,
   services: servicesCollection,
   otherPages: otherPagesCollection,
 };

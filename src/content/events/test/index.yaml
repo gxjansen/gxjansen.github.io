@@ -1,0 +1,7 @@
+title: Test
+city: Amsterdam
+countries:
+  - DE
+pubDate: 2024-06-26
+image: ../test/image.png
+draft: false
