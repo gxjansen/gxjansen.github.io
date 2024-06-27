@@ -199,39 +199,6 @@ const Events = (locale: (typeof locales)[number]) =>
         },
       }),
       image: fields.image({
-        label: "Event image",
-        publicPath: "../",
-        validation: { isRequired: true },
-      }),
-      draft: fields.checkbox({
-        label: "Draft",
-        description:
-          "Set this as draft to prevent it from being published.",
-      }),
-    },
-  });
-
-  /**
- * * Countries collection
- * This gets used by Astro Content Collections, so if you update this, you'll need to update the Astro Content Collections schema
- */
-const Countries = (locale: (typeof locales)[number]) =>
-  collection({
-    label: `Country`,
-    slugField: "title",
-    path: `src/content/events/${locale}/*/`,
-    columns: ["title"],
-    entryLayout: "content",
-    format: { contentField: "content" },
-    schema: {
-      title: fields.slug({
-        name: { label: "Title" },
-        slug: {
-          label: "SEO-friendly slug",
-          description: "Never change the slug once a file is published!",
-        },
-      }),
-      image: fields.image({
         label: "Country flag",
         publicPath: "../",
         validation: { isRequired: true },
@@ -365,8 +332,6 @@ const OtherPages = (locale: (typeof locales)[number]) =>
 export default {
   Blog,
   Authors,
-  Events,
-  Countries,
   Services,
   OtherPages,
 };
