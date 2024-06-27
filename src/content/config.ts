@@ -75,7 +75,7 @@ const countriesCollection = defineCollection({
 
 // events
 const eventsCollection = defineCollection({
-  type: "content",
+  type: "data",
   schema: ({ image }) =>
     z.object({
       title: z.string(),
