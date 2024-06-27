@@ -3,18 +3,18 @@
  * * About page with various sections including some text, team profiles, and CTA
  * Edit the team member information inside src/config/teamData.json.ts
  */
-import { Icon } from "astro-icon";
-import { getRelativeLocaleUrl } from "astro:i18n";
+// import { Icon } from "astro-icon";
+// import { getRelativeLocaleUrl } from "astro:i18n";
 
 // main layout
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
-import Profile from "@components/Profile/Profile.astro";
-import Button from "@components/Button/Button.astro";
+// import Profile from "@components/Profile/Profile.astro";
+// import Button from "@components/Button/Button.astro";
 import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
-import Badge from "@components/Badge/Badge.astro";
-import AboutMe from "@components/AboutMe/AboutMe.mdx";
+// import Badge from "@components/Badge/Badge.astro";
+// import AboutMe from "@components/AboutMe/AboutMe.mdx";
 import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
 import ServicesSideImage from "@components/Services/ServicesSideImage.astro";
 
@@ -30,8 +30,8 @@ const teamData = getTranslatedData("teamData", currLocale);
 ---
 
 <BaseLayout
-  title="About Us"
-  description="All about our super awesome small business team!"
+  title="About Guido"
+  description="I'm a cognitive psychologist focussed on E-commerce in general and the Spryker platform specifically."
 >
   <!-- text section -->
   <!-- <section
