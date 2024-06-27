@@ -141,7 +141,7 @@ declare module 'astro:content' {
   slug: "gxjansen";
   body: string;
   collection: "authors";
-  data: any
+  data: InferEntrySchema<"authors">
 } & { render(): Render[".mdx"] };
 };
 "blog": {
@@ -150,228 +150,213 @@ declare module 'astro:content' {
   slug: "best-vscode-extensions-front-end-developers";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/999999999/index.mdx": {
 	id: "en/999999999/index.mdx";
   slug: "en/999999999";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/are-you-left-or-right-brain-surprise-youre-both/index.mdx": {
 	id: "en/are-you-left-or-right-brain-surprise-youre-both/index.mdx";
   slug: "en/are-you-left-or-right-brain-surprise-youre-both";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/can-you-afford-not-to-know-can-you-afford-to-be-wrong/index.mdx": {
 	id: "en/can-you-afford-not-to-know-can-you-afford-to-be-wrong/index.mdx";
   slug: "en/can-you-afford-not-to-know-can-you-afford-to-be-wrong";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/compute-required-sample-size-for-your-ab-tests/index.mdx": {
 	id: "en/compute-required-sample-size-for-your-ab-tests/index.mdx";
   slug: "en/compute-required-sample-size-for-your-ab-tests";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/first-episode-of-cro-cafe-is-live/index.mdx": {
 	id: "en/first-episode-of-cro-cafe-is-live/index.mdx";
   slug: "en/first-episode-of-cro-cafe-is-live";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar/index.mdx": {
 	id: "en/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar/index.mdx";
   slug: "en/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/new-domain-and-cms/index.mdx": {
 	id: "en/new-domain-and-cms/index.mdx";
   slug: "en/new-domain-and-cms";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/nieuwe-website-online/index.mdx": {
 	id: "en/nieuwe-website-online/index.mdx";
   slug: "en/nieuwe-website-online";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/often-confused-commerce-terms/index.mdx": {
 	id: "en/often-confused-commerce-terms/index.mdx";
   slug: "en/often-confused-commerce-terms";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/one-year-com-in-retrospect/index.mdx": {
 	id: "en/one-year-com-in-retrospect/index.mdx";
   slug: "en/one-year-com-in-retrospect";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/optimization-hierarchy-of-evidence/index.mdx": {
 	id: "en/optimization-hierarchy-of-evidence/index.mdx";
   slug: "en/optimization-hierarchy-of-evidence";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/proving-the-monetary-value-of-a-b-testing/index.mdx": {
 	id: "en/proving-the-monetary-value-of-a-b-testing/index.mdx";
   slug: "en/proving-the-monetary-value-of-a-b-testing";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/recording-creating-an-optimization-culture/index.mdx": {
 	id: "en/recording-creating-an-optimization-culture/index.mdx";
   slug: "en/recording-creating-an-optimization-culture";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/texas-sharpshooter-fallacy/index.mdx": {
 	id: "en/texas-sharpshooter-fallacy/index.mdx";
   slug: "en/texas-sharpshooter-fallacy";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/the-cro-process/index.mdx": {
 	id: "en/the-cro-process/index.mdx";
   slug: "en/the-cro-process";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/the-story-of-spryker-with-ceo-boris-lokschin/index.mdx": {
 	id: "en/the-story-of-spryker-with-ceo-boris-lokschin/index.mdx";
   slug: "en/the-story-of-spryker-with-ceo-boris-lokschin";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/top-tips-for-getting-started-in-ecommerce/index.mdx": {
 	id: "en/top-tips-for-getting-started-in-ecommerce/index.mdx";
   slug: "en/top-tips-for-getting-started-in-ecommerce";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/website-move-to-webflow/index.mdx": {
 	id: "en/website-move-to-webflow/index.mdx";
   slug: "en/website-move-to-webflow";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/website-moved-to-astro/index.mdx": {
 	id: "en/website-moved-to-astro/index.mdx";
   slug: "en/website-moved-to-astro";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "en/website-online/index.mdx": {
 	id: "en/website-online/index.mdx";
   slug: "en/website-online";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "example-1/index.mdx": {
 	id: "example-1/index.mdx";
   slug: "example-1";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "example-2/index.mdx": {
 	id: "example-2/index.mdx";
   slug: "example-2";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "tailwind-gradient-underline/index.mdx": {
 	id: "tailwind-gradient-underline/index.mdx";
   slug: "tailwind-gradient-underline";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "tips-for-freelance-website-development/index.mdx": {
 	id: "tips-for-freelance-website-development/index.mdx";
   slug: "tips-for-freelance-website-development";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 "tsconfig-paths-setup/index.mdx": {
 	id: "tsconfig-paths-setup/index.mdx";
   slug: "tsconfig-paths-setup";
   body: string;
   collection: "blog";
-  data: any
+  data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
 };
-"events": {
-"en/index.mdx": {
-	id: "en/index.mdx";
-  slug: "en";
+"events": Record<string, {
+  id: string;
+  slug: string;
   body: string;
   collection: "events";
-  data: any
-} & { render(): Render[".mdx"] };
-"fr/index.mdx": {
-	id: "fr/index.mdx";
-  slug: "fr";
-  body: string;
-  collection: "events";
-  data: any
-} & { render(): Render[".mdx"] };
-"nl/index.mdx": {
-	id: "nl/index.mdx";
-  slug: "nl";
-  body: string;
-  collection: "events";
-  data: any
-} & { render(): Render[".mdx"] };
-};
+  data: InferEntrySchema<"events">;
+  render(): Render[".md"];
+}>;
 "otherPages": {
 "elements/index.mdx": {
 	id: "elements/index.mdx";
   slug: "elements";
   body: string;
   collection: "otherPages";
-  data: any
+  data: InferEntrySchema<"otherPages">
 } & { render(): Render[".mdx"] };
 "privacy-policy/index.mdx": {
 	id: "privacy-policy/index.mdx";
   slug: "privacy-policy";
   body: string;
   collection: "otherPages";
-  data: any
+  data: InferEntrySchema<"otherPages">
 } & { render(): Render[".mdx"] };
 "terms/index.mdx": {
 	id: "terms/index.mdx";
   slug: "terms";
   body: string;
   collection: "otherPages";
-  data: any
+  data: InferEntrySchema<"otherPages">
 } & { render(): Render[".mdx"] };
 };
 "services": {
@@ -380,21 +365,21 @@ declare module 'astro:content' {
   slug: "deck-and-fence-staining";
   body: string;
   collection: "services";
-  data: any
+  data: InferEntrySchema<"services">
 } & { render(): Render[".mdx"] };
 "exterior-painting/index.mdx": {
 	id: "exterior-painting/index.mdx";
   slug: "exterior-painting";
   body: string;
   collection: "services";
-  data: any
+  data: InferEntrySchema<"services">
 } & { render(): Render[".mdx"] };
 "interior-painting/index.mdx": {
 	id: "interior-painting/index.mdx";
   slug: "interior-painting";
   body: string;
   collection: "services";
-  data: any
+  data: InferEntrySchema<"services">
 } & { render(): Render[".mdx"] };
 };
 
@@ -405,12 +390,12 @@ declare module 'astro:content' {
 "DE/index": {
 	id: "DE/index";
   collection: "countries";
-  data: any
+  data: InferEntrySchema<"countries">
 };
 "NL/index": {
 	id: "NL/index";
   collection: "countries";
-  data: any
+  data: InferEntrySchema<"countries">
 };
 };
 
@@ -418,5 +403,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = never;
+	export type ContentConfig = typeof import("../src/content/config.js");
 }
