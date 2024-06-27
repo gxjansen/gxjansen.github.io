@@ -230,7 +230,7 @@ const Country = (locale: (typeof locales)[number]) =>
     label: `Countries`,
     slugField: "title",
     path: `src/content/countries/*/`,
-    columns: ["title"],
+    columns: ["title" ],
     entryLayout: "content",
     // format: { contentField: "content" },
     schema: {
