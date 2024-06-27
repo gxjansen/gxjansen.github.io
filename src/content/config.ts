@@ -65,7 +65,7 @@ const clientsCollection = defineCollection({
 
 // countries
 const countriesCollection = defineCollection({
-  type: "content",
+  type: "data",
   schema: ({ image }) =>
     z.object({
       title: z.string(),
