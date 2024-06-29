@@ -1,0 +1,230 @@
+---
+/**
+ * * Three row flags marquee
+ * JS allows the animation to pause while you hover over it.
+ */
+
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon";
+
+// components
+import Badge from "@components/Badge/Badge.astro";
+
+// images
+import argentina from "src/content/countries/argentina/image.webp";
+import austria from "src/content/countries/austria/image.png";
+import belarus from "src/content/countries/belarus/image.jpg";
+import belgium from "src/content/countries/belgium/image.png";
+import brazil from "src/content/countries/brazil/image.webp";
+import china from "src/content/countries/china/image.png";
+import croatia from "src/content/countries/croatia/image.svg";
+import czechrepublic from "src/content/countries/czech-republic/image.png";
+import germany from "src/content/countries/germany/image.webp";
+import greatbritain from "src/content/countries/great-britain/image.png";
+import denmark from "src/content/countries/denmark/image.jpg";
+import estonia from "src/content/countries/estonia/image.jpg";
+import france from "src/content/countries/france/image.png";
+import greece from "src/content/countries/greece/image.png";
+import india from "src/content/countries/india/image.png";
+import indonesia from "src/content/countries/indonesia/image.jpg";
+import ireland from "src/content/countries/ireland/image.png";
+import italy from "src/content/countries/italy/image.png";
+import norway from "src/content/countries/norway/image.jpg";
+import poland from "src/content/countries/poland/image.svg";
+import romania from "src/content/countries/romania/image.png";
+import singapore from "src/content/countries/singapore/image.webp";
+import spain from "src/content/countries/spain/image.png";
+import sweden from "src/content/countries/sweden/image.webp";
+import switserland from "src/content/countries/switserland/image.webp";
+import thenetherlands from "src/content/countries/the-netherlands/image.png";
+import ukraine from "src/content/countries/ukraine/image.png";
+import us from "src/content/countries/united-states/image.webp";
+import vietnam from "src/content/countries/vietnam/image.png";
+
+interface MarqueeImages {
+  images: ImageMetadata[]; // imported images
+}
+
+// change these images to whatever you want!
+const marqueeTop: MarqueeImages = {
+  images: [argentina, austria, belarus, belgium, brazil, china, croatia, czechrepublic, germany, greatbritain],
+};
+
+const marqueeMiddle: MarqueeImages = {
+  images: [denmark, estonia, greece, france, indonesia, ireland, italy, norway, poland, romania],
+};
+
+const marqueeBottom: MarqueeImages = {
+  images: [singapore, spain, sweden, switserland, india, thenetherlands, ukraine, us, vietnam],
+};
+---
+
+<section
+  id="feature-gallery-marquee"
+  class="bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark-big.svg')] md:py-28"
+>
+  <div class="site-container flex justify-center">
+    <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+      <Badge>Flags</Badge>
+      <h2 class="h2">Countries where I presented</h2>
+      <p class="description mt-4 text-pretty text-lg md:text-xl">
+        29 and counting! 
+      </p>
+    </div>
+  </div>
+
+  <div class="relative flex flex-col gap-3 overflow-hidden md:gap-5">
+    <!-- marquee top row -->
+    <div class="marquee-top relative flex gap-3 overflow-hidden md:gap-5">
+      <div
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
+      >
+        {
+          marqueeTop.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[5/3] max-w-[clamp(3rem,28vmin,5rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+      <div
+        aria-hidden="true"
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
+      >
+        {
+          marqueeTop.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[5/3] max-w-[clamp(3rem,28vmin,5rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- marquee middle row -->
+    <div class="marquee-middle relative flex gap-3 overflow-hidden md:gap-5">
+      <div
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
+      >
+        {
+          marqueeMiddle.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[5/3] max-w-[clamp(3rem,28vmin,5rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+      <div
+        aria-hidden="true"
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
+      >
+        {
+          marqueeMiddle.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[5/3] max-w-[clamp(3rem,28vmin,5rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- marquee bottom row -->
+    <div class="marquee-bottom relative flex gap-3 overflow-hidden md:gap-5">
+      <div
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
+      >
+        {
+          marqueeBottom.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[5/3] max-w-[clamp(3rem,35vmin,5rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+      <div
+        aria-hidden="true"
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
+      >
+        {
+          marqueeBottom.images.map((image) => (
+            <Image
+              src={image}
+              alt=""
+              loading="lazy"
+              width={600}
+              class="aspect-[5/3] max-w-[clamp(3rem,35vmin,5rem)] rounded-md object-cover shadow-md"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const setupMarquee = () => {
+    const marqueeTop = document.querySelector(".marquee-top");
+    const marqueeMiddle = document.querySelector(".marquee-middle");
+    const marqueeBottom = document.querySelector(".marquee-bottom");
+
+    // add the clauss "pause" when the mouse enters the marquee
+    marqueeTop?.addEventListener("mouseover", () => {
+      marqueeTop.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.add("pause");
+      });
+    });
+    marqueeMiddle?.addEventListener("mouseover", () => {
+      marqueeMiddle.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.add("pause");
+      });
+    });
+    marqueeBottom?.addEventListener("mouseover", () => {
+      marqueeBottom.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.add("pause");
+      });
+    });
+
+    // remove the class "pause" when the mouse leaves the marquee
+    marqueeTop?.addEventListener("mouseout", () => {
+      marqueeTop.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.remove("pause");
+      });
+    });
+    marqueeMiddle?.addEventListener("mouseout", () => {
+      marqueeMiddle.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.remove("pause");
+      });
+    });
+    marqueeBottom?.addEventListener("mouseout", () => {
+      marqueeBottom.querySelectorAll(".animate-marquee").forEach((el) => {
+        el.classList.remove("pause");
+      });
+    });
+  };
+
+  // runs on initial page load
+  setupMarquee();
+
+  // runs on view transitions navigation
+  document.addEventListener("astro:after-swap", setupMarquee);
+</script>
