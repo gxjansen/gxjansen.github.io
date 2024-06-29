@@ -21,7 +21,7 @@ export default defineConfig({
     "/presentation": "/",
     "/events": "/",
     "/guidojansen": "/about",
-    "/post/[...slug]": "/blog/[...slug]"
+    "/post/[...slug]": "/blog/[...slug]",
     "/kit": "https://kit.co/gxjansen",
     "/call": "https://app.reclaim.ai/m/gxjansen/flexible-quick-meeting",
     "/persuasive-ecommerce": "/",
