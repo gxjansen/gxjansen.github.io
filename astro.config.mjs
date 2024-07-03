@@ -7,8 +7,9 @@ import AutoImport from "astro-auto-import";
 import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
 import netlify from "@astrojs/netlify";
-
 import playformCompress from "@playform/compress";
+
+import compressor from "astro-compressor";
 
 // https://astro.build/config
 export default defineConfig({
@@ -78,5 +79,5 @@ export default defineConfig({
         useShortDoctype: true
       }
     }
-  }), playformCompress()]
+  }), playformCompress(), compressor()]
 });
