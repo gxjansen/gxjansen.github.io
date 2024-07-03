@@ -12,7 +12,7 @@ const siteData: SiteDataProps = {
   contact: {
     address1: "Ouderkerk aan de Amstel,",
     address2: "The Netherlands 🇳🇱 🇪🇺",
-    phone: "+31 6 42093976",
+    phone: "Signal, Telegram, Whatsapp, LinkedIn...",
     email: "x@gui.do",
   },
 
