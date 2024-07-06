@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro build --mode preview",
+    "production": "astro build --mode production",
     "astro": "astro"
   },
   "dependencies": {
