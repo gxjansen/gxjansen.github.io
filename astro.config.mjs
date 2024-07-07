@@ -93,7 +93,7 @@ export default defineConfig({
         writeBundle() {
           let robotsContent;
           const sitemapUrl = process.env.ASTRO_MODE === 'production'
-            ? 'https://prod.gui.do/sitemap-index.xml'
+            ? 'https://gxjansen.netlify.app/sitemap-index.xml'
             : 'https://dev.gui.do/sitemap-index.xml';
 
           if (process.env.ASTRO_MODE === 'production') {
@@ -101,7 +101,15 @@ export default defineConfig({
           } else {
             robotsContent = `User-agent: *\nDisallow: /\n\nSitemap: ${sitemapUrl}`;
           }
-          fs.writeFileSync('dist/robots.txt', robotsContent);
+          
+          // Ensure the dist directory exists
+          const distDir = path.join(process.cwd(), 'dist');
+          if (!fs.existsSync(distDir)) {
+            fs.mkdirSync(distDir, { recursive: true });
+          }
+
+          // Write the robots.txt file
+          fs.writeFileSync(path.join(distDir, 'robots.txt'), robotsContent);
         }
       }
     ]
