@@ -37,7 +37,6 @@
     "tailwindcss": "^3.4.3"
   },
   "devDependencies": {
-    "@playform/compress": "^0.0.13",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "prettier-plugin-astro": "^0.14.0",
