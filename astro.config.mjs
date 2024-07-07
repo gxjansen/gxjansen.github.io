@@ -84,11 +84,11 @@ export default defineConfig({
           handler() {
             let robotsContent;
             const sitemapUrl = process.env.ASTRO_MODE === 'production'
-              ? 'https://gxjansen.netlify.app/sitemap-index.xml'
+              ? 'https://www.gui.do/sitemap-index.xml'
               : 'https://dev.gui.do/sitemap-index.xml';
 
             if (process.env.ASTRO_MODE === 'production') {
-              robotsContent = `User-agent: *\nAllow: /\n\nSitemap: ${sitemapUrl}`;
+                robotsContent = `User-agent: *\nDisallow: /conference-terms\n\nSitemap: ${sitemapUrl}`;
             } else {
               robotsContent = `User-agent: *\nDisallow: /\n\nSitemap: ${sitemapUrl}`;
             }
