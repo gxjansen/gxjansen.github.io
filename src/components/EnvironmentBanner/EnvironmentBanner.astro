@@ -1,0 +1,27 @@
+---
+// src/components/EnvironmentBanner/EnvironmentBanner.astro
+import { CONFIG } from 'src/config.ts';
+
+const isProduction = CONFIG.ALLOW_INDEXING;
+---
+
+{!isProduction && (
+  <div class="environment-banner">
+    Preview Environment
+  </div>
+)}
+
+<style>
+  .environment-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #ff4136;
+    color: white;
+    text-align: center;
+    padding: 0rem;
+    font-weight: bold;
+    z-index: 9999;
+  }
+</style>

@@ -6,6 +6,8 @@ import BaseHead from "@layouts/BaseHead.astro";
 import Nav from "@components/Nav/Nav.astro";
 import Footer from "@components/Footer/Footer.astro";
 import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
+import EnvironmentBanner from '../components/EnvironmentBanner/EnvironmentBanner.astro';
+
 
 // style import
 import "@/styles/global.scss";
@@ -60,6 +62,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
       siteSettings.useAnimations === true ? "use-animations" : ""
     }`}
   >
+  <EnvironmentBanner />
     <!-- put cookie consent first so it is seen first by screen readers -->
     <!-- <CookieConsent /> -->
     <div class="min-h-[100lvh]">
