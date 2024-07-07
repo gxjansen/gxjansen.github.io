@@ -2,14 +2,15 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
-import compress from "@playform/compress";
 import AutoImport from "astro-auto-import";
 import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
 import netlify from "@astrojs/netlify";
-import playformCompress from "@playform/compress";
 
 import compressor from "astro-compressor";
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -66,18 +67,43 @@ export default defineConfig({
     imports: [
     // https://github.com/delucis/astro-auto-import
     "@components/Admonition/Admonition.astro"]
-  }), mdx(), react(), keystatic(), tailwind(), sitemap(), compress({
-    HTML: {
-      "html-minifier-terser": {
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: true,
-        ignoreCustomComments: [],
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
+  }), mdx(), react(), keystatic(), tailwind(), sitemap(), compressor()],
+
+// the following uses a Vite plugin to copy the appropriate robots.txt file to the dist folder during the build process, based on the current environment.
+  build: {
+    assets: 'astro-assets'
+  },
+
+  vite: {
+    plugins: [
+      {
+        name: 'robots-txt',
+        writeBundle: {
+          sequential: true,
+          order: 'post',
+          handler() {
+            let robotsContent;
+            const sitemapUrl = process.env.ASTRO_MODE === 'production'
+              ? 'https://www.gui.do/sitemap-index.xml'
+              : 'https://dev.gui.do/sitemap-index.xml';
+
+            if (process.env.ASTRO_MODE === 'production') {
+                robotsContent = `User-agent: *\nDisallow: /conference-terms\n\nSitemap: ${sitemapUrl}`;
+            } else {
+              robotsContent = `User-agent: *\nDisallow: /\n\nSitemap: ${sitemapUrl}`;
+            }
+            
+            // Ensure the dist directory exists
+            const distDir = path.join(process.cwd(), 'dist');
+            if (!fs.existsSync(distDir)) {
+              fs.mkdirSync(distDir, { recursive: true });
+            }
+
+            // Write the robots.txt file
+            fs.writeFileSync(path.join(distDir, 'robots.txt'), robotsContent);
+          }
+        }
       }
-    }
-  }), playformCompress(), compressor()]
+    ]
+  }
 });

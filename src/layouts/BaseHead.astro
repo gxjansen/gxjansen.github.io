@@ -7,6 +7,7 @@ import Seo from "@components/Seo/Seo.astro";
 
 // data
 import siteSettings from "@config/siteSettings.json";
+import { CONFIG } from '../config';  // Use .env for indexing
 
 export interface Props {
   type?: "blog" | "general" | undefined;
@@ -25,8 +26,9 @@ const {
   image,
   authors,
   postFrontmatter,
-  noindex = false,
 } = Astro.props as Props;
+// Use the environment variable to determine noindex
+const noindex = !CONFIG.ALLOW_INDEXING;
 ---
 
 <meta charset="utf-8" />
