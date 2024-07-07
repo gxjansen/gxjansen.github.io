@@ -79,5 +79,33 @@ export default defineConfig({
         useShortDoctype: true
       }
     }
-  }), playformCompress(), compressor()]
+  }), playformCompress(), compressor()],
+
+// the following uses a Vite plugin to copy the appropriate robots.txt file to the dist folder during the build process, based on the current environment.
+  build: {
+    assets: 'astro-assets'
+  },
+
+  vite: {
+    plugins: [
+      {
+        name: 'robots-txt',
+        writeBundle() {
+          let robotsSrc;
+          switch (process.env.ASTRO_MODE) {
+            case 'production':
+              robotsSrc = 'robots/robots.production.txt';
+              break;
+            case 'preview':
+              robotsSrc = 'robots/robots.preview.txt';
+              break;
+            default:
+              robotsSrc = 'robots/robots.development.txt';
+          }
+          
+          fs.copyFileSync(robotsSrc, 'dist/robots.txt');
+        }
+      }
+    ]
+  }
 });
