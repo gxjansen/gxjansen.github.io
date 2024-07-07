@@ -62,6 +62,7 @@ const Blog = (locale: (typeof locales)[number]) =>
         label: "Updated Date",
         description:
           "If you update this post at a later date, put that date here.",
+        validation: { isRequired: true},
       }),
       heroImage: fields.image({
         label: "Hero Image",

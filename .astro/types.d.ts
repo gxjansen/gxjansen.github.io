@@ -152,6 +152,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"en/101-ways-to-speed-up-your-magento-e-commerce-website/index.mdx": {
+	id: "en/101-ways-to-speed-up-your-magento-e-commerce-website/index.mdx";
+  slug: "en/101-ways-to-speed-up-your-magento-e-commerce-website";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "en/999999999/index.mdx": {
 	id: "en/999999999/index.mdx";
   slug: "en/999999999";
@@ -173,9 +180,23 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"en/color-persuasion/index.mdx": {
+	id: "en/color-persuasion/index.mdx";
+  slug: "en/color-persuasion";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "en/compute-required-sample-size-for-your-ab-tests/index.mdx": {
 	id: "en/compute-required-sample-size-for-your-ab-tests/index.mdx";
   slug: "en/compute-required-sample-size-for-your-ab-tests";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/data-driven-decisions-meets-psychology/index.mdx": {
+	id: "en/data-driven-decisions-meets-psychology/index.mdx";
+  slug: "en/data-driven-decisions-meets-psychology";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
@@ -190,6 +211,13 @@ declare module 'astro:content' {
 "en/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar/index.mdx": {
 	id: "en/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar/index.mdx";
   slug: "en/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/learnings-from-shenzhen/index.mdx": {
+	id: "en/learnings-from-shenzhen/index.mdx";
+  slug: "en/learnings-from-shenzhen";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
@@ -229,9 +257,37 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
+"en/optimize-magento-for-speed/index.mdx": {
+	id: "en/optimize-magento-for-speed/index.mdx";
+  slug: "en/optimize-magento-for-speed";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/personal-brand-combining-personal-business-online-5-guidelinestips/index.mdx": {
+	id: "en/personal-brand-combining-personal-business-online-5-guidelinestips/index.mdx";
+  slug: "en/personal-brand-combining-personal-business-online-5-guidelinestips";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/persuasion-profiling-dawn-of-a-new-marketing-era/index.mdx": {
+	id: "en/persuasion-profiling-dawn-of-a-new-marketing-era/index.mdx";
+  slug: "en/persuasion-profiling-dawn-of-a-new-marketing-era";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
 "en/proving-the-monetary-value-of-a-b-testing/index.mdx": {
 	id: "en/proving-the-monetary-value-of-a-b-testing/index.mdx";
   slug: "en/proving-the-monetary-value-of-a-b-testing";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/questions-on-experimentation/index.mdx": {
+	id: "en/questions-on-experimentation/index.mdx";
+  slug: "en/questions-on-experimentation";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
@@ -267,6 +323,13 @@ declare module 'astro:content' {
 "en/top-tips-for-getting-started-in-ecommerce/index.mdx": {
 	id: "en/top-tips-for-getting-started-in-ecommerce/index.mdx";
   slug: "en/top-tips-for-getting-started-in-ecommerce";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".mdx"] };
+"en/trustlogo-onderzoek/index.mdx": {
+	id: "en/trustlogo-onderzoek/index.mdx";
+  slug: "en/trustlogo-onderzoek";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
