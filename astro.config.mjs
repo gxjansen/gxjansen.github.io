@@ -91,19 +91,17 @@ export default defineConfig({
       {
         name: 'robots-txt',
         writeBundle() {
-          let robotsSrc;
-          switch (process.env.ASTRO_MODE) {
-            case 'production':
-              robotsSrc = 'robots/robots.production.txt';
-              break;
-            case 'preview':
-              robotsSrc = 'robots/robots.preview.txt';
-              break;
-            default:
-              robotsSrc = 'robots/robots.development.txt';
+          let robotsContent;
+          const sitemapUrl = process.env.ASTRO_MODE === 'production'
+            ? 'https://prod.gui.do/sitemap-index.xml'
+            : 'https://dev.gui.do/sitemap-index.xml';
+
+          if (process.env.ASTRO_MODE === 'production') {
+            robotsContent = `User-agent: *\nAllow: /\n\nSitemap: ${sitemapUrl}`;
+          } else {
+            robotsContent = `User-agent: *\nDisallow: /\n\nSitemap: ${sitemapUrl}`;
           }
-          
-          fs.copyFileSync(robotsSrc, 'dist/robots.txt');
+          fs.writeFileSync('dist/robots.txt', robotsContent);
         }
       }
     ]
