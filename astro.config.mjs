@@ -2,12 +2,10 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
-import compress from "@playform/compress";
 import AutoImport from "astro-auto-import";
 import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
 import netlify from "@astrojs/netlify";
-import playformCompress from "@playform/compress";
 
 import compressor from "astro-compressor";
 import * as fs from 'node:fs';
@@ -69,20 +67,7 @@ export default defineConfig({
     imports: [
     // https://github.com/delucis/astro-auto-import
     "@components/Admonition/Admonition.astro"]
-  }), mdx(), react(), keystatic(), tailwind(), sitemap(), compress({
-    HTML: {
-      "html-minifier-terser": {
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: true,
-        ignoreCustomComments: [],
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        useShortDoctype: true
-      }
-    }
-  }), playformCompress(), compressor()],
+  }), mdx(), react(), keystatic(), tailwind(), sitemap(), compressor()],
 
 // the following uses a Vite plugin to copy the appropriate robots.txt file to the dist folder during the build process, based on the current environment.
   build: {
