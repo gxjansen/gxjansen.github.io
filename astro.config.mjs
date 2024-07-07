@@ -10,6 +10,9 @@ import netlify from "@astrojs/netlify";
 import playformCompress from "@playform/compress";
 
 import compressor from "astro-compressor";
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -90,26 +93,30 @@ export default defineConfig({
     plugins: [
       {
         name: 'robots-txt',
-        writeBundle() {
-          let robotsContent;
-          const sitemapUrl = process.env.ASTRO_MODE === 'production'
-            ? 'https://gxjansen.netlify.app/sitemap-index.xml'
-            : 'https://dev.gui.do/sitemap-index.xml';
+        writeBundle: {
+          sequential: true,
+          order: 'post',
+          handler() {
+            let robotsContent;
+            const sitemapUrl = process.env.ASTRO_MODE === 'production'
+              ? 'https://gxjansen.netlify.app/sitemap-index.xml'
+              : 'https://dev.gui.do/sitemap-index.xml';
 
-          if (process.env.ASTRO_MODE === 'production') {
-            robotsContent = `User-agent: *\nAllow: /\n\nSitemap: ${sitemapUrl}`;
-          } else {
-            robotsContent = `User-agent: *\nDisallow: /\n\nSitemap: ${sitemapUrl}`;
-          }
-          
-          // Ensure the dist directory exists
-          const distDir = path.join(process.cwd(), 'dist');
-          if (!fs.existsSync(distDir)) {
-            fs.mkdirSync(distDir, { recursive: true });
-          }
+            if (process.env.ASTRO_MODE === 'production') {
+              robotsContent = `User-agent: *\nAllow: /\n\nSitemap: ${sitemapUrl}`;
+            } else {
+              robotsContent = `User-agent: *\nDisallow: /\n\nSitemap: ${sitemapUrl}`;
+            }
+            
+            // Ensure the dist directory exists
+            const distDir = path.join(process.cwd(), 'dist');
+            if (!fs.existsSync(distDir)) {
+              fs.mkdirSync(distDir, { recursive: true });
+            }
 
-          // Write the robots.txt file
-          fs.writeFileSync(path.join(distDir, 'robots.txt'), robotsContent);
+            // Write the robots.txt file
+            fs.writeFileSync(path.join(distDir, 'robots.txt'), robotsContent);
+          }
         }
       }
     ]
