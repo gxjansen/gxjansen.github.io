@@ -20,8 +20,16 @@ export declare const zodPatterns: {
     readonly email: RegExp;
     /**
      * Constructed a valid Unicode RegExp
+     *
+     * Lazily instantiate since this type of regex isn't supported
+     * in all envs (e.g. React Native).
+     *
+     * See:
+     * https://github.com/colinhacks/zod/issues/2433
+     * Fix in Zod:
+     * https://github.com/colinhacks/zod/commit/9340fd51e48576a75adc919bff65dbc4a5d4c99b
      */
-    readonly emoji: RegExp;
+    readonly emoji: () => RegExp;
     /**
      * Unused
      */
