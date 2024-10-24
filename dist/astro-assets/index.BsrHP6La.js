@@ -1,0 +1,3 @@
+const i="singapore/index",s="countries",r={title:"Singapore",image:new Proxy({src:"/astro-assets/image.C10JP9Qa.webp",width:1e3,height:667,format:"webp",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/singapore/image.webp"},{get(n,e,t){return e==="clone"?structuredClone(n):e==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/singapore/image.webp":n[e]}})},a={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/singapore/index.yaml",rawData:`title: Singapore
+image: ../singapore/image.webp
+`};export{a as _internal,s as collection,r as data,i as id};

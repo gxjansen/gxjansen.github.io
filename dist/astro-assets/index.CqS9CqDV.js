@@ -1,0 +1,104 @@
+const o="en/data-driven-decisions-meets-psychology/index.mdx",i="blog",s="en/data-driven-decisions-meets-psychology",a=`import { YouTube } from 'astro-embed';
+
+#### After a short introduction, I spoke about these 3 topics:
+
+1. [why psychology is important when selling online](https://medium.com/@gxjansen/data-driven-decisions-meets-psychology-8622194c9626#2b9b);
+
+2. [how to build an optimization team](https://medium.com/@gxjansen/data-driven-decisions-meets-psychology-8622194c9626#d498);
+
+3. [how to work on your optimization culture](https://medium.com/@gxjansen/data-driven-decisions-meets-psychology-8622194c9626#2c28).
+
+I hope [my session](https://nomadmage.com/product/data-driven-decisions-meets-psychology/) inspired you to work on this, but I don’t have the illusion that my 1,5 hour general session gave you all the information you need for your specific situation. So to help you get started, below you will find many notes and further readings on the topics around this session t get you started on implementing this in your organization.
+
+Need more help? Send me your questions on Twitter ([@guido](https://medium.com/r/?url=https%3A%2F%2Ftwitter.com%2Fguido)) or send an e-mail to x at gui.do.
+
+‍
+
+Part 1: Persuasive E-commerce
+
+**Slidedeck:**
+
+Data Driven Decisions meets Psychology by Guido JansenDuring the Nomadmage session, Guido will show you... 1) why psychology is important when you're selling online, 2) how…slides.com
+
+*Expanded version of me talking about Persuasive E-commerce:*
+
+<YouTube id="64Th5UUHzuY" />
+
+Video where I talk about our experiments with running multivariate tests with Machine Learning through Sentient Ascend:
+
+<YouTube id="fyrix-EARyE" />
+
+**Cognitive biases:**
+
+* List of cognitive biases - https\\://en.wikipedia.org/wiki/List\\_of\\_cognitive\\_biases
+
+* Cognitive bias cheat -https\\://betterhumans.coach.me/cognitive-bias-cheat-sheet-55a472476b18
+
+**Tools I’m using on a daily/weekly basis:**
+
+* [Convert](https://www.convert.com/) (A/B testing)
+
+* Sentient Ascend (Experiment with Machine Learning)
+
+* Effective Experiments (Project Management for A/B tests)
+
+* Hotjar (Heatmaps, funnel/form analysis, questionaires)
+
+* Google AnalyticsGoogle Data Studio (Data analysis)
+
+* Supermetrics for Google Drive (Data analysis)
+
+* RStudio (Data Analysis)
+
+**Books you should read:**
+
+*  [Thinking, Fast and Slow](https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555) - Daniel Kahneman
+
+* [Influence](https://www.amazon.com/Influence-Psychology-Persuasion-Robert-Cialdini/dp/0688128165) - Robert Cialdini
+
+*  [Predictably Irrational](https://www.amazon.com/Predictably-Irrational-Revised-Expanded-Decisions/dp/0061353248/ref=pd_sim_14_3?_encoding=UTF8\\&pd_rd_i=0061353248\\&pd_rd_r=WDV9RH10E2TE3P0D9YFR\\&pd_rd_w=WtZcK\\&pd_rd_wg=VTWnC\\&psc=1\\&refRID=WDV9RH10E2TE3P0D9YFR) - Dan Ariely
+
+* [Nudge](https://www.amazon.com/Nudge-Improving-Decisions-Health-Happiness/dp/014311526X/) -  Richard Thaler
+
+## Part 2: Building an Optimization Dream Team
+
+**Slidedeck:**
+
+[http://slides.com/gxjansen/team-data-building-a-data-driven-optimization-team](https://medium.com/r/?url=http%3A%2F%2Fslides.com%2Fgxjansen%2Fteam-data-building-a-data-driven-optimization-team%2Ffullscreen)
+
+Also see my posts [The CRO Process](/post/the-cro-process) and [The Website Optimization Workflow](/post/model-for-your-ab-testing-workflow) over on LinkedIn.
+
+**Mentioned tools:**
+
+* [Self assessment of your digital maturity](https://digitalanalyticsmaturity.org/)
+
+* [Compute required sample size for your A/B tests](/post/compute-required-sample-size-for-your-ab-tests)
+
+* [PXL framework for prioritization](https://conversionxl.com/blog/better-way-prioritize-ab-tests/)
+
+**Further reading:**
+
+* [Build, Buy, or Hire? How to Pick the Testing Solution That's Right for You](https://blog.optimizely.com/2013/09/27/how-to-choose-a-testing-solution/)
+
+* [How to Build and Structure a Conversion Optimization Team](https://conversionxl.com/blog/conversion-optimization-team/)
+
+* [Hiring an Optimizer? Look For These 8 Traits](https://conversionxl.com/blog/traits-of-successful-optimizers/)
+
+* [How to Recognize Great Conversion Optimization People](https://conversionxl.com/blog/recognize-great-conversion-optimization-people/)
+
+## Part 3: Optimization Culture
+
+**Slidedeck:**
+
+[Optimization culture by Guido Jansen](http://slides.com/gxjansen/optimization-culture#/)
+
+**Further reading:**
+
+* [The Culture Map: Breaking Through the Invisible Boundaries of Global Business](https://www.amazon.com/Culture-Map-Breaking-Invisible-Boundaries/dp/1610392507)
+
+* [Building a Sustainable Testing Culture](https://www.objeqt.com/blog/building-sustainable-testing-culture/) 
+
+### Left with questions?
+
+Reach out on [Twitter](https://twitter.com/guido)!
+`,r={title:"Data Driven Decisions meets Psychology",description:"On October 24th, I gave a session at Nomad Mage about using psychology and data to make the decisions to improve your webshop.",authors:[{slug:"gxjansen",collection:"authors"}],pubDate:new Date(15350688e5),heroImage:new Proxy({src:"/astro-assets/heroImage.RF0zaGKI.jpeg",width:960,height:540,format:"jpg",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/blog/en/data-driven-decisions-meets-psychology/heroImage.jpeg"},{get(n,e,t){return e==="clone"?structuredClone(n):e==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/blog/en/data-driven-decisions-meets-psychology/heroImage.jpeg":n[e]}}),categories:["Psychology"],draft:!1},d={type:"content",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/blog/en/data-driven-decisions-meets-psychology/index.mdx",rawData:void 0};export{d as _internal,a as body,i as collection,r as data,o as id,s as slug};

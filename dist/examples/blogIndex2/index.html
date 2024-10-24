@@ -1,0 +1,1246 @@
+<!DOCTYPE html><html lang="en" data-astro-transition-scope="astro-tyfwoq7n-30"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width" , initial-scale="1.0"><!-- Poppins Font --><link rel="preconnect" href="https://api.fontshare.com"><link href="https://api.fontshare.com/v2/css?f[]=poppins@400,500,600,700&display=swap" rel="stylesheet"><!-- Favicons. I store these in public/favicons. Wherever you store them in the public folder is what you need these href's to match --><link rel="icon" href="/favicons/favicon.ico"><!-- Below is generated from https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"><link rel="manifest" href="/favicons/site.webmanifest"><link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#22c55e"><link rel="shortcut icon" href="/favicons/favicon.ico"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-config" content="/favicons/browserconfig.xml"><meta name="theme-color" content="#22c55e"><!-- end favicons --><!-- other --><meta name="generator" content="Astro v4.16.7"><link rel="sitemap" href="/sitemap-index.xml"><!-- Theme change setup. Run early to eliminate Flash of inAccurate coloR Theme (FART) --><script>
+  function initTheme() {
+    let colorTheme = localStorage.getItem("colorTheme");
+    if (!colorTheme) {
+      // if no color theme yet, use the users browser preferences
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("colorTheme", "dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("colorTheme", "light");
+      }
+    } else {
+      // If there is, assign the theme based on the value in local storage
+      if (colorTheme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else if (colorTheme === "light") {
+        document.documentElement.classList.remove("dark");
+      }
+    }
+  }
+
+  // runs on initial page load
+  initTheme();
+
+  // runs on view transitions navigation
+  document.addEventListener("astro:after-swap", initTheme);
+</script><title>My articles</title><link rel="canonical" href="https://gxjansen.github.io/examples/blogIndex2/"><meta name="description" content="Learn from my articles about web development, psychology, podcasting and more."><meta name="robots" content="noindex, nofollow"><meta property="og:title" content="My articles"><meta property="og:type" content="website"><meta property="og:image" content="https://gxjansen.github.io/images/x-logo.webp"><meta property="og:url" content="https://gxjansen.github.io/examples/blogIndex2/"><meta property="og:description" content="Learn from my articles about web development, psychology, podcasting and more."><meta property="og:site_name" content="Guido X Jansen | Global Business &#38; Technology Evangelist"><meta property="og:image:url" content="https://gxjansen.github.io/images/x-logo.webp"><meta property="og:image:type" content="image/webp"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="800"><meta property="og:image:alt" content="My articles"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@guido"><meta name="twitter:title" content="My articles"><meta name="twitter:image" content="https://gxjansen.github.io/images/x-logo.webp"><meta name="twitter:description" content="Learn from my articles about web development, psychology, podcasting and more."><meta name="twitter:creator" content="@guido"> <!-- JSON LD --> <script type="application/ld+json">
+      {
+      "@context": "https://schema.org/",
+      "@type": "WebSite",
+      "name": "Guido X Jansen | Global Business & Technology Evangelist",
+      "url": "https://gxjansen.github.io"
+      }
+    </script><!-- no fallback as I saw issues with firefox fallback --><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="none"><link rel="stylesheet" href="/astro-assets/keystatic-astro-page.DEImE0nj.css">
+<link rel="stylesheet" href="/astro-assets/_slug_.iYJ1v4O3.css"><script type="module" src="/astro-assets/hoisted.D7k4V2gH.js"></script><style>[data-astro-transition-scope="astro-4zctsknj-1"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-2"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-3"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-4"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-4"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-4"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-5"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-5"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-5"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-6"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-6"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-6"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-6"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-6"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-6"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-7"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-7"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-7"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-7"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-7"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-7"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-8"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-8"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-8"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-8"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-8"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-8"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-9"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-9"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-9"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-9"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-9"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-9"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-10"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-10"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-10"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-10"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-10"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-10"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-10"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-10"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-10"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-11"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-11"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-11"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-11"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-11"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-11"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-11"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-11"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-11"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-12"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-12"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-12"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-12"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-12"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-12"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-12"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-12"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-12"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-13"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-13"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-13"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-13"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-13"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-13"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-13"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-13"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-13"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-14"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-14"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-14"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-14"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-14"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-14"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-14"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-14"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-14"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-15"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-15"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-15"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-15"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-15"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-15"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-15"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-15"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-15"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-16"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-16"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-16"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-16"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-16"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-16"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-16"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-16"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-16"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-17"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-17"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-17"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-17"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-17"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-17"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-17"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-17"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-17"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-18"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-18"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-18"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-18"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-18"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-18"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-18"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-18"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-18"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-19"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-19"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-19"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-19"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-19"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-19"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-19"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-19"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-19"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-20"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-20"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-20"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-20"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-20"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-20"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-20"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-20"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-20"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-21"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-21"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-21"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-21"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-21"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-21"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-21"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-21"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-21"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-22"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-22"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-22"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-22"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-22"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-22"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-22"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-22"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-22"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-23"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-23"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-23"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-23"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-23"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-23"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-23"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-23"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-23"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-24"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-24"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-24"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-24"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-24"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-24"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-24"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-24"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-24"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-25"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-25"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-25"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-25"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-25"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-25"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-25"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-25"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-25"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-26"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-26"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-26"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-26"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-26"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-26"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-26"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-26"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-26"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-27"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-27"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-27"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-27"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-27"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-27"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-27"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-27"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-27"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-28"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-28"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-28"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-28"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-28"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-28"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-28"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-28"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-28"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-4zctsknj-29"] { view-transition-name: heroImage; }@layer astro { ::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(heroImage) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-29"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-29"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-29"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-29"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-4zctsknj-29"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-4zctsknj-29"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-4zctsknj-29"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-4zctsknj-29"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-tyfwoq7n-30"] { view-transition-name: astro-tyfwoq7n-30; }@layer astro { ::view-transition-old(astro-tyfwoq7n-30) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(astro-tyfwoq7n-30) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(astro-tyfwoq7n-30) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(astro-tyfwoq7n-30) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-tyfwoq7n-30"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-tyfwoq7n-30"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-tyfwoq7n-30"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-tyfwoq7n-30"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-tyfwoq7n-30"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-tyfwoq7n-30"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-tyfwoq7n-30"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-tyfwoq7n-30"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-uabxsrdf-31"] { view-transition-name: nav; }@layer astro { ::view-transition-old(nav) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(nav) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(nav) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(nav) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-uabxsrdf-31"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-uabxsrdf-31"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-uabxsrdf-31"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-uabxsrdf-31"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-uabxsrdf-31"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-uabxsrdf-31"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-uabxsrdf-31"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-uabxsrdf-31"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body id="body" class="bg-background dark:bg-background-dark use-animations"> <div class="environment-banner" data-astro-cid-6pxxj6mc>
+Preview Environment
+</div> <!-- put cookie consent first so it is seen first by screen readers --> <!-- <CookieConsent /> --> <div class="min-h-[100lvh]"> <div id="nav__container" class="navbar--initial fixed left-0 top-0 z-30 flex w-full flex-col border-b transition-all duration-300" data-astro-cid-ju4v47fh data-astro-transition-scope="astro-uabxsrdf-31"> <div class="mx-auto flex w-full" data-astro-cid-ju4v47fh> <div class="site-container flex h-14 w-full items-center" data-astro-cid-ju4v47fh> <header class="relative flex w-full items-center gap-2" data-astro-cid-ju4v47fh> <!-- home button / image --> <div class="flex flex-auto justify-start" data-astro-cid-ju4v47fh> <a class="primary-focus flex items-center gap-2 align-middle text-xl font-bold text-base-600 dark:text-base-200" href="/"> <!-- <Image
+    src={logo}
+    alt="Atlas logo"
+    loading="eager"
+    height={90}
+    class="h-10 w-auto"
+    aria-label="Atlas logo"
+  /> --> <p class="">Guido</p> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-7 text-primary-500" viewBox="0 0 24 24" aria-hidden="true" astro-icon="atlas/logoipsum"><path stroke="none" d="M0 0h24v24H0z"/><path d="M18 6 6 18M6 6l12 12"/></svg> <p class="">Jansen</p> </a> </div> <!-- <div class="flex flex-auto justify-center">
+          
+        </div> --> <!-- desktop nav menu --> <div class="flex flex-auto justify-end" data-astro-cid-ju4v47fh> <nav class="hidden md:block" data-astro-cid-ju4v47fh> <ul class="flex h-fit items-center px-4" data-astro-cid-ju4v47fh> <li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 undefined" href="/podcasts/" target="" rel="" aria-label="Podcasts">  Podcasts </a> </li><!-- non-mobile mega menu menu --><li class="mega-menu__dropdown group" data-astro-cid-s7a3hvrw> <button class="primary-focus mega-menu__dropdown-button flex w-full items-center gap-0.5 whitespace-nowrap px-3 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300" type="button" id="Pages mega menu menu" aria-expanded="false" aria-haspopup="true" aria-controls="Pages mega menu menu content" data-astro-cid-s7a3hvrw> Pages <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mega-menu__dropdown-chevron size-5 shrink-0 transition-transform" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-s7a3hvrw astro-icon="tabler/chevron-down"><path stroke="none" d="M0 0h24v24H0z"/><path d="m6 9 6 6 6-6"/></svg> </button> <div id="Pages mega menu menu content" aria-labelledby="Pages mega menu menu" class="mega-menu__dropdown-content invisible absolute top-full z-10 opacity-0 transition-all inset-x-48 lg:inset-x-96" data-astro-cid-s7a3hvrw> <ul class="mt-[.9rem] grid w-full min-w-[150px] max-w-full gap-3 rounded-md border border-solid border-base-200 bg-base-50 px-1.5 py-3 drop-shadow-sm dark:border-base-800 dark:bg-base-900 grid-cols-2" data-astro-cid-s7a3hvrw> <div data-astro-cid-s7a3hvrw> <p class="mx-4 mb-2 border-b border-base-200 pb-1 text-lg font-medium text-base-500 dark:border-base-800 dark:text-base-400" data-astro-cid-s7a3hvrw> Landing Pages </p> <li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 w-full" href="/" target="" rel="" aria-label="Landing 1"> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mt-0.5 size-5 self-start md:size-4" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/star"><path stroke="none" d="M0 0h24v24H0z"/><path d="m12 17.75-6.172 3.245 1.179-6.873-5-4.867 6.9-1 3.086-6.253 3.086 6.253 6.9 1-5 4.867 1.179 6.873z"/></svg> Landing 1 </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 w-full" href="/examples/landing2/" target="" rel="" aria-label="Landing 2"> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mt-0.5 size-5 self-start md:size-4" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/diamonds"><path stroke="none" d="M0 0h24v24H0z"/><path d="m10.831 20.413-5.375-6.91c-.608-.783-.608-2.223 0-3l5.375-6.911a1.457 1.457 0 0 1 2.338 0l5.375 6.91c.608.783.608 2.223 0 3l-5.375 6.911a1.457 1.457 0 0 1-2.338 0z"/></svg> Landing 2 </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 w-full" href="/examples/landing3/" target="" rel="" aria-label="Landing 3"> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mt-0.5 size-5 self-start md:size-4" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/circle"><path stroke="none" d="M0 0h24v24H0z"/><path d="M3 12a9 9 0 1 0 18 0 9 9 0 1 0-18 0"/></svg> Landing 3 </a> </li> </div><div data-astro-cid-s7a3hvrw> <p class="mx-4 mb-2 border-b border-base-200 pb-1 text-lg font-medium text-base-500 dark:border-base-800 dark:text-base-400" data-astro-cid-s7a3hvrw> Blog </p> <li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 w-full" href="/blog/" target="" rel="" aria-label="Blog Index 1"> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mt-0.5 size-5 self-start md:size-4" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/pencil"><path stroke="none" d="M0 0h24v24H0z"/><path d="M4 20h4L18.5 9.5a2.828 2.828 0 1 0-4-4L4 16v4M13.5 6.5l4 4"/></svg> Blog Index 1 </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 w-full" href="/examples/blogIndex2/" target="" rel="" aria-label="Blog Index 2"> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mt-0.5 size-5 self-start md:size-4" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/pencil"><path stroke="none" d="M0 0h24v24H0z"/><path d="M4 20h4L18.5 9.5a2.828 2.828 0 1 0-4-4L4 16v4M13.5 6.5l4 4"/></svg> Blog Index 2 </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 w-full" href="/categories/" target="" rel="" aria-label="Categories"> <svg viewBox="0 0 24 24" aria-hidden="true" class="mt-0.5 size-5 self-start md:size-4" astro-icon="tabler/category"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 3a3 3 0 1 0 6 0 3 3 0 1 0-6 0"/></svg> Categories </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 w-full" href="/blog/tsconfig-paths-setup/" target="" rel="" aria-label="Blog Post"> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mt-0.5 size-5 self-start md:size-4" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/edit-circle"><path stroke="none" d="M0 0h24v24H0z"/><path d="m12 15 8.385-8.415a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3zM16 5l3 3"/><path d="M9 7.07A7 7 0 0 0 10 21a7 7 0 0 0 6.929-6"/></svg> Blog Post </a> </li> </div> </ul> </div> </li>  <li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 undefined" href="/blog/" target="" rel="" aria-label="Articles">  Articles </a> </li><!-- non-mobile dropdown menu --><li class="nav__dropdown group relative" data-astro-cid-enbuc7v7> <button class="primary-focus nav__dropdown-button flex w-full items-center gap-0.5 whitespace-nowrap px-3 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300" type="button" id="About dropdown menu" aria-expanded="false" aria-haspopup="true" aria-controls="About dropdown menu content" data-astro-cid-enbuc7v7> About <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="nav__dropdown-chevron size-5 shrink-0 transition-transform" viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-enbuc7v7 astro-icon="tabler/chevron-down"><path stroke="none" d="M0 0h24v24H0z"/><path d="m6 9 6 6 6-6"/></svg> </button> <div id="About dropdown menu content" aria-labelledby="About dropdown menu" class="nav__dropdown-content invisible absolute left-0 z-10 opacity-0 transition-all" data-astro-cid-enbuc7v7> <ul class="mt-4 w-[12rem] min-w-[9rem] max-w-[20rem] rounded-md border border-solid border-base-200 bg-base-50 p-1.5 drop-shadow-sm dark:border-base-800 dark:bg-base-900" data-astro-cid-enbuc7v7> <li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 w-full" href="/about/" target="" rel="" aria-label="About Guido"> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mt-0.5 size-5 self-start md:size-4" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/outline/user"><path stroke="none" d="M0 0h24v24H0z"/><path d="M8 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg> About Guido </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 w-full" href="/contact/" target="" rel="" aria-label="Contact"> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mt-0.5 size-5 self-start md:size-4" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/outline/messages"><path stroke="none" d="M0 0h24v24H0z"/><path d="m21 14-3-3h-7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v10M14 15v2a1 1 0 0 1-1 1H6l-3 3V11a1 1 0 0 1 1-1h2"/></svg> Contact </a> </li> </ul> </div> </li>    </ul> </nav> <button class="-ml-4 mr-3 hidden md:block theme-toggle primary-focus rounded-full p-2 text-base-500 transition-colors hover:text-base-600 dark:text-base-400 dark:hover:text-base-300" aria-label="color theme toggle"> <!-- placeholder --> <div class="theme-toggle__placeholder h-5 w-5"></div> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="theme-toggle__dark-icon hidden h-5 w-5" viewBox="0 0 24 24" astro-icon="tabler/moon-stars"><path stroke="none" d="M0 0h24v24H0z"/><path d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992zM17 4a2 2 0 0 0 2 2 2 2 0 0 0-2 2 2 2 0 0 0-2-2 2 2 0 0 0 2-2M19 11h2m-1-1v2"/></svg> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="theme-toggle__light-icon hidden h-5 w-5" viewBox="0 0 24 24" astro-icon="tabler/sun"><path stroke="none" d="M0 0h24v24H0z"/><path d="M8 12a4 4 0 1 0 8 0 4 4 0 1 0-8 0M3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7-.7.7m0 11.4.7.7m-12.1-.7-.7.7"/></svg> </button>  <!-- normal link --><a class="my-auto hidden px-4 py-1.5 md:block button group button--secondary" href="/contact" data-astro-cid-ju4v47fh>
+Book Guido
+</a><!-- button for "submit" or other -->  <!-- mobile nav menu, only load on small screens where it is visible --> <div class="md:hidden" data-astro-cid-ju4v47fh> <div id="mobile-nav__container" data-astro-cid-ihvhspnp> <button id="mobile-nav__burger" aria-label="open navigation menu" aria-haspopup="true" aria-expanded="false" class="primary-focus h-10 w-10 rounded-md" data-astro-cid-ihvhspnp> <!-- hamburger icon to open menu --> <svg viewBox="0 0 24 24" aria-hidden="true" data-astro-cid-ihvhspnp class="m-auto inline-block h-8 w-8 stroke-current text-base-600 dark:text-base-400" astro-icon="tabler/menu-2"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg> </button> <div id="mobile-nav__content" class="whitepace-nowrap fixed -right-72 top-0 z-20 hidden h-screen w-72 items-center overflow-x-hidden bg-base-50 text-lg font-normal transition-all duration-300 dark:bg-base-950" data-astro-cid-ihvhspnp> <div class="w-full px-2 pb-6" data-astro-cid-ihvhspnp> <div class="mx-1 my-2 flex w-full justify-end pl-6 pr-4" data-astro-cid-ihvhspnp> <button id="mobile-nav__close" class="primary-focus p-2" aria-label="close navigation menu" data-astro-cid-ihvhspnp> <!-- "X" icon to close menu --> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="h-8 w-8 text-base-600 dark:text-base-400" viewBox="0 0 24 24" data-astro-cid-ihvhspnp astro-icon="tabler/x"><path stroke="none" d="M0 0h24v24H0z"/><path d="M18 6 6 18M6 6l12 12"/></svg> </button> </div> <!-- nav items --> <hr class="mx-1 border-base-200 dark:border-base-800" data-astro-cid-ihvhspnp> <nav data-astro-cid-ihvhspnp> <ul class="mx-1 mt-2 text-xl" data-astro-cid-ihvhspnp> <li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 undefined" href="/podcasts/" target="" rel="" aria-label="Podcasts">  Podcasts </a> </li><li class="mobile-nav__dropdown group relative"> <button class="primary-focus mobile-nav__dropdown-button flex w-full flex-1 items-center justify-between rounded-md px-4 py-2 text-left font-medium text-base-500 transition duration-300 hover:text-base-600 dark:text-base-400 dark:hover:text-base-300" type="button" aria-label="Landing Pages dropdown menu" aria-expanded="false" aria-haspopup="true"> Landing Pages <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mobile-nav__dropdown-chevron mb-auto size-7 translate-y-0.5 transition-transform duration-300" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/chevron-down"><path stroke="none" d="M0 0h24v24H0z"/><path d="m6 9 6 6 6-6"/></svg> </button> <div class="mobile-nav__dropdown-content hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out"> <ul class="mb-2 transition-[height] duration-300"> <li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 ml-2" href="/" target="" rel="" aria-label="Landing 1">  Landing 1 </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 ml-2" href="/examples/landing2/" target="" rel="" aria-label="Landing 2">  Landing 2 </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 ml-2" href="/examples/landing3/" target="" rel="" aria-label="Landing 3">  Landing 3 </a> </li> </ul> </div> </li> <li class="mobile-nav__dropdown group relative"> <button class="primary-focus mobile-nav__dropdown-button flex w-full flex-1 items-center justify-between rounded-md px-4 py-2 text-left font-medium text-base-500 transition duration-300 hover:text-base-600 dark:text-base-400 dark:hover:text-base-300" type="button" aria-label="Blog dropdown menu" aria-expanded="false" aria-haspopup="true"> Blog <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mobile-nav__dropdown-chevron mb-auto size-7 translate-y-0.5 transition-transform duration-300" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/chevron-down"><path stroke="none" d="M0 0h24v24H0z"/><path d="m6 9 6 6 6-6"/></svg> </button> <div class="mobile-nav__dropdown-content hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out"> <ul class="mb-2 transition-[height] duration-300"> <li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 ml-2" href="/blog/" target="" rel="" aria-label="Blog Index 1">  Blog Index 1 </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 ml-2" href="/examples/blogIndex2/" target="" rel="" aria-label="Blog Index 2">  Blog Index 2 </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 ml-2" href="/categories/" target="" rel="" aria-label="Categories">  Categories </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 ml-2" href="/blog/tsconfig-paths-setup/" target="" rel="" aria-label="Blog Post">  Blog Post </a> </li> </ul> </div> </li> <li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 undefined" href="/blog/" target="" rel="" aria-label="Articles">  Articles </a> </li> <li class="mobile-nav__dropdown group relative"> <button class="primary-focus mobile-nav__dropdown-button flex w-full flex-1 items-center justify-between rounded-md px-4 py-2 text-left font-medium text-base-500 transition duration-300 hover:text-base-600 dark:text-base-400 dark:hover:text-base-300" type="button" aria-label="About dropdown menu" aria-expanded="false" aria-haspopup="true"> About <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mobile-nav__dropdown-chevron mb-auto size-7 translate-y-0.5 transition-transform duration-300" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/chevron-down"><path stroke="none" d="M0 0h24v24H0z"/><path d="m6 9 6 6 6-6"/></svg> </button> <div class="mobile-nav__dropdown-content hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out"> <ul class="mb-2 transition-[height] duration-300"> <li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 ml-2" href="/about/" target="" rel="" aria-label="About Guido">  About Guido </a> </li><li> <a class="primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 ml-2" href="/contact/" target="" rel="" aria-label="Contact">  Contact </a> </li> </ul> </div> </li>   </ul> </nav> <div class="mx-1 mt-3 px-4" data-astro-cid-ihvhspnp> <!-- normal link --><a class="w-full shadow-none button group button--secondary" href="/contact" data-astro-cid-ihvhspnp>
+Book Guido
+</a><!-- button for "submit" or other --> </div> <div class="mt-4 flex items-start justify-between pl-4 pr-2" data-astro-cid-ihvhspnp> <button class="theme-toggle primary-focus rounded-full p-2 text-base-500 transition-colors hover:text-base-600 dark:text-base-400 dark:hover:text-base-300" aria-label="color theme toggle"> <!-- placeholder --> <div class="theme-toggle__placeholder h-5 w-5"></div> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="theme-toggle__dark-icon hidden h-5 w-5" viewBox="0 0 24 24" astro-icon="tabler/moon-stars"><path stroke="none" d="M0 0h24v24H0z"/><path d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992zM17 4a2 2 0 0 0 2 2 2 2 0 0 0-2 2 2 2 0 0 0-2-2 2 2 0 0 0 2-2M19 11h2m-1-1v2"/></svg> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="theme-toggle__light-icon hidden h-5 w-5" viewBox="0 0 24 24" astro-icon="tabler/sun"><path stroke="none" d="M0 0h24v24H0z"/><path d="M8 12a4 4 0 1 0 8 0 4 4 0 1 0-8 0M3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7-.7.7m0 11.4.7.7m-12.1-.7-.7.7"/></svg> </button>   </div> </div> </div> <!-- backdrop button to also close menu --> <button id="mobile-nav__backdrop" class="mobile-nav__backdrop--fade-out fixed left-0 top-0 z-10 h-screen bg-black" aria-label="close navigation menu" data-astro-cid-ihvhspnp></button> </div>   </div> </div> </header> </div> </div> </div>   <main>  <section class="site-container"> <div class="overflow-x-clip bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat pt-24 dark:bg-[url('/assets/pattern-dark.svg')] md:pt-32"> <div class="mx-auto flex max-w-[950px] flex-col justify-center"> <div class="mx-auto"> <span class="mb-4 inline-block rounded-full bg-primary-100 px-2 py-px text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 dark:bg-primary-500 dark:text-white dark:shadow-none"> Blog </span> </div> <h1 class="h1 text-center">
+Our mission is to make knowledge and news accessible for everyone.
+</h1> </div> <div class="mt-20 flex pb-8 md:mt-28"> <div class="flex flex-wrap justify-center gap-x-2 gap-y-2"> <a href="/categories/archive/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Archive  </a><a href="/categories/experimentation/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Experimentation  </a><a href="/categories/website-update/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Website Update  </a><a href="/categories/psychology/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Psychology  </a><a href="/categories/spryker/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Spryker  </a><a href="/categories/statistics/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Statistics  </a><a href="/categories/persuasion/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Persuasion  </a><a href="/categories/magento/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Magento  </a><a href="/categories/open-source/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Open Source  </a><a href="/categories/podcast/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Podcast  </a><a href="/categories/video/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Video  </a><a href="/categories/travel/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Travel  </a><a href="/categories/interview/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Interview  </a><a href="/categories/branding/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Branding  </a><a href="/categories/research/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Research  </a><a href="/categories/tools/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Tools  </a><a href="/categories/e-commerce/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> E Commerce  </a><a href="/categories/website-updates/" class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"> Website Updates  </a> </div> </div> </div> <div class="grid gap-8 gap-y-10"> <article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/website-moved-to-astro/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.B72BeUmV_Z28CbTY.webp" alt="Cover for Website moved to Astro" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-1" width="1244" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Website Update/"> Website Update </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Jun 26, 2024 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/website-moved-to-astro/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Website moved to Astro </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Moved the website to Astro </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/website-moved-to-astro/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/often-confused-commerce-terms/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.CTG2Wt01_1ITymb.webp" alt="Cover for  Often Confused Commerce Terms " class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-2" width="1247" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Open Source/"> Open Source </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Spryker/"> Spryker </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Mar 15, 2022 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/often-confused-commerce-terms/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl">  Often Confused Commerce Terms  </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Lets set the record straight about some often mixed up terms in commerce </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/often-confused-commerce-terms/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/optimization-hierarchy-of-evidence/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.QyqnNhX1_2uUw2D.webp" alt="Cover for Optimization hierarchy of evidence" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-3" width="1249" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Experimentation/"> Experimentation </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Aug 10, 2020 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/optimization-hierarchy-of-evidence/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Optimization hierarchy of evidence </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> A CRO/Experimentation variant of the scientific hierarchy of evidence </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/optimization-hierarchy-of-evidence/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/are-you-left-or-right-brain-surprise-youre-both/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.C7I9R04A_bjTMQ.webp" alt="Cover for Are you LEFT or RIGHT brain? Surprise: you're both" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-4" width="1100" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Psychology/"> Psychology </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Jul 9, 2020 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/are-you-left-or-right-brain-surprise-youre-both/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Are you LEFT or RIGHT brain? Surprise: you&#39;re both </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> You&#39;ve probably heard about this divide between the functions of the Left Brain versus the Right Brain. There is no divide. </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/are-you-left-or-right-brain-surprise-youre-both/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/the-story-of-spryker-with-ceo-boris-lokschin/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.DgBxq15k_2ah9oP.webp" alt="Cover for The Story of Spryker with CEO Boris Lokschin" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-5" width="700" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Spryker/"> Spryker </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Dec 23, 2019 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/the-story-of-spryker-with-ceo-boris-lokschin/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> The Story of Spryker with CEO Boris Lokschin </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Building the commerce platform of the future </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/the-story-of-spryker-with-ceo-boris-lokschin/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/first-episode-of-cro-cafe-is-live/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.jkfN9E_4_1jn21c.webp" alt="Cover for First episode of CRO.CAFÉ is live!" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-6" width="700" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Podcast/"> Podcast </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Experimentation/"> Experimentation </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Jan 7, 2019 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/first-episode-of-cro-cafe-is-live/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> First episode of CRO.CAFÉ is live! </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> As announced in November I would be starting a new (Dutch) podcast series this year about CRO. Today the first episode launched! </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/first-episode-of-cro-cafe-is-live/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/recording-creating-an-optimization-culture/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.BmJ9KK2M_1Rjsbn.webp" alt="Cover for Recording: Creating An Optimization Culture" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-7" width="1318" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Video/"> Video </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Oct 23, 2018 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/recording-creating-an-optimization-culture/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Recording: Creating An Optimization Culture </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Recording of my session about creating an optimization culture </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/recording-creating-an-optimization-culture/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/data-driven-decisions-meets-psychology/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.RF0zaGKI_1IWsn5.webp" alt="Cover for Data Driven Decisions meets Psychology" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-8" width="1244" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Psychology/"> Psychology </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Aug 24, 2018 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/data-driven-decisions-meets-psychology/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Data Driven Decisions meets Psychology </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> On October 24th, I gave a session at Nomad Mage about using psychology and data to make the decisions to improve your webshop. </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/data-driven-decisions-meets-psychology/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/website-move-to-webflow/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.C20JhD7Y_CVYC2.webp" alt="Cover for Website moved to Webflow" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-9" width="1139" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Website Update/"> Website Update </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Archive/"> Archive </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Feb 15, 2018 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/website-move-to-webflow/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Website moved to Webflow </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Amazing new visual SaaS CMS system! </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/website-move-to-webflow/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/can-you-afford-not-to-know-can-you-afford-to-be-wrong/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.N4UZ73Re_Z4n5s2.webp" alt="Cover for Can you afford not to know? Can you afford to be wrong?" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-10" width="1047" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Statistics/"> Statistics </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Experimentation/"> Experimentation </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Psychology/"> Psychology </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Jan 22, 2018 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/can-you-afford-not-to-know-can-you-afford-to-be-wrong/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Can you afford not to know? Can you afford to be wrong? </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> How far do you go? What do you test? And is it sometimes ok NOT to test something? </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/can-you-afford-not-to-know-can-you-afford-to-be-wrong/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/texas-sharpshooter-fallacy/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.CgzNcDsW_Z12EYFo.webp" alt="Cover for Texas sharpshooter fallacy" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-11" width="1295" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Statistics/"> Statistics </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Experimentation/"> Experimentation </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Psychology/"> Psychology </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Dec 11, 2017 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/texas-sharpshooter-fallacy/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Texas sharpshooter fallacy </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> To help remember statistical constructs I&#39;ve started telling stories about statistics and the first one is about the Texas Sharshooter </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/texas-sharpshooter-fallacy/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/new-domain-and-cms/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.Z6ASCtLe_1Akhvw.webp" alt="Cover for New domain and CMS!" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-12" width="1168" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Website Update/"> Website Update </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Archive/"> Archive </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Oct 5, 2017 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/new-domain-and-cms/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> New domain and CMS! </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Switched to gui.do and Grav CMS </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/new-domain-and-cms/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/questions-on-experimentation/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.BxP63pGU_Z26geJ2.webp" alt="Cover for Questions on Experimentation" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-13" width="1050" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Experimentation/"> Experimentation </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Sep 20, 2017 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/questions-on-experimentation/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Questions on Experimentation </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Designing great experiments </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/questions-on-experimentation/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/learnings-from-shenzhen/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.DAim2S_m_1kUgyn.webp" alt="Cover for Learnings from Shenzhen" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-14" width="1244" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Travel/"> Travel </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Sep 3, 2017 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/learnings-from-shenzhen/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Learnings from Shenzhen </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Some (random) notes/learnings from my trip to Shenzhen China </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/learnings-from-shenzhen/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/proving-the-monetary-value-of-a-b-testing/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.D4rcSqnq_Z18qXrd.webp" alt="Cover for Proving the monetary value of A/B testing" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-15" width="1050" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Archive/"> Archive </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Experimentation/"> Experimentation </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Jul 28, 2017 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/proving-the-monetary-value-of-a-b-testing/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Proving the monetary value of A/B testing </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> How to go from “4% conversion uplift” to “€636K — €854K extra profit this year” </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/proving-the-monetary-value-of-a-b-testing/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/the-cro-process/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.Y3YRuhFb_ZVxkWA.webp" alt="Cover for The CRO Process" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-16" width="1383" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Experimentation/"> Experimentation </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Feb 6, 2017 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/the-cro-process/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> The CRO Process </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> White-paper on the CRO Process </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/the-cro-process/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.CixTreOD_Z2bNfHp.webp" alt="Cover for Intervju: Guido Jansen ska ta reda på varför kunderna inte handlar" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-17" width="1049" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Interview/"> Interview </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Mar 21, 2016 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Intervju: Guido Jansen ska ta reda på varför kunderna inte handlar </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> This is a re-post of an interview with me by the Swedish magazine eHandel </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/intervju-guido-jansen-ska-ta-reda-pa-varfor-kunderna-inte-handlar/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/personal-brand-combining-personal-business-online-5-guidelinestips/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.JWJ8PtJm_Z1DPyAB.webp" alt="Cover for Combining personal &#38; business online: 5 guidelines/tips." class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-18" width="933" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Branding/"> Branding </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Dec 17, 2015 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/personal-brand-combining-personal-business-online-5-guidelinestips/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Combining personal &amp; business online: 5 guidelines/tips. </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> My 5 tips on building your personal brand by having a healthy personal + business presence on your social media channels.  </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/personal-brand-combining-personal-business-online-5-guidelinestips/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/compute-required-sample-size-for-your-ab-tests/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.BXY1HaXL_Z1S08U2.webp" alt="Cover for Compute required Sample Size for your A/B tests" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-19" width="753" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Experimentation/"> Experimentation </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Archive/"> Archive </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Oct 24, 2015 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/compute-required-sample-size-for-your-ab-tests/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Compute required Sample Size for your A/B tests </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Google Sheet calculator for your AB test sample size </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/compute-required-sample-size-for-your-ab-tests/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/trustlogo-onderzoek/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.D-cdYAfg_1RUWEU.webp" alt="Cover for Trustlogo onderzoek" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-20" width="1069" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Research/"> Research </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Jan 27, 2012 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/trustlogo-onderzoek/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Trustlogo onderzoek </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Dutch Research towards e-commerce trust logo&#39;s </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/trustlogo-onderzoek/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/color-persuasion/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.DGXwgYZH_1J0phB.webp" alt="Cover for How Color Persuasion Works" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-21" width="913" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Persuasion/"> Persuasion </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Nov 22, 2011 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/color-persuasion/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> How Color Persuasion Works </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> How to (not) use colors in your website </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/color-persuasion/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/one-year-com-in-retrospect/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.Dm_uvCgQ_Z1F8yVU.webp" alt="Cover for One year .com in retrospect" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-22" width="814" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Archive/"> Archive </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Website Update/"> Website Update </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Jul 19, 2011 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/one-year-com-in-retrospect/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> One year .com in retrospect </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> One year ago, I move my blog to a .com </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/one-year-com-in-retrospect/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/persuasion-profiling-dawn-of-a-new-marketing-era/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.s6SVZi7D_Z1xyFIh.webp" alt="Cover for Persuasion profiling: Dawn of a New Marketing Era" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-23" width="1521" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/tools/"> Tools </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Persuasion/"> Persuasion </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> May 29, 2011 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/persuasion-profiling-dawn-of-a-new-marketing-era/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Persuasion profiling: Dawn of a New Marketing Era </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> PersuasionAPI: A new tool that makes your website much more persuasive </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/persuasion-profiling-dawn-of-a-new-marketing-era/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/optimize-magento-for-speed/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.DImxpNhZ_Z1DRoYq.webp" alt="Cover for Update: 101 ways to optimize Magento for speed" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-24" width="1050" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Magento/"> Magento </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Jun 1, 2010 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/optimize-magento-for-speed/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Update: 101 ways to optimize Magento for speed </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Guess Magento and it&#39;s speed is a hot issue :).  </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/optimize-magento-for-speed/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/101-ways-to-speed-up-your-magento-e-commerce-website/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.pwEQGeu2_WHgOL.webp" alt="Cover for 101 ways to speed up your Magento e-commerce website" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-25" width="1049" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Magento/"> Magento </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> May 18, 2010 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/101-ways-to-speed-up-your-magento-e-commerce-website/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> 101 ways to speed up your Magento e-commerce website </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Let&#39;s optimize your webshop for speed! </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/101-ways-to-speed-up-your-magento-e-commerce-website/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/top-tips-for-getting-started-in-ecommerce/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.BsxZfKna_2oVvup.webp" alt="Cover for Top 8.5 tips for getting started in ecommerce" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-26" width="940" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/E-commerce/"> E Commerce </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Archive/"> Archive </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Jan 4, 2010 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/top-tips-for-getting-started-in-ecommerce/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Top 8.5 tips for getting started in ecommerce </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> For business owners that have a retail store or a complete new business model but have little to no experience in the e-commerce field: this post is for you.\ </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/top-tips-for-getting-started-in-ecommerce/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/999999999/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.BFZRNTp3_1oOXMU.webp" alt="Cover for 9.999 on 09.09.09 09:09" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-27" width="1050" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Archive/"> Archive </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Sep 9, 2009 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/999999999/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> 9.999 on 09.09.09 09:09 </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Fun coincidence! </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/999999999/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/nieuwe-website-online/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.G_XI2_9a_19KYpa.webp" alt="Cover for New Website Online" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-28" width="1951" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Website Updates/"> Website Updates </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Archive/"> Archive </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Dec 30, 2004 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/nieuwe-website-online/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> New Website Online </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> Created a new website based on Mambo CMS </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/nieuwe-website-online/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article><article class="grid gap-6 md:grid-cols-2" data-aos="fade-up"> <a href="/blog/website-online/" class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"> <figure> <img src="/astro-assets/heroImage.BVKScx09_gBCWb.webp" alt="Cover for Website Online" class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500" data-astro-transition-scope="astro-4zctsknj-29" width="903" height="700" loading="lazy" decoding="async"> </figure> </a> <div> <!-- categories --> <div class="mt-4 flex flex-wrap gap-4"> <a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Archive/"> Archive </a><a class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500 dark:text-white dark:shadow-none dark:hover:bg-primary-600" href="/categories/Website Update/"> Website Update </a> </div> <div class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"> <!-- first author --> <p class="whitespace-nowrap"> Guido X Jansen </p> <span>&bull;</span> <!-- published date --> <p class="whitespace-nowrap"> Feb 8, 2001 </p> </div> <!-- title --> <div class="mt-2"> <a href="/blog/website-online/" class="decoration-primary-500 hover:underline"> <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl"> Website Online </h2> </a> </div> <!-- description --> <p class="mt-2 text-sm font-medium text-base-400 md:text-base"> My first personal website! </p> <!-- read post button --> <div class="mt-3"> <a href="/blog/website-online/" class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600">
+Read Post
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-4" viewBox="0 0 24 24" astro-icon="tabler/arrow-narrow-right"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12h14M15 16l4-4M15 8l4 4"/></svg> </a> </div> </div> </article> </div> </section>  </main> </div> <footer class="overflow-x-clip pb-16 pt-20 font-medium text-base-500"> <div class="site-container"> <div class="mt-6 flex flex-wrap items-center justify-between gap-6"> <a class="primary-focus flex items-center gap-2 align-middle text-xl font-bold text-base-600 dark:text-base-200" href="/"> <!-- <Image
+    src={logo}
+    alt="Atlas logo"
+    loading="eager"
+    height={90}
+    class="h-10 w-auto"
+    aria-label="Atlas logo"
+  /> --> <p class="">Guido</p> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-7 text-primary-500" viewBox="0 0 24 24" aria-hidden="true" astro-icon="atlas/logoipsum"><path stroke="none" d="M0 0h24v24H0z"/><path d="M18 6 6 18M6 6l12 12"/></svg> <p class="">Jansen</p> </a> <div class="flex flex-wrap gap-x-4"> <a href="/overview/" class="px-4 py-2 text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300"> Overview </a> <a href="/blog/" class="px-4 py-2 text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300"> Articles </a> <!-- <FooterLink href={getRelativeLocaleUrl(currLocale, "/elements")}
+          >Elements</FooterLink
+        > --> <a href="/contact/" class="px-4 py-2 text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300"> Contact </a> <!-- <FooterLink href={getRelativeLocaleUrl(currLocale, "/terms")}
+          >Terms</FooterLink
+        >
+        <FooterLink href={getRelativeLocaleUrl(currLocale, "/privacy-policy")}
+          >Privacy</FooterLink
+        > --> </div> </div> </div> <div class="mt-6 border-t border-t-base-200/50 text-sm text-base-400"> <div class="site-container mt-6 flex flex-wrap justify-between gap-6"> <div class="my-auto">
+&copy; 2024  Guido X Jansen. All rights reserved.
+</div> <!-- Socials --> <div class="flex flex-col"> <div class="flex gap-4"> <a aria-label="linkedin" href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=gxjansen" target="_blank" rel="noopener noreferrer" class="rounded-md p-2 text-base-400 hover:text-base-500 dark:hover:text-base-300"> <p class="sr-only">linkedin</p> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-5 transition" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/brand-linkedin"><path stroke="none" d="M0 0h24v24H0z"/><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM8 11v5M8 8v.01M12 16v-5"/><path d="M16 16v-3a2 2 0 0 0-4 0"/></svg> </a> <a aria-label="youtube" href="https://www.youtube.com/@gxjansen" target="_blank" rel="noopener noreferrer" class="rounded-md p-2 text-base-400 hover:text-base-500 dark:hover:text-base-300"> <p class="sr-only">youtube</p> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-5 transition" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/brand-youtube"><path stroke="none" d="M0 0h24v24H0z"/><path d="M2 8a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><path d="m10 9 5 3-5 3z"/></svg> </a> <a aria-label="github" href="https://github.com/gxjansen" target="_blank" rel="noopener noreferrer" class="rounded-md p-2 text-base-400 hover:text-base-500 dark:hover:text-base-300"> <p class="sr-only">github</p> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-5 transition" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/brand-github"><path stroke="none" d="M0 0h24v24H0z"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg> </a> <a aria-label="bluesky" href="https://bsky.app/profile/gui.do" target="_blank" rel="noopener noreferrer" class="rounded-md p-2 text-base-400 hover:text-base-500 dark:hover:text-base-300"> <p class="sr-only">bluesky</p> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-5 transition" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/brand-bluesky"><path stroke="none" d="M0 0h24v24H0z"/><path d="M6.335 5.144C4.681 3.945 2 3.017 2 5.97c0 .59.35 4.953.556 5.661C3.269 14.094 5.686 14.381 8 14c-4.045.665-4.889 3.208-2.667 5.41C6.363 20.428 7.246 21 8 21c2 0 3.134-2.769 3.5-3.5.333-.667.5-1.167.5-1.5 0 .333.167.833.5 1.5.366.731 1.5 3.5 3.5 3.5.754 0 1.637-.571 2.667-1.59C20.889 17.207 20.045 14.664 16 14c2.314.38 4.73.094 5.444-2.369.206-.708.556-5.072.556-5.661 0-2.953-2.68-2.025-4.335-.826C15.372 6.806 12.905 10.192 12 12c-.905-1.808-3.372-5.194-5.665-6.856z"/></svg> </a> <a aria-label="instagram" href="https://www.instagram.com/gxjansen" target="_blank" rel="noopener noreferrer" class="rounded-md p-2 text-base-400 hover:text-base-500 dark:hover:text-base-300"> <p class="sr-only">instagram</p> <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="size-5 transition" viewBox="0 0 24 24" aria-hidden="true" astro-icon="tabler/brand-instagram"><path stroke="none" d="M0 0h24v24H0z"/><path d="M4 8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M9 12a3 3 0 1 0 6 0 3 3 0 1 0-6 0M16.5 7.5v.01"/></svg> </a> <a aria-label="twitter (x)" href="https://twitter.com/guido" target="_blank" rel="noopener noreferrer" class="rounded-md p-2 text-base-400 hover:text-base-500 dark:hover:text-base-300"> <p class="sr-only">twitter (x)</p> <svg viewBox="0 0 24 24" aria-hidden="true" class="size-5 transition" astro-icon="tabler/brand-x"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 4 11.733 16H20L8.267 4zm0 16 6.768-6.768m2.46-2.46L20 4"/></svg> </a> </div> </div> </div> </div> </footer> <!-- Scroll animations -->  </body> </html>

@@ -1,0 +1,3 @@
+const s="the-netherlands/index",r="countries",i={title:"The Netherlands",image:new Proxy({src:"/astro-assets/image.Db4h7pbL.png",width:1024,height:682,format:"jpg",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/the-netherlands/image.png"},{get(t,e,n){return e==="clone"?structuredClone(t):e==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/the-netherlands/image.png":t[e]}})},a={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/the-netherlands/index.yaml",rawData:`title: The Netherlands
+image: ../the-netherlands/image.png
+`};export{a as _internal,r as collection,i as data,s as id};

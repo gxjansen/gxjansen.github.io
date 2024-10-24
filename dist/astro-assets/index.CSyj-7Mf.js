@@ -1,0 +1,3 @@
+const s="austria/index",i="countries",a={title:"Austria",image:new Proxy({src:"/astro-assets/image.CCylVll1.png",width:275,height:183,format:"png",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/austria/image.png"},{get(n,t,e){return t==="clone"?structuredClone(n):t==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/austria/image.png":n[t]}})},r={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/austria/index.yaml",rawData:`title: Austria
+image: ../austria/image.png
+`};export{r as _internal,i as collection,a as data,s as id};

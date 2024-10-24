@@ -1,0 +1,41 @@
+const t="en/one-year-com-in-retrospect/index.mdx",s="blog",a="en/one-year-com-in-retrospect",r=`*Note: in December 2017, the website was moved to gui.do*
+
+Although I've been blogging in English for quite some years now, today one year ago I switched my website from being local (guidojansen.nl since 2001) to global (gxjansen.com). It feels much more logical to have a .com instead of a .nl when you blog for an international audience right?
+
+I had no idea up-front if this would indeed broaden my audience but when I look at my Google Analytics stats I think that the switch was a great success!
+
+**Improved statistics**
+
+Before this year 39% of my visitors came from outside of The Netherlands, but last year, this increased to 83%! And not only did the ratio change, also traffic in general increased by 470%! It's also great to see a larger percentage of returning visitors, lower bounce rates, more pages are being visited with every visit and doubled time-on-site.
+
+For me enough reasons to believe it was a good choice to switch to a .com domain and to continue adding even more awesome blogposts! :)\\
+
+
+Some other stats for those who're interested:
+
+Around 5% of my visitors uses a mobile device (and uses the mobile-optimized version of my website). Most popular browsers are Firefox (48%) and Chrome (28%), the most popular OS is Windows (65%) followed by Mac (21%).
+
+**Biggest traffic sources:**
+
+1. Google (organic)
+
+2. Direct
+
+3. Magento.com
+
+4. RSS feeds
+
+5. Twitter
+
+**The most popular posts for this year:**
+
+1. 101 ways to speed up your Magento e-commerce website
+
+2. Want a Quora invite?
+
+3. Magento Master E-course
+
+4. The Psychology of E-commerce
+
+5. Update: 101 ways to optimize Magento for speed
+`,i={title:"One year .com in retrospect",description:"One year ago, I move my blog to a .com",authors:[{slug:"gxjansen",collection:"authors"}],pubDate:new Date(13110336e5),heroImage:new Proxy({src:"/astro-assets/heroImage.Dm_uvCgQ.png",width:945,height:813,format:"png",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/blog/en/one-year-com-in-retrospect/heroImage.png"},{get(o,e,n){return e==="clone"?structuredClone(o):e==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/blog/en/one-year-com-in-retrospect/heroImage.png":o[e]}}),categories:["Archive","Website Update"],draft:!1},c={type:"content",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/blog/en/one-year-com-in-retrospect/index.mdx",rawData:void 0};export{c as _internal,r as body,s as collection,i as data,t as id,a as slug};

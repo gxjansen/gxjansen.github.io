@@ -1,0 +1,3 @@
+const i="ireland/index",s="countries",r={title:"Ireland",image:new Proxy({src:"/astro-assets/image.C38DvlvL.png",width:800,height:400,format:"png",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/ireland/image.png"},{get(e,n,t){return n==="clone"?structuredClone(e):n==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/ireland/image.png":e[n]}})},a={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/ireland/index.yaml",rawData:`title: Ireland
+image: ../ireland/image.png
+`};export{a as _internal,s as collection,r as data,i as id};

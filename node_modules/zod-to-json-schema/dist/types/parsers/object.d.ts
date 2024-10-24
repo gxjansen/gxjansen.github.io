@@ -7,5 +7,4 @@ export type JsonSchema7ObjectType = {
     additionalProperties: boolean | JsonSchema7Type;
     required?: string[];
 };
-export declare function parseObjectDefX(def: ZodObjectDef, refs: Refs): JsonSchema7ObjectType;
 export declare function parseObjectDef(def: ZodObjectDef, refs: Refs): JsonSchema7ObjectType;
