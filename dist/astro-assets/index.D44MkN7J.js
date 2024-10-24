@@ -1,0 +1,3 @@
+const s="norway/index",r="countries",a={title:"Norway",image:new Proxy({src:"/astro-assets/image.DeRtwTaX.jpg",width:1e3,height:727,format:"jpg",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/norway/image.jpg"},{get(e,t,n){return t==="clone"?structuredClone(e):t==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/norway/image.jpg":e[t]}})},i={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/norway/index.yaml",rawData:`title: Norway
+image: ../norway/image.jpg
+`};export{i as _internal,r as collection,a as data,s as id};

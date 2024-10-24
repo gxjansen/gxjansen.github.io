@@ -1,0 +1,3 @@
+const i="great-britain/index",r="countries",a={title:"Great Britain",image:new Proxy({src:"/astro-assets/image.23AOMxZu.png",width:1280,height:640,format:"png",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/great-britain/image.png"},{get(n,t,e){return t==="clone"?structuredClone(n):t==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/great-britain/image.png":n[t]}})},s={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/great-britain/index.yaml",rawData:`title: Great Britain
+image: ../great-britain/image.png
+`};export{s as _internal,r as collection,a as data,i as id};

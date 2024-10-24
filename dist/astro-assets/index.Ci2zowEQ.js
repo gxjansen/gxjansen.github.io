@@ -1,0 +1,3 @@
+const s="switserland/index",i="countries",r={title:"Switserland",image:new Proxy({src:"/astro-assets/image.DkYNhkyE.webp",width:1e3,height:1e3,format:"webp",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/switserland/image.webp"},{get(t,e,n){return e==="clone"?structuredClone(t):e==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/switserland/image.webp":t[e]}})},a={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/switserland/index.yaml",rawData:`title: Switserland
+image: ../switserland/image.webp
+`};export{a as _internal,i as collection,r as data,s as id};
