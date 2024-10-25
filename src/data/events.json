@@ -727,7 +727,7 @@
   },
   {
     "name": "ING Inhouse event",
-    "icon": "",
+    "icon": "ing.png",
     "date": "2019-01-24",
     "city": "Amsterdam",
     "country": "NL",
@@ -859,7 +859,7 @@
   },
   {
     "name": "GrowthTribe evening course",
-    "icon": "",
+    "icon": "growthtribe.png",
     "date": "2017-11-07",
     "city": "Amsterdam",
     "country": "NL",
@@ -1024,7 +1024,7 @@
   },
   {
     "name": "GrowthTribe evening course",
-    "icon": "",
+    "icon": "growthtribe.png",
     "date": "2017-02-28",
     "city": "Amsterdam",
     "country": "NL",
@@ -1112,7 +1112,7 @@
   },
   {
     "name": "GrowthTribe evening course",
-    "icon": "",
+    "icon": "growthtribe.png",
     "date": "2016-10-04",
     "city": "Amsterdam",
     "country": "NL",
@@ -1189,7 +1189,7 @@
   },
   {
     "name": "GrowthTribe evening course",
-    "icon": "",
+    "icon": "growthtribe.png",
     "date": "2016-04-20",
     "city": "Amsterdam",
     "country": "NL",
@@ -1288,7 +1288,7 @@
   },
   {
     "name": "Euroflorist",
-    "icon": "",
+    "icon": "euroflorist.png",
     "date": "2016-01-12",
     "city": "Warsaw",
     "country": "PL",
@@ -1332,7 +1332,7 @@
   },
   {
     "name": "GrowthTribe evening course",
-    "icon": "",
+    "icon": "growthtribe.png",
     "date": "2015-11-17",
     "city": "Amsterdam",
     "country": "NL",
@@ -1398,7 +1398,7 @@
   },
   {
     "name": "Euroflorist",
-    "icon": "",
+    "icon": "euroflorist.png",
     "date": "2015-07-22",
     "city": "Romsey",
     "country": "GB",
@@ -1409,7 +1409,7 @@
   },
   {
     "name": "Euroflorist",
-    "icon": "",
+    "icon": "euroflorist.png",
     "date": "2015-07-06",
     "city": "Malmö",
     "country": "SE",
@@ -1464,7 +1464,7 @@
   },
   {
     "name": "Adobe User Group",
-    "icon": "",
+    "icon": "adobe.png",
     "date": "2015-04-28",
     "city": "Amsterdam",
     "country": "NL",
@@ -1497,7 +1497,7 @@
   },
   {
     "name": "Sanoma Breeze",
-    "icon": "",
+    "icon": "sanoma.png",
     "date": "2014-11-27",
     "city": "Hoofddorp",
     "country": "NL",
@@ -1519,7 +1519,7 @@
   },
   {
     "name": "ISM eCommerce Magento Enterprise event",
-    "icon": "magento.png",
+    "icon": "ism.png",
     "date": "2014-10-16",
     "city": "Rotterdam",
     "country": "NL",
@@ -1574,7 +1574,7 @@
   },
   {
     "name": "Sanoma Breeze",
-    "icon": "",
+    "icon": "sanoma.png",
     "date": "2014-04-27",
     "city": "Hoofddorp",
     "country": "NL",
@@ -1585,7 +1585,7 @@
   },
   {
     "name": "Joomladays Netherlands",
-    "icon": "",
+    "icon": "joomla.png",
     "date": "2014-03-23",
     "city": "Zeist",
     "country": "NL",
@@ -1596,7 +1596,7 @@
   },
   {
     "name": "Sanoma Breeze",
-    "icon": "",
+    "icon": "sanoma.png",
     "date": "2014-03-20",
     "city": "Hoofddorp",
     "country": "NL",
@@ -1673,7 +1673,7 @@
   },
   {
     "name": "Joomladays Netherlands",
-    "icon": "",
+    "icon": "joomla.png",
     "date": "2013-04-21",
     "city": "Zeist",
     "country": "NL",
@@ -1684,7 +1684,7 @@
   },
   {
     "name": "ISM eCommerce Online Marketing Event",
-    "icon": "",
+    "icon": "ism.png",
     "date": "2013-02-28",
     "city": "Rotterdam",
     "country": "NL",
@@ -1750,7 +1750,7 @@
   },
   {
     "name": "ISM eCommerce Online Marketing Event",
-    "icon": "",
+    "icon": "ism.png",
     "date": "2012-10-18",
     "city": "Rotterdam",
     "country": "NL",
@@ -1761,7 +1761,7 @@
   },
   {
     "name": "Joomla! World Conference",
-    "icon": "",
+    "icon": "joomla.png",
     "date": "2012-10-17",
     "city": "San José",
     "country": "US",
@@ -1805,7 +1805,7 @@
   },
   {
     "name": "ISM eCommerce Cross-channel event",
-    "icon": "",
+    "icon": "ism.png",
     "date": "2012-08-16",
     "city": "Rotterdam",
     "country": "NL",
@@ -1816,7 +1816,7 @@
   },
   {
     "name": "ISM eCommerce Webinar",
-    "icon": "",
+    "icon": "ism.png",
     "date": "2012-06-28",
     "city": "Rotterdam",
     "country": "NL",
@@ -1827,7 +1827,7 @@
   },
   {
     "name": "OroCRM Meetup",
-    "icon": "",
+    "icon": "oro.png",
     "date": "2012-05-31",
     "city": "Amsterdam",
     "country": "NL",
@@ -1860,7 +1860,7 @@
   },
   {
     "name": "ISM eCommerce Magento Event",
-    "icon": "magento.png",
+    "icon": "ism.png",
     "date": "2012-05-26",
     "city": "Rotterdam",
     "country": "NL",
@@ -1871,7 +1871,7 @@
   },
   {
     "name": "Oxillion Lunch & Learn",
-    "icon": "",
+    "icon": "oxilion.jpg",
     "date": "2012-05-24",
     "city": "Enschede",
     "country": "NL",
@@ -1948,7 +1948,7 @@
   },
   {
     "name": "Oxillion Lunch & Learn",
-    "icon": "",
+    "icon": "oxilion.jpg",
     "date": "2011-09-15",
     "city": "Enschede",
     "country": "NL",
@@ -1981,7 +1981,7 @@
   },
   {
     "name": "Oxillion Lunch & Learn",
-    "icon": "",
+    "icon": "oxilion.jpg",
     "date": "2010-12-16",
     "city": "Enschede",
     "country": "NL",
@@ -2003,7 +2003,7 @@
   },
   {
     "name": "Joomladays Netherlands",
-    "icon": "",
+    "icon": "joomla.png",
     "date": "2010-04-24",
     "city": "Utrecht",
     "country": "NL",
@@ -2014,7 +2014,7 @@
   },
   {
     "name": "Joomladays Netherlands",
-    "icon": "",
+    "icon": "joomla.png",
     "date": "2009-12-06",
     "city": "Nieuwegein",
     "country": "NL",
