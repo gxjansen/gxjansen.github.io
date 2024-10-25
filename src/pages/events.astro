@@ -1,0 +1,54 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import eventsData from "../data/events.json";
+import { getFlagEmoji } from "../utils/countryUtils.js";
+
+// Page metadata
+const pageTitle = "Speaking Events";
+const pageDescription = "A comprehensive list of conferences, meetups, and workshops where I've had the privilege to speak and share knowledge with the community.";
+---
+
+<BaseLayout 
+    title={pageTitle}
+    description={pageDescription}
+>
+  <div class="container mx-auto mt-16 overflow-x-clip">
+
+  <h1 class="text-center text-4xl font-bold text-white mb-8">Events I've Spoken At</h1>
+
+  <!-- Index -->
+  <nav class="text-center mb-8">
+    <ul class="inline-flex space-x-4">
+      {Array.from(new Set(eventsData.map(event => new Date(event.date).getFullYear()))).sort((a, b) => b - a).map((year) => (
+        <li><a href={`#${year}`} class="text-blue-400 hover:underline">{year}</a></li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- Events Grouped by Year -->
+  {Array.from(new Set(eventsData.map(event => new Date(event.date).getFullYear()))).sort((a, b) => b - a).map((year) => (
+    <section id={String(year)} class="mb-16">
+      <h2 class="text-3xl text-purple-400 border-b border-gray-700 pb-2 mb-8">{year}</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {eventsData.filter(event => new Date(event.date).getFullYear() === year).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((event, index) => (
+          <li class="w-full">
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1">
+              <div class="flex items-center mb-4">
+                <img src={`/src/images/events/${event.icon}`} alt={`${event.name} Icon`} class="w-12 h-12 mr-4" />
+                <div>
+                  {event.url ? <a href={event.url} target="_blank" rel="noopener noreferrer" class="text-xl font-semibold text-blue-400 hover:underline">{event.name}</a> : <strong class="text-xl font-semibold text-white">{event.name}</strong>}
+                </div>
+              </div>
+              <div class="text-gray-300">
+                {getFlagEmoji(event.country)} {event.city} @ {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </div>
+              <em class="text-gray-400 block mt-2">{event.role}</em>
+              {event.workshop && <span class="text-green-400 mt-2 block"> - Workshop</span>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+  </div>
+</BaseLayout>

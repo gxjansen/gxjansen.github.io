@@ -1,0 +1,62 @@
+[
+    {
+      "name": "Spryker EXCITE 2024",
+      "icon": "spryker.png",
+      "date": "2024-09-12",
+      "city": "Berlin",
+      "country": "DE",
+      "url": "https://spryker.com/events/excite-2024/",
+      "workshop": false,
+      "role": "Event Host/Moderator"
+    },
+    {
+      "name": "Growth Marketing Summit",
+      "icon": "gms.png",
+      "date": "2024-06-19",
+      "city": "Frankfurt",
+      "country": "DE",
+      "url": "https://www.growthmarketingsummit.com/en",
+      "workshop": false,
+      "role": "Podcast Livestream Host"
+    },
+    {
+      "name": "Bikkeldag",
+      "icon": "bikkelhart.png",
+      "date": "2024-03-21",
+      "city": "Amsterdam",
+      "country": "NL",
+      "url": "https://web.bikkelhart.com/bikkeldag-21-maart-2024",
+      "workshop": false,
+      "role": "Presenter - Persuasive E-commerce"
+    },
+    {
+      "name": "Spryker Hackathon",
+      "icon": "spryker.png",
+      "date": "2024-03-13",
+      "city": "Berlin",
+      "country": "DE",
+      "url": "https://commercequest.space/events/22-spryker-march-hackathon-double-your-development-speed",
+      "workshop": true,
+      "role": "Event Host/Moderator"
+    },
+    {
+      "name": "Spryker User Group February 2024",
+      "icon": "spryker.png",
+      "date": "2024-02-28",
+      "city": "Online",
+      "country": "",
+      "url": "https://commercequest.space/events/16-spryker-digital-user-group-february-2024-edition-remote-english",
+      "workshop": false,
+      "role": "Event Host/Moderator"
+    },
+    {
+      "name": "Spryker User Group November 2023",
+      "icon": "spryker.png",
+      "date": "2023-11-28",
+      "city": "Online",
+      "country": "",
+      "url": "https://commercequest.space/events/4-spryker-digital-user-group-november-2023-edition-remote-english",
+      "workshop": false,
+      "role": "Event Host/Moderator"
+    }
+  ]
