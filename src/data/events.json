@@ -5,8 +5,7 @@
     "date": "2025-09-25",
     "city": "Berlin",
     "country": "DE",
-    "url": "https://spryker.com/events/excite-2024/",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -16,8 +15,7 @@
     "date": "2024-09-12",
     "city": "Berlin",
     "country": "DE",
-    "url": "https://commercequest.space/event-recap/",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -27,8 +25,7 @@
     "date": "2024-06-19",
     "city": "Frankfurt am Main",
     "country": "DE",
-    "url": "https://www.growthmarketingsummit.com/en",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Podcast livestream host",
     "topic": ""
   },
@@ -38,8 +35,7 @@
     "date": "2024-04-29",
     "city": "Online event",
     "country": "",
-    "url": "https://commercequest.space/events/19-spryker-digital-user-group-april-2024-edition-remote-english",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -49,8 +45,7 @@
     "date": "2024-03-26",
     "city": "Online event",
     "country": "",
-    "url": "https://commercequest.space/events/18-spryker-digital-user-group-march-2024-edition-remote-english",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -60,8 +55,7 @@
     "date": "2024-03-21",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "https://web.bikkelhart.com/bikkeldag-21-maart-2024",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -71,8 +65,7 @@
     "date": "2024-03-13",
     "city": "Berlin",
     "country": "DE",
-    "url": "https://commercequest.space/events/22-spryker-march-hackathon-double-your-development-speed",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": "Double your development speed"
   },
@@ -82,8 +75,7 @@
     "date": "2024-02-28",
     "city": "Online event",
     "country": "",
-    "url": "https://commercequest.space/events/16-spryker-digital-user-group-february-2024-edition-remote-english",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -93,8 +85,7 @@
     "date": "2024-01-31",
     "city": "Online event",
     "country": "",
-    "url": "https://commercequest.space/events/13-spryker-digital-user-group-january-2024-edition-remote-english",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -104,8 +95,7 @@
     "date": "2023-11-28",
     "city": "Online event",
     "country": "",
-    "url": "https://commercequest.space/events/4-spryker-digital-user-group-november-2023-edition-remote-english",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -115,8 +105,7 @@
     "date": "2023-10-26",
     "city": "Online event",
     "country": "",
-    "url": "https://commercequest.space/events/3-spryker-digital-user-group-october-2023-edition-remote-english",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -126,8 +115,7 @@
     "date": "2023-09-26",
     "city": "Online event",
     "country": "",
-    "url": "https://commercequest.space/events/2-spryker-digital-user-group-september-2023-edition-remote-english",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -137,8 +125,7 @@
     "date": "2023-09-14",
     "city": "Berlin",
     "country": "DE",
-    "url": "https://commercequest.space/event-recap/",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -148,8 +135,7 @@
     "date": "2023-09-13",
     "city": "Berlin",
     "country": "DE",
-    "url": "https://commercequest.space/event-recap/",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -159,8 +145,7 @@
     "date": "2023-08-29",
     "city": "Online event",
     "country": "",
-    "url": "https://commercequest.space/events/1-spryker-digital-user-group-august-2023-edition-remote-english",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -170,8 +155,7 @@
     "date": "2023-07-08",
     "city": "Hamburg",
     "country": "DE",
-    "url": "https://commercequest.space/event-recap/",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Spryker update"
   },
@@ -181,8 +165,7 @@
     "date": "2023-02-16",
     "city": "Hamburg",
     "country": "DE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Crystal ball session: outlook for the coming year"
   },
@@ -192,8 +175,7 @@
     "date": "2023-02-01",
     "city": "Munchen",
     "country": "DE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Crystal ball session: outlook for the coming year"
   },
@@ -203,8 +185,7 @@
     "date": "2022-12-07",
     "city": "Berlin",
     "country": "DE",
-    "url": "https://b2bonlineeu.wbresearch.com/",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Composable Commerce & Packaged Business Capabilities"
   },
@@ -214,8 +195,7 @@
     "date": "2022-10-25",
     "city": "Berlin",
     "country": "DE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -225,8 +205,7 @@
     "date": "2022-07-08",
     "city": "Vienna",
     "country": "AT",
-    "url": "https://commercequest.space/event-recap/",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Spryker update"
   },
@@ -236,8 +215,7 @@
     "date": "2022-06-21",
     "city": "Nashville",
     "country": "US",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -247,8 +225,7 @@
     "date": "2022-06-15",
     "city": "Frankfurt",
     "country": "DE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Podcast livestream host",
     "topic": ""
   },
@@ -258,8 +235,7 @@
     "date": "2022-06-07",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Innovate or get Kodak'ed: 5 Guiding Principles to NOT F#%K up Modern Commerce"
   },
@@ -269,8 +245,7 @@
     "date": "2022-05-24",
     "city": "Berlin",
     "country": "DE",
-    "url": "https://spryker.com/events/excite-2022-berlin/",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -280,8 +255,7 @@
     "date": "2022-05-23",
     "city": "Berlin",
     "country": "DE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -291,8 +265,7 @@
     "date": "2022-05-14",
     "city": "Athens",
     "country": "GR",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Still A/B testing your buttons? You need to think (much) bigger..."
   },
@@ -302,8 +275,7 @@
     "date": "2022-05-12",
     "city": "Maarssen",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Growth strategies for the future of B2B commerce"
   },
@@ -313,8 +285,7 @@
     "date": "2022-05-12",
     "city": "Maarssen",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Grow Smart or Die Fast: 5 Guidelines to Navigate the Recession"
   },
@@ -324,8 +295,7 @@
     "date": "2022-04-26",
     "city": "London",
     "country": "GB",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Still A/B testing your buttons? You need to think (much) bigger..."
   },
@@ -335,8 +305,7 @@
     "date": "2022-04-14",
     "city": "Maarssen",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Why becoming a Marketplace should be your Next Big Initiative"
   },
@@ -346,8 +315,7 @@
     "date": "2022-04-06",
     "city": "London",
     "country": "GB",
-    "url": "https://business-online.co.uk/",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Still A/B testing your buttons? You need to think (much) bigger..."
   },
@@ -357,8 +325,7 @@
     "date": "2022-02-16",
     "city": "Online event",
     "country": "",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -368,8 +335,7 @@
     "date": "2021-12-11",
     "city": "Online event",
     "country": "",
-    "url": "https://events.smartosc.com/devx-headless-architecture-the-evolution-of-ecommerce_en",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Panellist",
     "topic": ""
   },
@@ -379,8 +345,7 @@
     "date": "2021-11-20",
     "city": "De Koog, Texel",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Podcast livestream host",
     "topic": ""
   },
@@ -390,8 +355,7 @@
     "date": "2021-10-06",
     "city": "Berlin",
     "country": "DE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Your path to becoming a (more) Customer Centric Business"
   },
@@ -401,8 +365,7 @@
     "date": "2020-12-02",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Cross-cultural website optimization"
   },
@@ -412,8 +375,7 @@
     "date": "2020-11-17",
     "city": "Online event",
     "country": "",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -423,8 +385,7 @@
     "date": "2020-10-29",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -434,8 +395,7 @@
     "date": "2020-10-28",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -445,8 +405,7 @@
     "date": "2020-07-16",
     "city": "Virtual",
     "country": "",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -456,8 +415,7 @@
     "date": "2020-03-05",
     "city": "Gothenburg",
     "country": "SE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -467,8 +425,7 @@
     "date": "2020-02-13",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Podcast livestream host",
     "topic": ""
   },
@@ -478,8 +435,7 @@
     "date": "2020-02-11",
     "city": "Oslo",
     "country": "NO",
-    "url": "",
-    "workshop": true,
+    "url": "",    "workshop": true,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -489,8 +445,7 @@
     "date": "2020-02-05",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Podcast livestream host",
     "topic": ""
   },
@@ -500,8 +455,7 @@
     "date": "2020-01-29",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -511,8 +465,7 @@
     "date": "2019-12-10",
     "city": "Tiel",
     "country": "NL",
-    "url": "",
-    "workshop": true,
+    "url": "",    "workshop": true,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -522,8 +475,7 @@
     "date": "2019-11-28",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Podcast livestream host",
     "topic": ""
   },
@@ -533,8 +485,7 @@
     "date": "2019-11-25",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Cross-cultural website optimization"
   },
@@ -544,8 +495,7 @@
     "date": "2019-11-22",
     "city": "De Koog, Texel",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Podcast livestream host",
     "topic": ""
   },
@@ -555,8 +505,7 @@
     "date": "2019-11-14",
     "city": "Tallinn",
     "country": "EE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -566,8 +515,7 @@
     "date": "2019-11-14",
     "city": "Tallinn",
     "country": "EE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -577,8 +525,7 @@
     "date": "2019-10-30",
     "city": "Bucharest",
     "country": "RO",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Data Driven Decisions meets Psychology"
   },
@@ -588,8 +535,7 @@
     "date": "2019-10-22",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Co-hosting Commerce Sneaks",
     "topic": ""
   },
@@ -599,8 +545,7 @@
     "date": "2019-10-17",
     "city": "The Hague",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Creating an optimization culture"
   },
@@ -610,8 +555,7 @@
     "date": "2019-10-17",
     "city": "The Hague",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Building your Optimization Dream Team"
   },
@@ -621,8 +565,7 @@
     "date": "2019-10-08",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -632,8 +575,7 @@
     "date": "2019-10-08",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Podcast livestream host",
     "topic": ""
   },
@@ -643,8 +585,7 @@
     "date": "2019-09-26",
     "city": "n.t.b.",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Podcast livestream host",
     "topic": ""
   },
@@ -654,8 +595,7 @@
     "date": "2019-07-30",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -665,8 +605,7 @@
     "date": "2019-06-26",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Cross-cultural website optimization"
   },
@@ -676,8 +615,7 @@
     "date": "2019-06-19",
     "city": "London",
     "country": "GB",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Magento Association"
   },
@@ -687,8 +625,7 @@
     "date": "2019-04-18",
     "city": "Den Haag",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -698,8 +635,7 @@
     "date": "2019-04-11",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Podcast livestream host",
     "topic": ""
   },
@@ -709,8 +645,7 @@
     "date": "2019-04-08",
     "city": "Online event",
     "country": "NL",
-    "url": "http://www.newbusinessradio.nl/artikel/381/let-s-talk-business",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Interview about Dutchento"
   },
@@ -720,8 +655,7 @@
     "date": "2019-02-14",
     "city": "Dublin",
     "country": "IE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -731,8 +665,7 @@
     "date": "2019-01-24",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Your path to becoming a (more) Customer Centric Business"
   },
@@ -742,8 +675,7 @@
     "date": "2019-01-23",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -753,8 +685,7 @@
     "date": "2018-12-06",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -764,8 +695,7 @@
     "date": "2018-09-19",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -775,8 +705,7 @@
     "date": "2018-06-29",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -786,8 +715,7 @@
     "date": "2018-06-13",
     "city": "London",
     "country": "GB",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Creating an optimization culture"
   },
@@ -797,8 +725,7 @@
     "date": "2018-06-06",
     "city": "London",
     "country": "GB",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Creating an optimization culture"
   },
@@ -808,8 +735,7 @@
     "date": "2018-06-01",
     "city": "Jaarbeurs, Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -819,8 +745,7 @@
     "date": "2018-03-20",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Creating an optimization culture"
   },
@@ -830,8 +755,7 @@
     "date": "2018-02-28",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -841,8 +765,7 @@
     "date": "2017-11-11",
     "city": "De Koog, Texel",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Management buy-in for CRO"
   },
@@ -852,8 +775,7 @@
     "date": "2017-11-09",
     "city": "British Library, London",
     "country": "GB",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Improve CRO processes with evolutionary AI"
   },
@@ -863,8 +785,7 @@
     "date": "2017-11-07",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": true,
+    "url": "",    "workshop": true,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -874,8 +795,7 @@
     "date": "2017-10-26",
     "city": "Bucharest",
     "country": "RO",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -885,8 +805,7 @@
     "date": "2017-10-24",
     "city": "Webinar",
     "country": "",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Data Driven Decisions meets Psychology"
   },
@@ -896,8 +815,7 @@
     "date": "2017-10-17",
     "city": "Cluj-Napoca",
     "country": "RO",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Creating an optimization culture"
   },
@@ -907,8 +825,7 @@
     "date": "2017-10-12",
     "city": "Athens",
     "country": "GR",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -918,8 +835,7 @@
     "date": "2017-09-28",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -929,8 +845,7 @@
     "date": "2017-09-09",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Conversion optimization"
   },
@@ -940,8 +855,7 @@
     "date": "2017-08-29",
     "city": "Shenzhen",
     "country": "CN",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Cross-cultural website optimization"
   },
@@ -951,8 +865,7 @@
     "date": "2017-08-26",
     "city": "Fort a/d Klop, Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Let's have a talk about giving talks"
   },
@@ -962,8 +875,7 @@
     "date": "2017-06-29",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Creating an optimization culture"
   },
@@ -973,8 +885,7 @@
     "date": "2017-06-17",
     "city": "Tallinn",
     "country": "EE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Creating an optimization culture"
   },
@@ -984,8 +895,7 @@
     "date": "2017-05-20",
     "city": "Copenhagen",
     "country": "DK",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -995,8 +905,7 @@
     "date": "2017-05-13",
     "city": "Pakhuis de Zwijger, Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Improve CRO processes with evolutionary AI"
   },
@@ -1006,8 +915,7 @@
     "date": "2017-05-12",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Improve CRO processes with evolutionary AI"
   },
@@ -1017,8 +925,7 @@
     "date": "2017-05-10",
     "city": "Jaarbeurs, Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -1028,8 +935,7 @@
     "date": "2017-02-28",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": true,
+    "url": "",    "workshop": true,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1039,8 +945,7 @@
     "date": "2016-12-15",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1050,8 +955,7 @@
     "date": "2016-11-19",
     "city": "De Koog, Texel",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Let's have a talk about giving talks"
   },
@@ -1061,8 +965,7 @@
     "date": "2016-11-12",
     "city": "Manchester",
     "country": "GB",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Meet Magento Association"
   },
@@ -1072,8 +975,7 @@
     "date": "2016-11-03",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": true,
+    "url": "",    "workshop": true,
     "role": "Speaker",
     "topic": "Online sales for florists"
   },
@@ -1083,8 +985,7 @@
     "date": "2016-10-21",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -1094,8 +995,7 @@
     "date": "2016-10-14",
     "city": "Fort a/d Klop, Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Let's have a talk about giving talks"
   },
@@ -1105,8 +1005,7 @@
     "date": "2016-10-13",
     "city": "London",
     "country": "GB",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1116,8 +1015,7 @@
     "date": "2016-10-04",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": true,
+    "url": "",    "workshop": true,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1127,8 +1025,7 @@
     "date": "2016-09-21",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Cross-cultural website optimization"
   },
@@ -1138,8 +1035,7 @@
     "date": "2016-08-29",
     "city": "Jakarta",
     "country": "ID",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1149,8 +1045,7 @@
     "date": "2016-06-02",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Cross-cultural website optimization"
   },
@@ -1160,8 +1055,7 @@
     "date": "2016-05-12",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -1171,8 +1065,7 @@
     "date": "2016-04-28",
     "city": "Tallinn",
     "country": "EE",
-    "url": "",
-    "workshop": true,
+    "url": "",    "workshop": true,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1182,8 +1075,7 @@
     "date": "2016-04-26",
     "city": "Opatija",
     "country": "HR",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Cross-cultural website optimization"
   },
@@ -1193,8 +1085,7 @@
     "date": "2016-04-20",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": true,
+    "url": "",    "workshop": true,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1204,8 +1095,7 @@
     "date": "2016-04-19",
     "city": "Webinar",
     "country": "",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Cross-cultural website optimization"
   },
@@ -1215,8 +1105,7 @@
     "date": "2016-03-31",
     "city": "Prague",
     "country": "CZ",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1226,8 +1115,7 @@
     "date": "2016-03-14",
     "city": "Stockholm",
     "country": "SE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1237,8 +1125,7 @@
     "date": "2016-03-13",
     "city": "Berlin",
     "country": "DE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Building your Optimization Dream Team"
   },
@@ -1248,8 +1135,7 @@
     "date": "2016-02-10",
     "city": "Webinar",
     "country": "",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Building your Optimization Dream Team"
   },
@@ -1259,8 +1145,7 @@
     "date": "2016-01-22",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Event host/moderator",
     "topic": ""
   },
@@ -1270,8 +1155,7 @@
     "date": "2016-01-21",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Cross-cultural website optimization"
   },
@@ -1281,8 +1165,7 @@
     "date": "2016-01-21",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": true,
+    "url": "",    "workshop": true,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1292,8 +1175,7 @@
     "date": "2016-01-12",
     "city": "Warsaw",
     "country": "PL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1303,8 +1185,7 @@
     "date": "2015-12-09",
     "city": "'s-Hertogenbosch",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1314,8 +1195,7 @@
     "date": "2015-12-03",
     "city": "Buenos Aires",
     "country": "AR",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1325,8 +1205,7 @@
     "date": "2015-11-21",
     "city": "Texel",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Compute required Sample Size for your A/B tests (A-priori)"
   },
@@ -1336,8 +1215,7 @@
     "date": "2015-11-17",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": true,
+    "url": "",    "workshop": true,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1347,8 +1225,7 @@
     "date": "2015-10-28",
     "city": "Madrid",
     "country": "ES",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Building your Optimization Dream Team"
   },
@@ -1358,8 +1235,7 @@
     "date": "2015-10-13",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Building your Optimization Dream Team"
   },
@@ -1369,8 +1245,7 @@
     "date": "2015-10-09",
     "city": "Athens",
     "country": "GR",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1380,8 +1255,7 @@
     "date": "2015-09-21",
     "city": "Minsk",
     "country": "BY",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1391,8 +1265,7 @@
     "date": "2015-08-22",
     "city": "Hanoi",
     "country": "VN",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1402,8 +1275,7 @@
     "date": "2015-07-22",
     "city": "Romsey",
     "country": "GB",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1413,8 +1285,7 @@
     "date": "2015-07-06",
     "city": "Malmö",
     "country": "SE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1424,8 +1295,7 @@
     "date": "2015-05-27",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -1435,8 +1305,7 @@
     "date": "2015-05-13",
     "city": "Brussels",
     "country": "BE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "5 Ultimate usability tips for E-commerce"
   },
@@ -1446,8 +1315,7 @@
     "date": "2015-05-07",
     "city": "Kolding",
     "country": "DK",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1457,8 +1325,7 @@
     "date": "2015-05-07",
     "city": "Leipzig",
     "country": "DE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "5 Ultimate usability tips for E-commerce"
   },
@@ -1468,8 +1335,7 @@
     "date": "2015-04-28",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Hack your users brain"
   },
@@ -1479,8 +1345,7 @@
     "date": "2015-04-16",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Usability Testing"
   },
@@ -1490,8 +1355,7 @@
     "date": "2015-04-14",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "5 Ultimate usability tips for E-commerce"
   },
@@ -1501,8 +1365,7 @@
     "date": "2014-11-27",
     "city": "Hoofddorp",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Learnings van 9 maanden conversie optimalisatie"
   },
@@ -1512,8 +1375,7 @@
     "date": "2014-10-24",
     "city": "Glattfelden",
     "country": "CH",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1523,8 +1385,7 @@
     "date": "2014-10-16",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Magento Community versus Enterprise"
   },
@@ -1534,8 +1395,7 @@
     "date": "2014-10-02",
     "city": "Delft",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to Magento"
   },
@@ -1545,8 +1405,7 @@
     "date": "2014-09-21",
     "city": "New York",
     "country": "US",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1556,8 +1415,7 @@
     "date": "2014-05-22",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -1567,8 +1425,7 @@
     "date": "2014-05-12",
     "city": "Leipzig",
     "country": "DE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1578,8 +1435,7 @@
     "date": "2014-04-27",
     "city": "Hoofddorp",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1589,8 +1445,7 @@
     "date": "2014-03-23",
     "city": "Zeist",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to A/B testing"
   },
@@ -1600,8 +1455,7 @@
     "date": "2014-03-20",
     "city": "Hoofddorp",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1611,8 +1465,7 @@
     "date": "2014-01-13",
     "city": "Kaprun",
     "country": "AT",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "The Future of the Magento Ecosystem"
   },
@@ -1622,8 +1475,7 @@
     "date": "2013-11-05",
     "city": "Warsaw",
     "country": "PL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1633,8 +1485,7 @@
     "date": "2013-10-24",
     "city": "Cluj-Napoca",
     "country": "RO",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1644,8 +1495,7 @@
     "date": "2013-06-04",
     "city": "Paris",
     "country": "FR",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1655,8 +1505,7 @@
     "date": "2013-06-03",
     "city": "Leipzig",
     "country": "DE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1666,8 +1515,7 @@
     "date": "2013-05-30",
     "city": "Ede",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -1677,8 +1525,7 @@
     "date": "2013-04-21",
     "city": "Zeist",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1688,8 +1535,7 @@
     "date": "2013-02-28",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Marketing with Magento"
   },
@@ -1699,8 +1545,7 @@
     "date": "2013-01-24",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1710,8 +1555,7 @@
     "date": "2013-01-23",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to Magento"
   },
@@ -1721,8 +1565,7 @@
     "date": "2013-01-17",
     "city": "Brussels",
     "country": "BE",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1732,8 +1575,7 @@
     "date": "2012-12-19",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1743,8 +1585,7 @@
     "date": "2012-12-10",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1754,8 +1595,7 @@
     "date": "2012-10-18",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Marketing with Magento"
   },
@@ -1765,8 +1605,7 @@
     "date": "2012-10-17",
     "city": "San José",
     "country": "US",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1776,8 +1615,7 @@
     "date": "2012-10-11",
     "city": "Delft",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to Magento"
   },
@@ -1787,8 +1625,7 @@
     "date": "2012-10-08",
     "city": "São Paulo",
     "country": "BR",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1798,8 +1635,7 @@
     "date": "2012-08-21",
     "city": "Delft",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to Magento"
   },
@@ -1809,8 +1645,7 @@
     "date": "2012-08-16",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Cross channel possibilities with Magento"
   },
@@ -1820,8 +1655,7 @@
     "date": "2012-06-28",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Magento Community versus Enterprise"
   },
@@ -1831,8 +1665,7 @@
     "date": "2012-05-31",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -1842,8 +1675,7 @@
     "date": "2012-05-31",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Cross channel possibilities with Magento"
   },
@@ -1853,8 +1685,7 @@
     "date": "2012-05-30",
     "city": "Ede",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -1864,8 +1695,7 @@
     "date": "2012-05-26",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to Magento"
   },
@@ -1875,8 +1705,7 @@
     "date": "2012-05-24",
     "city": "Enschede",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1886,8 +1715,7 @@
     "date": "2012-03-15",
     "city": "Maarssen",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1897,8 +1725,7 @@
     "date": "2012-01-26",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to Magento"
   },
@@ -1908,8 +1735,7 @@
     "date": "2012-01-25",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1919,8 +1745,7 @@
     "date": "2012-01-13",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1930,8 +1755,7 @@
     "date": "2011-12-08",
     "city": "Delft",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to Magento"
   },
@@ -1941,8 +1765,7 @@
     "date": "2011-11-17",
     "city": "Delft",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to Magento"
   },
@@ -1952,8 +1775,7 @@
     "date": "2011-09-15",
     "city": "Enschede",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to Magento"
   },
@@ -1963,8 +1785,7 @@
     "date": "2011-08-31",
     "city": "Maarssen",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Persuasive E-commerce"
   },
@@ -1974,8 +1795,7 @@
     "date": "2011-05-19",
     "city": "Ede",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -1985,8 +1805,7 @@
     "date": "2010-12-16",
     "city": "Enschede",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to Magento"
   },
@@ -1996,8 +1815,7 @@
     "date": "2010-05-26",
     "city": "Ede",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -2007,8 +1825,7 @@
     "date": "2010-04-24",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Speaker",
     "topic": "Conversion optimization"
   },
@@ -2018,8 +1835,7 @@
     "date": "2009-12-06",
     "city": "Nieuwegein",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   },
@@ -2029,8 +1845,7 @@
     "date": "2009-01-27",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",
-    "workshop": false,
+    "url": "",    "workshop": false,
     "role": "Main event organizer",
     "topic": ""
   }
