@@ -1,0 +1,60 @@
+---
+// src/components/Events/EventCard.astro
+import { Image } from "astro:assets";
+import { getFlagEmoji } from "../../utils/countryUtils.js";
+import type { Event } from "../../utils/eventUtils";
+
+type Props = Event;
+
+const { name, date, url, city, country, topic, role, workshop, loadedIcon } = Astro.props;
+
+// Prepare the content wrapper based on whether there's a URL
+const WrapperTag = url ? 'a' : 'div';
+const wrapperProps = url ? {
+  href: url,
+  target: "_blank",
+  rel: "noopener noreferrer",
+} : {};
+---
+
+<WrapperTag
+  {...wrapperProps}
+  class="block bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1 cursor-pointer border-2 border-teal-400/30"
+>
+  <div class="flex items-center mb-4">
+    {loadedIcon ? (
+      <Image
+        src={loadedIcon}
+        alt={`${name} Icon`}
+        width={48}
+        height={48}
+        class="mr-4"
+      />
+    ) : (
+      <div class="w-12 h-12 mr-4 bg-gray-700 rounded-lg flex items-center justify-center">
+        <span class="text-2xl">📅</span>
+      </div>
+    )}
+    <div>
+      <span class="text-xl font-semibold text-blue-400">
+        {name}
+      </span>
+    </div>
+  </div>
+  <div class="text-gray-300">
+    {country ? getFlagEmoji(country) : "🌎"} {city} @{" "}
+    {new Date(date).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    })}
+  </div>
+  <div class="flex justify-between items-center mt-2">
+    <em class="text-gray-400">{topic ?? role}</em>
+    {workshop && (
+      <span class="text-teal-400 ml-2 px-2 py-1 text-sm bg-green-400/10 rounded">
+        Workshop
+      </span>
+    )}
+  </div>
+</WrapperTag>

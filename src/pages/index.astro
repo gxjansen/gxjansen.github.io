@@ -32,6 +32,12 @@ import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { getTranslatedData } from "@js/translationUtils";
+import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
+import { getAllEvents } from "../utils/eventUtils";
+
+// Load all events with their icons
+const eventIcons = await getAllEvents();
+
 
 // data
 const currLocale = getLocaleFromUrl(Astro.url);
@@ -53,7 +59,21 @@ const siteData = getTranslatedData("siteData", currLocale);
 
   <!-- <TestimonialsSwiperQuotes /> -->
   <!-- <TestimonialsColumns /> -->
-  <FeatureFlagsMarquee />
+  <div class="site-container mx-auto px-4 pb-20 pt-10 md:py-28">
+    {/* Upcoming Events Section */}
+    <UpcomingEvents events={eventIcons} />
+    
+    <div class="flex justify-center mt-8">
+      <a 
+        href="/events" 
+        class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-3 text-center text-base font-medium text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-gray-100"
+      >
+        View Past Events
+      </a>
+    </div>
+  
+    <FeatureFlagsMarquee />
+  </div>
 
   <FeatureGalleryMarquee />
   <!-- <FeatureToggleImage /> -->
