@@ -16,13 +16,19 @@ const wrapperProps = url ? {
   rel: "noopener noreferrer",
 } : {};
 
-// Determine display text for topic/role - use topic if available, otherwise fall back to role
+// Determine display text for topic/role
 const displayText = topic || role;
+
+// Define classes based on whether the card is clickable
+const baseClasses = "block bg-gray-800 p-6 rounded-lg shadow-lg border-2 transition-all duration-200";
+const clickableClasses = url 
+  ? `${baseClasses} border-teal-400/30 hover:border-teal-400 hover:shadow-xl hover:-translate-y-1 cursor-pointer group` 
+  : `${baseClasses} border-gray-700`;
 ---
 
 <WrapperTag
   {...wrapperProps}
-  class="block bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1 cursor-pointer border-2 border-teal-400/30"
+  class={clickableClasses}
 >
   <div class="flex items-center mb-4">
     {loadedIcon ? (
@@ -38,14 +44,30 @@ const displayText = topic || role;
         <span class="text-2xl">📅</span>
       </div>
     )}
-    <div>
+    <div class="flex items-center gap-2">
       <span class="text-xl font-semibold text-blue-400">
         {name}
       </span>
+      {url && (
+        <span class="text-teal-400 group-hover:translate-x-1 transition-transform duration-200">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            class="h-5 w-5" 
+            viewBox="0 0 20 20" 
+            fill="currentColor"
+          >
+            <path 
+              fill-rule="evenodd" 
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
+              clip-rule="evenodd" 
+            />
+          </svg>
+        </span>
+      )}
     </div>
   </div>
   <div class="text-gray-300">
-    {country ? getFlagEmoji(country) : "🌎"} {city} @{" "}
+    {country ? getFlagEmoji(country) : "🌎"} {city}, {" "}
     {new Date(date).toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
@@ -53,12 +75,18 @@ const displayText = topic || role;
     })}
   </div>
   <div class="flex justify-between items-center mt-2">
-    <!-- Changed this line to use displayText instead of the previous conditional -->
     {displayText && <em class="text-gray-400">{displayText}</em>}
-    {workshop && (
-      <span class="text-teal-400 ml-2 px-2 py-1 text-sm bg-green-400/10 rounded">
-        Workshop
-      </span>
-    )}
+    <div class="flex items-center gap-2">
+      {workshop && (
+        <span class="text-teal-400 px-2 py-1 text-sm bg-green-400/10 rounded">
+          Workshop
+        </span>
+      )}
+      {url && (
+        <span class="text-xs text-gray-400 group-hover:text-teal-400 transition-colors duration-200">
+          View Presentation →
+        </span>
+      )}
+    </div>
   </div>
 </WrapperTag>

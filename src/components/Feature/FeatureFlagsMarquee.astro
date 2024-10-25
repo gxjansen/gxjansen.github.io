@@ -1,61 +1,33 @@
 ---
 /**
- * * Three row flags marquee
- * JS allows the animation to pause while you hover over it.
+ * Dynamic country flags marquee based on events data
+ * Flags are fetched from svg-country-flags package during build
  */
 
-import { Image } from "astro:assets";
-import { Icon } from "astro-icon";
+ import Badge from "@components/Badge/Badge.astro";
+import eventsData from "../../data/events.json";
+import { getAllFlags } from "../../utils/flagUtils";
 
-// components
-import Badge from "@components/Badge/Badge.astro";
+// Get unique countries from events
+const uniqueCountries = [...new Set(eventsData.map(event => event.country))].filter(Boolean);
 
-// images
-import argentina from "src/content/countries/argentina/image.webp";
-import austria from "src/content/countries/austria/image.png";
-import belarus from "src/content/countries/belarus/image.jpg";
-import belgium from "src/content/countries/belgium/image.png";
-import brazil from "src/content/countries/brazil/image.webp";
-import china from "src/content/countries/china/image.png";
-import croatia from "src/content/countries/croatia/image.svg";
-import czechrepublic from "src/content/countries/czech-republic/image.png";
-import germany from "src/content/countries/germany/image.webp";
-import greatbritain from "src/content/countries/great-britain/image.png";
-import denmark from "src/content/countries/denmark/image.jpg";
-import estonia from "src/content/countries/estonia/image.jpg";
-import france from "src/content/countries/france/image.png";
-import greece from "src/content/countries/greece/image.png";
-import india from "src/content/countries/india/image.png";
-import indonesia from "src/content/countries/indonesia/image.jpg";
-import ireland from "src/content/countries/ireland/image.png";
-import italy from "src/content/countries/italy/image.png";
-import norway from "src/content/countries/norway/image.jpg";
-import poland from "src/content/countries/poland/image.svg";
-import romania from "src/content/countries/romania/image.png";
-import singapore from "src/content/countries/singapore/image.webp";
-import spain from "src/content/countries/spain/image.png";
-import sweden from "src/content/countries/sweden/image.webp";
-import switserland from "src/content/countries/switserland/image.webp";
-import thenetherlands from "src/content/countries/the-netherlands/image.png";
-import ukraine from "src/content/countries/ukraine/image.png";
-import us from "src/content/countries/united-states/image.webp";
-import vietnam from "src/content/countries/vietnam/image.png";
+// Load all flags during build
+const allFlags = await getAllFlags(uniqueCountries);
 
-interface MarqueeImages {
-  images: ImageMetadata[]; // imported images
-}
+// Split flags into three roughly equal groups
+const totalFlags = allFlags.length;
+const flagsPerRow = Math.ceil(totalFlags / 3);
 
-// change these images to whatever you want!
-const marqueeTop: MarqueeImages = {
-  images: [argentina, austria, belarus, belgium, brazil, china, croatia, czechrepublic, germany, greatbritain],
+const marqueeTop = {
+  images: allFlags.slice(0, flagsPerRow)
 };
 
-const marqueeMiddle: MarqueeImages = {
-  images: [denmark, estonia, greece, france, indonesia, ireland, italy, norway, poland, romania],
+const marqueeMiddle = {
+  images: allFlags.slice(flagsPerRow, flagsPerRow * 2)
 };
 
-const marqueeBottom: MarqueeImages = {
-  images: [singapore, spain, sweden, switserland, india, thenetherlands, ukraine, us, vietnam],
+const marqueeBottom = {
+  images: allFlags.slice(flagsPerRow * 2)
 };
 ---
 
@@ -68,114 +40,144 @@ const marqueeBottom: MarqueeImages = {
       <Badge>Flags</Badge>
       <h2 class="h2">Countries where I presented</h2>
       <p class="description mt-4 text-pretty text-lg md:text-xl">
-        29 and counting! 
+        {uniqueCountries.length} and counting!
       </p>
     </div>
   </div>
 
   <div class="relative flex flex-col gap-3 overflow-hidden md:gap-5">
-    <!-- marquee top row -->
+    {/* marquee top row */}
     <div class="marquee-top relative flex gap-3 overflow-hidden md:gap-5">
-      <div
-        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
-      >
-        {
-          marqueeTop.images.map((image) => (
-            <Image
-              src={image}
+      <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5">
+        {marqueeTop.images.map((image) => (
+          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+            <img
+              src={image.src}
               alt=""
-              loading="lazy"
-              width={600}
-              class="aspect-[5/3] max-w-[clamp(3rem,28vmin,5rem)] rounded-md object-cover shadow-md"
+              width={image.width}
+              height={image.height}
+              class="w-full rounded-md"
+              style={{
+                aspectRatio: '3/2',
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
             />
-          ))
-        }
+          </div>
+        ))}
       </div>
       <div
         aria-hidden="true"
         class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
       >
-        {
-          marqueeTop.images.map((image) => (
-            <Image
-              src={image}
+        {marqueeTop.images.map((image) => (
+          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+            <img
+              src={image.src}
               alt=""
-              loading="lazy"
-              width={600}
-              class="aspect-[5/3] max-w-[clamp(3rem,28vmin,5rem)] rounded-md object-cover shadow-md"
+              width={image.width}
+              height={image.height}
+              class="w-full rounded-md"
+              style={{
+                aspectRatio: '3/2',
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
             />
-          ))
-        }
+          </div>
+        ))}
       </div>
     </div>
 
-    <!-- marquee middle row -->
+    {/* marquee middle row */}
     <div class="marquee-middle relative flex gap-3 overflow-hidden md:gap-5">
-      <div
-        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
-      >
-        {
-          marqueeMiddle.images.map((image) => (
-            <Image
-              src={image}
+      <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5">
+        {marqueeMiddle.images.map((image) => (
+          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+            <img
+              src={image.src}
               alt=""
-              loading="lazy"
-              width={600}
-              class="aspect-[5/3] max-w-[clamp(3rem,28vmin,5rem)] rounded-md object-cover shadow-md"
+              width={image.width}
+              height={image.height}
+              class="w-full rounded-md"
+              style={{
+                aspectRatio: '3/2',
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
             />
-          ))
-        }
+          </div>
+        ))}
       </div>
       <div
         aria-hidden="true"
         class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
       >
-        {
-          marqueeMiddle.images.map((image) => (
-            <Image
-              src={image}
+        {marqueeMiddle.images.map((image) => (
+          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+            <img
+              src={image.src}
               alt=""
-              loading="lazy"
-              width={600}
-              class="aspect-[5/3] max-w-[clamp(3rem,28vmin,5rem)] rounded-md object-cover shadow-md"
+              width={image.width}
+              height={image.height}
+              class="w-full rounded-md"
+              style={{
+                aspectRatio: '3/2',
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
             />
-          ))
-        }
+          </div>
+        ))}
       </div>
     </div>
 
-    <!-- marquee bottom row -->
+    {/* marquee bottom row */}
     <div class="marquee-bottom relative flex gap-3 overflow-hidden md:gap-5">
-      <div
-        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
-      >
-        {
-          marqueeBottom.images.map((image) => (
-            <Image
-              src={image}
+      <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5">
+        {marqueeBottom.images.map((image) => (
+          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+            <img
+              src={image.src}
               alt=""
-              loading="lazy"
-              width={600}
-              class="aspect-[5/3] max-w-[clamp(3rem,35vmin,5rem)] rounded-md object-cover shadow-md"
+              width={image.width}
+              height={image.height}
+              class="w-full rounded-md"
+              style={{
+                aspectRatio: '3/2',
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
             />
-          ))
-        }
+          </div>
+        ))}
       </div>
       <div
         aria-hidden="true"
         class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
       >
-        {
-          marqueeBottom.images.map((image) => (
-            <Image
-              src={image}
+        {marqueeBottom.images.map((image) => (
+          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+            <img
+              src={image.src}
               alt=""
-              loading="lazy"
-              width={600}
-              class="aspect-[5/3] max-w-[clamp(3rem,35vmin,5rem)] rounded-md object-cover shadow-md"
+              width={image.width}
+              height={image.height}
+              class="w-full rounded-md"
+              style={{
+                aspectRatio: '3/2',
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }}
             />
-          ))
-        }
+          </div>
+        ))}
       </div>
     </div>
   </div>

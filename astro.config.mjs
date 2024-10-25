@@ -75,6 +75,12 @@ export default defineConfig({
   },
 
   vite: {
+    assetsInclude: ['**/*.svg'],
+    resolve: {
+      alias: {
+        'svg-country-flags': '/node_modules/svg-country-flags'
+      }
+    },
     plugins: [
       {
         name: 'robots-txt',
