@@ -1,0 +1,42 @@
+---
+// src/components/Events/UpcomingEvents.astro
+import Badge from "@components/Badge/Badge.astro";
+import EventCard from "./EventCard.astro";
+import type { Event } from "../../utils/eventUtils";
+
+interface Props {
+  events: Event[];
+  showTitle?: boolean;
+}
+
+const { events, showTitle = true } = Astro.props;
+
+// Filter for upcoming events (today or future dates)
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const upcomingEvents = events
+  .filter((event) => new Date(event.date) >= today)
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+---
+
+{upcomingEvents.length > 0 && (
+  <div class="mb-16">
+    {showTitle && (
+      <div class="site-container flex justify-center">
+        <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+          <Badge>Events</Badge>
+          <h2 class="h2">Upcoming Speaking Engagements</h2>
+        </div>
+      </div>
+    )}
+
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {upcomingEvents.map((event) => (
+        <li class="w-full">
+          <EventCard {...event} />
+        </li>
+      ))}
+    </ul>
+  </div>
+)}

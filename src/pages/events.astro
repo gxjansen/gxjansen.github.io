@@ -1,195 +1,84 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import eventsData from "../data/events.json";
-import { getFlagEmoji } from "../utils/countryUtils.js";
 import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
 import Badge from "@components/Badge/Badge.astro";
-import { Image } from "astro:assets";
-
-// Get event icons
-const getEventIcon = async (iconName: string | undefined) => {
-  if (!iconName) return null;
-  try {
-    const image = await import(`../images/events/${iconName}`);
-    return image.default;
-  } catch (e) {
-    console.warn(`Could not load icon: ${iconName}`);
-    return null;
-  }
-};
+import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
+import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
+import EventCard from "@components/Events/EventCard.astro";
+import { loadEventIcons } from "../utils/eventUtils";
+import type { Event } from "../utils/eventUtils";
 
 // Pre-load all event icons
-const eventIcons = await Promise.all(
-  eventsData.map(async (event) => ({
-    ...event,
-    loadedIcon: await getEventIcon(event.icon),
-  }))
+const eventIcons = await loadEventIcons(eventsData as Omit<Event, 'loadedIcon'>[]);
+
+// Filter for past events (yesterday or earlier)
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const pastEvents = eventIcons.filter(
+  (event) => new Date(event.date) < today
 );
+
+// Get unique years from past events for the index
+const pastEventYears = Array.from(
+  new Set(pastEvents.map((event) => new Date(event.date).getFullYear()))
+).sort((a, b) => b - a);
 
 // Page metadata
 const pageTitle = "Speaking Events";
-const pageDescription =
-  "A comprehensive list of conferences, meetups, and workshops where I've had the privilege to speak and share knowledge with the community.";
+const pageDescription = "A comprehensive list of conferences, meetups, and workshops where I've had the privilege to speak and share knowledge with the community.";
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
   <div class="container mx-auto mt-16 overflow-x-clip">
     <FeatureFlagsMarquee />
 
+    {/* Upcoming Events Section */}
+    <UpcomingEvents events={eventIcons} />
+
+    {/* Past Events Section */}
     <div class="site-container flex justify-center">
       <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
         <Badge>Events</Badge>
-        <h2 class="h2">Speaking engagements</h2>
-        <!-- <p class="description mt-4 text-pretty text-lg md:text-xl">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        </p> -->
+        <h2 class="h2">Past Speaking Engagements</h2>
       </div>
     </div>
 
-    <!-- Index -->
+    {/* Year Index */}
     <nav class="text-center mb-8">
       <ul class="inline-flex space-x-4">
-        {
-          Array.from(
-            new Set(
-              eventsData.map((event) => new Date(event.date).getFullYear())
-            )
-          )
-            .sort((a, b) => b - a)
-            .map((year) => (
-              <li>
-                <a href={`#${year}`} class="text-blue-400 hover:underline">
-                  {year}
-                </a>
-              </li>
-            ))
-        }
+        {pastEventYears.map((year) => (
+          <li>
+            <a href={`#${year}`} class="text-blue-400 hover:underline">
+              {year}
+            </a>
+          </li>
+        ))}
       </ul>
     </nav>
 
-    <!-- Events Grouped by Year -->
-    {
-      Array.from(
-        new Set(eventsData.map((event) => new Date(event.date).getFullYear()))
-      )
-        .sort((a, b) => b - a)
-        .map((year) => (
-          <section id={String(year)} class="mb-16">
-            <h2 class="text-3xl text-teal-400 border-b border-gray-700 pb-2 mb-8">
-              {year}
-            </h2>
-            <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {eventIcons
-                .filter((event) => new Date(event.date).getFullYear() === year)
-                .sort(
-                  (a, b) =>
-                    new Date(b.date).getTime() - new Date(a.date).getTime()
-                )
-                .map((event) => (
-                  <li class="w-full">
-                    {event.url ? (
-                      <a
-                        href={event.url}
-                        target={
-                          event.url.startsWith("http") ? "_blank" : "_self"
-                        }
-                        rel={
-                          event.url.startsWith("http")
-                            ? "noopener noreferrer"
-                            : undefined
-                        }
-                        class="block bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1 cursor-pointer"
-                      >
-                        <div class="flex items-center mb-4">
-                          {event.loadedIcon ? (
-                            <Image
-                              src={event.loadedIcon}
-                              alt={`${event.name} Icon`}
-                              width={48}
-                              height={48}
-                              class="mr-4"
-                            />
-                          ) : (
-                            <div class="w-12 h-12 mr-4 bg-gray-700 rounded-lg flex items-center justify-center">
-                              <span class="text-2xl">🎯</span>
-                            </div>
-                          )}
-                          <div>
-                            <span class="text-xl font-semibold text-blue-400">
-                              {event.name}
-                            </span>
-                          </div>
-                        </div>
-                        <div class="text-gray-300">
-                          {event.country ? getFlagEmoji(event.country) : "🌎"}{" "}
-                          {event.city} @{" "}
-                          {new Date(event.date).toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
-                        </div>
-                        <div class="flex justify-between items-center mt-2">
-                          <em class="text-gray-400">
-                            {event.topic ?? event.role}
-                          </em>
-                          {event.workshop && (
-                            <span class="text-teal-400 ml-2 px-2 py-1 text-sm bg-green-400/10 rounded">
-                              Workshop
-                            </span>
-                          )}
-                        </div>
-                      </a>
-                    ) : (
-                      <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                        {/* Same content as above but without the link wrapper */}
-                        <div class="flex items-center mb-4">
-                          {event.loadedIcon ? (
-                            <Image
-                              src={event.loadedIcon}
-                              alt={`${event.name} Icon`}
-                              width={48}
-                              height={48}
-                              class="mr-4"
-                            />
-                          ) : (
-                            <div class="w-12 h-12 mr-4 bg-gray-700 rounded-lg flex items-center justify-center">
-                              <span class="text-2xl">🎯</span>
-                            </div>
-                          )}
-                          <div>
-                            <span class="text-xl font-semibold text-white">
-                              {event.name}
-                            </span>
-                          </div>
-                        </div>
-                        <div class="text-gray-300">
-                          {event.country ? getFlagEmoji(event.country) : "🌎"}{" "}
-                          {event.city} @{" "}
-                          {new Date(event.date).toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
-                        </div>
-                        <div class="flex justify-between items-center mt-2">
-                          <em class="text-gray-400">
-                              {event.topic ?? event.role}
-                          </em>
-                          {event.workshop && (
-                              <span class="text-teal-400 ml-2 px-2 py-1 text-sm bg-green-400/10 rounded">
-                                  Workshop
-                              </span>
-                          )}
-                        </div>
-                        )
-                      </div>
-                    )}
-                  </li>
-                ))}
-            </ul>
-          </section>
-        ))
-    }
+    {/* Events Grouped by Year */}
+    {pastEventYears.map((year) => {
+      const yearEvents = pastEvents
+        .filter((event) => new Date(event.date).getFullYear() === year)
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+      return (
+        <section id={String(year)} class="mb-16">
+          <h2 class="text-3xl text-teal-400 border-b border-gray-700 pb-2 mb-8">
+            {year}
+          </h2>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {yearEvents.map((event) => (
+              <li class="w-full">
+                <EventCard {...event} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+    })}
   </div>
+  <CtaCardSplit />
 </BaseLayout>
