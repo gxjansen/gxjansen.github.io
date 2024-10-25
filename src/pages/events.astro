@@ -8,6 +8,7 @@ import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
 import EventCard from "@components/Events/EventCard.astro";
 import { loadEventIcons } from "../utils/eventUtils";
 import type { Event } from "../utils/eventUtils";
+import { getTotalPastEventsCount } from "../utils/eventUtils.js";
 
 // Pre-load all event icons
 const eventIcons = await loadEventIcons(eventsData as Omit<Event, 'loadedIcon'>[]);
@@ -28,6 +29,7 @@ const pastEventYears = Array.from(
 // Page metadata
 const pageTitle = "Speaking Events";
 const pageDescription = "A comprehensive list of conferences, meetups, and workshops where I've had the privilege to speak and share knowledge with the community.";
+const totalPastEvents = getTotalPastEventsCount();
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -55,6 +57,9 @@ const pageDescription = "A comprehensive list of conferences, meetups, and works
       <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
         <Badge>Events</Badge>
         <h2 class="h2">Past Speaking Engagements</h2>
+        <p class="description mt-4 text-pretty text-lg md:text-xl">
+          {totalPastEvents} events and counting!
+        </p>
       </div>
     </div>
 

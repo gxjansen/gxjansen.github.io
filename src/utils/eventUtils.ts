@@ -57,3 +57,14 @@ export async function getAllEvents(): Promise<Event[]> {
     // Load icons for all events
     return loadEventIcons(eventsData as Omit<Event, 'loadedIcon'>[]);
   }
+
+/**
+ * Count the total number of past events
+ */
+
+import eventsData from "../data/events.json";
+
+export const getTotalPastEventsCount = () => {
+  const today = new Date();
+  return eventsData.filter(event => new Date(event.date) < today).length;
+};

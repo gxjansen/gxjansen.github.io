@@ -15,6 +15,9 @@ const wrapperProps = url ? {
   target: "_blank",
   rel: "noopener noreferrer",
 } : {};
+
+// Determine display text for topic/role - use topic if available, otherwise fall back to role
+const displayText = topic || role;
 ---
 
 <WrapperTag
@@ -50,7 +53,8 @@ const wrapperProps = url ? {
     })}
   </div>
   <div class="flex justify-between items-center mt-2">
-    <em class="text-gray-400">{topic ?? role}</em>
+    <!-- Changed this line to use displayText instead of the previous conditional -->
+    {displayText && <em class="text-gray-400">{displayText}</em>}
     {workshop && (
       <span class="text-teal-400 ml-2 px-2 py-1 text-sm bg-green-400/10 rounded">
         Workshop
