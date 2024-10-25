@@ -31,8 +31,21 @@ const pageDescription = "A comprehensive list of conferences, meetups, and works
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
+  <section id="services-icon" class="py-24 md:py-28">
+    <div
+      class="site-container bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat dark:bg-[url('/assets/pattern-dark.svg')]"
+    >
+      <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+        <Badge>Events</Badge>
+        <h2 class="h2 mb-4">I 💚 sharing my experience!</h2>
+        <p class="description text-lg md:text-xl">
+          I've had the privilege of speaking at a number of wonderful industry conferences and universities around the world, sharing my experience with the audience and sharing ideas with a lot of experts. Below is the current schedule of my upcoming speaking engagements:
+
+
+        </p>
+      </div>
   <div class="container mx-auto mt-16 overflow-x-clip">
-    <FeatureFlagsMarquee />
+      <FeatureFlagsMarquee />
 
     {/* Upcoming Events Section */}
     <UpcomingEvents events={eventIcons} />
