@@ -1,8 +1,168 @@
 [
   {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2025-11-25",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2025-10-28",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2025-07-30",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2025-06-26",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2025-05-27",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2025-04-29",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2025-03-25",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2025-02-27",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2025-01-28",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2024-11-28",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2024-10-30",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2024-09-26",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2024-08-27",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2024-06-27",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Spryker User Group",
+    "icon": "spryker.png",
+    "date": "2024-05-28",
+    "city": "Online event",
+    "country": "",
+    "url": "",    "workshop": false,
+    "role": "Organizer & co-host/moderator",
+    "topic": ""
+  },
+  {
     "name": "Spryker EXCITE",
     "icon": "spryker.png",
     "date": "2025-09-25",
+    "city": "Berlin",
+    "country": "DE",
+    "url": "",    "workshop": false,
+    "role": "Mainstage event host",
+    "topic": ""
+  },
+  {
+    "name": "Spryker EXCITE Hackathon",
+    "icon": "spryker.png",
+    "date": "2025-09-24",
     "city": "Berlin",
     "country": "DE",
     "url": "",    "workshop": false,
@@ -10,13 +170,23 @@
     "topic": ""
   },
   {
-    "name": "Spryker EXCITE",
+    "name": "Spryker EXCITE Hackathon",
     "icon": "spryker.png",
-    "date": "2024-09-12",
+    "date": "2024-09-24",
     "city": "Berlin",
     "country": "DE",
     "url": "",    "workshop": false,
     "role": "Event host/moderator",
+    "topic": ""
+  },
+  {
+    "name": "Nagarro Hackathon India",
+    "icon": "spryker.png",
+    "date": "2024-08-01",
+    "city": "Gurugram",
+    "country": "IN",
+    "url": "",    "workshop": false,
+    "role": "Organizer & Event host/moderator",
     "topic": ""
   },
   {
@@ -28,6 +198,16 @@
     "url": "",    "workshop": false,
     "role": "Podcast livestream host",
     "topic": ""
+  },
+  {
+    "name": "Turbine Hackathon",
+    "icon": "spryker.png",
+    "date": "2024-05-13",
+    "city": "Berlin",
+    "country": "DE",
+    "url": "",    "workshop": false,
+    "role": "Organizer & Event host/moderator",
+    "topic": "Security"
   },
   {
     "name": "Spryker User Group",
@@ -66,7 +246,7 @@
     "city": "Berlin",
     "country": "DE",
     "url": "",    "workshop": false,
-    "role": "Event host/moderator",
+    "role": "Organizer & Event host/moderator",
     "topic": "Double your development speed"
   },
   {
@@ -126,7 +306,7 @@
     "city": "Berlin",
     "country": "DE",
     "url": "",    "workshop": false,
-    "role": "Event host/moderator",
+    "role": "Mainstage event host",
     "topic": ""
   },
   {
@@ -246,7 +426,7 @@
     "city": "Berlin",
     "country": "DE",
     "url": "",    "workshop": false,
-    "role": "Event host/moderator",
+    "role": "Mainstage event host",
     "topic": ""
   },
   {
