@@ -6,8 +6,8 @@
     "dev": "astro dev",
     "start": "astro dev",
     "copy-flags": "node scripts/copy-flags.mjs",
-    "prebuild": "npm run copy-flags",
-    "build": "astro build",
+    "prepare-build": "npm run copy-flags",
+    "build": "npm run prepare-build && astro build",
     "preview": "astro build --mode preview",
     "production": "astro build --mode production",
     "astro": "astro"

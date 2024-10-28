@@ -14,9 +14,13 @@
 [[plugins]]
   package = "@netlify/plugin-local-install-core"
 
+[build.environment]
+  FLAGS_DIR = "_flags"
+
+# Simplified redirect
 [[redirects]]
   from = "/_flags/*"
-  to = "/.netlify/build/_flags/:splat"
+  to = "/_flags/:splat"
   status = 200
 
 # [[redirects]]
