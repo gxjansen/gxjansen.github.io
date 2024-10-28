@@ -9,8 +9,10 @@ const __dirname = path.dirname(__filename);
 async function copyFlags() {
     const projectRoot = path.join(__dirname, '..');
     const sourcePath = path.join(projectRoot, 'node_modules/svg-country-flags/svg');
-    // Update target path to use _flags
-    const targetPath = path.join(projectRoot, 'public/_flags');
+    // Update target path to use .netlify/build/_flags in build environment
+    const targetPath = process.env.NETLIFY 
+        ? path.join(projectRoot, '.netlify/build/_flags')
+        : path.join(projectRoot, 'public/_flags');
 
     try {
         // Create target directory if it doesn't exist
@@ -27,7 +29,7 @@ async function copyFlags() {
             await fs.copyFile(sourceFile, targetFile);
         }
 
-        console.log('✅ Successfully copied flag SVGs to public directory');
+        console.log('✅ Successfully copied flag SVGs to:', targetPath);
     } catch (error) {
         console.error('Error copying flags:', error);
         process.exit(1);
