@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "copy-flags": "node scripts/copy-flags.mjs",
+    "prebuild": "npm run copy-flags",
     "build": "astro build",
     "preview": "astro build --mode preview",
     "production": "astro build --mode production",
@@ -41,6 +43,7 @@
     "tailwindcss": "^3.4.3"
   },
   "devDependencies": {
+    "fs-extra": "^11.2.0",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "prettier-plugin-astro": "^0.14.0",

@@ -10,10 +10,12 @@ export async function loadCountryFlag(countryCode: string): Promise<ImageMetadat
   try {
     // Special handling for GB which is stored as gb-eng in the package
     const adjustedCode = countryCode === 'GB' ? 'gb-eng' : countryCode.toLowerCase();
-    const flagPath = `/node_modules/svg-country-flags/svg/${adjustedCode}.svg`;
-
+    
+    // Use _flags prefix to avoid router conflicts
+    const flagUrl = `/_flags/${adjustedCode}.svg`;
+    
     return {
-      src: flagPath,
+      src: flagUrl,
       width: 600,
       height: 360,
       format: 'svg'
@@ -23,6 +25,8 @@ export async function loadCountryFlag(countryCode: string): Promise<ImageMetadat
     return null;
   }
 }
+
+// ... keep getAllFlags function as is ...
 
 /**
  * Get all flags for an array of country codes
