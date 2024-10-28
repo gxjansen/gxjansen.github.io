@@ -8,9 +8,16 @@ import eventsData from "../../data/events.json";
 interface Props {
   events: Event[];
   showTitle?: boolean;
+  // Add new prop for maximum number of events to show
+  maxEvents?: number;
 }
 
-const { events, showTitle = true } = Astro.props;
+const { 
+  events, 
+  showTitle = true, 
+  // Default to 6 events if not specified
+  maxEvents = 6 
+} = Astro.props;
 
 // Filter for upcoming events (today or future dates)
 const today = new Date();
@@ -18,7 +25,9 @@ today.setHours(0, 0, 0, 0);
 
 const upcomingEvents = events
   .filter((event) => new Date(event.date) >= today)
-  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+  // Limit to maxEvents
+  .slice(0, maxEvents);
 ---
 
 {upcomingEvents.length > 0 && (
@@ -28,6 +37,12 @@ const upcomingEvents = events
         <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
           <Badge>Events</Badge>
           <h2 class="h2">Upcoming Speaking Engagements</h2>
+          {/* Optionally show total number of upcoming events if there are more than shown */}
+          {events.filter(event => new Date(event.date) >= today).length > maxEvents && (
+            <p class="mt-4 text-gray-400">
+              Showing {maxEvents} of {events.filter(event => new Date(event.date) >= today).length} upcoming events
+            </p>
+          )}
         </div>
       </div>
     )}
