@@ -1,8 +1,8 @@
 ---
 // src/components/Events/EventCard.astro
 import { Image } from "astro:assets";
-import { getFlagEmoji } from "../../utils/countryUtils.js";
 import type { Event } from "../../utils/eventUtils";
+import { loadCountryFlag } from "../../utils/flagUtils";
 
 type Props = Event;
 
@@ -24,6 +24,9 @@ const baseClasses = "block bg-gray-800 p-6 rounded-lg shadow-lg border-2 transit
 const clickableClasses = url 
   ? `${baseClasses} border-teal-400/30 hover:border-teal-400 hover:shadow-xl hover:-translate-y-1 cursor-pointer group` 
   : `${baseClasses} border-gray-700`;
+
+// Load country flag if country code is provided
+const flagImage = country ? await loadCountryFlag(country) : null;
 ---
 
 <WrapperTag
@@ -41,7 +44,7 @@ const clickableClasses = url
       />
     ) : (
       <div class="w-12 h-12 mr-4 bg-gray-700 rounded-lg flex items-center justify-center">
-        <span class="text-2xl">📅</span>
+        <span class="text-2xl">🗓️</span>
       </div>
     )}
     <div class="flex items-center gap-2">
@@ -66,13 +69,26 @@ const clickableClasses = url
       )}
     </div>
   </div>
-  <div class="text-gray-300">
-    {country ? getFlagEmoji(country) : "🌎"} {city}, {" "}
-    {new Date(date).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    })}
+  <div class="text-gray-300 flex items-center gap-1">
+    {flagImage ? (
+      <Image
+        src={flagImage}
+        alt=""
+        width={20}
+        height={15}
+        class="inline-block rounded-sm mb-0"
+      />
+    ) : (
+      <span>🌎</span>
+    )}
+    <span>{city} &mdash; {" "}</span>
+    <span>
+      {new Date(date).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })}
+    </span>
   </div>
   <div class="flex justify-between items-center mt-2">
     {displayText && <em class="text-gray-400">{displayText}</em>}
