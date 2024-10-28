@@ -4,16 +4,9 @@
  * Flags are fetched from svg-country-flags package during build
  */
 
-import Badge from "@components/Badge/Badge.astro";
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+ import Badge from "@components/Badge/Badge.astro";
 import eventsData from "../../data/events.json";
 import { getAllFlags } from "../../utils/flagUtils";
-
-// Define interfaces for our marquee data structures
-interface MarqueeRow {
-  images: ImageMetadata[];
-}
 
 // Get unique countries from events
 const uniqueCountries = [...new Set(eventsData.map(event => event.country))].filter(Boolean);
@@ -25,22 +18,16 @@ const allFlags = await getAllFlags(uniqueCountries);
 const totalFlags = allFlags.length;
 const flagsPerRow = Math.ceil(totalFlags / 3);
 
-// Create properly typed marquee row objects
-const marqueeTop: MarqueeRow = {
+const marqueeTop = {
   images: allFlags.slice(0, flagsPerRow)
 };
 
-const marqueeMiddle: MarqueeRow = {
+const marqueeMiddle = {
   images: allFlags.slice(flagsPerRow, flagsPerRow * 2)
 };
 
-const marqueeBottom: MarqueeRow = {
+const marqueeBottom = {
   images: allFlags.slice(flagsPerRow * 2)
-};
-
-// Helper function to validate image data
-const isValidImage = (image: ImageMetadata): boolean => {
-  return Boolean(image && image.src && image.width && image.height);
 };
 ---
 
@@ -48,7 +35,6 @@ const isValidImage = (image: ImageMetadata): boolean => {
   id="feature-gallery-marquee"
   class="bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark-big.svg')] md:py-28"
 >
-  <!-- Header section -->
   <div class="site-container flex justify-center">
     <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
       <Badge>Flags</Badge>
@@ -59,19 +45,18 @@ const isValidImage = (image: ImageMetadata): boolean => {
     </div>
   </div>
 
-  <!-- Marquee container -->
   <div class="relative flex flex-col gap-3 overflow-hidden md:gap-5">
-    {/* Top row */}
+    {/* marquee top row */}
     <div class="marquee-top relative flex gap-3 overflow-hidden md:gap-5">
       <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5">
-        {marqueeTop.images.filter(isValidImage).map((image) => (
+        {marqueeTop.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
+            <img
               src={image.src}
+              alt=""
               width={image.width}
               height={image.height}
-              alt="Country flag"
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',
@@ -82,19 +67,18 @@ const isValidImage = (image: ImageMetadata): boolean => {
           </div>
         ))}
       </div>
-      <!-- Duplicate for infinite scroll -->
       <div
         aria-hidden="true"
         class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
       >
-        {marqueeTop.images.filter(isValidImage).map((image) => (
+        {marqueeTop.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
+            <img
               src={image.src}
+              alt=""
               width={image.width}
               height={image.height}
-              alt="Country flag"
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',
@@ -108,16 +92,16 @@ const isValidImage = (image: ImageMetadata): boolean => {
     </div>
 
     {/* marquee middle row */}
-    <div class="marquee-top relative flex gap-3 overflow-hidden md:gap-5">
-      <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around [animation-direction:reverse] gap-3 md:gap-5">
-        {marqueeMiddle.images.filter(isValidImage).map((image) => (
+    <div class="marquee-middle relative flex gap-3 overflow-hidden md:gap-5">
+      <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5">
+        {marqueeMiddle.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
+            <img
               src={image.src}
+              alt=""
               width={image.width}
               height={image.height}
-              alt="Country flag"
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',
@@ -128,19 +112,18 @@ const isValidImage = (image: ImageMetadata): boolean => {
           </div>
         ))}
       </div>
-      <!-- Duplicate for infinite scroll -->
       <div
         aria-hidden="true"
-        class="flex min-w-full shrink-0 animate-marquee items-center justify-around [animation-direction:reverse] gap-3 md:gap-5"
+        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
       >
-        {marqueeMiddle.images.filter(isValidImage).map((image) => (
+        {marqueeMiddle.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
+            <img
               src={image.src}
+              alt=""
               width={image.width}
               height={image.height}
-              alt="Country flag"
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',
@@ -154,16 +137,16 @@ const isValidImage = (image: ImageMetadata): boolean => {
     </div>
 
     {/* marquee bottom row */}
-    <div class="marquee-top relative flex gap-3 overflow-hidden md:gap-5">
+    <div class="marquee-bottom relative flex gap-3 overflow-hidden md:gap-5">
       <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5">
-        {marqueeBottom.images.filter(isValidImage).map((image) => (
+        {marqueeBottom.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
+            <img
               src={image.src}
+              alt=""
               width={image.width}
               height={image.height}
-              alt="Country flag"
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',
@@ -174,19 +157,18 @@ const isValidImage = (image: ImageMetadata): boolean => {
           </div>
         ))}
       </div>
-      <!-- Duplicate for infinite scroll -->
       <div
         aria-hidden="true"
         class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
       >
-        {marqueeBottom.images.filter(isValidImage).map((image) => (
+        {marqueeBottom.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
+            <img
               src={image.src}
+              alt=""
               width={image.width}
               height={image.height}
-              alt="Country flag"
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',
