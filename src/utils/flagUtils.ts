@@ -11,11 +11,13 @@ export async function loadCountryFlag(countryCode: string): Promise<ImageMetadat
     // Special handling for GB which is stored as gb-eng in the package
     const adjustedCode = countryCode === 'GB' ? 'gb-eng' : countryCode.toLowerCase();
     
-    // Use _flags prefix to avoid router conflicts
-    const flagUrl = `/_flags/${adjustedCode}.svg`;
-    
+    // Use different path based on environment
+    const flagPath = process.env.NETLIFY
+      ? `/.netlify/build/_flags/${adjustedCode}.svg`
+      : `/_flags/${adjustedCode}.svg`;
+
     return {
-      src: flagUrl,
+      src: flagPath,
       width: 600,
       height: 360,
       format: 'svg'
@@ -25,8 +27,6 @@ export async function loadCountryFlag(countryCode: string): Promise<ImageMetadat
     return null;
   }
 }
-
-// ... keep getAllFlags function as is ...
 
 /**
  * Get all flags for an array of country codes

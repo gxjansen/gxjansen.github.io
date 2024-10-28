@@ -7,6 +7,18 @@
   publish = "dist"
   functions = "netlify/functions/"
 
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Ensure _flags directory is included in the build
+[[plugins]]
+  package = "@netlify/plugin-local-install-core"
+
+[[redirects]]
+  from = "/_flags/*"
+  to = "/.netlify/build/_flags/:splat"
+  status = 200
+
 # [[redirects]]
 #   from = "/api/*" # simplify all calls to serverless functions
 #   to = "/.netlify/functions/:splat" # all function calls will go to this path
