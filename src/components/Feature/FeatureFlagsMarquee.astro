@@ -4,7 +4,8 @@
  * Flags are fetched from svg-country-flags package during build
  */
 
- import Badge from "@components/Badge/Badge.astro";
+ import { Image } from 'astro:assets';
+import Badge from "@components/Badge/Badge.astro";
 import eventsData from "../../data/events.json";
 import { getAllFlags } from "../../utils/flagUtils";
 
@@ -52,11 +53,11 @@ const marqueeBottom = {
         {marqueeTop.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <img
-              src={image.src}
-              alt=""
-              width={image.width}
-              height={image.height}
+            <Image
+              src={image}
+              alt="Country flag"
+              width={600}
+              height={360}
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',
@@ -74,11 +75,11 @@ const marqueeBottom = {
         {marqueeTop.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <img
-              src={image.src}
-              alt=""
-              width={image.width}
-              height={image.height}
+            <Image
+              src={image}
+              alt="Country flag"
+              width={600}
+              height={360}
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',
@@ -97,11 +98,11 @@ const marqueeBottom = {
         {marqueeMiddle.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <img
-              src={image.src}
-              alt=""
-              width={image.width}
-              height={image.height}
+            <Image
+              src={image}
+              alt="Country flag"
+              width={600}
+              height={360}
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',
@@ -119,11 +120,11 @@ const marqueeBottom = {
         {marqueeMiddle.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <img
-              src={image.src}
-              alt=""
-              width={image.width}
-              height={image.height}
+            <Image
+              src={image}
+              alt="Country flag"
+              width={600}
+              height={360}
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',
@@ -142,11 +143,11 @@ const marqueeBottom = {
         {marqueeBottom.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <img
-              src={image.src}
-              alt=""
-              width={image.width}
-              height={image.height}
+            <Image
+              src={image}
+              alt="Country flag"
+              width={600}
+              height={360}
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',
@@ -164,11 +165,11 @@ const marqueeBottom = {
         {marqueeBottom.images.map((image) => (
           <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
             <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <img
-              src={image.src}
-              alt=""
-              width={image.width}
-              height={image.height}
+            <Image
+              src={image}
+              alt="Country flag"
+              width={600}
+              height={360}
               class="w-full rounded-md"
               style={{
                 aspectRatio: '3/2',

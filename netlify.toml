@@ -5,22 +5,11 @@
 [build]
   command = "npm run build"
   publish = "dist"
-  functions = "netlify/functions/"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
-# Ensure _flags directory is included in the build
-[[plugins]]
-  package = "@netlify/plugin-local-install-core"
-
-[build.environment]
-  FLAGS_DIR = "_flags"
 
 # Simplified redirect
 [[redirects]]
-  from = "/_flags/*"
-  to = "/_flags/:splat"
+  from = "/*"
+  to = "/.netlify/functions/entry"
   status = 200
 
 # [[redirects]]
