@@ -9,9 +9,9 @@ const __dirname = path.dirname(__filename);
 async function copyFlags() {
     const projectRoot = path.join(__dirname, '..');
     const sourcePath = path.join(projectRoot, 'node_modules/svg-country-flags/svg');
-    // Update target path to use .netlify/build/_flags in build environment
+    // Simplify the target path
     const targetPath = process.env.NETLIFY 
-        ? path.join(projectRoot, '.netlify/build/_flags')
+        ? path.join(projectRoot, '_flags') // Simplified path
         : path.join(projectRoot, 'public/_flags');
 
     try {
