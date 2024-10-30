@@ -29,32 +29,6 @@ export default defineConfig({
       }
     }
   },
-  redirects: {
-    "/admin": "/keystatic",
-    "/press": "/",
-    "/presentation": "/",
-    "/events": "/",
-    "/guidojansen": "/about",
-    "/post/[...slug]": "/blog/[...slug]",
-    "/kit": "https://kit.co/gxjansen",
-    "/call": "https://app.reclaim.ai/m/gxjansen/flexible-quick-meeting",
-    "/persuasive-ecommerce": "/",
-    "/instagram": "/social",
-    "/howtoweb": "/presentation/data-driven-decisions-meets-psychology",
-    "/cards": "/cognitive-biases",
-    "/bigger": "/presentation/still-a-b-testing-your-buttons-you-need-to-think-much-bigger",
-    "/audio": "/podcasts",
-    "/youtube": "https://www.youtube.com/c/GuidoJansen",
-    "/video": "https://www.youtube.com/c/GuidoJansen",
-    "/ddtt8": "/presentation/creating-an-optimization-culture",
-    "/index.php": "/",
-    "/images/(.*)": "/",
-    "/CV": "/cv",
-    "/hireme": "/about",
-    "/theme/contact-us/contact-us": "/about",
-    "/theme/contact": "/about",
-    "presentations": "/presentation"
-  },
   // i18n configuration must match src/config/translations.json.ts
   i18n: {
     defaultLocale: "en",
