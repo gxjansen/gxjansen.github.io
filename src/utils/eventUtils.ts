@@ -14,6 +14,11 @@ export interface Event {
   loadedIcon: ImageMetadata | null;
 }
 
+// Import all event icons as modules with correct typing for Astro's image handling
+const eventIcons = import.meta.glob<{ default: ImageMetadata }>('/src/images/events/*.{png,jpg,jpeg,gif,avif,svg}', {
+  eager: true // Make imports eager to ensure proper asset handling
+});
+
 /**
  * Loads an event icon image dynamically from the events directory
  * @param iconName - The name of the icon file
@@ -23,8 +28,19 @@ export async function getEventIcon(iconName: string | undefined): Promise<ImageM
   if (!iconName) return null;
   
   try {
-    const image = await import(`../images/events/${iconName}`);
-    return image.default;
+    // Construct the icon path
+    const iconPath = `/src/images/events/${iconName}`;
+    
+    // Get the icon module
+    const iconModule = eventIcons[iconPath];
+    
+    if (!iconModule) {
+      console.warn(`No icon found for: ${iconName}`);
+      return null;
+    }
+
+    // Return the ImageMetadata directly from the module
+    return iconModule.default;
   } catch (e) {
     console.warn(`Could not load icon: ${iconName}`);
     return null;
@@ -56,12 +72,11 @@ export async function getAllEvents(): Promise<Event[]> {
     
     // Load icons for all events
     return loadEventIcons(eventsData as Omit<Event, 'loadedIcon'>[]);
-  }
+}
 
 /**
  * Count the total number of past events
  */
-
 import eventsData from "../data/events.json";
 
 export const getTotalPastEventsCount = () => {
