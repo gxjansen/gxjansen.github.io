@@ -1,0 +1,26 @@
+---
+import Badge from "@components/Badge/Badge.astro";
+
+interface Props {
+  badge: string;
+  title: string;
+  description: string;
+}
+
+const { badge, title, description } = Astro.props;
+---
+
+<section class="py-24 md:py-28">
+  <div
+    class="site-container bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat dark:bg-[url('/assets/pattern-dark.svg')]"
+  >
+    <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+      <Badge>{badge}</Badge>
+      <h2 class="h2 mb-4">{title}</h2>
+      <p class="description text-lg md:text-xl">
+        {description}
+      </p>
+    </div>
+    <slot />
+  </div>
+</section>
