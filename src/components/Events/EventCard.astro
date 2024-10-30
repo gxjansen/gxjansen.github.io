@@ -1,5 +1,4 @@
 ---
-// src/components/Events/EventCard.astro
 import { Image } from "astro:assets";
 import type { Event } from "../../utils/eventUtils";
 import { loadCountryFlag } from "../../utils/flagUtils";
@@ -20,10 +19,10 @@ const wrapperProps = url ? {
 const displayText = topic || role;
 
 // Define classes based on whether the card is clickable
-const baseClasses = "block bg-gray-800 p-6 rounded-lg shadow-lg border-2 transition-all duration-200";
+const baseClasses = "block bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-2 transition-all duration-200";
 const clickableClasses = url 
   ? `${baseClasses} border-teal-400/30 hover:border-teal-400 hover:shadow-xl hover:-translate-y-1 cursor-pointer group` 
-  : `${baseClasses} border-gray-700`;
+  : `${baseClasses} border-gray-200 dark:border-gray-700`;
 
 // Load country flag if country code is provided
 const flagImage = country ? await loadCountryFlag(country) : null;
@@ -43,16 +42,16 @@ const flagImage = country ? await loadCountryFlag(country) : null;
         class="mr-4"
       />
     ) : (
-      <div class="w-12 h-12 mr-4 bg-gray-700 rounded-lg flex items-center justify-center">
+      <div class="w-12 h-12 mr-4 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
         <span class="text-2xl">🗓️</span>
       </div>
     )}
     <div class="flex items-center gap-2">
-      <span class="text-xl font-semibold text-blue-400">
+      <span class="text-xl font-semibold text-blue-600 dark:text-blue-400">
         {name}
       </span>
       {url && (
-        <span class="text-teal-400 group-hover:translate-x-1 transition-transform duration-200">
+        <span class="text-teal-600 dark:text-teal-400 group-hover:translate-x-1 transition-transform duration-200">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             class="h-5 w-5" 
@@ -69,11 +68,11 @@ const flagImage = country ? await loadCountryFlag(country) : null;
       )}
     </div>
   </div>
-  <div class="text-gray-300 flex items-center gap-1">
+  <div class="text-gray-600 dark:text-gray-300 flex items-center gap-1">
     {flagImage ? (
       <Image
         src={flagImage}
-        alt=""
+        alt={`Flag of ${country}`}
         width={20}
         height={15}
         class="inline-block rounded-sm mb-0"
@@ -86,20 +85,20 @@ const flagImage = country ? await loadCountryFlag(country) : null;
       {new Date(date).toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
-        year: "numeric",
+        year: "numeric"
       })}
     </span>
   </div>
   <div class="flex justify-between items-center mt-2">
-    {displayText && <em class="text-gray-400">{displayText}</em>}
+    {displayText && <em class="text-gray-600 dark:text-gray-400">{displayText}</em>}
     <div class="flex items-center gap-2">
       {workshop && (
-        <span class="text-teal-400 px-2 py-1 text-sm bg-green-400/10 rounded">
+        <span class="text-teal-600 dark:text-teal-400 px-2 py-1 text-sm bg-teal-50 dark:bg-green-400/10 rounded">
           Workshop
         </span>
       )}
       {url && (
-        <span class="text-xs text-gray-400 group-hover:text-teal-400 transition-colors duration-200">
+        <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-200">
           View Presentation →
         </span>
       )}
