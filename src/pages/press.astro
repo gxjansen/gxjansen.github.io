@@ -22,6 +22,16 @@ function formatDate(date: string) {
     year: 'numeric'
   });
 }
+
+// Get favicon URL function
+function getFaviconUrl(url: string) {
+  try {
+    const domain = new URL(url).hostname;
+    return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+  } catch {
+    return '';
+  }
+}
 ---
 
 <BaseLayout 
@@ -32,7 +42,7 @@ function formatDate(date: string) {
 
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
     <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white mb-4">{pageTitle}</h1>
-    <p class="description text-lg md:text-xl">
+    <p class="description text-lg md:text-xl mt-11 mb-11">
       I'm interviewed by different media regularly and appear on different (online and offline) panels. Below you can find a selection of these. Contact me if you're interested in interviewing me or having me on your event!
     </p>
 
@@ -103,16 +113,16 @@ function formatDate(date: string) {
       {podcasts.map(podcast => (
         <div class="bg-neutral-100 dark:bg-white/[.075] rounded-xl p-6">
           <iframe 
-  style="border-radius:12px" 
-  src={`https://open.spotify.com/embed/episode/${podcast.spotifyEmbedId}`} 
-  width="100%" 
-  height="152" 
-  frameborder="0" 
-  allowfullscreen="" 
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-  loading="lazy"
-></iframe>
-<h3 class="h3 mb-4">{podcast.title}</h3>
+            style="border-radius:12px" 
+            src={`https://open.spotify.com/embed/episode/${podcast.spotifyEmbedId}`} 
+            width="100%" 
+            height="152" 
+            frameborder="0" 
+            allowfullscreen="" 
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy"
+          ></iframe>
+          <h3 class="h3 mb-4">{podcast.title}</h3>
           <p class="description text-sm text-neutral-600 dark:text-neutral-400 mb-4">
             {formatDate(podcast.publicationDate)}
             {podcast.personOrganization && ` • ${podcast.personOrganization}`}
@@ -134,13 +144,24 @@ function formatDate(date: string) {
     <div class="space-y-4">
       {articles.map(article => (
         <div class="bg-neutral-100 dark:bg-white/[.075] rounded-xl p-6">
-          <h3 class="h3 mb-4">
-            <a href={article.articleUrl} target="_blank" rel="noopener noreferrer" 
-               class="text-blue-500 hover:text-blue-600">
-              {article.title}
-            </a>
-          </h3>
-          <p class="description text-sm text-neutral-600 dark:text-neutral-400">
+          <div class="flex items-center gap-3">
+            {article.articleUrl && (
+              <img 
+                src={getFaviconUrl(article.articleUrl)} 
+                alt=""
+                width="16" 
+                height="16"
+                class="w-4 h-4 object-contain"
+              />
+            )}
+            <h3 class="h3 mb-0 flex-1">
+              <a href={article.articleUrl} target="_blank" rel="noopener noreferrer" 
+                 class="text-blue-500 hover:text-blue-600">
+                {article.title}
+              </a>
+            </h3>
+          </div>
+          <p class="description text-sm text-neutral-600 dark:text-neutral-400 mt-4">
             {formatDate(article.publicationDate)}
             {article.personOrganization && ` • by ${article.personOrganization}`}
           </p>
@@ -165,4 +186,4 @@ function formatDate(date: string) {
   </section>
   </div>
   </section>
-</MainLayout>
+</BaseLayout>

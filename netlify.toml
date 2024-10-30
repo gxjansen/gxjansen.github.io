@@ -38,21 +38,6 @@
   status = 301
 
 [[redirects]]
-  from = "/press"
-  to = "/"
-  status = 301
-
-[[redirects]]
-  from = "/presentation"
-  to = "/"
-  status = 301
-
-[[redirects]]
-  from = "/events"
-  to = "/"
-  status = 301
-
-[[redirects]]
   from = "/guidojansen"
   to = "/about"
   status = 301
