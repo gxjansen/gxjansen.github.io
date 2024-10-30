@@ -6,14 +6,129 @@
   command = "npm run build"
   publish = "dist"
 
-# Simplified redirect
+# External redirects
+[[redirects]]
+  from = "/kit"
+  to = "https://kit.co/gxjansen"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/call"
+  to = "https://app.reclaim.ai/m/gxjansen/flexible-quick-meeting"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/youtube"
+  to = "https://www.youtube.com/c/GuidoJansen"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/video"
+  to = "https://www.youtube.com/c/GuidoJansen"
+  status = 301
+  force = true
+
+# Internal redirects
+[[redirects]]
+  from = "/admin"
+  to = "/keystatic"
+  status = 301
+
+[[redirects]]
+  from = "/press"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/presentation"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/events"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/guidojansen"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/post/*"
+  to = "/blog/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/persuasive-ecommerce"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/instagram"
+  to = "/social"
+  status = 301
+
+[[redirects]]
+  from = "/howtoweb"
+  to = "/presentation/data-driven-decisions-meets-psychology"
+  status = 301
+
+[[redirects]]
+  from = "/cards"
+  to = "/cognitive-biases"
+  status = 301
+
+[[redirects]]
+  from = "/bigger"
+  to = "/presentation/still-a-b-testing-your-buttons-you-need-to-think-much-bigger"
+  status = 301
+
+[[redirects]]
+  from = "/audio"
+  to = "/podcasts"
+  status = 301
+
+[[redirects]]
+  from = "/index.php"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/images/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/CV"
+  to = "/cv"
+  status = 301
+
+[[redirects]]
+  from = "/hireme"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/theme/contact-us/contact-us"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/theme/contact"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/presentations"
+  to = "/presentation"
+  status = 301
+
+# Function handling (keep this last)
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/entry"
   status = 200
-
-# [[redirects]]
-#   from = "/api/*" # simplify all calls to serverless functions
-#   to = "/.netlify/functions/:splat" # all function calls will go to this path
-#   status = 200 # ok code
-#   force = true # ensure to always redirect
