@@ -30,6 +30,10 @@ const navConfig: navItem[] = [
     text: "Events",
     link: "/events",
   },
+  {
+    text: "Press",
+    link: "/press",
+  },
   // {
   //   text: "Overview",
   //   link: "/overview",
