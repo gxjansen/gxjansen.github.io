@@ -4,6 +4,7 @@ dist/
 .DS_Store
 .vercel
 .netlify
+.astro/
 _site/
 scripts/smoke/*-main/
 scripts/memory/project/src/pages/
@@ -39,6 +40,17 @@ examples/**/.astro/
 examples/**/env.d.ts
 
 # make it easy for people to add project-specific Astro settings that they don't
-# want to share with others (see
-# https://github.com/withastro/astro/pull/11759#discussion_r1721444711)
+# want to share with others
 *.code-workspace
+
+# Additional common ignores
+.vscode/
+*.local
+npm-debug.log*
+coverage/
+*~
+.cache/
+.npm/
+.history/
+.temp/
+.tmp/
