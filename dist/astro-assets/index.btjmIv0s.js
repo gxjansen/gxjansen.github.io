@@ -1,3 +1,0 @@
-const i="belgium/index",s="countries",g={title:"Belgium",image:new Proxy({src:"/astro-assets/image.BxDhEEQW.png",width:275,height:183,format:"png",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/belgium/image.png"},{get(t,e,n){return e==="clone"?structuredClone(t):e==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/belgium/image.png":t[e]}})},r={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/belgium/index.yaml",rawData:`title: Belgium
-image: ../belgium/image.png
-`};export{r as _internal,s as collection,g as data,i as id};

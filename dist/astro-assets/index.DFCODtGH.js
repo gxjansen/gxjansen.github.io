@@ -1,3 +1,0 @@
-const i="vietnam/index",s="countries",a={title:"Vietnam",image:new Proxy({src:"/astro-assets/image.Dgu6JiKv.png",width:1024,height:682,format:"jpg",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/vietnam/image.png"},{get(e,t,n){return t==="clone"?structuredClone(e):t==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/vietnam/image.png":e[t]}})},r={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/vietnam/index.yaml",rawData:`title: Vietnam
-image: ../vietnam/image.png
-`};export{r as _internal,s as collection,a as data,i as id};

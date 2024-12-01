@@ -1,3 +1,0 @@
-const i="croatia/index",s="countries",a={title:"Croatia",image:new Proxy({src:"/astro-assets/image.B-UxBH1w.svg",width:1200,height:600,format:"svg",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/croatia/image.svg"},{get(e,t,n){return t==="clone"?structuredClone(e):t==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/croatia/image.svg":e[t]}})},r={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/croatia/index.yaml",rawData:`title: Croatia
-image: ../croatia/image.svg
-`};export{r as _internal,s as collection,a as data,i as id};

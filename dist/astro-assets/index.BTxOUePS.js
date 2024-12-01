@@ -1,3 +1,0 @@
-const s="united-states/index",i="countries",a={title:"United States",image:new Proxy({src:"/astro-assets/image.D0nZa_yc.webp",width:1e3,height:526,format:"webp",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/united-states/image.webp"},{get(e,t,n){return t==="clone"?structuredClone(e):t==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/united-states/image.webp":e[t]}})},r={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/united-states/index.yaml",rawData:`title: United States
-image: ../united-states/image.webp
-`};export{r as _internal,i as collection,a as data,s as id};

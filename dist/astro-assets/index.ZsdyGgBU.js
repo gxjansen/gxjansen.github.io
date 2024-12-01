@@ -1,3 +1,0 @@
-const c="czech-republic/index",i="countries",s={title:"Czech Republic",image:new Proxy({src:"/astro-assets/image.ZiOLauuJ.png",width:275,height:183,format:"png",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/czech-republic/image.png"},{get(t,e,n){return e==="clone"?structuredClone(t):e==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/czech-republic/image.png":t[e]}})},r={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/czech-republic/index.yaml",rawData:`title: Czech Republic
-image: ../czech-republic/image.png
-`};export{r as _internal,i as collection,s as data,c as id};

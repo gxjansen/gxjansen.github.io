@@ -1,3 +1,0 @@
-const i="spain/index",s="countries",a={title:"Spain",image:new Proxy({src:"/astro-assets/image.DFfyLb9Y.png",width:400,height:267,format:"png",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/spain/image.png"},{get(t,n,e){return n==="clone"?structuredClone(t):n==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/spain/image.png":t[n]}})},r={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/spain/index.yaml",rawData:`title: Spain
-image: ../spain/image.png
-`};export{r as _internal,s as collection,a as data,i as id};

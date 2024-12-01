@@ -1,3 +1,0 @@
-const s="estonia/index",i="countries",o={title:"Estonia",image:new Proxy({src:"/astro-assets/image.Dlkp_UAG.jpg",width:1e3,height:636,format:"jpg",fsPath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/estonia/image.jpg"},{get(e,t,n){return t==="clone"?structuredClone(e):t==="fsPath"?"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/estonia/image.jpg":e[t]}})},a={type:"data",filePath:"/Users/gxjansen/Documents/GitHub/gxjansen.github.io/src/content/countries/estonia/index.yaml",rawData:`title: Estonia
-image: ../estonia/image.jpg
-`};export{a as _internal,i as collection,o as data,s as id};
