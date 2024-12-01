@@ -11,12 +11,16 @@ const { icon, social, href } = Astro.props as Props;
 ---
 
 <a
-  aria-label={social}
+  aria-label={`Follow on ${social}`}
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="rounded-md p-2 text-base-400 hover:text-base-500 dark:hover:text-base-300"
+  class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md p-2 text-base-400 transition-colors hover:bg-base-100 hover:text-base-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:hover:bg-base-800 dark:hover:text-base-300"
 >
-  <p class="sr-only">{social}</p>
-  <Icon name={icon} class="size-5 transition" aria-hidden="true" />
+  <p class="sr-only">Follow on {social}</p>
+  <Icon 
+    name={icon} 
+    class="size-5 transition" 
+    aria-hidden="true"
+  />
 </a>
