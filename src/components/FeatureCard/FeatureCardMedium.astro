@@ -19,14 +19,18 @@ const { icon, title, text, ...rest } = Astro.props as Props;
 ---
 
 <div
-  class="rounded-md p-8 text-center transition duration-200 hover:bg-white hover:shadow-xl dark:hover:bg-base-900"
+  class="h-full rounded-md p-8 text-center transition duration-200 hover:bg-white hover:shadow-xl dark:hover:bg-base-900"
   {...rest}
 >
-  <div
-    class="mx-auto mb-7 inline-flex size-16 items-center justify-center rounded-lg bg-primary-500 text-white"
-  >
-    <Icon name={icon} class="size-6 text-white" aria-hidden="true" />
+  <div class="flex h-full flex-col">
+    <div
+      class="mx-auto mb-7 inline-flex size-16 items-center justify-center rounded-lg bg-primary-500 text-white"
+    >
+      <Icon name={icon} class="size-6 text-white" aria-hidden="true" />
+    </div>
+    <div class="flex flex-col items-center">
+      <div class="heading-card mb-3 text-base-900 dark:text-base-100" role="heading" aria-level="4">{title}</div>
+      <p class="description">{text}</p>
+    </div>
   </div>
-  <h4 class="heading-card mb-3">{title}</h4>
-  <p class="font-medium text-base-500 dark:text-base-400">{text}</p>
 </div>

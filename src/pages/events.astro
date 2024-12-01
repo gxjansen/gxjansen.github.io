@@ -42,8 +42,6 @@ const totalPastEvents = getTotalPastEventsCount();
         <h2 class="h2 mb-4">I 💚 sharing my experience!</h2>
         <p class="description text-lg md:text-xl">
           I've had the privilege of speaking at a number of wonderful industry conferences and universities around the world, sharing my experience with the audience and sharing ideas with a lot of experts. Below is the current schedule of my upcoming speaking engagements:
-
-
         </p>
       </div>
   <div class="container mx-auto mt-16 overflow-x-clip">
@@ -82,18 +80,30 @@ const totalPastEvents = getTotalPastEventsCount();
         .filter((event) => new Date(event.date).getFullYear() === year)
         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
+      // Split events into two columns
+      const firstColumnEvents = yearEvents.filter((_, i) => i % 2 === 0);
+      const secondColumnEvents = yearEvents.filter((_, i) => i % 2 === 1);
+
       return (
         <section id={String(year)} class="mb-16">
           <h2 class="text-3xl text-teal-400 border-b border-gray-700 pb-2 mb-8">
             {year}
           </h2>
-          <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {yearEvents.map((event) => (
-              <li class="w-full">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* First column */}
+            <div class="space-y-6">
+              {firstColumnEvents.map((event) => (
                 <EventCard {...event} />
-              </li>
-            ))}
-          </ul>
+              ))}
+            </div>
+
+            {/* Second column - offset as a whole */}
+            <div class="space-y-6 md:mt-24">
+              {secondColumnEvents.map((event) => (
+                <EventCard {...event} />
+              ))}
+            </div>
+          </div>
         </section>
       );
     })}
