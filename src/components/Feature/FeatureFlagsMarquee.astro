@@ -2,9 +2,10 @@
 /**
  * Dynamic country flags marquee based on events data
  * Flags are fetched from svg-country-flags package during build
+ * Features smooth multi-step fade-out edges that blend into the page background
  */
 
- import { Image } from 'astro:assets';
+import { Image } from 'astro:assets';
 import Badge from "@components/Badge/Badge.astro";
 import eventsData from "../../data/events.json";
 import { getAllFlags } from "../../utils/flagUtils";
@@ -34,9 +35,9 @@ const marqueeBottom = {
 
 <section
   id="feature-gallery-marquee"
-  class="bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark-big.svg')] md:py-28"
+  class="relative bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark-big.svg')] md:py-28"
 >
-  <div class="site-container flex justify-center">
+  <div class="site-container relative flex justify-center">
     <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
       <Badge>Flags</Badge>
       <h2 class="h2">Countries where I presented</h2>
@@ -46,7 +47,12 @@ const marqueeBottom = {
     </div>
   </div>
 
+  {/* Marquee container with fade-out edges */}
   <div class="relative flex flex-col gap-3 overflow-hidden md:gap-5">
+    {/* Gradient overlays for fade effect - using multi-step gradients for smoother transition */}
+    <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-40 bg-gradient-to-r from-background via-background/80 via-30% to-transparent dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80"></div>
+    <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-40 bg-gradient-to-l from-background via-background/80 via-30% to-transparent dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80"></div>
+
     {/* marquee top row */}
     <div class="marquee-top relative flex gap-3 overflow-hidden md:gap-5">
       <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5">
