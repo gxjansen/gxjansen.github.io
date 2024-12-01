@@ -4,40 +4,20 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
 import HeroSideImage from "@components/Hero/HeroSideImage.astro";
-// import HeroBgImage from "@components/Hero/HeroBgImage.astro";
-// import HeroCentered from "@components/Hero/HeroCentered.astro";
-
 import FeatureCardsSmall from "@components/Feature/FeatureCardsSmall.astro";
-// import FeatureCardsMedium from "@components/Feature/FeatureCardsMedium.astro";
 import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
 import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
-// import FeatureToggleImage from "@components/Feature/FeatureToggleImage.astro";
-// import FeatureVideo from "@components/Feature/FeatureVideo.astro";
-// import FeatureSideImage from "@components/Feature/FeatureSideImage.astro";
 import SiteContent from "@components/SiteContent/SiteContent.astro";
-
-// import ServicesSideImage from "@components/Services/ServicesSideImage.astro";
-// import ServicesIcon from "@components/Services/ServicesIcon.astro";
-
-// import TestimonialsSwiperQuotes from "@components/Testimonials/TestimonialsSwiperQuotes.astro";
-// import TestimonialsColumns from "@components/Testimonials/TestimonialsColumns.astro";
-
 import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
-// import CtaCardCenter from "@components/Cta/CtaCardCenter.astro";
-// import CtaCenter from "@components/Cta/CtaCenter.astro";
-
-// import FaqAccordions from "@components/Faq/FaqAccordions.astro";
-// import FaqCards from "@components/Faq/FaqCards.astro";
+import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { getTranslatedData } from "@js/translationUtils";
-import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
 import { getAllEvents } from "../utils/eventUtils";
 
 // Load all events with their icons
 const eventIcons = await getAllEvents();
-
 
 // data
 const currLocale = getLocaleFromUrl(Astro.url);
@@ -45,43 +25,33 @@ const siteData = getTranslatedData("siteData", currLocale);
 ---
 
 <BaseLayout title={siteData.title} description={siteData.description}>
-  <HeroSideImage />
-  <!-- <HeroBgImage /> -->
-  <!-- <HeroCentered /> -->
-  <SiteContent />
-  <!-- <FeatureCardsMedium /> -->
-  <FeatureCardsSmall />
-  <!-- <FeatureVideo /> -->
+  <main id="main-content">
+    <HeroSideImage />
+    <SiteContent />
+    <FeatureCardsSmall />
 
-  <!-- <ServicesSideImage /> -->
-  <!-- <ServicesIcon /> -->
-  <!-- <FeatureSideImage /> -->
-
-  <!-- <TestimonialsSwiperQuotes /> -->
-  <!-- <TestimonialsColumns /> -->
-  <div class="site-container mx-auto px-4 pb-20 pt-10 md:py-28">
-    {/* Upcoming Events Section */}
-    <UpcomingEvents events={eventIcons} />
-    
-    <div class="flex justify-center mt-8">
-      <a 
-        href="/events" 
-        class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-3 text-center text-base font-medium text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-gray-100"
-      >
-        View Past Events
-      </a>
+    <div 
+      class="site-container mx-auto px-4 pb-20 pt-10 md:py-28"
+      aria-label="Events and Features"
+    >
+      <section aria-label="Events Section">
+        <UpcomingEvents events={eventIcons} />
+        
+        <div class="flex justify-center mt-8">
+          <a 
+            href="/events" 
+            class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-3 text-center text-base font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+            aria-label="View all past speaking events"
+          >
+            View Past Events
+          </a>
+        </div>
+      
+        <FeatureFlagsMarquee />
+      </div>
     </div>
-  
-    <FeatureFlagsMarquee />
-  </div>
 
-  <FeatureGalleryMarquee />
-  <!-- <FeatureToggleImage /> -->
-
-  <CtaCardSplit />
-  <!-- <CtaCardCenter /> -->
-  <!-- <CtaCenter /> -->
-
-  <!-- <FaqAccordions /> -->
-  <!-- <FaqCards /> -->
+    <FeatureGalleryMarquee />
+    <CtaCardSplit />
+  </main>
 </BaseLayout>
