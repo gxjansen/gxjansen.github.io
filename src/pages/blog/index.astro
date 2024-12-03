@@ -1,61 +1,29 @@
 ---
-// layout
-import BaseLayout from "@layouts/BaseLayout.astro";
-
-// components
-import PostCard from "@components/PostCard/PostCardAtlas.astro";
-import CategoryCloud from "@components/CategoryCloud/CategoryCloud.astro";
-import Badge from "@components/Badge/Badge.astro";
-import { Image } from "astro:assets";
-import HumanNotAI from "@images/Written-By-Human-Not-By-AI-Badge-black.svg";
-
 // utils
-import { getAllPosts } from "@js/blogUtils";
+import { getCollection } from "astro:content";
 import { getLocaleFromUrl } from "@js/localeUtils";
 
-const currLocale = getLocaleFromUrl(Astro.url);
-const posts = await getAllPosts(currLocale);
+// Get the current locale
+const locale = getLocaleFromUrl(Astro.url);
+
+// Get all posts for the current locale directly from the collection
+// This is fine because .astro files are server-side
+const posts = await getCollection("blog", ({ data }) => {
+  return !data.draft;
+});
+
+// Filter by locale if needed
+const filteredPosts = locale 
+  ? posts.filter(post => post.id.startsWith(`${locale}/`))
+  : posts;
 ---
 
-<BaseLayout
-  title="Guido's articles"
-  description="I write about Community building, Experimentation, E-commerce, Psychology and other business things I care about."
->
-  <section class="site-container">
-    <div
-      class="overflow-x-clip bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat pt-24 dark:bg-[url('/assets/pattern-dark.svg')] md:pt-32"
-    >
-      <div class="mx-auto flex max-w-[950px] flex-col justify-center">
-        <div class="mx-auto">
-          <Badge>Blog</Badge>
-        </div>
-        <h1 class="h1 text-center">
-          Latest Articles
-        </h1>
-        <div class="flex justify-center pt-5">
-          <a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
-            <Image
-              src={HumanNotAI}
-              alt="Written-By-Human-Not-By-AI"
-              decoding="async"
-              loading="lazy"
-              width={100}
-            />
-          </a>
-        </div>
-      </div>
-
-      <div class="mt-20 flex pb-8 md:mt-28">
-        <CategoryCloud />
-      </div>
-    </div>
-
-    <div class="grid gap-8 gap-y-10 md:grid-cols-2">
-      {
-        posts.map((post) => (
-          <PostCard post={post} showDescription={true} data-aos="fade-up" />
-        ))
-      }
-    </div>
-  </section>
-</BaseLayout>
+<!-- Your template here -->
+<div>
+  {filteredPosts.map(post => (
+    <article>
+      <h2>{post.data.title}</h2>
+      <p>{post.data.description}</p>
+    </article>
+  ))}
+</div>

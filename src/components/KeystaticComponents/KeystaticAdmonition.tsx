@@ -3,7 +3,7 @@
  */
 
 // style import
-import "@/styles/keystatic.css";
+import "../../styles/keystatic.css";
 
 interface Props {
   variant: "tip" | "caution" | "danger" | "info";

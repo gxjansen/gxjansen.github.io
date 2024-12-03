@@ -1,27 +1,4 @@
-/**
- * * This file is used to define the navigation links for the site.
- * Notes:
- * 1 level of dropdown is supported
- * Mega menus look best with 3-5 columns, but supports anything > 2 columns
- * If using icons, the icon should be saved in the src/icons folder. If filename is "tabler/icon.svg" then input "tabler/icon"
- * Recommend getting icons from https://tabler.io/icons
- */
-
-// utils
-import { getAllPosts, countItems, sortByValue } from "@js/blogUtils";
-import { humanize } from "@js/textUtils";
-
-// get the categories used in blog posts, to put into navbar
-const posts = await getAllPosts("en");
-const allCategories = posts.map((post) => post.data.categories).flat();
-const countedCategories = countItems(allCategories);
-const processedCategories = sortByValue(countedCategories);
-
-// types
-import { type navItem } from "../types/configDataTypes";
-
-// note: 1 level of dropdown is supported
-const navConfig: navItem[] = [
+const navConfig = [
   {
     text: "Podcasts",
     link: "/podcasts",
@@ -34,12 +11,6 @@ const navConfig: navItem[] = [
     text: "Press",
     link: "/press",
   },
-  // {
-  //   text: "Overview",
-  //   link: "/overview",
-  // },
-
-  // mega menu
   {
     text: "Pages",
     megaMenuColumns: [
@@ -88,73 +59,8 @@ const navConfig: navItem[] = [
           },
         ],
       },
-      // {
-      //   title: "Elements and Forms",
-      //   items: [
-      //     {
-      //       text: "MDX Pages",
-      //       link: "/elements",
-      //       icon: "tabler/wand",
-      //     },
-      //     {
-      //       text: "Contact",
-      //       link: "/contact",
-      //       icon: "tabler/address-book",
-      //     },
-      //   ],
-      // },
-      // {
-      //   title: "Other Pages",
-      //   items: [
-      //     {
-      //       text: "About",
-      //       link: "/about",
-      //       icon: "tabler/user",
-      //     },
-      //     {
-      //       text: "Privacy Policy",
-      //       link: "/privacy-policy",
-      //       icon: "tabler/lock-square",
-      //     },
-      //     {
-      //       text: "Terms of Use",
-      //       link: "/terms",
-      //       icon: "tabler/script",
-      //     },
-      //     {
-      //       text: "Page not found",
-      //       link: "/not-a-link",
-      //       icon: "tabler/error-404",
-      //     },
-      //     {
-      //       text: "RSS Feed",
-      //       link: "/rss.xml",
-      //       newTab: true,
-      //       icon: "tabler/rss",
-      //     },
-      //   ],
-      // },
     ],
   },
-
-  // regular dropdown
-  // {
-  //   text: "Services",
-  //   dropdown: [
-  //     {
-  //       text: "Exterior Painting",
-  //       link: "/services/exterior-painting",
-  //     },
-  //     {
-  //       text: "Interior Painting",
-  //       link: "/services/interior-painting",
-  //     },
-  //     {
-  //       text: "Deck and Fence",
-  //       link: "/services/deck-and-fence-staining",
-  //     },
-  //   ],
-  // },
   {
     text: "Articles",
     link: "/blog",
@@ -174,16 +80,6 @@ const navConfig: navItem[] = [
       },
     ],
   },
-  // {
-  //   // get the categories used in blog posts, to put into a navbar dropdown
-  //   text: "Categories",
-  //   dropdown: processedCategories.map(([category, count]) => {
-  //     return {
-  //       text: humanize(category),
-  //       link: `/categories/${category}`,
-  //     };
-  //   }),
-  // },
 ];
 
 export default navConfig;
