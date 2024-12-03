@@ -3,6 +3,9 @@
 import { getCollection } from "astro:content";
 import { defaultLocale } from "@config/siteSettings.json";
 
+// layouts
+import BlogLayoutCenter from "@layouts/BlogLayoutCenter.astro";
+
 // Get all posts for static paths
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => {
@@ -17,11 +20,11 @@ export async function getStaticPaths() {
 
 // Get the post data from props
 const { post } = Astro.props;
+
+// Get the rendered content
+const { Content } = await post.render();
 ---
 
-<!-- Your template here -->
-<article>
-  <h1>{post.data.title}</h1>
-  <p>{post.data.description}</p>
-  <!-- Add your full blog post template here -->
-</article>
+<BlogLayoutCenter post={post} transitionName={`heroImage-${post.slug}`}>
+  <Content />
+</BlogLayoutCenter>
