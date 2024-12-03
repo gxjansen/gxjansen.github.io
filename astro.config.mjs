@@ -11,11 +11,10 @@ import compressor from "astro-compressor";
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://gxjansen.github.io",
-  output: "hybrid",
+  output: "static",
   adapter: netlify({
     imageCDN: false
   }),
@@ -46,17 +45,20 @@ export default defineConfig({
   },
   // trailingSlash: "always",
   integrations: [
-  // example auto import component into mdx files
-  AutoImport({
-    imports: [
-    // https://github.com/delucis/astro-auto-import
-    "@components/Admonition/Admonition.astro"]
-  }), mdx(), react(), keystatic(), tailwind(), sitemap(), compressor()],
-
-// the following uses a Vite plugin to copy the appropriate robots.txt file to the dist folder during the build process, based on the current environment.
-  build: {
-    assets: 'astro-assets'
-  },
+    // example auto import component into mdx files
+    AutoImport({
+      imports: [
+        // https://github.com/delucis/astro-auto-import
+        "@components/Admonition/Admonition.astro"
+      ]
+    }),
+    mdx(),
+    react(),
+    keystatic(),
+    tailwind(),
+    sitemap(),
+    compressor()
+  ],
 
   vite: {
     plugins: [

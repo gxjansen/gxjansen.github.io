@@ -1,4 +1,4 @@
-import { type CollectionEntry } from "astro:content";
+import type { BlogData, Author } from "./types";
 
 // utils
 import { getTranslatedData } from "@js/translationUtils";
@@ -13,9 +13,9 @@ interface GeneralProps {
 
 export interface BlogProps {
   type: "blog";
-  postFrontmatter: CollectionEntry<"blog">["data"];
+  postFrontmatter: BlogData;
   image: any; // result of getImage() from Seo.astro
-  authors: CollectionEntry<"authors">[];
+  authors: Author[];
   canonicalUrl: URL;
 }
 
