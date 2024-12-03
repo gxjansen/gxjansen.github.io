@@ -8,9 +8,8 @@ import Footer from "@components/Footer/Footer.astro";
 import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
 import EnvironmentBanner from '../components/EnvironmentBanner/EnvironmentBanner.astro';
 
-
 // style import
-import "@/styles/global.scss";
+import "../styles/global.scss";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -76,7 +75,6 @@ const currLocale = getLocaleFromUrl(Astro.url);
     <!-- Scroll animations -->
     <script>
       import siteSettings from "@config/siteSettings.json";
-
       import AOS from "@js/aos/aos";
 
       if (siteSettings.useAnimations === true) {
