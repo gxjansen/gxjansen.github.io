@@ -21,9 +21,10 @@ import HumanNotAI from "@images/Written-By-Human-Not-By-AI-Badge-black.svg";
 
 interface Props {
   post: CollectionEntry<"blog">;
+  transitionName?: string;
 }
 
-const { post } = Astro.props as Props;
+const { post, transitionName } = Astro.props as Props;
 const {
   title,
   description,
@@ -47,6 +48,7 @@ const authorsData = await getEntries(authors);
   authorsData={authorsData}
   postFrontmatter={post.data}
 >
+  <div class="absolute inset-0 -z-10 bg-[url('/assets/pattern-light-big.svg')] bg-repeat dark:bg-[url('/assets/pattern-dark-big.svg')]"></div>
   <article class="site-container mt-24">
     <!-- Blog post info -->
     <div class="flex w-full flex-col items-center">
@@ -75,7 +77,6 @@ const authorsData = await getEntries(authors);
                       quality="high"
                       loading="eager"
                       class="h-7 w-7 rounded-full object-cover"
-                      transition:name="heroImage"
                     />
                   </figure>
                   <div class="my-auto ml-2">{authorData.data.name}</div>
@@ -113,6 +114,7 @@ const authorsData = await getEntries(authors);
           class="max-h-[70vh] rounded-xl object-cover"
           loading="eager"
           format="webp"
+          transition:name={transitionName}
         />
       </div>
     </div>

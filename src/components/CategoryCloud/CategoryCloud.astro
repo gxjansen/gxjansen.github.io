@@ -1,34 +1,23 @@
 ---
-import { getRelativeLocaleUrl } from "astro:i18n";
-
 // utils
-import { getAllPosts, countItems, sortByValue } from "@js/blogUtils";
+import { getCollection } from "astro:content";
+import { countItems, sortByValue } from "@js/blogUtils";
 import { humanize } from "@js/textUtils";
-import { getLocaleFromUrl } from "@js/localeUtils";
 
-const currLocale = getLocaleFromUrl(Astro.url);
-const posts = await getAllPosts(currLocale);
-const allCategories = posts.map((post) => post.data.categories).flat();
-const countedCategories = countItems(allCategories);
-const processedCategories = sortByValue(countedCategories);
+// Get all categories and sort them by count
+const posts = await getCollection("blog", ({ data }) => {
+  return !data.draft;
+});
 
-interface Props {
-  showCount?: boolean;
-}
-
-const { showCount = false } = Astro.props as Props;
+const categories = posts.map((post) => post.data.categories).flat();
+const processedCategories = sortByValue(countItems(categories));
 ---
 
-<div class="flex flex-wrap justify-center gap-x-2 gap-y-2">
-  {
-    processedCategories.map(([category, count]) => (
-      <a
-        href={getRelativeLocaleUrl(currLocale, `/categories/${category}/`)}
-        class="button px-4 py-1 font-semibold text-base-400 hover:bg-primary-100 hover:text-primary-600 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50 dark:hover:bg-primary-500 dark:hover:text-white"
-      >
-        {humanize(category)}
-        {showCount && <span class="text-xs opacity-70">{count}</span>}
-      </a>
-    ))
-  }
+<!-- Your template here -->
+<div class="category-cloud">
+  {processedCategories.map(([category, count]) => (
+    <a href={`/categories/${category}`} class="category-link">
+      {humanize(category)} ({count})
+    </a>
+  ))}
 </div>

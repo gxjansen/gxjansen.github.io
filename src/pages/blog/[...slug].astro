@@ -1,30 +1,30 @@
 ---
-import { type InferGetStaticPropsType } from "astro";
-
-// layout
-import BlogLayout from "@layouts/BlogLayoutCenter.astro";
-
-// components
-import ExternalLink from "@components/MarkdownComponents/ExternalLink.astro";
-
 // utils
-import { getAllPosts } from "@js/blogUtils";
+import { getCollection } from "astro:content";
 import { defaultLocale } from "@config/siteSettings.json";
 
-export async function getStaticPaths() {
-  const posts = await getAllPosts(defaultLocale);
+// layouts
+import BlogLayoutCenter from "@layouts/BlogLayoutCenter.astro";
 
+// Get all posts for static paths
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => {
+    return !data.draft;
+  });
+  
   return posts.map((post) => ({
     params: { slug: post.slug },
-    props: post,
+    props: { post },
   }));
 }
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const post = Astro.props as Props;
-const { Content, headings } = await post.render();
+// Get the post data from props
+const { post } = Astro.props;
+
+// Get the rendered content
+const { Content } = await post.render();
 ---
 
-<BlogLayout post={post}>
-  <Content components={{ a: ExternalLink }} />
-</BlogLayout>
+<BlogLayoutCenter post={post} transitionName={`heroImage-${post.slug}`}>
+  <Content />
+</BlogLayoutCenter>

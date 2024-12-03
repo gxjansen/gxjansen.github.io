@@ -9,12 +9,12 @@
     "paths": {
       "@config/*": ["src/config/*"],
       "@js/*": ["src/js/*"],
+      "@utils/*": ["src/utils/*"],
       "@layouts/*": ["src/layouts/*"],
       "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"],
       "@images/*": ["src/assets/images/*"],
-      "@videos/*": ["src/assets/videos/*"],
-      "@/*": ["src/*"]
+      "@videos/*": ["src/assets/videos/*"]
     },
     "jsxImportSource": "react"
   }

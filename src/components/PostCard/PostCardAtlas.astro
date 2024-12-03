@@ -34,22 +34,21 @@ const authorsData = await getEntries(authors);
 <article class=`${className}` {...rest}>
   <a
     href={getRelativeLocaleUrl(currLocale, `/blog/${post.slug}/`)}
-    class="flex aspect-video max-h-96 shrink-0 justify-center overflow-hidden rounded-md sm:justify-normal"
+    class="block aspect-[16/9] overflow-hidden rounded-xl"
   >
-    <figure>
-      <Image
-        src={heroImage}
-        alt={`Cover for ${title}`}
-        height={700}
-        quality="high"
-        class="h-auto min-h-full w-full rounded-md object-cover transition-all duration-500"
-        transition:name="heroImage"
-      />
-    </figure>
+    <Image
+      src={heroImage}
+      alt={`Cover for ${title}`}
+      width={800}
+      height={450}
+      quality="high"
+      class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+      transition:name={`heroImage-${post.slug}`}
+    />
   </a>
   <div>
     <!-- categories -->
-    <div class="mt-4 flex flex-wrap gap-4">
+    <div class="mt-6 flex flex-wrap gap-4">
       {categories.map((category) => <Category category={category} />)}
     </div>
 
@@ -74,7 +73,7 @@ const authorsData = await getEntries(authors);
         href={getRelativeLocaleUrl(currLocale, `/blog/${post.slug}/`)}
         class="decoration-primary-500 hover:underline"
       >
-        <h2 class="text-lg font-bold dark:text-base-100 md:text-2xl">
+        <h2 class="text-xl font-bold dark:text-base-100 md:text-2xl">
           {title}
         </h2>
       </a>
@@ -83,14 +82,14 @@ const authorsData = await getEntries(authors);
     <!-- description -->
     {
       showDescription && (
-        <p class="mt-2 text-sm font-medium text-base-400 md:text-base">
+        <p class="mt-2 text-base font-medium text-base-400">
           {description}
         </p>
       )
     }
 
     <!-- read post button -->
-    <div class="mt-3">
+    <div class="mt-4">
       <a
         href={getRelativeLocaleUrl(currLocale, `/blog/${post.slug}/`)}
         class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600"
