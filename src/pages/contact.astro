@@ -19,10 +19,12 @@ const siteData = getTranslatedData("siteData", currLocale);
 <BaseLayout
   title="Book me for your event"
   description="Get in touch! Contact me using the form below or send me a DM."
+  transition:animate="slide"
 >
   <div class="site-container mx-auto mt-16 overflow-x-clip">
     <div
       class="w-full bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-20 text-center dark:bg-[url('/assets/pattern-dark.svg')] md:py-32"
+      transition:animate="slide"
     >
       <h1 class="h1">Contact Me /  Book me for your event</h1>
       <p class="description mx-auto mt-6 max-w-2xl">
@@ -32,12 +34,12 @@ const siteData = getTranslatedData("siteData", currLocale);
 
     <div class="grid gap-8 lg:grid-cols-2">
       <!-- contact form -->
-      <div class="mb-12 lg:order-2">
+      <div class="mb-12 lg:order-2" transition:persist>
         <ContactForm />
       </div>
 
       <!-- Contact info -->
-      <div class="mb-auto grid gap-x-6 gap-y-12 lg:grid-cols-2">
+      <div class="mb-auto grid gap-x-6 gap-y-12 lg:grid-cols-2" transition:animate="slide">
         <!-- Email -->
         <div class="flex flex-col items-center gap-3 lg:items-start">
           <div

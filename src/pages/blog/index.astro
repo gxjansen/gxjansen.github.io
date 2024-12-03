@@ -36,7 +36,7 @@ const allCategories = posts.map(post => post.data.categories).flat();
 const processedCategories = sortByValue(countItems(allCategories));
 ---
 
-<BaseLayout title="Blog" description="Latest blog posts and articles">
+<BaseLayout title="Blog" description="Latest blog posts and articles" transition:animate="slide">
   <div class="absolute inset-0 -z-10 bg-[url('/assets/pattern-light-big.svg')] bg-repeat dark:bg-[url('/assets/pattern-dark-big.svg')]"></div>
   <section class="py-24 md:py-28">
     <div class="site-container">
@@ -66,6 +66,7 @@ const processedCategories = sortByValue(countItems(allCategories));
             <a
               href={`/categories/${category}`}
               class="px-4 py-2 bg-base-800 text-white rounded-full text-sm font-medium hover:bg-primary-500 transition"
+              transition:animate="slide"
             >
               {humanize(category)}
             </a>
