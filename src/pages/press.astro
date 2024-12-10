@@ -22,12 +22,44 @@ const sortedCoverage = [...pressCoverage].sort((a, b) =>
 const videos = sortedCoverage.filter(item => item.youtubeLink);
 const podcasts = sortedCoverage.filter(item => item.spotifyEmbedId);
 const articles = sortedCoverage.filter(item => !item.youtubeLink && !item.spotifyEmbedId);
+
+// Get first few video IDs for preloading
+const firstVideoIds = videos
+  .slice(0, 2)
+  .map(video => {
+    const match = video.youtubeLink?.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
+    return match ? match[1] : '';
+  })
+  .filter(Boolean);
 ---
 
 <BaseLayout 
   title="Press / Media"
   description="Media appearances, interviews and articles featuring Guido Jansen."
 >
+  <!-- Resource hints for performance optimization -->
+  <Fragment slot="head">
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://i.ytimg.com" />
+    <link rel="preconnect" href="https://open.spotify.com" />
+    
+    <!-- DNS prefetch as fallback -->
+    <link rel="dns-prefetch" href="https://www.youtube.com" />
+    <link rel="dns-prefetch" href="https://i.ytimg.com" />
+    <link rel="dns-prefetch" href="https://open.spotify.com" />
+    
+    <!-- Preload critical thumbnails -->
+    {firstVideoIds.map(videoId => (
+      <link 
+        rel="preload" 
+        href={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+        as="image"
+        fetchpriority="high"
+      />
+    ))}
+  </Fragment>
+
   <section class="py-24 md:py-28">
     <div class="site-container bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat dark:bg-[url('/assets/pattern-dark.svg')]">
       <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
@@ -42,8 +74,34 @@ const articles = sortedCoverage.filter(item => !item.youtubeLink && !item.spotif
     </div>
   </section>
 
-  <VideoSection videos={videos} />
-  <PodcastSection podcasts={podcasts} />
-  <ArticleSection articles={articles} />
+  <!-- Use view transitions for smooth content switching -->
+  <div class="view-transition-group:media-content">
+    <VideoSection videos={videos} />
+    <PodcastSection podcasts={podcasts} />
+    <ArticleSection articles={articles} />
+  </div>
+  
   <LinkedInCTA />
 </BaseLayout>
+
+<script>
+  // Handle smooth scrolling to sections
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  });
+</script>
