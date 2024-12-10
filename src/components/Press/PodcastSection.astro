@@ -1,0 +1,39 @@
+---
+import { formatDate } from '@utils/pressUtils';
+import type { PressCoverage } from '@/types'; // Assuming you have this type defined
+
+interface Props {
+  podcasts: PressCoverage[];
+}
+
+const { podcasts } = Astro.props;
+---
+
+<section id="podcasts" class="container mx-auto px-4 mb-16">
+  <h2 class="h2 mb-4">Podcast Appearances</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {podcasts.map(podcast => (
+      <div class="bg-neutral-100 dark:bg-white/[.075] rounded-xl p-6">
+        <iframe 
+          style="border-radius:12px" 
+          src={`https://open.spotify.com/embed/episode/${podcast.spotifyEmbedId}`} 
+          width="100%" 
+          height="152" 
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+          loading="lazy"
+        ></iframe>
+        <h3 class="h3 mb-4">{podcast.title}</h3>
+        <p class="description text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+          {formatDate(podcast.publicationDate)}
+          {podcast.personOrganization && ` • ${podcast.personOrganization}`}
+        </p>
+        {podcast.articleUrl && (
+          <a href={podcast.articleUrl} target="_blank" rel="noopener noreferrer" 
+             class="description text-teal-500 hover:text-teal-600">
+            View article →
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+</section>

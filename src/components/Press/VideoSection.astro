@@ -1,0 +1,42 @@
+---
+import { formatDate } from '@utils/pressUtils';
+import type { PressCoverage } from '@/types'; // Assuming you have this type defined
+
+interface Props {
+  videos: PressCoverage[];
+}
+
+const { videos } = Astro.props;
+---
+
+<section id="videos" class="container mx-auto px-4 mb-16">
+  <h2 class="h2 mb-4">Video Interviews</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {videos.map(video => (
+      <div class="rounded-xl overflow-hidden">
+        <div class="aspect-video">
+          <iframe
+            class="w-full h-full"
+            src={`https://www.youtube.com/embed/${video.youtubeLink?.split('v=')[1]}`}
+            title={video.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          ></iframe>
+        </div>
+        <div class="p-6">
+          <h3 class="h3 mb-4">{video.title}</h3>
+          <p class="description text-sm mb-4">
+            {formatDate(video.publicationDate)}
+            {video.personOrganization && ` • ${video.personOrganization}`}
+          </p>
+          <div class="description space-x-4">
+            {video.articleUrl && (
+              <a href={video.articleUrl} target="_blank" rel="noopener noreferrer">
+                View article →
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
