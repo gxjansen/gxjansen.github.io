@@ -2,22 +2,33 @@
 // utils
 import { getCollection } from "astro:content";
 import { countItems, sortByValue } from "@js/blogUtils";
-import { humanize } from "@js/textUtils";
+import { humanize, slugify } from "@js/textUtils";
+
+interface Props {
+  showCount?: boolean;
+}
+
+const { showCount = true } = Astro.props;
 
 // Get all categories and sort them by count
 const posts = await getCollection("blog", ({ data }) => {
   return !data.draft;
 });
 
-const categories = posts.map((post) => post.data.categories).flat();
+// Filter out undefined categories and flatten the array
+const categories = posts
+  .map((post) => post.data.categories || [])
+  .flat()
+  .filter(Boolean);
+
 const processedCategories = sortByValue(countItems(categories));
 ---
 
 <!-- Your template here -->
 <div class="category-cloud">
   {processedCategories.map(([category, count]) => (
-    <a href={`/categories/${category}`} class="category-link">
-      {humanize(category)} ({count})
+    <a href={`/categories/${slugify(category)}`} class="category-link">
+      {humanize(category)} {showCount && `(${count})`}
     </a>
   ))}
 </div>
