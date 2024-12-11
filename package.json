@@ -37,12 +37,12 @@
     "gray-matter": "^4.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "sanitize-html": "^2.13.1",
     "sass": "^1.77.4",
     "svg-country-flags": "^1.2.10",
     "swiper": "^11.1.4",
     "tailwindcss": "^3.4.3",
-    "yaml": "^2.6.1",
-    "sanitize-html": "^2.13.1"
+    "yaml": "^2.6.1"
   },
   "devDependencies": {
     "fs-extra": "^11.2.0",

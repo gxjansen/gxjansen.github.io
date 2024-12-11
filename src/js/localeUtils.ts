@@ -1,5 +1,5 @@
 // data
-import { locales, defaultLocale } from "@config/siteSettings.json";
+import { locales, defaultLocale } from "@config/siteSettings.json.ts";
 
 /**
  * * returns the current locale gathered from the URL
