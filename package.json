@@ -41,7 +41,8 @@
     "svg-country-flags": "^1.2.10",
     "swiper": "^11.1.4",
     "tailwindcss": "^3.4.3",
-    "yaml": "^2.6.1"
+    "yaml": "^2.6.1",
+    "sanitize-html": "^2.13.1"
   },
   "devDependencies": {
     "fs-extra": "^11.2.0",
