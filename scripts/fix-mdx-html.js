@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import sanitizeHtml from 'sanitize-html';
 
 // Get current directory
 const __filename = fileURLToPath(import.meta.url);
@@ -24,18 +25,12 @@ files.forEach(file => {
     console.log(`Found HTML tags in: ${file}`);
     
     // Fix common HTML patterns
-    content = content
-      // Fix multiple newlines
-      .replace(/\n{3,}/g, '\n\n')
-      // Remove <p> tags
-      .replace(/<p>/g, '')
-      .replace(/<\/p>/g, '\n\n')
-      // Replace <br> tags
-      .replace(/<br>/g, '\n')
-      // Replace <a> tags with markdown links
-      .replace(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g, '[$2]($1)')
-      // Clean up any remaining HTML tags
-      .replace(/<[^>]+>/g, '')
+    content = sanitizeHtml(content, {
+      allowedTags: [],
+      allowedAttributes: {}
+    });
+    // Fix multiple newlines
+    content = content.replace(/\n{3,}/g, '\n\n')
       // Fix any double spaces
       .replace(/  +/g, ' ')
       // Fix any triple+ newlines
