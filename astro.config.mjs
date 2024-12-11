@@ -38,21 +38,22 @@ export default defineConfig({
   },
   markdown: {
     shikiConfig: {
-      // Shiki Themes: https://github.com/shikijs/shiki/blob/main/docs/themes.md
       theme: "dracula",
       wrap: true
     }
   },
-  // trailingSlash: "always",
   integrations: [
-    // example auto import component into mdx files
     AutoImport({
       imports: [
-        // https://github.com/delucis/astro-auto-import
         "@components/Admonition/Admonition.astro"
       ]
     }),
-    mdx(),
+    mdx({
+      // Configure MDX to be more lenient
+      extendMarkdownConfig: true,
+      optimize: false,
+      experimentalLayout: false
+    }),
     react(),
     keystatic(),
     tailwind(),

@@ -1,0 +1,21 @@
+---
+interface Props {
+  youtubeId: string;
+}
+
+const { youtubeId } = Astro.props;
+---
+
+<div class="mb-12">
+  <h2 class="h3 mb-4">Video Recording</h2>
+  <div class="relative pb-[56.25%] bg-slate-100 dark:bg-slate-800 rounded-lg">
+    <iframe 
+      src={`https://www.youtube.com/embed/${youtubeId}`}
+      class="absolute top-0 left-0 w-full h-full border-none rounded-lg"
+      allowfullscreen
+      loading="lazy"
+      onload="this.parentElement.classList.remove('bg-slate-100', 'dark:bg-slate-800')"
+      onerror="this.parentElement.innerHTML = '<div class=\'absolute inset-0 flex items-center justify-center text-slate-500 dark:text-slate-400\'>Failed to load video. <a href=\'https://www.youtube.com/watch?v=' + this.youtubeId + '\' target=\'_blank\' class=\'ml-2 text-blue-500 hover:underline\'>Watch on YouTube</a></div>'"
+    />
+  </div>
+</div>

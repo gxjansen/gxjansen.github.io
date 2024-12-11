@@ -1,149 +1,68 @@
-import { defineCollection, reference, z } from "astro:content";
+import { defineCollection, z } from 'astro:content';
 
-// Type-check frontmatter using a schema
-const blogCollection = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      // reference the authors collection https://docs.astro.build/en/guides/content-collections/#defining-collection-references
-      authors: z.array(reference("authors")),
-      // Transform string to Date object
-      pubDate: z
-        .string()
-        .or(z.date())
-        .transform((val) => new Date(val)),
-      updatedDate: z
-        .string()
-        .or(z.date())
-        .optional()
-        .transform((val) => (val ? new Date(val) : undefined)),
-      heroImage: image(),
-      categories: z.array(z.string()),
-      // blog posts will be excluded from build if draft is "true"
-      draft: z.boolean().optional(),
-    }),
+/**
+ * Presentation collection schema
+ */
+const presentations = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    title: z.string().optional(),  // Make title optional
+    duration: z.string().optional(),
+    intendedAudience: z.string().optional(),
+    isWorkshop: z.boolean().default(false),
+    isFeatured: z.boolean().default(false),
+    image: z.string().optional(),
+    slideshareKey: z.string().optional(),
+    youtubeId: z.string().optional(),
+    relatedEventSlugs: z.array(z.string()).default([])
+  })
 });
 
-// authors
-const authorsCollection = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      avatar: image(),
-      about: z.string(),
-      email: z.string(),
-      authorLink: z.string(), // author page link. Could be a personal website, github, twitter, whatever you want
-    }),
+/**
+ * Authors collection schema
+ */
+const authors = defineCollection({
+  type: 'content',
+  schema: z.object({})
 });
 
-// services
-const servicesCollection = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      image: image(),
-      // services will be excluded from build if draft is "true"
-      draft: z.boolean().optional(),
-    }),
+/**
+ * Blog collection schema
+ */
+const blog = defineCollection({
+  type: 'content',
+  schema: z.object({})
 });
 
-// clients
-const clientsCollection = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-      // items will be excluded from build if draft is "true"
-      draft: z.boolean().optional(),
-    }),
+/**
+ * Countries collection schema
+ */
+const countries = defineCollection({
+  type: 'content',
+  schema: z.object({})
 });
 
-// countries
-const countriesCollection = defineCollection({
-  type: "data",
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-    }),
+/**
+ * Other pages collection schema
+ */
+const otherPages = defineCollection({
+  type: 'content',
+  schema: z.object({})
 });
 
-// events
-const eventsCollection = defineCollection({
-  type: "data",
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-      city: z.string(),
-      countries: z.array(reference("countries")),
-      pubDate: z
-      .string()
-      .or(z.date())
-      .transform((val) => new Date(val)),
-      // items will be excluded from build if draft is "true"
-      draft: z.boolean().optional(),
-    }),
-});
-
-// linktree
-const linktreeCollection = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-      // items will be excluded from build if draft is "true"
-      draft: z.boolean().optional(),
-    }),
-});
-
-// press
-const pressCollection = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-      // items will be excluded from build if draft is "true"
-      draft: z.boolean().optional(),
-    }),
-});
-
-// testimonials
-const testimonialsCollection = defineCollection({
-  type: "content",
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      image: image(),
-      // items will be excluded from build if draft is "true"
-      draft: z.boolean().optional(),
-    }),
-});
-
-// other pages
-const otherPagesCollection = defineCollection({
-  type: "content",
-  schema: () =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      draft: z.boolean().optional(),
-    }),
+/**
+ * Services collection schema
+ */
+const services = defineCollection({
+  type: 'content',
+  schema: z.object({})
 });
 
 export const collections = {
-  blog: blogCollection,
-  authors: authorsCollection,
-  events: eventsCollection,
-  countries: countriesCollection,
-  services: servicesCollection,
-  otherPages: otherPagesCollection,
+  presentations,
+  authors,
+  blog,
+  countries,
+  otherPages,
+  services
 };
