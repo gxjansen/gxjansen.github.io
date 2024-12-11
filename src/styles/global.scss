@@ -1,3 +1,8 @@
+// Use forward declarations for local stylesheets
+@use "buttons";
+@use "prose";
+@use "aos";
+
 /* Import JetBrains Mono and Inter from Google Fonts - including lighter weights for better hierarchy */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -37,42 +42,30 @@
   }
 }
 
-/*  things in the components layer can be overriden with utility classes. 
-    Useful for custom styles on third-party components, and things like 
-    btn, card, badge, etc  */
 @layer components {
-  @import "buttons";
-  @import "prose";
-
-  /* Structured heading hierarchy */
-  
-  /* Level 1: Main page title / hero heading */
+  /* Existing component styles remain the same */
   .h1 {
     @apply font-inter text-5xl font-bold leading-[1.1] text-base-900 dark:text-base-100;
     letter-spacing: -0.025em;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
   }
 
-  /* Level 2: Main section headers (e.g., "What can you find here?", "How can I help?") */
   .h2 {
     @apply font-inter text-4xl font-semibold leading-[1.2] text-base-900 dark:text-base-100;
     letter-spacing: -0.02em;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
   }
 
-  /* Level 3: Sub-section headers */
   .h3 {
     @apply font-inter text-2xl font-medium leading-[1.3] text-base-900 dark:text-base-100;
     letter-spacing: -0.015em;
   }
 
-  /* Level 4: Card titles */
   .h4 {
     @apply font-inter text-xl font-medium leading-[1.3] text-base-900 dark:text-base-100;
     letter-spacing: -0.01em;
   }
 
-  /* Card titles - ensuring consistent size across all cards */
   .heading-card {
     font-family: 'Inter', sans-serif !important;
     font-size: 20px !important;
@@ -87,7 +80,7 @@
     -ms-text-size-adjust: none !important;
   }
 
-  /* Utility classes for consistent heading sizes */
+  /* Rest of the existing styles remain unchanged */
   .heading-main {
     @apply font-inter text-5xl font-bold leading-[1.1] tracking-[-0.025em];
   }
@@ -100,13 +93,12 @@
     @apply font-inter text-2xl font-medium leading-[1.3] tracking-[-0.015em];
   }
 
-  /* Apply Inter to any text that uses font-bold, as these are typically headings */
   .font-bold {
     @apply font-inter;
     letter-spacing: -0.015em;
   }
 
-  /* Common heading patterns found in components */
+  /* Remaining styles continue as before */
   [class*="text-"][class*="font-bold"],
   [class*="text-lg"][class*="font-semibold"],
   [class*="text-xl"][class*="font-semibold"],
@@ -118,19 +110,16 @@
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
   }
 
-  /* Enhanced large text readability */
   [class*="text-3xl"], [class*="text-4xl"], [class*="text-5xl"] {
     @apply leading-[1.1];
     letter-spacing: -0.025em;
   }
 
-  /* Enhanced medium text readability */
   [class*="text-xl"], [class*="text-2xl"] {
     @apply leading-[1.2];
     letter-spacing: -0.02em;
   }
 
-  /* Improved visual hierarchy for descriptions */
   .description {
     @apply font-normal text-base-500 dark:text-base-400;
     letter-spacing: -0.01em;
@@ -141,7 +130,6 @@
     @apply mx-auto max-w-[90rem] px-4;
   }
 
-  /* used for newsletter, and contact form inputs */
   .form__input {
     @apply w-full rounded-md border border-transparent bg-base-100 p-2.5 text-base-900 transition;
     @apply dark:bg-base-800 dark:text-base-200 dark:focus-visible:border-primary-500 dark:focus-visible:ring-primary-500;
@@ -150,14 +138,10 @@
 }
 
 @layer utilities {
-  @import "aos";
-
-  /* focus utility class (for when user is tabbing through items on page) */
   .primary-focus {
     @apply focus:outline-none focus-visible:rounded-sm focus-visible:outline-primary-500;
   }
 
-  /* use with "animate-pause" to pause a CSS animation */
   .pause {
     animation-play-state: paused !important;
   }

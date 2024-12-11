@@ -1,0 +1,52 @@
+---
+import { formatDate } from '@utils/pressUtils';
+import LazyYouTube from './LazyYouTube.astro';
+import type { PressCoverage } from '@types/press';
+
+interface Props {
+  videos: PressCoverage[];
+}
+
+const { videos } = Astro.props;
+
+// Function to extract video ID from YouTube URL
+function getYouTubeId(url: string): string {
+  const match = url?.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
+  return match ? match[1] : '';
+}
+---
+
+<section id="videos" class="container mx-auto px-4 mb-16">
+  <h2 class="h2 mb-4">Video Interviews</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {videos.map(video => (
+      <div class="rounded-xl overflow-hidden">
+        <div class="aspect-video">
+          <LazyYouTube 
+            videoId={getYouTubeId(video.youtubeLink || '')}
+            title={video.title}
+          />
+        </div>
+        <div class="p-6">
+          <h3 class="h3 mb-4">{video.title}</h3>
+          <p class="description text-sm mb-4">
+            {formatDate(video.publicationDate)}
+            {video.personOrganization && ` • ${video.personOrganization}`}
+          </p>
+          <div class="description space-x-4">
+            {video.articleUrl && (
+              <a 
+                href={video.articleUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="text-teal-500 hover:text-teal-600"
+              >
+                View article →
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

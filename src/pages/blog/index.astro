@@ -32,7 +32,11 @@ const sortedPosts = filteredPosts.sort((a, b) =>
 );
 
 // Get all categories for the filter bar
-const allCategories = posts.map(post => post.data.categories).flat();
+const allCategories = posts
+  .map(post => post.data.categories || [])
+  .flat()
+  .filter(category => category); // Filter out undefined/null values
+
 const processedCategories = sortByValue(countItems(allCategories));
 ---
 

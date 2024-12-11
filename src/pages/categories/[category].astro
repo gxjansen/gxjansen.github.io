@@ -10,8 +10,11 @@ export async function getStaticPaths() {
     return !data.draft;
   });
 
-  // Get all unique categories
-  const allCategories = [...new Set(posts.map(post => post.data.categories).flat())];
+  // Get all unique categories, filtering out undefined/null values
+  const allCategories = [...new Set(posts
+    .map(post => post.data.categories || [])
+    .flat()
+    .filter(Boolean))];
   
   // Create a path for each category
   return allCategories.map(category => ({
@@ -28,13 +31,18 @@ const posts = await getCollection("blog", ({ data }) => {
   return !data.draft;
 });
 
-// Filter posts by category
+// Filter posts by category, ensuring categories exist
 const filteredPosts = posts.filter((post) =>
-  post.data.categories.map((cat) => slugify(cat)).includes(slugify(category))
+  (post.data.categories || [])
+    .map((cat) => slugify(cat))
+    .includes(slugify(category))
 );
 
-// Get all categories for sidebar
-const categories = posts.map((post) => post.data.categories).flat();
+// Get all categories for sidebar, filtering out undefined/null values
+const categories = posts
+  .map((post) => post.data.categories || [])
+  .flat()
+  .filter(Boolean);
 const processedCategories = sortByValue(countItems(categories));
 ---
 

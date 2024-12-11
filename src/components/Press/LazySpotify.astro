@@ -1,0 +1,72 @@
+---
+interface Props {
+  episodeId: string;
+  title: string;
+}
+
+const { episodeId, title } = Astro.props;
+---
+
+<div 
+  class="lazy-spotify bg-neutral-100 dark:bg-white/[.075] rounded-xl p-4 min-h-[152px] relative"
+  data-episode-id={episodeId}
+  data-title={title}
+>
+  <!-- Placeholder loading state -->
+  <div class="animate-pulse flex space-x-4">
+    <div class="rounded-lg bg-neutral-200 dark:bg-white/[.1] h-[120px] w-[120px]"></div>
+    <div class="flex-1 space-y-4 py-1">
+      <div class="h-4 bg-neutral-200 dark:bg-white/[.1] rounded w-3/4"></div>
+      <div class="space-y-2">
+        <div class="h-3 bg-neutral-200 dark:bg-white/[.1] rounded"></div>
+        <div class="h-3 bg-neutral-200 dark:bg-white/[.1] rounded w-5/6"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initLazySpotify() {
+    const players = document.querySelectorAll('.lazy-spotify');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const container = entry.target;
+          if (!container.dataset.loaded) {
+            loadSpotifyEmbed(container);
+            container.dataset.loaded = 'true';
+            // Stop observing after loading
+            observer.unobserve(container);
+          }
+        }
+      });
+    }, {
+      rootMargin: '100px 0px',
+      threshold: 0.1
+    });
+
+    players.forEach(player => observer.observe(player));
+  }
+
+  function loadSpotifyEmbed(container: Element) {
+    const episodeId = container.getAttribute('data-episode-id');
+    const title = container.getAttribute('data-title');
+    
+    const iframe = document.createElement('iframe');
+    iframe.style.borderRadius = '12px';
+    iframe.src = `https://open.spotify.com/embed/episode/${episodeId}`;
+    iframe.width = '100%';
+    iframe.height = '152';
+    iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
+    iframe.setAttribute('loading', 'lazy');
+    iframe.setAttribute('title', title || 'Spotify podcast episode');
+    
+    // Clear placeholder and add iframe
+    container.innerHTML = '';
+    container.appendChild(iframe);
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initLazySpotify);
+</script>

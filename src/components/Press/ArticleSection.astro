@@ -1,0 +1,41 @@
+---
+import { formatDate, getFaviconUrl } from '@utils/pressUtils';
+import type { PressCoverage } from '@/types'; // Assuming you have this type defined
+
+interface Props {
+  articles: PressCoverage[];
+}
+
+const { articles } = Astro.props;
+---
+
+<section id="articles" class="container mx-auto px-4 mb-16">
+  <h2 class="h2 mb-4">Articles & Interviews</h2>
+  <div class="space-y-4">
+    {articles.map(article => (
+      <div class="bg-neutral-100 dark:bg-white/[.075] rounded-xl p-6">
+        <div class="flex items-center gap-3">
+          {article.articleUrl && (
+            <img 
+              src={getFaviconUrl(article.articleUrl)} 
+              alt=""
+              width="16" 
+              height="16"
+              class="w-4 h-4 object-contain"
+            />
+          )}
+          <h3 class="h3 mb-0 flex-1">
+            <a href={article.articleUrl} target="_blank" rel="noopener noreferrer" 
+               class="text-teal-500 hover:text-teal-600">
+              {article.title}
+            </a>
+          </h3>
+        </div>
+        <p class="description text-sm text-neutral-600 dark:text-neutral-400 mt-4">
+          {formatDate(article.publicationDate)}
+          {article.personOrganization && ` • by ${article.personOrganization}`}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>

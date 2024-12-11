@@ -1,0 +1,70 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  currentSlug: string;
+  presentations: CollectionEntry<'presentations'>[];
+}
+
+const { currentSlug, presentations } = Astro.props;
+
+// Sort presentations by title
+const sortedPresentations = presentations.sort((a, b) => 
+  a.data.title.localeCompare(b.data.title)
+);
+
+// Find current presentation index
+const currentIndex = sortedPresentations.findIndex(p => p.slug === currentSlug);
+const prevPresentation = currentIndex > 0 ? sortedPresentations[currentIndex - 1] : null;
+const nextPresentation = currentIndex < sortedPresentations.length - 1 ? sortedPresentations[currentIndex + 1] : null;
+---
+
+<nav class="border-t border-base-200 dark:border-base-800 mt-12 pt-8">
+  <div class="flex justify-between items-center">
+    <a 
+      href="/presentations" 
+      class="text-base-600 dark:text-base-400 hover:text-primary-500 dark:hover:text-primary-400 flex items-center gap-2"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+        <path d="M15 6l-6 6l6 6" />
+      </svg>
+      Back to Presentations
+    </a>
+  </div>
+
+  <div class="flex justify-between items-center mt-8 gap-4">
+    {prevPresentation && (
+      <a 
+        href={`/presentations/${prevPresentation.slug}`}
+        class="flex-1 p-4 rounded-lg border border-base-200 dark:border-base-800 hover:border-primary-500 dark:hover:border-primary-400 group"
+      >
+        <span class="text-sm text-base-500 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+            <path d="M15 6l-6 6l6 6" />
+          </svg>
+          Previous
+        </span>
+        <p class="font-medium mt-1 text-base-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400 line-clamp-2">
+          {prevPresentation.data.title}
+        </p>
+      </a>
+    )}
+
+    {nextPresentation && (
+      <a 
+        href={`/presentations/${nextPresentation.slug}`}
+        class="flex-1 p-4 rounded-lg border border-base-200 dark:border-base-800 hover:border-primary-500 dark:hover:border-primary-400 group text-right"
+      >
+        <span class="text-sm text-base-500 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1 justify-end">
+          Next
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
+            <path d="M9 6l6 6l-6 6" />
+          </svg>
+        </span>
+        <p class="font-medium mt-1 text-base-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400 line-clamp-2">
+          {nextPresentation.data.title}
+        </p>
+      </a>
+    )}
+  </div>
+</nav>
