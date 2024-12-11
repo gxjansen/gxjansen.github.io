@@ -5,22 +5,26 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 // components
 import Badge from "@components/Badge/Badge.astro";
 import RelatedPresentations from "@components/RelatedPresentations/RelatedPresentations.astro";
+import EventCard from "@components/Events/EventCard.astro";
 
 // utils
-import { getAllEvents, getEventById } from "@utils/eventPresentationRelations";
+import { getAllEvents, getEventById, getPresentationUrl } from "@utils/eventPresentationRelations";
 import type { Event } from "@utils/eventPresentationRelations";
 
 // Generate static paths for all events
 export function getStaticPaths() {
   const events = getAllEvents();
-  return events.map(event => ({
-    params: { id: event.id },
-    props: { event },
-  }));
+  return events.map(event => {
+    const presentationUrl = getPresentationUrl(event.id);
+    return {
+      params: { id: event.id },
+      props: { event, presentationUrl },
+    };
+  });
 }
 
 // Get event data
-const { event } = Astro.props as { event: Event };
+const { event, presentationUrl } = Astro.props as { event: Event; presentationUrl?: string };
 
 // Format date
 const eventDate = new Date(event.date).toLocaleDateString('en-US', {

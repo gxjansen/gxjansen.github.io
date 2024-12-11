@@ -39,14 +39,22 @@ const secondColumnEvents = sortedEvents.filter((_, i) => i % 2 === 1);
       {/* First column */}
       <div class="space-y-6">
         {firstColumnEvents.map((event) => (
-          <EventCard {...event} />
+          <EventCard 
+            {...event} 
+            showPresentationName={false}
+            isOnPresentationPage={true}
+          />
         ))}
       </div>
 
       {/* Second column - offset as a whole */}
       <div class="space-y-6 md:mt-24">
         {secondColumnEvents.map((event) => (
-          <EventCard {...event} />
+          <EventCard 
+            {...event} 
+            showPresentationName={false}
+            isOnPresentationPage={true}
+          />
         ))}
       </div>
     </div>
