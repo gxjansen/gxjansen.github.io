@@ -1,0 +1,103 @@
+---
+// layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import Badge from "@components/Badge/Badge.astro";
+import SlideEmbed from "@components/Presentations/SlideEmbed.astro";
+import VideoEmbed from "@components/Presentations/VideoEmbed.astro";
+import PresentationNav from "@components/Presentations/PresentationNav.astro";
+
+// content
+import { getCollection, getEntry } from 'astro:content';
+
+// Generate static paths for all presentations
+export async function getStaticPaths() {
+  const presentations = await getCollection('presentations');
+  return presentations.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry, presentations },
+  }));
+}
+
+// Get presentation data
+const { entry, presentations } = Astro.props;
+const { Content } = await entry.render();
+const { 
+  title, 
+  duration, 
+  intendedAudience, 
+  isWorkshop, 
+  image,
+  slideshareKey,
+  youtubeId 
+} = entry.data;
+
+// Metadata
+const metaDescription = `${title}${intendedAudience ? ` - For ${intendedAudience}` : ''}. ${duration} presentation${isWorkshop ? ' workshop' : ''}.`;
+const metaImage = new URL(image, Astro.site);
+---
+
+<BaseLayout 
+  title={`${title} | Presentations`}
+  description={metaDescription}
+  image={metaImage}
+>
+  <Fragment slot="head">
+    {/* Preload critical resources */}
+    <link rel="preload" as="image" href={image} />
+    {youtubeId && <link rel="preconnect" href="https://www.youtube.com" />}
+    {slideshareKey && <link rel="preconnect" href="https://www.slideshare.net" />}
+  </Fragment>
+
+  <section class="py-24 md:py-28">
+    <div class="site-container">
+      <div class="mx-auto max-w-4xl">
+        <div class="mb-8" data-aos="fade-up">
+          <Badge>Presentation</Badge>
+          <h1 class="h2 mb-4 text-white">{title}</h1>
+          
+          <div class="mb-6 flex flex-wrap gap-3">
+            {duration && (
+              <span class="rounded-full bg-base-100 px-3 py-1 text-sm text-base-700 dark:bg-base-800 dark:text-base-300">
+                {duration}
+              </span>
+            )}
+            {isWorkshop && (
+              <span class="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                Workshop
+              </span>
+            )}
+          </div>
+
+          {intendedAudience && (
+            <p class="text-lg text-base-400">
+              For: {intendedAudience}
+            </p>
+          )}
+        </div>
+
+        <div class="prose prose-lg dark:prose-invert mb-12">
+          <img
+            src={image}
+            alt={title}
+            width="800"
+            height="450"
+            class="rounded-lg mb-8 w-full h-auto aspect-video object-cover"
+            loading="eager"
+          />
+          
+          <Content />
+        </div>
+
+        {slideshareKey && <SlideEmbed slideshareKey={slideshareKey} />}
+        {youtubeId && <VideoEmbed youtubeId={youtubeId} />}
+
+        <PresentationNav 
+          currentSlug={entry.slug}
+          presentations={presentations}
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

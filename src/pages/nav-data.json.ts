@@ -2,13 +2,20 @@ import { getCollection } from "astro:content";
 import { countItems, sortByValue } from "@js/blogUtils";
 import { humanize } from "@js/textUtils";
 
+interface BlogPost {
+  data: {
+    draft?: boolean;
+    categories?: string[];
+  };
+}
+
 export async function GET() {
   // Get all categories from blog posts
-  const posts = await getCollection("blog", ({ data }) => {
+  const posts = await getCollection("blog", ({ data }: BlogPost) => {
     return !data.draft;
   });
 
-  const allCategories = posts.map((post) => post.data.categories).flat();
+  const allCategories = posts.map((post: BlogPost) => post.data.categories || []).flat();
   const processedCategories = sortByValue(countItems(allCategories));
 
   const navConfig = [
@@ -19,6 +26,10 @@ export async function GET() {
     {
       text: "Events",
       link: "/events",
+    },
+    {
+      text: "Presentations",
+      link: "/presentations",
     },
     {
       text: "Press",
@@ -93,16 +104,6 @@ export async function GET() {
         },
       ],
     },
-    // Uncomment to add categories to the navigation
-    // {
-    //   text: "Categories",
-    //   dropdown: processedCategories.map(([category, count]) => {
-    //     return {
-    //       text: humanize(category),
-    //       link: `/categories/${category}`,
-    //     };
-    //   }),
-    // },
   ];
 
   return new Response(JSON.stringify(navConfig), {

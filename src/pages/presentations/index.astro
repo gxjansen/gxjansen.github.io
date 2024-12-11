@@ -1,0 +1,80 @@
+---
+// layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import Badge from "@components/Badge/Badge.astro";
+import PresentationCard from "@components/Presentations/PresentationCard.astro";
+
+// content
+import { getCollection } from 'astro:content';
+
+// Get all presentations
+const allPresentations = await getCollection('presentations');
+
+// Filter out presentations without required data
+const validPresentations = allPresentations.filter(p => {
+  const hasTitle = !!p.data.title;
+  const hasImage = !!p.data.image;
+  return hasTitle && hasImage;
+});
+
+// Split into featured and non-featured
+const featuredPresentations = validPresentations
+  .filter(p => p.data.isFeatured)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const otherPresentations = validPresentations
+  .filter(p => !p.data.isFeatured)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+// Debug: Log presentations
+console.log('\nFeatured presentations:', featuredPresentations.length);
+featuredPresentations.forEach(p => console.log(`- ${p.data.title}`));
+
+console.log('\nOther presentations:', otherPresentations.length);
+otherPresentations.forEach(p => console.log(`- ${p.data.title}`));
+---
+
+<BaseLayout 
+  title="Presentations"
+  description="Presentations and workshops by Guido Jansen."
+>
+  <section class="py-24 md:py-28">
+    <div class="site-container">
+      <!-- Featured Presentations -->
+      <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+        <Badge>Featured</Badge>
+        <h1 class="h1 mb-4 text-white">Featured Presentations</h1>
+        <p class="description text-lg md:text-xl text-slate-400">
+          A selection of my most popular presentations and workshops. Contact me if you're interested in having me speak at your event!
+        </p>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-32">
+        {featuredPresentations.map(presentation => (
+          <div data-aos="fade-up">
+            <PresentationCard presentation={presentation} />
+          </div>
+        ))}
+      </div>
+
+      <!-- Other Presentations -->
+      <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+        <Badge>More</Badge>
+        <h2 class="h2 mb-4 text-white">More Presentations</h2>
+        <p class="description text-lg md:text-xl text-slate-400">
+          Other presentations and workshops I've given at various events.
+        </p>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {otherPresentations.map(presentation => (
+          <div data-aos="fade-up">
+            <PresentationCard presentation={presentation} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

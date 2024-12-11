@@ -8,6 +8,10 @@ const navConfig = [
     link: "/events",
   },
   {
+    text: "Presentations",
+    link: "/presentations",
+  },
+  {
     text: "Press",
     link: "/press",
   },

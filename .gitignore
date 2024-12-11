@@ -17,6 +17,10 @@ package-lock.json
 .eslintcache
 .pnpm-store
 
+# Project planning
+presentations.csv
+questions.md
+
 # do not commit .env files or any files that end with `.env`
 *.env
 .env
