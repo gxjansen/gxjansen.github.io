@@ -1,7 +1,6 @@
 ---
 import { getImage } from "astro:assets";
 import { type CollectionEntry } from "astro:content";
-import { SEO } from "astro-seo";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -27,9 +26,9 @@ interface GenProps extends BaseProps {
 
 interface BlogProps extends BaseProps {
   type: "blog";
-  image: ImageMetadata;
-  authors: CollectionEntry<"authors">[];
-  postFrontmatter: CollectionEntry<"blog">["data"];
+  image?: ImageMetadata;
+  authors?: CollectionEntry<"authors">[];
+  postFrontmatter?: CollectionEntry<"blog">["data"];
 }
 
 const {
@@ -46,14 +45,16 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 // if this is a blog page we do things differently
 if (type === "blog") {
-  const { authors, postFrontmatter } = Astro.props as BlogProps;
+  const { authors = [], postFrontmatter } = Astro.props as BlogProps;
 
-  optimizedImage = await getImage({
-    src: image,
-    format: "webp",
-    quality: "high",
-    width: 1200,
-  });
+  if (image) {
+    optimizedImage = await getImage({
+      src: image,
+      format: "webp",
+      quality: "high",
+      width: 1200,
+    });
+  }
 
   jsonLD = jsonLDGenerator({
     type: "blog",
@@ -70,53 +71,36 @@ else {
   });
 }
 
-function trimEndSlash(str: string) {
-  if (str[str.length - 1] === "/") {
-    return str.slice(0, -1);
-  } else {
-    return str;
-  }
-}
-
-// put together the image URL
-const imageUrl =
-  trimEndSlash(Astro.site?.toString() || "") +
-  (optimizedImage?.src || siteData.defaultImage.src);
+// Ensure we have an absolute URL for the image
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
+const imageUrl = optimizedImage 
+  ? new URL(optimizedImage.src, siteUrl).toString()
+  : new URL(siteData.defaultImage.src, siteUrl).toString();
 ---
 
-<SEO
-  title={title}
-  description={description}
-  canonical={canonicalUrl.toString()}
-  openGraph={{
-    basic: {
-      title: title,
-      type: "website",
-      image: imageUrl,
-      url: canonicalUrl.toString(),
-    },
-    optional: {
-      description: description,
-      siteName: siteData.title,
-    },
-    image: {
-      type: "image/webp",
-      width: optimizedImage?.attributes.width || "1200",
-      height: optimizedImage?.attributes.height || "800",
-      alt: title,
-    },
-  }}
-  twitter={{
-    site: "@" + siteData.author.twitter,
-    creator: "@" + siteData.author.twitter,
-    card: "summary_large_image",
-    title: title,
-    description: description,
-    image: imageUrl,
-  }}
-  noindex={noindex}
-  nofollow={noindex}
-/>
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+<link rel="canonical" href={canonicalUrl.toString()} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type === "blog" ? "article" : "website"} />
+<meta property="og:url" content={canonicalUrl.toString()} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:site_name" content={siteData.title} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl.toString()} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={imageUrl} />
+<meta name="twitter:site" content={"@" + siteData.author.twitter} />
+<meta name="twitter:creator" content={"@" + siteData.author.twitter} />
 
 <!-- JSON LD -->
 <Fragment set:html={jsonLD} />

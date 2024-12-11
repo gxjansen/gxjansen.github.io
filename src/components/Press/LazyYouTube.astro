@@ -1,0 +1,87 @@
+---
+// Props interface for the component
+interface Props {
+  videoId: string;
+  title: string;
+}
+
+const { videoId, title } = Astro.props;
+
+// Generate thumbnail URL (using maxresdefault for best quality)
+const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+---
+
+<div 
+  class="lazy-youtube aspect-video bg-neutral-100 dark:bg-white/[.075] relative cursor-pointer" 
+  data-video-id={videoId}
+  data-title={title}
+>
+  <!-- Thumbnail with loading optimization -->
+  <img 
+    src={thumbnailUrl} 
+    alt={`Thumbnail for ${title}`}
+    class="w-full h-full object-cover transition-opacity duration-300"
+    loading="lazy"
+    decoding="async"
+  />
+  
+  <!-- Play button overlay -->
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="w-16 h-12 bg-red-600 rounded-lg flex items-center justify-center hover:bg-red-700 transition-colors">
+      <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Initialize lazy loading for YouTube videos
+  function initLazyYouTube() {
+    const players = document.querySelectorAll('.lazy-youtube');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // Only load when element becomes visible
+        if (entry.isIntersecting) {
+          const player = entry.target;
+          
+          // Add click handler if not already initialized
+          if (!player.dataset.initialized) {
+            player.addEventListener('click', loadVideo);
+            player.dataset.initialized = 'true';
+          }
+        }
+      });
+    }, {
+      rootMargin: '50px 0px', // Start loading slightly before element becomes visible
+      threshold: 0.1
+    });
+
+    players.forEach(player => observer.observe(player));
+  }
+
+  function loadVideo(event: Event) {
+    const container = event.currentTarget as HTMLElement;
+    const videoId = container.dataset.videoId;
+    const title = container.dataset.title;
+    
+    // Create and insert iframe
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1`);
+    iframe.setAttribute('title', title || 'YouTube video');
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen');
+    iframe.classList.add('w-full', 'h-full', 'absolute', 'top-0', 'left-0');
+    
+    // Clear container and add iframe
+    container.innerHTML = '';
+    container.appendChild(iframe);
+    
+    // Remove click handler
+    container.removeEventListener('click', loadVideo);
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initLazyYouTube);
+</script>

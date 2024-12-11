@@ -4,6 +4,13 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
 import Badge from "@components/Badge/Badge.astro";
+import ContentTypeSelector from "@components/Press/ContentTypeSelector.astro";
+import VideoSection from "@components/Press/VideoSection.astro";
+import PodcastSection from "@components/Press/PodcastSection.astro";
+import ArticleSection from "@components/Press/ArticleSection.astro";
+import LinkedInCTA from "@components/Press/LinkedInCTA.astro";
+
+// data
 import { pressCoverage } from '../data/press-coverage';
 
 // Sort press coverage by date
@@ -16,33 +23,43 @@ const videos = sortedCoverage.filter(item => item.youtubeLink);
 const podcasts = sortedCoverage.filter(item => item.spotifyEmbedId);
 const articles = sortedCoverage.filter(item => !item.youtubeLink && !item.spotifyEmbedId);
 
-// Format date function
-function formatDate(date: string) {
-  return new Date(date).toLocaleDateString('en-US', {
-    month: 'long',
-    year: 'numeric'
-  });
-}
-
-// Get favicon URL function with fallback
-function getFaviconUrl(url: string) {
-  try {
-    // Default to our local fallback icon
-    if (!url) return '/assets/document-icon.svg';
-    
-    const domain = new URL(url).hostname;
-    // Use Google's favicon service with our fallback as the default
-    return `https://www.google.com/s2/favicons?domain=${domain}&sz=32&default=/assets/document-icon.svg`;
-  } catch {
-    return '/assets/document-icon.svg';
-  }
-}
+// Get first few video IDs for preloading
+const firstVideoIds = videos
+  .slice(0, 2)
+  .map(video => {
+    const match = video.youtubeLink?.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
+    return match ? match[1] : '';
+  })
+  .filter(Boolean);
 ---
 
 <BaseLayout 
   title="Press / Media"
   description="Media appearances, interviews and articles featuring Guido Jansen."
 >
+  <!-- Resource hints for performance optimization -->
+  <Fragment slot="head">
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://i.ytimg.com" />
+    <link rel="preconnect" href="https://open.spotify.com" />
+    
+    <!-- DNS prefetch as fallback -->
+    <link rel="dns-prefetch" href="https://www.youtube.com" />
+    <link rel="dns-prefetch" href="https://i.ytimg.com" />
+    <link rel="dns-prefetch" href="https://open.spotify.com" />
+    
+    <!-- Preload critical thumbnails -->
+    {firstVideoIds.map(videoId => (
+      <link 
+        rel="preload" 
+        href={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+        as="image"
+        fetchpriority="high"
+      />
+    ))}
+  </Fragment>
+
   <section class="py-24 md:py-28">
     <div class="site-container bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat dark:bg-[url('/assets/pattern-dark.svg')]">
       <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
@@ -53,141 +70,38 @@ function getFaviconUrl(url: string) {
         </p>
       </div>
 
-      <!-- Content Type Selector -->
-      <div class="container mx-auto px-4 mb-12">
-        <div class="flex space-x-4">
-          <a href="#videos" class="px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition flex items-center gap-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Videos
-          </a>
-          <a href="#podcasts" class="px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition flex items-center gap-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-            </svg>
-            Podcasts
-          </a>
-          <a href="#articles" class="px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition flex items-center gap-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-            </svg>
-            Articles
-          </a>
-        </div>
-      </div>
+      <ContentTypeSelector />
     </div>
   </section>
 
-  <!-- Videos Section -->
-  <section id="videos" class="container mx-auto px-4 mb-16">
-    <h2 class="h2 mb-4">Video Interviews</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {videos.map(video => (
-        <div class="rounded-xl overflow-hidden">
-          <div class="aspect-video">
-            <iframe
-              class="w-full h-full"
-              src={`https://www.youtube.com/embed/${video.youtubeLink?.split('v=')[1]}`}
-              title={video.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-            ></iframe>
-          </div>
-          <div class="p-6">
-            <h3 class="h3 mb-4">{video.title}</h3>
-            <p class="description text-sm mb-4">
-              {formatDate(video.publicationDate)}
-              {video.personOrganization && ` • ${video.personOrganization}`}
-            </p>
-            <div class="description space-x-4">
-              {video.articleUrl && (
-                <a href={video.articleUrl} target="_blank" rel="noopener noreferrer" 
-                   >
-                  View article →
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Podcasts Section -->
-  <section id="podcasts" class="container mx-auto px-4 mb-16">
-    <h2 class="h2 mb-4">Podcast Appearances</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {podcasts.map(podcast => (
-        <div class="bg-neutral-100 dark:bg-white/[.075] rounded-xl p-6">
-          <iframe 
-            style="border-radius:12px" 
-            src={`https://open.spotify.com/embed/episode/${podcast.spotifyEmbedId}`} 
-            width="100%" 
-            height="152" 
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-            loading="lazy"
-          ></iframe>
-          <h3 class="h3 mb-4">{podcast.title}</h3>
-          <p class="description text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-            {formatDate(podcast.publicationDate)}
-            {podcast.personOrganization && ` • ${podcast.personOrganization}`}
-          </p>
-          {podcast.articleUrl && (
-            <a href={podcast.articleUrl} target="_blank" rel="noopener noreferrer" 
-               class="description text-teal-500 hover:text-teal-600">
-              View article →
-            </a>
-          )}
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Articles Section -->
-  <section id="articles" class="container mx-auto px-4 mb-16">
-    <h2 class="h2 mb-4">Articles & Interviews</h2>
-    <div class="space-y-4">
-      {articles.map(article => (
-        <div class="bg-neutral-100 dark:bg-white/[.075] rounded-xl p-6">
-          <div class="flex items-center gap-3">
-            {article.articleUrl && (
-              <img 
-                src={getFaviconUrl(article.articleUrl)} 
-                alt=""
-                width="16" 
-                height="16"
-                class="w-4 h-4 object-contain"
-              />
-            )}
-            <h3 class="h3 mb-0 flex-1">
-              <a href={article.articleUrl} target="_blank" rel="noopener noreferrer" 
-                 class="text-teal-500 hover:text-teal-600">
-                {article.title}
-              </a>
-            </h3>
-          </div>
-          <p class="description text-sm text-neutral-600 dark:text-neutral-400 mt-4">
-            {formatDate(article.publicationDate)}
-            {article.personOrganization && ` • by ${article.personOrganization}`}
-          </p>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- LinkedIn CTA -->
-  <section class="container mx-auto px-4 mb-16">
-    <div class="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-8 text-center">
-      <h2 class="h2 mb-4">More like this? Follow me on LinkedIn!</h2>
-      <p class="description mb-6 text-neutral-600 dark:text-neutral-400">Most of my content is published on LinkedIn, so make sure to follow me there!</p>
-      <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=gxjansen" target="_blank" rel="noopener noreferrer"
-         class="inline-flex items-center gap-2 px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-        </svg>
-        Follow on LinkedIn
-      </a>
-    </div>
-  </section>
+  <!-- Use view transitions for smooth content switching -->
+  <div class="view-transition-group:media-content">
+    <VideoSection videos={videos} />
+    <PodcastSection podcasts={podcasts} />
+    <ArticleSection articles={articles} />
+  </div>
+  
+  <LinkedInCTA />
 </BaseLayout>
+
+<script>
+  // Handle smooth scrolling to sections
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  });
+</script>
