@@ -20,6 +20,7 @@ package-lock.json
 # Project planning
 presentations.csv
 questions.md
+implementation.md
 
 # do not commit .env files or any files that end with `.env`
 *.env
