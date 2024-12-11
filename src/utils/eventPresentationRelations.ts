@@ -55,6 +55,21 @@ export function getRelatedPresentations(
 }
 
 /**
+ * Get the URL for the first related presentation of an event
+ * @param eventId - The ID of the event
+ * @returns The URL to the presentation or undefined if none exists
+ */
+export function getPresentationUrl(eventId: string): string | undefined {
+  const event = events.find(e => e.id === eventId);
+  if (!event || !event.relatedPresentationSlugs || event.relatedPresentationSlugs.length === 0) {
+    return undefined;
+  }
+  
+  // Return URL to the first related presentation
+  return `/presentations/${event.relatedPresentationSlugs[0]}`;
+}
+
+/**
  * Add a presentation-event relationship
  * @param presentationSlug - The slug of the presentation
  * @param eventId - The ID of the event
