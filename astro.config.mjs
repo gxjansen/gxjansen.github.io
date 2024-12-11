@@ -6,7 +6,6 @@ import AutoImport from "astro-auto-import";
 import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
 import netlify from "@astrojs/netlify";
-
 import compressor from "astro-compressor";
 import * as fs from 'node:fs';
 import * as path from 'node:path';

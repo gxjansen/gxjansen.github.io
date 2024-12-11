@@ -1,0 +1,54 @@
+---
+import { getRelatedEvents } from '../../utils/eventPresentationRelations';
+import { loadEventIcons } from '../../utils/eventUtils';
+import type { Event as EventUtilsType } from '../../utils/eventUtils';
+import type { Event as EventRelationType } from '../../utils/eventPresentationRelations';
+import EventCard from '../Events/EventCard.astro';
+
+interface Props {
+  presentationSlug: string;
+}
+
+const { presentationSlug } = Astro.props;
+
+// Get related events for this presentation
+const relatedEvents = getRelatedEvents(presentationSlug);
+
+// Convert EventRelationType to EventUtilsType format
+const eventsForLoading = relatedEvents.map(event => ({
+  ...event,
+  loadedIcon: null // Initialize with null, will be populated by loadEventIcons
+}));
+
+// Sort events by date in descending order and load icons
+const sortedEvents = await loadEventIcons(
+  [...eventsForLoading].sort((a, b) => 
+    new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
+);
+
+// Split events into two columns for better organization
+const firstColumnEvents = sortedEvents.filter((_, i) => i % 2 === 0);
+const secondColumnEvents = sortedEvents.filter((_, i) => i % 2 === 1);
+---
+
+{sortedEvents.length > 0 && (
+  <div class="border-t border-base-200 dark:border-base-800 mt-12 pt-12">
+    <h2 class="text-2xl font-bold mb-8 text-white">Related Events</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      {/* First column */}
+      <div class="space-y-6">
+        {firstColumnEvents.map((event) => (
+          <EventCard {...event} />
+        ))}
+      </div>
+
+      {/* Second column - offset as a whole */}
+      <div class="space-y-6 md:mt-24">
+        {secondColumnEvents.map((event) => (
+          <EventCard {...event} />
+        ))}
+      </div>
+    </div>
+  </div>
+)}

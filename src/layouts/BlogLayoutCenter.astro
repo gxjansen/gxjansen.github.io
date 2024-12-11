@@ -37,7 +37,7 @@ const {
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
-const authorsData = authors.length > 0 ? await getEntries(authors) : [];
+const authorsData = authors && authors.length > 0 ? await getEntries(authors.map(author => ({ collection: 'authors', id: author }))) : [];
 ---
 
 <BaseLayout
@@ -111,14 +111,12 @@ const authorsData = authors.length > 0 ? await getEntries(authors) : [];
       <!-- blog post main image -->
       {heroImage && (
         <div class="mt-6 max-w-[1000px] overflow-hidden">
-          <Image
-            src={heroImage}
+          <img
+            src={heroImage.src}
             alt={`Cover for ${title}`}
             width={2000}
-            quality="high"
             class="max-h-[70vh] rounded-xl object-cover"
             loading="eager"
-            format="webp"
             transition:name={transitionName}
           />
         </div>
