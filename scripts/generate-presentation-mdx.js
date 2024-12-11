@@ -43,7 +43,7 @@ function createMDXContent(presentation) {
     .map(([key, value]) => {
       if (typeof value === 'string') {
         // Escape quotes in strings
-        const escapedValue = value.replace(/"/g, '\\"');
+        const escapedValue = value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
         return `${key}: "${escapedValue}"`;
       }
       return `${key}: ${value}`;
