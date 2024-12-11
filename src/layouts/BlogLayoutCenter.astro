@@ -28,8 +28,8 @@ const { post, transitionName } = Astro.props as Props;
 const {
   title,
   description,
-  authors,
-  categories,
+  authors = [],
+  categories = [],
   pubDate,
   updatedDate,
   heroImage,
@@ -37,7 +37,7 @@ const {
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
-const authorsData = await getEntries(authors);
+const authorsData = authors.length > 0 ? await getEntries(authors) : [];
 ---
 
 <BaseLayout
@@ -69,27 +69,31 @@ const authorsData = await getEntries(authors);
             {
               authorsData.map((authorData) => (
                 <div class="mb-auto flex">
-                  <figure>
-                    <Image
-                      src={authorData.data.avatar}
-                      alt={`${authorData.data.name} avatar`}
-                      width={100}
-                      quality="high"
-                      loading="eager"
-                      class="h-7 w-7 rounded-full object-cover"
-                    />
-                  </figure>
+                  {authorData.data.avatar && (
+                    <figure>
+                      <Image
+                        src={authorData.data.avatar}
+                        alt={`${authorData.data.name} avatar`}
+                        width={100}
+                        quality="high"
+                        loading="eager"
+                        class="h-7 w-7 rounded-full object-cover"
+                      />
+                    </figure>
+                  )}
                   <div class="my-auto ml-2">{authorData.data.name}</div>
                 </div>
               ))
             }
 
-            <span>&bull;</span>
+            {authorsData.length > 0 && pubDate && <span>&bull;</span>}
 
             <!-- Date -->
-            <time class="my-auto h-full" datetime={pubDate.toISOString()}
-              >{formatDate(pubDate, currLocale)}
-            </time>
+            {pubDate && (
+              <time class="my-auto h-full" datetime={pubDate instanceof Date ? pubDate.toISOString() : pubDate}
+                >{formatDate(pubDate, currLocale)}
+              </time>
+            )}
           </div>
         </div>
       </div>
@@ -105,18 +109,20 @@ const authorsData = await getEntries(authors);
         </a>
       </div>
       <!-- blog post main image -->
-      <div class="mt-6 max-w-[1000px] overflow-hidden">
-        <Image
-          src={heroImage}
-          alt={`Cover for ${title}`}
-          width={2000}
-          quality="high"
-          class="max-h-[70vh] rounded-xl object-cover"
-          loading="eager"
-          format="webp"
-          transition:name={transitionName}
-        />
-      </div>
+      {heroImage && (
+        <div class="mt-6 max-w-[1000px] overflow-hidden">
+          <Image
+            src={heroImage}
+            alt={`Cover for ${title}`}
+            width={2000}
+            quality="high"
+            class="max-h-[70vh] rounded-xl object-cover"
+            loading="eager"
+            format="webp"
+            transition:name={transitionName}
+          />
+        </div>
+      )}
     </div>
 
     <!-- article content -->
@@ -126,7 +132,7 @@ const authorsData = await getEntries(authors);
           {
             updatedDate && (
               <div class="mb-6 italic">
-                <time datetime={updatedDate.toISOString()}>
+                <time datetime={updatedDate instanceof Date ? updatedDate.toISOString() : updatedDate}>
                   {t("updated")}: {formatDate(updatedDate, currLocale)}
                 </time>
               </div>

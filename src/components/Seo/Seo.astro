@@ -27,9 +27,9 @@ interface GenProps extends BaseProps {
 
 interface BlogProps extends BaseProps {
   type: "blog";
-  image: ImageMetadata;
-  authors: CollectionEntry<"authors">[];
-  postFrontmatter: CollectionEntry<"blog">["data"];
+  image?: ImageMetadata;
+  authors?: CollectionEntry<"authors">[];
+  postFrontmatter?: CollectionEntry<"blog">["data"];
 }
 
 const {
@@ -46,14 +46,16 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 // if this is a blog page we do things differently
 if (type === "blog") {
-  const { authors, postFrontmatter } = Astro.props as BlogProps;
+  const { authors = [], postFrontmatter } = Astro.props as BlogProps;
 
-  optimizedImage = await getImage({
-    src: image,
-    format: "webp",
-    quality: "high",
-    width: 1200,
-  });
+  if (image) {
+    optimizedImage = await getImage({
+      src: image,
+      format: "webp",
+      quality: "high",
+      width: 1200,
+    });
+  }
 
   jsonLD = jsonLDGenerator({
     type: "blog",
@@ -79,9 +81,9 @@ function trimEndSlash(str: string) {
 }
 
 // put together the image URL
-const imageUrl =
-  trimEndSlash(Astro.site?.toString() || "") +
-  (optimizedImage?.src || siteData.defaultImage.src);
+const baseUrl = trimEndSlash(Astro.site?.toString() || "");
+const defaultImageUrl = baseUrl + siteData.defaultImage.src;
+const imageUrl = optimizedImage ? baseUrl + optimizedImage.src : defaultImageUrl;
 ---
 
 <SEO
@@ -90,26 +92,15 @@ const imageUrl =
   canonical={canonicalUrl.toString()}
   openGraph={{
     basic: {
-      title: title,
+      title,
       type: "website",
-      image: imageUrl,
-      url: canonicalUrl.toString(),
-    },
-    optional: {
-      description: description,
-      siteName: siteData.title,
-    },
-    image: {
-      type: "image/webp",
-      width: optimizedImage?.attributes.width || "1200",
-      height: optimizedImage?.attributes.height || "800",
-      alt: title,
+      image: defaultImageUrl,
     },
   }}
   twitter={{
+    card: "summary_large_image",
     site: "@" + siteData.author.twitter,
     creator: "@" + siteData.author.twitter,
-    card: "summary_large_image",
     title: title,
     description: description,
     image: imageUrl,
