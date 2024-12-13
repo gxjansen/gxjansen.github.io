@@ -1,4 +1,6 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+
 // layout
 import BaseLayout from "@layouts/BaseLayout.astro";
 
@@ -10,18 +12,25 @@ import PresentationNav from "@components/Presentations/PresentationNav.astro";
 import RelatedEvents from "@components/RelatedEvents/RelatedEvents.astro";
 
 // content
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 
-// Generate static paths for all presentations
+// Generate static paths for all non-hidden presentations
 export async function getStaticPaths() {
-  const presentations = await getCollection('presentations');
-  return presentations.map(entry => ({
+  const allPresentations = await getCollection('presentations');
+  // Filter out presentations with isHidden: true
+  const visiblePresentations = allPresentations.filter(p => p.data.isHidden !== true);
+  
+  return visiblePresentations.map(entry => ({
     params: { slug: entry.slug },
-    props: { entry, presentations },
+    props: { entry, presentations: visiblePresentations },
   }));
 }
 
-// Get presentation data
+interface Props {
+  entry: CollectionEntry<'presentations'>;
+  presentations: CollectionEntry<'presentations'>[];
+}
+
 const { entry, presentations } = Astro.props;
 const { Content } = await entry.render();
 const { 
@@ -34,7 +43,6 @@ const {
   youtubeId 
 } = entry.data;
 
-// Metadata
 const metaDescription = `${title}${intendedAudience ? ` - For ${intendedAudience}` : ''}. ${duration} presentation${isWorkshop ? ' workshop' : ''}.`;
 const metaImage = new URL(image, Astro.site);
 ---
@@ -44,12 +52,11 @@ const metaImage = new URL(image, Astro.site);
   description={metaDescription}
   image={metaImage}
 >
-  <Fragment slot="head">
-    {/* Preload critical resources */}
+  <div slot="head">
     <link rel="preload" as="image" href={image} />
     {youtubeId && <link rel="preconnect" href="https://www.youtube.com" />}
     {slideshareKey && <link rel="preconnect" href="https://www.slideshare.net" />}
-  </Fragment>
+  </div>
 
   <section class="py-24 md:py-28">
     <div class="site-container">
@@ -99,7 +106,6 @@ const metaImage = new URL(image, Astro.site);
           presentations={presentations}
         />
 
-        {/* Add Related Events component */}
         <RelatedEvents presentationSlug={entry.slug} />
       </div>
     </div>
