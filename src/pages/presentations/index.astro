@@ -1,4 +1,6 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+
 // layout
 import BaseLayout from "@layouts/BaseLayout.astro";
 
@@ -10,30 +12,27 @@ import PresentationCard from "@components/Presentations/PresentationCard.astro";
 import { getCollection } from 'astro:content';
 
 // Get all presentations
-const allPresentations = await getCollection('presentations');
+const allPresentations: CollectionEntry<'presentations'>[] = await getCollection('presentations');
 
-// Filter out presentations without required data
-const validPresentations = allPresentations.filter(p => {
-  const hasTitle = !!p.data.title;
-  const hasImage = !!p.data.image;
-  return hasTitle && hasImage;
+// Filter out presentations without required data and those with isHidden: true
+const validPresentations: CollectionEntry<'presentations'>[] = allPresentations.filter(p => {
+  // Check if presentation has required fields
+  if (!p.data.title || !p.data.image) {
+    return false;
+  }
+  
+  // Filter out presentations with isHidden: true
+  return p.data.isHidden !== true;
 });
 
 // Split into featured and non-featured
-const featuredPresentations = validPresentations
+const featuredPresentations: CollectionEntry<'presentations'>[] = validPresentations
   .filter(p => p.data.isFeatured)
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
 
-const otherPresentations = validPresentations
+const otherPresentations: CollectionEntry<'presentations'>[] = validPresentations
   .filter(p => !p.data.isFeatured)
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
-
-// Debug: Log presentations
-console.log('\nFeatured presentations:', featuredPresentations.length);
-featuredPresentations.forEach(p => console.log(`- ${p.data.title}`));
-
-console.log('\nOther presentations:', otherPresentations.length);
-otherPresentations.forEach(p => console.log(`- ${p.data.title}`));
 ---
 
 <BaseLayout 
