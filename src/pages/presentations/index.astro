@@ -50,9 +50,9 @@ const otherPresentations: CollectionEntry<'presentations'>[] = validPresentation
         </p>
       </div>
 
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-32">
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-32 auto-rows-fr">
         {featuredPresentations.map(presentation => (
-          <div data-aos="fade-up">
+          <div data-aos="fade-up" class="h-full">
             <PresentationCard presentation={presentation} />
           </div>
         ))}
@@ -67,9 +67,9 @@ const otherPresentations: CollectionEntry<'presentations'>[] = validPresentation
         </p>
       </div>
 
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
         {otherPresentations.map(presentation => (
-          <div data-aos="fade-up">
+          <div data-aos="fade-up" class="h-full">
             <PresentationCard presentation={presentation} />
           </div>
         ))}
