@@ -1,0 +1,65 @@
+---
+// layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import Badge from "@components/Badge/Badge.astro";
+import EventCard from "@components/Events/EventCard.astro";
+
+// utils
+import { getAllEvents, getPresentationUrl } from "@utils/eventPresentationRelations";
+import { loadEventIcons } from "@utils/eventUtils";
+
+// Get all events and sort them by date
+const events = getAllEvents();
+const sortedEvents = await loadEventIcons(
+  [...events].sort((a, b) => 
+    new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
+);
+
+// Split events into two columns for better organization
+const firstColumnEvents = sortedEvents.filter((_, i) => i % 2 === 0);
+const secondColumnEvents = sortedEvents.filter((_, i) => i % 2 === 1);
+---
+
+<BaseLayout 
+  title="Events"
+  description="Overview of all events"
+>
+  <section class="py-24 md:py-28">
+    <div class="site-container">
+      <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+        <Badge>Events</Badge>
+        <h1 class="h2 mb-4">Events Overview</h1>
+        <p class="description text-lg md:text-xl">
+          An overview of all events I've spoken at or attended
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        {/* First column */}
+        <div class="space-y-6">
+          {firstColumnEvents.map((event) => (
+            <EventCard 
+              {...event} 
+              showPresentationName={true}
+              presentationUrl={getPresentationUrl(event.id)}
+            />
+          ))}
+        </div>
+
+        {/* Second column - offset as a whole */}
+        <div class="space-y-6 md:mt-24">
+          {secondColumnEvents.map((event) => (
+            <EventCard 
+              {...event} 
+              showPresentationName={true}
+              presentationUrl={getPresentationUrl(event.id)}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
