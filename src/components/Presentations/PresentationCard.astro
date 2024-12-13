@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 
-interface Props {
+export interface Props {
   presentation: CollectionEntry<'presentations'>;
 }
 
@@ -9,40 +9,53 @@ const { presentation } = Astro.props;
 const { title, duration, intendedAudience, isWorkshop, image } = presentation.data;
 ---
 
-<article class="flex flex-col rounded-lg border border-base-200 bg-background dark:border-base-800 dark:bg-base-900">
-  {image && (
-    <div class="relative overflow-hidden rounded-t-lg aspect-video">
-      <img 
-        src={image} 
-        alt={title}
-        class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-        width="400"
-        height="225"
-      />
-    </div>
-  )}
-  <div class="p-6">
-    <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-white">
-      <a href={`/presentations/${presentation.slug}`} class="hover:text-primary-500 transition-colors duration-300">
-        {title}
-      </a>
-    </h3>
-    <div class="mb-4 flex flex-wrap gap-2">
-      {duration && (
-        <span class="rounded-full bg-base-100 px-3 py-1 text-sm text-base-700 dark:bg-base-800 dark:text-base-300">
-          {duration}
-        </span>
-      )}
-      {isWorkshop && (
-        <span class="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-          Workshop
-        </span>
-      )}
-    </div>
-    {intendedAudience && (
-      <p class="text-sm text-base-600 dark:text-base-400">
-        For: {intendedAudience}
-      </p>
+<a 
+  href={`/presentations/${presentation.slug}`} 
+  class="block h-full group transition-transform duration-300 hover:-translate-y-1"
+>
+  <article class="h-full flex flex-col rounded-lg border border-base-200 bg-background dark:border-base-800 dark:bg-base-900 transition-colors duration-300 hover:border-primary-500 dark:hover:border-primary-400">
+    {image && (
+      <div class="relative overflow-hidden rounded-t-lg aspect-video">
+        <img 
+          src={image} 
+          alt={title || ''} 
+          class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          width="400"
+          height="225"
+        />
+      </div>
     )}
-  </div>
-</article>
+    <div class="flex-1 p-6 flex flex-col">
+      {/* Main content area with minimum height */}
+      <div class="min-h-[10rem] flex flex-col">
+        <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors duration-300 line-clamp-2">
+          {title}
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          {duration && (
+            <span class="rounded-full bg-base-100 px-3 py-1 text-sm text-base-700 dark:bg-base-800 dark:text-base-300">
+              {duration}
+            </span>
+          )}
+          {isWorkshop && (
+            <span class="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+              Workshop
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* For section at bottom */}
+      {intendedAudience && (
+        <div class="pt-4 border-t border-base-200 dark:border-base-800">
+          <div class="flex items-start gap-2">
+            <span class="text-sm font-medium text-base-700 dark:text-base-300 shrink-0">For:</span>
+            <p class="text-sm text-base-600 dark:text-base-400 leading-normal">
+              {intendedAudience}
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  </article>
+</a>

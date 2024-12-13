@@ -3,14 +3,34 @@ import { Image } from "astro:assets";
 import type { Event } from "../../utils/eventUtils";
 import { loadCountryFlag } from "../../utils/flagUtils";
 
-type Props = Event;
+interface Props extends Event {
+  showPresentationName?: boolean;  // Whether to show the presentation name
+  presentationUrl?: string;        // URL to the presentation if it exists
+  isOnPresentationPage?: boolean;  // Whether this card is shown on a presentation detail page
+}
 
-const { name, date, url, city, country, topic, role, workshop, loadedIcon } = Astro.props;
+const { 
+  name, 
+  date, 
+  url, 
+  city, 
+  country, 
+  topic, 
+  role, 
+  workshop, 
+  loadedIcon,
+  showPresentationName = true,
+  presentationUrl,
+  isOnPresentationPage = false
+} = Astro.props;
+
+// Determine which URL to use for the link
+const linkUrl = isOnPresentationPage ? url : (presentationUrl || url);
 
 // Prepare the content wrapper based on whether there's a URL
-const WrapperTag = url ? 'a' : 'div';
-const wrapperProps = url ? {
-  href: url,
+const WrapperTag = linkUrl ? 'a' : 'div';
+const wrapperProps = linkUrl ? {
+  href: linkUrl,
   target: "_blank",
   rel: "noopener noreferrer",
 } : {};
@@ -20,7 +40,7 @@ const displayText = topic || role;
 
 // Define classes based on whether the card is clickable
 const baseClasses = "block bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-2 transition-all duration-200";
-const clickableClasses = url 
+const clickableClasses = linkUrl 
   ? `${baseClasses} border-teal-400/30 hover:border-teal-400 hover:shadow-xl hover:-translate-y-1 cursor-pointer group` 
   : `${baseClasses} border-gray-200 dark:border-gray-700`;
 
@@ -46,15 +66,69 @@ const flagImage = country ? await loadCountryFlag(country) : null;
         <span class="text-2xl">🗓️</span>
       </div>
     )}
-    <div class="flex items-center gap-2">
-      <span class="text-xl font-semibold text-blue-600 dark:text-blue-400">
-        {name}
-      </span>
-      {url && (
-        <span class="text-teal-600 dark:text-teal-400 group-hover:translate-x-1 transition-transform duration-200">
+    <div class="flex flex-col">
+      <div class="flex items-center gap-2">
+        <span class="text-xl font-semibold text-blue-600 dark:text-blue-400">
+          {name}
+        </span>
+        {linkUrl && (
+          <span class="text-teal-600 dark:text-teal-400 group-hover:translate-x-1 transition-transform duration-200">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              class="h-5 w-5" 
+              viewBox="0 0 20 20" 
+              fill="currentColor"
+            >
+              <path 
+                fill-rule="evenodd" 
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
+                clip-rule="evenodd" 
+              />
+            </svg>
+          </span>
+        )}
+      </div>
+      <div class="text-gray-600 dark:text-gray-300 flex items-center gap-1">
+        {flagImage ? (
+          <Image
+            src={flagImage}
+            alt={`Flag of ${country}`}
+            width={20}
+            height={15}
+            class="inline-block rounded-sm mb-0"
+          />
+        ) : (
+          <span>🌎</span>
+        )}
+        <span>{city} &mdash; {" "}</span>
+        <span>
+          {new Date(date).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+          })}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-between items-center mt-2">
+    <div class="flex-1">
+      {!isOnPresentationPage && displayText && (
+        <em class="text-gray-600 dark:text-gray-400">{displayText}</em>
+      )}
+    </div>
+    <div class="flex items-center gap-2 flex-shrink-0">
+      {workshop && (
+        <span class="text-teal-600 dark:text-teal-400 px-2 py-1 text-sm bg-teal-50 dark:bg-green-400/10 rounded">
+          Workshop
+        </span>
+      )}
+      {linkUrl && !isOnPresentationPage && (
+        <span class="inline-flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-200 whitespace-nowrap">
+          {presentationUrl ? "View Presentation" : "View Event"}
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            class="h-5 w-5" 
+            class="h-4 w-4" 
             viewBox="0 0 20 20" 
             fill="currentColor"
           >
@@ -64,42 +138,6 @@ const flagImage = country ? await loadCountryFlag(country) : null;
               clip-rule="evenodd" 
             />
           </svg>
-        </span>
-      )}
-    </div>
-  </div>
-  <div class="text-gray-600 dark:text-gray-300 flex items-center gap-1">
-    {flagImage ? (
-      <Image
-        src={flagImage}
-        alt={`Flag of ${country}`}
-        width={20}
-        height={15}
-        class="inline-block rounded-sm mb-0"
-      />
-    ) : (
-      <span>🌎</span>
-    )}
-    <span>{city} &mdash; {" "}</span>
-    <span>
-      {new Date(date).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric"
-      })}
-    </span>
-  </div>
-  <div class="flex justify-between items-center mt-2">
-    {displayText && <em class="text-gray-600 dark:text-gray-400">{displayText}</em>}
-    <div class="flex items-center gap-2">
-      {workshop && (
-        <span class="text-teal-600 dark:text-teal-400 px-2 py-1 text-sm bg-teal-50 dark:bg-green-400/10 rounded">
-          Workshop
-        </span>
-      )}
-      {url && (
-        <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-200">
-          View Presentation →
         </span>
       )}
     </div>

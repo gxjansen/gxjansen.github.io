@@ -42,11 +42,11 @@
 - [x] Ensure proper active state for navigation items
 
 ## Event Integration
-- [ ] Implement bi-directional relationship between presentations and events
-- [ ] Update event data to include presentation references
-- [ ] Add presentation links to event detail pages
-- [ ] Add event links to presentation detail pages
-- [ ] Update TypeScript interfaces for event-presentation relationship
+- [x] Implement bi-directional relationship between presentations and events
+- [x] Update event data to include presentation references
+- [x] Add presentation links to event detail pages
+- [x] Add event links to presentation detail pages
+- [x] Update TypeScript interfaces for event-presentation relationship
 
 ## Accessibility
 - [x] Add proper ARIA labels to interactive elements

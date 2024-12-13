@@ -1,2032 +1,2907 @@
 [
-    {
+  {
+    "id": "spryker-user-group-2025-11",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2025-11-25",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2025-10",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2025-10-28",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2025-07",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2025-07-30",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2025-06",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2025-06-26",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2025-05",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2025-05-27",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2025-04",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2025-04-29",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2025-03",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2025-03-25",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2025-02",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2025-02-27",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2025-01",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2025-01-28",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2024-11",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2024-11-28",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2024-10",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2024-10-30",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2024-09",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2024-09-26",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2024-08",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2024-08-27",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2024-06",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2024-06-27",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2024-05",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2024-05-28",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & co-host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-excite-2025-09",
     "name": "Spryker EXCITE",
     "icon": "spryker.png",
     "date": "2025-09-25",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Mainstage event host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-excite-hackathon-2025-09",
     "name": "Spryker EXCITE Hackathon",
     "icon": "spryker.png",
     "date": "2025-09-24",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-excite-hackathon-2024-09",
     "name": "Spryker EXCITE Hackathon",
     "icon": "spryker.png",
     "date": "2024-09-24",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "nagarro-hackathon-india-2024-08",
     "name": "Nagarro Hackathon India",
     "icon": "spryker.png",
     "date": "2024-08-01",
     "city": "Gurugram",
     "country": "IN",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "growth-marketing-summit-2024-06",
     "name": "Growth Marketing Summit",
     "icon": "gms.png",
     "date": "2024-06-19",
     "city": "Frankfurt am Main",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Podcast livestream host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "turbine-hackathon-2024-05",
     "name": "Turbine Hackathon",
     "icon": "spryker.png",
     "date": "2024-05-13",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & Event host/moderator",
-    "topic": "Security"
+    "topic": "Security",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2024-04",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2024-04-29",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2024-03",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2024-03-26",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "bikkeldag-2024-03",
     "name": "Bikkeldag",
     "icon": "bikkelhart.png",
     "date": "2024-03-21",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "spryker-hackathon-2024-03",
     "name": "Spryker Hackathon",
     "icon": "spryker.png",
     "date": "2024-03-13",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Organizer & Event host/moderator",
-    "topic": "Double your development speed"
+    "topic": "Double your development speed",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2024-02",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2024-02-28",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2024-01",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2024-01-31",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2023-11",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2023-11-28",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2023-10",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2023-10-26",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2023-09",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2023-09-26",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-excite-2023-09",
     "name": "Spryker EXCITE",
     "icon": "spryker.png",
     "date": "2023-09-14",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Mainstage event host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-hackathon-2023-09",
     "name": "Spryker Hackathon",
     "icon": "spryker.png",
     "date": "2023-09-13",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-user-group-2023-08",
     "name": "Spryker User Group",
     "icon": "spryker.png",
     "date": "2023-08-29",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-partner-hackathon-2023-07",
     "name": "Spryker Partner Hackathon",
     "icon": "towa.jpg",
     "date": "2023-07-08",
     "city": "Hamburg",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Spryker update"
+    "topic": "Spryker update",
+    "relatedPresentationSlugs": [
+      "spryker-update"
+    ]
   },
   {
+    "id": "towa-office-warming-2023-02",
     "name": "TOWA office warming",
     "icon": "towa.jpg",
     "date": "2023-02-16",
     "city": "Hamburg",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Crystal ball session: outlook for the coming year"
+    "topic": "Crystal ball session: outlook for the coming year",
+    "relatedPresentationSlugs": [
+      "crystal-ball-session-outlook-for-the-coming-year"
+    ]
   },
   {
+    "id": "divae-yearly-team-kickoff-2023-02",
     "name": "Diva-e yearly team kickoff",
     "icon": "diva-e.jpg",
     "date": "2023-02-01",
     "city": "Munchen",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Crystal ball session: outlook for the coming year"
+    "topic": "Crystal ball session: outlook for the coming year",
+    "relatedPresentationSlugs": [
+      "crystal-ball-session-outlook-for-the-coming-year"
+    ]
   },
   {
+    "id": "b2b-online-2022-12",
     "name": "B2B Online",
     "icon": "b2bonline.png",
     "date": "2022-12-07",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Composable Commerce & Packaged Business Capabilities"
+    "topic": "Composable Commerce & Packaged Business Capabilities",
+    "relatedPresentationSlugs": [
+      "composable-commerce-packaged-business-capabilities"
+    ]
   },
   {
+    "id": "spryker-customer-day-2022-10",
     "name": "Spryker customer day",
     "icon": "spryker.png",
     "date": "2022-10-25",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-partner-hackathon-2022-07",
     "name": "Spryker Partner Hackathon",
     "icon": "spryker.png",
     "date": "2022-07-08",
     "city": "Vienna",
     "country": "AT",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Spryker update"
+    "topic": "Spryker update",
+    "relatedPresentationSlugs": [
+      "spryker-update"
+    ]
   },
   {
+    "id": "spryker-customer-day-2022-06",
     "name": "Spryker customer day",
     "icon": "spryker.png",
     "date": "2022-06-21",
     "city": "Nashville",
     "country": "US",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "growth-marketing-summit-2022-06",
     "name": "Growth Marketing Summit",
     "icon": "gms.png",
     "date": "2022-06-15",
     "city": "Frankfurt",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Podcast livestream host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "emerce-ecommerce-live-2022-06",
     "name": "Emerce E-commerce Live!",
     "icon": "emerce.jpg",
     "date": "2022-06-07",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Innovate or get Kodak'ed: 5 Guiding Principles to NOT F#%K up Modern Commerce"
+    "topic": "Innovate or get Kodak'ed: 5 Guiding Principles to NOT F#%K up Modern Commerce",
+    "relatedPresentationSlugs": [
+      "innovate-or-get-kodaked-5-guiding-principles-to-not-f-k-up-modern-commerce"
+    ]
   },
   {
+    "id": "spryker-excite-2022-05",
     "name": "Spryker EXCITE",
     "icon": "spryker.png",
     "date": "2022-05-24",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Mainstage event host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-customer-day-2022-05",
     "name": "Spryker customer day",
     "icon": "spryker.png",
     "date": "2022-05-23",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "ecommerce-digital-marketing-expo-greece-se-europe-2022-05",
     "name": "eCommerce & Digital Marketing EXPO Greece & SE Europe",
     "icon": "ecdm.jpg",
     "date": "2022-05-14",
     "city": "Athens",
     "country": "GR",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Still A/B testing your buttons? You need to think (much) bigger..."
+    "topic": "Still A/B testing your buttons? You need to think (much) bigger...",
+    "relatedPresentationSlugs": [
+      "still-a-b-testing-your-buttons-you-need-to-think-much-bigger"
+    ]
   },
   {
+    "id": "emerce-b2b-2022-05",
     "name": "Emerce B2B",
     "icon": "emerce.jpg",
     "date": "2022-05-12",
     "city": "Maarssen",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Growth strategies for the future of B2B commerce"
+    "topic": "Growth strategies for the future of B2B commerce",
+    "relatedPresentationSlugs": [
+      "growth-strategies-for-the-future-of-b2b-commerce"
+    ]
   },
   {
+    "id": "emerce-b2b-dinner-session-2022-05",
     "name": "Emerce B2B Dinner session",
     "icon": "emerce.jpg",
     "date": "2022-05-12",
     "city": "Maarssen",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Grow Smart or Die Fast: 5 Guidelines to Navigate the Recession"
+    "topic": "Grow Smart or Die Fast: 5 Guidelines to Navigate the Recession",
+    "relatedPresentationSlugs": [
+      "5-guiding-principles-to-not-f-k-up-modern-b2b-commerce"
+    ]
   },
   {
+    "id": "etail-europe-2022-04",
     "name": "eTail Europe",
     "icon": "etail.png",
     "date": "2022-04-26",
     "city": "London",
     "country": "GB",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Still A/B testing your buttons? You need to think (much) bigger..."
+    "topic": "Still A/B testing your buttons? You need to think (much) bigger...",
+    "relatedPresentationSlugs": [
+      "still-a-b-testing-your-buttons-you-need-to-think-much-bigger"
+    ]
   },
   {
+    "id": "emerce-retail-2022-04",
     "name": "Emerce Retail",
     "icon": "emerce.jpg",
     "date": "2022-04-14",
     "city": "Maarssen",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Why becoming a Marketplace should be your Next Big Initiative"
+    "topic": "Why becoming a Marketplace should be your Next Big Initiative",
+    "relatedPresentationSlugs": [
+      "why-becoming-a-marketplace-should-be-your-next-big-initiative"
+    ]
   },
   {
+    "id": "business-online-2022-04",
     "name": "Business Online",
     "icon": "businesonline.jpg",
     "date": "2022-04-06",
     "city": "London",
     "country": "GB",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Still A/B testing your buttons? You need to think (much) bigger..."
+    "topic": "Still A/B testing your buttons? You need to think (much) bigger...",
+    "relatedPresentationSlugs": [
+      "still-a-b-testing-your-buttons-you-need-to-think-much-bigger"
+    ]
   },
   {
+    "id": "spryker-customer-day-2022-02",
     "name": "Spryker customer day",
     "icon": "spryker.png",
     "date": "2022-02-16",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "smartosc-devexperience-2021-12",
     "name": "SmartOSC Dev-Experience",
     "icon": "smartosc.jpg",
     "date": "2021-12-11",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Panellist",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "conversion-hotel-2021-11",
     "name": "Conversion Hotel",
     "icon": "conversion-hotel.jpg",
     "date": "2021-11-20",
     "city": "De Koog, Texel",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Podcast livestream host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "spryker-customer-day-2021-10",
     "name": "Spryker customer day",
     "icon": "spryker.png",
     "date": "2021-10-06",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Your path to becoming a (more) Customer Centric Business"
+    "topic": "Your path to becoming a (more) Customer Centric Business",
+    "relatedPresentationSlugs": [
+      "your-path-to-becoming-a-more-customer-centric-business"
+    ]
   },
   {
+    "id": "emerce-conversion-2020-12",
     "name": "Emerce Conversion",
     "icon": "emerce.jpg",
     "date": "2020-12-02",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Cross-cultural website optimization"
+    "topic": "Cross-cultural website optimization",
+    "relatedPresentationSlugs": [
+      "cross-cultural-website-optimization"
+    ]
   },
   {
+    "id": "emercify-2020-11",
     "name": "Emercify",
     "icon": "emercify.png",
     "date": "2020-11-17",
     "city": "Online event",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "shopping-today-2020-10",
     "name": "Shopping Today",
     "icon": "shopping-today.jpg",
     "date": "2020-10-29",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "crossborder-event-2020-10",
     "name": "CrossBorder Event",
     "icon": "",
     "date": "2020-10-28",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "contentsquare-champaigne-breakfast-2020-07",
     "name": "Contentsquare Champaigne breakfast",
     "icon": "contentsquare.avif",
     "date": "2020-07-16",
     "city": "Virtual",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "dcongress-2020-03",
     "name": "D-Congress",
     "icon": "d-congress.png",
     "date": "2020-03-05",
     "city": "Gothenburg",
     "country": "SE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "google-analytics-user-conference-2020-02",
     "name": "Google Analytics User Conference",
     "icon": "emerce.jpg",
     "date": "2020-02-13",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Podcast livestream host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "ecommerce-workshop-2020-02",
     "name": "Ecommerce Workshop",
     "icon": "",
     "date": "2020-02-11",
     "city": "Oslo",
     "country": "NO",
-    "url": "",    "workshop": true,
+    "url": "",
+    "workshop": true,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "marketing-insights-event-2020-02",
     "name": "Marketing Insights Event",
     "icon": "mie20.png",
     "date": "2020-02-05",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Podcast livestream host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "webwinkel-vakdagen-2020-01",
     "name": "Webwinkel Vakdagen",
     "icon": "wwd.png",
     "date": "2020-01-29",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "inhouse-workshop-2019-12",
     "name": "Inhouse workshop",
     "icon": "",
     "date": "2019-12-10",
     "city": "Tiel",
     "country": "NL",
-    "url": "",    "workshop": true,
+    "url": "",
+    "workshop": true,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "emerce-engage-2019-11",
     "name": "Emerce Engage",
     "icon": "emerce.jpg",
     "date": "2019-11-28",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Podcast livestream host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "tio-ecommerce-week-2019-11",
     "name": "TIO Ecommerce Week",
     "icon": "",
     "date": "2019-11-25",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Cross-cultural website optimization"
+    "topic": "Cross-cultural website optimization",
+    "relatedPresentationSlugs": [
+      "cross-cultural-website-optimization"
+    ]
   },
   {
+    "id": "conversion-hotel-2019-11",
     "name": "Conversion Hotel",
     "icon": "conversion-hotel.jpg",
     "date": "2019-11-22",
     "city": "De Koog, Texel",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Podcast livestream host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "target-2019-11",
     "name": "Target",
     "icon": "",
     "date": "2019-11-14",
     "city": "Tallinn",
     "country": "EE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "startupweek-tallinn-2019-11",
     "name": "Startupweek Tallinn",
     "icon": "",
     "date": "2019-11-14",
     "city": "Tallinn",
     "country": "EE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "how-to-web-2019-10",
     "name": "How to Web",
     "icon": "",
     "date": "2019-10-30",
     "city": "Bucharest",
     "country": "RO",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Data Driven Decisions meets Psychology"
+    "topic": "Data Driven Decisions meets Psychology",
+    "relatedPresentationSlugs": [
+      "data-driven-decisions-meets-psychology"
+    ]
   },
   {
+    "id": "magento-live-europe-2019-10",
     "name": "Magento Live Europe",
     "icon": "magento.png",
     "date": "2019-10-22",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Co-hosting Commerce Sneaks",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "t3con19-2019-10",
     "name": "T3con19",
     "icon": "",
     "date": "2019-10-17",
     "city": "The Hague",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Creating an optimization culture"
+    "topic": "Creating an optimization culture",
+    "relatedPresentationSlugs": [
+      "creating-an-optimization-culture"
+    ]
   },
   {
+    "id": "t3con19-2019-10",
     "name": "T3con19",
     "icon": "",
     "date": "2019-10-17",
     "city": "The Hague",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Building your Optimization Dream Team"
+    "topic": "Building your Optimization Dream Team",
+    "relatedPresentationSlugs": [
+      "building-your-optimization-dream-team"
+    ]
   },
   {
+    "id": "crocafe-unconference-2-2019-10",
     "name": "CRO.CAFE Unconference #2",
     "icon": "crocafe.jpg",
     "date": "2019-10-08",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "digital-analytics-congres-2019-10",
     "name": "Digital Analytics Congres",
     "icon": "",
     "date": "2019-10-08",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Podcast livestream host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "ddma-dutch-cro-awards-2019-09",
     "name": "DDMA Dutch CRO Awards",
     "icon": "",
     "date": "2019-09-26",
     "city": "n.t.b.",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Podcast livestream host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "crocafe-unconference-1-2019-07",
     "name": "CRO.CAFE Unconference #1",
     "icon": "crocafe.jpg",
     "date": "2019-07-30",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "emerce-ecommerce-live-2019-06",
     "name": "Emerce E-commerce Live!",
     "icon": "emerce.jpg",
     "date": "2019-06-26",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Cross-cultural website optimization"
+    "topic": "Cross-cultural website optimization",
+    "relatedPresentationSlugs": [
+      "cross-cultural-website-optimization"
+    ]
   },
   {
+    "id": "meet-magento-uk-2019-06",
     "name": "Meet Magento UK",
     "icon": "magento.png",
     "date": "2019-06-19",
     "city": "London",
     "country": "GB",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Magento Association"
+    "topic": "Magento Association",
+    "relatedPresentationSlugs": [
+      "magento-association",
+      "meet-magento-association"
+    ]
   },
   {
+    "id": "meet-magento-nl-2019-2019-04",
     "name": "Meet Magento NL 2019",
     "icon": "magento.png",
     "date": "2019-04-18",
     "city": "Den Haag",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "emerce-conversion-2019-04",
     "name": "Emerce Conversion",
     "icon": "emerce.jpg",
     "date": "2019-04-11",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Podcast livestream host",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "lets-talk-business-2019-04",
     "name": "Let's Talk Business",
     "icon": "",
     "date": "2019-04-08",
     "city": "Online event",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Interview about Dutchento"
+    "topic": "Interview about Dutchento",
+    "relatedPresentationSlugs": [
+      "dutchento"
+    ]
   },
   {
+    "id": "3xe-digital-cro-2019-02",
     "name": "3XE Digital CRO",
     "icon": "",
     "date": "2019-02-14",
     "city": "Dublin",
     "country": "IE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "ing-inhouse-event-2019-01",
     "name": "ING Inhouse event",
     "icon": "ing.png",
     "date": "2019-01-24",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Your path to becoming a (more) Customer Centric Business"
+    "topic": "Your path to becoming a (more) Customer Centric Business",
+    "relatedPresentationSlugs": [
+      "your-path-to-becoming-a-more-customer-centric-business"
+    ]
   },
   {
+    "id": "webwinkel-vakdagen-2019-01",
     "name": "Webwinkel Vakdagen",
     "icon": "wwd.png",
     "date": "2019-01-23",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "frmwrk-inhouse-event-2018-12",
     "name": "FRMWRK Inhouse event",
     "icon": "",
     "date": "2018-12-06",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "shopping-today-2018-09",
     "name": "Shopping Today",
     "icon": "shopping-today.jpg",
     "date": "2018-09-19",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "united-wardrobe-2018-06",
     "name": "United Wardrobe",
     "icon": "",
     "date": "2018-06-29",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-uk-2018-06",
     "name": "Meet Magento UK",
     "icon": "magento.png",
     "date": "2018-06-13",
     "city": "London",
     "country": "GB",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Creating an optimization culture"
+    "topic": "Creating an optimization culture",
+    "relatedPresentationSlugs": [
+      "creating-an-optimization-culture"
+    ]
   },
   {
+    "id": "conversion-elite-london-2018-06",
     "name": "Conversion Elite London",
     "icon": "",
     "date": "2018-06-06",
     "city": "London",
     "country": "GB",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Creating an optimization culture"
+    "topic": "Creating an optimization culture",
+    "relatedPresentationSlugs": [
+      "creating-an-optimization-culture"
+    ]
   },
   {
+    "id": "meet-magento-the-netherlands-2018-06",
     "name": "Meet Magento The Netherlands",
     "icon": "magento.png",
     "date": "2018-06-01",
     "city": "Jaarbeurs, Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "digital-data-tips-tuesday-2018-03",
     "name": "Digital Data Tips Tuesday",
     "icon": "",
     "date": "2018-03-20",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Creating an optimization culture"
+    "topic": "Creating an optimization culture",
+    "relatedPresentationSlugs": [
+      "creating-an-optimization-culture"
+    ]
   },
   {
+    "id": "utrecht-university-2018-02",
     "name": "Utrecht University",
     "icon": "",
     "date": "2018-02-28",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "conversion-hotel-2017-11",
     "name": "Conversion Hotel",
     "icon": "conversion-hotel.jpg",
     "date": "2017-11-11",
     "city": "De Koog, Texel",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Management buy-in for CRO"
+    "topic": "Management buy-in for CRO",
+    "relatedPresentationSlugs": [
+      "management-buy-in-for-cro"
+    ]
   },
   {
+    "id": "measurefest-2017-11",
     "name": "Measurefest",
     "icon": "",
     "date": "2017-11-09",
     "city": "British Library, London",
     "country": "GB",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Improve CRO processes with evolutionary AI"
+    "topic": "Improve CRO processes with evolutionary AI",
+    "relatedPresentationSlugs": [
+      "improve-cro-processes-with-evolutionary-ai"
+    ]
   },
   {
+    "id": "growthtribe-evening-course-2017-11",
     "name": "GrowthTribe evening course",
     "icon": "growthtribe.png",
     "date": "2017-11-07",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": true,
+    "url": "",
+    "workshop": true,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "retail-arena-2017-10",
     "name": "Retail Arena",
     "icon": "",
     "date": "2017-10-26",
     "city": "Bucharest",
     "country": "RO",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "nomadmage-2017-10",
     "name": "Nomadmage",
     "icon": "",
     "date": "2017-10-24",
     "city": "Webinar",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Data Driven Decisions meets Psychology"
+    "topic": "Data Driven Decisions meets Psychology",
+    "relatedPresentationSlugs": [
+      "data-driven-decisions-meets-psychology"
+    ]
   },
   {
+    "id": "meet-magento-romania-2017-10",
     "name": "Meet Magento Romania",
     "icon": "magento.png",
     "date": "2017-10-17",
     "city": "Cluj-Napoca",
     "country": "RO",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Creating an optimization culture"
+    "topic": "Creating an optimization culture",
+    "relatedPresentationSlugs": [
+      "creating-an-optimization-culture"
+    ]
   },
   {
+    "id": "meet-magento-greece-2017-10",
     "name": "Meet Magento Greece",
     "icon": "magento.png",
     "date": "2017-10-12",
     "city": "Athens",
     "country": "GR",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "bidfood-inhouse-2017-09",
     "name": "Bidfood (in-house)",
     "icon": "",
     "date": "2017-09-28",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "conversioncamp-2017-09",
     "name": "Conversion.Camp",
     "icon": "",
     "date": "2017-09-09",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Conversion optimization"
+    "topic": "Conversion optimization",
+    "relatedPresentationSlugs": [
+      "conversion-optimization"
+    ]
   },
   {
+    "id": "meet-magento-china-2017-08",
     "name": "Meet Magento China",
     "icon": "magento.png",
     "date": "2017-08-29",
     "city": "Shenzhen",
     "country": "CN",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Cross-cultural website optimization"
+    "topic": "Cross-cultural website optimization",
+    "relatedPresentationSlugs": [
+      "cross-cultural-website-optimization"
+    ]
   },
   {
+    "id": "magento-unconference-2017-08",
     "name": "Magento Unconference",
     "icon": "magento.png",
     "date": "2017-08-26",
     "city": "Fort a/d Klop, Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Let's have a talk about giving talks"
+    "topic": "Let's have a talk about giving talks",
+    "relatedPresentationSlugs": [
+      "a-talk-about-giving-talks"
+    ]
   },
   {
+    "id": "mug-rotterdam-2017-06",
     "name": "MUG Rotterdam",
     "icon": "magento.png",
     "date": "2017-06-29",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Creating an optimization culture"
+    "topic": "Creating an optimization culture",
+    "relatedPresentationSlugs": [
+      "creating-an-optimization-culture"
+    ]
   },
   {
+    "id": "elite-camp-2017-2017-06",
     "name": "Elite Camp 2017",
     "icon": "",
     "date": "2017-06-17",
     "city": "Tallinn",
     "country": "EE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Creating an optimization culture"
+    "topic": "Creating an optimization culture",
+    "relatedPresentationSlugs": [
+      "creating-an-optimization-culture"
+    ]
   },
   {
+    "id": "pan-european-strategy-forum-retail-2017-05",
     "name": "Pan European Strategy Forum Retail",
     "icon": "",
     "date": "2017-05-20",
     "city": "Copenhagen",
     "country": "DK",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "emerce-conversion-2017-05",
     "name": "Emerce Conversion",
     "icon": "emerce.jpg",
     "date": "2017-05-13",
     "city": "Pakhuis de Zwijger, Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Improve CRO processes with evolutionary AI"
+    "topic": "Improve CRO processes with evolutionary AI",
+    "relatedPresentationSlugs": [
+      "improve-cro-processes-with-evolutionary-ai"
+    ]
   },
   {
+    "id": "growth-marketing-conference-2017-05",
     "name": "Growth Marketing Conference",
     "icon": "",
     "date": "2017-05-12",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Improve CRO processes with evolutionary AI"
+    "topic": "Improve CRO processes with evolutionary AI",
+    "relatedPresentationSlugs": [
+      "improve-cro-processes-with-evolutionary-ai"
+    ]
   },
   {
+    "id": "meet-magento-the-netherlands-2017-05",
     "name": "Meet Magento The Netherlands",
     "icon": "magento.png",
     "date": "2017-05-10",
     "city": "Jaarbeurs, Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "growthtribe-evening-course-2017-02",
     "name": "GrowthTribe evening course",
     "icon": "growthtribe.png",
     "date": "2017-02-28",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": true,
+    "url": "",
+    "workshop": true,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "braingineers-2016-12",
     "name": "Braingineers",
     "icon": "",
     "date": "2016-12-15",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "conversion-hotel-2016-11",
     "name": "Conversion Hotel",
     "icon": "conversion-hotel.jpg",
     "date": "2016-11-19",
     "city": "De Koog, Texel",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Let's have a talk about giving talks"
+    "topic": "Let's have a talk about giving talks",
+    "relatedPresentationSlugs": [
+      "a-talk-about-giving-talks"
+    ]
   },
   {
+    "id": "magetitans-2016-11",
     "name": "MageTitans",
     "icon": "magento.png",
     "date": "2016-11-12",
     "city": "Manchester",
     "country": "GB",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Meet Magento Association"
+    "topic": "Meet Magento Association",
+    "relatedPresentationSlugs": [
+      "magento-association",
+      "meet-magento-association"
+    ]
   },
   {
+    "id": "teleflor-international-conference-2016-11",
     "name": "Teleflor International Conference",
     "icon": "",
     "date": "2016-11-03",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": true,
+    "url": "",
+    "workshop": true,
     "role": "Speaker",
-    "topic": "Online sales for florists"
+    "topic": "Online sales for florists",
+    "relatedPresentationSlugs": [
+      "workshop-online-sales-for-florists"
+    ]
   },
   {
+    "id": "magento-2-seminar-2016-10",
     "name": "Magento 2 Seminar",
     "icon": "magento.png",
     "date": "2016-10-21",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "magento-unconference-2016-10",
     "name": "Magento Unconference",
     "icon": "magento.png",
     "date": "2016-10-14",
     "city": "Fort a/d Klop, Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Let's have a talk about giving talks"
+    "topic": "Let's have a talk about giving talks",
+    "relatedPresentationSlugs": [
+      "a-talk-about-giving-talks"
+    ]
   },
   {
+    "id": "conversion-conference-2016-10",
     "name": "Conversion Conference",
     "icon": "",
     "date": "2016-10-13",
     "city": "London",
     "country": "GB",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "growthtribe-evening-course-2016-10",
     "name": "GrowthTribe evening course",
     "icon": "growthtribe.png",
     "date": "2016-10-04",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": true,
+    "url": "",
+    "workshop": true,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "savant-ecommerce-congress-2016-09",
     "name": "Savant E-commerce Congress",
     "icon": "",
     "date": "2016-09-21",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Cross-cultural website optimization"
+    "topic": "Cross-cultural website optimization",
+    "relatedPresentationSlugs": [
+      "cross-cultural-website-optimization"
+    ]
   },
   {
+    "id": "meet-magento-indonesia-2016-08",
     "name": "Meet Magento Indonesia",
     "icon": "magento.png",
     "date": "2016-08-29",
     "city": "Jakarta",
     "country": "ID",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "ecommerce-insights-2016-06",
     "name": "E-commerce Insights",
     "icon": "",
     "date": "2016-06-02",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Cross-cultural website optimization"
+    "topic": "Cross-cultural website optimization",
+    "relatedPresentationSlugs": [
+      "cross-cultural-website-optimization"
+    ]
   },
   {
+    "id": "meet-magento-the-netherlands-2016-05",
     "name": "Meet Magento The Netherlands",
     "icon": "magento.png",
     "date": "2016-05-12",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "annual-conference-of-estonian-ecommerce-2016-04",
     "name": "Annual Conference of Estonian E-commerce",
     "icon": "",
     "date": "2016-04-28",
     "city": "Tallinn",
     "country": "EE",
-    "url": "",    "workshop": true,
+    "url": "",
+    "workshop": true,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "developers-paradise-2016-04",
     "name": "Developers Paradise",
     "icon": "",
     "date": "2016-04-26",
     "city": "Opatija",
     "country": "HR",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Cross-cultural website optimization"
+    "topic": "Cross-cultural website optimization",
+    "relatedPresentationSlugs": [
+      "cross-cultural-website-optimization"
+    ]
   },
   {
+    "id": "growthtribe-evening-course-2016-04",
     "name": "GrowthTribe evening course",
     "icon": "growthtribe.png",
     "date": "2016-04-20",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": true,
+    "url": "",
+    "workshop": true,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "conversion-world-2016-04",
     "name": "Conversion World",
     "icon": "",
     "date": "2016-04-19",
     "city": "Webinar",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Cross-cultural website optimization"
+    "topic": "Cross-cultural website optimization",
+    "relatedPresentationSlugs": [
+      "cross-cultural-website-optimization"
+    ]
   },
   {
+    "id": "meet-magento-czech-2016-03",
     "name": "Meet Magento Czech",
     "icon": "magento.png",
     "date": "2016-03-31",
     "city": "Prague",
     "country": "CZ",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-sweden-2016-03",
     "name": "Meet Magento Sweden",
     "icon": "magento.png",
     "date": "2016-03-14",
     "city": "Stockholm",
     "country": "SE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "magento-unconference-2016-03",
     "name": "Magento Unconference",
     "icon": "magento.png",
     "date": "2016-03-13",
     "city": "Berlin",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Building your Optimization Dream Team"
+    "topic": "Building your Optimization Dream Team",
+    "relatedPresentationSlugs": [
+      "building-your-optimization-dream-team"
+    ]
   },
   {
+    "id": "effective-experiments-2016-02",
     "name": "Effective Experiments",
     "icon": "",
     "date": "2016-02-10",
     "city": "Webinar",
     "country": "",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Building your Optimization Dream Team"
+    "topic": "Building your Optimization Dream Team",
+    "relatedPresentationSlugs": [
+      "building-your-optimization-dream-team"
+    ]
   },
   {
+    "id": "magento-2-seminar-2016-01",
     "name": "Magento 2 Seminar",
     "icon": "magento.png",
     "date": "2016-01-22",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Event host/moderator",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "webwinkel-vakdagen-2016-01",
     "name": "Webwinkel Vakdagen",
     "icon": "wwd.png",
     "date": "2016-01-21",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Cross-cultural website optimization"
+    "topic": "Cross-cultural website optimization",
+    "relatedPresentationSlugs": [
+      "cross-cultural-website-optimization"
+    ]
   },
   {
+    "id": "the-talent-institute-2016-01",
     "name": "The Talent Institute",
     "icon": "",
     "date": "2016-01-21",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": true,
+    "url": "",
+    "workshop": true,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "euroflorist-2016-01",
     "name": "Euroflorist",
     "icon": "euroflorist.png",
     "date": "2016-01-12",
     "city": "Warsaw",
     "country": "PL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "performance-marketing-update-2015-12",
     "name": "Performance Marketing Update",
     "icon": "",
     "date": "2015-12-09",
     "city": "'s-Hertogenbosch",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-argentina-2015-12",
     "name": "Meet Magento Argentina",
     "icon": "magento.png",
     "date": "2015-12-03",
     "city": "Buenos Aires",
     "country": "AR",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "conversion-hotel-2015-11",
     "name": "Conversion Hotel",
     "icon": "conversion-hotel.jpg",
     "date": "2015-11-21",
     "city": "Texel",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Compute required Sample Size for your A/B tests (A-priori)"
+    "topic": "Compute required Sample Size for your A/B tests (A-priori)",
+    "relatedPresentationSlugs": [
+      "compute-required-sample-size-for-your-a-b-tests-a-priori"
+    ]
   },
   {
+    "id": "growthtribe-evening-course-2015-11",
     "name": "GrowthTribe evening course",
     "icon": "growthtribe.png",
     "date": "2015-11-17",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": true,
+    "url": "",
+    "workshop": true,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-spain-2015-10",
     "name": "Meet Magento Spain",
     "icon": "magento.png",
     "date": "2015-10-28",
     "city": "Madrid",
     "country": "ES",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Building your Optimization Dream Team"
+    "topic": "Building your Optimization Dream Team",
+    "relatedPresentationSlugs": [
+      "building-your-optimization-dream-team"
+    ]
   },
   {
+    "id": "optimizely-experience-2015-10",
     "name": "Optimizely Experience",
     "icon": "",
     "date": "2015-10-13",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Building your Optimization Dream Team"
+    "topic": "Building your Optimization Dream Team",
+    "relatedPresentationSlugs": [
+      "building-your-optimization-dream-team"
+    ]
   },
   {
+    "id": "meet-magento-greece-2015-10",
     "name": "Meet Magento Greece",
     "icon": "magento.png",
     "date": "2015-10-09",
     "city": "Athens",
     "country": "GR",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-belarus-2015-09",
     "name": "Meet Magento Belarus",
     "icon": "magento.png",
     "date": "2015-09-21",
     "city": "Minsk",
     "country": "BY",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-vietnam-2015-08",
     "name": "Meet Magento Vietnam",
     "icon": "magento.png",
     "date": "2015-08-22",
     "city": "Hanoi",
     "country": "VN",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "euroflorist-2015-07",
     "name": "Euroflorist",
     "icon": "euroflorist.png",
     "date": "2015-07-22",
     "city": "Romsey",
     "country": "GB",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "euroflorist-2015-07",
     "name": "Euroflorist",
     "icon": "euroflorist.png",
     "date": "2015-07-06",
     "city": "Malmö",
     "country": "SE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-the-netherlands-2015-05",
     "name": "Meet Magento The Netherlands",
     "icon": "magento.png",
     "date": "2015-05-27",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "belgento-2015-05",
     "name": "Belgento",
     "icon": "magento.png",
     "date": "2015-05-13",
     "city": "Brussels",
     "country": "BE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "5 Ultimate usability tips for E-commerce"
+    "topic": "5 Ultimate usability tips for E-commerce",
+    "relatedPresentationSlugs": [
+      "5-ultimate-usability-tips-for-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-denmark-2015-05",
     "name": "Meet Magento Denmark",
     "icon": "magento.png",
     "date": "2015-05-07",
     "city": "Kolding",
     "country": "DK",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-germany-2015-05",
     "name": "Meet Magento Germany",
     "icon": "",
     "date": "2015-05-07",
     "city": "Leipzig",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "5 Ultimate usability tips for E-commerce"
+    "topic": "5 Ultimate usability tips for E-commerce",
+    "relatedPresentationSlugs": [
+      "5-ultimate-usability-tips-for-e-commerce"
+    ]
   },
   {
+    "id": "adobe-user-group-2015-04",
     "name": "Adobe User Group",
     "icon": "adobe.png",
     "date": "2015-04-28",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Hack your users brain"
+    "topic": "Hack your users brain",
+    "relatedPresentationSlugs": [
+      "hack-your-users-brain"
+    ]
   },
   {
+    "id": "rockstart-answers-2015-04",
     "name": "Rockstart Answers",
     "icon": "",
     "date": "2015-04-16",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Usability Testing"
+    "topic": "Usability Testing",
+    "relatedPresentationSlugs": [
+      "usability-testing"
+    ]
   },
   {
+    "id": "emerce-conversion-2015-04",
     "name": "Emerce Conversion",
     "icon": "emerce.jpg",
     "date": "2015-04-14",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "5 Ultimate usability tips for E-commerce"
+    "topic": "5 Ultimate usability tips for E-commerce",
+    "relatedPresentationSlugs": [
+      "5-ultimate-usability-tips-for-e-commerce"
+    ]
   },
   {
+    "id": "sanoma-breeze-2014-11",
     "name": "Sanoma Breeze",
     "icon": "sanoma.png",
     "date": "2014-11-27",
     "city": "Hoofddorp",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Learnings van 9 maanden conversie optimalisatie"
+    "topic": "Learnings van 9 maanden conversie optimalisatie",
+    "relatedPresentationSlugs": [
+      "learnings-van-9-maanden-conversie-optimalisatie"
+    ]
   },
   {
+    "id": "meet-magento-switzerland-2014-10",
     "name": "Meet Magento Switzerland",
     "icon": "magento.png",
     "date": "2014-10-24",
     "city": "Glattfelden",
     "country": "CH",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "ism-ecommerce-magento-enterprise-event-2014-10",
     "name": "ISM eCommerce Magento Enterprise event",
     "icon": "ism.png",
     "date": "2014-10-16",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Magento Community versus Enterprise"
+    "topic": "Magento Community versus Enterprise",
+    "relatedPresentationSlugs": [
+      "magento-community-versus-enterprise"
+    ]
   },
   {
+    "id": "exact-meets-magento-2014-10",
     "name": "Exact meets Magento",
     "icon": "magento.png",
     "date": "2014-10-02",
     "city": "Delft",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Introduction to Magento"
+    "topic": "Introduction to Magento",
+    "relatedPresentationSlugs": [
+      "introduction-to-magento"
+    ]
   },
   {
+    "id": "meet-magento-new-york-2014-09",
     "name": "Meet Magento New York",
     "icon": "magento.png",
     "date": "2014-09-21",
     "city": "New York",
     "country": "US",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-the-netherlands-2014-05",
     "name": "Meet Magento The Netherlands",
     "icon": "magento.png",
     "date": "2014-05-22",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "meet-magento-germany-2014-05",
     "name": "Meet Magento Germany",
     "icon": "magento.png",
     "date": "2014-05-12",
     "city": "Leipzig",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "sanoma-breeze-2014-04",
     "name": "Sanoma Breeze",
     "icon": "sanoma.png",
     "date": "2014-04-27",
     "city": "Hoofddorp",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "joomladays-netherlands-2014-03",
     "name": "Joomladays Netherlands",
     "icon": "joomla.png",
     "date": "2014-03-23",
     "city": "Zeist",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Introduction to A/B testing"
+    "topic": "Introduction to A/B testing",
+    "relatedPresentationSlugs": [
+      "introduction-to-a-b-testing"
+    ]
   },
   {
+    "id": "sanoma-breeze-2014-03",
     "name": "Sanoma Breeze",
     "icon": "sanoma.png",
     "date": "2014-03-20",
     "city": "Hoofddorp",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "developers-paradise-2014-01",
     "name": "Developers Paradise",
     "icon": "magento.png",
     "date": "2014-01-13",
     "city": "Kaprun",
     "country": "AT",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "The Future of the Magento Ecosystem"
+    "topic": "The Future of the Magento Ecosystem",
+    "relatedPresentationSlugs": [
+      "the-future-of-the-magento-ecosystem"
+    ]
   },
   {
+    "id": "meet-magento-poland-2013-11",
     "name": "Meet Magento Poland",
     "icon": "magento.png",
     "date": "2013-11-05",
     "city": "Warsaw",
     "country": "PL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "tecomm-conference-2013-10",
     "name": "TeComm Conference",
     "icon": "",
     "date": "2013-10-24",
     "city": "Cluj-Napoca",
     "country": "RO",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "bargento-2013-06",
     "name": "Bargento",
     "icon": "magento.png",
     "date": "2013-06-04",
     "city": "Paris",
     "country": "FR",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-germany-2013-06",
     "name": "Meet Magento Germany",
     "icon": "magento.png",
     "date": "2013-06-03",
     "city": "Leipzig",
     "country": "DE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-the-netherlands-2013-05",
     "name": "Meet Magento The Netherlands",
     "icon": "magento.png",
     "date": "2013-05-30",
     "city": "Ede",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "joomladays-netherlands-2013-04",
     "name": "Joomladays Netherlands",
     "icon": "joomla.png",
     "date": "2013-04-21",
     "city": "Zeist",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "ism-ecommerce-online-marketing-event-2013-02",
     "name": "ISM eCommerce Online Marketing Event",
     "icon": "ism.png",
     "date": "2013-02-28",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Marketing with Magento"
+    "topic": "Marketing with Magento",
+    "relatedPresentationSlugs": [
+      "marketing-with-magento"
+    ]
   },
   {
+    "id": "webwinkel-vakdagen-2013-01",
     "name": "Webwinkel Vakdagen",
     "icon": "wwd.png",
     "date": "2013-01-24",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "webwinkel-vakdagen-2013-01",
     "name": "Webwinkel Vakdagen",
     "icon": "wwd.png",
     "date": "2013-01-23",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Introduction to Magento"
+    "topic": "Introduction to Magento",
+    "relatedPresentationSlugs": [
+      "introduction-to-magento"
+    ]
   },
   {
+    "id": "belgento-2013-01",
     "name": "Belgento",
     "icon": "magento.png",
     "date": "2013-01-17",
     "city": "Brussels",
     "country": "BE",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "nima-expert-class-2012-12",
     "name": "NIMA Expert Class",
     "icon": "",
     "date": "2012-12-19",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "amsterdam-university-of-applied-science-hva-2012-12",
     "name": "Amsterdam University of Applied Science (HvA)",
     "icon": "",
     "date": "2012-12-10",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "ism-ecommerce-online-marketing-event-2012-10",
     "name": "ISM eCommerce Online Marketing Event",
     "icon": "ism.png",
     "date": "2012-10-18",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Marketing with Magento"
+    "topic": "Marketing with Magento",
+    "relatedPresentationSlugs": [
+      "marketing-with-magento"
+    ]
   },
   {
+    "id": "joomla-world-conference-2012-10",
     "name": "Joomla! World Conference",
     "icon": "joomla.png",
     "date": "2012-10-17",
     "city": "San José",
     "country": "US",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "exact-meets-magento-2012-10",
     "name": "Exact meets Magento",
     "icon": "magento.png",
     "date": "2012-10-11",
     "city": "Delft",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Introduction to Magento"
+    "topic": "Introduction to Magento",
+    "relatedPresentationSlugs": [
+      "introduction-to-magento"
+    ]
   },
   {
+    "id": "meet-magento-brazil-2012-10",
     "name": "Meet Magento Brazil",
     "icon": "magento.png",
     "date": "2012-10-08",
     "city": "São Paulo",
     "country": "BR",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "exact-meets-magento-2012-08",
     "name": "Exact meets Magento",
     "icon": "magento.png",
     "date": "2012-08-21",
     "city": "Delft",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Introduction to Magento"
+    "topic": "Introduction to Magento",
+    "relatedPresentationSlugs": [
+      "introduction-to-magento"
+    ]
   },
   {
+    "id": "ism-ecommerce-crosschannel-event-2012-08",
     "name": "ISM eCommerce Cross-channel event",
     "icon": "ism.png",
     "date": "2012-08-16",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Cross channel possibilities with Magento"
+    "topic": "Cross channel possibilities with Magento",
+    "relatedPresentationSlugs": [
+      "cross-channel-possibilities-with-magento"
+    ]
   },
   {
+    "id": "ism-ecommerce-webinar-2012-06",
     "name": "ISM eCommerce Webinar",
     "icon": "ism.png",
     "date": "2012-06-28",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Magento Community versus Enterprise"
+    "topic": "Magento Community versus Enterprise",
+    "relatedPresentationSlugs": [
+      "magento-community-versus-enterprise"
+    ]
   },
   {
+    "id": "orocrm-meetup-2012-05",
     "name": "OroCRM Meetup",
     "icon": "oro.png",
     "date": "2012-05-31",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "ism-ecommerce-crosschannel-event-2012-05",
     "name": "ISM eCommerce Cross-channel event",
     "icon": "",
     "date": "2012-05-31",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Cross channel possibilities with Magento"
+    "topic": "Cross channel possibilities with Magento",
+    "relatedPresentationSlugs": [
+      "cross-channel-possibilities-with-magento"
+    ]
   },
   {
+    "id": "meet-magento-the-netherlands-2012-05",
     "name": "Meet Magento The Netherlands",
     "icon": "magento.png",
     "date": "2012-05-30",
     "city": "Ede",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "ism-ecommerce-magento-event-2012-05",
     "name": "ISM eCommerce Magento Event",
     "icon": "ism.png",
     "date": "2012-05-26",
     "city": "Rotterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Introduction to Magento"
+    "topic": "Introduction to Magento",
+    "relatedPresentationSlugs": [
+      "introduction-to-magento"
+    ]
   },
   {
+    "id": "oxillion-lunch-learn-2012-05",
     "name": "Oxillion Lunch & Learn",
     "icon": "oxilion.jpg",
     "date": "2012-05-24",
     "city": "Enschede",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "masterclass-ecommerce-magazine-2012-03",
     "name": "Masterclass Ecommerce Magazine",
     "icon": "",
     "date": "2012-03-15",
     "city": "Maarssen",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "webwinkel-vakdagen-2012-01",
     "name": "Webwinkel Vakdagen",
     "icon": "wwd.png",
     "date": "2012-01-26",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Introduction to Magento"
+    "topic": "Introduction to Magento",
+    "relatedPresentationSlugs": [
+      "introduction-to-magento"
+    ]
   },
   {
+    "id": "webwinkel-vakdagen-2012-01",
     "name": "Webwinkel Vakdagen",
     "icon": "wwd.png",
     "date": "2012-01-25",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "byte-seminar-2012-01",
     "name": "Byte Seminar",
     "icon": "",
     "date": "2012-01-13",
     "city": "Amsterdam",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "exact-meets-magento-2011-12",
     "name": "Exact meets Magento",
     "icon": "magento.png",
     "date": "2011-12-08",
     "city": "Delft",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Introduction to Magento"
+    "topic": "Introduction to Magento",
+    "relatedPresentationSlugs": [
+      "introduction-to-magento"
+    ]
   },
   {
+    "id": "exact-meets-magento-2011-11",
     "name": "Exact meets Magento",
     "icon": "magento.png",
     "date": "2011-11-17",
     "city": "Delft",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Introduction to Magento"
+    "topic": "Introduction to Magento",
+    "relatedPresentationSlugs": [
+      "introduction-to-magento"
+    ]
   },
   {
+    "id": "oxillion-lunch-learn-2011-09",
     "name": "Oxillion Lunch & Learn",
     "icon": "oxilion.jpg",
     "date": "2011-09-15",
     "city": "Enschede",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Introduction to Magento"
+    "topic": "Introduction to Magento",
+    "relatedPresentationSlugs": [
+      "introduction-to-magento"
+    ]
   },
   {
+    "id": "marketingrslt-summerschool-2011-08",
     "name": "MarketingRSLT: Summerschool",
     "icon": "",
     "date": "2011-08-31",
     "city": "Maarssen",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Persuasive E-commerce"
+    "topic": "Persuasive E-commerce",
+    "relatedPresentationSlugs": [
+      "persuasive-e-commerce"
+    ]
   },
   {
+    "id": "meet-magento-the-netherlands-2011-05",
     "name": "Meet Magento The Netherlands",
     "icon": "magento.png",
     "date": "2011-05-19",
     "city": "Ede",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "oxillion-lunch-learn-2010-12",
     "name": "Oxillion Lunch & Learn",
     "icon": "oxilion.jpg",
     "date": "2010-12-16",
     "city": "Enschede",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Introduction to Magento"
+    "topic": "Introduction to Magento",
+    "relatedPresentationSlugs": [
+      "introduction-to-magento"
+    ]
   },
   {
+    "id": "meet-magento-the-netherlands-2010-05",
     "name": "Meet Magento The Netherlands",
     "icon": "magento.png",
     "date": "2010-05-26",
     "city": "Ede",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "joomladays-netherlands-2010-04",
     "name": "Joomladays Netherlands",
     "icon": "joomla.png",
     "date": "2010-04-24",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Speaker",
-    "topic": "Conversion optimization"
+    "topic": "Conversion optimization",
+    "relatedPresentationSlugs": [
+      "conversion-optimization"
+    ]
   },
   {
+    "id": "joomladays-netherlands-2009-12",
     "name": "Joomladays Netherlands",
     "icon": "joomla.png",
     "date": "2009-12-06",
     "city": "Nieuwegein",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   },
   {
+    "id": "meet-magento-the-netherlands-2009-01",
     "name": "Meet Magento The Netherlands",
     "icon": "magento.png",
     "date": "2009-01-27",
     "city": "Utrecht",
     "country": "NL",
-    "url": "",    "workshop": false,
+    "url": "",
+    "workshop": false,
     "role": "Main event organizer",
-    "topic": ""
+    "topic": "",
+    "relatedPresentationSlugs": []
   }
 ]

@@ -1,0 +1,60 @@
+---
+import { getRelatedPresentations } from '../../utils/eventPresentationRelations';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  eventId: string;
+}
+
+const { eventId } = Astro.props;
+
+// Get all presentations
+const allPresentations = await getCollection('presentations');
+
+// Get related presentations for this event
+const relatedPresentations = getRelatedPresentations(eventId, allPresentations);
+---
+
+{relatedPresentations.length > 0 && (
+  <div class="mt-8">
+    <h2 class="text-2xl font-bold mb-4">Related Presentations</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+      {relatedPresentations.map((presentation) => (
+        <a 
+          href={`/presentations/${presentation.slug}`}
+          class="block bg-white dark:bg-base-900 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+        >
+          <div class="relative">
+            {presentation.data.image && (
+              <img
+                src={presentation.data.image}
+                alt={presentation.data.title || ''}
+                class="w-full h-48 object-cover rounded-t-lg"
+              />
+            )}
+            {presentation.data.isWorkshop && (
+              <span class="absolute top-2 right-2 bg-primary-600 text-white px-2 py-1 rounded text-sm">
+                Workshop
+              </span>
+            )}
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold text-lg mb-2">
+              {presentation.data.title}
+            </h3>
+            {presentation.data.duration && (
+              <p class="text-sm text-base-600 dark:text-base-400">
+                Duration: {presentation.data.duration}
+              </p>
+            )}
+            {presentation.data.intendedAudience && (
+              <p class="text-sm text-base-600 dark:text-base-400 mt-1">
+                For: {presentation.data.intendedAudience}
+              </p>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+)}

@@ -9,6 +9,7 @@ import EventCard from "@components/Events/EventCard.astro";
 import { loadEventIcons } from "../utils/eventUtils";
 import type { Event } from "../utils/eventUtils";
 import { getTotalPastEventsCount } from "../utils/eventUtils.js";
+import { getPresentationUrl } from "../utils/eventPresentationRelations";
 
 // Pre-load all event icons
 const eventIcons = await loadEventIcons(eventsData as Omit<Event, 'loadedIcon'>[]);
@@ -93,14 +94,22 @@ const totalPastEvents = getTotalPastEventsCount();
             {/* First column */}
             <div class="space-y-6">
               {firstColumnEvents.map((event) => (
-                <EventCard {...event} />
+                <EventCard 
+                  {...event} 
+                  showPresentationName={true}
+                  presentationUrl={getPresentationUrl(event.id)}
+                />
               ))}
             </div>
 
             {/* Second column - offset as a whole */}
             <div class="space-y-6 md:mt-24">
               {secondColumnEvents.map((event) => (
-                <EventCard {...event} />
+                <EventCard 
+                  {...event} 
+                  showPresentationName={true}
+                  presentationUrl={getPresentationUrl(event.id)}
+                />
               ))}
             </div>
           </div>
