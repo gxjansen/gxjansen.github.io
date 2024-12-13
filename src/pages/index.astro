@@ -10,6 +10,7 @@ import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
 import SiteContent from "@components/SiteContent/SiteContent.astro";
 import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
 import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
+import CompanyLogos from "@components/Companies/CompanyLogos.astro";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -52,6 +53,7 @@ const siteData = getTranslatedData("siteData", currLocale);
     </div>
 
     <FeatureGalleryMarquee />
+    <CompanyLogos />
     <CtaCardSplit />
   </main>
 </BaseLayout>
