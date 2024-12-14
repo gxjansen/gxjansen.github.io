@@ -6,39 +6,25 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import ServicesIcon from "@components/Services/ServicesIcon.astro";
 import PodcastFeed from "@components/Podcasts/PodcastFeed.astro";
 import type { PodcastEpisode } from "../types/podcast";
-import { XMLParser } from 'fast-xml-parser';
-
-// Function to get embed URL from episode URL
-const getEmbedUrl = (episodeUrl: string) => {
-  // Convert from: https://sheeptank.transistor.fm/episodes/vanmoof
-  // To: https://share.transistor.fm/e/vanmoof
-  const match = episodeUrl.match(/https:\/\/([^.]+)\.transistor\.fm\/episodes\/([^/]+)/);
-  if (!match) return '';
-  const [, , episodeSlug] = match;
-  return `https://share.transistor.fm/e/${episodeSlug}`;
-};
 
 // Function to fetch and parse RSS feed
 async function fetchPodcastFeed(url: string): Promise<PodcastEpisode[]> {
   try {
     const response = await fetch(url);
-    const xml = await response.text();
-    const parser = new XMLParser({
-      ignoreAttributes: false,
-      attributeNamePrefix: "@_"
-    });
-    const result = parser.parse(xml);
+    const text = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, "text/xml");
     
-    const channel = result.rss.channel;
-    const items = channel.item || [];
+    const items = Array.from(doc.querySelectorAll("item"));
+    const channelTitle = doc.querySelector("channel > title")?.textContent || "";
     
-    return items.map((item: any) => ({
-      title: item.title,
-      description: item.description,
-      pubDate: item.pubDate,
-      duration: item['itunes:duration'] || '',
-      link: getEmbedUrl(item.link), // Transform to embed URL
-      podcastName: channel.title
+    return items.map(item => ({
+      title: item.querySelector("title")?.textContent || "",
+      description: item.querySelector("description")?.textContent || "",
+      pubDate: item.querySelector("pubDate")?.textContent || "",
+      duration: item.querySelector("itunes\\:duration")?.textContent || "",
+      link: item.querySelector("link")?.textContent || "",
+      podcastName: channelTitle
     }));
   } catch (error) {
     console.error(`Error fetching feed ${url}:`, error);
