@@ -177,7 +177,7 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "5UJuKMx1f8mNzJqELQA0Wx",
         articleUrl: "https://vriendvandeshow.nl/mnot/episodes/s06e11-glibberige-aansmeertechnieken-met-cognitief-psycholoog-guido-jansen",
-        personOrganization: "Met Nerd Om Tafel"
+        personOrganization: "Met Nerds Om Tafel"
     },
     {
         title: "Het bij elkaar brengen van mensen is mijn belangrijkste skill",
