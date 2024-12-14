@@ -14,17 +14,20 @@ export async function getStaticPaths() {
   
   return posts.map((post) => ({
     params: { slug: post.slug },
-    props: { post },
+    props: { 
+      post,
+      allPosts: posts // Pass all non-draft posts
+    },
   }));
 }
 
 // Get the post data from props
-const { post } = Astro.props;
+const { post, allPosts } = Astro.props;
 
 // Get the rendered content
 const { Content } = await post.render();
 ---
 
-<BlogLayoutCenter post={post} transitionName={`heroImage-${post.slug}`}>
+<BlogLayoutCenter post={post} allPosts={allPosts} transitionName={`heroImage-${post.slug}`}>
   <Content />
 </BlogLayoutCenter>

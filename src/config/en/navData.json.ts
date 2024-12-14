@@ -17,6 +17,7 @@ const navConfig = [
   },
   {
     text: "Pages",
+    hidden: true,
     megaMenuColumns: [
       {
         title: "Landing Pages",

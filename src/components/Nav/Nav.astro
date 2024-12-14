@@ -44,20 +44,22 @@ import { locales } from "@config/siteSettings.json";
             <ul class="flex h-fit items-center px-4">
               {
                 // if dropdown exists, setup the dropdown, otherwise it is just a link
-                navData.map((navItem) =>
-                  "dropdown" in navItem ? (
-                    // non-mobile dropdown menu
-                    <>
-                      {/* <NavDropdown navItem={navItem} /> */}
-                      <NavDropdownToggle navItem={navItem} />
-                    </>
-                  ) : "megaMenuColumns" in navItem ? (
-                    <MegaMenuDropdownToggle {navItem} />
-                  ) : (
-                    // normal nav link
-                    <NavLink {navItem} />
-                  ),
-                )
+                navData
+                  .filter((navItem) => !navItem.hidden)
+                  .map((navItem) =>
+                    "dropdown" in navItem ? (
+                      // non-mobile dropdown menu
+                      <>
+                        {/* <NavDropdown navItem={navItem} /> */}
+                        <NavDropdownToggle navItem={navItem} />
+                      </>
+                    ) : "megaMenuColumns" in navItem ? (
+                      <MegaMenuDropdownToggle {navItem} />
+                    ) : (
+                      // normal nav link
+                      <NavLink {navItem} />
+                    ),
+                  )
               }
             </ul>
           </nav>
