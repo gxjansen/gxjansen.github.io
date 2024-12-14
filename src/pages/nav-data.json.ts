@@ -63,7 +63,7 @@ export async function GET() {
           items: [
             {
               text: "Blog Index 1",
-              link: "/blog",
+              link: "/post",
               icon: "tabler/pencil",
             },
             {
@@ -78,7 +78,7 @@ export async function GET() {
             },
             {
               text: "Blog Post",
-              link: "/blog/tsconfig-paths-setup",
+              link: "/post/tsconfig-paths-setup",
               icon: "tabler/edit-circle",
             },
           ],
@@ -87,7 +87,7 @@ export async function GET() {
     },
     {
       text: "Articles",
-      link: "/blog",
+      link: "/post",
     },
     {
       text: "About",

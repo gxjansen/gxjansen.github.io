@@ -1,14 +1,14 @@
 # Blog Restructure Plan
 
 ## Goal
-Change blog URL structure from `/blog/en/[articlename]` to `/post/[articlename]`
+Change blog URL structure from `/post/[articlename]` to `/post/[articlename]`
 
 ## Steps
 
 ### 1. Content Collection Changes
-- Move all articles from `src/content/blog/en/` to `src/content/blog/`
+- Move all articles from `src/content/post/` to `src/content/blog/`
   ```bash
-  mv src/content/blog/en/* src/content/blog/
+  mv src/content/post/* src/content/blog/
   rmdir src/content/blog/en
   ```
 - Rename blog directory to post
@@ -31,7 +31,7 @@ Change blog URL structure from `/blog/en/[articlename]` to `/post/[articlename]`
   - Update URL generation
   - Consider renaming to PostNav for consistency
 - Update any components that link to blog posts:
-  - Check for hardcoded `/blog/en/` paths
+  - Check for hardcoded `/post/` paths
   - Update to use `/post/` instead
 - Update imports:
   - Change `getCollection("blog")` to `getCollection("post")`

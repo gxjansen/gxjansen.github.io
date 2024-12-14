@@ -23,7 +23,7 @@ const Blog = (locale: (typeof locales)[number]) =>
   collection({
     label: `Blog`,
     slugField: "title",
-    path: `src/content/blog/en/*/`,
+    path: `src/content/post/*/`,
     columns: ["title", "pubDate"],
     entryLayout: "content",
     format: { contentField: "content" },
@@ -89,7 +89,7 @@ const Blog = (locale: (typeof locales)[number]) =>
           table: true,
           link: true,
           image: {
-            directory: `src/content/blog/en/`,
+            directory: `src/content/post/`,
             publicPath: "../",
             // schema: {
             //   title: fields.text({

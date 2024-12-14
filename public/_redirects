@@ -1,22 +1,25 @@
 # public/_redirects
 
 # Internal redirects
-/admin              /keystatic              301
-/guidojansen        /about                 301
-/post/*             /blog/:splat           301
-/persuasive-ecommerce /                    301
-/instagram          /social                301
+/blog/en/:slug     /post/:slug            301
+/blog/:slug        /post/:slug            301
+/blog/en/*         /post/:splat           301
+/blog/*            /post/:splat           301
+/admin              /keystatic            301
+/guidojansen        /about                301
+/persuasive-ecommerce /                   301
+/instagram          /social               301
 /howtoweb           /presentation/data-driven-decisions-meets-psychology 301
-/cards              /cognitive-biases      301
+/cards              /cognitive-biases     301
 /bigger             /presentation/still-a-b-testing-your-buttons-you-need-to-think-much-bigger 301
-/audio              /podcasts              301
-/index.php          /                      301
-/images/*           /                      301
-/CV                 /cv                    301
-/hireme             /about                 301
-/theme/contact-us/contact-us /about        301
-/theme/contact      /about                 301
-/presentations      /presentation          301
+/audio              /podcasts             301
+/index.php          /                     301
+/images/*           /                     301
+/CV                 /cv                   301
+/hireme             /about                301
+/theme/contact-us/contact-us /about       301
+/theme/contact      /about                301
+/presentations      /presentation         301
 
 # External redirects
 /kit                https://kit.co/gxjansen 301

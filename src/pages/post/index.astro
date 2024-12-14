@@ -14,20 +14,13 @@ import Badge from "@components/Badge/Badge.astro";
 // images
 import HumanNotAI from "@images/Written-By-Human-Not-By-AI-Badge-black.svg";
 
-// Get the current locale
-const locale = getLocaleFromUrl(Astro.url);
-
-// Get all posts for the current locale
-const posts = await getCollection("blog", ({ data }) => {
+// Get all posts
+const posts = await getCollection("post", ({ data }) => {
   return !data.draft;
 });
 
-// Filter by locale and sort by date (newest first)
-const filteredPosts = locale 
-  ? posts.filter(post => post.id.startsWith(`${locale}/`))
-  : posts;
-
-const sortedPosts = filteredPosts.sort((a, b) => 
+// Sort by date (newest first)
+const sortedPosts = posts.sort((a, b) => 
   new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
 

@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import BlogLayoutCenter from "@layouts/BlogLayoutCenter.astro";
+
+// Get static paths for all posts
+export async function getStaticPaths() {
+  const posts = await getCollection("post", ({ data }) => {
+    return !data.draft;
+  });
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post, allPosts: posts },
+  }));
+}
+
+// Get post data from props
+const { post, allPosts } = Astro.props;
+
+// Get the rendered content
+const { Content } = await post.render();
+---
+
+<BlogLayoutCenter post={post} allPosts={allPosts}>
+  <Content />
+</BlogLayoutCenter>

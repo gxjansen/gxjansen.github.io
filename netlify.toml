@@ -44,7 +44,7 @@
 
 [[redirects]]
   from = "/post/*"
-  to = "/blog/:splat"
+  to = "/post/:splat"
   status = 301
 
 [[redirects]]
