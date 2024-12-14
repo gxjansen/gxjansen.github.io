@@ -3,26 +3,82 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
-// import FeatureCardsSmall from "@components/Feature/FeatureCardsSmall.astro";
-// import FeatureCardsMedium from "@components/Feature/FeatureCardsMedium.astro";
-// import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
-// import FeatureVideo from "@components/Feature/FeatureVideo.astro";
-// import FeatureSideImage from "@components/Feature/FeatureSideImage.astro";
-// import FeatureToggleImage from "@components/Feature/FeatureToggleImage.astro";
 import ServicesIcon from "@components/Services/ServicesIcon.astro";
-// import ServicesSideImage from "@components/Services/ServicesSideImage.astro";
+import PodcastFeed from "@components/Podcasts/PodcastFeed.astro";
+import type { PodcastEpisode } from "../types/podcast";
+import { XMLParser } from 'fast-xml-parser';
+
+// Function to get embed URL from episode URL
+const getEmbedUrl = (episodeUrl: string) => {
+  // Convert from: https://sheeptank.transistor.fm/episodes/vanmoof
+  // To: https://share.transistor.fm/e/vanmoof
+  const match = episodeUrl.match(/https:\/\/([^.]+)\.transistor\.fm\/episodes\/([^/]+)/);
+  if (!match) return '';
+  const [, , episodeSlug] = match;
+  return `https://share.transistor.fm/e/${episodeSlug}`;
+};
+
+// Function to fetch and parse RSS feed
+async function fetchPodcastFeed(url: string): Promise<PodcastEpisode[]> {
+  try {
+    const response = await fetch(url);
+    const xml = await response.text();
+    const parser = new XMLParser({
+      ignoreAttributes: false,
+      attributeNamePrefix: "@_"
+    });
+    const result = parser.parse(xml);
+    
+    const channel = result.rss.channel;
+    const items = channel.item || [];
+    
+    return items.map((item: any) => ({
+      title: item.title,
+      description: item.description,
+      pubDate: item.pubDate,
+      duration: item['itunes:duration'] || '',
+      link: getEmbedUrl(item.link), // Transform to embed URL
+      podcastName: channel.title
+    }));
+  } catch (error) {
+    console.error(`Error fetching feed ${url}:`, error);
+    return [];
+  }
+}
+
+// Fetch episodes from all feeds
+const feeds = [
+  "https://feeds.transistor.fm/sheeptank",
+  "https://feeds.transistor.fm/cro-cafe",
+  "https://feeds.transistor.fm/cro-cafe-nl"
+];
+
+const allEpisodes = await Promise.all(feeds.map(fetchPodcastFeed))
+  .then(results => results.flat())
+  .catch(error => {
+    console.error("Error fetching podcast feeds:", error);
+    return [];
+  });
+
+// Sort episodes by date, newest first
+const sortedEpisodes = [...allEpisodes].sort((a, b) => 
+  new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
+);
+
+// Take only the latest 20 episodes
+const latestEpisodes = sortedEpisodes.slice(0, 20);
 ---
 
 <BaseLayout
   title="Guido's Podcasts"
   description="Overview of the podcasts that I host and produce."
 >
-  <!-- <FeatureVideo /> -->
-  <!-- <FeatureCardsSmall /> -->
   <ServicesIcon />
-  <!-- <FeatureSideImage />
-  <FeatureGalleryMarquee /> -->
-  <!-- <ServicesSideImage />
-  <FeatureToggleImage /> -->
-  <!-- <FeatureCardsMedium /> -->
+  
+  {/* Latest Episodes Section */}
+  <div class="bg-gray-50 dark:bg-gray-900 py-16 mt-16">
+    <div class="container mx-auto px-4">
+      <PodcastFeed episodes={latestEpisodes} />
+    </div>
+  </div>
 </BaseLayout>
