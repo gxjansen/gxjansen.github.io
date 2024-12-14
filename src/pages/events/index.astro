@@ -5,6 +5,8 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 // components
 import Badge from "@components/Badge/Badge.astro";
 import EventCard from "@components/Events/EventCard.astro";
+import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
+import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
 
 // utils
 import { getAllEvents, getPresentationUrl } from "@utils/eventPresentationRelations";
@@ -27,11 +29,26 @@ const secondColumnEvents = sortedEvents.filter((_, i) => i % 2 === 1);
   title="Events"
   description="Overview of all events"
 >
+  {/* Upcoming Events Section */}
+  <section class="py-24 md:py-28">
+    <div class="site-container">
+      <UpcomingEvents events={sortedEvents} />
+    </div>
+  </section>
+
+  {/* Countries Flags Section */}
+  <section class="py-12">
+    <div class="site-container">
+      <FeatureFlagsMarquee />
+    </div>
+  </section>
+
+  {/* Past Events Section */}
   <section class="py-24 md:py-28">
     <div class="site-container">
       <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
         <Badge>Events</Badge>
-        <h1 class="h2 mb-4">Events Overview</h1>
+        <h1 class="h2 mb-4">Past Events</h1>
         <p class="description text-lg md:text-xl">
           An overview of all events I've spoken at or attended
         </p>

@@ -58,26 +58,28 @@ import { locales } from "@config/siteSettings.json";
         <ul class="mx-1 mt-2 text-xl">
           {
             // if dropdown exists, setup the dropdown, otherwise it is just a link
-            navData.map((navItem) =>
-              "dropdown" in navItem ? (
-                // mobile dropdown menu
-                <>
-                  <MobileNavDropdown navItem={navItem} />
-                  {/* <hr class="mx-4 mb-2 border-base-300 dark:border-base-600/60" /> */}
-                </>
-              ) : "megaMenuColumns" in navItem ? (
-                // mobile mega menu dropdowns
-                <>
-                  {navItem.megaMenuColumns.map((navItem) => (
+            navData
+              .filter((navItem) => !navItem.hidden)
+              .map((navItem) =>
+                "dropdown" in navItem ? (
+                  // mobile dropdown menu
+                  <>
                     <MobileNavDropdown navItem={navItem} />
-                  ))}
-                  {/* <hr class="mx-4 my-1 border-base-300 dark:border-base-600/60" /> */}
-                </>
-              ) : (
-                // normal nav link
-                <NavLink {navItem} />
-              ),
-            )
+                    {/* <hr class="mx-4 mb-2 border-base-300 dark:border-base-600/60" /> */}
+                  </>
+                ) : "megaMenuColumns" in navItem ? (
+                  // mobile mega menu dropdowns
+                  <>
+                    {navItem.megaMenuColumns.map((navItem) => (
+                      <MobileNavDropdown navItem={navItem} />
+                    ))}
+                    {/* <hr class="mx-4 my-1 border-base-300 dark:border-base-600/60" /> */}
+                  </>
+                ) : (
+                  // normal nav link
+                  <NavLink {navItem} />
+                ),
+              )
           }
         </ul>
       </nav>
