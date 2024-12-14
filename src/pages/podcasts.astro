@@ -7,23 +7,50 @@ import ServicesIcon from "@components/Services/ServicesIcon.astro";
 import PodcastFeed from "@components/Podcasts/PodcastFeed.astro";
 import type { PodcastEpisode } from "../types/podcast";
 
+// Function to extract content between XML tags
+function getTagContent(xml: string, tag: string): string {
+  const regex = new RegExp(`<${tag}[^>]*>(.*?)<\/${tag}>`, "s");
+  const match = xml.match(regex);
+  return match ? match[1].trim() : "";
+}
+
+// Function to extract all items from XML
+function getItems(xml: string): string[] {
+  const items: string[] = [];
+  let remaining = xml;
+  
+  while (true) {
+    const startIndex = remaining.indexOf("<item>");
+    if (startIndex === -1) break;
+    
+    const endIndex = remaining.indexOf("</item>") + 7;
+    if (endIndex === -1) break;
+    
+    items.push(remaining.slice(startIndex, endIndex));
+    remaining = remaining.slice(endIndex);
+  }
+  
+  return items;
+}
+
 // Function to fetch and parse RSS feed
 async function fetchPodcastFeed(url: string): Promise<PodcastEpisode[]> {
   try {
     const response = await fetch(url);
-    const text = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(text, "text/xml");
+    const xml = await response.text();
     
-    const items = Array.from(doc.querySelectorAll("item"));
-    const channelTitle = doc.querySelector("channel > title")?.textContent || "";
+    // Get channel title
+    const channelTitle = getTagContent(xml, "channel").match(/<title[^>]*>(.*?)<\/title>/s)?.[1] || "";
+    
+    // Get all items
+    const items = getItems(xml);
     
     return items.map(item => ({
-      title: item.querySelector("title")?.textContent || "",
-      description: item.querySelector("description")?.textContent || "",
-      pubDate: item.querySelector("pubDate")?.textContent || "",
-      duration: item.querySelector("itunes\\:duration")?.textContent || "",
-      link: item.querySelector("link")?.textContent || "",
+      title: getTagContent(item, "title"),
+      description: getTagContent(item, "description"),
+      pubDate: getTagContent(item, "pubDate"),
+      duration: getTagContent(item, "itunes:duration"),
+      link: getTagContent(item, "link"),
       podcastName: channelTitle
     }));
   } catch (error) {
