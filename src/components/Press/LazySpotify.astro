@@ -8,7 +8,7 @@ const { episodeId, title } = Astro.props;
 ---
 
 <div 
-  class="lazy-spotify bg-neutral-100 dark:bg-white/[.075] rounded-xl p-4 min-h-[152px] relative"
+  class="lazy-spotify min-h-[152px] relative"
   data-episode-id={episodeId}
   data-title={title}
 >
@@ -54,7 +54,7 @@ const { episodeId, title } = Astro.props;
     const title = container.getAttribute('data-title');
     
     const iframe = document.createElement('iframe');
-    iframe.style.borderRadius = '12px';
+    iframe.style.borderRadius = '0';
     iframe.src = `https://open.spotify.com/embed/episode/${episodeId}`;
     iframe.width = '100%';
     iframe.height = '152';
