@@ -7,52 +7,51 @@ import ServicesIcon from "@components/Services/ServicesIcon.astro";
 import PodcastFeed from "@components/Podcasts/PodcastFeed.astro";
 import type { PodcastEpisode } from "../types/podcast";
 
-// Function to extract content between XML tags
-function getTagContent(xml: string, tag: string): string {
-  const regex = new RegExp(`<${tag}[^>]*>(.*?)<\/${tag}>`, "s");
-  const match = xml.match(regex);
-  return match ? match[1].trim() : "";
-}
-
-// Function to extract all items from XML
-function getItems(xml: string): string[] {
-  const items: string[] = [];
-  let remaining = xml;
-  
-  while (true) {
-    const startIndex = remaining.indexOf("<item>");
-    if (startIndex === -1) break;
-    
-    const endIndex = remaining.indexOf("</item>") + 7;
-    if (endIndex === -1) break;
-    
-    items.push(remaining.slice(startIndex, endIndex));
-    remaining = remaining.slice(endIndex);
-  }
-  
-  return items;
-}
-
 // Function to fetch and parse RSS feed
 async function fetchPodcastFeed(url: string): Promise<PodcastEpisode[]> {
   try {
-    const response = await fetch(url);
-    const xml = await response.text();
+    const response = await fetch(url, {
+      headers: {
+        'Accept': 'application/xml'
+      }
+    });
+    const text = await response.text();
     
-    // Get channel title
-    const channelTitle = getTagContent(xml, "channel").match(/<title[^>]*>(.*?)<\/title>/s)?.[1] || "";
+    // Extract all <item> elements
+    const items = text.match(/<item>[\s\S]*?<\/item>/g) || [];
     
-    // Get all items
-    const items = getItems(xml);
-    
-    return items.map(item => ({
-      title: getTagContent(item, "title"),
-      description: getTagContent(item, "description"),
-      pubDate: getTagContent(item, "pubDate"),
-      duration: getTagContent(item, "itunes:duration"),
-      link: getTagContent(item, "link"),
-      podcastName: channelTitle
-    }));
+    return items.map(item => {
+      // Extract title
+      const title = item.match(/<title>(.*?)<\/title>/)?.[1] || '';
+      
+      // Extract description
+      const description = item.match(/<description>(.*?)<\/description>/)?.[1] || '';
+      
+      // Extract pubDate
+      const pubDate = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || '';
+      
+      // Extract duration
+      const duration = item.match(/<itunes:duration>(.*?)<\/itunes:duration>/)?.[1] || '';
+      
+      // Extract link and convert to embed URL
+      const linkMatch = item.match(/<link>(.*?)<\/link>/)?.[1] || '';
+      const episodeIdMatch = linkMatch.match(/https:\/\/share\.transistor\.fm\/s\/(.*?)$/);
+      const embedUrl = episodeIdMatch 
+        ? `https://share.transistor.fm/e/${episodeIdMatch[1]}`
+        : '';
+      
+      // Extract podcast name from channel title
+      const podcastName = text.match(/<channel>[\s\S]*?<title>(.*?)<\/title>/)?.[1] || '';
+      
+      return {
+        title: title.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&'),
+        description: description.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&'),
+        pubDate,
+        duration,
+        link: embedUrl,
+        podcastName: podcastName.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+      };
+    });
   } catch (error) {
     console.error(`Error fetching feed ${url}:`, error);
     return [];
