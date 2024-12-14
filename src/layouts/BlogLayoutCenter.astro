@@ -11,6 +11,7 @@ import BaseLayout from "./BaseLayout.astro";
 import Button from "@components/Button/Button.astro";
 import Category from "@components/Category/Category.astro";
 import BlogNav from "@components/Blog/BlogNav.astro";
+import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
 
 // utils
 import { formatDate, humanize, slugify } from "@js/textUtils";
@@ -21,8 +22,8 @@ import { useTranslations } from "@js/translationUtils";
 import HumanNotAI from "@images/Written-By-Human-Not-By-AI-Badge-black.svg";
 
 interface Props {
-  post: CollectionEntry<"blog">;
-  allPosts: CollectionEntry<"blog">[];
+  post: CollectionEntry<"post">;
+  allPosts: CollectionEntry<"post">[];
   transitionName?: string;
 }
 
@@ -141,11 +142,20 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
           <section id="blog-post-content" class="prose mx-auto">
             <slot />
           </section>
-
-          <!-- Navigation -->
-          <BlogNav currentSlug={post.slug} posts={allPosts} />
         </div>
       </div>
     </div>
   </article>
+
+  <!-- CTA Card (full width) -->
+  <div class="mt-16">
+    <CtaCardSplit />
+  </div>
+
+  <!-- Navigation -->
+  <div class="site-container">
+    <div class="mx-auto max-w-2xl">
+      <BlogNav currentSlug={post.slug} posts={allPosts} />
+    </div>
+  </div>
 </BaseLayout>

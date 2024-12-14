@@ -44,7 +44,7 @@ const navConfig = [
         items: [
           {
             text: "Blog Index 1",
-            link: "/blog",
+            link: "/post",
             icon: "tabler/pencil",
           },
           {
@@ -59,7 +59,7 @@ const navConfig = [
           },
           {
             text: "Blog Post",
-            link: "/blog/tsconfig-paths-setup",
+            link: "/post/tsconfig-paths-setup",
             icon: "tabler/edit-circle",
           },
         ],
@@ -68,7 +68,7 @@ const navConfig = [
   },
   {
     text: "Articles",
-    link: "/blog",
+    link: "/post",
   },
   {
     text: "About",

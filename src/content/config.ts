@@ -55,9 +55,9 @@ const authors = defineCollection({
 });
 
 /**
- * Blog collection schema
+ * Post collection schema (formerly blog)
  */
-const blog = defineCollection({
+const post = defineCollection({
   type: 'content',
   schema: ({ image }) => z.object({
     title: z.string(),
@@ -115,7 +115,7 @@ export const collections = {
   presentations,
   events,
   authors,
-  blog,
+  post, // Changed from 'blog' to 'post'
   countries,
   otherPages,
   services
