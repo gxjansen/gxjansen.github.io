@@ -19,14 +19,17 @@ interface ServiceItem {
   title: string;
   details: string;
   href?: string;
+  ctaText?: string; // custom text for the CTA button
+  showCta?: boolean; // whether to show the CTA button
 }
 
-// data
 const serviceData: ServiceItem[] = [
   {
     image: image1,
     title: "Childhood",
     href: "https://www.linkedin.com/in/guido/",
+    ctaText: "View my journey",
+    showCta: true,
     details: `I was born in 1982 in Zwolle, in the Netherlands. I lived in Hattem, Tiel, Amersfoort, Utrecht, Breukelen (yes, Brooklyn), Hoofddorp, Amsterdam and I now live in Ouderkerk aan de Amstel (a suburb of Amsterdam).
 
 Until 2004 I spent most of my time swimming, won several Dutch championships and participated in European championship tournaments.`,
@@ -35,12 +38,16 @@ Until 2004 I spent most of my time swimming, won several Dutch championships and
     image: image2,
     title: "University",
     href: "https://www.linkedin.com/in/guido/",
+    ctaText: "See my education",
+    showCta: false,
     details: `I studied Applied Cognitive Psychology at the University of Utrecht. I was board member of the Student Group of Social Sciences (SGS) in 2006/2007. For more info about my study/CV you can take a look at my LinkedIn Profile.`,
   },
   {
     image: image3,
     title: "Professional experience",
     href: "https://www.linkedin.com/in/guido/",
+    ctaText: "View my experience",
+    showCta: true,
     details: `I have spent the past decade working on improving digital customer experiences;
 Working with mixed teams of stakeholders, analysts, researchers, ux/ui designers and developers, both locally and internationally;
 Setting up and leading user experience and conversion optimisation teams;
@@ -52,6 +59,8 @@ Advance and empower team members through open collaboration, education and thoug
     image: image3,
     title: "Online Communities & Events",
     href: "https://www.linkedin.com/in/guido/",
+    ctaText: "Explore my community work",
+    showCta: false,
     details: `My main involvement lies with web-based software applications and the communities involved with it. I founded one of the largest local Joomla! communities worldwide and I was a Dutch translation coordinator for the platform for quite some time. I also organized the two-day event Joomladays in 2009.
 
 I switched focus to e-commerce and between 2008 and 2021 focussed on one system in particular: Magento.  I organized the first worldwide Meet Magento event in 2009, organized 11 events in total and expanded the conference to over 550 yearly participants. This makes it one of the biggest Magento events worldwide and the start of a global movement of over 60 events.
@@ -113,6 +122,8 @@ In 2021 it was time to focus on something new and I became the Global Business &
             href={feature.href ?? '#'}
             imageSide={idx % 2 === 0 ? "right" : "left"}
             idx={idx}
+            ctaText={feature.ctaText}
+            showCta={feature.showCta}
           />
         ))
       }

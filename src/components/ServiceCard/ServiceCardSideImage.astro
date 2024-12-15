@@ -21,10 +21,11 @@ interface Props {
   image: ImageMetadata; // an imported image
   imageSide: "left" | "right";
   idx: number; // determines which "blob" icon svg to use. There are 4 options (0-3)
+  ctaText?: string; // custom text for the CTA button
+  showCta?: boolean; // whether to show the CTA button
 }
 
-const { image, title, href, idx, details, imageSide } = Astro.props as Props;
-
+const { image, title, href, idx, details, imageSide, ctaText = 'Learn more', showCta = true } = Astro.props as Props;
 const currLocale = getLocaleFromUrl(Astro.url);
 ---
 
@@ -37,15 +38,17 @@ const currLocale = getLocaleFromUrl(Astro.url);
   <div class=`${imageSide === "left" ? "md:order-last": ""} col-span-1`>
     <h3 class="h2 mt-6">{title}</h3>
     <p class="description mt-6">{details}</p>
-    <div class="z-20 mt-8 flex">
-      <Button
-        variant="primary"
-        href={getRelativeLocaleUrl(currLocale, href)}
-        arrow="none"
-      >
-        Learn more <span class="sr-only">about {title}</span>
-      </Button>
-    </div>
+    {showCta && (
+      <div class="z-20 mt-8 flex">
+        <Button
+          variant="primary"
+          href={getRelativeLocaleUrl(currLocale, href)}
+          arrow="none"
+        >
+          {ctaText} <span class="sr-only">about {title}</span>
+        </Button>
+      </div>
+    )}
   </div>
 
   <!-- image -->
