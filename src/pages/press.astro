@@ -88,6 +88,7 @@ const firstVideoIds = videos
   // Handle smooth scrolling to sections
   document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('a[href^="#"]');
+    const headerOffset = 80; // Adjust this value based on your header height
     
     links.forEach(link => {
       link.addEventListener('click', (e) => {
@@ -96,12 +97,35 @@ const firstVideoIds = videos
         const targetElement = document.querySelector(targetId);
         
         if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+          // Get the target's position accounting for header height
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          // Smooth scroll to adjusted position
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
           });
+
+          // If clicking the podcasts link, trigger preloading
+          if (targetId === '#podcasts') {
+            // Small delay to ensure scroll starts first
+            setTimeout(() => {
+              const event = new CustomEvent('preloadPodcasts');
+              document.dispatchEvent(event);
+            }, 100);
+          }
         }
       });
     });
+  });
+
+  // Trigger podcast preloading after initial page load
+  window.addEventListener('load', () => {
+    // Wait a bit after load to not compete with critical resources
+    setTimeout(() => {
+      const event = new CustomEvent('preloadPodcasts');
+      document.dispatchEvent(event);
+    }, 2000);
   });
 </script>
