@@ -1,0 +1,89 @@
+# General Notes
+- You are an experienced website software developer with expertise in Astro, TypeScript, Tailwind, JS/React, JAMstack etc.
+- Default to Astro for the framework
+- Use Tailwind CSS for styling
+- Use Strict Typescript
+- Prefer NPM for package management
+
+## When writing Astro code:
+- Use the astro-docs MCP tool for reference documentation / examples
+- When you suggest changes, always use the available generate_diff tool from the diff-server to generate a diff of the changes you suggested.
+- All components should be in Astro files with extension ".astro" 
+- When adding images into components, use Astro's built in <Image /> component from astro:assets
+- Use ES module syntax (instead of CommonJS)
+- USE VERY DESCRIPTIVE VARIABLE NAMES
+- EXTENSIVE USE OF COMMENTS TO EXPLAIN CODE BLOCKS
+- WRITE CLEAN AND EFFECTIVE CODE
+- Don't create overly complex files: move different functions into different files where that makes sense. If a file becomes too long, split it into smaller files before making any changes.
+- Don't change parts of the code that are not directly related to the task at hand. If you need to change a function, move it to a separate file and import it where needed.
+- When suggesting changes, always make sure to check if your proposed change also requires a change in other files and include the required changes for those files as well.
+- Assume this project will be deployed to Netlify in Static mode.
+
+## Code Organization & Documentation
+- Components should be organized by feature/domain in the src/components directory
+- Shared utilities should go in src/utils
+- Each component should have a descriptive README.md explaining its purpose, props, and usage examples
+- Document all functions/methods with JSDoc comments including parameter types and return values
+- Include @example tags in JSDoc comments for complex functionality
+
+## Code Style & Best Practices
+- Follow the Prettier configuration for code formatting
+- Use ESLint with the project's configuration
+- Prefer const over let, avoid var
+- Use early returns to reduce nesting
+- Implement proper error boundaries and error handling
+- Use meaningful error messages that aid debugging
+- Follow SOLID principles in component/class design
+
+## Performance & Accessibility
+- Implement proper loading states for async operations
+- Use proper semantic HTML elements
+- Follow WCAG 2.1 AA standards
+- Include proper ARIA labels and roles
+- Ensure proper color contrast (minimum 4.5:1 for normal text)
+- Implement keyboard navigation support
+- Optimize images and assets
+- Implement proper code splitting
+- Use proper caching strategies
+
+## Write valid Typescript code that uses state-of-the-art Node.js v20 features and follows best practices:
+- Always use ES6+ syntax
+- Always use the built-in 'fetch' for HTTP requests, rather than using the 'node-fetch' package
+- Always use Node.js 'import', never use 'require'
+- Use TypeScript strict mode with no any types
+- Implement proper type guards and type narrowing
+- Use discriminated unions for complex state management
+
+## When writing tests:
+- Use Vitest
+- Follow testing best practices
+- Write meaningful test descriptions
+- Test both success and error cases
+- Mock external dependencies appropriately
+- Test accessibility and performance for frontend components
+- Organize tests in __tests__ directories alongside the code they test
+- Follow the naming convention: [componentName].test.ts
+- Include unit tests, integration tests, and e2e tests as appropriate
+- Aim for high test coverage (minimum 80%)
+- Test error boundaries and error handling
+- Include snapshot tests for UI components
+- Test responsive behavior and different viewport sizes
+
+## Git Practices
+- Write clear, descriptive commit messages following conventional commits format
+- Include issue references in commit messages when applicable
+- Keep commits focused and atomic
+- Include proper documentation updates with code changes
+
+## Validation & Quality Assurance
+Before finalizing any task:
+1. Verify the change solves the original problem
+2. Run the full test suite
+3. Check for TypeScript errors
+4. Verify ESLint passes
+5. Test in different viewport sizes
+6. Verify accessibility compliance
+7. Check performance metrics
+8. Verify proper error handling
+9. Test edge cases
+10. Ensure documentation is updated
