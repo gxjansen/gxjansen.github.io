@@ -41,38 +41,42 @@ const otherPresentations: CollectionEntry<'presentations'>[] = validPresentation
 >
   <section class="py-24 md:py-28">
     <div class="site-container">
-      <!-- Featured Presentations -->
-      <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
-        <Badge>Featured</Badge>
-        <h1 class="h1 mb-4 text-white">Featured Presentations</h1>
-        <p class="description text-lg md:text-xl text-slate-400">
-          A selection of my most popular presentations and workshops. Contact me if you're interested in having me speak at your event!
-        </p>
-      </div>
-
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-32 auto-rows-fr">
-        {featuredPresentations.map(presentation => (
-          <div data-aos="fade-up" class="h-full">
-            <PresentationCard presentation={presentation} />
+      <div class="grid-pattern-container">
+        <div class="relative">
+          <!-- Featured Presentations -->
+          <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+            <Badge>Featured</Badge>
+            <h1 class="h1 mb-4">Featured Presentations</h1>
+            <p class="description text-lg md:text-xl">
+              A selection of my most popular presentations and workshops. Contact me if you're interested in having me speak at your event!
+            </p>
           </div>
-        ))}
-      </div>
 
-      <!-- Other Presentations -->
-      <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
-        <Badge>More</Badge>
-        <h2 class="h2 mb-4 text-white">More Presentations</h2>
-        <p class="description text-lg md:text-xl text-slate-400">
-          Other presentations and workshops I've given at various events.
-        </p>
-      </div>
-
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
-        {otherPresentations.map(presentation => (
-          <div data-aos="fade-up" class="h-full">
-            <PresentationCard presentation={presentation} />
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-32 auto-rows-fr">
+            {featuredPresentations.map(presentation => (
+              <div data-aos="fade-up" class="h-full">
+                <PresentationCard presentation={presentation} />
+              </div>
+            ))}
           </div>
-        ))}
+
+          <!-- Other Presentations -->
+          <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+            <Badge>More</Badge>
+            <h2 class="h2 mb-4">More Presentations</h2>
+            <p class="description text-lg md:text-xl">
+              Other presentations and workshops I've given at various events.
+            </p>
+          </div>
+
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+            {otherPresentations.map(presentation => (
+              <div data-aos="fade-up" class="h-full">
+                <PresentationCard presentation={presentation} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </section>

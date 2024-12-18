@@ -46,34 +46,36 @@ const featureData: FeatureData[] = [
 ---
 
 <section id="services-icon" class="py-24 md:py-28">
-  <div
-    class="site-container bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat dark:bg-[url('/assets/pattern-dark.svg')]"
-  >
-    <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
-      <Badge>Podcasting</Badge>
-      <h2 class="h2 mb-4 text-white">Podcasts that I host & produce</h2>
-      <p class="description text-lg md:text-xl text-slate-400">
-        Podcasting is a great way to learn, share and get to know people. I've published over 250 episodes for different podcasts:
-      </p>
-    </div>
-    <div
-      class="grid gap-4 sm:grid-cols-2 md:grid-cols-3"
-      id="services-icon-cards"
-    >
-      {
-        featureData.map((feature, idx) => (
-          <ServiceCard
-            title={feature.title}
-            text={feature.text}
-            icon={feature.icon}
-            href={feature.href}
-            idx={idx}
-            data-aos="zoom-in"
-            data-aos-delay={0.15 * idx}
-            data-aos-trigger="#services-icon-cards"
-          />
-        ))
-      }
+  <div class="site-container">
+    <div class="grid-pattern-container">
+      <div class="relative">
+        <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+          <Badge>Podcasting</Badge>
+          <h2 class="h2 mb-4">Podcasts that I host & produce</h2>
+          <p class="description text-lg md:text-xl">
+            Podcasting is a great way to learn, share and get to know people. I've published over 250 episodes for different podcasts:
+          </p>
+        </div>
+        <div
+          class="grid gap-4 sm:grid-cols-2 md:grid-cols-3"
+          id="services-icon-cards"
+        >
+          {
+            featureData.map((feature, idx) => (
+              <ServiceCard
+                title={feature.title}
+                text={feature.text}
+                icon={feature.icon}
+                href={feature.href}
+                idx={idx}
+                data-aos="zoom-in"
+                data-aos-delay={0.15 * idx}
+                data-aos-trigger="#services-icon-cards"
+              />
+            ))
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>

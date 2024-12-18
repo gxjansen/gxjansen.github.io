@@ -34,49 +34,52 @@ const processedCategories = sortByValue(countItems(allCategories));
 ---
 
 <BaseLayout title="Blog" description="Latest blog posts and articles" transition:animate="slide">
-  <div class="absolute inset-0 -z-10 bg-[url('/assets/pattern-light-big.svg')] bg-repeat dark:bg-[url('/assets/pattern-dark-big.svg')]"></div>
   <section class="py-24 md:py-28">
     <div class="site-container">
-      <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
-        <Badge>Blog</Badge>
-        <h2 class="h2 mb-4">Latest Articles</h2>
-        <p class="description text-lg md:text-xl">
-          I write about psychology, experimentation, e-commerce and more. Below you can find my latest articles.
-        </p>
-        <div class="mt-6 flex justify-center">
-          <a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
-            <Image
-              src={HumanNotAI}
-              alt="Written-By-Human-Not-By-AI"
-              decoding="async"
-              loading="lazy"
-              width={100}
-            />
-          </a>
-        </div>
-      </div>
+      <div class="grid-pattern-container">
+        <div class="relative">
+          <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+            <Badge>Blog</Badge>
+            <h2 class="h2 mb-4">Latest Articles</h2>
+            <p class="description text-lg md:text-xl">
+              I write about psychology, experimentation, e-commerce and more. Below you can find my latest articles.
+            </p>
+            <div class="mt-6 flex justify-center">
+              <a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
+                <Image
+                  src={HumanNotAI}
+                  alt="Written-By-Human-Not-By-AI"
+                  decoding="async"
+                  loading="lazy"
+                  width={100}
+                />
+              </a>
+            </div>
+          </div>
 
-      <!-- Category filters -->
-      <div class="container mx-auto px-4 mb-12">
-        <div class="flex flex-wrap justify-center gap-4">
-          {processedCategories.map(([category]) => (
-            <a
-              href={`/categories/${category}`}
-              class="px-4 py-2 bg-base-800 text-white rounded-full text-sm font-medium hover:bg-primary-500 transition"
-              transition:animate="slide"
-            >
-              {humanize(category)}
-            </a>
-          ))}
-        </div>
-      </div>
+          <!-- Category filters -->
+          <div class="container mx-auto px-4 mb-12">
+            <div class="flex flex-wrap justify-center gap-4">
+              {processedCategories.map(([category]) => (
+                <a
+                  href={`/categories/${category}`}
+                  class="px-4 py-2 bg-base-800 text-white rounded-full text-sm font-medium hover:bg-primary-500 transition"
+                  transition:animate="slide"
+                >
+                  {humanize(category)}
+                </a>
+              ))}
+            </div>
+          </div>
 
-      <!-- Blog posts grid -->
-      <div class="container mx-auto px-4">
-        <div class="grid gap-16 sm:grid-cols-2">
-          {sortedPosts.map(post => (
-            <PostCardAtlas post={post} showDescription={true} />
-          ))}
+          <!-- Blog posts grid -->
+          <div class="container mx-auto px-4">
+            <div class="grid gap-16 sm:grid-cols-2">
+              {sortedPosts.map(post => (
+                <PostCardAtlas post={post} showDescription={true} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
