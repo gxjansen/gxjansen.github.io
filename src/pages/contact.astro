@@ -22,65 +22,66 @@ const siteData = getTranslatedData("siteData", currLocale);
   transition:animate="slide"
 >
   <div class="site-container mx-auto mt-16 overflow-x-clip">
-    <div
-      class="w-full bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-20 text-center dark:bg-[url('/assets/pattern-dark.svg')] md:py-32"
-      transition:animate="slide"
-    >
-      <h1 class="h1">Contact Me /  Book me for your event</h1>
-      <p class="description mx-auto mt-6 max-w-2xl">
-        Get in touch! Contact me using the form below or send me a DM.
-      </p>
-    </div>
-
-    <div class="grid gap-8 lg:grid-cols-2">
-      <!-- contact form -->
-      <div class="mb-12 lg:order-2" transition:persist>
-        <ContactForm />
-      </div>
-
-      <!-- Contact info -->
-      <div class="mb-auto grid gap-x-6 gap-y-12 lg:grid-cols-2" transition:animate="slide">
-        <!-- Email -->
-        <div class="flex flex-col items-center gap-3 lg:items-start">
-          <div
-            class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
-          >
-            <Icon name="tabler/mail" class="size-6 text-white" />
-          </div>
-          <h3 class="h3">E-mail</h3>
-          <a
-            href="mailto:example@email.com"
-            class="description transition hover:text-base-600"
-            >{siteData.contact.email}</a
-          >
+    <div class="grid-pattern-container">
+      <div class="relative">
+        <div class="w-full py-20 text-center md:py-32" transition:animate="slide">
+          <h1 class="h1">Contact Me /  Book me for your event</h1>
+          <p class="description mx-auto mt-6 max-w-2xl">
+            Get in touch! Contact me using the form below or send me a DM.
+          </p>
         </div>
 
-        <!-- Phone -->
-        <div class="flex flex-col items-center gap-3 lg:items-start">
-          <div
-            class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
-          >
-            <Icon name="tabler/phone" class="size-6 text-white" />
+        <div class="grid gap-8 lg:grid-cols-2">
+          <!-- contact form -->
+          <div class="mb-12 lg:order-2" transition:persist>
+            <ContactForm />
           </div>
-          <h3 class="h3">DM</h3>
-          <a
-            href={`tel:${siteData.contact.phone}`}
-            class="description transition hover:text-base-600"
-            >{siteData.contact.phone}</a
-          >
-        </div>
 
-        <!-- Address -->
-        <div class="flex flex-col items-center gap-3 lg:items-start">
-          <div
-            class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
-          >
-            <Icon name="tabler/map-pin" class="size-6 text-white" />
-          </div>
-          <h3 class="h3">Home</h3>
-          <div class="description flex flex-col items-center lg:items-start">
-            <p>{siteData.contact.address1}</p>
-            <p>{siteData.contact.address2}</p>
+          <!-- Contact info -->
+          <div class="mb-auto grid gap-x-6 gap-y-12 lg:grid-cols-2" transition:animate="slide">
+            <!-- Email -->
+            <div class="flex flex-col items-center gap-3 lg:items-start">
+              <div
+                class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
+              >
+                <Icon name="tabler/mail" class="size-6 text-white" />
+              </div>
+              <h3 class="h3">E-mail</h3>
+              <a
+                href="mailto:example@email.com"
+                class="description transition hover:text-base-600"
+                >{siteData.contact.email}</a
+              >
+            </div>
+
+            <!-- Phone -->
+            <div class="flex flex-col items-center gap-3 lg:items-start">
+              <div
+                class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
+              >
+                <Icon name="tabler/phone" class="size-6 text-white" />
+              </div>
+              <h3 class="h3">DM</h3>
+              <a
+                href={`tel:${siteData.contact.phone}`}
+                class="description transition hover:text-base-600"
+                >{siteData.contact.phone}</a
+              >
+            </div>
+
+            <!-- Address -->
+            <div class="flex flex-col items-center gap-3 lg:items-start">
+              <div
+                class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
+              >
+                <Icon name="tabler/map-pin" class="size-6 text-white" />
+              </div>
+              <h3 class="h3">Home</h3>
+              <div class="description flex flex-col items-center lg:items-start">
+                <p>{siteData.contact.address1}</p>
+                <p>{siteData.contact.address2}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
