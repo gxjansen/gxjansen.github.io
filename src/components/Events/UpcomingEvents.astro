@@ -32,33 +32,37 @@ const secondColumnEvents = upcomingEvents.filter((_, i) => i % 2 === 1);
 
 {upcomingEvents.length > 0 && (
   <div class="mb-16">
-    {showTitle && (
-      <div class="site-container flex justify-center">
-        <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
-          <Badge>Events</Badge>
-          <h2 class="h2">Upcoming Speaking Engagements</h2>
-          {events.filter(event => new Date(event.date) >= today).length > maxEvents && (
-            <p class="mt-4 text-gray-400">
-              Showing {maxEvents} of {events.filter(event => new Date(event.date) >= today).length} upcoming events
-            </p>
-          )}
+    <div class="grid-pattern-container">
+      <div class="relative">
+        {showTitle && (
+          <div class="site-container flex justify-center">
+            <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+              <Badge>Events</Badge>
+              <h2 class="h2">Upcoming Speaking Engagements</h2>
+              {events.filter(event => new Date(event.date) >= today).length > maxEvents && (
+                <p class="mt-4 text-gray-400">
+                  Showing {maxEvents} of {events.filter(event => new Date(event.date) >= today).length} upcoming events
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* First column */}
+          <div class="space-y-6">
+            {firstColumnEvents.map((event) => (
+              <EventCard {...event} />
+            ))}
+          </div>
+
+          {/* Second column - offset as a whole */}
+          <div class="space-y-6 md:mt-24">
+            {secondColumnEvents.map((event) => (
+              <EventCard {...event} />
+            ))}
+          </div>
         </div>
-      </div>
-    )}
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {/* First column */}
-      <div class="space-y-6">
-        {firstColumnEvents.map((event) => (
-          <EventCard {...event} />
-        ))}
-      </div>
-
-      {/* Second column - offset as a whole */}
-      <div class="space-y-6 md:mt-24">
-        {secondColumnEvents.map((event) => (
-          <EventCard {...event} />
-        ))}
       </div>
     </div>
   </div>

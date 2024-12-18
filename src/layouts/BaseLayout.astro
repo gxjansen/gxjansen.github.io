@@ -54,14 +54,39 @@ const currLocale = getLocaleFromUrl(Astro.url);
       postFrontmatter={postFrontmatter ? postFrontmatter : undefined}
       noindex={noindex}
     />
+    <style>
+      /* Noise background animation */
+      @keyframes noise {
+        0% { transform: translate(0,0) }
+        10% { transform: translate(-5%,-5%) }
+        20% { transform: translate(-10%,5%) }
+        30% { transform: translate(5%,-10%) }
+        40% { transform: translate(-5%,15%) }
+        50% { transform: translate(-10%,5%) }
+        60% { transform: translate(15%,0) }
+        70% { transform: translate(0,10%) }
+        80% { transform: translate(-15%,0) }
+        90% { transform: translate(10%,5%) }
+        100% { transform: translate(5%,0) }
+      }
+    </style>
   </head>
   <body
     id="body"
     class={`bg-background dark:bg-background-dark ${
       siteSettings.useAnimations === true ? "use-animations" : ""
-    }`}
+    } relative isolate overflow-x-hidden`}
   >
-  <EnvironmentBanner />
+    {/* Noise overlay */}
+    <div class="pointer-events-none fixed inset-0 -z-20 opacity-[0.2] [background-size:150px_150px]" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+');"></div>
+
+    <!-- Top-left gradient with extended fade -->
+    <div class="fixed -top-[200px] -left-[200px] -z-10 h-[800px] w-[800px] bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0.1)_10%,rgba(20,184,166,0.05)_20%,rgba(20,184,166,0.025)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_60%)] dark:bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.08)_0%,rgba(20,184,166,0.06)_10%,rgba(20,184,166,0.04)_20%,rgba(20,184,166,0.02)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_60%)]" />
+    
+    <!-- Bottom-right gradient with extended fade -->
+    <div class="fixed -bottom-[200px] -right-[200px] -z-10 h-[800px] w-[800px] bg-[radial-gradient(circle_at_70%_70%,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0.1)_10%,rgba(20,184,166,0.05)_20%,rgba(20,184,166,0.025)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_60%)] dark:bg-[radial-gradient(circle_at_70%_70%,rgba(20,184,166,0.08)_0%,rgba(20,184,166,0.06)_10%,rgba(20,184,166,0.04)_20%,rgba(20,184,166,0.02)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_60%)]" />
+
+    <EnvironmentBanner />
     <!-- put cookie consent first so it is seen first by screen readers -->
     <!-- <CookieConsent /> -->
     <div class="min-h-[100lvh]">
