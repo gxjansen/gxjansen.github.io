@@ -27,6 +27,9 @@ interface Props {
 
 const { image, title, href, idx, details, imageSide, ctaText = 'Learn more', showCta = true } = Astro.props as Props;
 const currLocale = getLocaleFromUrl(Astro.url);
+
+// Determine if the link is external
+const isExternalLink = href && (href.startsWith('http://') || href.startsWith('https://'));
 ---
 
 <div
@@ -42,7 +45,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
       <div class="z-20 mt-8 flex">
         <Button
           variant="primary"
-          href={getRelativeLocaleUrl(currLocale, href)}
+          href={isExternalLink ? href : getRelativeLocaleUrl(currLocale, href)}
           arrow="none"
         >
           {ctaText} <span class="sr-only">about {title}</span>
