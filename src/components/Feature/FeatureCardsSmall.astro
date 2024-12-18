@@ -40,7 +40,7 @@ const featureData: FeatureData[] = [
   {
     icon: "tabler/outline/leaf",
     title: "Training & Workshops",
-    text: `I can guide your team to form a ‘customer intelligence team’ and embed a continuous optimization strategy within your organization​`,
+    text: `I can guide your team to form a 'customer intelligence team' and embed a continuous optimization strategy within your organization​`,
   },
   {
     icon: "tabler/outline/picnic-table",
@@ -57,32 +57,36 @@ const featureData: FeatureData[] = [
 
 <section
   id="feature-cards-small"
-  class="bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark.svg')] md:py-28"
+  class="py-24 md:py-28"
 >
-  <div class="site-container relative">
-    <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
-      <Badge>Skills</Badge>
-      <h2 class="h2 mb-4">How can I help?</h2>
-      <p class="description text-pretty text-lg md:text-xl">
-        Let me help your business.
-      </p>
-    </div>
-    <div
-      id="trigger-small-cards"
-      class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-    >
-      {
-        featureData.map((feature, idx) => (
-          <FeatureCard
-            title={feature.title}
-            text={feature.text}
-            icon={feature.icon}
-            data-aos="zoom-in"
-            data-aos-delay={0.15 * idx}
-            data-aos-trigger="#trigger-small-cards"
-          />
-        ))
-      }
+  <div class="site-container">
+    <div class="grid-pattern-container">
+      <div class="relative">
+        <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+          <Badge>Skills</Badge>
+          <h2 class="h2 mb-4">How can I help?</h2>
+          <p class="description text-pretty text-lg md:text-xl">
+            Let me help your business.
+          </p>
+        </div>
+        <div
+          id="trigger-small-cards"
+          class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {
+            featureData.map((feature, idx) => (
+              <FeatureCard
+                title={feature.title}
+                text={feature.text}
+                icon={feature.icon}
+                data-aos="zoom-in"
+                data-aos-delay={0.15 * idx}
+                data-aos-trigger="#trigger-small-cards"
+              />
+            ))
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -72,48 +72,49 @@ In 2021 it was time to focus on something new and I became the Global Business &
 ---
 
 <section id="services-side-image" class="overflow-hidden pb-24 md:pb-28">
-  <div class="absolute inset-0 -z-10 bg-[url('/assets/pattern-light-big.svg')] bg-repeat dark:bg-[url('/assets/pattern-dark-big.svg')]"></div>
-  <div class="site-container">
-    <!-- Info block about the X -->
-    <div class="text-center bg-base-100 rounded-xl p-8 shadow-lg">
-      <div class="flex items-center justify-center gap-4">
-        <div class="flex items-center">
-          <Icon 
-            name="tabler:letter-x" 
-            class="w-12 h-12 text-primary-500" 
-            stroke-width="3"
-            stroke="currentColor"
-            fill="none"
-          />
-          <Icon 
-            name="tabler:question-mark" 
-            class="w-12 h-12 text-primary-500 -ml-5" 
-            stroke-width="3"
-            stroke="currentColor"
-            fill="none"
-          />
+  <div class="bg-grid-pattern">
+    <div class="site-container">
+      <!-- Info block about the X -->
+      <div class="text-center bg-base-100 rounded-xl p-8 shadow-lg">
+        <div class="flex items-center justify-center gap-4">
+          <div class="flex items-center">
+            <Icon 
+              name="tabler:letter-x" 
+              class="w-12 h-12 text-primary-500" 
+              stroke-width="3"
+              stroke="currentColor"
+              fill="none"
+            />
+            <Icon 
+              name="tabler:question-mark" 
+              class="w-12 h-12 text-primary-500 -ml-5" 
+              stroke-width="3"
+              stroke="currentColor"
+              fill="none"
+            />
+          </div>
+          <p class="text-lg">
+            To answer a common question right out of the gate: Yes, the <span class="text-primary-500 font-bold">X</span> in my name is not just there for decorative reasons: my second name is <span class="font-bold">Xavier</span>!
+          </p>
         </div>
-        <p class="text-lg">
-          To answer a common question right out of the gate: Yes, the <span class="text-primary-500 font-bold">X</span> in my name is not just there for decorative reasons: my second name is <span class="font-bold">Xavier</span>!
-        </p>
       </div>
-    </div>
 
-    <div class="flex flex-col gap-16 md:mt-16 md:gap-24">
-      {
-        serviceData.map((feature, idx) => (
-          <ServiceCard
-            title={feature.title}
-            details={feature.details}
-            image={feature.image}
-            href={feature.href ?? '#'}
-            imageSide={idx % 2 === 0 ? "right" : "left"}
-            idx={idx}
-            ctaText={feature.ctaText}
-            showCta={feature.showCta}
-          />
-        ))
-      }
+      <div class="flex flex-col gap-16 md:mt-16 md:gap-24">
+        {
+          serviceData.map((feature, idx) => (
+            <ServiceCard
+              title={feature.title}
+              details={feature.details}
+              image={feature.image}
+              href={feature.href ?? '#'}
+              imageSide={idx % 2 === 0 ? "right" : "left"}
+              idx={idx}
+              ctaText={feature.ctaText}
+              showCta={feature.showCta}
+            />
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>

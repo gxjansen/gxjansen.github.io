@@ -20,30 +20,34 @@ const testimonialData = getTranslatedData("testimonialData", currLocale);
 
 <section
   id="testimonials-columns"
-  class="bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark-big.svg')] md:py-28"
+  class="py-24 md:py-28"
 >
   <div class="site-container">
-    <div class="mb-16 mr-auto md:max-w-4xl" data-aos="fade-up">
-      <Badge>Testimonials</Badge>
-      <h2 class="h2 mb-4">Hear from our customers</h2>
-      <p class="description text-lg md:text-xl">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      </p>
-    </div>
-    <div
-      class="mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-      id="trigger-testimonial-cards"
-    >
-      {
-        testimonialData.map((testimonial, idx) => (
-          <TestimonialCard
-            {...testimonial}
-            data-aos="zoom-in"
-            data-aos-delay={0.2 * idx}
-            data-aos-trigger="#trigger-testimonial-cards"
-          />
-        ))
-      }
+    <div class="grid-pattern-container">
+      <div class="relative">
+        <div class="mb-16 mr-auto md:max-w-4xl" data-aos="fade-up">
+          <Badge>Testimonials</Badge>
+          <h2 class="h2 mb-4">Hear from our customers</h2>
+          <p class="description text-lg md:text-xl">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+          </p>
+        </div>
+        <div
+          class="mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          id="trigger-testimonial-cards"
+        >
+          {
+            testimonialData.map((testimonial, idx) => (
+              <TestimonialCard
+                {...testimonial}
+                data-aos="zoom-in"
+                data-aos-delay={0.2 * idx}
+                data-aos-trigger="#trigger-testimonial-cards"
+              />
+            ))
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -35,156 +35,160 @@ const marqueeBottom = {
 
 <section
   id="feature-gallery-marquee"
-  class="relative bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat py-24 dark:bg-[url('/assets/pattern-dark-big.svg')] md:py-28"
+  class="relative py-24 md:py-28"
 >
-  <div class="site-container relative flex justify-center">
-    <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
-      <Badge>Flags</Badge>
-      <h2 class="h2">Countries where I presented</h2>
-      <p class="description mt-4 text-pretty text-lg md:text-xl">
-        {uniqueCountries.length} and counting!
-      </p>
-    </div>
-  </div>
+  <div class="site-container relative">
+    <div class="grid-pattern-container">
+      <div class="relative flex justify-center">
+        <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+          <Badge>Flags</Badge>
+          <h2 class="h2">Countries where I presented</h2>
+          <p class="description mt-4 text-pretty text-lg md:text-xl">
+            {uniqueCountries.length} and counting!
+          </p>
+        </div>
+      </div>
 
-  {/* Marquee container with fade-out edges */}
-  <div class="relative flex flex-col gap-3 overflow-hidden md:gap-5">
-    {/* Gradient overlays for fade effect - using multi-step gradients for smoother transition */}
-    <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-40 bg-gradient-to-r from-background via-background/80 via-30% to-transparent dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80"></div>
-    <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-40 bg-gradient-to-l from-background via-background/80 via-30% to-transparent dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80"></div>
+      {/* Marquee container with fade-out edges */}
+      <div class="relative flex flex-col gap-3 overflow-hidden md:gap-5">
+        {/* Gradient overlays for fade effect - using multi-step gradients for smoother transition */}
+        <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-40 bg-gradient-to-r from-background via-background/80 via-30% to-transparent dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80"></div>
+        <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-40 bg-gradient-to-l from-background via-background/80 via-30% to-transparent dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80"></div>
 
-    {/* marquee top row */}
-    <div class="marquee-top relative flex gap-3 overflow-hidden md:gap-5">
-      <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5">
-        {marqueeTop.images.map((image) => (
-          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
-              src={image}
-              alt="Country flag"
-              width={600}
-              height={360}
-              class="w-full rounded-md"
-              style={{
-                aspectRatio: '3/2',
-                objectFit: 'cover',
-                objectPosition: 'center'
-              }}
-            />
+        {/* marquee top row */}
+        <div class="marquee-top relative flex gap-3 overflow-hidden md:gap-5">
+          <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5">
+            {marqueeTop.images.map((image) => (
+              <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+                <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+                <Image
+                  src={image}
+                  alt="Country flag"
+                  width={600}
+                  height={360}
+                  class="w-full rounded-md"
+                  style={{
+                    aspectRatio: '3/2',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div
-        aria-hidden="true"
-        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
-      >
-        {marqueeTop.images.map((image) => (
-          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
-              src={image}
-              alt="Country flag"
-              width={600}
-              height={360}
-              class="w-full rounded-md"
-              style={{
-                aspectRatio: '3/2',
-                objectFit: 'cover',
-                objectPosition: 'center'
-              }}
-            />
+          <div
+            aria-hidden="true"
+            class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
+          >
+            {marqueeTop.images.map((image) => (
+              <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+                <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+                <Image
+                  src={image}
+                  alt="Country flag"
+                  width={600}
+                  height={360}
+                  class="w-full rounded-md"
+                  style={{
+                    aspectRatio: '3/2',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
 
-    {/* marquee middle row */}
-    <div class="marquee-middle relative flex gap-3 overflow-hidden md:gap-5">
-      <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5">
-        {marqueeMiddle.images.map((image) => (
-          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
-              src={image}
-              alt="Country flag"
-              width={600}
-              height={360}
-              class="w-full rounded-md"
-              style={{
-                aspectRatio: '3/2',
-                objectFit: 'cover',
-                objectPosition: 'center'
-              }}
-            />
+        {/* marquee middle row */}
+        <div class="marquee-middle relative flex gap-3 overflow-hidden md:gap-5">
+          <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5">
+            {marqueeMiddle.images.map((image) => (
+              <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+                <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+                <Image
+                  src={image}
+                  alt="Country flag"
+                  width={600}
+                  height={360}
+                  class="w-full rounded-md"
+                  style={{
+                    aspectRatio: '3/2',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div
-        aria-hidden="true"
-        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
-      >
-        {marqueeMiddle.images.map((image) => (
-          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
-              src={image}
-              alt="Country flag"
-              width={600}
-              height={360}
-              class="w-full rounded-md"
-              style={{
-                aspectRatio: '3/2',
-                objectFit: 'cover',
-                objectPosition: 'center'
-              }}
-            />
+          <div
+            aria-hidden="true"
+            class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
+          >
+            {marqueeMiddle.images.map((image) => (
+              <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+                <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+                <Image
+                  src={image}
+                  alt="Country flag"
+                  width={600}
+                  height={360}
+                  class="w-full rounded-md"
+                  style={{
+                    aspectRatio: '3/2',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
 
-    {/* marquee bottom row */}
-    <div class="marquee-bottom relative flex gap-3 overflow-hidden md:gap-5">
-      <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5">
-        {marqueeBottom.images.map((image) => (
-          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
-              src={image}
-              alt="Country flag"
-              width={600}
-              height={360}
-              class="w-full rounded-md"
-              style={{
-                aspectRatio: '3/2',
-                objectFit: 'cover',
-                objectPosition: 'center'
-              }}
-            />
+        {/* marquee bottom row */}
+        <div class="marquee-bottom relative flex gap-3 overflow-hidden md:gap-5">
+          <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5">
+            {marqueeBottom.images.map((image) => (
+              <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+                <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+                <Image
+                  src={image}
+                  alt="Country flag"
+                  width={600}
+                  height={360}
+                  class="w-full rounded-md"
+                  style={{
+                    aspectRatio: '3/2',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <div
-        aria-hidden="true"
-        class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
-      >
-        {marqueeBottom.images.map((image) => (
-          <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-            <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
-            <Image
-              src={image}
-              alt="Country flag"
-              width={600}
-              height={360}
-              class="w-full rounded-md"
-              style={{
-                aspectRatio: '3/2',
-                objectFit: 'cover',
-                objectPosition: 'center'
-              }}
-            />
+          <div
+            aria-hidden="true"
+            class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
+          >
+            {marqueeBottom.images.map((image) => (
+              <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
+                <div class="absolute inset-0 rounded-md shadow-md" style="box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset;"></div>
+                <Image
+                  src={image}
+                  alt="Country flag"
+                  width={600}
+                  height={360}
+                  class="w-full rounded-md"
+                  style={{
+                    aspectRatio: '3/2',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   </div>
