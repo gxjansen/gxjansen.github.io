@@ -30,6 +30,9 @@ const {
   class: className,
   ...rest
 } = Astro.props as Props;
+
+// Determine if the link is external
+const isExternalLink = href && (href.startsWith('http://') || href.startsWith('https://'));
 ---
 
 <!-- normal link -->{
@@ -53,6 +56,8 @@ const {
         },
       ]}
       href={href}
+      target={isExternalLink ? "_blank" : undefined}
+      rel={isExternalLink ? "noopener noreferrer" : undefined}
       onclick={onclick}
       {...rest}
     >
