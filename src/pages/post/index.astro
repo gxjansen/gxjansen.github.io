@@ -60,13 +60,14 @@ const processedCategories = sortByValue(countItems(allCategories));
           <!-- Category filters -->
           <div class="container mx-auto px-4 mb-12">
             <div class="flex flex-wrap justify-center gap-4">
-              {processedCategories.map(([category]) => (
+              {processedCategories
+                .filter(([_, __, count]) => count >= 2)
+                .map(([slug, original]) => (
                 <a
-                  href={`/categories/${category}`}
-                  class="px-4 py-2 bg-base-800 text-base-100 dark:text-base-900 rounded-full text-sm font-medium hover:bg-primary-500 transition"
-                  transition:animate="slide"
+                  href={`/categories/${slug}`}
+                  class="px-4 py-2 bg-base-800 text-base-100 dark:bg-base-100 dark:text-base-800 rounded-full text-sm font-medium hover:bg-primary-500 dark:hover:bg-primary-500 dark:hover:text-base-100 transition-all"
                 >
-                  {humanize(category)}
+                  {original}
                 </a>
               ))}
             </div>

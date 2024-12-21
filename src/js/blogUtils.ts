@@ -129,11 +129,15 @@ export function arePostsRelated(
 export function countItems(items: string[]): object {
   // get counts of each item in the array
   const countedItems = items.reduce((acc, item) => {
-    const val = acc[slugify(item)] || 0;
+    const slugifiedItem = slugify(item);
+    const val = acc[slugifiedItem]?.count || 0;
 
     return {
       ...acc,
-      [slugify(item)]: val + 1,
+      [slugifiedItem]: {
+        original: item,
+        count: val + 1
+      },
     };
   }, {});
 
@@ -145,15 +149,11 @@ export function countItems(items: string[]): object {
  * @param jsObj: object - array of "key: value" pairs to sort
  * @returns array of arrays with counts, sorted by count
  */
-export function sortByValue(jsObj: object): any[] {
-  var array: any[] = [];
-  for (var i in jsObj) {
-    array.push([i, jsObj[i]]);
+export function sortByValue(jsObj: object): [string, string, number][] {
+  const array: [string, string, number][] = [];
+  for (const key in jsObj) {
+    array.push([key, jsObj[key].original, jsObj[key].count]);
   }
 
-  const sorted = array.sort((a, b) => {
-    return b[1] - a[1];
-  });
-
-  return sorted;
+  return array.sort((a, b) => b[2] - a[2]);
 }
