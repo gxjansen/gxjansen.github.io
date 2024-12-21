@@ -56,7 +56,8 @@
 
   /* Grid pattern container with faded edges */
   .grid-pattern-container {
-    @apply relative min-h-[200px] -z-50;
+    @apply relative min-h-[200px];
+    pointer-events: none;
 
     &::before {
       content: "";
@@ -67,6 +68,11 @@
         transparent 80%
       );
       z-index: -1;
+      pointer-events: none;
+    }
+
+    > * {
+      pointer-events: auto;
     }
   }
 

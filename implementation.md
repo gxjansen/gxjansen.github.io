@@ -62,7 +62,7 @@
 - [x] Implement lazy loading for embedded content
 - [x] Add proper caching headers
 - [ ] Add loading states for dynamic content
-- [ ] Implement view transitions
+- [x] Implement view transitions
 - [ ] Add error boundaries for embedded content
 
 ## Testing

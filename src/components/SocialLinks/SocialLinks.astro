@@ -1,0 +1,29 @@
+---
+// Import the social links configuration
+import { socialLinks } from '@config/socialLinks';
+import SocialIcon from '@components/SocialIcon/SocialIcon.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<nav
+  class:list={["relative z-10", className]}
+  role="navigation"
+  aria-label="Social media links"
+>
+  <div class="flex items-center gap-4 pointer-events-auto">
+    {
+      socialLinks.map(({ name, href, icon }) => (
+        <SocialIcon
+          href={href}
+          icon={icon}
+          social={name}
+        />
+      ))
+    }
+  </div>
+</nav>
