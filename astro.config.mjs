@@ -14,6 +14,9 @@ import * as path from 'node:path';
 export default defineConfig({
   site: "https://gxjansen.github.io",
   output: "static",
+  viewTransitions: {
+    fallback: true // Enable fallback animations for browsers that don't support view transitions
+  },
   adapter: netlify({
     imageCDN: false
   }),

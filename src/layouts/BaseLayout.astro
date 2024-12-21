@@ -3,6 +3,7 @@ import { type CollectionEntry } from "astro:content";
 
 // component imports
 import BaseHead from "@layouts/BaseHead.astro";
+import { ViewTransitions } from 'astro:transitions';
 import Nav from "@components/Nav/Nav.astro";
 import Footer from "@components/Footer/Footer.astro";
 import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
@@ -43,7 +44,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang={currLocale} transition:animate="fade">
+<html lang={currLocale}>
   <head>
     <BaseHead
       type={type}
@@ -54,7 +55,15 @@ const currLocale = getLocaleFromUrl(Astro.url);
       postFrontmatter={postFrontmatter ? postFrontmatter : undefined}
       noindex={noindex}
     />
+    <ViewTransitions />
     <style>
+      /* Performance optimizations for transitions */
+      .transition-ready {
+        will-change: opacity, transform;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+      }
+
       /* Noise background animation */
       @keyframes noise {
         0% { transform: translate(0,0) }
@@ -89,16 +98,39 @@ const currLocale = getLocaleFromUrl(Astro.url);
     <EnvironmentBanner />
     <!-- put cookie consent first so it is seen first by screen readers -->
     <!-- <CookieConsent /> -->
-    <div class="min-h-[100lvh]">
-      <Nav />
-      <main>
-        <slot />
-      </main>
+    <div class="min-h-[100lvh] relative">
+      {/* Background grid pattern */}
+      <div class="fixed inset-0" style="z-index: -9999;">
+        <div class="grid-pattern-container h-full w-full" />
+      </div>
+      
+      {/* Main content */}
+      <div class="relative" style="z-index: 1;">
+        <Nav />
+        <main class="transition-ready" transition:animate="fade" transition:animate.duration="0.2" transition:animate.timing="ease-out">
+          <slot />
+        </main>
+      </div>
     </div>
     <Footer />
 
-    <!-- Scroll animations -->
+    <!-- Performance optimizations -->
     <script>
+      // Inform the browser about upcoming transitions
+      document.addEventListener('astro:before-preparation', () => {
+        document.querySelectorAll('.transition-ready').forEach(el => {
+          el.style.willChange = 'opacity, transform';
+        });
+      });
+
+      // Clean up after transition
+      document.addEventListener('astro:after-swap', () => {
+        document.querySelectorAll('.transition-ready').forEach(el => {
+          el.style.willChange = 'auto';
+        });
+      });
+
+      // Scroll animations
       import siteSettings from "@config/siteSettings.json";
       import AOS from "@js/aos/aos";
 

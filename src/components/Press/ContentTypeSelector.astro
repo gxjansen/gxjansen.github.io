@@ -25,7 +25,7 @@ const contentTypes = [
     {contentTypes.map(type => (
       <a
         href={`#${type.id}`}
-        class="px-6 py-3 bg-teal-500 text-base-100 rounded-lg hover:bg-teal-600 transition flex items-center gap-2"
+        class="px-6 py-3 bg-teal-500 text-base-100 dark:text-base-900 rounded-lg hover:bg-teal-600 transition flex items-center gap-2"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <Fragment set:html={type.icon} />

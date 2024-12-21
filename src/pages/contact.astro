@@ -44,12 +44,12 @@ const siteData = getTranslatedData("siteData", currLocale);
               <div
                 class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
               >
-                <Icon name="tabler/mail" class="size-6 text-white" />
+                <Icon name="tabler/mail" class="size-6 text-base-100 dark:text-base-900" />
               </div>
               <h3 class="h3">E-mail</h3>
               <a
                 href="mailto:example@email.com"
-                class="description transition hover:text-base-600"
+                class="description transition hover:text-base-600 dark:text-base-300"
                 >{siteData.contact.email}</a
               >
             </div>
@@ -59,12 +59,12 @@ const siteData = getTranslatedData("siteData", currLocale);
               <div
                 class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
               >
-                <Icon name="tabler/phone" class="size-6 text-white" />
+                <Icon name="tabler/phone" class="size-6 text-base-100 dark:text-base-900" />
               </div>
               <h3 class="h3">DM</h3>
               <a
                 href={`tel:${siteData.contact.phone}`}
-                class="description transition hover:text-base-600"
+                class="description transition hover:text-base-600 dark:text-base-300"
                 >{siteData.contact.phone}</a
               >
             </div>
@@ -74,7 +74,7 @@ const siteData = getTranslatedData("siteData", currLocale);
               <div
                 class="inline-flex size-12 items-center justify-center overflow-hidden rounded-full bg-primary-500"
               >
-                <Icon name="tabler/map-pin" class="size-6 text-white" />
+                <Icon name="tabler/map-pin" class="size-6 text-base-100 dark:text-base-900" />
               </div>
               <h3 class="h3">Home</h3>
               <div class="description flex flex-col items-center lg:items-start">

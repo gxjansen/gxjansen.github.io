@@ -7,7 +7,10 @@
     "build": "astro build",
     "preview": "astro build --mode preview",
     "production": "astro build --mode production",
-    "astro": "astro"
+    "astro": "astro",
+    "check-dark-mode": "node scripts/check-dark-mode.js",
+    "fix-dark-mode": "node scripts/fix-dark-mode.js",
+    "fix-dark-mode:dry": "node scripts/fix-dark-mode.js --dry-run"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.2",
