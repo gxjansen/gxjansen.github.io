@@ -46,7 +46,7 @@ const metaDescription = `${event.name} - ${eventDate} in ${event.city}${event.co
       <div class="mx-auto max-w-4xl">
         <div class="mb-8" data-aos="fade-up">
           <Badge>Event</Badge>
-          <h1 class="h2 mb-4 text-white">{event.name}</h1>
+          <h1 class="h2 mb-4 text-base-100 dark:text-base-900">{event.name}</h1>
           
           <div class="mb-6 flex flex-wrap gap-3">
             <span class="rounded-full bg-base-100 px-3 py-1 text-sm text-base-700 dark:bg-base-800 dark:text-base-300">
@@ -61,7 +61,7 @@ const metaDescription = `${event.name} - ${eventDate} in ${event.city}${event.co
 
           <div class="flex items-start gap-6">
             <div>
-              <p class="text-lg text-base-400">
+              <p class="text-lg text-base-400 dark:text-base-500">
                 {event.city}{event.country && `, ${event.country}`}
               </p>
               {event.role && (
@@ -94,7 +94,7 @@ const metaDescription = `${event.name} - ${eventDate} in ${event.city}${event.co
               href={event.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-block px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors"
+              class="inline-block px-6 py-3 bg-primary-600 hover:bg-primary-700 text-base-100 dark:text-base-900 rounded-lg transition-colors"
             >
               Visit Event Website
             </a>

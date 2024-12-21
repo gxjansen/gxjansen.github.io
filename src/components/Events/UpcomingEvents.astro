@@ -40,7 +40,7 @@ const secondColumnEvents = upcomingEvents.filter((_, i) => i % 2 === 1);
               <Badge>Events</Badge>
               <h2 class="h2">Upcoming Speaking Engagements</h2>
               {events.filter(event => new Date(event.date) >= today).length > maxEvents && (
-                <p class="mt-4 text-gray-400">
+                <p class="mt-4 text-base-400 dark:text-base-500">
                   Showing {maxEvents} of {events.filter(event => new Date(event.date) >= today).length} upcoming events
                 </p>
               )}

@@ -56,7 +56,7 @@
 
   /* Grid pattern container with faded edges */
   .grid-pattern-container {
-    @apply relative min-h-[200px];
+    @apply relative min-h-[200px] -z-50;
 
     &::before {
       content: "";

@@ -60,8 +60,7 @@ const metaImage = new URL(image, Astro.site);
 
   <section class="py-24 md:py-28">
     <div class="site-container">
-      <div class="grid-pattern-container">
-        <div class="relative">
+      <div class="relative">
           <div class="mx-auto max-w-4xl">
             <div class="mb-8" data-aos="fade-up">
               <Badge>Presentation</Badge>
@@ -81,21 +80,25 @@ const metaImage = new URL(image, Astro.site);
               </div>
 
               {intendedAudience && (
-                <p class="text-lg text-base-400">
+                <p class="text-lg text-base-400 dark:text-base-300">
                   For: {intendedAudience}
                 </p>
               )}
             </div>
 
             <div class="prose prose-lg dark:prose-invert mb-12">
-              <img
-                src={image}
-                alt={title}
-                width="800"
-                height="450"
-                class="rounded-lg mb-8 w-full h-auto aspect-video object-cover"
-                loading="eager"
-              />
+              <div class="relative rounded-lg mb-8 aspect-video" style="transform: translateZ(0);">
+                <img
+                  src={image}
+                  alt={title}
+                  width="800"
+                  height="450"
+                  class="absolute inset-0 w-full h-full object-cover rounded-lg"
+                  loading="eager"
+                  style="z-index: 100;"
+                  transition:name={`presentation-image-${entry.slug}`}
+                />
+              </div>
               
               <Content />
             </div>

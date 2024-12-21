@@ -54,8 +54,6 @@
 - [x] Add proper alt text to all images
 - [x] Maintain semantic HTML structure
 - [x] Ensure sufficient color contrast ratios
-- [ ] Add skip links for embedded content
-- [ ] Add transcripts for video content
 
 ## Performance
 - [x] Implement lazy loading for images
@@ -76,6 +74,7 @@
 - [ ] Test screen reader compatibility
 - [ ] Test embedded content fallbacks
 - [ ] Test error states and boundaries
+- [ ] Add a "dead link checker" for both internal and external 404 links
 
 ## Technical Reference
 

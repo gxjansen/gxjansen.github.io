@@ -374,7 +374,7 @@ export const pressCoverage = [
         publicationDate: "2024-04-04",
         youtubeLink: "https://www.youtube.com/watch?v=HJf7h66S3tM",
         spotifyEmbedId: "3ZW2obcTEHpo7urYLqJr2g",
-        articleUrl: "https://www.nohacks.show/psychology-behind-user-engagement-and-community-building-with-guido-jansen/",
+        articleUrl: "https://www.nohackspod.com/episode/psychology-behind-user-engagement-and-community-building-with-guido-jansen/",
         personOrganization: "nohacks.show"
     },
     {
