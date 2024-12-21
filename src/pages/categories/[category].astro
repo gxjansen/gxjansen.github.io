@@ -1,33 +1,50 @@
 ---
-// utils
 import { getCollection } from "astro:content";
+
+// components
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PostCardAtlas from "@components/PostCard/PostCardAtlas.astro";
+import Badge from "@components/Badge/Badge.astro";
+
+// utils
 import { countItems, sortByValue } from "@js/blogUtils";
-import { slugify, humanize } from "@js/textUtils";
+import { slugify } from "@js/textUtils";
 
 export async function getStaticPaths() {
   // Get all posts
-  const posts = await getCollection("blog", ({ data }) => {
+  const posts = await getCollection("post", ({ data }) => {
     return !data.draft;
   });
 
-  // Get all unique categories, filtering out undefined/null values
-  const allCategories = [...new Set(posts
+  // Get all categories and their original names
+  const allCategories = posts
     .map(post => post.data.categories || [])
     .flat()
-    .filter(Boolean))];
+    .filter(Boolean);
+
+  const uniqueCategories = [...new Set(allCategories)];
   
-  // Create a path for each category
-  return allCategories.map(category => ({
+  // Create a path for each category, storing both slugified and original versions
+  // Count posts per category
+  const categoryCount = countItems(allCategories);
+  const validCategories = uniqueCategories.filter(category => 
+    categoryCount[slugify(category)]?.count >= 2
+  );
+
+  return validCategories.map(category => ({
     params: { category: slugify(category) },
-    props: { category }
+    props: { 
+      slugifiedCategory: slugify(category),
+      originalCategory: category 
+    }
   }));
 }
 
-// Get the category from props
-const { category } = Astro.props;
+// Get both versions of the category from props
+const { slugifiedCategory, originalCategory } = Astro.props;
 
 // Get all posts
-const posts = await getCollection("blog", ({ data }) => {
+const posts = await getCollection("post", ({ data }) => {
   return !data.draft;
 });
 
@@ -35,7 +52,7 @@ const posts = await getCollection("blog", ({ data }) => {
 const filteredPosts = posts.filter((post) =>
   (post.data.categories || [])
     .map((cat) => slugify(cat))
-    .includes(slugify(category))
+    .includes(slugifiedCategory)
 );
 
 // Get all categories for sidebar, filtering out undefined/null values
@@ -44,15 +61,35 @@ const categories = posts
   .flat()
   .filter(Boolean);
 const processedCategories = sortByValue(countItems(categories));
+
+// Set up page metadata
+const title = `Posts in category: ${originalCategory}`;
+const description = `Articles categorized under ${originalCategory}`;
 ---
 
-<!-- Your template here -->
-<div>
-  <h1>Posts in category: {humanize(category)}</h1>
-  {filteredPosts.map(post => (
-    <article>
-      <h2>{post.data.title}</h2>
-      <p>{post.data.description}</p>
-    </article>
-  ))}
-</div>
+<BaseLayout title={title} description={description}>
+  <section class="py-24 md:py-28">
+    <div class="site-container">
+      <div class="grid-pattern-container">
+        <div class="relative">
+          <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+            <Badge>Category</Badge>
+            <h1 class="h1 mb-4">{originalCategory}</h1>
+            <p class="description text-lg md:text-xl">
+              Articles related to {originalCategory.toLowerCase()}
+            </p>
+          </div>
+
+          <!-- Blog posts grid -->
+          <div class="container mx-auto px-4">
+            <div class="grid gap-16 sm:grid-cols-2">
+              {filteredPosts.map(post => (
+                <PostCardAtlas post={post} showDescription={true} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
