@@ -14,7 +14,7 @@ export interface Props {
   title: string;
   description: string;
   image?: ImageMetadata;
-  postFrontmatter?: CollectionEntry<"blog">["data"];
+  postFrontmatter?: CollectionEntry<"post">["data"];
   authors?: CollectionEntry<"authors">[];
   noindex?: boolean;
 }

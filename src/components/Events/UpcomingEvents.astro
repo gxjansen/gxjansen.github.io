@@ -31,11 +31,10 @@ const secondColumnEvents = upcomingEvents.filter((_, i) => i % 2 === 1);
 ---
 
 {upcomingEvents.length > 0 && (
-  <div class="mb-16">
-    <div class="grid-pattern-container">
-      <div class="relative">
+  <section class="grid-pattern-container mb-16">
+    <div class="relative">
         {showTitle && (
-          <div class="site-container flex justify-center">
+          <div class="flex justify-center">
             <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
               <Badge>Events</Badge>
               <h2 class="h2">Upcoming Speaking Engagements</h2>
@@ -63,7 +62,6 @@ const secondColumnEvents = upcomingEvents.filter((_, i) => i % 2 === 1);
             ))}
           </div>
         </div>
-      </div>
     </div>
-  </div>
+  </section>
 )}

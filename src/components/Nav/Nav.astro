@@ -27,7 +27,7 @@ import { locales } from "@config/siteSettings.json";
   transition:name={`nav`}
 >
   <div class="mx-auto flex w-full">
-    <div class="site-container flex h-14 w-full items-center">
+    <div class="site-container flex h-14 w-full items-center px-4">
       <header class="relative flex w-full items-center gap-2">
         <!-- home button / image -->
         <div class="flex flex-auto justify-start">
@@ -41,7 +41,7 @@ import { locales } from "@config/siteSettings.json";
         <!-- desktop nav menu -->
         <div class="flex flex-auto justify-end">
           <nav class="hidden md:block">
-            <ul class="flex h-fit items-center px-4">
+            <ul class="flex h-fit items-center">
               {
                 // if dropdown exists, setup the dropdown, otherwise it is just a link
                 navData
@@ -85,8 +85,7 @@ import { locales } from "@config/siteSettings.json";
             <MobileNav />
           </div>
         </div>
-      </header>
-    </div>
+    </header>
   </div>
 </div>
 

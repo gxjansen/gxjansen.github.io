@@ -26,36 +26,25 @@ const siteData = getTranslatedData("siteData", currLocale);
 ---
 
 <BaseLayout title={siteData.title} description={siteData.description}>
-  <main id="main-content">
-    <HeroSideImage />
-    <SiteContent />
-    <FeatureCardsSmall />
+  <HeroSideImage />
+  <SiteContent />
+  <FeatureCardsSmall />
 
-    <div 
-      class="site-container mx-auto px-4 pb-20 pt-10 md:py-28"
-      aria-label="Events and Features"
+  <UpcomingEvents events={eventIcons} />
+  
+  <div class="flex justify-center mb-16">
+    <a 
+      href="/events" 
+      class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-3 text-center text-base font-medium text-base-700 dark:text-base-200 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+      aria-label="View all past speaking events"
     >
-      <section aria-label="Events Section" class="grid-pattern-container">
-        <div class="relative">
-          <UpcomingEvents events={eventIcons} />
-          
-          <div class="flex justify-center mt-8">
-            <a 
-              href="/events" 
-              class="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-3 text-center text-base font-medium text-base-700 dark:text-base-200 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-              aria-label="View all past speaking events"
-            >
-              View Past Events
-            </a>
-          </div>
-        </div>
-      </section>
-      
-      <FeatureFlagsMarquee />
-    </div>
+      View Past Events
+    </a>
+  </div>
+  
+  <FeatureFlagsMarquee />
 
-    <FeatureGalleryMarquee />
-    <CompanyLogos />
-    <CtaCardSplit />
-  </main>
+  <FeatureGalleryMarquee />
+  <CompanyLogos />
+  <CtaCardSplit />
 </BaseLayout>

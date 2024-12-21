@@ -19,7 +19,7 @@ const today = new Date();
 ---
 
 <footer class="overflow-x-clip pb-16 pt-20 font-medium text-base-500 dark:text-base-400">
-  <div class="site-container">
+  <div>
     <div class="mt-6 flex flex-wrap items-center justify-between gap-6">
       <SiteLogo />
       <div class="flex flex-wrap gap-x-4">
@@ -45,13 +45,15 @@ const today = new Date();
     </div>
   </div>
   <div class="mt-6 border-t border-t-base-200/50 text-sm text-base-400 dark:text-base-500">
-    <div class="site-container mt-6 flex flex-wrap justify-between gap-6">
+    <div class="mt-6">
+      <div class="flex flex-wrap justify-between gap-6">
       <div class="my-auto">
         &copy; {today.getFullYear()}
         {" "}{siteData.name}. All rights reserved.
       </div>
       <!-- Socials -->
-      <SocialLinks />
+        <SocialLinks />
+      </div>
     </div>
   </div>
 </footer>
