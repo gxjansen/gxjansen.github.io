@@ -5,7 +5,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import FooterLink from "@components/Footer/FooterLink.astro";
 import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
 import Button from "@components/Button/Button.astro";
-import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
+import SocialLinks from "@components/SocialLinks/SocialLinks.astro";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -51,40 +51,7 @@ const today = new Date();
         {" "}{siteData.name}. All rights reserved.
       </div>
       <!-- Socials -->
-      <div class="flex flex-col">
-        <div class="flex gap-4">
-          <SocialIcon
-            href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=gxjansen"
-            icon="tabler/brand-linkedin"
-            social="linkedin"
-          />
-          <SocialIcon
-          href="https://www.youtube.com/@gxjansen"
-          icon="tabler/brand-youtube"
-          social="youtube"
-        />
-        <SocialIcon
-            href="https://github.com/gxjansen"
-            icon="tabler/brand-github"
-            social="github"
-          />
-          <SocialIcon
-            href="https://bsky.app/profile/gui.do"
-            icon="tabler/brand-bluesky"
-            social="bluesky"
-          />
-          <SocialIcon
-            href="https://www.instagram.com/gxjansen"
-            icon="tabler/brand-instagram"
-            social="instagram"
-          />
-          <SocialIcon
-          href="https://twitter.com/guido"
-          icon="tabler/brand-x"
-          social="twitter (x)"
-        />
-        </div>
-      </div>
+      <SocialLinks />
     </div>
   </div>
 </footer>
