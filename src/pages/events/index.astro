@@ -31,22 +31,17 @@ const secondColumnEvents = sortedEvents.filter((_, i) => i % 2 === 1);
 >
   {/* Upcoming Events Section */}
   <section class="py-24 md:py-28">
-    <div class="site-container">
-      <UpcomingEvents events={sortedEvents} />
-    </div>
+    <UpcomingEvents events={sortedEvents} />
   </section>
 
   {/* Countries Flags Section */}
   <section class="py-12">
-    <div class="site-container">
-      <FeatureFlagsMarquee />
-    </div>
+    <FeatureFlagsMarquee />
   </section>
 
   {/* Past Events Section */}
   <section class="py-24 md:py-28">
-    <div class="site-container">
-      <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+    <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
         <Badge>Events</Badge>
         <h1 class="h2 mb-4">Past Events</h1>
         <p class="description text-lg md:text-xl">

@@ -49,11 +49,7 @@
 - [x] Update TypeScript interfaces for event-presentation relationship
 
 ## Accessibility
-- [x] Add proper ARIA labels to interactive elements
-- [x] Ensure keyboard navigation works correctly
-- [x] Add proper alt text to all images
-- [x] Maintain semantic HTML structure
-- [x] Ensure sufficient color contrast ratios
+- [ ] Go through /accessibility-checklist.md
 
 ## Performance
 - [x] Implement lazy loading for images

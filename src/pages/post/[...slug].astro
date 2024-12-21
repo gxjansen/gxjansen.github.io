@@ -8,7 +8,7 @@ import BlogLayoutCenter from "@layouts/BlogLayoutCenter.astro";
 
 // Get all posts for static paths
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => {
+  const posts = await getCollection("post", ({ data }) => {
     return !data.draft;
   });
   
@@ -23,6 +23,10 @@ export async function getStaticPaths() {
 
 // Get the post data from props
 const { post, allPosts } = Astro.props;
+
+if (!post) {
+  return Astro.redirect('/404');
+}
 
 // Get the rendered content
 const { Content } = await post.render();
