@@ -1,13 +1,39 @@
 ---
 // src/components/EnvironmentBanner/EnvironmentBanner.astro
 import { CONFIG } from 'src/config.ts';
+import { Icon } from "astro-icon";
 
 const isProduction = CONFIG.ALLOW_INDEXING;
 ---
 
 {!isProduction && (
-  <div class="environment-banner">
-    Preview Environment
+  <div 
+    class="environment-banner"
+    role="alert"
+    aria-atomic="true"
+    aria-live="polite"
+  >
+    <div class="banner-content">
+      <Icon
+        name="tabler/alert-triangle"
+        class="h-4 w-4"
+        aria-hidden="true"
+        role="presentation"
+      />
+      <span>Preview Environment</span>
+      <button
+        type="button"
+        class="banner-close"
+        aria-label="Dismiss preview environment notification"
+      >
+        <Icon
+          name="tabler/x"
+          class="h-4 w-4"
+          aria-hidden="true"
+          role="presentation"
+        />
+      </button>
+    </div>
   </div>
 )}
 
@@ -17,11 +43,88 @@ const isProduction = CONFIG.ALLOW_INDEXING;
     top: 0;
     left: 0;
     right: 0;
-    @apply bg-red-500;
+    background-color: rgb(239, 68, 68); /* red-500 */
     color: white;
     text-align: center;
-    padding: 0rem;
-    font-weight: bold;
     z-index: 9999;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .banner-close {
+    position: absolute;
+    right: 1rem;
+    padding: 0.25rem;
+    color: white;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+  }
+
+  .banner-close:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .banner-close:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
+  /* Ensure proper color contrast */
+  @media (prefers-contrast: more) {
+    .environment-banner {
+      background-color: rgb(185, 28, 28); /* red-700 for better contrast */
+    }
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .banner-close {
+      transition: none;
+    }
   }
 </style>
+
+<script>
+  function initBanner() {
+    const banner = document.querySelector('.environment-banner');
+    const closeButton = banner?.querySelector('.banner-close');
+
+    if (banner && closeButton) {
+      closeButton.addEventListener('click', () => {
+        banner.style.display = 'none';
+        // Store dismissal in session storage
+        sessionStorage.setItem('previewBannerDismissed', 'true');
+      });
+
+      // Handle keyboard events
+      closeButton.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          closeButton.click();
+        }
+      });
+
+      // Check if banner was previously dismissed
+      if (sessionStorage.getItem('previewBannerDismissed') === 'true') {
+        banner.style.display = 'none';
+      }
+    }
+  }
+
+  // Initialize on page load
+  initBanner();
+
+  // Re-initialize after view transitions
+  document.addEventListener('astro:after-swap', initBanner);
+</script>

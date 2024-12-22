@@ -31,32 +31,48 @@ const secondColumnEvents = upcomingEvents.filter((_, i) => i % 2 === 1);
 ---
 
 {upcomingEvents.length > 0 && (
-  <section class="grid-pattern-container mb-16">
+  <section 
+    class="grid-pattern-container mb-16"
+    aria-labelledby="upcoming-events-heading"
+  >
     <div class="relative">
         {showTitle && (
           <div class="flex justify-center">
             <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
               <Badge>Events</Badge>
-              <h2 class="h2">Upcoming Speaking Engagements</h2>
+              <h2 id="upcoming-events-heading" class="h2">Upcoming Speaking Engagements</h2>
               {events.filter(event => new Date(event.date) >= today).length > maxEvents && (
-                <p class="mt-4 text-base-400 dark:text-base-500">
-                  Showing {maxEvents} of {events.filter(event => new Date(event.date) >= today).length} upcoming events
-                </p>
+              <p 
+                class="mt-4 text-base-400 dark:text-base-500"
+                aria-live="polite"
+              >
+                Showing {maxEvents} of {events.filter(event => new Date(event.date) >= today).length} upcoming events
+              </p>
               )}
             </div>
           </div>
         )}
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div 
+          class="grid grid-cols-1 md:grid-cols-2 gap-6"
+          role="list"
+          aria-label="Upcoming events list"
+        >
           {/* First column */}
-          <div class="space-y-6">
+          <div 
+            class="space-y-6"
+            role="presentation"
+          >
             {firstColumnEvents.map((event) => (
               <EventCard {...event} />
             ))}
           </div>
 
           {/* Second column - offset as a whole */}
-          <div class="space-y-6 md:mt-24">
+          <div 
+            class="space-y-6 md:mt-24"
+            role="presentation"
+          >
             {secondColumnEvents.map((event) => (
               <EventCard {...event} />
             ))}

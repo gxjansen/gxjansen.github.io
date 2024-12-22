@@ -1,4 +1,4 @@
- ---
+---
 /**
  * * These are small cards with icons, titles, and text. With title first
  * This looks best with an even number of cards. They are smaller to
@@ -53,36 +53,92 @@ const featureData: FeatureData[] = [
     text: `Contact me and we can have a look at what I can do for your business.`,
   },
 ];
+
+// Check for reduced motion preference
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+const shouldReduceMotion = typeof window !== "undefined" 
+  ? window.matchMedia(reducedMotionQuery).matches 
+  : false;
 ---
 
 <section
   id="feature-cards-small"
   class="py-24 md:py-28"
+  aria-labelledby="features-heading"
 >
-    <div class="grid-pattern-container relative">
-        <div class="mb-16 text-center md:max-w-4xl mx-auto" data-aos="fade-up">
-          <Badge>Skills</Badge>
-          <h2 class="h2 mb-4">How can I help?</h2>
-          <p class="description text-pretty text-lg md:text-xl">
-            Let me help your business.
-          </p>
-        </div>
-        <div
-          id="trigger-small-cards"
-          class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {
-            featureData.map((feature, idx) => (
-              <FeatureCard
-                title={feature.title}
-                text={feature.text}
-                icon={feature.icon}
-                data-aos="zoom-in"
-                data-aos-delay={0.15 * idx}
-                data-aos-trigger="#trigger-small-cards"
-              />
-            ))
-          }
+  <div 
+    class="grid-pattern-container relative"
+    role="presentation"
+  >
+    <div 
+      class="mb-16 text-center md:max-w-4xl mx-auto" 
+      data-aos={shouldReduceMotion ? "" : "fade-up"}
+    >
+      <Badge>Skills</Badge>
+      <h2 
+        id="features-heading" 
+        class="h2 mb-4"
+      >
+        How can I help?
+      </h2>
+      <p 
+        class="description text-pretty text-lg md:text-xl"
+        aria-describedby="features-heading"
+      >
+        Let me help your business.
+      </p>
+    </div>
+    <div
+      id="trigger-small-cards"
+      class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      role="list"
+      aria-label="Available services"
+    >
+      {
+        featureData.map((feature, idx) => (
+          <FeatureCard
+            title={feature.title}
+            text={feature.text}
+            icon={feature.icon}
+            data-aos={shouldReduceMotion ? "" : "zoom-in"}
+            data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
+            data-aos-trigger="#trigger-small-cards"
+            aria-label={`Service: ${feature.title}`}
+          />
+        ))
+      }
     </div>
   </div>
 </section>
+
+<script>
+  // Handle reduced motion preference changes
+  if (typeof window !== 'undefined') {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    
+    function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
+      const elements = document.querySelectorAll('[data-aos]');
+      elements.forEach(element => {
+        if (e.matches) {
+          element.setAttribute('data-aos', '');
+          element.setAttribute('data-aos-delay', '');
+        } else {
+          // Restore original animations
+          const isHeader = element.classList.contains('mb-16');
+          const isCard = element.closest('[role="listitem"]');
+          
+          if (isHeader) {
+            element.setAttribute('data-aos', 'fade-up');
+          } else if (isCard) {
+            const index = Array.from(document.querySelectorAll('[role="listitem"]')).indexOf(isCard);
+            element.setAttribute('data-aos', 'zoom-in');
+            element.setAttribute('data-aos-delay', (0.15 * index).toString());
+          }
+        }
+      });
+    }
+
+    mediaQuery.addEventListener('change', handleMotionPreference);
+    handleMotionPreference(mediaQuery);
+  }
+</script>

@@ -55,21 +55,45 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 
     const jsonLD = {
       "@context": "https://schema.org",
-      "@type": "Blogposting",
+      "@type": "BlogPosting",
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": canonicalUrl.toString()
+        "@id": canonicalUrl.toString(),
+        "inLanguage": postFrontmatter.language || "en",
+        "accessibilityFeature": [
+          "alternativeText",
+          "readingOrder",
+          "structuralNavigation",
+          "tableOfContents",
+          "highContrastDisplay",
+          "largePrint",
+          "taggedPDF"
+        ],
+        "accessibilityHazard": "none",
+        "accessMode": ["textual", "visual"],
+        "accessModeSufficient": ["textual"]
       },
       "headline": postFrontmatter.title,
       "description": postFrontmatter.description,
       "author": authorsJsonLd,
       "datePublished": postFrontmatter.pubDate,
-      "dateModified": postFrontmatter.updatedDate || postFrontmatter.pubDate
+      "dateModified": postFrontmatter.updatedDate || postFrontmatter.pubDate,
+      "keywords": postFrontmatter.tags?.join(", "),
+      "articleBody": postFrontmatter.content,
+      "articleSection": postFrontmatter.category || "Blog",
+      "wordCount": postFrontmatter.content?.split(/\s+/).length || 0
     };
 
-    // Only add image if it exists and has a src property
+    // Add image with accessibility attributes if it exists
     if (image && typeof image === 'object' && 'src' in image) {
-      jsonLD["image"] = image.src;
+      jsonLD["image"] = {
+        "@type": "ImageObject",
+        "url": image.src,
+        "caption": postFrontmatter.imageCaption || postFrontmatter.title,
+        "description": postFrontmatter.imageAlt || postFrontmatter.description,
+        "width": image.width,
+        "height": image.height
+      };
     }
 
     return `<script type="application/ld+json">
@@ -82,7 +106,21 @@ export default function jsonLDGenerator(props: JsonLDProps) {
       "@context": "https://schema.org/",
       "@type": "WebSite",
       "name": "${siteData.title}",
-      "url": "${import.meta.env.SITE}"
+      "url": "${import.meta.env.SITE}",
+      "inLanguage": "${siteData.language || 'en'}",
+      "accessibilityAPI": "ARIA",
+      "accessibilityControl": [
+        "fullKeyboardControl",
+        "fullMouseControl",
+        "fullTouchControl"
+      ],
+      "accessibilityFeature": [
+        "alternativeText",
+        "structuralNavigation",
+        "highContrastDisplay",
+        "largePrint"
+      ],
+      "accessibilityHazard": "none"
     }
   </script>`;
 }

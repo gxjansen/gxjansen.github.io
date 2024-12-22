@@ -9,33 +9,51 @@ import { Icon } from "astro-icon";
 import Button from "@components/Button/Button.astro";
 ---
 
-<section class="py-10">
+<section 
+  class="py-10"
+  aria-labelledby="cta-heading"
+>
   <div class="site-container">
     <div
       class="relative overflow-hidden rounded-md bg-primary-500 px-16 py-11 md:py-20"
+      role="region"
+      aria-label="Call to action"
     >
       <Icon
         name="atlas/dots3"
         class="absolute left-4 top-0 z-10 size-16 text-accent-4"
         aria-hidden="true"
+        role="presentation"
       />
       <Icon
         name="atlas/dots3"
         class="absolute bottom-0 right-4 z-10 size-16 text-accent-4"
         aria-hidden="true"
+        role="presentation"
       />
       <Icon
         name="atlas/wave-bg-basic"
         class="absolute left-1/2 top-1/2 h-full -translate-x-1/2 -translate-y-1/2 object-cover text-base-900 dark:text-base-100/5"
         aria-hidden="true"
+        role="presentation"
       />
 
-      <div class="relative z-20 -m-3 flex flex-wrap items-center">
+      <div 
+        class="relative z-20 -m-3 flex flex-wrap items-center"
+        role="presentation"
+      >
         <div class="w-full p-3 md:w-1/2">
-          <h2 class="mb-6 text-4xl font-bold tracking-tighter text-base-100 dark:text-base-900">
+          <h2 
+            id="cta-heading" 
+            class="mb-6 text-4xl font-bold tracking-tighter text-base-100 dark:text-base-900"
+          >
             In need of a keynote speaker or in-house workshop?
           </h2>
-          <p class="font-semibold text-base-100 dark:text-base-900">I speak at various international events every month and I'm regularly awarded as the best and most engaging speaker of the event. Send me your details and we'll get your event on my schedule!
+          <p 
+            class="font-semibold text-base-100 dark:text-base-900"
+            aria-describedby="cta-heading"
+          >
+            I speak at various international events every month and I'm regularly awarded as the best and most engaging speaker of the event. Send me your details and we'll get your event on my schedule!
           </p>
         </div>
         <div class="flex w-full p-3 md:w-1/2 md:justify-end">
@@ -44,9 +62,10 @@ import Button from "@components/Button/Button.astro";
             href="/contact"
             target="_blank"
             rel="noopener noreferrer"
-            class="shadow-none"
+            class="shadow-none focus:outline-none focus:ring-2 focus:ring-base-100 focus:ring-offset-2 focus:ring-offset-primary-500"
+            aria-label="Book Guido for your event (opens in new tab)"
           >
-          Book Guido
+            <span>Book Guido</span>
           </Button>
         </div>
       </div>

@@ -15,15 +15,20 @@ const { class: className } = Astro.props;
   role="navigation"
   aria-label="Social media links"
 >
-  <div class="flex items-center gap-4 pointer-events-auto">
+  <ul 
+    class="flex items-center gap-4 pointer-events-auto" 
+    role="list"
+  >
     {
       socialLinks.map(({ name, href, icon }) => (
-        <SocialIcon
-          href={href}
-          icon={icon}
-          social={name}
-        />
+        <li role="listitem">
+          <SocialIcon
+            href={href}
+            icon={icon}
+            social={name}
+          />
+        </li>
       ))
     }
-  </div>
+  </ul>
 </nav>

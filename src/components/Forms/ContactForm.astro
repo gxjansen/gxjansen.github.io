@@ -11,151 +11,283 @@
 import Button from "@components/Button/Button.astro";
 ---
 
-<section id="contact" class="mx-auto min-w-fit max-w-3xl rounded-lg">
-  <form id="contact-form" name="contact" class="flex flex-col gap-4">
+<section 
+  id="contact" 
+  class="mx-auto min-w-fit max-w-3xl rounded-lg"
+  aria-labelledby="contact-form-heading"
+>
+  <h2 id="contact-form-heading" class="sr-only">Contact Form</h2>
+  
+  <form 
+    id="contact-form" 
+    name="contact" 
+    class="flex flex-col gap-4"
+    novalidate
+  >
     <input type="hidden" name="form-name" value="contact" />
-    <div>
+    
+    <fieldset>
+      <legend class="mb-4 text-lg font-semibold">Personal Information</legend>
       <div class="grid gap-4 sm:grid-cols-2">
-        <div class="flex flex-col">
-          <label for="contact-fname" class="form__label sr-only"
-            >First Name <span class="text-red-600">*</span></label
+        <div class="flex flex-col gap-2">
+          <label 
+            for="contact-fname" 
+            class="form__label font-medium"
           >
+            First Name <span class="text-red-600" aria-hidden="true">*</span>
+            <span class="sr-only">(Required)</span>
+          </label>
           <input
             type="text"
             class="form__input"
             name="fname"
             id="contact-fname"
-            placeholder="First name"
+            placeholder="Enter your first name"
             required
+            aria-required="true"
+            aria-describedby="fname-error"
           />
+          <div id="fname-error" class="error-message text-red-600 text-sm" role="alert"></div>
         </div>
 
-        <div class="flex flex-col">
-          <label for="contact-lname" class="form__label sr-only"
-            >Last Name <span class="text-red-600">*</span></label
+        <div class="flex flex-col gap-2">
+          <label 
+            for="contact-lname" 
+            class="form__label font-medium"
           >
+            Last Name <span class="text-red-600" aria-hidden="true">*</span>
+            <span class="sr-only">(Required)</span>
+          </label>
           <input
             type="text"
             class="form__input"
             name="lname"
             id="contact-lname"
-            placeholder="Last name"
+            placeholder="Enter your last name"
             required
+            aria-required="true"
+            aria-describedby="lname-error"
           />
+          <div id="lname-error" class="error-message text-red-600 text-sm" role="alert"></div>
         </div>
       </div>
-    </div>
-    <!-- <div>
-      <label for="contact-address" class="form__label sr-only mb-1"
-        >Street Address <span class="text-red-600">*</span></label
-      >
-      <input
-        type="text"
-        class="form__input"
-        name="address"
-        id="contact-address"
-        placeholder="street address"
-        required
-      />
-    </div>
-    <div>
-      <div class="grid gap-4 sm:grid-cols-3">
-        <div class="flex flex-col">
-          <label for="contact-city" class="form__label sr-only"
-            >City <span class="text-red-600">*</span></label
+    </fieldset>
+
+    <fieldset>
+      <legend class="mb-4 text-lg font-semibold">Contact Information</legend>
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
+          <label 
+            for="contact-email" 
+            class="form__label font-medium"
           >
+            Email <span class="text-red-600" aria-hidden="true">*</span>
+            <span class="sr-only">(Required)</span>
+          </label>
           <input
-            type="text"
+            type="email"
             class="form__input"
-            name="city"
-            id="contact-city"
-            placeholder="city"
+            name="email"
+            id="contact-email"
+            inputmode="email"
+            placeholder="Enter your email address"
             required
+            aria-required="true"
+            aria-describedby="email-error"
           />
+          <div id="email-error" class="error-message text-red-600 text-sm" role="alert"></div>
         </div>
 
-        <div class="flex flex-col">
-          <label for="contact-state" class="form__label sr-only"
-            >State <span class="text-red-600">*</span></label
+        <div class="flex flex-col gap-2">
+          <label 
+            for="contact-services" 
+            class="form__label font-medium"
           >
-          <input
-            type="text"
+            Message <span class="text-red-600" aria-hidden="true">*</span>
+            <span class="sr-only">(Required)</span>
+          </label>
+          <textarea
+            name="services"
             class="form__input"
-            name="state"
-            id="contact-state"
-            placeholder="state"
+            id="contact-services"
+            rows="4"
+            placeholder="Please provide a brief description of your request"
             required
-          />
-        </div>
-
-        <div class="flex flex-col">
-          <label for="contact-zip" class="form__label sr-only"
-            >Zip Code <span class="text-red-600">*</span></label
-          >
-          <input
-            type="text"
-            class="form__input"
-            name="zip"
-            id="contact-zip"
-            placeholder="zip code"
-            required
-          />
+            aria-required="true"
+            aria-describedby="services-error"
+          ></textarea>
+          <div id="services-error" class="error-message text-red-600 text-sm" role="alert"></div>
         </div>
       </div>
+    </fieldset>
+
+    <div class="mt-4">
+      <Button 
+        variant="primary" 
+        type="submit"
+        class="w-full sm:w-auto"
+      >
+        Submit Form
+      </Button>
     </div>
-    <div> -->
-      <label for="contact-email" class="form__label sr-only mb-1"
-        >Email <span class="text-red-600">*</span></label
-      >
-      <input
-        type="email"
-        class="form__input"
-        name="email"
-        id="contact-email"
-        inputmode="email"
-        placeholder="E-mail"
-        required
-      />
-    </div>
-    <!-- <div>
-      <label for="contact-phone" class="form__label sr-only mb-1"
-        >Phone Number <span class="text-red-600">*</span></label
-      >
-      <input
-        type="tel"
-        class="form__input"
-        name="phone"
-        id="contact-phone"
-        inputmode="tel"
-        placeholder="phone number"
-        required
-      />
-    </div> -->
-    <!-- <div>
-      <label for="contact-timeframe" class="form__label sr-only mb-1"
-        >Desired Time Frame <span class="text-red-600">*</span></label
-      >
-      <input
-        type="text"
-        class="form__input"
-        name="timeframe"
-        id="contact-timeframe"
-        placeholder="desired time frame for the work to be completed"
-        required
-      />
-    </div> -->
-    <div>
-      <label for="contact-services" class="form__label sr-only mb-1"
-        >Services Desired <span class="text-red-600">*</span></label
-      >
-      <textarea
-        name="services"
-        class="form__input"
-        id="contact-services"
-        rows="4"
-        placeholder="Please provide a brief description of your request"
-        required></textarea>
-    </div>
-    <Button variant="primary" type="submit">Submit</Button>
   </form>
 </section>
+
+<script>
+  class FormValidator {
+    private form: HTMLFormElement;
+    private submitButton: HTMLButtonElement;
+
+    constructor(formId: string) {
+      this.form = document.getElementById(formId) as HTMLFormElement;
+      this.submitButton = this.form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      
+      if (this.form) {
+        this.init();
+      }
+    }
+
+    private init() {
+      // Add validation on form submission
+      this.form.addEventListener('submit', this.handleSubmit.bind(this));
+
+      // Add live validation on input
+      this.form.querySelectorAll('input, textarea').forEach(input => {
+        input.addEventListener('blur', () => this.validateField(input as HTMLInputElement));
+        input.addEventListener('input', () => this.validateField(input as HTMLInputElement));
+      });
+
+      // Add keyboard support
+      this.form.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && e.target instanceof HTMLElement) {
+          if (e.target.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+            const inputs = Array.from(this.form.querySelectorAll('input, textarea, button'));
+            const index = inputs.indexOf(e.target);
+            if (index > -1 && index < inputs.length - 1) {
+              (inputs[index + 1] as HTMLElement).focus();
+            }
+          }
+        }
+      });
+    }
+
+    private validateField(input: HTMLInputElement | HTMLTextAreaElement) {
+      const errorElement = document.getElementById(`${input.id}-error`);
+      if (!errorElement) return;
+
+      // Clear existing error
+      errorElement.textContent = '';
+      input.setAttribute('aria-invalid', 'false');
+
+      if (input.hasAttribute('required') && !input.value.trim()) {
+        errorElement.textContent = `${input.labels?.[0]?.textContent?.replace('*', '').trim() || 'Field'} is required`;
+        input.setAttribute('aria-invalid', 'true');
+        return false;
+      }
+
+      if (input.type === 'email' && input.value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(input.value)) {
+          errorElement.textContent = 'Please enter a valid email address';
+          input.setAttribute('aria-invalid', 'true');
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    private handleSubmit(e: Event) {
+      e.preventDefault();
+      
+      let isValid = true;
+      const inputs = this.form.querySelectorAll('input[required], textarea[required]');
+      
+      inputs.forEach(input => {
+        if (!this.validateField(input as HTMLInputElement)) {
+          isValid = false;
+        }
+      });
+
+      if (isValid) {
+        // Disable submit button and show loading state
+        this.submitButton.disabled = true;
+        this.submitButton.innerHTML = 'Submitting...';
+        
+        // Here you would typically submit the form
+        // For now, let's just simulate a submission
+        setTimeout(() => {
+          this.submitButton.innerHTML = 'Submitted!';
+          this.form.reset();
+          
+          // Reset button after a delay
+          setTimeout(() => {
+            this.submitButton.disabled = false;
+            this.submitButton.innerHTML = 'Submit Form';
+          }, 2000);
+        }, 1000);
+      } else {
+        // Focus the first invalid field
+        const firstInvalid = this.form.querySelector('[aria-invalid="true"]') as HTMLElement;
+        if (firstInvalid) {
+          firstInvalid.focus();
+        }
+
+        // Announce error to screen readers
+        const errorSummary = document.createElement('div');
+        errorSummary.setAttribute('role', 'alert');
+        errorSummary.setAttribute('aria-live', 'polite');
+        errorSummary.classList.add('sr-only');
+        errorSummary.textContent = 'Please correct the errors in the form';
+        this.form.appendChild(errorSummary);
+        
+        // Remove after announcement
+        setTimeout(() => errorSummary.remove(), 1000);
+      }
+    }
+  }
+
+  // Initialize form validation
+  document.addEventListener('DOMContentLoaded', () => {
+    new FormValidator('contact-form');
+  });
+
+  // Re-initialize after view transitions
+  document.addEventListener('astro:after-swap', () => {
+    new FormValidator('contact-form');
+  });
+</script>
+
+<style>
+  /* Focus styles */
+  .form__input:focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+
+  /* Invalid state styles */
+  .form__input[aria-invalid="true"] {
+    @apply border-red-500 bg-red-50 dark:border-red-400 dark:bg-red-950;
+  }
+
+  /* Required field indicator */
+  .form__label .text-red-600 {
+    @apply ml-0.5;
+  }
+
+  /* Error message animation */
+  .error-message {
+    @apply mt-1 transition-all;
+  }
+
+  /* High contrast mode */
+  @media (forced-colors: active) {
+    .form__input {
+      border: 1px solid CanvasText;
+    }
+    
+    .form__input[aria-invalid="true"] {
+      border: 2px solid CanvasText;
+    }
+  }
+</style>

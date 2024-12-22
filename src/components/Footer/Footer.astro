@@ -18,41 +18,72 @@ const siteData = getTranslatedData("siteData", currLocale);
 const today = new Date();
 ---
 
-<footer class="overflow-x-clip pb-16 pt-20 font-medium text-base-500 dark:text-base-400">
-  <div>
+<footer 
+  class="overflow-x-clip pb-16 pt-20 font-medium text-base-500 dark:text-base-400"
+  role="contentinfo"
+  aria-label="Site footer"
+>
+  <div class="site-container">
     <div class="mt-6 flex flex-wrap items-center justify-between gap-6">
-      <SiteLogo />
-      <div class="flex flex-wrap gap-x-4">
-        <FooterLink href={getRelativeLocaleUrl(currLocale, "/about")}
-          >About Guido</FooterLink
-        >
-        <FooterLink href={getRelativeLocaleUrl(currLocale, "/post")}
-          >Articles</FooterLink
-        >
-        <!-- <FooterLink href={getRelativeLocaleUrl(currLocale, "/elements")}
-          >Elements</FooterLink
-        > -->
-        <FooterLink href={getRelativeLocaleUrl(currLocale, "/contact")}
-          >Contact</FooterLink
-        >
-        <!-- <FooterLink href={getRelativeLocaleUrl(currLocale, "/terms")}
-          >Terms</FooterLink
-        >
-        <FooterLink href={getRelativeLocaleUrl(currLocale, "/privacy-policy")}
-          >Privacy</FooterLink
-        > -->
+      <div class="flex items-center">
+        <SiteLogo />
       </div>
+      
+      <nav 
+        class="flex flex-wrap gap-x-4"
+        aria-label="Footer navigation"
+      >
+        <ul class="flex flex-wrap gap-x-4" role="list">
+          <li role="listitem">
+            <FooterLink 
+              href={getRelativeLocaleUrl(currLocale, "/about")}
+              aria-label="Learn more about Guido"
+            >
+              About Guido
+            </FooterLink>
+          </li>
+          <li role="listitem">
+            <FooterLink 
+              href={getRelativeLocaleUrl(currLocale, "/post")}
+              aria-label="Read Guido's articles"
+            >
+              Articles
+            </FooterLink>
+          </li>
+          <li role="listitem">
+            <FooterLink 
+              href={getRelativeLocaleUrl(currLocale, "/contact")}
+              aria-label="Contact Guido"
+            >
+              Contact
+            </FooterLink>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
-  <div class="mt-6 border-t border-t-base-200/50 text-sm text-base-400 dark:text-base-500">
-    <div class="mt-6">
-      <div class="flex flex-wrap justify-between gap-6">
-      <div class="my-auto">
-        &copy; {today.getFullYear()}
-        {" "}{siteData.name}. All rights reserved.
-      </div>
-      <!-- Socials -->
-        <SocialLinks />
+
+  <div 
+    class="mt-6 border-t border-t-base-200/50 text-sm text-base-400 dark:text-base-500"
+    role="contentinfo"
+    aria-label="Copyright and social links"
+  >
+    <div class="site-container">
+      <div class="mt-6">
+        <div class="flex flex-wrap justify-between gap-6">
+          <p class="my-auto">
+            <span aria-label="Copyright">&copy;</span> {today.getFullYear()}
+            {" "}{siteData.name}. All rights reserved.
+          </p>
+          
+          <!-- Social Links -->
+          <div 
+            aria-label="Social media links"
+            role="navigation"
+          >
+            <SocialLinks />
+          </div>
+        </div>
       </div>
     </div>
   </div>
