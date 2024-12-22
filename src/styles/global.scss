@@ -48,7 +48,41 @@
 }
 
 @layer components {
-  /* Grid pattern background that can be reused across components */
+  /* Layout & Container Classes */
+  .site-container {
+    @apply mx-auto max-w-[90rem];
+  }
+
+  .content-container {
+    @apply mx-auto max-w-[800px] px-4;
+  }
+
+  /* Z-index Management */
+  .z-base {
+    @apply z-0;
+  }
+  
+  .z-nav {
+    @apply z-50;
+  }
+  
+  .z-dropdown {
+    @apply z-40;
+  }
+  
+  .z-modal {
+    @apply z-30;
+  }
+  
+  .z-overlay {
+    @apply z-20;
+  }
+  
+  .z-background {
+    @apply -z-10;
+  }
+
+  /* Background Patterns */
   .bg-grid-pattern {
     background-image: url('/assets/grid-pattern-light.svg');
     background-position: center;
@@ -79,6 +113,88 @@
     > * {
       pointer-events: auto;
     }
+  }
+
+  /* Common Image Styles */
+  .img-cover {
+    @apply object-cover w-full h-full;
+  }
+
+  .img-contain {
+    @apply object-contain w-full h-full;
+  }
+
+  .img-rounded {
+    @apply rounded-xl overflow-hidden;
+  }
+
+  /* Performance Optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
+
+  /* Background Effects */
+  .noise-background {
+    @apply pointer-events-none fixed inset-0 opacity-[0.2];
+    background-size: 150px 150px;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+');
+  }
+
+  .gradient-top-left {
+    @apply fixed -top-[400px] -left-[400px] h-[1200px] w-[1200px];
+    @apply bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0.1)_10%,rgba(20,184,166,0.05)_20%,rgba(20,184,166,0.025)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)];
+    @apply dark:bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.08)_0%,rgba(20,184,166,0.06)_10%,rgba(20,184,166,0.04)_20%,rgba(20,184,166,0.02)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)];
+  }
+
+  .gradient-bottom-right {
+    @apply fixed -bottom-[400px] -right-[400px] h-[1200px] w-[1200px];
+    @apply bg-[radial-gradient(circle_at_70%_70%,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0.1)_10%,rgba(20,184,166,0.05)_20%,rgba(20,184,166,0.025)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)];
+    @apply dark:bg-[radial-gradient(circle_at_70%_70%,rgba(20,184,166,0.08)_0%,rgba(20,184,166,0.06)_10%,rgba(20,184,166,0.04)_20%,rgba(20,184,166,0.02)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)];
+  }
+
+  /* Background Patterns */
+  .bg-pattern {
+    @apply bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat dark:bg-[url('/assets/pattern-dark.svg')];
+  }
+
+  .bg-pattern-big {
+    @apply bg-[url('/assets/pattern-light-big.svg')] bg-center bg-no-repeat dark:bg-[url('/assets/pattern-dark-big.svg')];
+  }
+
+  /* Gradient Overlays */
+  .gradient-fade-left {
+    @apply pointer-events-none absolute inset-y-0 left-0 w-40;
+    @apply bg-gradient-to-r from-background via-background/80 via-30% to-transparent;
+    @apply dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80;
+  }
+
+  .gradient-fade-right {
+    @apply pointer-events-none absolute inset-y-0 right-0 w-40;
+    @apply bg-gradient-to-l from-background via-background/80 via-30% to-transparent;
+    @apply dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80;
+  }
+
+  /* Z-index Layers */
+  .z-dropdown {
+    @apply z-10;
+  }
+
+  .z-overlay {
+    @apply z-20;
+  }
+
+  .z-modal {
+    @apply z-30;
+  }
+
+  .z-modal-overlay {
+    @apply z-40;
+  }
+
+  .z-toast {
+    @apply z-50;
   }
 
   /* Existing component styles remain the same */
@@ -195,6 +311,10 @@
 
   .code-block {
     @apply text-sm bg-base-100/20 px-2 py-1 rounded text-base-900 dark:bg-base-800 dark:text-base-100;
+  }
+
+  .semantic-description {
+    @apply text-base leading-normal mb-2 text-base-900 dark:text-base-100;
   }
 
   .context-title {

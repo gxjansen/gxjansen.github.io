@@ -92,33 +92,36 @@ const currLocale = getLocaleFromUrl(Astro.url);
   >
     {/* Noise overlay */}
     <div 
-      class="pointer-events-none fixed inset-0 -z-20 opacity-[0.2] [background-size:150px_150px]" 
-      style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+');"
+      class="noise-background z-background"
       aria-hidden="true"
       role="presentation"
     ></div>
 
     <!-- Top-left gradient with extended fade -->
     <div 
-      class="fixed -top-[400px] -left-[400px] -z-10 h-[1200px] w-[1200px] bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0.1)_10%,rgba(20,184,166,0.05)_20%,rgba(20,184,166,0.025)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)] dark:bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.08)_0%,rgba(20,184,166,0.06)_10%,rgba(20,184,166,0.04)_20%,rgba(20,184,166,0.02)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)]"
+      class="gradient-top-left z-background"
       aria-hidden="true"
       role="presentation"
     />
     
     <!-- Bottom-right gradient with extended fade -->
-    <div class="fixed -bottom-[400px] -right-[400px] -z-10 h-[1200px] w-[1200px] bg-[radial-gradient(circle_at_70%_70%,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0.1)_10%,rgba(20,184,166,0.05)_20%,rgba(20,184,166,0.025)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)] dark:bg-[radial-gradient(circle_at_70%_70%,rgba(20,184,166,0.08)_0%,rgba(20,184,166,0.06)_10%,rgba(20,184,166,0.04)_20%,rgba(20,184,166,0.02)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)]" />
+    <div 
+      class="gradient-bottom-right z-background"
+      aria-hidden="true"
+      role="presentation"
+    />
 
     <EnvironmentBanner />
     <!-- put cookie consent first so it is seen first by screen readers -->
     <!-- <CookieConsent /> -->
     <div class="min-h-[100lvh] relative">
       {/* Background grid pattern */}
-      <div class="fixed inset-0" style="z-index: -9999;">
+      <div class="fixed inset-0 z-background">
         <div class="grid-pattern-container h-full w-full" />
       </div>
       
       {/* Main content */}
-      <div class="relative" style="z-index: 1;">
+      <div class="relative z-base">
         <Nav />
         <div class="site-container px-4">
           <main 
