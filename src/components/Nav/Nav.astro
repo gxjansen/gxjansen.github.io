@@ -43,45 +43,46 @@ const shouldReduceMotion = typeof window !== "undefined"
   <div class="mx-auto flex w-full">
     <div class="site-container flex h-14 w-full items-center px-4">
       <header 
-        class="relative flex w-full items-center gap-2" 
+        class="relative flex w-full items-center justify-between gap-4" 
         role="navigation" 
         aria-label="Main navigation"
       >
         <!-- Logo/Home link -->
-        <div class="flex flex-auto justify-start">
+        <div class="flex-none">
           <SiteLogo />
         </div>
 
         <!-- Desktop navigation -->
-        <div class="flex flex-auto justify-end">
-          <nav 
-            class="hidden md:block" 
-            aria-label="Desktop navigation"
+        <nav 
+          class="hidden flex-auto md:block" 
+          aria-label="Desktop navigation"
+        >
+          <ul 
+            class="flex h-fit items-center justify-center space-x-6" 
+            role="menubar" 
+            aria-label="Primary navigation menu"
           >
-            <ul 
-              class="flex h-fit items-center" 
-              role="menubar" 
-              aria-label="Primary navigation menu"
-            >
-              {
-                navData
-                  .filter((navItem) => !navItem.hidden)
-                  .map((navItem) => (
-                    "dropdown" in navItem ? (
-                      <NavDropdown navItem={navItem} />
-                    ) : "megaMenuColumns" in navItem ? (
-                      <MegaMenuDropdownToggle navItem={navItem} />
-                    ) : (
-                      <NavLink navItem={navItem} />
-                    )
-                  ))
-              }
-            </ul>
-          </nav>
+            {
+              navData
+                .filter((navItem) => !navItem.hidden)
+                .map((navItem) => (
+                  "dropdown" in navItem ? (
+                    <NavDropdown navItem={navItem} />
+                  ) : "megaMenuColumns" in navItem ? (
+                    <MegaMenuDropdownToggle navItem={navItem} />
+                  ) : (
+                    <NavLink navItem={navItem} />
+                  )
+                ))
+            }
+          </ul>
+        </nav>
 
+        <!-- Right side items -->
+        <div class="flex flex-none items-center space-x-4">
           <!-- Theme toggle -->
           <ThemeToggle 
-            class="-ml-4 mr-3 hidden md:block" 
+            class="hidden md:block" 
             aria-label="Toggle dark mode"
           />
 
@@ -99,7 +100,7 @@ const shouldReduceMotion = typeof window !== "undefined"
           {
             locales.length > 1 && (
               <LanguageSelect 
-                class="ml-4 hidden md:block" 
+                class="hidden md:block" 
                 aria-label="Select language"
               />
             )
