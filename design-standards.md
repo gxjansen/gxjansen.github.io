@@ -134,6 +134,63 @@
 - Disabled states visually distinct
 - Interactive states (hover, active) provide clear feedback
 
+## Z-Index Management
+
+### Z-Index Layers
+Use these standardized classes to maintain consistent layering across components:
+```scss
+.z-base      // z-0: Base content level
+.z-dropdown  // z-10: Dropdowns, tooltips
+.z-overlay   // z-20: Overlays, backdrops
+.z-modal     // z-30: Modal content
+.z-modal-overlay // z-40: Modal backdrops
+.z-toast     // z-50: Toasts, notifications
+.z-nav       // z-50: Navigation elements
+.z-background // -z-10: Background elements
+```
+
+## Background Patterns
+
+### Standard Patterns
+```scss
+.bg-pattern   // Regular pattern background
+.bg-pattern-big // Larger pattern background
+```
+
+### Grid Pattern Container
+```scss
+.grid-pattern-container // Container with faded edges
+```
+
+### Background Effects
+```scss
+.noise-background  // Noise texture overlay
+.gradient-top-left // Top-left gradient effect
+.gradient-bottom-right // Bottom-right gradient effect
+```
+
+### Gradient Overlays
+```scss
+.gradient-fade-left  // Left-side fade effect
+.gradient-fade-right // Right-side fade effect
+```
+
+## Performance Optimizations
+
+### GPU Acceleration
+```scss
+.gpu-accelerated // Enables hardware acceleration
+```
+Properties:
+- transform: translateZ(0)
+- backface-visibility: hidden
+- perspective: 1000
+
+Use for:
+- Elements with animations
+- Scrolling content
+- Elements with transforms
+
 ## To Be Implemented
 - [ ] Remove individual padding from components that should inherit from container
 - [ ] Standardize section spacing across all pages
