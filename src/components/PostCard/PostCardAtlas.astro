@@ -30,32 +30,27 @@ const currLocale = getLocaleFromUrl(Astro.url);
 const authorsData = authors && authors.length > 0 ? await getEntries(authors.map(author => ({ collection: 'authors', id: author }))) : [];
 ---
 
-<article class=`${className}` {...rest}>
-  <a
-    href={`/post/${post.slug}/`}
-    class="block aspect-[16/9] overflow-hidden rounded-xl"
-  >
+<article class=`post-card group ${className}` {...rest}>
+  <a href={`/post/${post.slug}/`} class="card-container">
     {heroImage && (
       <Image
         src={heroImage}
         alt={`Cover for ${title}`}
         width={800}
         height={450}
-        class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+        class="card-image"
         transition:name={`heroImage-${post.slug}`}
       />
     )}
   </a>
   <div>
     <!-- categories -->
-    <div class="mt-6 flex flex-wrap gap-4">
+    <div class="card-categories">
       {categories.map((category) => <Category category={category} />)}
     </div>
 
-    <div
-      class="mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400"
-    >
-      <!-- first author -->
+    <!-- author and date -->
+    <div class="card-author-date">
       {authorsData.length > 0 && (
         <>
           <p class="whitespace-nowrap">
@@ -64,8 +59,6 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
           <span>&bull;</span>
         </>
       )}
-
-      <!-- published date -->
       <p class="whitespace-nowrap">
         {formatDate(pubDate, currLocale)}
       </p>
@@ -73,31 +66,23 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
 
     <!-- title -->
     <div class="mt-2">
-      <a
-        href={`/post/${post.slug}/`}
-        class="decoration-primary-500 hover:underline"
-      >
-        <h2 class="text-xl font-bold dark:text-base-100 md:text-2xl">
+      <a href={`/post/${post.slug}/`} class="decoration-primary-500 hover:underline">
+        <h2 class="card-title group-hover:text-primary-500 dark:group-hover:text-primary-400">
           {title}
         </h2>
       </a>
     </div>
 
     <!-- description -->
-    {
-      showDescription && description && (
-        <p class="mt-2 text-base font-medium text-base-400 dark:text-base-500">
-          {description}
-        </p>
-      )
-    }
+    {showDescription && description && (
+      <p class="card-description">
+        {description}
+      </p>
+    )}
 
     <!-- read post button -->
     <div class="mt-4">
-      <a
-        href={`/post/${post.slug}/`}
-        class="flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600"
-      >
+      <a href={`/post/${post.slug}/`} class="card-read-button">
         Read Post
         <Icon name="tabler/arrow-narrow-right" class="size-4" />
       </a>

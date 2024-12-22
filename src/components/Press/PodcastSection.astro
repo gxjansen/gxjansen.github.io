@@ -17,14 +17,14 @@ const { podcasts } = Astro.props;
 >
   <h2 id="podcasts-heading" class="h2 mb-4">Podcast Appearances</h2>
   <div 
-    class="grid grid-cols-1 md:grid-cols-2 gap-8"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
     role="list"
   >
     {podcasts.map(podcast => (
-      <div 
-        class="bg-neutral-100 dark:bg-white/[.075] rounded-xl p-6"
-        role="listitem"
-      >
+        <article 
+          class="podcast-card"
+          role="listitem"
+        >
         <LazySpotify 
           episodeId={podcast.spotifyEmbedId || ''}
           title={podcast.title}
@@ -48,7 +48,7 @@ const { podcasts } = Astro.props;
             View article <span aria-hidden="true">→</span>
           </a>
         )}
-      </div>
+        </article>
     ))}
   </div>
 </section>

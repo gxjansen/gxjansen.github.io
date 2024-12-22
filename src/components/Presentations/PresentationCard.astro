@@ -9,57 +9,56 @@ const { presentation } = Astro.props;
 const { title, duration, intendedAudience, isWorkshop, image } = presentation.data;
 ---
 
-<a 
-  href={`/presentations/${presentation.slug}`} 
-  class="block h-full group transition-transform duration-300 hover:-translate-y-1"
->
-  <article 
-  class="h-full flex flex-col rounded-lg border border-base-200 bg-background dark:border-base-800 dark:bg-base-900 transition-colors duration-300 hover:border-primary-500 dark:hover:border-primary-400"
->
+<article class="presentation-card group">
+  <a href={`/presentations/${presentation.slug}`} class="card-container">
     {image && (
-      <div class="relative overflow-hidden rounded-t-lg aspect-video gpu-accelerated">
-        <img 
-          src={image} 
-          alt={title || ''} 
-          class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          class="z-nav"
-          width="400"
-          height="225"
-          transition:name={`presentation-image-${presentation.slug}`}
-        />
-      </div>
+      <img 
+        src={image} 
+        alt={title || ''} 
+        class="card-image"
+        width="800"
+        height="450"
+        transition:name={`presentation-image-${presentation.slug}`}
+      />
     )}
-    <div class="flex-1 p-6 flex flex-col">
-      {/* Main content area with minimum height */}
-      <div class="min-h-[10rem] flex flex-col">
-        <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors duration-300 line-clamp-2">
-          {title}
-        </h3>
-        <div class="flex flex-wrap gap-2">
-          {duration && (
-            <span class="rounded-full bg-base-100 px-3 py-1 text-sm text-base-700 dark:bg-base-800 dark:text-base-300">
-              {duration}
-            </span>
-          )}
-          {isWorkshop && (
-            <span class="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-              Workshop
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* For section at bottom */}
-      {intendedAudience && (
-        <div class="pt-4 border-t border-base-200 dark:border-base-800">
-          <div class="flex items-start gap-2">
-            <span class="text-sm font-medium text-base-700 dark:text-base-300 shrink-0">For:</span>
-            <p class="text-sm text-base-600 dark:text-base-400 leading-normal">
-              {intendedAudience}
-            </p>
-          </div>
-        </div>
+  </a>
+  <div>
+    <!-- Categories -->
+    <div class="card-categories">
+      {duration && (
+        <span class="inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700 dark:bg-gray-700 dark:text-gray-200">
+          {duration}
+        </span>
+      )}
+      {isWorkshop && (
+        <span class="inline-block rounded-full bg-primary-100 px-3 py-1 text-sm font-semibold text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+          Workshop
+        </span>
       )}
     </div>
-  </article>
-</a>
+
+    <!-- Title -->
+    <div class="mt-2">
+      <a href={`/presentations/${presentation.slug}`} class="decoration-primary-500 hover:underline">
+        <h2 class="card-title group-hover:text-primary-500 dark:group-hover:text-primary-400">{title}</h2>
+      </a>
+    </div>
+
+    <!-- Description (Intended Audience) -->
+    {intendedAudience && (
+      <p class="card-description">
+        <span class="font-medium">For:</span> {intendedAudience}
+      </p>
+    )}
+
+    <!-- Read More Button -->
+    <div class="mt-4">
+      <a href={`/presentations/${presentation.slug}`} class="card-read-button">
+        View Presentation
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>
