@@ -24,14 +24,14 @@ console.log('Videos data:', videos.map(video => ({
 
 <section id="videos" class="mb-16">
   <h2 class="h2 mb-4">Video Interviews</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     {videos.map(video => {
       const videoId = getYouTubeId(video.youtubeLink || '');
       if (!videoId) return null;
       
       return (
-        <div class="rounded-xl overflow-hidden">
-          <div class="aspect-video">
+        <article class="video-card">
+          <div class="card-container">
             <div 
               class="lazy-youtube aspect-video bg-neutral-100 dark:bg-white/[.075] relative rounded-lg overflow-hidden" 
               data-video-id={videoId}
@@ -52,7 +52,7 @@ console.log('Videos data:', videos.map(video => ({
               <img 
                 src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
                 alt={`Preview thumbnail for video: ${video.title}`}
-                class="w-full h-full object-cover"
+                class="card-image"
                 loading="lazy"
                 decoding="async"
               />
@@ -85,26 +85,29 @@ console.log('Videos data:', videos.map(video => ({
               </button>
             </div>
           </div>
-          <div class="p-6">
-            <h3 class="h3 mb-4">{video.title}</h3>
-            <p class="description text-sm mb-4">
+          <div>
+            <h3 class="card-title mt-6 mb-4">{video.title}</h3>
+            <p class="card-description mb-4">
               {formatDate(video.publicationDate)}
               {video.personOrganization && ` • ${video.personOrganization}`}
             </p>
-            <div class="description space-x-4">
+            <div class="mt-4">
               {video.articleUrl && (
                 <a 
                   href={video.articleUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  class="text-teal-500 hover:text-teal-600"
+                  class="card-read-button"
                 >
-                  View article →
+                  View article
+                  <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
                 </a>
               )}
             </div>
           </div>
-        </div>
+        </article>
       );
     })}
   </div>

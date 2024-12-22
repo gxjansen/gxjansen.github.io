@@ -21,7 +21,7 @@ const { articles } = Astro.props;
     Articles & Interviews
   </h2>
   <div 
-    class="space-y-4"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
     role="list"
     aria-label="List of articles and interviews"
   >
@@ -32,74 +32,69 @@ const { articles } = Astro.props;
       
       return (
         <article 
-          class="bg-neutral-100 dark:bg-white/[.075] rounded-xl p-6"
+          class="article-card"
           role="listitem"
           aria-labelledby={articleId}
         >
-          <div class="flex items-start gap-3">
-            {article.articleUrl && (
-              <div 
-                class="flex-shrink-0 mt-1"
-                aria-hidden="true"
+          <div>
+            <h3 
+              id={articleId}
+              class="h3 mb-0"
+            >
+              <a 
+                href={article.articleUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="text-teal-500 hover:text-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 rounded block"
+                aria-label={`${article.title} (opens in new tab)`}
               >
-                <img 
-                  src={getFaviconUrl(article.articleUrl)} 
-                  alt=""
-                  width="16" 
-                  height="16"
-                  class="w-4 h-4 object-contain"
-                  role="presentation"
-                />
-              </div>
-            )}
-            <div class="flex-1 min-w-0">
-              <h3 
-                id={articleId}
-                class="h3 mb-0"
-              >
-                <a 
-                  href={article.articleUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  class="text-teal-500 hover:text-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 rounded inline-flex items-center gap-1"
-                  aria-label={`${article.title} (opens in new tab)`}
-                >
-                  <span class="truncate">{article.title}</span>
+                <div class="flex items-start gap-2">
+                  {article.articleUrl && (
+                    <img 
+                      src={getFaviconUrl(article.articleUrl)} 
+                      alt=""
+                      width="16" 
+                      height="16"
+                      class="w-4 h-4 object-contain flex-shrink-0 mt-1"
+                      role="presentation"
+                    />
+                  )}
+                  <span class="line-clamp-2 flex-1">{article.title}</span>
                   <span 
-                    class="text-teal-400 dark:text-teal-500" 
+                    class="text-teal-400 dark:text-teal-500 flex-shrink-0" 
                     aria-hidden="true"
                   >
                     →
                   </span>
-                </a>
-              </h3>
-              <div 
-                class="mt-4 flex flex-wrap gap-x-2 text-sm text-neutral-600 dark:text-neutral-400"
-                aria-label="Article details"
-              >
-                <time datetime={new Date(article.publicationDate).toISOString()}>
-                  <span class="sr-only">Published on </span>
-                  {formattedDate}
-                </time>
-                {article.personOrganization && (
-                  <>
-                    <span aria-hidden="true">•</span>
-                    <span>
-                      <span class="sr-only">Written by </span>
-                      {article.personOrganization}
-                    </span>
-                  </>
-                )}
-                {domain && (
-                  <>
-                    <span aria-hidden="true">•</span>
-                    <span>
-                      <span class="sr-only">Published on </span>
-                      {domain}
-                    </span>
-                  </>
-                )}
-              </div>
+                </div>
+              </a>
+            </h3>
+            <div 
+              class="mt-4 flex flex-wrap gap-x-2 text-sm text-neutral-600 dark:text-neutral-400"
+              aria-label="Article details"
+            >
+              <time datetime={new Date(article.publicationDate).toISOString()}>
+                <span class="sr-only">Published on </span>
+                {formattedDate}
+              </time>
+              {article.personOrganization && (
+                <>
+                  <span aria-hidden="true">•</span>
+                  <span>
+                    <span class="sr-only">Written by </span>
+                    {article.personOrganization}
+                  </span>
+                </>
+              )}
+              {domain && (
+                <>
+                  <span aria-hidden="true">•</span>
+                  <span>
+                    <span class="sr-only">Published on </span>
+                    {domain}
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </article>

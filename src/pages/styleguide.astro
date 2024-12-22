@@ -86,6 +86,12 @@ const arrowExamples = [
               <li class="mt-1"><a href="#dropdown-menu" class="primary-link">Dropdown Menu</a></li>
             </ul>
           </div>
+          <div>
+            <a href="#cards" class="primary-link text-lg">Cards</a>
+            <ul class="mt-2 ml-4">
+              <li class="mt-1"><a href="#card-example" class="primary-link">Card Example</a></li>
+            </ul>
+          </div>
         </div>
       </nav>
     </section>
@@ -453,6 +459,61 @@ const arrowExamples = [
               ]
             }}
           />
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section id="cards" class="mb-16">
+      <h2 class="h2">Cards</h2>
+
+      <!-- Card Example -->
+      <div id="card-example" class="mb-8">
+        <h3 class="h3">Card Example</h3>
+        <div class="grid gap-16 sm:grid-cols-2">
+          <article>
+            <a href="#" class="card-container">
+              <img
+                src="/assets/grid-pattern-light.svg"
+                alt="Example Card Image"
+                class="card-image"
+              />
+            </a>
+            <div>
+              <!-- Categories -->
+              <div class="card-categories">
+                <span class="inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">Category 1</span>
+                <span class="inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">Category 2</span>
+              </div>
+
+              <!-- Author and Date -->
+              <div class="card-author-date">
+                <p>Author Name</p>
+                <span>&bull;</span>
+                <p>October 10, 2023</p>
+              </div>
+
+              <!-- Title -->
+              <div class="mt-2">
+                <a href="#" class="decoration-primary-500 hover:underline">
+                  <h2 class="card-title">Example Card Title</h2>
+                </a>
+              </div>
+
+              <!-- Description -->
+              <p class="card-description">This is an example description for the card. It can be longer and more detailed.</p>
+
+              <!-- Read Post Button -->
+              <div class="mt-4">
+                <a href="#" class="card-read-button">
+                  Read Post
+                  <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>

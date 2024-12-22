@@ -48,6 +48,38 @@
 }
 
 @layer components {
+  .card-container {  
+    @apply block aspect-[16/9] overflow-hidden rounded-xl;  
+  }  
+
+  .card-image {  
+    @apply h-full w-full object-cover transition-transform duration-500 hover:scale-105;  
+  }  
+
+  article[class*="card"] {
+    @apply bg-white dark:bg-gray-800 rounded-xl p-6;
+  }
+
+  .card-categories {  
+    @apply mt-6 flex flex-wrap gap-4;  
+  }  
+
+  .card-author-date {  
+    @apply mt-3 flex flex-wrap gap-1 text-sm font-medium text-base-500 dark:text-base-400;  
+  }  
+
+  .card-title {  
+    @apply text-xl font-bold dark:text-base-100 md:text-2xl;  
+  }  
+
+  .card-description {  
+    @apply mt-2 text-base font-medium text-base-400 dark:text-base-500;  
+  }  
+
+  .card-read-button {  
+    @apply flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600;  
+  }  
+  
   /* Layout & Container Classes */
   .site-container {
     @apply mx-auto max-w-[90rem];
