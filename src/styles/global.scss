@@ -104,9 +104,17 @@
     letter-spacing: -0.01em;
   }
 
-  /* Default margins for text elements */
-  p, blockquote, ul, fieldset, form, ol, dl, dir, menu {
-    @apply my-4;
+  /* Default margins and colors for text elements, excluding components */
+  p:not([class*="alert"]), 
+  blockquote:not([class*="alert"]), 
+  ul:not([class*="alert"]), 
+  fieldset:not([class*="alert"]), 
+  form:not([class*="alert"]), 
+  ol:not([class*="alert"]), 
+  dl:not([class*="alert"]), 
+  dir:not([class*="alert"]), 
+  menu:not([class*="alert"]) {
+    @apply my-4 text-base-900 dark:text-base-100;
   }
 
   .font-bold {
@@ -187,6 +195,10 @@
 
   .code-block {
     @apply text-sm bg-base-100/20 px-2 py-1 rounded text-base-900 dark:bg-base-800 dark:text-base-100;
+  }
+
+  .context-title {
+    @apply text-lg font-medium text-base-900 dark:text-base-100;
   }
 
   .filter-badge {
