@@ -198,36 +198,36 @@
       @apply relative rounded-xl p-4;
 
       .alert-content {
-        @apply flex flex-col gap-0;
+        @apply flex flex-col gap-0 pl-7;
 
         .alert-header {
-          @apply flex items-center gap-2 mb-1;
+          @apply flex items-center gap-1.5 mb-0;
 
           .alert-icon {
-            @apply flex-shrink-0;
+            @apply flex-shrink-0 -ml-6;
             svg {
               @apply size-5;
             }
           }
 
           .alert-title {
-            @apply text-base leading-relaxed font-medium;
+            @apply text-base leading-none font-medium m-0;
           }
         }
 
         .alert-description {
-          @apply text-sm leading-relaxed font-medium pl-7;
+          @apply text-sm leading-none font-medium m-0 mt-2;
         }
 
         .alert-list {
-          @apply space-y-1 pl-7;
+          @apply space-y-1 ml-4;
           li {
             @apply list-disc;
           }
         }
 
         .alert-actions {
-          @apply mt-6 flex gap-2 items-center pl-7;
+          @apply mt-6 flex gap-2 items-center;
         }
       }
     }
