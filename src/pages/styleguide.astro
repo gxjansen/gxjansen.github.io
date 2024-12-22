@@ -1,0 +1,399 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button/Button.astro";
+import Badge from "../components/Badge/Badge.astro";
+import ThemeToggle from "../components/ThemeToggle/ThemeToggle.astro";
+import NavLink from "../components/Nav/NavLink.astro";
+import NavDropdown from "../components/Nav/NavDropdown/NavDropdown.astro";
+import type { navLinkItem, navDropdownItem } from "@config/types/configDataTypes";
+
+// Define example buttons for different variants and states
+const buttonExamples = [
+  { variant: "primary", text: "Primary Button" },
+  { variant: "secondary", text: "Secondary Button" },
+  { variant: "outline", text: "Outline Button" },
+  { variant: "ghost", text: "Ghost Button" }
+] as const;
+
+const arrowExamples = [
+  { arrow: "left", text: "Back" },
+  { arrow: "right", text: "Next" }
+] as const;
+---
+
+<BaseLayout title="UI Style Guide" description="A comprehensive guide to UI components and their usage">
+  <main class="container mx-auto px-4 pt-32 pb-16 max-w-7xl">
+    <h1 class="h1">UI Style Guide</h1>
+    <p class="description">
+      Use the theme toggle below to test components in both light and dark modes.
+      All components should maintain proper contrast and visibility in both modes.
+    </p>
+    <div class="mb-12">
+      <ThemeToggle />
+    </div>
+
+    <!-- Index -->
+    <section class="mb-16">
+      <h2 class="h2 mb-6">On this page</h2>
+      <nav class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div>
+          <a href="#buttons" class="primary-link text-lg">Buttons</a>
+          <ul class="mt-2 ml-4">
+            <li class="mt-1"><a href="#button-variants" class="primary-link">Basic Variants</a></li>
+            <li class="mt-1"><a href="#button-states" class="primary-link">States</a></li>
+            <li class="mt-1"><a href="#button-arrows" class="primary-link">With Arrows</a></li>
+            <li class="mt-1"><a href="#button-links" class="primary-link">Link Buttons</a></li>
+          </ul>
+        </div>
+        <div>
+          <a href="#typography" class="primary-link text-lg">Typography</a>
+          <ul class="mt-2 ml-4">
+            <li class="mt-1"><a href="#headings" class="primary-link">Headings</a></li>
+            <li class="mt-1"><a href="#semantic-headings" class="primary-link">Semantic Headings</a></li>
+            <li class="mt-1"><a href="#text-sizes" class="primary-link">Text Sizes</a></li>
+            <li class="mt-1"><a href="#font-weights" class="primary-link">Font Weights</a></li>
+            <li class="mt-1"><a href="#body-text" class="primary-link">Body Text</a></li>
+            <li class="mt-1"><a href="#links" class="primary-link">Links</a></li>
+          </ul>
+        </div>
+        <div class="space-y-6">
+          <div>
+            <a href="#badges" class="primary-link text-lg">Badges</a>
+            <ul class="mt-2 ml-4">
+              <li class="mt-1"><a href="#basic-badge" class="primary-link">Basic Badge</a></li>
+              <li class="mt-1"><a href="#badge-label" class="primary-link">With Label</a></li>
+              <li class="mt-1"><a href="#badge-context" class="primary-link">In Context</a></li>
+              <li class="mt-1"><a href="#filter-badges" class="primary-link">Filter Badges</a></li>
+            </ul>
+          </div>
+          <div>
+            <a href="#navigation" class="primary-link text-lg">Navigation</a>
+            <ul class="mt-2 ml-4">
+              <li class="mt-1"><a href="#nav-links" class="primary-link">Nav Links</a></li>
+              <li class="mt-1"><a href="#dropdown-menu" class="primary-link">Dropdown Menu</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </section>
+    
+    <!-- Buttons Section -->
+    <section id="buttons" class="mb-16">
+      <h2 class="h2">Buttons</h2>
+      <div class="space-y-8">
+        <!-- Basic Button Variants -->
+        <div id="button-variants">
+          <h3 class="h3">Basic Variants</h3>
+          <div class="flex flex-wrap gap-4 mb-4">
+            {buttonExamples.map(({ variant, text }) => (
+              <div class="flex flex-col items-start gap-2">
+                <Button variant={variant}>{text}</Button>
+                <code class="code-block">variant="{variant}"</code>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Button States -->
+        <div id="button-states">
+          <h3 class="h3">States</h3>
+          <div class="flex flex-wrap gap-4">
+            <div class="flex flex-col items-start gap-2">
+              <Button disabled>Disabled Button</Button>
+              <code class="code-block">disabled={true}</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons with Arrows -->
+        <div id="button-arrows">
+          <h3 class="h3">With Arrows</h3>
+          <div class="flex flex-wrap gap-4">
+            {arrowExamples.map(({ arrow, text }) => (
+              <div class="flex flex-col items-start gap-2">
+                <Button variant="primary" arrow={arrow}>{text}</Button>
+                <code class="code-block">arrow="{arrow}"</code>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Link Buttons -->
+        <div id="button-links">
+          <h3 class="h3">Link Buttons</h3>
+          <div class="flex flex-wrap gap-4">
+            <div class="flex flex-col items-start gap-2">
+              <Button href="#" variant="primary">Internal Link</Button>
+              <code class="code-block">href="#"</code>
+            </div>
+            <div class="flex flex-col items-start gap-2">
+              <Button href="https://example.com" variant="primary">External Link</Button>
+              <code class="code-block">href="https://example.com"</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography Section -->
+    <section id="typography" class="mb-16">
+      <h2 class="h2">Typography</h2>
+      <div class="space-y-8">
+        <!-- Headings -->
+        <div id="headings">
+          <h3 class="h3">Headings</h3>
+          <div class="space-y-4">
+            <div>
+              <h1 class="h1">Heading 1</h1>
+              <code class="code-block">class="h1"</code>
+            </div>
+            <div>
+              <h2 class="h2">Heading 2</h2>
+              <code class="code-block">class="h2"</code>
+            </div>
+            <div>
+              <h3 class="h3">Heading 3</h3>
+              <code class="code-block">class="h3"</code>
+            </div>
+            <div>
+              <h4 class="h4">Heading 4</h4>
+              <code class="code-block">class="h4"</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Semantic Headings -->
+        <div id="semantic-headings">
+          <h3 class="h3">Semantic Headings</h3>
+          <div class="space-y-4">
+            <div>
+              <h1 class="h1">Main Heading (h1)</h1>
+              <code class="code-block">Use &lt;h1&gt; with class="h1" for main page headings</code>
+            </div>
+            <div>
+              <h2 class="h2">Section Heading (h2)</h2>
+              <code class="code-block">Use &lt;h2&gt; with class="h2" for section headings</code>
+            </div>
+            <div>
+              <h3 class="h3">Subsection Heading (h3)</h3>
+              <code class="code-block">Use &lt;h3&gt; with class="h3" for subsection headings</code>
+            </div>
+            <div>
+              <h4 class="h4">Card Heading (h4)</h4>
+              <code class="code-block">Use &lt;h4&gt; with class="h4" for card headings</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Sizes -->
+        <div id="text-sizes">
+          <h3 class="h3">Text Sizes</h3>
+          <div class="space-y-4">
+            <div>
+              <p class="text-small">Small Text</p>
+              <code class="code-block">class="text-small"</code>
+            </div>
+            <div>
+              <p class="text-regular">Base Text</p>
+              <code class="code-block">class="text-regular"</code>
+            </div>
+            <div>
+              <p class="text-large">Large Text</p>
+              <code class="code-block">class="text-large"</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Font Weights -->
+        <div id="font-weights">
+          <h3 class="h3">Font Weights</h3>
+          <div class="space-y-4">
+            <div>
+              <p class="weight-normal">Normal Text (400)</p>
+              <code class="code-block">class="weight-normal"</code>
+            </div>
+            <div>
+              <p class="weight-medium">Medium Text (500)</p>
+              <code class="code-block">class="weight-medium"</code>
+            </div>
+            <div>
+              <p class="weight-semibold">Semibold Text (600)</p>
+              <code class="code-block">class="weight-semibold"</code>
+            </div>
+            <div>
+              <p class="weight-bold">Bold Text (700)</p>
+              <code class="code-block">class="weight-bold"</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Body Text -->
+        <div id="body-text">
+          <h3 class="h3">Body Text</h3>
+          <div class="space-y-4">
+            <div>
+              <p class="description">This is a description text style, commonly used for introductory paragraphs and supporting content.</p>
+              <code class="code-block">class="description"</code>
+            </div>
+            <div>
+              <p>This is the default body text style, used for general content throughout the site.</p>
+              <code class="code-block">Default text (no class needed)</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div id="links">
+          <h3 class="h3">Links</h3>
+          <div class="space-y-4">
+            <div>
+              <a href="#" class="primary-link">Primary Link</a>
+              <code class="code-block ml-2">class="primary-link"</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Badges Section -->
+    <section id="badges" class="mb-16">
+      <h2 class="h2">Badges</h2>
+      <div class="space-y-8">
+        <!-- Basic Badge -->
+        <div id="basic-badge">
+          <h3 class="h3">Basic Badge</h3>
+          <div class="space-y-4">
+            <div>
+              <Badge>Category</Badge>
+              <code class="code-block ml-2">&lt;Badge&gt;Category&lt;/Badge&gt;</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badge with Label -->
+        <div id="badge-label">
+          <h3 class="h3">Badge with Label</h3>
+          <div class="space-y-4">
+            <div>
+              <Badge label="Category label for screen readers">Accessibility</Badge>
+              <code class="code-block ml-2">&lt;Badge label="Category label for screen readers"&gt;Accessibility&lt;/Badge&gt;</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badge in Context -->
+        <div id="badge-context">
+          <h3 class="h3">Badge in Context</h3>
+          <div class="space-y-4">
+            <div>
+              <Badge>Podcasting</Badge>
+              <h4 class="h4 mt-2">Section Title</h4>
+              <p class="description">Shows how badges are used above section titles.</p>
+              <code class="code-block mt-4">Used above section titles for categorization</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Badges -->
+        <div id="filter-badges">
+          <h3 class="h3">Filter Badges</h3>
+          <div class="space-y-4">
+            <div class="flex flex-wrap gap-4">
+              <a href="#" class="filter-badge">Psychology</a>
+              <a href="#" class="filter-badge">E-commerce</a>
+              <a href="#" class="filter-badge">Experimentation</a>
+            </div>
+            <code class="code-block mt-4">Used as category filters on blog overview pages</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Section -->
+    <section id="navigation" class="mb-16">
+      <h2 class="h2">Navigation</h2>
+      <div class="space-y-8">
+        <!-- Regular Nav Links -->
+        <div id="nav-links">
+          <h3 class="h3">Nav Links</h3>
+          <nav class="mb-8">
+            <ul class="flex flex-wrap gap-4" role="menubar">
+              <NavLink 
+                navItem={{
+                  text: "Regular Link",
+                  link: "#"
+                }}
+              />
+              <NavLink 
+                navItem={{
+                  text: "With Icon",
+                  link: "#",
+                  icon: "tabler/home"
+                }}
+              />
+              <NavLink 
+                navItem={{
+                  text: "External Link",
+                  link: "https://example.com",
+                  newTab: true
+                }}
+              />
+            </ul>
+          </nav>
+          <code class="code-block">Basic navigation links with optional icons and external link handling</code>
+        </div>
+
+        <!-- Dropdown Menu -->
+        <div id="dropdown-menu">
+          <h3 class="h3">Dropdown Menu</h3>
+          <nav class="mb-8">
+            <ul class="flex flex-wrap gap-4" role="menubar">
+              <NavDropdown
+                navItem={{
+                  text: "Dropdown Menu",
+                  dropdown: [
+                    {
+                      text: "Menu Item 1",
+                      link: "#"
+                    },
+                    {
+                      text: "Menu Item 2",
+                      link: "#",
+                      icon: "tabler/star"
+                    },
+                    {
+                      text: "External Item",
+                      link: "https://example.com",
+                      newTab: true
+                    }
+                  ]
+                }}
+              />
+            </ul>
+          </nav>
+          <code class="code-block">Dropdown menu with hover and keyboard navigation support</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage Documentation -->
+    <section id="usage" class="mb-16">
+      <h2 class="h2">Button Usage</h2>
+      <div class="prose max-w-none">
+        <pre class="code-block">
+{`// Button as a regular button
+<Button variant="primary" type="button">Click me</Button>
+
+// Button as a link
+<Button variant="primary" href="/some-page">Go to page</Button>
+
+// Button with arrow
+<Button variant="primary" arrow="right">Next</Button>
+
+// Disabled button
+<Button variant="primary" disabled>Cannot click</Button>`}
+        </pre>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

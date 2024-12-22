@@ -89,6 +89,51 @@
   - xl: 1280px
   - 2xl: 1536px
 
+## Button Standards
+
+### Button Variants
+- Primary: 
+  - Light/Dark: Primary brand color with white text
+  - Hover: Slightly darker shade
+  ```astro
+  @apply bg-primary-500 text-white hover:bg-primary-600
+  ```
+
+- Secondary:
+  - Light: Medium gray background (base-200) with dark text
+  - Dark: Dark gray background (base-700) with light text
+  - Hover: Slightly darker/lighter respectively
+  ```astro
+  @apply bg-base-200 text-base-900 hover:bg-base-300 dark:bg-base-700 dark:text-base-50 dark:hover:bg-base-600
+  ```
+
+- Outline:
+  - Light: Dark border and text, white background
+  - Dark: Light border and text, transparent background
+  - Hover: Inverted colors
+  ```astro
+  @apply border-2 border-base-900 bg-transparent text-base-900 hover:bg-base-900 hover:text-base-50 dark:border-base-50 dark:text-base-50 dark:hover:bg-base-50 dark:hover:text-base-900
+  ```
+
+- Ghost:
+  - Light: Dark text with semi-transparent hover background
+  - Dark: Light text with semi-transparent hover background
+  ```astro
+  @apply bg-transparent text-base-900 hover:bg-base-200/50 dark:text-base-50 dark:hover:bg-base-700/50
+  ```
+
+### Button States
+- Default: Full opacity, clickable
+- Disabled: 50% opacity, not clickable
+- Focus: Primary color ring with offset
+- Hover: Color variations as specified per variant
+
+### Accessibility
+- Minimum contrast ratio of 4.5:1 for all text/background combinations
+- Focus states clearly visible
+- Disabled states visually distinct
+- Interactive states (hover, active) provide clear feedback
+
 ## To Be Implemented
 - [ ] Remove individual padding from components that should inherit from container
 - [ ] Standardize section spacing across all pages

@@ -40,6 +40,11 @@
   ::-webkit-scrollbar-thumb {
     @apply rounded-full bg-base-300 bg-opacity-90;
   }
+
+  /* Custom focus styles for better accessibility */
+  a:focus {
+    @apply outline-none ring-2 ring-primary-500/30 ring-offset-1;
+  }
 }
 
 @layer components {
@@ -78,51 +83,30 @@
 
   /* Existing component styles remain the same */
   .h1 {
-    @apply font-inter text-5xl font-bold leading-[1.1] text-base-900 dark:text-base-100;
+    @apply font-inter text-5xl font-bold leading-[1.1] text-base-900 dark:text-base-100 my-3;
     letter-spacing: -0.025em;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
   }
 
   .h2 {
-    @apply font-inter text-4xl font-semibold leading-[1.2] text-base-900 dark:text-base-100;
+    @apply font-inter text-4xl font-semibold leading-[1.2] text-base-900 dark:text-base-100 my-3;
     letter-spacing: -0.02em;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
   }
 
   .h3 {
-    @apply font-inter text-2xl font-medium leading-[1.3] text-base-900 dark:text-base-100;
+    @apply font-inter text-2xl font-medium leading-[1.3] text-base-900 dark:text-base-100 my-4;
     letter-spacing: -0.015em;
   }
 
   .h4 {
-    @apply font-inter text-xl font-medium leading-[1.3] text-base-900 dark:text-base-100;
+    @apply font-inter text-xl font-medium leading-[1.3] text-base-900 dark:text-base-100 my-4;
     letter-spacing: -0.01em;
   }
 
-  .heading-card {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 20px !important;
-    font-weight: 600 !important;
-    line-height: 1.3 !important;
-    letter-spacing: -0.01em !important;
-    text-transform: none !important;
-    max-width: 100% !important;
-    text-size-adjust: none !important;
-    -webkit-text-size-adjust: none !important;
-    -moz-text-size-adjust: none !important;
-    -ms-text-size-adjust: none !important;
-  }
-
-  .heading-main {
-    @apply font-inter text-5xl font-bold leading-[1.1] tracking-[-0.025em];
-  }
-
-  .heading-section {
-    @apply font-inter text-4xl font-semibold leading-[1.2] tracking-[-0.02em];
-  }
-
-  .heading-subsection {
-    @apply font-inter text-2xl font-medium leading-[1.3] tracking-[-0.015em];
+  /* Default margins for text elements */
+  p, blockquote, ul, fieldset, form, ol, dl, dir, menu {
+    @apply my-4;
   }
 
   .font-bold {
@@ -152,6 +136,35 @@
     letter-spacing: -0.02em;
   }
 
+  /* Text classes with proper dark mode handling */
+  .text-small {
+    @apply text-sm text-base-900 dark:text-base-100;
+  }
+
+  .text-regular {
+    @apply text-base text-base-900 dark:text-base-100;
+  }
+
+  .text-large {
+    @apply text-lg text-base-900 dark:text-base-100;
+  }
+
+  .weight-normal {
+    @apply font-normal text-base-900 dark:text-base-100;
+  }
+
+  .weight-medium {
+    @apply font-medium text-base-900 dark:text-base-100;
+  }
+
+  .weight-semibold {
+    @apply font-semibold text-base-900 dark:text-base-100;
+  }
+
+  .weight-bold {
+    @apply font-bold text-base-900 dark:text-base-100;
+  }
+
   .description {
     @apply font-normal text-base-500 dark:text-base-400;
     letter-spacing: -0.01em;
@@ -166,6 +179,18 @@
     @apply w-full rounded-md border border-transparent bg-base-100 p-2.5 text-base-900 transition;
     @apply dark:bg-base-800 dark:text-base-200 dark:focus-visible:border-primary-500 dark:focus-visible:ring-primary-500;
     @apply focus-visible:border-primary-500/50 focus-visible:ring-2 focus-visible:ring-primary-500/50;
+  }
+
+  .primary-link {
+    @apply text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300;
+  }
+
+  .code-block {
+    @apply text-sm bg-base-100/20 px-2 py-1 rounded text-base-900 dark:bg-base-800 dark:text-base-100;
+  }
+
+  .filter-badge {
+    @apply px-4 py-2 bg-base-800 text-base-100 dark:bg-base-100 dark:text-base-800 rounded-full text-sm font-medium hover:bg-primary-500 dark:hover:bg-primary-500 dark:hover:text-base-100 transition-all;
   }
 }
 
