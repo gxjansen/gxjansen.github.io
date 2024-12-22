@@ -14,23 +14,50 @@ interface Props {
 }
 
 const { navItem } = Astro.props as Props;
+
+// Generate unique ID for ARIA relationships
+const dropdownId = `nav-dropdown-${navItem.text.toLowerCase().replace(/\s+/g, '-')}`;
+
+// Check for reduced motion preference
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+const shouldReduceMotion = typeof window !== "undefined" 
+  ? window.matchMedia(reducedMotionQuery).matches 
+  : false;
 ---
 
-<!-- non-mobile dropdown menu -->
-<li class="dropdown group relative">
+<li 
+  class="dropdown group relative"
+  role="none"
+>
   <button
-    class="primary-focus flex items-center gap-0.5 rounded-md px-3 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300"
+    class="primary-focus flex items-center gap-0.5 rounded-md px-3 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
     type="button"
-    aria-label={`${navItem.text} dropdown menu`}
+    aria-expanded="false"
+    aria-controls={dropdownId}
+    aria-haspopup="true"
+    role="menuitem"
+    data-dropdown-toggle
   >
-    {navItem.text}
-    <Icon name="tabler/chevron-down" aria-hidden="true" class="size-5" />
+    <span>{navItem.text}</span>
+    <Icon 
+      name="tabler/chevron-down" 
+      class={`size-5 transition-transform ${shouldReduceMotion ? "" : "group-hover:rotate-180 group-focus-within:rotate-180"}`}
+      aria-hidden="true"
+      role="presentation"
+    />
+    <span class="sr-only">, press Enter to show submenu</span>
   </button>
+  
   <div
+    id={dropdownId}
     class="dropdown-content invisible absolute left-0 z-10 opacity-0 transition-all"
+    role="menu"
+    aria-label={`${navItem.text} submenu`}
+    data-dropdown-content
   >
     <ul
       class="mt-4 w-[12rem] min-w-[9rem] max-w-[20rem] rounded-md border border-solid border-base-200 bg-base-50 p-1.5 drop-shadow-sm dark:border-base-800 dark:bg-base-900"
+      role="none"
     >
       {
         navItem.dropdown.map((dropdownItem) => (
@@ -41,22 +68,174 @@ const { navItem } = Astro.props as Props;
   </div>
 </li>
 
-<style lang="scss">
-  .dropdown {
-    // when dropdown is hovered over (mouse) or focused (keyboard tabbing), open it with animation
-    &:hover > .dropdown-content,
-    &:focus-within > .dropdown-content {
-      animation: navDropdownFadeInAnimation ease-out 0.15s forwards;
-      @apply visible opacity-100;
+<style>
+  /* Base dropdown styles */
+  .dropdown-content {
+    transform: translateY(-10px);
+    transition: transform 0.2s ease-out, opacity 0.15s ease-out, visibility 0s linear 0.2s;
+  }
+
+  /* Dropdown open state */
+  .dropdown:hover > .dropdown-content,
+  .dropdown:focus-within > .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 0.2s ease-out, opacity 0.15s ease-out, visibility 0s;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .dropdown-content,
+    .dropdown:hover > .dropdown-content,
+    .dropdown:focus-within > .dropdown-content {
+      transition: none;
+      transform: none;
+    }
+
+    .transition-transform {
+      transition: none;
     }
   }
 
-  @keyframes navDropdownFadeInAnimation {
-    0% {
-      @apply top-[80%];
+  /* High contrast mode enhancements */
+  @media (forced-colors: active) {
+    .dropdown-content {
+      border: 2px solid CanvasText;
     }
-    100% {
-      @apply top-full;
+
+    button[aria-expanded="true"] {
+      border: 2px solid CanvasText;
     }
   }
+
+  /* Focus styles */
+  .primary-focus:focus-visible {
+    outline: 2px solid var(--focus-ring-color, theme('colors.primary.500'));
+    outline-offset: 2px;
+  }
 </style>
+
+<script>
+  class DropdownManager {
+    private button: HTMLButtonElement;
+    private content: HTMLElement;
+    private dropdown: HTMLElement;
+    private links: NodeListOf<HTMLAnchorElement>;
+
+    constructor(dropdown: HTMLElement) {
+      this.dropdown = dropdown;
+      this.button = dropdown.querySelector('[data-dropdown-toggle]')!;
+      this.content = dropdown.querySelector('[data-dropdown-content]')!;
+      this.links = this.content.querySelectorAll('a');
+
+      this.init();
+    }
+
+    private init() {
+      this.setupButtonEvents();
+      this.setupKeyboardNav();
+      this.setupFocusManagement();
+      this.setupHoverEvents();
+    }
+
+    private setupButtonEvents() {
+      this.button.addEventListener('click', () => this.toggleDropdown());
+      
+      this.button.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.openDropdown();
+          this.focusFirstItem();
+        }
+      });
+    }
+
+    private setupKeyboardNav() {
+      this.content.addEventListener('keydown', (e) => {
+        const target = e.target as HTMLElement;
+        const items = Array.from(this.links);
+        const index = items.indexOf(target as HTMLAnchorElement);
+
+        switch (e.key) {
+          case 'ArrowDown':
+            e.preventDefault();
+            if (index < items.length - 1) {
+              items[index + 1].focus();
+            }
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            if (index > 0) {
+              items[index - 1].focus();
+            } else {
+              this.button.focus();
+            }
+            break;
+          case 'Escape':
+            e.preventDefault();
+            this.closeDropdown();
+            this.button.focus();
+            break;
+          case 'Tab':
+            if (!e.shiftKey && index === items.length - 1) {
+              this.closeDropdown();
+            }
+            break;
+        }
+      });
+    }
+
+    private setupFocusManagement() {
+      this.dropdown.addEventListener('focusout', (e) => {
+        if (!this.dropdown.contains(e.relatedTarget as Node)) {
+          this.closeDropdown();
+        }
+      });
+    }
+
+    private setupHoverEvents() {
+      this.dropdown.addEventListener('mouseenter', () => this.openDropdown());
+      this.dropdown.addEventListener('mouseleave', () => {
+        if (!this.dropdown.contains(document.activeElement)) {
+          this.closeDropdown();
+        }
+      });
+    }
+
+    private toggleDropdown() {
+      const isExpanded = this.button.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        this.closeDropdown();
+      } else {
+        this.openDropdown();
+      }
+    }
+
+    private openDropdown() {
+      this.button.setAttribute('aria-expanded', 'true');
+    }
+
+    private closeDropdown() {
+      this.button.setAttribute('aria-expanded', 'false');
+    }
+
+    private focusFirstItem() {
+      if (this.links.length > 0) {
+        this.links[0].focus();
+      }
+    }
+  }
+
+  function initDropdowns() {
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+      new DropdownManager(dropdown as HTMLElement);
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initDropdowns);
+
+  // Re-initialize after view transitions
+  document.addEventListener('astro:after-swap', initDropdowns);
+</script>

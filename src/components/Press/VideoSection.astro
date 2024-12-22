@@ -1,6 +1,5 @@
 ---
 import { formatDate } from '@utils/pressUtils';
-import LazyYouTube from './LazyYouTube.astro';
 import type { PressCoverage } from '@types/press';
 
 interface Props {
@@ -14,39 +13,120 @@ function getYouTubeId(url: string): string {
   const match = url?.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
   return match ? match[1] : '';
 }
+
+// Debug: Log videos data
+console.log('Videos data:', videos.map(video => ({
+  title: video.title,
+  url: video.youtubeLink,
+  id: getYouTubeId(video.youtubeLink || '')
+})));
 ---
 
 <section id="videos" class="mb-16">
   <h2 class="h2 mb-4">Video Interviews</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    {videos.map(video => (
-      <div class="rounded-xl overflow-hidden">
-        <div class="aspect-video">
-          <LazyYouTube 
-            videoId={getYouTubeId(video.youtubeLink || '')}
-            title={video.title}
-          />
-        </div>
-        <div class="p-6">
-          <h3 class="h3 mb-4">{video.title}</h3>
-          <p class="description text-sm mb-4">
-            {formatDate(video.publicationDate)}
-            {video.personOrganization && ` • ${video.personOrganization}`}
-          </p>
-          <div class="description space-x-4">
-            {video.articleUrl && (
-              <a 
-                href={video.articleUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="text-teal-500 hover:text-teal-600"
+    {videos.map(video => {
+      const videoId = getYouTubeId(video.youtubeLink || '');
+      if (!videoId) return null;
+      
+      return (
+        <div class="rounded-xl overflow-hidden">
+          <div class="aspect-video">
+            <div 
+              class="lazy-youtube aspect-video bg-neutral-100 dark:bg-white/[.075] relative rounded-lg overflow-hidden" 
+              data-video-id={videoId}
+              data-title={video.title}
+            >
+              <div class="video-container absolute inset-0 hidden">
+                <iframe
+                  src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+                  title={video.title}
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  class="w-full h-full"
+                ></iframe>
+              </div>
+              
+              <!-- Thumbnail -->
+              <img 
+                src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+                alt={`Preview thumbnail for video: ${video.title}`}
+                class="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+              
+              <!-- Play button -->
+              <button
+                type="button"
+                class="absolute inset-0 w-full h-full flex items-center justify-center group"
+                aria-label={`Play video: ${video.title}`}
+                onclick={`
+                  const container = this.closest('.lazy-youtube');
+                  const videoContainer = container.querySelector('.video-container');
+                  const thumbnail = container.querySelector('img');
+                  const button = this;
+                  
+                  videoContainer.classList.remove('hidden');
+                  thumbnail.classList.add('hidden');
+                  button.classList.add('hidden');
+                `}
               >
-                View article →
-              </a>
-            )}
+                <div class="w-16 h-12 bg-red-600 rounded-lg flex items-center justify-center group-hover:bg-red-700 transition-colors">
+                  <svg 
+                    class="w-6 h-6 text-white" 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor"
+                  >
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="h3 mb-4">{video.title}</h3>
+            <p class="description text-sm mb-4">
+              {formatDate(video.publicationDate)}
+              {video.personOrganization && ` • ${video.personOrganization}`}
+            </p>
+            <div class="description space-x-4">
+              {video.articleUrl && (
+                <a 
+                  href={video.articleUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="text-teal-500 hover:text-teal-600"
+                >
+                  View article →
+                </a>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    ))}
+      );
+    })}
   </div>
 </section>
+
+<style>
+  .lazy-youtube button:focus {
+    outline: 2px solid theme('colors.primary.500');
+    outline-offset: 2px;
+  }
+
+  /* High contrast mode support */
+  @media (forced-colors: active) {
+    .lazy-youtube button {
+      border: 2px solid currentColor;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .lazy-youtube .transition-colors {
+      transition: none;
+    }
+  }
+</style>

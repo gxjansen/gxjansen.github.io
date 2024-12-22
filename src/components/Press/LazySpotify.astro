@@ -11,10 +11,22 @@ const { episodeId, title } = Astro.props;
   class="lazy-spotify min-h-[152px] relative"
   data-episode-id={episodeId}
   data-title={title}
+  role="region"
+  aria-labelledby={`spotify-title-${episodeId}`}
+  aria-describedby={`spotify-loading-${episodeId}`}
 >
+  <!-- Hidden but accessible title -->
+  <div id={`spotify-title-${episodeId}`} class="sr-only">
+    Podcast episode: {title}
+  </div>
+
   <!-- Placeholder loading state -->
-  <div class="animate-pulse flex space-x-4">
-    <div class="rounded-lg bg-neutral-200 dark:bg-white/[.1] h-[120px] w-[120px]"></div>
+  <div 
+    class="animate-pulse flex space-x-4 bg-white/5 rounded-lg p-4" 
+    aria-hidden="true"
+    role="presentation"
+  >
+    <div class="rounded-lg bg-neutral-200 dark:bg-white/[.1] h-[120px] w-[120px] flex-shrink-0"></div>
     <div class="flex-1 space-y-4 py-1">
       <div class="h-4 bg-neutral-200 dark:bg-white/[.1] rounded w-3/4"></div>
       <div class="space-y-2">
@@ -22,6 +34,16 @@ const { episodeId, title } = Astro.props;
         <div class="h-3 bg-neutral-200 dark:bg-white/[.1] rounded w-5/6"></div>
       </div>
     </div>
+  </div>
+
+  <!-- Loading announcement for screen readers -->
+  <div 
+    id={`spotify-loading-${episodeId}`}
+    class="sr-only" 
+    role="status" 
+    aria-live="polite"
+  >
+    Loading podcast player for episode: {title}. Please wait.
   </div>
 </div>
 
@@ -36,7 +58,6 @@ const { episodeId, title } = Astro.props;
           if (!container.dataset.loaded) {
             loadSpotifyEmbed(container);
             container.dataset.loaded = 'true';
-            // Stop observing after loading
             observer.unobserve(container);
           }
         }
@@ -48,13 +69,12 @@ const { episodeId, title } = Astro.props;
 
     players.forEach(player => observer.observe(player));
 
-    // Preload remaining embeds after page load
+    // Preload remaining embeds during idle time
     if ('requestIdleCallback' in window) {
       requestIdleCallback(() => {
         preloadRemainingEmbeds();
-      }, { timeout: 2000 }); // 2 second timeout as fallback
+      }, { timeout: 2000 });
     } else {
-      // Fallback for browsers that don't support requestIdleCallback
       setTimeout(preloadRemainingEmbeds, 2000);
     }
   }
@@ -73,20 +93,53 @@ const { episodeId, title } = Astro.props;
     const episodeId = container.getAttribute('data-episode-id');
     const title = container.getAttribute('data-title');
     
+    // Create iframe wrapper for better keyboard handling
+    const wrapper = document.createElement('div');
+    wrapper.setAttribute('role', 'application');
+    wrapper.setAttribute('tabindex', '0');
+    wrapper.setAttribute('aria-label', `Podcast player for episode: ${title}`);
+    wrapper.classList.add('focus:outline-none', 'focus:ring-2', 'focus:ring-primary-500', 'focus:ring-offset-2', 'rounded-lg');
+    
+    // Create and configure iframe
     const iframe = document.createElement('iframe');
-    iframe.style.borderRadius = '0';
-    iframe.src = `https://open.spotify.com/embed/episode/${episodeId}`;
+    iframe.style.borderRadius = '12px';
+    iframe.src = `https://open.spotify.com/embed/episode/${episodeId}?theme=0`;
     iframe.width = '100%';
     iframe.height = '152';
     iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
     iframe.setAttribute('loading', 'lazy');
-    iframe.setAttribute('title', title || 'Spotify podcast episode');
+    iframe.setAttribute('title', `Spotify player: ${title}`);
     
-    // Clear placeholder and add iframe
+    // Add keyboard support
+    wrapper.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        iframe.focus();
+      }
+    });
+    
+    // Add iframe to wrapper
+    wrapper.appendChild(iframe);
+    
+    // Clear container and add wrapper
     container.innerHTML = '';
-    container.appendChild(iframe);
+    container.appendChild(wrapper);
+    
+    // Announce to screen readers
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.classList.add('sr-only');
+    announcement.textContent = `Podcast player loaded for episode: ${title}. Press Enter or Space to focus on player controls.`;
+    container.appendChild(announcement);
+    
+    // Remove announcement after reading
+    setTimeout(() => announcement.remove(), 3000);
   }
 
   // Initialize on page load
   document.addEventListener('DOMContentLoaded', initLazySpotify);
+
+  // Re-initialize after view transitions
+  document.addEventListener('astro:after-swap', initLazySpotify);
 </script>

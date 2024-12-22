@@ -28,10 +28,12 @@ const currLocale = getLocaleFromUrl(Astro.url);
     "lang-select__dropdown description group relative my-auto flex items-center text-sm",
     className,
   ]}
+  role="navigation"
+  aria-label="Language selection"
   {...rest}
 >
   <button
-    class="primary-focus lang-select__dropdown-button flex items-center gap-0.5 whitespace-nowrap py-1 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 md:flex"
+    class="primary-focus lang-select__dropdown-button flex items-center gap-0.5 whitespace-nowrap py-1 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 md:flex focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
     type="button"
     aria-expanded="false"
     aria-haspopup="true"
@@ -57,14 +59,20 @@ const currLocale = getLocaleFromUrl(Astro.url);
   >
     <ul
       class="mx-auto mt-3 w-fit max-w-xs whitespace-nowrap rounded-md border border-solid border-base-200 bg-base-50 px-3 py-1.5 drop-shadow-sm dark:border-base-800 dark:bg-base-900"
+      role="menu"
     >
       {
         locales.map((lang) => (
-          <li class="flex w-full justify-center">
+          <li 
+            class="flex w-full justify-center"
+            role="menuitem"
+          >
             <a
-              class="primary-focus relative block w-full whitespace-nowrap py-1 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300"
+              class="primary-focus relative block w-full whitespace-nowrap py-1 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
               href={getLocalizedPathname(lang, Astro.url)}
-              aria-label={`Change language to ${lang.toUpperCase()}`}
+              aria-label={`Change language to ${languageSwitcherMap[lang]}`}
+              lang={lang}
+              hreflang={lang}
             >
               {languageSwitcherMap[lang]}
             </a>
@@ -88,35 +96,94 @@ const currLocale = getLocaleFromUrl(Astro.url);
       const dropdownContent = langSelect.querySelector(
         ".lang-select__dropdown-content",
       );
+
       if (dropdownButton && dropdownContent && dropdownChevron) {
-        dropdownButton.addEventListener("click", (event) => {
-          if (!langSelect.classList.contains("active")) {
-            // if dropdown is currently closed, so open it
+        function toggleDropdown(event: Event) {
+          event.preventDefault();
+          event.stopPropagation();
+          
+          const isExpanding = !langSelect.classList.contains("active");
+          
+          // Close any other open dropdowns first
+          document.querySelectorAll(".lang-select__dropdown.active").forEach((dropdown) => {
+            if (dropdown !== langSelect) {
+              dropdown.classList.remove("active");
+              dropdown.querySelector(".lang-select__dropdown-button")?.setAttribute("aria-expanded", "false");
+              dropdown.querySelector(".lang-select__dropdown-content")?.classList.remove("dropdown--fade-in");
+              dropdown.querySelector(".lang-select__dropdown-chevron")?.classList.remove("rotate-180");
+            }
+          });
+          
+          if (isExpanding) {
+            // Opening dropdown
             langSelect.classList.add("active");
             dropdownButton.setAttribute("aria-expanded", "true");
             dropdownContent.classList.add("dropdown--fade-in");
             dropdownChevron.classList.add("rotate-180");
+            
+            // Focus first menu item
+            setTimeout(() => {
+              dropdownContent.querySelector("a")?.focus();
+            }, 100);
           } else {
-            // dropdown is currently open, so close it
+            // Closing dropdown
             langSelect.classList.remove("active");
             dropdownButton.setAttribute("aria-expanded", "false");
             dropdownContent.classList.remove("dropdown--fade-in");
             dropdownChevron.classList.remove("rotate-180");
+            dropdownButton.focus();
           }
-          event.preventDefault();
-          return false;
+        }
+
+        // Click handling
+        dropdownButton.addEventListener("click", toggleDropdown);
+
+        // Keyboard navigation for button
+        dropdownButton.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " " || event.key === "ArrowDown") {
+            event.preventDefault();
+            if (!langSelect.classList.contains("active")) {
+              toggleDropdown(event);
+            }
+          } else if (event.key === "Escape") {
+            if (langSelect.classList.contains("active")) {
+              toggleDropdown(event);
+            }
+          }
         });
 
-        // if dropdown menu is open there is a click outside, close the menu
+        // Keyboard navigation within menu
+        dropdownContent.addEventListener("keydown", (event) => {
+          const items = Array.from(dropdownContent.querySelectorAll("a"));
+          const currentIndex = items.indexOf(document.activeElement as HTMLElement);
+          
+          if (event.key === "ArrowDown") {
+            event.preventDefault();
+            const nextIndex = currentIndex + 1 < items.length ? currentIndex + 1 : 0;
+            items[nextIndex].focus();
+          } else if (event.key === "ArrowUp") {
+            event.preventDefault();
+            const prevIndex = currentIndex - 1 >= 0 ? currentIndex - 1 : items.length - 1;
+            items[prevIndex].focus();
+          } else if (event.key === "Escape") {
+            event.preventDefault();
+            toggleDropdown(event);
+          } else if (event.key === "Tab" && !event.shiftKey && currentIndex === items.length - 1) {
+            event.preventDefault();
+            toggleDropdown(event);
+          } else if (event.key === "Tab" && event.shiftKey && currentIndex === 0) {
+            event.preventDefault();
+            toggleDropdown(event);
+          }
+        });
+
+        // Close on outside click
         document.addEventListener("click", (event) => {
           if (
             !langSelect?.contains(event.target as Node) &&
             langSelect?.classList.contains("active")
           ) {
-            langSelect.classList.remove("active");
-            dropdownButton.setAttribute("aria-expanded", "false");
-            dropdownContent.classList.remove("dropdown--fade-in");
-            dropdownChevron.classList.remove("rotate-180");
+            toggleDropdown(event);
           }
         });
       }

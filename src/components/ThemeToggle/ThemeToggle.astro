@@ -12,17 +12,27 @@ const { class: className, ...rest } = Astro.props as Props;
 <button
   class:list={[
     className,
-    "theme-toggle primary-focus rounded-full p-2 text-base-500 transition-colors hover:text-base-600 dark:text-base-400 dark:hover:text-base-300",
+    "theme-toggle primary-focus rounded-full p-2 text-base-500 transition-colors hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2",
   ]}
-  aria-label="color theme toggle"
+  aria-label="Toggle color theme"
+  aria-pressed="false"
+  type="button"
 >
   <!-- placeholder -->
-  <div class="theme-toggle__placeholder h-5 w-5"></div>
+  <div class="theme-toggle__placeholder h-5 w-5" aria-hidden="true"></div>
   <Icon
     name="tabler/moon-stars"
     class="theme-toggle__dark-icon hidden h-5 w-5"
+    aria-hidden="true"
+    role="presentation"
   />
-  <Icon name="tabler/sun" class="theme-toggle__light-icon hidden h-5 w-5" />
+  <Icon 
+    name="tabler/sun" 
+    class="theme-toggle__light-icon hidden h-5 w-5" 
+    aria-hidden="true"
+    role="presentation"
+  />
+  <span class="sr-only theme-toggle__label">Switch to light theme</span>
 </button>
 
 <script>
@@ -46,45 +56,55 @@ const { class: className, ...rest } = Astro.props as Props;
     );
     const themeToggleBtns = document.querySelectorAll(".theme-toggle");
 
-    let colorTheme = localStorage.getItem("colorTheme");
-    // There will always be a color theme as it is assigned in BaseHead.astro
-    // So here just assign the appropriate icon
-    if (colorTheme === "dark") {
-      themeToggleLoaders.forEach((themeToggleLoader) => {
-        themeToggleLoader.classList.add("hidden");
-      });
-      themeToggleDarkIcons.forEach((themeToggleDarkIcon) => {
-        themeToggleDarkIcon.classList.remove("hidden");
-      });
-    } else if (colorTheme === "light") {
-      themeToggleLoaders.forEach((themeToggleLoader) => {
-        themeToggleLoader.classList.add("hidden");
-      });
-      themeToggleLightIcons.forEach((themeToggleLightIcon) => {
-        themeToggleLightIcon.classList.remove("hidden");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+    let colorTheme = localStorage.getItem("colorTheme") || (prefersDark.matches ? "dark" : "light");
+    
+    // Update button state and icons based on current theme
+    function updateThemeToggleState(theme: "dark" | "light") {
+      themeToggleLoaders.forEach((loader) => loader.classList.add("hidden"));
+      
+      const isDark = theme === "dark";
+      themeToggleDarkIcons.forEach((icon) => icon.classList.toggle("hidden", !isDark));
+      themeToggleLightIcons.forEach((icon) => icon.classList.toggle("hidden", isDark));
+      
+      // Update ARIA states
+      themeToggleBtns.forEach((btn) => {
+        btn.setAttribute("aria-pressed", isDark ? "true" : "false");
+        const label = btn.querySelector(".theme-toggle__label");
+        if (label) {
+          label.textContent = `Switch to ${isDark ? "light" : "dark"} theme`;
+        }
       });
     }
 
-    // add event listeners to all toggle buttons
-    themeToggleBtns.forEach((themToggleBtn) => {
-      themToggleBtn.addEventListener("click", function () {
-        // toggle icons inside button
-        themeToggleDarkIcons.forEach((themeToggleDarkIcon) => {
-          themeToggleDarkIcon.classList.toggle("hidden");
-        });
-        themeToggleLightIcons.forEach((themeToggleLightIcon) => {
-          themeToggleLightIcon.classList.toggle("hidden");
-        });
+    // Initial state
+    updateThemeToggleState(colorTheme);
 
-        // update local storage
-        if (localStorage.getItem("colorTheme") === "light") {
-          changeTheme("dark");
-          localStorage.setItem("colorTheme", "dark");
-        } else {
-          changeTheme("light");
-          localStorage.setItem("colorTheme", "light");
+    // Handle button clicks
+    themeToggleBtns.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const newTheme = localStorage.getItem("colorTheme") === "light" ? "dark" : "light";
+        changeTheme(newTheme);
+        localStorage.setItem("colorTheme", newTheme);
+        updateThemeToggleState(newTheme);
+      });
+
+      // Handle keyboard events
+      btn.addEventListener("keydown", function(event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          btn.click();
         }
       });
+    });
+
+    // Listen for system theme changes
+    prefersDark.addEventListener("change", (e) => {
+      if (!localStorage.getItem("colorTheme")) {
+        const newTheme = e.matches ? "dark" : "light";
+        changeTheme(newTheme);
+        updateThemeToggleState(newTheme);
+      }
     });
   }
 

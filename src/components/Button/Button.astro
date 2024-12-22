@@ -17,6 +17,7 @@ interface Props {
   arrow?: "left" | "right" | "none";
   onclick?: any; // any onclick events
   class?: string; // any additional classes
+  disabled?: boolean; // disabled state
   rest?: any; // catch-all for any additional parameters, such as "aria-label"
 }
 
@@ -27,38 +28,43 @@ const {
   href,
   arrow = "none",
   onclick,
+  disabled = false,
   class: className,
   ...rest
 } = Astro.props as Props;
 
 // Determine if the link is external
 const isExternalLink = href && (href.startsWith('http://') || href.startsWith('https://'));
+
+// Base button classes
+const baseClasses = [
+  className,
+  'button group',
+  'inline-flex items-center justify-center',
+  'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
+  'disabled:opacity-50 disabled:cursor-not-allowed',
+  {
+    'button--primary': variant === 'primary',
+    'button--secondary': variant === 'secondary',
+    'button--outline': variant === 'outline',
+    'button--ghost': variant === 'ghost',
+  }
+];
 ---
 
-<!-- normal link -->{
+<!-- Link button -->
+{
   href && (
     <a
       id={id}
-      class:list={[
-        className,
-        `button group`,
-        {
-          "button--primary": variant === "primary",
-        },
-        {
-          "button--secondary": variant === "secondary",
-        },
-        {
-          "button--outline": variant === "outline",
-        },
-        {
-          "button--ghost": variant === "ghost",
-        },
-      ]}
+      class:list={baseClasses}
       href={href}
       target={isExternalLink ? "_blank" : undefined}
       rel={isExternalLink ? "noopener noreferrer" : undefined}
       onclick={onclick}
+      role="button"
+      aria-disabled={disabled}
+      tabindex={disabled ? -1 : undefined}
       {...rest}
     >
       {arrow === "left" && (
@@ -66,43 +72,35 @@ const isExternalLink = href && (href.startsWith('http://') || href.startsWith('h
           name="tabler/arrow-narrow-left"
           class="mr-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:-translate-x-1"
           aria-hidden="true"
+          role="presentation"
         />
       )}
-      <slot />
+      <span class="button__text">
+        <slot />
+        {isExternalLink && <span class="sr-only">(opens in new tab)</span>}
+      </span>
       {arrow === "right" && (
         <Icon
           name="tabler/arrow-narrow-right"
           class="ml-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:translate-x-1"
           aria-hidden="true"
+          role="presentation"
         />
       )}
     </a>
   )
 }
 
-<!-- button for "submit" or other -->
+<!-- Regular button -->
 {
   !href && (
     <button
       id={id}
-      class:list={[
-        className,
-        `button group`,
-        {
-          "button--primary": variant === "primary",
-        },
-        {
-          "button--secondary": variant === "secondary",
-        },
-        {
-          "button--outline": variant === "outline",
-        },
-        {
-          "button--ghost": variant === "ghost",
-        },
-      ]}
+      class:list={baseClasses}
       type={type}
       onclick={onclick}
+      disabled={disabled}
+      aria-disabled={disabled}
       {...rest}
     >
       {arrow === "left" && (
@@ -110,16 +108,53 @@ const isExternalLink = href && (href.startsWith('http://') || href.startsWith('h
           name="tabler/arrow-narrow-left"
           class="mr-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:-translate-x-1"
           aria-hidden="true"
+          role="presentation"
         />
       )}
-      <slot />
+      <span class="button__text">
+        <slot />
+      </span>
       {arrow === "right" && (
         <Icon
           name="tabler/arrow-narrow-right"
           class="ml-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:translate-x-1"
           aria-hidden="true"
+          role="presentation"
         />
       )}
     </button>
   )
 }
+
+<style>
+  .button {
+    position: relative;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .button:disabled,
+  .button[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Variant styles */
+  .button--primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600;
+  }
+
+  .button--secondary {
+    @apply bg-base-100 text-base-900 hover:bg-base-200 dark:bg-base-800 dark:text-base-100 dark:hover:bg-base-700;
+  }
+
+  .button--outline {
+    @apply border-2 border-base-100 bg-transparent text-base-100 hover:bg-base-100 hover:text-base-900 dark:border-base-900 dark:text-base-900 dark:hover:bg-base-900 dark:hover:text-base-100;
+  }
+
+  .button--ghost {
+    @apply bg-transparent text-base-900 hover:bg-base-100 dark:text-base-100 dark:hover:bg-base-800;
+  }
+</style>

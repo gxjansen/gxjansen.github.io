@@ -51,19 +51,28 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
   authorsData={authorsData}
   postFrontmatter={post.data}
 >
-  <article class="mt-24">
+  <article 
+    class="mt-24"
+    aria-labelledby="article-title"
+    itemscope 
+    itemtype="https://schema.org/BlogPosting"
+  >
     <div class="grid-pattern-container relative">
         <!-- Blog post info -->
         <div class="flex w-full flex-col items-center">
           <div class="mx-auto flex w-full max-w-[800px]">
             <div class="mx-auto text-center">
               <!-- Categories -->
-              <div class="flex justify-center gap-4">
+              <div 
+                class="flex justify-center gap-4"
+                role="list"
+                aria-label="Article categories"
+              >
                 {categories.map((category) => <Category category={category} />)}
               </div>
 
               <!-- title -->
-              <h1 class="h1 mt-6">{title}</h1>
+              <h1 id="article-title" class="h1 mt-6" itemprop="headline">{title}</h1>
 
               <div
                 class="mt-6 flex w-full flex-wrap justify-center gap-4 font-medium text-base-500 dark:text-base-400"
@@ -71,7 +80,12 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
                 <!-- author info -->
                 {
                   authorsData.map((authorData) => (
-                    <div class="mb-auto flex">
+                    <div 
+                      class="mb-auto flex"
+                      itemprop="author" 
+                      itemscope 
+                      itemtype="https://schema.org/Person"
+                    >
                       {authorData.data.avatar && (
                         <figure>
                           <Image
@@ -81,10 +95,11 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
                             quality="high"
                             loading="eager"
                             class="h-7 w-7 rounded-full object-cover"
+                            itemprop="image"
                           />
                         </figure>
                       )}
-                      <div class="my-auto ml-2">{authorData.data.name}</div>
+                      <div class="my-auto ml-2" itemprop="name">{authorData.data.name}</div>
                     </div>
                   ))
                 }
@@ -93,8 +108,12 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
 
                 <!-- Date -->
                 {pubDate && (
-                  <time class="my-auto h-full" datetime={pubDate instanceof Date ? pubDate.toISOString() : pubDate}
-                    >{formatDate(pubDate, currLocale)}
+                  <time 
+                    class="my-auto h-full" 
+                    datetime={pubDate instanceof Date ? pubDate.toISOString() : pubDate}
+                    itemprop="datePublished"
+                  >
+                    <span aria-label="Published on">{formatDate(pubDate, currLocale)}</span>
                   </time>
                 )}
               </div>
@@ -114,13 +133,15 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
           <!-- blog post main image -->
           {heroImage && (
             <div class="mt-6 max-w-[1000px] overflow-hidden">
-              <img
-                src={heroImage.src}
-                alt={`Cover for ${title}`}
+              <Image
+                src={heroImage}
+                alt={heroImage.alt || `Cover image for article: ${title}`}
                 width={2000}
+                height={1125}
                 class="max-h-[70vh] rounded-xl object-cover"
                 loading="eager"
                 transition:name={transitionName}
+                itemprop="image"
               />
             </div>
           )}
@@ -141,7 +162,12 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
               </div>
             )
           }
-          <section id="blog-post-content" class="prose mx-auto">
+          <section 
+            id="blog-post-content" 
+            class="prose mx-auto"
+            itemprop="articleBody"
+            aria-label="Article content"
+          >
             <slot />
           </section>
         </div>
@@ -154,7 +180,10 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
   </div>
 
   <!-- Navigation -->
-  <div class="mx-auto max-w-2xl">
+  <nav 
+    class="mx-auto max-w-2xl"
+    aria-label="Blog post navigation"
+  >
     <BlogNav currentSlug={post.slug} posts={allPosts} />
-  </div>
+  </nav>
 </BaseLayout>

@@ -85,8 +85,29 @@ const imageUrl = optimizedImage
 {noindex && <meta name="robots" content="noindex,nofollow" />}
 <link rel="canonical" href={canonicalUrl.toString()} />
 
+<!-- Language and Accessibility Meta Tags -->
+<meta http-equiv="content-language" content={currLocale} />
+<meta name="language" content={currLocale} />
+<meta name="accessibility" content="WCAG2.1,AAA" />
+<meta name="rating" content="General" />
+
+<!-- Image Accessibility -->
+<meta property="og:image:alt" content={description} />
+<meta name="twitter:image:alt" content={description} />
+
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type === "blog" ? "article" : "website"} />
+<meta property="og:locale" content={currLocale} />
+{type === "blog" && (
+  <>
+    <meta property="article:published_time" content={Astro.props.postFrontmatter?.publishDate.toISOString()} />
+    <meta property="article:modified_time" content={Astro.props.postFrontmatter?.updateDate?.toISOString()} />
+    <meta property="article:author" content={siteData.author.name} />
+    {Astro.props.postFrontmatter?.tags?.map((tag: string) => (
+      <meta property="article:tag" content={tag} />
+    ))}
+  </>
+)}
 <meta property="og:url" content={canonicalUrl.toString()} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -104,3 +125,12 @@ const imageUrl = optimizedImage
 
 <!-- JSON LD -->
 <Fragment set:html={jsonLD} />
+
+<!-- Additional Accessibility Meta Tags -->
+{type === "blog" && (
+  <>
+    <meta name="author" content={Astro.props.authors?.map(author => author.data.name).join(', ') || siteData.author.name} />
+    <meta name="date" content={Astro.props.postFrontmatter?.publishDate.toISOString()} />
+    <meta name="last-modified" content={Astro.props.postFrontmatter?.updateDate?.toISOString()} />
+  </>
+)}

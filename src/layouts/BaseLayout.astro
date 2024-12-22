@@ -44,7 +44,11 @@ const currLocale = getLocaleFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang={currLocale}>
+<html 
+  lang={currLocale}
+  dir="ltr"
+  class="antialiased"
+>
   <head>
     <BaseHead
       type={type}
@@ -87,10 +91,19 @@ const currLocale = getLocaleFromUrl(Astro.url);
     } relative isolate overflow-x-hidden`}
   >
     {/* Noise overlay */}
-    <div class="pointer-events-none fixed inset-0 -z-20 opacity-[0.2] [background-size:150px_150px]" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+');"></div>
+    <div 
+      class="pointer-events-none fixed inset-0 -z-20 opacity-[0.2] [background-size:150px_150px]" 
+      style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+');"
+      aria-hidden="true"
+      role="presentation"
+    ></div>
 
     <!-- Top-left gradient with extended fade -->
-    <div class="fixed -top-[400px] -left-[400px] -z-10 h-[1200px] w-[1200px] bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0.1)_10%,rgba(20,184,166,0.05)_20%,rgba(20,184,166,0.025)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)] dark:bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.08)_0%,rgba(20,184,166,0.06)_10%,rgba(20,184,166,0.04)_20%,rgba(20,184,166,0.02)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)]" />
+    <div 
+      class="fixed -top-[400px] -left-[400px] -z-10 h-[1200px] w-[1200px] bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0.1)_10%,rgba(20,184,166,0.05)_20%,rgba(20,184,166,0.025)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)] dark:bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.08)_0%,rgba(20,184,166,0.06)_10%,rgba(20,184,166,0.04)_20%,rgba(20,184,166,0.02)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)]"
+      aria-hidden="true"
+      role="presentation"
+    />
     
     <!-- Bottom-right gradient with extended fade -->
     <div class="fixed -bottom-[400px] -right-[400px] -z-10 h-[1200px] w-[1200px] bg-[radial-gradient(circle_at_70%_70%,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0.1)_10%,rgba(20,184,166,0.05)_20%,rgba(20,184,166,0.025)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)] dark:bg-[radial-gradient(circle_at_70%_70%,rgba(20,184,166,0.08)_0%,rgba(20,184,166,0.06)_10%,rgba(20,184,166,0.04)_20%,rgba(20,184,166,0.02)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)]" />
@@ -108,7 +121,13 @@ const currLocale = getLocaleFromUrl(Astro.url);
       <div class="relative" style="z-index: 1;">
         <Nav />
         <div class="site-container px-4">
-          <main class="transition-ready" transition:animate="fade" transition:animate.duration="0.2" transition:animate.timing="ease-out">
+          <main 
+            id="main-content"
+            class="transition-ready" 
+            transition:animate="fade" 
+            transition:animate.duration="0.2" 
+            transition:animate.timing="ease-out"
+          >
             <slot />
           </main>
           <Footer />
@@ -132,16 +151,26 @@ const currLocale = getLocaleFromUrl(Astro.url);
         });
       });
 
-      // Scroll animations
+      // Scroll animations with reduced motion support
       import siteSettings from "@config/siteSettings.json";
       import AOS from "@js/aos/aos";
 
       if (siteSettings.useAnimations === true) {
-        // runs on initial page load
-        AOS.init({ once: true, duration: 0.75, distance: 100, offset: 120 });
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        if (!prefersReducedMotion) {
+          // runs on initial page load
+          AOS.init({ 
+            once: true, 
+            duration: 0.75, 
+            distance: 100, 
+            offset: 120,
+            disable: 'mobile' // Disable on mobile for better performance
+          });
 
-        // runs on view transitions navigation
-        document.addEventListener("astro:after-swap", AOS.refreshHard);
+          // runs on view transitions navigation
+          document.addEventListener("astro:after-swap", AOS.refreshHard);
+        }
       }
     </script>
   </body>

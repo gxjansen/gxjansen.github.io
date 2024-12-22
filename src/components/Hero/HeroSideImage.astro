@@ -24,32 +24,48 @@ import heroImage from "@assets/images/guido-couch.jpg";
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
+
+// Check for reduced motion preference
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+const shouldReduceMotion = typeof window !== "undefined" 
+  ? window.matchMedia(reducedMotionQuery).matches 
+  : false;
 ---
 
 <section
   id="hero-side"
-  aria-label="Introduction"
+  aria-labelledby="hero-heading"
   class="mt-20 overflow-clip"
+  role="banner"
 >
-    <div class="grid-pattern-container relative pointer-events-none pb-20 pt-10 md:py-28">
-      <div class="relative flex flex-wrap xl:items-center z-10 pointer-events-auto">
+    <div 
+      class="grid-pattern-container relative pb-20 pt-10 md:py-28"
+      role="presentation"
+    >
+      <div class="relative flex flex-wrap xl:items-center z-10">
         <div class="mb-16 w-full md:mb-0 md:w-1/2">
-          <div data-aos="fade-right" data-aos-trigger="#hero-side">
+          <div 
+            data-aos={shouldReduceMotion ? "" : "fade-right"}
+            data-aos-trigger="#hero-side"
+            class="flex flex-col gap-4"
+          >
             <span
-              class="mb-4 inline-flex min-h-[24px] min-w-[24px] items-center rounded-full bg-primary-500 px-2 py-px text-xs uppercase leading-5 text-base-100 dark:text-base-900"
+              class="inline-flex min-h-[24px] min-w-[24px] items-center rounded-full bg-primary-500 px-2 py-px text-xs uppercase leading-5 text-base-100 dark:text-base-900"
+              role="doc-subtitle"
             >
               Meet Guido
             </span>
 
             <h1
-              class="mb-6 text-pretty text-3xl font-bold leading-tight tracking-tight text-base-900 dark:text-base-100 lg:text-5xl lg:leading-tight"
+              id="hero-heading"
+              class="text-pretty text-3xl font-bold leading-tight tracking-tight text-base-900 dark:text-base-100 lg:text-5xl lg:leading-tight"
             >
               {t("hero_text")}
             </h1>
           </div>
           <p
             class="description mb-8 text-pretty text-lg leading-relaxed text-base-700 dark:text-base-300 lg:text-xl"
-            data-aos="fade-right"
+            data-aos={shouldReduceMotion ? "" : "fade-right"}
             data-aos-delay=".1"
             data-aos-trigger="#hero-side"
           >
@@ -57,23 +73,26 @@ const t = useTranslations(currLocale);
           </p>
           <div
             class="mt-6 flex flex-wrap gap-4"
-            data-aos="fade-right"
+            data-aos={shouldReduceMotion ? "" : "fade-right"}
             data-aos-delay=".2"
             data-aos-trigger="#hero-side"
+            role="group"
+            aria-label="Call to action buttons"
           >
             <Button
               variant="primary"
               href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=gxjansen"
-              aria-label="Follow Guido Jansen on LinkedIn"
+              aria-label="Follow Guido Jansen on LinkedIn (opens in new tab)"
               class="min-h-[44px] min-w-[44px] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Follow me on LinkedIn
+              <span>Follow me on LinkedIn</span>
+              <span class="sr-only">(opens in new tab)</span>
             </Button>
             <Button
               variant="outline"
               href="/contact"
-              target="_blank"
-              rel="noopener noreferrer"
               aria-label="Book Guido Jansen for your event"
               class="min-h-[44px] min-w-[44px] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
             >
@@ -81,38 +100,47 @@ const t = useTranslations(currLocale);
             </Button>
           </div>
           <!-- Socials -->
-          <div class="relative">
-            <div
-              data-aos="fade-right"
-              data-aos-delay=".3"
-              data-aos-trigger="#hero-side"
-              class="relative z-20"
-            >
-              <SocialLinks class="mt-6" />
+          <div 
+            class="relative"
+            data-aos={shouldReduceMotion ? "" : "fade-right"}
+            data-aos-delay=".3"
+            data-aos-trigger="#hero-side"
+          >
+            <div class="relative z-20">
+              <SocialLinks 
+                class="mt-6" 
+                aria-label="Social media links"
+              />
             </div>
           </div>
         </div>
         <div class="w-full md:w-1/2">
           <div
             class="relative mx-auto max-w-max md:mr-0"
-            data-aos="fade-left"
+            data-aos={shouldReduceMotion ? "" : "fade-left"}
             data-aos-trigger="#hero-side"
           >
             <Icon
               name="atlas/circle3"
               class="absolute -left-14 -top-12 z-10 w-28 text-accent-4"
               aria-hidden="true"
+              role="presentation"
             />
             <Icon
               name="atlas/dots3"
               class="absolute -bottom-8 -right-7 z-10 w-28 text-accent-2"
               aria-hidden="true"
+              role="presentation"
             />
-            <div class="rounded-7xl relative overflow-hidden rounded-2xl">
+            <div 
+              class="rounded-7xl relative overflow-hidden rounded-2xl"
+              role="img"
+              aria-label="Profile photo of Guido Jansen"
+            >
               <Image
                 src={heroImage}
                 class="h-auto min-w-full object-cover"
-                alt="Guido Jansen sitting casually on a modern office couch with a laptop"
+                alt="Guido Jansen, a CRO and UX specialist, sitting casually on a modern grey office couch with a laptop. He's wearing casual business attire and has a welcoming expression, representing his approachable consulting style."
                 loading="eager"
                 width={600}
                 densities={[1.5, 2]}
@@ -123,3 +151,27 @@ const t = useTranslations(currLocale);
       </div>
     </div>
 </section>
+
+<script>
+  // Handle reduced motion preference changes
+  if (typeof window !== 'undefined') {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    
+    function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
+      const elements = document.querySelectorAll('[data-aos]');
+      elements.forEach(element => {
+        if (e.matches) {
+          element.setAttribute('data-aos', '');
+        } else {
+          // Restore original animation
+          const direction = element.closest('.md\\:w-1\\/2') === null ? 
+            'fade-right' : 'fade-left';
+          element.setAttribute('data-aos', direction);
+        }
+      });
+    }
+
+    mediaQuery.addEventListener('change', handleMotionPreference);
+    handleMotionPreference(mediaQuery);
+  }
+</script>

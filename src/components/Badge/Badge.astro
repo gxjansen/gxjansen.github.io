@@ -1,9 +1,71 @@
 ---
+interface Props {
+  label?: string; // Optional label for screen readers
+  class?: string; // Additional classes
+}
 
+const { 
+  label,
+  class: className 
+} = Astro.props;
+
+// Combine base classes with any additional classes
+const classes = [
+  'mb-4',
+  'inline-flex',
+  'items-center',
+  'rounded-full',
+  'bg-primary-100',
+  'px-2',
+  'py-px',
+  'text-xs',
+  'font-medium',
+  'uppercase',
+  'leading-5',
+  'text-primary-500',
+  'shadow-sm',
+  'shadow-base-200/20',
+  'dark:bg-primary-500',
+  'dark:text-base-100',
+  'dark:shadow-none',
+  'min-h-[20px]', // Ensure minimum touch target size
+  'min-w-[20px]',
+  className
+].filter(Boolean).join(' ');
 ---
 
 <span
-  class="mb-4 inline-block rounded-full bg-primary-100 px-2 py-px text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 dark:bg-primary-500 dark:text-base-100 dark:shadow-none"
+  class={classes}
+  role="status"
+  aria-label={label}
 >
   <slot />
 </span>
+
+<style>
+  /* Ensure proper color contrast in all themes */
+  span {
+    --badge-bg-light: theme('colors.primary.100');
+    --badge-text-light: theme('colors.primary.700');
+    --badge-bg-dark: theme('colors.primary.500');
+    --badge-text-dark: theme('colors.base.100');
+  }
+
+  /* Light theme */
+  span {
+    background-color: var(--badge-bg-light);
+    color: var(--badge-text-light);
+  }
+
+  /* Dark theme */
+  :global(.dark) span {
+    background-color: var(--badge-bg-dark);
+    color: var(--badge-text-dark);
+  }
+
+  /* Ensure text remains readable */
+  span {
+    letter-spacing: 0.05em;
+    word-spacing: 0.1em;
+  }
+</style>

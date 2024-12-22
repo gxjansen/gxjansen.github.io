@@ -23,6 +23,20 @@ const videos = sortedCoverage.filter(item => item.youtubeLink);
 const podcasts = sortedCoverage.filter(item => item.spotifyEmbedId);
 const articles = sortedCoverage.filter(item => !item.youtubeLink && !item.spotifyEmbedId);
 
+// Debug: Log content counts
+console.log('Content counts:', {
+  total: sortedCoverage.length,
+  videos: videos.length,
+  podcasts: podcasts.length,
+  articles: articles.length
+});
+
+// Debug: Log video data
+console.log('Video data:', videos.map(video => ({
+  title: video.title,
+  url: video.youtubeLink
+})));
+
 // Get first few video IDs for preloading
 const firstVideoIds = videos
   .slice(0, 2)

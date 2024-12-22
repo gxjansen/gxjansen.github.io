@@ -16,12 +16,12 @@ import image3 from "@images/paint-swatches.jpg";
 import image4 from "@images/customerday.jpg";
 
 interface ServiceItem {
-  image: ImageMetadata; // an imported image
+  image: ImageMetadata;
   title: string;
   details: string;
   href?: string;
-  ctaText?: string; // custom text for the CTA button
-  showCta?: boolean; // whether to show the CTA button
+  ctaText?: string;
+  showCta?: boolean;
 }
 
 const serviceData: ServiceItem[] = [
@@ -69,50 +69,102 @@ I switched focus to e-commerce and between 2008 and 2021 focussed on one system 
 In 2021 it was time to focus on something new and I became the Global Business & Technology Evangelist at the digital commerce visionairy Spryker.`,
   },
 ];
+
+// Check for reduced motion preference
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+const shouldReduceMotion = typeof window !== "undefined" 
+  ? window.matchMedia(reducedMotionQuery).matches 
+  : false;
 ---
 
-<section id="services-side-image" class="overflow-hidden pb-24 md:pb-28">
-  <div class="grid-pattern-container relative">
-        <!-- Info block about the X -->
-        <div class="text-center bg-base-100 rounded-xl p-8 shadow-lg">
-          <div class="flex items-center justify-center gap-4">
-            <div class="flex items-center">
-              <Icon 
-                name="tabler:letter-x" 
-                class="w-12 h-12 text-primary-500" 
-                stroke-width="3"
-                stroke="currentColor"
-                fill="none"
-              />
-              <Icon 
-                name="tabler:question-mark" 
-                class="w-12 h-12 text-primary-500 -ml-5" 
-                stroke-width="3"
-                stroke="currentColor"
-                fill="none"
-              />
-            </div>
-            <p class="text-lg">
-              To answer a common question right out of the gate: Yes, the <span class="text-primary-500 font-bold">X</span> in my name is not just there for decorative reasons: my second name is <span class="font-bold">Xavier</span>!
-            </p>
-          </div>
+<section 
+  id="services-side-image" 
+  class="overflow-hidden pb-24 md:pb-28"
+  aria-labelledby="about-heading"
+>
+  <div 
+    class="grid-pattern-container relative"
+    role="presentation"
+  >
+    <h2 id="about-heading" class="sr-only">About Guido Xavier Jansen</h2>
+    
+    <!-- Name explanation block -->
+    <div 
+      class="text-center bg-base-100 rounded-xl p-8 shadow-lg"
+      role="complementary"
+      aria-label="Name explanation"
+    >
+      <div class="flex items-center justify-center gap-4">
+        <div 
+          class="flex items-center"
+          aria-hidden="true"
+        >
+          <Icon 
+            name="tabler:letter-x" 
+            class="w-12 h-12 text-primary-500" 
+            stroke-width="3"
+            stroke="currentColor"
+            fill="none"
+            role="presentation"
+          />
+          <Icon 
+            name="tabler:question-mark" 
+            class="w-12 h-12 text-primary-500 -ml-5" 
+            stroke-width="3"
+            stroke="currentColor"
+            fill="none"
+            role="presentation"
+          />
         </div>
+        <p class="text-lg">
+          To answer a common question right out of the gate: Yes, the <span class="text-primary-500 font-bold">X</span> in my name is not just there for decorative reasons: my second name is <span class="font-bold">Xavier</span>!
+        </p>
+      </div>
+    </div>
 
-        <div class="flex flex-col gap-16 md:mt-16 md:gap-24">
-          {
-            serviceData.map((feature, idx) => (
-              <ServiceCard
-                title={feature.title}
-                details={feature.details}
-                image={feature.image}
-                href={feature.href ?? '#'}
-                imageSide={idx % 2 === 0 ? "right" : "left"}
-                idx={idx}
-                ctaText={feature.ctaText}
-                showCta={feature.showCta}
-              />
-            ))
-          }
-  </div>
+    <!-- Biography sections -->
+    <div 
+      class="flex flex-col gap-16 md:mt-16 md:gap-24"
+      role="list"
+      aria-label="Biography sections"
+    >
+      {
+        serviceData.map((feature, idx) => (
+          <ServiceCard
+            title={feature.title}
+            details={feature.details}
+            image={feature.image}
+            href={feature.href ?? '#'}
+            imageSide={idx % 2 === 0 ? "right" : "left"}
+            idx={idx}
+            ctaText={feature.ctaText}
+            showCta={feature.showCta}
+            data-aos={shouldReduceMotion ? "" : (idx % 2 === 0 ? "fade-right" : "fade-left")}
+          />
+        ))
+      }
+    </div>
   </div>
 </section>
+
+<script>
+  // Handle reduced motion preference changes
+  if (typeof window !== 'undefined') {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    
+    function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
+      const elements = document.querySelectorAll('[data-aos]');
+      elements.forEach(element => {
+        if (e.matches) {
+          element.setAttribute('data-aos', '');
+        } else {
+          const index = Array.from(document.querySelectorAll('[role="listitem"]')).indexOf(element);
+          element.setAttribute('data-aos', index % 2 === 0 ? 'fade-right' : 'fade-left');
+        }
+      });
+    }
+
+    mediaQuery.addEventListener('change', handleMotionPreference);
+    handleMotionPreference(mediaQuery);
+  }
+</script>

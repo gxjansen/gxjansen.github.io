@@ -18,111 +18,226 @@ import { getTranslatedData } from "@js/translationUtils";
 const currLocale = getLocaleFromUrl(Astro.url);
 const navData = getTranslatedData("navData", currLocale);
 import { locales } from "@config/siteSettings.json";
-// console.log(JSON.stringify(navData, null, 2));
+
+// Check for reduced motion preference
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+const shouldReduceMotion = typeof window !== "undefined" 
+  ? window.matchMedia(reducedMotionQuery).matches 
+  : false;
 ---
+
+<!-- Skip to main content link -->
+<a 
+  href="#main-content" 
+  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:block focus:rounded-md focus:bg-primary-500 focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+>
+  Skip to main content
+</a>
 
 <div
   id="nav__container"
-  class="navbar--initial fixed left-0 top-0 z-30 flex w-full flex-col border-b transition-all duration-300"
+  class={`navbar--initial fixed left-0 top-0 z-30 flex w-full flex-col border-b ${shouldReduceMotion ? "" : "transition-all duration-300"}`}
   transition:name={`nav`}
+  role="banner"
 >
   <div class="mx-auto flex w-full">
     <div class="site-container flex h-14 w-full items-center px-4">
-      <header class="relative flex w-full items-center gap-2">
-        <!-- home button / image -->
+      <header 
+        class="relative flex w-full items-center gap-2" 
+        role="navigation" 
+        aria-label="Main navigation"
+      >
+        <!-- Logo/Home link -->
         <div class="flex flex-auto justify-start">
           <SiteLogo />
         </div>
 
-        <!-- <div class="flex flex-auto justify-center">
-          
-        </div> -->
-
-        <!-- desktop nav menu -->
+        <!-- Desktop navigation -->
         <div class="flex flex-auto justify-end">
-          <nav class="hidden md:block">
-            <ul class="flex h-fit items-center">
+          <nav 
+            class="hidden md:block" 
+            aria-label="Desktop navigation"
+          >
+            <ul 
+              class="flex h-fit items-center" 
+              role="menubar" 
+              aria-label="Primary navigation menu"
+            >
               {
-                // if dropdown exists, setup the dropdown, otherwise it is just a link
                 navData
                   .filter((navItem) => !navItem.hidden)
-                  .map((navItem) =>
+                  .map((navItem) => (
                     "dropdown" in navItem ? (
-                      // non-mobile dropdown menu
-                      <>
-                        {/* <NavDropdown navItem={navItem} /> */}
-                        <NavDropdownToggle navItem={navItem} />
-                      </>
+                      <NavDropdown navItem={navItem} />
                     ) : "megaMenuColumns" in navItem ? (
-                      <MegaMenuDropdownToggle {navItem} />
+                      <MegaMenuDropdownToggle navItem={navItem} />
                     ) : (
-                      // normal nav link
-                      <NavLink {navItem} />
-                    ),
-                  )
+                      <NavLink navItem={navItem} />
+                    )
+                  ))
               }
             </ul>
           </nav>
 
-          <ThemeToggle class="-ml-4 mr-3 hidden md:block" />
+          <!-- Theme toggle -->
+          <ThemeToggle 
+            class="-ml-4 mr-3 hidden md:block" 
+            aria-label="Toggle dark mode"
+          />
 
+          <!-- CTA Button -->
           <Button
             variant="secondary"
-            class="my-auto hidden px-4 py-1.5 md:block"
+            class="my-auto hidden px-4 py-1.5 md:block focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
             href="/contact"
+            aria-label="Book Guido for your event"
           >
-          Book Guido
+            Book Guido
           </Button>
 
+          <!-- Language selector -->
           {
             locales.length > 1 && (
-              <LanguageSelect class="ml-4 hidden md:block" />
+              <LanguageSelect 
+                class="ml-4 hidden md:block" 
+                aria-label="Select language"
+              />
             )
           }
 
-          <!-- mobile nav menu, only load on small screens where it is visible -->
-          <div class="md:hidden">
+          <!-- Mobile navigation -->
+          <div 
+            class="md:hidden"
+            aria-label="Mobile navigation menu"
+          >
             <MobileNav />
           </div>
         </div>
-    </header>
+      </header>
+    </div>
   </div>
 </div>
 
-<style lang="scss">
+<style>
+  /* Navigation states */
   .navbar--scrolled {
     @apply border-b-base-200 bg-base-50 dark:border-b-base-800 dark:bg-base-950;
+    backdrop-filter: blur(8px);
   }
 
   .navbar--initial {
     @apply border-b-transparent bg-transparent py-2;
   }
-</style>
 
-<script>
-  let navbar: HTMLElement | null;
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .transition-all {
+      transition: none !important;
+    }
 
-  function scrollHandler() {
-    if (navbar) {
-      if (window.scrollY > 50) {
-        // if we have scrolled down the page a bit, add a frosted-glass look to the navbar
-        navbar.classList.add("navbar--scrolled");
-        navbar.classList.remove("navbar--initial");
-      } else {
-        navbar.classList.add("navbar--initial");
-        navbar.classList.remove("navbar--scrolled");
-      }
+    .backdrop-filter {
+      backdrop-filter: none;
     }
   }
 
-  function initNav() {
-    navbar = document.getElementById("nav__container");
-    window.addEventListener("scroll", scrollHandler, { passive: true });
+  /* High contrast mode enhancements */
+  @media (forced-colors: active) {
+    .navbar--scrolled {
+      border-bottom: 2px solid CanvasText;
+      background-color: Canvas;
+    }
   }
 
-  // runs on initial page load
-  initNav();
+  /* Focus styles */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring-color, theme('colors.primary.500'));
+    outline-offset: 2px;
+  }
+</style>
 
-  // runs on view transitions navigation. Not needed if item has "transition:persist"
-  document.addEventListener("astro:after-swap", initNav);
+<script>
+  class NavigationManager {
+    private navbar: HTMLElement | null;
+    private scrollTimeout: number;
+    private mediaQuery: MediaQueryList;
+
+    constructor() {
+      this.navbar = null;
+      this.scrollTimeout = 0;
+      this.mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      
+      this.init();
+    }
+
+    private init() {
+      this.navbar = document.getElementById('nav__container');
+      
+      if (this.navbar) {
+        // Remove old listeners
+        window.removeEventListener('scroll', this.handleScroll);
+        
+        // Add new listeners
+        window.addEventListener('scroll', this.handleScroll, { passive: true });
+        this.mediaQuery.addEventListener('change', this.handleReducedMotion);
+        
+        // Initial state
+        this.handleScroll();
+        this.handleReducedMotion(this.mediaQuery);
+      }
+    }
+
+    private handleScroll = () => {
+      if (!this.navbar) return;
+
+      // Debounce scroll handling
+      if (this.scrollTimeout) {
+        window.cancelAnimationFrame(this.scrollTimeout);
+      }
+
+      this.scrollTimeout = window.requestAnimationFrame(() => {
+        const shouldShowBackground = window.scrollY > 50;
+        
+        this.navbar?.classList.toggle('navbar--scrolled', shouldShowBackground);
+        this.navbar?.classList.toggle('navbar--initial', !shouldShowBackground);
+        
+        // Update ARIA attributes
+        this.navbar?.setAttribute('aria-expanded', shouldShowBackground.toString());
+      });
+    };
+
+    private handleReducedMotion = (e: MediaQueryList | MediaQueryListEvent) => {
+      if (!this.navbar) return;
+      
+      if (e.matches) {
+        this.navbar.style.transition = 'none';
+        this.navbar.style.backdropFilter = 'none';
+      } else {
+        this.navbar.style.removeProperty('transition');
+        this.navbar.style.removeProperty('backdrop-filter');
+      }
+    };
+
+    public cleanup() {
+      window.removeEventListener('scroll', this.handleScroll);
+      this.mediaQuery.removeEventListener('change', this.handleReducedMotion);
+    }
+  }
+
+  let navigationManager: NavigationManager;
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    navigationManager = new NavigationManager();
+  });
+
+  // Re-initialize after view transitions
+  document.addEventListener('astro:after-swap', () => {
+    navigationManager?.cleanup();
+    navigationManager = new NavigationManager();
+  });
+
+  // Cleanup on page unload
+  document.addEventListener('beforeunload', () => {
+    navigationManager?.cleanup();
+  });
 </script>

@@ -10,17 +10,30 @@ interface Props {
 const { podcasts } = Astro.props;
 ---
 
-<section id="podcasts" class="mb-16">
-  <h2 class="h2 mb-4">Podcast Appearances</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<section 
+  id="podcasts" 
+  class="mb-16"
+  aria-labelledby="podcasts-heading"
+>
+  <h2 id="podcasts-heading" class="h2 mb-4">Podcast Appearances</h2>
+  <div 
+    class="grid grid-cols-1 md:grid-cols-2 gap-8"
+    role="list"
+  >
     {podcasts.map(podcast => (
-      <div class="bg-neutral-100 dark:bg-white/[.075] rounded-xl p-6">
+      <div 
+        class="bg-neutral-100 dark:bg-white/[.075] rounded-xl p-6"
+        role="listitem"
+      >
         <LazySpotify 
           episodeId={podcast.spotifyEmbedId || ''}
           title={podcast.title}
         />
-        <h3 class="h3 mb-4 mt-4">{podcast.title}</h3>
-        <p class="description text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+        <h3 id={`podcast-${podcast.spotifyEmbedId}`} class="h3 mb-4 mt-4">{podcast.title}</h3>
+        <p 
+          class="description text-sm text-neutral-600 dark:text-neutral-400 mb-4"
+          aria-label={`Published on ${formatDate(podcast.publicationDate)}${podcast.personOrganization ? ` by ${podcast.personOrganization}` : ''}`}
+        >
           {formatDate(podcast.publicationDate)}
           {podcast.personOrganization && ` • ${podcast.personOrganization}`}
         </p>
@@ -29,9 +42,10 @@ const { podcasts } = Astro.props;
             href={podcast.articleUrl} 
             target="_blank" 
             rel="noopener noreferrer" 
-            class="description text-teal-500 hover:text-teal-600"
+            class="description text-teal-500 hover:text-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 rounded"
+            aria-label={`Read article about ${podcast.title} (opens in new tab)`}
           >
-            View article →
+            View article <span aria-hidden="true">→</span>
           </a>
         )}
       </div>

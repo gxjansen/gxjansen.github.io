@@ -32,14 +32,31 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 ---
 
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" , initial-scale="1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark light" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a" />
 
-<!-- Poppins Font -->
-<link rel="preconnect" href="https://api.fontshare.com" />
-<link
+<!-- Accessibility meta tags -->
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="date=no" />
+<meta name="format-detection" content="address=no" />
+<meta name="format-detection" content="email=no" />
+
+<!-- Font loading optimization -->
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+<link 
   href="https://api.fontshare.com/v2/css?f[]=poppins@400,500,600,700&display=swap"
   rel="stylesheet"
+  media="print"
+  onload="this.media='all'"
 />
+<noscript>
+  <link
+    href="https://api.fontshare.com/v2/css?f[]=poppins@400,500,600,700&display=swap"
+    rel="stylesheet"
+  />
+</noscript>
 
 <!-- Favicons. I store these in public/favicons. Wherever you store them in the public folder is what you need these href's to match -->
 <link rel="icon" href="/favicons/favicon.ico" />
@@ -76,27 +93,34 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <!-- Theme change setup. Run early to eliminate Flash of inAccurate coloR Theme (FART) -->
 <script is:inline>
   function initTheme() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     let colorTheme = localStorage.getItem("colorTheme");
-    if (!colorTheme) {
-      // if no color theme yet, use the users browser preferences
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
+    
+    function applyTheme(theme) {
+      if (theme === "dark") {
         document.documentElement.classList.add("dark");
-        localStorage.setItem("colorTheme", "dark");
+        document.documentElement.style.colorScheme = "dark";
       } else {
         document.documentElement.classList.remove("dark");
-        localStorage.setItem("colorTheme", "light");
-      }
-    } else {
-      // If there is, assign the theme based on the value in local storage
-      if (colorTheme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else if (colorTheme === "light") {
-        document.documentElement.classList.remove("dark");
+        document.documentElement.style.colorScheme = "light";
       }
     }
+
+    // Initial theme setup
+    if (!colorTheme) {
+      colorTheme = prefersDark.matches ? "dark" : "light";
+      localStorage.setItem("colorTheme", colorTheme);
+    }
+    applyTheme(colorTheme);
+
+    // Listen for system theme changes
+    prefersDark.addEventListener("change", (e) => {
+      if (!localStorage.getItem("colorTheme")) {
+        const newTheme = e.matches ? "dark" : "light";
+        applyTheme(newTheme);
+        localStorage.setItem("colorTheme", newTheme);
+      }
+    });
   }
 
   // runs on initial page load
