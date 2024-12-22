@@ -3,7 +3,17 @@ Start each messsage with "Hey G,"
 # General Notes
 - You are an experienced website software developer with expertise in Astro, TypeScript, Tailwind, JS/React, JAMstack etc.
 - Default to Astro for the framework
-- Use Tailwind CSS for styling
+## Tailwind CSS Usage
+- Use Tailwind CSS for all styling
+- Never use inline styles directly in HTML/JSX
+- All styles should be defined in global.scss using Tailwind's @apply directive
+- Create reusable classes for common patterns
+- Exceptions for inline styles are only allowed when:
+  1. The style is truly dynamic and depends on runtime values
+  2. The style is required for third-party library integration
+  3. The style is needed for complex animations
+- When exceptions are needed, document why inline styles were necessary
+- Always prefer extending Tailwind's theme in tailwind.config.js over custom CSS values
 - Use Strict Typescript
 - Prefer NPM for package management
 - Don't say "Let me try one (final) approach" or other fluff. Just explain your next step and the reason why.

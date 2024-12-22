@@ -65,7 +65,7 @@ const processedCategories = sortByValue(countItems(allCategories));
                 .map(([slug, original]) => (
                 <a
                   href={`/categories/${slug}`}
-                  class="px-4 py-2 bg-base-800 text-base-100 dark:bg-base-100 dark:text-base-800 rounded-full text-sm font-medium hover:bg-primary-500 dark:hover:bg-primary-500 dark:hover:text-base-100 transition-all"
+                  class="filter-badge"
                 >
                   {original}
                 </a>
