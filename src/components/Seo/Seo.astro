@@ -76,6 +76,11 @@ const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
 const imageUrl = optimizedImage 
   ? new URL(optimizedImage.src, siteUrl).toString()
   : new URL(siteData.defaultImage.src, siteUrl).toString();
+
+// Helper function to safely format dates
+const formatDate = (date: Date | undefined) => {
+  return date instanceof Date ? date.toISOString() : undefined;
+};
 ---
 
 <!-- Primary Meta Tags -->
@@ -100,8 +105,12 @@ const imageUrl = optimizedImage
 <meta property="og:locale" content={currLocale} />
 {type === "blog" && (
   <>
-    <meta property="article:published_time" content={Astro.props.postFrontmatter?.publishDate.toISOString()} />
-    <meta property="article:modified_time" content={Astro.props.postFrontmatter?.updateDate?.toISOString()} />
+    {formatDate(Astro.props.postFrontmatter?.publishDate) && (
+      <meta property="article:published_time" content={formatDate(Astro.props.postFrontmatter?.publishDate)} />
+    )}
+    {formatDate(Astro.props.postFrontmatter?.updateDate) && (
+      <meta property="article:modified_time" content={formatDate(Astro.props.postFrontmatter?.updateDate)} />
+    )}
     <meta property="article:author" content={siteData.author.name} />
     {Astro.props.postFrontmatter?.tags?.map((tag: string) => (
       <meta property="article:tag" content={tag} />
@@ -130,7 +139,11 @@ const imageUrl = optimizedImage
 {type === "blog" && (
   <>
     <meta name="author" content={Astro.props.authors?.map(author => author.data.name).join(', ') || siteData.author.name} />
-    <meta name="date" content={Astro.props.postFrontmatter?.publishDate.toISOString()} />
-    <meta name="last-modified" content={Astro.props.postFrontmatter?.updateDate?.toISOString()} />
+    {formatDate(Astro.props.postFrontmatter?.publishDate) && (
+      <meta name="date" content={formatDate(Astro.props.postFrontmatter?.publishDate)} />
+    )}
+    {formatDate(Astro.props.postFrontmatter?.updateDate) && (
+      <meta name="last-modified" content={formatDate(Astro.props.postFrontmatter?.updateDate)} />
+    )}
   </>
 )}
