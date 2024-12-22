@@ -43,7 +43,7 @@
 
   /* Custom focus styles for better accessibility */
   a:focus {
-    @apply outline-none ring-2 ring-primary-500/30 ring-offset-1;
+    @apply outline-none ring-1 ring-primary-500/20 rounded;
   }
 }
 
@@ -191,6 +191,104 @@
 
   .filter-badge {
     @apply px-4 py-2 bg-base-800 text-base-100 dark:bg-base-100 dark:text-base-800 rounded-full text-sm font-medium hover:bg-primary-500 dark:hover:bg-primary-500 dark:hover:text-base-100 transition-all;
+  }
+
+  /* Alert Components */
+    .alert {
+      @apply relative rounded-xl p-4;
+
+      .alert-content {
+        @apply flex flex-col gap-0;
+
+        .alert-header {
+          @apply flex items-center gap-2 mb-1;
+
+          .alert-icon {
+            @apply flex-shrink-0;
+            svg {
+              @apply size-5;
+            }
+          }
+
+          .alert-title {
+            @apply text-base leading-relaxed font-medium;
+          }
+        }
+
+        .alert-description {
+          @apply text-sm leading-relaxed font-medium pl-7;
+        }
+
+        .alert-list {
+          @apply space-y-1 pl-7;
+          li {
+            @apply list-disc;
+          }
+        }
+
+        .alert-actions {
+          @apply mt-6 flex gap-2 items-center pl-7;
+        }
+      }
+    }
+
+  .alert-info {
+    @apply bg-blue-50 border border-blue-100 text-blue-600;
+    .alert-title { @apply text-blue-800; }
+    .alert-description { @apply text-blue-600; }
+  }
+
+  .alert-success {
+    @apply bg-emerald-50 border border-emerald-100 text-emerald-500;
+    .alert-title { @apply text-green-600; }
+    .alert-description { @apply text-green-500; }
+  }
+
+  .alert-warning {
+    @apply bg-amber-50 border border-amber-100 text-amber-500;
+    .alert-title { @apply text-yellow-800; }
+    .alert-description { @apply text-yellow-600; }
+  }
+
+  .alert-error {
+    @apply bg-rose-50 border border-rose-100 text-rose-800;
+    .alert-description { @apply text-rose-600; }
+  }
+
+  .alert-neutral {
+    @apply bg-base-50 text-base-500;
+    .alert-title { @apply text-base-700; }
+    .alert-description { @apply text-base-500; }
+  }
+
+  .alert-neutral-dark {
+    @apply bg-base-950 text-white ring-1 ring-white/5;
+    .alert-description { @apply text-base-300; }
+  }
+
+  .alert-accent {
+    @apply bg-primary-700 text-white ring-1 ring-white/5;
+    .alert-description { @apply text-base-300; }
+  }
+
+  .alert-button {
+    @apply flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none h-8 px-4 py-2 text-xs font-medium rounded-md;
+  }
+
+  .alert-button-primary {
+    @apply text-black bg-white hover:bg-base-200 focus:ring-base-500/50;
+  }
+
+  .alert-button-secondary {
+    @apply text-white bg-base-900 hover:text-primary-400 ring-1 ring-base-700 focus:ring-primary-400;
+  }
+
+  .alert-button-accent {
+    @apply text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-500/50;
+  }
+
+  .alert-button-outline {
+    @apply text-base-500 bg-white hover:text-primary-500 ring-1 ring-base-200 focus:ring-primary-500;
   }
 }
 

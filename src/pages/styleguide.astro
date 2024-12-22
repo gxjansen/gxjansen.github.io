@@ -67,6 +67,19 @@ const arrowExamples = [
             </ul>
           </div>
           <div>
+            <a href="#alerts" class="primary-link text-lg">Alerts</a>
+            <ul class="mt-2 ml-4">
+              <li class="mt-1"><a href="#alert-info" class="primary-link">Info Alert</a></li>
+              <li class="mt-1"><a href="#alert-success" class="primary-link">Success Alert</a></li>
+              <li class="mt-1"><a href="#alert-warning" class="primary-link">Warning Alert</a></li>
+              <li class="mt-1"><a href="#alert-error" class="primary-link">Error Alert</a></li>
+              <li class="mt-1"><a href="#alert-neutral" class="primary-link">Neutral Alert</a></li>
+              <li class="mt-1"><a href="#alert-neutral-dark" class="primary-link">Neutral Dark Alert</a></li>
+              <li class="mt-1"><a href="#alert-accent" class="primary-link">Accent Alert</a></li>
+              <li class="mt-1"><a href="#alert-with-actions" class="primary-link">Alert with Actions</a></li>
+            </ul>
+          </div>
+          <div>
             <a href="#navigation" class="primary-link text-lg">Navigation</a>
             <ul class="mt-2 ml-4">
               <li class="mt-1"><a href="#nav-links" class="primary-link">Nav Links</a></li>
@@ -76,61 +89,47 @@ const arrowExamples = [
         </div>
       </nav>
     </section>
-    
+
     <!-- Buttons Section -->
     <section id="buttons" class="mb-16">
       <h2 class="h2">Buttons</h2>
-      <div class="space-y-8">
-        <!-- Basic Button Variants -->
-        <div id="button-variants">
-          <h3 class="h3">Basic Variants</h3>
-          <div class="flex flex-wrap gap-4 mb-4">
-            {buttonExamples.map(({ variant, text }) => (
-              <div class="flex flex-col items-start gap-2">
-                <Button variant={variant}>{text}</Button>
-                <code class="code-block">variant="{variant}"</code>
-              </div>
-            ))}
-          </div>
+      
+      <!-- Basic Button Variants -->
+      <div id="button-variants" class="mb-8">
+        <h3 class="h3">Basic Variants</h3>
+        <div class="flex flex-wrap gap-4">
+          {buttonExamples.map(button => (
+            <Button variant={button.variant}>{button.text}</Button>
+          ))}
         </div>
+      </div>
 
-        <!-- Button States -->
-        <div id="button-states">
-          <h3 class="h3">States</h3>
-          <div class="flex flex-wrap gap-4">
-            <div class="flex flex-col items-start gap-2">
-              <Button disabled>Disabled Button</Button>
-              <code class="code-block">disabled={true}</code>
-            </div>
-          </div>
+      <!-- Button States -->
+      <div id="button-states" class="mb-8">
+        <h3 class="h3">States</h3>
+        <div class="flex flex-wrap gap-4">
+          <Button variant="primary">Default</Button>
+          <Button variant="primary" disabled>Disabled</Button>
+          <Button variant="primary" loading>Loading</Button>
         </div>
+      </div>
 
-        <!-- Buttons with Arrows -->
-        <div id="button-arrows">
-          <h3 class="h3">With Arrows</h3>
-          <div class="flex flex-wrap gap-4">
-            {arrowExamples.map(({ arrow, text }) => (
-              <div class="flex flex-col items-start gap-2">
-                <Button variant="primary" arrow={arrow}>{text}</Button>
-                <code class="code-block">arrow="{arrow}"</code>
-              </div>
-            ))}
-          </div>
+      <!-- Buttons with Arrows -->
+      <div id="button-arrows" class="mb-8">
+        <h3 class="h3">With Arrows</h3>
+        <div class="flex flex-wrap gap-4">
+          {arrowExamples.map(button => (
+            <Button variant="primary" arrow={button.arrow}>{button.text}</Button>
+          ))}
         </div>
+      </div>
 
-        <!-- Link Buttons -->
-        <div id="button-links">
-          <h3 class="h3">Link Buttons</h3>
-          <div class="flex flex-wrap gap-4">
-            <div class="flex flex-col items-start gap-2">
-              <Button href="#" variant="primary">Internal Link</Button>
-              <code class="code-block">href="#"</code>
-            </div>
-            <div class="flex flex-col items-start gap-2">
-              <Button href="https://example.com" variant="primary">External Link</Button>
-              <code class="code-block">href="https://example.com"</code>
-            </div>
-          </div>
+      <!-- Link Buttons -->
+      <div id="button-links" class="mb-8">
+        <h3 class="h3">Link Buttons</h3>
+        <div class="flex flex-wrap gap-4">
+          <Button variant="primary" href="#" target="_blank">External Link</Button>
+          <Button variant="outline" href="#">Internal Link</Button>
         </div>
       </div>
     </section>
@@ -138,172 +137,279 @@ const arrowExamples = [
     <!-- Typography Section -->
     <section id="typography" class="mb-16">
       <h2 class="h2">Typography</h2>
-      <div class="space-y-8">
-        <!-- Headings -->
-        <div id="headings">
-          <h3 class="h3">Headings</h3>
-          <div class="space-y-4">
-            <div>
-              <h1 class="h1">Heading 1</h1>
-              <code class="code-block">class="h1"</code>
-            </div>
-            <div>
-              <h2 class="h2">Heading 2</h2>
-              <code class="code-block">class="h2"</code>
-            </div>
-            <div>
-              <h3 class="h3">Heading 3</h3>
-              <code class="code-block">class="h3"</code>
-            </div>
-            <div>
-              <h4 class="h4">Heading 4</h4>
-              <code class="code-block">class="h4"</code>
-            </div>
-          </div>
-        </div>
 
-        <!-- Semantic Headings -->
-        <div id="semantic-headings">
-          <h3 class="h3">Semantic Headings</h3>
-          <div class="space-y-4">
-            <div>
-              <h1 class="h1">Main Heading (h1)</h1>
-              <code class="code-block">Use &lt;h1&gt; with class="h1" for main page headings</code>
-            </div>
-            <div>
-              <h2 class="h2">Section Heading (h2)</h2>
-              <code class="code-block">Use &lt;h2&gt; with class="h2" for section headings</code>
-            </div>
-            <div>
-              <h3 class="h3">Subsection Heading (h3)</h3>
-              <code class="code-block">Use &lt;h3&gt; with class="h3" for subsection headings</code>
-            </div>
-            <div>
-              <h4 class="h4">Card Heading (h4)</h4>
-              <code class="code-block">Use &lt;h4&gt; with class="h4" for card headings</code>
-            </div>
-          </div>
-        </div>
+      <!-- Headings -->
+      <div id="headings" class="mb-8">
+        <h3 class="h3">Headings</h3>
+        <h1 class="h1">Heading 1</h1>
+        <h2 class="h2">Heading 2</h2>
+        <h3 class="h3">Heading 3</h3>
+        <h4 class="h4">Heading 4</h4>
+      </div>
 
-        <!-- Text Sizes -->
-        <div id="text-sizes">
-          <h3 class="h3">Text Sizes</h3>
-          <div class="space-y-4">
-            <div>
-              <p class="text-small">Small Text</p>
-              <code class="code-block">class="text-small"</code>
-            </div>
-            <div>
-              <p class="text-regular">Base Text</p>
-              <code class="code-block">class="text-regular"</code>
-            </div>
-            <div>
-              <p class="text-large">Large Text</p>
-              <code class="code-block">class="text-large"</code>
-            </div>
-          </div>
+      <!-- Semantic Headings -->
+      <div id="semantic-headings" class="mb-8">
+        <h3 class="h3">Semantic Headings</h3>
+        <p class="text-base leading-normal mb-2">Use semantic heading classes to maintain proper document outline while using different visual styles:</p>
+        <div class="space-y-4">
+          <h2 class="h4">Small Section Heading (h2 with h4 style)</h2>
+          <h3 class="h2">Large Subsection (h3 with h2 style)</h3>
         </div>
+      </div>
 
-        <!-- Font Weights -->
-        <div id="font-weights">
-          <h3 class="h3">Font Weights</h3>
-          <div class="space-y-4">
-            <div>
-              <p class="weight-normal">Normal Text (400)</p>
-              <code class="code-block">class="weight-normal"</code>
-            </div>
-            <div>
-              <p class="weight-medium">Medium Text (500)</p>
-              <code class="code-block">class="weight-medium"</code>
-            </div>
-            <div>
-              <p class="weight-semibold">Semibold Text (600)</p>
-              <code class="code-block">class="weight-semibold"</code>
-            </div>
-            <div>
-              <p class="weight-bold">Bold Text (700)</p>
-              <code class="code-block">class="weight-bold"</code>
-            </div>
-          </div>
-        </div>
+      <!-- Text Sizes -->
+      <div id="text-sizes" class="mb-8">
+        <h3 class="h3">Text Sizes</h3>
+        <p class="text-small">Small Text</p>
+        <p class="text-regular">Regular Text</p>
+        <p class="text-large">Large Text</p>
+      </div>
 
-        <!-- Body Text -->
-        <div id="body-text">
-          <h3 class="h3">Body Text</h3>
-          <div class="space-y-4">
-            <div>
-              <p class="description">This is a description text style, commonly used for introductory paragraphs and supporting content.</p>
-              <code class="code-block">class="description"</code>
-            </div>
-            <div>
-              <p>This is the default body text style, used for general content throughout the site.</p>
-              <code class="code-block">Default text (no class needed)</code>
-            </div>
-          </div>
-        </div>
+      <!-- Font Weights -->
+      <div id="font-weights" class="mb-8">
+        <h3 class="h3">Font Weights</h3>
+        <p class="weight-normal">Normal Weight</p>
+        <p class="weight-medium">Medium Weight</p>
+        <p class="weight-semibold">Semibold Weight</p>
+        <p class="weight-bold">Bold Weight</p>
+      </div>
 
-        <!-- Links -->
-        <div id="links">
-          <h3 class="h3">Links</h3>
-          <div class="space-y-4">
-            <div>
-              <a href="#" class="primary-link">Primary Link</a>
-              <code class="code-block ml-2">class="primary-link"</code>
-            </div>
-          </div>
-        </div>
+      <!-- Body Text -->
+      <div id="body-text" class="mb-8">
+        <h3 class="h3">Body Text</h3>
+        <p class="description">Description text style with slightly reduced opacity for secondary information.</p>
+        <p class="mb-4">Regular paragraph text with good readability for longer content sections. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+
+      <!-- Links -->
+      <div id="links" class="mb-8">
+        <h3 class="h3">Links</h3>
+        <p>Text with a <a href="#" class="primary-link">primary link</a> styled consistently.</p>
       </div>
     </section>
 
     <!-- Badges Section -->
     <section id="badges" class="mb-16">
       <h2 class="h2">Badges</h2>
+
+      <!-- Basic Badge -->
+      <div id="basic-badge" class="mb-8">
+        <h3 class="h3">Basic Badge</h3>
+        <div class="flex gap-2">
+          <Badge>Default</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="error">Error</Badge>
+        </div>
+      </div>
+
+      <!-- Badge with Label -->
+      <div id="badge-label" class="mb-8">
+        <h3 class="h3">With Label</h3>
+        <div class="flex gap-2">
+          <Badge label="Status">Active</Badge>
+          <Badge label="Type" variant="success">Feature</Badge>
+        </div>
+      </div>
+
+      <!-- Badge in Context -->
+      <div id="badge-context" class="mb-8">
+        <h3 class="h3">In Context</h3>
+        <div class="flex items-center gap-2">
+          <h4 class="text-lg font-medium">Project Status</h4>
+          <Badge variant="success">Live</Badge>
+        </div>
+      </div>
+
+      <!-- Filter Badges -->
+      <div id="filter-badges" class="mb-8">
+        <h3 class="h3">Filter Badges</h3>
+        <div class="flex flex-wrap gap-2">
+          <button class="filter-badge">All Items</button>
+          <button class="filter-badge">Active</button>
+          <button class="filter-badge">Archived</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alerts Section -->
+    <section id="alerts" class="mb-16">
+      <h2 class="h2">Alerts</h2>
       <div class="space-y-8">
-        <!-- Basic Badge -->
-        <div id="basic-badge">
-          <h3 class="h3">Basic Badge</h3>
-          <div class="space-y-4">
-            <div>
-              <Badge>Category</Badge>
-              <code class="code-block ml-2">&lt;Badge&gt;Category&lt;/Badge&gt;</code>
+        <!-- Info Alert -->
+        <div id="alert-info">
+          <h3 class="h3">Info Alert</h3>
+          <div class="alert alert-info">
+            <div class="alert-content">
+              <div class="alert-header">
+                <div class="alert-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                    <path d="M12 9h.01"></path>
+                    <path d="M11 12h1v4h1"></path>
+                  </svg>
+                </div>
+                <p class="alert-title">Good to know</p>
+              </div>
+              <p class="alert-description">A new feature is available. You will be notified when it is ready.</p>
             </div>
           </div>
         </div>
 
-        <!-- Badge with Label -->
-        <div id="badge-label">
-          <h3 class="h3">Badge with Label</h3>
-          <div class="space-y-4">
-            <div>
-              <Badge label="Category label for screen readers">Accessibility</Badge>
-              <code class="code-block ml-2">&lt;Badge label="Category label for screen readers"&gt;Accessibility&lt;/Badge&gt;</code>
+        <!-- Success Alert -->
+        <div id="alert-success">
+          <h3 class="h3">Success Alert</h3>
+          <div class="alert alert-success" role="alert">
+            <div class="alert-content">
+              <div class="alert-header">
+                <div class="alert-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" stroke-width="0" fill="currentColor"></path>
+                  </svg>
+                </div>
+                <p class="alert-title">Success</p>
+              </div>
+              <p class="alert-description">Your changes have been saved.</p>
             </div>
           </div>
         </div>
 
-        <!-- Badge in Context -->
-        <div id="badge-context">
-          <h3 class="h3">Badge in Context</h3>
-          <div class="space-y-4">
-            <div>
-              <Badge>Podcasting</Badge>
-              <h4 class="h4 mt-2">Section Title</h4>
-              <p class="description">Shows how badges are used above section titles.</p>
-              <code class="code-block mt-4">Used above section titles for categorization</code>
+        <!-- Warning Alert -->
+        <div id="alert-warning">
+          <h3 class="h3">Warning Alert</h3>
+          <div class="alert alert-warning" role="alert">
+            <div class="alert-content">
+              <div class="alert-header">
+                <div class="alert-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 1.67c.955 0 1.845 .467 2.39 1.247l.105 .16l8.114 13.548a2.914 2.914 0 0 1 -2.307 4.363l-.195 .008h-16.225a2.914 2.914 0 0 1 -2.582 -4.2l.099 -.185l8.11 -13.538a2.914 2.914 0 0 1 2.491 -1.403zm.01 13.33l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -7a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z"></path>
+                  </svg>
+                </div>
+                <p class="alert-title">Warning!</p>
+              </div>
+              <p class="alert-description">This action cannot be undone. Please proceed with caution.</p>
             </div>
           </div>
         </div>
 
-        <!-- Filter Badges -->
-        <div id="filter-badges">
-          <h3 class="h3">Filter Badges</h3>
-          <div class="space-y-4">
-            <div class="flex flex-wrap gap-4">
-              <a href="#" class="filter-badge">Psychology</a>
-              <a href="#" class="filter-badge">E-commerce</a>
-              <a href="#" class="filter-badge">Experimentation</a>
+        <!-- Error Alert -->
+        <div id="alert-error">
+          <h3 class="h3">Error Alert</h3>
+          <div class="alert alert-error" role="alert">
+            <div class="alert-content">
+              <div class="alert-header">
+                <div class="alert-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 1.67c.955 0 1.845 .467 2.39 1.247l.105 .16l8.114 13.548a2.914 2.914 0 0 1 -2.307 4.363l-.195 .008h-16.225a2.914 2.914 0 0 1 -2.582 -4.2l.099 -.185l8.11 -13.538a2.914 2.914 0 0 1 2.491 -1.403zm.01 13.33l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -7a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z"></path>
+                  </svg>
+                </div>
+                <p class="alert-title">Warning! Time for a giggle Break!!</p>
+              </div>
+              <ul class="alert-list">
+                <li>
+                  <p class="alert-description">Your password must be at least 8 characters, because even passwords need a little length to protect their secrets.</p>
+                </li>
+                <li>
+                  <p class="alert-description">Your password must include at least one pro wrestling finishing move, so you can 'pin' down your security like a champ</p>
+                </li>
+              </ul>
             </div>
-            <code class="code-block mt-4">Used as category filters on blog overview pages</code>
+          </div>
+        </div>
+
+        <!-- Neutral Alert -->
+        <div id="alert-neutral">
+          <h3 class="h3">Neutral Alert</h3>
+          <div class="alert alert-neutral">
+            <div class="alert-content">
+              <div class="alert-header">
+                <div class="alert-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                    <path d="M12 9h.01"></path>
+                    <path d="M11 12h1v4h1"></path>
+                  </svg>
+                </div>
+                <p class="alert-title">Neutral alert!</p>
+              </div>
+              <p class="alert-description">A new feature is available. You will be notified when it is ready.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Neutral Dark Alert -->
+        <div id="alert-neutral-dark">
+          <h3 class="h3">Neutral Dark Alert</h3>
+          <div class="alert alert-neutral-dark">
+            <div class="alert-content">
+              <div class="alert-header">
+                <div class="alert-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                    <path d="M12 9h.01"></path>
+                    <path d="M11 12h1v4h1"></path>
+                  </svg>
+                </div>
+                <p class="alert-title">Neutral alert!</p>
+              </div>
+              <p class="alert-description">A new feature is available. You will be notified when it is ready.</p>
+              <div class="alert-actions">
+                <button class="alert-button alert-button-primary">View Updates</button>
+                <button class="alert-button alert-button-secondary">Remind me later</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accent Alert -->
+        <div id="alert-accent">
+          <h3 class="h3">Accent Alert</h3>
+          <div class="alert alert-accent">
+            <div class="alert-content">
+              <div class="alert-header">
+                <div class="alert-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                    <path d="M12 9h.01"></path>
+                    <path d="M11 12h1v4h1"></path>
+                  </svg>
+                </div>
+                <p class="alert-title">Neutral alert!</p>
+              </div>
+              <p class="alert-description">A new feature is available. You will be notified when it is ready.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Neutral Alert with Actions -->
+        <div id="alert-with-actions">
+          <h3 class="h3">Neutral Alert with Actions</h3>
+          <div class="alert alert-neutral">
+            <div class="alert-content">
+              <div class="alert-header">
+                <div class="alert-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                    <path d="M12 9h.01"></path>
+                    <path d="M11 12h1v4h1"></path>
+                  </svg>
+                </div>
+                <p class="alert-title">Neutral alert!</p>
+              </div>
+              <p class="alert-description">A new feature is available. You will be notified when it is ready.</p>
+              <div class="alert-actions">
+                <button class="alert-button alert-button-accent">View Updates</button>
+                <button class="alert-button alert-button-outline">Remind me later</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -312,87 +418,42 @@ const arrowExamples = [
     <!-- Navigation Section -->
     <section id="navigation" class="mb-16">
       <h2 class="h2">Navigation</h2>
-      <div class="space-y-8">
-        <!-- Regular Nav Links -->
-        <div id="nav-links">
-          <h3 class="h3">Nav Links</h3>
-          <nav class="mb-8">
-            <ul class="flex flex-wrap gap-4" role="menubar">
-              <NavLink 
-                navItem={{
-                  text: "Regular Link",
-                  link: "#"
-                }}
-              />
-              <NavLink 
-                navItem={{
-                  text: "With Icon",
-                  link: "#",
-                  icon: "tabler/home"
-                }}
-              />
-              <NavLink 
-                navItem={{
-                  text: "External Link",
-                  link: "https://example.com",
-                  newTab: true
-                }}
-              />
-            </ul>
-          </nav>
-          <code class="code-block">Basic navigation links with optional icons and external link handling</code>
-        </div>
 
-        <!-- Dropdown Menu -->
-        <div id="dropdown-menu">
-          <h3 class="h3">Dropdown Menu</h3>
-          <nav class="mb-8">
-            <ul class="flex flex-wrap gap-4" role="menubar">
-              <NavDropdown
-                navItem={{
-                  text: "Dropdown Menu",
-                  dropdown: [
-                    {
-                      text: "Menu Item 1",
-                      link: "#"
-                    },
-                    {
-                      text: "Menu Item 2",
-                      link: "#",
-                      icon: "tabler/star"
-                    },
-                    {
-                      text: "External Item",
-                      link: "https://example.com",
-                      newTab: true
-                    }
-                  ]
-                }}
-              />
-            </ul>
-          </nav>
-          <code class="code-block">Dropdown menu with hover and keyboard navigation support</code>
-        </div>
+      <!-- Nav Links -->
+      <div id="nav-links" class="mb-8">
+        <h3 class="h3">Nav Links</h3>
+        <nav class="flex gap-4">
+          <NavLink navItem={{ text: "Home", link: "#" }} />
+          <NavLink navItem={{ text: "About", link: "#" }} />
+          <NavLink navItem={{ text: "Contact", link: "#" }} />
+        </nav>
       </div>
-    </section>
 
-    <!-- Usage Documentation -->
-    <section id="usage" class="mb-16">
-      <h2 class="h2">Button Usage</h2>
-      <div class="prose max-w-none">
-        <pre class="code-block">
-{`// Button as a regular button
-<Button variant="primary" type="button">Click me</Button>
-
-// Button as a link
-<Button variant="primary" href="/some-page">Go to page</Button>
-
-// Button with arrow
-<Button variant="primary" arrow="right">Next</Button>
-
-// Disabled button
-<Button variant="primary" disabled>Cannot click</Button>`}
-        </pre>
+      <!-- Dropdown Menu -->
+      <div id="dropdown-menu" class="mb-8">
+        <h3 class="h3">Dropdown Menu</h3>
+        <div class="flex gap-4">
+          <NavDropdown
+            navItem={{
+              text: "Products",
+              dropdown: [
+                { text: "Overview", link: "#" },
+                { text: "Features", link: "#" },
+                { text: "Pricing", link: "#" }
+              ]
+            }}
+          />
+          <NavDropdown
+            navItem={{
+              text: "Resources",
+              dropdown: [
+                { text: "Documentation", link: "#" },
+                { text: "Guides", link: "#" },
+                { text: "Support", link: "#" }
+              ]
+            }}
+          />
+        </div>
       </div>
     </section>
   </main>
