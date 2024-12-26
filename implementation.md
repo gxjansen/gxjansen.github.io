@@ -51,6 +51,9 @@
 ## Accessibility
 - [ ] Go through /accessibility-checklist.md
 
+## Motion
+- [ ] Implement tailwindcss-motion (npm i -D tailwindcss-motion) or auto-animate (npm install @formkit/auto-animate)
+
 ## Performance
 - [x] Implement lazy loading for images
 - [x] Add image preloading for critical content
