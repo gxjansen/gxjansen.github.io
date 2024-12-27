@@ -52,22 +52,22 @@
 - [x] Go through /projects/accessibility-checklist.md
 
 ## Design
-- [ ] Align podcast cards with the other content cards on press and blog overview pages
-- [ ] fix the "Meet Guido" pill in the homepage hero section: it's too wide. After fixing this, make sure this isn't happening in other places as well.
 - [ ] Should we implement the gray background behind all content cards/blocks? Some have it, some don't. What should be the guiding principle here?
-- [ ] View past events button in Future Events section on homage has text that is too grey.
-- [ ] the sides of the flag section (FeatureFlagsMarquee) and gallery section (FeatureGalleryMarquee) needs to be truly transparent, not a fade to grey.
-- [ ] There is a weird "dot" between name and date on /post/ overview page that is showing up too high. The same dot is also shown on the post detail page, but there it's properly aligned with the text.
+      - [ ] Visually align podcast cards with the other content cards on press and blog overview pages
+- [x] fix the "Meet Guido" pill in the homepage hero section: it's too wide. After fixing this, make sure this isn't happening in other places as well.
+- [x] View past events button in Future Events section on homapage has text that is too grey.
+- [x] the sides of the flag section (FeatureFlagsMarquee) and gallery section (FeatureGalleryMarquee) needs to be truly transparent, not a fade to grey.
+- [x] There is a weird "dot" between name and date on /post/ overview page that is showing up too high. The same dot is also shown on the post detail page, but there it's properly aligned with the text.
+- [ ] Fix black dots / light mode for the "In need of a keynote speaker or in-house workshop?" CTA block
 
 ## Other / functional details that need fixing
 - [ ] Podcast subscription links
 - [x] Podcast bottom CTA
 - [x] Events bottom CTA
 - [ ] Check if the form on /contact actually works
-- [ ] Below a blog post, there is a "Back to article overview" back to previous article button and a next article button. The UI could improver here.
-- [ ] Remove the "updated" line from article detail pages
+- [ ] Below a blog post, there is a "Back to article overview" back to previous article button and a next article button. The UI could improve here.
+- [x] Remove the "updated" line from article detail pages
 - [ ] on /press/, the podcasts often only seem to load after a refresh
-- [ ] For cards on /presentations and /post/ overview pages, make the whole card clickable, not just the image
 - [ ] Why is there bot a src/pages/post/[...slug].astro and a src/pages/post/[slug].astro? Is one of them redundant?
 
 ## Checks
@@ -107,6 +107,7 @@
 ## New features
 - [ ] Add Bluesky comments
 - [ ] Add Latest BlueSky posts feed
+- [ ] For cards on /presentations and /post/ overview pages, make the whole card clickable, not just the image
 
 ## Motion
 - [ ] Implement tailwindcss-motion (npm i -D tailwindcss-motion) or auto-animate (npm install @formkit/auto-animate)
