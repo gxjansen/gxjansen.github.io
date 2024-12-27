@@ -196,16 +196,38 @@
   }
 
   /* Gradient Overlays */
-  .gradient-fade-left {
-    @apply pointer-events-none absolute inset-y-0 left-0 w-40;
-    @apply bg-gradient-to-r from-background via-background/80 via-30% to-transparent;
-    @apply dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80;
+  .marquee-container {
+    position: relative;
+    overflow: hidden;
   }
 
-  .gradient-fade-right {
-    @apply pointer-events-none absolute inset-y-0 right-0 w-40;
-    @apply bg-gradient-to-l from-background via-background/80 via-30% to-transparent;
-    @apply dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80;
+  .marquee-container::before,
+  .marquee-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10%;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .marquee-container::before {
+    left: 0;
+    background: linear-gradient(
+      to right, 
+      rgba(255, 255, 255, 1) 0%, 
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .marquee-container::after {
+    right: 0;
+    background: linear-gradient(
+      to left, 
+      rgba(255, 255, 255, 1) 0%, 
+      rgba(255, 255, 255, 0) 100%
+    );
   }
 
   /* Z-index Layers */
@@ -463,5 +485,17 @@
 
   .pause {
     animation-play-state: paused !important;
+  }
+
+  .mask-gradient {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    );
+    mask-size: 100%;
+    mask-repeat: no-repeat;
   }
 }
