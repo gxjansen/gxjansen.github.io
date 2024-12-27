@@ -60,13 +60,20 @@
 - [ ] There is a weird "dot" between name and date on /post/ overview page that is showing up too high. The same dot is also shown on the post detail page, but there it's properly aligned with the text.
 
 ## Other / functional details that need fixing
-- [ ] Dead links checker
+- [ ] Podcast subscription links
+- [ ] Podcast bottom CTA
+- [ ] Events bottom CTA
 - [ ] Check if the form on /contact actually works
 - [ ] Below a blog post, there is a "Back to article overview" back to previous article button and a next article button. The UI could improver here.
 - [ ] Remove the "updated" line from article detail pages
 - [ ] on /press/, the podcasts often only seem to load after a refresh
 - [ ] For cards on /presentations and /post/ overview pages, make the whole card clickable, not just the image
 - [ ] Why is there bot a src/pages/post/[...slug].astro and a src/pages/post/[slug].astro? Is one of them redundant?
+
+## Checks
+- [ ] Dead links checker
+- [ ] Redirects
+- [ ] CHeck site on mobile
 
 ## Performance
 - [x] Implement lazy loading for images
