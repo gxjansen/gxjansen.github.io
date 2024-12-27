@@ -68,12 +68,12 @@
 - [ ] Below a blog post, there is a "Back to article overview" back to previous article button and a next article button. The UI could improve here.
 - [x] Remove the "updated" line from article detail pages
 - [ ] on /press/, the podcasts often only seem to load after a refresh
-- [ ] Why is there bot a src/pages/post/[...slug].astro and a src/pages/post/[slug].astro? Is one of them redundant?
+- [x] Why is there bot a src/pages/post/[...slug].astro and a src/pages/post/[slug].astro? Is one of them redundant?
 
 ## Checks
 - [ ] Dead links checker
 - [ ] Redirects
-- [ ] CHeck site on mobile
+- [ ] Check site on mobile
 
 ## Performance
 - [x] Implement lazy loading for images
