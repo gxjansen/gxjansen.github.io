@@ -1,23 +1,7 @@
 ---
-// layout
-import BaseLayout from "@layouts/BaseLayout.astro";
+import { redirect } from 'astro:actions';
 
-// components
-import CategoryCloud from "@components/CategoryCloud/CategoryCloud.astro";
+export async function GET() {
+  return redirect('/post', 301);
+}
 ---
-
-<BaseLayout
-  title="Recent Blog Posts"
-  description="Recent Blog Posts Description"
->
-  <section
-    class="site-container overflow-x-clip bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-36 dark:bg-[url('/assets/pattern-dark.svg')] md:pt-44"
-  >
-    <div class="mx-auto max-w-3xl">
-      <h1 class="h1 text-center">Categories</h1>
-      <div class="mt-10 flex justify-center">
-        <CategoryCloud showCount={false} />
-      </div>
-    </div>
-  </section>
-</BaseLayout>
