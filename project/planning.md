@@ -49,10 +49,24 @@
 - [x] Update TypeScript interfaces for event-presentation relationship
 
 ## Accessibility
-- [ ] Go through /accessibility-checklist.md
+- [x] Go through /projects/accessibility-checklist.md
 
-## Motion
-- [ ] Implement tailwindcss-motion (npm i -D tailwindcss-motion) or auto-animate (npm install @formkit/auto-animate)
+## Design
+- [ ] Align podcast cards with the other content cards on press and blog overview pages
+- [ ] fix the "Meet Guido" pill in the homepage hero section: it's too wide. After fixing this, make sure this isn't happening in other places as well.
+- [ ] Should we implement the gray background behind all content cards/blocks? Some have it, some don't. What should be the guiding principle here?
+- [ ] View past events button in Future Events section on homage has text that is too grey.
+- [ ] the sides of the flag section (FeatureFlagsMarquee) and gallery section (FeatureGalleryMarquee) needs to be truly transparent, not a fade to grey.
+- [ ] There is a weird "dot" between name and date on /post/ overview page that is showing up too high. The same dot is also shown on the post detail page, but there it's properly aligned with the text.
+
+## Other / functional details that need fixing
+- [ ] Dead links checker
+- [ ] Check if the form on /contact actually works
+- [ ] Below a blog post, there is a "Back to article overview" back to previous article button and a next article button. The UI could improver here.
+- [ ] Remove the "updated" line from article detail pages
+- [ ] on /press/, the podcasts often only seem to load after a refresh
+- [ ] For cards on /presentations and /post/ overview pages, make the whole card clickable, not just the image
+- [ ] Why is there bot a src/pages/post/[...slug].astro and a src/pages/post/[slug].astro? Is one of them redundant?
 
 ## Performance
 - [x] Implement lazy loading for images
@@ -75,37 +89,17 @@
 - [ ] Test error states and boundaries
 - [ ] Add a "dead link checker" for both internal and external 404 links
 
-## Technical Reference
 
-### File Structure
-- `src/content/presentations/` - Presentations content
-- `src/components/Presentations/` - Components
-- `src/pages/presentations/` - Pages
 
-### Data Schema
-```typescript
-interface Presentation {
-  title: string;
-  duration?: string;
-  intendedAudience?: string;
-  isWorkshop: boolean;
-  isFeatured: boolean;
-  image?: string;
-  slideshareKey?: string;
-  youtubeId?: string;
-  relatedEventSlugs: string[];
-}
-```
+## After go-live
 
-### Color Scheme
-Using website's base color scale for consistency:
+## New Content
+- [ ] Add a section for Github projects
+- [ ] Integrate with Github to get live updates
 
-Light mode:
-- Background: bg-background
-- Borders: border-base-200
-- Text: text-base-900
+## New features
+- [ ] Add Bluesky comments
+- [ ] Add Latest BlueSky posts feed
 
-Dark mode:
-- Background: bg-base-900
-- Borders: border-base-800
-- Text: text-white
+## Motion
+- [ ] Implement tailwindcss-motion (npm i -D tailwindcss-motion) or auto-animate (npm install @formkit/auto-animate)

@@ -175,21 +175,55 @@ Use these standardized classes to maintain consistent layering across components
 .gradient-fade-right // Right-side fade effect
 ```
 
+## Component Standards Reference
+
+All component styling standards are maintained in:
+1. `src/pages/styleguide.astro` - Live component examples and implementation patterns
+2. `tailwind.config.cjs` - Theme configuration, colors, spacing, breakpoints
+3. `src/styles/global.scss` - Global styles and Tailwind component classes
+
+### Typography
+Refer to styleguide.astro#typography for:
+- Heading hierarchy
+- Text sizes and weights
+- Link styles
+- Body text styles
+
+### Components
+The following components have standardized implementations:
+- Buttons (styleguide.astro#buttons)
+- Alerts (styleguide.astro#alerts)
+- Badges (styleguide.astro#badges)
+- Cards (styleguide.astro#cards)
+- Navigation (styleguide.astro#navigation)
+
+### Theme Configuration
+Core design tokens are defined in tailwind.config.cjs:
+- Color palette
+- Typography scale
+- Spacing scale
+- Breakpoints
+- Component base styles
+
+### Global Styles
+Reusable patterns and utilities are defined in global.scss:
+- Component class definitions
+- Dark mode variants
+- Utility patterns
+- Animation classes
+
 ## Performance Optimizations
+Performance-critical styles and optimizations are documented in:
+- GPU acceleration patterns
+- Animation performance
+- Responsive image handling
+- Layout optimization
 
-### GPU Acceleration
-```scss
-.gpu-accelerated // Enables hardware acceleration
-```
-Properties:
-- transform: translateZ(0)
-- backface-visibility: hidden
-- perspective: 1000
-
-Use for:
-- Elements with animations
-- Scrolling content
-- Elements with transforms
+## Maintaining Standards
+1. Always reference styleguide.astro for current component implementations
+2. Update component examples in styleguide.astro when patterns change
+3. Document any deviations or special cases
+4. Keep configuration files as the single source of truth for design tokens
 
 ## To Be Implemented
 - [ ] Remove individual padding from components that should inherit from container
