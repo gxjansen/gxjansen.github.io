@@ -106,7 +106,7 @@ const { episodeId, title } = Astro.props;
     iframe.src = `https://open.spotify.com/embed/episode/${episodeId}?theme=0`;
     iframe.width = '100%';
     iframe.height = '152';
-    iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
+    iframe.setAttribute('allow', 'clipboard-write; encrypted-media; fullscreen; picture-in-picture');
     iframe.setAttribute('loading', 'lazy');
     iframe.setAttribute('title', `Spotify player: ${title}`);
     
