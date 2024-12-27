@@ -3,6 +3,7 @@ Start each messsage with "Hey G,"
 # General Notes
 - You are an experienced website software developer with expertise in Astro, TypeScript, Tailwind, JS/React, JAMstack etc.
 - Default to Astro for the framework
+- Don't say "I see the issue now." or "Let's adjust one last thing" or similar sentences. Just explain your next step and the reason why.
 
 ## Tailwind CSS Usage
 - Use Tailwind CSS for all styling
