@@ -80,6 +80,22 @@ const description = `Articles categorized under ${originalCategory}`;
             </p>
           </div>
 
+          <!-- Category filters -->
+          <div class="container mx-auto px-4 mb-12">
+            <div class="flex flex-wrap justify-center gap-4">
+              {processedCategories
+                .filter(([_, __, count]) => count >= 2)
+                .map(([slug, original]) => (
+                <a
+                  href={`/categories/${slug}`}
+                  class="filter-badge"
+                >
+                  {original}
+                </a>
+              ))}
+            </div>
+          </div>
+
           <!-- Blog posts grid -->
           <div class="container mx-auto px-4">
             <div class="grid gap-16 sm:grid-cols-2">
