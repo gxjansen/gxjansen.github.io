@@ -50,10 +50,10 @@ const marqueeBottom = {
       </div>
 
       {/* Marquee container with fade-out edges */}
-      <div class="relative flex flex-col gap-3 overflow-hidden md:gap-5">
+      <div class="relative flex flex-col gap-6 overflow-hidden md:gap-10 mask-gradient">
         {/* Gradient overlays for fade effect - using multi-step gradients for smoother transition */}
-        <div class="pointer-events-none absolute inset-y-0 left-0 z-10 w-40 bg-gradient-to-r from-background via-background/80 via-30% to-transparent dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80"></div>
-        <div class="pointer-events-none absolute inset-y-0 right-0 z-10 w-40 bg-gradient-to-l from-background via-background/80 via-30% to-transparent dark:from-[rgb(28,35,45)] dark:via-[rgb(28,35,45)]/80"></div>
+        <div class="gradient-fade-left z-dropdown"></div>
+        <div class="gradient-fade-right z-dropdown"></div>
 
         {/* marquee top row */}
         <div class="marquee-top relative flex gap-3 overflow-hidden md:gap-5">
