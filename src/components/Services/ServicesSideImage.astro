@@ -90,35 +90,37 @@ const shouldReduceMotion = typeof window !== "undefined"
     
     <!-- Name explanation block -->
     <div 
-      class="text-center bg-base-100 rounded-xl p-8 shadow-lg"
+      class="alert alert-accent"
       role="complementary"
       aria-label="Name explanation"
     >
-      <div class="flex items-center justify-center gap-4">
-        <div 
-          class="flex items-center"
-          aria-hidden="true"
-        >
-          <Icon 
-            name="tabler:letter-x" 
-            class="w-12 h-12 text-primary-500" 
-            stroke-width="3"
-            stroke="currentColor"
-            fill="none"
-            role="presentation"
-          />
-          <Icon 
-            name="tabler:question-mark" 
-            class="w-12 h-12 text-primary-500 -ml-5" 
-            stroke-width="3"
-            stroke="currentColor"
-            fill="none"
-            role="presentation"
-          />
+      <div class="alert-content">
+        <div class="flex items-center justify-center gap-4">
+          <div 
+            class="flex items-center"
+            aria-hidden="true"
+          >
+            <Icon 
+              name="tabler:letter-x" 
+              class="w-12 h-12 text-white" 
+              stroke-width="3"
+              stroke="currentColor"
+              fill="none"
+              role="presentation"
+            />
+            <Icon 
+              name="tabler:question-mark" 
+              class="w-12 h-12 text-white -ml-5" 
+              stroke-width="3"
+              stroke="currentColor"
+              fill="none"
+              role="presentation"
+            />
+          </div>
+          <p class="text-lg !text-white">
+            To answer a common question right out of the gate: Yes, the <span class="text-black font-bold">X</span> in my name is not just there for decorative reasons: my second name is <span class="font-bold">Xavier</span>!
+          </p>
         </div>
-        <p class="text-lg">
-          To answer a common question right out of the gate: Yes, the <span class="text-primary-500 font-bold">X</span> in my name is not just there for decorative reasons: my second name is <span class="font-bold">Xavier</span>!
-        </p>
       </div>
     </div>
 
