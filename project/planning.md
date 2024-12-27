@@ -59,6 +59,7 @@
 - [x] the sides of the flag section (FeatureFlagsMarquee) and gallery section (FeatureGalleryMarquee) needs to be truly transparent, not a fade to grey.
 - [x] There is a weird "dot" between name and date on /post/ overview page that is showing up too high. The same dot is also shown on the post detail page, but there it's properly aligned with the text.
 - [ ] Fix black dots / light mode for the "In need of a keynote speaker or in-house workshop?" CTA block
+- [ ] event images: dark/light mode (e.g. can't see spryker logo in white mode) 
 
 ## Other / functional details that need fixing
 - [ ] Podcast subscription links
