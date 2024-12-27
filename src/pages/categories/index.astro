@@ -1,7 +1,5 @@
 ---
-import { redirect } from 'astro:actions';
-
 export async function GET() {
-  return redirect('/post', 301);
+  return Response.redirect(new URL('/post', import.meta.url), 301);
 }
 ---
