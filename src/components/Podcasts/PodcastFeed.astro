@@ -1,5 +1,6 @@
 ---
 import type { PodcastEpisode } from "../../types/podcast";
+import Button from "../Button/Button.astro";
 
 interface Props {
   episodes: PodcastEpisode[];
@@ -48,5 +49,11 @@ const { episodes } = Astro.props;
         Check back soon for new podcast episodes!
       </p>
     </div>
+  
   )}
 </div>
+<div class="flex justify-center mt-8">
+    <Button href="/press/#podcasts" variant="primary" aria-label="View my appearances in 3rd party podcasts">
+        View my appearances in 3rd party podcasts
+    </Button>
+  </div>

@@ -61,8 +61,8 @@
 
 ## Other / functional details that need fixing
 - [ ] Podcast subscription links
-- [ ] Podcast bottom CTA
-- [ ] Events bottom CTA
+- [x] Podcast bottom CTA
+- [x] Events bottom CTA
 - [ ] Check if the form on /contact actually works
 - [ ] Below a blog post, there is a "Back to article overview" back to previous article button and a next article button. The UI could improver here.
 - [ ] Remove the "updated" line from article detail pages
