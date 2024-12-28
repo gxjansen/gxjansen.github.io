@@ -1,6 +1,8 @@
-# Presentations Section Implementation
+# Website Implementation
 
-## Overview Page (`/presentations`)
+## Subprojects Done
+
+### Overview Page (`/presentations`)
 - [x] Create presentations overview page with Featured and More sections
 - [x] Implement responsive grid layout
 - [x] Add proper styling using website's color scheme:
@@ -10,7 +12,7 @@
 - [x] Add hover effects on cards and images
 - [x] Ensure proper contrast in both light and dark modes
 
-## Detail Page (`/presentations/[slug]`)
+### Detail Page (`/presentations/[slug]`)
 - [x] Create dynamic presentation detail pages
 - [x] Add proper styling:
   - [x] White titles for better contrast
@@ -21,7 +23,7 @@
 - [x] Add metadata for SEO
 - [x] Add proper image handling with preloading
 
-## Components
+### Components
 - [x] Create PresentationCard component
 - [x] Create PresentationNav component
 - [x] Create SlideEmbed component
@@ -29,29 +31,31 @@
 - [x] Ensure consistent styling across all components
 - [x] Implement proper color contrast throughout
 
-## Data Management
+### Data Management
 - [x] Remove duplicate presentations
 - [x] Add proper filtering for required fields
 - [x] Add sorting by title
 - [x] Add featured presentation support
 - [x] Implement TypeScript interfaces for data
 
-## Navigation
+### Navigation
 - [x] Add "Presentations" link to main navigation menu between Events and Press
 - [x] Update `/src/config/en/navData.json.ts`
 - [x] Ensure proper active state for navigation items
 
-## Event Integration
+### Event Integration
 - [x] Implement bi-directional relationship between presentations and events
 - [x] Update event data to include presentation references
 - [x] Add presentation links to event detail pages
 - [x] Add event links to presentation detail pages
 - [x] Update TypeScript interfaces for event-presentation relationship
 
-## Accessibility
+### Accessibility
 - [x] Go through /projects/accessibility-checklist.md
 
-## Design
+## Subprojects Todo
+
+### Design
 - [ ] Should we implement the gray background behind all content cards/blocks? Some have it, some don't. What should be the guiding principle here?
       - [ ] Visually align podcast cards with the other content cards on press and blog overview pages
 - [x] fix the "Meet Guido" pill in the homepage hero section: it's too wide. After fixing this, make sure this isn't happening in other places as well.
@@ -61,22 +65,22 @@
 - [ ] Fix black dots / light mode for the "In need of a keynote speaker or in-house workshop?" CTA block
 - [ ] event images: dark/light mode (e.g. can't see spryker logo in white mode) 
 
-## Other / functional details that need fixing
+### Other / functional details that need fixing
 - [ ] Podcast subscription links
 - [x] Podcast bottom CTA
 - [x] Events bottom CTA
-- [ ] Check if the form on /contact actually works
+- [ ] /about: remove form, add social media contact buttons
 - [ ] Below a blog post, there is a "Back to article overview" back to previous article button and a next article button. The UI could improve here.
 - [x] Remove the "updated" line from article detail pages
 - [ ] on /press/, the podcasts often only seem to load after a refresh
 - [x] Why is there bot a src/pages/post/[...slug].astro and a src/pages/post/[slug].astro? Is one of them redundant?
 
-## Checks
+### Checks
 - [ ] Dead links checker
 - [ ] Redirects
 - [ ] Check site on mobile
 
-## Performance
+### Performance
 - [x] Implement lazy loading for images
 - [x] Add image preloading for critical content
 - [x] Optimize image sizes and formats
@@ -86,7 +90,7 @@
 - [x] Implement view transitions
 - [ ] Add error boundaries for embedded content
 
-## Testing
+### Testing
 - [ ] Add unit tests for components
 - [ ] Add integration tests for data fetching
 - [ ] Add end-to-end tests for user flows
@@ -97,18 +101,17 @@
 - [ ] Test error states and boundaries
 - [ ] Add a "dead link checker" for both internal and external 404 links
 
-
-
 ## After go-live
 
-## New Content
+### New Content
 - [ ] Add a section for Github projects
 - [ ] Integrate with Github to get live updates
+- [ ] Blog on AI tools I use?
 
-## New features
+### New features
 - [ ] Add Bluesky comments
 - [ ] Add Latest BlueSky posts feed
 - [ ] For cards on /presentations and /post/ overview pages, make the whole card clickable, not just the image
 
-## Motion
+### Motion
 - [ ] Implement tailwindcss-motion (npm i -D tailwindcss-motion) or auto-animate (npm install @formkit/auto-animate)

@@ -6,9 +6,9 @@ Start each messsage with "Hey G,"
 - Don't say "I see the issue now." or "Let's adjust one last thing" or similar sentences. Just explain your next step and the reason why.
 
 ## Tailwind CSS Usage
-- Use Tailwind CSS for all styling
-- Never use inline styles directly in HTML/JSX
-- All styles should be defined in global.scss using Tailwind's @apply directive
+- Use Tailwind CSS for all styling.
+- Components, .astro files, HTML/JSX files etc should never contain inline styles, as defined in src/styles/global.scss
+- All styles should be defined in src/styles/global.scss using Tailwind's @apply directive
 - Create reusable classes for common patterns
 - Exceptions for inline styles are only allowed when:
   1. The style is truly dynamic and depends on runtime values
