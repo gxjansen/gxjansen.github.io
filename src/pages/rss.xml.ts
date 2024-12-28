@@ -4,7 +4,7 @@ import { getTranslatedData } from "@js/translationUtils";
 import { defaultLocale } from "@config/siteSettings.json";
 
 export async function GET(context) {
-  const posts = await getCollection("blog", ({ data }) => {
+const posts = await getCollection("post", ({ data }) => {
     return !data.draft;
   });
   
@@ -14,9 +14,9 @@ export async function GET(context) {
     title: siteData.title,
     description: siteData.description,
     site: context.site,
-    items: posts.map((post) => ({
+items: posts.map((post) => ({
       title: post.data.title,
-      pubDate: post.data.pubDate,
+      pubDate: new Date(post.data.pubDate),
       description: post.data.description,
       link: `/post/${post.slug}/`,
     })),
