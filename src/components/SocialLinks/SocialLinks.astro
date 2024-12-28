@@ -1,13 +1,25 @@
 ---
 // Import the social links configuration
-import { socialLinks } from '@config/socialLinks';
+import { socialLinks } from '@data/socialLinks';
 import SocialIcon from '@components/SocialIcon/SocialIcon.astro';
 
 interface Props {
   class?: string;
+  location?: 'footer' | 'hero';
 }
 
-const { class: className } = Astro.props;
+const { class: className, location = 'footer' } = Astro.props;
+
+// Explicitly filter links based on location
+const visibleLinks = socialLinks.filter(link => {
+  if (location === 'footer') {
+    return link.visibility.footer === true;
+  }
+  if (location === 'hero') {
+    return link.visibility.hero === true;
+  }
+  return false;
+});
 ---
 
 <nav
@@ -20,7 +32,7 @@ const { class: className } = Astro.props;
     role="list"
   >
     {
-      socialLinks.map(({ name, href, icon }) => (
+      visibleLinks.map(({ name, href, icon }) => (
         <li role="listitem">
           <SocialIcon
             href={href}

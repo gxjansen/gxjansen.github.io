@@ -10,7 +10,8 @@
     "astro": "astro",
     "check-dark-mode": "node scripts/check-dark-mode.js",
     "fix-dark-mode": "node scripts/fix-dark-mode.js",
-    "fix-dark-mode:dry": "node scripts/fix-dark-mode.js --dry-run"
+    "fix-dark-mode:dry": "node scripts/fix-dark-mode.js --dry-run",
+    "test": "vitest"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.2",
@@ -49,12 +50,16 @@
     "yaml": "^2.6.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
     "fs-extra": "^11.2.0",
+    "jsdom": "^25.0.1",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-tailwindcss": "^0.6.1",
-    "svgo": "2.8.0"
+    "svgo": "2.8.0",
+    "vitest": "^2.1.8"
   },
   "overrides": {
     "sharp": "^0.33.0"

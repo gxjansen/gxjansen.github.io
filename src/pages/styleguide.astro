@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button/Button.astro";
+import SocialCard from "../components/SocialCard/SocialCard.astro";
 import Badge from "../components/Badge/Badge.astro";
 import ThemeToggle from "../components/ThemeToggle/ThemeToggle.astro";
 import NavLink from "../components/Nav/NavLink.astro";
@@ -466,6 +467,28 @@ const arrowExamples = [
     <!-- Cards Section -->
     <section id="cards" class="mb-16">
       <h2 class="h2">Cards</h2>
+
+      <!-- Social Card Example -->
+      <div id="social-card-example" class="mb-8">
+        <h3 class="h3">Social Card</h3>
+        <div class="grid gap-6 md:grid-cols-3 lg:grid-cols-4">
+          <SocialCard
+            name="LinkedIn"
+            href="https://linkedin.com"
+            icon="tabler/brand-linkedin"
+          />
+          <SocialCard
+            name="Twitter"
+            href="https://twitter.com"
+            icon="tabler/brand-twitter"
+          />
+          <SocialCard
+            name="GitHub"
+            href="https://github.com"
+            icon="tabler/brand-github"
+          />
+        </div>
+      </div>
 
       <!-- Card Example -->
       <div id="card-example" class="mb-8">

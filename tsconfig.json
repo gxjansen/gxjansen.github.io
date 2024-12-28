@@ -14,8 +14,11 @@
       "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"],
       "@images/*": ["src/assets/images/*"],
-      "@videos/*": ["src/assets/videos/*"]
+      "@videos/*": ["src/assets/videos/*"],
+      "@types/*": ["src/types/*"],
+      "@data/*": ["src/data/*"]
     },
+    "types": ["vitest", "@testing-library/jest-dom"],
     "jsxImportSource": "react"
   }
 }

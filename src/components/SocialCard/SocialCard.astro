@@ -1,0 +1,33 @@
+---
+import { Icon } from 'astro-icon';
+
+/**
+ * Props for the SocialCard component
+ * @interface Props
+ */
+interface Props {
+  /** The display name of the social media platform */
+  name: string;
+  /** The URL to the social media profile */
+  href: string;
+  /** The Tabler icon name for the platform */
+  icon: string;
+}
+
+const { name, href, icon } = Astro.props;
+---
+
+<a 
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="social-card hover:border-primary-500/50 hover:bg-primary-500/[0.03] dark:hover:border-primary-400/50 dark:hover:bg-primary-400/[0.03]"
+  aria-label={`Connect with me on ${name}`}
+>
+  <div class="social-card-icon-wrapper">
+    <Icon name={icon} class="size-6" aria-hidden="true" />
+  </div>
+  <h3 class="social-card-title hover:text-primary-500 dark:hover:text-primary-400">
+    {name}
+  </h3>
+</a>

@@ -1,0 +1,12 @@
+---
+import { socialLinks } from '@data/socialLinks';
+import SocialCard from '@components/SocialCard/SocialCard.astro';
+
+const aboutPageLinks = socialLinks.filter(link => link.visibility.about);
+---
+
+<div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+  {aboutPageLinks.map(link => (
+    <SocialCard {...link} />
+  ))}
+</div>
