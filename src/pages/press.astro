@@ -136,10 +136,33 @@ const firstVideoIds = videos
 
   // Trigger podcast preloading after initial page load
   window.addEventListener('load', () => {
-    // Wait a bit after load to not compete with critical resources
-    setTimeout(() => {
+    console.log('Press Page: Initial load complete, preparing podcast preload');
+    
+    // Ensure podcasts are preloaded with multiple strategies
+    const preloadPodcasts = () => {
+      console.log('Press Page: Triggering podcast preload');
       const event = new CustomEvent('preloadPodcasts');
       document.dispatchEvent(event);
-    }, 2000);
+    };
+
+    // Multiple preloading strategies
+    setTimeout(preloadPodcasts, 500);  // Quick initial attempt
+    setTimeout(preloadPodcasts, 2000); // Delayed attempt to catch any async content
+    
+    // Intersection Observer fallback
+    const podcastSection = document.getElementById('podcasts');
+    if (podcastSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            console.log('Press Page: Podcasts section entered viewport');
+            preloadPodcasts();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(podcastSection);
+    }
   });
 </script>
