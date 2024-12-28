@@ -48,46 +48,60 @@ const { episodeId, title } = Astro.props;
 </div>
 
 <script>
-  function initLazySpotify() {
-    const players = document.querySelectorAll('.lazy-spotify');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const container = entry.target;
-          if (!container.dataset.loaded) {
-            loadSpotifyEmbed(container);
-            container.dataset.loaded = 'true';
-            observer.unobserve(container);
-          }
+function initLazySpotify() {
+  console.log('LazySpotify: Initializing Spotify embed loading');
+  const players = document.querySelectorAll('.lazy-spotify');
+  
+  console.log(`LazySpotify: Found ${players.length} podcast players`);
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const container = entry.target;
+        if (!container.dataset.loaded) {
+          console.log(`LazySpotify: Loading embed for episode ${container.dataset.episodeId}`);
+          loadSpotifyEmbed(container);
+          container.dataset.loaded = 'true';
+          observer.unobserve(container);
         }
-      });
-    }, {
-      rootMargin: '100px 0px',
-      threshold: 0.1
-    });
-
-    players.forEach(player => observer.observe(player));
-
-    // Preload remaining embeds during idle time
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => {
-        preloadRemainingEmbeds();
-      }, { timeout: 2000 });
-    } else {
-      setTimeout(preloadRemainingEmbeds, 2000);
-    }
-  }
-
-  function preloadRemainingEmbeds() {
-    const unloadedPlayers = document.querySelectorAll('.lazy-spotify:not([data-loaded="true"])');
-    unloadedPlayers.forEach(container => {
-      if (!container.dataset.loaded) {
-        loadSpotifyEmbed(container);
-        container.dataset.loaded = 'true';
       }
     });
+  }, {
+    rootMargin: '100px 0px',
+    threshold: 0.1
+  });
+
+  players.forEach(player => {
+    console.log(`LazySpotify: Observing player for episode ${player.dataset.episodeId}`);
+    observer.observe(player);
+  });
+
+  // Preload remaining embeds during idle time
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      console.log('LazySpotify: Preloading remaining embeds via requestIdleCallback');
+      preloadRemainingEmbeds();
+    }, { timeout: 2000 });
+  } else {
+    setTimeout(() => {
+      console.log('LazySpotify: Preloading remaining embeds via setTimeout');
+      preloadRemainingEmbeds();
+    }, 2000);
   }
+}
+
+function preloadRemainingEmbeds() {
+  const unloadedPlayers = document.querySelectorAll('.lazy-spotify:not([data-loaded="true"])');
+  console.log(`LazySpotify: Preloading ${unloadedPlayers.length} remaining players`);
+  
+  unloadedPlayers.forEach(container => {
+    if (!container.dataset.loaded) {
+      console.log(`LazySpotify: Force loading embed for episode ${container.dataset.episodeId}`);
+      loadSpotifyEmbed(container);
+      container.dataset.loaded = 'true';
+    }
+  });
+}
 
   function loadSpotifyEmbed(container: Element) {
     const episodeId = container.getAttribute('data-episode-id');
