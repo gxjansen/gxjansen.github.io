@@ -5,20 +5,20 @@ import SocialIcon from '@components/SocialIcon/SocialIcon.astro';
 
 interface Props {
   class?: string;
-  location?: 'footer' | 'hero';
+  location?: 'footer' | 'hero' | 'contact' | 'about';
+  context?: 'footer' | 'hero';
 }
 
-const { class: className, location = 'footer' } = Astro.props;
+const { 
+  class: className, 
+  location = 'footer', 
+  context = location 
+} = Astro.props;
 
-// Explicitly filter links based on location
+// Explicitly filter links based on context
 const visibleLinks = socialLinks.filter(link => {
-  if (location === 'footer') {
-    return link.visibility.footer === true;
-  }
-  if (location === 'hero') {
-    return link.visibility.hero === true;
-  }
-  return false;
+  // Use context for filtering, with a fallback to location
+  return link.visibility[context] === true;
 });
 ---
 

@@ -2,11 +2,24 @@
 import { socialLinks } from '@data/socialLinks';
 import SocialCard from '@components/SocialCard/SocialCard.astro';
 
-const aboutPageLinks = socialLinks.filter(link => link.visibility.about);
+// Determine the current page context
+const currentPath = Astro.url.pathname;
+
+// Determine the current location
+const location = currentPath.includes('/about') 
+  ? 'about' 
+  : currentPath.includes('/contact') 
+    ? 'contact' 
+    : null;
+
+// Filter links based on the current page
+const visibleLinks = location 
+  ? socialLinks.filter(link => link.visibility[location] === true)
+  : [];
 ---
 
 <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-  {aboutPageLinks.map(link => (
+  {visibleLinks.map(link => (
     <SocialCard {...link} />
   ))}
 </div>
