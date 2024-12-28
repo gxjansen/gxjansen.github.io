@@ -11,6 +11,8 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
 import AboutHeader from "@components/About/AboutHeader.astro";
+import Badge from "@components/Badge/Badge.astro";
+import SocialCards from "@components/SocialCards/SocialCards.astro";
 import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
 import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
 import ServicesSideImage from "@components/Services/ServicesSideImage.astro";
@@ -29,7 +31,27 @@ const teamData = getTranslatedData("teamData", currLocale);
   description="I'm a cognitive psychologist focussed on E-commerce in general and the Spryker platform specifically."
 >
   <AboutHeader />
+
   <ServicesSideImage />
   <FeatureGalleryMarquee />
+
+  <section class="py-24 md:py-28">
+    <div class="site-container px-4">
+      <div class="grid-pattern-container relative">
+        <div class="mx-auto text-center md:max-w-2xl">
+          <Badge>Connect with me</Badge>
+          <h2 class="h2 mb-4">Let's Connect</h2>
+          <p class="description text-lg md:text-xl">
+            Find me on various social platforms where I share insights about CRO, UX, and e-commerce.
+          </p>
+        </div>
+        
+        <div class="mt-12">
+          <SocialCards />
+        </div>
+      </div>
+    </div>
+  </section>
+
   <CtaCardSplit />
 </BaseLayout>

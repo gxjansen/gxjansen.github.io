@@ -48,6 +48,17 @@
 }
 
 @layer components {
+.social-card {
+  @apply flex flex-col items-center rounded-xl border border-base-200/50 bg-base-100/50 p-6 backdrop-blur transition-all hover:border-primary-500/50 hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:hover:border-primary-400/50 dark:hover:bg-primary-400/[0.03];
+}
+
+.social-card-icon-wrapper {
+  @apply mb-4 flex size-12 items-center justify-center rounded-lg bg-primary-500/10 text-primary-500 dark:bg-primary-400/10 dark:text-primary-400;
+}
+
+.social-card-title {
+  @apply text-lg font-semibold text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400;
+}
   .card-container {  
     @apply block aspect-[16/9] overflow-hidden rounded-xl;  
   }  
