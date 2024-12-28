@@ -103,6 +103,9 @@
 
 ## After go-live
 
+### Design
+- use better (full) social media icons
+
 ### New Content
 - [ ] Add a section for Github projects
 - [ ] Integrate with Github to get live updates
