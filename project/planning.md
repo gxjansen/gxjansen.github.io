@@ -69,7 +69,7 @@
 - [ ] Podcast subscription links
 - [x] Podcast bottom CTA
 - [x] Events bottom CTA
-- [ ] /about: remove form, add social media contact buttons
+- [x] /about: remove form, add social media contact buttons
 - [ ] Below a blog post, there is a "Back to article overview" back to previous article button and a next article button. The UI could improve here.
 - [x] Remove the "updated" line from article detail pages
 - [ ] on /press/, the podcasts often only seem to load after a refresh
