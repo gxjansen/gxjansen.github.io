@@ -440,10 +440,7 @@
     "url": "",
     "workshop": false,
     "role": "Speaker",
-    "topic": "Spryker update",
-    "relatedPresentationSlugs": [
-      "spryker-update"
-    ]
+    "topic": "Spryker update"
   },
   {
     "id": "towa-office-warming-2023-02",
@@ -513,10 +510,7 @@
     "url": "",
     "workshop": false,
     "role": "Speaker",
-    "topic": "Spryker update",
-    "relatedPresentationSlugs": [
-      "spryker-update"
-    ]
+    "topic": "Spryker update"
   },
   {
     "id": "spryker-customer-day-2022-06",

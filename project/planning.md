@@ -56,12 +56,12 @@
 ## Subprojects Todo
 
 ### Design
-- [ ] Should we implement the gray background behind all content cards/blocks? Some have it, some don't. What should be the guiding principle here?
-      - [ ] Visually align podcast cards with the other content cards on press and blog overview pages
 - [x] fix the "Meet Guido" pill in the homepage hero section: it's too wide. After fixing this, make sure this isn't happening in other places as well.
 - [x] View past events button in Future Events section on homapage has text that is too grey.
 - [x] the sides of the flag section (FeatureFlagsMarquee) and gallery section (FeatureGalleryMarquee) needs to be truly transparent, not a fade to grey.
 - [x] There is a weird "dot" between name and date on /post/ overview page that is showing up too high. The same dot is also shown on the post detail page, but there it's properly aligned with the text.
+- [x] Should we implement the gray background behind all content cards/blocks? Some have it, some don't. What should be the guiding principle here?
+      - [x] Visually align podcast cards with the other content cards on press and blog overview pages
 - [ ] Fix black dots / light mode for the "In need of a keynote speaker or in-house workshop?" CTA block
 - [ ] event images: dark/light mode (e.g. can't see spryker logo in white mode) 
 
