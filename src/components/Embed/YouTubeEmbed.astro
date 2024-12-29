@@ -1,0 +1,26 @@
+---
+import Skeleton from '../Common/Skeleton.astro';
+import ErrorBoundary from '../Common/ErrorBoundary.astro';
+
+interface Props {
+  videoId: string;
+  title: string;
+}
+
+const { videoId, title } = Astro.props;
+---
+
+<ErrorBoundary fallback="Failed to load YouTube video">
+  <div class="relative aspect-video">
+    <Skeleton type="image" class="absolute inset-0" />
+    <iframe
+      class="absolute inset-0 w-full h-full rounded-lg"
+      src={`https://www.youtube.com/embed/${videoId}`}
+      title={title}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      loading="lazy"
+      onload="this.style.opacity = 1"
+      style="opacity: 0; transition: opacity 0.3s ease-in-out"
+    />
+  </div>
+</ErrorBoundary>
