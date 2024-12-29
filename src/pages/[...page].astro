@@ -33,9 +33,13 @@ export async function getStaticPaths() {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const page = Astro.props as Props;
 
-// convert markdown to html
-const { Content } = await page.render();
-const { title, description } = page.data;
+// get content and metadata
+if (!page?.data) {
+  throw new Error(`Page data is undefined for slug: ${page.slug}`);
+}
+
+const { title, description, body } = page.data;
+const { Content } = await Astro.render(body);
 ---
 
 <BaseLayout title={title} description={description}>

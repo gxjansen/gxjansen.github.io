@@ -68,7 +68,7 @@ The tips:
                            Header set Pragma "no-cache"\
 
 
-11. \[REPLACED by nginx\_pagespeed] [Enable Gzip Compression in htaccess](http://inchoo.net/ecommerce/magento/boost-the-speed-of-your-magento/). > REPLACED by nginx\_pagespeed
+11. \[REPLACED by nginx\_pagespeed]  Enable Gzip Compression in htaccess. > REPLACED by nginx\_pagespeed
 
 12. Compress output, use zlib.output\_compression or mod\_deflate.
 
@@ -84,7 +84,7 @@ The tips:
 
 18. Turn off or at least reduce web server logging (reduces disk writes).
 
-19. Disable Access Time Logging. For Linux servers, if you have access-time logging enabled on any of your mysql, web server or cache partitions, try turning it off for a performance boost. If you’re using ext3 or reiserfs there may be faster journal write methods you can use. For more info see [Linux.com](http://www.linux.com/feature/116693).
+19. Disable Access Time Logging. For Linux servers, if you have access-time logging enabled on any of your mysql, web server or cache partitions, try turning it off for a performance boost. If you’re using ext3 or reiserfs there may be faster journal write methods you can use.
 
 20. Compile MySQL from source instead of your OS’s package manager. You can also use Percona or MariaDB.
 
@@ -99,9 +99,9 @@ The tips:
 25. Change realpath\_cache\_size in php.ini.\
     realpath\_cache\_size=1M (careful, this is per apache process) realpath\_cache\_ttl=86400 (ok for production site)&#x20;
 
-26. Memcache (for the hardcore) is documented in [http://www.magentocommerce.com/boards/viewthread/9037/](http://www.magentocommerce.com/boards/viewthread/9037/) and more tips from http\://alexle.net/archives/275 to get you up and running. Or use Redis.
+26. Memcache (for the hardcore) is documented in [http://www.magentocommerce.com/boards/viewthread/9037/](http://www.magentocommerce.com/boards/viewthread/9037/). Or use Redis.
 
-27. Disable the PHP open\_basedir directive. [Read this](http://blog.nexcess.net/2010/03/31/php-open_basedir-and-magento-performance/).
+27. Disable the PHP open\_basedir directive.
 
 28. Eliminate directory structure scans for .htaccess files. Or use nginx.
 
@@ -134,8 +134,6 @@ The tips:
 42. http\://www\.artio.net/magento-extensions/m-turbo-accelerator
 
 43. http\://www\.aitoc.com/en/magento\_booster.html
-
-44. http\://www\.tinybrick.com/magento-modules/performance.html/
 
 45. Install the [Yireo DisableLog](http://www.yireo.com/software/magento-extensions/disablelog) addon. It prevents Magento writing tons of stuff to your database which is useless when you're already using something like Google Analytics.
 
@@ -211,7 +209,7 @@ The tips:
 
 ### D) Speed testing, analysing, monitoring
 
-1. Test your Magento site with [Magento Speed Test](http://www.magespeedtest.com/) (by [Ashley Schroder](http://www.aschroder.com/category/magento/)) or look for the TTFB in your inspector.
+1. Test your Magento site with [Magento Speed Test](http://www.magespeedtest.com/) or look for the TTFB in your inspector.
 
 2. Run your site through [websiteoptimization.com](http://www.websiteoptimization.com/services/analyze/).
 
@@ -243,7 +241,7 @@ The tips:
 
 * Use a big fat server configured by a Magento specialist. Hardware helps, but configuration is key.
 
-* Use nginx + nginx\_pagespeed and use mod\_pagespeed to tweak (see https\://www\.h-o.nl/blog/best-magento-mod\_pagespeed-configuration).
+* Use nginx + nginx\_pagespeed and use mod\_pagespeed to tweak.
 
 * Use the latest PHP version (currently 7) or HHVM
 

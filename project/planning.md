@@ -96,7 +96,7 @@
 - [ ] Test screen reader compatibility
 - [ ] Test embedded content fallbacks
 - [ ] Test error states and boundaries
-- [ ] Add a "dead link checker" for both internal and external 404 links
+- [ ] Add a "dead link checker" for both internal and external 404 links > see project/dead-links-checker-implementation.md
 
 ## After go-live
 
