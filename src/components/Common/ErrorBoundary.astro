@@ -19,8 +19,33 @@ const { fallback = 'Something went wrong' } = Astro.props;
       this.addEventListener('error', this.handleError.bind(this));
     }
 
+    logError(error) {
+      const errorData = {
+        timestamp: new Date().toISOString(),
+        component: this.tagName,
+        error: error.message,
+        stack: error.stack,
+        location: window.location.href
+      };
+      
+      // Send error to logging endpoint
+      fetch('/.netlify/functions/log-error', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(errorData)
+      }).catch(() => {
+        // Fallback to console if logging fails
+        console.error('Error logging failed:', errorData);
+      });
+    }
+
     handleError(event) {
       event.preventDefault();
+      const error = event.error || new Error('Unknown error');
+      this.logError(error);
+      
       this.innerHTML = `
         <div class="p-4 rounded-lg bg-red-50 border border-red-100 text-red-800">
           <p class="mb-2">${fallback}</p>

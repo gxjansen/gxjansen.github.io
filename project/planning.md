@@ -75,7 +75,6 @@
 ## Subprojects Todo
 
 ### Checks
-- [ ] Dead links checker
 - [ ] Redirects
 - [ ] Check site on mobile
 
@@ -85,24 +84,8 @@
 - [x] Optimize image sizes and formats
 - [x] Implement lazy loading for embedded content
 - [x] Add proper caching headers
-- [ ] Add loading states for embedded and interactive content
-  - [ ] Create loading skeleton components for:
-    - [ ] Blog posts
-    - [ ] Presentations
-    - [ ] Events
-    - [ ] Podcasts
-  - [ ] Implement loading states for:
-    - [ ] Embedded media (YouTube, Spotify)
-    - [ ] Lazy-loaded images
-    - [ ] Interactive components
-  - [ ] Add smooth transitions between loading and loaded states
 - [x] Implement view transitions
-- [ ] Add error boundaries for embedded content
-  - [ ] Create ErrorBoundary component
-  - [ ] Wrap embedded content components (YouTube, Spotify, etc.)
-  - [ ] Add fallback UI for failed embeds
-  - [ ] Implement error logging
-  - [ ] Add retry functionality
+- [x] Add error boundaries for embedded content
 
 ### Testing
 - [ ] Add unit tests for components
