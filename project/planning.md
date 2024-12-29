@@ -52,9 +52,7 @@
 
 ### Accessibility
 - [x] Go through /projects/accessibility-checklist.md
-
-## Subprojects Todo
-
+  
 ### Design
 - [x] fix the "Meet Guido" pill in the homepage hero section: it's too wide. After fixing this, make sure this isn't happening in other places as well.
 - [x] View past events button in Future Events section on homapage has text that is too grey.
@@ -62,8 +60,8 @@
 - [x] There is a weird "dot" between name and date on /post/ overview page that is showing up too high. The same dot is also shown on the post detail page, but there it's properly aligned with the text.
 - [x] Should we implement the gray background behind all content cards/blocks? Some have it, some don't. What should be the guiding principle here?
       - [x] Visually align podcast cards with the other content cards on press and blog overview pages
-- [ ] Fix black dots / light mode for the "In need of a keynote speaker or in-house workshop?" CTA block
-- [ ] event images: dark/light mode (e.g. can't see spryker logo in white mode) 
+- [x] Fix black dots / light mode for the "In need of a keynote speaker or in-house workshop?" CTA block
+- [x] event images: dark/light mode (e.g. can't see spryker logo in white mode) 
 
 ### Other / functional details that need fixing
 - [x] Podcast bottom CTA
@@ -73,6 +71,8 @@
 - [x] Remove the "updated" line from article detail pages
 - [x] on /press/, the podcasts often only seem to load after a refresh
 - [x] Why is there bot a src/pages/post/[...slug].astro and a src/pages/post/[slug].astro? Is one of them redundant?
+
+## Subprojects Todo
 
 ### Checks
 - [ ] Dead links checker
@@ -85,9 +85,24 @@
 - [x] Optimize image sizes and formats
 - [x] Implement lazy loading for embedded content
 - [x] Add proper caching headers
-- [ ] Add loading states for dynamic content
+- [ ] Add loading states for embedded and interactive content
+  - [ ] Create loading skeleton components for:
+    - [ ] Blog posts
+    - [ ] Presentations
+    - [ ] Events
+    - [ ] Podcasts
+  - [ ] Implement loading states for:
+    - [ ] Embedded media (YouTube, Spotify)
+    - [ ] Lazy-loaded images
+    - [ ] Interactive components
+  - [ ] Add smooth transitions between loading and loaded states
 - [x] Implement view transitions
 - [ ] Add error boundaries for embedded content
+  - [ ] Create ErrorBoundary component
+  - [ ] Wrap embedded content components (YouTube, Spotify, etc.)
+  - [ ] Add fallback UI for failed embeds
+  - [ ] Implement error logging
+  - [ ] Add retry functionality
 
 ### Testing
 - [ ] Add unit tests for components

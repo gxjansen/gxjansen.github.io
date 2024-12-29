@@ -1,0 +1,37 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  fallback?: string;
+}
+
+const { fallback = 'Something went wrong' } = Astro.props;
+---
+
+<div class="error-boundary">
+  <slot />
+</div>
+
+<script>
+  class ErrorBoundary extends HTMLElement {
+    constructor() {
+      super();
+      this.addEventListener('error', this.handleError.bind(this));
+    }
+
+    handleError(event) {
+      event.preventDefault();
+      this.innerHTML = `
+        <div class="p-4 rounded-lg bg-red-50 border border-red-100 text-red-800">
+          <p class="mb-2">${fallback}</p>
+          <button class="retry-btn">Retry</button>
+        </div>
+      `;
+      this.querySelector('.retry-btn')?.addEventListener('click', () => {
+        window.location.reload();
+      });
+    }
+  }
+
+  customElements.define('error-boundary', ErrorBoundary);
+</script>

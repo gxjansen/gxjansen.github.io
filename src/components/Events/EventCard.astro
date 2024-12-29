@@ -53,40 +53,47 @@ const flagImage = country ? await loadCountryFlag(country) : null;
     class={wrapperClasses}
   >
   <div class="flex items-center mb-3">
-    {loadedIcon ? (
-      <Image
-        src={loadedIcon}
-        alt={`${name} Icon`}
-        width={40}
-        height={40}
-        class="mr-3"
-      />
-    ) : (
-      <div class="w-10 h-10 mr-3 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+    <div class="w-10 h-10 mr-3 bg-base-200 dark:bg-base-800 rounded-lg flex items-center justify-center">
+      {loadedIcon ? (
+        <Image
+          src={loadedIcon}
+          alt={`${name} Icon`}
+          width={32}
+          height={32}
+          class="opacity-80 contrast-125 dark:opacity-90 dark:contrast-125"
+        />
+      ) : (
         <span class="text-2xl">🗓️</span>
-      </div>
-    )}
+      )}
+    </div>
     <div class="flex flex-col">
-      <div class="flex items-center gap-2">
-        <span class="text-lg font-semibold text-teal-600 dark:text-teal-400">
-          {name}
-        </span>
-        {linkUrl && (
-          <span class="text-teal-600 dark:text-teal-400 group-hover:translate-x-1 transition-transform duration-200">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              class="h-4 w-4" 
-              viewBox="0 0 20 20" 
-              fill="currentColor"
-            >
-              <path 
-                fill-rule="evenodd" 
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-                clip-rule="evenodd" 
-              />
-            </svg>
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="flex items-center gap-2">
+          <span class="text-lg font-semibold text-teal-600 dark:text-teal-400">
+            {name}
           </span>
-        )}
+          {workshop && (
+            <span class="text-xs text-teal-600 dark:text-teal-400 px-2 py-1 bg-teal-50 dark:bg-green-400/10 rounded">
+              Workshop
+            </span>
+          )}
+          {linkUrl && (
+            <span class="text-teal-600 dark:text-teal-400 group-hover:translate-x-1 transition-transform duration-200">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                class="h-4 w-4" 
+                viewBox="0 0 20 20" 
+                fill="currentColor"
+              >
+                <path 
+                  fill-rule="evenodd" 
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
+                  clip-rule="evenodd" 
+                />
+              </svg>
+            </span>
+          )}
+        </div>
       </div>
       <div class="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-1">
         {flagImage ? (
@@ -95,7 +102,7 @@ const flagImage = country ? await loadCountryFlag(country) : null;
             alt={`Flag of ${country}`}
             width={16}
             height={12}
-            class="inline-block rounded-sm mb-0"
+            class="inline-block rounded-sm mb-0 mix-blend-multiply dark:mix-blend-screen"
           />
         ) : (
           <span>🌎</span>
@@ -111,35 +118,19 @@ const flagImage = country ? await loadCountryFlag(country) : null;
       </div>
     </div>
   </div>
-  <div class="flex items-center justify-between mt-2">
-    <div class="flex-1 mr-4">
-      {!isOnPresentationPage && displayText && (
-        <em class="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">{displayText}</em>
-      )}
-    </div>
-    <div class="flex items-center gap-2 flex-shrink-0">
-      {workshop && (
-        <span class="text-xs text-teal-600 dark:text-teal-400 px-2 py-1 bg-teal-50 dark:bg-green-400/10 rounded">
-          Workshop
-        </span>
-      )}
-      {linkUrl && !isOnPresentationPage && (
-        <span class="inline-flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-200 whitespace-nowrap">
-          {presentationUrl ? "View Presentation" : "View Event"}
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            class="h-3 w-3" 
-            viewBox="0 0 20 20" 
-            fill="currentColor"
-          >
-            <path 
-              fill-rule="evenodd" 
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-              clip-rule="evenodd" 
-            />
-          </svg>
-        </span>
-      )}
+  <div class="h-6 mt-2 relative">
+    {!isOnPresentationPage && displayText && (
+      <em class="text-sm text-gray-600 dark:text-gray-400 line-clamp-1 block pr-[90px]">{displayText}</em>
+    )}
+    
+    <div class="absolute right-0 top-0">
+      <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-200">
+        {linkUrl && !isOnPresentationPage ? (
+          presentationUrl ? "Presentation" : "Event"
+        ) : (
+          <span class="invisible">placeholder</span>
+        )}
+      </span>
     </div>
   </div>
   </WrapperTag>

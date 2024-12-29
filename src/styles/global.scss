@@ -69,14 +69,19 @@ article[class*="card"] {
 
 /* Card Components */
 .card-container {  
-  @apply block aspect-[16/9] overflow-hidden -mx-6 -mt-6 mb-6;
+  @apply block aspect-[16/9] overflow-hidden -mx-6 -mt-6 mb-6 bg-base-200 dark:bg-base-800;
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
 }  
 
 .card-image {  
-  @apply h-full w-full object-cover transition-transform duration-500 hover:scale-105;  
+  @apply h-full w-full object-contain transition-transform duration-500 hover:scale-105 opacity-80 contrast-125 dark:opacity-90 dark:contrast-125 p-4;  
 }  
+
+/* Event Card Specific */
+.event-card img {
+  @apply opacity-80 contrast-125 dark:opacity-90 dark:contrast-125;
+}
 
 /* Video card specific styles */
 .video-card {
@@ -84,7 +89,7 @@ article[class*="card"] {
 }
 
 .video-card .card-container {
-  @apply block aspect-[16/9] overflow-hidden -mx-6 -mt-6 mb-6 relative;
+  @apply block aspect-[16/9] overflow-hidden -mx-6 -mt-6 mb-6 relative bg-base-200 dark:bg-base-800;
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
 }
@@ -104,7 +109,7 @@ article[class*="card"] {
 }
 
 .video-card .card-image {
-  @apply w-full h-full object-cover;
+  @apply w-full h-full object-cover opacity-80 contrast-125 dark:opacity-90 dark:contrast-125;
 }
 
 /* Card Content Area */
@@ -513,7 +518,7 @@ article[class*="card"] > *:not(.card-container) {
   }
 
   .alert-accent {
-    @apply bg-primary-700 text-white ring-1 ring-white/5;
+    @apply bg-primary-500 text-white ring-1 ring-white/5;
     .alert-description { @apply text-base-300; }
   }
 
