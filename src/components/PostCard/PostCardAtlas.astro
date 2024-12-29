@@ -49,16 +49,8 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
       {categories.map((category) => <Category category={category} />)}
     </div>
 
-    <!-- author and date -->
+    <!-- date -->
     <div class="card-author-date">
-      {authorsData.length > 0 && (
-        <>
-          <p class="whitespace-nowrap">
-            {authorsData[0].data.name}
-          </p>
-          <span>&bull;</span>
-        </>
-      )}
       <p class="whitespace-nowrap">
         {formatDate(pubDate, currLocale)}
       </p>

@@ -29,14 +29,15 @@ const arrowExamples = [
       Use the theme toggle below to test components in both light and dark modes.
       All components should maintain proper contrast and visibility in both modes.
     </p>
-    <div class="mb-12">
+    <div class="sticky top-32 right-4 z-50 w-fit bg-white/50 dark:bg-black/50 backdrop-blur-sm rounded-lg p-2 shadow-lg ml-auto">
       <ThemeToggle />
     </div>
 
     <!-- Index -->
     <section class="mb-16">
       <h2 class="h2 mb-6">On this page</h2>
-      <nav class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <nav class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-min">
+        <!-- Buttons Section -->
         <div>
           <a href="#buttons" class="primary-link text-lg">Buttons</a>
           <ul class="mt-2 ml-4">
@@ -46,6 +47,8 @@ const arrowExamples = [
             <li class="mt-1"><a href="#button-links" class="primary-link">Link Buttons</a></li>
           </ul>
         </div>
+
+        <!-- Typography Section -->
         <div>
           <a href="#typography" class="primary-link text-lg">Typography</a>
           <ul class="mt-2 ml-4">
@@ -57,42 +60,57 @@ const arrowExamples = [
             <li class="mt-1"><a href="#links" class="primary-link">Links</a></li>
           </ul>
         </div>
-        <div class="space-y-6">
-          <div>
-            <a href="#badges" class="primary-link text-lg">Badges</a>
-            <ul class="mt-2 ml-4">
-              <li class="mt-1"><a href="#basic-badge" class="primary-link">Basic Badge</a></li>
-              <li class="mt-1"><a href="#badge-label" class="primary-link">With Label</a></li>
-              <li class="mt-1"><a href="#badge-context" class="primary-link">In Context</a></li>
-              <li class="mt-1"><a href="#filter-badges" class="primary-link">Filter Badges</a></li>
-            </ul>
-          </div>
-          <div>
-            <a href="#alerts" class="primary-link text-lg">Alerts</a>
-            <ul class="mt-2 ml-4">
-              <li class="mt-1"><a href="#alert-info" class="primary-link">Info Alert</a></li>
-              <li class="mt-1"><a href="#alert-success" class="primary-link">Success Alert</a></li>
-              <li class="mt-1"><a href="#alert-warning" class="primary-link">Warning Alert</a></li>
-              <li class="mt-1"><a href="#alert-error" class="primary-link">Error Alert</a></li>
-              <li class="mt-1"><a href="#alert-neutral" class="primary-link">Neutral Alert</a></li>
-              <li class="mt-1"><a href="#alert-neutral-dark" class="primary-link">Neutral Dark Alert</a></li>
-              <li class="mt-1"><a href="#alert-accent" class="primary-link">Accent Alert</a></li>
-              <li class="mt-1"><a href="#alert-with-actions" class="primary-link">Alert with Actions</a></li>
-            </ul>
-          </div>
-          <div>
-            <a href="#navigation" class="primary-link text-lg">Navigation</a>
-            <ul class="mt-2 ml-4">
-              <li class="mt-1"><a href="#nav-links" class="primary-link">Nav Links</a></li>
-              <li class="mt-1"><a href="#dropdown-menu" class="primary-link">Dropdown Menu</a></li>
-            </ul>
-          </div>
-          <div>
-            <a href="#cards" class="primary-link text-lg">Cards</a>
-            <ul class="mt-2 ml-4">
-              <li class="mt-1"><a href="#card-example" class="primary-link">Card Example</a></li>
-            </ul>
-          </div>
+
+        <!-- Badges Section -->
+        <div>
+          <a href="#badges" class="primary-link text-lg">Badges</a>
+          <ul class="mt-2 ml-4">
+            <li class="mt-1"><a href="#basic-badge" class="primary-link">Basic Badge</a></li>
+            <li class="mt-1"><a href="#badge-label" class="primary-link">With Label</a></li>
+            <li class="mt-1"><a href="#badge-context" class="primary-link">In Context</a></li>
+            <li class="mt-1"><a href="#filter-badges" class="primary-link">Filter Badges</a></li>
+          </ul>
+        </div>
+
+        <!-- Alerts Section -->
+        <div>
+          <a href="#alerts" class="primary-link text-lg">Alerts</a>
+          <ul class="mt-2 ml-4">
+            <li class="mt-1"><a href="#alert-info" class="primary-link">Info Alert</a></li>
+            <li class="mt-1"><a href="#alert-success" class="primary-link">Success Alert</a></li>
+            <li class="mt-1"><a href="#alert-warning" class="primary-link">Warning Alert</a></li>
+            <li class="mt-1"><a href="#alert-error" class="primary-link">Error Alert</a></li>
+            <li class="mt-1"><a href="#alert-neutral" class="primary-link">Neutral Alert</a></li>
+            <li class="mt-1"><a href="#alert-neutral-dark" class="primary-link">Neutral Dark Alert</a></li>
+            <li class="mt-1"><a href="#alert-accent" class="primary-link">Accent Alert</a></li>
+            <li class="mt-1"><a href="#alert-with-actions" class="primary-link">Alert with Actions</a></li>
+          </ul>
+        </div>
+
+        <!-- Navigation Section -->
+        <div>
+          <a href="#navigation" class="primary-link text-lg">Navigation</a>
+          <ul class="mt-2 ml-4">
+            <li class="mt-1"><a href="#nav-links" class="primary-link">Nav Links</a></li>
+            <li class="mt-1"><a href="#dropdown-menu" class="primary-link">Dropdown Menu</a></li>
+          </ul>
+        </div>
+
+        <!-- Cards Section -->
+        <div>
+          <a href="#cards" class="primary-link text-lg">Cards</a>
+          <ul class="mt-2 ml-4">
+            <li class="mt-1"><a href="#card-example" class="primary-link">Card Example</a></li>
+          </ul>
+        </div>
+
+        <!-- Lists Section -->
+        <div>
+          <a href="#lists" class="primary-link text-lg">Lists</a>
+          <ul class="mt-2 ml-4">
+            <li class="mt-1"><a href="#unordered-lists" class="primary-link">Unordered Lists</a></li>
+            <li class="mt-1"><a href="#ordered-lists" class="primary-link">Ordered Lists</a></li>
+          </ul>
         </div>
       </nav>
     </section>
@@ -193,6 +211,58 @@ const arrowExamples = [
         <h3 class="h3">Links</h3>
         <p>Text with a <a href="#" class="primary-link">primary link</a> styled consistently.</p>
       </div>
+    </section>
+
+    <!-- Lists Section -->
+    <section id="lists" class="mb-16">
+      <h2 class="h2">Lists</h2>
+
+      <!-- Unordered Lists -->
+      <div id="unordered-lists" class="mb-8">
+        <h3 class="h3">Unordered Lists</h3>
+        <div class="grid gap-8 md:grid-cols-2">
+          <div>
+            <h4 class="h4 mb-4">Basic List</h4>
+            <ul class="list-disc pl-6">
+              <li>First item</li>
+              <li>Second item</li>
+              <li>Third item</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="h4 mb-4">Custom Marker</h4>
+            <ul class="list-[square] pl-6 marker:text-primary-500">
+              <li>Primary item</li>
+              <li>Secondary item</li>
+              <li>Tertiary item</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ordered Lists -->
+      <div id="ordered-lists" class="mb-8">
+        <h3 class="h3">Ordered Lists</h3>
+        <div class="grid gap-8 md:grid-cols-2">
+          <div>
+            <h4 class="h4 mb-4">Basic List</h4>
+            <ol class="list-decimal pl-6">
+              <li>First step</li>
+              <li>Second step</li>
+              <li>Third step</li>
+            </ol>
+          </div>
+          <div>
+            <h4 class="h4 mb-4">Custom Counter</h4>
+            <ol class="list-[upper-roman] pl-6 marker:font-medium marker:text-primary-500">
+              <li>Primary step</li>
+              <li>Secondary step</li>
+              <li>Tertiary step</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- Badges Section -->
@@ -509,10 +579,8 @@ const arrowExamples = [
                 <span class="inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700">Category 2</span>
               </div>
 
-              <!-- Author and Date -->
+              <!-- Date -->
               <div class="card-author-date">
-                <p>Author Name</p>
-                <span>&bull;</span>
                 <p>October 10, 2023</p>
               </div>
 
