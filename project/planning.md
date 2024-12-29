@@ -66,13 +66,12 @@
 - [ ] event images: dark/light mode (e.g. can't see spryker logo in white mode) 
 
 ### Other / functional details that need fixing
-- [ ] Podcast subscription links
 - [x] Podcast bottom CTA
 - [x] Events bottom CTA
 - [x] /about: remove form, add social media contact buttons
 - [ ] Below a blog post, there is a "Back to article overview" back to previous article button and a next article button. The UI could improve here.
 - [x] Remove the "updated" line from article detail pages
-- [ ] on /press/, the podcasts often only seem to load after a refresh
+- [x] on /press/, the podcasts often only seem to load after a refresh
 - [x] Why is there bot a src/pages/post/[...slug].astro and a src/pages/post/[slug].astro? Is one of them redundant?
 
 ### Checks
@@ -104,7 +103,8 @@
 ## After go-live
 
 ### Design
-- use better (full) social media icons
+- [ ] use better (full) social media icons
+- [ ] Odd podcast iframe loading on /press
 
 ### New Content
 - [ ] Add a section for Github projects
@@ -112,6 +112,7 @@
 - [ ] Blog on AI tools I use?
 
 ### New features
+- [ ] Podcast subscription links
 - [ ] Add Bluesky comments
 - [ ] Add Latest BlueSky posts feed
 - [ ] For cards on /presentations and /post/ overview pages, make the whole card clickable, not just the image
