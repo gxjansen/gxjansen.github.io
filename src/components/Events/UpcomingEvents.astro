@@ -54,20 +54,26 @@ const secondColumnEvents = upcomingEvents.filter((_, i) => i % 2 === 1);
           </div>
         )}
 
-        <div 
-          class="grid grid-cols-1 md:grid-cols-2 gap-4"
-          role="list"
-          aria-label="Upcoming events list"
-        >
-          {upcomingEvents.map((event) => (
-            <EventCard {...event} />
-          ))}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8" role="list" aria-label="Upcoming events list">
+          {/* First column */}
+          <div class="space-y-6">
+            {firstColumnEvents.map((event) => (
+              <EventCard {...event} />
+            ))}
+          </div>
+
+          {/* Second column - offset as a whole */}
+          <div class="space-y-6 md:mt-24">
+            {secondColumnEvents.map((event) => (
+              <EventCard {...event} />
+            ))}
+          </div>
         </div>
     </div>
 
     {upcomingEvents.length > 0 && (
       <div class="flex justify-center mt-8">
-        <Button href="/events" variant="secondary" aria-label="View all past speaking events">
+        <Button href="/events#past-events" variant="secondary" aria-label="View all past speaking events">
           View Past Events
         </Button>
       </div>
