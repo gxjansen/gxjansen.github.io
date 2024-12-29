@@ -77,6 +77,7 @@
 ### Checks
 - [ ] Redirects
 - [ ] Check site on mobile
+- [ ] fix /categories/experimentation
 
 ### Performance
 - [x] Implement lazy loading for images
