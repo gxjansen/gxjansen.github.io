@@ -30,7 +30,8 @@ const allCategories = posts
   .flat()
   .filter(category => category); // Filter out undefined/null values
 
-const processedCategories = sortByValue(countItems(allCategories));
+const countedItems = countItems(allCategories);
+const processedCategories = sortByValue(countedItems);
 ---
 
 <BaseLayout title="Blog" description="Latest blog posts and articles" transition:animate="slide">
