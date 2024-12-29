@@ -39,43 +39,43 @@ const wrapperProps = linkUrl ? {
 const displayText = topic || role;
 
 // Define classes based on whether the card is clickable
-const baseClasses = "block bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-2 transition-all duration-200";
-const clickableClasses = linkUrl 
-  ? `${baseClasses} border-teal-400/30 hover:border-teal-400 hover:shadow-xl hover:-translate-y-1 cursor-pointer group` 
-  : `${baseClasses} border-gray-200 dark:border-gray-700`;
+const wrapperClasses = linkUrl 
+  ? "cursor-pointer" 
+  : "";
 
 // Load country flag if country code is provided
 const flagImage = country ? await loadCountryFlag(country) : null;
 ---
 
-<WrapperTag
-  {...wrapperProps}
-  class={clickableClasses}
->
-  <div class="flex items-center mb-4">
+<article class="event-card group">
+  <WrapperTag
+    {...wrapperProps}
+    class={wrapperClasses}
+  >
+  <div class="flex items-center mb-3">
     {loadedIcon ? (
       <Image
         src={loadedIcon}
         alt={`${name} Icon`}
-        width={48}
-        height={48}
-        class="mr-4"
+        width={40}
+        height={40}
+        class="mr-3"
       />
     ) : (
-      <div class="w-12 h-12 mr-4 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+      <div class="w-10 h-10 mr-3 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
         <span class="text-2xl">🗓️</span>
       </div>
     )}
     <div class="flex flex-col">
       <div class="flex items-center gap-2">
-        <span class="text-xl font-semibold text-teal-600 dark:text-teal-400">
+        <span class="text-lg font-semibold text-teal-600 dark:text-teal-400">
           {name}
         </span>
         {linkUrl && (
           <span class="text-teal-600 dark:text-teal-400 group-hover:translate-x-1 transition-transform duration-200">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              class="h-5 w-5" 
+              class="h-4 w-4" 
               viewBox="0 0 20 20" 
               fill="currentColor"
             >
@@ -88,13 +88,13 @@ const flagImage = country ? await loadCountryFlag(country) : null;
           </span>
         )}
       </div>
-      <div class="text-gray-600 dark:text-gray-300 flex items-center gap-1">
+      <div class="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-1">
         {flagImage ? (
           <Image
             src={flagImage}
             alt={`Flag of ${country}`}
-            width={20}
-            height={15}
+            width={16}
+            height={12}
             class="inline-block rounded-sm mb-0"
           />
         ) : (
@@ -111,15 +111,15 @@ const flagImage = country ? await loadCountryFlag(country) : null;
       </div>
     </div>
   </div>
-  <div class="flex justify-between items-center mt-2">
-    <div class="flex-1">
+  <div class="flex items-center justify-between mt-2">
+    <div class="flex-1 mr-4">
       {!isOnPresentationPage && displayText && (
-        <em class="text-gray-600 dark:text-gray-400">{displayText}</em>
+        <em class="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">{displayText}</em>
       )}
     </div>
     <div class="flex items-center gap-2 flex-shrink-0">
       {workshop && (
-        <span class="text-teal-600 dark:text-teal-400 px-2 py-1 text-sm bg-teal-50 dark:bg-green-400/10 rounded">
+        <span class="text-xs text-teal-600 dark:text-teal-400 px-2 py-1 bg-teal-50 dark:bg-green-400/10 rounded">
           Workshop
         </span>
       )}
@@ -128,7 +128,7 @@ const flagImage = country ? await loadCountryFlag(country) : null;
           {presentationUrl ? "View Presentation" : "View Event"}
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            class="h-4 w-4" 
+            class="h-3 w-3" 
             viewBox="0 0 20 20" 
             fill="currentColor"
           >
@@ -142,4 +142,5 @@ const flagImage = country ? await loadCountryFlag(country) : null;
       )}
     </div>
   </div>
-</WrapperTag>
+  </WrapperTag>
+</article>

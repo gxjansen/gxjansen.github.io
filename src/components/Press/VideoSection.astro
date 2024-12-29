@@ -24,7 +24,7 @@ console.log('Videos data:', videos.map(video => ({
 
 <section id="videos" class="mb-16">
   <h2 class="h2 mb-4">Video Interviews</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <div class="cards-grid">
     {videos.map(video => {
       const videoId = getYouTubeId(video.youtubeLink || '');
       if (!videoId) return null;
@@ -33,7 +33,7 @@ console.log('Videos data:', videos.map(video => ({
         <article class="video-card">
           <div class="card-container">
             <div 
-              class="lazy-youtube aspect-video bg-neutral-100 dark:bg-white/[.075] relative rounded-lg overflow-hidden" 
+              class="lazy-youtube bg-neutral-100 dark:bg-white/[.075] h-full" 
               data-video-id={videoId}
               data-title={video.title}
             >

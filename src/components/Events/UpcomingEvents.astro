@@ -55,29 +55,13 @@ const secondColumnEvents = upcomingEvents.filter((_, i) => i % 2 === 1);
         )}
 
         <div 
-          class="grid grid-cols-1 md:grid-cols-2 gap-6"
+          class="grid grid-cols-1 md:grid-cols-2 gap-4"
           role="list"
           aria-label="Upcoming events list"
         >
-          {/* First column */}
-          <div 
-            class="space-y-6"
-            role="presentation"
-          >
-            {firstColumnEvents.map((event) => (
-              <EventCard {...event} />
-            ))}
-          </div>
-
-          {/* Second column - offset as a whole */}
-          <div 
-            class="space-y-6 md:mt-24"
-            role="presentation"
-          >
-            {secondColumnEvents.map((event) => (
-              <EventCard {...event} />
-            ))}
-          </div>
+          {upcomingEvents.map((event) => (
+            <EventCard {...event} />
+          ))}
         </div>
     </div>
 
