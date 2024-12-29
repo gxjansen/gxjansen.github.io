@@ -14,7 +14,7 @@ export const pressCoverage = [
         publicationDate: "2016-05-13",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://www.omnikick.com/cro-experts-list/",
+        articleUrl: "https://web.archive.org/web/20240804143201/https://www.omnikick.com/cro-experts-list/",
         personOrganization: "Sayed Shahnur for Omnikick"
     },
     {
@@ -158,7 +158,7 @@ export const pressCoverage = [
         publicationDate: "2013-02-20",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://blog.aheadworks.com/2013/02/ecommerce-in-the-netherlands-be-aware-of-local-laws-and-offer-prevailing-dutch-payment-solution/",
+        articleUrl: "https://aheadworks.com/blog/ecommerce-in-the-netherlands-be-aware-of-local-laws-and-offer-prevailing-dutch-payment-solution",
         personOrganization: "Irina Tsumarava for Aheadworks"
     },
     {
@@ -185,7 +185,7 @@ export const pressCoverage = [
         publicationDate: "2019-07-22",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://www.bind.nl/het-bij-elkaar-brengen-van-mensen-is-mijn-belangrijkste-skill/",
+        articleUrl: "https://web.archive.org/web/20210228115752/https://www.bind.nl/het-bij-elkaar-brengen-van-mensen-is-mijn-belangrijkste-skill/",
         personOrganization: "Bind"
     },
     {
@@ -356,7 +356,7 @@ export const pressCoverage = [
         publicationDate: "2020-11-04",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://experimentnation.com/2020/11/04/optimization-and-the-human-mind/",
+        articleUrl: "https://www.experimentnation.com/episodes/2020/11/04/optimization-and-the-human-mind",
         personOrganization: "Rommil Santiago for Experiment Nation"
     },
     {
