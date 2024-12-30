@@ -59,7 +59,7 @@
 
 [[redirects]]
   from = "/howtoweb"
-  to = "/presentation/data-driven-decisions-meets-psychology"
+  to = "/presentations/data-driven-decisions-meets-psychology"
   status = 301
 
 [[redirects]]
@@ -69,7 +69,7 @@
 
 [[redirects]]
   from = "/bigger"
-  to = "/presentation/still-a-b-testing-your-buttons-you-need-to-think-much-bigger"
+  to = "/presentations/still-a-b-testing-your-buttons-you-need-to-think-much-bigger"
   status = 301
 
 [[redirects]]
@@ -108,8 +108,8 @@
   status = 301
 
 [[redirects]]
-  from = "/presentations"
-  to = "/presentation"
+  from = "/presentation/*"
+  to = "/presentations/:splat"
   status = 301
 
 # Function handling (keep this last)
