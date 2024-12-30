@@ -1,121 +1,102 @@
-# Website Implementation
+# Global SCSS Refactoring Plan
 
-## Subprojects Done
+## Current Issues
+- Large monolithic file making maintenance difficult
+- Mixed concerns within layers
+- Some duplicate styles (z-index declarations)
+- Styles that could be better organized by feature
 
-### Overview Page (`/presentations`)
-- [x] Create presentations overview page with Featured and More sections
-- [x] Implement responsive grid layout
-- [x] Add proper styling using website's color scheme:
-  - [x] White background for cards
-  - [x] Base colors for borders and text
-  - [x] Primary colors for interactive elements
-- [x] Add hover effects on cards and images
-- [x] Ensure proper contrast in both light and dark modes
+## Proposed Structure
+```
+src/styles/
+├── global.scss              # Main entry point, imports all modules
+├── base/
+│   ├── _reset.scss         # Base reset styles
+│   ├── _typography.scss    # Base typography styles
+│   └── _scrollbar.scss     # Scrollbar styles
+├── components/
+│   ├── _alerts.scss        # Alert component styles
+│   ├── _cards.scss         # Card system styles
+│   ├── _forms.scss         # Form element styles
+│   └── _navigation.scss    # Navigation and dropdown styles
+├── layout/
+│   ├── _containers.scss    # Layout containers
+│   ├── _grid.scss         # Grid patterns
+│   └── _z-index.scss      # Z-index management
+├── utilities/
+│   ├── _backgrounds.scss   # Background patterns and effects
+│   ├── _gradients.scss     # Gradient utilities
+│   └── _typography.scss    # Typography utilities
+└── _variables.scss         # Shared variables and mixins
+```
 
-### Detail Page (`/presentations/[slug]`)
-- [x] Create dynamic presentation detail pages
-- [x] Add proper styling:
-  - [x] White titles for better contrast
-  - [x] Duration badge using base colors
-  - [x] Workshop badge using primary colors
-  - [x] Navigation between presentations
-- [x] Add support for slides and video embeds
-- [x] Add metadata for SEO
-- [x] Add proper image handling with preloading
+## Implementation Steps
 
-### Components
-- [x] Create PresentationCard component
-- [x] Create PresentationNav component
-- [x] Create SlideEmbed component
-- [x] Create VideoEmbed component
-- [x] Ensure consistent styling across all components
-- [x] Implement proper color contrast throughout
+1. Create directory structure
+2. Extract styles into appropriate modules
+3. Update global.scss to import new modules
+4. Test all components to ensure styles are applied correctly
+5. Update documentation to reflect new structure
 
-### Data Management
-- [x] Remove duplicate presentations
-- [x] Add proper filtering for required fields
-- [x] Add sorting by title
-- [x] Add featured presentation support
-- [x] Implement TypeScript interfaces for data
+## Benefits
 
-### Navigation
-- [x] Add "Presentations" link to main navigation menu between Events and Press
-- [x] Update `/src/config/en/navData.json.ts`
-- [x] Ensure proper active state for navigation items
+- Better organization and maintainability
+- Easier to find and modify specific styles
+- Reduced duplication
+- More scalable structure for future additions
+- Clearer separation of concerns
 
-### Event Integration
-- [x] Implement bi-directional relationship between presentations and events
-- [x] Update event data to include presentation references
-- [x] Add presentation links to event detail pages
-- [x] Add event links to presentation detail pages
-- [x] Update TypeScript interfaces for event-presentation relationship
+## Migration Strategy
 
-### Accessibility
-- [x] Go through /projects/accessibility-checklist.md
-  
-### Design
-- [x] fix the "Meet Guido" pill in the homepage hero section: it's too wide. After fixing this, make sure this isn't happening in other places as well.
-- [x] View past events button in Future Events section on homapage has text that is too grey.
-- [x] the sides of the flag section (FeatureFlagsMarquee) and gallery section (FeatureGalleryMarquee) needs to be truly transparent, not a fade to grey.
-- [x] There is a weird "dot" between name and date on /post/ overview page that is showing up too high. The same dot is also shown on the post detail page, but there it's properly aligned with the text.
-- [x] Should we implement the gray background behind all content cards/blocks? Some have it, some don't. What should be the guiding principle here?
-      - [x] Visually align podcast cards with the other content cards on press and blog overview pages
-- [x] Fix black dots / light mode for the "In need of a keynote speaker or in-house workshop?" CTA block
-- [x] event images: dark/light mode (e.g. can't see spryker logo in white mode) 
+1. Create new structure while keeping original global.scss
+2. Move styles in small, testable batches
+3. Test thoroughly after each batch
+4. Remove styles from global.scss as they're confirmed working in modules
+5. Final cleanup and documentation update
 
-### Other / functional details that need fixing
-- [x] Podcast bottom CTA
-- [x] Events bottom CTA
-- [x] /about: remove form, add social media contact buttons
-- [ ] Below a blog post, there is a "Back to article overview" back to previous article button and a next article button. The UI could improve here.
-- [x] Remove the "updated" line from article detail pages
-- [x] on /press/, the podcasts often only seem to load after a refresh
-- [x] Why is there bot a src/pages/post/[...slug].astro and a src/pages/post/[slug].astro? Is one of them redundant?
+## Implementation Status
 
-### Performance
-- [x] Implement lazy loading for images
-- [x] Add image preloading for critical content
-- [x] Optimize image sizes and formats
-- [x] Implement lazy loading for embedded content
-- [x] Add proper caching headers
-- [x] Implement view transitions
-- [x] Add error boundaries for embedded content
+✅ Directory Structure Created:
+- src/styles/base/
+- src/styles/components/
+- src/styles/layout/
+- src/styles/utilities/
 
-## Subprojects Todo
+✅ Files Created and Organized:
 
-### Checks
-- [ ] Redirects
-- [ ] Check site on mobile
-- [ ] fix /categories/experimentation
+Base Styles:
+- _typography.scss: Typography, fonts, and text-related base styles
+- _scrollbar.scss: Scrollbar and focus styles
 
-### Testing
-- [ ] Add unit tests for components
-- [ ] Add integration tests for data fetching
-- [ ] Add end-to-end tests for user flows
-- [ ] Test responsive layouts across devices
-- [ ] Test keyboard navigation
-- [ ] Test screen reader compatibility
-- [ ] Test embedded content fallbacks
-- [ ] Test error states and boundaries
-- [ ] Add a "dead link checker" for both internal and external 404 links > see project/dead-links-checker-implementation.md
+Component Styles:
+- _alerts.scss: Alert system and variants
+- _cards.scss: Card system and all card variants
+- _forms.scss: Form elements and related styles
+- _navigation.scss: Navigation and dropdown styles
 
-## After go-live
+Layout Styles:
+- _containers.scss: Layout containers and structural elements
 
-### Design
-- [ ] use better (full) social media icons
-- [ ] Odd podcast iframe loading on /press
+Utility Styles:
+- _backgrounds.scss: Background patterns and effects
+- _utilities.scss: General utilities and helper classes
 
-### New Content
-- [ ] Add a section for Github projects
-- [ ] Integrate with Github to get live updates
-- [ ] Blog on AI tools I use?
+✅ global.scss Updated:
+- Removed all individual style declarations
+- Added organized imports for all modules
+- Maintained Tailwind directives
 
-### New features
-- [ ] Podcast subscription links
-- [ ] Add Bluesky comments
-- [ ] Add Latest BlueSky posts feed
-- [ ] Blog tags/categories
-- [ ] For cards on /presentations and /post/ overview pages, make the whole card clickable, not just the image
+## Testing Checklist
 
-### Motion
-- [ ] Implement tailwindcss-motion (npm i -D tailwindcss-motion) or auto-animate (npm install @formkit/auto-animate)
+- [ ] All components render correctly
+- [ ] Dark mode functions properly
+- [ ] Responsive layouts work as expected
+- [ ] No unintended style conflicts
+- [ ] Performance impact is neutral or positive
+
+## Next Steps
+
+1. Test the refactored styles thoroughly
+2. Update component documentation to reflect new style organization
+3. Consider creating a style guide to document the new structure
+4. Monitor performance impact of the modularization
