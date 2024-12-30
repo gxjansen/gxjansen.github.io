@@ -2,25 +2,42 @@
   /* Card System */
   article[class*="card"] {
     @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur transition-all group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   /* Card Variants */
   .social-card {
-    @apply flex flex-col items-center px-2 py-4 sm:p-6;
+    @apply flex flex-col items-center px-3 py-3 sm:px-4 sm:py-4;
   }
 
   .post-card, .presentation-card, .article-card, .event-card {
-    @apply px-2 py-4 sm:p-6;
+    @apply px-3 py-3 sm:px-4 sm:py-4;
   }
 
   /* Card Grid Layout */
   .cards-grid {
-    @apply grid gap-6 sm:gap-8 lg:gap-16 sm:grid-cols-2 lg:grid-cols-3;
+    @apply grid gap-4 sm:gap-6 lg:gap-8;
+    grid-template-columns: 1fr;
+    grid-auto-rows: min-content;
+  }
+
+  @screen sm {
+    .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @screen lg {
+    .cards-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   /* Card Components */
   .card-container {  
-    @apply relative block aspect-[16/9] overflow-hidden -mx-2 sm:-mx-6 -mt-4 sm:-mt-6 mb-4 sm:mb-6;
+    @apply relative block aspect-[16/9] overflow-hidden -mx-3 sm:-mx-4 -mt-3 sm:-mt-4 mb-3 sm:mb-4;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
   }  
@@ -36,11 +53,11 @@
 
   /* Video card specific styles */
   .video-card {
-    @apply px-2 py-4 sm:p-6;
+    @apply flex flex-col px-3 py-3 sm:px-4 sm:py-4;
   }
 
   .video-card .card-container {
-    @apply relative block aspect-[16/9] overflow-hidden -mx-2 sm:-mx-6 -mt-4 sm:-mt-6 mb-4 sm:mb-6;
+    @apply relative block aspect-[16/9] overflow-hidden -mx-3 sm:-mx-4 -mt-3 sm:-mt-4 mb-3 sm:mb-4;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
   }
@@ -65,34 +82,39 @@
 
   /* Card Content Area */
   article[class*="card"] > *:not(.card-container) {
-    @apply px-2 sm:px-6;
+    @apply px-3 sm:px-4;
+  }
+
+  /* Make card content area fill remaining height */
+  article[class*="card"] > div:not(.card-container) {
+    @apply flex flex-col flex-1;
   }
 
   .social-card-icon-wrapper {
-    @apply mb-4 flex size-12 items-center justify-center rounded-lg bg-primary-500/10 text-primary-500 dark:bg-primary-400/10 dark:text-primary-400;
+    @apply mb-3 flex size-10 sm:size-12 items-center justify-center rounded-lg bg-primary-500/10 text-primary-500 dark:bg-primary-400/10 dark:text-primary-400;
   }
 
   .social-card-title {
-    @apply text-lg font-semibold text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400;
+    @apply text-base sm:text-lg font-semibold text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400;
   }
 
   .card-categories {  
-    @apply mt-4 sm:mt-6 flex flex-wrap gap-2 sm:gap-4;  
+    @apply mt-3 sm:mt-4 flex flex-wrap gap-2 sm:gap-4;  
   }  
 
   .card-author-date {  
-    @apply mt-2 sm:mt-3 text-sm font-medium text-base-500 dark:text-base-400;  
+    @apply mt-2 text-sm font-medium text-base-500 dark:text-base-400;  
   }  
 
   .card-title {  
-    @apply text-lg sm:text-xl font-bold dark:text-base-100 md:text-2xl;  
+    @apply text-base sm:text-lg lg:text-xl font-bold dark:text-base-100;  
   }  
 
   .card-description {  
-    @apply mt-2 text-base font-medium text-base-400 dark:text-base-500;  
+    @apply mt-2 text-sm sm:text-base font-medium text-base-400 dark:text-base-500;  
   }  
 
   .card-read-button {  
-    @apply flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600;  
+    @apply mt-auto pt-3 sm:pt-4 flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600;  
   }
 }
