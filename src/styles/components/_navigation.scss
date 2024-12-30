@@ -1,0 +1,39 @@
+@layer components {
+  /* Navigation and Dropdown List Styles */
+  nav ul, .dropdown-menu ul, .dropdown-content ul,
+  .dropdown ul, .dropdown-content > ul {
+    @apply list-none p-0 m-0;
+  }
+
+  nav li, .dropdown-menu li, .dropdown-content li,
+  .dropdown li, .dropdown-content > ul > li,
+  .dropdown > li {
+    @apply list-none p-0 m-0;
+  }
+
+  /* Specific styles for dropdown parent items */
+  .dropdown {
+    @apply list-none;
+  }
+
+  /* Z-index Layers for Navigation */
+  .z-dropdown {
+    @apply z-10;
+  }
+
+  .z-overlay {
+    @apply z-20;
+  }
+
+  .z-modal {
+    @apply z-30;
+  }
+
+  .z-modal-overlay {
+    @apply z-40;
+  }
+
+  .z-toast {
+    @apply z-50;
+  }
+}

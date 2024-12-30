@@ -1,0 +1,60 @@
+/* Import JetBrains Mono and Inter from Google Fonts - including lighter weights for better hierarchy */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  html {
+    @apply text-base leading-[1.6rem] text-base-900 dark:text-base-100;
+    scroll-behavior: smooth;
+    /* Enhanced text rendering */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Apply Inter font to all headings by default with enhanced readability */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-inter;
+    letter-spacing: -0.015em;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
+    font-feature-settings: 'ss01' on, 'ss02' on, 'ss03' on;
+  }
+
+  /* Default margins and colors for text elements, excluding components */
+  p:not([class*="alert"]), 
+  blockquote:not([class*="alert"]), 
+  ul:not([class*="alert"]), 
+  fieldset:not([class*="alert"]), 
+  form:not([class*="alert"]), 
+  ol:not([class*="alert"]), 
+  dl:not([class*="alert"]), 
+  dir:not([class*="alert"]), 
+  menu:not([class*="alert"]) {
+    @apply my-4 text-base-900 dark:text-base-100;
+  }
+
+  .font-bold {
+    @apply font-inter;
+    letter-spacing: -0.015em;
+  }
+
+  [class*="text-"][class*="font-bold"],
+  [class*="text-lg"][class*="font-semibold"],
+  [class*="text-xl"][class*="font-semibold"],
+  [class*="text-2xl"][class*="font-semibold"],
+  [class*="text-3xl"][class*="font-semibold"],
+  [class*="text-4xl"][class*="font-semibold"] {
+    @apply font-inter;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  [class*="text-3xl"], [class*="text-4xl"], [class*="text-5xl"] {
+    @apply leading-[1.1];
+    letter-spacing: -0.025em;
+  }
+
+  [class*="text-xl"], [class*="text-2xl"] {
+    @apply leading-[1.2];
+    letter-spacing: -0.02em;
+  }
+}

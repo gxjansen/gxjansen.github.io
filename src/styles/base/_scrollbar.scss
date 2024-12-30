@@ -1,0 +1,18 @@
+@layer base {
+  ::-webkit-scrollbar {
+    @apply h-1 w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-inherit;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-base-300 bg-opacity-90;
+  }
+
+  /* Custom focus styles for better accessibility */
+  a:focus {
+    @apply outline-none ring-1 ring-primary-500/20 rounded;
+  }
+}

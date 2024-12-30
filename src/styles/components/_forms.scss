@@ -1,0 +1,21 @@
+@layer components {
+  /* Form Elements */
+  .form__input {
+    @apply w-full rounded-md border border-transparent bg-base-100 p-2.5 text-base-900 transition;
+    @apply dark:bg-base-800 dark:text-base-200 dark:focus-visible:border-primary-500 dark:focus-visible:ring-primary-500;
+    @apply focus-visible:border-primary-500/50 focus-visible:ring-2 focus-visible:ring-primary-500/50;
+  }
+
+  /* Form-related Typography */
+  .semantic-description {
+    @apply text-base leading-normal mb-2 text-base-900 dark:text-base-100;
+  }
+
+  .context-title {
+    @apply text-lg font-medium text-base-900 dark:text-base-100;
+  }
+
+  .filter-badge {
+    @apply px-4 py-2 bg-base-800 text-base-100 dark:bg-base-100 dark:text-base-800 rounded-full text-sm font-medium hover:bg-primary-500 dark:hover:bg-primary-500 dark:hover:text-base-100 transition-all;
+  }
+}

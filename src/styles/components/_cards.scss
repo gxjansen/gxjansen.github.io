@@ -1,0 +1,98 @@
+@layer components {
+  /* Card System */
+  article[class*="card"] {
+    @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur transition-all group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
+  }
+
+  /* Card Variants */
+  .social-card {
+    @apply flex flex-col items-center p-6;
+  }
+
+  .post-card, .presentation-card, .article-card, .event-card {
+    @apply p-6;
+  }
+
+  /* Card Grid Layout */
+  .cards-grid {
+    @apply grid gap-16 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  /* Card Components */
+  .card-container {  
+    @apply block aspect-[16/9] overflow-hidden -mx-6 -mt-6 mb-6 bg-base-200 dark:bg-base-800;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }  
+
+  .card-image {  
+    @apply h-full w-full object-contain transition-transform duration-500 hover:scale-105 opacity-80 contrast-125 dark:opacity-90 dark:contrast-125 p-4;  
+  }  
+
+  /* Event Card Specific */
+  .event-card img {
+    @apply opacity-80 contrast-125 dark:opacity-90 dark:contrast-125;
+  }
+
+  /* Video card specific styles */
+  .video-card {
+    @apply p-6;
+  }
+
+  .video-card .card-container {
+    @apply block aspect-[16/9] overflow-hidden -mx-6 -mt-6 mb-6 relative bg-base-200 dark:bg-base-800;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+
+  .video-card .lazy-youtube {
+    @apply absolute inset-0 overflow-hidden;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+
+  .video-card .video-container {
+    @apply absolute inset-0;
+  }
+
+  .video-card .video-container iframe {
+    @apply w-full h-full;
+  }
+
+  .video-card .card-image {
+    @apply w-full h-full object-cover opacity-80 contrast-125 dark:opacity-90 dark:contrast-125;
+  }
+
+  /* Card Content Area */
+  article[class*="card"] > *:not(.card-container) {
+    @apply px-6;
+  }
+
+  .social-card-icon-wrapper {
+    @apply mb-4 flex size-12 items-center justify-center rounded-lg bg-primary-500/10 text-primary-500 dark:bg-primary-400/10 dark:text-primary-400;
+  }
+
+  .social-card-title {
+    @apply text-lg font-semibold text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400;
+  }
+
+  .card-categories {  
+    @apply mt-6 flex flex-wrap gap-4;  
+  }  
+
+  .card-author-date {  
+    @apply mt-3 text-sm font-medium text-base-500 dark:text-base-400;  
+  }  
+
+  .card-title {  
+    @apply text-xl font-bold dark:text-base-100 md:text-2xl;  
+  }  
+
+  .card-description {  
+    @apply mt-2 text-base font-medium text-base-400 dark:text-base-500;  
+  }  
+
+  .card-read-button {  
+    @apply flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600;  
+  }
+}
