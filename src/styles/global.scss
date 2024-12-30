@@ -1,83 +1,46 @@
-/* Dark mode override for strong text */
-:root[class~="dark"] .prose strong {
-  color: white !important;
-}
+/* Import Component Styles */
+@use './utilities/utilities';
+@use './components/alerts';
+@use './components/cards';
+@use './base/typography';
+@use './prose';
 
-/* Markdown and MDX Styling for blog posts, using @tailwind/typography with `prose` */
-.prose {
-  /* emergency word break */
-  @apply break-words;
-  /* heading font sizes */
-  @apply prose-h1:text-3xl prose-h1:font-bold md:prose-h1:text-4xl;
-  @apply prose-h2:text-2xl prose-h2:font-bold md:prose-h2:text-3xl;
-  @apply prose-h3:text-xl prose-h3:font-semibold md:prose-h3:text-2xl;
-  @apply prose-h4:text-lg prose-h4:font-semibold md:prose-h4:text-xl;
-  /* all headings */
-  @apply prose-headings:mb-5 prose-headings:mt-7 prose-headings:text-base-900 dark:prose-headings:text-base-100;
-  /* paragraphs */
-  @apply prose-p:my-2 prose-p:leading-normal prose-p:text-base-500 dark:prose-p:text-white;
-  /* bold text */
-  @apply prose-strong:font-bold prose-strong:text-base-900;
-  /* code */
-  @apply prose-code:rounded-md prose-code:border-2 prose-code:border-solid prose-code:border-base-200 prose-code:bg-base-50 prose-code:px-[.1rem] prose-code:font-normal prose-code:text-inherit dark:prose-code:border-base-800 dark:prose-code:bg-base-800 sm:prose-code:text-base;
-  /* code remove backticks */
-  code::before {
-    content: "";
+/* Base Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Layer Components */
+@layer components {
+  .site-container {
+    @apply mx-auto max-w-7xl;
   }
-  code::after {
-    content: "";
+
+  .z-background {
+    @apply -z-10;
   }
-  /* lists */
-  @apply prose-li:text-base-500 dark:prose-li:text-base-300;
-  /* anchor links */
-  @apply prose-a:text-base-600 prose-a:underline prose-a:decoration-primary-500 prose-a:transition hover:prose-a:text-primary-500 dark:prose-a:text-base-200 dark:hover:prose-a:text-primary-500;
-  /* images */
-  @apply prose-img:mx-auto prose-img:h-auto prose-img:w-full prose-img:max-w-[800px] prose-img:rounded-md;
-  /* video */
-  @apply prose-video:mr-auto prose-video:min-w-0 prose-video:max-w-full;
-  /* blockquote */
-  @apply prose-blockquote:border-l-primary-500;
-  /* horizontal rule */
-  @apply prose-hr:my-8 prose-hr:border-base-200 dark:prose-hr:border-base-800;
-  /* table head */
-  @apply prose-thead:border-b-base-400 prose-thead:text-left dark:prose-thead:border-b-base-700;
-  /* table row */
-  @apply prose-tr:border-b-base-200 dark:text-base-300 dark:prose-tr:border-b-base-800;
-}
 
-/* Markdown Styling for admonitions in posts, using @tailwind/typography with `prose` 
-   These are meant to override any of the normal prose stylings above */
-.admonition {
-  /* headings */
-  @apply mt-0 prose-headings:mb-0;
-  /* paragraphs */
-  @apply prose-p:mb-0 prose-p:mt-0;
-  /* code */
-  @apply prose-code:rounded-lg prose-code:border-opacity-0 prose-code:px-[.1rem] prose-code:font-normal prose-code:text-inherit sm:prose-code:text-base;
-  /* anchor links */
-  @apply prose-a:text-inherit prose-a:underline prose-a:transition hover:prose-a:text-inherit hover:prose-a:opacity-80;
-}
+  .z-base {
+    @apply z-0;
+  }
 
-.prose h1:first-child,
-.prose h2:first-child,
-.prose h3:first-child,
-.prose h4:first-child,
-.prose h5:first-child,
-.prose h6:first-child,
-.prose p:first-child,
-.prose a:first-child,
-.prose code:first-child,
-.prose blockquote:first-child,
-.prose .astro-code:first-child {
-  @apply mt-0;
-}
+  .z-nav {
+    @apply z-10;
+  }
 
-.prose .astro-code code {
-  @apply border-none bg-inherit;
-}
+  .z-overlay {
+    @apply z-20;
+  }
 
-/* youtube embed */
-.prose iframe {
-  @apply mr-auto min-w-0 max-w-full;
+  .z-modal {
+    @apply z-30;
+  }
+
+  .z-toast {
+    @apply z-40;
+  }
+
+  .z-tooltip {
+    @apply z-50;
+  }
 }
-/* end blog post markdown styling */

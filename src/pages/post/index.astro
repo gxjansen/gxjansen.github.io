@@ -23,15 +23,6 @@ const posts = await getCollection("post", ({ data }) => {
 const sortedPosts = posts.sort((a, b) => 
   new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
-
-// Get all categories for the filter bar
-const allCategories = posts
-  .map(post => post.data.categories || [])
-  .flat()
-  .filter(category => category); // Filter out undefined/null values
-
-const countedItems = countItems(allCategories);
-const processedCategories = sortByValue(countedItems);
 ---
 
 <BaseLayout title="Blog" description="Latest blog posts and articles">
@@ -58,25 +49,9 @@ const processedCategories = sortByValue(countedItems);
             </div>
           </div>
 
-          <!-- Category filters
-          <div class="container mx-auto px-4 mb-12">
-            <div class="flex flex-wrap justify-center gap-4">
-              {processedCategories
-                .filter(([_, __, count]) => count >= 2)
-                .map(([slug, original]) => (
-                <a
-                  href={`/categories/${slug}`}
-                  class="filter-badge"
-                >
-                  {original}
-                </a>
-              ))}
-            </div>
-          </div> -->
-
           <!-- Blog posts grid -->
           <div class="container mx-auto px-4">
-          <div class="cards-grid">
+            <div class="cards-grid">
               {sortedPosts.map(post => (
                 <PostCardAtlas post={post} showDescription={true} />
               ))}

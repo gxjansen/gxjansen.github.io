@@ -12,7 +12,7 @@
   /* paragraphs */
   @apply prose-p:my-2 prose-p:leading-normal prose-p:text-base-500 dark:prose-p:text-white;
   /* bold text */
-  @apply prose-strong:font-bold prose-strong:text-base-900 prose-strong:dark:text-white;
+  @apply prose-strong:font-bold prose-strong:text-base-900 dark:prose-strong:text-white;
   /* code */
   @apply prose-code:rounded-md prose-code:border-2 prose-code:border-solid prose-code:border-base-200 prose-code:bg-base-50 prose-code:px-[.1rem] prose-code:font-normal prose-code:text-inherit dark:prose-code:border-base-800 dark:prose-code:bg-base-800 sm:prose-code:text-base;
   /* code remove backticks */
@@ -24,8 +24,8 @@
   }
   /* lists */
   @apply prose-li:text-base-500 dark:prose-li:text-base-300;
-  /* anchor links */
-  @apply prose-a:text-base-600 prose-a:underline prose-a:decoration-primary-500 prose-a:transition hover:prose-a:text-primary-500 dark:prose-a:text-base-200 dark:hover:prose-a:text-primary-500;
+  /* anchor links - match primary-link utility class */
+  @apply prose-a:text-primary-500 prose-a:underline prose-a:decoration-primary-500 hover:prose-a:text-primary-600 dark:prose-a:text-primary-400 dark:hover:prose-a:text-primary-300;
   /* images */
   @apply prose-img:mx-auto prose-img:h-auto prose-img:w-full prose-img:max-w-[800px] prose-img:rounded-md;
   /* video */
@@ -75,4 +75,3 @@
 .prose iframe {
   @apply mr-auto min-w-0 max-w-full;
 }
-/* end blog post markdown styling */

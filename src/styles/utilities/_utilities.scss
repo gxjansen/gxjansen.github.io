@@ -58,7 +58,7 @@
   }
 
   .primary-link {
-    @apply text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300;
+    @apply text-primary-500 underline decoration-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300;
   }
 
   .code-block {

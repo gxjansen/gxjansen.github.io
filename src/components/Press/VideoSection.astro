@@ -13,13 +13,6 @@ function getYouTubeId(url: string): string {
   const match = url?.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
   return match ? match[1] : '';
 }
-
-// Debug: Log videos data
-console.log('Videos data:', videos.map(video => ({
-  title: video.title,
-  url: video.youtubeLink,
-  id: getYouTubeId(video.youtubeLink || '')
-})));
 ---
 
 <section id="videos" class="mb-16">
