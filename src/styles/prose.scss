@@ -1,3 +1,12 @@
+/* Strong text overrides */
+.prose strong {
+  color: rgb(17, 24, 39) !important; /* base-900 */
+}
+
+html[class~="dark"] .prose strong {
+  color: rgb(255, 255, 255) !important; /* white */
+}
+
 /* Markdown and MDX Styling for blog posts, using @tailwind/typography with `prose` */
 .prose {
   /* emergency word break */
@@ -10,9 +19,9 @@
   /* all headings */
   @apply prose-headings:mb-5 prose-headings:mt-7 prose-headings:text-base-900 dark:prose-headings:text-base-100;
   /* paragraphs */
-  @apply prose-p:my-2 prose-p:leading-normal prose-p:text-base-500 dark:prose-p:text-base-300;
+  @apply prose-p:my-2 prose-p:leading-normal prose-p:text-base-500 dark:prose-p:text-white;
   /* bold text */
-  @apply prose-strong:font-medium dark:prose-strong:text-base-300;
+  @apply prose-strong:font-bold;
   /* code */
   @apply prose-code:rounded-md prose-code:border-2 prose-code:border-solid prose-code:border-base-200 prose-code:bg-base-50 prose-code:px-[.1rem] prose-code:font-normal prose-code:text-inherit dark:prose-code:border-base-800 dark:prose-code:bg-base-800 sm:prose-code:text-base;
   /* code remove backticks */
