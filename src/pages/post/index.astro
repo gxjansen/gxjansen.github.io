@@ -34,12 +34,12 @@ const countedItems = countItems(allCategories);
 const processedCategories = sortByValue(countedItems);
 ---
 
-<BaseLayout title="Blog" description="Latest blog posts and articles" transition:animate="slide">
+<BaseLayout title="Blog" description="Latest blog posts and articles">
   <section class="py-24 md:py-28">
     <div class="site-container">
       <div class="grid-pattern-container">
         <div class="relative">
-          <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+          <div class="mx-auto mb-16 text-center md:max-w-4xl">
             <Badge>Blog</Badge>
             <h2 class="h2 mb-4">Latest Articles</h2>
             <p class="description text-lg md:text-xl">
@@ -58,7 +58,7 @@ const processedCategories = sortByValue(countedItems);
             </div>
           </div>
 
-          <!-- Category filters -->
+          <!-- Category filters
           <div class="container mx-auto px-4 mb-12">
             <div class="flex flex-wrap justify-center gap-4">
               {processedCategories
@@ -72,7 +72,7 @@ const processedCategories = sortByValue(countedItems);
                 </a>
               ))}
             </div>
-          </div>
+          </div> -->
 
           <!-- Blog posts grid -->
           <div class="container mx-auto px-4">
