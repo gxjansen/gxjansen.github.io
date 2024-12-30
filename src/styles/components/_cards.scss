@@ -6,41 +6,41 @@
 
   /* Card Variants */
   .social-card {
-    @apply flex flex-col items-center p-6;
+    @apply flex flex-col items-center px-2 py-4 sm:p-6;
   }
 
   .post-card, .presentation-card, .article-card, .event-card {
-    @apply p-6;
+    @apply px-2 py-4 sm:p-6;
   }
 
   /* Card Grid Layout */
   .cards-grid {
-    @apply grid gap-16 sm:grid-cols-2 lg:grid-cols-3;
+    @apply grid gap-6 sm:gap-8 lg:gap-16 sm:grid-cols-2 lg:grid-cols-3;
   }
 
   /* Card Components */
   .card-container {  
-    @apply block aspect-[16/9] overflow-hidden -mx-6 -mt-6 mb-6 bg-base-200 dark:bg-base-800;
+    @apply relative block aspect-[16/9] overflow-hidden -mx-2 sm:-mx-6 -mt-4 sm:-mt-6 mb-4 sm:mb-6;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
   }  
 
   .card-image {  
-    @apply h-full w-full object-contain transition-transform duration-500 hover:scale-105 opacity-80 contrast-125 dark:opacity-90 dark:contrast-125 p-4;  
+    @apply absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105 opacity-90 dark:opacity-100;  
   }  
 
   /* Event Card Specific */
   .event-card img {
-    @apply opacity-80 contrast-125 dark:opacity-90 dark:contrast-125;
+    @apply opacity-90 dark:opacity-100;
   }
 
   /* Video card specific styles */
   .video-card {
-    @apply p-6;
+    @apply px-2 py-4 sm:p-6;
   }
 
   .video-card .card-container {
-    @apply block aspect-[16/9] overflow-hidden -mx-6 -mt-6 mb-6 relative bg-base-200 dark:bg-base-800;
+    @apply relative block aspect-[16/9] overflow-hidden -mx-2 sm:-mx-6 -mt-4 sm:-mt-6 mb-4 sm:mb-6;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
   }
@@ -60,12 +60,12 @@
   }
 
   .video-card .card-image {
-    @apply w-full h-full object-cover opacity-80 contrast-125 dark:opacity-90 dark:contrast-125;
+    @apply absolute inset-0 h-full w-full object-cover opacity-90 dark:opacity-100;
   }
 
   /* Card Content Area */
   article[class*="card"] > *:not(.card-container) {
-    @apply px-6;
+    @apply px-2 sm:px-6;
   }
 
   .social-card-icon-wrapper {
@@ -77,15 +77,15 @@
   }
 
   .card-categories {  
-    @apply mt-6 flex flex-wrap gap-4;  
+    @apply mt-4 sm:mt-6 flex flex-wrap gap-2 sm:gap-4;  
   }  
 
   .card-author-date {  
-    @apply mt-3 text-sm font-medium text-base-500 dark:text-base-400;  
+    @apply mt-2 sm:mt-3 text-sm font-medium text-base-500 dark:text-base-400;  
   }  
 
   .card-title {  
-    @apply text-xl font-bold dark:text-base-100 md:text-2xl;  
+    @apply text-lg sm:text-xl font-bold dark:text-base-100 md:text-2xl;  
   }  
 
   .card-description {  
