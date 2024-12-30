@@ -23,12 +23,12 @@ const visibleLinks = socialLinks.filter(link => {
 ---
 
 <nav
-  class:list={["relative z-10", className]}
+  class:list={["relative z-10 max-w-full", className]}
   role="navigation"
   aria-label="Social media links"
 >
   <ul 
-    class="flex items-center gap-4 pointer-events-auto" 
+    class="flex items-center gap-2 sm:gap-3 md:gap-4 pointer-events-auto overflow-x-auto whitespace-nowrap px-4 sm:px-0 [&::-webkit-scrollbar]:hidden" 
     role="list"
   >
     {
@@ -38,6 +38,7 @@ const visibleLinks = socialLinks.filter(link => {
             href={href}
             icon={icon}
             social={name}
+            class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"
           />
         </li>
       ))
