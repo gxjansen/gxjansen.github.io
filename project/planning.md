@@ -72,13 +72,6 @@
 - [x] on /press/, the podcasts often only seem to load after a refresh
 - [x] Why is there bot a src/pages/post/[...slug].astro and a src/pages/post/[slug].astro? Is one of them redundant?
 
-## Subprojects Todo
-
-### Checks
-- [ ] Redirects
-- [ ] Check site on mobile
-- [ ] fix /categories/experimentation
-
 ### Performance
 - [x] Implement lazy loading for images
 - [x] Add image preloading for critical content
@@ -87,6 +80,13 @@
 - [x] Add proper caching headers
 - [x] Implement view transitions
 - [x] Add error boundaries for embedded content
+
+## Subprojects Todo
+
+### Checks
+- [ ] Redirects
+- [ ] Check site on mobile
+- [ ] fix /categories/experimentation
 
 ### Testing
 - [ ] Add unit tests for components
