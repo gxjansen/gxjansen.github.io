@@ -114,6 +114,7 @@
 - [ ] Podcast subscription links
 - [ ] Add Bluesky comments
 - [ ] Add Latest BlueSky posts feed
+- [ ] Blog tags/categories
 - [ ] For cards on /presentations and /post/ overview pages, make the whole card clickable, not just the image
 
 ### Motion

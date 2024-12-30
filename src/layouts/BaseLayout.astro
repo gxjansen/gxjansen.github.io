@@ -171,8 +171,13 @@ const currLocale = getLocaleFromUrl(Astro.url);
             disable: 'mobile' // Disable on mobile for better performance
           });
 
-          // runs on view transitions navigation
-          document.addEventListener("astro:after-swap", AOS.refreshHard);
+      // runs on view transitions navigation
+      document.addEventListener("astro:after-swap", () => {
+        // Small delay to ensure DOM is ready after view transition
+        setTimeout(() => {
+          AOS.refreshHard();
+        }, 100);
+      });
         }
       }
     </script>
