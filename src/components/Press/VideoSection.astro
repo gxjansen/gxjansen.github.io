@@ -33,7 +33,7 @@ console.log('Videos data:', videos.map(video => ({
         <article class="video-card">
           <div class="card-container">
             <div 
-              class="lazy-youtube bg-neutral-100 dark:bg-white/[.075] h-full" 
+              class="lazy-youtube h-full" 
               data-video-id={videoId}
               data-title={video.title}
             >
@@ -50,11 +50,12 @@ console.log('Videos data:', videos.map(video => ({
               
               <!-- Thumbnail -->
               <img 
-                src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+                src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
                 alt={`Preview thumbnail for video: ${video.title}`}
                 class="card-image"
                 loading="lazy"
                 decoding="async"
+                onerror="this.onerror=null; this.src=this.src.replace('maxresdefault', 'hqdefault');"
               />
               
               <!-- Play button -->

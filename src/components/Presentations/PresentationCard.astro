@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 
 export interface Props {
   presentation: CollectionEntry<'presentations'>;
@@ -12,13 +13,14 @@ const { title, duration, intendedAudience, isWorkshop, image } = presentation.da
 <article class="presentation-card group">
   <a href={`/presentations/${presentation.slug}`} class="card-container">
     {image && (
-      <img 
+      <Image 
         src={image} 
         alt={title || ''} 
+        width={1600}
+        height={900}
         class="card-image"
-        width="800"
-        height="450"
         transition:name={`presentation-image-${presentation.slug}`}
+        style="background: transparent;"
       />
     )}
   </a>

@@ -36,10 +36,11 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
       <Image
         src={heroImage}
         alt={`Cover for ${title}`}
-        width={800}
-        height={450}
+        width={1600}
+        height={900}
         class="card-image"
         transition:name={`heroImage-${post.slug}`}
+        style="background: transparent;"
       />
     )}
   </a>
