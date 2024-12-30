@@ -39,42 +39,45 @@
   }
 
   .alert-info {
-    @apply bg-blue-50 border border-blue-100 text-blue-600;
-    .alert-title { @apply text-blue-800; }
-    .alert-description { @apply text-blue-600; }
+    @apply bg-blue-50 border border-blue-100 text-blue-600 dark:bg-blue-950 dark:border-blue-900 dark:text-blue-300;
+    .alert-title { @apply text-blue-800 dark:text-blue-200; }
+    .alert-description { @apply text-blue-600 dark:text-blue-300; }
   }
 
   .alert-success {
-    @apply bg-emerald-50 border border-emerald-100 text-emerald-500;
-    .alert-title { @apply text-green-600; }
-    .alert-description { @apply text-green-500; }
+    @apply bg-emerald-50 border border-emerald-100 text-emerald-500 dark:bg-emerald-950 dark:border-emerald-900 dark:text-emerald-300;
+    .alert-title { @apply text-green-600 dark:text-green-200; }
+    .alert-description { @apply text-green-500 dark:text-green-300; }
   }
 
   .alert-warning {
-    @apply bg-amber-50 border border-amber-100 text-amber-500;
-    .alert-title { @apply text-yellow-800; }
-    .alert-description { @apply text-yellow-600; }
+    @apply bg-amber-50 border border-amber-100 text-amber-500 dark:bg-amber-950 dark:border-amber-900 dark:text-amber-300;
+    .alert-title { @apply text-yellow-800 dark:text-yellow-200; }
+    .alert-description { @apply text-yellow-600 dark:text-yellow-300; }
   }
 
   .alert-error {
-    @apply bg-rose-50 border border-rose-100 text-rose-800;
-    .alert-description { @apply text-rose-600; }
+    @apply bg-rose-50 border border-rose-100 text-rose-800 dark:bg-rose-950 dark:border-rose-900 dark:text-rose-300;
+    .alert-title { @apply text-rose-800 dark:text-rose-200; }
+    .alert-description { @apply text-rose-600 dark:text-rose-300; }
   }
 
   .alert-neutral {
-    @apply bg-base-50 text-base-500;
-    .alert-title { @apply text-base-700; }
-    .alert-description { @apply text-base-500; }
+    @apply bg-base-50 text-base-500 dark:bg-base-900 dark:text-base-400;
+    .alert-title { @apply text-base-700 dark:text-base-200; }
+    .alert-description { @apply text-base-500 dark:text-base-400; }
   }
 
   .alert-neutral-dark {
     @apply bg-base-950 text-white ring-1 ring-white/5;
+    .alert-title { @apply text-base-100; }
     .alert-description { @apply text-base-300; }
   }
 
   .alert-accent {
     @apply bg-primary-500 text-white ring-1 ring-white/5;
-    .alert-description { @apply text-base-300; }
+    .alert-title { @apply text-white; }
+    .alert-description { @apply text-base-100; }
   }
 
   .alert-button {
