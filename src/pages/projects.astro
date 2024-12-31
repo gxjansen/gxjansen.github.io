@@ -6,13 +6,18 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import Badge from "@components/Badge/Badge.astro";
 import ProjectCard from "@components/Projects/ProjectCard.astro";
 
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+
 // data
 import { indieProjects } from "@data/indieProjects";
+
+const currLocale = getLocaleFromUrl(Astro.url);
 ---
 
 <BaseLayout
   title="IndieHacker Projects"
-  description="Check out the indie projects I'm currently working on"
+  description="Check out the indie projects I'm currently working on."
   transition:animate="slide"
 >
   <section class="py-24 md:py-28">
@@ -22,7 +27,7 @@ import { indieProjects } from "@data/indieProjects";
           <Badge>Projects</Badge>
           <h2 class="h2 mb-4">IndieHacker Projects</h2>
           <p class="description text-lg md:text-xl">
-            Here are some of the indie projects I'm currently working on
+            Here are some of the indie projects I'm currently working on. All are available on GitHub under MIT license.
           </p>
         </div>
         
