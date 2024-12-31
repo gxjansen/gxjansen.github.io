@@ -28,7 +28,10 @@ const visibleLinks = socialLinks.filter(link => {
   aria-label="Social media links"
 >
   <ul 
-    class="flex items-center gap-2 sm:gap-3 md:gap-4 pointer-events-auto overflow-x-auto whitespace-nowrap px-4 sm:px-0 [&::-webkit-scrollbar]:hidden" 
+    class:list={[
+      "flex items-center gap-2 sm:gap-3 md:gap-4 pointer-events-auto overflow-x-auto whitespace-nowrap [&::-webkit-scrollbar]:hidden",
+      context === 'footer' ? 'pr-6' : 'px-4 sm:px-0'
+    ]}
     role="list"
   >
     {
@@ -38,7 +41,10 @@ const visibleLinks = socialLinks.filter(link => {
             href={href}
             icon={icon}
             social={name}
-            class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"
+            class:list={[
+              "transition-transform hover:scale-110",
+              context === 'footer' ? 'w-6 h-6 sm:w-6 sm:h-6' : 'w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8'
+            ]}
           />
         </li>
       ))

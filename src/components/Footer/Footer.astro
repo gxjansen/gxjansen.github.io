@@ -70,14 +70,15 @@ const today = new Date();
   >
     <div class="site-container">
       <div class="mt-6">
-        <div class="flex flex-wrap justify-between gap-6">
-          <p class="my-auto">
+        <div class="flex flex-col sm:flex-row justify-between gap-6">
+          <p class="my-auto order-2 sm:order-1">
             <span aria-label="Copyright">&copy;</span> {today.getFullYear()}
             {" "}{siteData.name}. All rights reserved.
           </p>
           
           <!-- Social Links -->
           <div 
+            class="w-full sm:w-auto overflow-x-auto order-1 sm:order-2"
             aria-label="Social media links"
             role="navigation"
           >
