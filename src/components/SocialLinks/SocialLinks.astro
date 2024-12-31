@@ -23,7 +23,7 @@ const visibleLinks = socialLinks.filter(link => {
 ---
 
 <nav
-  class:list={["relative z-10 max-w-full", className]}
+  class:list={["relative", className]}
   role="navigation"
   aria-label="Social media links"
 >
@@ -36,7 +36,46 @@ const visibleLinks = socialLinks.filter(link => {
   >
     {
       visibleLinks.map(({ name, href, icon }) => (
-        <li role="listitem">
+        <li role="listitem" class="group relative pt-8">
+          <div class="
+            absolute 
+            left-1/2 
+            -translate-x-1/2 
+            top-0
+            opacity-0 
+            group-hover:opacity-100 
+            transition-opacity 
+            duration-200
+            pointer-events-none
+            z-[100]
+          ">
+            <div class="
+              bg-base-900/90 
+              text-base-50 
+              text-xs 
+              px-2.5 
+              py-1.5 
+              rounded-md
+              whitespace-nowrap
+              shadow-lg
+              backdrop-blur-sm
+              border
+              border-base-700/20
+              mb-6
+            ">
+              {name}
+              <div class="
+                absolute 
+                left-1/2 
+                -translate-x-1/2
+                border-4 
+                border-transparent 
+                border-t-base-900/90
+                top-full
+                -mt-px
+              "></div>
+            </div>
+          </div>
           <SocialIcon
             href={href}
             icon={icon}

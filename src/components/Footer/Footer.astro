@@ -4,7 +4,6 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 // components
 import FooterLink from "@components/Footer/FooterLink.astro";
 import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
-import Button from "@components/Button/Button.astro";
 import SocialLinks from "@components/SocialLinks/SocialLinks.astro";
 
 // utils
@@ -19,7 +18,7 @@ const today = new Date();
 ---
 
 <footer 
-  class="overflow-x-clip pb-16 pt-20 font-medium text-base-500 dark:text-base-400"
+  class="relative z-10 overflow-x-clip pb-16 pt-20 font-medium text-base-500 dark:text-base-400"
   role="contentinfo"
   aria-label="Site footer"
 >
@@ -64,14 +63,14 @@ const today = new Date();
   </div>
 
   <div 
-    class="mt-6 border-t border-t-base-200/50 text-sm text-base-400 dark:text-base-500"
+    class="mt-2 border-t border-t-base-200/50 text-sm text-base-400 dark:text-base-500"
     role="contentinfo"
     aria-label="Copyright and social links"
   >
     <div class="site-container">
-      <div class="mt-6">
+      <div class="mt-2">
         <div class="flex flex-col sm:flex-row justify-between gap-6">
-          <p class="my-auto order-2 sm:order-1">
+          <p class="my-auto order-2 sm:order-1 pt-8">
             <span aria-label="Copyright">&copy;</span> {today.getFullYear()}
             {" "}{siteData.name}. All rights reserved.
           </p>

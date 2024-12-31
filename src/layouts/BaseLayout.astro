@@ -18,8 +18,6 @@ import { getLocaleFromUrl } from "@js/localeUtils";
 // data
 import siteSettings from "@config/siteSettings.json";
 
-// heroImage and authorData are defined on blog posts
-// authorData could also be defined on the about author page
 interface Props {
   type?: "blog" | "general";
   title: string;
@@ -27,7 +25,7 @@ interface Props {
   image?: ImageMetadata;
   authorsData?: CollectionEntry<"authors">[];
   postFrontmatter?: CollectionEntry<"post">["data"];
-  noindex?: boolean; // you need to opt-in to no indexing, as it hides the page from search engines
+  noindex?: boolean;
 }
 
 const {
@@ -88,55 +86,54 @@ const currLocale = getLocaleFromUrl(Astro.url);
     id="body"
     class={`bg-background dark:bg-background-dark ${
       siteSettings.useAnimations === true ? "use-animations" : ""
-    } relative isolate overflow-x-hidden`}
+    } relative isolate overflow-x-hidden min-h-screen flex flex-col`}
   >
-    {/* Noise overlay */}
-    <div 
-      class="noise-background z-background"
-      aria-hidden="true"
-      role="presentation"
-    ></div>
+    {/* Background elements */}
+    <div class="fixed inset-0 z-background">
+      {/* Noise overlay */}
+      <div 
+        class="noise-background"
+        aria-hidden="true"
+        role="presentation"
+      ></div>
 
-    <!-- Top-left gradient with extended fade -->
-    <div 
-      class="gradient-top-left z-background"
-      aria-hidden="true"
-      role="presentation"
-    />
-    
-    <!-- Bottom-right gradient with extended fade -->
-    <div 
-      class="gradient-bottom-right z-background"
-      aria-hidden="true"
-      role="presentation"
-    />
+      <!-- Top-left gradient with extended fade -->
+      <div 
+        class="gradient-top-left"
+        aria-hidden="true"
+        role="presentation"
+      />
+      
+      <!-- Bottom-right gradient with extended fade -->
+      <div 
+        class="gradient-bottom-right"
+        aria-hidden="true"
+        role="presentation"
+      />
+
+      {/* Background grid pattern */}
+      <div class="grid-pattern-container h-full w-full" />
+    </div>
 
     <EnvironmentBanner />
-    <!-- put cookie consent first so it is seen first by screen readers -->
-    <!-- <CookieConsent /> -->
-    <div class="min-h-[100lvh] relative">
-      {/* Background grid pattern */}
-      <div class="fixed inset-0 z-background">
-        <div class="grid-pattern-container h-full w-full" />
-      </div>
-      
-      {/* Main content */}
-      <div class="relative z-base">
-        <Nav />
-        <div class="site-container px-4">
-          <main 
-            id="main-content"
-            class="transition-ready" 
-            transition:animate="fade" 
-            transition:animate.duration="0.2" 
-            transition:animate.timing="ease-out"
-          >
-            <slot />
-          </main>
-          <Footer />
-        </div>
+    
+    {/* Main content */}
+    <div class="relative z-base flex-1">
+      <Nav />
+      <div class="site-container px-4">
+        <main 
+          id="main-content"
+          class="transition-ready" 
+          transition:animate="fade" 
+          transition:animate.duration="0.2" 
+          transition:animate.timing="ease-out"
+        >
+          <slot />
+        </main>
       </div>
     </div>
+
+    <Footer />
 
     <!-- Performance optimizations -->
     <script>
@@ -171,13 +168,13 @@ const currLocale = getLocaleFromUrl(Astro.url);
             disable: 'mobile' // Disable on mobile for better performance
           });
 
-      // runs on view transitions navigation
-      document.addEventListener("astro:after-swap", () => {
-        // Small delay to ensure DOM is ready after view transition
-        setTimeout(() => {
-          AOS.refreshHard();
-        }, 100);
-      });
+          // runs on view transitions navigation
+          document.addEventListener("astro:after-swap", () => {
+            // Small delay to ensure DOM is ready after view transition
+            setTimeout(() => {
+              AOS.refreshHard();
+            }, 100);
+          });
         }
       }
     </script>
