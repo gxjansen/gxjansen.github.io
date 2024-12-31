@@ -38,7 +38,7 @@ export const socialLinks: SocialLink[] = [
     href: 'https://keybase.io/gxjansen',
     icon: 'tabler/IconKey',
     visibility: {
-      footer: false,
+      footer: true,
       hero: false,
       about: true,
       contact: true
@@ -61,7 +61,7 @@ export const socialLinks: SocialLink[] = [
     icon: 'tabler/brand-youtube',
     visibility: {
       footer: true,
-      hero: false,
+      hero: true,
       about: true,
       contact: false
     }
@@ -83,7 +83,7 @@ export const socialLinks: SocialLink[] = [
     icon: 'tabler/brand-bluesky',
     visibility: {
       footer: true,
-      hero: false,
+      hero: true,
       about: true,
       contact: true
     }
@@ -105,7 +105,7 @@ export const socialLinks: SocialLink[] = [
     icon: 'tabler/brand-x',
     visibility: {
       footer: true,
-      hero: true,
+      hero: false,
       about: true,
       contact: false
     }
