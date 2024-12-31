@@ -16,6 +16,40 @@
     @apply mx-auto max-w-7xl;
   }
 
+  /* Background Patterns */
+  .bg-grid-pattern {
+    background-image: url('/assets/grid-pattern-light.svg');
+    background-position: center;
+    background-repeat: repeat;
+  }
+
+  :root[class~="dark"] .bg-grid-pattern {
+    background-image: url('/assets/grid-pattern-dark.svg');
+  }
+
+  /* Grid pattern container with faded edges */
+  .grid-pattern-container {
+    @apply relative min-h-[200px];
+    pointer-events: none;
+
+    &::before {
+      content: "";
+      @apply absolute inset-0 bg-grid-pattern;
+      mask-image: radial-gradient(
+        ellipse at center,
+        black 30%,
+        transparent 80%
+      );
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    > * {
+      pointer-events: auto;
+    }
+  }
+
+  /* Z-index Management */
   .z-background {
     @apply -z-10;
   }
