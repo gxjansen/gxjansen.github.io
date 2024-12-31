@@ -1,19 +1,6 @@
 import type { CollectionEntry } from 'astro:content';
 import eventsData from '../data/events.json';
-
-interface Event {
-  id: string;
-  name: string;
-  icon: string;
-  date: string;
-  city: string;
-  country: string;
-  url: string;
-  workshop: boolean;
-  role: string;
-  topic: string;
-  relatedPresentationSlugs: string[];
-}
+import type { Event } from './eventUtils';
 
 // Type assertion for imported events data
 const events = eventsData as Event[];
@@ -24,15 +11,9 @@ const events = eventsData as Event[];
  * @returns Array of related events
  */
 export function getRelatedEvents(presentationSlug: string): Event[] {
-  console.log('Getting related events for:', presentationSlug);
-  console.log('Total events:', events.length);
-  console.log('Events with relatedPresentationSlugs:', events.filter(e => e.relatedPresentationSlugs?.length > 0).length);
-  
   const relatedEvents = events.filter(event => 
     event.relatedPresentationSlugs?.includes(presentationSlug) ?? false
   );
-  
-  console.log('Found related events:', relatedEvents.length);
   return relatedEvents;
 }
 
@@ -55,7 +36,7 @@ export function getRelatedPresentations(
 }
 
 /**
- * Get the URL for the first related presentation of an event
+ * Get the URL for the most recent related presentation of an event
  * @param eventId - The ID of the event
  * @returns The URL to the presentation or undefined if none exists
  */
@@ -65,8 +46,8 @@ export function getPresentationUrl(eventId: string): string | undefined {
     return undefined;
   }
   
-  // Return URL to the first related presentation
-  return `/presentations/${event.relatedPresentationSlugs[0]}`;
+  // Return URL using the last (most recent) related presentation slug
+  return `/presentations/${event.relatedPresentationSlugs[event.relatedPresentationSlugs.length - 1]}`;
 }
 
 /**
@@ -110,14 +91,3 @@ export function removeRelation(presentationSlug: string, eventId: string): void 
 export function getEventById(eventId: string): Event | undefined {
   return events.find(e => e.id === eventId);
 }
-
-/**
- * Get all events
- * @returns Array of all events
- */
-export function getAllEvents(): Event[] {
-  return events;
-}
-
-// Export Event interface for use in other files
-export type { Event };

@@ -1084,7 +1084,6 @@
     "role": "Speaker",
     "topic": "Magento Association",
     "relatedPresentationSlugs": [
-      "magento-association",
       "meet-magento-association"
     ]
   },
@@ -1125,9 +1124,7 @@
     "workshop": false,
     "role": "Speaker",
     "topic": "Interview about Dutchento",
-    "relatedPresentationSlugs": [
-      "dutchento"
-    ]
+    "relatedPresentationSlugs": []
   },
   {
     "id": "3xe-digital-cro-2019-02",
@@ -1598,7 +1595,6 @@
     "role": "Speaker",
     "topic": "Meet Magento Association",
     "relatedPresentationSlugs": [
-      "magento-association",
       "meet-magento-association"
     ]
   },
