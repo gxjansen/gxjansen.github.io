@@ -58,7 +58,7 @@ export const socialLinks: SocialLink[] = [
   {
     name: 'YouTube',
     href: 'https://www.youtube.com/@gxjansen',
-    icon: 'tabler/brand-youtube',
+    icon: 'tabler/filled/brand-youtube',
     visibility: {
       footer: true,
       hero: true,
@@ -69,7 +69,7 @@ export const socialLinks: SocialLink[] = [
   {
     name: 'GitHub',
     href: 'https://github.com/gxjansen',
-    icon: 'tabler/brand-github',
+    icon: 'tabler/filled/brand-github',
     visibility: {
       footer: true,
       hero: true,
@@ -102,7 +102,7 @@ export const socialLinks: SocialLink[] = [
   {
     name: 'Twitter (X)',
     href: 'https://twitter.com/guido',
-    icon: 'tabler/brand-x',
+    icon: 'tabler/filled/brand-x',
     visibility: {
       footer: true,
       hero: false,

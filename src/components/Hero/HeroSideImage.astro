@@ -63,7 +63,7 @@ const shouldReduceMotion = typeof window !== "undefined"
             data-aos-delay=".1"
             data-aos-trigger="#hero-side"
           >
-            {t("hero_description")}
+            <Fragment set:html={t("hero_description").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} />
           </p>
           <div
             class="mt-6 flex flex-wrap gap-4"

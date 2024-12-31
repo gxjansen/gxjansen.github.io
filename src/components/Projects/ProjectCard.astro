@@ -1,0 +1,58 @@
+---
+import { Icon } from "astro-icon";
+import Button from "@components/Button/Button.astro";
+
+interface Props {
+  name: string;
+  description: string;
+  mainImage: string;
+  link: string;
+  iconBgColor: string;
+}
+
+const { name, description, mainImage, link, iconBgColor } = Astro.props;
+---
+
+<article class="card group px-3 py-3 sm:px-4 sm:py-4">
+  <div class="grid grid-cols-1 md:grid-cols-[auto,1fr] gap-8 md:gap-6">
+    <div class="flex-shrink-0 mx-auto md:mx-0 pt-4 md:pt-0">
+      <div class={`rounded-lg ${iconBgColor} p-4 w-20 h-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}>
+        <img 
+          src={mainImage} 
+          alt={`${name} icon`}
+          width="48"
+          height="48"
+          class="w-12 h-12 text-base-50"
+        />
+      </div>
+    </div>
+    <div class="text-center md:text-left flex flex-col">
+      <h2 class="h2 mb-2">
+        {link ? (
+          <a href={link} target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors duration-200">
+            {name}
+          </a>
+        ) : (
+          name
+        )}
+      </h2>
+      <p class="card-description text-lg">
+        {description}
+      </p>
+      {link && (
+        <div class="mt-8">
+          <Button 
+            href={link}
+            variant="primary"
+            arrow="right"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Project
+            <span class="sr-only">View {name} project</span>
+          </Button>
+        </div>
+      )}
+    </div>
+  </div>
+</article>
