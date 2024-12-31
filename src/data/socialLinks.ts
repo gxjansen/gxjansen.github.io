@@ -23,12 +23,23 @@ export interface SocialLink {
 
 export const socialLinks: SocialLink[] = [
   {
+    name: 'Signal',
+    href: 'https://signal.me/#eu/-unUEm2N_tIpI5lcvxWOfJ2NeMRZ2KJ_etky02xAzQiKdoxJ4P9Nxqgl05zJBEMd',
+    icon: 'signal',
+    visibility: {
+      footer: true,
+      hero: true,
+      about: true,
+      contact: true
+    }
+  },
+  {
     name: 'Keybase',
     href: 'https://keybase.io/gxjansen',
     icon: 'tabler/IconKey',
     visibility: {
-      footer: true,
-      hero: true,
+      footer: false,
+      hero: false,
       about: true,
       contact: true
     }
