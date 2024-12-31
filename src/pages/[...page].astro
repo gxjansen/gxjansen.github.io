@@ -30,12 +30,15 @@ export async function getStaticPaths() {
   }));
 }
 
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const page = Astro.props as Props;
+type Props = CollectionEntry<"otherPages">;
+const page = Astro.props;
 
-// get content and metadata
+// Ensure we have valid page data
 if (!page?.data) {
-  throw new Error(`Page data is undefined for slug: ${page.slug}`);
+  return new Response('Page not found', {
+    status: 404,
+    statusText: 'Not Found'
+  });
 }
 
 const { title, description, body } = page.data;

@@ -68,25 +68,54 @@ const featureData: FeatureData[] = [
             Podcasting is a great way to learn, share and get to know people. I've published over 250 episodes for different podcasts:
           </p> -->
         </div>
-        <div
-          class="grid gap-4 sm:grid-cols-2 md:grid-cols-3"
+        <div 
+          class="scroll-container-wrapper"
           id="services-icon-cards"
         >
-          {
-            featureData.map((feature, idx) => (
-              <ContentCard
-                title={feature.title}
-                text={feature.text}
-                icon={feature.icon}
-                href={feature.href}
-                idx={idx}
-                data-aos="zoom-in"
-                data-aos-delay={0.15 * idx}
-                data-aos-trigger="#services-icon-cards"
-              />
-            ))
-          }
+          <span class="sr-only" role="status" aria-live="polite">
+            Scroll horizontally to see more content
+          </span>
+          <div
+            class="scroll-container"
+            role="region"
+            aria-label="Scrollable content"
+            tabindex="0"
+          >
+            {
+              featureData.map((feature, idx) => (
+                <div class="scroll-item">
+                  <ContentCard
+                    title={feature.title}
+                    text={feature.text}
+                    icon={feature.icon}
+                    href={feature.href}
+                    idx={idx}
+                    data-aos="zoom-in"
+                    data-aos-delay={0.15 * idx}
+                    data-aos-trigger="#services-icon-cards"
+                  />
+                </div>
+              ))
+            }
+          </div>
         </div>
+
+        <script>
+          // Handle scroll gradient visibility
+          const wrapper = document.querySelector('.scroll-container-wrapper');
+          const container = wrapper?.querySelector('.scroll-container');
+
+          if (wrapper && container) {
+            const checkScroll = () => {
+              const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10;
+              wrapper.setAttribute('data-at-end', isAtEnd.toString());
+            };
+
+            container.addEventListener('scroll', checkScroll);
+            window.addEventListener('resize', checkScroll);
+            checkScroll(); // Initial check
+          }
+        </script>
       </div>
     </div>
   </div>

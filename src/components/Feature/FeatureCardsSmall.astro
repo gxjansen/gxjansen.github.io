@@ -88,26 +88,53 @@ const shouldReduceMotion = typeof window !== "undefined"
         Let me help your business.
       </p>
     </div>
-    <div
+    <div 
+      class="scroll-container-wrapper"
       id="trigger-small-cards"
-      class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-      role="list"
-      aria-label="Available services"
     >
-      {
-        featureData.map((feature, idx) => (
-          <FeatureCard
-            title={feature.title}
-            text={feature.text}
-            icon={feature.icon}
-            data-aos={shouldReduceMotion ? "" : "zoom-in"}
-            data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
-            data-aos-trigger="#trigger-small-cards"
-            aria-label={`Service: ${feature.title}`}
-          />
-        ))
-      }
+      <span class="sr-only" role="status" aria-live="polite">
+        Scroll horizontally to see more content
+      </span>
+      <div
+        class="scroll-container"
+        role="region"
+        aria-label="Available services"
+        tabindex="0"
+      >
+        {
+          featureData.map((feature, idx) => (
+            <div class="scroll-item">
+              <FeatureCard
+                title={feature.title}
+                text={feature.text}
+                icon={feature.icon}
+                data-aos={shouldReduceMotion ? "" : "zoom-in"}
+                data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
+                data-aos-trigger="#trigger-small-cards"
+                aria-label={`Service: ${feature.title}`}
+              />
+            </div>
+          ))
+        }
+      </div>
     </div>
+
+    <script>
+      // Handle scroll gradient visibility
+      const wrapper = document.querySelector('#trigger-small-cards');
+      const container = wrapper?.querySelector('.scroll-container');
+
+      if (wrapper && container) {
+        const checkScroll = () => {
+          const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10;
+          wrapper.setAttribute('data-at-end', isAtEnd.toString());
+        };
+
+        container.addEventListener('scroll', checkScroll);
+        window.addEventListener('resize', checkScroll);
+        checkScroll(); // Initial check
+      }
+    </script>
   </div>
 </section>
 
