@@ -7,7 +7,7 @@ const siteData: SiteDataProps = {
   title:
     "Guido X Jansen | Global Business & Technology Evangelist",
   description:
-    "I'm a psychologist working in E-commerce. ‍ I build community & business experimentation teams & programs at innovative businesses.",
+    "I'm a Cognitive psychologist bridging the gap between human behavior and e-commerce technology.",
   // used on contact page and footer
   contact: {
     address1: "Ouderkerk aan de Amstel,",
