@@ -45,6 +45,13 @@ const wrapperClasses = linkUrl
 
 // Load country flag if country code is provided
 const flagImage = country ? await loadCountryFlag(country) : null;
+
+// Format date
+const eventDate = new Date(date).toLocaleDateString("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric"
+});
 ---
 
 <article class="event-card group">
@@ -95,26 +102,23 @@ const flagImage = country ? await loadCountryFlag(country) : null;
           )}
         </div>
       </div>
-      <div class="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-1">
-        {flagImage ? (
-          <Image
-            src={flagImage}
-            alt={`Flag of ${country}`}
-            width={16}
-            height={12}
-            class="inline-block rounded-sm mb-0 mix-blend-multiply dark:mix-blend-screen"
-          />
-        ) : (
-          <span>🌎</span>
-        )}
-        <span>{city} &mdash; {" "}</span>
-        <span>
-          {new Date(date).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric"
-          })}
-        </span>
+      <div class="text-sm text-gray-600 dark:text-gray-300 flex flex-col sm:flex-row sm:items-center sm:gap-1">
+        <div class="flex items-center gap-1">
+          {flagImage ? (
+            <Image
+              src={flagImage}
+              alt={`Flag of ${country}`}
+              width={16}
+              height={12}
+              class="inline-block rounded-sm mb-0 mix-blend-multiply dark:mix-blend-screen"
+            />
+          ) : (
+            <span>🌎</span>
+          )}
+          <span>{city}</span>
+        </div>
+        <span class="hidden sm:inline">&mdash;</span>
+        <span>{eventDate}</span>
       </div>
     </div>
   </div>
