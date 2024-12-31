@@ -2,6 +2,7 @@
 import type { ImageMetadata } from 'astro';
 
 export interface Event {
+  id: string;
   name: string;
   date: string;
   url?: string;
@@ -12,6 +13,7 @@ export interface Event {
   workshop: boolean;
   icon?: string;
   loadedIcon: ImageMetadata | null;
+  relatedPresentationSlugs: string[]; // Changed from optional to required, with empty array as default
 }
 
 // Import all event icons as modules with correct typing for Astro's image handling
@@ -70,8 +72,14 @@ export async function getAllEvents(): Promise<Event[]> {
     // Dynamically import events data
     const eventsData = (await import('../data/events.json')).default;
     
+    // Ensure each event has relatedPresentationSlugs (default to empty array)
+    const eventsWithSlugs = eventsData.map(event => ({
+      ...event,
+      relatedPresentationSlugs: event.relatedPresentationSlugs || []
+    }));
+    
     // Load icons for all events
-    return loadEventIcons(eventsData as Omit<Event, 'loadedIcon'>[]);
+    return loadEventIcons(eventsWithSlugs as Omit<Event, 'loadedIcon'>[]);
 }
 
 /**

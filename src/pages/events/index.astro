@@ -9,15 +9,13 @@ import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
 import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
 
 // utils
-import { getAllEvents, getPresentationUrl } from "@utils/eventPresentationRelations";
-import { loadEventIcons } from "@utils/eventUtils";
+import { getPresentationUrl } from "@utils/eventPresentationRelations";
+import { getAllEvents, loadEventIcons } from "@utils/eventUtils";
 
 // Get all events and sort them by date
-const events = getAllEvents();
-const sortedEvents = await loadEventIcons(
-  [...events].sort((a, b) => 
-    new Date(b.date).getTime() - new Date(a.date).getTime()
-  )
+const events = await getAllEvents();
+const sortedEvents = [...events].sort((a, b) => 
+  new Date(b.date).getTime() - new Date(a.date).getTime()
 );
 
 // Split events into two columns for better organization
