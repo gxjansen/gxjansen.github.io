@@ -52,7 +52,7 @@ const t = useTranslations(currLocale);
         data-aos-delay=".1"
         data-aos-trigger="#hero-center"
       >
-        {t("hero_description")}
+        <Fragment set:html={t("hero_description").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} />
       </p>
       <div class="flex flex-wrap justify-center gap-4">
         <Button

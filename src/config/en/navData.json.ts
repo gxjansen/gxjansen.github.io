@@ -1,19 +1,52 @@
 const navConfig = [
   {
-    text: "Podcasts",
-    link: "/podcasts",
+    text: "Creations",
+    dropdown: [
+      {
+        text: "Podcasts",
+        link: "/podcasts",
+        icon: "tabler/outline/microphone",
+      },
+      {
+        text: "Articles",
+        link: "/post",
+        icon: "tabler/outline/article",
+      },
+      {
+        text: "Presentations",
+        link: "/presentations",
+        icon: "tabler/outline/presentation",
+      },
+      {
+        text: "Indie Projects",
+        link: "/projects",
+        icon: "tabler/outline/code",
+      },
+    ],
   },
   {
     text: "Events",
     link: "/events",
   },
   {
-    text: "Presentations",
-    link: "/presentations",
-  },
-  {
-    text: "Press",
-    link: "/press",
+    text: "About",
+    dropdown: [
+      {
+        text: "About Me",
+        link: "/about",
+        icon: "tabler/outline/user",
+      },
+      {
+        text: "Press & Media Features",
+        link: "/press",
+        icon: "tabler/outline/news",
+      },
+      {
+        text: "Contact",
+        link: "/contact",
+        icon: "tabler/outline/messages",
+      },
+    ],
   },
   {
     text: "Pages",
@@ -63,25 +96,6 @@ const navConfig = [
             icon: "tabler/edit-circle",
           },
         ],
-      },
-    ],
-  },
-  {
-    text: "Articles",
-    link: "/post",
-  },
-  {
-    text: "About",
-    dropdown: [
-      {
-        text: "About Guido",
-        link: "/about",
-        icon: "tabler/outline/user",
-      },
-      {
-        text: "Contact",
-        link: "/contact",
-        icon: "tabler/outline/messages",
       },
     ],
   },
