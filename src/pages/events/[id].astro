@@ -8,12 +8,13 @@ import RelatedPresentations from "@components/RelatedPresentations/RelatedPresen
 import EventCard from "@components/Events/EventCard.astro";
 
 // utils
-import { getAllEvents, getEventById, getPresentationUrl } from "@utils/eventPresentationRelations";
-import type { Event } from "@utils/eventPresentationRelations";
+import { getAllEvents } from "@utils/eventUtils";
+import { getEventById, getPresentationUrl } from "@utils/eventPresentationRelations";
+import type { Event } from "@utils/eventUtils";
 
 // Generate static paths for all events
-export function getStaticPaths() {
-  const events = getAllEvents();
+export async function getStaticPaths() {
+  const events = await getAllEvents();
   return events.map(event => {
     const presentationUrl = getPresentationUrl(event.id);
     return {
