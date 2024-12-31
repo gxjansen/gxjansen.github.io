@@ -10,42 +10,17 @@ interface Props {
 const { icon, social, href } = Astro.props as Props;
 ---
 
-<div class="relative group inline-block">
-  <a
-    aria-label={`Follow on ${social}`}
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    class="relative z-10 inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-md p-2 text-base-400 dark:text-base-500 transition-colors hover:bg-base-100 hover:text-base-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:hover:bg-base-800 dark:hover:text-base-300"
-  >
-    <p class="sr-only">Follow on {social}</p>
-    <Icon 
-      name={icon} 
-      class="size-5 transition" 
-      aria-hidden="true"
-    />
-  </a>
-  <div class="
-    absolute 
-    bottom-full 
-    left-1/2 
-    transform 
-    -translate-x-1/2 
-    -translate-y-1 
-    bg-base-700 
-    text-base-50 
-    text-xs 
-    px-2 
-    py-1 
-    rounded 
-    opacity-0 
-    group-hover:opacity-100 
-    transition-opacity 
-    pointer-events-none
-    whitespace-nowrap
-    min-w-max
-    ml-2
-  ">
-    {social}
-  </div>
-</div>
+<a
+  aria-label={`Follow on ${social}`}
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="relative inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-md p-2 text-base-400 dark:text-base-500 transition-colors hover:bg-base-100 hover:text-base-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:hover:bg-base-800 dark:hover:text-base-300"
+>
+  <p class="sr-only">Follow on {social}</p>
+  <Icon 
+    name={icon} 
+    class="size-5 transition" 
+    aria-hidden="true"
+  />
+</a>
