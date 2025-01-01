@@ -117,7 +117,7 @@
 - [ ] Add Latest BlueSky posts feed
 - [ ] Blog tags/categories
 - [ ] For cards on /presentations and /post/ overview pages, make the whole card clickable, not just the image
-- [ ] Posts rss
+- [x] Posts RSS
 
 ### Motion
 - [ ] Implement tailwindcss-motion (npm i -D tailwindcss-motion) or auto-animate (npm install @formkit/auto-animate)

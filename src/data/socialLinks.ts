@@ -47,7 +47,7 @@ export const socialLinks: SocialLink[] = [
     {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=gxjansen',
-    icon: 'tabler/brand-linkedin',
+    icon: 'linkedin',
     visibility: {
       footer: true,
       hero: true,
@@ -80,7 +80,7 @@ export const socialLinks: SocialLink[] = [
   {
     name: 'BlueSky',
     href: 'https://bsky.app/profile/gui.do',
-    icon: 'tabler/brand-bluesky',
+    icon: 'bluesky',
     visibility: {
       footer: true,
       hero: true,
@@ -91,7 +91,7 @@ export const socialLinks: SocialLink[] = [
   {
     name: 'Instagram',
     href: 'https://www.instagram.com/gxjansen',
-    icon: 'tabler/brand-instagram',
+    icon: 'instagram',
     visibility: {
       footer: true,
       hero: false,
