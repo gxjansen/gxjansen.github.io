@@ -1,0 +1,34 @@
+/* Link Colors - Easy to modify by changing these values */
+:root {
+  --link-color-1: rgb(14, 165, 233);  /* Sky blue */
+  --link-color-2: rgb(168, 85, 247);  /* Purple */
+  --link-color-3: rgb(234, 88, 12);   /* Orange */
+  --link-color-4: rgb(185, 16, 154);  /* Emerald */
+  --link-color-5: rgb(245, 158, 11);  /* Amber */
+}
+
+/* Base link styling */
+a {
+  @apply transition-all duration-200;
+  text-decoration: underline;
+  text-decoration-thickness: 0.2em;
+  text-underline-offset: 0.2em;
+  
+  /* Default color that will be overridden by JS */
+  text-decoration-color: transparent;
+  
+  &:hover {
+    @apply opacity-80;
+  }
+}
+
+/* Ensure our styles take precedence in prose content */
+.prose a {
+  text-decoration-thickness: 0.2em !important;
+  text-underline-offset: 0.2em !important;
+}
+
+/* Special cases where we don't want the random underline */
+.no-random-underline {
+  text-decoration: none;
+}
