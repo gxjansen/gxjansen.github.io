@@ -10,52 +10,52 @@ const { presentation } = Astro.props;
 const { title, duration, intendedAudience, isWorkshop, image } = presentation.data;
 ---
 
-<article class="presentation-card group">
-  <a href={`/presentations/${presentation.slug}`} class="card-container">
+<article class="card group">
+  <a href={`/presentations/${presentation.slug}`}>
     {image && (
       <Image 
         src={image} 
         alt={title || ''} 
         width={1600}
         height={900}
-        class="card-image"
+        class="w-full rounded-t-xl object-cover"
         transition:name={`presentation-image-${presentation.slug}`}
         style="background: transparent;"
       />
     )}
   </a>
-  <div>
+  <div class="card-content">
     <!-- Categories -->
-    <div class="card-categories">
+    <div class="card-meta">
       {duration && (
-        <span class="inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700 dark:bg-gray-700 dark:text-gray-200">
+        <span class="inline-flex rounded-full bg-base-200 px-3 py-1 text-sm font-medium text-base-900 dark:bg-base-800 dark:text-base-100">
           {duration}
         </span>
       )}
       {isWorkshop && (
-        <span class="inline-block rounded-full bg-primary-100 px-3 py-1 text-sm font-semibold text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+        <span class="inline-flex rounded-full bg-primary-100 px-3 py-1 text-sm font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-200">
           Workshop
         </span>
       )}
     </div>
 
     <!-- Title -->
-    <div class="mt-2">
-      <a href={`/presentations/${presentation.slug}`} class="decoration-primary-500 hover:underline">
-        <h2 class="card-title group-hover:text-primary-500 dark:group-hover:text-primary-400">{title}</h2>
+    <h2 class="card-title">
+      <a href={`/presentations/${presentation.slug}`} class="hover:text-primary-500 dark:hover:text-primary-400">
+        {title}
       </a>
-    </div>
+    </h2>
 
     <!-- Description (Intended Audience) -->
     {intendedAudience && (
-      <p class="card-description">
+      <p class="text-base-500 dark:text-base-400">
         <span class="font-medium">For:</span> {intendedAudience}
       </p>
     )}
 
     <!-- Read More Button -->
-    <div class="mt-4">
-      <a href={`/presentations/${presentation.slug}`} class="card-read-button">
+    <div class="mt-6">
+      <a href={`/presentations/${presentation.slug}`} class="inline-flex items-center gap-2">
         View Presentation
         <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M12 5l7 7-7 7"/>

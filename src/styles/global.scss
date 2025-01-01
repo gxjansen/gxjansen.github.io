@@ -11,8 +11,45 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base Typography */
+@layer base {
+  html {
+    font-size: 16px;
+    
+    @screen md {
+      font-size: 22.4px; /* 1.4rem */
+    }
+  }
+}
+
 /* Layer Components */
 @layer components {
+  /* Card Base Styles */
+  .card {
+    @apply bg-white dark:bg-base-900 rounded-xl shadow-lg transition-all duration-300 overflow-hidden;
+  }
+
+  .card-content {
+    @apply p-6 sm:p-8 flex flex-col;
+  }
+
+  .card-title {
+    @apply text-xl font-semibold mb-4 text-base-900 dark:text-base-100;
+  }
+
+  .card-meta {
+    @apply text-sm text-base-500 dark:text-base-400 flex flex-wrap gap-2 mb-4;
+  }
+
+  .cards-grid {
+    @apply grid gap-6 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  /* Card Image */
+  .card img:first-child {
+    @apply aspect-video object-cover;
+  }
+
   /* Horizontal Scroll Container */
   .scroll-container {
     @apply flex overflow-x-auto gap-4 pb-6 snap-x snap-mandatory;

@@ -183,6 +183,10 @@ All component styling standards are maintained in:
 3. `src/styles/global.scss` - Global styles and Tailwind component classes
 
 ### Typography
+Base font sizes:
+- Mobile: 16px (1rem)
+- Desktop/larger screens (md breakpoint and up): 22.4px (1.4rem)
+
 Refer to styleguide.astro#typography for:
 - Heading hierarchy
 - Text sizes and weights

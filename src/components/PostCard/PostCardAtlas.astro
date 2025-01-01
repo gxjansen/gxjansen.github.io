@@ -30,53 +30,52 @@ const currLocale = getLocaleFromUrl(Astro.url);
 const authorsData = authors && authors.length > 0 ? await getEntries(authors.map(author => ({ collection: 'authors', id: author }))) : [];
 ---
 
-<article class=`post-card group ${className}` {...rest}>
-  <a href={`/post/${post.slug}/`} class="card-container">
+<article class={`card group ${className}`} {...rest}>
+  <a href={`/post/${post.slug}/`}>
     {heroImage && (
       <Image
         src={heroImage}
         alt={`Cover for ${title}`}
         width={1600}
         height={900}
-        class="card-image"
+        class="w-full rounded-t-xl object-cover"
         transition:name={`heroImage-${post.slug}`}
         style="background: transparent;"
       />
     )}
   </a>
-  <div>
-    <!-- categories -->
-    <div class="card-categories">
-      {categories.map((category) => <Category category={category} />)}
-    </div>
-
-    <!-- date -->
-    <div class="card-author-date">
-      <p class="whitespace-nowrap">
+  <div class="card-content">
+    <!-- categories and date -->
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-wrap gap-2">
+        {categories.map((category) => <Category category={category} />)}
+      </div>
+      <time datetime={new Date(pubDate).toISOString()} class="text-sm text-base-500 dark:text-base-400">
         {formatDate(pubDate, currLocale)}
-      </p>
+      </time>
     </div>
 
     <!-- title -->
-    <div class="mt-2">
-      <a href={`/post/${post.slug}/`}>
-        <h2 class="card-title">
-          {title}
-        </h2>
+    <h2 class="card-title">
+      <a href={`/post/${post.slug}/`} class="hover:text-primary-500 dark:hover:text-primary-400">
+        {title}
       </a>
-    </div>
+    </h2>
 
     <!-- description -->
     {showDescription && description && (
-      <p class="card-description">
+      <p class="text-base-500 dark:text-base-400">
         {description}
       </p>
     )}
 
     <!-- read post link -->
-    <div class="mt-4">
-      <a href={`/post/${post.slug}/`}>
-        Read Post <span aria-hidden="true">→</span>
+    <div class="mt-6">
+      <a href={`/post/${post.slug}/`} class="inline-flex items-center gap-2">
+        Read Post 
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
       </a>
     </div>
   </div>
