@@ -17,7 +17,7 @@ const { podcasts } = Astro.props;
 >
   <h2 id="podcasts-heading" class="h2 mb-4">Podcast Appearances</h2>
   <div 
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+    class="cards-grid"
     role="list"
   >
     {podcasts.map(podcast => (
@@ -25,14 +25,16 @@ const { podcasts } = Astro.props;
           class="podcast-card"
           role="listitem"
         >
-          <LazySpotify 
-            episodeId={podcast.spotifyEmbedId || ''}
-            title={podcast.title}
-          />
-          <div class="px-4 pt-4 pb-6">
-            <h3 id={`podcast-${podcast.spotifyEmbedId}`} class="h3 mb-4">{podcast.title}</h3>
+          <div class="card-container">
+            <LazySpotify 
+              episodeId={podcast.spotifyEmbedId || ''}
+              title={podcast.title}
+            />
+          </div>
+          <div class="card-content">
+            <h3 id={`podcast-${podcast.spotifyEmbedId}`} class="card-title">{podcast.title}</h3>
             <p 
-              class="description text-sm text-neutral-600 dark:text-neutral-400 mb-4"
+              class="card-meta"
               aria-label={`Published on ${formatDate(podcast.publicationDate)}${podcast.personOrganization ? ` by ${podcast.personOrganization}` : ''}`}
             >
               {formatDate(podcast.publicationDate)}
@@ -43,7 +45,6 @@ const { podcasts } = Astro.props;
                 href={podcast.articleUrl} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                class="primary-link"
                 aria-label={`Read article about ${podcast.title} (opens in new tab)`}
               >
                 View article <span aria-hidden="true">→</span>

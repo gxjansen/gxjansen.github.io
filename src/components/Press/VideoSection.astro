@@ -79,9 +79,9 @@ function getYouTubeId(url: string): string {
               </button>
             </div>
           </div>
-          <div>
-            <h3 class="card-title mt-6 mb-4">{video.title}</h3>
-            <p class="card-description mb-4">
+          <div class="card-content">
+            <h3 class="card-title">{video.title}</h3>
+            <p class="card-meta">
               {formatDate(video.publicationDate)}
               {video.personOrganization && ` • ${video.personOrganization}`}
             </p>
