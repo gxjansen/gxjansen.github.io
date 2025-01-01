@@ -7,22 +7,16 @@ interface Props {
 const { episodeId, title } = Astro.props;
 ---
 
-<div 
-  class="spotify-embed"
-  role="region"
-  aria-label={`Podcast player for episode: ${title}`}
->
-  <div role="application" tabindex="0" aria-label={`Podcast player for episode: ${title}`} class="focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg w-full">
-    <iframe
-      style="border-radius:12px"
-      src={`https://open.spotify.com/embed/episode/${episodeId}?theme=0`}
-      width="100%"
-      height="152"
-      allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      title={`Spotify player: ${title}`}
-      class="w-full"
-    ></iframe>
-  </div>
+<div role="application" tabindex="0" aria-label={`Podcast player for episode: ${title}`} class="focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 w-full">
+  <iframe
+    style="border-radius:12px"
+    src={`https://open.spotify.com/embed/episode/${episodeId}?theme=0`}
+    width="100%"
+    height="152"
+    allow="clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    title={`Spotify player: ${title}`}
+    class="w-full"
+  ></iframe>
 </div>
 
 <script>
