@@ -12,7 +12,7 @@ import * as path from 'node:path';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://gxjansen.github.io",
+  site: "https://gui.do",
   output: "static",
   viewTransitions: {
     fallback: true // Enable fallback animations for browsers that don't support view transitions
