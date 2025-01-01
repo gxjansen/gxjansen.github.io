@@ -8,11 +8,23 @@
 }
 
 /* Base link styling */
-a {
-  @apply transition-all duration-200;
+a:not(
+  .card-container, 
+  [role="menuitem"], 
+  nav a, 
+  header a, 
+  footer a, 
+  .btn, 
+  [class*="button"],
+  .social-card a,
+  .site-content a,
+  .linkedin-cta a,
+  .content-type-selector a
+) {
+  @apply text-teal-500 hover:text-teal-600 dark:text-teal-400 dark:hover:text-teal-500 transition-all duration-200;
   text-decoration: underline;
   text-decoration-thickness: 0.2em;
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.1em;
   
   /* Default color that will be overridden by JS */
   text-decoration-color: transparent;
@@ -22,10 +34,31 @@ a {
   }
 }
 
+/* Elements that should not have underlines */
+[role="menuitem"], 
+nav a, 
+header a, 
+footer a, 
+.btn, 
+[class*="button"],
+.social-card a,
+.site-content a,
+.linkedin-cta a,
+.content-type-selector a {
+  text-decoration: none;
+}
+
+/* Heading links inherit heading styles but keep underline */
+h1, h2, h3, h4, h5, h6 {
+  a {
+    @apply text-base-900 dark:text-base-100;
+  }
+}
+
 /* Ensure our styles take precedence in prose content */
 .prose a {
-  text-decoration-thickness: 0.2em !important;
-  text-underline-offset: 0.2em !important;
+  text-decoration-thickness: 0.2em;
+  text-underline-offset: 0.1em;
 }
 
 /* Special cases where we don't want the random underline */

@@ -46,6 +46,7 @@
     @apply relative block aspect-[16/9] overflow-hidden -mx-3 sm:-mx-4 -mt-3 sm:-mt-4 mb-3 sm:mb-4;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
+    text-decoration: none;
   }  
 
   .card-image {  
@@ -114,8 +115,4 @@
   .card-description {  
     @apply mt-2 text-sm sm:text-base font-medium text-base-400 dark:text-base-500;  
   }  
-
-  .card-read-button {  
-    @apply mt-auto pt-3 sm:pt-4 flex items-center gap-1 font-semibold text-primary-500 transition-colors hover:text-primary-600;  
-  }
 }

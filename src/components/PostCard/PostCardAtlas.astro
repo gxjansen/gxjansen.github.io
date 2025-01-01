@@ -59,8 +59,8 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
 
     <!-- title -->
     <div class="mt-2">
-      <a href={`/post/${post.slug}/`} class="decoration-primary-500 hover:underline">
-        <h2 class="card-title group-hover:text-primary-500 dark:group-hover:text-primary-400">
+      <a href={`/post/${post.slug}/`}>
+        <h2 class="card-title">
           {title}
         </h2>
       </a>
@@ -73,11 +73,10 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
       </p>
     )}
 
-    <!-- read post button -->
+    <!-- read post link -->
     <div class="mt-4">
-      <a href={`/post/${post.slug}/`} class="card-read-button">
-        Read Post
-        <Icon name="tabler/arrow-narrow-right" class="size-4" />
+      <a href={`/post/${post.slug}/`}>
+        Read Post <span aria-hidden="true">→</span>
       </a>
     </div>
   </div>
