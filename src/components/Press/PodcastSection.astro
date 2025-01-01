@@ -22,15 +22,13 @@ const { podcasts } = Astro.props;
   >
     {podcasts.map(podcast => (
         <article 
-          class="podcast-card"
+          class="card"
           role="listitem"
         >
-          <div class="card-container">
-            <LazySpotify 
-              episodeId={podcast.spotifyEmbedId || ''}
-              title={podcast.title}
-            />
-          </div>
+          <LazySpotify 
+            episodeId={podcast.spotifyEmbedId || ''}
+            title={podcast.title}
+          />
           <div class="card-content">
             <h3 id={`podcast-${podcast.spotifyEmbedId}`} class="card-title">{podcast.title}</h3>
             <p 

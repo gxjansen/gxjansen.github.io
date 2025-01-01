@@ -23,10 +23,10 @@ function getYouTubeId(url: string): string {
       if (!videoId) return null;
       
       return (
-        <article class="video-card">
-          <div class="card-container">
+        <article class="card">
+          <div class="relative">
             <div 
-              class="lazy-youtube h-full" 
+              class="lazy-youtube" 
               data-video-id={videoId}
               data-title={video.title}
             >

@@ -29,6 +29,10 @@
     @apply bg-white dark:bg-base-900 rounded-xl shadow-lg transition-all duration-300 overflow-hidden;
   }
 
+  .card-container {
+    @apply mb-0;
+  }
+
   .card-content {
     @apply p-6 sm:p-8 flex flex-col;
   }
@@ -45,9 +49,19 @@
     @apply grid gap-6 md:grid-cols-2 lg:grid-cols-3;
   }
 
-  /* Card Image */
-  .card img:first-child {
-    @apply aspect-video object-cover;
+  /* Card Media */
+  .card img:first-child,
+  .card iframe:first-child {
+    @apply aspect-video object-cover mb-0;
+  }
+
+  /* Video Card */
+  .lazy-youtube {
+    @apply aspect-video relative;
+    
+    img {
+      @apply w-full h-full object-cover;
+    }
   }
 
   /* Horizontal Scroll Container */
