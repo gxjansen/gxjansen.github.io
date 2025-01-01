@@ -1,0 +1,36 @@
+<script is:inline>
+// Initialize and handle random link colors
+(function() {
+  function applyRandomColors() {
+    const style = getComputedStyle(document.documentElement);
+    const colors = [
+      style.getPropertyValue('--link-color-1'),
+      style.getPropertyValue('--link-color-2'),
+      style.getPropertyValue('--link-color-3'),
+      style.getPropertyValue('--link-color-4'),
+      style.getPropertyValue('--link-color-5')
+    ].map(color => color.trim());
+
+    console.log('Available colors:', colors);
+    
+    const links = document.querySelectorAll('a:not(.no-random-underline)');
+    console.log('Found links:', links.length);
+    
+    links.forEach(link => {
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      link.style.textDecorationColor = randomColor;
+      console.log('Applied color:', randomColor, 'to:', link.textContent);
+    });
+  }
+
+  // Apply immediately
+  console.log('Initializing random link colors');
+  applyRandomColors();
+
+  // Re-apply after view transitions
+  document.addEventListener('astro:after-swap', () => {
+    console.log('Re-applying random link colors after view transition');
+    applyRandomColors();
+  });
+})();
+</script>

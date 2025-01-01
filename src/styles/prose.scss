@@ -24,8 +24,8 @@
   }
   /* lists */
   @apply prose-li:text-base-500 dark:prose-li:text-base-300;
-  /* anchor links - match primary-link utility class */
-  @apply prose-a:text-primary-500 prose-a:underline prose-a:decoration-primary-500 hover:prose-a:text-primary-600 dark:prose-a:text-primary-400 dark:hover:prose-a:text-primary-300;
+  /* anchor links - only set text color, underline handled by global link styles */
+  @apply prose-a:text-primary-500 hover:prose-a:text-primary-600 dark:prose-a:text-primary-400 dark:hover:prose-a:text-primary-300;
   /* images */
   @apply prose-img:mx-auto prose-img:h-auto prose-img:w-full prose-img:max-w-[800px] prose-img:rounded-md;
   /* video */
