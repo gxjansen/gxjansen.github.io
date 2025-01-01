@@ -16,12 +16,24 @@ a:not(
   footer a, 
   .btn, 
   [class*="button"],
-  .social-card a,
+  .social-card,
+  .social-card *,
   .site-content a,
+  .site-content *,
+  .services-icon a,
+  .services-icon *,
+  [class*="group flex h-full"],
   .linkedin-cta a,
   .content-type-selector a,
   [class*="bg-teal-"],
-  .article-card h3 a
+  .article-card h3 a,
+  .event-card a,
+  .site-content-card a,
+  .badge a,
+  .card h2 a,
+  [class*="hover:text-primary"],
+  [class*="bg-primary-100"],
+  [class*="rounded-full"]
 ) {
   @apply text-teal-500 hover:text-teal-600 dark:text-teal-400 dark:hover:text-teal-500 transition-all duration-200;
   text-decoration: underline;
@@ -43,12 +55,24 @@ header a,
 footer a, 
 .btn, 
 [class*="button"],
-.social-card a,
+.social-card,
+.social-card *,
 .site-content a,
+.site-content *,
+.services-icon a,
+.services-icon *,
+[class*="group flex h-full"],
 .linkedin-cta a,
 .content-type-selector a,
 [class*="bg-teal-"],
-.article-card h3 a {
+.article-card h3 a,
+.event-card a,
+.site-content-card a,
+.badge a,
+.card h2 a,
+[class*="hover:text-primary"],
+[class*="bg-primary-100"],
+[class*="rounded-full"] {
   text-decoration: none;
 }
 
