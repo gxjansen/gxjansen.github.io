@@ -103,6 +103,7 @@
 ### Design
 - [ ] use better (full) social media icons
 - [ ] Odd podcast iframe loading on /press
+- [x] Random link colors
 
 ### New Content
 - [x] Add a section for Github projects

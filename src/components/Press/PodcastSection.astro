@@ -25,29 +25,31 @@ const { podcasts } = Astro.props;
           class="podcast-card"
           role="listitem"
         >
-        <LazySpotify 
-          episodeId={podcast.spotifyEmbedId || ''}
-          title={podcast.title}
-        />
-        <h3 id={`podcast-${podcast.spotifyEmbedId}`} class="h3 mb-4 mt-4">{podcast.title}</h3>
-        <p 
-          class="description text-sm text-neutral-600 dark:text-neutral-400 mb-4"
-          aria-label={`Published on ${formatDate(podcast.publicationDate)}${podcast.personOrganization ? ` by ${podcast.personOrganization}` : ''}`}
-        >
-          {formatDate(podcast.publicationDate)}
-          {podcast.personOrganization && ` • ${podcast.personOrganization}`}
-        </p>
-        {podcast.articleUrl && (
-          <a 
-            href={podcast.articleUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="description text-teal-500 hover:text-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 rounded"
-            aria-label={`Read article about ${podcast.title} (opens in new tab)`}
-          >
-            View article <span aria-hidden="true">→</span>
-          </a>
-        )}
+          <LazySpotify 
+            episodeId={podcast.spotifyEmbedId || ''}
+            title={podcast.title}
+          />
+          <div class="px-4 pt-4 pb-6">
+            <h3 id={`podcast-${podcast.spotifyEmbedId}`} class="h3 mb-4">{podcast.title}</h3>
+            <p 
+              class="description text-sm text-neutral-600 dark:text-neutral-400 mb-4"
+              aria-label={`Published on ${formatDate(podcast.publicationDate)}${podcast.personOrganization ? ` by ${podcast.personOrganization}` : ''}`}
+            >
+              {formatDate(podcast.publicationDate)}
+              {podcast.personOrganization && ` • ${podcast.personOrganization}`}
+            </p>
+            {podcast.articleUrl && (
+              <a 
+                href={podcast.articleUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="primary-link"
+                aria-label={`Read article about ${podcast.title} (opens in new tab)`}
+              >
+                View article <span aria-hidden="true">→</span>
+              </a>
+            )}
+          </div>
         </article>
     ))}
   </div>

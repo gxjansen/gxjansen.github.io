@@ -85,21 +85,16 @@ function getYouTubeId(url: string): string {
               {formatDate(video.publicationDate)}
               {video.personOrganization && ` • ${video.personOrganization}`}
             </p>
-            <div class="mt-4">
-              {video.articleUrl && (
-                <a 
-                  href={video.articleUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="card-read-button"
-                >
-                  View article
-                  <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
-                </a>
-              )}
-            </div>
+            {video.articleUrl && (
+              <a 
+                href={video.articleUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label={`View article about ${video.title} (opens in new tab)`}
+              >
+                View article <span aria-hidden="true">→</span>
+              </a>
+            )}
           </div>
         </article>
       );
