@@ -8,9 +8,11 @@ interface Props {
   mainImage: string;
   link: string;
   iconBgColor: string;
+  license?: string;
+  githubUrl?: string;
 }
 
-const { name, description, mainImage, link, iconBgColor } = Astro.props;
+const { name, description, mainImage, link, iconBgColor, license, githubUrl } = Astro.props;
 ---
 
 <article class="card group px-3 py-3 sm:px-4 sm:py-4">
@@ -44,11 +46,14 @@ const { name, description, mainImage, link, iconBgColor } = Astro.props;
           name
         )}
       </h2>
+      {license && (
+        <p class="text-sm text-base-400 mb-2">License: {license}</p>
+      )}
       <p class="card-description text-lg">
         {description}
       </p>
-      {link && (
-        <div class="mt-8">
+      <div class="mt-8 flex gap-4 items-center justify-center md:justify-start">
+        {link && (
           <Button 
             href={link}
             variant="primary"
@@ -59,8 +64,23 @@ const { name, description, mainImage, link, iconBgColor } = Astro.props;
             View Project
             <span class="sr-only">View {name} project</span>
           </Button>
-        </div>
-      )}
+        )}
+        {githubUrl && (
+          <a 
+            href={githubUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="primary-link flex items-center gap-2"
+          >
+            <Icon 
+              name="tabler/filled/brand-github"
+              class="w-5 h-5"
+              aria-hidden="true"
+            />
+            <span>Available on GitHub</span>
+          </a>
+        )}
+      </div>
     </div>
   </div>
 </article>

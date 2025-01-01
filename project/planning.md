@@ -85,8 +85,7 @@
 
 ### Checks
 - [ ] Redirects
-- [ ] Check site on mobile
-- [ ] fix /categories/experimentation
+- [x] Check site on mobile
 
 ### Testing
 - [ ] Add unit tests for components
@@ -106,7 +105,7 @@
 - [ ] Odd podcast iframe loading on /press
 
 ### New Content
-- [ ] Add a section for Github projects
+- [x] Add a section for Github projects
 - [ ] Integrate with Github to get live updates
 - [ ] Blog on AI tools I use?
 
@@ -115,7 +114,7 @@
 - [ ] Events: Year index
 - [ ] Add Bluesky comments
 - [ ] Add Latest BlueSky posts feed
-- [ ] Blog tags/categories
+- [ ] Blog tags/categories (fix /categories/experimentation)
 - [ ] For cards on /presentations and /post/ overview pages, make the whole card clickable, not just the image
 - [x] Posts RSS
 
