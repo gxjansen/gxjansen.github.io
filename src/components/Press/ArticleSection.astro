@@ -36,41 +36,27 @@ const { articles } = Astro.props;
           role="listitem"
           aria-labelledby={articleId}
         >
-          <div>
+          <div class="card-content">
             <h3 
               id={articleId}
-              class="h3 mb-0"
+              class="card-title"
             >
-              <a 
-                href={article.articleUrl} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 rounded block"
-                aria-label={`${article.title} (opens in new tab)`}
-              >
-                <div class="flex items-start gap-2">
-                  {article.articleUrl && (
-                    <img 
-                      src={getFaviconUrl(article.articleUrl)} 
-                      alt=""
-                      width="16" 
-                      height="16"
-                      class="w-4 h-4 object-contain flex-shrink-0 mt-1"
-                      role="presentation"
-                    />
-                  )}
-                  <span class="line-clamp-2 flex-1">{article.title}</span>
-                  <span 
-                    class="text-teal-400 dark:text-teal-500 flex-shrink-0" 
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
-                </div>
-              </a>
+              <div class="flex items-start gap-2">
+                {article.articleUrl && (
+                  <img 
+                    src={getFaviconUrl(article.articleUrl)} 
+                    alt=""
+                    width="16" 
+                    height="16"
+                    class="w-4 h-4 object-contain flex-shrink-0 mt-1"
+                    role="presentation"
+                  />
+                )}
+                <span class="line-clamp-2 flex-1">{article.title}</span>
+              </div>
             </h3>
             <div 
-              class="mt-4 flex flex-wrap gap-x-2 text-sm text-neutral-600 dark:text-neutral-400"
+              class="card-meta"
               aria-label="Article details"
             >
               <time datetime={new Date(article.publicationDate).toISOString()}>
@@ -96,6 +82,16 @@ const { articles } = Astro.props;
                 </>
               )}
             </div>
+            {article.articleUrl && (
+              <a 
+                href={article.articleUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label={`View article about ${article.title} (opens in new tab)`}
+              >
+                View article <span aria-hidden="true">→</span>
+              </a>
+            )}
           </div>
         </article>
       );
