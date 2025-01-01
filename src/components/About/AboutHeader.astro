@@ -18,12 +18,12 @@ const shouldReduceMotion = typeof window !== "undefined"
 ---
 
 <section 
-  class="overflow-hidden pt-24 md:pt-28"
+  class="overflow-hidden pt-24 pb-0 md:pt-28 md:pb-0"
   aria-labelledby="about-header-heading"
   role="region"
 >
   <div 
-    class="relative"
+    class="site-container px-4 relative"
     role="presentation"
   >
     <div 
@@ -60,22 +60,22 @@ const shouldReduceMotion = typeof window !== "undefined"
           </p>
           <p class="description">
             A well-known figure on the <span class="text-primary-500 font-semibold">international stage</span>, and I love to regularly share my expertise at <span class="text-primary-500 font-semibold">global events</span>.
-          </p>
+          </p><br/>
         </div>
       </div>
 
       <!-- Image Container -->
       <div 
-        class="md:w-1/3 md:self-center"
+        class="md:w-1/3"
         role="complementary"
         aria-label="Profile images"
       >
         <!-- Desktop Image -->
-        <figure class="hidden md:block">
+        <figure class="hidden md:block md:absolute md:bottom-0 md:right-4">
           <img 
             src={desktopImagePath} 
             alt="Guido Jansen, a cognitive psychologist and CX optimization specialist, standing confidently in a professional setting" 
-            class="w-full h-auto max-h-[600px] object-contain"
+            class="w-full h-auto max-h-[700px] object-contain"
             loading="eager"
             width="600"
             height="900"
