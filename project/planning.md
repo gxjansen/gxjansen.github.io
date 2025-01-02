@@ -104,6 +104,7 @@
 - [x] use better (full) social media icons
 - [x] Odd podcast iframe loading on /press
 - [x] Random link colors
+- [ ] re-implement Astro page transitions, for articles (works for presentations)
 
 ### New Content
 - [x] Add a section for Github projects

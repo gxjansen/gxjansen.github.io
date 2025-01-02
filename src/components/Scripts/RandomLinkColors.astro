@@ -1,36 +1,43 @@
 <script is:inline>
 // Initialize and handle random link colors
 (function() {
-  function applyRandomColors() {
-    const style = getComputedStyle(document.documentElement);
-    const colors = [
-      style.getPropertyValue('--link-color-1'),
-      style.getPropertyValue('--link-color-2'),
-      style.getPropertyValue('--link-color-3'),
-      style.getPropertyValue('--link-color-4'),
-      style.getPropertyValue('--link-color-5')
-    ].map(color => color.trim());
+  // Function to get all link color variables
+  function getAllLinkColors() {
+    const styles = getComputedStyle(document.documentElement);
+    const colors = [];
+    let i = 1;
+    
+    // Keep checking for link color variables until we don't find one
+    while (true) {
+      const varName = `--link-color-${i}`;
+      const color = styles.getPropertyValue(varName).trim();
+      if (!color) break;
+      colors.push(color);
+      i++;
+    }
+    
+    return colors;
+  }
 
-    console.log('Available colors:', colors);
+  // Function to randomly select a color
+  function getRandomColor() {
+    const colors = getAllLinkColors();
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  // Apply random colors to links
+  function applyRandomColors() {
+    const selector = 'a:not(.card-container, [role="menuitem"], nav a, header a, footer a, .btn, [class*="button"], .social-card, .social-card *, .site-content a, .site-content *, .services-icon a, .services-icon *, [class*="group flex h-full"], .linkedin-cta a, .content-type-selector a, [class*="bg-teal-"], .article-card h3 a, .event-card a, .site-content-card a, .badge a, .card h2 a, [class*="hover:text-primary"], [class*="bg-primary-100"], [class*="rounded-full"], .no-random-underline)';
     
-    const links = document.querySelectorAll('a:not(.no-random-underline)');
-    console.log('Found links:', links.length);
-    
-    links.forEach(link => {
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      link.style.textDecorationColor = randomColor;
-      console.log('Applied color:', randomColor, 'to:', link.textContent);
+    document.querySelectorAll(selector).forEach(link => {
+      link.style.textDecorationColor = getRandomColor();
     });
   }
 
   // Apply immediately
-  console.log('Initializing random link colors');
   applyRandomColors();
 
   // Re-apply after view transitions
-  document.addEventListener('astro:after-swap', () => {
-    console.log('Re-applying random link colors after view transition');
-    applyRandomColors();
-  });
+  document.addEventListener('astro:after-swap', applyRandomColors);
 })();
 </script>
