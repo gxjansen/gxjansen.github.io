@@ -101,23 +101,21 @@
 ## After go-live
 
 ### Design
-- [ ] use better (full) social media icons
-- [ ] Odd podcast iframe loading on /press
+- [x] use better (full) social media icons
+- [x] Odd podcast iframe loading on /press
 - [x] Random link colors
 
 ### New Content
 - [x] Add a section for Github projects
-- [ ] Integrate with Github to get live updates
 - [ ] Blog on AI tools I use?
 
 ### New features
 - [ ] Podcast subscription links
 - [ ] Events: Year index
 - [ ] Add Bluesky comments
-- [ ] Add Latest BlueSky posts feed
+- [ ] Activity feed
+      - [ ] Add Latest BlueSky posts feed
+      - [ ] Integrate with Github to get live updates
 - [ ] Blog tags/categories (fix /categories/experimentation)
 - [ ] For cards on /presentations and /post/ overview pages, make the whole card clickable, not just the image
 - [x] Posts RSS
-
-### Motion
-- [ ] Implement tailwindcss-motion (npm i -D tailwindcss-motion) or auto-animate (npm install @formkit/auto-animate)
