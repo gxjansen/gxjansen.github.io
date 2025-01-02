@@ -88,51 +88,166 @@ const shouldReduceMotion = typeof window !== "undefined"
         Let me help your business.
       </p>
     </div>
+    {/* Desktop Grid Layout */}
+    <div class="hidden lg:grid lg:grid-cols-3 gap-6 site-container">
+      {
+        featureData.map((feature, idx) => (
+          <FeatureCard
+            title={feature.title}
+            text={feature.text}
+            icon={feature.icon}
+            data-aos={shouldReduceMotion ? "" : "zoom-in"}
+            data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
+            aria-label={`Service: ${feature.title}`}
+          />
+        ))
+      }
+    </div>
+
+    {/* Mobile/Tablet Carousel */}
     <div 
-      class="scroll-container-wrapper"
+      class="scroll-container-wrapper lg:hidden site-container"
       id="trigger-small-cards"
     >
-      <span class="sr-only" role="status" aria-live="polite">
-        Scroll horizontally to see more content
-      </span>
-      <div
-        class="scroll-container"
-        role="list region"
-        aria-label="Available services"
-        tabindex="0"
-      >
-        {
-          featureData.map((feature, idx) => (
-            <div class="scroll-item">
-              <FeatureCard
-                title={feature.title}
-                text={feature.text}
-                icon={feature.icon}
-                data-aos={shouldReduceMotion ? "" : "zoom-in"}
-                data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
-                data-aos-trigger="#trigger-small-cards"
-                aria-label={`Service: ${feature.title}`}
+      <div class="relative">
+        <div class="carousel-header">
+          <span class="sr-only" role="status" aria-live="polite">
+            Services carousel. Use left and right arrow buttons or swipe to navigate through items.
+          </span>
+          
+          <div class="carousel-progress" role="progressbar" aria-valuemin="1" aria-valuemax={featureData.length}>
+            {featureData.map((_, idx) => (
+              <div 
+                class="progress-dot"
+                data-active={idx === 0 ? "true" : "false"}
+                aria-hidden="true"
               />
-            </div>
-          ))
-        }
+            ))}
+          </div>
+        </div>
+
+        <button 
+          class="nav-button left-button"
+          aria-label={`View previous items. Currently at item 1 of ${featureData.length}`}
+          disabled
+        >
+          <span aria-hidden="true">❮</span>
+        </button>
+
+        <div
+          class="scroll-container"
+          role="list region"
+          aria-label={`Services carousel with ${featureData.length} items`}
+          tabindex="0"
+        >
+          {
+            featureData.map((feature, idx) => (
+              <div class="scroll-item">
+                <FeatureCard
+                  title={feature.title}
+                  text={feature.text}
+                  icon={feature.icon}
+                  data-aos={shouldReduceMotion ? "" : "zoom-in"}
+                  data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
+                  data-aos-trigger="#trigger-small-cards"
+                  aria-label={`Service: ${feature.title}`}
+                />
+              </div>
+            ))
+          }
+        </div>
+
+        <button 
+          class="nav-button right-button"
+          aria-label="Next items"
+        >
+          <span aria-hidden="true">❯</span>
+        </button>
       </div>
     </div>
 
-    <script>
-      // Handle scroll gradient visibility
+    <script define:vars={{ totalItems: featureData.length }}>
+      // Handle carousel navigation
       const wrapper = document.querySelector('#trigger-small-cards');
       const container = wrapper?.querySelector('.scroll-container');
+      const leftButton = wrapper?.querySelector('.left-button');
+      const rightButton = wrapper?.querySelector('.right-button');
 
-      if (wrapper && container) {
-        const checkScroll = () => {
+      if (wrapper && container && leftButton && rightButton) {
+        const scrollAmount = container.clientWidth * 0.8; // 80% of container width
+        const progressDots = wrapper?.querySelectorAll('.progress-dot');
+
+        const updateCarouselState = () => {
+          if (!container || !leftButton || !rightButton || !progressDots) return;
+
+          const isAtStart = container.scrollLeft <= 10;
           const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10;
-          wrapper.setAttribute('data-at-end', isAtEnd.toString());
+          
+          // Update button states
+          leftButton.disabled = isAtStart;
+          rightButton.disabled = isAtEnd;
+          leftButton.setAttribute('aria-disabled', isAtStart.toString());
+          rightButton.setAttribute('aria-disabled', isAtEnd.toString());
+
+          // Calculate current item index
+          const scrollPercentage = container.scrollLeft / (container.scrollWidth - container.clientWidth);
+          const currentIndex = Math.round(scrollPercentage * (totalItems - 1));
+
+          // Update progress dots
+          progressDots.forEach((dot, idx) => {
+            dot.setAttribute('data-active', (idx === currentIndex).toString());
+          });
+
+          // Update ARIA labels
+          leftButton.setAttribute('aria-label', `View previous items. Currently at item ${currentIndex + 1} of ${totalItems}`);
+          rightButton.setAttribute('aria-label', `View next items. Currently at item ${currentIndex + 1} of ${totalItems}`);
+
+          // Update screen reader status
+          const status = wrapper?.querySelector('[role="status"]');
+          if (status) {
+            status.textContent = `Viewing item ${currentIndex + 1} of ${totalItems}. Use left and right arrow buttons or swipe to navigate.`;
+          }
         };
 
-        container.addEventListener('scroll', checkScroll);
-        window.addEventListener('resize', checkScroll);
-        checkScroll(); // Initial check
+        // Button click handlers with improved feedback
+        leftButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+          updateCarouselState();
+        });
+
+        rightButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+          updateCarouselState();
+        });
+
+        // Keyboard navigation
+        container.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+          } else if (e.key === 'ArrowRight') {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+          }
+        });
+
+        // Update carousel state on scroll, resize, and after animations
+        container.addEventListener('scroll', updateCarouselState);
+        window.addEventListener('resize', updateCarouselState);
+        container.addEventListener('scrollend', updateCarouselState);
+        
+        // Initial state
+        updateCarouselState();
+
+        // Touch swipe feedback
+        container.addEventListener('touchstart', () => {
+          container.style.scrollSnapType = 'none'; // Disable snap during swipe
+        });
+
+        container.addEventListener('touchend', () => {
+          container.style.scrollSnapType = 'x mandatory'; // Re-enable snap after swipe
+          updateCarouselState();
+        });
       }
     </script>
   </div>
