@@ -88,15 +88,93 @@
 - [x] Check site on mobile
 
 ### Testing
-- [ ] Add unit tests for components
-- [ ] Add integration tests for data fetching
-- [ ] Add end-to-end tests for user flows
-- [ ] Test responsive layouts across devices
-- [ ] Test keyboard navigation
-- [ ] Test screen reader compatibility
-- [ ] Test embedded content fallbacks
-- [ ] Test error states and boundaries
+#### Test Infrastructure Setup
+- [x] Configure Vitest with TypeScript support
+- [x] Set up testing utilities and common test helpers
+- [x] Configure testing environment variables
+- [x] Add test scripts to package.json
+- [ ] Set up GitHub Actions for automated testing
+
+#### Unit Tests
+- [ ] Add component tests:
+  - [x] PresentationCard component (using snapshot testing)
+  - [x] PresentationNav component (using DOM testing)
+  - [x] SlideEmbed component (using DOM testing)
+  - [x] VideoEmbed component (using DOM testing)
+  - [x] PodcastCard component (using DOM testing)
+  - [x] PodcastFeed component (using DOM testing)
+  - [x] Navigation components (Nav, MobileNav, NavDropdown)
+  - [x] Layout components (BaseLayout, BaseHead)
+- [x] Add utility function tests:
+  - [x] Data transformation functions (eventUtils, blogUtils)
+  - [x] URL handling functions (linkHelpers)
+  - [x] Date formatting utilities (pressUtils)
+  - [x] Type guards and validators (typeGuards)
+
+#### Integration Tests
+- [ ] Test data fetching and processing:
+  - [ ] Keystatic content retrieval
+  - [ ] Event-presentation relationships
+  - [ ] RSS feed generation
+  - [ ] Podcast feed integration
+- [ ] Test routing and navigation flows
+- [ ] Test dark/light mode transitions
+- [ ] Test Astro view transitions
+
+#### End-to-End Tests
+- [ ] Set up Playwright for E2E testing
+- [ ] Test critical user journeys:
+  - [ ] Navigation through presentation pages
+  - [ ] Blog post reading and navigation
+  - [ ] Event browsing and filtering
+  - [ ] Search functionality
+  - [ ] Contact form submission
+- [ ] Test responsive layouts across devices:
+  - [ ] Mobile (320px - 480px)
+  - [ ] Tablet (481px - 768px)
+  - [ ] Laptop (769px - 1024px)
+  - [ ] Desktop (1025px+)
+
+#### Accessibility Testing
+- [ ] Implement automated accessibility tests:
+  - [ ] ARIA attributes validation
+  - [ ] Color contrast checking
+  - [ ] Keyboard navigation testing
+  - [ ] Screen reader compatibility
+- [ ] Test with various assistive technologies:
+  - [ ] VoiceOver (macOS)
+  - [ ] NVDA (Windows)
+  - [ ] Screen reader announcements
+
+#### Performance Testing
+- [ ] Set up Lighthouse CI
+- [ ] Test and optimize:
+  - [ ] Page load times
+  - [ ] Time to Interactive
+  - [ ] First Contentful Paint
+  - [ ] Largest Contentful Paint
+  - [ ] Cumulative Layout Shift
+- [ ] Image optimization verification
+- [ ] Resource loading optimization
+
+#### Error Handling
+- [ ] Test error boundaries
+- [ ] Test fallback content
+- [ ] Test 404 handling
+- [ ] Test network error states
+- [ ] Test embedded content failures
+
+#### Content Validation
 - [ ] Add a "dead link checker" for both internal and external 404 links > see project/dead-links-checker-implementation.md
+- [ ] Validate Markdown/MDX content structure
+- [ ] Test image references
+- [ ] Verify metadata consistency
+
+#### Continuous Integration
+- [ ] Set up automated test runs on PR
+- [ ] Configure test coverage reporting
+- [ ] Set up test result visualization
+- [ ] Implement test failure notifications
 
 ## After go-live
 
