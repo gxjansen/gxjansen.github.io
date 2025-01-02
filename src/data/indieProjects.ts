@@ -12,7 +12,7 @@ export const indieProjects: IndieProject[] = [
   {
     name: "BlueSpark",
     description: "AI-powered conversation starter generator for BlueSky followers. You can use the SaaS version, run it locally or host it yourself (Netlify instructions included).",
-    mainImage: "/public/icons/bluespark.svg",
+    mainImage: "/icons/bluespark.svg",
     link: "https://bluespark.gui.do/",
     iconBgColor: "bg-black-600",
     githubUrl: "https://github.com/gxjansen/bluespark",
@@ -21,7 +21,7 @@ export const indieProjects: IndieProject[] = [
   {
     name: "SkyWatch",
     description: "BlueSky Follower Analytics & Management. Downloads all your followers, and allows you to filter/sort them based on their stats (followers, following, follower ratio, posts, posts/day, join date, last post date etc).",
-    mainImage: "/public/icons/skywatch.svg",
+    mainImage: "/icons/skywatch.svg",
     link: "https://github.com/gxjansen/SkyWatch",
     iconBgColor: "bg-black-500",
     githubUrl: "https://github.com/gxjansen/SkyWatch",
