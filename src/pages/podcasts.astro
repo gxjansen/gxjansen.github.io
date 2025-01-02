@@ -16,7 +16,8 @@ try {
   const response = await fetch(`${baseUrl}/.netlify/functions/getPodcastFeeds`);
   
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
   }
   
   latestEpisodes = await response.json();
@@ -26,7 +27,9 @@ try {
   if (import.meta.env.DEV) {
     error = 'Failed to fetch podcast feeds. Make sure to run "npm run dev:netlify" to start the Netlify Functions server.';
   } else {
-    error = 'Failed to fetch podcast feeds. Please try again later.';
+    error = e.message === 'Timeout while fetching podcast feeds'
+      ? 'The podcast feeds are taking longer than usual to load. Please try again in a moment.'
+      : 'We\'re having trouble loading the podcast feeds right now. Please try again later.';
   }
 }
 ---
@@ -40,7 +43,12 @@ try {
   <div class="mt-16">
     {error ? (
       <div class="text-center p-8 bg-red-50 rounded-lg">
-        <p class="text-red-600">{error}</p>
+        <p class="text-red-600 mb-4">{error}</p>
+        <p class="text-base-500">In the meantime, you can visit the podcasts directly:</p>
+        <div class="mt-4 space-y-2">
+          <a href="https://sheeptank.transistor.fm/" class="text-primary-500 hover:underline block">Sheeptank</a>
+          <a href="https://www.cro.cafe" class="text-primary-500 hover:underline block">CRO.CAFE</a>
+        </div>
       </div>
     ) : (
       <PodcastFeed episodes={latestEpisodes} />
