@@ -54,7 +54,13 @@ export function formatPosts(
     removeLocale = true,
   }: FormatPostsOptions = {},
 ): BlogPost[] {
-  const filteredPosts = posts.reduce((acc: BlogPost[], post) => {
+  // Create a deep copy of the posts array to avoid mutating the original
+  const postsCopy = posts.map(post => ({
+    ...post,
+    data: { ...post.data }
+  }));
+
+  const filteredPosts = postsCopy.reduce((acc: BlogPost[], post) => {
     const { pubDate } = post.data;
 
     // filterOutFuturePosts if true

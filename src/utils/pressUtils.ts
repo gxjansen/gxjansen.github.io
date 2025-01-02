@@ -24,9 +24,14 @@ export function getFaviconUrl(url: string): string {
     // Default to our local fallback icon
     if (!url) return '/assets/document-icon.svg';
     
-    const domain = new URL(url).hostname;
+    const urlObj = new URL(url);
+    // Only handle http and https protocols
+    if (!['http:', 'https:'].includes(urlObj.protocol)) {
+      return '/assets/document-icon.svg';
+    }
+    
     // Use Google's favicon service with our fallback as the default
-    return `https://www.google.com/s2/favicons?domain=${domain}&sz=32&default=/assets/document-icon.svg`;
+    return `https://www.google.com/s2/favicons?domain=${urlObj.hostname}&sz=32&default=/assets/document-icon.svg`;
   } catch {
     return '/assets/document-icon.svg';
   }
