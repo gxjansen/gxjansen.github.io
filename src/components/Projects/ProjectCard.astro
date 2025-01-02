@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon";
+import { Image } from "astro:assets";
 import Button from "@components/Button/Button.astro";
 
 interface Props {
@@ -20,11 +21,11 @@ const { name, description, mainImage, link, iconBgColor, license, githubUrl } = 
     <div class="flex-shrink-0 mx-auto md:mx-0 pt-4 md:pt-0">
       <div class={`rounded-lg ${iconBgColor} p-4 w-20 h-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}>
       {mainImage.startsWith('/') ? (
-        <img 
+        <Image 
           src={mainImage} 
           alt={`${name} icon`}
-          width="48"
-          height="48"
+          width={48}
+          height={48}
           class="w-12 h-12"
         />
       ) : (
