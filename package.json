@@ -4,6 +4,7 @@
   "version": "0.1.1",
   "scripts": {
     "dev": "astro dev",
+    "dev:netlify": "netlify dev",
     "build": "astro build",
     "preview": "astro build --mode preview",
     "production": "astro build --mode production",
