@@ -151,10 +151,58 @@ const baseClasses = [
   }
 
   .button--outline {
-    @apply border-2 border-base-900 bg-transparent text-base-900 hover:bg-base-900 hover:text-base-50 dark:border-base-50 dark:text-base-50 dark:hover:bg-base-50 dark:hover:text-base-900;
+    @apply border-2 bg-transparent;
+  }
+
+  .button--outline:hover {
+    @apply text-base-50 dark:text-base-900;
   }
 
   .button--ghost {
     @apply bg-transparent text-base-900 hover:bg-base-200/50 dark:text-base-50 dark:hover:bg-base-700/50;
   }
 </style>
+
+<script is:inline>
+  // Function to get all link color variables (runs immediately)
+  function getAllLinkColors() {
+    const styles = getComputedStyle(document.documentElement);
+    const colors = [];
+    let i = 1;
+    
+    // Keep checking for link color variables until we don't find one
+    while (true) {
+      const varName = `--link-color-${i}`;
+      const color = styles.getPropertyValue(varName).trim();
+      if (!color) break;
+      colors.push(`var(${varName})`);
+      i++;
+    }
+    
+    return colors;
+  }
+
+  // Function to randomly select a link color variable
+  function getRandomLinkColor() {
+    const colors = getAllLinkColors();
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  // Apply random colors to outline buttons immediately
+  (() => {
+    document.querySelectorAll('.button--outline').forEach(button => {
+      const randomColor = getRandomLinkColor();
+      button.style.borderColor = randomColor;
+      button.style.color = randomColor;
+      
+      // Store the color for hover state
+      button.addEventListener('mouseenter', () => {
+        button.style.backgroundColor = randomColor;
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        button.style.backgroundColor = 'transparent';
+      });
+    });
+  })();
+</script>

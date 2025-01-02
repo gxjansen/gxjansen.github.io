@@ -66,19 +66,21 @@ const { name, description, mainImage, link, iconBgColor, license, githubUrl } = 
           </Button>
         )}
         {githubUrl && (
-          <a 
-            href={githubUrl} 
-            target="_blank" 
+          <Button 
+            href={githubUrl}
+            variant="outline"
+            target="_blank"
             rel="noopener noreferrer"
-            class="primary-link flex items-center gap-2"
           >
-            <Icon 
-              name="tabler/filled/brand-github"
-              class="w-5 h-5"
-              aria-hidden="true"
-            />
-            <span>Available on GitHub</span>
-          </a>
+            <span class="flex items-center gap-2">
+              <Icon 
+                name="tabler/filled/brand-github"
+                class="w-5 h-5"
+                aria-hidden="true"
+              />
+              <span>Available on GitHub</span>
+            </span>
+          </Button>
         )}
       </div>
     </div>
