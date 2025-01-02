@@ -1,120 +1,34 @@
 ---
-// layout
 import BaseLayout from "@layouts/BaseLayout.astro";
-
-// components
 import ServicesIcon from "@components/Services/ServicesIcon.astro";
 import PodcastFeed from "@components/Podcasts/PodcastFeed.astro";
 import type { PodcastEpisode } from "../types/podcast";
 
-// Function to extract content between XML tags
-function getTagContent(xml: string, tag: string): string {
-  const regex = new RegExp(`<${tag}[^>]*>(.*?)<\/${tag}>`, "s");
-  const match = xml.match(regex);
-  return match ? match[1].trim() : "";
-}
+let latestEpisodes: PodcastEpisode[] = [];
+let error: string | null = null;
 
-// Function to extract URL from enclosure tag
-function getEnclosureUrl(item: string): string {
-  const match = item.match(/<enclosure[^>]*url="([^"]*)"[^>]*>/);
-  return match ? match[1] : "";
-}
+try {
+  // In development, check if we're using Netlify Dev server
+  const baseUrl = import.meta.env.DEV 
+    ? 'http://localhost:8888' // Netlify Functions dev server
+    : '';
 
-// Function to get episode ID from enclosure URL
-function getEpisodeId(enclosureUrl: string): string {
-  const match = enclosureUrl.match(/https:\/\/media\.transistor\.fm\/([^/]+)/);
-  return match ? match[1] : "";
-}
-
-// Function to extract all items from XML
-function getItems(xml: string): string[] {
-  const items: string[] = [];
-  let remaining = xml;
+  const response = await fetch(`${baseUrl}/.netlify/functions/getPodcastFeeds`);
   
-  while (true) {
-    const startIndex = remaining.indexOf("<item>");
-    if (startIndex === -1) break;
-    
-    const endIndex = remaining.indexOf("</item>") + 7;
-    if (endIndex === -1) break;
-    
-    items.push(remaining.slice(startIndex, endIndex));
-    remaining = remaining.slice(endIndex);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
   
-  return items;
-}
-
-// Function to fetch and parse RSS feed
-async function fetchPodcastFeed(url: string): Promise<PodcastEpisode[]> {
-  try {
-    const response = await fetch(url, {
-      headers: {
-        'Accept': 'application/xml'
-      }
-    });
-    const text = await response.text();
-    
-    // Extract all <item> elements
-    const items = getItems(text);
-    
-    return items.map(item => {
-      // Extract title
-      const title = getTagContent(item, "title");
-      
-      // Extract description
-      const description = getTagContent(item, "description");
-      
-      // Extract pubDate
-      const pubDate = getTagContent(item, "pubDate");
-      
-      // Extract duration
-      const duration = getTagContent(item, "itunes:duration");
-      
-      // Get enclosure URL and extract episode ID
-      const enclosureUrl = getEnclosureUrl(item);
-      const episodeId = getEpisodeId(enclosureUrl);
-      const embedUrl = episodeId ? `https://share.transistor.fm/e/${episodeId}` : '';
-      
-      // Extract podcast name from channel title
-      const podcastName = text.match(/<channel>[\s\S]*?<title>(.*?)<\/title>/)?.[1] || '';
-      
-      return {
-        title: title.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&'),
-        description: description.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&'),
-        pubDate,
-        duration,
-        link: embedUrl,
-        podcastName: podcastName.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
-      };
-    });
-  } catch (error) {
-    console.error(`Error fetching feed ${url}:`, error);
-    return [];
+  latestEpisodes = await response.json();
+} catch (e) {
+  console.error('Error fetching podcast feeds:', e);
+  
+  if (import.meta.env.DEV) {
+    error = 'Failed to fetch podcast feeds. Make sure to run "npm run dev:netlify" to start the Netlify Functions server.';
+  } else {
+    error = 'Failed to fetch podcast feeds. Please try again later.';
   }
 }
-
-// Fetch episodes from all feeds
-const feeds = [
-  "https://feeds.transistor.fm/sheeptank",
-  "https://feeds.transistor.fm/cro-cafe",
-  "https://feeds.transistor.fm/cro-cafe-nl"
-];
-
-const allEpisodes = await Promise.all(feeds.map(fetchPodcastFeed))
-  .then(results => results.flat())
-  .catch(error => {
-    console.error("Error fetching podcast feeds:", error);
-    return [];
-  });
-
-// Sort episodes by date, newest first
-const sortedEpisodes = [...allEpisodes].sort((a, b) => 
-  new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
-);
-
-// Take only the latest 20 episodes
-const latestEpisodes = sortedEpisodes.slice(0, 20);
 ---
 
 <BaseLayout
@@ -124,6 +38,12 @@ const latestEpisodes = sortedEpisodes.slice(0, 20);
   <ServicesIcon />
   
   <div class="mt-16">
-    <PodcastFeed episodes={latestEpisodes} />
+    {error ? (
+      <div class="text-center p-8 bg-red-50 rounded-lg">
+        <p class="text-red-600">{error}</p>
+      </div>
+    ) : (
+      <PodcastFeed episodes={latestEpisodes} />
+    )}
   </div>
 </BaseLayout>

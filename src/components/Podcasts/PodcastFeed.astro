@@ -32,6 +32,7 @@ const { episodes } = Astro.props;
           seamless 
           src={episode.link}
           title={episode.title}
+          loading="lazy"
           allow="encrypted-media"
         />
       </div>
