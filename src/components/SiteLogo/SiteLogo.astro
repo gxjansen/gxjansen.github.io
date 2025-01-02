@@ -15,23 +15,27 @@ const siteData = getTranslatedData("siteData", currLocale);
 import logo from "@images/atlas-logo.png";
 ---
 
+<script>
+  import { initLogoAnimation } from './logo-animation';
+  document.addEventListener('DOMContentLoaded', initLogoAnimation);
+</script>
+
+<style>
+  .site-logo-text,
+  .site-logo-icon {
+    opacity: 0;
+  }
+</style>
+
 <a
-  class="primary-focus flex items-center gap-2 align-middle text-xl font-bold text-base-600 dark:text-base-200"
+  class="site-logo primary-focus flex items-center gap-2 align-middle text-xl font-bold text-base-600 dark:text-base-200"
   href={getRelativeLocaleUrl(currLocale)}
 >
-  <!-- <Image
-    src={logo}
-    alt="Atlas logo"
-    loading="eager"
-    height={90}
-    class="h-10 w-auto"
-    aria-label="Atlas logo"
-  /> -->
-  <p class="">Guido</p>
+  <p class="site-logo-text">Guido</p>
   <Icon
     name="atlas/logoipsum"
-    class="size-7 text-primary-500"
+    class="site-logo-icon size-7 text-primary-500"
     aria-hidden="true"
   />
-  <p class="">Jansen</p>
+  <p class="site-logo-text">Jansen</p>
 </a>
