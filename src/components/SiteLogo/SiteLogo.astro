@@ -17,7 +17,21 @@ import logo from "@images/atlas-logo.png";
 
 <script>
   import { initLogoAnimation } from './logo-animation';
-  document.addEventListener('DOMContentLoaded', initLogoAnimation);
+
+  // Run animation on initial load and after view transitions
+  document.addEventListener('astro:page-load', initLogoAnimation, { once: false });
+
+  // Clean up animations when leaving page
+  document.addEventListener('astro:before-preparation', () => {
+    const logo = document.querySelector('.site-logo');
+    if (!logo) return;
+
+    // Clean up event listeners
+    const enterListener = logo.getAttribute('data-enter-listener');
+    const leaveListener = logo.getAttribute('data-leave-listener');
+    if (enterListener) logo.removeEventListener('mouseenter', window[enterListener]);
+    if (leaveListener) logo.removeEventListener('mouseleave', window[leaveListener]);
+  });
 </script>
 
 <style>
@@ -28,6 +42,7 @@ import logo from "@images/atlas-logo.png";
 </style>
 
 <a
+  transition:persist
   class="site-logo primary-focus flex items-center gap-2 align-middle text-xl font-bold text-base-600 dark:text-base-200"
   href={getRelativeLocaleUrl(currLocale)}
 >
