@@ -36,6 +36,7 @@ const marqueeBottom = {
 <section
   id="feature-gallery-marquee"
   class="relative py-24 md:py-28"
+  transition:animate="fade"
 >
   <div class="site-container relative">
     <div class="relative">
@@ -67,6 +68,7 @@ const marqueeBottom = {
                   width={600}
                   height={360}
                   class="w-full rounded-md"
+                  loading="lazy"
                   style={{
                     aspectRatio: '3/2',
                     objectFit: 'cover',

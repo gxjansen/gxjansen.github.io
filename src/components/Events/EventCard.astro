@@ -68,6 +68,7 @@ const eventDate = new Date(date).toLocaleDateString("en-US", {
           width={32}
           height={32}
           class="opacity-80 contrast-125 dark:opacity-90 dark:contrast-125"
+          loading="lazy"
         />
       ) : (
         <span class="text-2xl">🗓️</span>
@@ -111,6 +112,7 @@ const eventDate = new Date(date).toLocaleDateString("en-US", {
               width={16}
               height={12}
               class="inline-block rounded-sm mb-0 mix-blend-multiply dark:mix-blend-screen"
+              loading="lazy"
             />
           ) : (
             <span>🌎</span>

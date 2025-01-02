@@ -23,9 +23,10 @@ const firstColumnEvents = sortedEvents.filter((_, i) => i % 2 === 0);
 const secondColumnEvents = sortedEvents.filter((_, i) => i % 2 === 1);
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Events"
   description="Overview of all events"
+  transition:animate="slide"
 >
   {/* Upcoming Events Section */}
   <section class="py-24 md:py-28">

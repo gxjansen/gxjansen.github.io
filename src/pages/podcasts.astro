@@ -4,54 +4,82 @@ import ServicesIcon from "@components/Services/ServicesIcon.astro";
 import PodcastFeed from "@components/Podcasts/PodcastFeed.astro";
 import type { PodcastEpisode } from "../types/podcast";
 
-let latestEpisodes: PodcastEpisode[] = [];
-let error: string | null = null;
-
-try {
-  // In development, check if we're using Netlify Dev server
-  const baseUrl = import.meta.env.DEV 
-    ? 'http://localhost:8888' // Netlify Functions dev server
-    : '';
-
-  const response = await fetch(`${baseUrl}/.netlify/functions/getPodcastFeeds`);
-  
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
-  }
-  
-  latestEpisodes = await response.json();
-} catch (e) {
-  console.error('Error fetching podcast feeds:', e);
-  
-  if (import.meta.env.DEV) {
-    error = 'Failed to fetch podcast feeds. Make sure to run "npm run dev:netlify" to start the Netlify Functions server.';
-  } else {
-    error = e.message === 'Timeout while fetching podcast feeds'
-      ? 'The podcast feeds are taking longer than usual to load. Please try again in a moment.'
-      : 'We\'re having trouble loading the podcast feeds right now. Please try again later.';
-  }
-}
+// Episodes will be loaded client-side
+const latestEpisodes: PodcastEpisode[] = [];
 ---
 
 <BaseLayout
   title="Guido's Podcasts"
   description="Overview of the podcasts that I host and produce."
+  transition:animate="slide"
 >
   <ServicesIcon />
   
-  <div class="mt-16">
-    {error ? (
-      <div class="text-center p-8 bg-red-50 rounded-lg">
-        <p class="text-red-600 mb-4">{error}</p>
-        <p class="text-base-500">In the meantime, you can visit the podcasts directly:</p>
-        <div class="mt-4 space-y-2">
-          <a href="https://sheeptank.transistor.fm/" class="text-primary-500 hover:underline block">Sheeptank</a>
-          <a href="https://www.cro.cafe" class="text-primary-500 hover:underline block">CRO.CAFE</a>
-        </div>
+  <div class="mt-16" transition:animate="fade">
+    <div id="podcast-feed-container">
+      <div class="text-center">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary-500"></div>
+        <p class="mt-4 text-base-500">Loading podcast episodes...</p>
       </div>
-    ) : (
-      <PodcastFeed episodes={latestEpisodes} />
-    )}
+    </div>
+
+    <script>
+      async function loadPodcastFeed() {
+        const container = document.getElementById('podcast-feed-container');
+        if (!container) return;
+
+        try {
+          // In development, use the Netlify Dev server URL from the environment
+          const baseUrl = import.meta.env.DEV 
+            ? `http://localhost:${import.meta.env.NETLIFY_PORT || '8888'}`
+            : '';
+          const response = await fetch(`${baseUrl}/.netlify/functions/getPodcastFeeds`);
+          if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+          }
+          
+          const episodes = await response.json();
+          
+          // Replace loading spinner with episodes
+          container.innerHTML = episodes.map(episode => `
+            <div class="w-full bg-gray-800 rounded-lg overflow-hidden mb-6">
+              <iframe 
+                width="100%" 
+                height="180" 
+                frameborder="no" 
+                scrolling="no" 
+                seamless 
+                src="${episode.link}"
+                title="${episode.title}"
+                loading="lazy"
+                allow="encrypted-media"
+              ></iframe>
+            </div>
+          `).join('');
+
+        } catch (error) {
+          console.error('Error loading podcast feed:', error);
+          container.innerHTML = `
+            <div class="text-center p-8 bg-red-50 rounded-lg">
+              <p class="text-red-600 mb-4">${error.message === 'Timeout while fetching podcast feeds'
+                ? 'The podcast feeds are taking longer than usual to load. Please try again in a moment.'
+                : 'We\'re having trouble loading the podcast feeds right now. Please try again later.'}</p>
+              <p class="text-base-500">In the meantime, you can visit the podcasts directly:</p>
+              <div class="mt-4 space-y-2">
+                <a href="https://sheeptank.transistor.fm/" class="text-primary-500 hover:underline block">Sheeptank</a>
+                <a href="https://www.cro.cafe" class="text-primary-500 hover:underline block">CRO.CAFE</a>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      // Load feed when page loads
+      loadPodcastFeed();
+
+      // Reload feed when navigating back to the page
+      document.addEventListener('astro:page-load', loadPodcastFeed);
+    </script>
   </div>
 </BaseLayout>

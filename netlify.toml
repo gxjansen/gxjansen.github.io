@@ -1,6 +1,8 @@
 [dev]
   command = "npm run dev"
   framework = "astro"
+  port = 8888
+  targetPort = 4321
 
 [build]
   command = "npm run build"
