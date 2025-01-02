@@ -59,7 +59,17 @@ export default defineConfig({
     react(),
     keystatic(),
     tailwind(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes('/conference-terms'),
+      changefreq: 'weekly',
+      lastmod: new Date(),
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en'
+        }
+      }
+    }),
     compressor()
   ],
 
@@ -73,8 +83,8 @@ export default defineConfig({
           handler() {
             let robotsContent;
             const sitemapUrl = process.env.ASTRO_MODE === 'production'
-              ? 'https://www.gui.do/sitemap-index.xml'
-              : 'https://dev.gui.do/sitemap-index.xml';
+              ? 'https://gui.do/sitemap.xml'
+              : 'https://dev.gui.do/sitemap.xml';
 
             if (process.env.ASTRO_MODE === 'production') {
                 robotsContent = `User-agent: *\nDisallow: /conference-terms\n\nSitemap: ${sitemapUrl}`;

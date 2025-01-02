@@ -112,6 +112,25 @@
   to = "/presentations/:splat"
   status = 301
 
+# Sitemap handling
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/sitemap-index.xml"
+  to = "/sitemap-index.xml"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/sitemap-0.xml"
+  to = "/sitemap-0.xml"
+  status = 200
+  force = true
+
 # Function handling (keep this last)
 [[redirects]]
   from = "/*"
