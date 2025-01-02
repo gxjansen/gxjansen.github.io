@@ -131,8 +131,28 @@
   status = 200
   force = true
 
+# Function configuration
+[build.environment]
+  NODE_VERSION = "20"
+
+[functions]
+  directory = "netlify/functions"
+  external_node_modules = ["fast-xml-parser"]
+  node_bundler = "esbuild"
+  included_files = ["src/types/**"]
+  
+[functions.getPodcastFeeds]
+  timeout = 30
+
 # Function handling (keep this last)
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/entry"
   status = 200
+
+[[headers]]
+  for = "/.netlify/functions/getPodcastFeeds"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type"
+    Access-Control-Allow-Methods = "GET"

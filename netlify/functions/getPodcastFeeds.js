@@ -62,7 +62,11 @@ const parseFeed = async (feedUrl) => {
       };
     });
   } catch (error) {
-    console.error(`Error fetching feed ${feedUrl}:`, error);
+    console.error(`Error fetching feed ${feedUrl}:`, {
+      error: error.message,
+      stack: error.stack,
+      status: error.name === 'AbortError' ? 'timeout' : 'error'
+    });
     return [];
   }
 };
@@ -97,13 +101,23 @@ export const handler = async (event, context) => {
       body: JSON.stringify(latestEpisodes)
     };
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error in podcast feed handler:', {
+      error: error.message,
+      stack: error.stack,
+      type: error.name
+    });
+    
+    const errorMessage = error.name === 'AbortError' 
+      ? 'Timeout while fetching podcast feeds'
+      : 'Failed to fetch podcast feeds';
+    
     return {
-      statusCode: 500,
+      statusCode: error.name === 'AbortError' ? 504 : 500,
       headers,
       body: JSON.stringify({ 
-        error: 'Failed to fetch podcast feeds',
-        message: error.message 
+        error: errorMessage,
+        message: error.message,
+        type: error.name
       })
     };
   }
