@@ -27,7 +27,7 @@
 
 ### Container Classes
 - `site-container` provides:
-  - `mx-auto max-w-[90rem]` for width constraints
+  - `mx-auto max-w-7xl` for width constraints
   - Used for consistent layout width
   - Applied with `px-4` for horizontal padding
 
@@ -48,30 +48,6 @@
   - Applied at the component level
   - Provides consistent vertical rhythm between sections
 
-### Component Guidelines
-- Components should:
-  - Use site-container with px-4 for horizontal constraints
-  - Handle their own vertical spacing
-  - Use relative units for internal spacing
-  - Never use negative margins to counteract padding
-
-### Common Patterns
-```astro
-<!-- Correct usage -->
-<div class="site-container px-4">
-  <div class="grid gap-16 sm:grid-cols-2">
-    <!-- Component content -->
-  </div>
-</div>
-
-<!-- Avoid this -->
-<div class="site-container">
-  <div class="-mx-4"> <!-- No negative margins -->
-    <!-- Component content -->
-  </div>
-</div>
-```
-
 ### Grid System
 - Standard two-column layout: `grid gap-16 sm:grid-cols-2`
 - Three-column layout: `grid gap-8 md:grid-cols-3`
@@ -89,100 +65,166 @@
   - xl: 1280px
   - 2xl: 1536px
 
-## Button Standards
+## Stylesheet Organization
 
-### Button Variants
-- Primary: 
-  - Light/Dark: Primary brand color with white text
-  - Hover: Slightly darker shade
-  ```astro
-  @apply bg-primary-500 text-white hover:bg-primary-600
-  ```
+### File Structure
+```
+src/styles/
+├── global.scss          # Main entry point
+├── _prose.scss         # Rich text content styles
+├── base/
+│   └── _typography.scss # Base typography styles
+├── components/
+│   ├── _alerts.scss    # Alert component styles
+│   ├── _cards.scss     # Card component styles
+│   └── _links.scss     # Link styles
+└── utilities/
+    └── _utilities.scss  # Shared utility classes
+```
 
-- Secondary:
-  - Light: Medium gray background (base-200) with dark text
-  - Dark: Dark gray background (base-700) with light text
-  - Hover: Slightly darker/lighter respectively
-  ```astro
-  @apply bg-base-200 text-base-900 hover:bg-base-300 dark:bg-base-700 dark:text-base-50 dark:hover:bg-base-600
-  ```
+### Global Styles Structure
+```scss
+/* Import Component Styles */
+@use './utilities/utilities';
+@use './components/alerts';
+@use './components/cards';
+@use './components/links';
+@use './base/typography';
+@use './prose';
 
-- Outline:
-  - Light: Dark border and text, white background
-  - Dark: Light border and text, transparent background
-  - Hover: Inverted colors
-  ```astro
-  @apply border-2 border-base-900 bg-transparent text-base-900 hover:bg-base-900 hover:text-base-50 dark:border-base-50 dark:text-base-50 dark:hover:bg-base-50 dark:hover:text-base-900
-  ```
-
-- Ghost:
-  - Light: Dark text with semi-transparent hover background
-  - Dark: Light text with semi-transparent hover background
-  ```astro
-  @apply bg-transparent text-base-900 hover:bg-base-200/50 dark:text-base-50 dark:hover:bg-base-700/50
-  ```
-
-### Button States
-- Default: Full opacity, clickable
-- Disabled: 50% opacity, not clickable
-- Focus: Primary color ring with offset
-- Hover: Color variations as specified per variant
-
-### Accessibility
-- Minimum contrast ratio of 4.5:1 for all text/background combinations
-- Focus states clearly visible
-- Disabled states visually distinct
-- Interactive states (hover, active) provide clear feedback
+/* Base Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
 
 ## Z-Index Management
 
 ### Z-Index Layers
-Use these standardized classes to maintain consistent layering across components:
+Use these standardized z-index classes to maintain consistent layering:
 ```scss
-.z-base      // z-0: Base content level
-.z-dropdown  // z-10: Dropdowns, tooltips
-.z-overlay   // z-20: Overlays, backdrops
-.z-modal     // z-30: Modal content
-.z-modal-overlay // z-40: Modal backdrops
-.z-toast     // z-50: Toasts, notifications
-.z-nav       // z-50: Navigation elements
-.z-background // -z-10: Background elements
+.z-background  // -z-10: Background elements
+.z-base       // z-0: Base content level
+.z-nav        // z-10: Navigation elements
+.z-overlay    // z-20: Overlays, backdrops
+.z-modal      // z-30: Modal content
+.z-toast      // z-40: Toast notifications
+.z-tooltip    // z-50: Tooltips, popovers
 ```
 
-## Background Patterns
+## Link Styling
 
-### Standard Patterns
+### Link Colors
 ```scss
-.bg-pattern   // Regular pattern background
-.bg-pattern-big // Larger pattern background
+:root {
+  --link-color-1: rgb(14, 165, 233);  /* Sky blue */
+  --link-color-2: rgb(168, 85, 247);  /* Purple */
+  --link-color-3: rgb(234, 88, 12);   /* Orange */
+  --link-color-4: rgb(185, 16, 154);  /* Emerald */
+  --link-color-5: rgb(245, 158, 11);  /* Amber */
+}
 ```
 
-### Grid Pattern Container
+### Base Link Styling
+Default link styling (excluding special cases):
 ```scss
-.grid-pattern-container // Container with faded edges
+a {
+  @apply text-teal-500 hover:text-teal-600 dark:text-teal-400 dark:hover:text-teal-500 transition-all duration-200;
+  text-decoration: underline;
+  text-decoration-thickness: 0.2em;
+  text-underline-offset: 0.1em;
+}
 ```
 
-### Background Effects
+### Link Exceptions
+The following elements do not receive underline styling:
+- Navigation links (`nav a`)
+- Header and footer links (`header a`, `footer a`)
+- Buttons (`.btn`, `[class*="button"]`)
+- Social cards (`.social-card`)
+- Site content links (`.site-content a`)
+- Service icons (`.services-icon a`)
+- Card headings (`.card h2 a`)
+- Article cards (`.article-card h3 a`)
+- Event cards (`.event-card a`)
+- Badges (`.badge a`)
+- Primary color links (`[class*="hover:text-primary"]`)
+
+### Heading Links
 ```scss
-.noise-background  // Noise texture overlay
-.gradient-top-left // Top-left gradient effect
-.gradient-bottom-right // Bottom-right gradient effect
+h1, h2, h3, h4, h5, h6 {
+  a {
+    @apply text-base-900 dark:text-base-100;
+  }
+}
 ```
 
-### Gradient Overlays
+### Prose Content Links
 ```scss
-.gradient-fade-left  // Left-side fade effect
-.gradient-fade-right // Right-side fade effect
+.prose a {
+  text-decoration-thickness: 0.2em;
+  text-underline-offset: 0.1em;
+}
 ```
 
-## Component Standards Reference
+## Utility Classes
 
-All component styling standards are maintained in:
-1. `src/pages/styleguide.astro` - Live component examples and implementation patterns
-2. `tailwind.config.cjs` - Theme configuration, colors, spacing, breakpoints
-3. `src/styles/global.scss` - Global styles and Tailwind component classes
+### Focus Management
+```scss
+.primary-focus {
+  @apply focus:outline-none focus-visible:rounded-sm focus-visible:outline-primary-500;
+}
+```
 
-### Typography
+### Typography Utilities
+```scss
+// Text Sizes with Dark Mode Support
+.text-small    // text-sm
+.text-regular  // text-base
+.text-large    // text-lg
+
+// Font Weights with Dark Mode Support
+.weight-normal    // font-normal
+.weight-medium    // font-medium
+.weight-semibold  // font-semibold
+.weight-bold      // font-bold
+
+// Special Text Styles
+.description {
+  @apply font-normal text-base-500 dark:text-base-400;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+}
+
+.code-block {
+  @apply text-sm bg-base-100/20 px-2 py-1 rounded 
+         text-base-900 dark:bg-base-800 dark:text-base-100;
+}
+```
+
+### Animation Controls
+```scss
+.pause {
+  animation-play-state: paused !important;
+}
+```
+
+### Mask Effects
+```scss
+.mask-gradient {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  mask-size: 100%;
+  mask-repeat: no-repeat;
+}
+```
+
+## Typography
 Base font sizes:
 - Mobile: 16px (1rem)
 - Desktop/larger screens (md breakpoint and up): 22.4px (1.4rem)
@@ -193,31 +235,8 @@ Refer to styleguide.astro#typography for:
 - Link styles
 - Body text styles
 
-### Components
-The following components have standardized implementations:
-- Buttons (styleguide.astro#buttons)
-- Alerts (styleguide.astro#alerts)
-- Badges (styleguide.astro#badges)
-- Cards (styleguide.astro#cards)
-- Navigation (styleguide.astro#navigation)
-
-### Theme Configuration
-Core design tokens are defined in tailwind.config.cjs:
-- Color palette
-- Typography scale
-- Spacing scale
-- Breakpoints
-- Component base styles
-
-### Global Styles
-Reusable patterns and utilities are defined in global.scss:
-- Component class definitions
-- Dark mode variants
-- Utility patterns
-- Animation classes
-
 ## Performance Optimizations
-Performance-critical styles and optimizations are documented in:
+Performance-critical styles and optimizations:
 - GPU acceleration patterns
 - Animation performance
 - Responsive image handling
