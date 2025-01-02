@@ -182,6 +182,31 @@ const baseClasses = [
     return colors;
   }
 
+  // Function to calculate relative luminance (following WCAG guidelines)
+  function getLuminance(r, g, b) {
+    let [rs, gs, bs] = [r, g, b].map(c => {
+      c = c / 255;
+      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+  }
+
+  // Function to determine if white or black text should be used
+  function getContrastColor(backgroundColor) {
+    // Extract RGB values from the CSS variable
+    const tempDiv = document.createElement('div');
+    tempDiv.style.color = backgroundColor;
+    document.body.appendChild(tempDiv);
+    const rgbColor = getComputedStyle(tempDiv).color;
+    document.body.removeChild(tempDiv);
+    
+    const rgb = rgbColor.match(/\d+/g).map(Number);
+    const luminance = getLuminance(rgb[0], rgb[1], rgb[2]);
+    
+    // Use white text if background is dark (luminance < 0.5)
+    return luminance < 0.5 ? '#ffffff' : '#000000';
+  }
+
   // Function to randomly select a link color variable
   function getRandomLinkColor() {
     const colors = getAllLinkColors();
@@ -198,10 +223,12 @@ const baseClasses = [
       // Store the color for hover state
       button.addEventListener('mouseenter', () => {
         button.style.backgroundColor = randomColor;
+        button.style.color = getContrastColor(randomColor);
       });
       
       button.addEventListener('mouseleave', () => {
         button.style.backgroundColor = 'transparent';
+        button.style.color = randomColor;
       });
     });
   })();
