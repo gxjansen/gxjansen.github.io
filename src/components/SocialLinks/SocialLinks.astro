@@ -39,8 +39,13 @@ const visibleLinks = socialLinks.filter(link => {
         <li role="listitem" class="group relative pt-8">
           <div class="
             absolute 
-            left-1/2 
-            -translate-x-1/2 
+            left-1/2
+            -translate-x-1/2
+            [.group:first-child_&]:left-0
+            [.group:first-child_&]:translate-x-0
+            [.group:last-child_&]:left-auto
+            [.group:last-child_&]:right-0
+            [.group:last-child_&]:translate-x-0
             top-0
             opacity-0 
             group-hover:opacity-100 
