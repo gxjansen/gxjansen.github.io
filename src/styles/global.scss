@@ -71,51 +71,14 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     scroll-behavior: smooth;
-    mask-image: linear-gradient(to right, 
-      black calc(100% - 100px),
-      transparent calc(100% - 20px)
-    );
 
     &::-webkit-scrollbar {
       display: none;
     }
   }
 
-  /* Hide the mask when at the end */
-  .scroll-container-wrapper[data-at-end='true'] .scroll-container {
-    mask-image: none;
-  }
-
   .scroll-container-wrapper {
     @apply relative;
-
-    &::after {
-      content: '❯';
-      @apply absolute top-1/2 -translate-y-1/2 right-2 w-12 h-12 pointer-events-none;
-      @apply bg-white/95 dark:bg-gray-800/95 rounded-full;
-      @apply grid place-items-center text-3xl;
-      @apply text-gray-800 dark:text-gray-200;
-      @apply opacity-95 transition-all duration-300;
-      @apply shadow-lg;
-      animation: pulseRight 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-      aria-hidden: true; /* Hide from screen readers since we have descriptive text */
-    }
-
-    @keyframes pulseRight {
-      0%, 100% {
-        transform: translateX(0) translateY(-50%);
-        opacity: 0.95;
-      }
-      50% {
-        transform: translateX(6px) translateY(-50%);
-        opacity: 1;
-        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      }
-    }
-
-    &[data-at-end='true']::after {
-      @apply hidden;
-    }
   }
 
   .scroll-item {
@@ -125,9 +88,58 @@
     @screen sm {
       width: calc(50% - 1rem);
     }
-    
-    @screen lg {
-      width: calc(33.333% - 1rem);
+  }
+
+  /* Carousel Header and Progress */
+  .carousel-header {
+    @apply mb-6 flex flex-col items-center;
+  }
+
+  .carousel-progress {
+    @apply flex gap-2 justify-center items-center mt-2;
+  }
+
+  .progress-dot {
+    @apply w-2 h-2 rounded-full transition-all duration-300;
+    @apply bg-gray-300 dark:bg-gray-600;
+
+    &[data-active="true"] {
+      @apply w-3 h-3;
+      @apply bg-teal-500 dark:bg-teal-400;
+    }
+  }
+
+  /* Navigation Buttons */
+  .nav-button {
+    @apply absolute top-1/2 -translate-y-1/2 z-10;
+    @apply w-12 h-12 flex items-center justify-center;
+    @apply bg-white/95 dark:bg-gray-800/95 rounded-full;
+    @apply text-gray-800 dark:text-gray-200 text-2xl;
+    @apply shadow-lg transition-all duration-300;
+    @apply hover:bg-white dark:hover:bg-gray-700;
+    @apply focus:outline-none focus:ring-2 focus:ring-teal-500;
+    @apply disabled:opacity-30 disabled:cursor-not-allowed;
+    @apply disabled:hover:bg-white/95 dark:disabled:hover:bg-gray-800/95;
+    /* Improved touch target size */
+    @apply touch-manipulation;
+
+    &.left-button {
+      @apply left-0 -translate-x-1/2;
+    }
+
+    &.right-button {
+      @apply right-0 translate-x-1/2;
+    }
+
+    /* Prevent button clicks from triggering card links */
+    &::before {
+      content: '';
+      @apply absolute inset-0;
+    }
+
+    /* Improved focus styles */
+    &:focus-visible {
+      @apply ring-offset-2 ring-offset-white dark:ring-offset-gray-900;
     }
   }
 
