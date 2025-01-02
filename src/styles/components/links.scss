@@ -1,11 +1,11 @@
 /* Link Colors - Easy to modify by changing these values */
 :root {
-  --link-color-1: rgb(245, 205, 56); 
-  --link-color-2: rgb(56, 169, 245);  
-  --link-color-3: rgb(245, 167, 56);   
-  --link-color-4: rgb(90, 132, 160);     
-  --link-color-5: rgb(245, 115, 56);     
-  --link-color-6: rgb(148, 56, 245);     
+  --link-color-1: rgb(245, 205, 56); /* Yellow - Good contrast */
+  --link-color-2: rgb(0, 122, 204);  /* Darker blue for better contrast */
+  --link-color-3: rgb(245, 167, 56); /* Orange - Good contrast */
+  --link-color-4: rgb(38, 84, 124); /* Darker blue-grey for better contrast */
+  --link-color-5: rgb(245, 115, 56); /* Red-orange - Good contrast */
+  --link-color-6: rgb(128, 0, 255); /* Brighter purple for better contrast */
 }
 
 /* Base link styling */
