@@ -190,6 +190,7 @@
 
 ### New features
 - [ ] Podcast subscription links
+- [ ] OpenGraph implementation for all pages
 - [ ] Events: Year index
 - [ ] Add Bluesky comments
 - [ ] Activity feed
