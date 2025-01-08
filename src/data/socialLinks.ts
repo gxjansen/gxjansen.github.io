@@ -93,9 +93,9 @@ export const socialLinks: SocialLink[] = [
     href: 'https://www.instagram.com/gxjansen',
     icon: 'instagram',
     visibility: {
-      footer: true,
+      footer: false,
       hero: false,
-      about: true,
+      about: false,
       contact: false
     }
   },
