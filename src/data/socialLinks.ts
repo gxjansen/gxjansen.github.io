@@ -106,7 +106,7 @@ export const socialLinks: SocialLink[] = [
     visibility: {
       footer: true,
       hero: false,
-      about: true,
+      about: false,
       contact: false
     }
   }
