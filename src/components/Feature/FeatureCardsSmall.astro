@@ -89,17 +89,22 @@ const shouldReduceMotion = typeof window !== "undefined"
       </p>
     </div>
     {/* Desktop Grid Layout */}
-    <div class="hidden lg:grid lg:grid-cols-3 gap-6 site-container">
+    <div 
+      class="hidden lg:grid lg:grid-cols-3 gap-6 site-container"
+      role="list"
+      aria-label="Services grid"
+    >
       {
         featureData.map((feature, idx) => (
-          <FeatureCard
-            title={feature.title}
-            text={feature.text}
-            icon={feature.icon}
-            data-aos={shouldReduceMotion ? "" : "zoom-in"}
-            data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
-            aria-label={`Service: ${feature.title}`}
-          />
+          <div role="listitem">
+            <FeatureCard
+              title={feature.title}
+              text={feature.text}
+              icon={feature.icon}
+              data-aos={shouldReduceMotion ? "" : "zoom-in"}
+              data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
+            />
+          </div>
         ))
       }
     </div>
@@ -107,7 +112,7 @@ const shouldReduceMotion = typeof window !== "undefined"
     {/* Mobile/Tablet Carousel */}
     <div 
       class="scroll-container-wrapper lg:hidden site-container"
-      id="trigger-small-cards"
+      id="feature-cards-carousel"
     >
       <div class="relative">
         <div class="carousel-header">
@@ -115,7 +120,15 @@ const shouldReduceMotion = typeof window !== "undefined"
             Services carousel. Use left and right arrow buttons or swipe to navigate through items.
           </span>
           
-          <div class="carousel-progress" role="progressbar" aria-valuemin="1" aria-valuemax={featureData.length}>
+          <div 
+            class="carousel-progress" 
+            role="progressbar" 
+            aria-label="Feature cards carousel progress"
+            aria-valuemin="1" 
+            aria-valuemax={featureData.length}
+            aria-valuenow="1"
+            id="feature-cards-progress"
+          >
             {featureData.map((_, idx) => (
               <div 
                 class="progress-dot"
@@ -134,23 +147,26 @@ const shouldReduceMotion = typeof window !== "undefined"
           <span aria-hidden="true">❮</span>
         </button>
 
-        <div
-          class="scroll-container"
-          role="list region"
-          aria-label={`Services carousel with ${featureData.length} items`}
-          tabindex="0"
-        >
+          <div
+            class="scroll-container"
+            role="list"
+            aria-label={`Feature cards carousel with ${featureData.length} items`}
+            tabindex="0"
+            id="feature-cards-container"
+          >
           {
             featureData.map((feature, idx) => (
-              <div class="scroll-item">
+              <div 
+                class="scroll-item" 
+                role="listitem"
+              >
                 <FeatureCard
                   title={feature.title}
                   text={feature.text}
                   icon={feature.icon}
                   data-aos={shouldReduceMotion ? "" : "zoom-in"}
                   data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
-                  data-aos-trigger="#trigger-small-cards"
-                  aria-label={`Service: ${feature.title}`}
+                  data-aos-trigger="#feature-cards-carousel"
                 />
               </div>
             ))
@@ -168,8 +184,8 @@ const shouldReduceMotion = typeof window !== "undefined"
 
     <script define:vars={{ totalItems: featureData.length }}>
       // Handle carousel navigation
-      const wrapper = document.querySelector('#trigger-small-cards');
-      const container = wrapper?.querySelector('.scroll-container');
+      const wrapper = document.querySelector('#feature-cards-carousel');
+      const container = wrapper?.querySelector('#feature-cards-container');
       const leftButton = wrapper?.querySelector('.left-button');
       const rightButton = wrapper?.querySelector('.right-button');
 
@@ -202,10 +218,17 @@ const shouldReduceMotion = typeof window !== "undefined"
           leftButton.setAttribute('aria-label', `View previous items. Currently at item ${currentIndex + 1} of ${totalItems}`);
           rightButton.setAttribute('aria-label', `View next items. Currently at item ${currentIndex + 1} of ${totalItems}`);
 
-          // Update screen reader status
+          // Update screen reader status and progressbar
           const status = wrapper?.querySelector('[role="status"]');
+          const progressbar = wrapper?.querySelector('[role="progressbar"]');
+          
           if (status) {
             status.textContent = `Viewing item ${currentIndex + 1} of ${totalItems}. Use left and right arrow buttons or swipe to navigate.`;
+          }
+          
+          if (progressbar) {
+            progressbar.setAttribute('aria-valuenow', (currentIndex + 1).toString());
+            progressbar.setAttribute('aria-valuetext', `Item ${currentIndex + 1} of ${totalItems}`);
           }
         };
 
