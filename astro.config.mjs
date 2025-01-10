@@ -7,6 +7,7 @@ import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
 import netlify from "@astrojs/netlify";
 import compressor from "astro-compressor";
+import critters from "astro-critters";
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
@@ -70,10 +71,40 @@ export default defineConfig({
         }
       }
     }),
-    compressor()
+    compressor(),
+    critters({
+      // Inline all styles from both internal and external stylesheets
+      inlineThreshold: 0,
+      // Preload external stylesheets
+      preload: 'media',
+      // Minimize the inlined CSS
+      minimizeInlinedCSS: true,
+      // Don't remove original stylesheets as they're needed for view transitions
+      pruneSource: false
+    })
   ],
 
   vite: {
+    build: {
+      cssCodeSplit: true,
+      cssMinify: 'lightningcss',
+    },
+    css: {
+      postcss: {
+        plugins: [
+          // Extract and inline critical CSS
+          require('@fullhuman/postcss-purgecss')({
+            content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+            defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
+            safelist: {
+              standard: [/^astro-/, /^is-/, /^has-/, /^data-/, /^js-/],
+              deep: [/dark$/, /light$/, /active$/, /open$/],
+              greedy: [/show$/, /hide$/, /sr-only$/]
+            }
+          })
+        ]
+      }
+    },
     plugins: [
       {
         name: 'robots-txt',

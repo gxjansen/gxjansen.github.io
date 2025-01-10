@@ -4,6 +4,7 @@ import { ViewTransitions } from "astro:transitions";
 
 // component imports
 import Seo from "@components/Seo/Seo.astro";
+import PassiveEvents from "@components/Scripts/PassiveEvents.astro";
 
 // data
 import siteSettings from "@config/siteSettings.json";
@@ -44,19 +45,53 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <meta name="format-detection" content="email=no" />
 
 <!-- Font loading optimization -->
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+<style is:inline>
+  /* Inline critical font CSS */
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://api.fontshare.com/v2/css?f[]=poppins@400) format('woff2');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://api.fontshare.com/v2/css?f[]=poppins@500) format('woff2');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://api.fontshare.com/v2/css?f[]=poppins@600) format('woff2');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://api.fontshare.com/v2/css?f[]=poppins@700) format('woff2');
+  }
+</style>
+
+<!-- Preload critical font weights -->
 <link 
-  href="https://api.fontshare.com/v2/css?f[]=poppins@400,500,600,700&display=swap"
-  rel="stylesheet"
-  media="print"
-  onload="this.media='all'"
+  rel="preload" 
+  href="https://api.fontshare.com/v2/css?f[]=poppins@400" 
+  as="font" 
+  type="font/woff2" 
+  crossorigin
 />
-<noscript>
-  <link
-    href="https://api.fontshare.com/v2/css?f[]=poppins@400,500,600,700&display=swap"
-    rel="stylesheet"
-  />
-</noscript>
+<link 
+  rel="preload" 
+  href="https://api.fontshare.com/v2/css?f[]=poppins@500" 
+  as="font" 
+  type="font/woff2" 
+  crossorigin
+/>
 
 <!-- Favicons. I store these in public/favicons. Wherever you store them in the public folder is what you need these href's to match -->
 <link rel="icon" href="/favicons/favicon.ico" />
@@ -89,6 +124,9 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <!-- other -->
 <meta name="generator" content={Astro.generator} />
 <link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Performance optimizations -->
+<PassiveEvents />
 
 <!-- Theme change setup. Run early to eliminate Flash of inAccurate coloR Theme (FART) -->
 <script is:inline>

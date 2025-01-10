@@ -1,0 +1,36 @@
+---
+---
+<script>
+  const EVENTS_TO_MODIFY = [
+    'touchstart',
+    'touchmove',
+    'touchend',
+    'scroll',
+    'wheel',
+    'mousewheel'
+  ];
+
+  // Override addEventListener to make these events passive by default
+  const originalAddEventListener = EventTarget.prototype.addEventListener;
+  EventTarget.prototype.addEventListener = function(
+    type,
+    listener,
+    options
+  ) {
+    if (EVENTS_TO_MODIFY.includes(type)) {
+      // If options is a boolean or undefined, convert to object
+      if (typeof options === 'boolean' || typeof options === 'undefined') {
+        options = {
+          capture: options,
+          passive: true
+        };
+      } 
+      // If options is an object and passive isn't explicitly set to false
+      else if (typeof options === 'object' && options.passive !== false) {
+        options.passive = true;
+      }
+    }
+
+    return originalAddEventListener.call(this, type, listener, options);
+  };
+</script>
