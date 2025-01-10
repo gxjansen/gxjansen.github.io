@@ -91,11 +91,25 @@ const featureData: FeatureData[] = [
           >
             <div class="relative">
               <div class="carousel-header">
-                <span class="sr-only" role="status" aria-live="polite">
+                <span 
+                  class="sr-only" 
+                  role="status" 
+                  aria-live="polite"
+                  id="content-carousel-status"
+                >
                   Content carousel. Use left and right arrow buttons or swipe to navigate through items.
                 </span>
                 
-                <div class="carousel-progress" role="progressbar" aria-valuemin="1" aria-valuemax={featureData.length}>
+                <div 
+                  class="carousel-progress" 
+                  role="progressbar" 
+                  aria-label="Content carousel progress"
+                  aria-labelledby="content-carousel-status"
+                  aria-valuemin="1" 
+                  aria-valuemax={featureData.length}
+                  aria-valuenow="1"
+                  id="content-carousel-progress"
+                >
                   {featureData.map((_, idx) => (
                     <div 
                       class="progress-dot"

@@ -97,13 +97,14 @@ const shouldReduceMotion = typeof window !== "undefined"
       {
         featureData.map((feature, idx) => (
           <div role="listitem">
-            <FeatureCard
-              title={feature.title}
-              text={feature.text}
-              icon={feature.icon}
-              data-aos={shouldReduceMotion ? "" : "zoom-in"}
-              data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
-            />
+              <FeatureCard
+                title={feature.title}
+                text={feature.text}
+                icon={feature.icon}
+                suffix="-desktop"
+                data-aos={shouldReduceMotion ? "" : "zoom-in"}
+                data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
+              />
           </div>
         ))
       }
@@ -116,18 +117,24 @@ const shouldReduceMotion = typeof window !== "undefined"
     >
       <div class="relative">
         <div class="carousel-header">
-          <span class="sr-only" role="status" aria-live="polite">
+          <span 
+            class="sr-only" 
+            role="status" 
+            aria-live="polite"
+            id="carousel-status"
+          >
             Services carousel. Use left and right arrow buttons or swipe to navigate through items.
           </span>
           
           <div 
             class="carousel-progress" 
             role="progressbar" 
-            aria-label="Feature cards carousel progress"
+            aria-label="Services carousel progress"
+            aria-labelledby="carousel-status"
             aria-valuemin="1" 
             aria-valuemax={featureData.length}
             aria-valuenow="1"
-            id="feature-cards-progress"
+            id="services-carousel-progress"
           >
             {featureData.map((_, idx) => (
               <div 
@@ -164,6 +171,7 @@ const shouldReduceMotion = typeof window !== "undefined"
                   title={feature.title}
                   text={feature.text}
                   icon={feature.icon}
+                  suffix="-mobile"
                   data-aos={shouldReduceMotion ? "" : "zoom-in"}
                   data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
                   data-aos-trigger="#feature-cards-carousel"
