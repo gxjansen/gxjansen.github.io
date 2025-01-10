@@ -232,7 +232,7 @@ const shouldReduceMotion = typeof window !== "undefined"
         });
 
         // Update carousel state on scroll, resize, and after animations
-        container.addEventListener('scroll', updateCarouselState);
+        container.addEventListener('scroll', updateCarouselState, { passive: true });
         window.addEventListener('resize', updateCarouselState);
         container.addEventListener('scrollend', updateCarouselState);
         

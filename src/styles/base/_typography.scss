@@ -1,5 +1,4 @@
-/* Import Google Fonts - including lighter weights for better hierarchy */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+/* Font imports are handled in BaseHead.astro */
 
 @layer base {
   html {
@@ -11,9 +10,9 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Apply Inter font to all headings by default with enhanced readability */
+  /* Apply Poppins font to all headings by default with enhanced readability */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-inter text-base-900 dark:text-base-100;
+    @apply font-sans text-base-900 dark:text-base-100;
     letter-spacing: -0.015em;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
     font-feature-settings: 'ss01' on, 'ss02' on, 'ss03' on;
@@ -33,7 +32,7 @@
   }
 
   .font-bold {
-    @apply font-inter;
+    @apply font-sans;
     letter-spacing: -0.015em;
   }
 
@@ -43,7 +42,7 @@
   [class*="text-2xl"][class*="font-semibold"],
   [class*="text-3xl"][class*="font-semibold"],
   [class*="text-4xl"][class*="font-semibold"] {
-    @apply font-inter text-base-900 dark:text-base-100;
+    @apply font-sans text-base-900 dark:text-base-100;
     letter-spacing: -0.02em;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
   }
@@ -60,24 +59,24 @@
 
   /* Heading utility classes */
   .h1 {
-    @apply font-inter text-5xl font-bold leading-[1.1] text-base-900 dark:text-base-100 my-3;
+    @apply font-sans text-5xl font-bold leading-[1.1] text-base-900 dark:text-base-100 my-3;
     letter-spacing: -0.025em;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
   }
 
   .h2 {
-    @apply font-inter text-4xl font-semibold leading-[1.2] text-base-900 dark:text-base-100 my-3;
+    @apply font-sans text-4xl font-semibold leading-[1.2] text-base-900 dark:text-base-100 my-3;
     letter-spacing: -0.02em;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
   }
 
   .h3 {
-    @apply font-inter text-2xl font-medium leading-[1.3] text-base-900 dark:text-base-100 my-4;
+    @apply font-sans text-2xl font-medium leading-[1.3] text-base-900 dark:text-base-100 my-4;
     letter-spacing: -0.015em;
   }
 
   .h4 {
-    @apply font-inter text-xl font-medium leading-[1.3] text-base-900 dark:text-base-100 my-4;
+    @apply font-sans text-xl font-medium leading-[1.3] text-base-900 dark:text-base-100 my-4;
     letter-spacing: -0.01em;
   }
 }

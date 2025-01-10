@@ -60,6 +60,7 @@
     "astro-critters": "^2.2.1",
     "fs-extra": "^11.2.0",
     "jsdom": "^25.0.1",
+    "lightningcss": "^1.29.1",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "prettier-plugin-astro": "^0.14.0",

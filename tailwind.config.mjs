@@ -1,8 +1,9 @@
 /** @type {import('tailwindcss').Config} */
+import colors from "tailwindcss/colors";
+import typography from "@tailwindcss/typography";
+import forms from "@tailwindcss/forms";
 
-const colors = require("tailwindcss/colors");
-
-module.exports = {
+export default {
   // this enables you to cancel out dark mode using the class "light" for specific sections if desired
   darkMode: ["variant", "&:is(.dark *):not(.light *)"],
 
@@ -126,5 +127,5 @@ module.exports = {
       ]
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
+  plugins: [typography, forms],
 };
