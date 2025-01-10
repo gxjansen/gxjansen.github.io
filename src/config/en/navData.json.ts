@@ -3,14 +3,14 @@ const navConfig = [
     text: "Creations",
     dropdown: [
       {
-        text: "Podcasts",
-        link: "/podcasts",
-        icon: "tabler/outline/microphone",
-      },
-      {
         text: "Articles",
         link: "/post",
         icon: "tabler/outline/article",
+      },
+      {
+        text: "Podcasts",
+        link: "/podcasts",
+        icon: "tabler/outline/microphone",
       },
       {
         text: "Presentations",
