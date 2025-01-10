@@ -5,8 +5,14 @@
   targetPort = 4321
 
 [build]
-  command = "npm run build"
+  command = "npm run build && cp robots/robots.production.txt dist/robots.txt"
   publish = "dist"
+
+[context.deploy-preview]
+  command = "npm run build && cp robots/robots.preview.txt dist/robots.txt"
+
+[context.branch-deploy]
+  command = "npm run build && cp robots/robots.development.txt dist/robots.txt"
 
 # External redirects
 [[redirects]]
