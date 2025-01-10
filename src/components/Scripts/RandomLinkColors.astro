@@ -1,43 +1,53 @@
 <script is:inline>
-// Initialize and handle random link colors
-(function() {
-  // Function to get all link color variables
-  function getAllLinkColors() {
-    const styles = getComputedStyle(document.documentElement);
-    const colors = [];
-    let i = 1;
+// Array of color pairs (light/dark mode variants)
+const linkColors = [
+  { light: '--link-blue-light', dark: '--link-blue-dark' },
+  { light: '--link-purple-light', dark: '--link-purple-dark' },
+  { light: '--link-emerald-light', dark: '--link-emerald-dark' },
+  { light: '--link-red-light', dark: '--link-red-dark' },
+  { light: '--link-orange-light', dark: '--link-orange-dark' },
+  { light: '--link-indigo-light', dark: '--link-indigo-dark' },
+  { light: '--link-rose-light', dark: '--link-rose-dark' },
+  { light: '--link-lime-light', dark: '--link-lime-dark' },
+  { light: '--link-cyan-light', dark: '--link-cyan-dark' }
+];
+
+// Function to get a random color pair
+function getRandomColorPair() {
+  return linkColors[Math.floor(Math.random() * linkColors.length)];
+}
+
+// Function to apply colors to links
+function applyLinkColors() {
+  const selector = 'a:not(.card-container, [role="menuitem"], nav a, header a, footer a, .btn, [class*="button"], .social-card, .social-card *, .site-content a, .site-content *, .services-icon a, .services-icon *, [class*="group flex h-full"], .linkedin-cta a, .content-type-selector a, [class*="bg-teal-"], .article-card h3 a, .event-card a, .site-content-card a, .badge a, .card h2 a, [class*="hover:text-primary"], [class*="bg-primary-100"], [class*="rounded-full"], .no-random-underline)';
+  
+  document.querySelectorAll(selector).forEach(link => {
+    if (link.classList.contains('no-random-underline')) return;
     
-    // Keep checking for link color variables until we don't find one
-    while (true) {
-      const varName = `--link-color-${i}`;
-      const color = styles.getPropertyValue(varName).trim();
-      if (!color) break;
-      colors.push(color);
-      i++;
-    }
+    const { light, dark } = getRandomColorPair();
+    const isDark = document.documentElement.classList.contains('dark');
     
-    return colors;
-  }
-
-  // Function to randomly select a color
-  function getRandomColor() {
-    const colors = getAllLinkColors();
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
-
-  // Apply random colors to links
-  function applyRandomColors() {
-    const selector = 'a:not(.card-container, [role="menuitem"], nav a, header a, footer a, .btn, [class*="button"], .social-card, .social-card *, .site-content a, .site-content *, .services-icon a, .services-icon *, [class*="group flex h-full"], .linkedin-cta a, .content-type-selector a, [class*="bg-teal-"], .article-card h3 a, .event-card a, .site-content-card a, .badge a, .card h2 a, [class*="hover:text-primary"], [class*="bg-primary-100"], [class*="rounded-full"], .no-random-underline)';
+    // Get the color value from CSS variable
+    const color = getComputedStyle(document.documentElement)
+      .getPropertyValue(isDark ? dark : light)
+      .trim();
     
-    document.querySelectorAll(selector).forEach(link => {
-      link.style.textDecorationColor = getRandomColor();
-    });
-  }
+    // Apply the color to the link's underline
+    link.style.textDecorationColor = color;
+  });
+}
 
-  // Apply immediately
-  applyRandomColors();
+// Apply colors on page load and after view transitions
+applyLinkColors();
+document.addEventListener('astro:after-swap', applyLinkColors);
 
-  // Re-apply after view transitions
-  document.addEventListener('astro:after-swap', applyRandomColors);
-})();
+// Watch for theme changes
+const observer = new MutationObserver(() => {
+  applyLinkColors();
+});
+
+observer.observe(document.documentElement, {
+  attributes: true,
+  attributeFilter: ['class']
+});
 </script>

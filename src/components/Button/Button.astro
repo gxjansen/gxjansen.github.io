@@ -37,6 +37,24 @@ const {
 const isExternalLink = href && (href.startsWith('http://') || href.startsWith('https://'));
 
 // Base button classes
+// Array of color classes for outline buttons
+const colorClasses = [
+  'color-blue',
+  'color-purple',
+  'color-emerald',
+  'color-red',
+  'color-orange',
+  'color-indigo',
+  'color-rose',
+  'color-lime',
+  'color-cyan'
+];
+
+// Get a random color class if this is an outline button
+const randomColorClass = variant === 'outline' 
+  ? colorClasses[Math.floor(Math.random() * colorClasses.length)]
+  : '';
+
 const baseClasses = [
   className,
   'button group',
@@ -48,7 +66,8 @@ const baseClasses = [
     'button--secondary': variant === 'secondary',
     'button--outline': variant === 'outline',
     'button--ghost': variant === 'ghost',
-  }
+  },
+  randomColorClass // Add the random color class
 ];
 ---
 
@@ -141,95 +160,85 @@ const baseClasses = [
     cursor: not-allowed;
   }
 
-  /* Variant styles */
+  /* Variant styles with improved contrast ratios */
   .button--primary {
-    @apply bg-primary-500 text-white hover:bg-primary-600;
+    @apply bg-primary-600 text-white hover:bg-primary-700;
   }
 
   .button--secondary {
-    @apply bg-base-200 text-base-900 hover:bg-base-300 dark:bg-base-700 dark:text-base-50 dark:hover:bg-base-600;
+    @apply bg-base-300 text-base-900 hover:bg-base-400 dark:bg-base-600 dark:text-white dark:hover:bg-base-700;
   }
 
   .button--outline {
-    @apply border-2 bg-transparent;
+    @apply border-2 bg-transparent transition-all duration-200;
   }
 
-  .button--outline:hover {
-    @apply text-base-50 dark:text-base-900;
+  /* High-contrast color variations */
+  .button.button--outline.color-blue {
+    @apply !border-blue-700 !text-blue-700 dark:!border-blue-500 dark:!text-blue-500;
+  }
+  .button.button--outline.color-blue:hover {
+    @apply !bg-blue-700 dark:!bg-blue-500 !text-white dark:!text-white;
+  }
+
+  .button.button--outline.color-purple {
+    @apply !border-purple-700 !text-purple-700 dark:!border-purple-500 dark:!text-purple-500;
+  }
+  .button.button--outline.color-purple:hover {
+    @apply !bg-purple-700 dark:!bg-purple-500 !text-white dark:!text-white;
+  }
+
+  .button.button--outline.color-emerald {
+    @apply !border-emerald-700 !text-emerald-700 dark:!border-emerald-500 dark:!text-emerald-500;
+  }
+  .button.button--outline.color-emerald:hover {
+    @apply !bg-emerald-700 dark:!bg-emerald-500 !text-white dark:!text-white;
+  }
+
+  .button.button--outline.color-red {
+    @apply !border-red-700 !text-red-700 dark:!border-red-500 dark:!text-red-500;
+  }
+  .button.button--outline.color-red:hover {
+    @apply !bg-red-700 dark:!bg-red-500 !text-white dark:!text-white;
+  }
+
+  .button.button--outline.color-orange {
+    @apply !border-orange-800 !text-orange-800 dark:!border-orange-500 dark:!text-orange-500;
+  }
+  .button.button--outline.color-orange:hover {
+    @apply !bg-orange-800 dark:!bg-orange-500 !text-white dark:!text-white;
+  }
+
+  .button.button--outline.color-indigo {
+    @apply !border-indigo-700 !text-indigo-700 dark:!border-indigo-500 dark:!text-indigo-500;
+  }
+  .button.button--outline.color-indigo:hover {
+    @apply !bg-indigo-700 dark:!bg-indigo-500 !text-white dark:!text-white;
+  }
+
+  /* Additional high-contrast colors */
+  .button.button--outline.color-rose {
+    @apply !border-rose-700 !text-rose-700 dark:!border-rose-500 dark:!text-rose-500;
+  }
+  .button.button--outline.color-rose:hover {
+    @apply !bg-rose-700 dark:!bg-rose-500 !text-white dark:!text-white;
+  }
+
+  .button.button--outline.color-lime {
+    @apply !border-lime-800 !text-lime-800 dark:!border-lime-500 dark:!text-lime-500;
+  }
+  .button.button--outline.color-lime:hover {
+    @apply !bg-lime-800 dark:!bg-lime-500 !text-white dark:!text-white;
+  }
+
+  .button.button--outline.color-cyan {
+    @apply !border-cyan-700 !text-cyan-700 dark:!border-cyan-500 dark:!text-cyan-500;
+  }
+  .button.button--outline.color-cyan:hover {
+    @apply !bg-cyan-700 dark:!bg-cyan-500 !text-white dark:!text-white;
   }
 
   .button--ghost {
-    @apply bg-transparent text-base-900 hover:bg-base-200/50 dark:text-base-50 dark:hover:bg-base-700/50;
+    @apply bg-transparent text-base-800 hover:bg-base-200 dark:text-base-100 dark:hover:bg-base-800;
   }
 </style>
-
-<script is:inline>
-  // Function to get all link color variables (runs immediately)
-  function getAllLinkColors() {
-    const styles = getComputedStyle(document.documentElement);
-    const colors = [];
-    let i = 1;
-    
-    // Keep checking for link color variables until we don't find one
-    while (true) {
-      const varName = `--link-color-${i}`;
-      const color = styles.getPropertyValue(varName).trim();
-      if (!color) break;
-      colors.push(`var(${varName})`);
-      i++;
-    }
-    
-    return colors;
-  }
-
-  // Function to calculate relative luminance (following WCAG guidelines)
-  function getLuminance(r, g, b) {
-    let [rs, gs, bs] = [r, g, b].map(c => {
-      c = c / 255;
-      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-    });
-    return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
-  }
-
-  // Function to determine if white or black text should be used
-  function getContrastColor(backgroundColor) {
-    // Extract RGB values from the CSS variable
-    const tempDiv = document.createElement('div');
-    tempDiv.style.color = backgroundColor;
-    document.body.appendChild(tempDiv);
-    const rgbColor = getComputedStyle(tempDiv).color;
-    document.body.removeChild(tempDiv);
-    
-    const rgb = rgbColor.match(/\d+/g).map(Number);
-    const luminance = getLuminance(rgb[0], rgb[1], rgb[2]);
-    
-    // Use white text if background is dark (luminance < 0.5)
-    return luminance < 0.5 ? '#ffffff' : '#000000';
-  }
-
-  // Function to randomly select a link color variable
-  function getRandomLinkColor() {
-    const colors = getAllLinkColors();
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
-
-  // Apply random colors to outline buttons immediately
-  (() => {
-    document.querySelectorAll('.button--outline').forEach(button => {
-      const randomColor = getRandomLinkColor();
-      button.style.borderColor = randomColor;
-      button.style.color = randomColor;
-      
-      // Store the color for hover state
-      button.addEventListener('mouseenter', () => {
-        button.style.backgroundColor = randomColor;
-        button.style.color = getContrastColor(randomColor);
-      });
-      
-      button.addEventListener('mouseleave', () => {
-        button.style.backgroundColor = 'transparent';
-        button.style.color = randomColor;
-      });
-    });
-  })();
-</script>

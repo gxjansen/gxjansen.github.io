@@ -1,10 +1,26 @@
-/* Link Colors - Easy to modify by changing these values */
+/* Link Colors - High contrast colors matching buttons */
 :root {
-  --link-color-1: rgb(245, 205, 56); /* Yellow - Good contrast */
-  --link-color-2: rgb(0, 122, 204);  /* Darker blue for better contrast */
-  --link-color-3: rgb(245, 167, 56); /* Orange - Good contrast */
-  --link-color-4: rgb(245, 115, 56); /* Red-orange - Good contrast */
-  --link-color-5: rgb(128, 0, 255); /* Brighter purple for better contrast */
+  /* Light mode colors (700/800 shades) */
+  --link-blue-light: rgb(29, 78, 216);      /* blue-700 */
+  --link-purple-light: rgb(109, 40, 217);    /* purple-700 */
+  --link-emerald-light: rgb(4, 120, 87);     /* emerald-700 */
+  --link-red-light: rgb(185, 28, 28);        /* red-700 */
+  --link-orange-light: rgb(154, 52, 18);     /* orange-800 */
+  --link-indigo-light: rgb(67, 56, 202);     /* indigo-700 */
+  --link-rose-light: rgb(190, 18, 60);       /* rose-700 */
+  --link-lime-light: rgb(63, 98, 18);        /* lime-800 */
+  --link-cyan-light: rgb(14, 116, 144);      /* cyan-700 */
+
+  /* Dark mode colors (500 shades) */
+  --link-blue-dark: rgb(59, 130, 246);       /* blue-500 */
+  --link-purple-dark: rgb(168, 85, 247);     /* purple-500 */
+  --link-emerald-dark: rgb(16, 185, 129);    /* emerald-500 */
+  --link-red-dark: rgb(239, 68, 68);         /* red-500 */
+  --link-orange-dark: rgb(249, 115, 22);     /* orange-500 */
+  --link-indigo-dark: rgb(99, 102, 241);     /* indigo-500 */
+  --link-rose-dark: rgb(244, 63, 94);        /* rose-500 */
+  --link-lime-dark: rgb(132, 204, 22);       /* lime-500 */
+  --link-cyan-dark: rgb(6, 182, 212);        /* cyan-500 */
 }
 
 /* Base link styling */
@@ -35,7 +51,7 @@ a:not(
   [class*="bg-primary-100"],
   [class*="rounded-full"]
 ) {
-  @apply text-teal-500 hover:text-teal-600 dark:text-teal-400 dark:hover:text-teal-500 transition-all duration-200;
+  @apply text-primary-700 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-400 transition-all duration-200;
   text-decoration: underline;
   text-decoration-thickness: 0.2em;
   text-underline-offset: 0.1em;

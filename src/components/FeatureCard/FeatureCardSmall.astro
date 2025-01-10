@@ -14,13 +14,14 @@ interface Props {
   icon: string;
   title: string;
   text: string;
+  suffix?: string; // Optional suffix to make IDs unique
   rest?: any; // catch-all for any additional parameters, such as "aria-label"
 }
 
-const { icon, title, text, ...rest } = Astro.props as Props;
+const { icon, title, text, suffix = '', ...rest } = Astro.props as Props;
 
 // Generate unique ID for ARIA relationships
-const cardId = `feature-${title.toLowerCase().replace(/\s+/g, '-')}`;
+const cardId = `feature-${title.toLowerCase().replace(/\s+/g, '-')}${suffix}`;
 ---
 
 <article 
