@@ -87,7 +87,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
     id="body"
     class={`bg-background dark:bg-background-dark ${
       siteSettings.useAnimations === true ? "use-animations" : ""
-    } relative isolate overflow-x-hidden min-h-screen flex flex-col`}
+    } relative isolate min-h-screen flex flex-col w-screen overflow-x-clip`}
   >
     {/* Background elements */}
     <div class="fixed inset-0 z-background">
