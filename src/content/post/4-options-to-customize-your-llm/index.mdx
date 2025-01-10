@@ -1,0 +1,57 @@
+---
+title: 4 options to customize your LLM
+description: Explore four powerful ways to customize Large Language Models for your specific use case, from prompt engineering to fine-tuning
+draft: false
+authors:
+  - gxjansen
+pubDate: 2024-01-10
+heroImage: ./4-options-to-customize-your-llm/customize-ai.jpg
+categories:
+  - AI
+  - Development
+---
+
+If you want to customize an LLM of choice with more context about you/your project/ your company, you have a couple of options to do so. ✔︎
+
+For most people **(re)training** their own AI is **not** an option because it requires quite some hardware/resources. OpenAI has revealed that to train GPT-4 (so not even the latest models) it cost them $100M and took 100 days, utilizing 25,000 NVIDIA A100 GPUs. 😱
+
+So yeah, let's not do that. But you still have some very powerful options for customizing pre-trained models are either free or at least far below $100M... 👇
+
+## 1. Stuff your prompts with context
+
+The most accessible way to customize LLM behavior is through prompt engineering. This involves crafting specific instructions that guide the model's responses. There are thousands of ways to structure prompts (and YouTube video's on how to do it), but specifically for enriching your LLM with context you can add/upload documents, files, or even just plain text.
+
+You can include any additional context in the prompt (plain text or documents). This is also what happens when you add "instructions" or "projects" with files. You store documents that the LLM will include in *every* prompt.
+
+However: there is a limit to this called the "context" or "token" limit [What are tokens?](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them). Google Gemini 1.5 Pro has over 2M token limit, Claude Sonnet 3.5 has 200K, GPT-01-mini has 128K. One site where you can check these limits for many models is [OpenRouter](https://openrouter.ai/models). 
+
+**Tip 1**: You can (also) provide examples of what the end result should look like. If you want the a to use a certain tone of voice, structure text in a certain way or always include certain elements: instead of only **telling** it to do so, it really helps if you can actually show it what a desired outcome looks like. This method does NOT change the models' knowledge base or weights or anything, but it can definitely help the model understand the desired behavior and tune it towards your needs.
+**Tip 2**: If you want to save on tokens, for most LLMs, PDFs or images are much more token-heavy than plain text. So if you can, use plain text, or export your document as a markdown file first (Google Docs can do this).
+
+## 2. Fine-Tuning
+
+Fine-tining does adjust the model's weights to better align with your use case and/or based on any specific data that you provide. Requires substantial data, can still be expensive, will need re-training with every update. 
+
+## 3. RAG (Retrieval-Augmented Generation)
+
+Retrieves relevant information from external knowledge base and dynamically incorporates it. Allows you to go beyond context windows, doesn't require re-training when the data changes. So if your data source is up-to-date, so will your LLM. Does require you to have a vector database and retrieval system.
+
+RAG combines the LLM's capabilities with external knowledge bases. It retrieves relevant information and incorporates it into the generation process.
+
+## 4. MCP (Model Context Protocol):
+
+This is a connector/interface/tool the LLM can use. Example: connect to Google Docs or Asana to search for documents or add tasks. IF the API allows the action, your LLM can now use or even do it.
+
+You don't need to put all this info through every prompt. But any text/document that is requested to be used by the LLM will still add to the context limit, so you can't just pull in your whole Gdoc database with 100s of files.
+
+On Github you find [https://github.com/modelcontextprotocol](a list of MCPs that are available), but you can also "simply" ask your AI to create it's own MCP tool if you use it in a tool that allows this (like Cline for VSCode)
+
+MCPs are always "live": if the information updates, through the LLM, your LLM will have access to the latest info but it is not in any way trained on this info.
+
+## Conclusion
+
+It depends on what kind of information you want to include and how much and what you want to do with it.
+
+For simplicity and flexibility, I usually use a combination of #1️ (adjusting my prompts) and #4️ (MCPs).
+
+How do you structurally customize your AI experience?
