@@ -10,7 +10,7 @@ import Icon from "astro-icon";
 interface Props {
   id?: string;
   type?: "button" | "submit" | "reset" | null | undefined;
-  variant?: "primary" | "secondary" | "outline" | "ghost";
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "on-color";
   href?: string; // the href to go to, ex "/posts/"
   target?: string; // the target for the link, ex "_blank"
   rel?: string; // the rel for the link, ex "noopener"
@@ -66,6 +66,7 @@ const baseClasses = [
     'button--secondary': variant === 'secondary',
     'button--outline': variant === 'outline',
     'button--ghost': variant === 'ghost',
+    'button--on-color': variant === 'on-color',
   },
   randomColorClass // Add the random color class
 ];
@@ -240,5 +241,10 @@ const baseClasses = [
 
   .button--ghost {
     @apply bg-transparent text-base-800 hover:bg-base-200 dark:text-base-100 dark:hover:bg-base-800;
+  }
+
+  /* Special variant for buttons on colored backgrounds */
+  .button--on-color {
+    @apply border-2 border-base-100 text-base-100 bg-transparent hover:bg-base-100 hover:text-primary-500 dark:border-base-900 dark:text-base-900 dark:hover:bg-base-900 dark:hover:text-primary-500;
   }
 </style>
