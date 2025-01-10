@@ -6,7 +6,29 @@ module.exports = {
   // this enables you to cancel out dark mode using the class "light" for specific sections if desired
   darkMode: ["variant", "&:is(.dark *):not(.light *)"],
 
-  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  content: {
+    files: [
+      "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
+    ],
+    extract: {
+      markdown: content => {
+        // Don't process markdown files - let MDX handle it
+        return [];
+      }
+    }
+  },
+  safelist: [
+    // Classes that might be used dynamically
+    'dark',
+    'light',
+    // Animation classes
+    'animate-marquee',
+    // Interactive states that might be added via JavaScript
+    'active',
+    'open',
+    'show',
+    'hide'
+  ],
   theme: {
     screens: {
       xs: "400px",
@@ -74,40 +96,34 @@ module.exports = {
     },
     fontFamily: {
       sans: [
-        "JetBrains Mono",
-        "BlinkMacSystemFont",
+        "Poppins",
+        "system-ui",
         "-apple-system",
+        "BlinkMacSystemFont",
         "Segoe UI",
         "Roboto",
-        "Helvetica",
+        "Helvetica Neue",
         "Arial",
-        "sans-serif",
+        "sans-serif"
       ],
       serif: [
-        "JetBrains Mono",
-        "Iowan Old Style",
-        "Apple Garamond",
-        "Baskerville",
+        "Poppins",
+        "Georgia",
+        "Cambria",
         "Times New Roman",
-        "serif",
+        "Times",
+        "serif"
       ],
       mono: [
-        "JetBrains Mono",
+        "ui-monospace",
         "SFMono-Regular",
         "Menlo",
         "Monaco",
         "Consolas",
-        "monospace",
-      ],
-      inter: [
-        "Inter",
-        "BlinkMacSystemFont",
-        "-apple-system",
-        "Segoe UI",
-        "Roboto",
-        "Arial",
-        "sans-serif",
-      ],
+        "Liberation Mono",
+        "Courier New",
+        "monospace"
+      ]
     },
   },
   plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
