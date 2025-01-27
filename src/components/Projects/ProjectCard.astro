@@ -50,9 +50,7 @@ const { name, description, mainImage, link, iconBgColor, license, githubUrl } = 
       {license && (
         <p class="text-sm text-base-400 mb-2">License: {license}</p>
       )}
-      <p class="card-description text-lg">
-        {description}
-      </p>
+      <p class="card-description text-lg prose" set:html={description} />
       <div class="mt-8 flex gap-4 items-center justify-center md:justify-start">
         {link && (
           <Button 
