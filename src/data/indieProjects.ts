@@ -35,5 +35,14 @@ export const indieProjects: IndieProject[] = [
     iconBgColor: "bg-[#EC008C]",
     githubUrl: "https://github.com/spryker-community/Echo",
     license: "MIT"
+  },
+  {
+    name: "Transistor MCP",
+    description: "This MCP server provides tools to interact with the <a href='https://transistor.fm/' target='_blank' rel='noopener noreferrer'>Transistor.fm</a> API, allowing you to manage podcasts, episodes, and view analytics.",
+    mainImage: "/icons/transistor.svg",
+    link: "https://github.com/gxjansen/Transistor-MCP",
+    iconBgColor: "bg-[#FBC75D]",
+    githubUrl: "https://github.com/gxjansen/Transistor-MCP",
+    license: "MIT"
   }
 ];
