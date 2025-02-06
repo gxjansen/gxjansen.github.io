@@ -104,19 +104,6 @@
     "relatedPresentationSlugs": []
   },
   {
-    "id": "spryker-user-group-2025-01",
-    "name": "Spryker User Group",
-    "icon": "spryker.png",
-    "date": "2025-01-28",
-    "city": "Online event",
-    "country": "",
-    "url": "",
-    "workshop": false,
-    "role": "Organizer & co-host/moderator",
-    "topic": "",
-    "relatedPresentationSlugs": []
-  },
-  {
     "id": "spryker-user-group-2024-11",
     "name": "Spryker User Group",
     "icon": "spryker.png",
