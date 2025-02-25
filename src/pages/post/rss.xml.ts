@@ -1,7 +1,6 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIRoute } from 'astro';
-import sanitizeHtml from 'sanitize-html';
 export const GET: APIRoute = async () => {
   const siteTitle = "Guido Jansen";
   const siteDescription = "Guido Jansen's Blog";
