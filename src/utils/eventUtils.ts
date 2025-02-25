@@ -63,15 +63,15 @@ export async function loadEventIcons<T extends { icon?: string }>(events: T[]): 
   );
 }
 
+// Import events data statically to avoid duplicate imports
+import eventsData from "../data/events.json";
+
 /**
  * Loads and processes all events with their icons
  * Utility function to be used in pages that need to display events
  * @returns Promise of processed events with loaded icons
  */
 export async function getAllEvents(): Promise<Event[]> {
-    // Dynamically import events data
-    const eventsData = (await import('../data/events.json')).default;
-    
     // Ensure each event has relatedPresentationSlugs (default to empty array)
     const eventsWithSlugs = eventsData.map(event => ({
       ...event,
@@ -85,7 +85,6 @@ export async function getAllEvents(): Promise<Event[]> {
 /**
  * Count the total number of past events
  */
-import eventsData from "../data/events.json";
 
 export const getTotalPastEventsCount = () => {
   const today = new Date();

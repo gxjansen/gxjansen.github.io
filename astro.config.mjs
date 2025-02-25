@@ -39,6 +39,32 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
+  // Redirects configuration using Astro's native redirects
+  redirects: {
+    // External redirects
+    '/kit': { destination: 'https://kit.co/gxjansen', status: 301 },
+    '/call': { destination: 'https://app.reclaim.ai/m/gxjansen/flexible-quick-meeting', status: 301 },
+    '/youtube': { destination: 'https://www.youtube.com/c/GuidoJansen', status: 301 },
+    '/video': { destination: 'https://www.youtube.com/c/GuidoJansen', status: 301 },
+    
+    // Internal redirects
+    '/admin': { destination: '/keystatic', status: 301 },
+    '/guidojansen': { destination: '/about', status: 301 },
+    '/post/*': { destination: '/post/:splat', status: 301 },
+    '/persuasive-ecommerce': { destination: '/', status: 301 },
+    '/instagram': { destination: '/social', status: 301 },
+    '/howtoweb': { destination: '/presentations/data-driven-decisions-meets-psychology', status: 301 },
+    '/cards': { destination: '/cognitive-biases', status: 301 },
+    '/bigger': { destination: '/presentations/still-a-b-testing-your-buttons-you-need-to-think-much-bigger', status: 301 },
+    '/audio': { destination: '/podcasts', status: 301 },
+    '/index.php': { destination: '/', status: 301 },
+    '/images/*': { destination: '/', status: 301 },
+    '/CV': { destination: '/cv', status: 301 },
+    '/hireme': { destination: '/about', status: 301 },
+    '/theme/contact-us/contact-us': { destination: '/about', status: 301 },
+    '/theme/contact': { destination: '/about', status: 301 },
+    '/presentation/*': { destination: '/presentations/:splat', status: 301 }
+  },
   markdown: {
     shikiConfig: {
       theme: "dracula",
