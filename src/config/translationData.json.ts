@@ -46,7 +46,7 @@ export const textTranslations = {
   en: {
     hero_text: "Hi, I'm Guido 👋",
     hero_description:
-      "**Cognitive psychologist** bridging the gap between human behavior and e-commerce technology. I lead **DevRel** at Spryker, where we **engage** our community, **speak** globally, and help businesses go beyond with commerce. From experiments to coding, I'm constantly exploring ways to **make e-commerce more human-centered**.",
+      "**Cognitive Psychologist** & **Technology Evangelist** bridging the gap between human behavior and e-commerce technology. I lead **DevRel** at Spryker, where we scale our PaaS solution through customer-centric innovation. I **speak** globally, helping businesses go beyond with commerce. From experiments to coding, I'm constantly exploring ways to **make the web more human**.",
     back_to_all_posts: "Back to all posts",
     updated: "Updated",
   },
