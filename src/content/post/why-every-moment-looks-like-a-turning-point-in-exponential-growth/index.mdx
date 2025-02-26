@@ -11,8 +11,18 @@ categories:
   - Growth
   - Analysis
 ---
+import { Image } from 'astro:assets';
+import chartImage1 from './1685266190510-00-20.png';
+import chartImage2 from './1685266343011-20-40.png';
+import chartImage3 from './1685267110362-00-40.png';
+import chartImage4 from './1685266343011-20-40.png';
+import chartImage5 from './1685267519265-60-00.png';
+import chartImage6 from './1685268162219-20-00.png';
+import chartImage7 from './1685268733516-23-25.png';
 
 You're probably familiar with charts like these:
+
+<Image src={chartImage1} alt="Exponential growth chart showing a turning point" width={800} height={450} />
 
 The gist is always the same:
 
@@ -34,7 +44,7 @@ I will prove it to you.
 
 ### Refresher on exponential growth
 
-Skip this section if you don't need a refresher on exponential growth
+Skip this section if you don't need a refresher on exponential growth.
 
 Before we delve into the explainer, let's briefly refresh on what exponential growth is. Exponential growth refers to a pattern of data that shows greater increases with passing time, creating a curve of an exponential nature. In other words, it's a pattern of growth where the quantity increases by a consistent percentage rate over a given period of time.
 
@@ -60,7 +70,11 @@ Now let's zoom in on the data for time periods of say 20 years.
 
 Let's start with 1900-1920. Not much seems to have happened before 1910, but look at that growth after 1915, that most have been an amazing period of growth!
 
+<Image src={chartImage2} alt="Exponential growth chart showing a turning point 1900-1920" width={800} height={450} />
+
 Can't wait to look at the period right after: 1920-1940. Not much seems to be happening 1920-1930... But it skyrocketed again after 1935!
+
+<Image src={chartImage3} alt="Exponential growth chart showing a turning point 1920-1940" width={800} height={450} />
 
 So was the first chart wrong? It doesn't seem to flow into this second chart. Did growth slow down?
 
@@ -71,9 +85,13 @@ No, the growth is still the same factor 1.5x. But look at the vertical axis... W
 
 Ok so there was some impressive growth in the early 1900's, but let's look at the early 2000's, there should be much more growth visible now right?
 
+<Image src={chartImage4} alt="Exponential growth chart showing a turning point 2000-2020 and 2020-2040" width={800} height={450} />
+
 I assume that by now, you're getting the point: No matter which timeslot we pick, the chart for exponential growth looks the same.
 
 Let's perform a final check by examining the periods from 2060-2080 and 2080-2100:
+
+<Image src={chartImage5} alt="Exponential growth chart showing a turning point 2060-2080 and 208-2100" width={800} height={450} />
 
 Same story here.
 
@@ -87,13 +105,17 @@ No. Interestingly, the charts starts to look different when we use different tim
 
 If we consider a longer period, it seems like nothing significant will happen in the upcoming years, and we'll have to wait until the 2090s when things will really start to accelerate.
 
+<Image src={chartImage6} alt="Exponential growth chart showing a turning point 2020-2100" width={800} height={450} />
+
 Alternatively, if we consider a shorter period, it seems like there is definitely linear growth, but not much exponential happening here.
+
+<Image src={chartImage7} alt="Exponential growth chart showing a turning point 2023-2025" width={800} height={450} />
 
 So why then do all those "you are now here at this infliction point" graphs look like the first images in this article?
 
 Because the authors in those articles want to trick you in believing that something big happened recently/will happen soon.
 
-And they're not necesserily wrong, it's just that this is always the case when it comes to exponential growth. That's it's main feature. And of coruse they conveniently leave that part out.
+And they're not necessarily wrong, it's just that this is always the case when it comes to exponential growth. That's it's main feature. And of course they conveniently leave that part out.
 
 * * *
 
