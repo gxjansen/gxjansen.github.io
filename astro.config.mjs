@@ -6,8 +6,6 @@ import AutoImport from "astro-auto-import";
 import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
 import netlify from "@astrojs/netlify";
-import compressor from "astro-compressor";
-import critters from "astro-critters";
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
@@ -96,17 +94,6 @@ export default defineConfig({
           en: 'en'
         }
       }
-    }),
-    compressor(),
-    critters({
-      // Inline all styles from both internal and external stylesheets
-      inlineThreshold: 0,
-      // Preload external stylesheets
-      preload: 'media',
-      // Minimize the inlined CSS
-      minimizeInlinedCSS: true,
-      // Don't remove original stylesheets as they're needed for view transitions
-      pruneSource: false
     })
   ],
 
@@ -114,6 +101,11 @@ export default defineConfig({
     build: {
       cssCodeSplit: true,
       cssMinify: 'lightningcss',
+      sourcemap: false,
+      chunkSizeWarningLimit: 1000,
+    },
+    ssr: {
+      external: ['sharp']
     },
     css: {
       devSourcemap: true,
