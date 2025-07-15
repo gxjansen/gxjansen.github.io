@@ -1,5 +1,7 @@
 ---
-import { Icon } from "astro-icon";
+// Icon imports
+import MoonIcon from '@icons/ui/moon.svg';
+import SunIcon from '@icons/ui/sun.svg';
 
 interface Props {
   class?: string; // any additional classes
@@ -20,14 +22,12 @@ const { class: className, ...rest } = Astro.props as Props;
 >
   <!-- placeholder -->
   <div class="theme-toggle__placeholder h-5 w-5" aria-hidden="true"></div>
-  <Icon
-    name="tabler/moon-stars"
+  <MoonIcon
     class="theme-toggle__dark-icon hidden h-5 w-5"
     aria-hidden="true"
     role="presentation"
   />
-  <Icon 
-    name="tabler/sun" 
+  <SunIcon 
     class="theme-toggle__light-icon hidden h-5 w-5" 
     aria-hidden="true"
     role="presentation"

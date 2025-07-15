@@ -1,5 +1,6 @@
 ---
-import Icon from "astro-icon";
+import ArrowLeftIcon from '@icons/ui/arrow-narrow-left.svg';
+import ArrowRightIcon from '@icons/ui/arrow-narrow-right.svg';
 
 /**
  *  * Notes:
@@ -88,8 +89,7 @@ const baseClasses = [
       {...rest}
     >
       {arrow === "left" && (
-        <Icon
-          name="tabler/arrow-narrow-left"
+        <ArrowLeftIcon
           class="mr-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:-translate-x-1"
           aria-hidden="true"
           role="presentation"
@@ -100,8 +100,7 @@ const baseClasses = [
         {isExternalLink && <span class="sr-only">(opens in new tab)</span>}
       </span>
       {arrow === "right" && (
-        <Icon
-          name="tabler/arrow-narrow-right"
+        <ArrowRightIcon
           class="ml-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:translate-x-1"
           aria-hidden="true"
           role="presentation"
@@ -124,8 +123,7 @@ const baseClasses = [
       {...rest}
     >
       {arrow === "left" && (
-        <Icon
-          name="tabler/arrow-narrow-left"
+        <ArrowLeftIcon
           class="mr-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:-translate-x-1"
           aria-hidden="true"
           role="presentation"
@@ -135,8 +133,7 @@ const baseClasses = [
         <slot />
       </span>
       {arrow === "right" && (
-        <Icon
-          name="tabler/arrow-narrow-right"
+        <ArrowRightIcon
           class="ml-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:translate-x-1"
           aria-hidden="true"
           role="presentation"

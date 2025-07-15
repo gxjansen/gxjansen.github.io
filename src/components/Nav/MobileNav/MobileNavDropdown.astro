@@ -1,5 +1,6 @@
 ---
-import { Icon } from "astro-icon";
+// Icon imports
+import ChevronDownIcon from '@icons/ui/chevron-down.svg';
 
 // components
 import NavLink from "@components/Nav/NavLink.astro";
@@ -39,8 +40,7 @@ if ("dropdown" in navItem) {
     aria-haspopup="true"
   >
     {dropdownItem.text}
-    <Icon
-      name="tabler/chevron-down"
+    <ChevronDownIcon
       aria-hidden="true"
       class="mobile-nav__dropdown-chevron mb-auto size-7 translate-y-0.5 transition-transform duration-300"
     />

@@ -16,7 +16,8 @@
       "@images/*": ["src/assets/images/*"],
       "@videos/*": ["src/assets/videos/*"],
       "@types/*": ["src/types/*"],
-      "@data/*": ["src/data/*"]
+      "@data/*": ["src/data/*"],
+      "@icons/*": ["src/icons/*"]
     },
     "types": ["vitest", "@testing-library/jest-dom"],
     "jsxImportSource": "react"
