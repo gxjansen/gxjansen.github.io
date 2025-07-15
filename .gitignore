@@ -59,3 +59,9 @@ coverage/
 .history/
 .temp/
 .tmp/
+
+# Generated content availability file
+src/data/content-availability.json
+
+# Validation reports
+validation-reports/

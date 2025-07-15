@@ -12,9 +12,13 @@ import LinkedInCTA from "@components/Press/LinkedInCTA.astro";
 
 // data
 import { pressCoverage } from '../data/press-coverage';
+import { filterAvailableContent } from '../utils/content-availability';
+
+// Filter out unavailable content
+const availableCoverage = filterAvailableContent(pressCoverage);
 
 // Sort press coverage by date
-const sortedCoverage = [...pressCoverage].sort((a, b) => 
+const sortedCoverage = [...availableCoverage].sort((a, b) => 
   new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime()
 );
 
@@ -22,6 +26,12 @@ const sortedCoverage = [...pressCoverage].sort((a, b) =>
 const videos = sortedCoverage.filter(item => item.youtubeLink);
 const podcasts = sortedCoverage.filter(item => item.spotifyEmbedId);
 const articles = sortedCoverage.filter(item => !item.youtubeLink && !item.spotifyEmbedId);
+
+// Log if any content was filtered out
+const filteredCount = pressCoverage.length - availableCoverage.length;
+if (filteredCount > 0) {
+  console.log(`Filtered out ${filteredCount} unavailable content items`);
+}
 
 // Debug: Log content counts
 console.log('Content counts:', {

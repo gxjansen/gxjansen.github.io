@@ -12,7 +12,8 @@
     "check-dark-mode": "node scripts/check-dark-mode.js",
     "fix-dark-mode": "node scripts/fix-dark-mode.js",
     "fix-dark-mode:dry": "node scripts/fix-dark-mode.js --dry-run",
-    "test": "vitest"
+    "test": "vitest",
+    "validate-content": "node scripts/validate-content.js"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.2",
