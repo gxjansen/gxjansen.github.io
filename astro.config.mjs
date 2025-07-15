@@ -8,6 +8,7 @@ import keystatic from "@keystatic/astro";
 import netlify from "@astrojs/netlify";
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { contentValidationPlugin } from './src/utils/content-validation-plugin.ts';
 
 // https://astro.build/config
 export default defineConfig({
@@ -94,7 +95,8 @@ export default defineConfig({
           en: 'en'
         }
       }
-    })
+    }),
+    contentValidationPlugin()
   ],
 
   vite: {
