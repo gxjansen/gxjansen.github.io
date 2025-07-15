@@ -264,7 +264,7 @@ const shouldReduceMotion = typeof window !== "undefined"
 
         // Update carousel state on scroll, resize, and after animations
         container.addEventListener('scroll', updateCarouselState, { passive: true });
-        window.addEventListener('resize', updateCarouselState);
+        window.addEventListener('resize', updateCarouselState, { passive: true });
         container.addEventListener('scrollend', updateCarouselState);
         
         // Initial state
@@ -273,12 +273,12 @@ const shouldReduceMotion = typeof window !== "undefined"
         // Touch swipe feedback
         container.addEventListener('touchstart', () => {
           container.style.scrollSnapType = 'none'; // Disable snap during swipe
-        });
+        }, { passive: true });
 
         container.addEventListener('touchend', () => {
           container.style.scrollSnapType = 'x mandatory'; // Re-enable snap after swipe
           updateCarouselState();
-        });
+        }, { passive: true });
       }
     </script>
   </div>
