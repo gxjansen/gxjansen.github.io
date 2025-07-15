@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon";
+import CircleArrowUpIcon from '@icons/ui/circle-arrow-up.svg';
 
 interface Props {
   title: string;
@@ -18,8 +18,7 @@ const { title, details } = Astro.props as Props;
     aria-controls={`${title} accordion menu content`}
   >
     {title}
-    <Icon
-      name="tabler/circle-arrow-up"
+    <CircleArrowUpIcon
       aria-hidden="true"
       class="accordion__chevron size-6 shrink-0 rotate-180 text-primary-500 transition-transform"
     />

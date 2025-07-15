@@ -4,7 +4,8 @@
  * Uses info and utilities from src/js/i18nUtils.ts. Make sure this is updated with the languages you are using (to match the Astro config file)
  * Multiple dropdowns can be used on the same page
  */
-import { Icon } from "astro-icon";
+import LanguageIcon from '@icons/ui/language.svg';
+import ChevronDownIcon from '@icons/ui/chevron-down.svg';
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -40,14 +41,12 @@ const currLocale = getLocaleFromUrl(Astro.url);
     aria-controls="lang-select__dropdown-content"
   >
     <span class="sr-only">Change language</span>
-    <Icon
-      name="tabler/language"
+    <LanguageIcon
       aria-hidden="true"
       class="size-3.5 shrink-0 transition-transform"
     />
     {languageSwitcherMap[currLocale]}
-    <Icon
-      name="tabler/chevron-down"
+    <ChevronDownIcon
       aria-hidden="true"
       class="lang-select__dropdown-chevron ml-auto size-4 shrink-0 transition-transform"
     />

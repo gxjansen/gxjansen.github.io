@@ -1,13 +1,40 @@
 ---
-import { Icon } from "astro-icon";
+// Icon imports
+import GitHubIcon from '@icons/social/github.svg';
+import LinkedInIcon from '@icons/social/linkedin.svg';
+import YouTubeIcon from '@icons/social/youtube.svg';
+import XTwitterIcon from '@icons/social/x-twitter.svg';
+import BlueSkyIcon from '@icons/social/bluesky.svg';
+import InstagramIcon from '@icons/social/instagram.svg';
+import SignalIcon from '@icons/social/signal.svg';
+import KeybaseIcon from '@icons/social/keybase.svg';
 
 interface Props {
   icon: string;
   social: string; // used for aria label
   href: string;
+  class?: string;
 }
 
-const { icon, social, href } = Astro.props as Props;
+const { icon, social, href, class: className } = Astro.props as Props;
+
+// Map icon names to components
+const iconMap: { [key: string]: any } = {
+  'tabler/filled/brand-github': GitHubIcon,
+  'github': GitHubIcon,
+  'linkedin': LinkedInIcon,
+  'tabler/filled/brand-youtube': YouTubeIcon,
+  'youtube': YouTubeIcon,
+  'tabler/filled/brand-x': XTwitterIcon,
+  'x-twitter': XTwitterIcon,
+  'bluesky': BlueSkyIcon,
+  'instagram': InstagramIcon,
+  'signal': SignalIcon,
+  'tabler/IconKey': KeybaseIcon,
+  'keybase': KeybaseIcon,
+};
+
+const IconComponent = iconMap[icon] || null;
 ---
 
 <a
@@ -15,12 +42,18 @@ const { icon, social, href } = Astro.props as Props;
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="relative inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-md p-2 text-base-400 dark:text-base-500 transition-colors hover:bg-base-100 hover:text-base-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:hover:bg-base-800 dark:hover:text-base-300"
+  class:list={[
+    "relative inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-md p-2 text-base-400 dark:text-base-500 transition-colors hover:bg-base-100 hover:text-base-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:hover:bg-base-800 dark:hover:text-base-300",
+    className
+  ]}
 >
   <p class="sr-only">Follow on {social}</p>
-  <Icon 
-    name={icon} 
-    class="size-5 transition" 
-    aria-hidden="true"
-  />
+  {IconComponent ? (
+    <IconComponent 
+      class:list={["size-5 transition", className]}
+      aria-hidden="true"
+    />
+  ) : (
+    <span class="size-5">{icon}</span>
+  )}
 </a>

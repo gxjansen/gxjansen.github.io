@@ -1,5 +1,7 @@
 ---
-import { Icon } from "astro-icon";
+// Icon imports
+import MenuIcon from '@icons/ui/menu.svg';
+import CloseIcon from '@icons/ui/close.svg';
 
 //components
 import NavLink from "@components/Nav/NavLink.astro";
@@ -27,8 +29,7 @@ import { locales } from "@config/siteSettings.json";
     class="primary-focus h-10 w-10 rounded-md"
   >
     <!-- hamburger icon to open menu -->
-    <Icon
-      name="tabler/menu-2"
+    <MenuIcon
       class="m-auto inline-block h-8 w-8 stroke-current text-base-600 dark:text-base-400"
       aria-hidden="true"
     />
@@ -45,8 +46,7 @@ import { locales } from "@config/siteSettings.json";
           aria-label="close navigation menu"
         >
           <!-- "X" icon to close menu -->
-          <Icon
-            name="tabler/x"
+          <CloseIcon
             class="h-8 w-8 text-base-600 dark:text-base-400"
           />
         </button>

@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import { Icon } from "astro-icon";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import LogoIcon from '@icons/atlas/logoipsum.svg';
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -47,8 +47,7 @@ import logo from "@images/atlas-logo.png";
   href={getRelativeLocaleUrl(currLocale)}
 >
   <p class="site-logo-text">Guido</p>
-  <Icon
-    name="atlas/logoipsum"
+  <LogoIcon
     class="site-logo-icon size-7 text-primary-500"
     aria-hidden="true"
   />

@@ -102,6 +102,11 @@ export default defineConfig({
   ],
 
   vite: {
+    resolve: {
+      alias: {
+        '@icons': path.resolve('./src/icons'),
+      },
+    },
     build: {
       cssCodeSplit: true,
       cssMinify: 'lightningcss',
