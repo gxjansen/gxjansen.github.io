@@ -34,7 +34,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
   {...rest}
 >
   <button
-    class="primary-focus lang-select__dropdown-button flex items-center gap-0.5 whitespace-nowrap py-1 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 md:flex focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
+    class="primary-focus lang-select__dropdown-button flex items-center gap-0.5 whitespace-nowrap py-1 font-medium leading-tight text-base-600 transition hover:text-base-700 dark:text-base-300 dark:hover:text-base-200 md:flex focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
     type="button"
     aria-expanded="false"
     aria-haspopup="true"
@@ -67,7 +67,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
             role="menuitem"
           >
             <a
-              class="primary-focus relative block w-full whitespace-nowrap py-1 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
+              class="primary-focus relative block w-full whitespace-nowrap py-1 font-medium leading-tight text-base-600 transition hover:text-base-700 dark:text-base-300 dark:hover:text-base-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
               href={getLocalizedPathname(lang, Astro.url)}
               aria-label={`Change language to ${languageSwitcherMap[lang]}`}
               lang={lang}

@@ -16,6 +16,7 @@ package-lock.json
 .turbo/
 .eslintcache
 .pnpm-store
+dev/
 
 # Project planning
 presentations.csv

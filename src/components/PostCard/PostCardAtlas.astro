@@ -52,7 +52,7 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
       <div class="flex flex-wrap gap-2">
         {categories.map((category) => <Category category={category} />)}
       </div>
-      <time datetime={new Date(pubDate).toISOString()} class="text-sm text-base-500 dark:text-base-400">
+      <time datetime={new Date(pubDate).toISOString()} class="text-sm text-base-600 dark:text-base-300">
         {formatDate(pubDate, currLocale)}
       </time>
     </div>
@@ -66,7 +66,7 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
 
     <!-- description -->
     {showDescription && description && (
-      <p class="text-base-500 dark:text-base-400">
+      <p class="text-base-600 dark:text-base-300">
         {description}
       </p>
     )}
