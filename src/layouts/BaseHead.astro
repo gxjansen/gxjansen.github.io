@@ -33,22 +33,7 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 ---
 
 <meta charset="utf-8" />
-<!-- Content Security Policy -->
-<meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  script-src 'self' 'unsafe-inline';
-  style-src 'self' 'unsafe-inline';
-  img-src 'self' data: https:;
-  font-src 'self';
-  connect-src 'self';
-  media-src 'self';
-  frame-src https://www.youtube.com/embed/ https://open.spotify.com/embed/ https://share.transistor.fm/;
-  object-src 'none';
-  base-uri 'self';
-  form-action 'self';
-  frame-ancestors 'none';
-  upgrade-insecure-requests;
-" />
+<!-- Content Security Policy is now handled via Netlify headers for better security -->
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="color-scheme" content="dark light" />

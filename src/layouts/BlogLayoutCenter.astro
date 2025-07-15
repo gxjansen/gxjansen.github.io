@@ -136,12 +136,14 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
               <Image
                 src={heroImage}
                 alt={heroImage.alt || `Cover image for article: ${title}`}
-                width={2000}
-                height={1125}
+                widths={[640, 768, 1024, 1600, 2000]}
+                sizes="(max-width: 1024px) 100vw, 1000px"
                 class="max-h-[70vh] rounded-xl object-cover"
                 loading="eager"
                 transition:name={transitionName}
                 itemprop="image"
+                quality={90}
+                format="webp"
               />
             </div>
           )}
