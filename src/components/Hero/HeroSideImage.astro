@@ -138,8 +138,10 @@ const shouldReduceMotion = typeof window !== "undefined"
                 class="h-auto min-w-full object-cover"
                 alt="Guido Jansen, a CRO and UX specialist, sitting casually on a modern grey office couch with a laptop. He's wearing casual business attire and has a welcoming expression, representing his approachable consulting style."
                 loading="eager"
-                width={600}
-                densities={[1.5, 2]}
+                widths={[360, 600, 768, 1024, 1200]}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
+                quality={85}
+                format="webp"
               />
             </div>
           </div>
