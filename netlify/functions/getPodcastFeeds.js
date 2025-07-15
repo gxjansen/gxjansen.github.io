@@ -52,15 +52,19 @@ const parseFeed = async (feedUrl) => {
     
     return items.map(item => {
       const episodeId = getEpisodeId(item);
+      // Only include episodes that have valid embed links
+      if (!episodeId) {
+        return null;
+      }
       return {
         title: item.title,
         description: item.description,
         pubDate: item.pubDate,
         duration: item['itunes:duration'] || '',
-        link: episodeId ? `https://share.transistor.fm/e/${episodeId}` : '',
+        link: `https://share.transistor.fm/e/${episodeId}`,
         podcastName: channel.title
       };
-    });
+    }).filter(item => item !== null);
   } catch (error) {
     console.error(`Error fetching feed ${feedUrl}:`, {
       error: error.message,

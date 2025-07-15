@@ -41,8 +41,27 @@ const latestEpisodes: PodcastEpisode[] = [];
           
           const episodes = await response.json();
           
+          // Filter out episodes without valid links
+          const validEpisodes = episodes.filter(episode => 
+            episode.link && episode.link.startsWith('https://share.transistor.fm/')
+          );
+          
+          if (validEpisodes.length === 0) {
+            container.innerHTML = `
+              <div class="text-center p-8 bg-yellow-50 rounded-lg">
+                <p class="text-yellow-600">No podcast episodes are currently available.</p>
+                <p class="text-base-500 mt-2">Please check back later or visit the podcasts directly:</p>
+                <div class="mt-4 space-y-2">
+                  <a href="https://sheeptank.transistor.fm/" class="text-primary-500 hover:underline block">Sheeptank</a>
+                  <a href="https://www.cro.cafe" class="text-primary-500 hover:underline block">CRO.CAFE</a>
+                </div>
+              </div>
+            `;
+            return;
+          }
+          
           // Replace loading spinner with episodes
-          container.innerHTML = episodes.map(episode => `
+          container.innerHTML = validEpisodes.map(episode => `
             <div class="w-full bg-gray-800 rounded-lg overflow-hidden mb-6">
               <iframe 
                 width="100%" 
