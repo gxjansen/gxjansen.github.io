@@ -31,14 +31,7 @@ function getYouTubeId(url: string): string {
               data-title={video.title}
             >
               <div class="video-container absolute inset-0 hidden">
-                <iframe
-                  src={`https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`}
-                  title={video.title}
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  class="w-full h-full"
-                ></iframe>
+                <!-- iframe will be inserted here dynamically -->
               </div>
               
               <!-- Thumbnail -->
@@ -61,6 +54,20 @@ function getYouTubeId(url: string): string {
                   const videoContainer = container.querySelector('.video-container');
                   const thumbnail = container.querySelector('img');
                   const button = this;
+                  const videoId = container.dataset.videoId;
+                  const title = container.dataset.title;
+                  
+                  // Create iframe only when clicked
+                  if (!videoContainer.querySelector('iframe')) {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = 'https://www.youtube.com/embed/' + videoId + '?rel=0&autoplay=1';
+                    iframe.title = title;
+                    iframe.frameBorder = '0';
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                    iframe.allowFullscreen = true;
+                    iframe.className = 'w-full h-full';
+                    videoContainer.appendChild(iframe);
+                  }
                   
                   videoContainer.classList.remove('hidden');
                   thumbnail.classList.add('hidden');
