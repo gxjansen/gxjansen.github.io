@@ -423,15 +423,6 @@ export const pressCoverage = [
         personOrganization: "Devrims"
     },
     {
-        title: "The Ins and Outs of Persuasive E-Commerce",
-        language: "english",
-        publicationDate: "2020-11-05",
-        youtubeLink: "",
-        spotifyEmbedId: "0qmmqpLqglz5o82b1X96eD",
-        articleUrl: "",
-        personOrganization: "The B2B e-commerce talk"
-    },
-    {
         title: "The psychology of cognitive customer behavior with Guido Jansen",
         language: "english",
         publicationDate: "2022-01-20",
