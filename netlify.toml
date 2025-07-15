@@ -5,14 +5,14 @@
   targetPort = 4321
 
 [build]
-  command = "npm run build && cp robots/robots.production.txt dist/robots.txt"
+  command = "npm run build"
   publish = "dist"
 
 [context.deploy-preview]
-  command = "npm run build && cp robots/robots.preview.txt dist/robots.txt"
+  command = "npm run build"
 
 [context.branch-deploy]
-  command = "npm run build && cp robots/robots.development.txt dist/robots.txt"
+  command = "npm run build"
 
 # Sitemap handling
 [[redirects]]
