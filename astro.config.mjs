@@ -44,7 +44,7 @@ export default defineConfig({
   redirects: {
     // External redirects
     '/kit': { destination: 'https://kit.co/gxjansen', status: 301 },
-    '/call': { destination: 'https://app.reclaim.ai/m/gxjansen/flexible-quick-meeting', status: 301 },
+    '/call': { destination: 'https://calendar.app.google/E7mdyvsHvZaJq3Xq6', status: 301 },
     '/youtube': { destination: 'https://www.youtube.com/c/GuidoJansen', status: 301 },
     '/video': { destination: 'https://www.youtube.com/c/GuidoJansen', status: 301 },
     
