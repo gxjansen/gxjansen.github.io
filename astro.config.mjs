@@ -88,7 +88,7 @@ export default defineConfig({
     keystatic(),
     tailwind(),
     sitemap({
-      filter: (page) => !page.includes('/conference-terms'),
+      filter: (page) => !page.includes('/conference-terms') && !page.includes('/examples/'),
       changefreq: 'weekly',
       lastmod: new Date(),
       i18n: {
@@ -132,7 +132,7 @@ export default defineConfig({
               : 'https://dev.gui.do/sitemap.xml';
 
             if (process.env.ASTRO_MODE === 'production') {
-                robotsContent = `User-agent: *\nDisallow: /conference-terms\n\nSitemap: ${sitemapUrl}`;
+                robotsContent = `User-agent: *\nDisallow: /conference-terms\nDisallow: /examples/\n\nSitemap: ${sitemapUrl}`;
             } else {
               robotsContent = `User-agent: *\nDisallow: /\n\nSitemap: ${sitemapUrl}`;
             }
