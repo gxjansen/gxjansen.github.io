@@ -46,7 +46,7 @@ export const textTranslations = {
   en: {
     hero_text: "Hi, I'm Guido 👋",
     hero_description:
-      "**Cognitive Psychologist** & **Technology Evangelist** bridging the gap between human behavior and business technology. I lead **DevRel** at Spryker, where we scale our e-commerce PaaS solution through customer-centric innovation. I **speak** globally, inspiring businesses go beyond with commerce. From experimentation to coding and automation, I'm constantly exploring ways to **make the web more human**.",
+      "**Technology Evangelist** & **Ecosystem Architect** unlocking community potential to drive strategic growth engines. Blending **cognitive psychology** with **conversion optimization** and **community building** to create mutual value between organizations and their ecosystems. Leading **global DevRel** for a major commerce platform while pioneering **(AI) automation-powered** approaches that scale human understanding. Orchestrating **internal change that delivers exponential ecosystem growth**.",
     back_to_all_posts: "Back to all posts",
     updated: "Updated",
   },
