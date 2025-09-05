@@ -14,9 +14,10 @@ import { getSelectedTestimonials } from "@config/colleagueTestimonialData";
 // Get strategically selected testimonials
 const testimonials = getSelectedTestimonials(4);
 
-// Debug logging for production troubleshooting
-console.log('ColleagueTestimonials: Selected testimonials count:', testimonials.length);
-console.log('ColleagueTestimonials: Selected testimonials:', testimonials.map(t => t.name));
+// Ensure we always have exactly 4 testimonials for consistent layout
+if (testimonials.length !== 4) {
+  console.warn('ColleagueTestimonials: Expected 4 testimonials, got', testimonials.length);
+}
 ---
 
 <section 
@@ -44,8 +45,11 @@ console.log('ColleagueTestimonials: Selected testimonials:', testimonials.map(t 
     <div class="grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
       {testimonials.map((testimonial, index) => (
         <div 
+          key={testimonial.id}
+          data-testimonial-id={testimonial.id}
           data-aos="fade-up" 
           data-aos-delay={index * 100}
+          class="testimonial-card-wrapper"
         >
           <ColleagueTestimonialCard {...testimonial} />
         </div>
@@ -77,3 +81,20 @@ console.log('ColleagueTestimonials: Selected testimonials:', testimonials.map(t 
     </div>
   </div>
 </section>
+
+<style>
+  .testimonial-card-wrapper {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  #colleague-testimonials .grid {
+    display: grid;
+  }
+  
+  /* Ensure all testimonial cards are visible */
+  .testimonial-card-wrapper:nth-child(n+1) {
+    display: block !important;
+  }
+</style>
