@@ -5,7 +5,9 @@
       "Bash(find:*)",
       "Bash(ls:*)",
       "Bash(npm install:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "mcp__puppeteer__puppeteer_screenshot",
+      "mcp__puppeteer__puppeteer_evaluate"
     ],
     "deny": []
   }

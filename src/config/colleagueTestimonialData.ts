@@ -141,36 +141,45 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
 /**
  * Get a strategic selection of testimonials
  * Ensures variety across categories and people (no duplicates)
+ * Uses deterministic selection that works in build environments
  */
 export function getSelectedTestimonials(count: number = 4): ColleagueTestimonial[] {
-  // Define required categories (one from each for variety)
-  const requiredCategories = [
-    "Strategic Leadership",
-    "Results & Innovation", 
-    "Psychology Expertise",
-    "Culture Building"
-  ];
-  
   const selected: ColleagueTestimonial[] = [];
   const usedPeople = new Set<string>();
   
-  // First pass: select one high-priority testimonial from each required category
-  // ensuring no duplicate people
-  requiredCategories.forEach(category => {
-    const categoryTestimonials = colleagueTestimonials
-      .filter(t => t.category === category && t.priority >= 4 && !usedPeople.has(t.name))
-      .sort((a, b) => b.priority - a.priority);
+  // Predefined high-priority testimonials by category for consistent selection
+  // Ensuring no duplicate people across categories
+  const categorySelections = [
+    { category: "Strategic Leadership", preferredId: "manuel-costa" },
+    { category: "Psychology Expertise", preferredId: "sophie-smallwood-1" },
+    { category: "Culture Building", preferredId: "henrik-feld-jakobsen" },
+    { category: "Results & Innovation", preferredId: "nadine-peeters-2" }
+  ];
+  
+  // Select one testimonial from each priority category
+  categorySelections.forEach(({ category, preferredId }) => {
+    // Try preferred testimonial first
+    let selectedTestimonial = colleagueTestimonials.find(t => 
+      t.id === preferredId && 
+      !usedPeople.has(t.name)
+    );
     
-    if (categoryTestimonials.length > 0) {
-      // Use Math.random with build-time seed for consistency within a build
-      const randomIndex = Math.floor(Math.random() * Math.min(2, categoryTestimonials.length));
-      const selectedTestimonial = categoryTestimonials[randomIndex];
+    // If preferred is not available or person already used, get highest priority alternative
+    if (!selectedTestimonial) {
+      const categoryTestimonials = colleagueTestimonials
+        .filter(t => t.category === category && t.priority >= 4 && !usedPeople.has(t.name))
+        .sort((a, b) => b.priority - a.priority);
+      
+      selectedTestimonial = categoryTestimonials[0];
+    }
+    
+    if (selectedTestimonial && selected.length < count) {
       selected.push(selectedTestimonial);
       usedPeople.add(selectedTestimonial.name);
     }
   });
   
-  // Second pass: fill remaining slots with highest priority testimonials
+  // Fill remaining slots with highest priority testimonials from any category
   // ensuring no duplicate people
   while (selected.length < count) {
     const remainingTestimonials = colleagueTestimonials
