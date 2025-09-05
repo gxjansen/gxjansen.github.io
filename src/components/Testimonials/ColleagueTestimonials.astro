@@ -13,6 +13,10 @@ import { getSelectedTestimonials } from "@config/colleagueTestimonialData";
 
 // Get strategically selected testimonials
 const testimonials = getSelectedTestimonials(4);
+
+// Debug logging for production troubleshooting
+console.log('ColleagueTestimonials: Selected testimonials count:', testimonials.length);
+console.log('ColleagueTestimonials: Selected testimonials:', testimonials.map(t => t.name));
 ---
 
 <section 
