@@ -46,7 +46,7 @@ export const textTranslations = {
   en: {
     hero_text: "Hi, I'm Guido 👋",
     hero_description:
-      "**Technology Evangelist** & **Ecosystem Architect** unlocking community potential to drive strategic growth engines. Blending **cognitive psychology** with **conversion optimization** and **community building** to create mutual value between organizations and their ecosystems. Leading **global DevRel** for a major commerce platform while pioneering **(AI) automation-powered** approaches that scale human understanding. Orchestrating **internal change that delivers exponential ecosystem growth**.",
+      "<span class='text-primary-500 font-semibold'>Global Tech/Product Evangelist & Ecosystem Architect</span>\n\nI transform communities into strategic growth engines by combining:\n\n🧠 **Cognitive psychology** to decode user behavior\n📈 **Business Experimentation** that drives measurable growth\n🤝 **Community building** that creates mutual value\n🪴 **(AI) automation** making growth systematic and scalable",
     back_to_all_posts: "Back to all posts",
     updated: "Updated",
   },

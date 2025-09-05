@@ -52,7 +52,7 @@ const shouldReduceMotion = typeof window !== "undefined"
 
             <h1
               id="hero-heading"
-              class="text-pretty text-3xl font-bold leading-tight tracking-tight text-base-900 dark:text-base-100 lg:text-5xl lg:leading-tight"
+              class="text-pretty text-3xl font-bold leading-normal tracking-normal text-base-900 dark:text-base-100 lg:text-5xl lg:leading-normal"
             >
               {t("hero_text")}
             </h1>
@@ -63,7 +63,7 @@ const shouldReduceMotion = typeof window !== "undefined"
             data-aos-delay=".1"
             data-aos-trigger="#hero-side"
           >
-            <Fragment set:html={t("hero_description").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} />
+            <Fragment set:html={t("hero_description").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>')} />
           </p>
           <div
             class="mt-6 flex flex-wrap gap-4"
