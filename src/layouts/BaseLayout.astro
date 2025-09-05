@@ -166,7 +166,8 @@ const currLocale = getLocaleFromUrl(Astro.url);
             once: true, 
             duration: 0.75, 
             distance: 100, 
-            offset: 120
+            offset: 120,
+            disable: 'mobile' // Disable on mobile for better performance
           });
 
           // runs on view transitions navigation
