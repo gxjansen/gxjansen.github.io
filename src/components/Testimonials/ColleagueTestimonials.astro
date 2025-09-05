@@ -83,7 +83,7 @@ if (testimonials.length !== 4) {
 </section>
 
 <style>
-  .testimonial-card-wrapper {
+  #colleague-testimonials .testimonial-card-wrapper {
     display: block;
     visibility: visible;
     opacity: 1;
@@ -93,8 +93,8 @@ if (testimonials.length !== 4) {
     display: grid;
   }
   
-  /* Ensure all testimonial cards are visible */
-  .testimonial-card-wrapper:nth-child(n+1) {
-    display: block !important;
+  /* Ensure grid layout is maintained */
+  #colleague-testimonials .grid > .testimonial-card-wrapper {
+    display: block;
   }
 </style>
