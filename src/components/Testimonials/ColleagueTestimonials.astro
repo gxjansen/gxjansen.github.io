@@ -1,0 +1,75 @@
+---
+/**
+ * * Colleague testimonials section with strategic grid layout
+ * * Shows 4 rotating testimonials from colleagues with LinkedIn link
+ */
+
+// components
+import Badge from "@components/Badge/Badge.astro";
+import ColleagueTestimonialCard from "./ColleagueTestimonialCard.astro";
+
+// data
+import { getSelectedTestimonials } from "@config/colleagueTestimonialData";
+
+// Get strategically selected testimonials
+const testimonials = getSelectedTestimonials(4);
+---
+
+<section 
+  id="colleague-testimonials"
+  class="py-24 md:py-28"
+>
+  <div class="site-container px-4">
+    <div class="mx-auto text-center max-w-3xl mb-12">
+      <Badge>Testimonials</Badge>
+      <h2 class="h2 mb-4">
+        <a 
+          href="https://www.linkedin.com/in/gxjansen/details/recommendations/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-primary-600 transition-colors duration-200"
+        >
+          What my colleagues say
+        </a>
+      </h2>
+      <p class="description text-lg md:text-xl">
+        Excerpts from colleagues and collaborators recommending me on LinkedIn
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+      {testimonials.map((testimonial, index) => (
+        <div 
+          data-aos="fade-up" 
+          data-aos-delay={index * 100}
+        >
+          <ColleagueTestimonialCard {...testimonial} />
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <a 
+        href="https://www.linkedin.com/in/gxjansen/details/recommendations/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium transition-colors duration-200"
+      >
+        View all 70+ recommendations on my LinkedIn profile (login required)
+        <svg 
+          class="ml-2 w-4 h-4" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            stroke-width="2" 
+            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

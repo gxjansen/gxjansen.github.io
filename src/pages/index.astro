@@ -11,6 +11,7 @@ import SiteContent from "@components/SiteContent/SiteContent.astro";
 import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
 import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
 import CompanyLogos from "@components/Companies/CompanyLogos.astro";
+import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -28,6 +29,7 @@ const siteData = getTranslatedData("siteData", currLocale);
 <BaseLayout title={siteData.title} description={siteData.description}>
   <HeroSideImage />
   <SiteContent />
+  <ColleagueTestimonials />
   <FeatureCardsSmall />
 
   <UpcomingEvents events={eventIcons} />

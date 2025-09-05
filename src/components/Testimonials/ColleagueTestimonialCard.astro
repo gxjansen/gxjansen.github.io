@@ -1,0 +1,46 @@
+---
+/**
+ * * Individual colleague testimonial card component
+ */
+
+import { Icon } from "astro-icon";
+import type { ColleagueTestimonial } from "@config/colleagueTestimonialData";
+
+const { name, role, company, workRelationship, quote, category } = Astro.props as ColleagueTestimonial;
+---
+
+<article class="h-full flex flex-col bg-base-0 dark:bg-base-800 rounded-xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 border border-base-200 dark:border-base-700">
+  <!-- Quote section -->
+  <div class="flex-1">
+    <div class="relative">
+      <Icon
+        name="atlas/quotes-top"
+        class="absolute -top-2 -left-2 w-8 h-8 text-primary-200 dark:text-primary-700 opacity-60"
+        aria-hidden="true"
+      />
+      <blockquote class="text-base-700 dark:text-base-200 text-lg leading-relaxed pl-4 mb-4">
+        "{quote}"
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- Attribution section -->
+  <footer class="mt-auto">
+    <div class="border-t border-base-200 dark:border-base-600 pt-4">
+      <cite class="not-italic">
+        <div class="font-semibold text-base-900 dark:text-base-100 text-lg">
+          {name}
+        </div>
+        <div class="text-base-600 dark:text-base-300 mt-1">
+          {role}
+          {company && (
+            <span class="text-base-500 dark:text-base-400"> • {company}</span>
+          )}
+        </div>
+        <div class="text-sm text-base-500 dark:text-base-400 mt-1">
+          {workRelationship}
+        </div>
+      </cite>
+    </div>
+  </footer>
+</article>
