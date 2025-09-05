@@ -16,6 +16,7 @@ import SocialCards from "@components/SocialCards/SocialCards.astro";
 import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
 import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
 import ServicesSideImage from "@components/Services/ServicesSideImage.astro";
+import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -33,6 +34,7 @@ const teamData = getTranslatedData("teamData", currLocale);
   <AboutHeader />
 
   <ServicesSideImage />
+  <ColleagueTestimonials />
   <FeatureGalleryMarquee />
 
   <section class="py-24 md:py-28">
