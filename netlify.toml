@@ -56,21 +56,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = """
-      default-src 'self';
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://www.google-analytics.com https://js.tinyanalytics.io;
-      style-src 'self' 'unsafe-inline';
-      img-src 'self' data: https: blob:;
-      font-src 'self' data:;
-      connect-src 'self' https://www.google-analytics.com https://api.tinyanalytics.io https://vitals.vercel-insights.com;
-      media-src 'self' https:;
-      frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://share.transistor.fm https://open.spotify.com;
-      frame-ancestors 'self';
-      base-uri 'self';
-      form-action 'self' https://share.transistor.fm;
-      object-src 'none';
-      upgrade-insecure-requests;
-    """
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://www.google-analytics.com https://js.tinyanalytics.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://api.tinyanalytics.io https://vitals.vercel-insights.com; media-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://share.transistor.fm https://open.spotify.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://share.transistor.fm; object-src 'none'; upgrade-insecure-requests;"
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
