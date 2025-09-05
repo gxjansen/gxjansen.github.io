@@ -13,18 +13,6 @@ import { getSelectedTestimonials } from "@config/colleagueTestimonialData";
 
 // Get strategically selected testimonials
 const testimonials = getSelectedTestimonials(4);
-
-// Debug logging to understand what's happening
-console.log('🔍 ColleagueTestimonials DEBUG:');
-console.log('  - Requested count: 4');
-console.log('  - Actual count:', testimonials.length);
-console.log('  - Selected IDs:', testimonials.map(t => t.id));
-console.log('  - Selected names:', testimonials.map(t => t.name));
-
-// Ensure we always have exactly 4 testimonials for consistent layout
-if (testimonials.length !== 4) {
-  console.warn('⚠️ ColleagueTestimonials: Expected 4 testimonials, got', testimonials.length);
-}
 ---
 
 <section 
@@ -49,11 +37,6 @@ if (testimonials.length !== 4) {
       </p>
     </div>
 
-    <!-- Debug info (visible in HTML) -->
-    <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; font-size: 12px;">
-      DEBUG: Rendering {testimonials.length} testimonials: {testimonials.map(t => t.name).join(', ')}
-    </div>
-
     <div class="grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
       {testimonials.map((testimonial, index) => (
         <div 
@@ -62,11 +45,7 @@ if (testimonials.length !== 4) {
           data-aos="fade-up" 
           data-aos-delay={index * 100}
           class="testimonial-card-wrapper"
-          style={`border: 2px solid ${index === 0 ? 'red' : index === 1 ? 'blue' : index === 2 ? 'green' : 'purple'}; margin: 2px;`}
         >
-          <div style="font-size: 10px; background: yellow; padding: 2px;">
-            #{index + 1}: {testimonial.name} ({testimonial.id})
-          </div>
           <ColleagueTestimonialCard {...testimonial} />
         </div>
       ))}
