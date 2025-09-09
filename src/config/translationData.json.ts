@@ -7,11 +7,11 @@
  * * Data file configuration for the i18n system
  * Every {Data} key must exist in the below object
  */
-import siteDataEn from "./en/siteData.json";
-import navDataEn from "./en/navData.json";
-import faqDataEn from "./en/faqData.json";
-import teamDataEn from "./en/teamData.json";
-import testimonialDataEn from "./en/testimonialData.json";
+import siteDataEn from "./en/siteData.json.ts";
+import navDataEn from "./en/navData.json.ts";
+import faqDataEn from "./en/faqData.json.ts";
+import teamDataEn from "./en/teamData.json.ts";
+import testimonialDataEn from "./en/testimonialData.json.ts";
 
 export const dataTranslations = {
   en: {
@@ -46,7 +46,7 @@ export const textTranslations = {
   en: {
     hero_text: "Hi, I'm Guido 👋",
     hero_description:
-      "<span class='text-primary-500 font-semibold'>Global Tech/Product Evangelist & Ecosystem Architect</span>\n\nI transform communities into strategic growth engines by combining:\n\n🧠 **Cognitive psychology** to decode user behavior\n📈 **Business Experimentation** that drives measurable growth\n🤝 **Community building** that creates mutual value\n🪴 **(AI) automation** making growth systematic and scalable",
+      "<span class='text-primary-500 font-semibold'>I build Antifragile Developer Ecosystems</span>\n\nI transform tech communities into strategic growth engines by combining:\n\n🧠 **Cognitive psychology** to decode user behavior\n📈 **Business Experimentation** that drives measurable growth\n🤝 **Community building** that creates mutual value\n🪴 **(AI) automation** making growth systematic and scalable",
     back_to_all_posts: "Back to all posts",
     updated: "Updated",
   },

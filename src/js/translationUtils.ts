@@ -5,7 +5,7 @@ import {
   textTranslations,
   dataTranslations,
   routeTranslations,
-} from "@config/translationData.json";
+} from "@config/translationData.json.ts";
 import { locales, defaultLocale } from "@config/siteSettings.json";
 
 /**
