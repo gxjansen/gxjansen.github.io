@@ -38,6 +38,20 @@ import logo from "@images/atlas-logo.png";
   .site-logo-text,
   .site-logo-icon {
     opacity: 0;
+    /* Fallback: ensure logo is visible if animations fail to load */
+    animation: logoFallback 0.1s ease-in-out 2s forwards;
+  }
+
+  @keyframes logoFallback {
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Immediately show logo if JS is disabled */
+  .no-js .site-logo-text,
+  .no-js .site-logo-icon {
+    opacity: 1;
   }
 </style>
 
