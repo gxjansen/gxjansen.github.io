@@ -14,14 +14,20 @@ import { getAllEvents, loadEventIcons } from "@utils/eventUtils";
 
 // Get all events and sort them by date
 const events = await getAllEvents();
-const sortedEvents = [...events].sort((a, b) => 
+const sortedEvents = [...events].sort((a, b) =>
   new Date(b.date).getTime() - new Date(a.date).getTime()
 );
 
+// Filter for past events only (before today)
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const pastEvents = sortedEvents.filter((event) => new Date(event.date) < today);
+
 // Implement pagination to reduce DOM size
 const EVENTS_PER_PAGE = 40; // Show 40 events initially to reduce DOM size
-const initialEvents = sortedEvents.slice(0, EVENTS_PER_PAGE);
-const remainingEvents = sortedEvents.slice(EVENTS_PER_PAGE);
+const initialEvents = pastEvents.slice(0, EVENTS_PER_PAGE);
+const remainingEvents = pastEvents.slice(EVENTS_PER_PAGE);
 
 // Split events into two columns for better organization
 const firstColumnEvents = initialEvents.filter((_, i) => i % 2 === 0);
