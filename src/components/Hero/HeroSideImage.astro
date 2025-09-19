@@ -57,14 +57,14 @@ const shouldReduceMotion = typeof window !== "undefined"
               {t("hero_text")}
             </h1>
           </div>
-          <p
-            class="description mb-8 text-pretty text-lg leading-relaxed text-base-700 dark:text-base-300 lg:text-xl"
+          <div
+            class="description mb-8 text-pretty text-lg leading-relaxed text-base-700 dark:text-base-300 lg:text-xl [&>br+br]:block [&>br+br]:mb-4"
             data-aos={shouldReduceMotion ? "" : "fade-right"}
             data-aos-delay=".1"
             data-aos-trigger="#hero-side"
           >
-            <Fragment set:html={t("hero_description").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>')} />
-          </p>
+            <Fragment set:html={t("hero_description").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')} />
+          </div>
           <div
             class="mt-6 flex flex-wrap gap-4"
             data-aos={shouldReduceMotion ? "" : "fade-right"}
