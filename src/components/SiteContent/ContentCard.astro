@@ -22,11 +22,12 @@ interface Props {
   title: string;
   text: string;
   href: string;
+  ctaText: string;
   idx: number; // determines which "blob" icon svg to use. There are 4 options (0-3)
   rest?: any; // catch-all for any additional parameters, such as "aria-label"
 }
 
-const { icon, title, text, href, idx, ...rest } = Astro.props as Props;
+const { icon, title, text, href, ctaText, idx, ...rest } = Astro.props as Props;
 
 const currLocale = getLocaleFromUrl(Astro.url);
 ---
@@ -48,7 +49,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
     </div>
     <div class="mt-6 flex justify-center">
       <Button variant="outline" arrow="right">
-        Check it out<span class="sr-only">about {title}</span>
+        {ctaText}<span class="sr-only">about {title}</span>
       </Button>
     </div>
   </a>
