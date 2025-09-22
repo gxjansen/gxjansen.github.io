@@ -7,7 +7,7 @@ const siteData: SiteDataProps = {
   title:
     "Guido X Jansen | Building Antifragile Tech Ecosystems",
   description:
-    "I create sustainable business value by understanding what your ecosystem needs and orchestrating internal change to deliver strategic growth engines.",
+    "Architecting developer ecosystems that transform challenges into competitive advantages. Strategic advisory for C-suite leaders on community-led growth.",
   // used on contact page and footer
   contact: {
     address1: "Ouderkerk aan de Amstel,",

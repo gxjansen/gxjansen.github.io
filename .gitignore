@@ -66,3 +66,4 @@ src/data/content-availability.json
 
 # Validation reports
 validation-reports/
+src/components/SiteContent/SiteContent.astro

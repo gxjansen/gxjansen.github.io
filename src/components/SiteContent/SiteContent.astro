@@ -20,39 +20,31 @@ interface FeatureData {
   title: string;
   text: string;
   href: string;
+  ctaText: string;
 }
 
 // data
 const featureData: FeatureData[] = [
   {
     icon: "tabler/outline/broadcast",
-    title: "Podcasts",
-    text: `Podcasting is a great way to learn, share and get to know people. I've published over 250 episodes for different podcasts.`,
+    title: "200+ Conversations on Growth & Optimization",
+    text: `Through CRO.CAFE and other podcasts, I've explored the psychology of user behavior, experimentation culture, and what makes digital experiences succeed. These conversations with industry leaders and practitioners reveal patterns I now apply to building resilient developer ecosystems. Understanding human behavior remains crucial whether optimizing interfaces or architecting communities.`,
     href: "/podcasts",
-  },
-  {
-    icon: "tabler/outline/calendar-event",
-    title: "Events",
-    text: `I've had the privilege of speaking at a number of wonderful industry conferences and universities around the world, sharing my experience with the audience and sharing ideas with a lot of experts.`,
-    href: "/events",
+    ctaText: "Listen to Past Episodes",
   },
   {
     icon: "tabler/outline/article",
-    title: "Articles",
-    text: `I provide actionable tips on improving your online business and boosting conversion rates.`,
+    title: "From Optimization to Ecosystem Thinking",
+    text: `I've evolved from hands-on conversion optimization and community building tactics to strategic thinking about tech ecosystems and technology choices. Explore insights on behavioral psychology in tech, building sustainable systems, and why I'm passionate about open source, privacy, and developer sovereignty. More content coming on antifragile ecosystem design.`,
     href: "/post",
+    ctaText: "Read Insights",
   },
   {
-    icon: "tabler/outline/friends",
-    title: "Presentations",
-    text: `Overview of public presentations with decks and videos (when available).`,
-    href: "/presentations",
-  },
-  {
-    icon: "tabler/outline/code",
-    title: "Projects",
-    text: `Some of my IndieHacker projects. Use at your own risk 😉`,
-    href: "/projects",
+    icon: "tabler/outline/presentation",
+    title: "Speaking on Community, Technology & Human Behavior",
+    text: `Keynotes at 50+ global conferences in 25 countries,sharing insights from 20+ years at the intersection of psychology and technology. Topics range from developer community building and open source ecosystems to behavioral design and the future of tech communities. Available for strategic discussions on building resilient developer programs.`,
+    href: "/events",
+    ctaText: "View Speaking Topics",
   },
 ];
 ---
@@ -62,8 +54,8 @@ const featureData: FeatureData[] = [
     <div class="relative">
       <div class="relative">
         <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
-          <Badge>Content</Badge>
-          <h2 class="h2 mb-4">What can you find here?</h2>
+          <Badge>Resources</Badge>
+          <h2 class="h2 mb-4">Leadership Resources & Insights</h2>
           <!-- <p class="description text-lg md:text-xl">
             Podcasting is a great way to learn, share and get to know people. I've published over 250 episodes for different podcasts:
           </p> -->
@@ -76,6 +68,7 @@ const featureData: FeatureData[] = [
                   text={feature.text}
                   icon={feature.icon}
                   href={feature.href}
+                  ctaText={feature.ctaText}
                   idx={idx}
                   data-aos="zoom-in"
                   data-aos-delay={0.15 * idx}
@@ -142,6 +135,7 @@ const featureData: FeatureData[] = [
                         text={feature.text}
                         icon={feature.icon}
                         href={feature.href}
+                        ctaText={feature.ctaText}
                         idx={idx}
                         data-aos="zoom-in"
                         data-aos-delay={0.15 * idx}
