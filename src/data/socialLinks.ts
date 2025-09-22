@@ -33,17 +33,6 @@ export const socialLinks: SocialLink[] = [
       contact: true
     }
   },
-  {
-    name: 'Keybase',
-    href: 'https://keybase.io/gxjansen',
-    icon: 'tabler/IconKey',
-    visibility: {
-      footer: true,
-      hero: false,
-      about: true,
-      contact: true
-    }
-  },
     {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=gxjansen',
