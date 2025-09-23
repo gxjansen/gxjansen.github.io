@@ -87,16 +87,5 @@ export const socialLinks: SocialLink[] = [
       about: false,
       contact: false
     }
-  },
-  {
-    name: 'Twitter (X)',
-    href: 'https://twitter.com/guido',
-    icon: 'tabler/filled/brand-x',
-    visibility: {
-      footer: true,
-      hero: false,
-      about: false,
-      contact: false
-    }
   }
 ];
