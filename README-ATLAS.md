@@ -1,4 +1,4 @@
-# Welcome to Atlas!
+.# Welcome to Atlas!
 
 1. To get started, first install all necessary packages with `npm install`, then run an initial build to make sure the setup works `npm run build`.
 2. Next, you'll want to configure your site i18n setup (one language, or multiple). Follow instructions in the [i18n documentation](https://cosmicthemes.com/i18n/).

@@ -8,7 +8,9 @@
       "Bash(npm run build:*)",
       "mcp__puppeteer__puppeteer_screenshot",
       "mcp__puppeteer__puppeteer_evaluate",
-      "mcp__firecrawl__firecrawl_scrape"
+      "mcp__firecrawl__firecrawl_scrape",
+      "mcp__serena__read_file",
+      "mcp__serena__list_dir"
     ],
     "deny": []
   }
