@@ -32,7 +32,7 @@
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
     "animejs": "^3.2.2",
-    "astro": "^5.12.6",
+    "astro": "^5.13.10",
     "astro-auto-import": "^0.4.2",
     "astro-embed": "^0.7.4",
     "astro-icon": "0.8.2",
@@ -66,6 +66,9 @@
     "prettier-plugin-tailwindcss": "^0.6.14",
     "svgo": "2.8.0",
     "vitest": "^3.2.4"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.28.1"
   },
   "overrides": {
     "sharp": "^0.33.0"
