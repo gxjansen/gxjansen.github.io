@@ -25,7 +25,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-This is a personal website and blog built with Astro 5.3.1, featuring:
+This is a personal website and blog built with Astro 5.13.10, featuring:
 - **Static Site Generation** with Astro
 - **Content Management** via Keystatic (Git-based CMS)
 - **Styling** with Tailwind CSS and custom theme

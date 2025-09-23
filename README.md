@@ -1,11 +1,11 @@
 # gui.do website
 
-In this repo I'm building a new website for [gui.do](https://gui.do), replacing the current Webflow SaaS.
+This is the website for [gui.do](https://gui.do), built with Astro and replacing the previous Webflow site.
 
 See [this article](https://gui.do/post/website-moved-to-astro/) with more background info on why I made the switch.
 
 ## Stack
-I'm basing the new system on [Astro](https://astro.build/), [Tailwind](https://tailwindcss.com/), [Keystatic](https://keystatic.com/) and [Netlify](https://www.netlify.com/).
+Built with [Astro](https://astro.build/), [Tailwind](https://tailwindcss.com/), [Keystatic](https://keystatic.com/) and deployed on [Netlify](https://www.netlify.com/).
 
 ### Development site
 [![GH Pages Deploy](https://github.com/MichaelCurrin/badge-generator/workflows/GH%20Pages%20Deploy/badge.svg)](https://github.com/gxjansen/gxjansen.github.io/edit/development/actions/workflows/astro.yml "GitHub Actions workflow status")
