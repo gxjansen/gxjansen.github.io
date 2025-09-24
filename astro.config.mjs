@@ -119,35 +119,6 @@ export default defineConfig({
     css: {
       devSourcemap: true,
     },
-    plugins: [
-      {
-        name: 'robots-txt',
-        writeBundle: {
-          sequential: true,
-          order: 'post',
-          handler() {
-            let robotsContent;
-            const sitemapUrl = process.env.ASTRO_MODE === 'production'
-              ? 'https://gui.do/sitemap.xml'
-              : 'https://dev.gui.do/sitemap.xml';
-
-            if (process.env.ASTRO_MODE === 'production') {
-                robotsContent = `User-agent: *\nDisallow: /conference-terms\nDisallow: /examples/\n\nSitemap: ${sitemapUrl}`;
-            } else {
-              robotsContent = `User-agent: *\nDisallow: /\n\nSitemap: ${sitemapUrl}`;
-            }
-            
-            // Ensure the dist directory exists
-            const distDir = path.join(process.cwd(), 'dist');
-            if (!fs.existsSync(distDir)) {
-              fs.mkdirSync(distDir, { recursive: true });
-            }
-
-            // Write the robots.txt file
-            fs.writeFileSync(path.join(distDir, 'robots.txt'), robotsContent);
-          }
-        }
-      }
-    ]
+    plugins: []
   }
 });
