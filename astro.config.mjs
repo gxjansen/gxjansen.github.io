@@ -4,7 +4,6 @@ import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import AutoImport from "astro-auto-import";
 import react from "@astrojs/react";
-import keystatic from "@keystatic/astro";
 import netlify from "@astrojs/netlify";
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -14,6 +13,9 @@ import { contentValidationPlugin } from './src/utils/content-validation-plugin.t
 export default defineConfig({
   site: "https://gui.do",
   output: "static",
+  build: {
+    inlineStylesheets: "auto", // Inline critical CSS automatically
+  },
   viewTransitions: {
     fallback: true // Enable fallback animations for browsers that don't support view transitions
   },
@@ -49,7 +51,6 @@ export default defineConfig({
     '/video': { destination: 'https://www.youtube.com/c/GuidoJansen', status: 301 },
     
     // Internal redirects
-    '/admin': { destination: '/keystatic', status: 301 },
     '/guidojansen': { destination: '/about', status: 301 },
     '/post/*': { destination: '/post/:splat', status: 301 },
     '/persuasive-ecommerce': { destination: '/', status: 301 },
@@ -85,7 +86,6 @@ export default defineConfig({
       experimentalLayout: false
     }),
     react(),
-    keystatic(),
     tailwind(),
     sitemap({
       filter: (page) => !page.includes('/conference-terms') && !page.includes('/examples/'),
