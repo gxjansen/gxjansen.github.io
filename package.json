@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "dev:netlify": "netlify dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/test-robots.js",
     "preview": "astro build --mode preview",
     "production": "astro build --mode production",
     "astro": "astro",
@@ -13,6 +13,7 @@
     "fix-dark-mode": "node scripts/fix-dark-mode.js",
     "fix-dark-mode:dry": "node scripts/fix-dark-mode.js --dry-run",
     "test": "vitest",
+    "test:robots": "node scripts/test-robots.js",
     "validate-content": "node scripts/validate-content.js"
   },
   "dependencies": {
