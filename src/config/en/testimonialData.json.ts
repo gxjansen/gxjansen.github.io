@@ -1,7 +1,7 @@
 import { type TestimonialItem } from "../types/configDataTypes";
 
 import BowTiedFocus from "@images/BowTiedFocus.jpg";
-import TravisB from "@images/travis-b.png";
+import TravisB from "@images/travis-b.webp";
 import Isaac from "@images/isaac_saas.jpg";
 import Aniket from "@images/aniket_p.jpg";
 import David from "@images/david-g-davedev.png";
