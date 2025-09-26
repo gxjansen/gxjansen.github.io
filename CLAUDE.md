@@ -141,6 +141,15 @@ The following MCP servers are available for use:
 - **Notifications**: List and manage notifications (`mcp__github__list_notifications`, `mcp__github__dismiss_notification`)
 - **Copilot**: Assign Copilot to issues, request reviews (`mcp__github__assign_copilot_to_issue`, `mcp__github__request_copilot_review`)
 
+### 7. **Serena** - Code Analysis & Navigation
+- **Project Activation**: Always activate the correct project first (`mcp__serena__activate_project`)
+- **File Operations**: Read files and list directories (`mcp__serena__read_file`, `mcp__serena__list_dir`)
+- **Search**: Pattern search and symbol finding (`mcp__serena__search_for_pattern`, `mcp__serena__find_symbol`, `mcp__serena__find_referencing_symbols`)
+- **File Management**: Find files and create new ones (`mcp__serena__find_file`, `mcp__serena__create_text_file`)
+- **Code Manipulation**: Replace symbol bodies and regex patterns (`mcp__serena__replace_symbol_body`, `mcp__serena__replace_regex`)
+
+**IMPORTANT**: Before using any Serena tools, ALWAYS first activate this specific project using `mcp__serena__activate_project` to ensure you're working with the correct project data. Serena contains data from multiple projects and needs to be properly scoped.
+
 ## Write valid Typescript code that uses state-of-the-art Node.js v24 features and follows best practices:
 - Always use ES6+ syntax
 - Always use the built-in 'fetch' for HTTP requests, rather than using the 'node-fetch' package
