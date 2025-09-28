@@ -44,7 +44,7 @@ export const dataTranslations = {
  */
 export const textTranslations = {
   en: {
-    hero_text: "Hi, I'm Guido (GXJ) 👋",
+    hero_text: "Hi, I'm Guido 👋",
     hero_description:
       "<span class='text-primary-500 font-semibold'>I build Antifragile Developer Ecosystems</span>\n\nFor 20+ years I've been transforming tech communities into strategic growth engines by combining:\n\n🧠 **Cognitive psychology** to decode user behavior\n📈 **Business Experimentation** that drives measurable growth\n🤝 **Community building** that creates mutual value\n🪴 **(AI) automation** making growth systematic and scalable\n⚡ **Open tech** choosing user freedom over vendor lock-in",
     back_to_all_posts: "Back to all posts",
