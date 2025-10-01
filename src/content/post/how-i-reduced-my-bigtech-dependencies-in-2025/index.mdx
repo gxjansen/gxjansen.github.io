@@ -12,12 +12,13 @@ categories:
   - Technology
 ---
 
-I hate being locked in to subscriptions, only to every year see the prices go up and the value go down. So in 2025 I've continued moving towards a more robust (or in some cases even antifragile) setup. And I don't want to sugarcoat this: it's taken me many evenings and weekends to get here and I'm not done yet. But hopefully in sharing my journey I can A) inspire you to make similar moves and B) make your journey a bit shorter and easier than mine.
+I dislike being locked in to subscriptions, only to every year see the prices go up and the value go down. I dislike the privacy violations and [the dark patterns](https://www.linkedin.com/feed/update/urn:li:activity:7379112533552693248) (h/t Abi Hough). I also like tinkering with tech a lot.
+
+So in 2025 I've continued moving towards a more robust (or in some cases even antifragile) setup. And I don't want to sugarcoat this: it's taken me many evenings and weekends to get here and I'm not done yet. But hopefully in sharing my journey I can A) inspire you to make similar moves and B) make your journey a bit shorter and easier than mine.
 
 ## Why change?
 - Subscriptions everywhere, vendor lock-in, limited mobility... I don't like these big companies force their changes on me.
 - Privacy: While paying for these services (e.g. Gmail, LLMs, phones), I can't shake the feeling that it is still my data that is the real product being sold.
-- I want my setup to be more privacy friendly.
 - General annoyance with how many Big Tech companies are behaving.
 
 ## Why now?
@@ -36,34 +37,37 @@ I've been an open source user since I first came into contact with Mambo CMS in 
 - **Identity independence**: Keep email/2FA/domains separate from apps. This makes future migrations dramatically easier.
 
 ## My starting points & current status
-At the beginning of the year, I still had:
-- Netflix, Disney+, Amazon Prime, Youtube Premium
-- Google Workspace
-- Audible
-- Google Photos
-- Websites running on Webflow
-
-But I also already had:
-- Synology NAS (DS920+ as main, DS418 as backup), Plex, public ingress; anything public runs on managed hosting (e.g Elestio or VPS) or SaaS.
-- [Signal](https://signal.org/) for messaging
+I already have the items below in my setup that are already a decent fit for the above preferences:
+- Synology NAS (DS920+ as main, DS418 as backup), no public ingress; anything public runs on managed hosting (e.g Elestio or VPS) or SaaS.
+- [Signal](https://signal.org/) - messaging
 - [Firewalla router](https://firewalla.com/products/firewalla-gold-pro) that blocks a lot of ads/domains (at least when at home and/or using Tailscale)
-- [Bitwarden](https://bitwarden.com/)
+- [Bitwarden](https://bitwarden.com/) - Password manager
 - [Obsidian](https://obsidian.md/) - Personal notes
 - [Tailscale](https://tailscale.com/) - Personal VPN
+- [Ollama](https://ollama.com/) - Local LLMs
 - [OpenRouter](https://openrouter.ai/) for the majority of LLMs. Not self hosted, but makes me extremely flexible in the LLMs I'm using.
 - [BlueSky](https://bsky.app/profile/gui.do) (I haven't used Twitter or Instagram for over a year)
 - [OBS Studio](https://obsproject.com/) - video recording and live streaming
+- [Homebrew](https://brew.sh/) - MacOS package manager
+- [VLC](https://www.videolan.org/) - Media player
+- [Zed](https://zed.dev/) / [VSCodium](https://vscodium.com/) - Code editior
+
+But... at the beginning of the year, I also still had way to many media subscriptions (e.g. Netflix, Disney+, Amazon Prime, Youtube Premium) and still stuck with that pesky Google Workspace
 
 Things I've changed so far in 2025:
 - Plex + \*arr stack to replace streaming services. Works great for English content, not great yet for 4/6 yo kids that want to watch things in Dutch
+- Audible/YouTube Music → [PlexAmp](https://www.plex.tv/plexamp/) (which is also used in my [RPi Pirate audio side project](https://gui.do/post/rpi-pirate-audio-side-project/))
 - Google Photos → [Immich](https://immich.app/)
 - Authy → [Aegis](https://getaegis.app/) (+ YubiKey for hardware keys)
-- Webflow → [Astro](https://astro.build/) (on Netlify)
+- Webflow → [Astro](https://astro.build/) (on Netlify) for both [gui.do](https://gui.do/) and [cro.cafe](https://www.cro.cafe/)
+- YouTube → [GrayJay](https://grayjay.app/) (both on Desktop an Mobile)
+- ARC → [Firefox](https://www.firefox.com/) ARC is still superior, but not open source and [development is dead now](https://www.youtube.com/watch?v=NXsId9C4zpg)
 - Moved more chatgroups from Whatsapp to Signal (only some parent groups still stuck on Whatsapp)
 - Started building more automations and workflows between my (increasingly more open and self-controlled) apps with [n8n](https://www.n8n.io).
-- Replaced Ghostty CLI with []Alacritty](https://alacritty.org/) as that works cross-platform
+- Replaced Ghostty CLI with []Alacritty](https://alacritty.org/) as that works cross-platform.
 - Got a [Fairphone 6](https://shop.fairphone.com/nl/the-fairphone-gen-6) to replace my dying Samsung Galaxy S21 Ultra.
 - Got a [Supernote Manta](https://supernote.com/pages/supernote-manta) for note-taking and e-books. Works with Obsidian.
+- Started self-hosting Minecraft to provide a safe environment for my kids when playing the game
 - Moved all e-mail domains, calendar, contacts to Fastmail. I first transitioned to Proton for my e-mail/calendar needs. And although the service itself is good, I mainly ran into issues when I wanted to automate things with my calendar. Proton's calendar has no CalDAV/CardDAV support (and this is also not on the roadmap) and that's what made me ultimately move on to Fastmail instead. (You can get [10% off your first year of Fastmail through this referral link](https://join.fastmail.com/dc7cc1ab).)
 
 Transition targets underway:
@@ -71,9 +75,10 @@ Transition targets underway:
 - Adobe CC → Affinity + Darktable/RawTherapee + DaVinci Resolve (this is mainly a habit thing I want to change)
 
 After that:
-- As long as the Synologies still function, I don't see why I should replace them, at least not their NAS function. I do have more and more Homelab containers running which is beginning to stretch its limits so a dedicated docker server might be in my future.
-- Replace Tailscale with Headscale and Bitwarden with Vaultwarden? Not sure if that these a worth the hassle.
-- Setup FreshRSS? Still haven't recovered from the Google Reader sunset 😅
+- As long as the Synology devices still function, I don't see why I should replace them, at least not their NAS function. I do have more and more Homelab containers running which is beginning to stretch its limits so a dedicated docker server might be in my future.
+- Replace Tailscale with [Headscale](https://headscale.net/stable/) and Bitwarden with [Vaultwarden](https://www.vaultwarden.net/)? Not sure if that these a worth the hassle.
+- Selfhost an office suite like [Cryptpad](https://cryptpad.org/)
+- Setup [FreshRSS](https://freshrss.org/)? Still haven't recovered from the Google Reader sunset in 2013 😅
 
 You can start small by moving some smaller apps like some mentioned above.
 
@@ -88,7 +93,7 @@ I left out a lot and I'm happy to dive into any specific area if there's interes
 
 ## Terms Explainer
 
-**Antifragile**: A concept by Nassim Taleb describing systems that actually benefit from shocks and volatility. In tech terms, it means your setup gets stronger when things change or break, not weaker. Think: having your own email domain means you can switch providers easily if one fails or raises prices.
+**Antifragile**: A concept by [Nassim Taleb](https://en.wikipedia.org/wiki/Nassim_Nicholas_Taleb) describing systems that actually benefit from shocks and volatility. In tech terms, it means your setup gets stronger when things change or break, not weaker. Think: having your own email domain means you can switch providers easily if one fails or raises prices.
 
 **Open Source**: Software where the source code is publicly available for anyone to inspect, modify, and improve. Unlike proprietary software, you can see exactly what it does with your data.
 
