@@ -1,0 +1,98 @@
+---
+title: How I reduced my BigTech dependencies in 2025 (and why you should too)
+description: A detailed guide on moving away from vendor lock-in and Big Tech subscriptions to build a more robust, privacy-friendly, and antifragile tech setup using open source alternatives.
+draft: false
+authors:
+  - gxjansen
+pubDate: 2025-10-01
+heroImage: ../how-i-reduced-my-bigtech-dependencies-in-2025/fairphone.jpg
+categories:
+  - Privacy
+  - Open Source
+  - Technology
+---
+
+I hate being locked in to subscriptions, only to every year see the prices go up and the value go down. So in 2025 I've continued moving towards a more robust (or in some cases even antifragile) setup. And I don't want to sugarcoat this: it's taken me many evenings and weekends to get here and I'm not done yet. But hopefully in sharing my journey I can A) inspire you to make similar moves and B) make your journey a bit shorter and easier than mine.
+
+## Why change?
+- Subscriptions everywhere, vendor lock-in, limited mobility... I don't like these big companies force their changes on me.
+- Privacy: While paying for these services (e.g. Gmail, LLMs, phones), I can't shake the feeling that it is still my data that is the real product being sold.
+- I want my setup to be more privacy friendly.
+- General annoyance with how many Big Tech companies are behaving.
+
+## Why now?
+I've been an open source user since I first came into contact with Mambo CMS in 2003, so nothing new in that sense. And unknowingly I made some decent antifragility choices (e.g. using my own e-mail domain). But over the years I've also accrued some sloppy/easy/bad choices and I found myself increasingly uncomfortable with being locked into too many places.
+
+- More and better alternatives keep becoming available and easier to start using and customizing (especially with access to tools like Claude Code and a NAS or cheap VPS)
+- Because increasingly, the vendors that have achieved some form of lock-in just do whatever like raising prices while simultaneously making the service worse (Check this rant by [Louis Rossmann on why paying for a service nowadays often gets you a worse experience](https://www.youtube.com/watch?v=o4GZUCwVRLs)). Just being confronted with changes I didn't sign up for is not the experience I like to have.
+- Europe (where I live) is leaning more into open source and technological sovereignty because it's more secure, cost‑effective, flexible, and innovative when done right. Several roadmaps and analyses point to open technologies as a lever for digital autonomy and sustainability in Europe (something which I fully support for all (united) countries, not just Europe).
+
+## Preferences/Principles that keep the journey realistic
+- **Open source first**, open standards second: I prefer tools where I can see the code (Astro, Firefox, Immich, Obsidian) and use non-proprietary formats (Markdown, CalDAV).
+- **Data ownership**: I own my data or can export it completely. GDPR-respecting by default.
+- **Pragmatic, not pure**: I'm not dogmatic about self-hosting everything. I use SaaS when lock-in is low (Netlify, OpenRouter) or I already have lifetime licenses (Plex). The goal is *mobility*, not ideology.
+- **Incremental migration**: Run old and new systems in parallel. Switch when the new setup is "boringly reliable."
+- **Identity independence**: Keep email/2FA/domains separate from apps. This makes future migrations dramatically easier.
+
+## My starting points & current status
+At the beginning of the year, I still had:
+- Netflix, Disney+, Amazon Prime, Youtube Premium
+- Google Workspace
+- Audible
+- Google Photos
+- Websites running on Webflow
+
+But I also already had:
+- Synology NAS (DS920+ as main, DS418 as backup), Plex, public ingress; anything public runs on managed hosting (e.g Elestio or VPS) or SaaS.
+- Signal for messaging
+- Firewalla router that blocks a lot of ads/domains (at least when at home and/or using Tailscale)
+- Bitwarden
+- Obsidian
+- Tailscale
+- OpenRouter for the majority of LLMs. Not self hosted, but makes me extremely flexible in the LLMs I'm using.
+- BlueSky (I haven't used Twitter or Instagram for over a year)
+
+Things I've changed so far in 2025:
+- Plex + \*arr stack to replace streaming services. Works great for English content, not great yet for 4/6 yo kids that want to watch things in Dutch
+- Google Photos → Immich
+- Authy → Aegis (+ YubiKey for hardware keys)
+- Webflow → Astro (on Netlify)
+- Moved more chatgroups from Whatsapp to Signal (only some parent groups still stuck on Whatsapp)
+- Started building more automations and workflows between my (increasingly more open and self-controlled) apps with [n8n](https://www.n8n.io).
+- Got a Fairphone 6 to replace my dying Samsung Galaxy S21 Ultra.
+- Moved all e-mail domains, calendar, contacts to Fastmail. I first transitioned to Proton for my e-mail/calendar needs. And although the service itself is good, I mainly ran into issues when I wanted to automate things with my calendar. Proton's calendar has no CalDAV/CardDAV support (and this is also not on the roadmap) and that's what made me ultimately move on to Fastmail instead. (You can get [10% off your first year of Fastmail through this referral link](https://join.fastmail.com/dc7cc1ab).)
+
+Transition targets underway:
+- Google Workspace → Fastmail (The main thing left is to untangle Google SSO sign‑ins)
+- Adobe CC → Affinity + Darktable/RawTherapee + DaVinci Resolve (this is mainly a habit thing I want to change)
+
+You can start small by moving some smaller apps like some mentioned above.
+
+If you want to seriously improve your antifragility, start the work with freeing your core identity and authentication:
+- **Get your own e-mail domain.** I can't stress enough how important this one is. You need to own your own identity and a very important key to that is to have control over your e-mail as everything is connected to that. Even if you want to keep using gmail: use it with your own domain. If you ever want to get rid of Google (or whoever you are hosting your e-mail with) it is very hard to move away if you only ever used an @gmail.com address. I used Google Workspace for many years, using it with my own e-mail address allows me to switch e-mail providers from one day to another without losing any e-mails.
+- **For any service/app signup: use e-mail, not SSO.** I get that it saves a couple of seconds, but it also locks you in. Especially annoying when the service you are using doesn't allow you to switch to another form of SSO or e-mail (looking at you Anthropic and Tailscale). So instead: signup for new services using your e-mail and maybe setup SSO as a secondary way to sign in if you really want. And of course always setup 2FA/MFA when available. Untangling all kinds of services from your SSO provider is NOT fun...
+- **Open Authenticator**: speaking of 2FA/MFA: use an independent/open source app for this. You don't want your free Auth app to suddenly stop its service or start charging (or charging more). I moved from Authy to Aegis which means logging in to a service with Authy 2FA, disabling 2FA and enabling it again with Aegis. Annoying? Yes. Satisfying? Very. And as always: make exports/backups (which Aegis actually allows, Authy did not).
+
+I left out a lot and I'm happy to dive into any specific area if there's interest, let me know in the comments!
+
+---
+
+## Terms Explainer
+
+**Antifragile**: A concept by Nassim Taleb describing systems that actually benefit from shocks and volatility. In tech terms, it means your setup gets stronger when things change or break, not weaker. Think: having your own email domain means you can switch providers easily if one fails or raises prices.
+
+**Open Source**: Software where the source code is publicly available for anyone to inspect, modify, and improve. Unlike proprietary software, you can see exactly what it does with your data.
+
+**Open Standards**: File formats or protocols that anyone can use without restrictions (like Markdown, CalDAV, RSS). This prevents vendor lock-in since multiple tools can work with the same data.
+
+**SSO (Single Sign-On)**: "Login with Google/Apple/Facebook" buttons. Convenient but creates dependency on that provider.
+
+**2FA/MFA (Two-Factor/Multi-Factor Authentication)**: Extra security requiring a second verification (like a code from an app) beyond your password.
+
+**NAS (Network Attached Storage)**: A dedicated device for storing files on your home network. Think of it as your personal cloud.
+
+**VPS (Virtual Private Server)**: A rented server where you can host your own services and websites.
+
+**CalDAV/CardDAV**: Open standards for syncing calendars and contacts across devices and apps.
+
+**\*arr stack**: Collection of media automation tools (Sonarr, Radarr, etc.) that work with Plex for media management.
