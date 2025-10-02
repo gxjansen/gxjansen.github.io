@@ -12,14 +12,20 @@ categories:
   - Technology
 ---
 
-I dislike being locked in to subscriptions, only to every year see the prices go up and the value go down. I dislike the privacy violations and [the dark patterns](https://www.linkedin.com/feed/update/urn:li:activity:7379112533552693248) (h/t Abi Hough). I also like tinkering with tech a lot.
+Have you been paying for a subscriptions, only to every year see the prices go up and the value go down...? How about the privacy violations and [the dark patterns](https://www.linkedin.com/feed/update/urn:li:activity:7379112533552693248) (h/t [Abi Hough](https://uk.linkedin.com/in/abihough)? How would it feel if all these things you consider "yours" would be taken down tomorrow, completely legally?
 
-So in 2025 I've continued moving towards a more robust (or in some cases even antifragile) setup. And I don't want to sugarcoat this: it's taken me many evenings and weekends to get here and I'm not done yet. But hopefully in sharing my journey I can A) inspire you to make similar moves and B) make your journey a bit shorter and easier than mine.
+I don't like this situation.
+
+So in 2025 I've continued moving towards a more robust (or in some cases even antifragile) setup.
+
+And let's not sugarcoat this: I've been in it way too deep and it's taken me many evenings and weekends to get here. And I'm not done yet. But hopefully in sharing my journey I can A) inspire you to make similar moves and B) make your journey a bit shorter and easier than mine.
 
 ## Why change?
-- Subscriptions everywhere, vendor lock-in, limited mobility... I don't like that these big companies force their changes on me.
-- Privacy: While paying for these services (e.g. Gmail, LLMs, phones), I can't shake the feeling that it is still my data that is the real product being sold.
+- I have too many subscriptions and don't truly own "my" stuff.
+- Vendor lock-in, limited mobility and service quality going down. I don't like companies forcing their (negative) changes on me while I keep paying the same (or sometimes even more).
+- Privacy: While paying for these services (e.g. Gmail, LLMs, phones), many still use/sell my data.
 - General annoyance with how many Big Tech companies are behaving.
+- I link tinkering with these tools and learning new things along the way ← a lot depends on this if you want to go down this route...
 
 ## Why now?
 I've been an open source user since I first came into contact with Mambo CMS in 2003, so nothing new in that sense. And unknowingly I made some decent antifragility choices (e.g. using my own e-mail domain). But over the years I've also accrued some sloppy/easy/bad choices and I found myself increasingly uncomfortable with being locked into too many places.
@@ -38,12 +44,12 @@ I've been an open source user since I first came into contact with Mambo CMS in 
 
 ## My starting points & current status
 I already have the items below in my setup that are already a decent fit for the above preferences:
-- Synology NAS (DS920+ as main, DS418 as backup), no public ingress; anything public runs on managed hosting (e.g Elestio or VPS) or SaaS.
+- Synology NAS (DS920+ as main, DS418 as backup), no public ingress; anything public runs on managed hosting (e.g Elestio or VPS) or SaaS. The Synology completely replaced my need for paid Google Drive/Dropbox storage.
 - [Signal](https://signal.org/) - messaging
 - [Firewalla router](https://firewalla.com/products/firewalla-gold-pro) that blocks a lot of ads/domains (at least when at home and/or using Tailscale)
 - [Bitwarden](https://bitwarden.com/) - Password manager
-- [Obsidian](https://obsidian.md/) - Personal notes
-- [Tailscale](https://tailscale.com/) - Personal VPN
+- [Obsidian](https://obsidian.md/) - Personal notes (completely replaced Evernote/Notion)
+- [Tailscale](https://tailscale.com/) - Personal VPN (completely replaced paid VPNs)
 - [Ollama](https://ollama.com/) - Local LLMs
 - [OpenRouter](https://openrouter.ai/) for the majority of LLMs. Not self-hosted, but makes me extremely flexible in the LLMs I'm using.
 - [BlueSky](https://bsky.app/profile/gui.do) (I haven't used Twitter or Instagram for over a year)
@@ -53,7 +59,7 @@ I already have the items below in my setup that are already a decent fit for the
 - [Plex](https://www.plex.tv/) - Media management/ player. I bought a lifetime pass many years ago, I doubt I would buy it again. But since I have it anyway...
 - [Zed](https://zed.dev/) / [VSCodium](https://vscodium.com/) - Code editor
 
-But... at the beginning of the year, I also still had way too many media subscriptions (e.g. Netflix, Disney+, Amazon Prime, Youtube Premium) and still stuck with that pesky Google Workspace
+But... at the beginning of the year, I also still had way too many media subscriptions (e.g. Netflix, Disney+, Amazon Prime, Youtube Premium) and still stuck with that pesky Google Workspace...
 
 Things I've changed so far in 2025:
 - Added the [*arr stack](https://www.reddit.com/r/selfhosted/comments/1g44l4p/full_guide_to_install_arrstack_almost_all_arr/) to my Plex setup to replace streaming services. Works great for English content, not great yet for 4/6 yo kids that want to watch things in Dutch.
@@ -70,20 +76,21 @@ Things I've changed so far in 2025:
 - Replaced Ghostty CLI with [Alacritty](https://alacritty.org/) as that works cross-platform.
 - Got a [Fairphone 6](https://shop.fairphone.com/nl/the-fairphone-gen-6) to replace my dying Samsung Galaxy S21 Ultra.
 - Got a [Supernote Manta](https://supernote.com/pages/supernote-manta) for note-taking and e-books. Works with Obsidian.
-- Started self-hosting Minecraft to provide a safe environment for my kids when playing the game
-- Moved all e-mail domains, calendar, contacts to Fastmail. I first transitioned to Proton for my e-mail/calendar needs. And although the service itself is good, I mainly ran into issues when I wanted to automate things with my calendar. Proton's calendar has no CalDAV/CardDAV support (and this is also not on the roadmap) and that's what made me ultimately move on to Fastmail instead. (You can get [10% off your first year of Fastmail through this referral link](https://join.fastmail.com/dc7cc1ab).)
+- Replaced Sonos speaker → [Raspberry Pi Zero](https://www.raspberrypi.com/products/raspberry-pi-zero/) with [Pirate audio HAT](https://shop.pimoroni.com/products/pirate-audio-line-out) (see [this blog](https://gui.do/post/rpi-pirate-audio-side-project/))
+- Started self-hosting Minecraft (on the Synology) to provide a safe environment for my kids when playing the game.
+- Moved (almost) all e-mail domains, calendar, contacts to Fastmail. I first transitioned to Proton for my e-mail/calendar needs. And although the service itself is good, I mainly ran into issues when I wanted to automate things with my calendar. Proton's calendar has no CalDAV/CardDAV support (and this is also not on the roadmap) and that's what made me ultimately move on to Fastmail instead. (You can get [10% off your first year of Fastmail through this referral link](https://join.fastmail.com/dc7cc1ab).)
 
 Transition targets underway:
 - Google Workspace → Fastmail (The main thing left is to untangle Google SSO sign‑ins)
-- Adobe CC → Affinity + Darktable/RawTherapee + DaVinci Resolve (this is mainly a habit thing I want to change)
+- Adobe CC → Affinity + Darktable/RawTherapee + [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve/) (this is mainly a habit thing I need to change)
 
 After that:
-- As long as the Synology devices still function, I don't see why I should replace them, at least not their NAS function. I do have more and more Homelab containers running which is beginning to stretch its limits so a dedicated docker server might be in my future.
-- Replace Tailscale with [Headscale](https://headscale.net/stable/) and Bitwarden with [Vaultwarden](https://www.vaultwarden.net/)? Not sure if these are worth the hassle.
-- Self-host an office suite like [Cryptpad](https://cryptpad.org/)
+- I wouldn't recommend buying a Synology today, but as long as the devices still function, I don't see why I should replace them. At least not their NAS function. I do have more and more Homelab containers running which is beginning to stretch its CPU and memory limits so a dedicated docker server (NUC?) might be in my future.
+- Replace Tailscale with [Headscale](https://headscale.net/stable/) and Bitwarden with [Vaultwarden](https://www.vaultwarden.net/)? Not sure if that is worth the hassle.
+- Self-host an office suite like [Cryptpad](https://cryptpad.org/).
 - Setup [FreshRSS](https://freshrss.org/)? Still haven't recovered from the Google Reader sunset in 2013 😅
 
-You can start small by moving some smaller apps like some mentioned above.
+Note that you can start small by moving some smaller apps like some mentioned above.
 
 If you want to seriously improve your antifragility, start the work with freeing your core identity and authentication:
 - **Get your own e-mail domain.** I can't stress enough how important this one is. You need to own your own identity and a very important key to that is to have control over your e-mail as everything is connected to that. Even if you want to keep using gmail: use it with your own domain. If you ever want to get rid of Google (or whoever you are hosting your e-mail with) it is very hard to move away if you only ever used an @gmail.com address. I used Google Workspace for many years, using it with my own e-mail address allows me to switch e-mail providers from one day to another without losing any e-mails.
