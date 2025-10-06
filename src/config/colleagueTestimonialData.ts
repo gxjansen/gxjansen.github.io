@@ -61,7 +61,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     name: "Sophie Smallwood",
     role: "Director, Customer Success",
     company: "Spryker",
-    workRelationship: "Fellow member of the leadership team",
+    workRelationship: "Leadership peer",
     quote: "What stands out most is his ability to balance strong opinions with genuine psychological safety.",
     category: "Leadership & Team Building",
     priority: 5
@@ -93,7 +93,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     name: "Sophie Smallwood",
     role: "Director, Customer Success",
     company: "Spryker",
-    workRelationship: "Fellow member of the leadership team",
+    workRelationship: "Leadership peer",
     quote: "He brings a rare mix of energy, positivity, and technical acumen. He rolls up his sleeves to get things done, while also experimenting with new ideas.",
     category: "Community & Collaboration",
     priority: 4
@@ -145,7 +145,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     name: "Svitlana Kulynych",
     role: "Head of Learning Experience",
     company: "Spryker",
-    workRelationship: "Fellow member of the leadership team",
+    workRelationship: "Leadership peer",
     quote: "I saw first-hand how the initiatives of his team not only strengthened customer and partner engagement but also directly shaped product direction and organizational growth. Guido has a rare ability to translate community insights into tangible business intelligence and vice versa bring business closer to the community.",
     category: "Business Impact & Innovation",
     priority: 4
@@ -155,7 +155,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     name: "Chris Rauch",
     role: "Chief Customer Officer",
     company: "Spryker",
-    workRelationship: "Second level manager",
+    workRelationship: "Former 2nd level manager",
     quote: "His strategic thinking impressed me. Guido understood that communities need sustainable business value, not just engagement metrics. The hackathon projects directly influenced what we built next, including some AI features.",
     category: "Business Impact & Innovation",
     priority: 4
@@ -165,7 +165,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     name: "Chris Rauch",
     role: "Chief Customer Officer",
     company: "Spryker",
-    workRelationship: "Second level manager",
+    workRelationship: "Former 2nd level manager",
     quote: "He delivered results that mattered: developer feedback shaped our product roadmap, engineering teams connected directly with external developers, and our community became stronger after each challenge.",
     category: "Business Impact & Innovation",
     priority: 4
