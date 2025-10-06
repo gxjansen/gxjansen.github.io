@@ -2,6 +2,7 @@
 /**
  * * Colleague testimonials section with strategic grid layout
  * * Shows 4 rotating testimonials from colleagues with LinkedIn link
+ * * Uses client-side randomization for dynamic content on each page load
  */
 
 // components
@@ -9,13 +10,13 @@ import Badge from "@components/Badge/Badge.astro";
 import ColleagueTestimonialCard from "./ColleagueTestimonialCard.astro";
 
 // data
-import { getSelectedTestimonials } from "@config/colleagueTestimonialData";
+import { getRandomTestimonials, colleagueTestimonials } from "@config/colleagueTestimonialData";
 
-// Get strategically selected testimonials
-const testimonials = getSelectedTestimonials(4);
+// Get initial testimonials for SSR (will be replaced client-side)
+const initialTestimonials = getRandomTestimonials(4);
 ---
 
-<section 
+<section
   id="colleague-testimonials"
   class="py-24 md:py-28"
 >
@@ -23,7 +24,7 @@ const testimonials = getSelectedTestimonials(4);
     <div class="mx-auto text-center max-w-3xl mb-12">
       <Badge>Testimonials</Badge>
       <h2 class="h2 mb-4">
-        <a 
+        <a
           href="https://www.linkedin.com/in/gxjansen/details/recommendations/"
           target="_blank"
           rel="noopener noreferrer"
@@ -37,10 +38,9 @@ const testimonials = getSelectedTestimonials(4);
       </p>
     </div>
 
-    <div class="grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-      {testimonials.map((testimonial, index) => (
-        <div 
-          key={testimonial.id}
+    <div id="testimonials-grid" class="grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+      {initialTestimonials.map((testimonial) => (
+        <div
           data-testimonial-id={testimonial.id}
           class="testimonial-card-wrapper"
         >
@@ -50,23 +50,23 @@ const testimonials = getSelectedTestimonials(4);
     </div>
 
     <div class="text-center mt-12">
-      <a 
+      <a
         href="https://www.linkedin.com/in/gxjansen/details/recommendations/"
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium transition-colors duration-200"
       >
         View the full, 70+ recommendations on my LinkedIn profile (login required)
-        <svg 
-          class="ml-2 w-4 h-4" 
-          fill="none" 
-          stroke="currentColor" 
+        <svg
+          class="ml-2 w-4 h-4"
+          fill="none"
+          stroke="currentColor"
           viewBox="0 0 24 24"
         >
-          <path 
-            stroke-linecap="round" 
-            stroke-linejoin="round" 
-            stroke-width="2" 
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
           />
         </svg>
@@ -75,13 +75,73 @@ const testimonials = getSelectedTestimonials(4);
   </div>
 </section>
 
+<script>
+  import { getRandomTestimonials } from "@config/colleagueTestimonialData";
+
+  function randomizeTestimonials() {
+    const grid = document.getElementById('testimonials-grid');
+    if (!grid) return;
+
+    // Get random testimonials
+    const testimonials = getRandomTestimonials(4);
+
+    // Build HTML for each testimonial card
+    const cardsHTML = testimonials.map(testimonial => `
+      <div data-testimonial-id="${testimonial.id}" class="testimonial-card-wrapper">
+        <article class="colleague-testimonial-card bg-surface dark:bg-gray-800 rounded-xl shadow-md p-6 h-full flex flex-col transition-all duration-300 hover:shadow-lg">
+          <blockquote class="flex-grow mb-6">
+            <svg class="w-8 h-8 text-primary-600 dark:text-primary-400 mb-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">${testimonial.quote}</p>
+          </blockquote>
+
+          <footer class="border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="flex items-start justify-between">
+              <div class="flex-grow">
+                <cite class="not-italic">
+                  <div class="font-semibold text-gray-900 dark:text-white">${testimonial.name}</div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400">${testimonial.role}</div>
+                  <div class="text-sm text-gray-600 dark:text-gray-400">${testimonial.company}</div>
+                  <div class="text-xs text-gray-500 dark:text-gray-500 mt-1 italic">${testimonial.workRelationship}</div>
+                </cite>
+              </div>
+            </div>
+          </footer>
+        </article>
+      </div>
+    `).join('');
+
+    // Update the grid with smooth transition
+    grid.style.opacity = '0';
+    setTimeout(() => {
+      grid.innerHTML = cardsHTML;
+      grid.style.opacity = '1';
+    }, 150);
+  }
+
+  // Randomize on initial page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', randomizeTestimonials);
+  } else {
+    randomizeTestimonials();
+  }
+
+  // Randomize on view transitions navigation
+  document.addEventListener('astro:after-swap', randomizeTestimonials);
+</script>
+
 <style>
   #colleague-testimonials .testimonial-card-wrapper {
     visibility: visible;
     opacity: 1;
   }
-  
+
   #colleague-testimonials .grid {
     display: grid;
+  }
+
+  #testimonials-grid {
+    transition: opacity 150ms ease-in-out;
   }
 </style>

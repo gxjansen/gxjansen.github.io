@@ -24,7 +24,9 @@
       "mcp__tavily__tavily-search",
       "mcp__puppeteer__puppeteer_fill",
       "mcp__puppeteer__puppeteer_click",
-      "mcp__serena__create_text_file"
+      "mcp__serena__create_text_file",
+      "Read(//Users/gxjansen/Documents/CoreNotes/**)",
+      "Read(//Users/gxjansen/Downloads/**)"
     ],
     "deny": []
   }
