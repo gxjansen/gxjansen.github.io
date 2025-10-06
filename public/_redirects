@@ -5,7 +5,6 @@
 /blog/:slug        /post/:slug            301
 /blog/en/*         /post/:splat           301
 /blog/*            /post/:splat           301
-/admin              /keystatic            301
 /guidojansen        /about                301
 /persuasive-ecommerce /                   301
 /instagram          /social               301
