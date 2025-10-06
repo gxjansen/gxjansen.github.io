@@ -27,16 +27,6 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     priority: 5
   },
   {
-    id: "riccardo-sozzi",
-    name: "Riccardo Sozzi",
-    role: "Head of Digital Data",
-    company: "Randstad",
-    workRelationship: "Former colleague",
-    quote: "He has organizational and resource management skills with lots of enthusiasm.",
-    category: "Leadership & Team Building",
-    priority: 3
-  },
-  {
     id: "henrik-feld-jakobsen",
     name: "Henrik Feld-Jakobsen",
     role: "Chief Strategy Officer",
@@ -206,7 +196,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
   // Cross-functional Impact & Technical Versatility
   {
     id: "mark-1",
-    name: "Mark",
+    name: "Mark Dearlove",
     role: "Senior Director of Academy",
     company: "Spryker",
     workRelationship: "Leadership peer",
@@ -216,7 +206,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
   },
   {
     id: "christian-1",
-    name: "Christian",
+    name: "Christian von Schassen",
     role: "Senior Director, Partner Success",
     company: "Spryker",
     workRelationship: "Leadership peer",
@@ -226,7 +216,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
   },
   {
     id: "mark-2",
-    name: "Mark",
+    name: "Mark Dearlove",
     role: "Senior Director of Academy",
     company: "Spryker",
     workRelationship: "Leadership peer",
