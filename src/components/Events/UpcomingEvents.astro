@@ -40,7 +40,7 @@ const secondColumnEvents = upcomingEvents.filter((_, i) => i % 2 === 1);
     <div class="relative">
         {showTitle && (
           <div class="flex justify-center">
-            <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+            <div class="mx-auto mb-16 text-center md:max-w-4xl">
               <Badge>Events</Badge>
               <h2 id="upcoming-events-heading" class="h2">Upcoming Speaking Engagements</h2>
               {events.filter(event => new Date(event.date) >= today).length > maxEvents && (
