@@ -21,7 +21,7 @@ const initialTestimonials = getRandomTestimonials(4);
   class="py-24 md:py-28"
 >
   <div class="site-container px-4">
-    <div class="mx-auto text-center max-w-3xl mb-12">
+    <div class="mx-auto text-center max-w-3xl mb-12" data-aos="fade-up">
       <Badge>Testimonials</Badge>
       <h2 class="h2 mb-4">
         <a
@@ -39,10 +39,12 @@ const initialTestimonials = getRandomTestimonials(4);
     </div>
 
     <div id="testimonials-grid" class="grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-      {initialTestimonials.map((testimonial) => (
+      {initialTestimonials.map((testimonial, index) => (
         <div
           data-testimonial-id={testimonial.id}
           class="testimonial-card-wrapper"
+          data-aos="fade-up"
+          data-aos-delay={index * 100}
         >
           <ColleagueTestimonialCard {...testimonial} />
         </div>
@@ -85,9 +87,9 @@ const initialTestimonials = getRandomTestimonials(4);
     // Get random testimonials
     const testimonials = getRandomTestimonials(4);
 
-    // Build HTML for each testimonial card
-    const cardsHTML = testimonials.map(testimonial => `
-      <div data-testimonial-id="${testimonial.id}" class="testimonial-card-wrapper">
+    // Build HTML for each testimonial card with AOS attributes
+    const cardsHTML = testimonials.map((testimonial, index) => `
+      <div data-testimonial-id="${testimonial.id}" class="testimonial-card-wrapper" data-aos="fade-up" data-aos-delay="${index * 100}">
         <article class="colleague-testimonial-card bg-surface dark:bg-gray-800 rounded-xl shadow-md p-6 h-full flex flex-col transition-all duration-300 hover:shadow-lg">
           <blockquote class="flex-grow mb-6">
             <svg class="w-8 h-8 text-primary-600 dark:text-primary-400 mb-4" fill="currentColor" viewBox="0 0 24 24">
@@ -117,6 +119,11 @@ const initialTestimonials = getRandomTestimonials(4);
     setTimeout(() => {
       grid.innerHTML = cardsHTML;
       grid.style.opacity = '1';
+
+      // Refresh AOS to recognize new elements
+      if (typeof AOS !== 'undefined') {
+        AOS.refresh();
+      }
     }, 150);
   }
 
