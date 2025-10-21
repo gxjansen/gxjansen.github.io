@@ -23,6 +23,8 @@ presentations.csv
 questions.md
 implementation.md
 
+AGENTS.md
+
 # do not commit .env files or any files that end with `.env`
 *.env
 .env

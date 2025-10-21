@@ -1,0 +1,168 @@
+---
+title: "Ditching \"One community idea per month\": Our hackathon path to 80+ community projects"
+description: Learn how we transformed community engagement through hackathons instead of monthly idea quotas, creating 80+ community projects while building better understanding between community and product teams.
+draft: false
+authors:
+  - gxjansen
+pubDate: 2025-10-16
+heroImage: ./heroImage.jpg
+heroImageAlt: "C-level presenting Hackathon findings at our annual conference 💪"
+categories:
+  - Community
+  - DevRel
+  - Product Management
+---
+import { Image } from 'astro:assets';
+import image1 from './image1.jpg';
+import image2 from './image2.jpg';
+
+A question popped up recently in a product community: "Should we commit to implementing one community idea per month?"
+
+The underlying tension will be recognizable for many community managers:
+
+- Your community members share ideas and feel like they disappear into a void.
+- Product teams are drowning in suggestions and struggling to show they're listening.
+
+I've learned that promising to pick one idea per month (or whatever your number and frequency is) doesn't really solve either problem. Let me share what worked for us, even in our small-scale enterprise-community setting.
+
+*(Note that while I've applied this to a developer-community, this can also work for a non-developer community, see further below)*
+
+## The Problem with Fixed Quotas
+
+When you promise to implement one community idea per month, you're creating a system that sounds fair but can actually work against you.
+
+- **Ideas are cheap.** The product team is already drowning in them.
+- **Ideas might not align** with your product direction or desired impact.
+- **Ideas vary in size.** A lot.
+
+You're also setting up a competitive dynamic where community members are essentially competing for limited slots and you also cap your potential upside. That's not the kind of culture and practice most of us want to build.
+
+## What We Did Instead: The Hackathon Approach
+
+We started running regular public hackathons in 2024 at our own offices and at partner or customer locations. Resulting in over 80 public projects now live on the [Spryker Community GitHub](https://github.com/spryker-community), with typically 3-5 teams participating per hackathon.
+
+The approach was surprisingly simple but had some specific elements that made it work:
+
+> **We pushed every team to publish their results to GitHub under an MIT license as reusable modules.** We provided boilerplates to make this easier. We also recorded team presentations at the end of each hackathon.
+
+This meant what teams created was:
+
+1. Instantly reusable by the community the very next day, or ready to be developed further in a future hackathon;
+2. Documented, including the team's vision and ideas for future use;
+3. Ready to be picked up by the product team if they chose to do so.
+
+<Image src={image1} alt="Hackathon team presentations at the Berlin office, September 2025, with multiple members from the Spryker Product and Tech teams on-site." />
+*Hackathon team presentations at the Berlin office, September 2025, with multiple members from the Spryker Product and Tech teams on-site.*
+
+## The Key: Making Success Independent of Product Team Pickup
+
+**The biggest challenge for any hackathon participant is making sure the "what's in it for them" is clear, immediate, and not dependent on whether the product team picks up their work.**
+
+For developers, this was somewhat easy: They could have a great hackathon simply by learning from building something with others, nerd out about the latest tech and have a pizza and beer together. Regardless of what happened afterward with their code. We stimulated participation with prizes, which helped with motivation, but the intrinsic value was already there.
+
+I've also done this format at other companies with product managers and designers. The output is less directly usable, but when it's something tangible like a wireframe, user research result, or video explaining the ideas, it still provides value and makes it much more interesting to a product team than "an idea".
+
+Potentially counterintuitive but important: **We never force these teams to work on specific features.** Instead, we discussed hackathon themes with the product team beforehand (and set technical winning criteria that were the same accross all hackathons), but we always left the exact features open.
+
+As facilitators, my team makes sure that the community efforts both:
+
+- Stayed away from things already in active development (preventing duplicate work)
+- Focused on either things the product team wanted to build "next" (to get POCs/MVPs of different solution directions) OR work on things that the product team specifically would NOT build so it could live on as a community module and provide value that way.
+
+This gave participants lots of freedom and resulted in a good mix of funny, innovative and also serious enough projects that contributed to our north star: getting more community-driven innovation into our core product.
+
+<Image src={image2} alt="Hackathon team presenting their Apple Vision Pro shopping project. Did it make it in to the project? No. Was it innovative, fun and a great learning experience? Heck yeah!" />
+*Hackathon team presenting their Apple Vision Pro shopping project. Did it make it in to the project? No. Was it innovative, fun and a great learning experience? Heck yeah!*
+
+## The trade-off: You need some volume
+
+Here's the honest challenge with this approach: **To get a meaningful amount of actual product innovations, you need volume.**
+
+By leaving topics open, you create space for creativity but you also accept that not every project will be product-ready or even product-relevant. Some will be experimental. Some will be quirky. Some will be brilliant but not aligned with your roadmap.
+
+That's actually fine. It's a feature, not a bug. It's a great motivational and bonding event for the participants. Who doesn't want the freedom to solve that pesky problem or to work with that cutting edge tech that no scrum master every gave the green light?
+
+But it does mean you can't run one small hackathon and expect five ready-to-implement features. You need enough hackathon participants over time to generate the right mix of projects.
+
+## Increasing the chances of product team pickup
+
+Of course, we still wanted good ideas to make it into the product, that's still the north start we are working towards. To improve those odds, we took several steps:
+
+We aligned on themes and what NOT to work on. We discussed the ideal handover format for the product team, which is why we added team videos and required proper documentation. We always had someone from the product team attend hackathons on-site and ideally in preparation sessions where we set themes and topics. We presented results to the product team afterward and referred them to detailed documentation per team, topic, and idea.
+
+And sometimes we also had Spryker developers actually join the hackathon teams, which made this learning even more powerful (and again increase the chance of being picked up).
+
+## Two deeper benefits I didn't expect
+
+Looking back, the hackathon approach delivered two bonus benefits I hadn't fully appreciated before we started this program:
+
+**First, it helped community members understand that ideas alone aren't enough.** An in-depth request or prototype that's well thought out has a much higher chance of being seriously considered by the product team than a single-sentence suggestion. This realization changed how people approached feedback.
+
+**Second, and maybe more important, community members who actually worked on solving problems gained a much deeper understanding of why things are the way they are.** Even when the hackathon didn't solve the issue, participants came away with higher appreciation for the product/tech team and how they make choices (hat tip here to Volodymyr Lunov, Denis Turkov, Helen Laktionova & Andriy Tkachenko often being the ones taking time to explain deeper product/architectural decisions and provide recommendations to the teams 🙏).
+
+## Not a universal solution
+
+I want to be clear: This is specifically aimed at **community managers and DevRel specialists who work with a developer community on one side and a product team on the other.**
+
+If your community isn't primarily developers, or if your product doesn't support extensibility, this exact approach won't translate. But I do think the underlying principles can:
+
+- Make community participation valuable on its own, not contingent on product team action
+- Help community members understand the complexity of implementation, creating goodwill
+- Create opportunities for community members to work alongside product team members
+- Provide clear pathways for mature ideas to reach the product team
+
+## The research backs this up
+
+Recent studies (see below for links) on open source contributions show that intrinsic motivation drives far more sustainable engagement than external rewards. When developers contribute because they're learning, building relationships, or solving problems that matter to them personally, they stick around longer and contribute more meaningfully.
+
+Research on hackathons specifically shows they're effective at building community, generating innovation, and creating lasting value when structured properly. The key is making the event itself rewarding, not just positioning it as a gateway to getting features implemented.
+
+Community-driven innovation works best when it empowers local expertise and creates genuine ownership. This aligns perfectly with what we saw: when community members built something themselves, they were invested in it regardless of whether it made it into the core product.
+
+## So what's the alternative to monthly quotas?
+
+Instead of committing to "one community idea per month," I'd suggest to:
+
+- **Create opportunities for community members to develop their ideas into something more substantial.** Whether that's through hackathons, community modules, detailed RFC processes, or something else entirely.
+- **Make sure the product team is actively present in these processes.** Not just observing, but participating and explaining their thinking.
+- **Focus on bringing more mature ideas and proof-of-concepts to the product team** rather than raw suggestions. This makes their job easier and increases the chance of implementation.
+- **Work on increasing community understanding and appreciation for how product decisions get made.** This might sound like lowering expectations, but I found it actually increased satisfaction because people understood the "why" behind decisions.
+
+## Our two-part solution
+
+So essentially, our approach worked on two fronts:
+
+1. **Make it more appealing for the product team to implement things** by bringing more mature ideas, POCs, and MVPs rather than raw feature requests.
+2. **Increase community understanding and appreciation** for unsolved or unaddressed ideas by having them work on the challenges themselves.
+
+Both of these reduce friction and increase the actual value exchange between community and product team.
+
+## Want to try this?
+
+If you're a community manager or DevRel professional thinking about running hackathons, I've documented our entire process in a [Hackathon Blueprint](https://commercequest.space/events/hackathon-blueprint/) that covers everything from planning to execution to follow-up.
+
+It's practical, detailed, and designed to help you avoid the mistakes we made along the way.
+
+And if something is missing, feel free to send in a PR 😉
+
+## How would you approach this?
+
+I'm genuinely curious how other community managers and DevRel folks handle this tension between community expectations and product roadmap reality.
+
+Have you tried fixed quotas? Do you have a different structure that works well? What challenges have you faced in making community members feel heard while also protecting your product team's ability to execute on their roadmap?
+
+For those working with less technical communities, how do you create similar value exchanges without the ability to produce working code?
+
+What am I missing in this approach? I'd love to hear your experiences in the comments!
+
+---
+
+### Research links
+
+1. Motivations and Incentives of Participation in Open-Source Software ("OSS"): [https://www.semanticscholar.org/paper/8bf33b688b2a42c28bf3c66c6e17563e6161cabb](https://www.semanticscholar.org/paper/8bf33b688b2a42c28bf3c66c6e17563e6161cabb)
+2. The Shifting Sands of Motivation: Revisiting What Drives Contributors in Open Source (2021): [https://ieeexplore.ieee.org/document/9402044/](https://ieeexplore.ieee.org/document/9402044/)
+3. Why We Engage in FLOSS: Answers from Core Developers (2018): [https://arxiv.org/pdf/1803.05741.pdf](https://arxiv.org/pdf/1803.05741.pdf)
+4. Motivation, values, and work design as drivers of participation in the R open source project (2015): [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4672828/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4672828/)
+5. Motivation of Open Source Developers (2009): [https://www.academia.edu/54446264/Motivation_of_Open_Source_Developers](https://www.academia.edu/54446264/Motivation_of_Open_Source_Developers)
+
+These papers collectively highlight that intrinsic motivators (e.g. learning, altruism, fun, community sense) drive sustained and more meaningful engagement than purely extrinsic rewards.
