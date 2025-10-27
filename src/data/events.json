@@ -1,31 +1,5 @@
 [
   {
-    "id": "spryker-user-group-2025-11",
-    "name": "Spryker User Group",
-    "icon": "spryker.png",
-    "date": "2025-11-25",
-    "city": "Online event",
-    "country": "",
-    "url": "https://forum.commercequest.space/events/",
-    "workshop": false,
-    "role": "Organizer & co-host/moderator",
-    "topic": "",
-    "relatedPresentationSlugs": []
-  },
-  {
-    "id": "spryker-user-group-2025-10",
-    "name": "Spryker User Group",
-    "icon": "spryker.png",
-    "date": "2025-10-28",
-    "city": "Online event",
-    "country": "",
-    "url": "https://forum.commercequest.space/events/",
-    "workshop": false,
-    "role": "Organizer & co-host/moderator",
-    "topic": "",
-    "relatedPresentationSlugs": []
-  },
-  {
     "id": "spryker-user-group-2025-09",
     "name": "Spryker User Group @ Turbine Kreuzberg",
     "icon": "spryker.png",
