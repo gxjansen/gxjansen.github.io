@@ -89,7 +89,11 @@ const secondColumnEvents = initialEvents.filter((_, i) => i % 2 === 1);
           <button 
             id="load-more-btn"
             class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
-            data-remaining-events={JSON.stringify(remainingEvents)}
+            data-remaining-events={JSON.stringify(remainingEvents.map(event => ({
+              ...event,
+              loadedIcon: undefined, // Remove ImageMetadata object
+              icon: event.icon // Keep the filename for client-side rendering
+            })))}
             data-remaining-count={remainingEvents.length}
           >
             Load More Events ({remainingEvents.length})
@@ -131,9 +135,9 @@ const secondColumnEvents = initialEvents.filter((_, i) => i % 2 === 1);
           ${linkUrl ? `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer" class="cursor-pointer">` : '<div>'}
             <div class="flex items-center mb-3">
               <div class="w-10 h-10 mr-3 bg-base-300 dark:bg-base-800 rounded-lg flex items-center justify-center">
-                ${event.loadedIcon ? `
+                ${event.icon ? `
                   <img 
-                    src="${event.loadedIcon}"
+                    src="/images/events/${event.icon}"
                     alt="${event.name} Icon"
                     width="32"
                     height="32"
