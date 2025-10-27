@@ -1,0 +1,25 @@
+name: Latest blog post workflow
+on:
+  schedule:
+    # Runs 4 times a day at 8 AM, 2 PM, 8 PM UTC, and 2 AM UTC
+    # Avoids 3-7 AM UTC when network failures are most common
+    - cron: '0 8,14,20,2 * * *'
+  workflow_dispatch: # Allows manual trigger
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/blog-post-workflow.yml'
+jobs:
+  update-readme-with-blog:
+    name: Update this repo's README with latest blog posts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: gautamkrishnar/blog-post-workflow@master
+        continue-on-error: true # Don't fail the workflow on network errors
+        with:
+          feed_list: 'https://www.gui.do/post/rss.xml'
+          max_post_count: 5
+          retry_count: 3 # Retry 3 times on failure
+          retry_wait_time: 2 # Wait 2 seconds between retries
