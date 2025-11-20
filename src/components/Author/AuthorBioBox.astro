@@ -15,8 +15,8 @@ const {
   jobTitle,
   organization,
   linkedin,
-  twitter,
   github,
+  bluesky,
   website,
   expertise = [],
   credentials = []
@@ -24,12 +24,15 @@ const {
 
 const authorUrl = `/authors/${author.slug}`;
 
-// Map social links with proper icon names
+// Map social links with proper icon names (LinkedIn, GitHub, Bluesky, Website as per user requirement)
 const socialLinks = [
   { url: linkedin, icon: "linkedin", label: "LinkedIn" },
   { url: github, icon: "github", label: "GitHub" },
-  { url: website, icon: "website", label: "Website" },
+  { url: bluesky, icon: "bluesky", label: "Bluesky" },
 ].filter(link => link.url);
+
+// Add website link separately if it exists
+const hasWebsite = website && website.includes('gui.do');
 ---
 
 <aside
@@ -106,8 +109,8 @@ const socialLinks = [
         </div>
       )}
 
-      {socialLinks.length > 0 && (
-        <div class="mt-4 flex gap-2">
+      {(socialLinks.length > 0 || hasWebsite) && (
+        <div class="mt-4 flex flex-wrap items-center gap-2">
           {socialLinks.map(link => (
             <SocialIcon
               icon={link.icon}
@@ -116,6 +119,16 @@ const socialLinks = [
               class="w-10 h-10"
             />
           ))}
+          {hasWebsite && (
+            <a
+              href={website}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 ml-2"
+            >
+              gui.do →
+            </a>
+          )}
         </div>
       )}
 

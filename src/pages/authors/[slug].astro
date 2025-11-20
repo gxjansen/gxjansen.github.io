@@ -1,0 +1,220 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PostCardAtlas from "@components/PostCard/PostCardAtlas.astro";
+import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
+
+export async function getStaticPaths() {
+  const authors = await getCollection("authors");
+  return authors.map((author) => ({
+    params: { slug: author.slug },
+    props: { author },
+  }));
+}
+
+const { author } = Astro.props as { author: CollectionEntry<"authors"> };
+const { Content } = await author.render();
+
+// Get all posts by this author
+const allPosts = await getCollection("post", ({ data }) => {
+  return !data.draft && data.authors && data.authors.includes(author.slug);
+});
+
+const sortedPosts = allPosts.sort((a, b) => {
+  const dateA = new Date(a.data.pubDate).getTime();
+  const dateB = new Date(b.data.pubDate).getTime();
+  return dateB - dateA;
+});
+
+const {
+  name,
+  avatar,
+  bio,
+  jobTitle,
+  organization,
+  linkedin,
+  github,
+  bluesky,
+  website,
+  expertise = [],
+  credentials = [],
+  awards = [],
+  publications = [],
+  yearsOfExperience
+} = author.data;
+
+// Map social links (LinkedIn, GitHub, Bluesky as per user requirement)
+const socialLinks = [
+  { url: linkedin, icon: "linkedin", label: "LinkedIn" },
+  { url: github, icon: "github", label: "GitHub" },
+  { url: bluesky, icon: "bluesky", label: "Bluesky" },
+].filter(link => link.url);
+
+// Add website link separately
+const hasWebsite = website && website.includes('gui.do');
+---
+
+<BaseLayout
+  title={`${name} - Author Profile`}
+  description={bio || `Articles and insights from ${name}`}
+  image={avatar}
+>
+  <article class="mt-24">
+    <!-- Author Header -->
+    <div class="mx-auto max-w-4xl px-4">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
+        {avatar && (
+          <div class="flex-shrink-0">
+            <Image
+              src={avatar}
+              alt={`${name}'s avatar`}
+              width={200}
+              height={200}
+              quality="high"
+              class="h-32 w-32 md:h-48 md:w-48 rounded-full object-cover"
+            />
+          </div>
+        )}
+
+        <div class="flex-1">
+          <h1 class="text-4xl md:text-5xl font-bold text-base-900 dark:text-base-100">
+            {name}
+          </h1>
+
+          {(jobTitle || organization) && (
+            <div class="mt-2 text-xl text-base-600 dark:text-base-400">
+              {jobTitle}
+              {jobTitle && organization && " at "}
+              {organization}
+            </div>
+          )}
+
+          {yearsOfExperience && (
+            <div class="mt-2 text-base-600 dark:text-base-400">
+              {yearsOfExperience}+ years of experience
+            </div>
+          )}
+
+          {bio && (
+            <div class="mt-4 text-lg text-base-700 dark:text-base-300 prose dark:prose-invert max-w-none">
+              <p>{bio}</p>
+            </div>
+          )}
+
+          {(socialLinks.length > 0 || hasWebsite) && (
+            <div class="mt-6 flex flex-wrap items-center gap-2">
+              {socialLinks.map(link => (
+                <SocialIcon
+                  icon={link.icon}
+                  social={link.label}
+                  href={link.url}
+                />
+              ))}
+              {hasWebsite && (
+                <a
+                  href={website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 ml-2"
+                >
+                  gui.do →
+                </a>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <!-- Expertise -->
+      {expertise.length > 0 && (
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold text-base-900 dark:text-base-100 mb-4">
+            Areas of Expertise
+          </h2>
+          <div class="flex flex-wrap gap-3">
+            {expertise.map((topic: string) => (
+              <span class="px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 font-medium">
+                {topic}
+              </span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Credentials -->
+      {credentials.length > 0 && (
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold text-base-900 dark:text-base-100 mb-4">
+            Credentials & Qualifications
+          </h2>
+          <ul class="list-disc list-inside space-y-2 text-base-700 dark:text-base-300">
+            {credentials.map((credential: string) => (
+              <li>{credential}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <!-- Awards -->
+      {awards.length > 0 && (
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold text-base-900 dark:text-base-100 mb-4">
+            Awards & Recognition
+          </h2>
+          <ul class="list-disc list-inside space-y-2 text-base-700 dark:text-base-300">
+            {awards.map((award: string) => (
+              <li>{award}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <!-- Notable Publications -->
+      {publications.length > 0 && (
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold text-base-900 dark:text-base-100 mb-4">
+            Notable Publications
+          </h2>
+          <ul class="space-y-3">
+            {publications.map((pub) => (
+              <li>
+                <a
+                  href={pub.url}
+                  class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium"
+                >
+                  {pub.title}
+                </a>
+                {(pub.publication || pub.date) && (
+                  <span class="text-sm text-base-600 dark:text-base-400 ml-2">
+                    {pub.publication && `— ${pub.publication}`}
+                    {pub.date && ` (${pub.date})`}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <!-- MDX Content (if any) -->
+      <div class="mt-12 prose dark:prose-invert max-w-none">
+        <Content />
+      </div>
+
+      <!-- Articles by Author -->
+      {sortedPosts.length > 0 && (
+        <section class="mt-16">
+          <h2 class="text-3xl font-bold text-base-900 dark:text-base-100 mb-8">
+            Articles by {name} ({sortedPosts.length})
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {sortedPosts.map(post => (
+              <PostCardAtlas post={post} showDescription={true} />
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </article>
+</BaseLayout>

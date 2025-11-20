@@ -37,6 +37,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
         author.data.linkedin,
         author.data.twitter,
         author.data.github,
+        author.data.bluesky,
         author.data.mastodon,
         author.data.website,
         author.data.instagram

@@ -50,6 +50,7 @@ const authors = defineCollection({
     twitter: z.string().optional(),
     github: z.string().optional(),
     linkedin: z.string().optional(),
+    bluesky: z.string().optional(),
     instagram: z.string().optional(),
     mastodon: z.string().optional(),
 
