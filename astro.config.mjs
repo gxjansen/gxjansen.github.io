@@ -88,7 +88,7 @@ export default defineConfig({
     react(),
     tailwind(),
     sitemap({
-      filter: (page) => !page.includes('/conference-terms') && !page.includes('/examples/'),
+      filter: (page) => !page.includes('/conference-terms') && !page.includes('/examples/') && !page.includes('/categories/'),
       changefreq: 'weekly',
       lastmod: new Date(),
       i18n: {
