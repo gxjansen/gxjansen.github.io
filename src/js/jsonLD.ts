@@ -32,11 +32,61 @@ export default function jsonLDGenerator(props: JsonLDProps) {
     }
 
     let authorsJsonLdArray = authors.map((author) => {
-      return {
+      // Build sameAs array from social profiles
+      const sameAsLinks = [
+        author.data.linkedin,
+        author.data.twitter,
+        author.data.github,
+        author.data.mastodon,
+        author.data.website,
+        author.data.instagram
+      ].filter(Boolean); // Remove undefined/null values
+
+      const authorSchema: any = {
         "@type": "Person",
-        name: author.data.name,
-        url: author.data.authorLink,
+        "@id": `${import.meta.env.SITE}/authors/${author.slug}#person`,
+        "name": author.data.name,
+        "url": author.data.authorLink || `${import.meta.env.SITE}/authors/${author.slug}`,
       };
+
+      // Add optional fields only if they exist
+      if (author.data.bio || author.data.bioShort) {
+        authorSchema.description = author.data.bioShort || author.data.bio;
+      }
+
+      if (sameAsLinks.length > 0) {
+        authorSchema.sameAs = sameAsLinks;
+      }
+
+      if (author.data.avatar && typeof author.data.avatar === 'object' && 'src' in author.data.avatar) {
+        authorSchema.image = {
+          "@type": "ImageObject",
+          "url": author.data.avatar.src,
+          "caption": `Photo of ${author.data.name}`
+        };
+      }
+
+      if (author.data.jobTitle) {
+        authorSchema.jobTitle = author.data.jobTitle;
+      }
+
+      if (author.data.organization) {
+        authorSchema.worksFor = {
+          "@type": "Organization",
+          "name": author.data.organization,
+          ...(author.data.organizationUrl && { "url": author.data.organizationUrl })
+        };
+      }
+
+      if (author.data.expertise && author.data.expertise.length > 0) {
+        authorSchema.knowsAbout = author.data.expertise;
+      }
+
+      if (author.data.email) {
+        authorSchema.email = author.data.email;
+      }
+
+      return authorSchema;
     });
 
     let authorsJsonLd;

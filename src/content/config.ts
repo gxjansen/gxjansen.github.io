@@ -45,12 +45,42 @@ const authors = defineCollection({
     name: z.string(),
     email: z.string().optional(),
     website: z.string().optional(),
+
+    // Social profiles (for sameAs schema)
     twitter: z.string().optional(),
     github: z.string().optional(),
     linkedin: z.string().optional(),
+    instagram: z.string().optional(),
+    mastodon: z.string().optional(),
+
+    // Visual identity
     avatar: image().optional(),
-    about: z.string().optional(),
-    authorLink: z.string().optional()
+
+    // Professional information
+    jobTitle: z.string().optional(),
+    organization: z.string().optional(),
+    organizationUrl: z.string().optional(),
+
+    // Expertise and credentials
+    bio: z.string().optional(), // Detailed bio for profile page
+    bioShort: z.string().optional(), // 1-2 sentence inline bio
+    expertise: z.array(z.string()).default([]), // Areas of knowledge
+    credentials: z.array(z.string()).default([]), // Certifications, degrees
+    yearsOfExperience: z.number().optional(),
+
+    // Authority signals
+    awards: z.array(z.string()).default([]),
+    publications: z.array(z.object({
+      title: z.string(),
+      url: z.string(),
+      publication: z.string().optional(),
+      date: z.string().optional()
+    })).default([]),
+    speakingEngagements: z.array(z.string()).default([]),
+
+    // Legacy fields (keep for backward compatibility)
+    about: z.string().optional(), // Can deprecate in favor of bio
+    authorLink: z.string().optional() // Author profile URL
   })
 });
 

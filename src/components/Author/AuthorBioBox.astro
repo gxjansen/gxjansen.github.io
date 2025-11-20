@@ -1,0 +1,132 @@
+---
+import { type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
+
+interface Props {
+  author: CollectionEntry<"authors">;
+}
+
+const { author } = Astro.props;
+const {
+  name,
+  avatar,
+  bio,
+  jobTitle,
+  organization,
+  linkedin,
+  twitter,
+  github,
+  website,
+  expertise = [],
+  credentials = []
+} = author.data;
+
+const authorUrl = `/authors/${author.slug}`;
+
+// Map social links with proper icon names
+const socialLinks = [
+  { url: linkedin, icon: "linkedin", label: "LinkedIn" },
+  { url: github, icon: "github", label: "GitHub" },
+  { url: website, icon: "website", label: "Website" },
+].filter(link => link.url);
+---
+
+<aside
+  class="mt-12 rounded-xl border border-base-300 dark:border-base-700 bg-base-50 dark:bg-base-900 p-6"
+  aria-label={`About ${name}`}
+>
+  <h3 class="text-xl font-bold mb-4 text-base-900 dark:text-base-100">
+    About the Author
+  </h3>
+
+  <div class="flex flex-col md:flex-row gap-6">
+    {avatar && (
+      <div class="flex-shrink-0">
+        <a href={authorUrl}>
+          <Image
+            src={avatar}
+            alt={`${name}'s avatar`}
+            width={120}
+            height={120}
+            quality="high"
+            class="h-24 w-24 md:h-30 md:w-30 rounded-full object-cover"
+          />
+        </a>
+      </div>
+    )}
+
+    <div class="flex-1">
+      <a
+        href={authorUrl}
+        class="text-xl font-semibold text-base-900 dark:text-base-100 hover:text-primary-500 dark:hover:text-primary-400"
+      >
+        {name}
+      </a>
+
+      {(jobTitle || organization) && (
+        <div class="mt-1 text-base-600 dark:text-base-400">
+          {jobTitle}
+          {jobTitle && organization && " at "}
+          {organization}
+        </div>
+      )}
+
+      {bio && (
+        <div class="mt-3 text-base-700 dark:text-base-300 prose prose-sm dark:prose-invert max-w-none">
+          <p>{bio}</p>
+        </div>
+      )}
+
+      {expertise.length > 0 && (
+        <div class="mt-4">
+          <h4 class="text-sm font-semibold text-base-900 dark:text-base-100 mb-2">
+            Areas of Expertise
+          </h4>
+          <div class="flex flex-wrap gap-2">
+            {expertise.map((topic: string) => (
+              <span class="px-3 py-1 text-xs rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200">
+                {topic}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {credentials.length > 0 && (
+        <div class="mt-4">
+          <h4 class="text-sm font-semibold text-base-900 dark:text-base-100 mb-2">
+            Credentials
+          </h4>
+          <ul class="list-disc list-inside text-sm text-base-700 dark:text-base-300 space-y-1">
+            {credentials.map((credential: string) => (
+              <li>{credential}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {socialLinks.length > 0 && (
+        <div class="mt-4 flex gap-2">
+          {socialLinks.map(link => (
+            <SocialIcon
+              icon={link.icon}
+              social={link.label}
+              href={link.url}
+              class="w-10 h-10"
+            />
+          ))}
+        </div>
+      )}
+
+      <div class="mt-4">
+        <a
+          href={authorUrl}
+          class="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+        >
+          View all posts by {name} →
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>

@@ -163,3 +163,31 @@ export function sortByValue(jsObj: object): [string, string, number][] {
 
   return array.sort((a, b) => b[2] - a[2]);
 }
+
+/**
+ * * filters categories to only include those with minimum number of posts
+ * @param categories: string[] - array of category names to filter
+ * @param allPosts: any[] - all posts to count categories from (BlogPost or CollectionEntry<"post">)
+ * @param minCount: number - minimum number of posts required (default: 2)
+ * @returns filtered array of category names
+ */
+export function filterCategoriesByCount(
+  categories: string[],
+  allPosts: any[],
+  minCount: number = 2
+): string[] {
+  // Get all categories from all posts
+  const allCategories = allPosts
+    .map((post) => post.data.categories || [])
+    .flat()
+    .filter(Boolean);
+
+  // Count occurrences
+  const categoryCounts = countItems(allCategories);
+
+  // Filter input categories to only include those with enough posts
+  return categories.filter((category) => {
+    const slugifiedCategory = slugify(category);
+    return categoryCounts[slugifiedCategory]?.count >= minCount;
+  });
+}
