@@ -28,8 +28,15 @@
       "Read(//Users/gxjansen/Documents/CoreNotes/**)",
       "Read(//Users/gxjansen/Downloads/**)",
       "Bash(git fetch:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(cat:*)"
     ],
     "deny": []
-  }
+  },
+  "enabledMcpjsonServers": [
+    "claude-flow",
+    "ruv-swarm",
+    "claude-flow@alpha",
+    "flow-nexus"
+  ]
 }
