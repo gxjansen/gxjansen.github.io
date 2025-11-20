@@ -30,17 +30,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
         <div class="flex flex-col">
           <h3 class="overview-heading">Landing Pages</h3>
           <a class="overview-link" href={getRelativeLocaleUrl(currLocale, "/")}
-            >Landing 1</a
-          >
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/examples/landing2")}
-            >Landing 2</a
-          >
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/examples/landing3")}
-            >Landing 3</a
+            >Home Page</a
           >
         </div>
 
@@ -49,60 +39,28 @@ const currLocale = getLocaleFromUrl(Astro.url);
           <h3 class="overview-heading">Blog</h3>
           <a
             class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/post")}>Blog Index 1</a
-          >
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/examples/blogIndex2")}
-            >Blog Index 2</a
+            href={getRelativeLocaleUrl(currLocale, "/post")}>Blog Index</a
           >
           <a
             class="overview-link"
             href={getRelativeLocaleUrl(currLocale, "/categories")}>Categories</a
           >
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(
-              currLocale,
-              "/post/tsconfig-paths-setup",
-            )}>Blog Post</a
-          >
         </div>
 
-        <!-- Sections -->
+        <!-- Site Pages -->
         <div class="flex flex-col">
-          <h3 class="overview-heading">Sections</h3>
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(
-              currLocale,
-              "/examples/feature-services",
-            )}>All Feature and Services Sections</a
-          >
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(
-              currLocale,
-              "/examples/testimonials-faq",
-            )}>All Testimonial and FAQ Sections</a
-          >
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/examples/hero-sections")}
-            >All Hero Sections</a
-          >
-        </div>
-
-        <!-- Site Elements -->
-        <div class="flex flex-col">
-          <h3 class="overview-heading">Elements and Forms</h3>
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/elements")}>MDX Pages</a
-          >
+          <h3 class="overview-heading">Site Pages</h3>
           <a
             class="overview-link"
             href={getRelativeLocaleUrl(currLocale, "/contact")}>Contact</a
+          >
+          <a
+            class="overview-link"
+            href={getRelativeLocaleUrl(currLocale, "/projects")}>Projects</a
+          >
+          <a
+            class="overview-link"
+            href={getRelativeLocaleUrl(currLocale, "/podcasts")}>Podcasts</a
           >
         </div>
 
@@ -117,21 +75,15 @@ const currLocale = getLocaleFromUrl(Astro.url);
 
         <!-- Other -->
         <div class="flex flex-col">
-          <h3 class="overview-heading">Other Pages</h3>
+          <h3 class="overview-heading">Other</h3>
           <a
             class="overview-link"
             href={getRelativeLocaleUrl(currLocale, "/about")}>About</a
           >
           <a
             class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/privacy-policy")}
-            >Privacy Policy</a
+            href={getRelativeLocaleUrl(currLocale, "/press")}>Press</a
           >
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/terms")}>Terms of Use</a
-          >
-          <a class="overview-link" href="/not-a-link/">404</a>
           <a
             class="overview-link"
             href="/rss.xml"
