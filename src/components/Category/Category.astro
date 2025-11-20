@@ -3,7 +3,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
-import { humanize } from "@js/textUtils";
+import { humanize, slugify } from "@js/textUtils";
 
 interface Props {
   category: string;
@@ -17,7 +17,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
 <div role="listitem">
   <a
     class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 dark:bg-primary-500/90 dark:text-base-50 dark:shadow-none dark:hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-    href={getRelativeLocaleUrl(currLocale, `/categories/${category}`)}
+    href={getRelativeLocaleUrl(currLocale, `/categories/${slugify(category)}`)}
     aria-label={`View all posts in category: ${humanize(category)}`}
     role="link"
   >
