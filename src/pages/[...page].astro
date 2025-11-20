@@ -21,10 +21,8 @@ export async function getStaticPaths() {
     },
   );
 
-  // get rid of pages from other languages and remove locale from slug
-  const filteredPages = filterCollectionByLanguage(otherPages, defaultLocale);
-
-  return filteredPages.map((page) => ({
+  // Note: otherPages don't have language-specific versions, so no need to filter by locale
+  return otherPages.map((page) => ({
     params: { page: page.slug },
     props: page,
   }));
@@ -41,8 +39,8 @@ if (!page?.data) {
   });
 }
 
-const { title, description, body } = page.data;
-const { Content } = await Astro.render(body);
+const { title, description } = page.data;
+const { Content } = await page.render();
 ---
 
 <BaseLayout title={title} description={description}>
