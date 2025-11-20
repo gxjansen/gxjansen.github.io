@@ -49,8 +49,9 @@ export default defineConfig({
     '/call': { destination: 'https://calendar.app.google/E7mdyvsHvZaJq3Xq6', status: 301 },
     '/youtube': { destination: 'https://www.youtube.com/c/GuidoJansen', status: 301 },
     '/video': { destination: 'https://www.youtube.com/c/GuidoJansen', status: 301 },
-    
+
     // Internal redirects
+    '/categories': { destination: '/post', status: 301 },
     '/guidojansen': { destination: '/about', status: 301 },
     '/post/*': { destination: '/post/:splat', status: 301 },
     '/persuasive-ecommerce': { destination: '/', status: 301 },

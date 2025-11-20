@@ -131,7 +131,11 @@ const countries = defineCollection({
  */
 const otherPages = defineCollection({
   type: 'content',
-  schema: z.object({})
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    draft: z.boolean().default(false)
+  })
 });
 
 /**
