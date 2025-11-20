@@ -40,14 +40,18 @@ export default function jsonLDGenerator(props: JsonLDProps) {
         author.data.bluesky,
         author.data.mastodon,
         author.data.website,
-        author.data.instagram
+        author.data.instagram,
+        author.data.authorLink // Include authorLink as a sameAs profile
       ].filter(Boolean); // Remove undefined/null values
+
+      // Ensure we always have a valid URL for the author
+      const authorUrl = author.data.authorLink || author.data.website || `${import.meta.env.SITE}/authors/${author.slug}`;
 
       const authorSchema: any = {
         "@type": "Person",
         "@id": `${import.meta.env.SITE}/authors/${author.slug}#person`,
         "name": author.data.name,
-        "url": author.data.authorLink || `${import.meta.env.SITE}/authors/${author.slug}`,
+        "url": authorUrl,
       };
 
       // Add optional fields only if they exist
