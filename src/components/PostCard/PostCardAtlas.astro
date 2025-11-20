@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getEntries } from "astro:content";
+import { type CollectionEntry, getEntries, getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon";
 
@@ -9,6 +9,7 @@ import Category from "@components/Category/Category.astro";
 // utils
 import { slugify, formatDate, humanize } from "@js/textUtils";
 import { getLocaleFromUrl } from "@js/localeUtils";
+import { filterCategoriesByCount } from "@js/blogUtils";
 
 interface Props {
   post: CollectionEntry<"post">;
@@ -28,6 +29,10 @@ const { title, description, categories = [], authors = [], pubDate, heroImage } 
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const authorsData = authors && authors.length > 0 ? await getEntries(authors.map(author => ({ collection: 'authors', id: author }))) : [];
+
+// Get all posts to filter categories by count
+const allPosts = await getCollection("post", ({ data }) => !data.draft);
+const filteredCategories = filterCategoriesByCount(categories, allPosts);
 ---
 
 <article class={`card group ${className}`} {...rest}>
@@ -50,7 +55,7 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
     <!-- categories and date -->
     <div class="flex flex-col gap-2">
       <div class="flex flex-wrap gap-2">
-        {categories.map((category) => <Category category={category} />)}
+        {filteredCategories.map((category) => <Category category={category} />)}
       </div>
       <time datetime={new Date(pubDate).toISOString()} class="text-sm text-base-600 dark:text-base-300">
         {formatDate(pubDate, currLocale)}

@@ -17,6 +17,7 @@ import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
 import { formatDate, humanize, slugify } from "@js/textUtils";
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { useTranslations } from "@js/translationUtils";
+import { filterCategoriesByCount } from "@js/blogUtils";
 
 // images
 import HumanNotAI from "@images/Written-By-Human-Not-By-AI-Badge-black.svg";
@@ -41,6 +42,9 @@ const {
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
 const authorsData = authors && authors.length > 0 ? await getEntries(authors.map(author => ({ collection: 'authors', id: author }))) : [];
+
+// Filter categories to only show those with 2+ posts
+const filteredCategories = filterCategoriesByCount(categories, allPosts);
 ---
 
 <BaseLayout
@@ -63,12 +67,12 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
           <div class="mx-auto flex w-full max-w-[1000px]">
             <div class="mx-auto text-center">
               <!-- Categories -->
-              <div 
+              <div
                 class="flex justify-center gap-4"
                 role="list"
                 aria-label="Article categories"
               >
-                {categories.map((category) => <Category category={category} />)}
+                {filteredCategories.map((category) => <Category category={category} />)}
               </div>
 
               <!-- title -->
