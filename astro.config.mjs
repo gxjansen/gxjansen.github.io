@@ -34,6 +34,10 @@ export default defineConfig({
       }
     }
   },
+  // Trailing slash configuration - ensures all URLs have trailing slashes
+  // This fixes canonical URL mismatches (e.g., /about vs /about/)
+  trailingSlash: 'always',
+
   // i18n configuration must match src/config/translations.json.ts
   i18n: {
     defaultLocale: "en",
