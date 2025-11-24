@@ -34,12 +34,22 @@ const eventDate = new Date(event.date).toLocaleDateString('en-US', {
   day: 'numeric'
 });
 
-// Metadata
-const metaDescription = `${event.name} - ${eventDate} in ${event.city}${event.country ? `, ${event.country}` : ''}. ${event.topic ? `Topic: ${event.topic}` : ''}`;
+// Enhanced SEO title with year, city, and country
+const eventYear = new Date(event.date).getFullYear();
+const enhancedTitle = `${event.name} ${eventYear} - ${event.city}${event.country ? `, ${event.country}` : ''} | Events`;
+
+// Enhanced metadata description with comprehensive details
+const descriptionParts = [
+  `${event.name} - ${eventDate} in ${event.city}${event.country ? `, ${event.country}` : ''}.`,
+  event.role ? `Role: ${event.role}.` : '',
+  event.topic ? `Topic: ${event.topic}.` : '',
+  event.workshop ? 'This was a hands-on workshop event.' : 'Professional speaking engagement.'
+];
+const metaDescription = descriptionParts.filter(Boolean).join(' ');
 ---
 
-<BaseLayout 
-  title={`${event.name} | Events`}
+<BaseLayout
+  title={enhancedTitle}
   description={metaDescription}
 >
   <section class="py-24 md:py-28">

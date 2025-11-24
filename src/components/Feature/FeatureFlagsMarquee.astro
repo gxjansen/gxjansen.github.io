@@ -21,15 +21,15 @@ const totalFlags = allFlags.length;
 const flagsPerRow = Math.ceil(totalFlags / 3);
 
 const marqueeTop = {
-  images: allFlags.slice(0, flagsPerRow)
+  flags: allFlags.slice(0, flagsPerRow)
 };
 
 const marqueeMiddle = {
-  images: allFlags.slice(flagsPerRow, flagsPerRow * 2)
+  flags: allFlags.slice(flagsPerRow, flagsPerRow * 2)
 };
 
 const marqueeBottom = {
-  images: allFlags.slice(flagsPerRow * 2)
+  flags: allFlags.slice(flagsPerRow * 2)
 };
 ---
 
@@ -59,12 +59,12 @@ const marqueeBottom = {
         {/* marquee top row */}
         <div class="marquee-top relative flex gap-3 overflow-hidden md:gap-5">
           <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5">
-            {marqueeTop.images.map((image) => (
+            {marqueeTop.flags.map((flag) => (
               <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
                 <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10"></div>
                 <Image
-                  src={image}
-                  alt="Country flag"
+                  src={flag.image}
+                  alt={`${flag.countryName} flag`}
                   width={600}
                   height={360}
                   class="w-full rounded-md"
@@ -82,12 +82,12 @@ const marqueeBottom = {
             aria-hidden="true"
             class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
           >
-            {marqueeTop.images.map((image) => (
+            {marqueeTop.flags.map((flag) => (
               <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
                 <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10"></div>
                 <Image
-                  src={image}
-                  alt="Country flag"
+                  src={flag.image}
+                  alt={`${flag.countryName} flag`}
                   width={600}
                   height={360}
                   class="w-full rounded-md"
@@ -105,12 +105,12 @@ const marqueeBottom = {
         {/* marquee middle row */}
         <div class="marquee-middle relative flex gap-3 overflow-hidden md:gap-5">
           <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5">
-            {marqueeMiddle.images.map((image) => (
+            {marqueeMiddle.flags.map((flag) => (
               <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
                 <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10"></div>
                 <Image
-                  src={image}
-                  alt="Country flag"
+                  src={flag.image}
+                  alt={`${flag.countryName} flag`}
                   width={600}
                   height={360}
                   class="w-full rounded-md"
@@ -127,12 +127,12 @@ const marqueeBottom = {
             aria-hidden="true"
             class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
           >
-            {marqueeMiddle.images.map((image) => (
+            {marqueeMiddle.flags.map((flag) => (
               <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
                 <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10"></div>
                 <Image
-                  src={image}
-                  alt="Country flag"
+                  src={flag.image}
+                  alt={`${flag.countryName} flag`}
                   width={600}
                   height={360}
                   class="w-full rounded-md"
@@ -150,12 +150,12 @@ const marqueeBottom = {
         {/* marquee bottom row */}
         <div class="marquee-bottom relative flex gap-3 overflow-hidden md:gap-5">
           <div class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5">
-            {marqueeBottom.images.map((image) => (
+            {marqueeBottom.flags.map((flag) => (
               <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
                 <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10"></div>
                 <Image
-                  src={image}
-                  alt="Country flag"
+                  src={flag.image}
+                  alt={`${flag.countryName} flag`}
                   width={600}
                   height={360}
                   class="w-full rounded-md"
@@ -172,12 +172,12 @@ const marqueeBottom = {
             aria-hidden="true"
             class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
           >
-            {marqueeBottom.images.map((image) => (
+            {marqueeBottom.flags.map((flag) => (
               <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
                 <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10"></div>
                 <Image
-                  src={image}
-                  alt="Country flag"
+                  src={flag.image}
+                  alt={`${flag.countryName} flag`}
                   width={600}
                   height={360}
                   class="w-full rounded-md"
