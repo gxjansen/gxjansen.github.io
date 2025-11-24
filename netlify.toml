@@ -42,9 +42,20 @@
   external_node_modules = ["fast-xml-parser"]
   node_bundler = "esbuild"
   included_files = ["src/types/**"]
-  
+
 [functions.getPodcastFeeds]
   timeout = 30
+
+# Trailing slash redirects (must come before function handling)
+# Redirect URLs without trailing slashes to versions with trailing slashes
+# This fixes "Canonical URL Different" warnings in LibreCrawl
+[[redirects]]
+  from = "/*"
+  to = "/:splat/"
+  status = 301
+  force = false
+  # Only redirect paths without file extensions and not starting with _
+  conditions = {path = ["!/*.*", "!/_*"]}
 
 # Function handling (keep this last)
 [[redirects]]

@@ -35,21 +35,52 @@ import image21 from "@assets/images/gallery/Spryker_Day02-2851.jpg";
 import image22 from "@assets/images/gallery/Spryker_Day02-2876.jpg";
 import image23 from "@assets/images/gallery/Spryker_Day02-3166.jpg";
 
-interface MarqueeImages {
-  images: ImageMetadata[]; // imported images
+interface GalleryImage {
+  image: ImageMetadata;
+  alt: string;
 }
 
-// change these images to whatever you want!
+interface MarqueeImages {
+  images: GalleryImage[];
+}
+
+// Gallery images with descriptive alt text for accessibility
 const marqueeTop: MarqueeImages = {
-  images: [image1, image2, image16, image4, image7, image19, image20],
+  images: [
+    { image: image1, alt: "Guido working on a couch during a casual work session" },
+    { image: image2, alt: "Guido at Customer Day event" },
+    { image: image16, alt: "Guido with Peep Laja at a conference" },
+    { image: image4, alt: "Guido participating in a hackathon event" },
+    { image: image7, alt: "Guido with colleague Oskar at the office" },
+    { image: image19, alt: "Guido presenting at Meet Commerce event" },
+    { image: image20, alt: "Guido presenting at Spryker Day conference" },
+  ],
 };
 
 const marqueeMiddle: MarqueeImages = {
-  images: [image6, image9, image10, image11, image3, image13, image5, image21, image22],
+  images: [
+    { image: image6, alt: "Guido working at the office" },
+    { image: image9, alt: "Guido presenting at a conference" },
+    { image: image10, alt: "Guido at the Spryker office wall" },
+    { image: image11, alt: "Guido at Alumio event" },
+    { image: image3, alt: "Guido at Excite Conference 2022" },
+    { image: image13, alt: "Guido at the office art wall" },
+    { image: image5, alt: "Guido in the office environment" },
+    { image: image21, alt: "Guido at Spryker Day conference" },
+    { image: image22, alt: "Guido networking at Spryker Day" },
+  ],
 };
 
 const marqueeBottom: MarqueeImages = {
-  images: [image14, image15, image12, image17, image8, image18, image23],
+  images: [
+    { image: image14, alt: "Guido presenting at an industry event" },
+    { image: image15, alt: "Guido at CRO Cafe meetup" },
+    { image: image12, alt: "Guido recording a podcast episode" },
+    { image: image17, alt: "Guido with Peep Laja discussing CRO" },
+    { image: image8, alt: "Guido with Mark Nottingham at a tech conference" },
+    { image: image18, alt: "Guido at Excite Conference" },
+    { image: image23, alt: "Guido engaging with attendees at Spryker Day" },
+  ],
 };
 ---
 
@@ -79,10 +110,10 @@ const marqueeBottom: MarqueeImages = {
               class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 md:gap-10"
             >
               {
-                marqueeTop.images.map((image) => (
+                marqueeTop.images.map((item) => (
                   <Image
-                    src={image}
-                    alt=""
+                    src={item.image}
+                    alt={item.alt}
                     loading="lazy"
                     width={400}
                     height={300}
@@ -99,10 +130,10 @@ const marqueeBottom: MarqueeImages = {
               class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 md:gap-10"
             >
               {
-                marqueeTop.images.map((image) => (
+                marqueeTop.images.map((item) => (
                   <Image
-                    src={image}
-                    alt=""
+                    src={item.image}
+                    alt={item.alt}
                     loading="lazy"
                     width={400}
                     height={300}
@@ -122,10 +153,10 @@ const marqueeBottom: MarqueeImages = {
               class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 [animation-direction:reverse] md:gap-10"
             >
               {
-                marqueeMiddle.images.map((image) => (
+                marqueeMiddle.images.map((item) => (
                   <Image
-                    src={image}
-                    alt=""
+                    src={item.image}
+                    alt={item.alt}
                     loading="lazy"
                     width={400}
                     height={300}
@@ -142,10 +173,10 @@ const marqueeBottom: MarqueeImages = {
               class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 [animation-direction:reverse] md:gap-10"
             >
               {
-                marqueeMiddle.images.map((image) => (
+                marqueeMiddle.images.map((item) => (
                   <Image
-                    src={image}
-                    alt=""
+                    src={item.image}
+                    alt={item.alt}
                     loading="lazy"
                     width={400}
                     height={300}
@@ -165,10 +196,10 @@ const marqueeBottom: MarqueeImages = {
               class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 md:gap-10"
             >
               {
-                marqueeBottom.images.map((image) => (
+                marqueeBottom.images.map((item) => (
                   <Image
-                    src={image}
-                    alt=""
+                    src={item.image}
+                    alt={item.alt}
                     loading="lazy"
                     width={400}
                     height={300}
@@ -185,10 +216,10 @@ const marqueeBottom: MarqueeImages = {
               class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 md:gap-10"
             >
               {
-                marqueeBottom.images.map((image) => (
+                marqueeBottom.images.map((item) => (
                   <Image
-                    src={image}
-                    alt=""
+                    src={item.image}
+                    alt={item.alt}
                     loading="lazy"
                     width={400}
                     height={300}
