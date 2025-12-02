@@ -87,30 +87,27 @@ const communities = [
   transition:animate="slide"
 >
   <!-- Hero Section -->
-  <section class="relative py-24 md:py-32 overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-accent/80"></div>
-      <div class="absolute inset-0 bg-black/30"></div>
-    </div>
-
-    <div class="site-container relative z-10">
-      <div class="mx-auto max-w-4xl text-center text-white">
-        <Badge class="mb-6">Community</Badge>
-        <h1 class="h1 mb-6 text-white">Building Communities From Zero</h1>
-        <p class="text-xl md:text-2xl mb-8 opacity-90">
-          I've built community functions from scratch multiple times across different contexts. Here's the pattern.
-        </p>
+  <section class="py-24 md:py-28">
+    <div class="site-container px-4">
+      <div class="relative">
+        <div class="mx-auto text-center md:max-w-2xl">
+          <Badge>Community</Badge>
+          <h1 class="h1 mb-4">Building Communities From Zero</h1>
+          <p class="description text-lg md:text-xl">
+            I've built community functions from scratch multiple times across different contexts. Here's the pattern.
+          </p>
+        </div>
 
         <!-- Timeline graphic -->
         <div class="mt-12 flex flex-wrap justify-center items-center gap-4 md:gap-8">
           {communities.map((community, index) => (
             <div class="flex items-center">
               <div class="text-center">
-                <div class="text-2xl md:text-3xl font-bold opacity-90">{community.period.split('-')[0]}</div>
-                <div class="text-sm opacity-75 mt-1 max-w-[120px]">{community.name.split('/')[0]}</div>
+                <div class="text-2xl md:text-3xl font-bold text-primary">{community.period.split('-')[0]}</div>
+                <div class="text-sm text-muted-foreground mt-1 max-w-[120px]">{community.name.split('/')[0]}</div>
               </div>
               {index < communities.length - 1 && (
-                <div class="hidden md:block w-12 h-0.5 bg-white/40 mx-4"></div>
+                <div class="hidden md:block w-12 h-0.5 bg-primary/40 mx-4"></div>
               )}
             </div>
           ))}
