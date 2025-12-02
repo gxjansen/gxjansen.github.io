@@ -1,0 +1,184 @@
+---
+/**
+ * * The Story section - Personal background (swimming, education, career journey)
+ * Section 4 of the About page restructure
+ * Previously ServicesSideImage, now restructured for the new narrative flow
+ */
+import { Icon } from "astro-icon";
+
+// components
+import ServiceCard from "@components/ServiceCard/ServiceCardSideImage.astro";
+import Badge from "@components/Badge/Badge.astro";
+
+// images
+import image1 from "@images/house.jpg";
+import image2 from "@images/living-room.jpg";
+import image3 from "@images/paint-swatches.jpg";
+
+interface StoryItem {
+  image: ImageMetadata;
+  title: string;
+  details: string;
+  href?: string;
+  ctaText?: string;
+  showCta?: boolean;
+}
+
+const storyData: StoryItem[] = [
+  {
+    image: image1,
+    title: "The Athletic Years",
+    href: "#",
+    ctaText: "",
+    showCta: false,
+    details: `I was born in 1982 in Zwolle, in the Netherlands. I lived in Hattem, Tiel, Amersfoort, Utrecht, Breukelen (yes, Brooklyn), Hoofddorp, Amsterdam and now Ouderkerk aan de Amstel (a suburb of Amsterdam).
+
+Until 2004, I spent most of my time swimming—training for national and European championships. That chapter taught me discipline, competition, and the value of showing up consistently.`,
+  },
+  {
+    image: image2,
+    title: "University & Psychology",
+    href: "https://www.linkedin.com/in/gxjansen/",
+    ctaText: "View my LinkedIn profile",
+    showCta: true,
+    details: `I studied Applied Cognitive Psychology at the University of Utrecht. I was board member of the Student Group of Social Sciences (SGS) in 2006/2007.
+
+This foundation in psychology became the lens through which I understand community dynamics, user behavior, and what actually motivates people to participate and contribute.`,
+  },
+  {
+    image: image3,
+    title: "Career Journey",
+    href: "/authors/gxjansen/",
+    ctaText: "View my credentials, awards & articles",
+    showCta: true,
+    details: `My career has bridged psychology and technology—from running 500+ experiments at companies like Randstad and JDE, to building community functions at major platforms.
+
+Each role reinforced the same insight: understanding why people behave the way they do is the foundation for building systems that actually work. Whether optimizing conversions or growing developer ecosystems, the principles remain the same.`,
+  },
+];
+
+// Check for reduced motion preference
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+const shouldReduceMotion = typeof window !== "undefined"
+  ? window.matchMedia(reducedMotionQuery).matches
+  : false;
+---
+
+<section
+  id="the-story"
+  class="overflow-hidden py-24 md:py-28 bg-base-50 dark:bg-base-800/50"
+  aria-labelledby="story-heading"
+>
+  <div
+    class="site-container px-4"
+    role="presentation"
+  >
+    <!-- Section header -->
+    <div class="mx-auto text-center max-w-3xl mb-12" data-aos="fade-up">
+      <Badge>The Backstory</Badge>
+      <h2 id="story-heading" class="h2 mb-4">
+        How I Got Here
+      </h2>
+      <p class="description text-lg md:text-xl">
+        Before community strategy, there was competitive swimming. I spent my early years training for national and European championships—learning discipline, competition, and the value of showing up consistently. That chapter ended in 2004, and a new one began.
+      </p>
+    </div>
+
+    <!-- Name explanation block -->
+    <div
+      class="alert alert-accent mb-16"
+      role="complementary"
+      aria-label="Name explanation"
+    >
+      <div class="alert-content px-8 py-4">
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+          <div
+            class="flex items-center justify-center"
+            aria-hidden="true"
+          >
+            <Icon
+              name="tabler:letter-g"
+              class="w-10 h-10 text-white"
+              stroke-width="1"
+              stroke="currentColor"
+              fill="none"
+              role="presentation"
+            />
+            <Icon
+              name="tabler:letter-x"
+              class="w-14 h-14 text-base-100 -ml-3"
+              stroke-width="8"
+              stroke="currentColor"
+              fill="none"
+              role="presentation"
+            />
+            <Icon
+              name="tabler:letter-j"
+              class="w-10 h-10 text-white -ml-4"
+              stroke-width="1"
+              stroke="currentColor"
+              fill="none"
+              role="presentation"
+            />
+            <Icon
+              name="tabler:question-mark"
+              class="w-12 h-12 text-white -ml-2"
+              stroke-width="3"
+              stroke="currentColor"
+              fill="none"
+              role="presentation"
+            />
+          </div>
+          <p class="text-lg !text-white text-center md:text-left">
+            To answer a common question right out of the gate: Yes, the <span class="text-black font-bold">X</span> in my name is not just there for decorative reasons: my second name is <span class="font-bold">Xavier</span>!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Biography sections -->
+    <div
+      class="flex flex-col gap-16 md:gap-24"
+      role="list"
+      aria-label="Biography sections"
+    >
+      {
+        storyData.map((story, idx) => (
+          <ServiceCard
+            title={story.title}
+            details={story.details}
+            image={story.image}
+            href={story.href ?? '#'}
+            imageSide={idx % 2 === 0 ? "right" : "left"}
+            idx={idx}
+            ctaText={story.ctaText}
+            showCta={story.showCta}
+            data-aos={shouldReduceMotion ? "" : (idx % 2 === 0 ? "fade-right" : "fade-left")}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  // Handle reduced motion preference changes
+  if (typeof window !== 'undefined') {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
+      const elements = document.querySelectorAll('[data-aos]');
+      elements.forEach(element => {
+        if (e.matches) {
+          element.setAttribute('data-aos', '');
+        } else {
+          const index = Array.from(document.querySelectorAll('[role="listitem"]')).indexOf(element);
+          element.setAttribute('data-aos', index % 2 === 0 ? 'fade-right' : 'fade-left');
+        }
+      });
+    }
+
+    mediaQuery.addEventListener('change', handleMotionPreference);
+    handleMotionPreference(mediaQuery);
+  }
+</script>
