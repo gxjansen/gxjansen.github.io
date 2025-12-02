@@ -22,6 +22,8 @@ interface ServiceItem {
   href?: string;
   ctaText?: string;
   showCta?: boolean;
+  href2?: string;
+  ctaText2?: string;
 }
 
 const serviceData: ServiceItem[] = [
@@ -60,6 +62,8 @@ Currently serving as Global Business & Technology Evangelist for Spryker, a majo
     title: "Online Communities & Events",
     href: "/events",
     ctaText: "See events I'm involved in",
+    href2: "/communities",
+    ctaText2: "View my community track record",
     showCta: true,
     details: `My main involvement lies with web-based software applications and the communities involved with it. I founded one of the largest local Joomla! communities worldwide and I was a Dutch translation coordinator for the platform for quite some time. I also organized the two-day event Joomladays in 2009.
 
@@ -156,6 +160,8 @@ const shouldReduceMotion = typeof window !== "undefined"
             idx={idx}
             ctaText={feature.ctaText}
             showCta={feature.showCta}
+            href2={feature.href2}
+            ctaText2={feature.ctaText2}
             data-aos={shouldReduceMotion ? "" : (idx % 2 === 0 ? "fade-right" : "fade-left")}
           />
         ))

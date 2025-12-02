@@ -23,21 +23,27 @@ interface Props {
   idx: number;
   ctaText?: string;
   showCta?: boolean;
+  // Optional second CTA button
+  href2?: string;
+  ctaText2?: string;
 }
 
-const { 
-  image, 
-  title, 
-  href, 
-  idx, 
-  details, 
-  imageSide, 
-  ctaText = 'Learn more', 
-  showCta = true 
+const {
+  image,
+  title,
+  href,
+  idx,
+  details,
+  imageSide,
+  ctaText = 'Learn more',
+  showCta = true,
+  href2,
+  ctaText2
 } = Astro.props as Props;
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const isExternalLink = href && (href.startsWith('http://') || href.startsWith('https://'));
+const isExternalLink2 = href2 && (href2.startsWith('http://') || href2.startsWith('https://'));
 const cardId = `biography-${title.toLowerCase().replace(/\s+/g, '-')}`;
 ---
 
@@ -72,9 +78,9 @@ const cardId = `biography-${title.toLowerCase().replace(/\s+/g, '-')}`;
       </p>
     </div>
     {showCta && (
-      <div 
-        class="z-20 mt-8 flex"
-        aria-label={`Action for ${title}`}
+      <div
+        class="z-20 mt-8 flex flex-wrap gap-4"
+        aria-label={`Actions for ${title}`}
       >
         <Button
           variant="primary"
@@ -85,6 +91,17 @@ const cardId = `biography-${title.toLowerCase().replace(/\s+/g, '-')}`;
         >
           {ctaText}
         </Button>
+        {href2 && ctaText2 && (
+          <Button
+            variant="secondary"
+            href={isExternalLink2 ? href2 : getRelativeLocaleUrl(currLocale, href2)}
+            arrow="none"
+            aria-label={`${ctaText2} about ${title}${isExternalLink2 ? ' (opens in new tab)' : ''}`}
+            aria-describedby={`${cardId}-description`}
+          >
+            {ctaText2}
+          </Button>
+        )}
       </div>
     )}
   </div>
