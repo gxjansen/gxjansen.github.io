@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { author, showBio = true, variant = "compact" } = Astro.props;
-const { name, avatar, bioShort, organization } = author.data;
+const { name, avatar, bioShort } = author.data;
 const authorUrl = `/authors/${author.slug}`;
 ---
 
@@ -44,12 +44,6 @@ const authorUrl = `/authors/${author.slug}`;
         <span itemprop="name">{name}</span>
       </a>
     </div>
-
-    {organization && (
-      <div class="text-sm text-base-600 dark:text-base-400" itemprop="worksFor" itemscope itemtype="https://schema.org/Organization">
-        <span itemprop="name">{organization}</span>
-      </div>
-    )}
 
     {showBio && bioShort && (
       <p class="mt-1 text-sm text-base-700 dark:text-base-300" itemprop="description">
