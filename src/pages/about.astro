@@ -17,6 +17,7 @@ import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
 import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
 import ServicesSideImage from "@components/Services/ServicesSideImage.astro";
 import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
+import WhatsNext from "@components/About/WhatsNext.astro";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -29,12 +30,13 @@ const teamData = getTranslatedData("teamData", currLocale);
 
 <BaseLayout
   title="About Guido"
-  description="I'm a cognitive psychologist focussed on E-commerce in general and the Spryker platform specifically."
+  description="The story of Guido X Jansen: from competitive swimmer to community strategist. 20+ years building technical ecosystems at Joomla!, Magento, CRO.CAFE, and Spryker."
 >
   <AboutHeader />
 
   <ServicesSideImage />
   <ColleagueTestimonials />
+  <WhatsNext />
   <FeatureGalleryMarquee />
 
   <section class="py-24 md:py-28">

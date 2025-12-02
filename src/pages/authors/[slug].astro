@@ -53,11 +53,53 @@ const socialLinks = [
 
 // Add website link separately
 const hasWebsite = website && website.includes('gui.do');
+
+// Custom meta description for gxjansen, default to bio for other authors
+const metaDescription = author.slug === "gxjansen"
+  ? `${name} — Community strategist, 20+ years building developer ecosystems. Credentials, awards, and ${sortedPosts.length}+ articles on community building, experimentation, and e-commerce.`
+  : (bio || `Articles and insights from ${name}`);
+
+// Build Person schema for E-E-A-T
+const sameAsLinks = [
+  linkedin,
+  github,
+  bluesky,
+  website,
+  author.data.authorLink
+].filter(Boolean);
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${import.meta.env.SITE}/authors/${author.slug}#person`,
+  name: name,
+  url: `${import.meta.env.SITE}/authors/${author.slug}`,
+  description: bio,
+  jobTitle: jobTitle,
+  ...(organization && {
+    worksFor: {
+      "@type": "Organization",
+      name: organization,
+      ...(author.data.organizationUrl && { url: author.data.organizationUrl })
+    }
+  }),
+  ...(sameAsLinks.length > 0 && { sameAs: sameAsLinks }),
+  ...(awards.length > 0 && { award: awards }),
+  ...(expertise.length > 0 && { knowsAbout: expertise }),
+  ...(author.data.email && { email: author.data.email }),
+  // Alumni - specific for gxjansen
+  ...(author.slug === "gxjansen" && {
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: "Utrecht University"
+    }
+  })
+};
 ---
 
 <BaseLayout
   title={`${name} - Author Profile`}
-  description={bio || `Articles and insights from ${name}`}
+  description={metaDescription}
   image={avatar}
 >
   <article class="mt-24">
@@ -99,6 +141,21 @@ const hasWebsite = website && website.includes('gui.do');
           {bio && (
             <div class="mt-4 text-lg text-base-700 dark:text-base-300 prose dark:prose-invert max-w-none">
               <p>{bio}</p>
+            </div>
+          )}
+
+          {/* CTA to About page - only show for gxjansen */}
+          {author.slug === "gxjansen" && (
+            <div class="mt-6">
+              <a
+                href="/about/"
+                class="inline-flex items-center px-5 py-2.5 border-2 border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-base-900 rounded-lg font-medium transition-colors duration-200"
+              >
+                Read the Full Story
+                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
             </div>
           )}
 
@@ -217,4 +274,7 @@ const hasWebsite = website && website.includes('gui.do');
       )}
     </div>
   </article>
+
+  <!-- Person Schema for E-E-A-T -->
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema, null, 2)} />
 </BaseLayout>
