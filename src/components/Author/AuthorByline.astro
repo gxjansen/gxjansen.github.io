@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { author, showBio = true, variant = "compact" } = Astro.props;
-const { name, avatar, bioShort, jobTitle, organization } = author.data;
+const { name, avatar, bioShort, organization } = author.data;
 const authorUrl = `/authors/${author.slug}`;
 ---
 
@@ -43,11 +43,6 @@ const authorUrl = `/authors/${author.slug}`;
       >
         <span itemprop="name">{name}</span>
       </a>
-      {jobTitle && (
-        <span class="text-sm text-base-600 dark:text-base-400" itemprop="jobTitle">
-          {jobTitle}
-        </span>
-      )}
     </div>
 
     {organization && (
