@@ -22,6 +22,11 @@ const navConfig = [
         link: "/projects",
         icon: "tabler/outline/code",
       },
+      {
+        text: "Communities",
+        link: "/communities",
+        icon: "tabler/outline/users-group",
+      },
     ],
   },
   {
