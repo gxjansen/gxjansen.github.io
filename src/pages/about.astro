@@ -1,42 +1,48 @@
 ---
 /**
- * * About page with various sections including some text, team profiles, and CTA
- * Edit the team member information inside src/config/teamData.json.ts
+ * * About page restructured for community strategist positioning
+ * New structure: Value Proposition → The Pattern → Why It Works → The Story → Testimonials → What's Next
  */
-// import { Icon } from "astro-icon";
-// import { getRelativeLocaleUrl } from "astro:i18n";
 
 // main layout
 import BaseLayout from "@layouts/BaseLayout.astro";
 
-// components
+// components - ordered by new page structure
 import AboutHeader from "@components/About/AboutHeader.astro";
+import ThePattern from "@components/About/ThePattern.astro";
+import WhyItWorks from "@components/About/WhyItWorks.astro";
+import TheStory from "@components/About/TheStory.astro";
+import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
+import WhatsNext from "@components/About/WhatsNext.astro";
+import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
 import Badge from "@components/Badge/Badge.astro";
 import SocialCards from "@components/SocialCards/SocialCards.astro";
 import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
-import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
-import ServicesSideImage from "@components/Services/ServicesSideImage.astro";
-import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
-import WhatsNext from "@components/About/WhatsNext.astro";
-
-// utils
-import { getLocaleFromUrl } from "@js/localeUtils";
-import { getTranslatedData } from "@js/translationUtils";
-
-// data
-const currLocale = getLocaleFromUrl(Astro.url);
-const teamData = getTranslatedData("teamData", currLocale);
 ---
 
 <BaseLayout
-  title="About Guido"
-  description="The story of Guido X Jansen: from competitive swimmer to community strategist. 20+ years building technical ecosystems at Joomla!, Magento, CRO.CAFE, and Spryker."
+  title="About Guido | Community Strategist"
+  description="Guido X Jansen: Community strategist with 20+ years building technical ecosystems. Founded Dutchento/Meet Magento, created CRO.CAFE, led community at Spryker. Psychology background, business outcome focus."
 >
+  <!-- Section 1: Value Proposition -->
   <AboutHeader />
 
-  <ServicesSideImage />
+  <!-- Section 2: The Pattern - Proof of repeatable community building -->
+  <ThePattern />
+
+  <!-- Section 3: Why It Works - Psychology + business outcome focus -->
+  <WhyItWorks />
+
+  <!-- Section 4: The Story - Personal background -->
+  <TheStory />
+
+  <!-- Section 5: Testimonials -->
   <ColleagueTestimonials />
+
+  <!-- Section 6: What's Next - Availability signal -->
   <WhatsNext />
+
+  <!-- Visual gallery -->
   <FeatureGalleryMarquee />
 
   <section class="py-24 md:py-28">

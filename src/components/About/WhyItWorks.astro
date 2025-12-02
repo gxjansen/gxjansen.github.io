@@ -1,0 +1,133 @@
+---
+/**
+ * * Why It Works section - Psychology background + business outcome focus
+ * Section 3 of the About page restructure
+ */
+import Badge from "@components/Badge/Badge.astro";
+import { Icon } from "astro-icon";
+
+interface Approach {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const approaches: Approach[] = [
+  {
+    title: "Designing onboarding that turns newcomers into contributors",
+    description: "Understanding the psychology of first impressions and commitment escalation.",
+    icon: "tabler:door"
+  },
+  {
+    title: "Creating participation structures that tap into intrinsic motivation",
+    description: "Building systems that reward genuine engagement over vanity metrics.",
+    icon: "tabler:star"
+  },
+  {
+    title: "Building feedback mechanisms that surface real sentiment",
+    description: "Distinguishing signal from noise in community interactions.",
+    icon: "tabler:message"
+  },
+  {
+    title: "Understanding the difference between activity and engagement",
+    description: "Measuring what actually matters for community health and business value.",
+    icon: "tabler:chart-bar"
+  }
+];
+---
+
+<section
+  id="why-it-works"
+  class="py-24 md:py-28"
+  aria-labelledby="why-heading"
+>
+  <div class="site-container px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+        <!-- Left column: Main content -->
+        <div data-aos="fade-right">
+          <Badge>The Psychology Edge</Badge>
+          <h2 id="why-heading" class="h2 mb-6">
+            Why This Approach Works
+          </h2>
+          <div class="space-y-4 text-lg text-base-700 dark:text-base-300">
+            <p class="description">
+              My cognitive psychology background shapes how I approach every community decision. I understand <span class="text-primary-500 font-semibold">why</span> developers and technical users behave the way they do, which lets me design interventions that actually work.
+            </p>
+            <p class="description">
+              Where others ask "how do we get more people?" I ask "<span class="text-primary-500 font-semibold">why would someone stay, contribute, and advocate?</span>"
+            </p>
+          </div>
+        </div>
+
+        <!-- Right column: Approach list -->
+        <div class="space-y-4" data-aos="fade-left">
+          {approaches.map((approach, index) => (
+            <div
+              class="bg-surface dark:bg-gray-800 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300"
+              data-aos="fade-up"
+              data-aos-delay={index * 75}
+            >
+              <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                  <div class="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg">
+                    <Icon
+                      name={approach.icon}
+                      class="w-5 h-5 text-primary-600 dark:text-primary-400"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
+                    {approach.title}
+                  </h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    {approach.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Experimentation background -->
+      <div
+        class="mt-16 bg-gradient-to-r from-primary-50 to-primary-100/50 dark:from-primary-900/20 dark:to-primary-800/10 rounded-2xl p-8 md:p-10"
+        data-aos="fade-up"
+      >
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <div class="flex-shrink-0">
+            <div class="p-3 bg-primary-200 dark:bg-primary-800/50 rounded-xl">
+              <Icon
+                name="tabler:flask"
+                class="w-8 h-8 text-primary-700 dark:text-primary-300"
+              />
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Data-Driven, Not Just Relational
+            </h3>
+            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+              My experimentation background (running <span class="text-primary-600 dark:text-primary-400 font-semibold">500+ A/B tests</span> at companies like Randstad and JDE) taught me to measure what matters and prove what's actually working. This makes me a different kind of community leader—one who thinks <span class="text-primary-600 dark:text-primary-400 font-semibold">strategically and analytically</span>, not just relationally.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cross-link to Author page -->
+      <div class="text-center mt-10" data-aos="fade-up">
+        <a
+          href="/authors/gxjansen/"
+          class="inline-flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium transition-colors duration-200"
+        >
+          See my credentials, awards, and articles
+          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
