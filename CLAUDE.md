@@ -150,6 +150,65 @@ The following MCP servers are available for use:
 
 **IMPORTANT**: Before using any Serena tools, ALWAYS first activate this specific project using `mcp__serena__activate_project` to ensure you're working with the correct project data. Serena contains data from multiple projects and needs to be properly scoped.
 
+### 8. **Claude-Flow** - AI Agent Orchestration Platform
+Enterprise-grade AI orchestration with hive-mind swarm intelligence, persistent memory, and 100+ MCP tools.
+
+**Core Features:**
+- 🐝 Hive-Mind Intelligence: Queen-led AI coordination with specialized worker agents
+- 🧠 Persistent Memory: ReasoningBank + AgentDB hybrid with 96x-164x faster vector search
+- 🎨 25 Claude Skills: Natural language-activated skills for development, GitHub, memory, and automation
+- 🔧 100 MCP Tools: Comprehensive toolkit for swarm orchestration and automation
+- 🔄 Dynamic Agent Architecture (DAA): Self-organizing agents with fault tolerance
+
+**Swarm Commands:**
+- `npx claude-flow@alpha swarm "task description" --claude` - Quick task execution
+- `npx claude-flow@alpha swarm init --topology mesh --max-agents 5` - Initialize multi-agent coordination
+- `npx claude-flow@alpha swarm spawn researcher "analyze patterns"` - Spawn specialized agent
+- `npx claude-flow@alpha swarm status` - Check swarm status
+
+**Hive-Mind Commands (Complex Projects):**
+- `npx claude-flow@alpha hive-mind wizard` - Interactive setup wizard
+- `npx claude-flow@alpha hive-mind spawn "build system" --claude` - Start coordinated development
+- `npx claude-flow@alpha hive-mind status` - Check hive status
+- `npx claude-flow@alpha hive-mind resume session-xxx` - Resume previous session
+
+**Memory Commands:**
+- `npx claude-flow@alpha memory store key "value" --namespace backend --reasoningbank` - Store memory
+- `npx claude-flow@alpha memory query "search term" --reasoningbank` - Query memories (2-3ms latency)
+- `npx claude-flow@alpha memory list --namespace backend --reasoningbank` - List memories
+- `npx claude-flow@alpha memory status --reasoningbank` - Check memory status
+- `npx claude-flow@alpha memory vector-search "semantic query" --k 10` - Semantic vector search
+
+**MCP Tools:**
+- **Swarm**: `mcp__claude-flow__swarm_init`, `mcp__claude-flow__agent_spawn`, `mcp__claude-flow__task_orchestrate`
+- **Memory**: `mcp__claude-flow__memory_usage`, `mcp__claude-flow__memory_search`
+- **Neural**: `mcp__claude-flow__neural_status`, `mcp__claude-flow__neural_train`, `mcp__claude-flow__neural_patterns`
+- **GitHub**: `mcp__claude-flow__github_repo_analyze`, `mcp__claude-flow__github_pr_manage`
+- **Performance**: `mcp__claude-flow__benchmark_run`, `mcp__claude-flow__performance_report`
+
+**Available Agents (64 total):** Core (coder, reviewer, tester, planner, researcher), Swarm Coordination, Consensus, Performance, GitHub, SPARC Methodology, Specialized Development, Testing
+
+**Skills (25 total):** Activate automatically via natural language:
+- "Let's pair program on this feature" → pair-programming skill
+- "Review this PR for security issues" → github-code-review skill
+- "Use vector search to find similar code" → agentdb-vector-search skill
+- "Create a swarm to build this API" → swarm-orchestration skill
+
+**Documentation:** See `.claude/commands/` for detailed command docs
+
+### 9. **ruv-swarm** - Enhanced Coordination (Optional)
+- Provides additional swarm coordination capabilities
+- Works alongside claude-flow for complex multi-agent scenarios
+
+### 10. **flow-nexus** - Cloud Features (Optional)
+- Cloud-based sandboxes and execution environments
+- Advanced AI orchestration with 70+ additional tools
+- Requires registration: `npx flow-nexus@latest register`
+
+### 11. **Context7** - Library Documentation
+- **Resolve Library ID**: Find Context7-compatible library ID (`mcp__context7__resolve-library-id`)
+- **Get Library Docs**: Fetch up-to-date documentation for a library (`mcp__context7__get-library-docs`)
+
 ## Write valid Typescript code that uses state-of-the-art Node.js v24 features and follows best practices:
 - Always use ES6+ syntax
 - Always use the built-in 'fetch' for HTTP requests, rather than using the 'node-fetch' package
