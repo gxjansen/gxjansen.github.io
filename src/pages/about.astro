@@ -1,7 +1,7 @@
 ---
 /**
  * * About page restructured for community strategist positioning
- * New structure: Value Proposition → The Pattern → Why It Works → The Story → Testimonials → What's Next
+ * New structure: Value Proposition → Why It Works → The Story → Testimonials → What's Next
  */
 
 // main layout
@@ -9,7 +9,6 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components - ordered by new page structure
 import AboutHeader from "@components/About/AboutHeader.astro";
-import ThePattern from "@components/About/ThePattern.astro";
 import WhyItWorks from "@components/About/WhyItWorks.astro";
 import TheStory from "@components/About/TheStory.astro";
 import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
@@ -27,19 +26,16 @@ import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
   <!-- Section 1: Value Proposition -->
   <AboutHeader />
 
-  <!-- Section 2: The Pattern - Proof of repeatable community building -->
-  <ThePattern />
-
-  <!-- Section 3: Why It Works - Psychology + business outcome focus -->
+  <!-- Section 2: Why It Works - Psychology + business outcome focus -->
   <WhyItWorks />
 
-  <!-- Section 4: The Story - Personal background -->
+  <!-- Section 3: The Story - Personal background -->
   <TheStory />
 
-  <!-- Section 5: Testimonials -->
+  <!-- Section 4: Testimonials -->
   <ColleagueTestimonials />
 
-  <!-- Section 6: What's Next - Availability signal -->
+  <!-- Section 5: What's Next - Availability signal -->
   <WhatsNext />
 
   <!-- Visual gallery -->
