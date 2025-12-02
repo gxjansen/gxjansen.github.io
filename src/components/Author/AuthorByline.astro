@@ -14,7 +14,7 @@ const authorUrl = `/authors/${author.slug}`;
 ---
 
 <div
-  class="author-byline flex items-start gap-3"
+  class={`author-byline flex gap-3 ${showBio && bioShort ? 'items-start' : 'items-center'}`}
   itemprop="author"
   itemscope
   itemtype="https://schema.org/Person"
