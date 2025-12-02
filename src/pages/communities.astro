@@ -22,7 +22,7 @@ const communities = [
     roleType: "volunteer",
     context: "Open source CMS community",
     logo: joomlaLogo,
-    description: "My first community experience. I contributed to the Mambo open source CMS project with (Dutch) translations, then followed the community fork that became Joomla! in 2005. This was my introduction to how open source communities work—the governance challenges, the passion, and how open source communities can build software that competes with commercial products.",
+    description: "My first community experience. I contributed to the Mambo open source CMS project with (Dutch) translations, then followed the community fork that became Joomla! in 2005. This was my introduction to how open source communities work: the governance challenges, the passion, and how open source communities can build software that competes with commercial products.",
     achievements: [
       "Early contributor to what became one of the world's most popular CMS platforms",
       "Learned open source community dynamics firsthand",
@@ -68,11 +68,11 @@ const communities = [
     roleType: "professional",
     context: "4+ years",
     logo: sprykerLogo,
-    description: "Built the enterprise community function from scratch, serving 130+ B2B clients and their developer ecosystem. This was community building in a different context—enterprise software with no freemium tier, where community size is tied to sales rather than organic growth. Required different strategies: Customer Advisory Boards, MIT-licensed module ecosystems, and structures that translate community intelligence into product decisions.",
+    description: "Built the enterprise community function from scratch, serving 130+ B2B clients and their developer ecosystem. This was community building in a different context: enterprise software with no freemium tier, where community size is tied to sales rather than organic growth. Required different strategies: Customer Advisory Boards, MIT-licensed module ecosystems, and structures that translate community intelligence into product decisions.",
     achievements: [
       "Built community platform serving 130+ enterprise accounts with 3-person team",
       "Launched Customer Advisory Board connecting enterprise clients directly to product teams",
-      "Established MIT-licensed module ecosystem—creating a vendor-independent innovation layer",
+      "Established MIT-licensed module ecosystem, creating a vendor-independent innovation layer",
       "Community-driven initiatives now influence 25% of product roadmap decisions",
       "Multiple hackathon projects adopted into core product"
     ],
@@ -94,23 +94,8 @@ const communities = [
           <Badge>Community</Badge>
           <h1 class="h1 mb-4">Building Communities From Zero</h1>
           <p class="description text-lg md:text-xl">
-            I've built community functions from scratch multiple times across different contexts. Here's the pattern.
+            I've built community functions from scratch multiple times across different contexts:
           </p>
-        </div>
-
-        <!-- Timeline graphic -->
-        <div class="mt-12 flex flex-wrap justify-center items-center gap-4 md:gap-8">
-          {communities.map((community, index) => (
-            <div class="flex items-center">
-              <div class="text-center">
-                <div class="text-2xl md:text-3xl font-bold text-primary">{community.period.split('-')[0]}</div>
-                <div class="text-sm text-muted-foreground mt-1 max-w-[120px]">{community.name.split('/')[0]}</div>
-              </div>
-              {index < communities.length - 1 && (
-                <div class="hidden md:block w-12 h-0.5 bg-primary/40 mx-4"></div>
-              )}
-            </div>
-          ))}
         </div>
       </div>
     </div>
