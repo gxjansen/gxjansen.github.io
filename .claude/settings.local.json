@@ -7,7 +7,8 @@
       "mcp__claude-flow__health_check",
       "mcp__netlify__netlify-project-services-reader",
       "mcp__netlify__netlify-deploy-services-updater",
-      "mcp__netlify__netlify-deploy-services-reader"
+      "mcp__netlify__netlify-deploy-services-reader",
+      "mcp__firecrawl__firecrawl_scrape"
     ],
     "deny": []
   },
