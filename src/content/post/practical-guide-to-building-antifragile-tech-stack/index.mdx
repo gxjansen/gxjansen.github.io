@@ -1,0 +1,93 @@
+---
+title: A practical guide to building your own antifragile tech stack
+description: Seven principles for evaluating technology choices, reducing vendor lock-in, and building a more resilient digital setup. The decision-making framework behind the tools.
+draft: false
+authors:
+  - gxjansen
+pubDate: 2025-12-04
+heroImage: ../practical-guide-to-building-antifragile-tech-stack/puzzle-key.jpg
+categories:
+  - Privacy
+  - Open Source
+  - Technology
+---
+
+A few weeks ago I wrote about [how I reduced my BigTech dependencies in 2025](/post/how-i-reduced-my-bigtech-dependencies-in-2025/). I got some nice supportive responses to that, but also some follow-up questions. Where to start? What trade-offs are acceptable? How do you avoid spending months on a migration? Fair questions. My original post was heavy on the "what" but light on the "how." Let's fix that.
+
+Here are the principles I use when evaluating any piece of technology. Consider this the decision-making framework behind the tools.
+
+## 1. Own your data, or at least be able to leave
+
+Before adopting any tool, ask: how hard is it to export everything? If the answer is "impossible" or "requires an engineering degree," think twice (or better: just don't do it).
+
+*Example:* I use [Obsidian](https://obsidian.md/) for notes because everything is stored as plain Markdown files on my own drive. If the Obsidian team would quit tomorrow, the app itself would still work, and every note would still open in any text editor. Notion requires their servers to function. Obsidian runs entirely on your machine, so company troubles don't lock you out of your own notes.
+
+*Trade-off:* You can take care of syncing yourself, but I still pay for [Obsidian Sync](https://obsidian.md/sync) because the convenience (especially on mobile) is worth it. But the ($4 USD/month) subscription is for the syncing service, not for access. My files remain mine regardless. Plus: paying for Sync supports a small team building on open standards with a thriving plugin ecosystem. I'm not against paying creators, I'm against paying rent on my own data.
+
+## 2. Prioritise open standards
+
+Proprietary formats create invisible lock-in. Open standards mean your data works across tools, now and in the future.
+
+*Example:* For email and calendar, I use Fastmail with standard protocols (IMAP, CalDAV, CardDAV). My contacts and calendars sync with any app that speaks these protocols. No ecosystem required.
+
+*Trade-off:* Some open-standard tools lack the polish of their proprietary alternatives. CalDAV supports collaboration basics like invitations and shared calendars, but you'll miss Google-specific conveniences like Meet integration. For my needs, independence outweighs convenience. YMMV.
+
+## 3. Local-first, cloud-optional
+
+Services that require constant internet connectivity are services that can fail when you need them most. Look for tools that work offline first, with cloud sync as an enhancement rather than a requirement.
+
+*Example:* My home automation runs on a [Home Assistant Green](https://www.home-assistant.io/green/). If my internet goes down, the lights still work, the automations still run and you can even have [local AI voice control](https://www.home-assistant.io/voice-pe/). Compare that to cloud-dependent smart home systems that become useless when AWS has a bad day, or when the company decides to sunset your device.
+
+*Example:* I migrated photos from Google Photos to Immich (self-hosted, [v2.0 stable has been released last October!](https://immich.app/blog/stable-release)). The transition took time, but the result is a photo library that doesn't require Google's continued goodwill.
+
+## 4. Apply the bankruptcy test
+
+Before buying hardware, ask: what happens if this company goes under? Will the device still function, or will it become e-waste?
+
+*Example:* When choosing smart home devices, I look for ones with local API access and Home Assistant compatibility. If the manufacturer disappears, the hardware keeps working. A Sonos speaker keeps some functionality offline, but you're still dependent on Sonos for streaming, setup, and long-term software support. A Zigbee light bulb still works with any compatible hub.
+
+*Trade-off:* This sometimes means paying more or accepting fewer features. The cheapest smart plug might be cloud-only (because you're "paying" with your data). The Home Assistant-compatible alternative might cost a few euros extra. I consider that a good tradeoff.
+
+## 5. Resist subscription creep, but accept strategic subscriptions
+
+Subscriptions aren't inherently bad, but they add up and create ongoing dependencies. Be intentional about which ones you accept.
+
+*Example:* I avoid subscriptions for tools where a one-time purchase exists. [Affinity Photo](https://www.affinity.studio/) (now free since Canva's acquisition, previously a one-time purchase) instead of Adobe Photoshop. But I do pay for [Elestio](https://elest.io/) to selfhost services like [n8n](https://n8n.io/) and [Cal.com](https://cal.com/) that need to be publicly accessible, because the alternative (exposing my home network) creates risks and uptime requirements I'm not (yet) willing to take.
+
+## 6. Favour EU-based and privacy-respecting tools
+
+GDPR exists for a reason. Tools built in jurisdictions with strong privacy laws tend to treat your data more respectfully by design.
+
+*Example:* My domains are registered with Gandi (France). My managed hosting runs through Elestio (Ireland).
+
+## 7. Replace gradually, not all at once
+
+The goal isn't to rebuild everything overnight. That's a recipe for frustration and abandoned projects. Replace things as they break, expire, or become intolerable. Run old and new systems in parallel until the new setup is boringly reliable.
+
+*Example:* I'm still de-Googling, years into the process. Gmail, Gcal, Translate, Drive, Search and YouTube are all replaced, but I'm still trying to find a proper Google Maps alternative (that can also ingest my many POIs). My gaming PC still runs Windows. Hardware that still works doesn't get replaced just for ideology. And my Fairphone still runs Android, don't expect that to change any time soon.
+
+---
+
+## Own your identity first
+
+All these principles do assume one thing: that you control your own digital identity. Your email address is the key to everything else. Every account recovery, every signup, every 2FA setup flows through it. If you don't own that, you risk every aspect of your digital life being controlled by someone else.
+
+### Where to start
+
+- **Get your own email domain.** This is the single most important step. Your email is your digital identity. Everything connects to it. Even if you keep using Gmail for now, use it with your own domain. When you eventually want to switch providers, you can do it overnight without losing anything.
+- **Prefer email signups over SSO**, paired with a password manager and 2FA/MFA where possible. "Login with Google" is convenient but creates lock-in that's painful to undo. (Note that if you're not using a password manager with unique passwords and 2FA everywhere, SSO might actually be the safer choice. But please use a password manager and 2FA everywhere.)
+- **Use an open-source authenticator.** Move your 2FA codes to something like Aegis that lets you export and backup your tokens. You don't want your authentication app to suddenly start charging or shut down.
+
+These three steps give you identity independence. Once you own your identity, everything else becomes easier to migrate.
+
+---
+
+## The point isn't purity
+
+Every system involves trade-offs. The question isn't whether you've achieved perfect digital independence. It's whether you're moving in a direction that gives you more control, more resilience, and fewer single points of failure.
+
+Start with one thing. Maybe it's moving your notes to Markdown. Maybe it's checking whether your smart home devices work offline. Maybe it's just asking "can I export this?" before signing up for the next shiny service. Figure out what your biggest pain point is and start there.
+
+Small steps compound. A year from now, you'll be surprised how far you've come.
+
+What principle resonates most with your own situation?
