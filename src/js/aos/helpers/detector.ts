@@ -18,12 +18,12 @@ function ua() {
 class Detector {
   phone() {
     const a = ua();
-    return !!(fullNameRe.test(a) || prefixRe.test(a.substr(0, 4)));
+    return !!(fullNameRe.test(a) || prefixRe.test(a.substring(0, 4)));
   }
 
   mobile() {
     const a = ua();
-    return !!(fullNameMobileRe.test(a) || prefixMobileRe.test(a.substr(0, 4)));
+    return !!(fullNameMobileRe.test(a) || prefixMobileRe.test(a.substring(0, 4)));
   }
 
   tablet() {
