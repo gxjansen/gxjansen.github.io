@@ -1,8 +1,8 @@
 <!--
-category: System
-tags: [favorite, like, mark, bookmark, grade]
-version: "1.0"
-unicode: "eb2e"
+tags: [alphabet, symbol, text, code]
+category: Letters
+version: "1.12"
+unicode: "ec67"
 -->
 <svg
   xmlns="http://www.w3.org/2000/svg"
@@ -15,5 +15,6 @@ unicode: "eb2e"
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+  <path d="M7 4l10 16" />
+  <path d="M17 4l-10 16" />
 </svg>

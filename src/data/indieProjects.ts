@@ -30,7 +30,7 @@ export const indieProjects: IndieProject[] = [
   {
     name: "Community Echo",
     description: "Tool to A) collect community activity from different sources, B) Determine the right internal team this post is relevant to and C) generate a short (Slack) message notifying this team of the activity.",
-    mainImage: "tabler:speakerphone",
+    mainImage: "tabler/speakerphone",
     link: "https://github.com/spryker-community/Echo",
     iconBgColor: "bg-[#EC008C]",
     githubUrl: "https://github.com/spryker-community/Echo",
