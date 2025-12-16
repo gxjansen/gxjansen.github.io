@@ -31,7 +31,7 @@ describe('PodcastCard', () => {
 
           <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between mb-1">
-              <span class="text-sm font-medium text-teal-600 dark:text-teal-400">
+              <span class="text-sm font-medium text-primary-600 dark:text-primary-400">
                 ${episode.podcastName}
               </span>
               <span class="text-sm text-gray-500 dark:text-gray-400">
@@ -51,7 +51,7 @@ describe('PodcastCard', () => {
               <span class="text-sm text-gray-500 dark:text-gray-400">
                 ${episode.duration}
               </span>
-              <span class="inline-flex items-center gap-1 text-sm text-teal-600 dark:text-teal-400 group-hover:translate-x-1 transition-transform duration-200">
+              <span class="inline-flex items-center gap-1 text-sm text-primary-600 dark:text-primary-400 group-hover:translate-x-1 transition-transform duration-200">
                 Listen Now
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 

@@ -41,45 +41,103 @@ export default {
     },
     extend: {
       colors: {
-        // use any standard tailwind colors from here https://tailwindcss.com/docs/customizing-colors
-        // or generate with https://uicolors.app/create
-        primary: colors.teal,
+        // Rosé Pine color palette
+        // Dark mode: Main variant | Light mode: Dawn variant
+        // https://rosepinetheme.com/palette/
 
-        // recommend not changing the base color scheme
+        // Primary accent - Pine (teal)
+        primary: {
+          50: "#f0f5f7",
+          100: "#dceaef",
+          200: "#b8d5df",
+          300: "#9ccfd8",  // foam (Main)
+          400: "#56949f",  // foam (Dawn)
+          500: "#31748f",  // pine (Main)
+          600: "#286983",  // pine (Dawn)
+          700: "#1f5a73",
+          800: "#1a4a5e",
+          900: "#153a4a",
+          950: "#0f2a35",
+        },
+
+        // Base colors - Rosé Pine Main (dark) / Dawn (light)
         base: {
-          50: "rgb(241, 242, 244)",
-          100: "rgb(235, 237, 239)",
-          200: "rgb(206, 209, 214)",
-          300: "rgb(180, 190, 199)",
-          400: "rgb(127, 146, 170)",
-          500: "rgb(85, 105, 135)",
-          600: "rgb(58, 71, 91)",
-          700: "rgb(52, 64, 82)",
-          800: "rgb(44, 53, 68)",
-          900: "rgb(35, 43, 55)",
-          950: "rgb(28, 35, 45)",
+          // Light mode (Dawn variant)
+          50: "#fffaf3",   // surface
+          100: "#faf4ed",  // base
+          200: "#f2e9e1",  // overlay
+          300: "#dfdad3",  // muted background
+          400: "#9893a5",  // muted text
+          // Dark mode (Main variant)
+          500: "#908caa",  // subtle
+          600: "#6e6a86",  // muted
+          700: "#393552",  // highlight-high
+          800: "#26233a",  // overlay
+          900: "#1f1d2e",  // surface
+          950: "#191724",  // base
         },
 
-        // accents affect various SVG elements
+        // Rosé Pine accent colors
         accent: {
-          1: colors.yellow[500],
-          2: colors.blue[500],
-          3: colors.purple[500],
-          4: colors.red[500],
+          1: "#f6c177",  // gold
+          2: "#9ccfd8",  // foam
+          3: "#c4a7e7",  // iris
+          4: "#eb6f92",  // love
         },
 
-        // if you change the background color, also change the matching color in public/assets/pattern-light.svg and pattern-light-big.svg
-        background: "rgb(247, 248, 249)",
-        "background-dark": "rgb(28, 35, 45)",
+        // Background colors
+        background: "#faf4ed",        // Dawn base
+        "background-dark": "#191724", // Main base
 
-        info: "#7dd3fc",
-        "info-content": "#082f49",
-        success: "#6ee7b7",
-        "success-content": "#022c22",
-        warning: "#fcd34d",
-        "warning-content": "#111827",
-        error: "#fca5a5",
-        "error-content": "#450a0a",
+        // Semantic colors using Rosé Pine accents
+        info: "#9ccfd8",              // foam
+        "info-content": "#191724",
+        success: "#31748f",           // pine
+        "success-content": "#e0def4",
+        warning: "#f6c177",           // gold
+        "warning-content": "#191724",
+        error: "#eb6f92",             // love
+        "error-content": "#191724",
+
+        // Direct Rosé Pine accent access
+        love: {
+          light: "#b4637a",
+          DEFAULT: "#eb6f92",
+        },
+        gold: {
+          light: "#ea9d34",
+          DEFAULT: "#f6c177",
+        },
+        rose: {
+          light: "#d7827e",
+          DEFAULT: "#ebbcba",
+        },
+        pine: {
+          light: "#286983",
+          DEFAULT: "#31748f",
+        },
+        foam: {
+          light: "#56949f",
+          DEFAULT: "#9ccfd8",
+        },
+        iris: {
+          light: "#907aa9",
+          DEFAULT: "#c4a7e7",
+        },
+
+        // Text colors for direct use
+        "rp-text": {
+          light: "#575279",   // Dawn text
+          DEFAULT: "#e0def4", // Main text
+        },
+        "rp-subtle": {
+          light: "#797593",   // Dawn subtle
+          DEFAULT: "#908caa", // Main subtle
+        },
+        "rp-muted": {
+          light: "#9893a5",   // Dawn muted
+          DEFAULT: "#6e6a86", // Main muted
+        },
       },
       animation: {
         marquee: "marquee 100s linear infinite",

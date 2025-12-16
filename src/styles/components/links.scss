@@ -1,26 +1,20 @@
-/* Link Colors - High contrast colors matching buttons */
+/* Link Colors - Rosé Pine accent palette */
 :root {
-  /* Light mode colors (700/800 shades) */
-  --link-blue-light: rgb(29, 78, 216);      /* blue-700 */
-  --link-purple-light: rgb(109, 40, 217);    /* purple-700 */
-  --link-emerald-light: rgb(4, 120, 87);     /* emerald-700 */
-  --link-red-light: rgb(185, 28, 28);        /* red-700 */
-  --link-orange-light: rgb(154, 52, 18);     /* orange-800 */
-  --link-indigo-light: rgb(67, 56, 202);     /* indigo-700 */
-  --link-rose-light: rgb(190, 18, 60);       /* rose-700 */
-  --link-lime-light: rgb(63, 98, 18);        /* lime-800 */
-  --link-cyan-light: rgb(14, 116, 144);      /* cyan-700 */
+  /* Light mode colors (Dawn variant) */
+  --link-love-light: #b4637a;      /* love (Dawn) - reds/errors */
+  --link-gold-light: #ea9d34;      /* gold (Dawn) - yellows/warnings */
+  --link-rose-light: #d7827e;      /* rose (Dawn) - highlights */
+  --link-pine-light: #286983;      /* pine (Dawn) - greens/keywords */
+  --link-foam-light: #56949f;      /* foam (Dawn) - blues/information */
+  --link-iris-light: #907aa9;      /* iris (Dawn) - magentas/hints */
 
-  /* Dark mode colors (500 shades) */
-  --link-blue-dark: rgb(59, 130, 246);       /* blue-500 */
-  --link-purple-dark: rgb(168, 85, 247);     /* purple-500 */
-  --link-emerald-dark: rgb(16, 185, 129);    /* emerald-500 */
-  --link-red-dark: rgb(239, 68, 68);         /* red-500 */
-  --link-orange-dark: rgb(249, 115, 22);     /* orange-500 */
-  --link-indigo-dark: rgb(99, 102, 241);     /* indigo-500 */
-  --link-rose-dark: rgb(244, 63, 94);        /* rose-500 */
-  --link-lime-dark: rgb(132, 204, 22);       /* lime-500 */
-  --link-cyan-dark: rgb(6, 182, 212);        /* cyan-500 */
+  /* Dark mode colors (Main variant) */
+  --link-love-dark: #eb6f92;       /* love (Main) */
+  --link-gold-dark: #f6c177;       /* gold (Main) */
+  --link-rose-dark: #ebbcba;       /* rose (Main) */
+  --link-pine-dark: #31748f;       /* pine (Main) */
+  --link-foam-dark: #9ccfd8;       /* foam (Main) */
+  --link-iris-dark: #c4a7e7;       /* iris (Main) */
 }
 
 /* Base link styling */
@@ -41,7 +35,7 @@ a:not(
   [class*="group flex h-full"],
   .linkedin-cta a,
   .content-type-selector a,
-  [class*="bg-teal-"],
+  [class*="bg-primary-"],
   .article-card h3 a,
   .event-card a,
   .site-content-card a,
@@ -80,7 +74,7 @@ footer a,
 [class*="group flex h-full"],
 .linkedin-cta a,
 .content-type-selector a,
-[class*="bg-teal-"],
+[class*="bg-primary-"],
 .article-card h3 a,
 .event-card a,
 .site-content-card a,

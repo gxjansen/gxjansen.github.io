@@ -1,15 +1,12 @@
 <script is:inline>
-// Array of color pairs (light/dark mode variants)
+// Rosé Pine accent color pairs (light Dawn / dark Main variants)
 const linkColors = [
-  { light: '--link-blue-light', dark: '--link-blue-dark' },
-  { light: '--link-purple-light', dark: '--link-purple-dark' },
-  { light: '--link-emerald-light', dark: '--link-emerald-dark' },
-  { light: '--link-red-light', dark: '--link-red-dark' },
-  { light: '--link-orange-light', dark: '--link-orange-dark' },
-  { light: '--link-indigo-light', dark: '--link-indigo-dark' },
-  { light: '--link-rose-light', dark: '--link-rose-dark' },
-  { light: '--link-lime-light', dark: '--link-lime-dark' },
-  { light: '--link-cyan-light', dark: '--link-cyan-dark' }
+  { light: '--link-love-light', dark: '--link-love-dark' },   // reds
+  { light: '--link-gold-light', dark: '--link-gold-dark' },   // yellows
+  { light: '--link-rose-light', dark: '--link-rose-dark' },   // highlights
+  { light: '--link-pine-light', dark: '--link-pine-dark' },   // greens/teals
+  { light: '--link-foam-light', dark: '--link-foam-dark' },   // blues/cyans
+  { light: '--link-iris-light', dark: '--link-iris-dark' }    // purples
 ];
 
 // Function to get a random color pair
@@ -19,7 +16,7 @@ function getRandomColorPair() {
 
 // Function to apply colors to links
 function applyLinkColors() {
-  const selector = 'a:not(.card-container, [role="menuitem"], nav a, header a, footer a, .btn, [class*="button"], .social-card, .social-card *, .site-content a, .site-content *, .services-icon a, .services-icon *, [class*="group flex h-full"], .linkedin-cta a, .content-type-selector a, [class*="bg-teal-"], .article-card h3 a, .event-card a, .site-content-card a, .badge a, .card h2 a, [class*="hover:text-primary"], [class*="bg-primary-100"], [class*="rounded-full"], .no-random-underline)';
+  const selector = 'a:not(.card-container, [role="menuitem"], nav a, header a, footer a, .btn, [class*="button"], .social-card, .social-card *, .site-content a, .site-content *, .services-icon a, .services-icon *, [class*="group flex h-full"], .linkedin-cta a, .content-type-selector a, [class*="bg-primary-"], .article-card h3 a, .event-card a, .site-content-card a, .badge a, .card h2 a, [class*="hover:text-primary"], [class*="bg-primary-100"], [class*="rounded-full"], .no-random-underline)';
   
   document.querySelectorAll(selector).forEach(link => {
     if (link.classList.contains('no-random-underline')) return;

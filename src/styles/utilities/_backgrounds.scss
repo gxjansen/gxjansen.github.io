@@ -25,16 +25,20 @@
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+');
   }
 
-  /* Gradient Effects */
+  /* Gradient Effects - Rosé Pine pine color */
   .gradient-top-left {
     @apply fixed -top-[400px] -left-[400px] h-[1200px] w-[1200px];
-    @apply bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0.1)_10%,rgba(20,184,166,0.05)_20%,rgba(20,184,166,0.025)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)];
-    @apply dark:bg-[radial-gradient(circle_at_30%_30%,rgba(20,184,166,0.08)_0%,rgba(20,184,166,0.06)_10%,rgba(20,184,166,0.04)_20%,rgba(20,184,166,0.02)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)];
+    /* Light: pine Dawn #286983 = rgb(40,105,131) */
+    @apply bg-[radial-gradient(circle_at_30%_30%,rgba(40,105,131,0.15)_0%,rgba(40,105,131,0.1)_10%,rgba(40,105,131,0.05)_20%,rgba(40,105,131,0.025)_30%,rgba(40,105,131,0.01)_40%,rgba(40,105,131,0.005)_50%,transparent_70%)];
+    /* Dark: pine Main #31748f = rgb(49,116,143) */
+    @apply dark:bg-[radial-gradient(circle_at_30%_30%,rgba(49,116,143,0.08)_0%,rgba(49,116,143,0.06)_10%,rgba(49,116,143,0.04)_20%,rgba(49,116,143,0.02)_30%,rgba(49,116,143,0.01)_40%,rgba(49,116,143,0.005)_50%,transparent_70%)];
   }
 
   .gradient-bottom-right {
     @apply fixed -bottom-[400px] -right-[400px] h-[1200px] w-[1200px];
-    @apply bg-[radial-gradient(circle_at_70%_70%,rgba(20,184,166,0.15)_0%,rgba(20,184,166,0.1)_10%,rgba(20,184,166,0.05)_20%,rgba(20,184,166,0.025)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)];
-    @apply dark:bg-[radial-gradient(circle_at_70%_70%,rgba(20,184,166,0.08)_0%,rgba(20,184,166,0.06)_10%,rgba(20,184,166,0.04)_20%,rgba(20,184,166,0.02)_30%,rgba(20,184,166,0.01)_40%,rgba(20,184,166,0.005)_50%,transparent_70%)];
+    /* Light: pine Dawn #286983 = rgb(40,105,131) */
+    @apply bg-[radial-gradient(circle_at_70%_70%,rgba(40,105,131,0.15)_0%,rgba(40,105,131,0.1)_10%,rgba(40,105,131,0.05)_20%,rgba(40,105,131,0.025)_30%,rgba(40,105,131,0.01)_40%,rgba(40,105,131,0.005)_50%,transparent_70%)];
+    /* Dark: pine Main #31748f = rgb(49,116,143) */
+    @apply dark:bg-[radial-gradient(circle_at_70%_70%,rgba(49,116,143,0.08)_0%,rgba(49,116,143,0.06)_10%,rgba(49,116,143,0.04)_20%,rgba(49,116,143,0.02)_30%,rgba(49,116,143,0.01)_40%,rgba(49,116,143,0.005)_50%,transparent_70%)];
   }
 }
