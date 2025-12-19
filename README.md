@@ -13,3 +13,7 @@ Built with [Astro](https://astro.build/), [Tailwind](https://tailwindcss.com/), 
 ### Production site
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b6ca57ea-33ef-4185-a64e-a6b040a64805/deploy-status)](https://app.netlify.com/sites/gxjansen/deploys)
 [![CodeQL](https://github.com/MichaelCurrin/badge-generator/workflows/CodeQL/badge.svg)](https://github.com/gxjansen/gxjansen.github.io/actions?query=workflow%3ACodeQL "Code quality workflow status")
+[![Core Web Vitals](https://page-speed.dev/badge/gui.do?style=flat)](https://page-speed.dev/gui.do)
+[![LCP](https://page-speed.dev/badge/gui.do?metric=lcp&style=flat)](https://page-speed.dev/gui.do)
+[![CLS](https://page-speed.dev/badge/gui.do?metric=cls&style=flat)](https://page-speed.dev/gui.do)
+[![INP](https://page-speed.dev/badge/gui.do?metric=inp&style=flat)](https://page-speed.dev/gui.do)
