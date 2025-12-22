@@ -236,6 +236,7 @@ export const pressCoverage = [
         publicationDate: "2020-08-25",
         youtubeLink: "https://www.youtube.com/watch?v=pHKiMoapecE",
         spotifyEmbedId: "1JQOINF7985dcVMc9C6bKD",
+        audioFile: "/audio/podcasts/magetalk-overheated-dutch-guy.mp3",
         articleUrl: "https://magetalk.com/magetalk-episode-222-an-overheated-dutch-guy-feat-guido-jansen/",
         personOrganization: "Kalen Jordan for MageTalk"
     },
@@ -327,6 +328,7 @@ export const pressCoverage = [
         publicationDate: "2018-04-17",
         youtubeLink: "",
         spotifyEmbedId: "45DMHmImVV74DceRBnRE5c",
+        audioFile: "/audio/podcasts/dutchento-imagine-2018-ben-marks.mp3",
         articleUrl: "",
         personOrganization: "Ben Marks for Adobe"
     },
@@ -509,6 +511,7 @@ export const pressCoverage = [
         publicationDate: "2015-06-05",
         youtubeLink: "",
         spotifyEmbedId: "2MaVKAIBT9EvW8JicDMBvM",
+        audioFile: "/audio/podcasts/magetalk-netherdutch.mp3",
         articleUrl: "https://magetalk.com/magetalk-episode-45-the-netherdutch-strikes-back/",
         personOrganization: "Phillip Jackson and Kalen Jordan"
     },
@@ -574,6 +577,7 @@ export const pressCoverage = [
         publicationDate: "2022-06-16",
         youtubeLink: "https://www.youtube.com/watch?v=DIUn71f86eI",
         spotifyEmbedId: "0RnLDa3osFqoymR6d05J1l",
+        audioFile: "/audio/podcasts/frmwrk-saas-paas-iaas.mp3",
         articleUrl: "",
         personOrganization: "Muhammed Aydogan / FRMWRK"
     },
