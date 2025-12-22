@@ -237,6 +237,7 @@ export const pressCoverage = [
         youtubeLink: "https://www.youtube.com/watch?v=pHKiMoapecE",
         spotifyEmbedId: "1JQOINF7985dcVMc9C6bKD",
         audioFile: "/audio/podcasts/magetalk-overheated-dutch-guy.mp3",
+        coverImage: "/images/podcasts/magetalk.jpg",
         articleUrl: "https://magetalk.com/magetalk-episode-222-an-overheated-dutch-guy-feat-guido-jansen/",
         personOrganization: "Kalen Jordan for MageTalk"
     },
@@ -319,6 +320,7 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "7hbnazzIfprpRGTDPINaoc",
         audioFile: "/audio/podcasts/growth-lab-experimenten.mp3",
+        coverImage: "/images/podcasts/growth-lab.jpg",
         articleUrl: "https://fingerspitz.nl/blog/de-meest-gestelde-vragen-over-experimenten/",
         personOrganization: "Jaap Jacobs for Growth Lab Podcast"
     },
@@ -329,6 +331,7 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "45DMHmImVV74DceRBnRE5c",
         audioFile: "/audio/podcasts/dutchento-imagine-2018-ben-marks.mp3",
+        coverImage: "/images/podcasts/dutchento.jpg",
         articleUrl: "",
         personOrganization: "Ben Marks for Adobe"
     },
@@ -339,6 +342,7 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "7tIP7Fz3IfDXKMX5M8lUnG",
         audioFile: "/audio/podcasts/dutchento-origins.mp3",
+        coverImage: "/images/podcasts/dutchento.jpg",
         articleUrl: "",
         personOrganization: "Sander Mangel for Dutchento"
     },
@@ -367,6 +371,7 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "5UJuKMx1f8mNzJqELQA0Wx",
         audioFile: "/audio/podcasts/mnot-glibberige-aansmeertechnieken.mp3",
+        coverImage: "/images/podcasts/met-nerds-om-tafel.jpg",
         articleUrl: "https://vriendvandeshow.nl/mnot/episodes/s06e11-glibberige-aansmeertechnieken-met-cognitief-psycholoog-guido-jansen",
         personOrganization: "Met Nerds Om Tafel"
     },
@@ -512,6 +517,7 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "2MaVKAIBT9EvW8JicDMBvM",
         audioFile: "/audio/podcasts/magetalk-netherdutch.mp3",
+        coverImage: "/images/podcasts/magetalk.jpg",
         articleUrl: "https://magetalk.com/magetalk-episode-45-the-netherdutch-strikes-back/",
         personOrganization: "Phillip Jackson and Kalen Jordan"
     },
@@ -531,6 +537,7 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "5EFVmi3Pjga34RMQkRhrH5",
         audioFile: "/audio/podcasts/digital-explained-guido-jansen.mp3",
+        coverImage: "/images/podcasts/digital-explained.jpg",
         articleUrl: "https://www.digitalexplainedtomymom.com/meeting-guido-x-jansen-cognitive-psychologist-customer-optimization-manager-magento-master-podcast-host-and-international-speaker/",
         personOrganization: "Sultan Semlali"
     },
@@ -568,6 +575,7 @@ export const pressCoverage = [
         youtubeLink: "https://www.youtube.com/watch?v=HJf7h66S3tM",
         spotifyEmbedId: "3ZW2obcTEHpo7urYLqJr2g",
         audioFile: "/audio/podcasts/nohacks-psychology-user-engagement.mp3",
+        coverImage: "/images/podcasts/nohacks.jpg",
         articleUrl: "https://www.nohackspod.com/episode/psychology-behind-user-engagement-and-community-building-with-guido-jansen/",
         personOrganization: "nohacks.show"
     },
@@ -578,6 +586,7 @@ export const pressCoverage = [
         youtubeLink: "https://www.youtube.com/watch?v=DIUn71f86eI",
         spotifyEmbedId: "0RnLDa3osFqoymR6d05J1l",
         audioFile: "/audio/podcasts/frmwrk-saas-paas-iaas.mp3",
+        coverImage: "/images/podcasts/frmwrk.png",
         articleUrl: "",
         personOrganization: "Muhammed Aydogan / FRMWRK"
     },
@@ -624,6 +633,7 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "3KMHHpQ39ZJTjyab08Y8Tx",
         audioFile: "/audio/podcasts/talk-commerce-psychology-cognitive.mp3",
+        coverImage: "/images/podcasts/talk-commerce.jpg",
         articleUrl: "https://talk-commerce.com/spryker/the-psychology-of-cognitive-customer-behavior-with-guido-jansen/",
         personOrganization: "Brent Peterson for Talk Commerce"
     },

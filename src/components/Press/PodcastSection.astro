@@ -30,6 +30,7 @@ const { podcasts } = Astro.props;
             <AudioPlayer
               src={podcast.audioFile}
               title={podcast.title}
+              coverImage={podcast.coverImage}
             />
           ) : (
             <PodcastLinks

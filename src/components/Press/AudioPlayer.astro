@@ -2,12 +2,24 @@
 interface Props {
   src: string;
   title: string;
+  coverImage?: string;
 }
 
-const { src, title } = Astro.props;
+const { src, title, coverImage } = Astro.props;
 ---
 
 <div class="audio-player w-full rounded-xl bg-gray-100 dark:bg-gray-800 p-4 transition-colors">
+  {coverImage && (
+    <div class="cover-image mb-3">
+      <img
+        src={coverImage}
+        alt={`${title} podcast cover`}
+        class="w-full aspect-square object-cover rounded-lg"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  )}
   <audio
     controls
     preload="metadata"
