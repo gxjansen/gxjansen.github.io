@@ -18,6 +18,96 @@ export const pressCoverage = [
         personOrganization: "Valentin Radu for Omniconvert"
     },
     {
+        title: "Best Ecommerce Podcasts in 2024",
+        language: "english",
+        publicationDate: "2024-01-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://saufter.io/best-ecommerce-podcasts/",
+        personOrganization: "Saufter AI"
+    },
+    {
+        title: "The Best Growth Marketing Podcasts for B2B Marketers",
+        language: "english",
+        publicationDate: "2024-01-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://growthmethod.com/growth-marketing-podcast/",
+        personOrganization: "Growth Method"
+    },
+    {
+        title: "10 Conversion Rate Podcasts to Help You Grow Your Business",
+        language: "english",
+        publicationDate: "2024-01-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://www.fastercapital.com/content/Conversion-Rate-Podcasts--10-Conversion-Rate-Podcasts-to-Help-You-Grow-Your-Business.html",
+        personOrganization: "FasterCapital"
+    },
+    {
+        title: "CRO Knowledge Repository - Expert Listing",
+        language: "english",
+        publicationDate: "2022-01-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://www.2checkout.com/lp/cro-knowledge-repository/",
+        personOrganization: "2Checkout"
+    },
+    {
+        title: "Experimentation Culture Webinar",
+        language: "english",
+        publicationDate: "2021-09-23",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://conversionhotel.com/speaker/guido-jansen-alexandre-suon/",
+        personOrganization: "Conversion Hotel"
+    },
+    {
+        title: "4 Pillars of Great Conversion Rate Optimization",
+        language: "english",
+        publicationDate: "2021-01-05",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://music.amazon.com/podcasts/2ca22a67-6b1e-461e-9dec-cbe601574463/episodes/c77b4ac2-cf9b-449b-9bf1-d2453215e9ac/the-summit-podcast-4-pillars-of-great-conversion-rate-optimization",
+        personOrganization: "Kyle Hamer for The Summit Podcast"
+    },
+    {
+        title: "Experimentation Culture Awards 2020 - Individual Winner",
+        language: "english",
+        publicationDate: "2020-11-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://experimentationcultureawards.com/",
+        personOrganization: "Experimentation Culture Awards"
+    },
+    {
+        title: "Vaimo's Guido Jansen Wins Magento Master 2019 Award",
+        language: "english",
+        publicationDate: "2019-05-14",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://www.vaimo.com/blog/guido-jansen-wins-magento-masters-award/",
+        personOrganization: "Vaimo"
+    },
+    {
+        title: "Meet Magento: Let's Talk Business",
+        language: "dutch",
+        publicationDate: "2019-04-08",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://soundcloud.com/newbusinessradio/sets/meet-magento-lett-talk-business-8-april-2019",
+        personOrganization: "New Business Radio"
+    },
+    {
+        title: "Key Insights from Every Speaker of Elite Camp 2017",
+        language: "english",
+        publicationDate: "2017-06-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://cxl.com/blog/key-insights-every-speaker-elite-camp-2017/",
+        personOrganization: "CXL"
+    },
+    {
         title: "45 best CRO Experts you need to follow to Skyrocket your website conversion",
         language: "english",
         publicationDate: "2016-05-13",
