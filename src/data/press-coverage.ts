@@ -151,7 +151,7 @@ export const pressCoverage = [
         publicationDate: "2013-04-01",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://web.archive.org/web/20130420165315/http://mycmgr.com/",
+        articleUrl: "",
         personOrganization: "My Community Manager (mycmgr.com)",
         category: "award"
     },
