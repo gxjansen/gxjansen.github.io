@@ -5,9 +5,11 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 // components
 import Badge from "@components/Badge/Badge.astro";
 import ContentTypeSelector from "@components/Press/ContentTypeSelector.astro";
+import AwardsSection from "@components/Press/AwardsSection.astro";
 import VideoSection from "@components/Press/VideoSection.astro";
 import PodcastSection from "@components/Press/PodcastSection.astro";
 import ArticleSection from "@components/Press/ArticleSection.astro";
+import ListingsSection from "@components/Press/ListingsSection.astro";
 import LinkedInCTA from "@components/Press/LinkedInCTA.astro";
 
 // data
@@ -18,14 +20,19 @@ import { filterAvailableContent } from '../utils/content-availability';
 const availableCoverage = filterAvailableContent(pressCoverage);
 
 // Sort press coverage by date
-const sortedCoverage = [...availableCoverage].sort((a, b) => 
+const sortedCoverage = [...availableCoverage].sort((a, b) =>
   new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime()
 );
 
-// Separate content by type
-const videos = sortedCoverage.filter(item => item.youtubeLink);
-const podcasts = sortedCoverage.filter(item => item.spotifyEmbedId);
-const articles = sortedCoverage.filter(item => !item.youtubeLink && !item.spotifyEmbedId);
+// Separate content by category first
+const awards = sortedCoverage.filter(item => item.category === 'award');
+const listings = sortedCoverage.filter(item => item.category === 'listing');
+
+// For remaining content (interviews/default), separate by media type
+const interviewContent = sortedCoverage.filter(item => !item.category || item.category === 'interview');
+const videos = interviewContent.filter(item => item.youtubeLink);
+const podcasts = interviewContent.filter(item => item.spotifyEmbedId);
+const articles = interviewContent.filter(item => !item.youtubeLink && !item.spotifyEmbedId);
 
 // Log if any content was filtered out
 const filteredCount = pressCoverage.length - availableCoverage.length;
@@ -36,9 +43,11 @@ if (filteredCount > 0) {
 // Debug: Log content counts
 console.log('Content counts:', {
   total: sortedCoverage.length,
+  awards: awards.length,
   videos: videos.length,
   podcasts: podcasts.length,
-  articles: articles.length
+  articles: articles.length,
+  listings: listings.length
 });
 
 // Debug: Log video data
@@ -100,9 +109,11 @@ const firstVideoIds = videos
 
   <!-- Use view transitions for smooth content switching -->
   <div class="view-transition-group:media-content">
+    {awards.length > 0 && <AwardsSection awards={awards} />}
     <VideoSection videos={videos} />
     <PodcastSection podcasts={podcasts} />
     <ArticleSection articles={articles} />
+    {listings.length > 0 && <ListingsSection listings={listings} />}
   </div>
   
   <LinkedInCTA />

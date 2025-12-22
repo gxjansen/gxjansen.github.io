@@ -1,0 +1,99 @@
+---
+import { formatDate, getFaviconUrl } from '@utils/pressUtils';
+import type { PressCoverage } from '@types/press';
+
+interface Props {
+  awards: PressCoverage[];
+}
+
+const { awards } = Astro.props;
+---
+
+<section
+  id="awards"
+  class="mb-16"
+  aria-labelledby="awards-heading"
+>
+  <h2
+    id="awards-heading"
+    class="h2 mb-4"
+  >
+    Awards & Recognition
+  </h2>
+  <div
+    class="grid gap-4 md:grid-cols-2"
+    role="list"
+    aria-label="List of awards and recognition"
+  >
+    {awards.map(award => {
+      const domain = award.articleUrl ? new URL(award.articleUrl).hostname : '';
+      const formattedDate = formatDate(award.publicationDate);
+      const awardId = `award-${award.articleUrl ? new URL(award.articleUrl).pathname.replace(/\W/g, '-') : crypto.randomUUID()}`;
+
+      return (
+        <article
+          class="award-card bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 border border-primary-200 dark:border-primary-700 rounded-xl p-6 hover:shadow-lg transition-shadow"
+          role="listitem"
+          aria-labelledby={awardId}
+        >
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-500 dark:bg-primary-600 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-base-100 dark:text-base-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3
+                id={awardId}
+                class="text-lg font-semibold text-base-900 dark:text-base-100 mb-2"
+              >
+                <div class="flex items-start gap-2">
+                  {award.articleUrl && (
+                    <img
+                      src={getFaviconUrl(award.articleUrl)}
+                      alt=""
+                      width="16"
+                      height="16"
+                      class="w-4 h-4 object-contain flex-shrink-0 mt-1"
+                      role="presentation"
+                    />
+                  )}
+                  <span class="flex-1">{award.title}</span>
+                </div>
+              </h3>
+              <div
+                class="text-sm text-base-600 dark:text-base-400 flex flex-wrap items-center gap-2"
+                aria-label="Award details"
+              >
+                <time datetime={new Date(award.publicationDate).toISOString()}>
+                  <span class="sr-only">Received on </span>
+                  {formattedDate}
+                </time>
+                {award.personOrganization && (
+                  <>
+                    <span aria-hidden="true">•</span>
+                    <span>
+                      <span class="sr-only">Awarded by </span>
+                      {award.personOrganization}
+                    </span>
+                  </>
+                )}
+              </div>
+              {award.articleUrl && (
+                <a
+                  href={award.articleUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 mt-3 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium text-sm"
+                  aria-label={`View details about ${award.title} (opens in new tab)`}
+                >
+                  View details <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</section>

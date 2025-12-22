@@ -24,7 +24,8 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "",
         articleUrl: "https://saufter.io/best-ecommerce-podcasts/",
-        personOrganization: "Saufter AI"
+        personOrganization: "Saufter AI",
+        category: "listing"
     },
     {
         title: "The Best Growth Marketing Podcasts for B2B Marketers",
@@ -33,7 +34,8 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "",
         articleUrl: "https://growthmethod.com/growth-marketing-podcast/",
-        personOrganization: "Growth Method"
+        personOrganization: "Growth Method",
+        category: "listing"
     },
     {
         title: "10 Conversion Rate Podcasts to Help You Grow Your Business",
@@ -42,7 +44,8 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "",
         articleUrl: "https://www.fastercapital.com/content/Conversion-Rate-Podcasts--10-Conversion-Rate-Podcasts-to-Help-You-Grow-Your-Business.html",
-        personOrganization: "FasterCapital"
+        personOrganization: "FasterCapital",
+        category: "listing"
     },
     {
         title: "CRO Knowledge Repository - Expert Listing",
@@ -51,7 +54,8 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "",
         articleUrl: "https://www.2checkout.com/lp/cro-knowledge-repository/",
-        personOrganization: "2Checkout"
+        personOrganization: "2Checkout",
+        category: "listing"
     },
     {
         title: "Experimentation Culture Webinar",
@@ -78,7 +82,8 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "",
         articleUrl: "https://experimentationcultureawards.com/",
-        personOrganization: "Experimentation Culture Awards"
+        personOrganization: "Experimentation Culture Awards",
+        category: "award"
     },
     {
         title: "Vaimo's Guido Jansen Wins Magento Master 2019 Award",
@@ -87,7 +92,8 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "",
         articleUrl: "https://www.vaimo.com/blog/guido-jansen-wins-magento-masters-award/",
-        personOrganization: "Vaimo"
+        personOrganization: "Vaimo",
+        category: "award"
     },
     {
         title: "Meet Magento: Let's Talk Business",
@@ -114,7 +120,8 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "",
         articleUrl: "https://web.archive.org/web/20240804143201/https://www.omnikick.com/cro-experts-list/",
-        personOrganization: "Sayed Shahnur for Omnikick"
+        personOrganization: "Sayed Shahnur for Omnikick",
+        category: "listing"
     },
     {
         title: "5 CRO experts die de moeite zijn om te volgen",
@@ -123,7 +130,8 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "",
         articleUrl: "https://webinsight.be/cro/cro-experts-om-te-volgen/",
-        personOrganization: "WebInsight"
+        personOrganization: "WebInsight",
+        category: "listing"
     },
     {
         title: "A/B-testen levert veel te weinig informatie op",

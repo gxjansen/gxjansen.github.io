@@ -1,0 +1,98 @@
+---
+import { formatDate, getFaviconUrl } from '@utils/pressUtils';
+import type { PressCoverage } from '@types/press';
+
+interface Props {
+  listings: PressCoverage[];
+}
+
+const { listings } = Astro.props;
+---
+
+<section
+  id="listings"
+  class="mb-16"
+  aria-labelledby="listings-heading"
+>
+  <h2
+    id="listings-heading"
+    class="h2 mb-4"
+  >
+    Featured In
+  </h2>
+  <p class="text-base-600 dark:text-base-400 mb-6">
+    Mentioned in "best of" lists and expert compilations.
+  </p>
+  <div
+    class="grid gap-3 md:grid-cols-2 lg:grid-cols-3"
+    role="list"
+    aria-label="List of features and mentions"
+  >
+    {listings.map(listing => {
+      const domain = listing.articleUrl ? new URL(listing.articleUrl).hostname : '';
+      const formattedDate = formatDate(listing.publicationDate);
+      const listingId = `listing-${listing.articleUrl ? new URL(listing.articleUrl).pathname.replace(/\W/g, '-') : crypto.randomUUID()}`;
+
+      return (
+        <article
+          class="listing-card bg-base-100 dark:bg-base-800 border border-base-200 dark:border-base-700 rounded-lg p-4 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+          role="listitem"
+          aria-labelledby={listingId}
+        >
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-8 h-8 bg-base-200 dark:bg-base-700 rounded-full flex items-center justify-center">
+              <svg class="w-4 h-4 text-base-500 dark:text-base-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3
+                id={listingId}
+                class="text-sm font-medium text-base-900 dark:text-base-100 mb-1 line-clamp-2"
+              >
+                <div class="flex items-start gap-2">
+                  {listing.articleUrl && (
+                    <img
+                      src={getFaviconUrl(listing.articleUrl)}
+                      alt=""
+                      width="14"
+                      height="14"
+                      class="w-3.5 h-3.5 object-contain flex-shrink-0 mt-0.5"
+                      role="presentation"
+                    />
+                  )}
+                  <span class="flex-1">{listing.title}</span>
+                </div>
+              </h3>
+              <div
+                class="text-xs text-base-500 dark:text-base-500 flex flex-wrap items-center gap-1"
+                aria-label="Listing details"
+              >
+                <time datetime={new Date(listing.publicationDate).toISOString()}>
+                  {formattedDate}
+                </time>
+                {listing.personOrganization && (
+                  <>
+                    <span aria-hidden="true">•</span>
+                    <span>{listing.personOrganization}</span>
+                  </>
+                )}
+              </div>
+              {listing.articleUrl && (
+                <a
+                  href={listing.articleUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 mt-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-xs font-medium"
+                  aria-label={`View ${listing.title} (opens in new tab)`}
+                >
+                  View <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</section>
