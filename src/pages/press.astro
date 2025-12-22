@@ -5,7 +5,6 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 // components
 import Badge from "@components/Badge/Badge.astro";
 import ContentTypeSelector from "@components/Press/ContentTypeSelector.astro";
-import AwardsSection from "@components/Press/AwardsSection.astro";
 import VideoSection from "@components/Press/VideoSection.astro";
 import PodcastSection from "@components/Press/PodcastSection.astro";
 import ArticleSection from "@components/Press/ArticleSection.astro";
@@ -24,8 +23,7 @@ const sortedCoverage = [...availableCoverage].sort((a, b) =>
   new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime()
 );
 
-// Separate content by category first (awards and nominations go together)
-const awards = sortedCoverage.filter(item => item.category === 'award' || item.category === 'nomination');
+// Separate content by category
 const listings = sortedCoverage.filter(item => item.category === 'listing');
 
 // For remaining content (interviews/default), separate by media type
@@ -43,7 +41,6 @@ if (filteredCount > 0) {
 // Debug: Log content counts
 console.log('Content counts:', {
   total: sortedCoverage.length,
-  awards: awards.length,
   videos: videos.length,
   podcasts: podcasts.length,
   articles: articles.length,
@@ -109,7 +106,6 @@ const firstVideoIds = videos
 
   <!-- Use view transitions for smooth content switching -->
   <div class="view-transition-group:media-content">
-    {awards.length > 0 && <AwardsSection awards={awards} />}
     <VideoSection videos={videos} />
     <PodcastSection podcasts={podcasts} />
     <ArticleSection articles={articles} />

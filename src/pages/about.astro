@@ -10,7 +10,19 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 // components - ordered by new page structure
 import AboutHeader from "@components/About/AboutHeader.astro";
 import WhyItWorks from "@components/About/WhyItWorks.astro";
+import AwardsSection from "@components/Press/AwardsSection.astro";
 import TheStory from "@components/About/TheStory.astro";
+
+// data
+import { pressCoverage } from '../data/press-coverage';
+import { filterAvailableContent } from '../utils/content-availability';
+
+// Filter awards and nominations
+const availableCoverage = filterAvailableContent(pressCoverage);
+const sortedCoverage = [...availableCoverage].sort((a, b) =>
+  new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime()
+);
+const awards = sortedCoverage.filter(item => item.category === 'award' || item.category === 'nomination');
 import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
 import WhatsNext from "@components/About/WhatsNext.astro";
 import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
@@ -29,7 +41,10 @@ import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
   <!-- Section 2: Why It Works - Psychology + business outcome focus -->
   <WhyItWorks />
 
-  <!-- Section 3: The Story - Personal background -->
+  <!-- Section 3: Awards & Nominations -->
+  {awards.length > 0 && <AwardsSection awards={awards} />}
+
+  <!-- Section 4: The Story - Personal background -->
   <TheStory />
 
   <!-- Section 4: Testimonials -->
