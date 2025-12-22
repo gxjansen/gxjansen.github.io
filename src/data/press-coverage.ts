@@ -86,6 +86,76 @@ export const pressCoverage = [
         category: "award"
     },
     {
+        title: "CRO Personality of the Year 2020 (Nominated)",
+        language: "english",
+        publicationDate: "2020-01-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "",
+        personOrganization: "Digital Elite Group",
+        category: "nomination"
+    },
+    {
+        title: "Magento Top 50 Contributor 2020",
+        language: "english",
+        publicationDate: "2020-01-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://community.magento.com/t5/Magento-DevBlog/2019-2020-Magento-Top-Contributors-and-2020-Magento-Masters/ba-p/453426",
+        personOrganization: "Adobe",
+        category: "award"
+    },
+    {
+        title: "Magento Master 2019",
+        language: "english",
+        publicationDate: "2019-05-14",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://community.magento.com/t5/Magento-DevBlog/2019-2020-Magento-Top-Contributors-and-2020-Magento-Masters/ba-p/453426",
+        personOrganization: "Adobe",
+        category: "award"
+    },
+    {
+        title: "Magento Top 50 Contributor 2019",
+        language: "english",
+        publicationDate: "2019-01-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://community.magento.com/t5/Magento-DevBlog/2019-2020-Magento-Top-Contributors-and-2020-Magento-Masters/ba-p/453426",
+        personOrganization: "Adobe",
+        category: "award"
+    },
+    {
+        title: "Magento Top 50 Contributor 2017",
+        language: "english",
+        publicationDate: "2017-01-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://community.magento.com/t5/Magento-DevBlog/Announcing-Our-2017-Magento-Masters-and-Top-50-Contributors/ba-p/66798",
+        personOrganization: "Adobe",
+        category: "award"
+    },
+    {
+        title: "Community Manager of the Day",
+        language: "english",
+        publicationDate: "2013-04-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://web.archive.org/web/20130420165315/http://mycmgr.com/",
+        personOrganization: "My Community Manager (mycmgr.com)",
+        category: "award"
+    },
+    {
+        title: "Magento X.commerce Community Builder Award",
+        language: "english",
+        publicationDate: "2011-10-01",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "",
+        personOrganization: "eBay / John Donahoe",
+        category: "award"
+    },
+    {
         title: "Vaimo's Guido Jansen Wins Magento Master 2019 Award",
         language: "english",
         publicationDate: "2019-05-14",

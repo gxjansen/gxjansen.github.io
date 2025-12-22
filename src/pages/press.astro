@@ -24,8 +24,8 @@ const sortedCoverage = [...availableCoverage].sort((a, b) =>
   new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime()
 );
 
-// Separate content by category first
-const awards = sortedCoverage.filter(item => item.category === 'award');
+// Separate content by category first (awards and nominations go together)
+const awards = sortedCoverage.filter(item => item.category === 'award' || item.category === 'nomination');
 const listings = sortedCoverage.filter(item => item.category === 'listing');
 
 // For remaining content (interviews/default), separate by media type

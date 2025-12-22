@@ -18,28 +18,41 @@ const { awards } = Astro.props;
     id="awards-heading"
     class="h2 mb-4"
   >
-    Awards & Recognition
+    Awards & Nominations
   </h2>
   <div
     class="grid gap-4 md:grid-cols-2"
     role="list"
-    aria-label="List of awards and recognition"
+    aria-label="List of awards and nominations"
   >
     {awards.map(award => {
       const domain = award.articleUrl ? new URL(award.articleUrl).hostname : '';
       const formattedDate = formatDate(award.publicationDate);
       const awardId = `award-${award.articleUrl ? new URL(award.articleUrl).pathname.replace(/\W/g, '-') : crypto.randomUUID()}`;
+      const isNomination = award.category === 'nomination';
 
       return (
         <article
-          class="award-card bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 border border-primary-200 dark:border-primary-700 rounded-xl p-6 hover:shadow-lg transition-shadow"
+          class={`award-card rounded-xl p-6 hover:shadow-lg transition-shadow ${
+            isNomination
+              ? 'bg-gradient-to-br from-base-50 to-base-100 dark:from-base-800/50 dark:to-base-700/50 border border-base-200 dark:border-base-600'
+              : 'bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 border border-primary-200 dark:border-primary-700'
+          }`}
           role="listitem"
           aria-labelledby={awardId}
         >
           <div class="flex items-start gap-4">
-            <div class="flex-shrink-0 w-12 h-12 bg-primary-500 dark:bg-primary-600 rounded-full flex items-center justify-center">
+            <div class={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
+              isNomination
+                ? 'bg-base-400 dark:bg-base-500'
+                : 'bg-primary-500 dark:bg-primary-600'
+            }`}>
               <svg class="w-6 h-6 text-base-100 dark:text-base-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                {isNomination ? (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                ) : (
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                )}
               </svg>
             </div>
             <div class="flex-1 min-w-0">
@@ -63,17 +76,17 @@ const { awards } = Astro.props;
               </h3>
               <div
                 class="text-sm text-base-600 dark:text-base-400 flex flex-wrap items-center gap-2"
-                aria-label="Award details"
+                aria-label={isNomination ? "Nomination details" : "Award details"}
               >
                 <time datetime={new Date(award.publicationDate).toISOString()}>
-                  <span class="sr-only">Received on </span>
+                  <span class="sr-only">{isNomination ? "Nominated in " : "Received on "}</span>
                   {formattedDate}
                 </time>
                 {award.personOrganization && (
                   <>
                     <span aria-hidden="true">•</span>
                     <span>
-                      <span class="sr-only">Awarded by </span>
+                      <span class="sr-only">{isNomination ? "Nominated by " : "Awarded by "}</span>
                       {award.personOrganization}
                     </span>
                   </>
@@ -86,6 +99,7 @@ const { awards } = Astro.props;
                   rel="noopener noreferrer"
                   class="inline-flex items-center gap-1 mt-3 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium text-sm"
                   aria-label={`View details about ${award.title} (opens in new tab)`}
+                  title={`View details about ${award.title}`}
                 >
                   View details <span aria-hidden="true">→</span>
                 </a>
