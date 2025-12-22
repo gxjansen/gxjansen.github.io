@@ -9,19 +9,19 @@ interface Props {
 const { articles } = Astro.props;
 ---
 
-<section 
-  id="articles" 
+<section
+  id="articles"
   class="mb-16"
   aria-labelledby="articles-heading"
 >
-  <h2 
-    id="articles-heading" 
+  <h2
+    id="articles-heading"
     class="h2 mb-4"
   >
     Articles & Interviews
   </h2>
-  <div 
-    class="cards-grid"
+  <div
+    class="grid gap-4 md:grid-cols-2"
     role="list"
     aria-label="List of articles and interviews"
   >
@@ -29,69 +29,76 @@ const { articles } = Astro.props;
       const domain = article.articleUrl ? new URL(article.articleUrl).hostname : '';
       const formattedDate = formatDate(article.publicationDate);
       const articleId = `article-${article.articleUrl ? new URL(article.articleUrl).pathname.replace(/\W/g, '-') : crypto.randomUUID()}`;
-      
+
       return (
-        <article 
-          class="article-card"
+        <article
+          class="article-card rounded-xl p-6 hover:shadow-lg transition-shadow bg-gradient-to-br from-base-50 to-base-100 dark:from-base-800/50 dark:to-base-700/50 border border-base-200 dark:border-base-600"
           role="listitem"
           aria-labelledby={articleId}
         >
-          <div class="card-content">
-            <h3 
-              id={articleId}
-              class="card-title"
-            >
-              <div class="flex items-start gap-2">
-                {article.articleUrl && (
-                  <img 
-                    src={getFaviconUrl(article.articleUrl)} 
-                    alt=""
-                    width="16" 
-                    height="16"
-                    class="w-4 h-4 object-contain flex-shrink-0 mt-1"
-                    role="presentation"
-                  />
-                )}
-                <span class="line-clamp-2 flex-1">{article.title}</span>
-              </div>
-            </h3>
-            <div 
-              class="card-meta"
-              aria-label="Article details"
-            >
-              <time datetime={new Date(article.publicationDate).toISOString()}>
-                <span class="sr-only">Published on </span>
-                {formattedDate}
-              </time>
-              {article.personOrganization && (
-                <>
-                  <span aria-hidden="true">•</span>
-                  <span>
-                    <span class="sr-only">Written by </span>
-                    {article.personOrganization}
-                  </span>
-                </>
-              )}
-              {domain && (
-                <>
-                  <span aria-hidden="true">•</span>
-                  <span>
-                    <span class="sr-only">Published on </span>
-                    {domain}
-                  </span>
-                </>
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center bg-base-200 dark:bg-base-700 overflow-hidden">
+              {article.articleUrl ? (
+                <img
+                  src={getFaviconUrl(article.articleUrl)}
+                  alt=""
+                  width="32"
+                  height="32"
+                  class="w-8 h-8 object-contain"
+                  role="presentation"
+                />
+              ) : (
+                <svg class="w-7 h-7 text-base-500 dark:text-base-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+                </svg>
               )}
             </div>
-            {article.articleUrl && (
-              <a 
-                href={article.articleUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label={`View article about ${article.title} (opens in new tab)`}
+            <div class="flex-1 min-w-0">
+              <h3
+                id={articleId}
+                class="text-lg font-semibold text-base-900 dark:text-base-100 mb-2"
               >
-                View article <span aria-hidden="true">→</span>
-              </a>
-            )}
+                {article.title}
+              </h3>
+              <div
+                class="text-sm text-base-600 dark:text-base-400 flex flex-wrap items-center gap-2"
+                aria-label="Article details"
+              >
+                <time datetime={new Date(article.publicationDate).toISOString()}>
+                  <span class="sr-only">Published on </span>
+                  {formattedDate}
+                </time>
+                {article.personOrganization && (
+                  <>
+                    <span aria-hidden="true">•</span>
+                    <span>
+                      <span class="sr-only">Written by </span>
+                      {article.personOrganization}
+                    </span>
+                  </>
+                )}
+                {domain && (
+                  <>
+                    <span aria-hidden="true">•</span>
+                    <span>
+                      <span class="sr-only">Published on </span>
+                      {domain}
+                    </span>
+                  </>
+                )}
+              </div>
+              {article.articleUrl && (
+                <a
+                  href={article.articleUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 mt-3 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium text-sm"
+                  aria-label={`View article about ${article.title} (opens in new tab)`}
+                >
+                  View article <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
           </div>
         </article>
       );
