@@ -76,11 +76,14 @@ const getBrandIcon = (org: string | undefined): string | null => {
                   role="presentation"
                 />
               ) : brandIcon === 'ebay' ? (
-                <svg class="w-8 h-8" viewBox="0 0 24 24" aria-hidden="true">
-                  <text x="2" y="17" font-size="10" font-weight="bold" font-family="system-ui">
-                    <tspan fill="#E53238">e</tspan><tspan fill="#0064D2">b</tspan><tspan fill="#F5AF02">a</tspan><tspan fill="#86B817">y</tspan>
-                  </text>
-                </svg>
+                <img
+                  src="/images/brand-icons/ebay.webp"
+                  alt=""
+                  width="32"
+                  height="32"
+                  class="w-8 h-8 object-contain"
+                  role="presentation"
+                />
               ) : brandIcon === 'experiment' ? (
                 <img
                   src="/images/brand-icons/experimentation-culture-awards.png"
