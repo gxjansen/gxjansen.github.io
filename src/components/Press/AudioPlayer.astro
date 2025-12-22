@@ -1,0 +1,61 @@
+---
+interface Props {
+  src: string;
+  title: string;
+}
+
+const { src, title } = Astro.props;
+---
+
+<div class="audio-player w-full rounded-xl bg-gray-100 dark:bg-gray-800 p-4 transition-colors">
+  <audio
+    controls
+    preload="metadata"
+    class="w-full h-10"
+    title={title}
+  >
+    <source src={src} type="audio/mpeg" />
+    <p>
+      Your browser doesn't support HTML5 audio.
+      <a href={src} download class="text-primary-600 dark:text-primary-400 underline">Download the audio</a>
+    </p>
+  </audio>
+</div>
+
+<style>
+  /* Custom styling for the audio player */
+  .audio-player audio {
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+
+  /* Webkit browsers (Chrome, Safari, Edge) */
+  .audio-player audio::-webkit-media-controls-panel {
+    background: linear-gradient(to right, #f3f4f6, #e5e7eb);
+  }
+
+  :global(.dark) .audio-player audio::-webkit-media-controls-panel {
+    background: linear-gradient(to right, #374151, #1f2937);
+  }
+
+  .audio-player audio::-webkit-media-controls-current-time-display,
+  .audio-player audio::-webkit-media-controls-time-remaining-display {
+    color: #374151;
+  }
+
+  :global(.dark) .audio-player audio::-webkit-media-controls-current-time-display,
+  :global(.dark) .audio-player audio::-webkit-media-controls-time-remaining-display {
+    color: #d1d5db;
+  }
+
+  /* Focus styles for accessibility */
+  .audio-player audio:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+
+  .audio-player audio:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+</style>

@@ -1,10 +1,11 @@
 /**
  * Content category type
  * - 'award': Awards and recognitions
+ * - 'nomination': Award nominations
  * - 'listing': Mentioned in a list (e.g., "Best podcasts", "Top experts")
  * - 'interview': True interviews, articles with contributed content (default)
  */
-export type ContentCategory = 'award' | 'listing' | 'interview';
+export type ContentCategory = 'award' | 'nomination' | 'listing' | 'interview';
 
 /**
  * Represents a single press coverage item (video, podcast, or article)
@@ -24,6 +25,10 @@ export interface PressCoverage {
   youtubeLink?: string;
   /** Spotify episode ID for podcast embeds */
   spotifyEmbedId?: string;
+  /** Local audio file path (DRM-free alternative to Spotify embed) */
+  audioFile?: string;
+  /** Apple Podcasts URL for fallback links */
+  applePodcastsUrl?: string;
   /** Content category - defaults to 'interview' if not specified */
   category?: ContentCategory;
 }

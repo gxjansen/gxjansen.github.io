@@ -92,8 +92,7 @@ export const pressCoverage = [
         youtubeLink: "",
         spotifyEmbedId: "",
         articleUrl: "https://www.vaimo.com/blog/guido-jansen-wins-magento-masters-award/",
-        personOrganization: "Vaimo",
-        category: "award"
+        personOrganization: "Vaimo"
     },
     {
         title: "Meet Magento: Let's Talk Business",
@@ -238,6 +237,7 @@ export const pressCoverage = [
         publicationDate: "2022-01-19",
         youtubeLink: "",
         spotifyEmbedId: "7hbnazzIfprpRGTDPINaoc",
+        audioFile: "/audio/podcasts/growth-lab-experimenten.mp3",
         articleUrl: "https://fingerspitz.nl/blog/de-meest-gestelde-vragen-over-experimenten/",
         personOrganization: "Jaap Jacobs for Growth Lab Podcast"
     },
@@ -256,6 +256,7 @@ export const pressCoverage = [
         publicationDate: "2017-08-18",
         youtubeLink: "",
         spotifyEmbedId: "7tIP7Fz3IfDXKMX5M8lUnG",
+        audioFile: "/audio/podcasts/dutchento-origins.mp3",
         articleUrl: "",
         personOrganization: "Sander Mangel for Dutchento"
     },
@@ -283,6 +284,7 @@ export const pressCoverage = [
         publicationDate: "2020-01-05",
         youtubeLink: "",
         spotifyEmbedId: "5UJuKMx1f8mNzJqELQA0Wx",
+        audioFile: "/audio/podcasts/mnot-glibberige-aansmeertechnieken.mp3",
         articleUrl: "https://vriendvandeshow.nl/mnot/episodes/s06e11-glibberige-aansmeertechnieken-met-cognitief-psycholoog-guido-jansen",
         personOrganization: "Met Nerds Om Tafel"
     },
@@ -445,6 +447,7 @@ export const pressCoverage = [
         publicationDate: "2019-04-08",
         youtubeLink: "",
         spotifyEmbedId: "5EFVmi3Pjga34RMQkRhrH5",
+        audioFile: "/audio/podcasts/digital-explained-guido-jansen.mp3",
         articleUrl: "https://www.digitalexplainedtomymom.com/meeting-guido-x-jansen-cognitive-psychologist-customer-optimization-manager-magento-master-podcast-host-and-international-speaker/",
         personOrganization: "Sultan Semlali"
     },
@@ -481,6 +484,7 @@ export const pressCoverage = [
         publicationDate: "2024-04-04",
         youtubeLink: "https://www.youtube.com/watch?v=HJf7h66S3tM",
         spotifyEmbedId: "3ZW2obcTEHpo7urYLqJr2g",
+        audioFile: "/audio/podcasts/nohacks-psychology-user-engagement.mp3",
         articleUrl: "https://www.nohackspod.com/episode/psychology-behind-user-engagement-and-community-building-with-guido-jansen/",
         personOrganization: "nohacks.show"
     },
@@ -535,6 +539,7 @@ export const pressCoverage = [
         publicationDate: "2022-01-20",
         youtubeLink: "",
         spotifyEmbedId: "3KMHHpQ39ZJTjyab08Y8Tx",
+        audioFile: "/audio/podcasts/talk-commerce-psychology-cognitive.mp3",
         articleUrl: "https://talk-commerce.com/spryker/the-psychology-of-cognitive-customer-behavior-with-guido-jansen/",
         personOrganization: "Brent Peterson for Talk Commerce"
     },
