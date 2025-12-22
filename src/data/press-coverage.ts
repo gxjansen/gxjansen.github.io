@@ -1,5 +1,15 @@
 export const pressCoverage = [
     {
+        title: "Best Product Built with n8n - ElevenLabs Worldwide Hackathon",
+        language: "english",
+        publicationDate: "2025-12-11",
+        youtubeLink: "",
+        spotifyEmbedId: "",
+        articleUrl: "https://elevenlabs.io/hackathon",
+        personOrganization: "ElevenLabs / n8n",
+        category: "award"
+    },
+    {
         title: "We Automated My Entire Podcast Guest Pipeline with n8n + Apify!",
         language: "english",
         publicationDate: "2025-12-11",
