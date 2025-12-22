@@ -8,6 +8,16 @@ import {
 } from "@config/translationData.json.ts";
 import { locales, defaultLocale } from "@config/siteSettings.json";
 
+// Type helper for locale checking
+type LocaleType = (typeof locales)[number];
+
+/**
+ * Type guard to check if a string is a valid locale
+ */
+function isValidLocale(value: string): value is LocaleType {
+  return (locales as readonly string[]).includes(value);
+}
+
 /**
  * * text translation helper function
  * @param locale: Language to use for translation, one of the locales
@@ -65,7 +75,7 @@ export function getTranslatedData<T extends Locale, K extends DataKey<T>>(
  * @returns new URL pathname as a string
  */
 export function getLocalizedPathname(
-  locale: (typeof locales)[number],
+  locale: LocaleType,
   url: URL,
 ): string {
   // figure out if the current URL has a language in it's path
@@ -80,19 +90,17 @@ export function getLocalizedPathname(
     );
   };
 
-  let oldPath: string, currLocale: (typeof locales)[number];
-  //@ts-ignore
-  if (locales.includes(lang)) {
+  let oldPath: string;
+  let currLocale: LocaleType;
+  if (isValidLocale(lang)) {
     // remove locale from URL if it's already there
     oldPath = rest.join("/");
-    currLocale = lang as (typeof locales)[number];
-    // newPath = getRelativeLocaleUrl(locale, rest.join("/"));
+    currLocale = lang;
   } else {
     // otherwise, just create the URL from the existing path
     // this is the case if default locale and Astro config has `prefixDefaultLocale: false`
     oldPath = url.pathname;
     currLocale = defaultLocale;
-    // newPath = getRelativeLocaleUrl(locale, url.pathname);
   }
 
   // trim any starting and ending slashes for comparison

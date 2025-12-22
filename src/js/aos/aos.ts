@@ -13,7 +13,7 @@ import detect from "./helpers/detector";
 import handleScroll from "./helpers/handleScroll";
 import prepare from "./helpers/prepare";
 import elements from "./helpers/elements";
-import { type AOSElement, type AOSDefaultOptions } from "./helpers/aosTypes";
+import { type AOSElement, type AOSDefaultOptions, type DisableOption } from "./helpers/aosTypes";
 import { getPositionIn, getPositionOut } from "./helpers/offsetCalculator";
 
 /**
@@ -115,7 +115,7 @@ const disable = function () {
 /**
  * Check if AOS should be disabled
  */
-const isDisabled = function (optionDisable: any) {
+const isDisabled = function (optionDisable: DisableOption): boolean {
   return (
     optionDisable === true ||
     (optionDisable === "mobile" && detect.mobile()) ||

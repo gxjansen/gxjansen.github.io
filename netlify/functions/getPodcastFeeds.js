@@ -1,4 +1,3 @@
-
 import { XMLParser } from 'fast-xml-parser';
 
 const PODCAST_FEEDS = [
@@ -7,8 +6,16 @@ const PODCAST_FEEDS = [
   'https://feeds.transistor.fm/cro-cafe-nl'
 ];
 
-const CACHE_TTL = 3600; // Cache for 1 hour
 const FETCH_TIMEOUT = 5000; // 5 second timeout for feed fetches
+
+// Response headers with strong caching
+const RESPONSE_HEADERS = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Cache-Control': 'public, max-age=3600, s-maxage=3600', // Cache for 1 hour in browser and CDN
+  'Surrogate-Control': 'max-age=3600', // Additional CDN-specific cache
+  'stale-while-revalidate': '86400' // Allow serving stale content for up to 24 hours while revalidating
+};
 
 // Fetch with timeout
 const fetchWithTimeout = async (url, timeout) => {
@@ -75,24 +82,15 @@ const parseFeed = async (feedUrl) => {
   }
 };
 
-export const handler = async (event, context) => {
+export const handler = async () => {
   try {
-    // Set response headers with strong caching
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Cache-Control': 'public, max-age=3600, s-maxage=3600', // Cache for 1 hour in browser and CDN
-      'Surrogate-Control': 'max-age=3600', // Additional CDN-specific cache
-      'stale-while-revalidate': '86400' // Allow serving stale content for up to 24 hours while revalidating
-    };
-
     // Fetch all feeds in parallel with error handling for each
     const allEpisodes = (await Promise.all(
       PODCAST_FEEDS.map(url => parseFeed(url))
     )).flat();
 
     // Sort episodes by date
-    const sortedEpisodes = allEpisodes.sort((a, b) => 
+    const sortedEpisodes = allEpisodes.sort((a, b) =>
       new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
     );
 
@@ -101,7 +99,7 @@ export const handler = async (event, context) => {
 
     return {
       statusCode: 200,
-      headers,
+      headers: RESPONSE_HEADERS,
       body: JSON.stringify(latestEpisodes)
     };
   } catch (error) {
@@ -110,15 +108,15 @@ export const handler = async (event, context) => {
       stack: error.stack,
       type: error.name
     });
-    
-    const errorMessage = error.name === 'AbortError' 
+
+    const errorMessage = error.name === 'AbortError'
       ? 'Timeout while fetching podcast feeds'
       : 'Failed to fetch podcast feeds';
-    
+
     return {
       statusCode: error.name === 'AbortError' ? 504 : 500,
-      headers,
-      body: JSON.stringify({ 
+      headers: RESPONSE_HEADERS,
+      body: JSON.stringify({
         error: errorMessage,
         message: error.message,
         type: error.name

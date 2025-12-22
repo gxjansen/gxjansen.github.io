@@ -16,11 +16,16 @@ export type TriggerPlacement =
   | "bottom-top"
   | "center-top";
 
+/**
+ * Disable option - can be boolean, device type string, or function
+ */
+export type DisableOption = boolean | "mobile" | "phone" | "tablet" | (() => boolean);
+
 export interface AOSDefaultOptions extends AnimeOptions {
   offset: number;
   once: boolean;
   mirror: boolean;
-  disable: boolean;
+  disable: DisableOption;
   anchorPlacement: TriggerPlacement;
   startEvent: string;
   animatedClassName: string;
@@ -30,9 +35,23 @@ export interface AOSDefaultOptions extends AnimeOptions {
   debounceDelay: number;
 }
 
+/**
+ * AnimeJS animation instance interface
+ */
+export interface AnimeInstance {
+  play: () => void;
+  pause: () => void;
+  reverse: () => void;
+  seek: (time: number) => void;
+  reversed: boolean;
+  completed: boolean;
+  duration: number;
+  progress: number;
+}
+
 export interface AOSElement {
   node: HTMLElement;
-  animation?: any; // animeJS animation
+  animation?: AnimeInstance;
   animated?: boolean;
   position?: {
     in?: number;

@@ -1,16 +1,11 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import { type InferGetStaticPropsType } from "astro";
 
 // layout
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
 import ExternalLink from "@components/MarkdownComponents/ExternalLink.astro";
-
-// utils
-import { filterCollectionByLanguage } from "@js/localeUtils";
-import { defaultLocale } from "@config/siteSettings.json";
 
 export async function getStaticPaths() {
   const otherPages: CollectionEntry<"otherPages">[] = await getCollection(

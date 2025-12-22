@@ -8,6 +8,42 @@ import { slugify } from "@js/textUtils";
 // data
 import { locales } from "@config/siteSettings.json";
 
+/**
+ * Interface for counted item results
+ */
+export interface CountedItem {
+  original: string;
+  count: number;
+}
+
+/**
+ * Record type for counted items keyed by slugified string
+ */
+export type CountedItems = Record<string, CountedItem>;
+
+/**
+ * Interface for posts with category data (used by filterCategoriesByCount)
+ */
+interface PostWithCategories {
+  data: {
+    categories?: string[];
+    [key: string]: unknown;
+  };
+  [key: string]: unknown;
+}
+
+/**
+ * Fisher-Yates shuffle for unbiased array randomization
+ */
+function shuffleArray<T>(array: T[]): T[] {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 // Client-side safe types (without any astro:content imports)
 export interface BlogPost {
   id: string;
@@ -74,28 +110,30 @@ export function formatPosts(
 
   // now we have filteredPosts
   // sortByDate or randomize
+  let sortedPosts: BlogPost[];
   if (sortByDate) {
-    filteredPosts.sort(
+    sortedPosts = [...filteredPosts].sort(
       (a: BlogPost, b: BlogPost) =>
         new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
     );
   } else {
-    filteredPosts.sort(() => Math.random() - 0.5);
+    // Use Fisher-Yates shuffle for unbiased randomization
+    sortedPosts = shuffleArray(filteredPosts);
   }
 
   // remove locale from URL
   if (removeLocale) {
-    filteredPosts.forEach((post) => {
+    sortedPosts.forEach((post) => {
       post.slug = removeLocaleFromSlug(post.slug);
     });
   }
 
   // limit if number is passed
   if (typeof limit === "number") {
-    return filteredPosts.slice(0, limit);
+    return sortedPosts.slice(0, limit);
   }
 
-  return filteredPosts;
+  return sortedPosts;
 }
 
 /**
@@ -128,13 +166,13 @@ export function arePostsRelated(
 }
 
 /**
- * * returns an array of processed items, sorted by count
- * @param items: string[] - array of items to count and sort
- * @returns object with counts of each item in the array
+ * * returns an object of processed items with counts
+ * @param items: string[] - array of items to count
+ * @returns Record of counted items keyed by slugified string
  */
-export function countItems(items: string[]): object {
+export function countItems(items: string[]): CountedItems {
   // get counts of each item in the array
-  const countedItems = items.reduce((acc, item) => {
+  const countedItems = items.reduce<CountedItems>((acc, item) => {
     const slugifiedItem = slugify(item);
     const val = acc[slugifiedItem]?.count || 0;
 
@@ -151,14 +189,14 @@ export function countItems(items: string[]): object {
 }
 
 /**
- * * returns array of arrays, sorted by value (high value first)
- * @param jsObj: object - array of "key: value" pairs to sort
- * @returns array of arrays with counts, sorted by count
+ * * returns array of tuples, sorted by count (high value first)
+ * @param countedItems - Record of counted items from countItems()
+ * @returns array of [slug, original, count] tuples, sorted by count descending
  */
-export function sortByValue(jsObj: object): [string, string, number][] {
+export function sortByValue(countedItems: CountedItems): [string, string, number][] {
   const array: [string, string, number][] = [];
-  for (const key in jsObj) {
-    array.push([key, jsObj[key].original, jsObj[key].count]);
+  for (const key in countedItems) {
+    array.push([key, countedItems[key].original, countedItems[key].count]);
   }
 
   return array.sort((a, b) => b[2] - a[2]);
@@ -167,13 +205,13 @@ export function sortByValue(jsObj: object): [string, string, number][] {
 /**
  * * filters categories to only include those with minimum number of posts
  * @param categories: string[] - array of category names to filter
- * @param allPosts: any[] - all posts to count categories from (BlogPost or CollectionEntry<"post">)
+ * @param allPosts: PostWithCategories[] - all posts to count categories from
  * @param minCount: number - minimum number of posts required (default: 2)
  * @returns filtered array of category names
  */
 export function filterCategoriesByCount(
   categories: string[],
-  allPosts: any[],
+  allPosts: PostWithCategories[],
   minCount: number = 2
 ): string[] {
   // Get all categories from all posts

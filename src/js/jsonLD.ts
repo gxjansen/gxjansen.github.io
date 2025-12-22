@@ -7,6 +7,41 @@ import { defaultLocale } from "@config/siteSettings.json";
 // data - siteData.title should not change based on locale so this should be fine
 const siteData = getTranslatedData("siteData", defaultLocale);
 
+/**
+ * Image metadata interface (compatible with Astro's getImage result)
+ */
+interface ImageMetadata {
+  src: string;
+  width?: number;
+  height?: number;
+  format?: string;
+}
+
+/**
+ * Schema.org Person type for JSON-LD
+ */
+interface PersonSchema {
+  "@type": "Person";
+  "@id": string;
+  name: string;
+  url: string;
+  description?: string;
+  sameAs?: string[];
+  image?: {
+    "@type": "ImageObject";
+    url: string;
+    caption: string;
+  };
+  jobTitle?: string;
+  worksFor?: {
+    "@type": "Organization";
+    name: string;
+    url?: string;
+  };
+  knowsAbout?: string[];
+  email?: string;
+}
+
 interface GeneralProps {
   type: "general";
 }
@@ -14,7 +49,7 @@ interface GeneralProps {
 export interface BlogProps {
   type: "blog";
   postFrontmatter?: BlogData;
-  image?: any; // result of getImage() from Seo.astro
+  image?: ImageMetadata;
   authors?: Author[];
   canonicalUrl?: URL;
 }
@@ -47,7 +82,8 @@ export default function jsonLDGenerator(props: JsonLDProps) {
       // Ensure we always have a valid URL for the author
       const authorUrl = author.data.authorLink || author.data.website || `${import.meta.env.SITE}/authors/${author.slug}`;
 
-      const authorSchema: any = {
+      // Build the base author schema
+      const authorSchema: PersonSchema = {
         "@type": "Person",
         "@id": `${import.meta.env.SITE}/authors/${author.slug}#person`,
         "name": author.data.name,
@@ -60,7 +96,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
       }
 
       if (sameAsLinks.length > 0) {
-        authorSchema.sameAs = sameAsLinks;
+        authorSchema.sameAs = sameAsLinks as string[];
       }
 
       if (author.data.avatar && typeof author.data.avatar === 'object' && 'src' in author.data.avatar) {

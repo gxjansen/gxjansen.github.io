@@ -2,24 +2,29 @@ import { type AOSElement } from "./aosTypes";
 
 /**
  * Adds multiple classes on node
- * @param {DOMNode} node
- * @param {array}  classes
+ * @param node - DOM element
+ * @param classes - array of class names to add
  */
-const addClasses = (node, classes) =>
+const addClasses = (node: HTMLElement, classes: string[] | undefined): void => {
   classes && classes.forEach((className) => node.classList.add(className));
+};
 
 /**
  * Removes multiple classes from node
- * @param {DOMNode} node
- * @param {array}  classes
+ * @param node - DOM element
+ * @param classes - array of class names to remove
  */
-const removeClasses = (node, classes) =>
+const removeClasses = (node: HTMLElement, classes: string[] | undefined): void => {
   classes && classes.forEach((className) => node.classList.remove(className));
+};
 
-const fireEvent = (eventName, data) => {
-  let customEvent;
-
-  customEvent = new CustomEvent(eventName, {
+/**
+ * Fires a custom event
+ * @param eventName - name of the event
+ * @param data - data to pass with the event
+ */
+const fireEvent = (eventName: string, data: HTMLElement): boolean => {
+  const customEvent = new CustomEvent(eventName, {
     detail: data,
   });
 
@@ -28,10 +33,10 @@ const fireEvent = (eventName, data) => {
 
 /**
  * Set or remove aos-animate class
- * @param {node} el         element
- * @param {int}  top        scrolled distance
+ * @param el - AOS element
+ * @param top - scrolled distance
  */
-const applyClasses = (el: any, top: number) => {
+const applyClasses = (el: AOSElement, top: number): void => {
   const { options, position, node } = el;
 
   const hide = () => {
@@ -89,10 +94,10 @@ const applyClasses = (el: any, top: number) => {
 /**
  * Scroll logic - add or remove 'aos-animate' class on scroll
  *
- * @param  {array} $elements         array of elements nodes
- * @return {void}
+ * @param $elements - array of AOS elements
  */
-const handleScroll = ($elements) =>
-  $elements.forEach((el, i) => applyClasses(el, window.scrollY));
+const handleScroll = ($elements: AOSElement[]): void => {
+  $elements.forEach((el) => applyClasses(el, window.scrollY));
+};
 
 export default handleScroll;

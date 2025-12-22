@@ -1,6 +1,16 @@
 // data
 import { locales, defaultLocale } from "@config/siteSettings.json.ts";
 
+// Type helper for locale checking
+type Locale = (typeof locales)[number];
+
+/**
+ * Type guard to check if a string is a valid locale
+ */
+function isValidLocale(value: string): value is Locale {
+  return (locales as readonly string[]).includes(value);
+}
+
 /**
  * * returns the current locale gathered from the URL
  * @param url: current URL
@@ -11,12 +21,20 @@ import { locales, defaultLocale } from "@config/siteSettings.json.ts";
  * - it never returns "undefined", and instead defaults to the defaultLocale
  * - It is useable in this typescript file and other non-astro files
  */
-export function getLocaleFromUrl(url: URL): (typeof locales)[number] {
+export function getLocaleFromUrl(url: URL): Locale {
   const [, locale] = url.pathname.split("/");
 
-  //@ts-ignore
-  if (locales.includes(locale)) return locale as (typeof locales)[number];
+  if (isValidLocale(locale)) return locale;
   return defaultLocale;
+}
+
+/**
+ * Interface for collection items with id and slug properties
+ */
+interface CollectionItem {
+  id: string;
+  slug: string;
+  [key: string]: unknown;
 }
 
 /**
@@ -24,7 +42,7 @@ export function getLocaleFromUrl(url: URL): (typeof locales)[number] {
  * @param collection: content collection array
  * @param locale: language to filter by (one of the above locales)
  * @param removeLocale: boolean (optional, default TRUE) - remove the locale from the slug field
- * @returns filtered content collection array
+ * @returns filtered content collection array (new array, does not mutate input)
  *
  *  ## Example
  *
@@ -39,13 +57,13 @@ export function getLocaleFromUrl(url: URL): (typeof locales)[number] {
  *
  * Your content collections should be paths like `src/content/blog/de/my-post.md` and `src/content/post/my-post.md`
  */
-export function filterCollectionByLanguage(
-  collection: any[],
-  locale: (typeof locales)[number],
+export function filterCollectionByLanguage<T extends CollectionItem>(
+  collection: T[],
+  locale: Locale,
   removeLocale: boolean = true,
-): any[] {
+): T[] {
   // check if the passed language is in the languages array
-  if (!locales.includes(locale)) {
+  if (!isValidLocale(locale)) {
     console.error(`Language ${locale} not found in locales array`);
     return [];
   }
@@ -54,15 +72,14 @@ export function filterCollectionByLanguage(
     item.id.startsWith(`${locale}/`),
   );
 
-  // remove locale from URL
+  // Return new objects with updated slugs (no mutation)
   if (removeLocale) {
-    filteredCollection.forEach((item) => {
-      // @ts-ignore (it's fine, we're just removing the locale from the URL)
-      item.slug = removeLocaleFromSlug(item.slug);
-    });
+    return filteredCollection.map((item) => ({
+      ...item,
+      slug: removeLocaleFromSlug(item.slug),
+    }));
   }
 
-  // filter the collection by the passed language
   return filteredCollection;
 }
 
@@ -74,12 +91,11 @@ export function filterCollectionByLanguage(
  */
 export function removeLocaleFromSlug(slug: string): string {
   // split the URL into parts separated by "/"
-  const SlugElements = slug.split("/");
+  const slugElements = slug.split("/");
 
   // map over the URL parts and remove any locales
-  const newSlugElements = SlugElements.filter(
-    //@ts-ignore
-    (element) => !locales.includes(element),
+  const newSlugElements = slugElements.filter(
+    (element) => !isValidLocale(element),
   );
 
   // combine the URL parts back into a string
