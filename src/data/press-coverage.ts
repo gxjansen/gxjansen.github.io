@@ -1,5 +1,14 @@
 export const pressCoverage = [
     {
+        title: "We Automated My Entire Podcast Guest Pipeline with n8n + Apify!",
+        language: "english",
+        publicationDate: "2025-12-11",
+        youtubeLink: "https://www.youtube.com/watch?v=D1PbvVzxYnA",
+        spotifyEmbedId: "",
+        articleUrl: "",
+        personOrganization: "Aemal Sayer"
+    },
+    {
         title: "Lessons From 17 CRO Experts: Key A-Ha Moments That Transformed Their Experimentation Strategies",
         language: "english",
         publicationDate: "2024-10-26",
