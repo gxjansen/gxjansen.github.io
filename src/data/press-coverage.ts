@@ -596,7 +596,7 @@ export const pressCoverage = [
         publicationDate: "2021-11-04",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://spryker.com/en/press-release-guidojansen/",
+        articleUrl: "",
         personOrganization: "Spryker"
     },
     {
@@ -605,7 +605,7 @@ export const pressCoverage = [
         publicationDate: "2022-03-16",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://spryker.com/en/blog/customer-advisory-board/",
+        articleUrl: "",
         personOrganization: "Samuel Pais for Spryker"
     },
     {
