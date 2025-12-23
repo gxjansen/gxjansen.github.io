@@ -238,7 +238,7 @@ export const pressCoverage = [
         spotifyEmbedId: "1JQOINF7985dcVMc9C6bKD",
         audioFile: "/audio/podcasts/magetalk-overheated-dutch-guy.mp3",
         coverImage: "/images/podcasts/magetalk-222-episode.jpg",
-        articleUrl: "https://magetalk.com/magetalk-episode-222-an-overheated-dutch-guy-feat-guido-jansen/",
+        articleUrl: "",
         personOrganization: "Kalen Jordan for MageTalk"
     },
     {
@@ -292,7 +292,7 @@ export const pressCoverage = [
         publicationDate: "2022-02-22",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://www.omniconvert.com/blog/guido-jansen-customer-behavior/",
+        articleUrl: "",
         personOrganization: "Alexandra Panaitescu for Omniconvert"
     },
     {
@@ -390,7 +390,7 @@ export const pressCoverage = [
         publicationDate: "2020-10-08",
         youtubeLink: "https://www.youtube.com/watch?v=wjDT316TH4s",
         spotifyEmbedId: "",
-        articleUrl: "https://www.omniconvert.com/blog/different-holiday-sales-2020-guido-jansen-ecommerce-growth-show-ep-25.html",
+        articleUrl: "",
         personOrganization: "Valentin Radu for Omniconvert"
     },
     {
@@ -417,7 +417,7 @@ export const pressCoverage = [
         publicationDate: "2019-05-16",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://www.magezine.co/",
+        articleUrl: "",
         personOrganization: "MageZine"
     },
     {
@@ -518,7 +518,7 @@ export const pressCoverage = [
         spotifyEmbedId: "2MaVKAIBT9EvW8JicDMBvM",
         audioFile: "/audio/podcasts/magetalk-netherdutch.mp3",
         coverImage: "/images/podcasts/magetalk-45-episode.jpg",
-        articleUrl: "https://magetalk.com/magetalk-episode-45-the-netherdutch-strikes-back/",
+        articleUrl: "",
         personOrganization: "Phillip Jackson and Kalen Jordan"
     },
     {
@@ -538,7 +538,7 @@ export const pressCoverage = [
         spotifyEmbedId: "5EFVmi3Pjga34RMQkRhrH5",
         audioFile: "/audio/podcasts/digital-explained-guido-jansen.mp3",
         coverImage: "/images/podcasts/digital-explained-guido-episode.jpg",
-        articleUrl: "https://www.digitalexplainedtomymom.com/meeting-guido-x-jansen-cognitive-psychologist-customer-optimization-manager-magento-master-podcast-host-and-international-speaker/",
+        articleUrl: "",
         personOrganization: "Sultan Semlali"
     },
     {
@@ -556,7 +556,7 @@ export const pressCoverage = [
         publicationDate: "2020-11-04",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://www.experimentnation.com/episodes/2020/11/04/optimization-and-the-human-mind",
+        articleUrl: "https://www.experimentnation.com/learn/2020/11/04/optimization-and-the-human-mind",
         personOrganization: "Rommil Santiago for Experiment Nation"
     },
     {
@@ -614,7 +614,7 @@ export const pressCoverage = [
         publicationDate: "2019-12-30",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://www.omniconvert.com/blog/guido-jansen-podcast-interview-unique-value-proposition/",
+        articleUrl: "",
         personOrganization: "Alexandra Ionescu for Omniconvert"
     },
     {
