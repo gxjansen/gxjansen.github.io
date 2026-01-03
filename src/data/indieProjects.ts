@@ -44,5 +44,19 @@ export const indieProjects: IndieProject[] = [
     iconBgColor: "bg-[#FBC75D]",
     githubUrl: "https://github.com/gxjansen/Transistor-MCP",
     license: "MIT"
+  },
+  {
+    name: "AI Consensus Answers",
+    description: "n8n workflow that generates consensus-based answers by leveraging multiple AI models with a peer review system. Synthesizes responses across different AI systems to improve answer quality through comparative analysis.",
+    mainImage: "/icons/n8n.svg",
+    link: "https://n8n.io/workflows/11660-generate-consensus-answers-with-multiple-ai-models-and-peer-review-system/",
+    iconBgColor: "bg-[#1a1a2e]"
+  },
+  {
+    name: "LinkedIn Profile Enricher",
+    description: "n8n workflow that integrates LinkedIn profile scraping with Apify and NocoDB CRM. Automatically enriches and updates customer data with detailed LinkedIn information for enhanced lead intelligence.",
+    mainImage: "/icons/n8n.svg",
+    link: "https://n8n.io/workflows/5258-enrich-linkedin-profiles-in-nocodb-crm-with-apify-scraper/",
+    iconBgColor: "bg-[#1a1a2e]"
   }
 ];
