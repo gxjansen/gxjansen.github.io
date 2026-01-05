@@ -1,0 +1,85 @@
+---
+title: "BigTech independence update: cleaning house for local AI"
+description: Three months after my original BigTech independence article, here's what changed and why I'm building infrastructure for local AI.
+draft: false
+authors:
+  - gxjansen
+pubDate: 2026-01-05
+categories:
+  - Privacy
+  - Open Source
+  - Technology
+  - Self-hosted
+  - AI
+---
+
+Three months ago I wrote about [reducing my BigTech dependencies](/post/how-i-reduced-my-bigtech-dependencies-in-2025/). The response was great: I had several people asking some detailed questions and also for updates. So here we are!
+
+The short version... I've been cleaning house. Not the most exciting stuff, but more like organizing that drawer you've been avoiding for years. Something I actually also did last week.
+
+## Foundations for Local Family LLM
+
+I could have jumped straight to the exciting stuff: voice assistants, AI interfaces, smart automations. But a fancy AI assistant isn't very useful if it doesn't know who you are, what your preferences are, or where to find your documents.
+
+So I've been building infrastructure.
+
+One of the major additions to the stack is [Paperless-ngx](https://docs.paperless-ngx.com/) (which documents sit inside one of my [Obsidian](https://obsidian.md/) workspaces) means an LLM could actually search our household documents. The Obsidian setup (where I keep notes, manuals, projects) is already structured for retrieval. [FreshRSS](https://freshrss.org/) could feed relevant news into a daily briefing.
+
+This is the groundwork. Not flashy. But necessary.
+
+## What got done
+
+**Dedicated Home Assistant device**: Got a [Home Assistant Green](https://www.home-assistant.io/green/) with a ZBT-2 for all Zigbee connections.
+
+**FreshRSS is running.** This was on my "after that" list in October. Turns out I'm still recovering from the Google Reader sunset in 2013. Having RSS back feels like coming home.
+
+**Paperless-ngx for documents.** Insurance papers, manuals, government stuff, utilities... From now on it's all searchable and OCR'd. This one doesn't sound exciting until you need to find that warranty document from 2019. Also will be a great base/source for future family LLM.
+
+**Every service has its own subdomain now.** This might seem like a small thing, but it's been a quality-of-life win. Instead of remembering IP addresses and port numbers, everything runs on clean URLs. Or we just access them directly from the central "local services" [Homepage](https://gethomepage.dev/).
+
+**Public access without VPN.** A selection of the local services (e.g. media, ebooks) is now accessible remotely through [Cloudflare Tunnel](https://www.cloudflare.com/products/tunnel/). Same https:// URL works at home and away. No [Tailscale](https://tailscale.com/) required for basic access. No changing the URL between local and remote. The Spouse Approval Factor on this one is high.
+
+Cloudflare, SSL certificates, reverse proxies... I have avoided them for years: they sounded very daunting to me. I can't say that it's super simple now, but it turns out that with the help of [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview), it became an easy hurdle to overcome. And now that the steps are established, adding new services takes just a couple of minutes.
+
+## Details on the current stack
+
+### Infrastructure
+  - [Portainer CE](https://www.portainer.io/) (Docker management)
+  - [Homepage](https://gethomepage.dev/) (dashboard)
+  - [Glances](https://nicolargo.github.io/glances/) (system monitoring)
+  - [Diun](https://crazymax.dev/diun/) (Docker update notifications to Telegram)
+
+### Media Stack
+  - [Plex](https://www.plex.tv/) (media server)
+  - [LazyLibrarian](https://lazylibrarian.gitlab.io/) (books & audiobooks)
+  - [Calibre-web](https://github.com/janeczku/calibre-web) (ebook web interface)
+  - [Audiobookshelf](https://www.audiobookshelf.org/) (audiobook player)
+  - \*arr stack
+
+### Photos
+  - [Immich](https://immich.app/) (Google Photos replacement)
+
+### Home Automation
+  - [Home Assistant](https://www.home-assistant.io/) (with ZHA coordinator)
+
+### Documents & Reference
+  - [Paperless-ngx](https://docs.paperless-ngx.com/) (document management)
+  - [FreshRSS](https://freshrss.org/) (RSS reader)
+  - [Kiwix](https://www.kiwix.org/) (offline Wikipedia)
+
+### Gaming
+  - Minecraft server
+
+## What's next
+
+A few smaller UX improvements first. I'm setting up a messenger bot to upload images and documents directly to Paperless (probably with help of [n8n](https://n8n.io/)). Right now you need to open the web interface. Good enough for me, too much friction for family use.
+
+Once these systems are stable and in use, the next step is a local LLM interface with access to all these documents. [OpenWebUI](https://openwebui.com/) or [LibreChat](https://www.librechat.ai/) (self-hosted ChatGPT-style interfaces) are high on the list of candidates. The goal: an AI assistant that actually knows us and our stuff, running entirely at home and able to control the home. I think a purchase of the [Home Assistant Voice](https://www.home-assistant.io/voice-pe/) is in my future.
+
+I'll share an update again in a couple months how this went (or how it terribly went wrong...)!
+
+---
+
+*This is a follow-up to [How I reduced my BigTech dependencies in 2025](/post/how-i-reduced-my-bigtech-dependencies-in-2025/).*
+
+Running any of this at home? What would you want a local AI to manage first?
