@@ -46,6 +46,8 @@ Cloudflare, SSL certificates, reverse proxies... I have avoided them for years: 
 
 All of this (except Home Assistant, which runs on its own dedicated device) is hosted on my Synology DS920+ via Docker/Portainer. So far it's handling everything remarkably well.
 
+The one exception: Immich's machine learning tasks. Face recognition and smart search were crushing the Synology's CPU. The fix? I spun up an Immich ML container on my MacMini and configured it as the primary ML server, with the Synology as fallback. Now Immich flies through ML tasks without melting the NAS.
+
 ### Infrastructure
   - <a href="https://www.portainer.io/" target="_blank" rel="noopener noreferrer">Portainer CE</a> (Docker management)
   - <a href="https://gethomepage.dev/" target="_blank" rel="noopener noreferrer">Homepage</a> (dashboard)
