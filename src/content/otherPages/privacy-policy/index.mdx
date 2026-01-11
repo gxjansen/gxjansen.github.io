@@ -70,9 +70,21 @@ You have the right to object to processing based on legitimate interest at any t
 
 ## Analytics and Tracking
 
-**I do not use any analytics or tracking on this website.** This is a privacy-first static personal website with no user tracking, cookies for analytics, or behavioral monitoring.
+This website uses [Umami](https://umami.is), a privacy-friendly, open-source analytics tool that I self-host on my own infrastructure in the Netherlands. Umami is designed to be GDPR-compliant without requiring cookie consent because it:
 
-Your browsing activity on this website is not tracked, analyzed, or shared with any third parties.
+- **Does not use cookies** - visitor identification uses a non-reversible hash
+- **Does not store IP addresses** - IPs are hashed immediately and the original is discarded
+- **Does not track users across sites** - each website has its own unique hash salt
+- **Does not collect personal data** - no usernames, emails, or identifying information
+- **Is self-hosted** - all data stays on my own servers in the EU
+
+The analytics data collected includes:
+- Page views and referrer information
+- Browser and device type (aggregated, not individual)
+- Country-level location (derived from IP hash, not stored)
+- Custom events (like button clicks and navigation)
+
+This data helps me understand how visitors use the website and improve the user experience. No consent banner is required because no personal data is processed or stored.
 
 ## Cookies
 
