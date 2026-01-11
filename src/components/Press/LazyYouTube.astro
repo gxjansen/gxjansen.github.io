@@ -34,7 +34,12 @@ const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
       const container = this.closest('.lazy-youtube');
       const videoId = container.dataset.videoId;
       const title = container.dataset.title;
-      
+
+      // Track video play with Umami
+      if (typeof umami !== 'undefined') {
+        umami.track('media-play', { target: 'youtube', value: title || videoId });
+      }
+
       const iframe = document.createElement('iframe');
       iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
       iframe.title = title || 'YouTube video player';
@@ -42,7 +47,7 @@ const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
       iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
       iframe.allowFullscreen = true;
       iframe.classList.add('absolute', 'inset-0', 'w-full', 'h-full');
-      
+
       container.innerHTML = '';
       container.appendChild(iframe);
     `}

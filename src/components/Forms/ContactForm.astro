@@ -211,10 +211,15 @@ import Button from "@components/Button/Button.astro";
       });
 
       if (isValid) {
+        // Track form submission with Umami
+        if (typeof umami !== 'undefined') {
+          umami.track('form-submit', { target: 'contact' });
+        }
+
         // Disable submit button and show loading state
         this.submitButton.disabled = true;
         this.submitButton.innerHTML = 'Submitting...';
-        
+
         // Here you would typically submit the form
         // For now, let's just simulate a submission
         setTimeout(() => {

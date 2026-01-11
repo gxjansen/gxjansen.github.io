@@ -58,6 +58,12 @@ const { title, details } = Astro.props as Props;
             accordionMenu.classList.add("active");
             accordionButton.setAttribute("aria-expanded", "true");
 
+            // Track accordion expand with Umami
+            if (typeof umami !== 'undefined') {
+              const title = accordionButton.textContent?.trim() || 'unknown';
+              umami.track('accordion-toggle', { target: title, value: 'expand' });
+            }
+
             // set max-height to the height of the accordion content
             // this makes it animate properly
             accordionContent.classList.remove("hidden");

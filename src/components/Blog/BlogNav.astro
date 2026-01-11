@@ -27,10 +27,12 @@ const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentInde
   aria-label="Blog post navigation"
 >
   <div class="flex justify-between items-center">
-    <a 
+    <a
       href={`/post`}
       class="text-base-600 dark:text-base-400 hover:text-primary-500 dark:hover:text-primary-400 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
       aria-label="Return to article overview"
+      data-umami-event="nav-click"
+      data-umami-event-target="blog-overview"
     >
       <svg 
         xmlns="http://www.w3.org/2000/svg" 
@@ -50,10 +52,12 @@ const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentInde
 
   <div class="flex justify-between items-center mt-8 gap-4">
     {prevPost && (
-      <a 
+      <a
         href={`/post/${prevPost.slug}`}
         class="flex-1 p-4 rounded-lg border border-base-200 dark:border-base-800 hover:border-primary-500 dark:hover:border-primary-400 group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
         aria-label={`Previous article: ${prevPost.data.title}`}
+        data-umami-event="nav-click"
+        data-umami-event-target="blog-prev"
       >
         <span class="text-sm text-base-500 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1">
           <svg 
@@ -77,10 +81,12 @@ const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentInde
     )}
 
     {nextPost && (
-      <a 
+      <a
         href={`/post/${nextPost.slug}`}
         class="flex-1 p-4 rounded-lg border border-base-200 dark:border-base-800 hover:border-primary-500 dark:hover:border-primary-400 group text-right focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
         aria-label={`Next article: ${nextPost.data.title}`}
+        data-umami-event="nav-click"
+        data-umami-event-target="blog-next"
       >
         <span class="text-sm text-base-500 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1 justify-end">
           <span>Next</span>

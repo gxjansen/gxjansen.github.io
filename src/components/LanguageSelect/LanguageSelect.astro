@@ -72,6 +72,8 @@ const currLocale = getLocaleFromUrl(Astro.url);
               aria-label={`Change language to ${languageSwitcherMap[lang]}`}
               lang={lang}
               hreflang={lang}
+              data-umami-event="lang-change"
+              data-umami-event-value={lang}
             >
               {languageSwitcherMap[lang]}
             </a>

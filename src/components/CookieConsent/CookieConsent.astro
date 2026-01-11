@@ -78,6 +78,12 @@ const currLocale = getLocaleFromUrl(Astro.url);
       cookieBanner?.classList.add("hidden");
       // accepted cookie only lasts for the session
       document.cookie = "cookie-consent=accept; path=/";
+
+      // Track cookie acceptance with Umami
+      if (typeof umami !== 'undefined') {
+        umami.track('modal-click', { target: 'cookie-accept' });
+      }
+
       // example of cookies lasting for a year (might be limited by browser settings)
       // let d = new Date();
       // let oneYear = new Date(d.getFullYear() + 1, d.getMonth(), d.getDate());
@@ -93,6 +99,11 @@ const currLocale = getLocaleFromUrl(Astro.url);
       cookieBanner?.classList.add("hidden");
       // declined cookie only lasts for the session
       document.cookie = "cookie-consent=decline; path=/";
+
+      // Track cookie decline with Umami
+      if (typeof umami !== 'undefined') {
+        umami.track('modal-click', { target: 'cookie-decline' });
+      }
     });
   }
 

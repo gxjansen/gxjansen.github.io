@@ -253,6 +253,43 @@ Enterprise-grade AI orchestration with hive-mind swarm intelligence, persistent 
 - **Resolve Library ID**: Find Context7-compatible library ID (`mcp__context7__resolve-library-id`)
 - **Get Library Docs**: Fetch up-to-date documentation for a library (`mcp__context7__get-library-docs`)
 
+## Umami Analytics Event Tracking
+
+This site uses a self-hosted Umami Analytics instance at `https://u.a11y.nl` for privacy-friendly analytics.
+
+### Event Naming Convention
+Events follow the pattern: `{category}-{action}` with optional `data-umami-event-target` for specifics.
+
+**Categories:**
+- `nav` - Navigation elements (header, footer links)
+- `cta` - Call-to-action buttons
+- `external` - External links
+- `card` - Content cards
+- `contact` - Contact form interactions
+- `theme` - Theme toggle
+
+### Implemented Events
+| Event Name | Target | Location |
+|------------|--------|----------|
+| `nav-click` | `home`, `about`, `blog`, etc. | Header navigation |
+| `external-click` | `linkedin`, `github`, `bluesky`, etc. | Social links |
+| `theme-toggle` | `dark`/`light` | Theme switch |
+| `contact-submit` | - | Contact form |
+| `card-click` | Card title | Blog/content cards |
+
+### Adding New Events
+**Static elements (links, buttons):**
+```html
+<a href="/page" data-umami-event="nav-click" data-umami-event-target="page-name">
+```
+
+**Dynamic tracking (JavaScript):**
+```javascript
+if (typeof umami !== 'undefined') {
+  umami.track('event-name', { target: 'value' });
+}
+```
+
 ## Write valid Typescript code that uses state-of-the-art Node.js v24 features and follows best practices:
 - Always use ES6+ syntax
 - Always use the built-in 'fetch' for HTTP requests, rather than using the 'node-fetch' package

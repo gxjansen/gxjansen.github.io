@@ -87,6 +87,11 @@ const { class: className, ...rest } = Astro.props as Props;
         changeTheme(newTheme);
         localStorage.setItem("colorTheme", newTheme);
         updateThemeToggleState(newTheme);
+
+        // Track theme toggle with Umami
+        if (typeof umami !== 'undefined') {
+          umami.track('theme-toggle', { value: newTheme });
+        }
       });
 
       // Handle keyboard events

@@ -19,6 +19,8 @@ interface Props {
   onclick?: any; // any onclick events
   class?: string; // any additional classes
   disabled?: boolean; // disabled state
+  umamiEvent?: string; // Umami event name (e.g., "cta-click")
+  umamiEventTarget?: string; // Umami event target (e.g., "book-guido")
   rest?: any; // catch-all for any additional parameters, such as "aria-label"
 }
 
@@ -30,6 +32,8 @@ const {
   arrow = "none",
   onclick,
   disabled = false,
+  umamiEvent,
+  umamiEventTarget,
   class: className,
   ...rest
 } = Astro.props as Props;
@@ -83,6 +87,8 @@ const baseClasses = [
       role="button"
       aria-disabled={disabled}
       tabindex={disabled ? -1 : undefined}
+      data-umami-event={umamiEvent}
+      data-umami-event-target={umamiEventTarget}
       {...rest}
     >
       {arrow === "left" && (
@@ -117,6 +123,8 @@ const baseClasses = [
       onclick={onclick}
       disabled={disabled}
       aria-disabled={disabled}
+      data-umami-event={umamiEvent}
+      data-umami-event-target={umamiEventTarget}
       {...rest}
     >
       {arrow === "left" && (

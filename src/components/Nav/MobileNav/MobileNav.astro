@@ -88,6 +88,8 @@ import { locales } from "@config/siteSettings.json";
           variant="secondary"
           class="w-full shadow-none"
           href="/contact"
+          umamiEvent="cta-click"
+          umamiEventTarget="book-guido-mobile"
         >
         Book Guido
         </Button>
@@ -132,6 +134,11 @@ import { locales } from "@config/siteSettings.json";
         // mobile nav is currently closed, so open it
         mobileNavContainer.classList.add("open");
         mobileNavBurger.setAttribute("aria-expanded", "true");
+
+        // Track mobile menu open with Umami
+        if (typeof umami !== 'undefined') {
+          umami.track('nav-click', { target: 'mobile-menu-open' });
+        }
 
         // mobile nav content drawer
         mobileNavContent.classList.remove("hidden");

@@ -103,6 +103,13 @@ const testimonialData = getTranslatedData("testimonialData", currLocale);
 
     // Now you can use Swiper
     const swiper = new Swiper(".testimonials__swiper--quotes", SwiperParams);
+
+    // Track testimonial carousel navigation with Umami
+    swiper.on('slideChange', () => {
+      if (typeof umami !== 'undefined') {
+        umami.track('carousel-change', { target: 'testimonials', value: swiper.activeIndex.toString() });
+      }
+    });
   }
 
   // runs on initial page load

@@ -9,7 +9,12 @@
       "mcp__netlify__netlify-deploy-services-updater",
       "mcp__netlify__netlify-deploy-services-reader",
       "mcp__firecrawl__firecrawl_scrape",
-      "mcp__firecrawl__firecrawl_search"
+      "mcp__firecrawl__firecrawl_search",
+      "mcp__puppeteer__puppeteer_navigate",
+      "mcp__puppeteer__puppeteer_screenshot",
+      "mcp__puppeteer__puppeteer_evaluate",
+      "mcp__tavily__tavily-search",
+      "Skill(linkedin)"
     ],
     "deny": []
   },
