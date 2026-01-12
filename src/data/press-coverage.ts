@@ -5,7 +5,7 @@ export const pressCoverage = [
         publicationDate: "2025-12-11",
         youtubeLink: "",
         spotifyEmbedId: "",
-        articleUrl: "https://elevenlabs.io/hackathon",
+        articleUrl: "https://elevenlabs.io/blog/announcing-the-winners-of-the-elevenlabs-worldwide-hackathon",
         personOrganization: "ElevenLabs / n8n",
         category: "award"
     },
