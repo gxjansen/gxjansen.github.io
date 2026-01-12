@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" fill="none">
+  <defs>
+    <mask id="node-mask">
+      <circle cx="60" cy="160" r="50" fill="white"/>
+      <circle cx="60" cy="160" r="25" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Node circle with transparent hole -->
+  <circle cx="60" cy="160" r="50" fill="#FF6D5A" mask="url(#node-mask)"/>
+
+  <!-- Heartbeat pulse -->
+  <polyline
+    points="110,160 140,160 160,80 200,240 240,120 270,160 300,160"
+    stroke="#FF6D5A"
+    stroke-width="25"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+</svg>
