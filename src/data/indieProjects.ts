@@ -16,7 +16,7 @@ export const indieProjects: IndieProject[] = [
     mainImage: "/icons/n8n-pulse.svg",
     link: "https://n8n-pulse.gui.do/",
     iconBgColor: "bg-[#1a1a2e]",
-    githubUrl: "https://github.com/gxjansen/n8n-pulse",
+    githubUrl: "https://github.com/gxjansen/n8n-stats",
     license: "MIT"
   },
   {
