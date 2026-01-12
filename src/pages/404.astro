@@ -82,4 +82,14 @@ const currLocale = getLocaleFromUrl(Astro.url);
       </div>
     </div>
   </section>
+
+  <!-- Track 404 with Umami -->
+  <script>
+    if (typeof umami !== 'undefined') {
+      umami.track('404-page', {
+        url: window.location.pathname,
+        referrer: document.referrer || 'direct',
+      });
+    }
+  </script>
 </BaseLayout>

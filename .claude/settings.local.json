@@ -19,9 +19,9 @@
     "deny": []
   },
   "enabledMcpjsonServers": [
-    "claude-flow",
-    "ruv-swarm",
     "claude-flow@alpha",
+    "ruv-swarm",
     "flow-nexus"
-  ]
+  ],
+  "enableAllProjectMcpServers": true
 }
