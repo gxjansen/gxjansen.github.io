@@ -10,10 +10,11 @@ interface Props {
   link: string;
   iconBgColor: string;
   license?: string;
+  tagline?: string;
   githubUrl?: string;
 }
 
-const { name, description, mainImage, link, iconBgColor, license, githubUrl } = Astro.props;
+const { name, description, mainImage, link, iconBgColor, license, tagline, githubUrl } = Astro.props;
 ---
 
 <article class="card group px-3 py-3 sm:px-4 sm:py-4">
@@ -47,8 +48,8 @@ const { name, description, mainImage, link, iconBgColor, license, githubUrl } = 
           name
         )}
       </h2>
-      {license && (
-        <p class="text-sm text-base-400 mb-2">License: {license}</p>
+      {(tagline || license) && (
+        <p class="text-sm text-base-400 mb-2">{tagline || `License: ${license}`}</p>
       )}
       <p class="card-description text-lg prose" set:html={description} />
       <div class="mt-8 flex gap-4 items-center justify-center md:justify-start">

@@ -5,6 +5,7 @@ interface IndieProject {
   link: string;
   iconBgColor: string; // Tailwind color class for the icon background
   license?: string; // Optional license information
+  tagline?: string; // Optional custom tagline (overrides license display)
   githubUrl?: string; // Optional GitHub repository URL
 }
 
@@ -23,7 +24,8 @@ export const indieProjects: IndieProject[] = [
     description: "n8n workflow that generates consensus-based answers by leveraging multiple AI models with a peer review system. Synthesizes responses across different AI systems to improve answer quality through comparative analysis.",
     mainImage: "/icons/n8n.svg",
     link: "https://n8n.io/workflows/11660-generate-consensus-answers-with-multiple-ai-models-and-peer-review-system/",
-    iconBgColor: "bg-[#1a1a2e]"
+    iconBgColor: "bg-[#1a1a2e]",
+    tagline: "Available on the n8n template marketplace"
   },
   {
     name: "Community Echo",
@@ -48,7 +50,8 @@ export const indieProjects: IndieProject[] = [
     description: "n8n workflow that integrates LinkedIn profile scraping with Apify and NocoDB CRM. Automatically enriches and updates customer data with detailed LinkedIn information for enhanced lead intelligence.",
     mainImage: "/icons/n8n.svg",
     link: "https://n8n.io/workflows/5258-enrich-linkedin-profiles-in-nocodb-crm-with-apify-scraper/",
-    iconBgColor: "bg-[#1a1a2e]"
+    iconBgColor: "bg-[#1a1a2e]",
+    tagline: "Available on the n8n template marketplace"
   },
   {
     name: "BlueSpark",
