@@ -1,13 +1,15 @@
 /**
- * URL Validation Tests for Data Files
+ * URL Validation Tests for Data Files and Blog Posts
  *
- * Validates that all external URLs in data files are reachable (not 404s).
+ * Validates that all external URLs in data files and blog posts are reachable (not 404s).
  * This catches broken links before they reach production.
  *
  * Run with: npm test -- src/data/__tests__/validateUrls.test.ts
  */
 
 import { describe, it, expect } from 'vitest';
+import * as fs from 'fs';
+import * as path from 'path';
 import { indieProjects } from '../indieProjects';
 import { socialLinks } from '../socialLinks';
 import { pressCoverage } from '../press-coverage';
@@ -90,6 +92,95 @@ function collectUrls(): UrlToValidate[] {
   return urls;
 }
 
+/**
+ * Extract URLs from markdown/MDX content
+ * Handles: [text](url), <a href="url">, src="url", href="url"
+ */
+function extractUrlsFromMarkdown(content: string, source: string): UrlToValidate[] {
+  const urls: UrlToValidate[] = [];
+  const seenUrls = new Set<string>();
+
+  // Match markdown links: [text](url)
+  const markdownLinkRegex = /\[([^\]]*)\]\((https?:\/\/[^)]+)\)/g;
+  let match;
+  while ((match = markdownLinkRegex.exec(content)) !== null) {
+    const url = match[2].trim();
+    if (!seenUrls.has(url)) {
+      seenUrls.add(url);
+      urls.push({ url, source, field: 'markdown-link' });
+    }
+  }
+
+  // Match HTML links: href="url" or href='url'
+  const hrefRegex = /href=["'](https?:\/\/[^"']+)["']/g;
+  while ((match = hrefRegex.exec(content)) !== null) {
+    const url = match[1].trim();
+    if (!seenUrls.has(url)) {
+      seenUrls.add(url);
+      urls.push({ url, source, field: 'href' });
+    }
+  }
+
+  // Match src attributes (for iframes, images): src="url"
+  const srcRegex = /src=["'](https?:\/\/[^"']+)["']/g;
+  while ((match = srcRegex.exec(content)) !== null) {
+    const url = match[1].trim();
+    if (!seenUrls.has(url)) {
+      seenUrls.add(url);
+      urls.push({ url, source, field: 'src' });
+    }
+  }
+
+  return urls;
+}
+
+/**
+ * Get all MDX files from a directory recursively
+ */
+function getMdxFiles(dir: string): string[] {
+  const files: string[] = [];
+
+  if (!fs.existsSync(dir)) {
+    return files;
+  }
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...getMdxFiles(fullPath));
+    } else if (entry.name.endsWith('.mdx') || entry.name.endsWith('.md')) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
+
+/**
+ * Collect all URLs from blog posts
+ */
+function collectBlogPostUrls(): UrlToValidate[] {
+  const urls: UrlToValidate[] = [];
+
+  // Path to blog posts directory (relative to __dirname which is src/data/__tests__)
+  const blogDir = path.resolve(__dirname, '../../content/post');
+  const mdxFiles = getMdxFiles(blogDir);
+
+  for (const filePath of mdxFiles) {
+    const content = fs.readFileSync(filePath, 'utf-8');
+    // Extract post name from path for better error messages
+    const relativePath = path.relative(blogDir, filePath);
+    const postName = path.dirname(relativePath) || path.basename(relativePath, path.extname(relativePath));
+
+    const postUrls = extractUrlsFromMarkdown(content, `blog: ${postName}`);
+    urls.push(...postUrls);
+  }
+
+  return urls;
+}
+
 // Domains known to block automated requests or have bot detection
 const SKIP_DOMAINS = [
   'instagram.com',
@@ -98,7 +189,18 @@ const SKIP_DOMAINS = [
   'signal.me',       // Signal links are special
   'soundcloud.com',  // Often blocks bots
   'x.com',
-  'twitter.com'
+  'twitter.com',
+  'youtube.com',     // Embedded videos use different URL patterns
+  'youtu.be',        // YouTube short URLs
+  'vimeo.com',       // Video embeds
+  'medium.com',      // Often has bot detection
+  'facebook.com',    // Bot detection
+  'slideshare.net',  // Often blocks bots
+  'amazon.com',      // Bot detection
+  'amazon.de',       // Bot detection
+  'amzn.to',         // Amazon short links
+  'docs.google.com', // Google Docs returns 404/410 based on sharing settings
+  'drive.google.com' // Google Drive same issue
 ];
 
 /**
@@ -282,7 +384,22 @@ describe('Data File URL Validation', () => {
 
     expect(errors).toEqual([]);
   }, 60000);
+
+  it('should have valid URLs in blog posts', async () => {
+    const urls = collectBlogPostUrls();
+
+    console.log(`Validating ${urls.length} URLs from blog posts...`);
+
+    const errors = await validateUrlsWithRateLimit(urls, 300);
+
+    if (errors.length > 0) {
+      console.error('\nBroken URLs found in blog posts:');
+      errors.forEach(err => console.error(`  - ${err}`));
+    }
+
+    expect(errors).toEqual([]);
+  }, 300000); // 5 min timeout for all blog posts
 });
 
 // Export for potential use in CLI script
-export { collectUrls, validateUrl, validateUrlsWithRateLimit };
+export { collectUrls, collectBlogPostUrls, validateUrl, validateUrlsWithRateLimit };
