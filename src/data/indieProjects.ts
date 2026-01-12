@@ -25,7 +25,7 @@ export const indieProjects: IndieProject[] = [
     mainImage: "/icons/n8n.svg",
     link: "https://n8n.io/workflows/11660-generate-consensus-answers-with-multiple-ai-models-and-peer-review-system/",
     iconBgColor: "bg-[#1a1a2e]",
-    tagline: "Available on the n8n template marketplace"
+    tagline: "Available for free on the n8n template marketplace"
   },
   {
     name: "Community Echo",
@@ -51,7 +51,7 @@ export const indieProjects: IndieProject[] = [
     mainImage: "/icons/n8n.svg",
     link: "https://n8n.io/workflows/5258-enrich-linkedin-profiles-in-nocodb-crm-with-apify-scraper/",
     iconBgColor: "bg-[#1a1a2e]",
-    tagline: "Available on the n8n template marketplace"
+    tagline: "Available for free on the n8n template marketplace"
   },
   {
     name: "BlueSpark",
