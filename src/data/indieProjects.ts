@@ -53,7 +53,7 @@ export const indieProjects: IndieProject[] = [
     iconBgColor: "bg-[#1a1a2e]"
   },
   {
-    name: "LinkedIn Profile Enricher",
+    name: "CRM LinkedIn Enricher",
     description: "n8n workflow that integrates LinkedIn profile scraping with Apify and NocoDB CRM. Automatically enriches and updates customer data with detailed LinkedIn information for enhanced lead intelligence.",
     mainImage: "/icons/n8n.svg",
     link: "https://n8n.io/workflows/5258-enrich-linkedin-profiles-in-nocodb-crm-with-apify-scraper/",
