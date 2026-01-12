@@ -5,12 +5,13 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 // components
 import Badge from "@components/Badge/Badge.astro";
 import EventCard from "@components/Events/EventCard.astro";
+import RecurringEventCard from "@components/Events/RecurringEventCard.astro";
 import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
 import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
 
 // utils
 import { getPresentationUrl } from "@utils/eventPresentationRelations";
-import { getAllEvents, loadEventIcons } from "@utils/eventUtils";
+import { getAllEvents, getEventIcon } from "@utils/eventUtils";
 
 // Get all events and sort them by date
 const events = await getAllEvents();
@@ -24,14 +25,66 @@ today.setHours(0, 0, 0, 0);
 
 const pastEvents = sortedEvents.filter((event) => new Date(event.date) < today);
 
-// Implement pagination to reduce DOM size
-const EVENTS_PER_PAGE = 40; // Show 40 events initially to reduce DOM size
-const initialEvents = pastEvents.slice(0, EVENTS_PER_PAGE);
-const remainingEvents = pastEvents.slice(EVENTS_PER_PAGE);
+// Identify recurring event patterns (Spryker User Group monthly events)
+const RECURRING_EVENT_PATTERN = /^spryker-user-group-\d{4}-\d{2}$/;
 
-// Split events into two columns for better organization
-const firstColumnEvents = initialEvents.filter((_, i) => i % 2 === 0);
-const secondColumnEvents = initialEvents.filter((_, i) => i % 2 === 1);
+// Group events by year and separate recurring events
+interface YearGroup {
+  year: number;
+  regularEvents: typeof pastEvents;
+  recurringGroups: Map<string, typeof pastEvents>;
+}
+
+// Type for combined events (regular + recurring groups)
+interface CombinedEventItem {
+  type: 'regular' | 'recurring';
+  event?: typeof pastEvents[0];
+  recurringKey?: string;
+  recurringEvents?: typeof pastEvents;
+  date: Date;
+}
+
+const eventsByYear = new Map<number, YearGroup>();
+
+pastEvents.forEach((event) => {
+  const year = new Date(event.date).getFullYear();
+
+  if (!eventsByYear.has(year)) {
+    eventsByYear.set(year, {
+      year,
+      regularEvents: [],
+      recurringGroups: new Map()
+    });
+  }
+
+  const yearGroup = eventsByYear.get(year)!;
+
+  // Check if this is a recurring Spryker User Group event
+  if (RECURRING_EVENT_PATTERN.test(event.id)) {
+    const groupKey = 'spryker-user-group';
+    if (!yearGroup.recurringGroups.has(groupKey)) {
+      yearGroup.recurringGroups.set(groupKey, []);
+    }
+    yearGroup.recurringGroups.get(groupKey)!.push(event);
+  } else {
+    yearGroup.regularEvents.push(event);
+  }
+});
+
+// Sort years descending
+const sortedYears = Array.from(eventsByYear.keys()).sort((a, b) => b - a);
+
+// Load the Spryker icon once for recurring event cards
+const sprykerIcon = await getEventIcon('spryker.png');
+
+// Calculate total event count for display
+// Regular events + 1 per recurring group per year
+let totalDisplayedEvents = 0;
+sortedYears.forEach((year) => {
+  const yearGroup = eventsByYear.get(year)!;
+  totalDisplayedEvents += yearGroup.regularEvents.length;
+  totalDisplayedEvents += yearGroup.recurringGroups.size; // Each recurring group counts as 1
+});
 ---
 
 <BaseLayout
@@ -52,184 +105,104 @@ const secondColumnEvents = initialEvents.filter((_, i) => i % 2 === 1);
   {/* Past Events Section */}
   <section id="past-events" class="py-24 md:py-28">
     <div class="mx-auto mb-16 text-center md:max-w-4xl">
-        <Badge>Events</Badge>
-        <h1 class="h2 mb-4">Past Events</h1>
-        <p class="description text-lg md:text-xl">
-          An overview of all events I've spoken at or attended
-        </p>
-      </div>
+      <Badge>Events</Badge>
+      <h1 class="h2 mb-4">Past Events</h1>
+      <p class="description text-lg md:text-xl">
+        An overview of all {totalDisplayedEvents} events I've spoken at
+      </p>
+    </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8" id="events-container">
-        {/* First column */}
-        <div class="space-y-6" id="first-column">
-          {firstColumnEvents.map((event) => (
-            <EventCard 
-              {...event} 
-              showPresentationName={true}
-              presentationUrl={getPresentationUrl(event.id)}
-            />
-          ))}
-        </div>
+    <div class="space-y-16" id="events-container">
+      {sortedYears.map((year) => {
+        const yearGroup = eventsByYear.get(year)!;
 
-        {/* Second column - offset as a whole */}
-        <div class="space-y-6 md:mt-24" id="second-column">
-          {secondColumnEvents.map((event) => (
-            <EventCard 
-              {...event} 
-              showPresentationName={true}
-              presentationUrl={getPresentationUrl(event.id)}
-            />
-          ))}
-        </div>
-      </div>
+        // Combine recurring groups and regular events for this year
+        // Place recurring group card at the position of its first occurrence
+        const allYearEvents: CombinedEventItem[] = [];
 
-      {/* Load More Button */}
-      {remainingEvents.length > 0 && (
-        <div class="mt-16 text-center">
-          <button 
-            id="load-more-btn"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200"
-            data-remaining-events={JSON.stringify(remainingEvents.map(event => ({
-              ...event,
-              loadedIcon: undefined, // Remove ImageMetadata object
-              icon: event.icon // Keep the filename for client-side rendering
-            })))}
-            data-remaining-count={remainingEvents.length}
-          >
-            Load More Events ({remainingEvents.length})
-            <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-          </button>
-        </div>
-      )}
+        // Add regular events
+        yearGroup.regularEvents.forEach((event) => {
+          allYearEvents.push({
+            type: 'regular',
+            event,
+            date: new Date(event.date)
+          });
+        });
+
+        // Add recurring groups (use the date of the last event in the group)
+        yearGroup.recurringGroups.forEach((events, key) => {
+          const lastEvent = events[0]; // Events are already sorted desc
+          allYearEvents.push({
+            type: 'recurring',
+            recurringKey: key,
+            recurringEvents: events,
+            date: new Date(lastEvent.date)
+          });
+        });
+
+        // Sort by date descending
+        allYearEvents.sort((a, b) => b.date.getTime() - a.date.getTime());
+
+        // Split into two columns
+        const firstColumnEvents = allYearEvents.filter((_, i) => i % 2 === 0);
+        const secondColumnEvents = allYearEvents.filter((_, i) => i % 2 === 1);
+
+        return (
+          <div class="year-group">
+            <div class="flex items-center gap-4 mb-8">
+              <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200">{year}</h2>
+              <div class="flex-1 h-px bg-gray-200 dark:bg-gray-700"></div>
+              <span class="text-sm text-gray-500 dark:text-gray-400">
+                {allYearEvents.length} {allYearEvents.length === 1 ? 'event' : 'events'}
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {/* First column */}
+              <div class="space-y-6">
+                {firstColumnEvents.map((item) => (
+                  item.type === 'recurring' && item.recurringEvents ? (
+                    <RecurringEventCard
+                      name="Spryker User Group"
+                      events={item.recurringEvents}
+                      icon={sprykerIcon}
+                      url="https://forum.commercequest.space/events/"
+                      role="Organizer & co-host/moderator"
+                    />
+                  ) : item.event ? (
+                    <EventCard
+                      {...item.event}
+                      showPresentationName={true}
+                      presentationUrl={getPresentationUrl(item.event.id)}
+                    />
+                  ) : null
+                ))}
+              </div>
+
+              {/* Second column - offset as a whole */}
+              <div class="space-y-6 md:mt-24">
+                {secondColumnEvents.map((item) => (
+                  item.type === 'recurring' && item.recurringEvents ? (
+                    <RecurringEventCard
+                      name="Spryker User Group"
+                      events={item.recurringEvents}
+                      icon={sprykerIcon}
+                      url="https://forum.commercequest.space/events/"
+                      role="Organizer & co-host/moderator"
+                    />
+                  ) : item.event ? (
+                    <EventCard
+                      {...item.event}
+                      showPresentationName={true}
+                      presentationUrl={getPresentationUrl(item.event.id)}
+                    />
+                  ) : null
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   </section>
 </BaseLayout>
-
-<script>
-  import { getPresentationUrl } from '@utils/eventPresentationRelations';
-  
-  function setupLoadMoreEvents() {
-    const loadMoreBtn = document.getElementById('load-more-btn');
-    const firstColumn = document.getElementById('first-column');
-    const secondColumn = document.getElementById('second-column');
-    
-    if (!loadMoreBtn || !firstColumn || !secondColumn) return;
-    
-    const remainingEvents = JSON.parse(loadMoreBtn.dataset.remainingEvents || '[]');
-    let currentIndex = 0;
-    const BATCH_SIZE = 20; // Load 20 more events at a time
-    
-    function renderEventCard(event, index) {
-      const presentationUrl = getPresentationUrl(event.id);
-      const linkUrl = presentationUrl || event.url;
-      const eventDate = new Date(event.date).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric"
-      });
-      
-      return `
-        <article class="event-card group" role="listitem">
-          ${linkUrl ? `<a href="${linkUrl}" target="_blank" rel="noopener noreferrer" class="cursor-pointer">` : '<div>'}
-            <div class="flex items-center mb-3">
-              <div class="w-10 h-10 mr-3 bg-base-300 dark:bg-base-800 rounded-lg flex items-center justify-center">
-                ${event.icon ? `
-                  <img 
-                    src="/images/events/${event.icon}"
-                    alt="${event.name} Icon"
-                    width="32"
-                    height="32"
-                    class="opacity-80 contrast-125 dark:opacity-90 dark:contrast-125"
-                    loading="lazy"
-                  />
-                ` : '<span class="text-2xl">🗓️</span>'}
-              </div>
-              <div class="flex flex-col">
-                <div class="flex items-center gap-2 flex-wrap">
-                  <div class="flex items-center gap-2">
-                    <span class="text-lg font-semibold text-primary-600 dark:text-primary-400">
-                      ${event.name}
-                    </span>
-                    ${event.workshop ? `
-                      <span class="text-xs text-primary-600 dark:text-primary-400 px-2 py-1 bg-primary-50 dark:bg-primary-400/10 rounded">
-                        Workshop
-                      </span>
-                    ` : ''}
-                    ${linkUrl ? `
-                      <span class="text-primary-600 dark:text-primary-400 group-hover:translate-x-1 transition-transform duration-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                      </span>
-                    ` : ''}
-                  </div>
-                </div>
-                <div class="text-sm text-gray-600 dark:text-gray-300 flex flex-col sm:flex-row sm:items-center sm:gap-1">
-                  <div class="flex items-center gap-1">
-                    <span>🌎</span>
-                    <span>${event.city}</span>
-                  </div>
-                  <span class="hidden sm:inline">&mdash;</span>
-                  <span>${eventDate}</span>
-                </div>
-              </div>
-            </div>
-            <div class="mt-2 flex items-center gap-2">
-              ${event.topic || event.role ? `
-                <em class="text-sm text-gray-600 dark:text-gray-400 line-clamp-1 flex-1">
-                  ${event.topic || event.role}
-                </em>
-              ` : ''}
-              ${linkUrl && presentationUrl ? `
-                <div class="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors duration-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="size-4">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M21 3a1 1 0 0 1 0 2v9a3 3 0 0 1 -3 3h-5v2h2a1 1 0 0 1 0 2h-6a1 1 0 0 1 0 -2h2v-2h-5a3 3 0 0 1 -3 -3v-9a1 1 0 1 1 0 -2zm-4.293 4.293a1 1 0 0 0 -1.414 0l-2.293 2.292l-1.293 -1.292a1 1 0 0 0 -1.414 0l-3 3a1 1 0 0 0 0 1.414l.094 .083a1 1 0 0 0 1.32 -.083l2.293 -2.292l1.293 1.292a1 1 0 0 0 1.414 0l3 -3a1 1 0 0 0 0 -1.414" />
-                  </svg>
-                </div>
-              ` : ''}
-            </div>
-          ${linkUrl ? '</a>' : '</div>'}
-        </article>
-      `;
-    }
-    
-    function loadMoreEvents() {
-      const nextBatch = remainingEvents.slice(currentIndex, currentIndex + BATCH_SIZE);
-      
-      nextBatch.forEach((event, index) => {
-        const isEven = (currentIndex + index) % 2 === 0;
-        const targetColumn = isEven ? firstColumn : secondColumn;
-        
-        const eventElement = document.createElement('div');
-        eventElement.innerHTML = renderEventCard(event, currentIndex + index);
-        targetColumn.appendChild(eventElement.firstElementChild);
-      });
-      
-      currentIndex += BATCH_SIZE;
-      
-      // Update button text or hide if no more events
-      const remainingCount = remainingEvents.length - currentIndex;
-      if (remainingCount <= 0) {
-        loadMoreBtn.style.display = 'none';
-      } else {
-        loadMoreBtn.innerHTML = `
-          Load More Events (${remainingCount})
-          <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-        `;
-      }
-    }
-    
-    loadMoreBtn.addEventListener('click', loadMoreEvents);
-  }
-  
-  // Initialize on page load
-  setupLoadMoreEvents();
-  
-  // Re-initialize after page transitions
-  document.addEventListener('astro:after-swap', setupLoadMoreEvents);
-</script>
