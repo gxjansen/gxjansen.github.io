@@ -34,7 +34,7 @@
   }
 
   .card-content {
-    @apply p-6 sm:p-8 flex flex-col;
+    @apply p-4 sm:p-6 md:p-8 flex flex-col;
   }
 
   .card-title {
@@ -66,7 +66,7 @@
 
   /* Horizontal Scroll Container */
   .scroll-container {
-    @apply flex overflow-x-auto gap-4 pb-6 snap-x snap-mandatory;
+    @apply flex overflow-x-auto gap-3 pb-6 snap-x snap-mandatory px-2;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -82,7 +82,7 @@
   }
 
   .scroll-item {
-    @apply flex-none snap-start w-[calc(100%-2rem)] sm:w-[calc(50%-1rem)] max-w-full box-border;
+    @apply flex-none snap-center w-[calc(100%-1rem)] sm:w-[calc(50%-0.5rem)] max-w-full box-border;
   }
 
   /* Carousel Header and Progress */
@@ -139,7 +139,7 @@
   }
 
   .site-container {
-    @apply mx-auto max-w-7xl w-full box-border px-4;
+    @apply mx-auto max-w-7xl w-full box-border px-2 sm:px-4;
   }
 
   /* Background Patterns */
