@@ -11,8 +11,8 @@
   @apply prose-h4:text-lg prose-h4:font-semibold md:prose-h4:text-xl;
   /* all headings */
   @apply prose-headings:mb-5 prose-headings:mt-7 prose-headings:text-base-900 dark:prose-headings:text-base-100;
-  /* paragraphs */
-  @apply prose-p:my-2 prose-p:leading-normal prose-p:text-base-500 dark:prose-p:text-white;
+  /* paragraphs - 17px on mobile for better readability, scales with base on desktop */
+  @apply prose-p:my-2 prose-p:leading-relaxed prose-p:text-base-500 dark:prose-p:text-white prose-p:text-[17px] md:prose-p:text-base;
   /* bold text */
   @apply prose-strong:font-bold prose-strong:text-base-900 dark:prose-strong:text-white;
   /* code */
@@ -28,8 +28,8 @@
   pre {
     @apply max-w-full overflow-x-auto;
   }
-  /* lists */
-  @apply prose-li:text-base-500 dark:prose-li:text-base-300;
+  /* lists - 17px on mobile for better readability, scales with base on desktop */
+  @apply prose-li:text-base-500 dark:prose-li:text-base-300 prose-li:text-[17px] md:prose-li:text-base prose-li:leading-relaxed;
   /* anchor links - only set text color, underline handled by global link styles */
   @apply prose-a:text-primary-500 hover:prose-a:text-primary-600 dark:prose-a:text-primary-400 dark:hover:prose-a:text-primary-300;
   /* images - constrained to container width on mobile */
