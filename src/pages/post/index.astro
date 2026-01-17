@@ -50,7 +50,7 @@ const sortedPosts = posts.sort((a, b) =>
           </div>
 
           <!-- Blog posts grid -->
-          <div class="container mx-auto px-4">
+          <div class="mx-auto max-w-6xl">
             <div class="cards-grid">
               {sortedPosts.map(post => (
                 <PostCardAtlas post={post} showDescription={true} />
