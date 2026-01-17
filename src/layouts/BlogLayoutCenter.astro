@@ -65,7 +65,7 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
   >
     <div class="relative">
         <!-- Blog post info -->
-        <div class="flex w-full flex-col items-center">
+        <div class="flex w-full flex-col items-center px-4">
           <div class="mx-auto flex w-full max-w-[1000px]">
             <div class="mx-auto text-center">
               <!-- Categories -->
@@ -121,14 +121,15 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
           </div>
           <!-- blog post main image -->
           {heroImage && (
-            <div class="mt-6 max-w-[1000px] overflow-hidden">
+            <div class="mt-6 max-w-[1000px] overflow-hidden px-4 md:px-0">
               <Image
                 src={heroImage}
                 alt={heroImage.alt || `Cover image for article: ${title}`}
                 widths={[640, 768, 1024, 1600, 2000]}
                 sizes="(max-width: 1024px) 100vw, 1000px"
-                class="max-h-[70vh] rounded-xl object-cover"
+                class="max-h-[70vh] w-full rounded-xl object-cover"
                 loading="eager"
+                fetchpriority="high"
                 transition:name={transitionName}
                 itemprop="image"
                 quality={90}
@@ -141,7 +142,7 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
     </div>
 
     <!-- article content -->
-    <div class="mt-10 w-full">
+    <div class="mt-10 w-full px-4">
       <div class="mx-auto max-w-2xl">
         <div class="text-base-900 dark:text-base-100 text-base">
           {

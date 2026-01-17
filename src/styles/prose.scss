@@ -1,5 +1,7 @@
 /* Markdown and MDX Styling for blog posts, using @tailwind/typography with `prose` */
 .prose {
+  /* prevent horizontal overflow */
+  @apply overflow-x-hidden;
   /* emergency word break */
   @apply break-words;
   /* heading font sizes */
@@ -22,22 +24,33 @@
   code::after {
     content: "";
   }
+  /* code blocks - scrollable on overflow */
+  pre {
+    @apply max-w-full overflow-x-auto;
+  }
   /* lists */
   @apply prose-li:text-base-500 dark:prose-li:text-base-300;
   /* anchor links - only set text color, underline handled by global link styles */
   @apply prose-a:text-primary-500 hover:prose-a:text-primary-600 dark:prose-a:text-primary-400 dark:hover:prose-a:text-primary-300;
-  /* images */
-  @apply prose-img:mx-auto prose-img:h-auto prose-img:w-full prose-img:max-w-[800px] prose-img:rounded-md;
+  /* images - constrained to container width on mobile */
+  @apply prose-img:mx-auto prose-img:h-auto prose-img:w-full prose-img:max-w-full prose-img:rounded-md md:prose-img:max-w-[800px];
   /* video */
   @apply prose-video:mr-auto prose-video:min-w-0 prose-video:max-w-full;
   /* blockquote */
   @apply prose-blockquote:border-l-primary-500;
   /* horizontal rule */
   @apply prose-hr:my-8 prose-hr:border-base-200 dark:prose-hr:border-base-800;
+  /* table - scrollable wrapper on mobile */
+  @apply prose-table:block prose-table:max-w-full prose-table:overflow-x-auto;
   /* table head */
   @apply prose-thead:border-b-base-400 prose-thead:text-left dark:prose-thead:border-b-base-700;
   /* table row */
   @apply prose-tr:border-b-base-200 dark:text-base-300 dark:prose-tr:border-b-base-800;
+
+  /* SVGs and other wide elements */
+  svg {
+    @apply max-w-full h-auto;
+  }
 }
 
 /* Markdown Styling for admonitions in posts, using @tailwind/typography with `prose` 

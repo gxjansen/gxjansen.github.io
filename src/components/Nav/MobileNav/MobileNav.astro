@@ -186,11 +186,44 @@ import { locales } from "@config/siteSettings.json";
     }
   }
 
+  // Force navigation for mobile menu links
+  // Firefox Android has issues with View Transitions - this bypasses them
+  function initMobileNavLinks() {
+    const mobileNavContent = document.getElementById("mobile-nav__content");
+    if (!mobileNavContent) return;
+
+    mobileNavContent.querySelectorAll('a').forEach((link) => {
+      // Handle click events
+      link.addEventListener('click', function(e) {
+        const href = link.getAttribute('href');
+        if (href && !href.startsWith('#')) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = href;
+        }
+      });
+
+      // Handle touchend for mobile touch devices
+      link.addEventListener('touchend', function(e) {
+        const href = link.getAttribute('href');
+        if (href && !href.startsWith('#')) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = href;
+        }
+      });
+    });
+  }
+
   // runs on initial page load
   initMobileNav();
+  initMobileNavLinks();
 
   // runs on view transitions navigation
-  document.addEventListener("astro:after-swap", initMobileNav);
+  document.addEventListener("astro:after-swap", () => {
+    initMobileNav();
+    initMobileNavLinks();
+  });
 </script>
 
 <style lang="scss">
