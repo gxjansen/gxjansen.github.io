@@ -34,13 +34,21 @@ function applyLinkColors() {
   });
 }
 
-// Apply colors on page load and after view transitions
-applyLinkColors();
+// Apply colors on page load (deferred to not block main thread)
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(applyLinkColors);
+} else {
+  setTimeout(applyLinkColors, 0);
+}
 document.addEventListener('astro:after-swap', applyLinkColors);
 
-// Watch for theme changes
+// Watch for theme changes (debounced to avoid performance issues)
 const observer = new MutationObserver(() => {
-  applyLinkColors();
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(applyLinkColors);
+  } else {
+    setTimeout(applyLinkColors, 0);
+  }
 });
 
 observer.observe(document.documentElement, {
