@@ -1,0 +1,117 @@
+---
+/**
+ * Newsletter subscription page with detailed information about
+ * content expectations, privacy, and GDPR compliance.
+ */
+
+// main layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import Badge from "@components/Badge/Badge.astro";
+import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+
+const currLocale = getLocaleFromUrl(Astro.url);
+---
+
+<BaseLayout
+  title="Newsletter"
+  description="Subscribe to occasional insights on community building, ecosystems, and the intersection of technology and business."
+  transition:animate="slide"
+>
+  <section class="py-24 md:py-28">
+    <div class="site-container px-4">
+      <div class="mx-auto max-w-2xl">
+        <div class="text-center mb-12">
+          <Badge>Stay informed</Badge>
+          <h1 class="h1 mb-4">Newsletter</h1>
+          <p class="description text-lg md:text-xl">
+            Occasional insights on community building, ecosystems, and the intersection of technology and business.
+          </p>
+        </div>
+
+        <!-- Newsletter signup form -->
+        <NewsletterForm
+          variant="card"
+          title="Subscribe"
+          description="Join readers who want to stay ahead in ecosystem strategy and community building."
+          class="mb-12"
+        />
+
+        <!-- What to expect -->
+        <div class="prose dark:prose-invert mx-auto">
+          <h2>What to expect</h2>
+          <p>
+            When you subscribe, you'll receive occasional emails about:
+          </p>
+          <ul>
+            <li><strong>Ecosystem strategy</strong> - How to build and leverage business ecosystems and partner networks</li>
+            <li><strong>Community building</strong> - Practical insights from building developer and user communities</li>
+            <li><strong>Technology and business</strong> - The intersection where tech decisions meet business outcomes</li>
+            <li><strong>New content</strong> - Notifications when I publish new articles, talks, or resources</li>
+          </ul>
+          <p>
+            I send emails sporadically - typically a few times per month at most. No weekly spam, no daily "tips" that clutter your inbox.
+          </p>
+
+          <h2>Your privacy matters</h2>
+          <p>
+            I take your privacy seriously. Here's exactly how your data is handled:
+          </p>
+
+          <h3>What I collect</h3>
+          <ul>
+            <li><strong>Email address</strong> - Required to send you the newsletter</li>
+            <li><strong>Name</strong> - Optional, only if you choose to provide it</li>
+            <li><strong>Subscription date</strong> - When you signed up</li>
+          </ul>
+
+          <h3>What I don't do</h3>
+          <ul>
+            <li><strong>No tracking pixels</strong> - I don't use invisible images to track if you opened an email</li>
+            <li><strong>No behavioral profiling</strong> - I don't build profiles based on your reading habits</li>
+            <li><strong>No data selling</strong> - Your information is never sold or shared with third parties</li>
+            <li><strong>No advertising</strong> - The newsletter is not monetized through ads</li>
+          </ul>
+
+          <h3>Link tracking</h3>
+          <p>
+            Links in emails may include UTM parameters (like <code>?utm_source=newsletter</code>) so I can see in my privacy-friendly analytics (Umami) how many people came from the newsletter. This helps me understand what content resonates. These parameters don't identify you personally - I just see aggregate numbers like "47 people clicked through from the newsletter."
+          </p>
+
+          <h2>GDPR compliance</h2>
+          <p>
+            This newsletter is fully compliant with the EU General Data Protection Regulation (GDPR):
+          </p>
+          <ul>
+            <li><strong>Lawful basis</strong> - Your explicit consent when subscribing</li>
+            <li><strong>Double opt-in</strong> - You'll receive a confirmation email to verify your subscription</li>
+            <li><strong>Easy unsubscribe</strong> - Every email includes a one-click unsubscribe link</li>
+            <li><strong>Data access</strong> - You can request a copy of your data at any time</li>
+            <li><strong>Data deletion</strong> - You can request complete deletion of your data</li>
+            <li><strong>EU-based infrastructure</strong> - The newsletter is powered by <a href="https://listmonk.app/" target="_blank" rel="noopener noreferrer">Listmonk</a>, self-hosted on EU-based servers</li>
+          </ul>
+
+          <h2>Self-hosted and open source</h2>
+          <p>
+            Unlike most newsletter platforms, I use <a href="https://listmonk.app/" target="_blank" rel="noopener noreferrer">Listmonk</a> - a free, open-source newsletter manager that I host myself. This means:
+          </p>
+          <ul>
+            <li>Your data stays on servers I control</li>
+            <li>No third-party company has access to subscriber lists</li>
+            <li>No vendor lock-in or corporate policies to worry about</li>
+            <li>Full transparency - the software's code is publicly auditable</li>
+          </ul>
+
+          <h2>Questions?</h2>
+          <p>
+            If you have any questions about the newsletter or how your data is handled, feel free to reach out via <a href="/contact">my contact page</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

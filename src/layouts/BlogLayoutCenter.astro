@@ -11,7 +11,7 @@ import BaseLayout from "./BaseLayout.astro";
 import Button from "@components/Button/Button.astro";
 import Category from "@components/Category/Category.astro";
 import BlogNav from "@components/Blog/BlogNav.astro";
-import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
+import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 import AuthorByline from "@components/Author/AuthorByline.astro";
 import AuthorBioBox from "@components/Author/AuthorBioBox.astro";
 
@@ -175,9 +175,13 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
     </div>
   </article>
 
-  <!-- CTA Card (full width) -->
-  <div class="mt-16">
-    <CtaCardSplit />
+  <!-- Newsletter CTA -->
+  <div class="mt-16 site-container">
+    <NewsletterForm
+      variant="card"
+      title="Enjoyed this article?"
+      description="Get notified when I publish new insights on community building, ecosystems, and business strategy. No spam, no tracking pixels, unsubscribe anytime."
+    />
   </div>
 
   <!-- Navigation -->

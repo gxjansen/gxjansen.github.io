@@ -8,7 +8,7 @@ import FeatureCardsSmall from "@components/Feature/FeatureCardsSmall.astro";
 import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
 import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
 import SiteContent from "@components/SiteContent/SiteContent.astro";
-import CtaCardSplit from "@components/Cta/CtaCardSplit.astro";
+import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
 import CompanyLogos from "@components/Companies/CompanyLogos.astro";
 import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
@@ -38,5 +38,5 @@ const siteData = getTranslatedData("siteData", currLocale);
   <FeatureFlagsMarquee />
 
   <CompanyLogos />
-  <CtaCardSplit />
+  <NewsletterForm variant="cta" />
 </BaseLayout>

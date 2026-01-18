@@ -1,0 +1,502 @@
+---
+/**
+ * Reusable Newsletter Subscription Form Component
+ * Integrates with self-hosted Listmonk instance
+ *
+ * Variants:
+ * - inline: Horizontal form for embedding in content
+ * - card: Standalone card with background and optional title/description
+ * - cta: Full-width call-to-action style with dark background
+ * - minimal: Just the form fields, no wrapper styling
+ *
+ * Best practices applied:
+ * - Minimal fields (email only, name optional) to reduce friction
+ * - Clear value proposition in default copy
+ * - Trust signals (unsubscribe note, privacy)
+ * - Accessible with ARIA labels and keyboard support
+ */
+
+import Button from "@components/Button/Button.astro";
+
+interface Props {
+  /** Display variant */
+  variant?: "inline" | "card" | "cta" | "minimal";
+  /** Form title (used in card/cta variants) */
+  title?: string;
+  /** Form description (used in card/cta variants) */
+  description?: string;
+  /** Optional note below form (e.g., frequency, unsubscribe info) */
+  note?: string;
+  /** Listmonk list UUID */
+  listId?: string;
+  /** Listmonk form action URL */
+  actionUrl?: string;
+  /** Show name field */
+  showName?: boolean;
+  /** Placeholder text for email */
+  emailPlaceholder?: string;
+  /** Placeholder text for name */
+  namePlaceholder?: string;
+  /** Submit button text */
+  buttonText?: string;
+  /** Additional CSS classes */
+  class?: string;
+}
+
+const {
+  variant = "card",
+  title = "Stay in the loop",
+  description = "Occasional insights on community building, ecosystems, and the intersection of technology and business. No spam, no tracking pixels, unsubscribe anytime.",
+  note,
+  listId = "43998bb9-5d55-4d9a-a3d7-04f6a76ef863",
+  actionUrl = "https://n.a11y.nl/subscription/form",
+  showName = false, // Research shows fewer fields = more signups
+  emailPlaceholder = "your@email.com",
+  namePlaceholder = "Your name (optional)",
+  buttonText = "Subscribe",
+  class: className,
+} = Astro.props;
+
+const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+{variant === "card" && (
+  <div
+    class:list={[
+      "newsletter-card rounded-lg bg-base-200 dark:bg-base-800 p-6 md:p-8",
+      className
+    ]}
+  >
+    {title && (
+      <h3 class="text-xl md:text-2xl font-bold text-base-900 dark:text-base-100 mb-2">
+        {title}
+      </h3>
+    )}
+    {description && (
+      <p class="text-base-600 dark:text-base-400 mb-6">
+        {description}
+      </p>
+    )}
+    <form
+      id={formId}
+      method="post"
+      action={actionUrl}
+      class="newsletter-form flex flex-col gap-4"
+      data-newsletter-form
+    >
+      <input type="hidden" name="nonce" />
+      <input type="hidden" name="l" value={listId} />
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <div class="flex-1">
+          <label for={`${formId}-email`} class="sr-only">Email address</label>
+          <input
+            type="email"
+            name="email"
+            id={`${formId}-email`}
+            required
+            placeholder={emailPlaceholder}
+            class="form__input w-full"
+            aria-required="true"
+            aria-describedby={`${formId}-status`}
+          />
+        </div>
+
+        {showName && (
+          <div class="flex-1 sm:max-w-[200px]">
+            <label for={`${formId}-name`} class="sr-only">Name (optional)</label>
+            <input
+              type="text"
+              name="name"
+              id={`${formId}-name`}
+              placeholder={namePlaceholder}
+              class="form__input w-full"
+            />
+          </div>
+        )}
+
+        <Button
+          type="submit"
+          variant="primary"
+          class="whitespace-nowrap"
+        >
+          {buttonText}
+        </Button>
+      </div>
+
+      <div
+        id={`${formId}-status`}
+        class="newsletter-status text-sm"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+      {note && (
+        <p class="text-xs text-base-500 dark:text-base-400 mt-2">
+          {note}
+        </p>
+      )}
+    </form>
+  </div>
+)}
+
+{variant === "cta" && (
+  <section class="py-10">
+    <div class="site-container">
+      <div
+        class:list={[
+          "relative overflow-hidden rounded-md bg-base-900 px-8 py-10 md:px-16 md:py-14",
+          className
+        ]}
+      >
+        <div
+          class="relative z-20 mx-auto flex max-w-2xl flex-col items-center gap-6 text-center"
+        >
+          {title && (
+            <h2 class="text-2xl md:text-3xl font-bold text-base-100 dark:text-base-900">
+              {title}
+            </h2>
+          )}
+          {description && (
+            <p class="text-base-300 dark:text-base-600 max-w-lg">
+              {description}
+            </p>
+          )}
+
+          <form
+            id={formId}
+            method="post"
+            action={actionUrl}
+            class="newsletter-form w-full max-w-md"
+            data-newsletter-form
+          >
+            <input type="hidden" name="nonce" />
+            <input type="hidden" name="l" value={listId} />
+
+            <div class="flex flex-col sm:flex-row gap-3">
+              <div class="flex-1">
+                <label for={`${formId}-email`} class="sr-only">Email address</label>
+                <input
+                  type="email"
+                  name="email"
+                  id={`${formId}-email`}
+                  required
+                  placeholder={emailPlaceholder}
+                  class="form__input w-full bg-base-800 text-base-100 placeholder:text-base-500 border-base-700"
+                  aria-required="true"
+                  aria-describedby={`${formId}-status`}
+                />
+              </div>
+
+              {showName && (
+                <div class="flex-shrink-0">
+                  <label for={`${formId}-name`} class="sr-only">Name (optional)</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id={`${formId}-name`}
+                    placeholder={namePlaceholder}
+                    class="form__input w-full sm:w-40 bg-base-800 text-base-100 placeholder:text-base-500 border-base-700"
+                  />
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                variant="primary"
+                class="whitespace-nowrap"
+              >
+                {buttonText}
+              </Button>
+            </div>
+
+            <div
+              id={`${formId}-status`}
+              class="newsletter-status newsletter-status--cta text-sm mt-3"
+              role="status"
+              aria-live="polite"
+            ></div>
+
+            {note && (
+              <p class="text-xs text-base-400 mt-3">
+                {note}
+              </p>
+            )}
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+{variant === "inline" && (
+  <form
+    id={formId}
+    method="post"
+    action={actionUrl}
+    class:list={[
+      "newsletter-form newsletter-inline flex flex-col sm:flex-row gap-3 items-start sm:items-center",
+      className
+    ]}
+    data-newsletter-form
+  >
+    <input type="hidden" name="nonce" />
+    <input type="hidden" name="l" value={listId} />
+
+    <div class="flex-1 w-full sm:w-auto">
+      <label for={`${formId}-email`} class="sr-only">Email address</label>
+      <input
+        type="email"
+        name="email"
+        id={`${formId}-email`}
+        required
+        placeholder={emailPlaceholder}
+        class="form__input w-full"
+        aria-required="true"
+        aria-describedby={`${formId}-status`}
+      />
+    </div>
+
+    {showName && (
+      <div class="flex-shrink-0 w-full sm:w-auto">
+        <label for={`${formId}-name`} class="sr-only">Name (optional)</label>
+        <input
+          type="text"
+          name="name"
+          id={`${formId}-name`}
+          placeholder={namePlaceholder}
+          class="form__input w-full sm:w-48"
+        />
+      </div>
+    )}
+
+    <Button
+      type="submit"
+      variant="primary"
+      class="whitespace-nowrap w-full sm:w-auto"
+    >
+      {buttonText}
+    </Button>
+
+    <div
+      id={`${formId}-status`}
+      class="newsletter-status text-sm w-full"
+      role="status"
+      aria-live="polite"
+    ></div>
+  </form>
+)}
+
+{variant === "minimal" && (
+  <form
+    id={formId}
+    method="post"
+    action={actionUrl}
+    class:list={["newsletter-form newsletter-minimal", className]}
+    data-newsletter-form
+  >
+    <input type="hidden" name="nonce" />
+    <input type="hidden" name="l" value={listId} />
+
+    <div class="flex flex-col gap-3">
+      <div>
+        <label for={`${formId}-email`} class="sr-only">Email address</label>
+        <input
+          type="email"
+          name="email"
+          id={`${formId}-email`}
+          required
+          placeholder={emailPlaceholder}
+          class="form__input w-full"
+          aria-required="true"
+          aria-describedby={`${formId}-status`}
+        />
+      </div>
+
+      {showName && (
+        <div>
+          <label for={`${formId}-name`} class="sr-only">Name (optional)</label>
+          <input
+            type="text"
+            name="name"
+            id={`${formId}-name`}
+            placeholder={namePlaceholder}
+            class="form__input w-full"
+          />
+        </div>
+      )}
+
+      <Button
+        type="submit"
+        variant="primary"
+        class="w-full"
+      >
+        {buttonText}
+      </Button>
+
+      <div
+        id={`${formId}-status`}
+        class="newsletter-status text-sm"
+        role="status"
+        aria-live="polite"
+      ></div>
+    </div>
+  </form>
+)}
+
+<script>
+  class NewsletterFormHandler {
+    private form: HTMLFormElement;
+    private submitButton: HTMLButtonElement;
+    private statusElement: HTMLElement;
+    private originalButtonText: string;
+
+    constructor(form: HTMLFormElement) {
+      this.form = form;
+      this.submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      this.statusElement = form.querySelector('.newsletter-status') as HTMLElement;
+      this.originalButtonText = this.submitButton.querySelector('.button__text')?.textContent || 'Subscribe';
+
+      this.init();
+    }
+
+    private init() {
+      this.form.addEventListener('submit', this.handleSubmit.bind(this));
+
+      // Validate email on input
+      const emailInput = this.form.querySelector('input[type="email"]') as HTMLInputElement;
+      emailInput?.addEventListener('input', () => this.validateEmail(emailInput));
+    }
+
+    private validateEmail(input: HTMLInputElement): boolean {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValid = emailRegex.test(input.value);
+
+      input.setAttribute('aria-invalid', (!isValid && input.value.length > 0).toString());
+      return isValid;
+    }
+
+    private setStatus(message: string, type: 'success' | 'error' | 'loading') {
+      this.statusElement.textContent = message;
+
+      // Check if this is a CTA variant (has special class)
+      const isCta = this.statusElement.classList.contains('newsletter-status--cta');
+
+      // Reset classes but preserve base and CTA classes
+      this.statusElement.className = isCta
+        ? 'newsletter-status newsletter-status--cta text-sm mt-3'
+        : 'newsletter-status text-sm mt-2';
+
+      if (type === 'success') {
+        this.statusElement.classList.add(
+          isCta ? 'text-green-400' : 'text-green-600',
+          isCta ? '' : 'dark:text-green-400'
+        );
+      } else if (type === 'error') {
+        this.statusElement.classList.add(
+          isCta ? 'text-red-400' : 'text-red-600',
+          isCta ? '' : 'dark:text-red-400'
+        );
+      } else {
+        this.statusElement.classList.add(
+          isCta ? 'text-base-400' : 'text-base-500',
+          isCta ? '' : 'dark:text-base-400'
+        );
+      }
+    }
+
+    private setButtonState(loading: boolean) {
+      this.submitButton.disabled = loading;
+      const buttonText = this.submitButton.querySelector('.button__text');
+      if (buttonText) {
+        buttonText.textContent = loading ? 'Subscribing...' : this.originalButtonText;
+      }
+    }
+
+    private async handleSubmit(e: Event) {
+      e.preventDefault();
+
+      const emailInput = this.form.querySelector('input[type="email"]') as HTMLInputElement;
+
+      if (!this.validateEmail(emailInput)) {
+        this.setStatus('Please enter a valid email address.', 'error');
+        emailInput.focus();
+        return;
+      }
+
+      this.setButtonState(true);
+      this.setStatus('', 'loading');
+
+      const formData = new FormData(this.form);
+
+      try {
+        const response = await fetch(this.form.action, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors' // Listmonk may not send CORS headers
+        });
+
+        // Since we use no-cors, we can't read the response
+        // Assume success if no network error
+        this.setStatus('Thanks for subscribing! Please check your email to confirm.', 'success');
+        this.form.reset();
+
+        // Reset button after delay
+        setTimeout(() => {
+          this.setButtonState(false);
+        }, 2000);
+
+      } catch {
+        this.setStatus('Something went wrong. Please try again.', 'error');
+        this.setButtonState(false);
+      }
+    }
+  }
+
+  // Initialize all newsletter forms
+  function initNewsletterForms() {
+    document.querySelectorAll<HTMLFormElement>('[data-newsletter-form]').forEach(form => {
+      // Avoid re-initializing
+      if (!form.dataset.initialized) {
+        new NewsletterFormHandler(form);
+        form.dataset.initialized = 'true';
+      }
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initNewsletterForms);
+
+  // Re-initialize after Astro view transitions
+  document.addEventListener('astro:after-swap', initNewsletterForms);
+</script>
+
+<style>
+  .newsletter-form input[aria-invalid="true"] {
+    @apply border-red-500 dark:border-red-400;
+  }
+
+  .newsletter-form input:focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+
+  .newsletter-status:empty {
+    display: none;
+  }
+
+  /* CTA variant specific styles */
+  .newsletter-status--cta {
+    text-align: center;
+  }
+
+  /* High contrast mode support */
+  @media (forced-colors: active) {
+    .newsletter-form input {
+      border: 1px solid CanvasText;
+    }
+
+    .newsletter-form input[aria-invalid="true"] {
+      border: 2px solid CanvasText;
+    }
+  }
+</style>
