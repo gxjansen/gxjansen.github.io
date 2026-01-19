@@ -22,26 +22,30 @@ const currLocale = getLocaleFromUrl(Astro.url);
   description="Subscribe to occasional insights on community building, ecosystems, and the intersection of technology and business."
   transition:animate="slide"
 >
-  <section class="py-24 md:py-28">
+  <!-- Header -->
+  <section class="pt-24 md:pt-28 pb-8">
+    <div class="site-container px-4">
+      <div class="mx-auto max-w-2xl text-center">
+        <Badge>Stay informed</Badge>
+        <h1 class="h1 mb-4">Newsletter</h1>
+        <p class="description text-lg md:text-xl">
+          Occasional insights on community building, ecosystems, and the intersection of technology and business.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter signup form (full-width CTA) -->
+  <NewsletterForm
+    variant="cta"
+    title="Subscribe"
+    description="Join readers who want to stay ahead in ecosystem strategy and community building."
+  />
+
+  <!-- Content section -->
+  <section class="py-12 md:py-16">
     <div class="site-container px-4">
       <div class="mx-auto max-w-2xl">
-        <div class="text-center mb-12">
-          <Badge>Stay informed</Badge>
-          <h1 class="h1 mb-4">Newsletter</h1>
-          <p class="description text-lg md:text-xl">
-            Occasional insights on community building, ecosystems, and the intersection of technology and business.
-          </p>
-        </div>
-
-        <!-- Newsletter signup form -->
-        <NewsletterForm
-          variant="card"
-          title="Subscribe"
-          description="Join readers who want to stay ahead in ecosystem strategy and community building."
-          class="mb-12"
-        />
-
-        <!-- What to expect -->
         <div class="prose dark:prose-invert mx-auto">
           <h2>What to expect</h2>
           <p>
