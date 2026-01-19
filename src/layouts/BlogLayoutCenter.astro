@@ -47,6 +47,12 @@ const authorsData = authors && authors.length > 0 ? await getEntries(authors.map
 
 // Filter categories to only show those with 2+ posts
 const filteredCategories = filterCategoriesByCount(categories, allPosts);
+
+// Generate dynamic newsletter description based on categories
+const categoryNames = categories.map(cat => humanize(cat)).slice(0, 3);
+const newsletterDescription = categoryNames.length > 0
+  ? `Want more on ${categoryNames.join(', ')}? Subscribe for curated insights on community, AI & open tech.`
+  : "Curated insights on community, AI & open tech. No spam, no tracking pixels, unsubscribe anytime.";
 ---
 
 <BaseLayout
@@ -180,7 +186,7 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
     <NewsletterForm
       variant="cta"
       title="Enjoyed this article?"
-      description="Get notified when I publish new insights on community building, ecosystems, and business strategy. No spam, no tracking pixels, unsubscribe anytime."
+      description={newsletterDescription}
     />
   </div>
 
