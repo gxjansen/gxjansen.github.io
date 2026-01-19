@@ -16,6 +16,7 @@
  * - Accessible with ARIA labels and keyboard support
  */
 
+import { Icon } from "astro-icon";
 import Button from "@components/Button/Button.astro";
 
 interface Props {
@@ -141,24 +142,49 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
 )}
 
 {variant === "cta" && (
-  <section class="py-10">
+  <section class="py-10" aria-labelledby={`${formId}-heading`}>
     <div class="site-container">
       <div
         class:list={[
-          "relative overflow-hidden rounded-md bg-base-900 px-8 py-10 md:px-16 md:py-14",
+          "relative overflow-hidden rounded-md bg-primary-500 px-4 sm:px-8 md:px-16 py-8 sm:py-11 md:py-14",
           className
         ]}
+        role="region"
+        aria-label="Newsletter signup"
       >
+        <!-- Decorative elements -->
+        <Icon
+          name="atlas/dots3"
+          class="absolute left-4 top-0 z-10 size-16 text-accent-4"
+          aria-hidden="true"
+          role="presentation"
+        />
+        <Icon
+          name="atlas/dots3"
+          class="absolute bottom-0 right-4 z-10 size-16 text-accent-4"
+          aria-hidden="true"
+          role="presentation"
+        />
+        <Icon
+          name="atlas/wave-bg-basic"
+          class="absolute left-1/2 top-1/2 h-full w-full max-w-full -translate-x-1/2 -translate-y-1/2 object-cover text-base-100/5"
+          aria-hidden="true"
+          role="presentation"
+        />
+
         <div
           class="relative z-20 mx-auto flex max-w-2xl flex-col items-center gap-6 text-center"
         >
           {title && (
-            <h2 class="text-2xl md:text-3xl font-bold text-base-100 dark:text-base-900">
+            <h2
+              id={`${formId}-heading`}
+              class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tighter text-base-100 dark:text-base-900"
+            >
               {title}
             </h2>
           )}
           {description && (
-            <p class="text-base-300 dark:text-base-600 max-w-lg">
+            <p class="font-medium text-base-100/90 dark:text-base-900/90 max-w-lg">
               {description}
             </p>
           )}
@@ -182,7 +208,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
                   id={`${formId}-email`}
                   required
                   placeholder={emailPlaceholder}
-                  class="form__input w-full h-[46px] bg-base-800 text-base-100 placeholder:text-base-500 border-base-700"
+                  class="form__input w-full h-[46px] bg-base-100 dark:bg-base-900 text-base-900 dark:text-base-100 placeholder:text-base-500 border-transparent"
                   aria-required="true"
                   aria-describedby={`${formId}-status`}
                 />
@@ -196,15 +222,15 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
                     name="name"
                     id={`${formId}-name`}
                     placeholder={namePlaceholder}
-                    class="form__input w-full sm:w-40 bg-base-800 text-base-100 placeholder:text-base-500 border-base-700"
+                    class="form__input w-full sm:w-40 h-[46px] bg-base-100 dark:bg-base-900 text-base-900 dark:text-base-100 placeholder:text-base-500 border-transparent"
                   />
                 </div>
               )}
 
               <Button
                 type="submit"
-                variant="primary"
-                class="whitespace-nowrap"
+                variant="on-color"
+                class="whitespace-nowrap shadow-none"
               >
                 {buttonText}
               </Button>
@@ -218,7 +244,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
             ></div>
 
             {note && (
-              <p class="text-xs text-base-400 mt-3">
+              <p class="text-xs text-base-100/80 dark:text-base-900/80 mt-3">
                 {note}
               </p>
             )}
@@ -379,7 +405,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
     private setStatus(message: string, type: 'success' | 'error' | 'loading') {
       this.statusElement.textContent = message;
 
-      // Check if this is a CTA variant (has special class)
+      // Check if this is a CTA variant (has special class - on teal background)
       const isCta = this.statusElement.classList.contains('newsletter-status--cta');
 
       // Reset classes but preserve base and CTA classes
@@ -388,19 +414,23 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
         : 'newsletter-status text-sm mt-2';
 
       if (type === 'success') {
+        // CTA: light text on teal background
         this.statusElement.classList.add(
-          isCta ? 'text-green-400' : 'text-green-600',
-          isCta ? '' : 'dark:text-green-400'
+          isCta ? 'text-base-100' : 'text-green-600',
+          isCta ? 'dark:text-base-900' : 'dark:text-green-400',
+          isCta ? 'font-medium' : ''
         );
       } else if (type === 'error') {
+        // CTA: use a visible color on teal
         this.statusElement.classList.add(
-          isCta ? 'text-red-400' : 'text-red-600',
-          isCta ? '' : 'dark:text-red-400'
+          isCta ? 'text-red-100' : 'text-red-600',
+          isCta ? 'dark:text-red-900' : 'dark:text-red-400',
+          isCta ? 'font-medium' : ''
         );
       } else {
         this.statusElement.classList.add(
-          isCta ? 'text-base-400' : 'text-base-500',
-          isCta ? '' : 'dark:text-base-400'
+          isCta ? 'text-base-100/80' : 'text-base-500',
+          isCta ? 'dark:text-base-900/80' : 'dark:text-base-400'
         );
       }
     }
