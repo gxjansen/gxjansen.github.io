@@ -87,7 +87,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
       <input type="hidden" name="nonce" />
       <input type="hidden" name="l" value={listId} />
 
-      <div class="flex flex-col sm:flex-row gap-3">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
         <div class="flex-1">
           <label for={`${formId}-email`} class="sr-only">Email address</label>
           <input
@@ -96,7 +96,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
             id={`${formId}-email`}
             required
             placeholder={emailPlaceholder}
-            class="form__input w-full"
+            class="form__input w-full h-[46px]"
             aria-required="true"
             aria-describedby={`${formId}-status`}
           />
@@ -110,7 +110,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
               name="name"
               id={`${formId}-name`}
               placeholder={namePlaceholder}
-              class="form__input w-full"
+              class="form__input w-full h-[46px]"
             />
           </div>
         )}
@@ -173,7 +173,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
             <input type="hidden" name="nonce" />
             <input type="hidden" name="l" value={listId} />
 
-            <div class="flex flex-col sm:flex-row gap-3">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-3">
               <div class="flex-1">
                 <label for={`${formId}-email`} class="sr-only">Email address</label>
                 <input
@@ -182,7 +182,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
                   id={`${formId}-email`}
                   required
                   placeholder={emailPlaceholder}
-                  class="form__input w-full bg-base-800 text-base-100 placeholder:text-base-500 border-base-700"
+                  class="form__input w-full h-[46px] bg-base-800 text-base-100 placeholder:text-base-500 border-base-700"
                   aria-required="true"
                   aria-describedby={`${formId}-status`}
                 />
@@ -251,7 +251,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
         id={`${formId}-email`}
         required
         placeholder={emailPlaceholder}
-        class="form__input w-full"
+        class="form__input w-full h-[46px]"
         aria-required="true"
         aria-describedby={`${formId}-status`}
       />
@@ -265,7 +265,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
           name="name"
           id={`${formId}-name`}
           placeholder={namePlaceholder}
-          class="form__input w-full sm:w-48"
+          class="form__input w-full sm:w-48 h-[46px]"
         />
       </div>
     )}
