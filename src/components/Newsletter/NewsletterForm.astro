@@ -50,7 +50,7 @@ const {
   description = "Curated insights on community, AI & open tech. No spam, no tracking pixels, unsubscribe anytime.",
   note,
   listId = "43998bb9-5d55-4d9a-a3d7-04f6a76ef863",
-  actionUrl = "https://n.a11y.nl/subscription/form",
+  actionUrl = "/.netlify/functions/newsletter-subscribe",
   showName = false, // Research shows fewer fields = more signups
   emailPlaceholder = "your@email.com",
   namePlaceholder = "Your name (optional)",
@@ -457,24 +457,36 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
       this.setButtonState(true);
       this.setStatus('', 'loading');
 
-      const formData = new FormData(this.form);
+      // Build JSON payload for our Netlify function
+      const payload = {
+        email: emailInput.value,
+        listId: (this.form.querySelector('input[name="l"]') as HTMLInputElement)?.value,
+        name: (this.form.querySelector('input[name="name"]') as HTMLInputElement)?.value || undefined,
+      };
 
       try {
         const response = await fetch(this.form.action, {
           method: 'POST',
-          body: formData,
-          mode: 'no-cors' // Listmonk may not send CORS headers
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
         });
 
-        // Since we use no-cors, we can't read the response
-        // Assume success if no network error
-        this.setStatus('Thanks for subscribing! Please check your email to confirm.', 'success');
-        this.form.reset();
+        const result = await response.json();
 
-        // Reset button after delay
-        setTimeout(() => {
+        if (response.ok && result.success) {
+          this.setStatus(result.message || 'Thanks for subscribing! Please check your email to confirm.', 'success');
+          this.form.reset();
+
+          // Reset button after delay
+          setTimeout(() => {
+            this.setButtonState(false);
+          }, 2000);
+        } else {
+          this.setStatus(result.error || 'Something went wrong. Please try again.', 'error');
           this.setButtonState(false);
-        }, 2000);
+        }
 
       } catch {
         this.setStatus('Something went wrong. Please try again.', 'error');

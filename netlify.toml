@@ -46,6 +46,9 @@
 [functions.getPodcastFeeds]
   timeout = 30
 
+[functions.newsletter-subscribe]
+  timeout = 10
+
 # Trailing slash redirects (must come before function handling)
 # Redirect URLs without trailing slashes to versions with trailing slashes
 # This fixes "Canonical URL Different" warnings in LibreCrawl
@@ -67,7 +70,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://www.google-analytics.com https://js.tinyanalytics.io https://u.a11y.nl; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://api.tinyanalytics.io https://vitals.vercel-insights.com https://u.a11y.nl; media-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://share.transistor.fm https://open.spotify.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://share.transistor.fm; object-src 'none'; upgrade-insecure-requests;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://u.a11y.nl; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://u.a11y.nl; media-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://share.transistor.fm https://open.spotify.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://share.transistor.fm; object-src 'none'; upgrade-insecure-requests;"
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
