@@ -50,14 +50,14 @@ const {
   variant = "card",
   title = "Stay in the loop",
   description = "Curated insights on community, experimentation, AI & open tech. No spam, no tracking pixels, unsubscribe anytime.",
-  note,
+  note = "You'll receive a confirmation email to verify your subscription.",
   listId = "43998bb9-5d55-4d9a-a3d7-04f6a76ef863",
   actionUrl = "/.netlify/functions/newsletter-subscribe",
   showName = false, // Research shows fewer fields = more signups
   emailPlaceholder = "your@email.com",
   namePlaceholder = "Your name (optional)",
   buttonText = "Subscribe",
-  showSubscriberCount = false,
+  showSubscriberCount = true,
   class: className,
 } = Astro.props;
 
