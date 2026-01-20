@@ -19,7 +19,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
 
 <BaseLayout
   title="Newsletter"
-  description="Subscribe to occasional insights on community building, ecosystems, and the intersection of technology and business."
+  description="Get occasional insights on ecosystem strategy, community building, and where technology meets business. No spam, no tracking pixels."
   transition:animate="slide"
 >
   <!-- Header -->
@@ -27,10 +27,21 @@ const currLocale = getLocaleFromUrl(Astro.url);
     <div class="site-container px-4">
       <div class="mx-auto max-w-2xl text-center">
         <Badge>Stay informed</Badge>
-        <h1 class="h1 mb-4">Newsletter</h1>
-        <p class="description text-lg md:text-xl">
-          Occasional insights on community building, ecosystems, and the intersection of technology and business.
-        </p>
+        <h1 class="h1 mb-6">Newsletter</h1>
+        <ul class="text-left inline-block text-base-600 dark:text-base-400 space-y-2 mb-0">
+          <li class="flex items-start gap-2">
+            <span class="text-primary-500 mt-1">-</span>
+            <span>Ecosystem & community strategy from 15+ years in tech</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-primary-500 mt-1">-</span>
+            <span>New articles, talks, and resources when published</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-primary-500 mt-1">-</span>
+            <span>No fluff, no daily tips - just substance</span>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -38,8 +49,23 @@ const currLocale = getLocaleFromUrl(Astro.url);
   <!-- Newsletter signup form (full-width CTA) -->
   <NewsletterForm
     variant="cta"
-    title="Subscribe"
+    title="Get the newsletter"
   />
+
+  <!-- Value proposition -->
+  <section class="py-8 md:py-12">
+    <div class="site-container px-4">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-base-600 dark:text-base-400 text-lg">
+          I've spent 15+ years building communities and ecosystems at companies like Spryker, Spotify, and eBay.
+          This newsletter shares what I've learned about making technology and business work together.
+        </p>
+        <p id="subscriber-count" class="text-sm text-base-500 dark:text-base-400 mt-4 hidden">
+          Join <span id="subscriber-number" class="font-medium"></span> others who subscribe.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- Content section -->
   <section class="py-12 md:py-16">
@@ -117,4 +143,30 @@ const currLocale = getLocaleFromUrl(Astro.url);
       </div>
     </div>
   </section>
+
+  <script>
+    async function fetchSubscriberCount() {
+      try {
+        const response = await fetch('/.netlify/functions/newsletter-stats');
+        const data = await response.json();
+
+        if (data.success && data.subscriberCount && data.subscriberCount > 10) {
+          const countElement = document.getElementById('subscriber-count');
+          const numberElement = document.getElementById('subscriber-number');
+
+          if (countElement && numberElement) {
+            numberElement.textContent = data.subscriberCount.toLocaleString();
+            countElement.classList.remove('hidden');
+          }
+        }
+      } catch {
+        // Silently fail - don't show count if fetch fails
+      }
+    }
+
+    // Fetch on page load
+    document.addEventListener('DOMContentLoaded', fetchSubscriberCount);
+    // Re-fetch after Astro view transitions
+    document.addEventListener('astro:after-swap', fetchSubscriberCount);
+  </script>
 </BaseLayout>
