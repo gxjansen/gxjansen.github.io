@@ -25,8 +25,8 @@ const siteData: SiteDataProps = {
 
   // default image for meta tags if the page doesn't have an image already
   defaultImage: {
-    src: "/images/x-logo.webp",
-    alt: "Guido Jansen logo",
+    src: "/images/og-default.png",
+    alt: "Guido X Jansen - Community Strategy & Ecosystem Building",
   },
 };
 
