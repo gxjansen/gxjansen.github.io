@@ -91,7 +91,7 @@ async function generateOGImage() {
             font-family="Inter, system-ui, sans-serif"
             font-size="24"
             font-weight="600"
-            fill="${colors.gold}"
+            fill="${colors.pine}"
             text-anchor="middle">
         gui.do
       </text>
@@ -125,7 +125,7 @@ async function generateOGImage() {
         input: Buffer.from(`
           <svg width="${AVATAR_SIZE + 8}" height="${AVATAR_SIZE + 8}">
             <circle cx="${(AVATAR_SIZE + 8)/2}" cy="${(AVATAR_SIZE + 8)/2}" r="${(AVATAR_SIZE + 4)/2}"
-                    fill="none" stroke="${colors.gold}" stroke-width="4"/>
+                    fill="none" stroke="${colors.pine}" stroke-width="4"/>
           </svg>
         `),
         top: Math.floor((HEIGHT - AVATAR_SIZE) / 2) - 4,
