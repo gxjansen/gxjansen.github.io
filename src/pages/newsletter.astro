@@ -27,7 +27,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
     <div class="site-container px-4">
       <div class="mx-auto max-w-2xl text-center">
         <Badge>Stay informed</Badge>
-        <h1 class="h1 mb-6">Get the Newsletter</h1>
+        <h1 class="h1 mb-6">The Newsletter</h1>
       </div>
     </div>
   </section>
@@ -36,6 +36,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
   <NewsletterForm
     variant="cta"
     title="Get Guido's Golden Nuggets"
+    showSubscriberCount={true}
     note="You'll receive a confirmation email to verify your subscription."
   />
 
@@ -48,9 +49,6 @@ const currLocale = getLocaleFromUrl(Astro.url);
         </p>
         <p class="text-sm text-base-500 dark:text-base-400 mt-3">
           Self-hosted. No Big Tech. No tracking pixels.
-        </p>
-        <p id="subscriber-count" class="text-sm text-base-500 dark:text-base-400 mt-4 hidden">
-          Join <span id="subscriber-number" class="font-medium"></span> others who subscribe.
         </p>
       </div>
     </div>
@@ -133,29 +131,4 @@ const currLocale = getLocaleFromUrl(Astro.url);
     </div>
   </section>
 
-  <script>
-    async function fetchSubscriberCount() {
-      try {
-        const response = await fetch('/.netlify/functions/newsletter-stats');
-        const data = await response.json();
-
-        if (data.success && data.subscriberCount && data.subscriberCount > 10) {
-          const countElement = document.getElementById('subscriber-count');
-          const numberElement = document.getElementById('subscriber-number');
-
-          if (countElement && numberElement) {
-            numberElement.textContent = data.subscriberCount.toLocaleString();
-            countElement.classList.remove('hidden');
-          }
-        }
-      } catch {
-        // Silently fail - don't show count if fetch fails
-      }
-    }
-
-    // Fetch on page load
-    document.addEventListener('DOMContentLoaded', fetchSubscriberCount);
-    // Re-fetch after Astro view transitions
-    document.addEventListener('astro:after-swap', fetchSubscriberCount);
-  </script>
 </BaseLayout>

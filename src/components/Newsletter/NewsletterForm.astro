@@ -40,6 +40,8 @@ interface Props {
   namePlaceholder?: string;
   /** Submit button text */
   buttonText?: string;
+  /** Show subscriber count as social proof */
+  showSubscriberCount?: boolean;
   /** Additional CSS classes */
   class?: string;
 }
@@ -55,6 +57,7 @@ const {
   emailPlaceholder = "your@email.com",
   namePlaceholder = "Your name (optional)",
   buttonText = "Subscribe",
+  showSubscriberCount = false,
   class: className,
 } = Astro.props;
 
@@ -72,6 +75,14 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
       <h3 class="text-xl md:text-2xl font-bold text-base-900 dark:text-base-100 mb-2">
         {title}
       </h3>
+    )}
+    {showSubscriberCount && (
+      <p
+        class="subscriber-count text-base-600 dark:text-base-400 mb-2 hidden"
+        data-subscriber-count
+      >
+        Join <span class="subscriber-number"></span> subscribers today
+      </p>
     )}
     {description && (
       <p class="text-base-600 dark:text-base-400 mb-6">
@@ -182,6 +193,14 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
             >
               {title}
             </h2>
+          )}
+          {showSubscriberCount && (
+            <p
+              class="subscriber-count text-base-100/90 dark:text-base-900/90 font-medium hidden"
+              data-subscriber-count
+            >
+              Join <span class="subscriber-number"></span> subscribers today
+            </p>
           )}
           {description && (
             <p class="font-medium text-base-100/90 dark:text-base-900/90 max-w-lg">
@@ -506,11 +525,37 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
     });
   }
 
+  // Fetch and display subscriber count
+  async function fetchSubscriberCount() {
+    try {
+      const response = await fetch('/.netlify/functions/newsletter-stats');
+      const data = await response.json();
+
+      if (data.success && data.subscriberCount && data.subscriberCount > 10) {
+        document.querySelectorAll('[data-subscriber-count]').forEach(el => {
+          const numberEl = el.querySelector('.subscriber-number');
+          if (numberEl) {
+            numberEl.textContent = data.subscriberCount.toLocaleString();
+            el.classList.remove('hidden');
+          }
+        });
+      }
+    } catch {
+      // Silently fail - don't show count if fetch fails
+    }
+  }
+
   // Initialize on page load
-  document.addEventListener('DOMContentLoaded', initNewsletterForms);
+  document.addEventListener('DOMContentLoaded', () => {
+    initNewsletterForms();
+    fetchSubscriberCount();
+  });
 
   // Re-initialize after Astro view transitions
-  document.addEventListener('astro:after-swap', initNewsletterForms);
+  document.addEventListener('astro:after-swap', () => {
+    initNewsletterForms();
+    fetchSubscriberCount();
+  });
 </script>
 
 <style>
