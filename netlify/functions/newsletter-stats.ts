@@ -5,17 +5,17 @@ import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
  *
  * Fetches subscriber statistics from self-hosted Listmonk instance.
  * Requires LISTMONK_API_USER and LISTMONK_API_KEY environment variables.
+ * Uses /subscribers endpoint which requires only subscribers:get permission.
  */
 
 const LISTMONK_API_URL = "https://n.a11y.nl/api";
 
-interface ListmonkDashboardStats {
+interface ListmonkSubscribersResponse {
   data: {
-    subscribers: {
-      total: number;
-      blocklisted: number;
-      orphans: number;
-    };
+    results: unknown[];
+    total: number;
+    per_page: number;
+    page: number;
   };
 }
 
@@ -58,20 +58,24 @@ const handler: Handler = async (
   try {
     const authHeader = Buffer.from(`${apiUser}:${apiKey}`).toString("base64");
 
-    const response = await fetch(`${LISTMONK_API_URL}/dashboard/stats`, {
-      method: "GET",
-      headers: {
-        Authorization: `Basic ${authHeader}`,
-        "Content-Type": "application/json",
-      },
-    });
+    // Use subscribers endpoint with minimal query (1 result) just to get total count
+    const response = await fetch(
+      `${LISTMONK_API_URL}/subscribers?page=1&per_page=1`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Basic ${authHeader}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Listmonk API returned ${response.status}`);
     }
 
-    const data: ListmonkDashboardStats = await response.json();
-    const totalSubscribers = data.data.subscribers.total;
+    const data: ListmonkSubscribersResponse = await response.json();
+    const totalSubscribers = data.data.total;
 
     return {
       statusCode: 200,
