@@ -27,21 +27,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
     <div class="site-container px-4">
       <div class="mx-auto max-w-2xl text-center">
         <Badge>Stay informed</Badge>
-        <h1 class="h1 mb-6">Newsletter</h1>
-        <ul class="text-left inline-block text-base-600 dark:text-base-400 space-y-2 mb-0">
-          <li class="flex items-start gap-2">
-            <span class="text-primary-500 mt-1">-</span>
-            <span>Ecosystem & community strategy from 20+ years in tech</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-primary-500 mt-1">-</span>
-            <span>New articles, talks, and resources when published</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-primary-500 mt-1">-</span>
-            <span>No fluff, no daily tips. Just substance.</span>
-          </li>
-        </ul>
+        <h1 class="h1 mb-6">Get the Newsletter</h1>
       </div>
     </div>
   </section>
@@ -49,7 +35,8 @@ const currLocale = getLocaleFromUrl(Astro.url);
   <!-- Newsletter signup form (full-width CTA) -->
   <NewsletterForm
     variant="cta"
-    title="Get the newsletter"
+    title="Get Guido's Golden Nuggets"
+    note="You'll receive a confirmation email to verify your subscription."
   />
 
   <!-- Value proposition -->
