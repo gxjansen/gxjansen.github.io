@@ -72,9 +72,18 @@ src/components/SiteContent/SiteContent.astro
 
 #Agents
 .swarm/
-.serena/
-.claude/
+/.serena
+/.claude
 .claude-flow/
+
+# Project planning/internal docs
+/internal
+/project
+.clinerules
+PRD-astro-features.md
+README-ATLAS.md
+CLAUDE.md
+color-contrast-audit.md
 
 # Claude Flow generated files
 .claude/settings.local.json
