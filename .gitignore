@@ -75,6 +75,11 @@ src/components/SiteContent/SiteContent.astro
 /.serena
 /.claude
 .claude-flow/
+.playwright-mcp/
+
+# Generated/lock files
+deno.lock
+link-check-results.md
 
 # Project planning/internal docs
 /internal

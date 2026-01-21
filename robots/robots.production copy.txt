@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /conference-terms
-Disallow: /styleguide
-Sitemap: https://gui.do/sitemap-index.xml

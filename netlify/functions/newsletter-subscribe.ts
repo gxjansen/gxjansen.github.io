@@ -85,6 +85,10 @@ const handler: Handler = async (
     const apiUser = process.env.LISTMONK_API_USER;
     const apiKey = process.env.LISTMONK_API_KEY;
 
+    // Debug: log credential status (not values)
+    console.log("Env check - apiUser exists:", !!apiUser, "apiKey exists:", !!apiKey);
+    console.log("Env check - apiUser length:", apiUser?.length, "apiKey length:", apiKey?.length);
+
     if (!apiUser || !apiKey) {
       console.error("Missing Listmonk API credentials");
       return {
@@ -129,6 +133,10 @@ const handler: Handler = async (
 
     // Parse JSON response from API
     const responseData = await response.json().catch(() => null);
+
+    // Debug: log full response
+    console.log("Listmonk response status:", response.status);
+    console.log("Listmonk response data:", JSON.stringify(responseData));
 
     if (response.ok) {
       // Subscriber created - now send opt-in confirmation email
