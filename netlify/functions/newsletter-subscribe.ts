@@ -66,9 +66,6 @@ const handler: Handler = async (
 
     const { email, name, listId, signupPage } = requestData;
 
-    // Debug: log incoming request data
-    console.log("Request data:", JSON.stringify({ email, name, listId, signupPage }));
-
     // Validate email
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return {
@@ -85,10 +82,6 @@ const handler: Handler = async (
     const apiUser = process.env.LISTMONK_API_USER;
     const apiKey = process.env.LISTMONK_API_KEY;
 
-    // Debug: log credential status (not values)
-    console.log("Env check - apiUser exists:", !!apiUser, "apiKey exists:", !!apiKey);
-    console.log("Env check - apiUser length:", apiUser?.length, "apiKey length:", apiKey?.length);
-
     if (!apiUser || !apiKey) {
       console.error("Missing Listmonk API credentials");
       return {
@@ -104,13 +97,14 @@ const handler: Handler = async (
       };
     }
 
-    // Build JSON payload for Listmonk authenticated API
-    // This endpoint supports custom attributes and requires API auth
-    const payload = {
+    const authHeader = `Basic ${Buffer.from(`${apiUser}:${apiKey}`).toString("base64")}`;
+    const targetListId = listId ? parseInt(String(listId), 10) : DEFAULT_LIST_ID;
+
+    // Step 1: Create subscriber (without list assignment - separate API call needed)
+    const subscriberPayload = {
       email: email,
       name: name || "",
-      status: "enabled", // Subscriber is added directly; use optin campaign in Listmonk if needed
-      lists: [listId ? parseInt(String(listId), 10) : DEFAULT_LIST_ID],
+      status: "enabled",
       attribs: {
         source: "gui.do",
         signup_page: signupPage || "unknown",
@@ -118,34 +112,41 @@ const handler: Handler = async (
       },
     };
 
-    // Debug: log the payload being sent
-    console.log("Listmonk payload:", JSON.stringify(payload));
-
-    // Submit to Listmonk authenticated API
     const response = await fetch(LISTMONK_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${Buffer.from(`${apiUser}:${apiKey}`).toString("base64")}`,
+        Authorization: authHeader,
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(subscriberPayload),
     });
 
-    // Parse JSON response from API
     const responseData = await response.json().catch(() => null);
 
-    // Debug: log full response
-    console.log("Listmonk response status:", response.status);
-    console.log("Listmonk response data:", JSON.stringify(responseData));
-
     if (response.ok) {
-      // Subscriber created - now send opt-in confirmation email
       const subscriberId = responseData?.data?.id;
+
       if (subscriberId) {
+        // Step 2: Add subscriber to list using dedicated endpoint
+        await fetch("https://n.a11y.nl/api/subscribers/lists", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authHeader,
+          },
+          body: JSON.stringify({
+            ids: [subscriberId],
+            action: "add",
+            target_list_ids: [targetListId],
+            status: "unconfirmed",
+          }),
+        });
+
+        // Step 3: Send opt-in confirmation email
         await fetch(`https://n.a11y.nl/api/subscribers/${subscriberId}/optin`, {
           method: "POST",
           headers: {
-            Authorization: `Basic ${Buffer.from(`${apiUser}:${apiKey}`).toString("base64")}`,
+            Authorization: authHeader,
           },
         });
       }
