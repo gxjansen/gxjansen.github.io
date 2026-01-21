@@ -66,6 +66,9 @@ const handler: Handler = async (
 
     const { email, name, listId, signupPage } = requestData;
 
+    // Debug: log incoming request data
+    console.log("Request data:", JSON.stringify({ email, name, listId, signupPage }));
+
     // Validate email
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return {
@@ -110,6 +113,9 @@ const handler: Handler = async (
         signup_date: new Date().toISOString().split("T")[0],
       },
     };
+
+    // Debug: log the payload being sent
+    console.log("Listmonk payload:", JSON.stringify(payload));
 
     // Submit to Listmonk authenticated API
     const response = await fetch(LISTMONK_API_URL, {
