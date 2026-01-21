@@ -8,8 +8,8 @@ import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
  * API credentials are stored securely in Netlify environment variables.
  */
 
-const LISTMONK_API_URL = "https://n.a11y.nl/api/public/subscription";
-const DEFAULT_LIST_ID = "43998bb9-5d55-4d9a-a3d7-04f6a76ef863";
+const LISTMONK_API_URL = "https://n.a11y.nl/api/subscribers";
+const DEFAULT_LIST_ID = 3; // Guido's Golden Nuggets
 
 interface SubscriptionRequest {
   email: string;
@@ -78,12 +78,32 @@ const handler: Handler = async (
       };
     }
 
-    // Build JSON payload for Listmonk public subscription API
-    // This endpoint supports custom attributes for subscriber tracking
+    // Get API credentials from environment
+    const apiUser = process.env.LISTMONK_API_USER;
+    const apiKey = process.env.LISTMONK_API_KEY;
+
+    if (!apiUser || !apiKey) {
+      console.error("Missing Listmonk API credentials");
+      return {
+        statusCode: 500,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          success: false,
+          error: "Server configuration error. Please try again later.",
+        }),
+      };
+    }
+
+    // Build JSON payload for Listmonk authenticated API
+    // This endpoint supports custom attributes and requires API auth
     const payload = {
       email: email,
       name: name || "",
-      list_uuids: [listId || DEFAULT_LIST_ID],
+      status: "enabled", // Subscriber is added directly; use optin campaign in Listmonk if needed
+      lists: [listId ? parseInt(String(listId), 10) : DEFAULT_LIST_ID],
       attribs: {
         source: "gui.do",
         signup_page: signupPage || "unknown",
@@ -91,11 +111,12 @@ const handler: Handler = async (
       },
     };
 
-    // Submit to Listmonk public subscription API
+    // Submit to Listmonk authenticated API
     const response = await fetch(LISTMONK_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Basic ${Buffer.from(`${apiUser}:${apiKey}`).toString("base64")}`,
       },
       body: JSON.stringify(payload),
     });
@@ -104,6 +125,17 @@ const handler: Handler = async (
     const responseData = await response.json().catch(() => null);
 
     if (response.ok) {
+      // Subscriber created - now send opt-in confirmation email
+      const subscriberId = responseData?.data?.id;
+      if (subscriberId) {
+        await fetch(`https://n.a11y.nl/api/subscribers/${subscriberId}/optin`, {
+          method: "POST",
+          headers: {
+            Authorization: `Basic ${Buffer.from(`${apiUser}:${apiKey}`).toString("base64")}`,
+          },
+        });
+      }
+
       return {
         statusCode: 200,
         headers: {
@@ -113,7 +145,7 @@ const handler: Handler = async (
         body: JSON.stringify({
           success: true,
           message:
-            "Thanks for subscribing! Please check your email to confirm.",
+            "Thanks! Please check your email to confirm your subscription.",
         }),
       };
     }
