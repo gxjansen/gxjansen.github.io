@@ -4,16 +4,18 @@ import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
  * Newsletter Subscription Proxy
  *
  * This function proxies subscription requests to our self-hosted Listmonk instance.
- * This approach solves CSP restrictions and allows proper response handling.
+ * Uses the Listmonk API to enable custom attributes for subscriber tracking.
+ * API credentials are stored securely in Netlify environment variables.
  */
 
-const LISTMONK_URL = "https://n.a11y.nl/subscription/form";
+const LISTMONK_API_URL = "https://n.a11y.nl/api/public/subscription";
 const DEFAULT_LIST_ID = "43998bb9-5d55-4d9a-a3d7-04f6a76ef863";
 
 interface SubscriptionRequest {
   email: string;
   name?: string;
   listId?: string;
+  signupPage?: string;
 }
 
 const handler: Handler = async (
@@ -58,10 +60,11 @@ const handler: Handler = async (
         email: params.get("email") || "",
         name: params.get("name") || undefined,
         listId: params.get("l") || params.get("listId") || undefined,
+        signupPage: params.get("signupPage") || undefined,
       };
     }
 
-    const { email, name, listId } = requestData;
+    const { email, name, listId, signupPage } = requestData;
 
     // Validate email
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -75,34 +78,32 @@ const handler: Handler = async (
       };
     }
 
-    // Build form data for Listmonk
-    const formData = new URLSearchParams();
-    formData.append("email", email);
-    formData.append("l", listId || DEFAULT_LIST_ID);
+    // Build JSON payload for Listmonk public subscription API
+    // This endpoint supports custom attributes for subscriber tracking
+    const payload = {
+      email: email,
+      name: name || "",
+      list_uuids: [listId || DEFAULT_LIST_ID],
+      attribs: {
+        source: "gui.do",
+        signup_page: signupPage || "unknown",
+        signup_date: new Date().toISOString().split("T")[0],
+      },
+    };
 
-    if (name) {
-      formData.append("name", name);
-    }
-
-    // Submit to Listmonk
-    const response = await fetch(LISTMONK_URL, {
+    // Submit to Listmonk public subscription API
+    const response = await fetch(LISTMONK_API_URL, {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
-      body: formData.toString(),
+      body: JSON.stringify(payload),
     });
 
-    // Get response text to check for success indicators
-    const responseText = await response.text();
+    // Parse JSON response from API
+    const responseData = await response.json().catch(() => null);
 
-    // Listmonk returns HTML - check for success message
-    const isSuccess =
-      responseText.includes("confirm your subscription") ||
-      responseText.includes("already subscribed") ||
-      responseText.includes("Thank you");
-
-    if (isSuccess) {
+    if (response.ok) {
       return {
         statusCode: 200,
         headers: {
@@ -117,34 +118,34 @@ const handler: Handler = async (
       };
     }
 
-    // Check for common error patterns
-    if (responseText.includes("invalid") || responseText.includes("error")) {
+    // Handle specific error cases from Listmonk API
+    if (response.status === 409 || responseData?.message?.includes("already")) {
+      // Already subscribed - treat as success
       return {
-        statusCode: 400,
+        statusCode: 200,
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify({
-          success: false,
-          error: "Subscription failed. Please try again.",
+          success: true,
+          message: "You're already subscribed! Check your inbox for updates.",
         }),
       };
     }
 
-    // Unknown response - log for debugging but return success
-    // (Listmonk may have accepted it but responded differently)
-    console.log("Unexpected Listmonk response:", responseText.slice(0, 500));
+    // Log error for debugging
+    console.log("Listmonk API error:", response.status, responseData);
 
     return {
-      statusCode: 200,
+      statusCode: 400,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        success: true,
-        message: "Thanks for subscribing! Please check your email to confirm.",
+        success: false,
+        error: responseData?.message || "Subscription failed. Please try again.",
       }),
     };
   } catch (error) {

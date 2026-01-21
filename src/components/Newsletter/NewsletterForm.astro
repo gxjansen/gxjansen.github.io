@@ -62,6 +62,7 @@ const {
 } = Astro.props;
 
 const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
+const signupPage = Astro.url.pathname;
 ---
 
 {variant === "card" && (
@@ -98,6 +99,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
     >
       <input type="hidden" name="nonce" />
       <input type="hidden" name="l" value={listId} />
+      <input type="hidden" name="signupPage" value={signupPage} />
 
       <div class="flex flex-col sm:flex-row sm:items-center gap-3">
         <div class="flex-1">
@@ -217,6 +219,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
           >
             <input type="hidden" name="nonce" />
             <input type="hidden" name="l" value={listId} />
+            <input type="hidden" name="signupPage" value={signupPage} />
 
             <div class="flex flex-col sm:flex-row sm:items-center gap-3">
               <div class="flex-1">
@@ -287,6 +290,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
   >
     <input type="hidden" name="nonce" />
     <input type="hidden" name="l" value={listId} />
+    <input type="hidden" name="signupPage" value={signupPage} />
 
     <div class="flex-1 w-full sm:w-auto">
       <label for={`${formId}-email`} class="sr-only">Email address</label>
@@ -342,6 +346,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
   >
     <input type="hidden" name="nonce" />
     <input type="hidden" name="l" value={listId} />
+    <input type="hidden" name="signupPage" value={signupPage} />
 
     <div class="flex flex-col gap-3">
       <div>
@@ -481,6 +486,7 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
         email: emailInput.value,
         listId: (this.form.querySelector('input[name="l"]') as HTMLInputElement)?.value,
         name: (this.form.querySelector('input[name="name"]') as HTMLInputElement)?.value || undefined,
+        signupPage: (this.form.querySelector('input[name="signupPage"]') as HTMLInputElement)?.value || undefined,
       };
 
       try {
