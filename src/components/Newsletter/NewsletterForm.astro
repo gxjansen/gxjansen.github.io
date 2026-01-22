@@ -683,9 +683,10 @@ const signupPage = Astro.url.pathname;
     accent-color: #f6c177 !important;
   }
 
-  /* Filter fallback: shift blue (~220°) to gold (~40°) = ~180° rotation */
+  /* Filter to shift blue checkbox to rosé-pine gold (~36° hue) */
+  /* Blue ~220° to gold ~36° = rotate ~176°, with saturation boost for vibrancy */
   :global(altcha-widget .altcha-checkbox input[type="checkbox"]:checked) {
-    filter: hue-rotate(180deg) saturate(1.2) !important;
+    filter: hue-rotate(165deg) saturate(1.5) brightness(1.1) !important;
   }
 
   /* Ensure ALTCHA checkbox is clearly visible without container border */
