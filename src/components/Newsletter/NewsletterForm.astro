@@ -76,9 +76,7 @@ const signupPage = Astro.url.pathname;
     ]}
   >
     {title && (
-      <h3 class="text-xl md:text-2xl font-bold text-base-900 dark:text-base-100 mb-2">
-        {title}
-      </h3>
+      <h3 class="text-xl md:text-2xl font-bold text-base-900 dark:text-base-100 mb-2" set:html={title} />
     )}
     {showSubscriberCount && (
       <p
@@ -208,9 +206,8 @@ const signupPage = Astro.url.pathname;
             <h2
               id={`${formId}-heading`}
               class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tighter text-base-100 dark:text-base-900"
-            >
-              {title}
-            </h2>
+              set:html={title}
+            />
           )}
           {showSubscriberCount && (
             <p
@@ -681,9 +678,14 @@ const signupPage = Astro.url.pathname;
     --altcha-color-active: #f6c177;
   }
 
-  /* ALTCHA checkbox - gold checkmark (no Shadow DOM so direct targeting works) */
+  /* ALTCHA checkbox - gold checkmark */
   :global(altcha-widget .altcha-checkbox input[type="checkbox"]) {
     accent-color: #f6c177 !important;
+  }
+
+  /* Filter fallback: shift blue (~220°) to gold (~40°) = ~180° rotation */
+  :global(altcha-widget .altcha-checkbox input[type="checkbox"]:checked) {
+    filter: hue-rotate(180deg) saturate(1.2) !important;
   }
 
   /* Ensure ALTCHA checkbox is clearly visible without container border */
@@ -701,5 +703,26 @@ const signupPage = Astro.url.pathname;
     .newsletter-form input[aria-invalid="true"] {
       border: 2px solid CanvasText;
     }
+  }
+
+  /* Gold hover for newsletter subscribe buttons */
+  .newsletter-form :global(.button--primary:hover) {
+    background-color: #ea9d34 !important;
+  }
+  :global(.dark) .newsletter-form :global(.button--primary:hover) {
+    background-color: #f6c177 !important;
+    color: #191724 !important;
+  }
+
+  /* On-color variant (CTA) - gold hover */
+  .newsletter-form :global(.button--on-color:hover) {
+    background-color: #f6c177 !important;
+    border-color: #f6c177 !important;
+    color: #191724 !important;
+  }
+  :global(.dark) .newsletter-form :global(.button--on-color:hover) {
+    background-color: #ea9d34 !important;
+    border-color: #ea9d34 !important;
+    color: #191724 !important;
   }
 </style>
