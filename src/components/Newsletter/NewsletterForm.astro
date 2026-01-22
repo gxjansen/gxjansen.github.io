@@ -104,8 +104,9 @@ const signupPage = Astro.url.pathname;
       <input type="hidden" name="l" value={listId} />
       <input type="hidden" name="signupPage" value={signupPage} />
 
-      <div class="flex flex-col md:flex-row md:items-center gap-3">
-        <div class="flex-1 md:max-w-xs">
+      <div class="flex flex-col gap-3">
+        <!-- Row 1: Email field (full width) -->
+        <div class="w-full">
           <label for={`${formId}-email`} class="sr-only">Email address</label>
           <input
             type="email"
@@ -120,7 +121,7 @@ const signupPage = Astro.url.pathname;
         </div>
 
         {showName && (
-          <div class="flex-shrink-0 md:max-w-[200px]">
+          <div class="w-full">
             <label for={`${formId}-name`} class="sr-only">Name (optional)</label>
             <input
               type="text"
@@ -132,22 +133,25 @@ const signupPage = Astro.url.pathname;
           </div>
         )}
 
-        <!-- ALTCHA spam protection widget -->
-        <div class="altcha-container flex-shrink-0">
-          <altcha-widget
-            challengeurl={altchaChallengeUrl}
-            hidefooter
-            hidelogo
-          ></altcha-widget>
-        </div>
+        <!-- Row 2: ALTCHA + Subscribe button -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+          <!-- ALTCHA spam protection widget -->
+          <div class="altcha-container flex-shrink-0">
+            <altcha-widget
+              challengeurl={altchaChallengeUrl}
+              hidefooter
+              hidelogo
+            ></altcha-widget>
+          </div>
 
-        <Button
-          type="submit"
-          variant="primary"
-          class="whitespace-nowrap flex-shrink-0"
-        >
-          {buttonText}
-        </Button>
+          <Button
+            type="submit"
+            variant="primary"
+            class="whitespace-nowrap flex-shrink-0 w-full sm:w-auto"
+          >
+            {buttonText}
+          </Button>
+        </div>
       </div>
 
       <div
@@ -233,8 +237,9 @@ const signupPage = Astro.url.pathname;
             <input type="hidden" name="l" value={listId} />
             <input type="hidden" name="signupPage" value={signupPage} />
 
-            <div class="flex flex-col md:flex-row md:items-center md:justify-center gap-3">
-              <div class="flex-1 md:max-w-xs">
+            <div class="flex flex-col gap-3">
+              <!-- Row 1: Email field (full width) -->
+              <div class="w-full max-w-md mx-auto">
                 <label for={`${formId}-email`} class="sr-only">Email address</label>
                 <input
                   type="email"
@@ -249,34 +254,37 @@ const signupPage = Astro.url.pathname;
               </div>
 
               {showName && (
-                <div class="flex-shrink-0">
+                <div class="w-full max-w-md mx-auto">
                   <label for={`${formId}-name`} class="sr-only">Name (optional)</label>
                   <input
                     type="text"
                     name="name"
                     id={`${formId}-name`}
                     placeholder={namePlaceholder}
-                    class="form__input w-full md:w-40 h-[46px] bg-base-100 dark:bg-base-900 text-base-900 dark:text-base-100 placeholder:text-base-500 border-transparent"
+                    class="form__input w-full h-[46px] bg-base-100 dark:bg-base-900 text-base-900 dark:text-base-100 placeholder:text-base-500 border-transparent"
                   />
                 </div>
               )}
 
-              <!-- ALTCHA spam protection widget -->
-              <div class="altcha-container altcha-container--cta flex-shrink-0">
-                <altcha-widget
-                  challengeurl={altchaChallengeUrl}
-                  hidefooter
-                  hidelogo
-                ></altcha-widget>
-              </div>
+              <!-- Row 2: ALTCHA + Subscribe button -->
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 w-full max-w-md mx-auto">
+                <!-- ALTCHA spam protection widget -->
+                <div class="altcha-container altcha-container--cta flex-shrink-0">
+                  <altcha-widget
+                    challengeurl={altchaChallengeUrl}
+                    hidefooter
+                    hidelogo
+                  ></altcha-widget>
+                </div>
 
-              <Button
-                type="submit"
-                variant="on-color"
-                class="whitespace-nowrap shadow-none flex-shrink-0"
-              >
-                {buttonText}
-              </Button>
+                <Button
+                  type="submit"
+                  variant="on-color"
+                  class="whitespace-nowrap shadow-none flex-shrink-0 w-full sm:w-auto"
+                >
+                  {buttonText}
+                </Button>
+              </div>
             </div>
 
             <div
@@ -304,7 +312,7 @@ const signupPage = Astro.url.pathname;
     method="post"
     action={actionUrl}
     class:list={[
-      "newsletter-form newsletter-inline flex flex-col md:flex-row gap-3 items-start md:items-center",
+      "newsletter-form newsletter-inline flex flex-col gap-3",
       className
     ]}
     data-newsletter-form
@@ -313,7 +321,8 @@ const signupPage = Astro.url.pathname;
     <input type="hidden" name="l" value={listId} />
     <input type="hidden" name="signupPage" value={signupPage} />
 
-    <div class="flex-1 w-full md:w-auto md:max-w-xs">
+    <!-- Row 1: Email field (full width) -->
+    <div class="w-full">
       <label for={`${formId}-email`} class="sr-only">Email address</label>
       <input
         type="email"
@@ -328,34 +337,37 @@ const signupPage = Astro.url.pathname;
     </div>
 
     {showName && (
-      <div class="flex-shrink-0 w-full md:w-auto">
+      <div class="w-full">
         <label for={`${formId}-name`} class="sr-only">Name (optional)</label>
         <input
           type="text"
           name="name"
           id={`${formId}-name`}
           placeholder={namePlaceholder}
-          class="form__input w-full md:w-48 h-[46px]"
+          class="form__input w-full h-[46px]"
         />
       </div>
     )}
 
-    <!-- ALTCHA spam protection widget -->
-    <div class="altcha-container w-full md:w-auto flex-shrink-0">
-      <altcha-widget
-        challengeurl={altchaChallengeUrl}
-        hidefooter
-        hidelogo
-      ></altcha-widget>
-    </div>
+    <!-- Row 2: ALTCHA + Subscribe button -->
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+      <!-- ALTCHA spam protection widget -->
+      <div class="altcha-container flex-shrink-0">
+        <altcha-widget
+          challengeurl={altchaChallengeUrl}
+          hidefooter
+          hidelogo
+        ></altcha-widget>
+      </div>
 
-    <Button
-      type="submit"
-      variant="primary"
-      class="whitespace-nowrap w-full md:w-auto flex-shrink-0"
-    >
-      {buttonText}
-    </Button>
+      <Button
+        type="submit"
+        variant="primary"
+        class="whitespace-nowrap w-full sm:w-auto flex-shrink-0"
+      >
+        {buttonText}
+      </Button>
+    </div>
 
     <div
       id={`${formId}-status`}
@@ -379,6 +391,7 @@ const signupPage = Astro.url.pathname;
     <input type="hidden" name="signupPage" value={signupPage} />
 
     <div class="flex flex-col gap-3">
+      <!-- Row 1: Email field (full width) -->
       <div>
         <label for={`${formId}-email`} class="sr-only">Email address</label>
         <input
@@ -406,22 +419,25 @@ const signupPage = Astro.url.pathname;
         </div>
       )}
 
-      <!-- ALTCHA spam protection widget -->
-      <div class="altcha-container">
-        <altcha-widget
-          challengeurl={altchaChallengeUrl}
-          hidefooter
-          hidelogo
-        ></altcha-widget>
-      </div>
+      <!-- Row 2: ALTCHA + Subscribe button -->
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+        <!-- ALTCHA spam protection widget -->
+        <div class="altcha-container flex-shrink-0">
+          <altcha-widget
+            challengeurl={altchaChallengeUrl}
+            hidefooter
+            hidelogo
+          ></altcha-widget>
+        </div>
 
-      <Button
-        type="submit"
-        variant="primary"
-        class="w-full"
-      >
-        {buttonText}
-      </Button>
+        <Button
+          type="submit"
+          variant="primary"
+          class="w-full sm:w-auto"
+        >
+          {buttonText}
+        </Button>
+      </div>
 
       <div
         id={`${formId}-status`}
@@ -655,9 +671,19 @@ const signupPage = Astro.url.pathname;
     /* Centered in CTA variant */
   }
 
-  /* Make ALTCHA widget blend with form design */
+  /* Make ALTCHA widget blend with form design - remove border per UX recommendation */
   altcha-widget {
     --altcha-max-width: 100%;
+    --altcha-border-width: 0;
+    --altcha-border-radius: 0;
+    --altcha-color-border: transparent;
+    --altcha-color-border-focus: transparent;
+  }
+
+  /* Ensure ALTCHA checkbox is clearly visible without container border */
+  .altcha-container {
+    display: flex;
+    align-items: center;
   }
 
   /* High contrast mode support */
