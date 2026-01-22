@@ -127,6 +127,7 @@ const signupPage = Astro.url.pathname;
               id={`${formId}-name`}
               placeholder={namePlaceholder}
               class="form__input w-full h-[46px]"
+              aria-required="false"
             />
           </div>
         )}
@@ -134,11 +135,15 @@ const signupPage = Astro.url.pathname;
         <!-- Row 2: ALTCHA + Subscribe button -->
         <div class="flex flex-col sm:flex-row sm:items-center gap-3">
           <!-- ALTCHA spam protection widget -->
-          <div class="altcha-container flex-shrink-0">
+          <div class="altcha-container flex-shrink-0" role="group" aria-label="Spam verification">
+            <span id={`${formId}-altcha-desc`} class="sr-only">
+              Complete the verification checkbox to prove you're human
+            </span>
             <altcha-widget
               challengeurl={altchaChallengeUrl}
               hidefooter
               hidelogo
+              aria-describedby={`${formId}-altcha-desc`}
             ></altcha-widget>
           </div>
 
@@ -259,6 +264,7 @@ const signupPage = Astro.url.pathname;
                     id={`${formId}-name`}
                     placeholder={namePlaceholder}
                     class="form__input w-full h-[46px] bg-base-100 dark:bg-base-900 text-base-900 dark:text-base-100 placeholder:text-base-500 border-transparent"
+                    aria-required="false"
                   />
                 </div>
               )}
@@ -266,11 +272,15 @@ const signupPage = Astro.url.pathname;
               <!-- Row 2: ALTCHA + Subscribe button -->
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 w-full max-w-md mx-auto">
                 <!-- ALTCHA spam protection widget -->
-                <div class="altcha-container altcha-container--cta flex-shrink-0">
+                <div class="altcha-container altcha-container--cta flex-shrink-0" role="group" aria-label="Spam verification">
+                  <span id={`${formId}-altcha-desc`} class="sr-only">
+                    Complete the verification checkbox to prove you're human
+                  </span>
                   <altcha-widget
                     challengeurl={altchaChallengeUrl}
                     hidefooter
                     hidelogo
+                    aria-describedby={`${formId}-altcha-desc`}
                   ></altcha-widget>
                 </div>
 
@@ -342,6 +352,7 @@ const signupPage = Astro.url.pathname;
           id={`${formId}-name`}
           placeholder={namePlaceholder}
           class="form__input w-full h-[46px]"
+          aria-required="false"
         />
       </div>
     )}
@@ -349,11 +360,15 @@ const signupPage = Astro.url.pathname;
     <!-- Row 2: ALTCHA + Subscribe button -->
     <div class="flex flex-col sm:flex-row sm:items-center gap-3">
       <!-- ALTCHA spam protection widget -->
-      <div class="altcha-container flex-shrink-0">
+      <div class="altcha-container flex-shrink-0" role="group" aria-label="Spam verification">
+        <span id={`${formId}-altcha-desc`} class="sr-only">
+          Complete the verification checkbox to prove you're human
+        </span>
         <altcha-widget
           challengeurl={altchaChallengeUrl}
           hidefooter
           hidelogo
+          aria-describedby={`${formId}-altcha-desc`}
         ></altcha-widget>
       </div>
 
@@ -412,6 +427,7 @@ const signupPage = Astro.url.pathname;
             id={`${formId}-name`}
             placeholder={namePlaceholder}
             class="form__input w-full"
+            aria-required="false"
           />
         </div>
       )}
@@ -419,11 +435,15 @@ const signupPage = Astro.url.pathname;
       <!-- Row 2: ALTCHA + Subscribe button -->
       <div class="flex flex-col sm:flex-row sm:items-center gap-3">
         <!-- ALTCHA spam protection widget -->
-        <div class="altcha-container flex-shrink-0">
+        <div class="altcha-container flex-shrink-0" role="group" aria-label="Spam verification">
+          <span id={`${formId}-altcha-desc`} class="sr-only">
+            Complete the verification checkbox to prove you're human
+          </span>
           <altcha-widget
             challengeurl={altchaChallengeUrl}
             hidefooter
             hidelogo
+            aria-describedby={`${formId}-altcha-desc`}
           ></altcha-widget>
         </div>
 
@@ -509,16 +529,17 @@ const signupPage = Astro.url.pathname;
           isCta ? 'font-medium' : ''
         );
       } else if (type === 'error') {
-        // CTA: use a visible color on teal
+        // CTA: use high-contrast color on teal background
         this.statusElement.classList.add(
-          isCta ? 'text-red-100' : 'text-red-600',
-          isCta ? 'dark:text-red-900' : 'dark:text-red-400',
-          isCta ? 'font-medium' : ''
+          isCta ? 'text-white' : 'text-red-600',
+          isCta ? 'dark:text-base-950' : 'dark:text-red-400',
+          'font-semibold'
         );
       } else {
+        // Loading/neutral state - full opacity for contrast
         this.statusElement.classList.add(
-          isCta ? 'text-base-100/80' : 'text-base-500',
-          isCta ? 'dark:text-base-900/80' : 'dark:text-base-400'
+          isCta ? 'text-base-100' : 'text-base-600',
+          isCta ? 'dark:text-base-900' : 'dark:text-base-300'
         );
       }
     }
@@ -577,6 +598,11 @@ const signupPage = Astro.url.pathname;
 
         if (response.ok && result.success) {
           this.setStatus(result.message || 'Thanks for subscribing! Please check your email to confirm.', 'success');
+
+          // Move focus to status for screen reader announcement
+          this.statusElement.setAttribute('tabindex', '-1');
+          this.statusElement.focus();
+
           this.form.reset();
 
           // Reset button after delay
@@ -585,11 +611,21 @@ const signupPage = Astro.url.pathname;
           }, 2000);
         } else {
           this.setStatus(result.error || 'Something went wrong. Please try again.', 'error');
+
+          // Move focus to error message for screen reader announcement
+          this.statusElement.setAttribute('tabindex', '-1');
+          this.statusElement.focus();
+
           this.setButtonState(false);
         }
 
       } catch {
         this.setStatus('Something went wrong. Please try again.', 'error');
+
+        // Move focus to error message for screen reader announcement
+        this.statusElement.setAttribute('tabindex', '-1');
+        this.statusElement.focus();
+
         this.setButtonState(false);
       }
     }
