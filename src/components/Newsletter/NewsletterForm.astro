@@ -433,10 +433,19 @@ const signupPage = Astro.url.pathname;
   </form>
 )}
 
-<!-- Load ALTCHA widget script -->
-<script src="https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js" async defer type="module"></script>
-
 <script>
+  // Dynamically load ALTCHA widget script
+  function loadAltchaScript() {
+    if (document.querySelector('script[data-altcha]')) return;
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js';
+    script.type = 'module';
+    script.async = true;
+    script.dataset.altcha = 'true';
+    document.head.appendChild(script);
+  }
+  loadAltchaScript();
+
   class NewsletterFormHandler {
     private form: HTMLFormElement;
     private submitButton: HTMLButtonElement;
@@ -606,12 +615,14 @@ const signupPage = Astro.url.pathname;
 
   // Initialize on page load
   document.addEventListener('DOMContentLoaded', () => {
+    loadAltchaScript();
     initNewsletterForms();
     fetchSubscriberCount();
   });
 
   // Re-initialize after Astro view transitions
   document.addEventListener('astro:after-swap', () => {
+    loadAltchaScript();
     initNewsletterForms();
     fetchSubscriberCount();
   });
