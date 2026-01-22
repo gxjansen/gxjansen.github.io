@@ -128,7 +128,7 @@ const handler: Handler = async (
 
       if (subscriberId) {
         // Step 2: Add subscriber to list using dedicated endpoint
-        await fetch("https://n.a11y.nl/api/subscribers/lists", {
+        const listResponse = await fetch("https://n.a11y.nl/api/subscribers/lists", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -141,14 +141,18 @@ const handler: Handler = async (
             status: "unconfirmed",
           }),
         });
+        const listResult = await listResponse.json().catch(() => null);
+        console.log("Step 2 - Add to list:", listResponse.status, JSON.stringify(listResult));
 
         // Step 3: Send opt-in confirmation email
-        await fetch(`https://n.a11y.nl/api/subscribers/${subscriberId}/optin`, {
+        const optinResponse = await fetch(`https://n.a11y.nl/api/subscribers/${subscriberId}/optin`, {
           method: "POST",
           headers: {
             Authorization: authHeader,
           },
         });
+        const optinResult = await optinResponse.json().catch(() => null);
+        console.log("Step 3 - Opt-in:", optinResponse.status, JSON.stringify(optinResult));
       }
 
       return {
