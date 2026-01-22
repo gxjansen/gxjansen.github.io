@@ -70,7 +70,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://u.a11y.nl https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://u.a11y.nl; media-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://share.transistor.fm https://open.spotify.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://share.transistor.fm; object-src 'none'; upgrade-insecure-requests;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://u.a11y.nl https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://u.a11y.nl; media-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://share.transistor.fm https://open.spotify.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://share.transistor.fm; object-src 'none'; worker-src 'self' blob:; upgrade-insecure-requests;"
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
