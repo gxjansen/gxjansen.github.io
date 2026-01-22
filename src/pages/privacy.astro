@@ -1,0 +1,114 @@
+---
+/**
+ * Privacy policy page covering data handling practices,
+ * particularly for the newsletter.
+ */
+
+// main layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// components
+import Badge from "@components/Badge/Badge.astro";
+
+// utils
+import { getLocaleFromUrl } from "@js/localeUtils";
+
+const currLocale = getLocaleFromUrl(Astro.url);
+---
+
+<BaseLayout
+  title="Privacy"
+  description="How I handle your data. Self-hosted infrastructure, no tracking pixels, GDPR compliant."
+  transition:animate="slide"
+>
+  <!-- Header -->
+  <section class="pt-24 md:pt-28 pb-8">
+    <div class="site-container px-4">
+      <div class="mx-auto max-w-2xl text-center">
+        <Badge>Your data</Badge>
+        <h1 class="h1 mb-6">Privacy</h1>
+        <p class="text-base-600 dark:text-base-400 text-lg">
+          Here's exactly how I handle your data.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content section -->
+  <section class="py-12 md:py-16">
+    <div class="site-container px-4">
+      <div class="mx-auto max-w-2xl">
+        <div class="prose dark:prose-invert mx-auto">
+
+          <h2>Website analytics</h2>
+          <p>
+            I self-host <a href="https://umami.is/" target="_blank" rel="noopener noreferrer">Umami</a> for privacy-friendly analytics. It collects only:
+          </p>
+          <ul>
+            <li>Page views (aggregate, not individual)</li>
+            <li>Referrer information</li>
+            <li>Country (derived from IP, then discarded)</li>
+            <li>Device type and browser (anonymized)</li>
+          </ul>
+          <p>
+            I use zero cookies. Each visit stands alone.
+          </p>
+
+          <h2 id="newsletter">Newsletter</h2>
+          <p>
+            I run the <a href="/newsletter">newsletter</a> on <a href="https://listmonk.app/" target="_blank" rel="noopener noreferrer">Listmonk</a>, an open-source tool I host on EU servers.
+          </p>
+
+          <h3>What I collect</h3>
+          <ul>
+            <li><strong>Email address:</strong> Required to send you the newsletter</li>
+            <li><strong>Name:</strong> Optional</li>
+            <li><strong>Subscription date:</strong> When you signed up</li>
+          </ul>
+
+          <h3>What I promise</h3>
+          <ul>
+            <li><strong>Transparent delivery:</strong> Emails arrive without tracking pixels or open-rate monitoring</li>
+            <li><strong>Your data stays yours:</strong> I keep subscriber information private and sell nothing</li>
+            <li><strong>Reader-supported:</strong> I fund the newsletter myself, so ads stay out</li>
+          </ul>
+
+          <h3>Link tracking</h3>
+          <p>
+            Links in emails may include UTM parameters (like <code>?utm_source=newsletter</code>) so my analytics can count newsletter referrals. These parameters remain anonymous. I see aggregate numbers like "47 people clicked through" rather than individual behavior.
+          </p>
+
+          <h2>GDPR compliance</h2>
+          <p>
+            This website and newsletter follow GDPR requirements:
+          </p>
+          <ul>
+            <li><strong>Lawful basis:</strong> Your explicit consent when subscribing</li>
+            <li><strong>Double opt-in:</strong> A confirmation email verifies your intent</li>
+            <li><strong>Easy unsubscribe:</strong> Every email includes a one-click unsubscribe link</li>
+            <li><strong>Data access:</strong> <a href="/contact">Request a copy of your data</a> at any time</li>
+            <li><strong>Data deletion:</strong> <a href="/contact">Request complete deletion</a> of your data</li>
+            <li><strong>EU-based infrastructure:</strong> Self-hosted on EU servers</li>
+          </ul>
+
+          <h2>Self-hosted infrastructure</h2>
+          <p>
+            I self-host my tools, giving me full control. This means:
+          </p>
+          <ul>
+            <li>Your data stays on servers I control</li>
+            <li>I keep third parties out of subscriber lists and analytics</li>
+            <li>I control the policies and can migrate freely</li>
+            <li>Full transparency: <a href="https://github.com/knadh/listmonk" target="_blank" rel="noopener noreferrer">Listmonk</a> and <a href="https://github.com/umami-software/umami" target="_blank" rel="noopener noreferrer">Umami</a> are publicly auditable</li>
+          </ul>
+
+          <h2>Questions?</h2>
+          <p>
+            <a href="/contact">Reach out</a> if you have questions about your data.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
