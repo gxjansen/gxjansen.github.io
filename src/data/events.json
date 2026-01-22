@@ -1,5 +1,18 @@
 [
   {
+    "id": "space-academy-2026",
+    "name": "Space Academy",
+    "icon": "experimentationelite.png",
+    "date": "2026-05-07",
+    "city": "London",
+    "country": "GB",
+    "url": "https://experimentationelite.com/",
+    "workshop": false,
+    "role": "Advisor",
+    "topic": "",
+    "relatedPresentationSlugs": []
+  },
+  {
     "id": "spryker-user-group-2025-09",
     "name": "Spryker User Group @ Turbine Kreuzberg",
     "icon": "spryker.png",
