@@ -1,10 +1,12 @@
 import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
+import { verifySolution } from "altcha-lib";
 
 /**
  * Newsletter Subscription Proxy
  *
  * This function proxies subscription requests to our self-hosted Listmonk instance.
  * Uses the Listmonk API to enable custom attributes for subscriber tracking.
+ * Validates ALTCHA proof-of-work challenges for spam protection.
  * API credentials are stored securely in Netlify environment variables.
  */
 
@@ -16,6 +18,7 @@ interface SubscriptionRequest {
   name?: string;
   listId?: string;
   signupPage?: string;
+  altcha?: string;
 }
 
 const handler: Handler = async (
@@ -61,10 +64,11 @@ const handler: Handler = async (
         name: params.get("name") || undefined,
         listId: params.get("l") || params.get("listId") || undefined,
         signupPage: params.get("signupPage") || undefined,
+        altcha: params.get("altcha") || undefined,
       };
     }
 
-    const { email, name, listId, signupPage } = requestData;
+    const { email, name, listId, signupPage, altcha } = requestData;
 
     // Validate email
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -76,6 +80,56 @@ const handler: Handler = async (
         },
         body: JSON.stringify({ error: "Valid email address required" }),
       };
+    }
+
+    // Validate ALTCHA proof-of-work solution
+    const altchaKey = process.env.ALTCHA_HMAC_KEY;
+    if (altchaKey) {
+      if (!altcha) {
+        console.log("Submission without ALTCHA solution");
+        return {
+          statusCode: 400,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({
+            success: false,
+            error: "Verification required. Please try again.",
+          }),
+        };
+      }
+
+      try {
+        const isValid = await verifySolution(altcha, altchaKey);
+        if (!isValid) {
+          console.log("Invalid ALTCHA solution submitted");
+          return {
+            statusCode: 400,
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+              success: false,
+              error: "Verification failed. Please refresh and try again.",
+            }),
+          };
+        }
+      } catch (error) {
+        console.error("ALTCHA verification error:", error);
+        return {
+          statusCode: 400,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({
+            success: false,
+            error: "Verification expired. Please refresh and try again.",
+          }),
+        };
+      }
     }
 
     // Get API credentials from environment

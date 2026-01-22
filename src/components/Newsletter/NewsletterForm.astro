@@ -14,10 +14,13 @@
  * - Clear value proposition in default copy
  * - Trust signals (unsubscribe note, privacy)
  * - Accessible with ARIA labels and keyboard support
+ * - ALTCHA proof-of-work spam protection (privacy-friendly)
  */
 
 import { Icon } from "astro-icon";
 import Button from "@components/Button/Button.astro";
+
+const altchaChallengeUrl = "/.netlify/functions/altcha-challenge";
 
 interface Props {
   /** Display variant */
@@ -136,6 +139,15 @@ const signupPage = Astro.url.pathname;
         >
           {buttonText}
         </Button>
+      </div>
+
+      <!-- ALTCHA spam protection widget -->
+      <div class="altcha-container">
+        <altcha-widget
+          challengeurl={altchaChallengeUrl}
+          hidefooter
+          hidelogo
+        ></altcha-widget>
       </div>
 
       <div
@@ -258,6 +270,15 @@ const signupPage = Astro.url.pathname;
               </Button>
             </div>
 
+            <!-- ALTCHA spam protection widget -->
+            <div class="altcha-container altcha-container--cta mt-3">
+              <altcha-widget
+                challengeurl={altchaChallengeUrl}
+                hidefooter
+                hidelogo
+              ></altcha-widget>
+            </div>
+
             <div
               id={`${formId}-status`}
               class="newsletter-status newsletter-status--cta text-sm mt-3"
@@ -327,6 +348,15 @@ const signupPage = Astro.url.pathname;
       {buttonText}
     </Button>
 
+    <!-- ALTCHA spam protection widget -->
+    <div class="altcha-container w-full">
+      <altcha-widget
+        challengeurl={altchaChallengeUrl}
+        hidefooter
+        hidelogo
+      ></altcha-widget>
+    </div>
+
     <div
       id={`${formId}-status`}
       class="newsletter-status text-sm w-full"
@@ -384,6 +414,15 @@ const signupPage = Astro.url.pathname;
         {buttonText}
       </Button>
 
+      <!-- ALTCHA spam protection widget -->
+      <div class="altcha-container">
+        <altcha-widget
+          challengeurl={altchaChallengeUrl}
+          hidefooter
+          hidelogo
+        ></altcha-widget>
+      </div>
+
       <div
         id={`${formId}-status`}
         class="newsletter-status text-sm"
@@ -393,6 +432,9 @@ const signupPage = Astro.url.pathname;
     </div>
   </form>
 )}
+
+<!-- Load ALTCHA widget script -->
+<script src="https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js" async defer></script>
 
 <script>
   class NewsletterFormHandler {
@@ -481,12 +523,23 @@ const signupPage = Astro.url.pathname;
       this.setButtonState(true);
       this.setStatus('', 'loading');
 
+      // Get ALTCHA solution from widget
+      const altchaInput = this.form.querySelector('input[name="altcha"]') as HTMLInputElement;
+      const altchaSolution = altchaInput?.value;
+
+      if (!altchaSolution) {
+        this.setStatus('Please wait for verification to complete.', 'error');
+        this.setButtonState(false);
+        return;
+      }
+
       // Build JSON payload for our Netlify function
       const payload = {
         email: emailInput.value,
         listId: (this.form.querySelector('input[name="l"]') as HTMLInputElement)?.value,
         name: (this.form.querySelector('input[name="name"]') as HTMLInputElement)?.value || undefined,
         signupPage: (this.form.querySelector('input[name="signupPage"]') as HTMLInputElement)?.value || undefined,
+        altcha: altchaSolution,
       };
 
       try {
@@ -580,6 +633,20 @@ const signupPage = Astro.url.pathname;
   /* CTA variant specific styles */
   .newsletter-status--cta {
     text-align: center;
+  }
+
+  /* ALTCHA widget styling */
+  .altcha-container {
+    @apply mt-2;
+  }
+
+  .altcha-container--cta {
+    @apply flex justify-center;
+  }
+
+  /* Make ALTCHA widget blend with form design */
+  altcha-widget {
+    --altcha-max-width: 100%;
   }
 
   /* High contrast mode support */

@@ -30,6 +30,7 @@
     "@types/date-fns": "^2.5.3",
     "@types/react": "^18.3.23",
     "@types/react-dom": "^18.3.7",
+    "altcha-lib": "^1.4.1",
     "animejs": "^3.2.2",
     "astro": "^5.16.6",
     "astro-auto-import": "^0.4.2",
