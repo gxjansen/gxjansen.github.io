@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import 'bluesky-comments/bluesky-comments.css';
 import { BlueskyComments as BlueskyCommentsLib, BlueskyFilters } from 'bluesky-comments';
 
@@ -6,6 +6,11 @@ interface Props {
   uri?: string;
   postTitle: string;
   postUrl: string;
+}
+
+interface CommentEmptyDetails {
+  code: string;
+  message: string;
 }
 
 // Bluesky butterfly logo SVG path
@@ -38,8 +43,7 @@ function getReplyUrl(uri: string): string {
  * - If no uri: Shows a "Discuss on Bluesky" share button
  */
 export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [emptyDetails, setEmptyDetails] = useState<CommentEmptyDetails | null>(null);
 
   // Generate share URL for posts not yet linked
   const shareText = `${postTitle}\n\n${postUrl}`;
@@ -47,9 +51,13 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
 
   // Reset state when uri changes
   useEffect(() => {
-    setIsEmpty(false);
-    setHasError(false);
+    setEmptyDetails(null);
   }, [uri]);
+
+  // Callback for when comments are empty (handles both no comments and errors)
+  const handleEmpty = useCallback((details: CommentEmptyDetails) => {
+    setEmptyDetails(details);
+  }, []);
 
   if (!uri) {
     // No Bluesky post linked yet - show share button
@@ -78,8 +86,11 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
 
   const replyUrl = getReplyUrl(uri);
 
-  // Show empty state
-  if (isEmpty || hasError) {
+  // Determine if this is an error or just no comments
+  const isError = emptyDetails?.code === 'error' || emptyDetails?.code === 'network_error';
+
+  // Show empty/error state
+  if (emptyDetails) {
     return (
       <section className="bluesky-comments-section mt-12 pt-8 border-t border-base-200 dark:border-base-700">
         <h2 className="text-xl font-semibold text-base-900 dark:text-base-100 mb-4">
@@ -87,7 +98,7 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
         </h2>
         <div className="bg-base-100 dark:bg-base-800 rounded-lg p-6 text-center border border-base-200 dark:border-base-700">
           <p className="text-base-600 dark:text-base-400 mb-4">
-            {hasError
+            {isError
               ? "Couldn't load comments. Join the conversation on Bluesky!"
               : "No comments yet. Be the first to join the conversation!"}
           </p>
@@ -118,8 +129,7 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
             BlueskyFilters.NoPins,
             BlueskyFilters.MinCharacterCountFilter(3),
           ]}
-          onEmpty={() => setIsEmpty(true)}
-          onError={() => setHasError(true)}
+          onEmpty={handleEmpty}
         />
       </div>
       <div className="mt-4 text-center">
