@@ -261,8 +261,12 @@
     @apply rounded-lg mb-4;
   }
 
-  /* Link styling */
+  /* Link styling - using darker blue for WCAG AA compliance */
   a {
-    @apply text-[#0085FF] hover:underline;
+    @apply text-[#0066CC] hover:underline;
+  }
+
+  :root[class~="dark"] & a {
+    @apply text-[#4da6ff];
   }
 }
