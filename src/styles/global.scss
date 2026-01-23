@@ -259,14 +259,14 @@
   /* Light mode refinements */
   .bsky-comment {
     @apply rounded-lg mb-4;
+
+    /* Link styling inside comments only - WCAG AA compliance */
+    a {
+      @apply text-[#0066CC] hover:underline;
+    }
   }
 
-  /* Link styling - using darker blue for WCAG AA compliance */
-  a {
-    @apply text-[#0066CC] hover:underline;
-  }
-
-  :root[class~="dark"] & a {
+  :root[class~="dark"] & .bsky-comment a {
     @apply text-[#4da6ff];
   }
 }
