@@ -29,6 +29,7 @@ AGENTS.md
 *.env
 .env
 .env.*
+!.env.example
 
 packages/astro/src/**/*.prebuilt.ts
 packages/astro/src/**/*.prebuilt-dev.ts

@@ -14,7 +14,8 @@
     "fix-dark-mode:dry": "node scripts/fix-dark-mode.js --dry-run",
     "test": "vitest",
     "test:robots": "node scripts/test-robots.js",
-    "validate-content": "node scripts/validate-content.js"
+    "validate-content": "node scripts/validate-content.js",
+    "bluesky:link": "node scripts/bluesky-link.mjs"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.2",
@@ -24,6 +25,7 @@
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/tailwind": "^6.0.2",
+    "@atproto/api": "^0.18.17",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
     "@types/animejs": "^3.1.13",
@@ -37,6 +39,7 @@
     "astro-embed": "^0.9.2",
     "astro-icon": "0.8.2",
     "astro-seo": "^0.8.4",
+    "bluesky-comments": "^0.13.1",
     "csv-parse": "^6.1.0",
     "csv-stringify": "^6.6.0",
     "date-fns": "^4.1.0",

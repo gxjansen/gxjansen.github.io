@@ -14,6 +14,7 @@ import BlogNav from "@components/Blog/BlogNav.astro";
 import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 import AuthorByline from "@components/Author/AuthorByline.astro";
 import AuthorBioBox from "@components/Author/AuthorBioBox.astro";
+import BlueskyComments from "@components/Bluesky/BlueskyComments";
 
 // utils
 import { formatDate, humanize, slugify } from "@js/textUtils";
@@ -39,7 +40,11 @@ const {
   pubDate,
   updatedDate,
   heroImage,
+  blueskyUri,
 } = post.data;
+
+// Generate the canonical post URL for Bluesky sharing
+const postUrl = new URL(`/post/${post.slug}/`, Astro.site).toString();
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
@@ -178,6 +183,16 @@ const newsletterDescription = categoryNames.length > 0
             ))}
           </div>
         )}
+
+        <!-- Bluesky Comments -->
+        <div class="mx-auto max-w-2xl">
+          <BlueskyComments
+            client:load
+            uri={blueskyUri}
+            postTitle={title}
+            postUrl={postUrl}
+          />
+        </div>
     </div>
   </article>
 

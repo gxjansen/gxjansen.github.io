@@ -114,7 +114,9 @@ const post = defineCollection({
     description: z.string().optional(),
     authors: z.array(z.string()).default([]),
     categories: z.array(z.string()).default([]),
-    draft: z.boolean().default(false)
+    draft: z.boolean().default(false),
+    // Bluesky AT URI for comments (e.g., "at://did:plc:xxx/app.bsky.feed.post/yyy")
+    blueskyUri: z.string().optional()
   })
 });
 

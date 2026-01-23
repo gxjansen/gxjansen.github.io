@@ -223,3 +223,46 @@
     @apply z-50;
   }
 }
+
+/* Bluesky Comments Dark Mode Overrides */
+.bluesky-comments-wrapper {
+  /* Override default bluesky-comments styles for dark mode */
+  :root[class~="dark"] & {
+    --bsky-bg: theme('colors.base.800');
+    --bsky-border: theme('colors.base.700');
+    --bsky-text: theme('colors.base.100');
+    --bsky-text-secondary: theme('colors.base.400');
+    --bsky-link: #0085FF;
+
+    .bsky-comment {
+      @apply bg-base-800 border-base-700;
+    }
+
+    .bsky-author-name {
+      @apply text-base-100;
+    }
+
+    .bsky-author-handle,
+    .bsky-comment-date {
+      @apply text-base-400;
+    }
+
+    .bsky-comment-text {
+      @apply text-base-200;
+    }
+
+    .bsky-reply-context {
+      @apply border-base-700;
+    }
+  }
+
+  /* Light mode refinements */
+  .bsky-comment {
+    @apply rounded-lg mb-4;
+  }
+
+  /* Link styling */
+  a {
+    @apply text-[#0085FF] hover:underline;
+  }
+}
