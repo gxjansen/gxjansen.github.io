@@ -74,7 +74,7 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
             href={shareUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#0066CC] hover:bg-[#0052A3] text-white font-medium rounded-lg transition-colors"
+            className="bsky-btn inline-flex items-center gap-2 px-4 py-2 bg-[#0066CC] hover:bg-[#0052A3] !text-white font-medium rounded-lg transition-colors"
           >
             <BlueskyLogo />
             Discuss on Bluesky
@@ -106,7 +106,7 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
             href={replyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#0066CC] hover:bg-[#0052A3] text-white font-medium rounded-lg transition-colors"
+            className="bsky-btn inline-flex items-center gap-2 px-4 py-2 bg-[#0066CC] hover:bg-[#0052A3] !text-white font-medium rounded-lg transition-colors"
           >
             <BlueskyLogo />
             Reply on Bluesky

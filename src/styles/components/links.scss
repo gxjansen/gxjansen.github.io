@@ -19,13 +19,14 @@
 
 /* Base link styling */
 a:not(
-  .card-container, 
-  [role="menuitem"], 
-  nav a, 
-  header a, 
-  footer a, 
-  .btn, 
+  .card-container,
+  [role="menuitem"],
+  nav a,
+  header a,
+  footer a,
+  .btn,
   [class*="button"],
+  .bsky-btn,
   .social-card,
   .social-card *,
   .site-content a,
@@ -59,12 +60,13 @@ a:not(
 }
 
 /* Elements that should not have underlines */
-[role="menuitem"], 
-nav a, 
-header a, 
-footer a, 
-.btn, 
+[role="menuitem"],
+nav a,
+header a,
+footer a,
+.btn,
 [class*="button"],
+.bsky-btn,
 .social-card,
 .social-card *,
 .site-content a,
