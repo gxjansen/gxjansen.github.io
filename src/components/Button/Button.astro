@@ -42,20 +42,13 @@ const {
 const isExternalLink = href && (href.startsWith('http://') || href.startsWith('https://'));
 
 // Base button classes
-// Rosé Pine accent color classes for outline buttons
-const colorClasses = [
-  'color-love',   // reds
-  'color-gold',   // yellows
-  'color-rose',   // warm highlights
-  'color-pine',   // teals/greens
-  'color-foam',   // blues/cyans
-  'color-iris'    // purples
-];
+// Rosé Pine accent colors for outline buttons
+const outlineColors = ['love', 'gold', 'rose', 'pine', 'foam', 'iris'] as const;
 
-// Get a random color class if this is an outline button
-const randomColorClass = variant === 'outline' 
-  ? colorClasses[Math.floor(Math.random() * colorClasses.length)]
-  : '';
+// Get a random color if this is an outline button
+const randomColor = variant === 'outline'
+  ? outlineColors[Math.floor(Math.random() * outlineColors.length)]
+  : undefined;
 
 const baseClasses = [
   className,
@@ -70,7 +63,6 @@ const baseClasses = [
     'button--ghost': variant === 'ghost',
     'button--on-color': variant === 'on-color',
   },
-  randomColorClass // Add the random color class
 ];
 ---
 
@@ -89,6 +81,7 @@ const baseClasses = [
       tabindex={disabled ? -1 : undefined}
       data-umami-event={umamiEvent}
       data-umami-event-target={umamiEventTarget}
+      data-color={randomColor}
       {...rest}
     >
       {arrow === "left" && (
@@ -125,6 +118,7 @@ const baseClasses = [
       aria-disabled={disabled}
       data-umami-event={umamiEvent}
       data-umami-event-target={umamiEventTarget}
+      data-color={randomColor}
       {...rest}
     >
       {arrow === "left" && (
@@ -174,116 +168,31 @@ const baseClasses = [
 
   .button--outline {
     @apply border-2 bg-transparent transition-all duration-200;
+    /* Use CSS custom property for color - set by data-color attribute */
+    border-color: var(--btn-color);
+    color: var(--btn-color);
   }
 
-  /* Rosé Pine accent color variations */
-  /* Love - reds */
-  .button.button--outline.color-love {
-    border-color: #b4637a !important;
-    color: #b4637a !important;
-  }
-  :global(.dark) .button.button--outline.color-love {
-    border-color: #eb6f92 !important;
-    color: #eb6f92 !important;
-  }
-  .button.button--outline.color-love:hover {
-    background-color: #b4637a !important;
-    color: white !important;
-  }
-  :global(.dark) .button.button--outline.color-love:hover {
-    background-color: #eb6f92 !important;
-    color: #191724 !important;
+  .button--outline:hover {
+    background-color: var(--btn-color);
+    color: var(--btn-hover-text, white);
   }
 
-  /* Gold - yellows */
-  .button.button--outline.color-gold {
-    border-color: #ea9d34 !important;
-    color: #ea9d34 !important;
-  }
-  :global(.dark) .button.button--outline.color-gold {
-    border-color: #f6c177 !important;
-    color: #f6c177 !important;
-  }
-  .button.button--outline.color-gold:hover {
-    background-color: #ea9d34 !important;
-    color: white !important;
-  }
-  :global(.dark) .button.button--outline.color-gold:hover {
-    background-color: #f6c177 !important;
-    color: #191724 !important;
-  }
+  /* Rosé Pine accent colors - light mode */
+  .button--outline[data-color="love"] { --btn-color: #b4637a; }
+  .button--outline[data-color="gold"] { --btn-color: #ea9d34; }
+  .button--outline[data-color="rose"] { --btn-color: #d7827e; }
+  .button--outline[data-color="pine"] { --btn-color: #286983; }
+  .button--outline[data-color="foam"] { --btn-color: #56949f; }
+  .button--outline[data-color="iris"] { --btn-color: #907aa9; }
 
-  /* Rose - warm highlights */
-  .button.button--outline.color-rose {
-    border-color: #d7827e !important;
-    color: #d7827e !important;
-  }
-  :global(.dark) .button.button--outline.color-rose {
-    border-color: #ebbcba !important;
-    color: #ebbcba !important;
-  }
-  .button.button--outline.color-rose:hover {
-    background-color: #d7827e !important;
-    color: white !important;
-  }
-  :global(.dark) .button.button--outline.color-rose:hover {
-    background-color: #ebbcba !important;
-    color: #191724 !important;
-  }
-
-  /* Pine - teals/greens */
-  .button.button--outline.color-pine {
-    border-color: #286983 !important;
-    color: #286983 !important;
-  }
-  :global(.dark) .button.button--outline.color-pine {
-    border-color: #31748f !important;
-    color: #31748f !important;
-  }
-  .button.button--outline.color-pine:hover {
-    background-color: #286983 !important;
-    color: white !important;
-  }
-  :global(.dark) .button.button--outline.color-pine:hover {
-    background-color: #31748f !important;
-    color: #e0def4 !important;
-  }
-
-  /* Foam - blues/cyans */
-  .button.button--outline.color-foam {
-    border-color: #56949f !important;
-    color: #56949f !important;
-  }
-  :global(.dark) .button.button--outline.color-foam {
-    border-color: #9ccfd8 !important;
-    color: #9ccfd8 !important;
-  }
-  .button.button--outline.color-foam:hover {
-    background-color: #56949f !important;
-    color: white !important;
-  }
-  :global(.dark) .button.button--outline.color-foam:hover {
-    background-color: #9ccfd8 !important;
-    color: #191724 !important;
-  }
-
-  /* Iris - purples */
-  .button.button--outline.color-iris {
-    border-color: #907aa9 !important;
-    color: #907aa9 !important;
-  }
-  :global(.dark) .button.button--outline.color-iris {
-    border-color: #c4a7e7 !important;
-    color: #c4a7e7 !important;
-  }
-  .button.button--outline.color-iris:hover {
-    background-color: #907aa9 !important;
-    color: white !important;
-  }
-  :global(.dark) .button.button--outline.color-iris:hover {
-    background-color: #c4a7e7 !important;
-    color: #191724 !important;
-  }
+  /* Rosé Pine accent colors - dark mode */
+  :global(.dark) .button--outline[data-color="love"] { --btn-color: #eb6f92; --btn-hover-text: #191724; }
+  :global(.dark) .button--outline[data-color="gold"] { --btn-color: #f6c177; --btn-hover-text: #191724; }
+  :global(.dark) .button--outline[data-color="rose"] { --btn-color: #ebbcba; --btn-hover-text: #191724; }
+  :global(.dark) .button--outline[data-color="pine"] { --btn-color: #31748f; --btn-hover-text: #e0def4; }
+  :global(.dark) .button--outline[data-color="foam"] { --btn-color: #9ccfd8; --btn-hover-text: #191724; }
+  :global(.dark) .button--outline[data-color="iris"] { --btn-color: #c4a7e7; --btn-hover-text: #191724; }
 
   .button--ghost {
     @apply bg-transparent text-base-800 hover:bg-base-200 dark:text-base-100 dark:hover:bg-base-800;
