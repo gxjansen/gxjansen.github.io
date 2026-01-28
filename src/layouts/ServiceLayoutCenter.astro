@@ -37,7 +37,7 @@ const { title, description, image = undefined } = Astro.props as Props;
         <div class="-mt-12 max-w-[800px] overflow-hidden px-4 md:-mt-20">
           <Image
             src={image}
-            alt=""
+            alt={`${title} - service illustration`}
             width={1600}
             quality="high"
             class="max-h-[45vh] rounded-md object-cover"
