@@ -43,11 +43,10 @@ const { listings } = Astro.props;
               {listing.articleUrl ? (
                 <img
                   src={getFaviconUrl(listing.articleUrl)}
-                  alt=""
+                  alt={listing.personOrganization ? `${listing.personOrganization} logo` : "Publication logo"}
                   width="32"
                   height="32"
                   class="w-8 h-8 object-contain"
-                  role="presentation"
                 />
               ) : (
                 <svg class="w-7 h-7 text-base-500 dark:text-base-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
