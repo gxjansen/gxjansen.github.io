@@ -57,6 +57,7 @@ const handler: Handler = async (
 
   try {
     const authHeader = Buffer.from(`${apiUser}:${apiKey}`).toString("base64");
+    const bypassToken = process.env.CF_BYPASS_TOKEN || "";
 
     // Use subscribers endpoint with minimal query (1 result) just to get total count
     const response = await fetch(
@@ -66,6 +67,7 @@ const handler: Handler = async (
         headers: {
           Authorization: `Basic ${authHeader}`,
           "Content-Type": "application/json",
+          "X-Bypass-Token": bypassToken,
         },
       }
     );

@@ -152,6 +152,7 @@ const handler: Handler = async (
     }
 
     const authHeader = `Basic ${Buffer.from(`${apiUser}:${apiKey}`).toString("base64")}`;
+    const bypassToken = process.env.CF_BYPASS_TOKEN || "";
     const targetListId = listId ? parseInt(String(listId), 10) : DEFAULT_LIST_ID;
 
     // Step 1: Create subscriber (without list assignment - separate API call needed)
@@ -171,6 +172,7 @@ const handler: Handler = async (
       headers: {
         "Content-Type": "application/json",
         Authorization: authHeader,
+        "X-Bypass-Token": bypassToken,
       },
       body: JSON.stringify(subscriberPayload),
     });
@@ -187,6 +189,7 @@ const handler: Handler = async (
           headers: {
             "Content-Type": "application/json",
             Authorization: authHeader,
+            "X-Bypass-Token": bypassToken,
           },
           body: JSON.stringify({
             ids: [subscriberId],
@@ -201,6 +204,7 @@ const handler: Handler = async (
           method: "POST",
           headers: {
             Authorization: authHeader,
+            "X-Bypass-Token": bypassToken,
           },
         });
       }
