@@ -7,10 +7,7 @@ See [this article](https://gui.do/post/website-moved-to-astro/) with more backgr
 ## Stack
 Built with [Astro](https://astro.build/), [React](https://react.dev/), [MDX](https://mdxjs.com/), [Tailwind](https://tailwindcss.com/) and deployed on [Netlify](https://www.netlify.com/).
 
-### Development site
-[![GH Pages Deploy](https://github.com/gxjansen/gxjansen.github.io/workflows/Deploy%20Astro%20site%20to%20Pages/badge.svg)](https://github.com/gxjansen/gxjansen.github.io/actions/workflows/astro.yml "GitHub Actions workflow status")
-
-### Production site
+### Status
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b6ca57ea-33ef-4185-a64e-a6b040a64805/deploy-status)](https://app.netlify.com/sites/gxjansen/deploys)
 [![CodeQL](https://github.com/gxjansen/gxjansen.github.io/workflows/CodeQL/badge.svg)](https://github.com/gxjansen/gxjansen.github.io/actions?query=workflow%3ACodeQL "Code quality workflow status")
-[![Core Web Vitals](https://page-speed.dev/badge/gui.do?style=flat)](https://page-speed.dev/gui.do)
+[![PageSpeed](https://img.shields.io/badge/PageSpeed-View%20Report-4285F4?logo=pagespeedinsights)](https://pagespeed.web.dev/analysis/https-gui-do/)
