@@ -82,6 +82,12 @@ src/components/SiteContent/SiteContent.astro
 deno.lock
 link-check-results.md
 
+# Debug/troubleshooting functions (not deployed)
+netlify/functions/_debug/
+
+# Internal documentation (security-sensitive)
+docs/
+
 # Project planning/internal docs
 /internal
 /project
