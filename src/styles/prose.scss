@@ -99,8 +99,8 @@
   background: transparent !important;
 }
 
-/* Game UI ASCII block - retro terminal style (use with .game-ui wrapper) */
-.game-ui pre {
+/* Game UI ASCII block - retro terminal style (use with .game-ui-desktop wrapper) */
+.game-ui-desktop pre {
   @apply text-[10px] xs:text-[11px] sm:text-xs md:text-sm;
   @apply leading-[1.15] tracking-tight;
   @apply bg-base-950 font-mono;
@@ -111,10 +111,10 @@
   max-width: 100%;
 }
 
-.game-ui pre code {
+.game-ui-desktop pre code {
   @apply text-foam;
 }
 
-.game-ui pre code span {
+.game-ui-desktop pre code span {
   color: inherit !important;
 }

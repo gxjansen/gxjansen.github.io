@@ -1,8 +1,27 @@
 ---
-// Game UI ASCII art component - isolated to prevent formatter mangling
+// Game UI component - shows ASCII art on desktop, simplified version on mobile
 ---
 
-<div class="game-ui">
+<!-- Mobile version -->
+<div class="game-ui-mobile my-4 rounded-lg border border-base-700 bg-base-950 p-3 font-mono text-xs">
+  <div class="flex items-center justify-between border-b border-base-700 pb-2 mb-2">
+    <span class="text-foam font-bold">REALMS ONLINE</span>
+    <span class="text-foam">████████░░ 80%</span>
+  </div>
+  <div class="grid grid-cols-2 gap-1 text-base-400 text-[11px]">
+    <div>CLASS: <span class="text-foam">Viber</span></div>
+    <div>REALM: <span class="text-foam">Sisyphean</span></div>
+    <div>STAMINA: <span class="text-foam">████░░░░</span></div>
+    <div>SESSION: <span class="text-foam">4h 32m</span></div>
+  </div>
+  <div class="mt-2 pt-2 border-t border-base-700 text-[11px]">
+    <div class="text-gold">QUEST: "Restore the Guardian Gate"</div>
+    <div class="text-base-500 mt-1">> Opus is waiting for your command...</div>
+  </div>
+</div>
+
+<!-- Desktop ASCII art -->
+<div class="game-ui-desktop">
 <pre class="astro-code" data-language="plaintext" style="background-color: var(--tw-prose-pre-bg); overflow-x: auto;" tabindex="0"><code>╔══════════════════════════════════════════════════════════════╗
 ║  REALMS ONLINE          ████████░░ MANA: 80%                 ║
 ╠══════════════════════════════════════════════════════════════╣
@@ -14,3 +33,23 @@
 ║  > Opus is waiting for your command...                       ║
 ╚══════════════════════════════════════════════════════════════╝</code></pre>
 </div>
+
+<style>
+  /* Mobile: show mobile version, hide desktop */
+  .game-ui-mobile {
+    display: block;
+  }
+  .game-ui-desktop {
+    display: none;
+  }
+
+  /* Desktop (768px+): hide mobile, show desktop */
+  @media (min-width: 768px) {
+    .game-ui-mobile {
+      display: none;
+    }
+    .game-ui-desktop {
+      display: block;
+    }
+  }
+</style>
