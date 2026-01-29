@@ -60,6 +60,7 @@
     "@fullhuman/postcss-purgecss": "^7.0.2",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
+    "baseline-browser-mapping": "^2.9.19",
     "fs-extra": "^11.3.0",
     "jsdom": "^27.2.0",
     "lightningcss": "^1.30.1",
