@@ -30,7 +30,8 @@ export default defineConfig({
       config: {
         svg: {
           enabled: true
-        }
+        },
+        kernel: 'mks2021' // Sharper image resizing (Astro 5.17+)
       }
     }
   },
