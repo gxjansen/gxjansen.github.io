@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon";
 
 interface Props {
-  variant: "tip" | "caution" | "danger" | "info";
+  variant: "tip" | "caution" | "danger" | "info" | "terminal" | "prompt";
 }
 
 const { variant } = Astro.props as Props;
@@ -18,38 +18,70 @@ const icon = (() => {
       return "tabler/flame";
     case "info":
       return "tabler/info-circle";
+    case "terminal":
+      return "tabler/terminal-2";
+    case "prompt":
+      return "tabler/user";
   }
 })();
+
+const label = variant === "terminal" ? "OPUS" : variant === "prompt" ? "GUIDO" : variant.toUpperCase();
 ---
 
-<div
-  class:list={[
-    "admonition my-3 rounded-lg border-l-4 px-4 py-3 text-base-600 dark:text-base-300",
-    {
-      "border-success bg-success/10 text-success-content prose-code:bg-success/20 dark:prose-code:bg-success/20":
-        variant === "tip",
-    },
-    {
-      "border-warning bg-warning/10 text-warning-content prose-code:bg-warning/20 dark:prose-code:bg-warning/20":
-        variant === "caution",
-    },
-    {
-      "border-error bg-error/10 text-error-content prose-code:bg-error/20 dark:prose-code:bg-error/20":
-        variant === "danger",
-    },
-    {
-      "border-info bg-info/10 text-info-content prose-code:bg-info/20 dark:prose-code:bg-info/20":
-        variant === "info",
-    },
-  ]}
->
-  <div class="flex items-center gap-2 pb-2">
-    <Icon
-      name={icon}
-      class="size-7 text-base-600 dark:text-base-300"
-      aria-hidden="true"
-    />
-    <p class="text-sm font-bold">{variant.toUpperCase()}</p>
+{variant === "terminal" ? (
+  <div class="admonition my-3 rounded-lg border-l-4 px-4 py-3 border-gold bg-gold/10 font-mono text-sm text-base-600 dark:text-base-300 prose-code:bg-gold/20 dark:prose-code:bg-gold/20">
+    <span class="inline-flex items-center gap-1.5 align-middle mr-2" style="transform: translateY(-1px);">
+      <Icon
+        name={icon}
+        class="size-5 text-base-600 dark:text-base-300 inline"
+        aria-hidden="true"
+      />
+      <span class="font-bold">{label}</span>
+    </span>
+    <slot />
   </div>
-  <slot />
-</div>
+) : variant === "prompt" ? (
+  <div class="admonition my-3 rounded-lg border-l-4 px-4 py-3 border-pine bg-pine/10 font-mono text-sm text-base-600 dark:text-base-300">
+    <span class="inline-flex items-center gap-1.5 align-middle mr-2" style="transform: translateY(-1px);">
+      <Icon
+        name={icon}
+        class="size-5 text-base-600 dark:text-base-300 inline"
+        aria-hidden="true"
+      />
+      <span class="font-bold">{label}</span>
+    </span>
+    <slot />
+  </div>
+) : (
+  <div
+    class:list={[
+      "admonition my-3 rounded-lg border-l-4 px-4 py-3 text-base-600 dark:text-base-300",
+      {
+        "border-success bg-success/10 text-success-content prose-code:bg-success/20 dark:prose-code:bg-success/20":
+          variant === "tip",
+      },
+      {
+        "border-warning bg-warning/10 text-warning-content prose-code:bg-warning/20 dark:prose-code:bg-warning/20":
+          variant === "caution",
+      },
+      {
+        "border-error bg-error/10 text-error-content prose-code:bg-error/20 dark:prose-code:bg-error/20":
+          variant === "danger",
+      },
+      {
+        "border-info bg-info/10 text-info-content prose-code:bg-info/20 dark:prose-code:bg-info/20":
+          variant === "info",
+      },
+    ]}
+  >
+    <div class="flex items-center gap-2 pb-2">
+      <Icon
+        name={icon}
+        class="size-7 text-base-600 dark:text-base-300"
+        aria-hidden="true"
+      />
+      <p class="text-sm font-bold">{label}</p>
+    </div>
+    <slot />
+  </div>
+)}

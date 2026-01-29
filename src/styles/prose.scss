@@ -16,7 +16,7 @@
   /* bold text */
   @apply prose-strong:font-bold prose-strong:text-base-900 dark:prose-strong:text-white;
   /* code */
-  @apply prose-code:rounded-md prose-code:border-2 prose-code:border-solid prose-code:border-base-200 prose-code:bg-base-50 prose-code:px-[.1rem] prose-code:font-normal prose-code:text-inherit dark:prose-code:border-base-800 dark:prose-code:bg-base-800 sm:prose-code:text-base;
+  @apply prose-code:rounded-md prose-code:border-2 prose-code:border-solid prose-code:border-base-200 prose-code:bg-base-50 prose-code:px-[.1rem] prose-code:font-normal prose-code:text-inherit dark:prose-code:border-base-800 dark:prose-code:bg-base-800 dark:prose-code:text-base-100 sm:prose-code:text-base;
   /* code remove backticks */
   code::before {
     content: "";
@@ -53,7 +53,7 @@
   }
 }
 
-/* Markdown Styling for admonitions in posts, using @tailwind/typography with `prose` 
+/* Markdown Styling for admonitions in posts, using @tailwind/typography with `prose`
    These are meant to override any of the normal prose stylings above */
 .admonition {
   /* headings */
@@ -64,6 +64,11 @@
   @apply prose-code:rounded-lg prose-code:border-opacity-0 prose-code:px-[.1rem] prose-code:font-normal prose-code:text-inherit sm:prose-code:text-base;
   /* anchor links */
   @apply prose-a:text-inherit prose-a:underline prose-a:transition hover:prose-a:text-inherit hover:prose-a:opacity-80;
+}
+
+/* Terminal admonition - inline paragraph for compact display */
+.admonition.border-gold p {
+  display: inline;
 }
 
 .prose h1:first-child,
@@ -87,4 +92,29 @@
 /* youtube embed */
 .prose iframe {
   @apply mr-auto min-w-0 max-w-full;
+}
+
+/* ASCII/plaintext code blocks - transparent text background */
+.prose pre[data-language="plaintext"] code {
+  background: transparent !important;
+}
+
+/* Game UI ASCII block - retro terminal style (use with .game-ui wrapper) */
+.game-ui pre {
+  @apply text-[10px] xs:text-[11px] sm:text-xs md:text-sm;
+  @apply leading-[1.15] tracking-tight;
+  @apply bg-base-950 font-mono;
+  @apply border border-base-700 rounded-lg;
+  @apply p-3 sm:p-4;
+  @apply mx-auto;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.game-ui pre code {
+  @apply text-foam;
+}
+
+.game-ui pre code span {
+  color: inherit !important;
 }

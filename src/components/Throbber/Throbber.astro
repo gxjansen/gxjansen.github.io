@@ -1,0 +1,67 @@
+---
+interface Props {
+  word?: string;
+}
+
+const { word = "Pondering" } = Astro.props;
+
+// Don't double-add ellipsis if word already ends with one
+const displayWord = word.endsWith("…") || word.endsWith("...") ? word : `${word}…`;
+---
+
+<div class="throbber my-4 flex items-center gap-2 font-mono text-sm select-none">
+  <span class="throbber-icon">✶</span>
+  <span class="throbber-text">{displayWord}</span>
+</div>
+
+<style>
+  .throbber-icon {
+    display: inline-block;
+    color: #E28E6E;
+    animation: throbber-spin 0.8s ease-in-out infinite;
+  }
+
+  .throbber-text {
+    background: linear-gradient(
+      90deg,
+      #E28E6E 0%,
+      #E28E6E 40%,
+      #f4b8a0 50%,
+      #E28E6E 60%,
+      #E28E6E 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: throbber-shimmer 2s ease-in-out infinite;
+  }
+
+  @keyframes throbber-spin {
+    0%, 100% {
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+    }
+    25% {
+      transform: rotate(90deg) scale(0.8);
+      opacity: 0.7;
+    }
+    50% {
+      transform: rotate(180deg) scale(1);
+      opacity: 1;
+    }
+    75% {
+      transform: rotate(270deg) scale(0.8);
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes throbber-shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+</style>
