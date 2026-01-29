@@ -30,8 +30,7 @@ export default defineConfig({
       config: {
         svg: {
           enabled: true
-        },
-        kernel: 'mks2021' // Sharper image resizing (Astro 5.17+)
+        }
       }
     }
   },
@@ -82,7 +81,9 @@ export default defineConfig({
   integrations: [
     AutoImport({
       imports: [
-        "@components/Admonition/Admonition.astro"
+        "@components/Admonition/Admonition.astro",
+        "@components/Throbber/Throbber.astro",
+        "@components/GameUI/GameUI.astro"
       ]
     }),
     mdx({
