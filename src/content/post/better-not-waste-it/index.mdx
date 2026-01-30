@@ -30,9 +30,7 @@ My game's weekly stamina supply will reset in 4 days. _Better not waste it._
 
 Mana bar appears:
 
-```plaintext
-████████░░ 80%  ⏱ 4h 32m
-```
+<ManaBar percent={80} time="4h 32m" />
 
 The RTX 4080 is warmed up, ready to go. Three quests in the backlog. I'll clear them all tonight and turn in for an early night.
 
@@ -57,9 +55,7 @@ But there's mana left. And it doesn't carry over.
 
 Next quest.
 
-```plaintext
-███████░░░ 70%  ⏱ 4h 08m
-```
+<ManaBar percent={70} time="4h 08m" />
 
 Nice, plenty mana left.
 
@@ -114,9 +110,7 @@ Verification finally passes.
 
 Wait. Now the Guardian Gate is corrupted again? Travelers can't pass. Aaargh 🤦
 
-```plaintext
-█████░░░░░ 48%  ⏱ 3h 16m
-```
+<ManaBar percent={48} time="3h 16m" />
 
 Wut! Where did all my Mana go?
 
@@ -142,9 +136,7 @@ Am I being played here?
 
 One more command.
 
-```plaintext
-████░░░░░░ 40%  ⏱ 2h 57m
-```
+<ManaBar percent={40} time="2h 57m" />
 
 ---
 
@@ -174,9 +166,7 @@ I check the change log. Four hundred runes modified across six chambers. I don't
 
 Works, though. 🤷
 
-```plaintext
-█░░░░░░░░░ 8%  ⏱ 1h 41m
-```
+<ManaBar percent={8} time="1h 41m" />
 
 Eight percent?!
 
@@ -192,12 +182,7 @@ Noooooo.
 
 I start typing the fix.
 
-```plaintext
-░░░░░░░░░░ 0%   ⏱ 1h 23m
-
-SESSION MANA DEPLETED
-Mana refills in 1h 23m
-```
+<ManaBar percent={0} time="1h 23m" depleted message="Mana refills in 1h 23m" />
 
 Mana depleted. The game locked me out.
 
@@ -233,9 +218,7 @@ Terminal opens. Fingers find the keys.
 
 The RTX 4080 spins up. Token bar appears.
 
-```plaintext
-██████████ 100%  ⏱ 5h 00m
-```
+<ManaBar percent={100} time="5h 00m" />
 
 Weekly reset in 3 days. _Better not waste it._
 
