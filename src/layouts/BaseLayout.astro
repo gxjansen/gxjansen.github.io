@@ -182,6 +182,11 @@ const currLocale = getLocaleFromUrl(Astro.url);
     <!-- Error tracking with Umami -->
     <script is:inline>
       (function() {
+        // Skip error tracking on localhost/dev environments
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          return;
+        }
+
         function trackError(type, data) {
           if (typeof umami !== 'undefined') {
             umami.track(type, data);
