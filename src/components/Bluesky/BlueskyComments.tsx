@@ -62,7 +62,7 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
   if (!uri) {
     // No Bluesky post linked yet - show share button
     return (
-      <section className="bluesky-comments-section mt-12 pt-8 border-t border-base-200 dark:border-base-700">
+      <section className="bluesky-comments-section mt-12 pt-8 border-t-2 border-base-400 dark:border-base-600">
         <h2 className="text-xl font-semibold text-base-900 dark:text-base-100 mb-4">
           Comments
         </h2>
@@ -92,7 +92,7 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
   // Show empty/error state
   if (emptyDetails) {
     return (
-      <section className="bluesky-comments-section mt-12 pt-8 border-t border-base-200 dark:border-base-700">
+      <section className="bluesky-comments-section mt-12 pt-8 border-t-2 border-base-400 dark:border-base-600">
         <h2 className="text-xl font-semibold text-base-900 dark:text-base-100 mb-4">
           Comments
         </h2>
@@ -118,7 +118,7 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
 
   // Bluesky post is linked - show comments
   return (
-    <section className="bluesky-comments-section mt-12 pt-8 border-t border-base-200 dark:border-base-700">
+    <section className="bluesky-comments-section mt-12 pt-8 border-t-2 border-base-400 dark:border-base-600">
       <h2 className="text-xl font-semibold text-base-900 dark:text-base-100 mb-4">
         Comments
       </h2>
