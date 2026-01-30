@@ -46,7 +46,7 @@ export const textTranslations = {
   en: {
     hero_text: "Hi, I'm Guido 👋",
     hero_description:
-      "<span class='text-primary-500 font-semibold'>I build Ecosystems for Tech Products</span>\n\nI've built multiple tech communities from zero (Joomla!, Magento, CRO.CAFE, Spryker) and turned them into strategic growth engines\n\n🧠 **Cognitive psychology** to decode user behavior\n📈 **Business Experimentation** that drives measurable growth\n🤝 **Community building** that creates mutual value\n🪴 **(AI) automation** making growth systematic and scalable\n⚡ **Open tech** choosing user freedom over vendor lock-in",
+      "<span class='text-primary-500 font-semibold'>I build Community Functions for Tech Products</span>\n\nI've built multiple technical communities from zero (Joomla!, Magento, CRO.CAFE, Spryker) - and the teams to run them\n\n🧠 **Cognitive psychology** to decode user behavior\n📈 **Business Experimentation** that drives measurable growth\n🤝 **Community building** that creates mutual value\n🪴 **(AI) automation** making growth systematic and scalable\n⚡ **Open tech** choosing user freedom over vendor lock-in",
     back_to_all_posts: "Back to all posts",
     updated: "Updated",
   },
