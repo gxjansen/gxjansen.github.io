@@ -38,8 +38,8 @@
   @apply prose-video:mr-auto prose-video:min-w-0 prose-video:max-w-full;
   /* blockquote */
   @apply prose-blockquote:border-l-primary-500;
-  /* horizontal rule */
-  @apply prose-hr:my-8 prose-hr:border-base-200 dark:prose-hr:border-base-800;
+  /* horizontal rule - WCAG 1.4.11 requires 3:1 contrast for UI components */
+  @apply prose-hr:my-8 prose-hr:border-base-400 dark:prose-hr:border-base-600;
   /* table - scrollable wrapper on mobile */
   @apply prose-table:block prose-table:max-w-full prose-table:overflow-x-auto;
   /* table head */
