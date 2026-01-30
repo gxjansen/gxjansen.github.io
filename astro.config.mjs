@@ -83,7 +83,8 @@ export default defineConfig({
       imports: [
         "@components/Admonition/Admonition.astro",
         "@components/Throbber/Throbber.astro",
-        "@components/GameUI/GameUI.astro"
+        "@components/GameUI/GameUI.astro",
+        "@components/Regenerating/Regenerating.astro"
       ]
     }),
     mdx({
