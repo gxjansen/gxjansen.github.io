@@ -91,7 +91,7 @@ export const socialLinks: SocialLink[] = [
   {
     name: 'RSS Feed',
     href: '/rss.xml',
-    icon: 'tabler/outline/rss',
+    icon: 'rss',
     visibility: {
       footer: true,
       hero: false,

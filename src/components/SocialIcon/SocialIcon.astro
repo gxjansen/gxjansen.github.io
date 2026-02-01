@@ -7,6 +7,7 @@ import XTwitterIcon from '@icons/social/x-twitter.svg';
 import BlueSkyIcon from '@icons/social/bluesky.svg';
 import InstagramIcon from '@icons/social/instagram.svg';
 import SignalIcon from '@icons/social/signal.svg';
+import RSSIcon from '@icons/social/rss.svg';
 
 interface Props {
   icon: string;
@@ -29,6 +30,7 @@ const iconMap: { [key: string]: any } = {
   'bluesky': BlueSkyIcon,
   'instagram': InstagramIcon,
   'signal': SignalIcon,
+  'rss': RSSIcon,
 };
 
 const IconComponent = iconMap[icon] || null;
