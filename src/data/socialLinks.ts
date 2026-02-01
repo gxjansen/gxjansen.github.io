@@ -87,5 +87,16 @@ export const socialLinks: SocialLink[] = [
       about: false,
       contact: false
     }
+  },
+  {
+    name: 'RSS Feed',
+    href: '/rss.xml',
+    icon: 'tabler/outline/rss',
+    visibility: {
+      footer: true,
+      hero: false,
+      about: false,
+      contact: false
+    }
   }
 ];
