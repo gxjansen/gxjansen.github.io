@@ -4,11 +4,11 @@ interface Props {
   time: string;
   depleted?: boolean;
   message?: string;
-  memoryLow?: boolean;
-  memoryCritical?: boolean;
+  attunementLow?: boolean;
+  attunementCritical?: boolean;
 }
 
-const { percent, time, depleted = false, message, memoryLow = false, memoryCritical = false } = Astro.props;
+const { percent, time, depleted = false, message, attunementLow = false, attunementCritical = false } = Astro.props;
 
 // Generate progress bar: 10 characters total
 const filled = Math.round(percent / 10);
@@ -20,17 +20,17 @@ const bar = '█'.repeat(filled) + '░'.repeat(empty);
   <div class="flex flex-wrap gap-x-4 gap-y-1">
     <span class="whitespace-nowrap text-foam">{bar} {percent}%</span>
     <span class="whitespace-nowrap text-foam">⏱ {time}</span>
-    {memoryLow && !memoryCritical && (
-      <span class="whitespace-nowrap text-gold">⚠ MEMORY LOW</span>
+    {attunementLow && !attunementCritical && (
+      <span class="whitespace-nowrap text-gold">⚠ ATTUNEMENT LOW</span>
     )}
-    {memoryCritical && (
-      <span class="whitespace-nowrap text-love animate-pulse">⚠ MEMORY CRITICAL</span>
+    {attunementCritical && (
+      <span class="whitespace-nowrap text-love animate-pulse">⚠ ATTUNEMENT CRITICAL</span>
     )}
   </div>
   {depleted && message && (
     <div class="mt-2 pt-2 border-t border-base-700 text-center">
-      <div class="text-red-400 font-bold">SESSION MANA DEPLETED</div>
-      <div class="text-base-400">{message}</div>
+      <div class="text-love font-bold">SESSION MANA DEPLETED</div>
+      <div class="text-base-500">{message}</div>
     </div>
   )}
 </div>
