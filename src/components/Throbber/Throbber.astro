@@ -1,16 +1,17 @@
 ---
 interface Props {
   word?: string;
+  variant?: "default" | "game";
 }
 
-const { word = "Pondering" } = Astro.props;
+const { word = "Pondering", variant = "default" } = Astro.props;
 
 // Don't double-add ellipsis if word already ends with one
 const displayWord = word.endsWith("…") || word.endsWith("...") ? word : `${word}…`;
 ---
 
 <div class="throbber my-4 flex items-center gap-2 font-mono text-sm select-none">
-  <span class="throbber-icon">✶</span>
+  <span class:list={["throbber-icon", variant === "game" ? "game" : "claude"]}></span>
   <span class="throbber-text">{displayWord}</span>
 </div>
 
@@ -18,7 +19,42 @@ const displayWord = word.endsWith("…") || word.endsWith("...") ? word : `${wor
   .throbber-icon {
     display: inline-block;
     color: #E28E6E;
-    animation: throbber-spin 0.8s ease-in-out infinite;
+    width: 1em;
+    text-align: center;
+  }
+
+  /* Claude Code style: cycles between dot and star characters */
+  .throbber-icon.claude::before {
+    content: "·";
+    animation: claude-cycle 1.4s steps(1) infinite;
+  }
+
+  @keyframes claude-cycle {
+    0% { content: "·"; }
+    12.5% { content: "•"; }
+    25% { content: "✳"; }
+    37.5% { content: "✶"; }
+    50% { content: "✻"; }
+    62.5% { content: "*"; }
+    75% { content: "✶"; }
+    87.5% { content: "✢"; }
+  }
+
+  /* Game style: cycles through fantasy ASCII characters */
+  .throbber-icon.game::before {
+    content: "†";
+    animation: game-cycle 1.4s steps(1) infinite;
+  }
+
+  @keyframes game-cycle {
+    0% { content: "†"; }      /* dagger */
+    12.5% { content: "✧"; }   /* magic star */
+    25% { content: "◆"; }     /* gem */
+    37.5% { content: "ψ"; }   /* staff */
+    50% { content: "※"; }     /* rune */
+    62.5% { content: "☽"; }   /* moon */
+    75% { content: "⚡"; }    /* lightning */
+    87.5% { content: "✵"; }   /* burst */
   }
 
   .throbber-text {
@@ -35,25 +71,6 @@ const displayWord = word.endsWith("…") || word.endsWith("...") ? word : `${wor
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: throbber-shimmer 2s ease-in-out infinite;
-  }
-
-  @keyframes throbber-spin {
-    0%, 100% {
-      transform: rotate(0deg) scale(1);
-      opacity: 1;
-    }
-    25% {
-      transform: rotate(90deg) scale(0.8);
-      opacity: 0.7;
-    }
-    50% {
-      transform: rotate(180deg) scale(1);
-      opacity: 1;
-    }
-    75% {
-      transform: rotate(270deg) scale(0.8);
-      opacity: 0.7;
-    }
   }
 
   @keyframes throbber-shimmer {
