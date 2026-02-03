@@ -8,11 +8,21 @@ const { word = "Pondering", variant = "default" } = Astro.props;
 
 // Don't double-add ellipsis if word already ends with one
 const displayWord = word.endsWith("…") || word.endsWith("...") ? word : `${word}…`;
+
+// Desynchronized animations
+// Icon: start at a random position in the 8-character cycle (discrete steps)
+const iconStep = Math.floor(Math.random() * 8);
+const iconDelay = (iconStep * (1.4 / 8)).toFixed(3);
+// Shimmer: random delay within the 2s cycle
+const shimmerDelay = (Math.random() * 2).toFixed(2);
 ---
 
 <div class="throbber my-4 flex items-center gap-2 font-mono text-sm select-none">
-  <span class:list={["throbber-icon", variant === "game" ? "game" : "claude"]}></span>
-  <span class="throbber-text">{displayWord}</span>
+  <span
+    class:list={["throbber-icon", variant === "game" ? "game" : "claude"]}
+    style={`animation-delay: ${iconDelay}s`}
+  ></span>
+  <span class="throbber-text" style={`animation-delay: ${shimmerDelay}s`}>{displayWord}</span>
 </div>
 
 <style>
@@ -27,6 +37,7 @@ const displayWord = word.endsWith("…") || word.endsWith("...") ? word : `${wor
   .throbber-icon.claude::before {
     content: "·";
     animation: claude-cycle 1.4s steps(1) infinite;
+    animation-delay: inherit;
   }
 
   @keyframes claude-cycle {
@@ -44,6 +55,7 @@ const displayWord = word.endsWith("…") || word.endsWith("...") ? word : `${wor
   .throbber-icon.game::before {
     content: "†";
     animation: game-cycle 1.4s steps(1) infinite;
+    animation-delay: inherit;
   }
 
   @keyframes game-cycle {
