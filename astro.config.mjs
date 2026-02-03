@@ -85,7 +85,8 @@ export default defineConfig({
         "@components/Throbber/Throbber.astro",
         "@components/GameUI/GameUI.astro",
         "@components/Regenerating/Regenerating.astro",
-        "@components/ManaBar/ManaBar.astro"
+        "@components/ManaBar/ManaBar.astro",
+        "@components/Compacting/Compacting.astro"
       ]
     }),
     mdx({

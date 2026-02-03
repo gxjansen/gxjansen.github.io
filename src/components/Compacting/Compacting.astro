@@ -1,0 +1,160 @@
+---
+interface Props {
+  message?: string;
+}
+
+const { message = "Compacting our conversation so we can keep chatting..." } = Astro.props;
+---
+
+<div class="compacting">
+  <div class="compacting-content">
+    <div class="spinner">
+      <span class="dot" style="--i: 0"></span>
+      <span class="dot" style="--i: 1"></span>
+      <span class="dot" style="--i: 2"></span>
+      <span class="dot" style="--i: 3"></span>
+      <span class="dot" style="--i: 4"></span>
+      <span class="dot" style="--i: 5"></span>
+      <span class="dot" style="--i: 6"></span>
+      <span class="dot" style="--i: 7"></span>
+      <span class="dot" style="--i: 8"></span>
+      <span class="dot" style="--i: 9"></span>
+      <span class="dot" style="--i: 10"></span>
+      <span class="dot" style="--i: 11"></span>
+    </div>
+    <div class="compacting-info">
+      <div class="compacting-text">{message}</div>
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-empty"></div>
+          <div class="progress-fill"></div>
+        </div>
+        <span class="progress-percent"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .compacting {
+    padding: 1em 0;
+    margin: 1em 0;
+    font-family: monospace;
+  }
+
+  .compacting-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5em;
+  }
+
+  /* Dotted circle spinner */
+  .spinner {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    margin-top: 0.25em;
+  }
+
+  .dot {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #E28E6E;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    animation: dot-pulse 1.2s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.1s);
+  }
+
+  .dot { transform: rotate(calc(var(--i) * 30deg)) translateX(-50%) translateY(-16px); }
+
+  @keyframes dot-pulse {
+    0%, 100% {
+      opacity: 0.2;
+      transform: rotate(calc(var(--i) * 30deg)) translateX(-50%) translateY(-16px) scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: rotate(calc(var(--i) * 30deg)) translateX(-50%) translateY(-16px) scale(1.1);
+    }
+  }
+
+  .compacting-info {
+    flex: 1;
+  }
+
+  .compacting-text {
+    @apply text-base-300;
+    font-style: italic;
+    margin-bottom: 0.75em;
+    line-height: 1.4;
+  }
+
+  .progress-container {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .progress-bar {
+    position: relative;
+    flex: 1;
+    height: 6px;
+    @apply bg-base-800;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-empty {
+    position: absolute;
+    inset: 0;
+    @apply bg-base-700;
+  }
+
+  .progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    background-color: #E28E6E;
+    border-radius: 3px;
+    animation: fill-progress 18s ease-out infinite;
+  }
+
+  @keyframes fill-progress {
+    0% { width: 0%; }
+    90% { width: 100%; }
+    100% { width: 100%; }
+  }
+
+  .progress-percent {
+    @apply text-base-500;
+    font-family: monospace;
+    font-size: 0.85em;
+    min-width: 3.5em;
+    text-align: right;
+  }
+
+  /* Animated counter using CSS counter + content */
+  .progress-percent::after {
+    content: "0%";
+    animation: count-up 18s ease-out infinite;
+  }
+
+  @keyframes count-up {
+    0% { content: "0%"; }
+    10% { content: "12%"; }
+    20% { content: "27%"; }
+    30% { content: "38%"; }
+    40% { content: "51%"; }
+    50% { content: "63%"; }
+    60% { content: "74%"; }
+    70% { content: "82%"; }
+    80% { content: "91%"; }
+    90%, 100% { content: "100%"; }
+  }
+</style>
