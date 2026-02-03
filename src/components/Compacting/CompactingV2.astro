@@ -1,0 +1,169 @@
+---
+interface Props {
+  message?: string;
+}
+
+const { message = "Re-attuning... condensing our bond to what matters most..." } = Astro.props;
+---
+
+<div class="compacting-v2">
+  <div class="symbols-container">
+    <span class="symbol s1">✧</span>
+    <span class="symbol s2">†</span>
+    <span class="symbol s3">◆</span>
+    <span class="symbol s4">ψ</span>
+    <span class="symbol s5">※</span>
+    <span class="symbol s6">☽</span>
+    <span class="symbol s7">✧</span>
+    <span class="symbol s8">†</span>
+    <span class="symbol s9">◆</span>
+    <span class="symbol s10">ψ</span>
+    <span class="symbol s11">※</span>
+    <span class="symbol s12">☽</span>
+    <span class="symbol-core">◆</span>
+  </div>
+  <div class="compacting-message">{message}</div>
+  <div class="compacting-progress">(condensing... <span class="progress-counter"></span>)</div>
+</div>
+
+<style>
+  .compacting-v2 {
+    @apply bg-base-950;
+    padding: 3em 2em;
+    margin: 2em 0;
+    text-align: center;
+    font-family: monospace;
+  }
+
+  .symbols-container {
+    position: relative;
+    width: 280px;
+    height: 60px;
+    margin: 0 auto 1.5em;
+    transform-origin: center;
+  }
+
+  /* Responsive scaling for mobile */
+  @media (max-width: 400px) {
+    .symbols-container {
+      transform: scale(0.7);
+      margin-bottom: 0.5em;
+    }
+  }
+
+  @media (min-width: 401px) and (max-width: 500px) {
+    .symbols-container {
+      transform: scale(0.85);
+      margin-bottom: 1em;
+    }
+  }
+
+  .symbol {
+    position: absolute;
+    font-size: 1.25em;
+    @apply text-foam;
+    opacity: 0.8;
+    animation: converge 6s ease-in-out infinite;
+  }
+
+  .symbol-core {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    @apply text-foam;
+    animation: core-pulse 6s ease-in-out infinite;
+  }
+
+  /* Position symbols randomly scattered across wide container */
+  .s1  { left: 2%;  top: 5%;  animation-delay: 0s; }
+  .s2  { left: 12%; top: 70%; animation-delay: 0.35s; }
+  .s3  { left: 22%; top: 20%; animation-delay: 0.7s; }
+  .s4  { left: 35%; top: 80%; animation-delay: 0.15s; }
+  .s5  { left: 42%; top: 0%;  animation-delay: 0.5s; }
+  .s6  { left: 55%; top: 75%; animation-delay: 0.85s; }
+  .s7  { left: 62%; top: 10%; animation-delay: 0.25s; }
+  .s8  { left: 73%; top: 65%; animation-delay: 0.6s; }
+  .s9  { left: 80%; top: 5%;  animation-delay: 0.95s; }
+  .s10 { left: 88%; top: 55%; animation-delay: 0.4s; }
+  .s11 { left: 95%; top: 15%; animation-delay: 0.75s; }
+  .s12 { left: 30%; top: 40%; animation-delay: 1.05s; }
+
+  @keyframes converge {
+    0% {
+      opacity: 0.8;
+      transform: translate(0, 0) scale(1);
+    }
+    60% {
+      opacity: 0.6;
+      transform: translate(var(--to-x), var(--to-y)) scale(0.8);
+    }
+    80% {
+      opacity: 0;
+      transform: translate(var(--to-x), var(--to-y)) scale(0.3);
+    }
+    81%, 100% {
+      opacity: 0;
+      transform: translate(0, 0) scale(1);
+    }
+  }
+
+  /* Movement vectors toward center (~132px, 10px adjusted for glyph center) */
+  .s1  { --to-x: 126px;  --to-y: 7px; }    /* from 2%, 5% */
+  .s2  { --to-x: 98px;   --to-y: -32px; }  /* from 12%, 70% */
+  .s3  { --to-x: 70px;   --to-y: -2px; }   /* from 22%, 20% */
+  .s4  { --to-x: 34px;   --to-y: -38px; }  /* from 35%, 80% */
+  .s5  { --to-x: 14px;   --to-y: 10px; }   /* from 42%, 0% */
+  .s6  { --to-x: -22px;  --to-y: -35px; }  /* from 55%, 75% */
+  .s7  { --to-x: -42px;  --to-y: 4px; }    /* from 62%, 10% */
+  .s8  { --to-x: -72px;  --to-y: -29px; }  /* from 73%, 65% */
+  .s9  { --to-x: -92px;  --to-y: 7px; }    /* from 80%, 5% */
+  .s10 { --to-x: -114px; --to-y: -23px; }  /* from 88%, 55% */
+  .s11 { --to-x: -134px; --to-y: 1px; }    /* from 95%, 15% */
+  .s12 { --to-x: 48px;   --to-y: -14px; }  /* from 30%, 40% */
+
+  @keyframes core-pulse {
+    0%, 70% {
+      opacity: 0.3;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+    85% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+      opacity: 0.6;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  .compacting-message {
+    @apply text-base-500;
+    font-style: italic;
+    margin-bottom: 0.5em;
+  }
+
+  .compacting-progress {
+    @apply text-base-500;
+    font-size: 0.9em;
+  }
+
+  .progress-counter::after {
+    content: "0%";
+    animation: count-progress 6s ease-in-out infinite;
+  }
+
+  @keyframes count-progress {
+    0% { content: "0%"; }
+    10% { content: "12%"; }
+    20% { content: "27%"; }
+    30% { content: "41%"; }
+    40% { content: "53%"; }
+    50% { content: "68%"; }
+    60% { content: "79%"; }
+    70% { content: "88%"; }
+    80% { content: "96%"; }
+    85%, 100% { content: "100%"; }
+  }
+</style>

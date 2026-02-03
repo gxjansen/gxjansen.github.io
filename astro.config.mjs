@@ -86,7 +86,8 @@ export default defineConfig({
         "@components/GameUI/GameUI.astro",
         "@components/Regenerating/Regenerating.astro",
         "@components/ManaBar/ManaBar.astro",
-        "@components/Compacting/Compacting.astro"
+        "@components/Compacting/Compacting.astro",
+        "@components/Compacting/CompactingV2.astro"
       ]
     }),
     mdx({
