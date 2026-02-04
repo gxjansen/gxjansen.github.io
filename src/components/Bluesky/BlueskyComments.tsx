@@ -56,14 +56,8 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
 
   // Callback for when comments are empty (handles both no comments and errors)
   const handleEmpty = useCallback((details: CommentEmptyDetails) => {
-    console.log('[BlueskyComments] onEmpty called:', details);
     setEmptyDetails(details);
   }, []);
-
-  // Debug: log the uri prop
-  useEffect(() => {
-    console.log('[BlueskyComments] uri prop:', uri);
-  }, [uri]);
 
   if (!uri) {
     // No Bluesky post linked yet - show share button
