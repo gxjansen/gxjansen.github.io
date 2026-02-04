@@ -126,7 +126,6 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
         <BlueskyCommentsLib
           uri={uri}
           commentFilters={[
-            BlueskyFilters.NoPins,
             BlueskyFilters.MinCharacterCountFilter(3),
           ]}
           onEmpty={handleEmpty}
