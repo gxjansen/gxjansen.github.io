@@ -62,24 +62,29 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
   if (!uri) {
     // No Bluesky post linked yet - show share button
     return (
-      <section className="bluesky-comments-section mt-12 pt-8 border-t-2 border-base-400 dark:border-base-600">
-        <h2 className="text-xl font-semibold text-base-900 dark:text-base-100 mb-4">
-          Comments
-        </h2>
-        <div className="bg-base-100 dark:bg-base-800 rounded-lg p-6 text-center border border-base-200 dark:border-base-700">
-          <p className="text-base-600 dark:text-base-400 mb-4">
-            Want to discuss this post? Start a conversation on Bluesky.
-          </p>
-          <a
-            href={shareUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bsky-btn inline-flex items-center gap-2 px-4 py-2 bg-[#0066CC] hover:bg-[#0052A3] !text-white font-medium rounded-lg transition-colors"
-          >
-            <BlueskyLogo />
-            Discuss on Bluesky
-          </a>
-        </div>
+      <section className="bluesky-comments-section mt-12">
+        <aside
+          className="rounded-xl border border-base-300 dark:border-base-700 bg-base-50 dark:bg-base-900 p-6"
+          aria-label="Comments"
+        >
+          <h3 className="text-xl font-bold mb-4 text-base-900 dark:text-base-100">
+            Comments
+          </h3>
+          <div className="text-center py-4">
+            <p className="text-base-600 dark:text-base-400 mb-4">
+              Want to discuss this post? Start a conversation on Bluesky.
+            </p>
+            <a
+              href={shareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bsky-btn inline-flex items-center gap-2 px-4 py-2 bg-[#0066CC] hover:bg-[#0052A3] !text-white font-medium rounded-lg transition-colors"
+            >
+              <BlueskyLogo />
+              Discuss on Bluesky
+            </a>
+          </div>
+        </aside>
       </section>
     );
   }
@@ -92,56 +97,63 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
   // Show empty/error state
   if (emptyDetails) {
     return (
-      <section className="bluesky-comments-section mt-12 pt-8 border-t-2 border-base-400 dark:border-base-600">
-        <h2 className="text-xl font-semibold text-base-900 dark:text-base-100 mb-4">
-          Comments
-        </h2>
-        <div className="bg-base-100 dark:bg-base-800 rounded-lg p-6 text-center border border-base-200 dark:border-base-700">
-          <p className="text-base-600 dark:text-base-400 mb-4">
-            {isError
-              ? "Couldn't load comments. Join the conversation on Bluesky!"
-              : "No comments yet. Be the first to join the conversation!"}
-          </p>
-          <a
-            href={replyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bsky-btn inline-flex items-center gap-2 px-4 py-2 bg-[#0066CC] hover:bg-[#0052A3] !text-white font-medium rounded-lg transition-colors"
-          >
-            <BlueskyLogo />
-            Reply on Bluesky
-          </a>
-        </div>
+      <section className="bluesky-comments-section mt-12">
+        <aside
+          className="rounded-xl border border-base-300 dark:border-base-700 bg-base-50 dark:bg-base-900 p-6"
+          aria-label="Comments"
+        >
+          <h3 className="text-xl font-bold mb-4 text-base-900 dark:text-base-100">
+            Comments
+          </h3>
+          <div className="text-center py-4">
+            <p className="text-base-600 dark:text-base-400 mb-4">
+              {isError
+                ? "Couldn't load comments. Join the conversation on Bluesky!"
+                : "No comments yet. Be the first to join the conversation!"}
+            </p>
+            <a
+              href={replyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bsky-btn inline-flex items-center gap-2 px-4 py-2 bg-[#0066CC] hover:bg-[#0052A3] !text-white font-medium rounded-lg transition-colors"
+            >
+              <BlueskyLogo />
+              Reply on Bluesky
+            </a>
+          </div>
+        </aside>
       </section>
     );
   }
 
-  // Bluesky post is linked - show comments
+  // Bluesky post is linked - show comments in styled container
   return (
-    <section className="bluesky-comments-section mt-12 pt-8 border-t-2 border-base-400 dark:border-base-600">
-      <h2 className="text-xl font-semibold text-base-900 dark:text-base-100 mb-4">
-        Comments
-      </h2>
-      <div className="bluesky-comments-wrapper">
-        <BlueskyCommentsLib
-          uri={uri}
-          commentFilters={[
-            BlueskyFilters.MinCharacterCountFilter(3),
-          ]}
-          onEmpty={handleEmpty}
-        />
-      </div>
-      <div className="mt-4 text-center">
-        <a
-          href={replyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-[#0066CC] dark:text-[#4da6ff] hover:underline text-sm"
-        >
-          <BlueskyLogo />
-          Join the conversation on Bluesky
-        </a>
-      </div>
+    <section className="bluesky-comments-section mt-12">
+      <aside
+        className="rounded-xl border border-base-300 dark:border-base-700 bg-base-50 dark:bg-base-900 p-6"
+        aria-label="Comments from Bluesky"
+      >
+        <div className="bluesky-comments-wrapper">
+          <BlueskyCommentsLib
+            uri={uri}
+            commentFilters={[
+              BlueskyFilters.MinCharacterCountFilter(3),
+            ]}
+            onEmpty={handleEmpty}
+          />
+        </div>
+        <div className="mt-6 pt-4 border-t border-base-200 dark:border-base-700 text-center">
+          <a
+            href={replyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[#0066CC] dark:text-[#4da6ff] hover:underline text-sm font-medium"
+          >
+            <BlueskyLogo />
+            Join the conversation on Bluesky
+          </a>
+        </div>
+      </aside>
     </section>
   );
 }

@@ -15,7 +15,7 @@
 @layer base {
   html {
     font-size: 16px;
-    
+
     @screen md {
       font-size: 22.4px; /* 1.4rem */
     }
@@ -58,7 +58,7 @@
   /* Video Card */
   .lazy-youtube {
     @apply aspect-video relative;
-    
+
     img {
       @apply w-full h-full object-cover;
     }
@@ -175,7 +175,7 @@
     }
   }
 
-  /* Enhanced Gradient Effects - Rosé Pine pine color */
+  /* Enhanced Gradient Effects - Rose Pine pine color */
   .gradient-top-left {
     @apply fixed top-0 left-0 h-screen w-screen;
     /* Light: pine Dawn #286983 = rgb(40,105,131) */
@@ -224,49 +224,106 @@
   }
 }
 
-/* Bluesky Comments Dark Mode Overrides */
+/* Bluesky Comments Styling */
 .bluesky-comments-wrapper {
-  /* Override default bluesky-comments styles for dark mode */
-  :root[class~="dark"] & {
-    --bsky-bg: theme('colors.base.800');
-    --bsky-border: theme('colors.base.700');
-    --bsky-text: theme('colors.base.100');
-    --bsky-text-secondary: theme('colors.base.400');
-    --bsky-link: #0085FF;
+  /* Style the library's "Comments" title to match our design */
+  [class*="_commentsTitle_"] {
+    @apply text-xl font-bold mb-4 text-base-900 dark:text-base-100;
+    margin-top: 0 !important; /* Override library's margin-top */
+  }
 
-    .bsky-comment {
-      @apply bg-base-800 border-base-700;
-    }
+  /* Style the stats bar (likes, reposts, etc.) */
+  [class*="_statsBar_"] {
+    @apply text-base-600 dark:text-base-400 text-sm mb-4;
+  }
 
-    .bsky-author-name {
-      @apply text-base-100;
-    }
+  /* Style the reply text */
+  [class*="_replyText_"] {
+    @apply text-base-600 dark:text-base-400;
+  }
 
-    .bsky-author-handle,
-    .bsky-comment-date {
-      @apply text-base-400;
-    }
+  /* Style the divider */
+  [class*="_divider_"] {
+    @apply border-base-200 dark:border-base-700;
+    border-top-width: 1px;
+    border-top-style: solid;
+  }
 
-    .bsky-comment-text {
-      @apply text-base-200;
-    }
+  /* Comments list spacing */
+  [class*="_commentsList_"] {
+    @apply mt-4;
+  }
 
-    .bsky-reply-context {
-      @apply border-base-700;
+  /* Individual comment styling */
+  [class*="_commentContainer_"] {
+    @apply py-3;
+  }
+
+  /* Comment content */
+  [class*="_commentContent_"] {
+    @apply max-w-none;
+  }
+
+  /* Author link styling */
+  [class*="_authorLink_"] {
+    @apply text-base-900 dark:text-base-100;
+
+    &:hover {
+      @apply text-primary-600 dark:text-primary-400;
     }
   }
 
-  /* Light mode refinements */
-  .bsky-comment {
-    @apply rounded-lg mb-4;
-
-    /* Link styling inside comments only - WCAG AA compliance */
-    a {
-      @apply text-[#0066CC] hover:underline;
-    }
+  /* Author name */
+  [class*="_authorName_"] {
+    @apply font-medium text-base-900 dark:text-base-100;
   }
 
-  :root[class~="dark"] & .bsky-comment a {
+  /* Handle (username) */
+  [class*="_handle_"] {
+    @apply text-base-500 dark:text-base-400;
+  }
+
+  /* Avatar styling */
+  [class*="_avatar_"] {
+    @apply bg-base-200 dark:bg-base-700;
+  }
+
+  /* Replies container (nested comments) */
+  [class*="_repliesContainer_"] {
+    @apply border-base-300 dark:border-base-600;
+    border-left-width: 2px;
+  }
+
+  /* Actions container */
+  [class*="_actionsContainer_"] {
+    @apply text-base-500 dark:text-base-400 text-xs;
+  }
+
+  /* Show more button */
+  [class*="_showMoreButton_"] {
+    @apply text-base-600 dark:text-base-300 border-base-300 dark:border-base-600;
+    @apply hover:bg-base-100 dark:hover:bg-base-800;
+    @apply rounded-md px-3 py-1.5;
+    background: transparent !important;
+  }
+
+  /* Loading and error text */
+  [class*="_loadingText_"],
+  [class*="_errorText_"] {
+    @apply text-base-600 dark:text-base-400;
+  }
+
+  /* Link styling inside comments - WCAG AA compliance */
+  a {
+    @apply text-[#0066CC] hover:underline;
+  }
+
+  :root[class~="dark"] & a {
     @apply text-[#4da6ff];
+  }
+
+  /* Override library container max-width */
+  [class*="_container_"] {
+    max-width: none !important;
   }
 }
