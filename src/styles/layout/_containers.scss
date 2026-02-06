@@ -1,3 +1,11 @@
+:root {
+  --marquee-bg: #faf4ed;
+}
+
+:root.dark {
+  --marquee-bg: #1A1825;
+}
+
 @layer components {
   /* Layout & Container Classes */
   .site-container {
@@ -73,18 +81,18 @@
     &::before {
       left: 0;
       background: linear-gradient(
-        to right, 
-        rgba(255, 255, 255, 1) 0%, 
-        rgba(255, 255, 255, 0) 100%
+        to right,
+        var(--marquee-bg) 0%,
+        transparent 100%
       );
     }
 
     &::after {
       right: 0;
       background: linear-gradient(
-        to left, 
-        rgba(255, 255, 255, 1) 0%, 
-        rgba(255, 255, 255, 0) 100%
+        to left,
+        var(--marquee-bg) 0%,
+        transparent 100%
       );
     }
   }
