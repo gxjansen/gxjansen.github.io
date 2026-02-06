@@ -90,22 +90,22 @@ const initialTestimonials = getRandomTestimonials(4);
     // Build HTML for each testimonial card with AOS attributes
     const cardsHTML = testimonials.map((testimonial, index) => `
       <div data-testimonial-id="${testimonial.id}" class="testimonial-card-wrapper" data-aos="fade-up" data-aos-delay="${index * 100}">
-        <article class="colleague-testimonial-card bg-surface dark:bg-gray-800 rounded-xl shadow-md p-4 sm:p-6 h-full flex flex-col transition-all duration-300 hover:shadow-lg">
+        <article class="colleague-testimonial-card bg-surface dark:bg-base-800 rounded-xl shadow-md p-4 sm:p-6 h-full flex flex-col transition-all duration-300 hover:shadow-lg">
           <blockquote class="flex-grow mb-6">
             <svg class="w-8 h-8 text-primary-600 dark:text-primary-400 mb-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
             </svg>
-            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">${testimonial.quote}</p>
+            <p class="text-base-700 dark:text-base-300 leading-relaxed">${testimonial.quote}</p>
           </blockquote>
 
-          <footer class="border-t border-gray-200 dark:border-gray-700 pt-4">
+          <footer class="border-t border-base-300 dark:border-base-700 pt-4">
             <div class="flex items-start justify-between">
               <div class="flex-grow">
                 <cite class="not-italic">
-                  <div class="font-semibold text-gray-900 dark:text-white">${testimonial.name}</div>
-                  <div class="text-sm text-gray-600 dark:text-gray-400">${testimonial.role}</div>
-                  <div class="text-sm text-gray-600 dark:text-gray-400">${testimonial.company}</div>
-                  <div class="text-xs text-gray-500 dark:text-gray-500 mt-1 italic">${testimonial.workRelationship}</div>
+                  <div class="font-semibold text-base-900 dark:text-base-100">${testimonial.name}</div>
+                  <div class="text-sm text-base-600 dark:text-base-400">${testimonial.role}</div>
+                  <div class="text-sm text-base-600 dark:text-base-400">${testimonial.company}</div>
+                  <div class="text-xs text-base-500 dark:text-base-500 mt-1 italic">${testimonial.workRelationship}</div>
                 </cite>
               </div>
             </div>

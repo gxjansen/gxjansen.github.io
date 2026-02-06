@@ -16,6 +16,10 @@
   html {
     font-size: 16px;
 
+    @screen sm {
+      font-size: 18px;
+    }
+
     @screen md {
       font-size: 22.4px; /* 1.4rem */
     }
@@ -26,7 +30,7 @@
 @layer components {
   /* Card Base Styles */
   .card {
-    @apply bg-white dark:bg-base-900 rounded-xl shadow-lg transition-all duration-300 overflow-hidden;
+    @apply bg-base-50 dark:bg-base-900 rounded-xl shadow-lg transition-all duration-300 overflow-hidden;
   }
 
   .card-container {
@@ -96,7 +100,7 @@
 
   .progress-dot {
     @apply w-2 h-2 rounded-full transition-all duration-300;
-    @apply bg-gray-300 dark:bg-gray-600;
+    @apply bg-base-300 dark:bg-base-600;
 
     &[data-active="true"] {
       @apply w-3 h-3;
@@ -108,13 +112,13 @@
   .nav-button {
     @apply absolute top-1/2 -translate-y-1/2 z-10;
     @apply w-12 h-12 flex items-center justify-center;
-    @apply bg-white/95 dark:bg-gray-800/95 rounded-full;
-    @apply text-gray-800 dark:text-gray-200 text-2xl;
+    @apply bg-base-50/95 dark:bg-base-800/95 rounded-full;
+    @apply text-base-800 dark:text-base-200 text-2xl;
     @apply shadow-lg transition-all duration-300;
-    @apply hover:bg-white dark:hover:bg-gray-700;
-    @apply focus:outline-none focus:ring-2 focus:ring-teal-500;
+    @apply hover:bg-base-100 dark:hover:bg-base-700;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500;
     @apply disabled:opacity-30 disabled:cursor-not-allowed;
-    @apply disabled:hover:bg-white/95 dark:disabled:hover:bg-gray-800/95;
+    @apply disabled:hover:bg-base-50/95 dark:disabled:hover:bg-base-800/95;
     /* Improved touch target size */
     @apply touch-manipulation;
 
@@ -134,7 +138,7 @@
 
     /* Improved focus styles */
     &:focus-visible {
-      @apply ring-offset-2 ring-offset-white dark:ring-offset-gray-900;
+      @apply ring-offset-2 ring-offset-base-50 dark:ring-offset-base-900;
     }
   }
 
@@ -283,11 +287,11 @@
 
   /* Link styling inside comments - WCAG AA compliance */
   a {
-    @apply text-[#0066CC] hover:underline;
+    @apply text-foam-light hover:underline;
   }
 
   :root[class~="dark"] & a {
-    @apply text-[#4da6ff];
+    @apply text-foam;
   }
 
   /* Override library container max-width */

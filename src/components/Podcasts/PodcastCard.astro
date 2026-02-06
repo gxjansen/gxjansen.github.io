@@ -20,7 +20,7 @@ const truncatedDescription = episode.description.length > 150
   : episode.description;
 
 // Define classes for the card
-const cardClasses = "block bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-2 border-teal-400/30 hover:border-teal-400 hover:shadow-xl hover:-translate-y-1 cursor-pointer group transition-all duration-200";
+const cardClasses = "block bg-white dark:bg-base-800 p-6 rounded-lg shadow-lg border-2 border-primary-400/30 hover:border-primary-400 hover:shadow-xl hover:-translate-y-1 cursor-pointer group transition-all duration-200";
 ---
 
 <a
@@ -41,7 +41,7 @@ const cardClasses = "block bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg bo
           class="rounded-lg object-cover"
         />
       ) : (
-        <div class="w-20 h-20 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+        <div class="w-20 h-20 bg-base-200 dark:bg-base-700 rounded-lg flex items-center justify-center">
           <span class="text-2xl">🎙️</span>
         </div>
       )}
@@ -54,24 +54,24 @@ const cardClasses = "block bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg bo
         <span class="text-sm font-medium text-primary-600 dark:text-primary-400">
           {episode.podcastName}
         </span>
-        <span class="text-sm text-gray-500 dark:text-gray-400">
+        <span class="text-sm text-base-500 dark:text-base-400">
           {formattedDate}
         </span>
       </div>
 
       {/* Episode Title */}
-      <h3 class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-2 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-200">
+      <h3 class="text-xl font-semibold text-primary-600 dark:text-primary-400 mb-2 group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors duration-200">
         {episode.title}
       </h3>
 
       {/* Description */}
-      <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+      <p class="text-base-600 dark:text-base-300 text-sm mb-3">
         {truncatedDescription}
       </p>
 
       {/* Duration and Listen Button */}
       <div class="flex items-center justify-between">
-        <span class="text-sm text-gray-500 dark:text-gray-400">
+        <span class="text-sm text-base-500 dark:text-base-400">
           {episode.duration}
         </span>
         <span class="inline-flex items-center gap-1 text-sm text-primary-600 dark:text-primary-400 group-hover:translate-x-1 transition-transform duration-200">

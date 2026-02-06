@@ -8,7 +8,7 @@ interface Props {
 const { src, title, coverImage } = Astro.props;
 ---
 
-<div class="audio-player w-full rounded-xl bg-gray-100 dark:bg-gray-800 p-4 transition-colors">
+<div class="audio-player w-full rounded-xl bg-base-200 dark:bg-base-800 p-4 transition-colors">
   {coverImage && (
     <div class="cover-image mb-3">
       <img
@@ -43,31 +43,31 @@ const { src, title, coverImage } = Astro.props;
 
   /* Webkit browsers (Chrome, Safari, Edge) */
   .audio-player audio::-webkit-media-controls-panel {
-    background: linear-gradient(to right, #f3f4f6, #e5e7eb);
+    background: linear-gradient(to right, #f2e9e1, #dfdad3);
   }
 
   :global(.dark) .audio-player audio::-webkit-media-controls-panel {
-    background: linear-gradient(to right, #374151, #1f2937);
+    background: linear-gradient(to right, #393552, #26233a);
   }
 
   .audio-player audio::-webkit-media-controls-current-time-display,
   .audio-player audio::-webkit-media-controls-time-remaining-display {
-    color: #374151;
+    color: #393552;
   }
 
   :global(.dark) .audio-player audio::-webkit-media-controls-current-time-display,
   :global(.dark) .audio-player audio::-webkit-media-controls-time-remaining-display {
-    color: #d1d5db;
+    color: #e0def4;
   }
 
   /* Focus styles for accessibility */
   .audio-player audio:focus {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid #31748f;
     outline-offset: 2px;
   }
 
   .audio-player audio:focus-visible {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid #31748f;
     outline-offset: 2px;
   }
 </style>
