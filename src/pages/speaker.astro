@@ -5,12 +5,13 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 // components
 import { Image } from 'astro:assets';
 import Badge from "@components/Badge/Badge.astro";
+import Button from "@components/Button/Button.astro";
 
 // images
-import speakerImage from '@images/headshot/08.02.2022_Spryker_CEO_0278.webp';
-import headshot1 from '@images/headshot/08.02.2022_Spryker_CEO_0278.webp';
-import headshot2 from '@images/headshot/08.02.2022_Spryker_CEO_2636.webp';
-import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
+import speakerImage from '@images/headshot/08.02.2022_Spryker_CEO_0278.jpg';
+import headshot1 from '@images/headshot/08.02.2022_Spryker_CEO_0278.jpg';
+import headshot2 from '@images/headshot/08.02.2022_Spryker_CEO_2636.jpg';
+import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.jpg';
 ---
 
 <BaseLayout 
@@ -18,11 +19,11 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
   description="Everything organizers typically want to know about me. Speaking terms, requirements, and booking information."
   noindex={true}
 >
-  <!-- Hero Section -->
-  <section class="relative py-24 md:py-32 overflow-hidden">
+  <!-- Hero Section (mt-14 matches fixed nav height h-14) -->
+  <section class="relative mt-14 py-24 md:py-32 overflow-hidden">
     <!-- Background with speaking photo -->
     <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 bg-gradient-to-br from-primary-500/90 via-primary-500/70 to-accent-500/80"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-primary-500/90 via-primary-500/70 to-accent-2/80"></div>
       <div class="absolute inset-0 bg-black/30"></div>
     </div>
     
@@ -34,9 +35,9 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
           Everything organizers typically want to know about me
         </p>
         <p class="text-lg opacity-80 max-w-2xl mx-auto">
-          I'm passionate about helping organizations optimize their digital experiences. 
-          If you're interested in having me speak at your event, you can find all the 
-          information about my speaking terms and requirements below.
+          Community Builder with 20+ years creating technical ecosystems. 200+ conference
+          talks across 26 countries. If you're interested in having me speak at your event,
+          you'll find all the information you need below.
         </p>
       </div>
     </div>
@@ -49,8 +50,8 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
         <h2 class="h2 mb-4">What you can find on this page:</h2>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-        <div class="text-center group" data-aos="fade-up" data-aos-delay="0">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8" data-aos="fade-up">
+        <div class="text-center group">
           <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-base-200 dark:bg-base-700/50 flex items-center justify-center group-hover:bg-primary-500/20 dark:group-hover:bg-primary-500/30 transition-colors">
             <svg class="w-8 h-8 text-primary-600 dark:text-primary-400/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -60,7 +61,7 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
           <p class="text-sm text-base-500 dark:text-base-400">Technical and logistical requirements</p>
         </div>
 
-        <div class="text-center group" data-aos="fade-up" data-aos-delay="100">
+        <div class="text-center group">
           <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-base-200 dark:bg-base-700/50 flex items-center justify-center group-hover:bg-primary-500/20 dark:group-hover:bg-primary-500/30 transition-colors">
             <svg class="w-8 h-8 text-primary-600 dark:text-primary-400/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -70,7 +71,7 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
           <p class="text-sm text-base-500 dark:text-base-400">Speaker biography and credentials</p>
         </div>
 
-        <div class="text-center group" data-aos="fade-up" data-aos-delay="200">
+        <div class="text-center group">
           <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-base-200 dark:bg-base-700/50 flex items-center justify-center group-hover:bg-primary-500/20 dark:group-hover:bg-primary-500/30 transition-colors">
             <svg class="w-8 h-8 text-primary-600 dark:text-primary-400/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
@@ -80,7 +81,7 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
           <p class="text-sm text-base-500 dark:text-base-400">Speaking fees and expenses</p>
         </div>
 
-        <div class="text-center group" data-aos="fade-up" data-aos-delay="300">
+        <div class="text-center group">
           <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-base-200 dark:bg-base-700/50 flex items-center justify-center group-hover:bg-primary-500/20 dark:group-hover:bg-primary-500/30 transition-colors">
             <svg class="w-8 h-8 text-primary-600 dark:text-primary-400/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
@@ -90,7 +91,7 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
           <p class="text-sm text-base-500 dark:text-base-400">What others say about my talks</p>
         </div>
 
-        <div class="text-center group" data-aos="fade-up" data-aos-delay="400">
+        <div class="text-center group">
           <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-base-200 dark:bg-base-700/50 flex items-center justify-center group-hover:bg-primary-500/20 dark:group-hover:bg-primary-500/30 transition-colors">
             <svg class="w-8 h-8 text-primary-600 dark:text-primary-400/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
@@ -101,7 +102,7 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
           <p class="text-sm text-base-500 dark:text-base-400">Logistics and requirements</p>
         </div>
 
-        <div class="text-center group" data-aos="fade-up" data-aos-delay="500">
+        <div class="text-center group">
           <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-base-200 dark:bg-base-700/50 flex items-center justify-center group-hover:bg-primary-500/20 dark:group-hover:bg-primary-500/30 transition-colors">
             <svg class="w-8 h-8 text-primary-600 dark:text-primary-400/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -111,7 +112,7 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
           <p class="text-sm text-base-500 dark:text-base-400">Technical setup needed</p>
         </div>
 
-        <div class="text-center group" data-aos="fade-up" data-aos-delay="600">
+        <div class="text-center group">
           <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-base-200 dark:bg-base-700/50 flex items-center justify-center group-hover:bg-primary-500/20 dark:group-hover:bg-primary-500/30 transition-colors">
             <svg class="w-8 h-8 text-primary-600 dark:text-primary-400/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
@@ -121,7 +122,7 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
           <p class="text-sm text-base-500 dark:text-base-400">Materials to promote the event</p>
         </div>
 
-        <div class="text-center group" data-aos="fade-up" data-aos-delay="700">
+        <div class="text-center group">
           <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-base-200 dark:bg-base-700/50 flex items-center justify-center group-hover:bg-primary-500/20 dark:group-hover:bg-primary-500/30 transition-colors">
             <svg class="w-8 h-8 text-primary-600 dark:text-primary-400/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
@@ -140,12 +141,14 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
       <div class="mx-auto max-w-6xl">
         <div class="grid md:grid-cols-2 gap-12 items-center">
           <div data-aos="fade-right">
-            <Image 
-              src={speakerImage} 
+            <Image
+              src={speakerImage}
               alt="Guido Jansen speaking at a conference"
               class="rounded-2xl shadow-lg w-full"
-              width={600}
-              height={400}
+              widths={[400, 800, 1200]}
+              sizes="(min-width: 768px) 50vw, 100vw"
+              quality={90}
+              format="webp"
             />
           </div>
           <div data-aos="fade-left">
@@ -153,13 +156,13 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
             <h2 class="h2 mb-6">Guido Jansen</h2>
             <div class="prose prose-lg text-base-500 dark:text-base-400 space-y-4">
               <p>
-                Guido is a digital psychology and experimentation consultant who helps organizations optimize their digital customer experiences through data-driven insights and behavioral psychology.
+                Guido is a Community Builder who transforms technical ecosystems into business growth engines. With 20+ years at the intersection of psychology and technology, he has built community functions from zero multiple times.
               </p>
               <p>
-                With over 15 years of experience in e-commerce optimization, conversion psychology, and A/B testing, Guido has worked with hundreds of companies ranging from startups to Fortune 500 enterprises.
+                His cognitive psychology background shapes how he approaches every community decision. He understands why developers and technical users behave the way they do, which lets him design interventions that actually work.
               </p>
               <p>
-                He's the founder of CRO.CAFE and has spoken at 100+ conferences worldwide, sharing actionable insights on digital optimization, customer psychology, and experimentation culture.
+                He has presented at 200+ conferences across 26 countries on topics including composable commerce, community building, and digital psychology.
               </p>
             </div>
           </div>
@@ -180,8 +183,8 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
         <h2 class="h2 mb-6">Am I the right fit?</h2>
       </div>
 
-      <div class="mx-auto max-w-6xl" data-aos="fade-up">
-        <div class="prose prose-lg text-base-500 dark:text-base-400 space-y-6 text-center">
+      <div class="mx-auto max-w-3xl" data-aos="fade-up">
+        <div class="prose prose-lg text-base-500 dark:text-base-400 space-y-6 mx-auto text-center">
           <p>
             Before you reach out, please ensure you understand my speaking goals and the specific objectives for the session. What is your ultimate goal, and who is your target audience? What do you want them to be able to say after the session? Please let me be clear that this is not to be difficult; this is to ensure my session is not just for your audience and deliver the content in the most useful way.
           </p>
@@ -189,9 +192,9 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
             To make this easy for you, I've created an online form you can fill out to give me all the needed information. Please fill out the form at least 3 months before your event.
           </p>
           <div class="mt-8">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSf7yj4sn0qxaSbvnuIflFbN9C3SyFoz4crYQaJkdry9s8zWEg/viewform?usp=sf_link" target="_blank" class="btn btn-primary">
+            <Button href="https://docs.google.com/forms/d/e/1FAIpQLSf7yj4sn0qxaSbvnuIflFbN9C3SyFoz4crYQaJkdry9s8zWEg/viewform?usp=sf_link" variant="primary">
               Contact Information Form
-            </a>
+            </Button>
           </div>
         </div>
       </div>
@@ -210,8 +213,8 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
         <h2 class="h2 mb-6">Talk format</h2>
       </div>
 
-      <div class="mx-auto max-w-6xl" data-aos="fade-up">
-        <div class="prose prose-lg text-base-500 dark:text-base-400 space-y-6">
+      <div class="mx-auto max-w-3xl" data-aos="fade-up">
+        <div class="prose prose-lg text-base-500 dark:text-base-400 space-y-6 mx-auto">
           <p>
             My talks are easy to understand sessions on usability, persuasion, conversion optimization, building experimentation culture, CRO teams and community building. They are usually designed for a wide variety of audiences and can be adapted to fit beginners as well as intermediate audiences. The focus is on building audience awareness while providing actionable takeaways.
           </p>
@@ -267,7 +270,7 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
 
       <div class="mx-auto max-w-6xl" data-aos="fade-up">
         <div class="space-y-8">
-          <div class="prose prose-lg text-base-500 dark:text-base-400 space-y-6">
+          <div class="prose prose-lg max-w-none text-base-500 dark:text-base-400 space-y-6">
             <p>
               At least €2500 should be paid in EUR (€) via wire transfer or PayPal to account. I pay my own taxes and fees in my country so this fee is net amount that I need to receive to speak for free at a commercial conference and events.
             </p>
@@ -315,8 +318,65 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700" data-aos="fade-up" data-aos-delay="0">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-base-200 dark:bg-base-700/50 rounded-full flex items-center justify-center">
+                <span class="text-primary-600 dark:text-primary-400 font-semibold">E</span>
+              </div>
+            </div>
+            <div>
+              <blockquote class="text-base-500 dark:text-base-400 mb-4">
+                "Guido is an excellent public speaker. Whether it's a workshop, a conference talk, or a meetup, he always manages to bring energy and knowledge to his presentations."
+              </blockquote>
+              <div>
+                <div class="font-semibold text-base-900 dark:text-base-100">Erin Weigel</div>
+                <div class="text-sm text-base-500 dark:text-base-400">Advisor, ABsmartly</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-base-200 dark:bg-base-700/50 rounded-full flex items-center justify-center">
+                <span class="text-primary-600 dark:text-primary-400 font-semibold">A</span>
+              </div>
+            </div>
+            <div>
+              <blockquote class="text-base-500 dark:text-base-400 mb-4">
+                "Give him a stage and the audience will love him!"
+              </blockquote>
+              <div>
+                <div class="font-semibold text-base-900 dark:text-base-100">Alex Franke</div>
+                <div class="text-sm text-base-500 dark:text-base-400">EVP, Spryker</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <div class="w-12 h-12 bg-base-200 dark:bg-base-700/50 rounded-full flex items-center justify-center">
+                <span class="text-primary-600 dark:text-primary-400 font-semibold">J</span>
+              </div>
+            </div>
+            <div>
+              <blockquote class="text-base-500 dark:text-base-400 mb-4">
+                "His session was extremely well received by a diverse audience of web development professionals. Guido's ability to communicate complex topics in a clear and engaging manner made his talk a highlight of the event."
+              </blockquote>
+              <div>
+                <div class="font-semibold text-base-900 dark:text-base-100">John O'Connor</div>
+                <div class="text-sm text-base-500 dark:text-base-400">Development Inspector, Charles White Limited</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700">
           <div class="flex items-start space-x-4">
             <div class="flex-shrink-0">
               <div class="w-12 h-12 bg-base-200 dark:bg-base-700/50 rounded-full flex items-center justify-center">
@@ -325,17 +385,17 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
             </div>
             <div>
               <blockquote class="text-base-500 dark:text-base-400 mb-4">
-                "Guido gave an excellent presentation at our event. His knowledge and expertise in the field of CRO was evident throughout his talk. The audience was engaged and provided positive feedback."
+                "I attended Guido's CRO session at Growth Tribe and I was mind-blown. He's articulate, knowledgeable, and uses real examples and frameworks that you can actually apply."
               </blockquote>
               <div>
-                <div class="font-semibold text-base-900 dark:text-base-100">Timo Verhoeven</div>
-                <div class="text-sm text-base-500 dark:text-base-400">Conference Director, Conversion Hotel</div>
+                <div class="font-semibold text-base-900 dark:text-base-100">Thomas Paris</div>
+                <div class="text-sm text-base-500 dark:text-base-400">Director of Demand Generation, Posh</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700" data-aos="fade-up" data-aos-delay="100">
+        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700">
           <div class="flex items-start space-x-4">
             <div class="flex-shrink-0">
               <div class="w-12 h-12 bg-base-200 dark:bg-base-700/50 rounded-full flex items-center justify-center">
@@ -344,87 +404,30 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
             </div>
             <div>
               <blockquote class="text-base-500 dark:text-base-400 mb-4">
-                "Guido's session on experimentation culture was exactly what our team needed. His practical approach and real-world examples made complex concepts accessible to everyone."
+                "Guido brought his 'Persuasive eCommerce' topic to our meetup in Jakarta and the audience loved it. Very engaging speaker with deep practical knowledge."
               </blockquote>
               <div>
-                <div class="font-semibold text-base-900 dark:text-base-100">Martijn Vrolijk</div>
-                <div class="text-sm text-base-500 dark:text-base-400">Event Organizer, Growth Marketing Conference</div>
+                <div class="font-semibold text-base-900 dark:text-base-100">Muliadi Jeo</div>
+                <div class="text-sm text-base-500 dark:text-base-400">Founder and Director, ICUBE</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700" data-aos="fade-up" data-aos-delay="200">
+        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700">
           <div class="flex items-start space-x-4">
             <div class="flex-shrink-0">
               <div class="w-12 h-12 bg-base-200 dark:bg-base-700/50 rounded-full flex items-center justify-center">
-                <span class="text-primary-600 dark:text-primary-400 font-semibold">L</span>
+                <span class="text-primary-600 dark:text-primary-400 font-semibold">F</span>
               </div>
             </div>
             <div>
               <blockquote class="text-base-500 dark:text-base-400 mb-4">
-                "Professional, well-prepared, and delivers valuable insights. Guido's talk on digital psychology was one of the highlights of our conference. Highly recommended!"
+                "Guido has a unique combination of knowledge about psychology, experimentation, and e-commerce that makes his talks both insightful and highly practical."
               </blockquote>
               <div>
-                <div class="font-semibold text-base-900 dark:text-base-100">Laura Kemperman</div>
-                <div class="text-sm text-base-500 dark:text-base-400">Program Manager, E-commerce Live</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700" data-aos="fade-up" data-aos-delay="300">
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div class="w-12 h-12 bg-base-200 dark:bg-base-700/50 rounded-full flex items-center justify-center">
-                <span class="text-primary-600 dark:text-primary-400 font-semibold">R</span>
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-500 dark:text-base-400 mb-4">
-                "Guido brings a unique blend of technical expertise and practical insights. His presentation style is engaging and the content is always relevant to our audience."
-              </blockquote>
-              <div>
-                <div class="font-semibold text-base-900 dark:text-base-100">Rob Janssen</div>
-                <div class="text-sm text-base-500 dark:text-base-400">Event Director, Digital Analytics Congress</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700" data-aos="fade-up" data-aos-delay="400">
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div class="w-12 h-12 bg-base-200 dark:bg-base-700/50 rounded-full flex items-center justify-center">
-                <span class="text-primary-600 dark:text-primary-400 font-semibold">K</span>
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-500 dark:text-base-400 mb-4">
-                "Working with Guido was a pleasure. He understood our audience needs and delivered content that was both educational and actionable. Our attendees loved it!"
-              </blockquote>
-              <div>
-                <div class="font-semibold text-base-900 dark:text-base-100">Koen Verhagen</div>
-                <div class="text-sm text-base-500 dark:text-base-400">Conference Organizer, Meet Magento</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700" data-aos="fade-up" data-aos-delay="500">
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div class="w-12 h-12 bg-base-200 dark:bg-base-700/50 rounded-full flex items-center justify-center">
-                <span class="text-primary-600 dark:text-primary-400 font-semibold">S</span>
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-500 dark:text-base-400 mb-4">
-                "Guido's expertise in conversion optimization and his ability to translate complex concepts into practical advice made his session one of the most valuable at our event."
-              </blockquote>
-              <div>
-                <div class="font-semibold text-base-900 dark:text-base-100">Sandra de Vries</div>
-                <div class="text-sm text-base-500 dark:text-base-400">Head of Programming, How to Web</div>
+                <div class="font-semibold text-base-900 dark:text-base-100">Florian Gendrault</div>
+                <div class="text-sm text-base-500 dark:text-base-400">CEO, Alleo</div>
               </div>
             </div>
           </div>
@@ -445,70 +448,52 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
 
       <div class="grid md:grid-cols-3 gap-8 mb-12" data-aos="fade-up">
         <div class="bg-base-100 dark:bg-base-900 rounded-xl overflow-hidden border border-base-200 dark:border-base-700 shadow-sm hover:shadow-md transition-shadow">
-          <div class="aspect-video bg-gradient-to-br from-primary-500/20 to-accent-500/20 flex items-center justify-center">
-            <div class="text-center p-6">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-primary-500/10 flex items-center justify-center">
-                <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                </svg>
-              </div>
-            </div>
+          <div class="aspect-video overflow-hidden">
+            <img src="/images/presentations/Guido_Jansen_Spryker_2663.jpg" alt="Still A/B Testing Your Buttons?" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="p-6">
             <h3 class="font-semibold text-base-900 dark:text-base-100 mb-2">Still A/B Testing Your Buttons?</h3>
             <p class="text-sm text-base-500 dark:text-base-400 mb-4">You need to think much bigger. How to move beyond basic button tests to meaningful experimentation.</p>
             <div class="flex items-center justify-between">
               <span class="text-xs text-base-500 dark:text-base-400">20 minutes</span>
-              <a href="/presentations/still-a-b-testing-your-buttons-you-need-to-think-much-bigger" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Learn more →</a>
+              <a href="/presentations/still-a-b-testing-your-buttons-you-need-to-think-much-bigger/" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Learn more →</a>
             </div>
           </div>
         </div>
 
         <div class="bg-base-100 dark:bg-base-900 rounded-xl overflow-hidden border border-base-200 dark:border-base-700 shadow-sm hover:shadow-md transition-shadow">
-          <div class="aspect-video bg-gradient-to-br from-accent-500/20 to-primary-500/20 flex items-center justify-center">
-            <div class="text-center p-6">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-primary-500/10 flex items-center justify-center">
-                <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
-              </div>
-            </div>
+          <div class="aspect-video overflow-hidden">
+            <img src="/images/presentations/presentation-e4967d73.jpeg" alt="Persuasive E-commerce" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="p-6">
             <h3 class="font-semibold text-base-900 dark:text-base-100 mb-2">Persuasive E-commerce</h3>
             <p class="text-sm text-base-500 dark:text-base-400 mb-4">Applying psychology principles to optimize digital customer experiences and drive conversions.</p>
             <div class="flex items-center justify-between">
               <span class="text-xs text-base-500 dark:text-base-400">40 minutes - 4 hours</span>
-              <a href="/presentations/persuasive-e-commerce" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Learn more →</a>
+              <a href="/presentations/persuasive-e-commerce/" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Learn more →</a>
             </div>
           </div>
         </div>
 
         <div class="bg-base-100 dark:bg-base-900 rounded-xl overflow-hidden border border-base-200 dark:border-base-700 shadow-sm hover:shadow-md transition-shadow">
-          <div class="aspect-video bg-gradient-to-br from-primary-500/20 to-base-200/30 dark:to-base-700/30 flex items-center justify-center">
-            <div class="text-center p-6">
-              <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-primary-500/10 flex items-center justify-center">
-                <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                </svg>
-              </div>
-            </div>
+          <div class="aspect-video overflow-hidden">
+            <img src="/images/presentations/presentation-8858f7b7.jpeg" alt="Creating an Optimization Culture" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="p-6">
             <h3 class="font-semibold text-base-900 dark:text-base-100 mb-2">Creating an Optimization Culture</h3>
             <p class="text-sm text-base-500 dark:text-base-400 mb-4">How to build experimentation teams and foster data-driven decision making across organizations.</p>
             <div class="flex items-center justify-between">
               <span class="text-xs text-base-500 dark:text-base-400">20-30 minutes</span>
-              <a href="/presentations/creating-an-optimization-culture" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Learn more →</a>
+              <a href="/presentations/creating-an-optimization-culture/" class="text-primary-600 dark:text-primary-400 hover:underline text-sm">Learn more →</a>
             </div>
           </div>
         </div>
       </div>
 
       <div class="text-center" data-aos="fade-up">
-        <a href="/presentations" class="btn btn-outline btn-lg">
+        <Button href="/presentations/" variant="outline">
           View All Presentations
-        </a>
+        </Button>
       </div>
     </div>
   </section>
@@ -607,33 +592,39 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
         <div class="space-y-8">
           <div class="bg-base-100 dark:bg-base-900 rounded-xl p-8 border border-base-200 dark:border-base-700">
             <h3 class="text-xl font-semibold mb-4 text-base-900 dark:text-base-100">Short Bio (50 words)</h3>
-            <div class="prose prose-lg text-base-500 dark:text-base-400">
+            <div class="prose prose-lg max-w-none text-base-500 dark:text-base-400">
               <p>
-                Guido Jansen is a digital psychology and experimentation consultant who helps organizations optimize their digital customer experiences. With 15+ years in CRO and A/B testing, he's the founder of CRO.CAFE and has spoken at 100+ conferences worldwide.
+                Guido X Jansen is a Community Builder with 20+ years creating technical ecosystems. Founded Dutchento/Meet Magento, created CRO.CAFE podcast, and led Spryker's enterprise community. Cognitive psychologist turned DevRel leader. 200+ conference talks across 26 countries. Open source and privacy advocate. Based in the Netherlands.
               </p>
             </div>
           </div>
 
           <div class="bg-base-100 dark:bg-base-900 rounded-xl p-8 border border-base-200 dark:border-base-700">
             <h3 class="text-xl font-semibold mb-4 text-base-900 dark:text-base-100">Medium Bio (100 words)</h3>
-            <div class="prose prose-lg text-base-500 dark:text-base-400">
+            <div class="prose prose-lg max-w-none text-base-500 dark:text-base-400">
               <p>
-                Guido Jansen is a digital psychology and experimentation consultant who helps organizations optimize their digital customer experiences through data-driven insights and behavioral psychology. With over 15 years of experience in e-commerce optimization, conversion psychology, and A/B testing, Guido has worked with hundreds of companies ranging from startups to Fortune 500 enterprises. He's the founder of CRO.CAFE and has spoken at 100+ conferences worldwide, sharing actionable insights on digital optimization, customer psychology, and experimentation culture. Guido is passionate about making complex psychological concepts accessible and actionable for business teams.
+                Guido X Jansen is a Community Builder who creates technical ecosystems that drive business growth. He has built community functions from zero multiple times: Dutchento/Meet Magento (600+ annual attendees), CRO.CAFE (200+ podcast episodes), and Spryker's enterprise community (130+ clients).
+              </p>
+              <p>
+                His cognitive psychology background helps him understand why technical users behave the way they do, designing communities that create real business value rather than just activity metrics. He has spoken at 200+ conferences across 26 countries.
+              </p>
+              <p>
+                Guido advocates for open source, privacy-first technology, and building resilient systems. Based in the Netherlands, working remotely.
               </p>
             </div>
           </div>
 
           <div class="bg-base-100 dark:bg-base-900 rounded-xl p-8 border border-base-200 dark:border-base-700">
             <h3 class="text-xl font-semibold mb-4 text-base-900 dark:text-base-100">Long Bio (200 words)</h3>
-            <div class="prose prose-lg text-base-500 dark:text-base-400">
+            <div class="prose prose-lg max-w-none text-base-500 dark:text-base-400">
               <p>
-                Guido Jansen is a leading digital psychology and experimentation consultant who specializes in helping organizations optimize their digital customer experiences through the strategic application of behavioral psychology and data-driven experimentation. With over 15 years of experience in e-commerce optimization, conversion rate optimization, and A/B testing, Guido has become a trusted advisor to hundreds of companies ranging from ambitious startups to Fortune 500 enterprises.
+                Guido X Jansen is a Community Builder who transforms technical ecosystems into business growth engines. With 20+ years at the intersection of psychology and technology, he has built community functions from zero multiple times: in the early 2000s with Mambo/Joomla!, as founder of Dutchento/Meet Magento (scaling to 600+ annual attendees), as creator of CRO.CAFE (200+ episodes across four languages), and at Spryker (serving 130+ enterprise clients).
               </p>
               <p>
-                As the founder of CRO.CAFE, Guido has built a platform that bridges the gap between academic research and practical business applications. He has delivered keynotes and workshops at over 100 conferences across Europe, Asia, and North America, consistently receiving top ratings for his ability to translate complex psychological concepts into immediately actionable business strategies.
+                His cognitive psychology background shapes how he approaches every community decision. He understands why developers and technical users behave the way they do, which lets him design interventions that actually work. This means creating onboarding that turns newcomers into contributors, building feedback mechanisms that surface real sentiment, and understanding the difference between activity and engagement.
               </p>
               <p>
-                Guido's expertise spans digital customer psychology, experimentation culture development, statistical analysis, and team building. His work has been featured in leading industry publications, and he regularly contributes to the conversation around ethical and effective optimization practices. When not speaking or consulting, Guido is dedicated to advancing the field through research, mentorship, and community building within the CRO and experimentation space.
+                Guido operates at the intersection of community, product, and customer success. At Spryker, community-driven initiatives influenced 25% of product roadmap decisions. He has presented at 200+ conferences across 26 countries on topics including composable commerce, community building, and digital psychology. He advocates for open source principles, privacy protection, and building systems that get stronger under pressure rather than just surviving it.
               </p>
             </div>
           </div>
@@ -684,7 +675,7 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
         <div class="mt-8 bg-base-100 dark:bg-base-900 rounded-xl p-6 border border-base-200 dark:border-base-700">
           <h3 class="text-xl font-semibold mb-4 text-base-900 dark:text-base-100">Social Media Kit</h3>
           <p class="text-base-500 dark:text-base-400 mb-4">Professional headshots, social media graphics, and promotional copy available upon request for event marketing.</p>
-          <a href="/contact" class="btn btn-outline">Request Marketing Materials</a>
+          <Button href="/contact/" variant="outline">Request Marketing Materials</Button>
         </div>
       </div>
     </div>
@@ -703,16 +694,18 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
       <div class="grid md:grid-cols-3 gap-6" data-aos="fade-up">
         <div class="group">
           <div class="aspect-square overflow-hidden rounded-xl border border-base-200 dark:border-base-700 bg-base-100 dark:bg-base-900">
-            <Image 
-              src={headshot1} 
+            <Image
+              src={headshot1}
               alt="Guido Jansen headshot"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              width={400}
-              height={400}
+              widths={[400, 600, 800]}
+              sizes="(min-width: 768px) 33vw, 100vw"
+              quality={90}
+              format="webp"
             />
           </div>
           <div class="mt-4 text-center">
-            <a href="/images/headshot/08.02.2022_Spryker_CEO_0278.webp" target="_blank" class="btn btn-outline btn-sm">
+            <a href="/images/headshot/08.02.2022_Spryker_CEO_0278.jpg" target="_blank" class="button button--outline inline-flex text-sm py-2 px-4">
               Download High-Res
             </a>
           </div>
@@ -720,16 +713,18 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
         
         <div class="group">
           <div class="aspect-square overflow-hidden rounded-xl border border-base-200 dark:border-base-700 bg-base-100 dark:bg-base-900">
-            <Image 
-              src={headshot2} 
+            <Image
+              src={headshot2}
               alt="Guido Jansen headshot"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              width={400}
-              height={400}
+              widths={[400, 600, 800]}
+              sizes="(min-width: 768px) 33vw, 100vw"
+              quality={90}
+              format="webp"
             />
           </div>
           <div class="mt-4 text-center">
-            <a href="/images/headshot/08.02.2022_Spryker_CEO_2636.jpg" target="_blank" class="btn btn-outline btn-sm">
+            <a href="/images/headshot/08.02.2022_Spryker_CEO_2636.jpg" target="_blank" class="button button--outline inline-flex text-sm py-2 px-4">
               Download High-Res
             </a>
           </div>
@@ -737,16 +732,18 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
         
         <div class="group">
           <div class="aspect-square overflow-hidden rounded-xl border border-base-200 dark:border-base-700 bg-base-100 dark:bg-base-900">
-            <Image 
-              src={headshot3} 
+            <Image
+              src={headshot3}
               alt="Guido Jansen headshot"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              width={400}
-              height={400}
+              widths={[400, 600, 800]}
+              sizes="(min-width: 768px) 33vw, 100vw"
+              quality={90}
+              format="webp"
             />
           </div>
           <div class="mt-4 text-center">
-            <a href="/images/headshot/08.02.2022_Spryker_CEO_2669.jpg" target="_blank" class="btn btn-outline btn-sm">
+            <a href="/images/headshot/08.02.2022_Spryker_CEO_2669.jpg" target="_blank" class="button button--outline inline-flex text-sm py-2 px-4">
               Download High-Res
             </a>
           </div>
@@ -761,11 +758,11 @@ import headshot3 from '@images/headshot/08.02.2022_Spryker_CEO_2669.webp';
       <div class="mx-auto max-w-4xl text-center" data-aos="fade-up">
         <h2 class="h2 mb-6">Ready to book me for your event?</h2>
         <p class="text-lg text-base-500 dark:text-base-400 mb-8">
-          If you have more info, you can <a href="/contact" class="text-primary-600 dark:text-primary-400 hover:underline">contact me here</a>.
+          If you have more info, you can <a href="/contact/" class="text-primary-600 dark:text-primary-400 hover:underline">contact me here</a>.
         </p>
-        <a href="/contact" class="btn btn-primary btn-lg">
+        <Button href="/contact/" variant="primary">
           Get in Touch
-        </a>
+        </Button>
       </div>
     </div>
   </section>
