@@ -39,27 +39,27 @@
   }
 
   .alert-info {
-    @apply bg-blue-50 border border-blue-100 text-blue-600 dark:bg-blue-950 dark:border-blue-900 dark:text-blue-300;
-    .alert-title { @apply text-blue-800 dark:text-blue-200; }
-    .alert-description { @apply text-blue-600 dark:text-blue-300; }
+    @apply bg-primary-50 border border-primary-100 text-primary-600 dark:bg-primary-950 dark:border-primary-900/50 dark:text-foam;
+    .alert-title { @apply text-primary-700 dark:text-foam; }
+    .alert-description { @apply text-primary-600 dark:text-primary-300; }
   }
 
   .alert-success {
-    @apply bg-emerald-50 border border-emerald-100 text-emerald-500 dark:bg-emerald-950 dark:border-emerald-900 dark:text-emerald-300;
-    .alert-title { @apply text-green-600 dark:text-green-200; }
-    .alert-description { @apply text-green-500 dark:text-green-300; }
+    @apply bg-primary-50 border border-primary-200 text-primary-600 dark:bg-primary-950 dark:border-primary-800 dark:text-primary-300;
+    .alert-title { @apply text-primary-700 dark:text-primary-200; }
+    .alert-description { @apply text-primary-600 dark:text-primary-300; }
   }
 
   .alert-warning {
-    @apply bg-amber-50 border border-amber-100 text-amber-500 dark:bg-amber-950 dark:border-amber-900 dark:text-amber-300;
-    .alert-title { @apply text-yellow-800 dark:text-yellow-200; }
-    .alert-description { @apply text-yellow-600 dark:text-yellow-300; }
+    @apply bg-[#fef9ee] border border-gold-light/20 text-gold-light dark:bg-[#2a2118] dark:border-gold/20 dark:text-gold;
+    .alert-title { @apply text-[#8a5b1a] dark:text-gold; }
+    .alert-description { @apply text-gold-light dark:text-gold/80; }
   }
 
   .alert-error {
-    @apply bg-rose-50 border border-rose-100 text-rose-800 dark:bg-rose-950 dark:border-rose-900 dark:text-rose-300;
-    .alert-title { @apply text-rose-800 dark:text-rose-200; }
-    .alert-description { @apply text-rose-600 dark:text-rose-300; }
+    @apply bg-[#fef2f4] border border-love-light/20 text-love-light dark:bg-[#2a1520] dark:border-love/20 dark:text-love;
+    .alert-title { @apply text-love-light dark:text-love; }
+    .alert-description { @apply text-love-light/80 dark:text-love/80; }
   }
 
   .alert-neutral {
@@ -85,7 +85,7 @@
   }
 
   .alert-button-primary {
-    @apply text-black bg-white hover:bg-base-200 focus:ring-base-500/50;
+    @apply text-black bg-base-50 hover:bg-base-200 focus:ring-base-500/50;
   }
 
   .alert-button-secondary {
@@ -97,6 +97,6 @@
   }
 
   .alert-button-outline {
-    @apply text-base-500 bg-white hover:text-primary-500 ring-1 ring-base-200 focus:ring-primary-500;
+    @apply text-base-500 bg-base-50 hover:text-primary-500 ring-1 ring-base-200 focus:ring-primary-500;
   }
 }

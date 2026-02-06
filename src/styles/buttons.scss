@@ -8,23 +8,27 @@
 .button--primary {
   @apply bg-primary-500 text-white shadow-md;
   @apply hover:bg-primary-600;
+  @apply dark:bg-primary-500 dark:text-base-100 dark:hover:bg-primary-400;
   @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50;
 }
 
 .button--secondary {
   @apply bg-base-500 text-base-50 shadow-sm;
   @apply hover:bg-base-600;
+  @apply dark:bg-base-600 dark:text-base-200 dark:hover:bg-base-500;
   @apply focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-opacity-50;
 }
 
 .button--outline {
   @apply border border-base-200 bg-base-50 text-base-800 shadow-sm;
   @apply hover:bg-base-100;
-  @apply focus-visible:ring-2 focus-visible:ring-base-200 focus-visible:ring-opacity-50;
+  @apply dark:border-base-700 dark:bg-base-900 dark:text-base-200 dark:hover:bg-base-800;
+  @apply focus-visible:ring-2 focus-visible:ring-base-200 focus-visible:ring-opacity-50 dark:focus-visible:ring-base-600;
 }
 
 .button--ghost {
-  @apply bg-base-50;
+  @apply bg-base-50 text-base-800;
   @apply hover:bg-base-200;
-  @apply focus-visible:ring-2 focus-visible:ring-base-200 focus-visible:ring-opacity-50;
+  @apply dark:bg-transparent dark:text-base-200 dark:hover:bg-base-800;
+  @apply focus-visible:ring-2 focus-visible:ring-base-200 focus-visible:ring-opacity-50 dark:focus-visible:ring-base-600;
 }
