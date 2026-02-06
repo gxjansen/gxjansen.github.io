@@ -1,15 +1,4 @@
 @layer components {
-  /* Background Patterns */
-  .bg-grid-pattern {
-    background-image: url('/assets/grid-pattern-light.svg');
-    background-position: center;
-    background-repeat: repeat;
-  }
-
-  :root[class~="dark"] .bg-grid-pattern {
-    background-image: url('/assets/grid-pattern-dark.svg');
-  }
-
   .bg-pattern {
     @apply bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat dark:bg-[url('/assets/pattern-dark.svg')];
   }

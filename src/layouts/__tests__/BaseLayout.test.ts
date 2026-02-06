@@ -40,7 +40,6 @@ describe('BaseLayout', () => {
               aria-hidden="true"
               role="presentation"
             ></div>
-            <div class="grid-pattern-container h-full w-full"></div>
           </div>
           
           <div class="relative z-base flex-1">

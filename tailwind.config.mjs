@@ -87,7 +87,7 @@ export default {
 
         // Background colors
         background: "#faf4ed",        // Dawn base
-        "background-dark": "#191724", // Main base
+        "background-dark": "#1A1825", // Rosé Pine base
 
         // Semantic colors using Rosé Pine accents
         info: "#9ccfd8",              // foam
