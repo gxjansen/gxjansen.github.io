@@ -177,6 +177,22 @@ const currLocale = getLocaleFromUrl(Astro.url);
 
         observeRevealElements();
         document.addEventListener("astro:after-swap", observeRevealElements);
+
+        // Watch for dynamically added [data-reveal] elements (e.g. testimonials randomization)
+        new MutationObserver((mutations) => {
+          for (const mutation of mutations) {
+            for (const node of mutation.addedNodes) {
+              if (node instanceof HTMLElement) {
+                if (node.dataset.reveal && !node.classList.contains('revealed')) {
+                  revealObserver.observe(node);
+                }
+                node.querySelectorAll?.('[data-reveal]:not(.revealed)').forEach((el) => {
+                  revealObserver.observe(el);
+                });
+              }
+            }
+          }
+        }).observe(document.body, { childList: true, subtree: true });
       }
     </script>
 
