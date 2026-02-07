@@ -15,7 +15,8 @@
     "test": "vitest",
     "test:robots": "node scripts/test-robots.js",
     "validate-content": "node scripts/validate-content.js",
-    "bluesky:link": "node scripts/bluesky-link.mjs"
+    "bluesky:link": "node scripts/bluesky-link.mjs",
+    "check:trailing-slashes": "node scripts/check-trailing-slashes.js"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.2",

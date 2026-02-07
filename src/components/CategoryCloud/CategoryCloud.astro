@@ -27,7 +27,7 @@ const processedCategories = sortByValue(countItems(categories));
 <!-- Your template here -->
 <div class="category-cloud">
   {processedCategories.map(([category, count]) => (
-    <a href={`/categories/${slugify(category)}`} class="category-link">
+    <a href={`/categories/${slugify(category)}/`} class="category-link">
       {humanize(category)} {showCount && `(${count})`}
     </a>
   ))}

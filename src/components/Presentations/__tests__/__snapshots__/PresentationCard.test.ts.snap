@@ -2,7 +2,7 @@
 
 exports[`PresentationCard HTML Structure > matches snapshot with all props 1`] = `
 "<article class="card group">
-        <a href="/presentations/test-presentation">
+        <a href="/presentations/test-presentation/">
           <img src="/test-image.jpg" alt="Full Test Presentation" width="1600" height="900" class="w-full rounded-t-xl object-cover" >
         </a>
         <div class="card-content">
@@ -16,7 +16,7 @@ exports[`PresentationCard HTML Structure > matches snapshot with all props 1`] =
           </div>
 
           <h2 class="card-title">
-            <a href="/presentations/test-presentation" class="hover:text-primary-500 dark:hover:text-primary-400">
+            <a href="/presentations/test-presentation/" class="hover:text-primary-500 dark:hover:text-primary-400">
               Full Test Presentation
             </a>
           </h2>
@@ -26,7 +26,7 @@ exports[`PresentationCard HTML Structure > matches snapshot with all props 1`] =
           </p>
 
           <div class="mt-6">
-            <a href="/presentations/test-presentation" class="inline-flex items-center gap-2">
+            <a href="/presentations/test-presentation/" class="inline-flex items-center gap-2">
               View Presentation
               <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"></path>
@@ -39,15 +39,15 @@ exports[`PresentationCard HTML Structure > matches snapshot with all props 1`] =
 
 exports[`PresentationCard HTML Structure > matches snapshot with minimal props 1`] = `
 "<article class="card group">
-        <a href="/presentations/test-presentation">
+        <a href="/presentations/test-presentation/">
           <h2 class="card-title">
-            <a href="/presentations/test-presentation" class="hover:text-primary-500 dark:hover:text-primary-400">
+            <a href="/presentations/test-presentation/" class="hover:text-primary-500 dark:hover:text-primary-400">
               Test Presentation
             </a>
           </h2>
         </a>
         <div class="mt-6">
-          <a href="/presentations/test-presentation" class="inline-flex items-center gap-2">
+          <a href="/presentations/test-presentation/" class="inline-flex items-center gap-2">
             View Presentation
             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7"></path>

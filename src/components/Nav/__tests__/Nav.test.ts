@@ -48,7 +48,7 @@ describe('Nav', () => {
                 <button type="button" class="hidden md:block" aria-label="Toggle dark mode">
                   Theme Toggle
                 </button>
-                <a href="/contact" class="hidden md:block" aria-label="Book Guido for your event">
+                <a href="/contact/" class="hidden md:block" aria-label="Book Guido for your event">
                   Book Guido
                 </a>
               </div>
@@ -121,14 +121,14 @@ describe('Nav', () => {
           aria-orientation="vertical"
         >
           <a 
-            href="/services/consulting" 
+            href="/services/consulting/" 
             class="nav-dropdown-item" 
             role="menuitem"
           >
             Consulting
           </a>
           <a 
-            href="/services/training" 
+            href="/services/training/" 
             class="nav-dropdown-item" 
             role="menuitem"
           >
@@ -159,8 +159,8 @@ describe('Nav', () => {
     // Check dropdown items
     const items = parsedHtml.querySelectorAll('.nav-dropdown-item');
     expect(items.length).toBe(2);
-    expect(items[0]?.getAttribute('href')).toBe('/services/consulting');
-    expect(items[1]?.getAttribute('href')).toBe('/services/training');
+    expect(items[0]?.getAttribute('href')).toBe('/services/consulting/');
+    expect(items[1]?.getAttribute('href')).toBe('/services/training/');
   });
 
   it('has proper accessibility attributes', () => {

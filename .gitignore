@@ -71,6 +71,9 @@ src/data/content-availability.json
 validation-reports/
 src/components/SiteContent/SiteContent.astro
 
+# Worktrees
+.worktrees/
+
 #Agents
 .swarm/
 /.serena

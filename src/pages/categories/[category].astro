@@ -87,7 +87,7 @@ const description = `Articles categorized under ${originalCategory}`;
                 .filter(([_, __, count]) => count >= 2)
                 .map(([slug, original]) => (
                 <a
-                  href={`/categories/${slug}`}
+                  href={`/categories/${slug}/`}
                   class="filter-badge"
                 >
                   {original}

@@ -21,7 +21,7 @@ const relatedPresentations = getRelatedPresentations(eventId, allPresentations);
     <div class="grid gap-6 md:grid-cols-2">
       {relatedPresentations.map((presentation) => (
         <a 
-          href={`/presentations/${presentation.slug}`}
+          href={`/presentations/${presentation.slug}/`}
           class="block bg-white dark:bg-base-900 rounded-lg shadow-md hover:shadow-lg transition-shadow"
         >
           <div class="relative">
