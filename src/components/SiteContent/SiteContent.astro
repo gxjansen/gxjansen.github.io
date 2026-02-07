@@ -53,7 +53,7 @@ const featureData: FeatureData[] = [
   <div class="site-container">
     <div class="relative">
       <div class="relative">
-        <div class="mx-auto mb-16 text-center md:max-w-4xl" data-aos="fade-up">
+        <div class="mx-auto mb-16 text-center md:max-w-4xl" data-reveal="fade-up">
           <Badge>Resources</Badge>
           <h2 class="h2 mb-4">Leadership Resources & Insights</h2>
           <!-- <p class="description text-lg md:text-xl">
@@ -70,8 +70,8 @@ const featureData: FeatureData[] = [
                   href={feature.href}
                   ctaText={feature.ctaText}
                   idx={idx}
-                  data-aos="zoom-in"
-                  data-aos-delay={0.15 * idx}
+                  data-reveal="zoom-in"
+                  data-reveal-delay={idx + 1}
                 />
               ))
             }
@@ -137,9 +137,8 @@ const featureData: FeatureData[] = [
                         href={feature.href}
                         ctaText={feature.ctaText}
                         idx={idx}
-                        data-aos="zoom-in"
-                        data-aos-delay={0.15 * idx}
-                        data-aos-trigger="#services-icon-cards"
+                        data-reveal="zoom-in"
+                        data-reveal-delay={idx + 1}
                       />
                     </div>
                   ))

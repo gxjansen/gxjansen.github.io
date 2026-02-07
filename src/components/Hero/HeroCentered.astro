@@ -33,7 +33,7 @@ const t = useTranslations(currLocale);
     <div
       class="mx-auto mb-16 flex w-full max-w-[750px] flex-col justify-center px-4 text-center"
     >
-      <div data-aos="fade-right" data-aos-trigger="#hero-center">
+      <div data-reveal="fade-right">
         <span
           class="mb-4 inline-flex items-center rounded-full bg-primary-500 px-2 py-px text-xs uppercase leading-5 text-base-100 dark:text-base-900"
         >
@@ -48,9 +48,8 @@ const t = useTranslations(currLocale);
       </div>
       <p
         class="description mb-10 text-pretty text-lg lg:text-xl"
-        data-aos="fade-right"
-        data-aos-delay=".1"
-        data-aos-trigger="#hero-center"
+        data-reveal="fade-right"
+        data-reveal-delay="1"
       >
         <Fragment set:html={t("hero_description").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} />
       </p>
@@ -60,25 +59,22 @@ const t = useTranslations(currLocale);
           href="/contact"
           target="_blank"
           rel="noopener noreferrer"
-          data-aos="fade-right"
-          data-aos-delay=".2"
-          data-aos-trigger="#hero-center"
+          data-reveal="fade-right"
+          data-reveal-delay="2"
         >
         Book Guido
         </Button>
         <VideoButton
-          data-aos="fade-right"
-          data-aos-delay=".2"
-          data-aos-trigger="#hero-center"
+          data-reveal="fade-right"
+          data-reveal-delay="2"
         />
       </div>
 
       <!-- social proof -->
       <div
         class="mx-auto mt-8 flex max-w-md justify-center"
-        data-aos="fade-right"
-        data-aos-delay=".3"
-        data-aos-trigger="#hero-center"
+        data-reveal="fade-right"
+        data-reveal-delay="3"
       >
         <div class="-m-1.5 flex flex-wrap items-center">
           <div class="w-auto p-1.5">

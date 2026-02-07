@@ -1,10 +1,15 @@
 @layer components {
   /* Card System */
   article[class*="card"]:not(.event-card) {
-    @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur transition-all group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
+    @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
     display: flex;
     flex-direction: column;
     height: 100%;
+    transition:
+      border-color 0.3s ease,
+      background-color 0.3s ease,
+      transform 0.3s cubic-bezier(0.33, 1, 0.68, 1),
+      box-shadow 0.3s cubic-bezier(0.33, 1, 0.68, 1);
   }
 
   /* Card Grid Layout */
@@ -91,7 +96,43 @@
 
   /* Event Card Specifics */
   .event-card {
-    @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur transition-all group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
+    @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
     @apply p-4;
+    transition:
+      border-color 0.3s ease,
+      background-color 0.3s ease,
+      transform 0.3s cubic-bezier(0.33, 1, 0.68, 1),
+      box-shadow 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  /* Card hover lift effect */
+  :is(article[class*="card"], .event-card) {
+    &:where(:hover, .group:hover &) {
+      transform: translateY(-4px);
+      box-shadow:
+        0 10px 15px -3px rgb(0 0 0 / 0.08),
+        0 4px 6px -4px rgb(0 0 0 / 0.08);
+    }
+  }
+
+  :root.dark :is(article[class*="card"], .event-card) {
+    &:where(:hover, .group:hover &) {
+      box-shadow:
+        0 10px 15px -3px rgb(0 0 0 / 0.25),
+        0 4px 6px -4px rgb(0 0 0 / 0.2);
+    }
+  }
+
+  /* Social card icon hover spring */
+  .group:hover .social-card-icon-wrapper {
+    transform: scale(1.1);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  article[class*="card"],
+  .event-card {
+    transition: none !important;
   }
 }

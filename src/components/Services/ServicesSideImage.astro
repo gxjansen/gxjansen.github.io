@@ -162,7 +162,7 @@ const shouldReduceMotion = typeof window !== "undefined"
             showCta={feature.showCta}
             href2={feature.href2}
             ctaText2={feature.ctaText2}
-            data-aos={shouldReduceMotion ? "" : (idx % 2 === 0 ? "fade-right" : "fade-left")}
+            data-reveal={idx % 2 === 0 ? "fade-right" : "fade-left"}
           />
         ))
       }
@@ -174,15 +174,15 @@ const shouldReduceMotion = typeof window !== "undefined"
   // Handle reduced motion preference changes
   if (typeof window !== 'undefined') {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    
+
     function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
-      const elements = document.querySelectorAll('[data-aos]');
+      const elements = document.querySelectorAll('[data-reveal]');
       elements.forEach(element => {
         if (e.matches) {
-          element.setAttribute('data-aos', '');
+          element.setAttribute('data-reveal', '');
         } else {
           const index = Array.from(document.querySelectorAll('[role="listitem"]')).indexOf(element);
-          element.setAttribute('data-aos', index % 2 === 0 ? 'fade-right' : 'fade-left');
+          element.setAttribute('data-reveal', index % 2 === 0 ? 'fade-right' : 'fade-left');
         }
       });
     }

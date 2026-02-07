@@ -20,7 +20,7 @@ const faqData = getTranslatedData("faqData", currLocale);
 
 <section id="faq-accordions" class="overflow-hidden py-24 md:py-28">
   <div class="site-container grid gap-10 md:grid-cols-2">
-    <div class="mr-auto max-w-lg" data-aos="fade-right">
+    <div class="mr-auto max-w-lg" data-reveal="fade-right">
       <Badge>FAQ</Badge>
       <h2 class="h2 mb-6">Frequently Asked Questions</h2>
       <p class="description md:text-lg">
@@ -29,7 +29,7 @@ const faqData = getTranslatedData("faqData", currLocale);
         tempora perferendis perspiciatis.
       </p>
     </div>
-    <div class="flex flex-col gap-3" data-aos="fade-left">
+    <div class="flex flex-col gap-3" data-reveal="fade-left">
       {
         faqData.map(({ question, answer }) => (
           <Accordion title={question} details={answer} />

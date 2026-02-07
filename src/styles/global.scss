@@ -5,6 +5,7 @@
 @use './components/links';
 @use './base/typography';
 @use './prose';
+@use './scroll-reveal';
 
 /* Base Styles */
 @tailwind base;
@@ -193,6 +194,36 @@
 
   .z-tooltip {
     @apply z-50;
+  }
+}
+
+/* Animated Focus Ring */
+@keyframes focus-ring-expand {
+  from {
+    outline-offset: 0px;
+    outline-color: transparent;
+  }
+  to {
+    outline-offset: 3px;
+    outline-color: theme('colors.primary.500');
+  }
+}
+
+:focus-visible {
+  outline: 2px solid theme('colors.primary.500');
+  outline-offset: 3px;
+  animation: focus-ring-expand 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* Global Reduced-Motion Safety Net */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

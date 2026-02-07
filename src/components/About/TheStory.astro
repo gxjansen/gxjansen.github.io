@@ -74,7 +74,7 @@ const shouldReduceMotion = typeof window !== "undefined"
     role="presentation"
   >
     <!-- Section header -->
-    <div class="mx-auto text-center max-w-3xl mb-12" data-aos="fade-up">
+    <div class="mx-auto text-center max-w-3xl mb-12" data-reveal="fade-up">
       <Badge>The Backstory</Badge>
       <h2 id="story-heading" class="h2 mb-4">
         How I Got Here
@@ -153,7 +153,7 @@ const shouldReduceMotion = typeof window !== "undefined"
             idx={idx}
             ctaText={story.ctaText}
             showCta={story.showCta}
-            data-aos={shouldReduceMotion ? "" : (idx % 2 === 0 ? "fade-right" : "fade-left")}
+            data-reveal={idx % 2 === 0 ? "fade-right" : "fade-left"}
           />
         ))
       }
@@ -167,13 +167,13 @@ const shouldReduceMotion = typeof window !== "undefined"
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
-      const elements = document.querySelectorAll('[data-aos]');
+      const elements = document.querySelectorAll('[data-reveal]');
       elements.forEach(element => {
         if (e.matches) {
-          element.setAttribute('data-aos', '');
+          element.setAttribute('data-reveal', '');
         } else {
           const index = Array.from(document.querySelectorAll('[role="listitem"]')).indexOf(element);
-          element.setAttribute('data-aos', index % 2 === 0 ? 'fade-right' : 'fade-left');
+          element.setAttribute('data-reveal', index % 2 === 0 ? 'fade-right' : 'fade-left');
         }
       });
     }

@@ -45,7 +45,7 @@ const approaches: Approach[] = [
     <div class="max-w-5xl mx-auto">
       <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
         <!-- Left column: Main content -->
-        <div data-aos="fade-right">
+        <div data-reveal="fade-right">
           <Badge>The Psychology Edge</Badge>
           <h2 id="why-heading" class="h2 mb-6">
             Why This Approach Works
@@ -61,12 +61,12 @@ const approaches: Approach[] = [
         </div>
 
         <!-- Right column: Approach list -->
-        <div class="space-y-4" data-aos="fade-left">
+        <div class="space-y-4" data-reveal="fade-left">
           {approaches.map((approach, index) => (
             <div
               class="bg-surface dark:bg-base-800 rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-all duration-300"
-              data-aos="fade-up"
-              data-aos-delay={index * 75}
+              data-reveal="fade-up"
+              data-reveal-delay={index + 1}
             >
               <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <div class="flex-shrink-0">
@@ -94,7 +94,7 @@ const approaches: Approach[] = [
       <!-- Experimentation background -->
       <div
         class="mt-12 sm:mt-16 bg-gradient-to-r from-primary-50 to-primary-100/50 dark:from-primary-900/20 dark:to-primary-800/10 rounded-2xl p-5 sm:p-8 md:p-10"
-        data-aos="fade-up"
+        data-reveal="fade-up"
       >
         <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
           <div class="flex-shrink-0">
@@ -117,7 +117,7 @@ const approaches: Approach[] = [
       </div>
 
       <!-- Cross-link to Author page -->
-      <div class="text-center mt-10" data-aos="fade-up">
+      <div class="text-center mt-10" data-reveal="fade-up">
         <a
           href="/authors/gxjansen/"
           class="inline-flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium transition-colors duration-200"
