@@ -57,7 +57,7 @@ const shouldReduceMotion = typeof window !== "undefined"
   >
     <div 
       class="mb-16 text-center md:max-w-4xl mx-auto" 
-      data-aos={shouldReduceMotion ? "" : "fade-up"}
+      data-reveal="fade-up"
     >
       <Badge>Strategic Impact</Badge>
       <h2
@@ -87,8 +87,8 @@ const shouldReduceMotion = typeof window !== "undefined"
                 text={feature.text}
                 icon={feature.icon}
                 suffix="-desktop"
-                data-aos={shouldReduceMotion ? "" : "zoom-in"}
-                data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
+                data-reveal="zoom-in"
+                data-reveal-delay={idx + 1}
               />
           </div>
         ))
@@ -157,9 +157,8 @@ const shouldReduceMotion = typeof window !== "undefined"
                   text={feature.text}
                   icon={feature.icon}
                   suffix="-mobile"
-                  data-aos={shouldReduceMotion ? "" : "zoom-in"}
-                  data-aos-delay={shouldReduceMotion ? "" : (0.15 * idx).toString()}
-                  data-aos-trigger="#feature-cards-carousel"
+                  data-reveal="zoom-in"
+                  data-reveal-delay={idx + 1}
                 />
               </div>
             ))
@@ -273,24 +272,24 @@ const shouldReduceMotion = typeof window !== "undefined"
   // Handle reduced motion preference changes
   if (typeof window !== 'undefined') {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    
+
     function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
-      const elements = document.querySelectorAll('[data-aos]');
+      const elements = document.querySelectorAll('[data-reveal]');
       elements.forEach(element => {
         if (e.matches) {
-          element.setAttribute('data-aos', '');
-          element.setAttribute('data-aos-delay', '');
+          element.setAttribute('data-reveal', '');
+          element.removeAttribute('data-reveal-delay');
         } else {
           // Restore original animations
           const isHeader = element.classList.contains('mb-16');
           const isCard = element.closest('[role="listitem"]');
-          
+
           if (isHeader) {
-            element.setAttribute('data-aos', 'fade-up');
+            element.setAttribute('data-reveal', 'fade-up');
           } else if (isCard) {
             const index = Array.from(document.querySelectorAll('[role="listitem"]')).indexOf(isCard);
-            element.setAttribute('data-aos', 'zoom-in');
-            element.setAttribute('data-aos-delay', (0.15 * index).toString());
+            element.setAttribute('data-reveal', 'zoom-in');
+            element.setAttribute('data-reveal-delay', (index + 1).toString());
           }
         }
       });

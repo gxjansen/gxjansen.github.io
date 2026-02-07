@@ -36,7 +36,8 @@ const shouldReduceMotion = typeof window !== "undefined"
 
 <div
   id="nav__container"
-  class={`navbar--initial fixed left-0 top-0 z-30 flex w-full flex-col border-b ${shouldReduceMotion ? "" : "transition-all duration-300"}`}
+  class={`navbar--initial fixed left-0 top-0 z-30 flex w-full flex-col border-b ${shouldReduceMotion ? "" : "duration-300"}`}
+  style={shouldReduceMotion ? "" : "transition: background-color 0.3s cubic-bezier(0.33, 1, 0.68, 1), border-color 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;"}
   transition:name={`nav`}
   role="banner"
 >

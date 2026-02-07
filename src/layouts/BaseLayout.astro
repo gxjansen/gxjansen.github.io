@@ -79,6 +79,12 @@ const currLocale = getLocaleFromUrl(Astro.url);
         90% { transform: translate(10%,5%) }
         100% { transform: translate(5%,0) }
       }
+
+      /* Gradient breathing animation */
+      @keyframes gradient-breathe {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+      }
     </style>
   </head>
   <body
@@ -90,22 +96,25 @@ const currLocale = getLocaleFromUrl(Astro.url);
     {/* Background elements */}
     <div class="fixed inset-0 z-background">
       {/* Noise overlay */}
-      <div 
+      <div
         class="noise-background"
+        style="animation: noise 8s steps(10) infinite;"
         aria-hidden="true"
         role="presentation"
       ></div>
 
       <!-- Top-left gradient with extended fade -->
-      <div 
+      <div
         class="gradient-top-left"
+        style="animation: gradient-breathe 12s ease-in-out infinite;"
         aria-hidden="true"
         role="presentation"
       />
       
       <!-- Bottom-right gradient with extended fade -->
-      <div 
+      <div
         class="gradient-bottom-right"
+        style="animation: gradient-breathe 12s ease-in-out infinite; animation-delay: 6s;"
         aria-hidden="true"
         role="presentation"
       />
@@ -149,31 +158,36 @@ const currLocale = getLocaleFromUrl(Astro.url);
         });
       });
 
-      // Scroll animations with reduced motion support
-      import siteSettings from "@config/siteSettings.json";
-      import AOS from "@js/aos/aos";
-
-      if (siteSettings.useAnimations === true) {
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
-        if (!prefersReducedMotion) {
-          // runs on initial page load
-          AOS.init({ 
-            once: true, 
-            duration: 0.75, 
-            distance: 100, 
-            offset: 120,
-            disable: 'mobile' // Disable on mobile for better performance
+      // Scroll-reveal: native CSS or JS fallback
+      if (CSS.supports('animation-timeline: view()')) {
+        // Re-trigger CSS scroll-driven animations after View Transitions
+        document.addEventListener("astro:after-swap", () => {
+          document.querySelectorAll('[data-reveal]').forEach((el) => {
+            const htmlEl = el as HTMLElement;
+            htmlEl.style.animation = 'none';
+            void htmlEl.offsetHeight;
+            htmlEl.style.animation = '';
           });
+        });
+      } else {
+        // Fallback: IntersectionObserver for browsers without scroll-driven animations
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
 
-          // runs on view transitions navigation
-          document.addEventListener("astro:after-swap", () => {
-            // Small delay to ensure DOM is ready after view transition
-            setTimeout(() => {
-              AOS.refreshHard();
-            }, 100);
+        function observeRevealElements() {
+          document.querySelectorAll('[data-reveal]:not(.revealed)').forEach((el) => {
+            revealObserver.observe(el);
           });
         }
+
+        observeRevealElements();
+        document.addEventListener("astro:after-swap", observeRevealElements);
       }
     </script>
 

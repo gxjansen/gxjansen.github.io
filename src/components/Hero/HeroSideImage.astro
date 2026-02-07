@@ -98,17 +98,15 @@ const shouldReduceMotion = typeof window !== "undefined"
             <Icon
               name="atlas/circle3"
               class="absolute -left-14 -top-12 z-10 w-28 text-accent-4"
-              data-aos={shouldReduceMotion ? "" : "fade-in"}
-              data-aos-trigger="#hero-side"
+              data-reveal="fade-in"
               aria-hidden="true"
               role="presentation"
             />
             <Icon
               name="atlas/dots3"
               class="absolute -bottom-8 -right-7 z-10 w-28 text-accent-2"
-              data-aos={shouldReduceMotion ? "" : "fade-in"}
-              data-aos-delay="100"
-              data-aos-trigger="#hero-side"
+              data-reveal="fade-in"
+              data-reveal-delay="1"
               aria-hidden="true"
               role="presentation"
             />
@@ -138,17 +136,17 @@ const shouldReduceMotion = typeof window !== "undefined"
   // Handle reduced motion preference changes
   if (typeof window !== 'undefined') {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    
+
     function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
-      const elements = document.querySelectorAll('[data-aos]');
+      const elements = document.querySelectorAll('[data-reveal]');
       elements.forEach(element => {
         if (e.matches) {
-          element.setAttribute('data-aos', '');
+          element.setAttribute('data-reveal', '');
         } else {
           // Restore original animation
-          const direction = element.closest('.md\\:w-1\\/2') === null ? 
+          const direction = element.closest('.md\\:w-1\\/2') === null ?
             'fade-right' : 'fade-left';
-          element.setAttribute('data-aos', direction);
+          element.setAttribute('data-reveal', direction);
         }
       });
     }

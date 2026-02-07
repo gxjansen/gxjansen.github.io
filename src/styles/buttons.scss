@@ -1,8 +1,25 @@
 /* buttons, 4 types "primary", "secondary", "outline", "ghost" */
 .button {
-  @apply flex items-center justify-center rounded-md px-7 py-3 font-medium transition-colors;
+  @apply flex items-center justify-center rounded-md px-7 py-3 font-medium;
   @apply focus:outline-none;
   @apply disabled:pointer-events-none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease;
+
+  &:hover:not(:active):not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    transition-duration: 0.1s;
+  }
 }
 
 .button--primary {
@@ -31,4 +48,10 @@
   @apply hover:bg-base-200;
   @apply dark:bg-transparent dark:text-base-200 dark:hover:bg-base-800;
   @apply focus-visible:ring-2 focus-visible:ring-base-200 focus-visible:ring-opacity-50 dark:focus-visible:ring-base-600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none !important;
+  }
 }

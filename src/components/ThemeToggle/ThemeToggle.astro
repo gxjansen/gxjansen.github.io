@@ -119,3 +119,21 @@ const { class: className, ...rest } = Astro.props as Props;
   // runs on view transitions navigation
   document.addEventListener("astro:after-swap", initThemeToggle);
 </script>
+
+<style>
+  @keyframes icon-rotate-in {
+    from {
+      transform: rotate(-90deg) scale(0.5);
+      opacity: 0;
+    }
+    to {
+      transform: rotate(0deg) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .theme-toggle__dark-icon:not(.hidden),
+  .theme-toggle__light-icon:not(.hidden) {
+    animation: icon-rotate-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+</style>

@@ -24,7 +24,7 @@ const { title, details, group = "accordion" } = Astro.props;
     <Icon
       name="tabler/circle-arrow-up"
       aria-hidden="true"
-      class="accordion__chevron size-6 shrink-0 rotate-180 text-primary-500 transition-transform duration-300"
+      class="accordion__chevron size-6 shrink-0 rotate-180 text-primary-500 transition-transform duration-[400ms] ease-[cubic-bezier(0.33,1,0.68,1)]"
     />
   </summary>
   <div class="accordion__content">
@@ -52,7 +52,7 @@ const { title, details, group = "accordion" } = Astro.props;
   .accordion__content {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 300ms ease-in-out;
+    transition: grid-template-rows 400ms cubic-bezier(0.33, 1, 0.68, 1);
   }
 
   .accordion__content > * {
