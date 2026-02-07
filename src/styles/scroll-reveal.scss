@@ -68,83 +68,99 @@
   }
 }
 
-/* Scroll-driven animations - progressive enhancement */
+/* Scroll-driven animations - progressive enhancement
+ * Uses longhand properties to prevent CSS toolchain (Lightning CSS)
+ * from merging animation + animation-timeline into a broken shorthand.
+ * Gated behind body:not(.scroll-reveal-fallback) so JS can force the
+ * IntersectionObserver path for browsers with buggy implementations (Firefox). */
 @supports (animation-timeline: view()) {
-  .use-animations [data-reveal="fade-up"] {
-    animation: reveal-fade-up linear both;
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal="fade-up"] {
+    animation-name: reveal-fade-up;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: view();
     animation-range: entry 0% entry 35%;
   }
 
-  .use-animations [data-reveal="fade-down"] {
-    animation: reveal-fade-down linear both;
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal="fade-down"] {
+    animation-name: reveal-fade-down;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: view();
     animation-range: entry 0% entry 35%;
   }
 
-  .use-animations [data-reveal="fade-left"] {
-    animation: reveal-fade-left linear both;
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal="fade-left"] {
+    animation-name: reveal-fade-left;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: view();
     animation-range: entry 0% entry 35%;
   }
 
-  .use-animations [data-reveal="fade-right"] {
-    animation: reveal-fade-right linear both;
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal="fade-right"] {
+    animation-name: reveal-fade-right;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: view();
     animation-range: entry 0% entry 35%;
   }
 
-  .use-animations [data-reveal="zoom-in"] {
-    animation: reveal-zoom-in linear both;
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal="zoom-in"] {
+    animation-name: reveal-zoom-in;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: view();
     animation-range: entry 0% entry 35%;
   }
 
-  .use-animations [data-reveal="fade-in"] {
-    animation: reveal-fade-in linear both;
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal="fade-in"] {
+    animation-name: reveal-fade-in;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
     animation-timeline: view();
     animation-range: entry 0% entry 35%;
   }
 
   /* Stagger delays: shift animation-range forward by 3% per ordinal */
-  .use-animations [data-reveal-delay="1"] { animation-range: entry 3% entry 38%; }
-  .use-animations [data-reveal-delay="2"] { animation-range: entry 6% entry 41%; }
-  .use-animations [data-reveal-delay="3"] { animation-range: entry 9% entry 44%; }
-  .use-animations [data-reveal-delay="4"] { animation-range: entry 12% entry 47%; }
-  .use-animations [data-reveal-delay="5"] { animation-range: entry 15% entry 50%; }
-  .use-animations [data-reveal-delay="6"] { animation-range: entry 18% entry 53%; }
-  .use-animations [data-reveal-delay="7"] { animation-range: entry 21% entry 56%; }
-  .use-animations [data-reveal-delay="8"] { animation-range: entry 24% entry 59%; }
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal-delay="1"] { animation-range: entry 3% entry 38%; }
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal-delay="2"] { animation-range: entry 6% entry 41%; }
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal-delay="3"] { animation-range: entry 9% entry 44%; }
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal-delay="4"] { animation-range: entry 12% entry 47%; }
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal-delay="5"] { animation-range: entry 15% entry 50%; }
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal-delay="6"] { animation-range: entry 18% entry 53%; }
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal-delay="7"] { animation-range: entry 21% entry 56%; }
+  body:not(.scroll-reveal-fallback).use-animations [data-reveal-delay="8"] { animation-range: entry 24% entry 59%; }
 }
 
-/* JS fallback for browsers without scroll-driven animations (Firefox) */
-@supports not (animation-timeline: view()) {
-  .use-animations [data-reveal] {
-    opacity: 0;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .use-animations [data-reveal="fade-up"] { transform: translateY(2rem); }
-  .use-animations [data-reveal="fade-down"] { transform: translateY(-2rem); }
-  .use-animations [data-reveal="fade-left"] { transform: translateX(2rem); }
-  .use-animations [data-reveal="fade-right"] { transform: translateX(-2rem); }
-  .use-animations [data-reveal="zoom-in"] { transform: scale(0.9); }
-
-  .use-animations [data-reveal].revealed {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* Stagger delays for fallback */
-  .use-animations [data-reveal-delay="1"] { transition-delay: 0.1s; }
-  .use-animations [data-reveal-delay="2"] { transition-delay: 0.2s; }
-  .use-animations [data-reveal-delay="3"] { transition-delay: 0.3s; }
-  .use-animations [data-reveal-delay="4"] { transition-delay: 0.4s; }
-  .use-animations [data-reveal-delay="5"] { transition-delay: 0.5s; }
-  .use-animations [data-reveal-delay="6"] { transition-delay: 0.6s; }
-  .use-animations [data-reveal-delay="7"] { transition-delay: 0.7s; }
-  .use-animations [data-reveal-delay="8"] { transition-delay: 0.8s; }
+/* JS-driven fallback for Firefox and browsers with buggy scroll-driven animations.
+ * JS adds .scroll-reveal-fallback to body, then IntersectionObserver adds .revealed
+ * to each element as it enters the viewport. */
+.scroll-reveal-fallback.use-animations [data-reveal] {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
+
+.scroll-reveal-fallback.use-animations [data-reveal="fade-up"] { transform: translateY(2rem); }
+.scroll-reveal-fallback.use-animations [data-reveal="fade-down"] { transform: translateY(-2rem); }
+.scroll-reveal-fallback.use-animations [data-reveal="fade-left"] { transform: translateX(2rem); }
+.scroll-reveal-fallback.use-animations [data-reveal="fade-right"] { transform: translateX(-2rem); }
+.scroll-reveal-fallback.use-animations [data-reveal="zoom-in"] { transform: scale(0.9); }
+
+.scroll-reveal-fallback.use-animations [data-reveal].revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger delays for fallback */
+.scroll-reveal-fallback.use-animations [data-reveal-delay="1"] { transition-delay: 0.1s; }
+.scroll-reveal-fallback.use-animations [data-reveal-delay="2"] { transition-delay: 0.2s; }
+.scroll-reveal-fallback.use-animations [data-reveal-delay="3"] { transition-delay: 0.3s; }
+.scroll-reveal-fallback.use-animations [data-reveal-delay="4"] { transition-delay: 0.4s; }
+.scroll-reveal-fallback.use-animations [data-reveal-delay="5"] { transition-delay: 0.5s; }
+.scroll-reveal-fallback.use-animations [data-reveal-delay="6"] { transition-delay: 0.6s; }
+.scroll-reveal-fallback.use-animations [data-reveal-delay="7"] { transition-delay: 0.7s; }
+.scroll-reveal-fallback.use-animations [data-reveal-delay="8"] { transition-delay: 0.8s; }
 
 /* Reduced motion: disable all reveal animations */
 @media (prefers-reduced-motion: reduce) {

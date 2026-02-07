@@ -148,25 +148,6 @@
   }
 
 
-  /* Enhanced Gradient Effects - Rose Pine pine color */
-  .gradient-top-left {
-    @apply fixed top-0 left-0 h-screen w-screen;
-    /* Light: pine Dawn #286983 = rgb(40,105,131) */
-    @apply bg-[radial-gradient(circle_at_0%_0%,rgba(40,105,131,0.35)_0%,rgba(40,105,131,0.3)_10%,rgba(40,105,131,0.25)_20%,rgba(40,105,131,0.2)_30%,rgba(40,105,131,0.15)_40%,rgba(40,105,131,0.125)_50%,transparent_70%)];
-    /* Dark: pine Main #31748f = rgb(49,116,143) */
-    @apply dark:bg-[radial-gradient(circle_at_0%_0%,rgba(49,116,143,0.05)_0%,rgba(49,116,143,0.04)_10%,rgba(49,116,143,0.03)_20%,rgba(49,116,143,0.02)_30%,rgba(49,116,143,0.01)_40%,rgba(49,116,143,0.005)_50%,transparent_70%)];
-    transform-origin: top left;
-  }
-
-  .gradient-bottom-right {
-    @apply fixed bottom-0 right-0 h-screen w-screen;
-    /* Light: pine Dawn #286983 = rgb(40,105,131) */
-    @apply bg-[radial-gradient(circle_at_100%_100%,rgba(40,105,131,0.35)_0%,rgba(40,105,131,0.3)_10%,rgba(40,105,131,0.25)_20%,rgba(40,105,131,0.2)_30%,rgba(40,105,131,0.15)_40%,rgba(40,105,131,0.125)_50%,transparent_70%)];
-    /* Dark: pine Main #31748f = rgb(49,116,143) */
-    @apply dark:bg-[radial-gradient(circle_at_100%_100%,rgba(49,116,143,0.05)_0%,rgba(49,116,143,0.04)_10%,rgba(49,116,143,0.03)_20%,rgba(49,116,143,0.02)_30%,rgba(49,116,143,0.01)_40%,rgba(49,116,143,0.005)_50%,transparent_70%)];
-    transform-origin: bottom right;
-  }
-
   /* Z-index Management */
   .z-background {
     @apply -z-10;

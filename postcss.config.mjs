@@ -18,7 +18,9 @@ export default {
           // Astro and framework classes
           /^astro-/, /^is-/, /^has-/, /^data-/, /^js-/,
           // Animation classes
-          /^aos-/, /^animate-/, /^transition-/, /^duration-/,
+          /^animate-/, /^transition-/, /^duration-/,
+          // Scroll-reveal classes
+          'revealed', 'scroll-reveal-fallback',
           // State classes
           'active', 'disabled', 'loading', 'error', 'success',
           // Focus and hover states
@@ -27,16 +29,20 @@ export default {
         deep: [
           /dark$/, /light$/, /active$/, /open$/, /closed$/,
           // Dynamic theme classes
-          /^bg-/, /^text-/, /^border-/
+          /^bg-/, /^text-/, /^border-/,
+          // Scroll-reveal selectors (inside @supports blocks)
+          /data-reveal/
         ],
         greedy: [
           /show$/, /hide$/, /sr-only$/, /visible$/, /invisible$/,
           // Responsive classes
-          /^sm:/, /^md:/, /^lg:/, /^xl:/, /^2xl:/
+          /^sm:/, /^md:/, /^lg:/, /^xl:/, /^2xl:/,
+          // Scroll-reveal keyframes and rules
+          /reveal-fade/, /reveal-zoom/
         ]
       },
-      // Remove unused keyframes and font faces
-      keyframes: true,
+      // Keep keyframes - PurgeCSS can't detect usage inside @supports blocks
+      keyframes: false,
       fontFace: true,
       // More aggressive whitespace removal
       rejected: false

@@ -80,11 +80,6 @@ const currLocale = getLocaleFromUrl(Astro.url);
         100% { transform: translate(5%,0) }
       }
 
-      /* Gradient breathing animation */
-      @keyframes gradient-breathe {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.8; }
-      }
     </style>
   </head>
   <body
@@ -98,26 +93,10 @@ const currLocale = getLocaleFromUrl(Astro.url);
       {/* Noise overlay */}
       <div
         class="noise-background"
-        style="animation: noise 8s steps(10) infinite;"
+        style={siteSettings.useAnimations ? "animation: noise 8s steps(10) infinite;" : ""}
         aria-hidden="true"
         role="presentation"
       ></div>
-
-      <!-- Top-left gradient with extended fade -->
-      <div
-        class="gradient-top-left"
-        style="animation: gradient-breathe 12s ease-in-out infinite;"
-        aria-hidden="true"
-        role="presentation"
-      />
-      
-      <!-- Bottom-right gradient with extended fade -->
-      <div
-        class="gradient-bottom-right"
-        style="animation: gradient-breathe 12s ease-in-out infinite; animation-delay: 6s;"
-        aria-hidden="true"
-        role="presentation"
-      />
 
     </div>
 
@@ -159,7 +138,17 @@ const currLocale = getLocaleFromUrl(Astro.url);
       });
 
       // Scroll-reveal: native CSS or JS fallback
-      if (CSS.supports('animation-timeline: view()')) {
+      // Firefox claims support via @supports but its implementation is buggy
+      // (elements stay partially transparent), so force the JS fallback there.
+      const isFirefox = navigator.userAgent.includes('Firefox');
+      const useNativeScrollAnimations = CSS.supports('animation-timeline: view()') && !isFirefox;
+
+      if (!useNativeScrollAnimations) {
+        // Tell CSS to skip scroll-driven animation rules
+        document.body.classList.add('scroll-reveal-fallback');
+      }
+
+      if (useNativeScrollAnimations) {
         // Re-trigger CSS scroll-driven animations after View Transitions
         document.addEventListener("astro:after-swap", () => {
           document.querySelectorAll('[data-reveal]').forEach((el) => {
@@ -170,7 +159,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
           });
         });
       } else {
-        // Fallback: IntersectionObserver for browsers without scroll-driven animations
+        // Fallback: IntersectionObserver for Firefox and unsupported browsers
         const revealObserver = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
