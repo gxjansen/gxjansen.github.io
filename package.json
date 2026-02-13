@@ -75,6 +75,8 @@
     "lightningcss-linux-x64-gnu": "^1.30.1"
   },
   "overrides": {
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.0",
+    "lodash": "^4.17.23",
+    "@isaacs/brace-expansion": "^5.0.1"
   }
 }
