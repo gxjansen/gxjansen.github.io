@@ -53,7 +53,7 @@ const featureData: FeatureData[] = [
   <div class="site-container">
     <div class="relative">
       <div class="relative">
-        <div class="mx-auto mb-16 text-center md:max-w-4xl" data-reveal="fade-up">
+        <div class="mx-auto mb-16 text-center md:max-w-4xl">
           <Badge>Resources</Badge>
           <h2 class="h2 mb-4">Leadership Resources & Insights</h2>
           <!-- <p class="description text-lg md:text-xl">
@@ -70,41 +70,39 @@ const featureData: FeatureData[] = [
                   href={feature.href}
                   ctaText={feature.ctaText}
                   idx={idx}
-                  data-reveal="zoom-in"
-                  data-reveal-delay={idx + 1}
                 />
               ))
             }
           </div>
 
           {/* Mobile/Tablet Carousel */}
-          <div 
+          <div
             class="scroll-container-wrapper lg:hidden"
             id="services-icon-cards"
           >
             <div class="relative">
               <div class="carousel-header">
-                <span 
-                  class="sr-only" 
-                  role="status" 
+                <span
+                  class="sr-only"
+                  role="status"
                   aria-live="polite"
                   id="content-carousel-status"
                 >
                   Content carousel. Use left and right arrow buttons or swipe to navigate through items.
                 </span>
-                
-                <div 
-                  class="carousel-progress" 
-                  role="progressbar" 
+
+                <div
+                  class="carousel-progress"
+                  role="progressbar"
                   aria-label="Content carousel progress"
                   aria-labelledby="content-carousel-status"
-                  aria-valuemin="1" 
+                  aria-valuemin="1"
                   aria-valuemax={featureData.length}
                   aria-valuenow="1"
                   id="content-carousel-progress"
                 >
                   {featureData.map((_, idx) => (
-                    <div 
+                    <div
                       class="progress-dot"
                       data-active={idx === 0 ? "true" : "false"}
                       aria-hidden="true"
@@ -113,7 +111,7 @@ const featureData: FeatureData[] = [
                 </div>
               </div>
 
-              <button 
+              <button
                 class="nav-button left-button"
                 aria-label={`View previous items. Currently at item 1 of ${featureData.length}`}
                 disabled
@@ -137,8 +135,6 @@ const featureData: FeatureData[] = [
                         href={feature.href}
                         ctaText={feature.ctaText}
                         idx={idx}
-                        data-reveal="zoom-in"
-                        data-reveal-delay={idx + 1}
                       />
                     </div>
                   ))

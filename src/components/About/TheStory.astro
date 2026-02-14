@@ -74,7 +74,7 @@ const shouldReduceMotion = typeof window !== "undefined"
     role="presentation"
   >
     <!-- Section header -->
-    <div class="mx-auto text-center max-w-3xl mb-12" data-reveal="fade-up">
+    <div class="mx-auto text-center max-w-3xl mb-12">
       <Badge>The Backstory</Badge>
       <h2 id="story-heading" class="h2 mb-4">
         How I Got Here
@@ -153,7 +153,6 @@ const shouldReduceMotion = typeof window !== "undefined"
             idx={idx}
             ctaText={story.ctaText}
             showCta={story.showCta}
-            data-reveal={idx % 2 === 0 ? "fade-right" : "fade-left"}
           />
         ))
       }
@@ -161,24 +160,3 @@ const shouldReduceMotion = typeof window !== "undefined"
   </div>
 </section>
 
-<script>
-  // Handle reduced motion preference changes
-  if (typeof window !== 'undefined') {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
-      const elements = document.querySelectorAll('[data-reveal]');
-      elements.forEach(element => {
-        if (e.matches) {
-          element.setAttribute('data-reveal', '');
-        } else {
-          const index = Array.from(document.querySelectorAll('[role="listitem"]')).indexOf(element);
-          element.setAttribute('data-reveal', index % 2 === 0 ? 'fade-right' : 'fade-left');
-        }
-      });
-    }
-
-    mediaQuery.addEventListener('change', handleMotionPreference);
-    handleMotionPreference(mediaQuery);
-  }
-</script>

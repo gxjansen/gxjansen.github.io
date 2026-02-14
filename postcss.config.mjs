@@ -19,8 +19,6 @@ export default {
           /^astro-/, /^is-/, /^has-/, /^data-/, /^js-/,
           // Animation classes
           /^animate-/, /^transition-/, /^duration-/,
-          // Scroll-reveal classes
-          'revealed', 'scroll-reveal-fallback',
           // State classes
           'active', 'disabled', 'loading', 'error', 'success',
           // Focus and hover states
@@ -30,15 +28,11 @@ export default {
           /dark$/, /light$/, /active$/, /open$/, /closed$/,
           // Dynamic theme classes
           /^bg-/, /^text-/, /^border-/,
-          // Scroll-reveal selectors (inside @supports blocks)
-          /data-reveal/
         ],
         greedy: [
           /show$/, /hide$/, /sr-only$/, /visible$/, /invisible$/,
           // Responsive classes
           /^sm:/, /^md:/, /^lg:/, /^xl:/, /^2xl:/,
-          // Scroll-reveal keyframes and rules
-          /reveal-fade/, /reveal-zoom/
         ]
       },
       // Keep keyframes - PurgeCSS can't detect usage inside @supports blocks

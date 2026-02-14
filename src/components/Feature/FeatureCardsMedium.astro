@@ -59,7 +59,7 @@ const featureData: FeatureData[] = [
   class="overflow-hidden bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-12 dark:bg-[url('/assets/pattern-dark.svg')] md:py-20"
 >
   <div class="site-container">
-    <div class="mx-auto mb-16 text-center md:max-w-4xl" data-reveal="fade-up">
+    <div class="mx-auto mb-16 text-center md:max-w-4xl">
       <Badge>Content</Badge>
       <h2 class="h2 mb-4">What can you find here?</h2>
       <!-- <p class="description text-pretty text-lg md:text-xl">
@@ -69,7 +69,6 @@ const featureData: FeatureData[] = [
     <div
       id="trigger-medium-cards"
       class="grid gap-4 md:grid-cols-3"
-      data-reveal="fade-left"
     >
       {
         featureData.map((feature, idx) => (
