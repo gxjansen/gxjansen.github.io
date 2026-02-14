@@ -2,6 +2,7 @@ interface IndieProject {
   name: string;
   description: string;
   mainImage: string;
+
   link: string;
   iconBgColor: string; // Tailwind color class for the icon background
   license?: string; // Optional license information
@@ -10,6 +11,15 @@ interface IndieProject {
 }
 
 export const indieProjects: IndieProject[] = [
+  {
+    name: "Barazo Forum",
+    description: "Privacy-focused, decentralized forum software built on the AT Protocol. Your identity. Your communities. Everywhere.",
+    mainImage: "/icons/barazo-dark.svg",
+    link: "https://barazo.forum",
+    iconBgColor: "bg-[#1a1a2e]",
+    githubUrl: "https://github.com/barazo-forum",
+    license: "MIT / AGPL-3.0"
+  },
   {
     name: "n8n Pulse",
     description: "Community analytics dashboard for the n8n ecosystem. Track community growth, discover trending workflows, explore popular integrations, and build custom visualizations with the data playground.",
