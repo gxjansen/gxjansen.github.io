@@ -30,6 +30,15 @@ export const indieProjects: IndieProject[] = [
     license: "MIT"
   },
   {
+    name: "Claude Code Meter",
+    description: "macOS desktop widget that monitors Claude Code usage limits in real time. Displays both 5-hour and 7-day rolling windows with progress bars, countdown timers, and color-coded warnings via Ubersicht.",
+    mainImage: "tabler:gauge",
+    link: "https://github.com/gxjansen/claude-code-meter",
+    iconBgColor: "bg-[#D97706]",
+    githubUrl: "https://github.com/gxjansen/claude-code-meter",
+    license: "MIT"
+  },
+  {
     name: "AI Consensus Answers",
     description: "n8n workflow that generates consensus-based answers by leveraging multiple AI models with a peer review system. Synthesizes responses across different AI systems to improve answer quality through comparative analysis.",
     mainImage: "/icons/n8n.svg",
