@@ -37,6 +37,6 @@ jobs:
             --timeout 30
             --max-retries 3
             --exclude-path dist/_astro
-            --exclude '^/'
+            --base dist
             dist
           fail: ${{ github.event_name == 'pull_request' }}

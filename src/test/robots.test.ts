@@ -2,8 +2,10 @@ import { describe, it, expect } from "vitest";
 import * as fs from "node:fs";
 import * as path from "node:path";
 
-describe("Robots.txt Validation", () => {
-  const distPath = path.resolve(process.cwd(), "dist");
+const distPath = path.resolve(process.cwd(), "dist");
+const hasDist = fs.existsSync(distPath);
+
+describe.skipIf(!hasDist)("Robots.txt Validation", () => {
   const robotsPath = path.join(distPath, "robots.txt");
 
   it("should have robots.txt file in dist directory after build", () => {
