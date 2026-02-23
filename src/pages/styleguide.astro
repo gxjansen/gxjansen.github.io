@@ -6,110 +6,182 @@ import Badge from "../components/Badge/Badge.astro";
 import ThemeToggle from "../components/ThemeToggle/ThemeToggle.astro";
 import NavLink from "../components/Nav/NavLink.astro";
 import NavDropdown from "../components/Nav/NavDropdown/NavDropdown.astro";
-import type { navLinkItem, navDropdownItem } from "@config/types/configDataTypes";
+import type {
+  navLinkItem,
+  navDropdownItem,
+} from "@config/types/configDataTypes";
 
 // Define example buttons for different variants and states
 const buttonExamples = [
   { variant: "primary", text: "Primary Button" },
   { variant: "secondary", text: "Secondary Button" },
   { variant: "outline", text: "Outline Button" },
-  { variant: "ghost", text: "Ghost Button" }
+  { variant: "ghost", text: "Ghost Button" },
 ] as const;
 
 const arrowExamples = [
   { arrow: "left", text: "Back" },
-  { arrow: "right", text: "Next" }
+  { arrow: "right", text: "Next" },
 ] as const;
 ---
 
-<BaseLayout title="UI Style Guide" description="A comprehensive guide to UI components and their usage">
-  <main class="container mx-auto px-4 pt-32 pb-16 max-w-7xl">
+<BaseLayout
+  title="UI Style Guide"
+  description="A comprehensive guide to UI components and their usage"
+>
+  <main class="container mx-auto max-w-7xl px-4 pb-16 pt-32">
     <h1 class="h1">UI Style Guide</h1>
     <p class="description">
-      Use the theme toggle below to test components in both light and dark modes.
-      All components should maintain proper contrast and visibility in both modes.
+      Use the theme toggle below to test components in both light and dark
+      modes. All components should maintain proper contrast and visibility in
+      both modes.
     </p>
-    <div class="sticky top-32 right-4 z-50 w-fit bg-white/50 dark:bg-black/50 backdrop-blur-sm rounded-lg p-2 shadow-lg ml-auto">
+    <div
+      class="sticky right-4 top-32 z-50 ml-auto w-fit rounded-lg bg-white/50 p-2 shadow-lg backdrop-blur-sm dark:bg-black/50"
+    >
       <ThemeToggle />
     </div>
 
     <!-- Index -->
     <section class="mb-16">
       <h2 class="h2 mb-6">On this page</h2>
-      <nav class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-min">
+      <nav
+        class="grid auto-rows-min grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+      >
         <!-- Buttons Section -->
         <div>
           <a href="#buttons" class="primary-link text-lg">Buttons</a>
-          <ul class="mt-2 ml-4">
-            <li class="mt-1"><a href="#button-variants" class="primary-link">Basic Variants</a></li>
-            <li class="mt-1"><a href="#button-states" class="primary-link">States</a></li>
-            <li class="mt-1"><a href="#button-arrows" class="primary-link">With Arrows</a></li>
-            <li class="mt-1"><a href="#button-links" class="primary-link">Link Buttons</a></li>
+          <ul class="ml-4 mt-2">
+            <li class="mt-1">
+              <a href="#button-variants" class="primary-link">Basic Variants</a>
+            </li>
+            <li class="mt-1">
+              <a href="#button-states" class="primary-link">States</a>
+            </li>
+            <li class="mt-1">
+              <a href="#button-arrows" class="primary-link">With Arrows</a>
+            </li>
+            <li class="mt-1">
+              <a href="#button-links" class="primary-link">Link Buttons</a>
+            </li>
           </ul>
         </div>
 
         <!-- Typography Section -->
         <div>
           <a href="#typography" class="primary-link text-lg">Typography</a>
-          <ul class="mt-2 ml-4">
-            <li class="mt-1"><a href="#headings" class="primary-link">Headings</a></li>
-            <li class="mt-1"><a href="#semantic-headings" class="primary-link">Semantic Headings</a></li>
-            <li class="mt-1"><a href="#text-sizes" class="primary-link">Text Sizes</a></li>
-            <li class="mt-1"><a href="#font-weights" class="primary-link">Font Weights</a></li>
-            <li class="mt-1"><a href="#body-text" class="primary-link">Body Text</a></li>
-            <li class="mt-1"><a href="#links" class="primary-link">Links</a></li>
+          <ul class="ml-4 mt-2">
+            <li class="mt-1">
+              <a href="#headings" class="primary-link">Headings</a>
+            </li>
+            <li class="mt-1">
+              <a href="#semantic-headings" class="primary-link"
+                >Semantic Headings</a
+              >
+            </li>
+            <li class="mt-1">
+              <a href="#text-sizes" class="primary-link">Text Sizes</a>
+            </li>
+            <li class="mt-1">
+              <a href="#font-weights" class="primary-link">Font Weights</a>
+            </li>
+            <li class="mt-1">
+              <a href="#body-text" class="primary-link">Body Text</a>
+            </li>
+            <li class="mt-1">
+              <a href="#links" class="primary-link">Links</a>
+            </li>
           </ul>
         </div>
 
         <!-- Badges Section -->
         <div>
           <a href="#badges" class="primary-link text-lg">Badges</a>
-          <ul class="mt-2 ml-4">
-            <li class="mt-1"><a href="#basic-badge" class="primary-link">Basic Badge</a></li>
-            <li class="mt-1"><a href="#badge-label" class="primary-link">With Label</a></li>
-            <li class="mt-1"><a href="#badge-context" class="primary-link">In Context</a></li>
-            <li class="mt-1"><a href="#filter-badges" class="primary-link">Filter Badges</a></li>
+          <ul class="ml-4 mt-2">
+            <li class="mt-1">
+              <a href="#basic-badge" class="primary-link">Basic Badge</a>
+            </li>
+            <li class="mt-1">
+              <a href="#badge-label" class="primary-link">With Label</a>
+            </li>
+            <li class="mt-1">
+              <a href="#badge-context" class="primary-link">In Context</a>
+            </li>
+            <li class="mt-1">
+              <a href="#filter-badges" class="primary-link">Filter Badges</a>
+            </li>
           </ul>
         </div>
 
         <!-- Alerts Section -->
         <div>
           <a href="#alerts" class="primary-link text-lg">Alerts</a>
-          <ul class="mt-2 ml-4">
-            <li class="mt-1"><a href="#alert-info" class="primary-link">Info Alert</a></li>
-            <li class="mt-1"><a href="#alert-success" class="primary-link">Success Alert</a></li>
-            <li class="mt-1"><a href="#alert-warning" class="primary-link">Warning Alert</a></li>
-            <li class="mt-1"><a href="#alert-error" class="primary-link">Error Alert</a></li>
-            <li class="mt-1"><a href="#alert-neutral" class="primary-link">Neutral Alert</a></li>
-            <li class="mt-1"><a href="#alert-neutral-dark" class="primary-link">Neutral Dark Alert</a></li>
-            <li class="mt-1"><a href="#alert-accent" class="primary-link">Accent Alert</a></li>
-            <li class="mt-1"><a href="#alert-with-actions" class="primary-link">Alert with Actions</a></li>
+          <ul class="ml-4 mt-2">
+            <li class="mt-1">
+              <a href="#alert-info" class="primary-link">Info Alert</a>
+            </li>
+            <li class="mt-1">
+              <a href="#alert-success" class="primary-link">Success Alert</a>
+            </li>
+            <li class="mt-1">
+              <a href="#alert-warning" class="primary-link">Warning Alert</a>
+            </li>
+            <li class="mt-1">
+              <a href="#alert-error" class="primary-link">Error Alert</a>
+            </li>
+            <li class="mt-1">
+              <a href="#alert-neutral" class="primary-link">Neutral Alert</a>
+            </li>
+            <li class="mt-1">
+              <a href="#alert-neutral-dark" class="primary-link"
+                >Neutral Dark Alert</a
+              >
+            </li>
+            <li class="mt-1">
+              <a href="#alert-accent" class="primary-link">Accent Alert</a>
+            </li>
+            <li class="mt-1">
+              <a href="#alert-with-actions" class="primary-link"
+                >Alert with Actions</a
+              >
+            </li>
           </ul>
         </div>
 
         <!-- Navigation Section -->
         <div>
           <a href="#navigation" class="primary-link text-lg">Navigation</a>
-          <ul class="mt-2 ml-4">
-            <li class="mt-1"><a href="#nav-links" class="primary-link">Nav Links</a></li>
-            <li class="mt-1"><a href="#dropdown-menu" class="primary-link">Dropdown Menu</a></li>
+          <ul class="ml-4 mt-2">
+            <li class="mt-1">
+              <a href="#nav-links" class="primary-link">Nav Links</a>
+            </li>
+            <li class="mt-1">
+              <a href="#dropdown-menu" class="primary-link">Dropdown Menu</a>
+            </li>
           </ul>
         </div>
 
         <!-- Cards Section -->
         <div>
           <a href="#cards" class="primary-link text-lg">Cards</a>
-          <ul class="mt-2 ml-4">
-            <li class="mt-1"><a href="#card-example" class="primary-link">Card Example</a></li>
+          <ul class="ml-4 mt-2">
+            <li class="mt-1">
+              <a href="#card-example" class="primary-link">Card Example</a>
+            </li>
           </ul>
         </div>
 
         <!-- Lists Section -->
         <div>
           <a href="#lists" class="primary-link text-lg">Lists</a>
-          <ul class="mt-2 ml-4">
-            <li class="mt-1"><a href="#unordered-lists" class="primary-link">Unordered Lists</a></li>
-            <li class="mt-1"><a href="#ordered-lists" class="primary-link">Ordered Lists</a></li>
+          <ul class="ml-4 mt-2">
+            <li class="mt-1">
+              <a href="#unordered-lists" class="primary-link">Unordered Lists</a
+              >
+            </li>
+            <li class="mt-1">
+              <a href="#ordered-lists" class="primary-link">Ordered Lists</a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -118,14 +190,16 @@ const arrowExamples = [
     <!-- Buttons Section -->
     <section id="buttons" class="mb-16">
       <h2 class="h2">Buttons</h2>
-      
+
       <!-- Basic Button Variants -->
       <div id="button-variants" class="mb-8">
         <h3 class="h3">Basic Variants</h3>
         <div class="flex flex-wrap gap-4">
-          {buttonExamples.map(button => (
-            <Button variant={button.variant}>{button.text}</Button>
-          ))}
+          {
+            buttonExamples.map((button) => (
+              <Button variant={button.variant}>{button.text}</Button>
+            ))
+          }
         </div>
       </div>
 
@@ -143,9 +217,13 @@ const arrowExamples = [
       <div id="button-arrows" class="mb-8">
         <h3 class="h3">With Arrows</h3>
         <div class="flex flex-wrap gap-4">
-          {arrowExamples.map(button => (
-            <Button variant="primary" arrow={button.arrow}>{button.text}</Button>
-          ))}
+          {
+            arrowExamples.map((button) => (
+              <Button variant="primary" arrow={button.arrow}>
+                {button.text}
+              </Button>
+            ))
+          }
         </div>
       </div>
 
@@ -153,7 +231,9 @@ const arrowExamples = [
       <div id="button-links" class="mb-8">
         <h3 class="h3">Link Buttons</h3>
         <div class="flex flex-wrap gap-4">
-          <Button variant="primary" href="#" target="_blank">External Link</Button>
+          <Button variant="primary" href="#" target="_blank"
+            >External Link</Button
+          >
           <Button variant="outline" href="#">Internal Link</Button>
         </div>
       </div>
@@ -175,7 +255,10 @@ const arrowExamples = [
       <!-- Semantic Headings -->
       <div id="semantic-headings" class="mb-8">
         <h3 class="h3">Semantic Headings</h3>
-        <p class="semantic-description">Use semantic heading classes to maintain proper document outline while using different visual styles:</p>
+        <p class="semantic-description">
+          Use semantic heading classes to maintain proper document outline while
+          using different visual styles:
+        </p>
         <div class="space-y-4">
           <h2 class="h4">Small Section Heading (h2 with h4 style)</h2>
           <h3 class="h2">Large Subsection (h3 with h2 style)</h3>
@@ -202,14 +285,23 @@ const arrowExamples = [
       <!-- Body Text -->
       <div id="body-text" class="mb-8">
         <h3 class="h3">Body Text</h3>
-        <p class="description">Description text style with slightly reduced opacity for secondary information.</p>
-        <p class="mb-4">Regular paragraph text with good readability for longer content sections. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p class="description">
+          Description text style with slightly reduced opacity for secondary
+          information.
+        </p>
+        <p class="mb-4">
+          Regular paragraph text with good readability for longer content
+          sections. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+          do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
       </div>
 
       <!-- Links -->
       <div id="links" class="mb-8">
         <h3 class="h3">Links</h3>
-        <p>Text with a <a href="#" class="primary-link">primary link</a> styled consistently.</p>
+        <p>
+          Text with a <a href="#" class="primary-link">primary link</a> styled consistently.
+        </p>
       </div>
     </section>
 
@@ -254,7 +346,9 @@ const arrowExamples = [
           </div>
           <div>
             <h4 class="h4 mb-4">Custom Counter</h4>
-            <ol class="list-[upper-roman] pl-6 marker:font-medium marker:text-primary-500">
+            <ol
+              class="list-[upper-roman] pl-6 marker:font-medium marker:text-primary-500"
+            >
               <li>Primary step</li>
               <li>Secondary step</li>
               <li>Tertiary step</li>
@@ -262,7 +356,6 @@ const arrowExamples = [
           </div>
         </div>
       </div>
-
     </section>
 
     <!-- Badges Section -->
@@ -320,7 +413,15 @@ const arrowExamples = [
             <div class="alert-content">
               <div class="alert-header">
                 <div class="alert-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
                     <path d="M12 9h.01"></path>
@@ -329,7 +430,10 @@ const arrowExamples = [
                 </div>
                 <p class="alert-title">Good to know</p>
               </div>
-              <p class="alert-description">A new feature is available. You will be notified when it is ready.</p>
+              <p class="alert-description">
+                A new feature is available. You will be notified when it is
+                ready.
+              </p>
             </div>
           </div>
         </div>
@@ -341,9 +445,20 @@ const arrowExamples = [
             <div class="alert-content">
               <div class="alert-header">
                 <div class="alert-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" stroke-width="0" fill="currentColor"></path>
+                    <path
+                      d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                      stroke-width="0"
+                      fill="currentColor"></path>
                   </svg>
                 </div>
                 <p class="alert-title">Success</p>
@@ -360,14 +475,26 @@ const arrowExamples = [
             <div class="alert-content">
               <div class="alert-header">
                 <div class="alert-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M12 1.67c.955 0 1.845 .467 2.39 1.247l.105 .16l8.114 13.548a2.914 2.914 0 0 1 -2.307 4.363l-.195 .008h-16.225a2.914 2.914 0 0 1 -2.582 -4.2l.099 -.185l8.11 -13.538a2.914 2.914 0 0 1 2.491 -1.403zm.01 13.33l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -7a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z"></path>
+                    <path
+                      d="M12 1.67c.955 0 1.845 .467 2.39 1.247l.105 .16l8.114 13.548a2.914 2.914 0 0 1 -2.307 4.363l-.195 .008h-16.225a2.914 2.914 0 0 1 -2.582 -4.2l.099 -.185l8.11 -13.538a2.914 2.914 0 0 1 2.491 -1.403zm.01 13.33l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -7a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z"
+                    ></path>
                   </svg>
                 </div>
                 <p class="alert-title">Warning!</p>
               </div>
-              <p class="alert-description">This action cannot be undone. Please proceed with caution.</p>
+              <p class="alert-description">
+                This action cannot be undone. Please proceed with caution.
+              </p>
             </div>
           </div>
         </div>
@@ -379,19 +506,36 @@ const arrowExamples = [
             <div class="alert-content">
               <div class="alert-header">
                 <div class="alert-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M12 1.67c.955 0 1.845 .467 2.39 1.247l.105 .16l8.114 13.548a2.914 2.914 0 0 1 -2.307 4.363l-.195 .008h-16.225a2.914 2.914 0 0 1 -2.582 -4.2l.099 -.185l8.11 -13.538a2.914 2.914 0 0 1 2.491 -1.403zm.01 13.33l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -7a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z"></path>
+                    <path
+                      d="M12 1.67c.955 0 1.845 .467 2.39 1.247l.105 .16l8.114 13.548a2.914 2.914 0 0 1 -2.307 4.363l-.195 .008h-16.225a2.914 2.914 0 0 1 -2.582 -4.2l.099 -.185l8.11 -13.538a2.914 2.914 0 0 1 2.491 -1.403zm.01 13.33l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -7a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z"
+                    ></path>
                   </svg>
                 </div>
                 <p class="alert-title">Warning! Time for a giggle Break!!</p>
               </div>
               <ul class="alert-list">
                 <li>
-                  <p class="alert-description">Your password must be at least 8 characters, because even passwords need a little length to protect their secrets.</p>
+                  <p class="alert-description">
+                    Your password must be at least 8 characters, because even
+                    passwords need a little length to protect their secrets.
+                  </p>
                 </li>
                 <li>
-                  <p class="alert-description">Your password must include at least one pro wrestling finishing move, so you can 'pin' down your security like a champ</p>
+                  <p class="alert-description">
+                    Your password must include at least one pro wrestling
+                    finishing move, so you can 'pin' down your security like a
+                    champ
+                  </p>
                 </li>
               </ul>
             </div>
@@ -405,7 +549,15 @@ const arrowExamples = [
             <div class="alert-content">
               <div class="alert-header">
                 <div class="alert-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
                     <path d="M12 9h.01"></path>
@@ -414,7 +566,10 @@ const arrowExamples = [
                 </div>
                 <p class="alert-title">Neutral alert!</p>
               </div>
-              <p class="alert-description">A new feature is available. You will be notified when it is ready.</p>
+              <p class="alert-description">
+                A new feature is available. You will be notified when it is
+                ready.
+              </p>
             </div>
           </div>
         </div>
@@ -426,7 +581,15 @@ const arrowExamples = [
             <div class="alert-content">
               <div class="alert-header">
                 <div class="alert-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
                     <path d="M12 9h.01"></path>
@@ -435,10 +598,17 @@ const arrowExamples = [
                 </div>
                 <p class="alert-title">Neutral alert!</p>
               </div>
-              <p class="alert-description">A new feature is available. You will be notified when it is ready.</p>
+              <p class="alert-description">
+                A new feature is available. You will be notified when it is
+                ready.
+              </p>
               <div class="alert-actions">
-                <button class="alert-button alert-button-primary">View Updates</button>
-                <button class="alert-button alert-button-secondary">Remind me later</button>
+                <button class="alert-button alert-button-primary"
+                  >View Updates</button
+                >
+                <button class="alert-button alert-button-secondary"
+                  >Remind me later</button
+                >
               </div>
             </div>
           </div>
@@ -451,7 +621,15 @@ const arrowExamples = [
             <div class="alert-content">
               <div class="alert-header">
                 <div class="alert-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
                     <path d="M12 9h.01"></path>
@@ -460,7 +638,10 @@ const arrowExamples = [
                 </div>
                 <p class="alert-title">Neutral alert!</p>
               </div>
-              <p class="alert-description">A new feature is available. You will be notified when it is ready.</p>
+              <p class="alert-description">
+                A new feature is available. You will be notified when it is
+                ready.
+              </p>
             </div>
           </div>
         </div>
@@ -472,7 +653,15 @@ const arrowExamples = [
             <div class="alert-content">
               <div class="alert-header">
                 <div class="alert-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
                     <path d="M12 9h.01"></path>
@@ -481,10 +670,17 @@ const arrowExamples = [
                 </div>
                 <p class="alert-title">Neutral alert!</p>
               </div>
-              <p class="alert-description">A new feature is available. You will be notified when it is ready.</p>
+              <p class="alert-description">
+                A new feature is available. You will be notified when it is
+                ready.
+              </p>
               <div class="alert-actions">
-                <button class="alert-button alert-button-accent">View Updates</button>
-                <button class="alert-button alert-button-outline">Remind me later</button>
+                <button class="alert-button alert-button-accent"
+                  >View Updates</button
+                >
+                <button class="alert-button alert-button-outline"
+                  >Remind me later</button
+                >
               </div>
             </div>
           </div>
@@ -516,8 +712,8 @@ const arrowExamples = [
               dropdown: [
                 { text: "Overview", link: "#" },
                 { text: "Features", link: "#" },
-                { text: "Pricing", link: "#" }
-              ]
+                { text: "Pricing", link: "#" },
+              ],
             }}
           />
           <NavDropdown
@@ -526,8 +722,8 @@ const arrowExamples = [
               dropdown: [
                 { text: "Documentation", link: "#" },
                 { text: "Guides", link: "#" },
-                { text: "Support", link: "#" }
-              ]
+                { text: "Support", link: "#" },
+              ],
             }}
           />
         </div>
@@ -575,8 +771,14 @@ const arrowExamples = [
             <div>
               <!-- Categories -->
               <div class="card-categories">
-                <span class="inline-block rounded-full bg-base-300 px-3 py-1 text-sm font-semibold text-base-700">Category 1</span>
-                <span class="inline-block rounded-full bg-base-300 px-3 py-1 text-sm font-semibold text-base-700">Category 2</span>
+                <span
+                  class="inline-block rounded-full bg-base-300 px-3 py-1 text-sm font-semibold text-base-700"
+                  >Category 1</span
+                >
+                <span
+                  class="inline-block rounded-full bg-base-300 px-3 py-1 text-sm font-semibold text-base-700"
+                  >Category 2</span
+                >
               </div>
 
               <!-- Date -->
@@ -592,14 +794,26 @@ const arrowExamples = [
               </div>
 
               <!-- Description -->
-              <p class="card-description">This is an example description for the card. It can be longer and more detailed.</p>
+              <p class="card-description">
+                This is an example description for the card. It can be longer
+                and more detailed.
+              </p>
 
               <!-- Read Post Button -->
               <div class="mt-4">
                 <a href="#" class="card-read-button">
                   Read Post
-                  <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="size-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
                   </svg>
                 </a>
               </div>

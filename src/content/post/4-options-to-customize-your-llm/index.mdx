@@ -21,9 +21,9 @@ So yeah, let's not do that. But you still have some very powerful options for cu
 
 The most accessible way to customize LLM behavior is through prompt engineering. This involves crafting specific instructions that guide the model's responses. There are thousands of ways to structure prompts (and YouTube videos on how to do it), but specifically for enriching your LLM with context you can add/upload documents, files, or even just plain text.
 
-You can include any additional context in the prompt (plain text or documents). This is also what happens when you add "instructions" or "projects" with files. You store documents that the LLM will include in *every* prompt.
+You can include any additional context in the prompt (plain text or documents). This is also what happens when you add "instructions" or "projects" with files. You store documents that the LLM will include in _every_ prompt.
 
-However: there is a limit to this called the "context" or "token" limit [What are tokens?](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them). Google Gemini 1.5 Pro has over 2M token limit, Claude Sonnet 3.5 has 200K, GPT-01-mini has 128K. One site where you can check these limits for many models is [OpenRouter](https://openrouter.ai/models). 
+However: there is a limit to this called the "context" or "token" limit [What are tokens?](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them). Google Gemini 1.5 Pro has over 2M token limit, Claude Sonnet 3.5 has 200K, GPT-01-mini has 128K. One site where you can check these limits for many models is [OpenRouter](https://openrouter.ai/models).
 
 **Tip 1**: You can (also) provide examples of what the end result should look like. If you want the AI to use a certain tone of voice, structure text in a certain way or always include certain elements: instead of only **telling** it to do so, it really helps if you can actually show it what a desired outcome looks like. This method does NOT change the models' knowledge base or weights or anything, but it can definitely help the model understand the desired behavior and tune it towards your needs.
 
@@ -31,7 +31,7 @@ However: there is a limit to this called the "context" or "token" limit [What ar
 
 ## 2. Fine-Tuning
 
-Fine-tuning does adjust the model's weights to better align with your use case and/or based on any specific data that you provide. It requires substantial data, can still be expensive, and will need re-training with every update. 
+Fine-tuning does adjust the model's weights to better align with your use case and/or based on any specific data that you provide. It requires substantial data, can still be expensive, and will need re-training with every update.
 
 ## 3. RAG (Retrieval-Augmented Generation)
 

@@ -11,29 +11,21 @@
 import Button from "@components/Button/Button.astro";
 ---
 
-<section 
-  id="contact" 
+<section
+  id="contact"
   class="mx-auto min-w-fit max-w-3xl rounded-lg"
   aria-labelledby="contact-form-heading"
 >
   <h2 id="contact-form-heading" class="sr-only">Contact Form</h2>
-  
-  <form 
-    id="contact-form" 
-    name="contact" 
-    class="flex flex-col gap-4"
-    novalidate
-  >
+
+  <form id="contact-form" name="contact" class="flex flex-col gap-4" novalidate>
     <input type="hidden" name="form-name" value="contact" />
-    
+
     <fieldset>
       <legend class="mb-4 text-lg font-semibold">Personal Information</legend>
       <div class="grid gap-4 sm:grid-cols-2">
         <div class="flex flex-col gap-2">
-          <label 
-            for="contact-fname" 
-            class="form__label font-medium"
-          >
+          <label for="contact-fname" class="form__label font-medium">
             First Name <span class="text-red-600" aria-hidden="true">*</span>
             <span class="sr-only">(Required)</span>
           </label>
@@ -47,14 +39,16 @@ import Button from "@components/Button/Button.astro";
             aria-required="true"
             aria-describedby="fname-error"
           />
-          <div id="fname-error" class="error-message text-red-600 text-sm" role="alert"></div>
+          <div
+            id="fname-error"
+            class="error-message text-sm text-red-600"
+            role="alert"
+          >
+          </div>
         </div>
 
         <div class="flex flex-col gap-2">
-          <label 
-            for="contact-lname" 
-            class="form__label font-medium"
-          >
+          <label for="contact-lname" class="form__label font-medium">
             Last Name <span class="text-red-600" aria-hidden="true">*</span>
             <span class="sr-only">(Required)</span>
           </label>
@@ -68,7 +62,12 @@ import Button from "@components/Button/Button.astro";
             aria-required="true"
             aria-describedby="lname-error"
           />
-          <div id="lname-error" class="error-message text-red-600 text-sm" role="alert"></div>
+          <div
+            id="lname-error"
+            class="error-message text-sm text-red-600"
+            role="alert"
+          >
+          </div>
         </div>
       </div>
     </fieldset>
@@ -77,10 +76,7 @@ import Button from "@components/Button/Button.astro";
       <legend class="mb-4 text-lg font-semibold">Contact Information</legend>
       <div class="flex flex-col gap-4">
         <div class="flex flex-col gap-2">
-          <label 
-            for="contact-email" 
-            class="form__label font-medium"
-          >
+          <label for="contact-email" class="form__label font-medium">
             Email <span class="text-red-600" aria-hidden="true">*</span>
             <span class="sr-only">(Required)</span>
           </label>
@@ -95,14 +91,16 @@ import Button from "@components/Button/Button.astro";
             aria-required="true"
             aria-describedby="email-error"
           />
-          <div id="email-error" class="error-message text-red-600 text-sm" role="alert"></div>
+          <div
+            id="email-error"
+            class="error-message text-sm text-red-600"
+            role="alert"
+          >
+          </div>
         </div>
 
         <div class="flex flex-col gap-2">
-          <label 
-            for="contact-services" 
-            class="form__label font-medium"
-          >
+          <label for="contact-services" class="form__label font-medium">
             Message <span class="text-red-600" aria-hidden="true">*</span>
             <span class="sr-only">(Required)</span>
           </label>
@@ -114,19 +112,19 @@ import Button from "@components/Button/Button.astro";
             placeholder="Please provide a brief description of your request"
             required
             aria-required="true"
-            aria-describedby="services-error"
-          ></textarea>
-          <div id="services-error" class="error-message text-red-600 text-sm" role="alert"></div>
+            aria-describedby="services-error"></textarea>
+          <div
+            id="services-error"
+            class="error-message text-sm text-red-600"
+            role="alert"
+          >
+          </div>
         </div>
       </div>
     </fieldset>
 
     <div class="mt-4">
-      <Button 
-        variant="primary" 
-        type="submit"
-        class="w-full sm:w-auto"
-      >
+      <Button variant="primary" type="submit" class="w-full sm:w-auto">
         Submit Form
       </Button>
     </div>
@@ -140,8 +138,10 @@ import Button from "@components/Button/Button.astro";
 
     constructor(formId: string) {
       this.form = document.getElementById(formId) as HTMLFormElement;
-      this.submitButton = this.form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      
+      this.submitButton = this.form.querySelector(
+        'button[type="submit"]',
+      ) as HTMLButtonElement;
+
       if (this.form) {
         this.init();
       }
@@ -149,20 +149,26 @@ import Button from "@components/Button/Button.astro";
 
     private init() {
       // Add validation on form submission
-      this.form.addEventListener('submit', this.handleSubmit.bind(this));
+      this.form.addEventListener("submit", this.handleSubmit.bind(this));
 
       // Add live validation on input
-      this.form.querySelectorAll('input, textarea').forEach(input => {
-        input.addEventListener('blur', () => this.validateField(input as HTMLInputElement));
-        input.addEventListener('input', () => this.validateField(input as HTMLInputElement));
+      this.form.querySelectorAll("input, textarea").forEach((input) => {
+        input.addEventListener("blur", () =>
+          this.validateField(input as HTMLInputElement),
+        );
+        input.addEventListener("input", () =>
+          this.validateField(input as HTMLInputElement),
+        );
       });
 
       // Add keyboard support
-      this.form.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && e.target instanceof HTMLElement) {
-          if (e.target.tagName !== 'TEXTAREA') {
+      this.form.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && e.target instanceof HTMLElement) {
+          if (e.target.tagName !== "TEXTAREA") {
             e.preventDefault();
-            const inputs = Array.from(this.form.querySelectorAll('input, textarea, button'));
+            const inputs = Array.from(
+              this.form.querySelectorAll("input, textarea, button"),
+            );
             const index = inputs.indexOf(e.target);
             if (index > -1 && index < inputs.length - 1) {
               (inputs[index + 1] as HTMLElement).focus();
@@ -177,20 +183,20 @@ import Button from "@components/Button/Button.astro";
       if (!errorElement) return;
 
       // Clear existing error
-      errorElement.textContent = '';
-      input.setAttribute('aria-invalid', 'false');
+      errorElement.textContent = "";
+      input.setAttribute("aria-invalid", "false");
 
-      if (input.hasAttribute('required') && !input.value.trim()) {
-        errorElement.textContent = `${input.labels?.[0]?.textContent?.replace('*', '').trim() || 'Field'} is required`;
-        input.setAttribute('aria-invalid', 'true');
+      if (input.hasAttribute("required") && !input.value.trim()) {
+        errorElement.textContent = `${input.labels?.[0]?.textContent?.replace("*", "").trim() || "Field"} is required`;
+        input.setAttribute("aria-invalid", "true");
         return false;
       }
 
-      if (input.type === 'email' && input.value) {
+      if (input.type === "email" && input.value) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(input.value)) {
-          errorElement.textContent = 'Please enter a valid email address';
-          input.setAttribute('aria-invalid', 'true');
+          errorElement.textContent = "Please enter a valid email address";
+          input.setAttribute("aria-invalid", "true");
           return false;
         }
       }
@@ -200,11 +206,13 @@ import Button from "@components/Button/Button.astro";
 
     private handleSubmit(e: Event) {
       e.preventDefault();
-      
+
       let isValid = true;
-      const inputs = this.form.querySelectorAll('input[required], textarea[required]');
-      
-      inputs.forEach(input => {
+      const inputs = this.form.querySelectorAll(
+        "input[required], textarea[required]",
+      );
+
+      inputs.forEach((input) => {
         if (!this.validateField(input as HTMLInputElement)) {
           isValid = false;
         }
@@ -212,41 +220,43 @@ import Button from "@components/Button/Button.astro";
 
       if (isValid) {
         // Track form submission with Umami
-        if (typeof umami !== 'undefined') {
-          umami.track('form-submit', { target: 'contact' });
+        if (typeof umami !== "undefined") {
+          umami.track("form-submit", { target: "contact" });
         }
 
         // Disable submit button and show loading state
         this.submitButton.disabled = true;
-        this.submitButton.innerHTML = 'Submitting...';
+        this.submitButton.innerHTML = "Submitting...";
 
         // Here you would typically submit the form
         // For now, let's just simulate a submission
         setTimeout(() => {
-          this.submitButton.innerHTML = 'Submitted!';
+          this.submitButton.innerHTML = "Submitted!";
           this.form.reset();
-          
+
           // Reset button after a delay
           setTimeout(() => {
             this.submitButton.disabled = false;
-            this.submitButton.innerHTML = 'Submit Form';
+            this.submitButton.innerHTML = "Submit Form";
           }, 2000);
         }, 1000);
       } else {
         // Focus the first invalid field
-        const firstInvalid = this.form.querySelector('[aria-invalid="true"]') as HTMLElement;
+        const firstInvalid = this.form.querySelector(
+          '[aria-invalid="true"]',
+        ) as HTMLElement;
         if (firstInvalid) {
           firstInvalid.focus();
         }
 
         // Announce error to screen readers
-        const errorSummary = document.createElement('div');
-        errorSummary.setAttribute('role', 'alert');
-        errorSummary.setAttribute('aria-live', 'polite');
-        errorSummary.classList.add('sr-only');
-        errorSummary.textContent = 'Please correct the errors in the form';
+        const errorSummary = document.createElement("div");
+        errorSummary.setAttribute("role", "alert");
+        errorSummary.setAttribute("aria-live", "polite");
+        errorSummary.classList.add("sr-only");
+        errorSummary.textContent = "Please correct the errors in the form";
         this.form.appendChild(errorSummary);
-        
+
         // Remove after announcement
         setTimeout(() => errorSummary.remove(), 1000);
       }
@@ -254,13 +264,13 @@ import Button from "@components/Button/Button.astro";
   }
 
   // Initialize form validation
-  document.addEventListener('DOMContentLoaded', () => {
-    new FormValidator('contact-form');
+  document.addEventListener("DOMContentLoaded", () => {
+    new FormValidator("contact-form");
   });
 
   // Re-initialize after view transitions
-  document.addEventListener('astro:after-swap', () => {
-    new FormValidator('contact-form');
+  document.addEventListener("astro:after-swap", () => {
+    new FormValidator("contact-form");
   });
 </script>
 
@@ -290,7 +300,7 @@ import Button from "@components/Button/Button.astro";
     .form__input {
       border: 1px solid CanvasText;
     }
-    
+
     .form__input[aria-invalid="true"] {
       border: 2px solid CanvasText;
     }

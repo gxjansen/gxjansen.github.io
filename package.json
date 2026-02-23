@@ -16,7 +16,9 @@
     "test:robots": "node scripts/test-robots.js",
     "validate-content": "node scripts/validate-content.js",
     "bluesky:link": "node scripts/bluesky-link.mjs",
-    "check:trailing-slashes": "node scripts/check-trailing-slashes.js"
+    "check:trailing-slashes": "node scripts/check-trailing-slashes.js",
+    "format:check": "prettier --check \"src/**/*.{astro,ts,tsx,js,jsx,mjs,css,md,mdx}\"",
+    "typecheck": "astro check"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.10",
@@ -58,6 +60,7 @@
     "yaml": "^2.8.2"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.6",
     "@fullhuman/postcss-purgecss": "^7.0.2",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.2",
@@ -68,6 +71,7 @@
     "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "svgo": "2.8.0",
+    "typescript": "^5.9.3",
     "vitest": "^3.2.4"
   },
   "optionalDependencies": {

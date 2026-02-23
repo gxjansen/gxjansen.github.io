@@ -7,7 +7,8 @@ interface Props {
 const { word = "Pondering", variant = "default" } = Astro.props;
 
 // Don't double-add ellipsis if word already ends with one
-const displayWord = word.endsWith("…") || word.endsWith("...") ? word : `${word}…`;
+const displayWord =
+  word.endsWith("…") || word.endsWith("...") ? word : `${word}…`;
 
 // Desynchronized animations
 // Icon: start at a random position in the 8-character cycle (discrete steps)
@@ -17,18 +18,21 @@ const iconDelay = (iconStep * (1.4 / 8)).toFixed(3);
 const shimmerDelay = (Math.random() * 2).toFixed(2);
 ---
 
-<div class="throbber my-4 flex items-center gap-2 font-mono text-sm select-none">
+<div
+  class="throbber my-4 flex select-none items-center gap-2 font-mono text-sm"
+>
   <span
     class:list={["throbber-icon", variant === "game" ? "game" : "claude"]}
-    style={`animation-delay: ${iconDelay}s`}
-  ></span>
-  <span class="throbber-text" style={`animation-delay: ${shimmerDelay}s`}>{displayWord}</span>
+    style={`animation-delay: ${iconDelay}s`}></span>
+  <span class="throbber-text" style={`animation-delay: ${shimmerDelay}s`}
+    >{displayWord}</span
+  >
 </div>
 
 <style>
   .throbber-icon {
     display: inline-block;
-    color: #E28E6E;
+    color: #e28e6e;
     width: 1em;
     text-align: center;
     transform: translateY(-2px);
@@ -42,14 +46,30 @@ const shimmerDelay = (Math.random() * 2).toFixed(2);
   }
 
   @keyframes claude-cycle {
-    0% { content: "·"; }
-    12.5% { content: "•"; }
-    25% { content: "✳"; }
-    37.5% { content: "✶"; }
-    50% { content: "✻"; }
-    62.5% { content: "*"; }
-    75% { content: "✶"; }
-    87.5% { content: "✢"; }
+    0% {
+      content: "·";
+    }
+    12.5% {
+      content: "•";
+    }
+    25% {
+      content: "✳";
+    }
+    37.5% {
+      content: "✶";
+    }
+    50% {
+      content: "✻";
+    }
+    62.5% {
+      content: "*";
+    }
+    75% {
+      content: "✶";
+    }
+    87.5% {
+      content: "✢";
+    }
   }
 
   /* Game style: cycles through fantasy ASCII characters */
@@ -60,24 +80,40 @@ const shimmerDelay = (Math.random() * 2).toFixed(2);
   }
 
   @keyframes game-cycle {
-    0% { content: "†"; }      /* dagger */
-    12.5% { content: "✧"; }   /* magic star */
-    25% { content: "◆"; }     /* gem */
-    37.5% { content: "ψ"; }   /* staff */
-    50% { content: "※"; }     /* rune */
-    62.5% { content: "☽"; }   /* moon */
-    75% { content: "ϟ"; }     /* lightning (Greek koppa) */
-    87.5% { content: "✵"; }   /* burst */
+    0% {
+      content: "†";
+    } /* dagger */
+    12.5% {
+      content: "✧";
+    } /* magic star */
+    25% {
+      content: "◆";
+    } /* gem */
+    37.5% {
+      content: "ψ";
+    } /* staff */
+    50% {
+      content: "※";
+    } /* rune */
+    62.5% {
+      content: "☽";
+    } /* moon */
+    75% {
+      content: "ϟ";
+    } /* lightning (Greek koppa) */
+    87.5% {
+      content: "✵";
+    } /* burst */
   }
 
   .throbber-text {
     background: linear-gradient(
       90deg,
-      #E28E6E 0%,
-      #E28E6E 40%,
+      #e28e6e 0%,
+      #e28e6e 40%,
       #f4b8a0 50%,
-      #E28E6E 60%,
-      #E28E6E 100%
+      #e28e6e 60%,
+      #e28e6e 100%
     );
     background-size: 200% 100%;
     -webkit-background-clip: text;

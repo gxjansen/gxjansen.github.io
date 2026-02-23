@@ -1,5 +1,5 @@
 // src/utils/eventUtils.ts
-import type { ImageMetadata } from 'astro';
+import type { ImageMetadata } from "astro";
 
 export interface Event {
   id: string;
@@ -17,25 +17,30 @@ export interface Event {
 }
 
 // Import all event icons as modules with correct typing for Astro's image handling
-const eventIcons = import.meta.glob<{ default: ImageMetadata }>('/src/images/events/*.{png,jpg,jpeg,gif,avif,svg}', {
-  eager: true // Make imports eager to ensure proper asset handling
-});
+const eventIcons = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/images/events/*.{png,jpg,jpeg,gif,avif,svg}",
+  {
+    eager: true, // Make imports eager to ensure proper asset handling
+  },
+);
 
 /**
  * Loads an event icon image dynamically from the events directory
  * @param iconName - The name of the icon file
  * @returns The loaded image or null if not found
  */
-export async function getEventIcon(iconName: string | undefined): Promise<ImageMetadata | null> {
+export async function getEventIcon(
+  iconName: string | undefined,
+): Promise<ImageMetadata | null> {
   if (!iconName) return null;
-  
+
   try {
     // Construct the icon path
     const iconPath = `/src/images/events/${iconName}`;
-    
+
     // Get the icon module
     const iconModule = eventIcons[iconPath];
-    
+
     if (!iconModule) {
       console.warn(`No icon found for: ${iconName}`);
       return null;
@@ -54,12 +59,14 @@ export async function getEventIcon(iconName: string | undefined): Promise<ImageM
  * @param events - Array of raw event data
  * @returns Promise of events with loaded icons
  */
-export async function loadEventIcons<T extends { icon?: string }>(events: T[]): Promise<(T & { loadedIcon: ImageMetadata | null })[]> {
+export async function loadEventIcons<T extends { icon?: string }>(
+  events: T[],
+): Promise<(T & { loadedIcon: ImageMetadata | null })[]> {
   return Promise.all(
     events.map(async (event) => ({
       ...event,
-      loadedIcon: await getEventIcon(event.icon)
-    }))
+      loadedIcon: await getEventIcon(event.icon),
+    })),
   );
 }
 
@@ -72,14 +79,14 @@ import eventsData from "../data/events.json";
  * @returns Promise of processed events with loaded icons
  */
 export async function getAllEvents(): Promise<Event[]> {
-    // Ensure each event has relatedPresentationSlugs (default to empty array)
-    const eventsWithSlugs = eventsData.map(event => ({
-      ...event,
-      relatedPresentationSlugs: event.relatedPresentationSlugs || []
-    }));
-    
-    // Load icons for all events
-    return loadEventIcons(eventsWithSlugs as Omit<Event, 'loadedIcon'>[]);
+  // Ensure each event has relatedPresentationSlugs (default to empty array)
+  const eventsWithSlugs = eventsData.map((event) => ({
+    ...event,
+    relatedPresentationSlugs: event.relatedPresentationSlugs || [],
+  }));
+
+  // Load icons for all events
+  return loadEventIcons(eventsWithSlugs as Omit<Event, "loadedIcon">[]);
 }
 
 /**
@@ -88,5 +95,5 @@ export async function getAllEvents(): Promise<Event[]> {
 
 export const getTotalPastEventsCount = () => {
   const today = new Date();
-  return eventsData.filter(event => new Date(event.date) < today).length;
+  return eventsData.filter((event) => new Date(event.date) < today).length;
 };

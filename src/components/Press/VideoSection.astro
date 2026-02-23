@@ -1,6 +1,6 @@
 ---
-import { formatDate } from '@utils/pressUtils';
-import type { PressCoverage } from '@types/press';
+import { formatDate } from "@utils/pressUtils";
+import type { PressCoverage } from "../../types/press";
 
 interface Props {
   videos: PressCoverage[];
@@ -10,46 +10,45 @@ const { videos } = Astro.props;
 
 // Function to extract video ID from YouTube URL
 function getYouTubeId(url: string): string {
-  const match = url?.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
-  return match ? match[1] : '';
+  const match = url?.match(
+    /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/,
+  );
+  return match ? match[1] : "";
 }
 ---
 
 <section id="videos" class="mb-16">
   <h2 class="h2 mb-4">Video Interviews</h2>
   <div class="cards-grid">
-    {videos.map(video => {
-      const videoId = getYouTubeId(video.youtubeLink || '');
-      if (!videoId) return null;
-      
-      return (
-        <article class="card">
-          <div class="relative">
-            <div 
-              class="lazy-youtube" 
-              data-video-id={videoId}
-              data-title={video.title}
-            >
-              <div class="video-container absolute inset-0 hidden">
-                <!-- iframe will be inserted here dynamically -->
-              </div>
-              
-              <!-- Thumbnail -->
-              <img 
-                src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
-                alt={`Preview thumbnail for video: ${video.title}`}
-                class="card-image"
-                loading="lazy"
-                decoding="async"
-                onerror="this.onerror=null; this.src=this.src.replace('maxresdefault', 'hqdefault');"
-              />
-              
-              <!-- Play button -->
-              <button
-                type="button"
-                class="absolute inset-0 w-full h-full flex items-center justify-center group"
-                aria-label={`Play video: ${video.title}`}
-                onclick={`
+    {
+      videos.map((video) => {
+        const videoId = getYouTubeId(video.youtubeLink || "");
+        if (!videoId) return null;
+
+        return (
+          <article class="card">
+            <div class="relative">
+              <div
+                class="lazy-youtube"
+                data-video-id={videoId}
+                data-title={video.title}
+              >
+                <div class="video-container absolute inset-0 hidden" />
+
+                <img
+                  src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
+                  alt={`Preview thumbnail for video: ${video.title}`}
+                  class="card-image"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="this.onerror=null; this.src=this.src.replace('maxresdefault', 'hqdefault');"
+                />
+
+                <button
+                  type="button"
+                  class="group absolute inset-0 flex h-full w-full items-center justify-center"
+                  aria-label={`Play video: ${video.title}`}
+                  onclick={`
                   const container = this.closest('.lazy-youtube');
                   const videoContainer = container.querySelector('.video-container');
                   const thumbnail = container.querySelector('img');
@@ -73,45 +72,46 @@ function getYouTubeId(url: string): string {
                   thumbnail.classList.add('hidden');
                   button.classList.add('hidden');
                 `}
-              >
-                <div class="w-16 h-12 bg-red-600 rounded-lg flex items-center justify-center group-hover:bg-red-700 transition-colors">
-                  <svg 
-                    class="w-6 h-6 text-white" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor"
-                  >
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                </div>
-              </button>
+                >
+                  <div class="flex h-12 w-16 items-center justify-center rounded-lg bg-red-600 transition-colors group-hover:bg-red-700">
+                    <svg
+                      class="h-6 w-6 text-white"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">{video.title}</h3>
-            <p class="card-meta">
-              {formatDate(video.publicationDate)}
-              {video.personOrganization && ` • ${video.personOrganization}`}
-            </p>
-            {video.articleUrl && (
-              <a 
-                href={video.articleUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label={`View article about ${video.title} (opens in new tab)`}
-              >
-                View article <span aria-hidden="true">→</span>
-              </a>
-            )}
-          </div>
-        </article>
-      );
-    })}
+            <div class="card-content">
+              <h3 class="card-title">{video.title}</h3>
+              <p class="card-meta">
+                {formatDate(video.publicationDate)}
+                {video.personOrganization && ` • ${video.personOrganization}`}
+              </p>
+              {video.articleUrl && (
+                <a
+                  href={video.articleUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View article about ${video.title} (opens in new tab)`}
+                >
+                  View article <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
+          </article>
+        );
+      })
+    }
   </div>
 </section>
 
 <style>
   .lazy-youtube button:focus {
-    outline: 2px solid theme('colors.primary.500');
+    outline: 2px solid theme("colors.primary.500");
     outline-offset: 2px;
   }
 

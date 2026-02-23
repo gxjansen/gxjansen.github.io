@@ -4,8 +4,8 @@
  * Uses info and utilities from src/js/i18nUtils.ts. Make sure this is updated with the languages you are using (to match the Astro config file)
  * Multiple dropdowns can be used on the same page
  */
-import LanguageIcon from '@icons/ui/language.svg';
-import ChevronDownIcon from '@icons/ui/chevron-down.svg';
+import LanguageIcon from "@icons/ui/language.svg";
+import ChevronDownIcon from "@icons/ui/chevron-down.svg";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -34,7 +34,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
   {...rest}
 >
   <button
-    class="primary-focus lang-select__dropdown-button flex items-center gap-0.5 whitespace-nowrap py-1 font-medium leading-tight text-base-600 transition hover:text-base-700 dark:text-base-300 dark:hover:text-base-200 md:flex focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
+    class="primary-focus lang-select__dropdown-button flex items-center gap-0.5 whitespace-nowrap rounded py-1 font-medium leading-tight text-base-600 transition hover:text-base-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 md:flex dark:text-base-300 dark:hover:text-base-200"
     type="button"
     aria-expanded="false"
     aria-haspopup="true"
@@ -62,12 +62,9 @@ const currLocale = getLocaleFromUrl(Astro.url);
     >
       {
         locales.map((lang) => (
-          <li 
-            class="flex w-full justify-center"
-            role="menuitem"
-          >
+          <li class="flex w-full justify-center" role="menuitem">
             <a
-              class="primary-focus relative block w-full whitespace-nowrap py-1 font-medium leading-tight text-base-600 transition hover:text-base-700 dark:text-base-300 dark:hover:text-base-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
+              class="primary-focus relative block w-full whitespace-nowrap rounded py-1 font-medium leading-tight text-base-600 transition hover:text-base-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:text-base-300 dark:hover:text-base-200"
               href={getLocalizedPathname(lang, Astro.url)}
               aria-label={`Change language to ${languageSwitcherMap[lang]}`}
               lang={lang}
@@ -99,54 +96,67 @@ const currLocale = getLocaleFromUrl(Astro.url);
       );
 
       if (dropdownButton && dropdownContent && dropdownChevron) {
+        const btn = dropdownButton as HTMLElement;
+        const content = dropdownContent;
+        const chevron = dropdownChevron;
+
         function toggleDropdown(event: Event) {
           event.preventDefault();
           event.stopPropagation();
-          
+
           const isExpanding = !langSelect.classList.contains("active");
-          
+
           // Close any other open dropdowns first
-          document.querySelectorAll(".lang-select__dropdown.active").forEach((dropdown) => {
-            if (dropdown !== langSelect) {
-              dropdown.classList.remove("active");
-              dropdown.querySelector(".lang-select__dropdown-button")?.setAttribute("aria-expanded", "false");
-              dropdown.querySelector(".lang-select__dropdown-content")?.classList.remove("dropdown--fade-in");
-              dropdown.querySelector(".lang-select__dropdown-chevron")?.classList.remove("rotate-180");
-            }
-          });
-          
+          document
+            .querySelectorAll(".lang-select__dropdown.active")
+            .forEach((dropdown) => {
+              if (dropdown !== langSelect) {
+                dropdown.classList.remove("active");
+                dropdown
+                  .querySelector(".lang-select__dropdown-button")
+                  ?.setAttribute("aria-expanded", "false");
+                dropdown
+                  .querySelector(".lang-select__dropdown-content")
+                  ?.classList.remove("dropdown--fade-in");
+                dropdown
+                  .querySelector(".lang-select__dropdown-chevron")
+                  ?.classList.remove("rotate-180");
+              }
+            });
+
           if (isExpanding) {
             // Opening dropdown
             langSelect.classList.add("active");
-            dropdownButton.setAttribute("aria-expanded", "true");
-            dropdownContent.classList.add("dropdown--fade-in");
-            dropdownChevron.classList.add("rotate-180");
-            
+            btn.setAttribute("aria-expanded", "true");
+            content.classList.add("dropdown--fade-in");
+            chevron.classList.add("rotate-180");
+
             // Focus first menu item
             setTimeout(() => {
-              dropdownContent.querySelector("a")?.focus();
+              content.querySelector("a")?.focus();
             }, 100);
           } else {
             // Closing dropdown
             langSelect.classList.remove("active");
-            dropdownButton.setAttribute("aria-expanded", "false");
-            dropdownContent.classList.remove("dropdown--fade-in");
-            dropdownChevron.classList.remove("rotate-180");
-            dropdownButton.focus();
+            btn.setAttribute("aria-expanded", "false");
+            content.classList.remove("dropdown--fade-in");
+            chevron.classList.remove("rotate-180");
+            btn.focus();
           }
         }
 
         // Click handling
-        dropdownButton.addEventListener("click", toggleDropdown);
+        btn.addEventListener("click", toggleDropdown);
 
         // Keyboard navigation for button
-        dropdownButton.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " " || event.key === "ArrowDown") {
+        btn.addEventListener("keydown", (event) => {
+          const e = event as KeyboardEvent;
+          if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
             event.preventDefault();
             if (!langSelect.classList.contains("active")) {
               toggleDropdown(event);
             }
-          } else if (event.key === "Escape") {
+          } else if (e.key === "Escape") {
             if (langSelect.classList.contains("active")) {
               toggleDropdown(event);
             }
@@ -154,25 +164,34 @@ const currLocale = getLocaleFromUrl(Astro.url);
         });
 
         // Keyboard navigation within menu
-        dropdownContent.addEventListener("keydown", (event) => {
-          const items = Array.from(dropdownContent.querySelectorAll("a"));
-          const currentIndex = items.indexOf(document.activeElement as HTMLElement);
-          
-          if (event.key === "ArrowDown") {
+        content.addEventListener("keydown", (event) => {
+          const e = event as KeyboardEvent;
+          const items = Array.from(content.querySelectorAll("a"));
+          const currentIndex = items.indexOf(
+            document.activeElement as HTMLAnchorElement,
+          );
+
+          if (e.key === "ArrowDown") {
             event.preventDefault();
-            const nextIndex = currentIndex + 1 < items.length ? currentIndex + 1 : 0;
+            const nextIndex =
+              currentIndex + 1 < items.length ? currentIndex + 1 : 0;
             items[nextIndex].focus();
-          } else if (event.key === "ArrowUp") {
+          } else if (e.key === "ArrowUp") {
             event.preventDefault();
-            const prevIndex = currentIndex - 1 >= 0 ? currentIndex - 1 : items.length - 1;
+            const prevIndex =
+              currentIndex - 1 >= 0 ? currentIndex - 1 : items.length - 1;
             items[prevIndex].focus();
-          } else if (event.key === "Escape") {
+          } else if (e.key === "Escape") {
             event.preventDefault();
             toggleDropdown(event);
-          } else if (event.key === "Tab" && !event.shiftKey && currentIndex === items.length - 1) {
+          } else if (
+            e.key === "Tab" &&
+            !e.shiftKey &&
+            currentIndex === items.length - 1
+          ) {
             event.preventDefault();
             toggleDropdown(event);
-          } else if (event.key === "Tab" && event.shiftKey && currentIndex === 0) {
+          } else if (e.key === "Tab" && e.shiftKey && currentIndex === 0) {
             event.preventDefault();
             toggleDropdown(event);
           }

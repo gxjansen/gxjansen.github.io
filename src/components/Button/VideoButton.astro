@@ -1,6 +1,6 @@
 ---
-import PlayIcon from '@icons/ui/player-play.svg';
-import XIcon from '@icons/ui/x.svg';
+import PlayIcon from "@icons/ui/player-play.svg";
+import XIcon from "@icons/ui/x.svg";
 
 // components
 import Button from "@components/Button/Button.astro";
@@ -20,9 +20,7 @@ import video from "@videos/placeholder-space.mp4";
   class="video-button flex gap-1"
   {...rest}
 >
-  <PlayIcon class="h-5 w-5" aria-hidden="true" /><span
-    >Watch Video</span
-  >
+  <PlayIcon class="h-5 w-5" aria-hidden="true" /><span>Watch Video</span>
 </Button>
 
 <!-- html video. Shown when play button is pressed -->
@@ -62,7 +60,7 @@ import video from "@videos/placeholder-space.mp4";
         class="group absolute right-0 top-0 z-30 h-7 w-7 rounded-full border-2 border-base-50 transition-all hover:border-primary-500"
       >
         <XIcon
-          class="m-auto aspect-square h-full max-h-14 w-full text-base-50 dark:text-base-950 transition group-hover:text-primary-500"
+          class="m-auto aspect-square h-full max-h-14 w-full text-base-50 transition group-hover:text-primary-500 dark:text-base-950"
           aria-hidden="true"
         />
       </button>

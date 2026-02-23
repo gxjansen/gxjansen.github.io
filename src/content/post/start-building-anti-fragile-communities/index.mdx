@@ -13,12 +13,13 @@ categories:
   - Open Source
 blueskyUri: "https://bsky.app/profile/gui.do/post/3m4dkvdtsqs2k"
 ---
-import { Image } from 'astro:assets';
-import image1 from './image1.jpg';
-import image2 from './image2.jpg';
-import image3 from './image3.jpg';
-import image4 from './image4.jpg';
-import image5 from './image5.jpg';
+
+import { Image } from "astro:assets";
+import image1 from "./image1.jpg";
+import image2 from "./image2.jpg";
+import image3 from "./image3.jpg";
+import image4 from "./image4.jpg";
+import image5 from "./image5.jpg";
 
 Over 20 years building communities around open-source platforms, I've watched a pattern repeat. Communities feel invincible until the moment they collapse.
 
@@ -80,7 +81,10 @@ At [CRO.CAFE Podcast](https://www.cro.cafe/) I couldn't simply send all Facebook
 
 At [Spryker](https://spryker.com/), my team moved the community from Slack to self-hosted forums because Slack's feature crackdown and pricing model made us vulnerable (community members on Slack really hated that older messages would just disappear after some set time period). The migration was hard work and not perfect. Lost messages. Broken workflows. Lost members. But the community emerged stronger. We'd proven we owned our infrastructure. Members trusted we wouldn't abandon them when a vendor changed terms. We never had more community code contributions than this year. Switching platforms made the community better and increased our anti-fragility.
 
-<Image src={image2} alt="Spryker community platform CommerceQuest, self-hosted on the open source Astro and Vanilla platforms. The website is completely public on our community Github pages where members can adjust the content and code." />
+<Image
+  src={image2}
+  alt="Spryker community platform CommerceQuest, self-hosted on the open source Astro and Vanilla platforms. The website is completely public on our community Github pages where members can adjust the content and code."
+/>
 
 I'm not claiming that the platforms or systems we moved to are perfect, not at all. The point is that you should make decisions that are sound in their (anti-fragile) direction. Also: don't change everything at once: start with the most fragile systems or processes, let the dust settle, and move to the next.
 
@@ -108,7 +112,10 @@ Closed, Big Tech Platforms exploit these biases deliberately. The real lock-in i
 
 Anti-fragile communities counter this by giving members genuine power over their experience. Not the illusion of feedback forms. Actual influence over what gets built and how it works.
 
-<Image src={image3} alt="Meet Magento 2017 in Utrecht, The Netherlands. Lunchtime!" />
+<Image
+  src={image3}
+  alt="Meet Magento 2017 in Utrecht, The Netherlands. Lunchtime!"
+/>
 
 When I scaled Meet Magento Netherlands from 100 to 600 attendees, the growth wasn't what mattered. What mattered: other community leaders copied the model. Modified it. Made it their own across Europe, then globally. Same at Spryker where we built whitepapers for others to organize Meetups, Unconferences and Hackathons. The true validation is not when your community team organizes these, but when others pick it up themselves (and give it their own twist). The pattern got stronger every time someone adapted it. Anti-fragile growth through decentralized participation. Not franchise control. Not brand protection. Just a good structure becoming better through variation.
 

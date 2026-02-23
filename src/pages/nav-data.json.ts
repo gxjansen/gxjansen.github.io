@@ -2,20 +2,13 @@ import { getCollection } from "astro:content";
 import { countItems, sortByValue } from "@js/blogUtils";
 import { humanize } from "@js/textUtils";
 
-interface BlogPost {
-  data: {
-    draft?: boolean;
-    categories?: string[];
-  };
-}
-
 export async function GET() {
   // Get all categories from blog posts
-  const posts = await getCollection("blog", ({ data }: BlogPost) => {
+  const posts = await getCollection("post", ({ data }) => {
     return !data.draft;
   });
 
-  const allCategories = posts.map((post: BlogPost) => post.data.categories || []).flat();
+  const allCategories = posts.map((post) => post.data.categories || []).flat();
   const processedCategories = sortByValue(countItems(allCategories));
 
   const navConfig = [
@@ -108,7 +101,7 @@ export async function GET() {
 
   return new Response(JSON.stringify(navConfig), {
     headers: {
-      'Content-Type': 'application/json'
-    }
+      "Content-Type": "application/json",
+    },
   });
 }

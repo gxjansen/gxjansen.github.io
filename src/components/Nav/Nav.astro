@@ -10,6 +10,12 @@ import Button from "@components/Button/Button.astro";
 import LanguageSelect from "@components/LanguageSelect/LanguageSelect.astro";
 import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
 
+// types
+import type {
+  navDropdownItem,
+  navMegaDropdownItem,
+} from "@config/types/configDataTypes";
+
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { getTranslatedData } from "@js/translationUtils";
@@ -21,14 +27,15 @@ import { locales } from "@config/siteSettings.json";
 
 // Check for reduced motion preference
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-const shouldReduceMotion = typeof window !== "undefined" 
-  ? window.matchMedia(reducedMotionQuery).matches 
-  : false;
+const shouldReduceMotion =
+  typeof window !== "undefined"
+    ? window.matchMedia(reducedMotionQuery).matches
+    : false;
 ---
 
 <!-- Skip to main content link -->
-<a 
-  href="#main-content" 
+<a
+  href="#main-content"
   class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:block focus:rounded-md focus:bg-primary-500 focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
 >
   Skip to main content
@@ -37,15 +44,17 @@ const shouldReduceMotion = typeof window !== "undefined"
 <div
   id="nav__container"
   class={`navbar--initial fixed left-0 top-0 z-30 flex w-full flex-col border-b ${shouldReduceMotion ? "" : "duration-300"}`}
-  style={shouldReduceMotion ? "" : "transition: background-color 0.3s cubic-bezier(0.33, 1, 0.68, 1), border-color 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;"}
+  style={shouldReduceMotion
+    ? ""
+    : "transition: background-color 0.3s cubic-bezier(0.33, 1, 0.68, 1), border-color 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;"}
   transition:name={`nav`}
   role="banner"
 >
   <div class="mx-auto flex w-full">
     <div class="site-container flex h-14 w-full items-center px-4">
-      <header 
-        class="relative flex w-full items-center justify-between gap-4" 
-        role="navigation" 
+      <header
+        class="relative flex w-full items-center justify-between gap-4"
+        role="navigation"
         aria-label="Main navigation"
       >
         <!-- Logo/Home link -->
@@ -54,27 +63,26 @@ const shouldReduceMotion = typeof window !== "undefined"
         </div>
 
         <!-- Desktop navigation -->
-        <nav 
-          class="hidden flex-auto md:block" 
-          aria-label="Desktop navigation"
-        >
-          <ul 
-            class="flex h-fit items-center justify-center space-x-6" 
-            role="menubar" 
+        <nav class="hidden flex-auto md:block" aria-label="Desktop navigation">
+          <ul
+            class="flex h-fit items-center justify-center space-x-6"
+            role="menubar"
             aria-label="Primary navigation menu"
           >
             {
               navData
-                .filter((navItem) => !navItem.hidden)
-                .map((navItem) => (
+                .filter((navItem) => !("hidden" in navItem && navItem.hidden))
+                .map((navItem) =>
                   "dropdown" in navItem ? (
-                    <NavDropdown navItem={navItem} />
+                    <NavDropdown navItem={navItem as navDropdownItem} />
                   ) : "megaMenuColumns" in navItem ? (
-                    <MegaMenuDropdownToggle navItem={navItem} />
+                    <MegaMenuDropdownToggle
+                      navItem={navItem as navMegaDropdownItem}
+                    />
                   ) : (
                     <NavLink navItem={navItem} />
-                  )
-                ))
+                  ),
+                )
             }
           </ul>
         </nav>
@@ -82,15 +90,12 @@ const shouldReduceMotion = typeof window !== "undefined"
         <!-- Right side items -->
         <div class="flex flex-none items-center space-x-4">
           <!-- Theme toggle -->
-          <ThemeToggle 
-            class="hidden md:block" 
-            aria-label="Toggle dark mode"
-          />
+          <ThemeToggle class="hidden md:block" aria-label="Toggle dark mode" />
 
           <!-- CTA Button -->
           <Button
             variant="secondary"
-            class="my-auto hidden px-4 py-1.5 md:block focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+            class="my-auto hidden px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 md:block"
             href="/contact/"
             aria-label="Book Guido for your event"
             umamiEvent="cta-click"
@@ -102,18 +107,15 @@ const shouldReduceMotion = typeof window !== "undefined"
           <!-- Language selector -->
           {
             locales.length > 1 && (
-              <LanguageSelect 
-                class="hidden md:block" 
+              <LanguageSelect
+                class="hidden md:block"
                 aria-label="Select language"
               />
             )
           }
 
           <!-- Mobile navigation -->
-          <div 
-            class="md:hidden"
-            aria-label="Mobile navigation menu"
-          >
+          <div class="md:hidden" aria-label="Mobile navigation menu">
             <MobileNav />
           </div>
         </div>
@@ -154,7 +156,7 @@ const shouldReduceMotion = typeof window !== "undefined"
 
   /* Focus styles */
   :focus-visible {
-    outline: 2px solid var(--focus-ring-color, theme('colors.primary.500'));
+    outline: 2px solid var(--focus-ring-color, theme("colors.primary.500"));
     outline-offset: 2px;
   }
 </style>
@@ -168,22 +170,22 @@ const shouldReduceMotion = typeof window !== "undefined"
     constructor() {
       this.navbar = null;
       this.scrollTimeout = 0;
-      this.mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      
+      this.mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
       this.init();
     }
 
     private init() {
-      this.navbar = document.getElementById('nav__container');
-      
+      this.navbar = document.getElementById("nav__container");
+
       if (this.navbar) {
         // Remove old listeners
-        window.removeEventListener('scroll', this.handleScroll);
-        
+        window.removeEventListener("scroll", this.handleScroll);
+
         // Add new listeners
-        window.addEventListener('scroll', this.handleScroll, { passive: true });
-        this.mediaQuery.addEventListener('change', this.handleReducedMotion);
-        
+        window.addEventListener("scroll", this.handleScroll, { passive: true });
+        this.mediaQuery.addEventListener("change", this.handleReducedMotion);
+
         // Initial state
         this.handleScroll();
         this.handleReducedMotion(this.mediaQuery);
@@ -200,48 +202,51 @@ const shouldReduceMotion = typeof window !== "undefined"
 
       this.scrollTimeout = window.requestAnimationFrame(() => {
         const shouldShowBackground = window.scrollY > 50;
-        
-        this.navbar?.classList.toggle('navbar--scrolled', shouldShowBackground);
-        this.navbar?.classList.toggle('navbar--initial', !shouldShowBackground);
-        
+
+        this.navbar?.classList.toggle("navbar--scrolled", shouldShowBackground);
+        this.navbar?.classList.toggle("navbar--initial", !shouldShowBackground);
+
         // Update ARIA attributes
-        this.navbar?.setAttribute('aria-expanded', shouldShowBackground.toString());
+        this.navbar?.setAttribute(
+          "aria-expanded",
+          shouldShowBackground.toString(),
+        );
       });
     };
 
     private handleReducedMotion = (e: MediaQueryList | MediaQueryListEvent) => {
       if (!this.navbar) return;
-      
+
       if (e.matches) {
-        this.navbar.style.transition = 'none';
-        this.navbar.style.backdropFilter = 'none';
+        this.navbar.style.transition = "none";
+        this.navbar.style.backdropFilter = "none";
       } else {
-        this.navbar.style.removeProperty('transition');
-        this.navbar.style.removeProperty('backdrop-filter');
+        this.navbar.style.removeProperty("transition");
+        this.navbar.style.removeProperty("backdrop-filter");
       }
     };
 
     public cleanup() {
-      window.removeEventListener('scroll', this.handleScroll);
-      this.mediaQuery.removeEventListener('change', this.handleReducedMotion);
+      window.removeEventListener("scroll", this.handleScroll);
+      this.mediaQuery.removeEventListener("change", this.handleReducedMotion);
     }
   }
 
   let navigationManager: NavigationManager;
 
   // Initialize on page load
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     navigationManager = new NavigationManager();
   });
 
   // Re-initialize after view transitions
-  document.addEventListener('astro:after-swap', () => {
+  document.addEventListener("astro:after-swap", () => {
     navigationManager?.cleanup();
     navigationManager = new NavigationManager();
   });
 
   // Cleanup on page unload
-  document.addEventListener('beforeunload', () => {
+  document.addEventListener("beforeunload", () => {
     navigationManager?.cleanup();
   });
 </script>

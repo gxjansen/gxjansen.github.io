@@ -1,13 +1,13 @@
 ---
 // Icon imports
-import GitHubIcon from '@icons/social/github.svg';
-import LinkedInIcon from '@icons/social/linkedin.svg';
-import YouTubeIcon from '@icons/social/youtube.svg';
-import XTwitterIcon from '@icons/social/x-twitter.svg';
-import BlueSkyIcon from '@icons/social/bluesky.svg';
-import InstagramIcon from '@icons/social/instagram.svg';
-import SignalIcon from '@icons/social/signal.svg';
-import RSSIcon from '@icons/social/rss.svg';
+import GitHubIcon from "@icons/social/github.svg";
+import LinkedInIcon from "@icons/social/linkedin.svg";
+import YouTubeIcon from "@icons/social/youtube.svg";
+import XTwitterIcon from "@icons/social/x-twitter.svg";
+import BlueSkyIcon from "@icons/social/bluesky.svg";
+import InstagramIcon from "@icons/social/instagram.svg";
+import SignalIcon from "@icons/social/signal.svg";
+import RSSIcon from "@icons/social/rss.svg";
 
 interface Props {
   icon: string;
@@ -20,17 +20,17 @@ const { icon, social, href, class: className } = Astro.props as Props;
 
 // Map icon names to components
 const iconMap: { [key: string]: any } = {
-  'tabler/filled/brand-github': GitHubIcon,
-  'github': GitHubIcon,
-  'linkedin': LinkedInIcon,
-  'tabler/filled/brand-youtube': YouTubeIcon,
-  'youtube': YouTubeIcon,
-  'tabler/filled/brand-x': XTwitterIcon,
-  'x-twitter': XTwitterIcon,
-  'bluesky': BlueSkyIcon,
-  'instagram': InstagramIcon,
-  'signal': SignalIcon,
-  'rss': RSSIcon,
+  "tabler/filled/brand-github": GitHubIcon,
+  github: GitHubIcon,
+  linkedin: LinkedInIcon,
+  "tabler/filled/brand-youtube": YouTubeIcon,
+  youtube: YouTubeIcon,
+  "tabler/filled/brand-x": XTwitterIcon,
+  "x-twitter": XTwitterIcon,
+  bluesky: BlueSkyIcon,
+  instagram: InstagramIcon,
+  signal: SignalIcon,
+  rss: RSSIcon,
 };
 
 const IconComponent = iconMap[icon] || null;
@@ -42,19 +42,21 @@ const IconComponent = iconMap[icon] || null;
   target="_blank"
   rel="noopener noreferrer"
   class:list={[
-    "relative inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-md p-2 text-base-600 dark:text-base-400 transition-colors hover:bg-base-100 hover:text-base-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:hover:bg-base-800 dark:hover:text-base-300",
-    className
+    "relative inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-md p-2 text-base-600 transition-colors hover:bg-base-100 hover:text-base-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:text-base-400 dark:hover:bg-base-800 dark:hover:text-base-300",
+    className,
   ]}
   data-umami-event="social-click"
   data-umami-event-target={social.toLowerCase()}
 >
   <p class="sr-only">Follow on {social}</p>
-  {IconComponent ? (
-    <IconComponent 
-      class:list={["size-5 transition", className]}
-      aria-hidden="true"
-    />
-  ) : (
-    <span class="size-5">{icon}</span>
-  )}
+  {
+    IconComponent ? (
+      <IconComponent
+        class:list={["size-5 transition", className]}
+        aria-hidden="true"
+      />
+    ) : (
+      <span class="size-5">{icon}</span>
+    )
+  }
 </a>

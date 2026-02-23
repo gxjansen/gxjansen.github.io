@@ -1,5 +1,4 @@
-import { parse } from 'node-html-parser';
-
+import { parse } from "node-html-parser";
 
 /**
  * Parse HTML string into a DOM-like structure for testing
@@ -21,22 +20,24 @@ export function getElement(html: string, selector: string) {
  */
 export function createMockImage(props: Record<string, unknown>) {
   const { src, alt, width, height, class: className } = props;
-  return `<img src="${src}" alt="${alt}" width="${width}" height="${height}" class="${className || ''}" />`;
+  return `<img src="${src}" alt="${alt}" width="${width}" height="${height}" class="${className || ""}" />`;
 }
 
 /**
  * Create test data for a presentation
  */
-export function createTestPresentation(overrides: Record<string, unknown> = {}) {
+export function createTestPresentation(
+  overrides: Record<string, unknown> = {},
+) {
   return {
-    slug: 'test-presentation',
+    slug: "test-presentation",
     data: {
-      title: 'Test Presentation',
-      duration: '45 minutes',
+      title: "Test Presentation",
+      duration: "45 minutes",
       isWorkshop: false,
-      intendedAudience: 'Developers',
+      intendedAudience: "Developers",
       image: undefined,
-      ...overrides
-    }
+      ...overrides,
+    },
   };
 }

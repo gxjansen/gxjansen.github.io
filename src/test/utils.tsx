@@ -1,6 +1,6 @@
-import { render } from '@testing-library/react';
-import type { RenderOptions } from '@testing-library/react';
-import type { ReactElement } from 'react';
+import { render } from "@testing-library/react";
+import type { RenderOptions } from "@testing-library/react";
+import type { ReactElement } from "react";
 
 /**
  * Custom render function that includes common providers if needed
@@ -8,7 +8,7 @@ import type { ReactElement } from 'react';
  */
 function customRender(
   ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>,
+  options?: Omit<RenderOptions, "wrapper">,
 ) {
   return render(ui, {
     // Add any global providers here if needed
@@ -26,11 +26,11 @@ function customRender(
 export function createAstroProps(props: Record<string, unknown> = {}) {
   return {
     ...props,
-    'client:load': undefined,
-    'client:idle': undefined,
-    'client:visible': undefined,
-    'client:media': undefined,
-    'client:only': undefined,
+    "client:load": undefined,
+    "client:idle": undefined,
+    "client:visible": undefined,
+    "client:media": undefined,
+    "client:only": undefined,
   };
 }
 
@@ -39,17 +39,17 @@ export function createAstroProps(props: Record<string, unknown> = {}) {
  */
 export function createAstroImageProps(props: Record<string, unknown> = {}) {
   return {
-    src: '/placeholder.jpg',
-    alt: 'Test image',
+    src: "/placeholder.jpg",
+    alt: "Test image",
     width: 100,
     height: 100,
-    format: 'webp',
+    format: "webp",
     ...props,
   };
 }
 
 // Re-export everything
-export * from '@testing-library/react';
+export * from "@testing-library/react";
 export { customRender as render };
 
 interface NavDropdownItem {
@@ -67,38 +67,40 @@ interface NavItem {
 /**
  * Create mock navigation data for testing
  */
-export function createMockNavData(overrides: Partial<NavItem>[] = []): NavItem[] {
+export function createMockNavData(
+  overrides: Partial<NavItem>[] = [],
+): NavItem[] {
   return [
     {
-      title: 'Home',
-      href: '/',
-      hidden: false
+      title: "Home",
+      href: "/",
+      hidden: false,
     },
     {
-      title: 'About',
-      href: '/about',
-      hidden: false
+      title: "About",
+      href: "/about",
+      hidden: false,
     },
     {
-      title: 'Presentations',
-      href: '/presentations',
-      hidden: false
+      title: "Presentations",
+      href: "/presentations",
+      hidden: false,
     },
     {
-      title: 'Hidden Item',
-      href: '/hidden',
-      hidden: true
+      title: "Hidden Item",
+      href: "/hidden",
+      hidden: true,
     },
     {
-      title: 'Services',
-      href: '/services',
+      title: "Services",
+      href: "/services",
       dropdown: [
-        { title: 'Consulting', href: '/services/consulting' },
-        { title: 'Training', href: '/services/training' }
+        { title: "Consulting", href: "/services/consulting" },
+        { title: "Training", href: "/services/training" },
       ],
-      hidden: false
+      hidden: false,
     },
-    ...overrides
+    ...(overrides as NavItem[]),
   ];
 }
 
@@ -118,25 +120,30 @@ interface LayoutProps {
 /**
  * Create mock layout props for testing
  */
-export function createMockLayoutProps(overrides: Partial<LayoutProps> = {}): LayoutProps {
+export function createMockLayoutProps(
+  overrides: Partial<LayoutProps> = {},
+): LayoutProps {
   return {
-    title: 'Test Page',
-    description: 'This is a test page description',
-    type: 'general',
+    title: "Test Page",
+    description: "This is a test page description",
+    type: "general",
     noindex: false,
-    ...overrides
+    ...overrides,
   };
 }
 
-export function createMockPodcastEpisode(overrides: Record<string, unknown> = {}) {
+export function createMockPodcastEpisode(
+  overrides: Record<string, unknown> = {},
+) {
   return {
-    title: 'Test Episode',
-    description: 'This is a test episode description that is long enough to test truncation functionality in the podcast card component.',
-    link: 'https://example.com/episode',
-    pubDate: '2024-01-01T12:00:00Z',
-    duration: '45 min',
-    podcastName: 'Test Podcast',
-    imageUrl: 'https://example.com/image.jpg',
-    ...overrides
+    title: "Test Episode",
+    description:
+      "This is a test episode description that is long enough to test truncation functionality in the podcast card component.",
+    link: "https://example.com/episode",
+    pubDate: "2024-01-01T12:00:00Z",
+    duration: "45 min",
+    podcastName: "Test Podcast",
+    imageUrl: "https://example.com/image.jpg",
+    ...overrides,
   };
 }

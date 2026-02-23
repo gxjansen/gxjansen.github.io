@@ -8,28 +8,32 @@ interface Props {
 const { src, title, coverImage } = Astro.props;
 ---
 
-<div class="audio-player w-full rounded-xl bg-base-200 dark:bg-base-800 p-4 transition-colors">
-  {coverImage && (
-    <div class="cover-image mb-3">
-      <img
-        src={coverImage}
-        alt={`${title} podcast cover`}
-        class="w-full aspect-square object-cover rounded-lg"
-        loading="lazy"
-        decoding="async"
-      />
-    </div>
-  )}
-  <audio
-    controls
-    preload="metadata"
-    class="w-full h-10"
-    title={title}
-  >
+<div
+  class="audio-player w-full rounded-xl bg-base-200 p-4 transition-colors dark:bg-base-800"
+>
+  {
+    coverImage && (
+      <div class="cover-image mb-3">
+        <img
+          src={coverImage}
+          alt={`${title} podcast cover`}
+          class="aspect-square w-full rounded-lg object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    )
+  }
+  <audio controls preload="metadata" class="h-10 w-full" title={title}>
     <source src={src} type="audio/mpeg" />
     <p>
       Your browser doesn't support HTML5 audio.
-      <a href={src} download class="text-primary-600 dark:text-primary-400 underline">Download the audio</a>
+      <a
+        href={src}
+        download
+        class="text-primary-600 underline dark:text-primary-400"
+        >Download the audio</a
+      >
     </p>
   </audio>
 </div>
@@ -55,8 +59,12 @@ const { src, title, coverImage } = Astro.props;
     color: #393552;
   }
 
-  :global(.dark) .audio-player audio::-webkit-media-controls-current-time-display,
-  :global(.dark) .audio-player audio::-webkit-media-controls-time-remaining-display {
+  :global(.dark)
+    .audio-player
+    audio::-webkit-media-controls-current-time-display,
+  :global(.dark)
+    .audio-player
+    audio::-webkit-media-controls-time-remaining-display {
     color: #e0def4;
   }
 

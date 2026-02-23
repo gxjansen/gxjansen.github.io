@@ -1,15 +1,18 @@
-import { describe, it, expect } from 'vitest';
-import { parseHTML } from '../../../test/astro-test-utils';
-import { createMockPodcastEpisode } from '../../../test/utils';
+import { describe, it, expect } from "vitest";
+import { parseHTML } from "../../../test/astro-test-utils";
+import { createMockPodcastEpisode } from "../../../test/utils";
 
-describe('PodcastCard', () => {
-  it('renders with all required information', () => {
+describe("PodcastCard", () => {
+  it("renders with all required information", () => {
     const episode = createMockPodcastEpisode();
-    const formattedDate = new Date(episode.pubDate).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric"
-    });
+    const formattedDate = new Date(episode.pubDate).toLocaleDateString(
+      "en-US",
+      {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      },
+    );
 
     const html = `
       <a
@@ -74,31 +77,31 @@ describe('PodcastCard', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check link attributes
-    const link = parsedHtml.querySelector('a');
+    const link = parsedHtml.querySelector("a");
     expect(link).toBeTruthy();
-    expect(link?.getAttribute('href')).toBe(episode.link);
-    expect(link?.getAttribute('target')).toBe('_blank');
-    expect(link?.getAttribute('rel')).toBe('noopener noreferrer');
+    expect(link?.getAttribute("href")).toBe(episode.link);
+    expect(link?.getAttribute("target")).toBe("_blank");
+    expect(link?.getAttribute("rel")).toBe("noopener noreferrer");
 
     // Check image
-    const img = parsedHtml.querySelector('img');
+    const img = parsedHtml.querySelector("img");
     expect(img).toBeTruthy();
-    expect(img?.getAttribute('src')).toBe(episode.imageUrl);
-    expect(img?.getAttribute('alt')).toBe(`${episode.podcastName} Cover`);
+    expect(img?.getAttribute("src")).toBe(episode.imageUrl);
+    expect(img?.getAttribute("alt")).toBe(`${episode.podcastName} Cover`);
 
     // Check podcast details
     expect(parsedHtml.textContent).toContain(episode.podcastName);
     expect(parsedHtml.textContent).toContain(episode.title);
     expect(parsedHtml.textContent).toContain(episode.duration);
-    expect(parsedHtml.textContent).toContain('Listen Now');
+    expect(parsedHtml.textContent).toContain("Listen Now");
 
     // Check date formatting
     expect(parsedHtml.textContent).toContain(formattedDate);
   });
 
-  it('renders fallback image when imageUrl is not provided', () => {
+  it("renders fallback image when imageUrl is not provided", () => {
     const episode = createMockPodcastEpisode({ imageUrl: undefined });
 
     const html = `
@@ -110,16 +113,16 @@ describe('PodcastCard', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check fallback image container
-    const fallbackContainer = parsedHtml.querySelector('.w-20.h-20');
+    const fallbackContainer = parsedHtml.querySelector(".w-20.h-20");
     expect(fallbackContainer).toBeTruthy();
-    expect(fallbackContainer?.classList.contains('bg-gray-100')).toBe(true);
-    expect(fallbackContainer?.textContent).toContain('🎙️');
+    expect(fallbackContainer?.classList.contains("bg-gray-100")).toBe(true);
+    expect(fallbackContainer?.textContent).toContain("🎙️");
   });
 
-  it('truncates long descriptions', () => {
-    const longDescription = 'A'.repeat(200);
+  it("truncates long descriptions", () => {
+    const longDescription = "A".repeat(200);
     const episode = createMockPodcastEpisode({ description: longDescription });
 
     const html = `
@@ -129,16 +132,16 @@ describe('PodcastCard', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check description truncation
-    const description = parsedHtml.querySelector('p');
-    const descriptionText = description?.textContent?.trim() || '';
+    const description = parsedHtml.querySelector("p");
+    const descriptionText = description?.textContent?.trim() || "";
     expect(descriptionText.length).toBeLessThan(longDescription.length);
-    expect(descriptionText.endsWith('...')).toBe(true);
+    expect(descriptionText.endsWith("...")).toBe(true);
   });
 
-  it('does not truncate short descriptions', () => {
-    const shortDescription = 'A'.repeat(100);
+  it("does not truncate short descriptions", () => {
+    const shortDescription = "A".repeat(100);
     const episode = createMockPodcastEpisode({ description: shortDescription });
 
     const html = `
@@ -148,15 +151,15 @@ describe('PodcastCard', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check description is not truncated
-    const description = parsedHtml.querySelector('p');
-    const descriptionText = description?.textContent?.trim() || '';
+    const description = parsedHtml.querySelector("p");
+    const descriptionText = description?.textContent?.trim() || "";
     expect(descriptionText).toBe(shortDescription);
-    expect(descriptionText.endsWith('...')).toBe(false);
+    expect(descriptionText.endsWith("...")).toBe(false);
   });
 
-  it('has proper accessibility attributes', () => {
+  it("has proper accessibility attributes", () => {
     const episode = createMockPodcastEpisode();
 
     const html = `
@@ -186,19 +189,19 @@ describe('PodcastCard', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check image alt text
-    const img = parsedHtml.querySelector('img');
-    expect(img?.getAttribute('alt')).toBeTruthy();
-    
+    const img = parsedHtml.querySelector("img");
+    expect(img?.getAttribute("alt")).toBeTruthy();
+
     // Check heading structure
-    const heading = parsedHtml.querySelector('h3');
+    const heading = parsedHtml.querySelector("h3");
     expect(heading).toBeTruthy();
     expect(heading?.textContent?.trim()).toBe(episode.title);
 
     // Check link attributes for security
-    const link = parsedHtml.querySelector('a');
-    expect(link?.getAttribute('rel')).toContain('noopener');
-    expect(link?.getAttribute('target')).toBe('_blank');
+    const link = parsedHtml.querySelector("a");
+    expect(link?.getAttribute("rel")).toContain("noopener");
+    expect(link?.getAttribute("target")).toBe("_blank");
   });
 });

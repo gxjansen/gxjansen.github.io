@@ -10,25 +10,25 @@ import Badge from "@components/Badge/Badge.astro";
 import ColleagueTestimonialCard from "./ColleagueTestimonialCard.astro";
 
 // data
-import { getRandomTestimonials, colleagueTestimonials } from "@config/colleagueTestimonialData";
+import {
+  getRandomTestimonials,
+  colleagueTestimonials,
+} from "@config/colleagueTestimonialData";
 
 // Get initial testimonials for SSR (will be replaced client-side)
 const initialTestimonials = getRandomTestimonials(4);
 ---
 
-<section
-  id="colleague-testimonials"
-  class="py-24 md:py-28"
->
+<section id="colleague-testimonials" class="py-24 md:py-28">
   <div class="site-container px-2 sm:px-4">
-    <div class="mx-auto text-center max-w-3xl mb-12" data-reveal="fade-up">
+    <div class="mx-auto mb-12 max-w-3xl text-center" data-reveal="fade-up">
       <Badge>Testimonials</Badge>
       <h2 class="h2 mb-4">
         <a
           href="https://www.linkedin.com/in/gxjansen/details/recommendations/"
           target="_blank"
           rel="noopener noreferrer"
-          class="hover:text-primary-600 transition-colors duration-200"
+          class="transition-colors duration-200 hover:text-primary-600"
         >
           What my colleagues say
         </a>
@@ -38,29 +38,35 @@ const initialTestimonials = getRandomTestimonials(4);
       </p>
     </div>
 
-    <div id="testimonials-grid" class="grid gap-6 md:gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-      {initialTestimonials.map((testimonial, index) => (
-        <div
-          data-testimonial-id={testimonial.id}
-          class="testimonial-card-wrapper"
-          data-reveal="fade-up"
-          data-reveal-delay={index + 1}
-        >
-          <ColleagueTestimonialCard {...testimonial} />
-        </div>
-      ))}
+    <div
+      id="testimonials-grid"
+      class="grid gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-2 xl:grid-cols-2"
+    >
+      {
+        initialTestimonials.map((testimonial, index) => (
+          <div
+            data-testimonial-id={testimonial.id}
+            class="testimonial-card-wrapper"
+            data-reveal="fade-up"
+            data-reveal-delay={index + 1}
+          >
+            <ColleagueTestimonialCard {...testimonial} />
+          </div>
+        ))
+      }
     </div>
 
-    <div class="text-center mt-12">
+    <div class="mt-12 text-center">
       <a
         href="https://www.linkedin.com/in/gxjansen/details/recommendations/"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium transition-colors duration-200"
+        class="inline-flex items-center font-medium text-primary-600 transition-colors duration-200 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
       >
-        View the full, 80+ recommendations on my LinkedIn profile (login required)
+        View the full, 80+ recommendations on my LinkedIn profile (login
+        required)
         <svg
-          class="ml-2 w-4 h-4"
+          class="ml-2 h-4 w-4"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -70,7 +76,7 @@ const initialTestimonials = getRandomTestimonials(4);
             stroke-linejoin="round"
             stroke-width="2"
             d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-          />
+          ></path>
         </svg>
       </a>
     </div>
@@ -81,14 +87,16 @@ const initialTestimonials = getRandomTestimonials(4);
   import { getRandomTestimonials } from "@config/colleagueTestimonialData";
 
   function randomizeTestimonials() {
-    const grid = document.getElementById('testimonials-grid');
+    const grid = document.getElementById("testimonials-grid");
     if (!grid) return;
 
     // Get random testimonials
     const testimonials = getRandomTestimonials(4);
 
     // Build HTML for each testimonial card with AOS attributes
-    const cardsHTML = testimonials.map((testimonial, index) => `
+    const cardsHTML = testimonials
+      .map(
+        (testimonial, index) => `
       <div data-testimonial-id="${testimonial.id}" class="testimonial-card-wrapper" data-reveal="fade-up" data-reveal-delay="${index + 1}">
         <article class="colleague-testimonial-card bg-base-50 dark:bg-base-800 rounded-xl shadow-md p-4 sm:p-6 h-full flex flex-col transition-all duration-300 hover:shadow-lg">
           <blockquote class="flex-grow mb-6">
@@ -112,27 +120,29 @@ const initialTestimonials = getRandomTestimonials(4);
           </footer>
         </article>
       </div>
-    `).join('');
+    `,
+      )
+      .join("");
 
     // Update the grid with smooth transition
-    grid.style.opacity = '0';
+    grid.style.opacity = "0";
     setTimeout(() => {
       grid.innerHTML = cardsHTML;
-      grid.style.opacity = '1';
+      grid.style.opacity = "1";
 
       // Note: CSS scroll-driven animations auto-detect new data-reveal elements
     }, 150);
   }
 
   // Randomize on initial page load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', randomizeTestimonials);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", randomizeTestimonials);
   } else {
     randomizeTestimonials();
   }
 
   // Randomize on view transitions navigation
-  document.addEventListener('astro:after-swap', randomizeTestimonials);
+  document.addEventListener("astro:after-swap", randomizeTestimonials);
 </script>
 
 <style>

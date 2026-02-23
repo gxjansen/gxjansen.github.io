@@ -1,23 +1,23 @@
-import { describe, it, expect } from 'vitest';
-import { parseHTML } from '../../../test/astro-test-utils';
+import { describe, it, expect } from "vitest";
+import { parseHTML } from "../../../test/astro-test-utils";
 
-describe('PresentationNav', () => {
+describe("PresentationNav", () => {
   const mockPresentations = [
     {
-      slug: 'presentation-1',
-      data: { title: 'Presentation 1' }
+      slug: "presentation-1",
+      data: { title: "Presentation 1" },
     },
     {
-      slug: 'presentation-2',
-      data: { title: 'Presentation 2' }
+      slug: "presentation-2",
+      data: { title: "Presentation 2" },
     },
     {
-      slug: 'presentation-3',
-      data: { title: 'Presentation 3' }
-    }
+      slug: "presentation-3",
+      data: { title: "Presentation 3" },
+    },
   ];
 
-  it('renders navigation for middle presentation', () => {
+  it("renders navigation for middle presentation", () => {
     const html = `
       <nav class="border-t border-base-200 dark:border-base-800 mt-12 pt-8">
         <div class="flex justify-between items-center">
@@ -58,26 +58,32 @@ describe('PresentationNav', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check overview link
     const overviewLink = parsedHtml.querySelector('a[href="/presentations/"]');
     expect(overviewLink).toBeTruthy();
-    expect(overviewLink?.textContent).toContain('Back to Presentation Overview');
+    expect(overviewLink?.textContent).toContain(
+      "Back to Presentation Overview",
+    );
 
     // Check previous link
-    const prevLink = parsedHtml.querySelector('a[href="/presentations/presentation-1/"]');
+    const prevLink = parsedHtml.querySelector(
+      'a[href="/presentations/presentation-1/"]',
+    );
     expect(prevLink).toBeTruthy();
-    expect(prevLink?.textContent).toContain('Previous');
-    expect(prevLink?.textContent).toContain('Presentation 1');
+    expect(prevLink?.textContent).toContain("Previous");
+    expect(prevLink?.textContent).toContain("Presentation 1");
 
     // Check next link
-    const nextLink = parsedHtml.querySelector('a[href="/presentations/presentation-3/"]');
+    const nextLink = parsedHtml.querySelector(
+      'a[href="/presentations/presentation-3/"]',
+    );
     expect(nextLink).toBeTruthy();
-    expect(nextLink?.textContent).toContain('Next');
-    expect(nextLink?.textContent).toContain('Presentation 3');
+    expect(nextLink?.textContent).toContain("Next");
+    expect(nextLink?.textContent).toContain("Presentation 3");
   });
 
-  it('renders navigation for first presentation', () => {
+  it("renders navigation for first presentation", () => {
     const html = `
       <nav class="border-t border-base-200 dark:border-base-800 mt-12 pt-8">
         <div class="flex justify-between items-center">
@@ -106,19 +112,21 @@ describe('PresentationNav', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Should not have previous link
-    const prevLink = parsedHtml.querySelector('a:has(.previous)');
+    const prevLink = parsedHtml.querySelector("a:has(.previous)");
     expect(prevLink).toBeFalsy();
 
     // Should have next link
-    const nextLink = parsedHtml.querySelector('a[href="/presentations/presentation-2/"]');
+    const nextLink = parsedHtml.querySelector(
+      'a[href="/presentations/presentation-2/"]',
+    );
     expect(nextLink).toBeTruthy();
-    expect(nextLink?.textContent).toContain('Next');
-    expect(nextLink?.textContent).toContain('Presentation 2');
+    expect(nextLink?.textContent).toContain("Next");
+    expect(nextLink?.textContent).toContain("Presentation 2");
   });
 
-  it('renders navigation for last presentation', () => {
+  it("renders navigation for last presentation", () => {
     const html = `
       <nav class="border-t border-base-200 dark:border-base-800 mt-12 pt-8">
         <div class="flex justify-between items-center">
@@ -147,19 +155,21 @@ describe('PresentationNav', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Should have previous link
-    const prevLink = parsedHtml.querySelector('a[href="/presentations/presentation-2/"]');
+    const prevLink = parsedHtml.querySelector(
+      'a[href="/presentations/presentation-2/"]',
+    );
     expect(prevLink).toBeTruthy();
-    expect(prevLink?.textContent).toContain('Previous');
-    expect(prevLink?.textContent).toContain('Presentation 2');
+    expect(prevLink?.textContent).toContain("Previous");
+    expect(prevLink?.textContent).toContain("Presentation 2");
 
     // Should not have next link
-    const nextLink = parsedHtml.querySelector('a:has(.next)');
+    const nextLink = parsedHtml.querySelector("a:has(.next)");
     expect(nextLink).toBeFalsy();
   });
 
-  it('has proper accessibility attributes', () => {
+  it("has proper accessibility attributes", () => {
     const html = `
       <nav class="border-t border-base-200 dark:border-base-800 mt-12 pt-8">
         <div class="flex justify-between items-center">
@@ -174,21 +184,21 @@ describe('PresentationNav', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check if nav element exists
-    const nav = parsedHtml.querySelector('nav');
+    const nav = parsedHtml.querySelector("nav");
     expect(nav).toBeTruthy();
 
     // Check if SVG icons are properly hidden from screen readers
-    const svgIcons = parsedHtml.querySelectorAll('svg');
-    svgIcons.forEach(icon => {
-      expect(icon.getAttribute('aria-hidden')).toBe('true');
+    const svgIcons = parsedHtml.querySelectorAll("svg");
+    svgIcons.forEach((icon) => {
+      expect(icon.getAttribute("aria-hidden")).toBe("true");
     });
 
     // Check if links have descriptive text
-    const links = parsedHtml.querySelectorAll('a');
-    links.forEach(link => {
-      expect(link.textContent?.trim()).not.toBe('');
+    const links = parsedHtml.querySelectorAll("a");
+    links.forEach((link) => {
+      expect(link.textContent?.trim()).not.toBe("");
     });
   });
 });

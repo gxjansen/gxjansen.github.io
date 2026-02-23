@@ -1,0 +1,14 @@
+# LinkedIn returns 999 for automated requests
+https?://www\.linkedin\.com/.*
+https?://linkedin\.com/.*
+
+# Twitter/X rate-limits aggressively
+https?://(www\.)?twitter\.com/.*
+https?://(www\.)?x\.com/.*
+
+# Localhost and dev URLs
+https?://localhost.*
+https?://127\.0\.0\.1.*
+
+# Anchor-only links
+^#

@@ -1,0 +1,26 @@
+---
+interface Props {
+  type?: "card" | "image" | "text";
+  class?: string;
+}
+
+const { type = "card", class: className } = Astro.props;
+
+const typeClasses = {
+  card: "rounded-lg",
+  image: "rounded-lg aspect-video",
+  text: "rounded h-4",
+};
+---
+
+<div
+  class:list={[
+    "animate-pulse bg-base-200 dark:bg-base-700",
+    typeClasses[type],
+    className,
+  ]}
+  role="status"
+  aria-label="Loading..."
+>
+  <span class="sr-only">Loading...</span>
+</div>

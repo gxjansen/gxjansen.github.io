@@ -22,6 +22,7 @@ So in 2025 I've continued moving towards a more robust (or in some cases even an
 And let's not sugarcoat this: I've been in it way too deep and it's taken me many evenings and weekends to get here. And I'm not done yet. But hopefully in sharing my journey I can A) inspire you to make similar moves and B) make your journey a bit shorter and easier than mine.
 
 ## Why change?
+
 - I have too many subscriptions and don't truly own "my" stuff.
 - Vendor lock-in, limited mobility and service quality going down. I don't like companies forcing their (negative) changes on me while I keep paying the same (or sometimes even more).
 - Privacy: While paying for these services (e.g. Gmail, LLMs, phones), many still use/sell my data.
@@ -29,6 +30,7 @@ And let's not sugarcoat this: I've been in it way too deep and it's taken me man
 - I like tinkering with these tools and learning new things along the way ← a lot depends on this if you want to go down this route...
 
 ## Why now?
+
 I've been an open source user since I first came into contact with Mambo CMS in 2003, so nothing new in that sense. And unknowingly I made some decent antifragility choices (e.g. using my own e-mail domain). But over the years I've also accrued some sloppy/easy/bad choices and I found myself increasingly uncomfortable with being locked into too many places.
 
 - More and better alternatives keep becoming available and easier to start using and customizing (especially with access to tools like Claude Code and a NAS or cheap VPS)
@@ -36,15 +38,18 @@ I've been an open source user since I first came into contact with Mambo CMS in 
 - Europe (where I live) is leaning more into open source and technological sovereignty because it's more secure, cost‑effective, flexible, and innovative when done right. Several roadmaps and analyses point to open technologies as a lever for digital autonomy and sustainability in Europe (something which I fully support for all (united) countries, not just Europe).
 
 ## Preferences/Principles that keep the journey realistic
+
 - **Open source first**, open standards second: I prefer tools where I can see the code (Astro, Firefox, Immich, Obsidian) and use non-proprietary formats (Markdown, CalDAV).
 - **Data ownership**: I own my data or can export it completely. GDPR-respecting by default.
 - **Cross platform tools**: Prefer tools that I can use on macOS, Windows and Linux. Saves me on mental gymnastics when moving around on different devices when the tools can stay the same.
-- **Pragmatic, not pure**: I'm not dogmatic about self-hosting everything. I use SaaS when lock-in is low (Netlify, OpenRouter) or I already have lifetime licenses (Plex). The goal is *mobility*, not ideology.
+- **Pragmatic, not pure**: I'm not dogmatic about self-hosting everything. I use SaaS when lock-in is low (Netlify, OpenRouter) or I already have lifetime licenses (Plex). The goal is _mobility_, not ideology.
 - **Incremental migration**: Run old and new systems in parallel. Switch when the new setup is "boringly reliable."
 - **Identity independence**: Keep email/2FA/domains separate from apps. This makes future migrations dramatically easier.
 
 ## My starting points & current status
+
 I already have the items below in my setup that are already a decent fit for the above preferences:
+
 - Synology NAS (DS920+ as main, DS418 as backup), no public ingress; anything public runs on managed hosting (e.g Elestio or VPS) or SaaS. The Synology completely replaced my need for paid Google Drive/Dropbox storage.
 - [Signal](https://signal.org/) - messaging
 - [Firewalla router](https://firewalla.com/products/firewalla-gold-pro) that blocks a lot of ads/domains (at least when at home and/or using Tailscale)
@@ -63,7 +68,8 @@ I already have the items below in my setup that are already a decent fit for the
 But... at the beginning of the year, I also still had way too many media subscriptions (e.g. Netflix, Disney+, Amazon Prime, Youtube Premium) and still stuck with that pesky Google Workspace...
 
 Things I've changed so far in 2025:
-- Added the [*arr stack](https://www.reddit.com/r/selfhosted/comments/1g44l4p/full_guide_to_install_arrstack_almost_all_arr/) to my Plex setup to replace streaming services. Works great for English content, not great yet for 4/6 yo kids that want to watch things in Dutch.
+
+- Added the [\*arr stack](https://www.reddit.com/r/selfhosted/comments/1g44l4p/full_guide_to_install_arrstack_almost_all_arr/) to my Plex setup to replace streaming services. Works great for English content, not great yet for 4/6 yo kids that want to watch things in Dutch.
 - Audible/YouTube Music → [PlexAmp](https://www.plex.tv/plexamp/) (which is also used in my [RPi Pirate audio side project](https://gui.do/post/rpi-pirate-audio-side-project/)).
 - Google Photos → [Immich](https://immich.app/)
 - Authy → [Aegis](https://getaegis.app/) (+ YubiKey for hardware keys)
@@ -82,10 +88,12 @@ Things I've changed so far in 2025:
 - Moved (almost) all e-mail domains, calendar, contacts to Fastmail. I first transitioned to Proton for my e-mail/calendar needs. And although the service itself is good, I mainly ran into issues when I wanted to automate things with my calendar. Proton's calendar has no CalDAV/CardDAV support (and this is also not on the roadmap) and that's what made me ultimately move on to Fastmail instead. (Check out [Fastmail](https://www.fastmail.com/) if you're looking for an alternative.)
 
 Transition targets underway:
+
 - Google Workspace → Fastmail (The main thing left is to untangle Google SSO sign‑ins)
 - Adobe CC → Affinity + Darktable/RawTherapee + [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve/) (this is mainly a habit thing I need to change)
 
 After that:
+
 - I wouldn't recommend buying a Synology today, but as long as the devices still function, I don't see why I should replace them. At least not their NAS function. I do have more and more Homelab containers running which is beginning to stretch its CPU and memory limits so a dedicated docker server (NUC?) might be in my future.
 - Replace Tailscale with [Headscale](https://headscale.net/stable/) and Bitwarden with [Vaultwarden](https://www.vaultwarden.net/)? Not sure if that is worth the hassle.
 - Self-host an office suite like [Cryptpad](https://cryptpad.org/).
@@ -94,11 +102,13 @@ After that:
 Note that you can start small by moving some smaller apps like some mentioned above.
 
 If you want to seriously improve your antifragility, start the work with freeing your core identity and authentication:
+
 - **Get your own e-mail domain.** I can't stress enough how important this one is. You need to own your own identity and a very important key to that is to have control over your e-mail as everything is connected to that. Even if you want to keep using gmail: use it with your own domain. If you ever want to get rid of Google (or whoever you are hosting your e-mail with) it is very hard to move away if you only ever used an @gmail.com address. I used Google Workspace for many years, using it with my own e-mail address allows me to switch e-mail providers from one day to another without losing any e-mails.
 - **For any service/app signup: use e-mail, not SSO.** I get that it saves a couple of seconds, but it also locks you in. Especially annoying when the service you are using doesn't allow you to switch to another form of SSO or e-mail (looking at you Anthropic and Tailscale). So instead: signup for new services using your e-mail and maybe setup SSO as a secondary way to sign in if you really want. And of course always setup 2FA/MFA when available. Untangling all kinds of services from your SSO provider is NOT fun...
 - **Open Authenticator**: speaking of 2FA/MFA: use an independent/open source app for this. You don't want your free Auth app to suddenly stop its service or start charging (or charging more). I moved from Authy to Aegis which means logging in to a service with Authy 2FA, disabling 2FA and enabling it again with Aegis. Annoying? Yes. Satisfying? Very. And as always: make exports/backups (which Aegis actually allows, Authy did not).
 
 ## The big kicker
+
 What might be the biggest shift of all: [Claude Code](https://claude.com/product/claude-code) + [n8n](https://www.n8n.io) + self-hosting. It gives everyone the ability to just build small tools instead of subscribing to yet another service. Or more easily re-use something you found on Github and integrate it into your stack.
 Custom scrapers, specific integrations, tiny utilities that do exactly what I need. Previously these used to require finding (and paying for) niche SaaS products or hiring developers. Now I build them myself in a couple of hours.
 This democratization of software creation might be the ultimate unlock for software sovereignty. YOU are becoming the toolmaker now.

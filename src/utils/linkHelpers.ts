@@ -9,7 +9,7 @@ type YearString = string;
  * @returns A DOM-safe ID string
  */
 export const createYearAnchorId = (year: YearString): string => {
-    return `year-${year}`;
+  return `year-${year}`;
 };
 
 /**
@@ -18,7 +18,7 @@ export const createYearAnchorId = (year: YearString): string => {
  * @returns A properly formatted href string including the hash
  */
 export const createYearAnchorHref = (year: YearString): string => {
-    return `#${createYearAnchorId(year)}`;
+  return `#${createYearAnchorId(year)}`;
 };
 
 /**
@@ -27,7 +27,10 @@ export const createYearAnchorHref = (year: YearString): string => {
  * @param baseUrl - The base URL of the site (optional)
  * @returns A complete URL string
  */
-export const createYearFullUrl = (year: YearString, baseUrl?: string): string => {
-    const anchor = createYearAnchorHref(year);
-    return baseUrl ? `${baseUrl}${anchor}` : anchor;
+export const createYearFullUrl = (
+  year: YearString,
+  baseUrl?: string,
+): string => {
+  const anchor = createYearAnchorHref(year);
+  return baseUrl ? `${baseUrl}${anchor}` : anchor;
 };

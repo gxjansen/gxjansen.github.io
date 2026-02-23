@@ -1,6 +1,6 @@
-import type { CollectionEntry } from 'astro:content';
-import eventsData from '../data/events.json';
-import type { Event } from './eventUtils';
+import type { CollectionEntry } from "astro:content";
+import eventsData from "../data/events.json";
+import type { Event } from "./eventUtils";
 
 // Type assertion for imported events data
 const events = eventsData as Event[];
@@ -11,8 +11,9 @@ const events = eventsData as Event[];
  * @returns Array of related events
  */
 export function getRelatedEvents(presentationSlug: string): Event[] {
-  const relatedEvents = events.filter(event => 
-    event.relatedPresentationSlugs?.includes(presentationSlug) ?? false
+  const relatedEvents = events.filter(
+    (event) =>
+      event.relatedPresentationSlugs?.includes(presentationSlug) ?? false,
   );
   return relatedEvents;
 }
@@ -24,14 +25,14 @@ export function getRelatedEvents(presentationSlug: string): Event[] {
  * @returns Array of related presentations
  */
 export function getRelatedPresentations(
-  eventId: string, 
-  presentations: CollectionEntry<'presentations'>[]
-): CollectionEntry<'presentations'>[] {
-  const event = events.find(e => e.id === eventId);
+  eventId: string,
+  presentations: CollectionEntry<"presentations">[],
+): CollectionEntry<"presentations">[] {
+  const event = events.find((e) => e.id === eventId);
   if (!event || !event.relatedPresentationSlugs) return [];
-  
-  return presentations.filter(presentation => 
-    event.relatedPresentationSlugs.includes(presentation.slug)
+
+  return presentations.filter((presentation) =>
+    event.relatedPresentationSlugs.includes(presentation.slug),
   );
 }
 
@@ -41,11 +42,15 @@ export function getRelatedPresentations(
  * @returns The URL to the presentation or undefined if none exists
  */
 export function getPresentationUrl(eventId: string): string | undefined {
-  const event = events.find(e => e.id === eventId);
-  if (!event || !event.relatedPresentationSlugs || event.relatedPresentationSlugs.length === 0) {
+  const event = events.find((e) => e.id === eventId);
+  if (
+    !event ||
+    !event.relatedPresentationSlugs ||
+    event.relatedPresentationSlugs.length === 0
+  ) {
     return undefined;
   }
-  
+
   // Return URL using the last (most recent) related presentation slug
   return `/presentations/${event.relatedPresentationSlugs[event.relatedPresentationSlugs.length - 1]}`;
 }
@@ -56,14 +61,14 @@ export function getPresentationUrl(eventId: string): string | undefined {
  * @param eventId - The ID of the event
  */
 export function addRelation(presentationSlug: string, eventId: string): void {
-  const event = events.find(e => e.id === eventId);
+  const event = events.find((e) => e.id === eventId);
   if (!event) return;
-  
+
   // Initialize relatedPresentationSlugs if it doesn't exist
   if (!event.relatedPresentationSlugs) {
     event.relatedPresentationSlugs = [];
   }
-  
+
   if (!event.relatedPresentationSlugs.includes(presentationSlug)) {
     event.relatedPresentationSlugs.push(presentationSlug);
   }
@@ -74,12 +79,15 @@ export function addRelation(presentationSlug: string, eventId: string): void {
  * @param presentationSlug - The slug of the presentation
  * @param eventId - The ID of the event
  */
-export function removeRelation(presentationSlug: string, eventId: string): void {
-  const event = events.find(e => e.id === eventId);
+export function removeRelation(
+  presentationSlug: string,
+  eventId: string,
+): void {
+  const event = events.find((e) => e.id === eventId);
   if (!event || !event.relatedPresentationSlugs) return;
-  
+
   event.relatedPresentationSlugs = event.relatedPresentationSlugs.filter(
-    slug => slug !== presentationSlug
+    (slug) => slug !== presentationSlug,
   );
 }
 
@@ -89,5 +97,5 @@ export function removeRelation(presentationSlug: string, eventId: string): void 
  * @returns The event object or undefined if not found
  */
 export function getEventById(eventId: string): Event | undefined {
-  return events.find(e => e.id === eventId);
+  return events.find((e) => e.id === eventId);
 }

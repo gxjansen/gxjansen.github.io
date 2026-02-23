@@ -9,9 +9,10 @@ heroImage: ../101-ways-to-speed-up-your-magento-e-commerce-website/heroImage.jpe
 categories:
   - Magento
 ---
+
 As you probably know by now, Google is Using site speed in web search ranking. And I couldn't agree more: speed is important for your site, and not only for Google but mainly for the User Experience (UX) on your site. Research from Google and Microsoft shows that slower websites convert less and that the effect of a slow website is lasting.
 
-*Sidenote: As a psychologist this might be a form of [Déformation professionnelle](http://en.wikipedia.org/wiki/D%C3%A9formation_professionnelle), but I kinda hate it when people always talk about optimizing for search engines/ Google. Don't optimize for Google, keep in mind that you optimize for your users!*\
+_Sidenote: As a psychologist this might be a form of [Déformation professionnelle](http://en.wikipedia.org/wiki/D%C3%A9formation_professionnelle), but I kinda hate it when people always talk about optimizing for search engines/ Google. Don't optimize for Google, keep in mind that you optimize for your users!_\
 \
 Ok, so nothing new so far (I hope), but what about the speed of your Magento platform? If you're serious about e-commerce, 9 out of 10 times Magento will be your best choice overall when looking at features, flexibility and TCO. But there are some complaints about Magento being a very slow system and as I just explained: that isn't good for your UX.\
 \
@@ -41,7 +42,7 @@ The tips:
 
 9. Swap Apache for NginX or Litespeed.
 
-10. \[REPLACED by nginx\_pagespeed] Use Apache mod\_expires and be sure to set how long files should be cached. You could use the example below for your Apache virtualhost config:\
+10. \[REPLACED by nginx_pagespeed] Use Apache mod_expires and be sure to set how long files should be cached. You could use the example below for your Apache virtualhost config:\
     \# Turn on Expires and set default to 0\
                    ExpiresActive On\
                    ExpiresDefault A0\
@@ -67,10 +68,9 @@ The tips:
                            Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform"\
                            Header set Pragma "no-cache"\
 
+11. \[REPLACED by nginx_pagespeed]  Enable Gzip Compression in htaccess. > REPLACED by nginx_pagespeed
 
-11. \[REPLACED by nginx\_pagespeed]  Enable Gzip Compression in htaccess. > REPLACED by nginx\_pagespeed
-
-12. Compress output, use zlib.output\_compression or mod\_deflate.
+12. Compress output, use zlib.output_compression or mod_deflate.
 
 13. Use a Content Delivery Network (CDN) for parallel transfer of static content. There is a Magento extension that can help you do this with category and product images: the [One Pica Image CDN](http://www.magentocommerce.com/magento-connect/One+Pica/extension/1279/one-pica-image-cdn). But... (see next tip).
 
@@ -92,20 +92,20 @@ The tips:
 
 22. Query Cach size: [Magento Blog](http://www.magentocommerce.com/blog/performance-is-key-notes-on-magentos-performance): Modify the configuration for your MySQL server to take better advantage of your server’s RAM. Most Linux distributions provide a conservative MySQL package out of the box to ensure it will run on a wide array of hardware configurations. If you have ample RAM (eg, 1gb or more), then you may want to try tweaking the configuration. An example my.cnf is below, though you will want to consult the MySQL documentation for a complete list of configuration directives and recommended settings. A proper MySQL setup is very important with Magento.
 
-23. set 'php\_value memory\_limit 512M' in your php configuration or add it to your .htaccess file to ensure you don't run out of memory.
+23. set 'php_value memory_limit 512M' in your php configuration or add it to your .htaccess file to ensure you don't run out of memory.
 
 24. Use a memory-based filesystem for dynamic data. If you store dynamic data (**var/cache**, **var/session**) on RAMdisk or tmpfs, the disk I/O is decreased. Use Redis / RedisSession
 
-25. Change realpath\_cache\_size in php.ini.\
-    realpath\_cache\_size=1M (careful, this is per apache process) realpath\_cache\_ttl=86400 (ok for production site)&#x20;
+25. Change realpath_cache_size in php.ini.\
+    realpath_cache_size=1M (careful, this is per apache process) realpath_cache_ttl=86400 (ok for production site)&#x20;
 
 26. Memcache (for the hardcore) is documented in [http://www.magentocommerce.com/boards/viewthread/9037/](http://www.magentocommerce.com/boards/viewthread/9037/). Or use Redis.
 
-27. Disable the PHP open\_basedir directive.
+27. Disable the PHP open_basedir directive.
 
 28. Eliminate directory structure scans for .htaccess files. Or use nginx.
 
-29. Recommended innodb\_buffer\_pool\_size.
+29. Recommended innodb_buffer_pool_size.
 
 30. Combined web and db server, 6 GB RAM:  **2-3 GB**
 
@@ -113,11 +113,11 @@ The tips:
 
 32. Dedicated database server, 12 GB RAM: **10 GB**
 
-33. innodb\_thread\_concurrency.
+33. innodb_thread_concurrency.
 
 34. **2 \* \[numberofCPUs] + 2**
 
-35. Query Cach: query\_cache\_size: 64MB, query\_cache\_limit: 2MB. Depends on the server though.
+35. Query Cach: query_cache_size: 64MB, query_cache_limit: 2MB. Depends on the server though.
 
 36. Usually 1 (fat) server should be able to handle everything. If you do a lot of backend work during peak hours however you could consider using a seperate backend server to handle admin users, process backend activity (cron), pre generate full page caching and to handle media queries.
 
@@ -129,19 +129,19 @@ The tips:
 
 40. Try some of these cache extensions: 
 
-41. https\://github.com/GordonLesti/Lesti\_Fpc
+41. https\://github.com/GordonLesti/Lesti_Fpc
 
 42. http\://www\.artio.net/magento-extensions/m-turbo-accelerator
 
-43. http\://www\.aitoc.com/en/magento\_booster.html
+43. http\://www\.aitoc.com/en/magento_booster.html
 
-45. Install the [Yireo DisableLog](http://www.yireo.com/software/magento-extensions/disablelog) addon. It prevents Magento writing tons of stuff to your database which is useless when you're already using something like Google Analytics.
+44. Install the [Yireo DisableLog](http://www.yireo.com/software/magento-extensions/disablelog) addon. It prevents Magento writing tons of stuff to your database which is useless when you're already using something like Google Analytics.
 
-46. Use Magento with HHVM (HipHop Virtual Machine). Facebook uses this too and they reported 6x to 9x server performance improvement. See http\://www\.slideshare.net/MeetMagentoNY2014/jenna-warren-14pm-23-sept.
+45. Use Magento with HHVM (HipHop Virtual Machine). Facebook uses this too and they reported 6x to 9x server performance improvement. See http\://www\.slideshare.net/MeetMagentoNY2014/jenna-warren-14pm-23-sept.
 
 ### B) Template
 
-1. Optimize all your (template) images- Most if not all should be at least below 10kb. Use nginx\_pagespeed.
+1. Optimize all your (template) images- Most if not all should be at least below 10kb. Use nginx_pagespeed.
 
 2. Crop the white space using your image editor.
 
@@ -153,9 +153,9 @@ The tips:
 
 6. Use[ CSS Sprites](http://css-tricks.com/css-sprites/), there even are [CSS Sprite Generators](http://www.google.nl/search?q=css+sprite+generator).
 
-7. Minify your Css, remove unused code. Use nginx\_pagespeed.
+7. Minify your Css, remove unused code. Use nginx_pagespeed.
 
-8. Minimize Javascript use. Use nginx\_pagespeed.
+8. Minimize Javascript use. Use nginx_pagespeed.
 
 9. Use a lightweight template as a basis for your template.
 
@@ -175,14 +175,13 @@ The tips:
 
 3. This is an example setting\[/caption]
 
-4. Enable all Magento Caches: *System -> Cache Management.\
+4. Enable all Magento Caches: \*System -> Cache Management.\
    \
-   *
+   -
 
 5. Use an offsite Stats Tracker like Google Analytics and not an onsite one. Most of this will use Javascript, host the Javascript yourself.
 
 6. , whichever works best for you.\
-
 
 7. Try some of the Magento performance extensions. Research the extensions, ask around fir experiences.
 
@@ -190,22 +189,22 @@ The tips:
 
 9. Don't use layered navigation if you don't really need it, it's resource intensive.
 
-10. Don't use Magento's Compilation feature. Use Aoe\_ClassPathCache instead.
+10. Don't use Magento's Compilation feature. Use Aoe_ClassPathCache instead.
 
 11. Use the correct session storage, choose file system or database (during setup). Most installations should use "file system" because it's faster and doesn't cause the database to grow. If you're on a cluster, use RedisSession.
 
 12. If it's good for your conversion, show more products. But be aware that showing more product on a category page will increase page load. But conversion trumps page load so test it.
 
-13. Set only those attribute frontend properties to 'Yes' that you're actually going to use. Set all other to 'No'. Don't use in quick search, advanced search compare, etc etc.: *Catalog -> Attributes -> Manage Atributes -> Frontend Properties.*
+13. Set only those attribute frontend properties to 'Yes' that you're actually going to use. Set all other to 'No'. Don't use in quick search, advanced search compare, etc etc.: _Catalog -> Attributes -> Manage Atributes -> Frontend Properties._
 
-*Enterprise only tip:*
+_Enterprise only tip:_
 
-* Disable Enterprise\_CatalogEvent. Go to Admin -> System -> Configuration -> Catalog -> Catalog Events.\
+- Disable Enterprise_CatalogEvent. Go to Admin -> System -> Configuration -> Catalog -> Catalog Events.\
   Then you want to turn off the settings for "Enable Catalog Events Functionality" and "Enable Catalog Event Widget".
 
-* Enable Solr search, it's quicker compared to the default setup, especially when you have lots of products (>10k).
+- Enable Solr search, it's quicker compared to the default setup, especially when you have lots of products (>10k).
 
-* Enable Full Page Caching.
+- Enable Full Page Caching.
 
 ### D) Speed testing, analysing, monitoring
 
@@ -219,6 +218,7 @@ The tips:
 
 5. Speed monitoring and downtime alerts.\
    \
+
       
 
 6. [Mon.itor.us](http://mon.itor.us/)
@@ -231,21 +231,21 @@ The tips:
 
 (because it doesn't actually speed up the frontend but only the backend):
 
-* Use [K-Meleon](http://kmeleon.sourceforge.net/) if you are on Windows for your general Admin work. It renders Magento’s heavy JS back-end significantly faster than any other browser.
+- Use [K-Meleon](http://kmeleon.sourceforge.net/) if you are on Windows for your general Admin work. It renders Magento’s heavy JS back-end significantly faster than any other browser.
 
-* Use the [GoogleGears extension from Yireo.com](http://www.yireo.com/software/magento-extensions/googlegears-for-magento) to cache static files locally.
+- Use the [GoogleGears extension from Yireo.com](http://www.yireo.com/software/magento-extensions/googlegears-for-magento) to cache static files locally.
 
-* Use a local pc/mac application to manage Magento (like [mag-manager.com](http://www.mag-manager.com/)).
+- Use a local pc/mac application to manage Magento (like [mag-manager.com](http://www.mag-manager.com/)).
 
 ### So to summarize:
 
-* Use a big fat server configured by a Magento specialist. Hardware helps, but configuration is key.
+- Use a big fat server configured by a Magento specialist. Hardware helps, but configuration is key.
 
-* Use nginx + nginx\_pagespeed and use mod\_pagespeed to tweak.
+- Use nginx + nginx_pagespeed and use mod_pagespeed to tweak.
 
-* Use the latest PHP version (currently 7) or HHVM
+- Use the latest PHP version (currently 7) or HHVM
 
-* Use a CDN like Cloudflare.
+- Use a CDN like Cloudflare.
 
 I do realize that you probably can't use all of the above tips but it's not about using them all, and sometimes you just make the choice to give a functionality a priority over performance and that's OK. If you can only apply some of them you will still increase speed and gain in user experience. And remember: because speed depends on many variables, some of the tips might not have an impact on your website at all while others can have a huge impact. So always test the impact of every step you take and take actions accordingly.\
 \

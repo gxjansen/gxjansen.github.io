@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
-import { parseHTML } from '../../../test/astro-test-utils';
+import { describe, it, expect } from "vitest";
+import { parseHTML } from "../../../test/astro-test-utils";
 
-describe('VideoEmbed', () => {
-  const mockYoutubeId = 'test123';
+describe("VideoEmbed", () => {
+  const mockYoutubeId = "test123";
 
-  it('renders video embed with correct structure', () => {
+  it("renders video embed with correct structure", () => {
     const html = `
       <div class="mb-12">
         <h2 class="h3 mb-4">Video Recording</h2>
@@ -22,31 +22,33 @@ describe('VideoEmbed', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check container structure
-    const container = parsedHtml.querySelector('div.mb-12');
+    const container = parsedHtml.querySelector("div.mb-12");
     expect(container).toBeTruthy();
-    
+
     // Check heading
-    const heading = parsedHtml.querySelector('h2');
+    const heading = parsedHtml.querySelector("h2");
     expect(heading).toBeTruthy();
-    expect(heading?.textContent).toBe('Video Recording');
+    expect(heading?.textContent).toBe("Video Recording");
 
     // Check iframe container
-    const iframeContainer = parsedHtml.querySelector('div.relative');
+    const iframeContainer = parsedHtml.querySelector("div.relative");
     expect(iframeContainer).toBeTruthy();
-    expect(iframeContainer?.classList.contains('bg-slate-100')).toBe(true);
-    expect(iframeContainer?.classList.contains('rounded-lg')).toBe(true);
+    expect(iframeContainer?.classList.contains("bg-slate-100")).toBe(true);
+    expect(iframeContainer?.classList.contains("rounded-lg")).toBe(true);
 
     // Check iframe attributes
-    const iframe = parsedHtml.querySelector('iframe');
+    const iframe = parsedHtml.querySelector("iframe");
     expect(iframe).toBeTruthy();
-    expect(iframe?.getAttribute('src')).toBe(`https://www.youtube.com/embed/${mockYoutubeId}`);
-    expect(iframe?.getAttribute('loading')).toBe('lazy');
-    expect(iframe?.hasAttribute('allowfullscreen')).toBe(true);
+    expect(iframe?.getAttribute("src")).toBe(
+      `https://www.youtube.com/embed/${mockYoutubeId}`,
+    );
+    expect(iframe?.getAttribute("loading")).toBe("lazy");
+    expect(iframe?.hasAttribute("allowfullscreen")).toBe(true);
   });
 
-  it('handles loading state correctly', () => {
+  it("handles loading state correctly", () => {
     const html = `
       <div class="mb-12">
         <div class="relative pb-[56.25%] bg-slate-100 dark:bg-slate-800 rounded-lg">
@@ -62,23 +64,23 @@ describe('VideoEmbed', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check loading state classes
-    const container = parsedHtml.querySelector('div.relative');
+    const container = parsedHtml.querySelector("div.relative");
     expect(container).toBeTruthy();
-    expect(container?.classList.contains('bg-slate-100')).toBe(true);
-    expect(container?.classList.contains('dark:bg-slate-800')).toBe(true);
+    expect(container?.classList.contains("bg-slate-100")).toBe(true);
+    expect(container?.classList.contains("dark:bg-slate-800")).toBe(true);
 
     // Check onload handler removes loading state
-    const iframe = parsedHtml.querySelector('iframe');
-    const onloadHandler = iframe?.getAttribute('onload');
+    const iframe = parsedHtml.querySelector("iframe");
+    const onloadHandler = iframe?.getAttribute("onload");
     expect(onloadHandler).toBeTruthy();
-    expect(onloadHandler).toContain('remove');
-    expect(onloadHandler).toContain('bg-slate-100');
-    expect(onloadHandler).toContain('dark:bg-slate-800');
+    expect(onloadHandler).toContain("remove");
+    expect(onloadHandler).toContain("bg-slate-100");
+    expect(onloadHandler).toContain("dark:bg-slate-800");
   });
 
-  it('includes error handling with fallback content', () => {
+  it("includes error handling with fallback content", () => {
     const html = `
       <div class="mb-12">
         <div class="relative pb-[56.25%] bg-slate-100 dark:bg-slate-800 rounded-lg">
@@ -95,17 +97,17 @@ describe('VideoEmbed', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check error handler content
-    const iframe = parsedHtml.querySelector('iframe');
-    const errorHandler = iframe?.getAttribute('onerror');
+    const iframe = parsedHtml.querySelector("iframe");
+    const errorHandler = iframe?.getAttribute("onerror");
     expect(errorHandler).toBeTruthy();
-    expect(errorHandler).toContain('Failed to load video');
-    expect(errorHandler).toContain('Watch on YouTube');
-    expect(errorHandler).toContain('https://www.youtube.com/watch?v=');
+    expect(errorHandler).toContain("Failed to load video");
+    expect(errorHandler).toContain("Watch on YouTube");
+    expect(errorHandler).toContain("https://www.youtube.com/watch?v=");
   });
 
-  it('has proper accessibility attributes', () => {
+  it("has proper accessibility attributes", () => {
     const html = `
       <div class="mb-12">
         <h2 class="h3 mb-4">Video Recording</h2>
@@ -122,14 +124,14 @@ describe('VideoEmbed', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check iframe title
-    const iframe = parsedHtml.querySelector('iframe');
-    expect(iframe?.getAttribute('title')).toBe('Presentation Video Recording');
+    const iframe = parsedHtml.querySelector("iframe");
+    expect(iframe?.getAttribute("title")).toBe("Presentation Video Recording");
 
     // Check heading structure
-    const heading = parsedHtml.querySelector('h2');
+    const heading = parsedHtml.querySelector("h2");
     expect(heading).toBeTruthy();
-    expect(heading?.classList.contains('h3')).toBe(true);
+    expect(heading?.classList.contains("h3")).toBe(true);
   });
 });

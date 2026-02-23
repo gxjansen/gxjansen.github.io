@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 
 // layout
 import BaseLayout from "@layouts/BaseLayout.astro";
@@ -9,72 +9,83 @@ import Badge from "@components/Badge/Badge.astro";
 import PresentationCard from "@components/Presentations/PresentationCard.astro";
 
 // content
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
 // Get all presentations
-const allPresentations: CollectionEntry<'presentations'>[] = await getCollection('presentations');
+const allPresentations: CollectionEntry<"presentations">[] =
+  await getCollection("presentations");
 
 // Filter out presentations without required data and those with isHidden: true
-const validPresentations: CollectionEntry<'presentations'>[] = allPresentations.filter(p => {
-  // Check if presentation has required fields
-  if (!p.data.title || !p.data.image) {
-    return false;
-  }
-  
-  // Filter out presentations with isHidden: true
-  return p.data.isHidden !== true;
-});
+const validPresentations: CollectionEntry<"presentations">[] =
+  allPresentations.filter((p) => {
+    // Check if presentation has required fields
+    if (!p.data.title || !p.data.image) {
+      return false;
+    }
+
+    // Filter out presentations with isHidden: true
+    return p.data.isHidden !== true;
+  });
 
 // Split into featured and non-featured
-const featuredPresentations: CollectionEntry<'presentations'>[] = validPresentations
-  .filter(p => p.data.isFeatured)
-  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+const featuredPresentations: CollectionEntry<"presentations">[] =
+  validPresentations
+    .filter((p) => p.data.isFeatured)
+    .sort((a, b) => (a.data.title ?? "").localeCompare(b.data.title ?? ""));
 
-const otherPresentations: CollectionEntry<'presentations'>[] = validPresentations
-  .filter(p => !p.data.isFeatured)
-  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+const otherPresentations: CollectionEntry<"presentations">[] =
+  validPresentations
+    .filter((p) => !p.data.isFeatured)
+    .sort((a, b) => (a.data.title ?? "").localeCompare(b.data.title ?? ""));
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Presentations"
   description="Presentations and workshops by Guido Jansen."
 >
   <section class="py-24 md:py-28">
     <div class="site-container">
       <div class="relative">
-          <!-- Featured Presentations -->
-          <div class="mx-auto mb-16 text-center md:max-w-4xl">
-            <Badge>Featured</Badge>
-            <h1 class="h1 mb-4">Featured Presentations</h1>
-            <p class="description text-lg md:text-xl">
-              A selection of my most popular presentations and workshops. Contact me if you're interested in having me speak at your event!
-            </p>
-          </div>
+        <!-- Featured Presentations -->
+        <div class="mx-auto mb-16 text-center md:max-w-4xl">
+          <Badge>Featured</Badge>
+          <h1 class="h1 mb-4">Featured Presentations</h1>
+          <p class="description text-lg md:text-xl">
+            A selection of my most popular presentations and workshops. Contact
+            me if you're interested in having me speak at your event!
+          </p>
+        </div>
 
-          <div class="cards-grid mb-32">
-            {featuredPresentations.map(presentation => (
+        <div class="cards-grid mb-32">
+          {
+            featuredPresentations.map((presentation) => (
               <div data-reveal="fade-up">
                 <PresentationCard presentation={presentation} />
               </div>
-            ))}
-          </div>
+            ))
+          }
+        </div>
 
-          <!-- Other Presentations -->
-          <div class="mx-auto mb-16 text-center md:max-w-4xl" data-reveal="fade-up">
-            <Badge>More</Badge>
-            <h2 class="h2 mb-4">More Presentations</h2>
-            <p class="description text-lg md:text-xl">
-              Other presentations and workshops I've given at various events.
-            </p>
-          </div>
+        <!-- Other Presentations -->
+        <div
+          class="mx-auto mb-16 text-center md:max-w-4xl"
+          data-reveal="fade-up"
+        >
+          <Badge>More</Badge>
+          <h2 class="h2 mb-4">More Presentations</h2>
+          <p class="description text-lg md:text-xl">
+            Other presentations and workshops I've given at various events.
+          </p>
+        </div>
 
-          <div class="cards-grid">
-            {otherPresentations.map(presentation => (
+        <div class="cards-grid">
+          {
+            otherPresentations.map((presentation) => (
               <div data-reveal="fade-up">
                 <PresentationCard presentation={presentation} />
               </div>
-            ))}
-          </div>
+            ))
+          }
         </div>
       </div>
     </div>

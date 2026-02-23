@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest';
-import { parseHTML } from '../../test/astro-test-utils';
-import { createMockLayoutProps } from '../../test/utils';
+import { describe, it, expect } from "vitest";
+import { parseHTML } from "../../test/astro-test-utils";
+import { createMockLayoutProps } from "../../test/utils";
 
-describe('BaseLayout', () => {
-  it('renders basic structure correctly', () => {
+describe("BaseLayout", () => {
+  it("renders basic structure correctly", () => {
     const props = createMockLayoutProps();
-    
+
     const markup = `
       <!doctype html>
       <html 
@@ -63,32 +63,32 @@ describe('BaseLayout', () => {
     `.trim();
 
     const parsedHtml = parseHTML(markup);
-    
+
     // Check basic structure
-    expect(parsedHtml.querySelector('html')).toBeTruthy();
-    expect(parsedHtml.querySelector('head')).toBeTruthy();
-    expect(parsedHtml.querySelector('body')).toBeTruthy();
-    expect(parsedHtml.querySelector('main')).toBeTruthy();
+    expect(parsedHtml.querySelector("html")).toBeTruthy();
+    expect(parsedHtml.querySelector("head")).toBeTruthy();
+    expect(parsedHtml.querySelector("body")).toBeTruthy();
+    expect(parsedHtml.querySelector("main")).toBeTruthy();
 
     // Check HTML attributes
-    const htmlElement = parsedHtml.querySelector('html');
-    expect(htmlElement?.getAttribute('lang')).toBe('en');
-    expect(htmlElement?.getAttribute('dir')).toBe('ltr');
-    expect(htmlElement?.classList.contains('antialiased')).toBe(true);
+    const htmlElement = parsedHtml.querySelector("html");
+    expect(htmlElement?.getAttribute("lang")).toBe("en");
+    expect(htmlElement?.getAttribute("dir")).toBe("ltr");
+    expect(htmlElement?.classList.contains("antialiased")).toBe(true);
 
     // Check meta tags
-    const title = parsedHtml.querySelector('title');
+    const title = parsedHtml.querySelector("title");
     expect(title?.textContent).toBe(props.title);
     const description = parsedHtml.querySelector('meta[name="description"]');
-    expect(description?.getAttribute('content')).toBe(props.description);
+    expect(description?.getAttribute("content")).toBe(props.description);
 
     // Check main content area
-    const main = parsedHtml.querySelector('main');
-    expect(main?.id).toBe('main-content');
-    expect(main?.classList.contains('transition-ready')).toBe(true);
+    const main = parsedHtml.querySelector("main");
+    expect(main?.id).toBe("main-content");
+    expect(main?.classList.contains("transition-ready")).toBe(true);
   });
 
-  it('includes background elements with proper accessibility', () => {
+  it("includes background elements with proper accessibility", () => {
     const markup = `
       <div class="fixed inset-0 z-background">
         <div 
@@ -111,19 +111,21 @@ describe('BaseLayout', () => {
     `.trim();
 
     const parsedHtml = parseHTML(markup);
-    
+
     // Check background elements
-    const backgroundElements = parsedHtml.querySelectorAll('[role="presentation"]');
+    const backgroundElements = parsedHtml.querySelectorAll(
+      '[role="presentation"]',
+    );
     expect(backgroundElements.length).toBe(3);
-    
+
     // Check accessibility attributes
-    backgroundElements.forEach(element => {
-      expect(element.getAttribute('aria-hidden')).toBe('true');
-      expect(element.getAttribute('role')).toBe('presentation');
+    backgroundElements.forEach((element) => {
+      expect(element.getAttribute("aria-hidden")).toBe("true");
+      expect(element.getAttribute("role")).toBe("presentation");
     });
   });
 
-  it('handles view transitions correctly', () => {
+  it("handles view transitions correctly", () => {
     const markup = `
       <main 
         id="main-content"
@@ -137,23 +139,23 @@ describe('BaseLayout', () => {
     `.trim();
 
     const parsedHtml = parseHTML(markup);
-    
+
     // Check transition attributes
-    const main = parsedHtml.querySelector('main');
-    expect(main?.classList.contains('transition-ready')).toBe(true);
-    expect(main?.getAttribute('transition:animate')).toBe('fade');
-    expect(main?.getAttribute('transition:animate.duration')).toBe('0.2');
-    expect(main?.getAttribute('transition:animate.timing')).toBe('ease-out');
+    const main = parsedHtml.querySelector("main");
+    expect(main?.classList.contains("transition-ready")).toBe(true);
+    expect(main?.getAttribute("transition:animate")).toBe("fade");
+    expect(main?.getAttribute("transition:animate.duration")).toBe("0.2");
+    expect(main?.getAttribute("transition:animate.timing")).toBe("ease-out");
   });
 
-  it('handles SEO meta tags correctly', () => {
+  it("handles SEO meta tags correctly", () => {
     const props = createMockLayoutProps({
-      type: 'blog',
-      title: 'Test Blog Post',
-      description: 'This is a test blog post',
-      noindex: true
+      type: "blog",
+      title: "Test Blog Post",
+      description: "This is a test blog post",
+      noindex: true,
     });
-    
+
     const markup = `
       <head>
         <title>${props.title}</title>
@@ -169,24 +171,54 @@ describe('BaseLayout', () => {
     `.trim();
 
     const parsedHtml = parseHTML(markup);
-    
+
     // Check basic meta tags
-    expect(parsedHtml.querySelector('title')?.textContent).toBe(props.title);
-    expect(parsedHtml.querySelector('meta[name="description"]')?.getAttribute('content')).toBe(props.description);
-    expect(parsedHtml.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex');
+    expect(parsedHtml.querySelector("title")?.textContent).toBe(props.title);
+    expect(
+      parsedHtml
+        .querySelector('meta[name="description"]')
+        ?.getAttribute("content"),
+    ).toBe(props.description);
+    expect(
+      parsedHtml.querySelector('meta[name="robots"]')?.getAttribute("content"),
+    ).toBe("noindex");
 
     // Check OpenGraph tags
-    expect(parsedHtml.querySelector('meta[property="og:title"]')?.getAttribute('content')).toBe(props.title);
-    expect(parsedHtml.querySelector('meta[property="og:description"]')?.getAttribute('content')).toBe(props.description);
-    expect(parsedHtml.querySelector('meta[property="og:type"]')?.getAttribute('content')).toBe('article');
+    expect(
+      parsedHtml
+        .querySelector('meta[property="og:title"]')
+        ?.getAttribute("content"),
+    ).toBe(props.title);
+    expect(
+      parsedHtml
+        .querySelector('meta[property="og:description"]')
+        ?.getAttribute("content"),
+    ).toBe(props.description);
+    expect(
+      parsedHtml
+        .querySelector('meta[property="og:type"]')
+        ?.getAttribute("content"),
+    ).toBe("article");
 
     // Check Twitter tags
-    expect(parsedHtml.querySelector('meta[name="twitter:title"]')?.getAttribute('content')).toBe(props.title);
-    expect(parsedHtml.querySelector('meta[name="twitter:description"]')?.getAttribute('content')).toBe(props.description);
-    expect(parsedHtml.querySelector('meta[name="twitter:card"]')?.getAttribute('content')).toBe('summary_large_image');
+    expect(
+      parsedHtml
+        .querySelector('meta[name="twitter:title"]')
+        ?.getAttribute("content"),
+    ).toBe(props.title);
+    expect(
+      parsedHtml
+        .querySelector('meta[name="twitter:description"]')
+        ?.getAttribute("content"),
+    ).toBe(props.description);
+    expect(
+      parsedHtml
+        .querySelector('meta[name="twitter:card"]')
+        ?.getAttribute("content"),
+    ).toBe("summary_large_image");
   });
 
-  it('includes performance optimizations', () => {
+  it("includes performance optimizations", () => {
     const markup = `
       <html>
         <head>
@@ -218,17 +250,17 @@ describe('BaseLayout', () => {
     `.trim();
 
     const parsedHtml = parseHTML(markup);
-    
+
     // Check performance CSS
-    const style = parsedHtml.querySelector('style');
-    expect(style?.textContent).toContain('will-change: opacity, transform');
-    expect(style?.textContent).toContain('transform: translateZ(0)');
-    expect(style?.textContent).toContain('backface-visibility: hidden');
+    const style = parsedHtml.querySelector("style");
+    expect(style?.textContent).toContain("will-change: opacity, transform");
+    expect(style?.textContent).toContain("transform: translateZ(0)");
+    expect(style?.textContent).toContain("backface-visibility: hidden");
 
     // Check performance script
-    const script = parsedHtml.querySelector('script');
-    expect(script?.textContent).toContain('astro:before-preparation');
-    expect(script?.textContent).toContain('astro:after-swap');
-    expect(script?.textContent).toContain('willChange');
+    const script = parsedHtml.querySelector("script");
+    expect(script?.textContent).toContain("astro:before-preparation");
+    expect(script?.textContent).toContain("astro:after-swap");
+    expect(script?.textContent).toContain("willChange");
   });
 });

@@ -11,17 +11,18 @@ heroImage: ../proving-the-monetary-value-of-a-b-testing/heroImage.jpeg
 categories:
   - Experimentation
 ---
+
 How to go from “4% conversion uplift” to “€636K — €854K extra profit this year”. Example calculation sheet included!
 
 I’ve created a method to calculate the impact of A/B testing in terms of yearly profit. And not unimportant: this has been accepted by the whole company. This method isn’t perfect, but it gives you as a CRO manager quite some power to prove the effect of your team.
 
 The prerequisites to do this:
 
-* showing what you normally would expect to get in terms of traffic, number of orders and average revenue (or even average profit) per order for the next 12 months. If you don’t have this, you could take data of the past 12 months as an alternative baseline.
+- showing what you normally would expect to get in terms of traffic, number of orders and average revenue (or even average profit) per order for the next 12 months. If you don’t have this, you could take data of the past 12 months as an alternative baseline.
 
-* You ran some **successful A/B test** :).
+- You ran some **successful A/B test** :).
 
-*\* I take 12 months so I don’t have to worry about any seasonal effects.*
+_\* I take 12 months so I don’t have to worry about any seasonal effects._
 
 Our BI/Finance team can already provide me with the baseline prediction (based on current numbers and including predictions on competitors, market changes, investments etc. etc.) so I don’t have to worry about that. Of course we also have some successful A/B tests at our disposal.
 
@@ -47,23 +48,23 @@ Now this is where it gets tricky. 2A) will get you a very precise (and usually q
 
 Some of the assumptions/corrections I do:
 
-* I assume a diminishing effect per month. I’ve set this to 2% which means\
+- I assume a diminishing effect per month. I’ve set this to 2% which means\
   that after a full year, you will only have 78% of the original effect\
   left.
 
-* When I do a test in a single or just a couple of countries, I always assume\
+- When I do a test in a single or just a couple of countries, I always assume\
   the effect will be less when applied in other countries. In the same\
   region I’ve set this to 25%, for countries outside the tested region\
   this is set to 50% (this is not included in the example sheet below).
 
-* A correction for the significance level (we test at 95%). This correction\
+- A correction for the significance level (we test at 95%). This correction\
   makes no sense when applied to one test, but when you do this for all\
   experiments that you implement, you can assume a certain part (around\
   23%,
 
 After all corrections I turn the single number that comes out of this equation into the upper limit of a range and subtract a percentage to get to a lower limit. For a country this is 20%, when applied to the same region it’s 40% and for the rest of the group this is 50%. All arbitrary numbers.
 
-And the result of all this? Instead of saying *“we have improved conversion by 4%”* I can now claim *“after implementation this test gives us €636K — €854K extra profit this year”*.
+And the result of all this? Instead of saying _“we have improved conversion by 4%”_ I can now claim _“after implementation this test gives us €636K — €854K extra profit this year”_.
 
 ### **Try it yourself!**
 
@@ -71,7 +72,7 @@ For obvious reasons I can’t share our own internal sheet (containing our compl
 
 ![](../proving-the-monetary-value-of-a-b-testing/Proving%20A-B%20Testing%20Value.png)
 
-[*Example of the calculation sheet*](https://docs.google.com/spreadsheets/d/10yG3lzoBMZG0Zw613qZiEdYToWc287FfQXCt_d-1MZs/edit?usp=sharing)
+[_Example of the calculation sheet_](https://docs.google.com/spreadsheets/d/10yG3lzoBMZG0Zw613qZiEdYToWc287FfQXCt_d-1MZs/edit?usp=sharing)
 
 Let me know if you think some things are off or if you have any improvements.
 
@@ -81,10 +82,10 @@ I highly recommend writing down all your assumptions in your calculation sheet. 
 
 Some more written down assumptions I have in my sheet:
 
-* We\
+- We\
   work across 12 countries with different currencies while the budget predictions are all int he same currency. Changes in exchange rates will not be taken into account.
 
-* During A/B tests we optimize for CR and AOV but the testing system cannot optimize for profit (technical limitation). Profit is a percentage of AOV but this is different for different countries and different products. This calculation assumes a stable relation between AOV and profit which is the best we can do right now.
+- During A/B tests we optimize for CR and AOV but the testing system cannot optimize for profit (technical limitation). Profit is a percentage of AOV but this is different for different countries and different products. This calculation assumes a stable relation between AOV and profit which is the best we can do right now.
 
 This also helps when sharing this sheet internally because: buy-in!
 

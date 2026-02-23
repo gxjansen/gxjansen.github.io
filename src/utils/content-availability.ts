@@ -1,24 +1,30 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 // Cache for content availability status
 let availabilityCache: Record<string, boolean> | null = null;
 
 // Load availability status from the generated JSON file
 function loadAvailabilityStatus(): Record<string, boolean> {
-  if (availabilityCache) {
+  if (availabilityCache !== null) {
     return availabilityCache;
   }
 
   try {
-    const statusPath = path.join(process.cwd(), 'src', 'data', 'content-availability.json');
+    const statusPath = path.join(
+      process.cwd(),
+      "src",
+      "data",
+      "content-availability.json",
+    );
     if (fs.existsSync(statusPath)) {
-      const content = fs.readFileSync(statusPath, 'utf-8');
-      availabilityCache = JSON.parse(content);
-      return availabilityCache;
+      const content = fs.readFileSync(statusPath, "utf-8");
+      const parsed: Record<string, boolean> = JSON.parse(content);
+      availabilityCache = parsed;
+      return parsed;
     }
   } catch (error) {
-    console.warn('Could not load content availability status:', error);
+    console.warn("Could not load content availability status:", error);
   }
 
   // Return empty object if no status file exists (all content assumed available)
@@ -28,7 +34,7 @@ function loadAvailabilityStatus(): Record<string, boolean> {
 // Check if a specific URL is available
 export function isContentAvailable(url: string): boolean {
   const status = loadAvailabilityStatus();
-  
+
   // If URL is not in the status object, assume it's available (hasn't been checked)
   return status[url] !== false;
 }
@@ -50,29 +56,34 @@ export function isArticleAvailable(articleUrl: string): boolean {
 }
 
 // Filter press coverage items to only include available content
-export function filterAvailableContent<T extends {
-  youtubeLink?: string;
-  spotifyEmbedId?: string;
-  articleUrl?: string;
-}>(items: T[]): T[] {
-  return items.filter(item => {
+export function filterAvailableContent<
+  T extends {
+    youtubeLink?: string;
+    spotifyEmbedId?: string;
+    articleUrl?: string;
+  },
+>(items: T[]): T[] {
+  return items.filter((item) => {
     // Check YouTube availability
     if (item.youtubeLink && !isYouTubeVideoAvailable(item.youtubeLink)) {
       return false;
     }
-    
+
     // Check Spotify availability
-    if (item.spotifyEmbedId && !isSpotifyEpisodeAvailable(item.spotifyEmbedId)) {
+    if (
+      item.spotifyEmbedId &&
+      !isSpotifyEpisodeAvailable(item.spotifyEmbedId)
+    ) {
       return false;
     }
-    
+
     // Check article availability
     if (item.articleUrl && !item.youtubeLink && !item.spotifyEmbedId) {
       if (!isArticleAvailable(item.articleUrl)) {
         return false;
       }
     }
-    
+
     return true;
   });
 }
@@ -89,11 +100,11 @@ export function getAvailabilityReport(): {
   const unavailableUrls = entries
     .filter(([_, available]) => !available)
     .map(([url]) => url);
-  
+
   return {
     total: entries.length,
     available: entries.filter(([_, available]) => available).length,
     unavailable: unavailableUrls.length,
-    unavailableUrls
+    unavailableUrls,
   };
 }

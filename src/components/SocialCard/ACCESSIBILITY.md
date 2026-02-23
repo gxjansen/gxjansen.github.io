@@ -1,12 +1,14 @@
 # SocialCard Accessibility Guidelines
 
 ## WCAG 2.1 AA Compliance
+
 - Color contrast ratio of at least 4.5:1 for text
 - Interactive elements are keyboard accessible
 - Focus indicators are visible
 - Touch targets are at least 44x44 pixels
 
 ## Implementation Details
+
 1. Semantic HTML
    - Uses semantic `<a>` tags for links
    - Proper heading hierarchy with `<h3>`
@@ -31,6 +33,7 @@
    - Clear visual hierarchy
 
 ## Testing Checklist
+
 - [ ] Test with keyboard navigation
 - [ ] Verify screen reader announcements
 - [ ] Check color contrast ratios

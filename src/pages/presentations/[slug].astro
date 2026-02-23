@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 
 // layout
 import BaseLayout from "@layouts/BaseLayout.astro";
@@ -12,107 +12,121 @@ import PresentationNav from "@components/Presentations/PresentationNav.astro";
 import RelatedEvents from "@components/RelatedEvents/RelatedEvents.astro";
 
 // content
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
 // Generate static paths for all non-hidden presentations
 export async function getStaticPaths() {
-  const allPresentations = await getCollection('presentations');
+  const allPresentations = await getCollection("presentations");
   // Filter out presentations with isHidden: true
-  const visiblePresentations = allPresentations.filter(p => p.data.isHidden !== true);
-  
-  return visiblePresentations.map(entry => ({
+  const visiblePresentations = allPresentations.filter(
+    (p) => p.data.isHidden !== true,
+  );
+
+  return visiblePresentations.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry, presentations: visiblePresentations },
   }));
 }
 
 interface Props {
-  entry: CollectionEntry<'presentations'>;
-  presentations: CollectionEntry<'presentations'>[];
+  entry: CollectionEntry<"presentations">;
+  presentations: CollectionEntry<"presentations">[];
 }
 
 const { entry, presentations } = Astro.props;
 const { Content } = await entry.render();
-const { 
-  title, 
-  duration, 
-  intendedAudience, 
-  isWorkshop, 
+const {
+  title,
+  duration,
+  intendedAudience,
+  isWorkshop,
   image,
   slideshareKey,
-  youtubeId 
+  youtubeId,
 } = entry.data;
 
-const metaDescription = `${title}${intendedAudience ? ` - For ${intendedAudience}` : ''}. ${duration} presentation${isWorkshop ? ' workshop' : ''}.`;
-const metaImage = new URL(image, Astro.site);
+const metaDescription = `${title}${intendedAudience ? ` - For ${intendedAudience}` : ""}. ${duration} presentation${isWorkshop ? " workshop" : ""}.`;
+const metaImage = image ? new URL(image, Astro.site) : undefined;
 ---
 
-<BaseLayout 
+<BaseLayout
   title={`${title} | Presentations`}
   description={metaDescription}
-  image={metaImage}
+  image={metaImage as any}
 >
   <div slot="head">
     <link rel="preload" as="image" href={image} />
     {youtubeId && <link rel="preconnect" href="https://www.youtube.com" />}
-    {slideshareKey && <link rel="preconnect" href="https://www.slideshare.net" />}
+    {
+      slideshareKey && (
+        <link rel="preconnect" href="https://www.slideshare.net" />
+      )
+    }
   </div>
 
   <section class="py-24 md:py-28">
     <div class="site-container">
       <div class="relative">
-          <div class="mx-auto max-w-4xl">
-            <div class="mb-8" data-reveal="fade-up">
-              <Badge>Presentation</Badge>
-              <h1 class="h2 mb-4">{title}</h1>
-              
-              <div class="mb-6 flex flex-wrap gap-3">
-                {duration && (
+        <div class="mx-auto max-w-4xl">
+          <div class="mb-8" data-reveal="fade-up">
+            <Badge>Presentation</Badge>
+            <h1 class="h2 mb-4">{title}</h1>
+
+            <div class="mb-6 flex flex-wrap gap-3">
+              {
+                duration && (
                   <span class="rounded-full bg-base-100 px-3 py-1 text-sm text-base-700 dark:bg-base-800 dark:text-base-300">
                     {duration}
                   </span>
-                )}
-                {isWorkshop && (
+                )
+              }
+              {
+                isWorkshop && (
                   <span class="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-800 dark:bg-primary-900 dark:text-primary-200">
                     Workshop
                   </span>
-                )}
-              </div>
+                )
+              }
+            </div>
 
-              {intendedAudience && (
+            {
+              intendedAudience && (
                 <p class="text-lg text-base-400 dark:text-base-300">
                   For: {intendedAudience}
                 </p>
-              )}
-            </div>
-
-            <div class="prose prose-lg dark:prose-invert mb-12">
-              <div class="relative rounded-lg mb-8 aspect-video" style="transform: translateZ(0);">
-                <img
-                  src={image}
-                  alt={title}
-                  width="800"
-                  height="450"
-                  class="absolute inset-0 w-full h-full object-cover rounded-lg"
-                  loading="eager"
-                  style="z-index: 100;"
-                  transition:name={`presentation-image-${entry.slug}`}
-                />
-              </div>
-              
-              <Content />
-            </div>
-
-            {slideshareKey && <SlideEmbed slideshareKey={slideshareKey} />}
-            {youtubeId && <VideoEmbed youtubeId={youtubeId} />}
-
-            <PresentationNav 
-              currentSlug={entry.slug}
-              presentations={presentations}
-            />
-
-            <RelatedEvents presentationSlug={entry.slug} />
+              )
+            }
           </div>
+
+          <div class="prose prose-lg mb-12 dark:prose-invert">
+            <div
+              class="relative mb-8 aspect-video rounded-lg"
+              style="transform: translateZ(0);"
+            >
+              <img
+                src={image}
+                alt={title}
+                width="800"
+                height="450"
+                class="absolute inset-0 h-full w-full rounded-lg object-cover"
+                loading="eager"
+                style="z-index: 100;"
+                transition:name={`presentation-image-${entry.slug}`}
+              />
+            </div>
+
+            <Content />
+          </div>
+
+          {slideshareKey && <SlideEmbed slideshareKey={slideshareKey} />}
+          {youtubeId && <VideoEmbed youtubeId={youtubeId} />}
+
+          <PresentationNav
+            currentSlug={entry.slug}
+            presentations={presentations}
+          />
+
+          <RelatedEvents presentationSlug={entry.slug} />
         </div>
       </div>
     </div>

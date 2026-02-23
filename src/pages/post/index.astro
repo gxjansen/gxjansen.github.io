@@ -20,12 +20,16 @@ const posts = await getCollection("post", ({ data }) => {
 });
 
 // Sort by date (newest first)
-const sortedPosts = posts.sort((a, b) => 
-  new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+const sortedPosts = posts.sort(
+  (a, b) =>
+    new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
 );
 ---
 
-<BaseLayout title="Blog | Guido X Jansen" description="Articles on community building, developer ecosystems, experimentation, and psychology-driven growth strategies.">
+<BaseLayout
+  title="Blog | Guido X Jansen"
+  description="Articles on community building, developer ecosystems, experimentation, and psychology-driven growth strategies."
+>
   <section class="py-24 md:py-28">
     <div class="site-container">
       <div>
@@ -34,10 +38,15 @@ const sortedPosts = posts.sort((a, b) =>
             <Badge>Blog</Badge>
             <h1 class="h1 mb-4">Latest Articles</h1>
             <p class="description text-lg md:text-xl">
-              I write about psychology, experimentation, e-commerce, homelabbing and more. Below you can find my latest articles.
+              I write about psychology, experimentation, e-commerce, homelabbing
+              and more. Below you can find my latest articles.
             </p>
             <div class="mt-6 flex justify-center">
-              <a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://notbyai.fyi/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src={HumanNotAI}
                   alt="Written-By-Human-Not-By-AI"
@@ -52,9 +61,11 @@ const sortedPosts = posts.sort((a, b) =>
           <!-- Blog posts grid -->
           <div class="mx-auto max-w-6xl">
             <div class="cards-grid">
-              {sortedPosts.map(post => (
-                <PostCardAtlas post={post} showDescription={true} />
-              ))}
+              {
+                sortedPosts.map((post) => (
+                  <PostCardAtlas post={post} showDescription={true} />
+                ))
+              }
             </div>
           </div>
         </div>

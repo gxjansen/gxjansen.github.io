@@ -1,22 +1,22 @@
 ---
 // Import the social links configuration
-import { socialLinks } from '@data/socialLinks';
-import SocialIcon from '@components/SocialIcon/SocialIcon.astro';
+import { socialLinks } from "@data/socialLinks";
+import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
 
 interface Props {
   class?: string;
-  location?: 'footer' | 'hero' | 'contact' | 'about';
-  context?: 'footer' | 'hero';
+  location?: "footer" | "hero" | "contact" | "about";
+  context?: "footer" | "hero";
 }
 
-const { 
-  class: className, 
-  location = 'footer', 
-  context = location 
+const {
+  class: className,
+  location = "footer",
+  context = location,
 } = Astro.props;
 
 // Explicitly filter links based on context
-const visibleLinks = socialLinks.filter(link => {
+const visibleLinks = socialLinks.filter((link) => {
   // Use context for filtering, with a fallback to location
   return link.visibility[context] === true;
 });
@@ -27,58 +27,20 @@ const visibleLinks = socialLinks.filter(link => {
   role="navigation"
   aria-label="Social media links"
 >
-  <ul 
+  <ul
     class:list={[
-      "flex items-center gap-2 sm:gap-3 md:gap-4 pointer-events-auto overflow-x-auto whitespace-nowrap [&::-webkit-scrollbar]:hidden",
-      context === 'footer' ? 'pr-6' : 'px-4 sm:px-0'
+      "pointer-events-auto flex items-center gap-2 overflow-x-auto whitespace-nowrap sm:gap-3 md:gap-4 [&::-webkit-scrollbar]:hidden",
+      context === "footer" ? "pr-6" : "px-4 sm:px-0",
     ]}
     role="list"
   >
     {
       visibleLinks.map(({ name, href, icon }) => (
         <li role="listitem" class="group relative pt-8">
-          <div class="
-            absolute 
-            left-1/2
-            -translate-x-1/2
-            [.group:first-child_&]:left-0
-            [.group:first-child_&]:translate-x-0
-            [.group:last-child_&]:left-auto
-            [.group:last-child_&]:right-0
-            [.group:last-child_&]:translate-x-0
-            top-0
-            opacity-0 
-            group-hover:opacity-100 
-            transition-opacity 
-            duration-200
-            pointer-events-none
-            z-[100]
-          ">
-            <div class="
-              bg-base-900/90 
-              text-base-50 
-              text-xs 
-              px-2.5 
-              py-1.5 
-              rounded-md
-              whitespace-nowrap
-              shadow-lg
-              backdrop-blur-sm
-              border
-              border-base-700/20
-              mb-6
-            ">
+          <div class="pointer-events-none absolute left-1/2 top-0 z-[100] -translate-x-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 [.group:first-child_&]:left-0 [.group:first-child_&]:translate-x-0 [.group:last-child_&]:left-auto [.group:last-child_&]:right-0 [.group:last-child_&]:translate-x-0">
+            <div class="mb-6 whitespace-nowrap rounded-md border border-base-700/20 bg-base-900/90 px-2.5 py-1.5 text-xs text-base-50 shadow-lg backdrop-blur-sm">
               {name}
-              <div class="
-                absolute 
-                left-1/2 
-                -translate-x-1/2
-                border-4 
-                border-transparent 
-                border-t-base-900/90
-                top-full
-                -mt-px
-              "></div>
+              <div class="absolute left-1/2 top-full -mt-px -translate-x-1/2 border-4 border-transparent border-t-base-900/90" />
             </div>
           </div>
           <SocialIcon
@@ -87,7 +49,9 @@ const visibleLinks = socialLinks.filter(link => {
             social={name}
             class:list={[
               "transition-transform hover:scale-110",
-              context === 'footer' ? 'w-6 h-6 sm:w-6 sm:h-6' : 'w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8'
+              context === "footer"
+                ? "h-6 w-6 sm:h-6 sm:w-6"
+                : "h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8",
             ]}
           />
         </li>

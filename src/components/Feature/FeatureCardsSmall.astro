@@ -41,9 +41,10 @@ const featureData: FeatureData[] = [
 
 // Check for reduced motion preference
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-const shouldReduceMotion = typeof window !== "undefined" 
-  ? window.matchMedia(reducedMotionQuery).matches 
-  : false;
+const shouldReduceMotion =
+  typeof window !== "undefined"
+    ? window.matchMedia(reducedMotionQuery).matches
+    : false;
 ---
 
 <section
@@ -51,21 +52,10 @@ const shouldReduceMotion = typeof window !== "undefined"
   class="py-24 md:py-28"
   aria-labelledby="features-heading"
 >
-  <div 
-    class="relative"
-    role="presentation"
-  >
-    <div 
-      class="mb-16 text-center md:max-w-4xl mx-auto" 
-      data-reveal="fade-up"
-    >
+  <div class="relative" role="presentation">
+    <div class="mx-auto mb-16 text-center md:max-w-4xl" data-reveal="fade-up">
       <Badge>Strategic Impact</Badge>
-      <h2
-        id="features-heading"
-        class="h2 mb-4"
-      >
-        Strategic Impact Areas
-      </h2>
+      <h2 id="features-heading" class="h2 mb-4">Strategic Impact Areas</h2>
       <p
         class="description text-pretty text-lg md:text-xl"
         aria-describedby="features-heading"
@@ -74,64 +64,67 @@ const shouldReduceMotion = typeof window !== "undefined"
       </p>
     </div>
     {/* Desktop Grid Layout */}
-    <div 
-      class="hidden lg:grid lg:grid-cols-3 gap-6 site-container"
+    <div
+      class="site-container hidden gap-6 lg:grid lg:grid-cols-3"
       role="list"
       aria-label="Services grid"
     >
       {
         featureData.map((feature, idx) => (
           <div role="listitem">
-              <FeatureCard
-                title={feature.title}
-                text={feature.text}
-                icon={feature.icon}
-                suffix="-desktop"
-                data-reveal="zoom-in"
-                data-reveal-delay={idx + 1}
-              />
+            <FeatureCard
+              title={feature.title}
+              text={feature.text}
+              icon={feature.icon}
+              suffix="-desktop"
+              data-reveal="zoom-in"
+              data-reveal-delay={idx + 1}
+            />
           </div>
         ))
       }
     </div>
 
     {/* Mobile/Tablet Carousel */}
-    <div 
-      class="scroll-container-wrapper lg:hidden site-container"
+    <div
+      class="scroll-container-wrapper site-container lg:hidden"
       id="feature-cards-carousel"
     >
       <div class="relative">
         <div class="carousel-header">
-          <span 
-            class="sr-only" 
-            role="status" 
+          <span
+            class="sr-only"
+            role="status"
             aria-live="polite"
             id="carousel-status"
           >
-            Services carousel. Use left and right arrow buttons or swipe to navigate through items.
+            Services carousel. Use left and right arrow buttons or swipe to
+            navigate through items.
           </span>
-          
-          <div 
-            class="carousel-progress" 
-            role="progressbar" 
+
+          <div
+            class="carousel-progress"
+            role="progressbar"
             aria-label="Services carousel progress"
             aria-labelledby="carousel-status"
-            aria-valuemin="1" 
+            aria-valuemin="1"
             aria-valuemax={featureData.length}
             aria-valuenow="1"
             id="services-carousel-progress"
           >
-            {featureData.map((_, idx) => (
-              <div 
-                class="progress-dot"
-                data-active={idx === 0 ? "true" : "false"}
-                aria-hidden="true"
-              />
-            ))}
+            {
+              featureData.map((_, idx) => (
+                <div
+                  class="progress-dot"
+                  data-active={idx === 0 ? "true" : "false"}
+                  aria-hidden="true"
+                />
+              ))
+            }
           </div>
         </div>
 
-        <button 
+        <button
           class="nav-button left-button"
           aria-label={`View previous items. Currently at item 1 of ${featureData.length}`}
           disabled
@@ -139,19 +132,16 @@ const shouldReduceMotion = typeof window !== "undefined"
           <span aria-hidden="true">❮</span>
         </button>
 
-          <div
-            class="scroll-container"
-            role="list"
-            aria-label={`Feature cards carousel with ${featureData.length} items`}
-            tabindex="0"
-            id="feature-cards-container"
-          >
+        <div
+          class="scroll-container"
+          role="list"
+          aria-label={`Feature cards carousel with ${featureData.length} items`}
+          tabindex="0"
+          id="feature-cards-container"
+        >
           {
             featureData.map((feature, idx) => (
-              <div 
-                class="scroll-item" 
-                role="listitem"
-              >
+              <div class="scroll-item" role="listitem">
                 <FeatureCard
                   title={feature.title}
                   text={feature.text}
@@ -165,10 +155,7 @@ const shouldReduceMotion = typeof window !== "undefined"
           }
         </div>
 
-        <button 
-          class="nav-button right-button"
-          aria-label="Next items"
-        >
+        <button class="nav-button right-button" aria-label="Next items">
           <span aria-hidden="true">❯</span>
         </button>
       </div>
@@ -176,93 +163,122 @@ const shouldReduceMotion = typeof window !== "undefined"
 
     <script define:vars={{ totalItems: featureData.length }}>
       // Handle carousel navigation
-      const wrapper = document.querySelector('#feature-cards-carousel');
-      const container = wrapper?.querySelector('#feature-cards-container');
-      const leftButton = wrapper?.querySelector('.left-button');
-      const rightButton = wrapper?.querySelector('.right-button');
+      const wrapper = document.querySelector("#feature-cards-carousel");
+      const container = wrapper?.querySelector("#feature-cards-container");
+      const leftButton = wrapper?.querySelector(".left-button");
+      const rightButton = wrapper?.querySelector(".right-button");
 
       if (wrapper && container && leftButton && rightButton) {
         const scrollAmount = container.clientWidth * 0.8; // 80% of container width
-        const progressDots = wrapper?.querySelectorAll('.progress-dot');
+        const progressDots = wrapper?.querySelectorAll(".progress-dot");
 
         const updateCarouselState = () => {
-          if (!container || !leftButton || !rightButton || !progressDots) return;
+          if (!container || !leftButton || !rightButton || !progressDots)
+            return;
 
           const isAtStart = container.scrollLeft <= 10;
-          const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10;
-          
+          const isAtEnd =
+            container.scrollLeft + container.clientWidth >=
+            container.scrollWidth - 10;
+
           // Update button states
           leftButton.disabled = isAtStart;
           rightButton.disabled = isAtEnd;
-          leftButton.setAttribute('aria-disabled', isAtStart.toString());
-          rightButton.setAttribute('aria-disabled', isAtEnd.toString());
+          leftButton.setAttribute("aria-disabled", isAtStart.toString());
+          rightButton.setAttribute("aria-disabled", isAtEnd.toString());
 
           // Calculate current item index
-          const scrollPercentage = container.scrollLeft / (container.scrollWidth - container.clientWidth);
+          const scrollPercentage =
+            container.scrollLeft /
+            (container.scrollWidth - container.clientWidth);
           const currentIndex = Math.round(scrollPercentage * (totalItems - 1));
 
           // Update progress dots
           progressDots.forEach((dot, idx) => {
-            dot.setAttribute('data-active', (idx === currentIndex).toString());
+            dot.setAttribute("data-active", (idx === currentIndex).toString());
           });
 
           // Update ARIA labels
-          leftButton.setAttribute('aria-label', `View previous items. Currently at item ${currentIndex + 1} of ${totalItems}`);
-          rightButton.setAttribute('aria-label', `View next items. Currently at item ${currentIndex + 1} of ${totalItems}`);
+          leftButton.setAttribute(
+            "aria-label",
+            `View previous items. Currently at item ${currentIndex + 1} of ${totalItems}`,
+          );
+          rightButton.setAttribute(
+            "aria-label",
+            `View next items. Currently at item ${currentIndex + 1} of ${totalItems}`,
+          );
 
           // Update screen reader status and progressbar
           const status = wrapper?.querySelector('[role="status"]');
           const progressbar = wrapper?.querySelector('[role="progressbar"]');
-          
+
           if (status) {
             status.textContent = `Viewing item ${currentIndex + 1} of ${totalItems}. Use left and right arrow buttons or swipe to navigate.`;
           }
-          
+
           if (progressbar) {
-            progressbar.setAttribute('aria-valuenow', (currentIndex + 1).toString());
-            progressbar.setAttribute('aria-valuetext', `Item ${currentIndex + 1} of ${totalItems}`);
+            progressbar.setAttribute(
+              "aria-valuenow",
+              (currentIndex + 1).toString(),
+            );
+            progressbar.setAttribute(
+              "aria-valuetext",
+              `Item ${currentIndex + 1} of ${totalItems}`,
+            );
           }
         };
 
         // Button click handlers with improved feedback
-        leftButton.addEventListener('click', (e) => {
+        leftButton.addEventListener("click", (e) => {
           e.stopPropagation();
-          container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+          container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
           updateCarouselState();
         });
 
-        rightButton.addEventListener('click', (e) => {
+        rightButton.addEventListener("click", (e) => {
           e.stopPropagation();
-          container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+          container.scrollBy({ left: scrollAmount, behavior: "smooth" });
           updateCarouselState();
         });
 
         // Keyboard navigation
-        container.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') {
-            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-          } else if (e.key === 'ArrowRight') {
-            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        container.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") {
+            container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+          } else if (e.key === "ArrowRight") {
+            container.scrollBy({ left: scrollAmount, behavior: "smooth" });
           }
         });
 
         // Update carousel state on scroll, resize, and after animations
-        container.addEventListener('scroll', updateCarouselState, { passive: true });
-        window.addEventListener('resize', updateCarouselState, { passive: true });
-        container.addEventListener('scrollend', updateCarouselState);
-        
+        container.addEventListener("scroll", updateCarouselState, {
+          passive: true,
+        });
+        window.addEventListener("resize", updateCarouselState, {
+          passive: true,
+        });
+        container.addEventListener("scrollend", updateCarouselState);
+
         // Initial state
         updateCarouselState();
 
         // Touch swipe feedback
-        container.addEventListener('touchstart', () => {
-          container.style.scrollSnapType = 'none'; // Disable snap during swipe
-        }, { passive: true });
+        container.addEventListener(
+          "touchstart",
+          () => {
+            container.style.scrollSnapType = "none"; // Disable snap during swipe
+          },
+          { passive: true },
+        );
 
-        container.addEventListener('touchend', () => {
-          container.style.scrollSnapType = 'x mandatory'; // Re-enable snap after swipe
-          updateCarouselState();
-        }, { passive: true });
+        container.addEventListener(
+          "touchend",
+          () => {
+            container.style.scrollSnapType = "x mandatory"; // Re-enable snap after swipe
+            updateCarouselState();
+          },
+          { passive: true },
+        );
       }
     </script>
   </div>
@@ -270,32 +286,34 @@ const shouldReduceMotion = typeof window !== "undefined"
 
 <script>
   // Handle reduced motion preference changes
-  if (typeof window !== 'undefined') {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (typeof window !== "undefined") {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
-      const elements = document.querySelectorAll('[data-reveal]');
-      elements.forEach(element => {
+      const elements = document.querySelectorAll("[data-reveal]");
+      elements.forEach((element) => {
         if (e.matches) {
-          element.setAttribute('data-reveal', '');
-          element.removeAttribute('data-reveal-delay');
+          element.setAttribute("data-reveal", "");
+          element.removeAttribute("data-reveal-delay");
         } else {
           // Restore original animations
-          const isHeader = element.classList.contains('mb-16');
+          const isHeader = element.classList.contains("mb-16");
           const isCard = element.closest('[role="listitem"]');
 
           if (isHeader) {
-            element.setAttribute('data-reveal', 'fade-up');
+            element.setAttribute("data-reveal", "fade-up");
           } else if (isCard) {
-            const index = Array.from(document.querySelectorAll('[role="listitem"]')).indexOf(isCard);
-            element.setAttribute('data-reveal', 'zoom-in');
-            element.setAttribute('data-reveal-delay', (index + 1).toString());
+            const index = Array.from(
+              document.querySelectorAll('[role="listitem"]'),
+            ).indexOf(isCard);
+            element.setAttribute("data-reveal", "zoom-in");
+            element.setAttribute("data-reveal-delay", (index + 1).toString());
           }
         }
       });
     }
 
-    mediaQuery.addEventListener('change', handleMotionPreference);
+    mediaQuery.addEventListener("change", handleMotionPreference);
     handleMotionPreference(mediaQuery);
   }
 </script>

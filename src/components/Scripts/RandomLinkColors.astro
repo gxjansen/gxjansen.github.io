@@ -1,58 +1,59 @@
 <script is:inline>
-// Rosé Pine accent color pairs (light Dawn / dark Main variants)
-const linkColors = [
-  { light: '--link-love-light', dark: '--link-love-dark' },   // reds
-  { light: '--link-gold-light', dark: '--link-gold-dark' },   // yellows
-  { light: '--link-rose-light', dark: '--link-rose-dark' },   // highlights
-  { light: '--link-pine-light', dark: '--link-pine-dark' },   // greens/teals
-  { light: '--link-foam-light', dark: '--link-foam-dark' },   // blues/cyans
-  { light: '--link-iris-light', dark: '--link-iris-dark' }    // purples
-];
+  // Rosé Pine accent color pairs (light Dawn / dark Main variants)
+  const linkColors = [
+    { light: "--link-love-light", dark: "--link-love-dark" }, // reds
+    { light: "--link-gold-light", dark: "--link-gold-dark" }, // yellows
+    { light: "--link-rose-light", dark: "--link-rose-dark" }, // highlights
+    { light: "--link-pine-light", dark: "--link-pine-dark" }, // greens/teals
+    { light: "--link-foam-light", dark: "--link-foam-dark" }, // blues/cyans
+    { light: "--link-iris-light", dark: "--link-iris-dark" }, // purples
+  ];
 
-// Function to get a random color pair
-function getRandomColorPair() {
-  return linkColors[Math.floor(Math.random() * linkColors.length)];
-}
+  // Function to get a random color pair
+  function getRandomColorPair() {
+    return linkColors[Math.floor(Math.random() * linkColors.length)];
+  }
 
-// Function to apply colors to links
-function applyLinkColors() {
-  const selector = 'a:not(.card-container, [role="menuitem"], nav a, header a, footer a, .btn, [class*="button"], .social-card, .social-card *, .site-content a, .site-content *, .services-icon a, .services-icon *, [class*="group flex h-full"], .linkedin-cta a, .content-type-selector a, [class*="bg-primary-"], .article-card h3 a, .event-card a, .site-content-card a, .badge a, .card h2 a, [class*="hover:text-primary"], [class*="bg-primary-100"], [class*="rounded-full"], .no-random-underline)';
-  
-  document.querySelectorAll(selector).forEach(link => {
-    if (link.classList.contains('no-random-underline')) return;
-    
-    const { light, dark } = getRandomColorPair();
-    const isDark = document.documentElement.classList.contains('dark');
-    
-    // Get the color value from CSS variable
-    const color = getComputedStyle(document.documentElement)
-      .getPropertyValue(isDark ? dark : light)
-      .trim();
-    
-    // Apply the color to the link's underline
-    link.style.textDecorationColor = color;
-  });
-}
+  // Function to apply colors to links
+  function applyLinkColors() {
+    const selector =
+      'a:not(.card-container, [role="menuitem"], nav a, header a, footer a, .btn, [class*="button"], .social-card, .social-card *, .site-content a, .site-content *, .services-icon a, .services-icon *, [class*="group flex h-full"], .linkedin-cta a, .content-type-selector a, [class*="bg-primary-"], .article-card h3 a, .event-card a, .site-content-card a, .badge a, .card h2 a, [class*="hover:text-primary"], [class*="bg-primary-100"], [class*="rounded-full"], .no-random-underline)';
 
-// Apply colors on page load (deferred to not block main thread)
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(applyLinkColors);
-} else {
-  setTimeout(applyLinkColors, 0);
-}
-document.addEventListener('astro:after-swap', applyLinkColors);
+    document.querySelectorAll(selector).forEach((link) => {
+      if (link.classList.contains("no-random-underline")) return;
 
-// Watch for theme changes (debounced to avoid performance issues)
-const observer = new MutationObserver(() => {
-  if ('requestIdleCallback' in window) {
+      const { light, dark } = getRandomColorPair();
+      const isDark = document.documentElement.classList.contains("dark");
+
+      // Get the color value from CSS variable
+      const color = getComputedStyle(document.documentElement)
+        .getPropertyValue(isDark ? dark : light)
+        .trim();
+
+      // Apply the color to the link's underline
+      link.style.textDecorationColor = color;
+    });
+  }
+
+  // Apply colors on page load (deferred to not block main thread)
+  if ("requestIdleCallback" in window) {
     requestIdleCallback(applyLinkColors);
   } else {
     setTimeout(applyLinkColors, 0);
   }
-});
+  document.addEventListener("astro:after-swap", applyLinkColors);
 
-observer.observe(document.documentElement, {
-  attributes: true,
-  attributeFilter: ['class']
-});
+  // Watch for theme changes (debounced to avoid performance issues)
+  const observer = new MutationObserver(() => {
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(applyLinkColors);
+    } else {
+      setTimeout(applyLinkColors, 0);
+    }
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
 </script>

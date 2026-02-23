@@ -1,6 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import 'bluesky-comments/bluesky-comments.css';
-import { BlueskyComments as BlueskyCommentsLib, BlueskyFilters } from 'bluesky-comments';
+import React, { useState, useEffect, useCallback } from "react";
+import "bluesky-comments/bluesky-comments.css";
+import {
+  BlueskyComments as BlueskyCommentsLib,
+  BlueskyFilters,
+} from "bluesky-comments";
 
 interface Props {
   uri?: string;
@@ -16,7 +19,7 @@ interface CommentEmptyDetails {
 // Bluesky butterfly logo SVG path
 const BlueskyLogo = () => (
   <svg
-    className="w-5 h-5"
+    className="h-5 w-5"
     viewBox="0 0 568 501"
     fill="currentColor"
     aria-hidden="true"
@@ -28,13 +31,13 @@ const BlueskyLogo = () => (
 // Convert web URL to direct reply link
 function getReplyUrl(uri: string): string {
   // If it's already a web URL, use it directly
-  if (uri.startsWith('https://bsky.app/')) {
+  if (uri.startsWith("https://bsky.app/")) {
     return uri;
   }
   // Convert AT URI to web URL
   return uri
-    .replace('at://', 'https://bsky.app/profile/')
-    .replace('/app.bsky.feed.post/', '/post/');
+    .replace("at://", "https://bsky.app/profile/")
+    .replace("/app.bsky.feed.post/", "/post/");
 }
 
 /**
@@ -43,7 +46,9 @@ function getReplyUrl(uri: string): string {
  * - If no uri: Shows a "Discuss on Bluesky" share button
  */
 export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
-  const [emptyDetails, setEmptyDetails] = useState<CommentEmptyDetails | null>(null);
+  const [emptyDetails, setEmptyDetails] = useState<CommentEmptyDetails | null>(
+    null,
+  );
 
   // Generate share URL for posts not yet linked
   const shareText = `${postTitle}\n\n${postUrl}`;
@@ -64,21 +69,21 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
     return (
       <section className="bluesky-comments-section mt-12">
         <aside
-          className="rounded-xl border border-base-300 dark:border-base-700 bg-base-50 dark:bg-base-900 p-6"
+          className="rounded-xl border border-base-300 bg-base-50 p-6 dark:border-base-700 dark:bg-base-900"
           aria-label="Comments"
         >
-          <h3 className="text-xl font-bold mb-4 text-base-900 dark:text-base-100">
+          <h3 className="mb-4 text-xl font-bold text-base-900 dark:text-base-100">
             Comments
           </h3>
-          <div className="text-center py-4">
-            <p className="text-base-600 dark:text-base-400 mb-4">
+          <div className="py-4 text-center">
+            <p className="mb-4 text-base-600 dark:text-base-400">
               Want to discuss this post? Start a conversation on Bluesky.
             </p>
             <a
               href={shareUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bsky-btn inline-flex items-center gap-2 px-4 py-2 bg-[#0066CC] hover:bg-[#0052A3] !text-white font-medium rounded-lg transition-colors"
+              className="bsky-btn inline-flex items-center gap-2 rounded-lg bg-[#0066CC] px-4 py-2 font-medium !text-white transition-colors hover:bg-[#0052A3]"
             >
               <BlueskyLogo />
               Discuss on Bluesky
@@ -92,21 +97,22 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
   const replyUrl = getReplyUrl(uri);
 
   // Determine if this is an error or just no comments
-  const isError = emptyDetails?.code === 'error' || emptyDetails?.code === 'network_error';
+  const isError =
+    emptyDetails?.code === "error" || emptyDetails?.code === "network_error";
 
   // Show empty/error state
   if (emptyDetails) {
     return (
       <section className="bluesky-comments-section mt-12">
         <aside
-          className="rounded-xl border border-base-300 dark:border-base-700 bg-base-50 dark:bg-base-900 p-6"
+          className="rounded-xl border border-base-300 bg-base-50 p-6 dark:border-base-700 dark:bg-base-900"
           aria-label="Comments"
         >
-          <h3 className="text-xl font-bold mb-4 text-base-900 dark:text-base-100">
+          <h3 className="mb-4 text-xl font-bold text-base-900 dark:text-base-100">
             Comments
           </h3>
-          <div className="text-center py-4">
-            <p className="text-base-600 dark:text-base-400 mb-4">
+          <div className="py-4 text-center">
+            <p className="mb-4 text-base-600 dark:text-base-400">
               {isError
                 ? "Couldn't load comments. Join the conversation on Bluesky!"
                 : "No comments yet. Be the first to join the conversation!"}
@@ -115,7 +121,7 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
               href={replyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bsky-btn inline-flex items-center gap-2 px-4 py-2 bg-[#0066CC] hover:bg-[#0052A3] !text-white font-medium rounded-lg transition-colors"
+              className="bsky-btn inline-flex items-center gap-2 rounded-lg bg-[#0066CC] px-4 py-2 font-medium !text-white transition-colors hover:bg-[#0052A3]"
             >
               <BlueskyLogo />
               Reply on Bluesky
@@ -130,24 +136,22 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
   return (
     <section className="bluesky-comments-section mt-12">
       <aside
-        className="rounded-xl border border-base-300 dark:border-base-700 bg-base-50 dark:bg-base-900 p-6"
+        className="rounded-xl border border-base-300 bg-base-50 p-6 dark:border-base-700 dark:bg-base-900"
         aria-label="Comments from Bluesky"
       >
         <div className="bluesky-comments-wrapper">
           <BlueskyCommentsLib
             uri={uri}
-            commentFilters={[
-              BlueskyFilters.MinCharacterCountFilter(3),
-            ]}
+            commentFilters={[BlueskyFilters.MinCharacterCountFilter(3)]}
             onEmpty={handleEmpty}
           />
         </div>
-        <div className="mt-6 pt-4 border-t border-base-200 dark:border-base-700 text-center">
+        <div className="mt-6 border-t border-base-200 pt-4 text-center dark:border-base-700">
           <a
             href={replyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[#0066CC] dark:text-[#4da6ff] hover:underline text-sm font-medium"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#0066CC] hover:underline dark:text-[#4da6ff]"
           >
             <BlueskyLogo />
             Join the conversation on Bluesky

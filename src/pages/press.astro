@@ -12,25 +12,31 @@ import ListingsSection from "@components/Press/ListingsSection.astro";
 import LinkedInCTA from "@components/Press/LinkedInCTA.astro";
 
 // data
-import { pressCoverage } from '../data/press-coverage';
-import { filterAvailableContent } from '../utils/content-availability';
+import { pressCoverage } from "../data/press-coverage";
+import { filterAvailableContent } from "../utils/content-availability";
 
 // Filter out unavailable content
 const availableCoverage = filterAvailableContent(pressCoverage);
 
 // Sort press coverage by date
-const sortedCoverage = [...availableCoverage].sort((a, b) =>
-  new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime()
+const sortedCoverage = [...availableCoverage].sort(
+  (a, b) =>
+    new Date(b.publicationDate).getTime() -
+    new Date(a.publicationDate).getTime(),
 );
 
 // Separate content by category
-const listings = sortedCoverage.filter(item => item.category === 'listing');
+const listings = sortedCoverage.filter((item) => item.category === "listing");
 
 // For remaining content (interviews/default), separate by media type
-const interviewContent = sortedCoverage.filter(item => !item.category || item.category === 'interview');
-const videos = interviewContent.filter(item => item.youtubeLink);
-const podcasts = interviewContent.filter(item => item.spotifyEmbedId);
-const articles = interviewContent.filter(item => !item.youtubeLink && !item.spotifyEmbedId);
+const interviewContent = sortedCoverage.filter(
+  (item) => !item.category || item.category === "interview",
+);
+const videos = interviewContent.filter((item) => item.youtubeLink);
+const podcasts = interviewContent.filter((item) => item.spotifyEmbedId);
+const articles = interviewContent.filter(
+  (item) => !item.youtubeLink && !item.spotifyEmbedId,
+);
 
 // Log if any content was filtered out
 const filteredCount = pressCoverage.length - availableCoverage.length;
@@ -39,31 +45,36 @@ if (filteredCount > 0) {
 }
 
 // Debug: Log content counts
-console.log('Content counts:', {
+console.log("Content counts:", {
   total: sortedCoverage.length,
   videos: videos.length,
   podcasts: podcasts.length,
   articles: articles.length,
-  listings: listings.length
+  listings: listings.length,
 });
 
 // Debug: Log video data
-console.log('Video data:', videos.map(video => ({
-  title: video.title,
-  url: video.youtubeLink
-})));
+console.log(
+  "Video data:",
+  videos.map((video) => ({
+    title: video.title,
+    url: video.youtubeLink,
+  })),
+);
 
 // Get first few video IDs for preloading
 const firstVideoIds = videos
   .slice(0, 2)
-  .map(video => {
-    const match = video.youtubeLink?.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
-    return match ? match[1] : '';
+  .map((video) => {
+    const match = video.youtubeLink?.match(
+      /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/,
+    );
+    return match ? match[1] : "";
   })
   .filter(Boolean);
 ---
 
-<BaseLayout 
+<BaseLayout
   title="Press / Media"
   description="Media appearances, interviews and articles featuring Guido Jansen."
 >
@@ -73,21 +84,23 @@ const firstVideoIds = videos
     <link rel="preconnect" href="https://www.youtube.com" />
     <link rel="preconnect" href="https://i.ytimg.com" />
     <link rel="preconnect" href="https://open.spotify.com" />
-    
+
     <!-- DNS prefetch as fallback -->
     <link rel="dns-prefetch" href="https://www.youtube.com" />
     <link rel="dns-prefetch" href="https://i.ytimg.com" />
     <link rel="dns-prefetch" href="https://open.spotify.com" />
-    
+
     <!-- Preload critical thumbnails -->
-    {firstVideoIds.map(videoId => (
-      <link 
-        rel="preload" 
-        href={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
-        as="image"
-        fetchpriority="high"
-      />
-    ))}
+    {
+      firstVideoIds.map((videoId) => (
+        <link
+          rel="preload"
+          href={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+          as="image"
+          fetchpriority="high"
+        />
+      ))
+    }
   </Fragment>
 
   <section class="py-24 md:py-28">
@@ -96,7 +109,10 @@ const firstVideoIds = videos
         <Badge>Media</Badge>
         <h1 class="h1 mb-4">Press / Media</h1>
         <p class="description text-lg md:text-xl">
-          I'm interviewed by different media regularly and appear on different (online and offline) panels. Below you can find a selection of these. Contact me if you're interested in interviewing me or having me on your event!
+          I'm interviewed by different media regularly and appear on different
+          (online and offline) panels. Below you can find a selection of these.
+          Contact me if you're interested in interviewing me or having me on
+          your event!
         </p>
       </div>
 
@@ -111,38 +127,40 @@ const firstVideoIds = videos
     <ArticleSection articles={articles} />
     {listings.length > 0 && <ListingsSection listings={listings} />}
   </div>
-  
+
   <LinkedInCTA />
 </BaseLayout>
 
 <script>
   // Handle smooth scrolling to sections
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const links = document.querySelectorAll('a[href^="#"]');
     const headerOffset = 80; // Adjust this value based on your header height
-    
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
+
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
         e.preventDefault();
-        const targetId = link.getAttribute('href');
+        const targetId = link.getAttribute("href");
+        if (!targetId) return;
         const targetElement = document.querySelector(targetId);
-        
+
         if (targetElement) {
           // Get the target's position accounting for header height
           const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          const offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
 
           // Smooth scroll to adjusted position
           window.scrollTo({
             top: offsetPosition,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
 
           // If clicking the podcasts link, trigger preloading
-          if (targetId === '#podcasts') {
+          if (targetId === "#podcasts") {
             // Small delay to ensure scroll starts first
             setTimeout(() => {
-              const event = new CustomEvent('preloadPodcasts');
+              const event = new CustomEvent("preloadPodcasts");
               document.dispatchEvent(event);
             }, 100);
           }
@@ -152,33 +170,36 @@ const firstVideoIds = videos
   });
 
   // Trigger podcast preloading after initial page load
-  window.addEventListener('load', () => {
-    console.log('Press Page: Initial load complete, preparing podcast preload');
-    
+  window.addEventListener("load", () => {
+    console.log("Press Page: Initial load complete, preparing podcast preload");
+
     // Ensure podcasts are preloaded with multiple strategies
     const preloadPodcasts = () => {
-      console.log('Press Page: Triggering podcast preload');
-      const event = new CustomEvent('preloadPodcasts');
+      console.log("Press Page: Triggering podcast preload");
+      const event = new CustomEvent("preloadPodcasts");
       document.dispatchEvent(event);
     };
 
     // Multiple preloading strategies
-    setTimeout(preloadPodcasts, 500);  // Quick initial attempt
+    setTimeout(preloadPodcasts, 500); // Quick initial attempt
     setTimeout(preloadPodcasts, 2000); // Delayed attempt to catch any async content
-    
+
     // Intersection Observer fallback
-    const podcastSection = document.getElementById('podcasts');
+    const podcastSection = document.getElementById("podcasts");
     if (podcastSection) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            console.log('Press Page: Podcasts section entered viewport');
-            preloadPodcasts();
-            observer.disconnect();
-          }
-        });
-      }, { threshold: 0.1 });
-      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              console.log("Press Page: Podcasts section entered viewport");
+              preloadPodcasts();
+              observer.disconnect();
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
       observer.observe(podcastSection);
     }
   });

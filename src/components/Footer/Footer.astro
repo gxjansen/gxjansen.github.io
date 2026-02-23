@@ -17,7 +17,7 @@ const siteData = getTranslatedData("siteData", currLocale);
 const today = new Date();
 ---
 
-<footer 
+<footer
   class="relative z-10 overflow-x-clip pb-16 pt-20 font-medium text-base-500 dark:text-base-400"
   role="contentinfo"
   aria-label="Site footer"
@@ -27,14 +27,11 @@ const today = new Date();
       <div class="flex items-center">
         <SiteLogo />
       </div>
-      
-      <nav 
-        class="flex flex-wrap gap-x-4"
-        aria-label="Footer navigation"
-      >
+
+      <nav class="flex flex-wrap gap-x-4" aria-label="Footer navigation">
         <ul class="flex flex-wrap gap-x-4" role="list">
           <li role="listitem">
-            <FooterLink 
+            <FooterLink
               href={getRelativeLocaleUrl(currLocale, "/about")}
               aria-label="Learn more about Guido"
             >
@@ -42,7 +39,7 @@ const today = new Date();
             </FooterLink>
           </li>
           <li role="listitem">
-            <FooterLink 
+            <FooterLink
               href={getRelativeLocaleUrl(currLocale, "/post")}
               aria-label="Read Guido's articles"
             >
@@ -70,22 +67,23 @@ const today = new Date();
     </div>
   </div>
 
-  <div 
+  <div
     class="mt-2 border-t border-t-base-200/50 text-sm text-base-400 dark:text-base-500"
     role="contentinfo"
     aria-label="Copyright and social links"
   >
     <div class="site-container px-2 sm:px-4">
       <div class="mt-2">
-        <div class="flex flex-col sm:flex-row justify-between gap-6">
-          <p class="my-auto order-2 sm:order-1 pt-8">
-            <span aria-label="Copyright">&copy;</span> {today.getFullYear()}
+        <div class="flex flex-col justify-between gap-6 sm:flex-row">
+          <p class="order-2 my-auto pt-8 sm:order-1">
+            <span aria-label="Copyright">&copy;</span>
+            {today.getFullYear()}
             {" "}{siteData.name}. All rights reserved.
           </p>
-          
+
           <!-- Social Links -->
-          <div 
-            class="w-full sm:w-auto overflow-x-auto order-1 sm:order-2"
+          <div
+            class="order-1 w-full overflow-x-auto sm:order-2 sm:w-auto"
             aria-label="Social media links"
             role="navigation"
           >

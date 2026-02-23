@@ -75,37 +75,34 @@ In 2021 it was time to focus on something new and I became the Global Business &
 
 // Check for reduced motion preference
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-const shouldReduceMotion = typeof window !== "undefined" 
-  ? window.matchMedia(reducedMotionQuery).matches 
-  : false;
+const shouldReduceMotion =
+  typeof window !== "undefined"
+    ? window.matchMedia(reducedMotionQuery).matches
+    : false;
 ---
 
-<section 
-  id="services-side-image" 
+<section
+  id="services-side-image"
   class="overflow-hidden pb-24 md:pb-28"
   aria-labelledby="about-heading"
 >
-  <div 
-    class="relative"
-    role="presentation"
-  >
+  <div class="relative" role="presentation">
     <h2 id="about-heading" class="sr-only">About Guido Xavier Jansen</h2>
-    
+
     <!-- Name explanation block -->
-    <div 
+    <div
       class="alert alert-accent"
       role="complementary"
       aria-label="Name explanation"
     >
       <div class="alert-content px-8 py-4">
-        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-          <div 
-            class="flex items-center justify-center"
-            aria-hidden="true"
-          >
+        <div
+          class="flex flex-col items-center justify-center gap-4 md:flex-row"
+        >
+          <div class="flex items-center justify-center" aria-hidden="true">
             <Icon
               name="tabler:letter-g"
-              class="w-10 h-10 text-white"
+              class="h-10 w-10 text-white"
               stroke-width="1"
               stroke="currentColor"
               fill="none"
@@ -113,7 +110,7 @@ const shouldReduceMotion = typeof window !== "undefined"
             />
             <Icon
               name="tabler:letter-x"
-              class="w-14 h-14 text-base-100 -ml-3"
+              class="-ml-3 h-14 w-14 text-base-100"
               stroke-width="8"
               stroke="currentColor"
               fill="none"
@@ -121,30 +118,33 @@ const shouldReduceMotion = typeof window !== "undefined"
             />
             <Icon
               name="tabler:letter-j"
-              class="w-10 h-10 text-white -ml-4"
+              class="-ml-4 h-10 w-10 text-white"
               stroke-width="1"
               stroke="currentColor"
               fill="none"
               role="presentation"
             />
-            <Icon 
-              name="tabler:question-mark" 
-              class="w-12 h-12 text-white -ml-2" 
+            <Icon
+              name="tabler:question-mark"
+              class="-ml-2 h-12 w-12 text-white"
               stroke-width="3"
               stroke="currentColor"
               fill="none"
               role="presentation"
             />
           </div>
-          <p class="text-lg !text-white text-center md:text-left">
-            To answer a common question right out of the gate: Yes, the <span class="text-black font-bold">X</span> in my name is not just there for decorative reasons: my second name is <span class="font-bold">Xavier</span>!
+          <p class="text-center text-lg !text-white md:text-left">
+            To answer a common question right out of the gate: Yes, the <span
+              class="font-bold text-black">X</span
+            > in my name is not just there for decorative reasons: my second name
+            is <span class="font-bold">Xavier</span>!
           </p>
         </div>
       </div>
     </div>
 
     <!-- Biography sections -->
-    <div 
+    <div
       class="flex flex-col gap-16 md:mt-16 md:gap-24"
       role="list"
       aria-label="Biography sections"
@@ -155,7 +155,7 @@ const shouldReduceMotion = typeof window !== "undefined"
             title={feature.title}
             details={feature.details}
             image={feature.image}
-            href={feature.href ?? '#'}
+            href={feature.href ?? "#"}
             imageSide={idx % 2 === 0 ? "right" : "left"}
             idx={idx}
             ctaText={feature.ctaText}
@@ -172,22 +172,27 @@ const shouldReduceMotion = typeof window !== "undefined"
 
 <script>
   // Handle reduced motion preference changes
-  if (typeof window !== 'undefined') {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (typeof window !== "undefined") {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
-      const elements = document.querySelectorAll('[data-reveal]');
-      elements.forEach(element => {
+      const elements = document.querySelectorAll("[data-reveal]");
+      elements.forEach((element) => {
         if (e.matches) {
-          element.setAttribute('data-reveal', '');
+          element.setAttribute("data-reveal", "");
         } else {
-          const index = Array.from(document.querySelectorAll('[role="listitem"]')).indexOf(element);
-          element.setAttribute('data-reveal', index % 2 === 0 ? 'fade-right' : 'fade-left');
+          const index = Array.from(
+            document.querySelectorAll('[role="listitem"]'),
+          ).indexOf(element);
+          element.setAttribute(
+            "data-reveal",
+            index % 2 === 0 ? "fade-right" : "fade-left",
+          );
         }
       });
     }
 
-    mediaQuery.addEventListener('change', handleMotionPreference);
+    mediaQuery.addEventListener("change", handleMotionPreference);
     handleMotionPreference(mediaQuery);
   }
 </script>

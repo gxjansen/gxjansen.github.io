@@ -10,25 +10,24 @@ const { videoId, title } = Astro.props;
 const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 ---
 
-<div 
-  class="lazy-youtube aspect-video bg-base-200 dark:bg-white/[.075] relative rounded-lg overflow-hidden" 
+<div
+  class="lazy-youtube relative aspect-video overflow-hidden rounded-lg bg-base-200 dark:bg-white/[.075]"
   data-video-id={videoId}
   data-title={title}
-  client:load
 >
   <!-- Thumbnail -->
-  <img 
-    src={thumbnailUrl} 
+  <img
+    src={thumbnailUrl}
     alt={`Preview thumbnail for video: ${title}`}
-    class="w-full h-full object-cover"
+    class="h-full w-full object-cover"
     loading="lazy"
     decoding="async"
   />
-  
+
   <!-- Play button -->
   <button
     type="button"
-    class="absolute inset-0 w-full h-full flex items-center justify-center group"
+    class="group absolute inset-0 flex h-full w-full items-center justify-center"
     aria-label={`Play video: ${title}`}
     onclick={`
       const container = this.closest('.lazy-youtube');
@@ -52,13 +51,11 @@ const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
       container.appendChild(iframe);
     `}
   >
-    <div class="w-16 h-12 bg-red-600 rounded-lg flex items-center justify-center group-hover:bg-red-700 transition-colors">
-      <svg 
-        class="w-6 h-6 text-white" 
-        viewBox="0 0 24 24" 
-        fill="currentColor"
-      >
-        <path d="M8 5v14l11-7z"/>
+    <div
+      class="flex h-12 w-16 items-center justify-center rounded-lg bg-red-600 transition-colors group-hover:bg-red-700"
+    >
+      <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8 5v14l11-7z"></path>
       </svg>
     </div>
   </button>
@@ -66,7 +63,7 @@ const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
 <style>
   .lazy-youtube button:focus {
-    outline: 2px solid theme('colors.primary.500');
+    outline: 2px solid theme("colors.primary.500");
     outline-offset: 2px;
   }
 

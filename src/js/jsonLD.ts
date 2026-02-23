@@ -59,11 +59,15 @@ export type JsonLDProps = BlogProps | GeneralProps;
 export default function jsonLDGenerator(props: JsonLDProps) {
   const { type } = props;
   if (type === "blog") {
-    const { postFrontmatter, image, authors = [], canonicalUrl } =
-      props as BlogProps;
+    const {
+      postFrontmatter,
+      image,
+      authors = [],
+      canonicalUrl,
+    } = props as BlogProps;
 
     if (!postFrontmatter || !canonicalUrl) {
-      return '';
+      return "";
     }
 
     let authorsJsonLdArray = authors.map((author) => {
@@ -76,18 +80,21 @@ export default function jsonLDGenerator(props: JsonLDProps) {
         author.data.mastodon,
         author.data.website,
         author.data.instagram,
-        author.data.authorLink // Include authorLink as a sameAs profile
+        author.data.authorLink, // Include authorLink as a sameAs profile
       ].filter(Boolean); // Remove undefined/null values
 
       // Ensure we always have a valid URL for the author
-      const authorUrl = author.data.authorLink || author.data.website || `${import.meta.env.SITE}/authors/${author.slug}`;
+      const authorUrl =
+        author.data.authorLink ||
+        author.data.website ||
+        `${import.meta.env.SITE}/authors/${author.slug}`;
 
       // Build the base author schema
       const authorSchema: PersonSchema = {
         "@type": "Person",
         "@id": `${import.meta.env.SITE}/authors/${author.slug}#person`,
-        "name": author.data.name,
-        "url": authorUrl,
+        name: author.data.name,
+        url: authorUrl,
       };
 
       // Add optional fields only if they exist
@@ -99,11 +106,15 @@ export default function jsonLDGenerator(props: JsonLDProps) {
         authorSchema.sameAs = sameAsLinks as string[];
       }
 
-      if (author.data.avatar && typeof author.data.avatar === 'object' && 'src' in author.data.avatar) {
+      if (
+        author.data.avatar &&
+        typeof author.data.avatar === "object" &&
+        "src" in author.data.avatar
+      ) {
         authorSchema.image = {
           "@type": "ImageObject",
-          "url": author.data.avatar.src,
-          "caption": `Photo of ${author.data.name}`
+          url: author.data.avatar.src,
+          caption: `Photo of ${author.data.name}`,
         };
       }
 
@@ -114,8 +125,10 @@ export default function jsonLDGenerator(props: JsonLDProps) {
       if (author.data.organization) {
         authorSchema.worksFor = {
           "@type": "Organization",
-          "name": author.data.organization,
-          ...(author.data.organizationUrl && { "url": author.data.organizationUrl })
+          name: author.data.organization,
+          ...(author.data.organizationUrl && {
+            url: author.data.organizationUrl,
+          }),
         };
       }
 
@@ -147,43 +160,43 @@ export default function jsonLDGenerator(props: JsonLDProps) {
     const jsonLD = {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "mainEntityOfPage": {
+      mainEntityOfPage: {
         "@type": "WebPage",
         "@id": canonicalUrl.toString(),
-        "inLanguage": postFrontmatter.language || "en",
-        "accessibilityFeature": [
+        inLanguage: postFrontmatter.language || "en",
+        accessibilityFeature: [
           "alternativeText",
           "readingOrder",
           "structuralNavigation",
           "tableOfContents",
           "highContrastDisplay",
           "largePrint",
-          "taggedPDF"
+          "taggedPDF",
         ],
-        "accessibilityHazard": "none",
-        "accessMode": ["textual", "visual"],
-        "accessModeSufficient": ["textual"]
+        accessibilityHazard: "none",
+        accessMode: ["textual", "visual"],
+        accessModeSufficient: ["textual"],
       },
-      "headline": postFrontmatter.title,
-      "description": postFrontmatter.description,
-      "author": authorsJsonLd,
-      "datePublished": postFrontmatter.pubDate,
-      "dateModified": postFrontmatter.updatedDate || postFrontmatter.pubDate,
-      "keywords": postFrontmatter.tags?.join(", "),
-      "articleBody": postFrontmatter.content,
-      "articleSection": postFrontmatter.category || "Blog",
-      "wordCount": postFrontmatter.content?.split(/\s+/).length || 0
+      headline: postFrontmatter.title,
+      description: postFrontmatter.description,
+      author: authorsJsonLd,
+      datePublished: postFrontmatter.pubDate,
+      dateModified: postFrontmatter.updatedDate || postFrontmatter.pubDate,
+      keywords: postFrontmatter.tags?.join(", "),
+      articleBody: postFrontmatter.content,
+      articleSection: postFrontmatter.category || "Blog",
+      wordCount: postFrontmatter.content?.split(/\s+/).length || 0,
     };
 
     // Add image with accessibility attributes if it exists
-    if (image && typeof image === 'object' && 'src' in image) {
+    if (image && typeof image === "object" && "src" in image) {
       jsonLD["image"] = {
         "@type": "ImageObject",
-        "url": image.src,
-        "caption": postFrontmatter.imageCaption || postFrontmatter.title,
-        "description": postFrontmatter.imageAlt || postFrontmatter.description,
-        "width": image.width,
-        "height": image.height
+        url: image.src,
+        caption: postFrontmatter.imageCaption || postFrontmatter.title,
+        description: postFrontmatter.imageAlt || postFrontmatter.description,
+        width: image.width,
+        height: image.height,
       };
     }
 
@@ -198,7 +211,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
       "@type": "WebSite",
       "name": "${siteData.title}",
       "url": "${import.meta.env.SITE}",
-      "inLanguage": "${siteData.language || 'en'}",
+      "inLanguage": "${"language" in siteData ? (siteData as any).language : "en"}",
       "accessibilityAPI": "ARIA",
       "accessibilityControl": [
         "fullKeyboardControl",

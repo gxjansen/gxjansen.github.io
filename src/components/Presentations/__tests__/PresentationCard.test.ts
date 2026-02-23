@@ -1,14 +1,18 @@
-import { describe, it, expect } from 'vitest';
-import { parseHTML, createTestPresentation, createMockImage } from '../../../test/astro-test-utils';
+import { describe, it, expect } from "vitest";
+import {
+  parseHTML,
+  createTestPresentation,
+  createMockImage,
+} from "../../../test/astro-test-utils";
 
-describe('PresentationCard HTML Structure', () => {
-  it('matches snapshot with minimal props', () => {
+describe("PresentationCard HTML Structure", () => {
+  it("matches snapshot with minimal props", () => {
     const presentation = createTestPresentation({
-      title: 'Test Presentation',
+      title: "Test Presentation",
       image: undefined,
       duration: undefined,
       isWorkshop: undefined,
-      intendedAudience: undefined
+      intendedAudience: undefined,
     });
 
     const html = `
@@ -34,19 +38,19 @@ describe('PresentationCard HTML Structure', () => {
     expect(parseHTML(html).toString()).toMatchSnapshot();
   });
 
-  it('matches snapshot with all props', () => {
+  it("matches snapshot with all props", () => {
     const presentation = createTestPresentation({
-      title: 'Full Test Presentation',
-      duration: '45 minutes',
+      title: "Full Test Presentation",
+      duration: "45 minutes",
       isWorkshop: true,
-      intendedAudience: 'Developers',
+      intendedAudience: "Developers",
       image: createMockImage({
-        src: '/test-image.jpg',
-        alt: 'Full Test Presentation',
+        src: "/test-image.jpg",
+        alt: "Full Test Presentation",
         width: 1600,
         height: 900,
-        class: 'w-full rounded-t-xl object-cover'
-      })
+        class: "w-full rounded-t-xl object-cover",
+      }),
     });
 
     const html = `

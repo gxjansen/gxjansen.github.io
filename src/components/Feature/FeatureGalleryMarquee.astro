@@ -47,7 +47,10 @@ interface MarqueeImages {
 // Gallery images with descriptive alt text for accessibility
 const marqueeTop: MarqueeImages = {
   images: [
-    { image: image1, alt: "Guido working on a couch during a casual work session" },
+    {
+      image: image1,
+      alt: "Guido working on a couch during a casual work session",
+    },
     { image: image2, alt: "Guido at Customer Day event" },
     { image: image16, alt: "Guido with Peep Laja at a conference" },
     { image: image4, alt: "Guido participating in a hackathon event" },
@@ -84,14 +87,14 @@ const marqueeBottom: MarqueeImages = {
 };
 ---
 
-<section
-  id="feature-gallery-marquee"
-  class="py-24 md:py-28"
->
+<section id="feature-gallery-marquee" class="py-24 md:py-28">
   <div class="site-container">
     <div class="relative">
       <div class="relative">
-        <div class="mx-auto mb-16 text-center md:max-w-4xl" data-reveal="fade-up">
+        <div
+          class="mx-auto mb-16 text-center md:max-w-4xl"
+          data-reveal="fade-up"
+        >
           <Badge>Gallery</Badge>
           <h2 class="h2">Me at work</h2>
           <!-- <p class="description mt-4 text-pretty text-lg md:text-xl">
@@ -99,13 +102,19 @@ const marqueeBottom: MarqueeImages = {
           </p> -->
         </div>
 
-            <div class="relative flex flex-col gap-6 overflow-hidden md:gap-10 mask-gradient">
-          {/* Gradient overlays for fade effect - using multi-step gradients for smoother transition */}
+        <div
+          class="mask-gradient relative flex flex-col gap-6 overflow-hidden md:gap-10"
+        >
+          {
+            /* Gradient overlays for fade effect - using multi-step gradients for smoother transition */
+          }
           <div class="gradient-fade-left z-dropdown"></div>
           <div class="gradient-fade-right z-dropdown"></div>
 
           <!-- marquee top row -->
-          <div class="marquee-top relative flex gap-6 overflow-hidden md:gap-10">
+          <div
+            class="marquee-top relative flex gap-6 overflow-hidden md:gap-10"
+          >
             <div
               class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 md:gap-10"
             >
@@ -148,7 +157,9 @@ const marqueeBottom: MarqueeImages = {
           </div>
 
           <!-- marquee middle row -->
-          <div class="marquee-middle relative flex gap-6 overflow-hidden md:gap-10">
+          <div
+            class="marquee-middle relative flex gap-6 overflow-hidden md:gap-10"
+          >
             <div
               class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 [animation-direction:reverse] md:gap-10"
             >
@@ -191,7 +202,9 @@ const marqueeBottom: MarqueeImages = {
           </div>
 
           <!-- marquee bottom row -->
-          <div class="marquee-bottom relative flex gap-6 overflow-hidden md:gap-10">
+          <div
+            class="marquee-bottom relative flex gap-6 overflow-hidden md:gap-10"
+          >
             <div
               class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-6 md:gap-10"
             >

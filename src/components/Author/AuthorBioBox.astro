@@ -19,7 +19,7 @@ const {
   bluesky,
   website,
   expertise = [],
-  credentials = []
+  credentials = [],
 } = author.data;
 
 const authorUrl = `/authors/${author.slug}`;
@@ -29,108 +29,122 @@ const socialLinks = [
   { url: linkedin, icon: "linkedin", label: "LinkedIn" },
   { url: github, icon: "github", label: "GitHub" },
   { url: bluesky, icon: "bluesky", label: "Bluesky" },
-].filter(link => link.url);
+].filter((link): link is { url: string; icon: string; label: string } =>
+  Boolean(link.url),
+);
 
 // Add website link separately if it exists
-const hasWebsite = website && website.includes('gui.do');
+const hasWebsite = website && website.includes("gui.do");
 ---
 
 <aside
-  class="mt-12 rounded-xl border border-base-300 dark:border-base-700 bg-base-50 dark:bg-base-900 p-6"
+  class="mt-12 rounded-xl border border-base-300 bg-base-50 p-6 dark:border-base-700 dark:bg-base-900"
   aria-label={`About ${name}`}
 >
-  <h3 class="text-xl font-bold mb-4 text-base-900 dark:text-base-100">
+  <h3 class="mb-4 text-xl font-bold text-base-900 dark:text-base-100">
     About the Author
   </h3>
 
-  <div class="flex flex-col md:flex-row gap-6">
-    {avatar && (
-      <div class="flex-shrink-0">
-        <a href={authorUrl}>
-          <Image
-            src={avatar}
-            alt={`${name}'s avatar`}
-            width={120}
-            height={120}
-            quality="high"
-            class="h-24 w-24 md:h-30 md:w-30 rounded-full object-cover"
-          />
-        </a>
-      </div>
-    )}
+  <div class="flex flex-col gap-6 md:flex-row">
+    {
+      avatar && (
+        <div class="flex-shrink-0">
+          <a href={authorUrl}>
+            <Image
+              src={avatar}
+              alt={`${name}'s avatar`}
+              width={120}
+              height={120}
+              quality="high"
+              class="md:h-30 md:w-30 h-24 w-24 rounded-full object-cover"
+            />
+          </a>
+        </div>
+      )
+    }
 
     <div class="flex-1">
       <a
         href={authorUrl}
-        class="text-xl font-semibold text-base-900 dark:text-base-100 hover:text-primary-500 dark:hover:text-primary-400"
+        class="text-xl font-semibold text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400"
       >
         {name}
       </a>
 
-      {(jobTitle || organization) && (
-        <div class="mt-1 text-base-600 dark:text-base-400">
-          {jobTitle}
-          {jobTitle && organization && " at "}
-          {organization}
-        </div>
-      )}
-
-      {bio && (
-        <div class="mt-3 text-base-700 dark:text-base-300 prose prose-sm dark:prose-invert max-w-none">
-          <p>{bio}</p>
-        </div>
-      )}
-
-      {expertise.length > 0 && (
-        <div class="mt-4">
-          <h4 class="text-sm font-semibold text-base-900 dark:text-base-100 mb-2">
-            Areas of Expertise
-          </h4>
-          <div class="flex flex-wrap gap-2">
-            {expertise.map((topic: string) => (
-              <span class="px-3 py-1 text-xs rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200">
-                {topic}
-              </span>
-            ))}
+      {
+        (jobTitle || organization) && (
+          <div class="mt-1 text-base-600 dark:text-base-400">
+            {jobTitle}
+            {jobTitle && organization && " at "}
+            {organization}
           </div>
-        </div>
-      )}
+        )
+      }
 
-      {credentials.length > 0 && (
-        <div class="mt-4">
-          <h4 class="text-sm font-semibold text-base-900 dark:text-base-100 mb-2">
-            Credentials
-          </h4>
-          <ul class="list-disc list-inside text-sm text-base-700 dark:text-base-300 space-y-1">
-            {credentials.map((credential: string) => (
-              <li>{credential}</li>
+      {
+        bio && (
+          <div class="prose prose-sm mt-3 max-w-none text-base-700 dark:prose-invert dark:text-base-300">
+            <p>{bio}</p>
+          </div>
+        )
+      }
+
+      {
+        expertise.length > 0 && (
+          <div class="mt-4">
+            <h4 class="mb-2 text-sm font-semibold text-base-900 dark:text-base-100">
+              Areas of Expertise
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              {expertise.map((topic: string) => (
+                <span class="rounded-full bg-primary-100 px-3 py-1 text-xs text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                  {topic}
+                </span>
+              ))}
+            </div>
+          </div>
+        )
+      }
+
+      {
+        credentials.length > 0 && (
+          <div class="mt-4">
+            <h4 class="mb-2 text-sm font-semibold text-base-900 dark:text-base-100">
+              Credentials
+            </h4>
+            <ul class="list-inside list-disc space-y-1 text-sm text-base-700 dark:text-base-300">
+              {credentials.map((credential: string) => (
+                <li>{credential}</li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      {
+        (socialLinks.length > 0 || hasWebsite) && (
+          <div class="mt-4 flex flex-wrap items-center gap-2">
+            {socialLinks.map((link) => (
+              <SocialIcon
+                icon={link.icon}
+                social={link.label}
+                href={link.url}
+                class="h-10 w-10"
+              />
             ))}
-          </ul>
-        </div>
-      )}
-
-      {(socialLinks.length > 0 || hasWebsite) && (
-        <div class="mt-4 flex flex-wrap items-center gap-2">
-          {socialLinks.map(link => (
-            <SocialIcon
-              icon={link.icon}
-              social={link.label}
-              href={link.url}
-              class="w-10 h-10"
-            />
-          ))}
-          {hasWebsite && (
-            <a
-              href={website}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 ml-2"
-            >
-              gui.do →
-            </a>
-          )}
-        </div>
-      )}
+            {hasWebsite && (
+              <a
+                href={website}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="ml-2 text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+              >
+                gui.do →
+              </a>
+            )}
+          </div>
+        )
+      }
 
       <div class="mt-4">
         <a

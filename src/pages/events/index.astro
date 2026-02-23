@@ -15,8 +15,8 @@ import { getAllEvents, getEventIcon } from "@utils/eventUtils";
 
 // Get all events and sort them by date
 const events = await getAllEvents();
-const sortedEvents = [...events].sort((a, b) =>
-  new Date(b.date).getTime() - new Date(a.date).getTime()
+const sortedEvents = [...events].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
 );
 
 // Filter for past events only (before today)
@@ -37,8 +37,8 @@ interface YearGroup {
 
 // Type for combined events (regular + recurring groups)
 interface CombinedEventItem {
-  type: 'regular' | 'recurring';
-  event?: typeof pastEvents[0];
+  type: "regular" | "recurring";
+  event?: (typeof pastEvents)[0];
   recurringKey?: string;
   recurringEvents?: typeof pastEvents;
   date: Date;
@@ -53,7 +53,7 @@ pastEvents.forEach((event) => {
     eventsByYear.set(year, {
       year,
       regularEvents: [],
-      recurringGroups: new Map()
+      recurringGroups: new Map(),
     });
   }
 
@@ -61,7 +61,7 @@ pastEvents.forEach((event) => {
 
   // Check if this is a recurring Spryker User Group event
   if (RECURRING_EVENT_PATTERN.test(event.id)) {
-    const groupKey = 'spryker-user-group';
+    const groupKey = "spryker-user-group";
     if (!yearGroup.recurringGroups.has(groupKey)) {
       yearGroup.recurringGroups.set(groupKey, []);
     }
@@ -75,7 +75,7 @@ pastEvents.forEach((event) => {
 const sortedYears = Array.from(eventsByYear.keys()).sort((a, b) => b - a);
 
 // Load the Spryker icon once for recurring event cards
-const sprykerIcon = await getEventIcon('spryker.png');
+const sprykerIcon = await getEventIcon("spryker.png");
 
 // Calculate total event count for display
 // Regular events + 1 per recurring group per year
@@ -113,96 +113,103 @@ sortedYears.forEach((year) => {
     </div>
 
     <div class="space-y-16" id="events-container">
-      {sortedYears.map((year) => {
-        const yearGroup = eventsByYear.get(year)!;
+      {
+        sortedYears.map((year) => {
+          const yearGroup = eventsByYear.get(year)!;
 
-        // Combine recurring groups and regular events for this year
-        // Place recurring group card at the position of its first occurrence
-        const allYearEvents: CombinedEventItem[] = [];
+          // Combine recurring groups and regular events for this year
+          // Place recurring group card at the position of its first occurrence
+          const allYearEvents: CombinedEventItem[] = [];
 
-        // Add regular events
-        yearGroup.regularEvents.forEach((event) => {
-          allYearEvents.push({
-            type: 'regular',
-            event,
-            date: new Date(event.date)
+          // Add regular events
+          yearGroup.regularEvents.forEach((event) => {
+            allYearEvents.push({
+              type: "regular",
+              event,
+              date: new Date(event.date),
+            });
           });
-        });
 
-        // Add recurring groups (use the date of the last event in the group)
-        yearGroup.recurringGroups.forEach((events, key) => {
-          const lastEvent = events[0]; // Events are already sorted desc
-          allYearEvents.push({
-            type: 'recurring',
-            recurringKey: key,
-            recurringEvents: events,
-            date: new Date(lastEvent.date)
+          // Add recurring groups (use the date of the last event in the group)
+          yearGroup.recurringGroups.forEach((events, key) => {
+            const lastEvent = events[0]; // Events are already sorted desc
+            allYearEvents.push({
+              type: "recurring",
+              recurringKey: key,
+              recurringEvents: events,
+              date: new Date(lastEvent.date),
+            });
           });
-        });
 
-        // Sort by date descending
-        allYearEvents.sort((a, b) => b.date.getTime() - a.date.getTime());
+          // Sort by date descending
+          allYearEvents.sort((a, b) => b.date.getTime() - a.date.getTime());
 
-        // Split into two columns
-        const firstColumnEvents = allYearEvents.filter((_, i) => i % 2 === 0);
-        const secondColumnEvents = allYearEvents.filter((_, i) => i % 2 === 1);
+          // Split into two columns
+          const firstColumnEvents = allYearEvents.filter((_, i) => i % 2 === 0);
+          const secondColumnEvents = allYearEvents.filter(
+            (_, i) => i % 2 === 1,
+          );
 
-        return (
-          <div class="year-group">
-            <div class="flex items-center gap-4 mb-8">
-              <h2 class="text-2xl font-bold text-base-800 dark:text-base-200">{year}</h2>
-              <div class="flex-1 h-px bg-base-300 dark:bg-base-700"></div>
-              <span class="text-sm text-base-500 dark:text-base-400">
-                {allYearEvents.length} {allYearEvents.length === 1 ? 'event' : 'events'}
-              </span>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {/* First column */}
-              <div class="space-y-6">
-                {firstColumnEvents.map((item) => (
-                  item.type === 'recurring' && item.recurringEvents ? (
-                    <RecurringEventCard
-                      name="Spryker User Group"
-                      events={item.recurringEvents}
-                      icon={sprykerIcon}
-                      url="https://forum.commercequest.space/events/"
-                      role="Organizer & co-host/moderator"
-                    />
-                  ) : item.event ? (
-                    <EventCard
-                      {...item.event}
-                      showPresentationName={true}
-                      presentationUrl={getPresentationUrl(item.event.id)}
-                    />
-                  ) : null
-                ))}
+          return (
+            <div class="year-group">
+              <div class="mb-8 flex items-center gap-4">
+                <h2 class="text-2xl font-bold text-base-800 dark:text-base-200">
+                  {year}
+                </h2>
+                <div class="h-px flex-1 bg-base-300 dark:bg-base-700" />
+                <span class="text-sm text-base-500 dark:text-base-400">
+                  {allYearEvents.length}{" "}
+                  {allYearEvents.length === 1 ? "event" : "events"}
+                </span>
               </div>
 
-              {/* Second column - offset as a whole */}
-              <div class="space-y-6 md:mt-24">
-                {secondColumnEvents.map((item) => (
-                  item.type === 'recurring' && item.recurringEvents ? (
-                    <RecurringEventCard
-                      name="Spryker User Group"
-                      events={item.recurringEvents}
-                      icon={sprykerIcon}
-                      url="https://forum.commercequest.space/events/"
-                      role="Organizer & co-host/moderator"
-                    />
-                  ) : item.event ? (
-                    <EventCard
-                      {...item.event}
-                      showPresentationName={true}
-                      presentationUrl={getPresentationUrl(item.event.id)}
-                    />
-                  ) : null
-                ))}
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+                {/* First column */}
+                <div class="space-y-6">
+                  {firstColumnEvents.map((item) =>
+                    item.type === "recurring" && item.recurringEvents ? (
+                      <RecurringEventCard
+                        name="Spryker User Group"
+                        events={item.recurringEvents}
+                        icon={sprykerIcon}
+                        url="https://forum.commercequest.space/events/"
+                        role="Organizer & co-host/moderator"
+                      />
+                    ) : item.event ? (
+                      <EventCard
+                        {...item.event}
+                        showPresentationName={true}
+                        presentationUrl={getPresentationUrl(item.event.id)}
+                      />
+                    ) : null,
+                  )}
+                </div>
+
+                {/* Second column - offset as a whole */}
+                <div class="space-y-6 md:mt-24">
+                  {secondColumnEvents.map((item) =>
+                    item.type === "recurring" && item.recurringEvents ? (
+                      <RecurringEventCard
+                        name="Spryker User Group"
+                        events={item.recurringEvents}
+                        icon={sprykerIcon}
+                        url="https://forum.commercequest.space/events/"
+                        role="Organizer & co-host/moderator"
+                      />
+                    ) : item.event ? (
+                      <EventCard
+                        {...item.event}
+                        showPresentationName={true}
+                        presentationUrl={getPresentationUrl(item.event.id)}
+                      />
+                    ) : null,
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })
+      }
     </div>
   </section>
 </BaseLayout>

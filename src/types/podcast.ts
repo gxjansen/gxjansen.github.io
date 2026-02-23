@@ -5,6 +5,6 @@ export interface PodcastEpisode {
   duration: string;
   link: string;
   podcastName: string;
-  audioUrl?: string;  // Optional since we're not using it for embedding
-  imageUrl?: string;  // Optional since the embed includes the artwork
+  audioUrl?: string; // Optional since we're not using it for embedding
+  imageUrl?: string; // Optional since the embed includes the artwork
 }

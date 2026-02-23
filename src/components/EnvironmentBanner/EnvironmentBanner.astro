@@ -1,41 +1,43 @@
 ---
 // src/components/EnvironmentBanner/EnvironmentBanner.astro
-import { CONFIG } from 'src/config.ts';
+import { CONFIG } from "src/config.ts";
 import { Icon } from "astro-icon";
 
 const isProduction = CONFIG.ALLOW_INDEXING;
 ---
 
-{!isProduction && (
-  <div 
-    class="environment-banner"
-    role="alert"
-    aria-atomic="true"
-    aria-live="polite"
-  >
-    <div class="banner-content">
-      <Icon
-        name="tabler/alert-triangle"
-        class="h-4 w-4"
-        aria-hidden="true"
-        role="presentation"
-      />
-      <span>Preview Environment</span>
-      <button
-        type="button"
-        class="banner-close"
-        aria-label="Dismiss preview environment notification"
-      >
+{
+  !isProduction && (
+    <div
+      class="environment-banner"
+      role="alert"
+      aria-atomic="true"
+      aria-live="polite"
+    >
+      <div class="banner-content">
         <Icon
-          name="tabler/x"
+          name="tabler/alert-triangle"
           class="h-4 w-4"
           aria-hidden="true"
           role="presentation"
         />
-      </button>
+        <span>Preview Environment</span>
+        <button
+          type="button"
+          class="banner-close"
+          aria-label="Dismiss preview environment notification"
+        >
+          <Icon
+            name="tabler/x"
+            class="h-4 w-4"
+            aria-hidden="true"
+            role="presentation"
+          />
+        </button>
+      </div>
     </div>
-  </div>
-)}
+  )
+}
 
 <style>
   .environment-banner {
@@ -97,27 +99,32 @@ const isProduction = CONFIG.ALLOW_INDEXING;
 
 <script>
   function initBanner() {
-    const banner = document.querySelector('.environment-banner');
-    const closeButton = banner?.querySelector('.banner-close');
+    const banner = document.querySelector(
+      ".environment-banner",
+    ) as HTMLElement | null;
+    const closeButton = banner?.querySelector(
+      ".banner-close",
+    ) as HTMLElement | null;
 
     if (banner && closeButton) {
-      closeButton.addEventListener('click', () => {
-        banner.style.display = 'none';
+      closeButton.addEventListener("click", () => {
+        banner.style.display = "none";
         // Store dismissal in session storage
-        sessionStorage.setItem('previewBannerDismissed', 'true');
+        sessionStorage.setItem("previewBannerDismissed", "true");
       });
 
       // Handle keyboard events
-      closeButton.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
+      closeButton.addEventListener("keydown", (event) => {
+        const e = event as KeyboardEvent;
+        if (e.key === "Enter" || e.key === " ") {
           event.preventDefault();
           closeButton.click();
         }
       });
 
       // Check if banner was previously dismissed
-      if (sessionStorage.getItem('previewBannerDismissed') === 'true') {
-        banner.style.display = 'none';
+      if (sessionStorage.getItem("previewBannerDismissed") === "true") {
+        banner.style.display = "none";
       }
     }
   }
@@ -126,5 +133,5 @@ const isProduction = CONFIG.ALLOW_INDEXING;
   initBanner();
 
   // Re-initialize after view transitions
-  document.addEventListener('astro:after-swap', initBanner);
+  document.addEventListener("astro:after-swap", initBanner);
 </script>

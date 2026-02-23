@@ -1,6 +1,6 @@
 ---
-import Skeleton from '../Common/Skeleton.astro';
-import ErrorBoundary from '../Common/ErrorBoundary.astro';
+import Skeleton from "../Common/Skeleton.astro";
+import ErrorBoundary from "../Common/ErrorBoundary.astro";
 
 interface Props {
   episodeId: string;
@@ -15,18 +15,17 @@ const { episodeId, title } = Astro.props;
     <Skeleton type="card" class="absolute inset-0" />
     <iframe
       id={`spotify-embed-${episodeId}`}
-      class="absolute inset-0 w-full h-full rounded-lg"
+      class="absolute inset-0 h-full w-full rounded-lg"
       title={title}
       allow="encrypted-media"
       style="opacity: 0; transition: opacity 0.3s ease-in-out"
-      onload="this.style.opacity = 1"
-    />
-    <div 
-      class="absolute inset-0 flex items-center justify-center bg-base-200 rounded-lg"
+      onload="this.style.opacity = 1"></iframe>
+    <div
+      class="absolute inset-0 flex items-center justify-center rounded-lg bg-base-200"
       id={`spotify-load-button-${episodeId}`}
     >
       <button
-        class="px-4 py-2 bg-primary-500 text-white rounded hover:bg-primary-600 transition-colors"
+        class="rounded bg-primary-500 px-4 py-2 text-white transition-colors hover:bg-primary-600"
         onclick="document.getElementById(`spotify-embed-${episodeId}`).src = `https://open.spotify.com/embed/episode/${episodeId}`; this.parentElement.style.display = 'none';"
       >
         Load Spotify Player

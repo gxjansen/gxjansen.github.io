@@ -14,31 +14,33 @@ blueskyUri: "https://bsky.app/profile/gui.do/post/3lxxnadt4fs2a"
 
 Had a fun evening side-project today: built my own standalone Wifi speaker!
 
-Did I tell you I love tinkering with small software/hardware projects? 
+Did I tell you I love tinkering with small software/hardware projects?
 
 I was looking for a Wifi audio player for playing audiobooks in my kids bedrooms for when they go to sleep (they love listening to some fairytales while falling asleep).
 
 I wasn't really happy with the (closed, proprietary and expensive) commercial options and especially wanted to stay away from Sonos (I have one and they messed up badly last year).
 
 So what I have now:
-* Connect the device to a power source and it automatically loads the default playlist (based on files that are loaded onto the SD card) and play right away with a single click (even without wifi/internet in case that is down)
-* Control play/pause/next/previous and volume levels on the device
-* Control with mobile phone if you want (mobile page or Snapcast app)
-* Potentially connect to a streaming service or local Plex server to play audio from there.
 
-And most importantly: no monthly fees, no tracking, no ads 🎉 
+- Connect the device to a power source and it automatically loads the default playlist (based on files that are loaded onto the SD card) and play right away with a single click (even without wifi/internet in case that is down)
+- Control play/pause/next/previous and volume levels on the device
+- Control with mobile phone if you want (mobile page or Snapcast app)
+- Potentially connect to a streaming service or local Plex server to play audio from there.
+
+And most importantly: no monthly fees, no tracking, no ads 🎉
 
 And since it doesn't require wifi or internet to function, I can also just take these with us when we go on holiday with the kids and they will work out of the box!
 
 Ingredients:
-* Raspberry Pi Zero 2 WH
-* Pimoroni Ltd Pirate audio HAT ([shop.pimoroni.com](https://shop.pimoroni.com/search?q=pirate%20audio))
-* Mopidy music server
+
+- Raspberry Pi Zero 2 WH
+- Pimoroni Ltd Pirate audio HAT ([shop.pimoroni.com](https://shop.pimoroni.com/search?q=pirate%20audio))
+- Mopidy music server
 
 Cost? 46 EUR + an evening of your time + some tweaking with Claude Code. Definitely beats a $200 (or more) commercial speaker (at least for this usecase)!
 
 The Pirate audio speaker variant is perfect for this usecase as 1) it makes this very compact and 2) the volume needs to be low (they are using it to fall asleep after all). If you want to use it to listen to music yourself / on a higher volume I'd highly recommend using one of the other Pirate audio HATs (like with line out or headphone amp) and connect it to a speaker (you probably have one laying around) for better audio at higher volumes.
 
-Had to customize the installation somewhat to make the buttons and Mopidy play nice, you can find the code on my GitHub at [github.com/gxjansen/pirate-audio-mopidy-setup](https://github.com/gxjansen/pirate-audio-mopidy-setup) if you're interested. 
+Had to customize the installation somewhat to make the buttons and Mopidy play nice, you can find the code on my GitHub at [github.com/gxjansen/pirate-audio-mopidy-setup](https://github.com/gxjansen/pirate-audio-mopidy-setup) if you're interested.
 
 Now I only need to figure out a decent case that fits the RPI Zero 2 + the HAT and we are set (is this the project that finally makes me buy a 3D printer....? Lets see 😅)!

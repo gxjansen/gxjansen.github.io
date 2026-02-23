@@ -16,21 +16,19 @@ interface Props {
 const { navItem } = Astro.props as Props;
 
 // Generate unique ID for ARIA relationships
-const dropdownId = `nav-dropdown-${navItem.text.toLowerCase().replace(/\s+/g, '-')}`;
+const dropdownId = `nav-dropdown-${navItem.text.toLowerCase().replace(/\s+/g, "-")}`;
 
 // Check for reduced motion preference
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-const shouldReduceMotion = typeof window !== "undefined" 
-  ? window.matchMedia(reducedMotionQuery).matches 
-  : false;
+const shouldReduceMotion =
+  typeof window !== "undefined"
+    ? window.matchMedia(reducedMotionQuery).matches
+    : false;
 ---
 
-<li 
-  class="dropdown group relative"
-  role="none"
->
+<li class="dropdown group relative" role="none">
   <button
-    class="primary-focus flex items-center gap-0.5 rounded-md px-3 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+    class="primary-focus flex items-center gap-0.5 rounded-md px-3 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:text-base-400 dark:hover:text-base-300"
     type="button"
     aria-expanded="false"
     aria-controls={dropdownId}
@@ -39,15 +37,15 @@ const shouldReduceMotion = typeof window !== "undefined"
     data-dropdown-toggle
   >
     <span>{navItem.text}</span>
-    <Icon 
-      name="tabler/chevron-down" 
+    <Icon
+      name="tabler/chevron-down"
       class={`size-5 transition-transform ${shouldReduceMotion ? "" : "group-hover:rotate-180 group-focus-within:rotate-180"}`}
       aria-hidden="true"
       role="presentation"
     />
     <span class="sr-only">, press Enter to show submenu</span>
   </button>
-  
+
   <div
     id={dropdownId}
     class="dropdown-content invisible absolute left-0 z-10 opacity-0 transition-all"
@@ -72,7 +70,10 @@ const shouldReduceMotion = typeof window !== "undefined"
   /* Base dropdown styles */
   .dropdown-content {
     transform: translateY(-10px) scale(0.97);
-    transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.15s ease-out, visibility 0s linear 0.2s;
+    transition:
+      transform 0.2s cubic-bezier(0.33, 1, 0.68, 1),
+      opacity 0.15s ease-out,
+      visibility 0s linear 0.2s;
   }
 
   /* Dropdown open state */
@@ -81,7 +82,10 @@ const shouldReduceMotion = typeof window !== "undefined"
     visibility: visible;
     opacity: 1;
     transform: translateY(0) scale(1);
-    transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.15s ease-out, visibility 0s;
+    transition:
+      transform 0.2s cubic-bezier(0.33, 1, 0.68, 1),
+      opacity 0.15s ease-out,
+      visibility 0s;
   }
 
   /* Respect reduced motion preferences */
@@ -111,7 +115,7 @@ const shouldReduceMotion = typeof window !== "undefined"
 
   /* Focus styles */
   .primary-focus:focus-visible {
-    outline: 2px solid var(--focus-ring-color, theme('colors.primary.500'));
+    outline: 2px solid var(--focus-ring-color, theme("colors.primary.500"));
     outline-offset: 2px;
   }
 </style>
@@ -125,9 +129,9 @@ const shouldReduceMotion = typeof window !== "undefined"
 
     constructor(dropdown: HTMLElement) {
       this.dropdown = dropdown;
-      this.button = dropdown.querySelector('[data-dropdown-toggle]')!;
-      this.content = dropdown.querySelector('[data-dropdown-content]')!;
-      this.links = this.content.querySelectorAll('a');
+      this.button = dropdown.querySelector("[data-dropdown-toggle]")!;
+      this.content = dropdown.querySelector("[data-dropdown-content]")!;
+      this.links = this.content.querySelectorAll("a");
 
       this.init();
     }
@@ -140,10 +144,10 @@ const shouldReduceMotion = typeof window !== "undefined"
     }
 
     private setupButtonEvents() {
-      this.button.addEventListener('click', () => this.toggleDropdown());
-      
-      this.button.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+      this.button.addEventListener("click", () => this.toggleDropdown());
+
+      this.button.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           this.openDropdown();
           this.focusFirstItem();
@@ -152,19 +156,19 @@ const shouldReduceMotion = typeof window !== "undefined"
     }
 
     private setupKeyboardNav() {
-      this.content.addEventListener('keydown', (e) => {
+      this.content.addEventListener("keydown", (e) => {
         const target = e.target as HTMLElement;
         const items = Array.from(this.links);
         const index = items.indexOf(target as HTMLAnchorElement);
 
         switch (e.key) {
-          case 'ArrowDown':
+          case "ArrowDown":
             e.preventDefault();
             if (index < items.length - 1) {
               items[index + 1].focus();
             }
             break;
-          case 'ArrowUp':
+          case "ArrowUp":
             e.preventDefault();
             if (index > 0) {
               items[index - 1].focus();
@@ -172,12 +176,12 @@ const shouldReduceMotion = typeof window !== "undefined"
               this.button.focus();
             }
             break;
-          case 'Escape':
+          case "Escape":
             e.preventDefault();
             this.closeDropdown();
             this.button.focus();
             break;
-          case 'Tab':
+          case "Tab":
             if (!e.shiftKey && index === items.length - 1) {
               this.closeDropdown();
             }
@@ -187,7 +191,7 @@ const shouldReduceMotion = typeof window !== "undefined"
     }
 
     private setupFocusManagement() {
-      this.dropdown.addEventListener('focusout', (e) => {
+      this.dropdown.addEventListener("focusout", (e) => {
         if (!this.dropdown.contains(e.relatedTarget as Node)) {
           this.closeDropdown();
         }
@@ -195,8 +199,8 @@ const shouldReduceMotion = typeof window !== "undefined"
     }
 
     private setupHoverEvents() {
-      this.dropdown.addEventListener('mouseenter', () => this.openDropdown());
-      this.dropdown.addEventListener('mouseleave', () => {
+      this.dropdown.addEventListener("mouseenter", () => this.openDropdown());
+      this.dropdown.addEventListener("mouseleave", () => {
         if (!this.dropdown.contains(document.activeElement)) {
           this.closeDropdown();
         }
@@ -204,7 +208,7 @@ const shouldReduceMotion = typeof window !== "undefined"
     }
 
     private toggleDropdown() {
-      const isExpanded = this.button.getAttribute('aria-expanded') === 'true';
+      const isExpanded = this.button.getAttribute("aria-expanded") === "true";
       if (isExpanded) {
         this.closeDropdown();
       } else {
@@ -213,11 +217,11 @@ const shouldReduceMotion = typeof window !== "undefined"
     }
 
     private openDropdown() {
-      this.button.setAttribute('aria-expanded', 'true');
+      this.button.setAttribute("aria-expanded", "true");
     }
 
     private closeDropdown() {
-      this.button.setAttribute('aria-expanded', 'false');
+      this.button.setAttribute("aria-expanded", "false");
     }
 
     private focusFirstItem() {
@@ -228,14 +232,14 @@ const shouldReduceMotion = typeof window !== "undefined"
   }
 
   function initDropdowns() {
-    document.querySelectorAll('.dropdown').forEach(dropdown => {
+    document.querySelectorAll(".dropdown").forEach((dropdown) => {
       new DropdownManager(dropdown as HTMLElement);
     });
   }
 
   // Initialize on page load
-  document.addEventListener('DOMContentLoaded', initDropdowns);
+  document.addEventListener("DOMContentLoaded", initDropdowns);
 
   // Re-initialize after view transitions
-  document.addEventListener('astro:after-swap', initDropdowns);
+  document.addEventListener("astro:after-swap", initDropdowns);
 </script>

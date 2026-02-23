@@ -9,13 +9,16 @@ import EventCard from "@components/Events/EventCard.astro";
 
 // utils
 import { getAllEvents } from "@utils/eventUtils";
-import { getEventById, getPresentationUrl } from "@utils/eventPresentationRelations";
+import {
+  getEventById,
+  getPresentationUrl,
+} from "@utils/eventPresentationRelations";
 import type { Event } from "@utils/eventUtils";
 
 // Generate static paths for all events
 export async function getStaticPaths() {
   const events = await getAllEvents();
-  return events.map(event => {
+  return events.map((event) => {
     const presentationUrl = getPresentationUrl(event.id);
     return {
       params: { id: event.id },
@@ -25,49 +28,55 @@ export async function getStaticPaths() {
 }
 
 // Get event data
-const { event, presentationUrl } = Astro.props as { event: Event; presentationUrl?: string };
+const { event, presentationUrl } = Astro.props as {
+  event: Event;
+  presentationUrl?: string;
+};
 
 // Format date
-const eventDate = new Date(event.date).toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
+const eventDate = new Date(event.date).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 });
 
 // Enhanced SEO title with year, city, and country
 const eventYear = new Date(event.date).getFullYear();
-const enhancedTitle = `${event.name} ${eventYear} - ${event.city}${event.country ? `, ${event.country}` : ''} | Events`;
+const enhancedTitle = `${event.name} ${eventYear} - ${event.city}${event.country ? `, ${event.country}` : ""} | Events`;
 
 // Enhanced metadata description with comprehensive details
 const descriptionParts = [
-  `${event.name} - ${eventDate} in ${event.city}${event.country ? `, ${event.country}` : ''}.`,
-  event.role ? `Role: ${event.role}.` : '',
-  event.topic ? `Topic: ${event.topic}.` : '',
-  event.workshop ? 'This was a hands-on workshop event.' : 'Professional speaking engagement.'
+  `${event.name} - ${eventDate} in ${event.city}${event.country ? `, ${event.country}` : ""}.`,
+  event.role ? `Role: ${event.role}.` : "",
+  event.topic ? `Topic: ${event.topic}.` : "",
+  event.workshop
+    ? "This was a hands-on workshop event."
+    : "Professional speaking engagement.",
 ];
-const metaDescription = descriptionParts.filter(Boolean).join(' ');
+const metaDescription = descriptionParts.filter(Boolean).join(" ");
 ---
 
-<BaseLayout
-  title={enhancedTitle}
-  description={metaDescription}
->
+<BaseLayout title={enhancedTitle} description={metaDescription}>
   <section class="py-24 md:py-28">
     <div class="site-container">
       <div class="mx-auto max-w-4xl">
         <div class="mb-8" data-reveal="fade-up">
           <Badge>Event</Badge>
           <h1 class="h2 mb-4 text-base-100 dark:text-base-900">{event.name}</h1>
-          
+
           <div class="mb-6 flex flex-wrap gap-3">
-            <span class="rounded-full bg-base-100 px-3 py-1 text-sm text-base-700 dark:bg-base-800 dark:text-base-300">
+            <span
+              class="rounded-full bg-base-100 px-3 py-1 text-sm text-base-700 dark:bg-base-800 dark:text-base-300"
+            >
               {eventDate}
             </span>
-            {event.workshop && (
-              <span class="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-800 dark:bg-primary-900 dark:text-primary-200">
-                Workshop
-              </span>
-            )}
+            {
+              event.workshop && (
+                <span class="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                  Workshop
+                </span>
+              )
+            }
           </div>
 
           <div class="flex items-start gap-6">
@@ -75,42 +84,50 @@ const metaDescription = descriptionParts.filter(Boolean).join(' ');
               <p class="text-lg text-base-600 dark:text-base-300">
                 {event.city}{event.country && `, ${event.country}`}
               </p>
-              {event.role && (
-                <p class="text-base text-base-600 dark:text-base-300 mt-1">
-                  Role: {event.role}
-                </p>
-              )}
-              {event.topic && (
-                <p class="text-base text-base-600 dark:text-base-300 mt-1">
-                  Topic: {event.topic}
-                </p>
-              )}
+              {
+                event.role && (
+                  <p class="mt-1 text-base text-base-600 dark:text-base-300">
+                    Role: {event.role}
+                  </p>
+                )
+              }
+              {
+                event.topic && (
+                  <p class="mt-1 text-base text-base-600 dark:text-base-300">
+                    Topic: {event.topic}
+                  </p>
+                )
+              }
             </div>
-            {event.icon && (
-              <div class="w-24 h-24">
-                <img 
-                  src={`@images/events/${event.icon}`}
-                  alt={`${event.name} logo`}
-                  class="w-full h-full object-contain"
-                  loading="lazy"
-                />
-              </div>
-            )}
+            {
+              event.icon && (
+                <div class="h-24 w-24">
+                  <img
+                    src={`@images/events/${event.icon}`}
+                    alt={`${event.name} logo`}
+                    class="h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              )
+            }
           </div>
         </div>
 
-        {event.url && (
-          <div class="mb-12">
-            <a 
-              href={event.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-block px-6 py-3 bg-primary-600 hover:bg-primary-700 text-base-100 dark:text-base-900 rounded-lg transition-colors"
-            >
-              Visit Event Website
-            </a>
-          </div>
-        )}
+        {
+          event.url && (
+            <div class="mb-12">
+              <a
+                href={event.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block rounded-lg bg-primary-600 px-6 py-3 text-base-100 transition-colors hover:bg-primary-700 dark:text-base-900"
+              >
+                Visit Event Website
+              </a>
+            </div>
+          )
+        }
 
         <RelatedPresentations eventId={event.id} />
       </div>

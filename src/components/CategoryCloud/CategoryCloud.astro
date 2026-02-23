@@ -11,7 +11,7 @@ interface Props {
 const { showCount = true } = Astro.props;
 
 // Get all categories and sort them by count
-const posts = await getCollection("blog", ({ data }) => {
+const posts = await getCollection("post", ({ data }) => {
   return !data.draft;
 });
 
@@ -26,9 +26,11 @@ const processedCategories = sortByValue(countItems(categories));
 
 <!-- Your template here -->
 <div class="category-cloud">
-  {processedCategories.map(([category, count]) => (
-    <a href={`/categories/${slugify(category)}/`} class="category-link">
-      {humanize(category)} {showCount && `(${count})`}
-    </a>
-  ))}
+  {
+    processedCategories.map(([category, count]) => (
+      <a href={`/categories/${slugify(category)}/`} class="category-link">
+        {humanize(category)} {showCount && `(${count})`}
+      </a>
+    ))
+  }
 </div>

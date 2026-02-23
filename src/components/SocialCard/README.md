@@ -4,11 +4,11 @@ A card component for displaying social media links with icons and hover effects.
 
 ## Props
 
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| name | string | Yes | The name of the social media platform |
-| href | string | Yes | The URL to the social media profile |
-| icon | string | Yes | The Tabler icon name for the platform |
+| Name | Type   | Required | Description                           |
+| ---- | ------ | -------- | ------------------------------------- |
+| name | string | Yes      | The name of the social media platform |
+| href | string | Yes      | The URL to the social media profile   |
+| icon | string | Yes      | The Tabler icon name for the platform |
 
 ## Usage Example
 
@@ -23,6 +23,7 @@ import SocialCard from '@components/SocialCard/SocialCard.astro';
 ```
 
 ## Accessibility
+
 - Uses semantic HTML elements
 - Includes proper ARIA labels
 - Supports keyboard navigation

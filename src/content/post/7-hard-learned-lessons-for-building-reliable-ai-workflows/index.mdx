@@ -14,48 +14,56 @@ blueskyUri: "https://bsky.app/profile/gui.do/post/3lr5x4ghaj22g"
 
 Watching your AI workflows derail because it tried to 'think' instead of execute? Trying to get started with your first workflows and getting stuck?
 
-I have some useful tips for you... 
+I have some useful tips for you...
 
 ❕Disclaimer: I don't want to claim to be an expert who has implemented thousands of AI workflows, this is not something I do full-time for a living. But I have built maaany automation workflows in the past 15 years (For both my job and personal use), from Zapier's early days to awesome new (and open source!) platforms like n8n.
 
-Many of my workflows failed their initial concept, and I had to rework many (all?) of them. Adding an AI-node opens the door to many new possibilities. But let's be clear: it's not magic. 
+Many of my workflows failed their initial concept, and I had to rework many (all?) of them. Adding an AI-node opens the door to many new possibilities. But let's be clear: it's not magic.
 
-This year, as I’ve rebuilt personal workflows using generative AI, clear patterns emerged: Some old guidelines that still hold true since I started building automation workflows 15 years ago, and some new ones that apply to working with AI. Both categories still very relevant today. 
+This year, as I’ve rebuilt personal workflows using generative AI, clear patterns emerged: Some old guidelines that still hold true since I started building automation workflows 15 years ago, and some new ones that apply to working with AI. Both categories still very relevant today.
 
 These aren’t corporate case studies but field notes from someone knee-deep in prototyping. Whether you’re automating client outreach or personal knowledge management, here’s what I wish I knew before my first AI workflow exploded in a RAG cloud of hallucinated notes…
 
 ## Tip 1. Process First, AI Second
+
 Your AI is only as good as your underlying process. If your manual workflow is chaotic, AI will amplify that chaos at scale. Map and execute your process manually before adding any automation. Solid processes + quality data = AI success. Vague processes + poor data = expensive disappointment.
 
 ## Tip 2. Think Subtasks, Not Magic Solutions
+
 "Analyze all clients for churn risk" is a recipe for mediocre results. Instead, break it down: extract engagement metrics, identify usage pattern changes, analyze support ticket sentiment, score individual risk factors. The more specific the AI task, the better the output quality.
 
 > "If your workflow exceeds 20-25 steps, you'll probably need to rethink your workflow"
-You may have seen some people post these excessively elaborate n8n workflows. These makes no sense to me as it will make it very hard to manage and debug your workflows. There will always be exceptions, but I think as a general rule of thumb: if your workflow exceeds 20-25 steps, you'll probably need to rethink this and break it up into sub-tasks (One neat thing about n8n is that one workflow can trigger another workflow, which is extremely useful).
+> You may have seen some people post these excessively elaborate n8n workflows. These makes no sense to me as it will make it very hard to manage and debug your workflows. There will always be exceptions, but I think as a general rule of thumb: if your workflow exceeds 20-25 steps, you'll probably need to rethink this and break it up into sub-tasks (One neat thing about n8n is that one workflow can trigger another workflow, which is extremely useful).
 
 ## Tip 3. Context is King (But Less is More)
+
 Give AI exactly what it needs to succeed, no more, no less. Analyzing one client? Don't flood it with data from all 500 customers. The Goldilocks principle applies: just right context beats information overload every time.
 
 ## Tip 4. Skip AI for Simple Tasks
+
 Don't use AI to sort a list alphabetically. Use code. AI introduces variability where you need consistency. Reserve AI for interpretation, transcription, text summaries, pattern recognition, and other things LLMs are good at.
 
 For deterministic tasks, stick with traditional programming, it's faster, cheaper, and more reliable.
 
 ## Tip 5. Specialized Tools Beat Swiss Army Knives
+
 Stop trying to make ChatGPT do everything. Use Whisper for transcription, GitHub Copilot or Claude for code, Midjourney for images, Veo for video, Elevenlabs for audio. Specialized models for your specific needs. Each AI excels at particular tasks. Leverage that specialization for better results.
 
 💡 **Sidenote:** The shitty thing here is that the optimal model for a specific task might change weekly. I haven't yet found a definitive solution for this, but monitoring popular models in [OpenRouter](https://openrouter.ai/rankings) provides valuable insights. 💡
 
 ## Tip 6. Start Where You Already Excel
+
 > "If you can't do the task manually with unlimited time, AI probably can't either."
-The most successful AI implementations enhance existing strengths rather than attempting entirely new capabilities. Or at least it really helps a ton to already have the experience under your belt before you venture into new capabilities.  If you can't do the task manually with unlimited time, AI probably can't either. Begin with familiar processes you understand deeply.
+> The most successful AI implementations enhance existing strengths rather than attempting entirely new capabilities. Or at least it really helps a ton to already have the experience under your belt before you venture into new capabilities. If you can't do the task manually with unlimited time, AI probably can't either. Begin with familiar processes you understand deeply.
 
 ## Tip 7. Human-AI Collaboration > Replacement
+
 The winning formula isn't AI vs. humans, it's AI + humans. Position AI as an intelligent assistant handling data processing and pattern recognition while humans make decisions, handle exceptions, and manage relationships.
 
-I don't trust AI to send out any communication to anyone, so I don't. But it doesn't mean I don't let it help me with anything. What you need to do is build human-in-the-loop steps where you check the AI's work. Especially for new workflows this is invaluable. Once you trust the workflow more and more, you could remove the human-in-the-loop nodes. 
+I don't trust AI to send out any communication to anyone, so I don't. But it doesn't mean I don't let it help me with anything. What you need to do is build human-in-the-loop steps where you check the AI's work. Especially for new workflows this is invaluable. Once you trust the workflow more and more, you could remove the human-in-the-loop nodes.
 
-## The bottom line: 
+## The bottom line:
+
 AI amplifies what you do well and exposes what you do poorly. Start with solid foundations, think in subtasks, and remember that the goal isn't to replace human judgment, it's to enhance it.
 
-What's your biggest challenge in implementing AI workflows? Or the biggest time saver you have implemented? Share your experience below, I'd love to help and learn! 
+What's your biggest challenge in implementing AI workflows? Or the biggest time saver you have implemented? Share your experience below, I'd love to help and learn!

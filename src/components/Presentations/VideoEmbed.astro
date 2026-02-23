@@ -8,14 +8,14 @@ const { youtubeId } = Astro.props;
 
 <div class="mb-12">
   <h2 class="h3 mb-4">Video Recording</h2>
-  <div class="relative pb-[56.25%] bg-base-200 dark:bg-base-800 rounded-lg">
+  <div class="relative rounded-lg bg-base-200 pb-[56.25%] dark:bg-base-800">
     <iframe
       src={`https://www.youtube.com/embed/${youtubeId}`}
-      class="absolute top-0 left-0 w-full h-full border-none rounded-lg"
+      class="absolute left-0 top-0 h-full w-full rounded-lg border-none"
       allowfullscreen
       loading="lazy"
       onload="this.parentElement.classList.remove('bg-base-200', 'dark:bg-base-800')"
       onerror="this.parentElement.innerHTML = '<div class=\'absolute inset-0 flex items-center justify-center text-base-500 dark:text-base-400\'>Failed to load video. <a href=\'https://www.youtube.com/watch?v=' + this.youtubeId + '\' target=\'_blank\' class=\'ml-2 text-primary-500 hover:underline\'>Watch on YouTube</a></div>'"
-    />
+    ></iframe>
   </div>
 </div>

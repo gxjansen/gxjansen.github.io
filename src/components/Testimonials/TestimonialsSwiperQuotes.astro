@@ -23,7 +23,7 @@ const testimonialData = getTranslatedData("testimonialData", currLocale);
 
 <section
   id="testimonial-swiper-quotes"
-  class="overflow-hidden bg-pattern-big py-24 md:pb-28"
+  class="bg-pattern-big overflow-hidden py-24 md:pb-28"
 >
   <div class="site-container">
     <div
@@ -105,9 +105,12 @@ const testimonialData = getTranslatedData("testimonialData", currLocale);
     const swiper = new Swiper(".testimonials__swiper--quotes", SwiperParams);
 
     // Track testimonial carousel navigation with Umami
-    swiper.on('slideChange', () => {
-      if (typeof umami !== 'undefined') {
-        umami.track('carousel-change', { target: 'testimonials', value: swiper.activeIndex.toString() });
+    swiper.on("slideChange", () => {
+      if (typeof umami !== "undefined") {
+        umami.track("carousel-change", {
+          target: "testimonials",
+          value: swiper.activeIndex.toString(),
+        });
       }
     });
   }
