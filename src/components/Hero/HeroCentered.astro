@@ -30,7 +30,7 @@ const t = useTranslations(currLocale);
     <div
       class="mx-auto mb-16 flex w-full max-w-[750px] flex-col justify-center px-4 text-center"
     >
-      <div data-reveal="fade-right">
+      <div>
         <span
           class="mb-4 inline-flex items-center rounded-full bg-primary-500 px-2 py-px text-xs uppercase leading-5 text-base-100 dark:text-base-900"
         >
@@ -43,11 +43,7 @@ const t = useTranslations(currLocale);
           {t("hero_text")}
         </h1>
       </div>
-      <p
-        class="description mb-10 text-pretty text-lg lg:text-xl"
-        data-reveal="fade-right"
-        data-reveal-delay="1"
-      >
+      <p class="description mb-10 text-pretty text-lg lg:text-xl">
         <Fragment
           set:html={t("hero_description").replace(
             /\*\*(.*?)\*\*/g,
@@ -61,20 +57,14 @@ const t = useTranslations(currLocale);
           href="/contact/"
           target="_blank"
           rel="noopener noreferrer"
-          data-reveal="fade-right"
-          data-reveal-delay="2"
         >
           Book Guido
         </Button>
-        <VideoButton data-reveal="fade-right" data-reveal-delay="2" />
+        <VideoButton />
       </div>
 
       <!-- social proof -->
-      <div
-        class="mx-auto mt-8 flex max-w-md justify-center"
-        data-reveal="fade-right"
-        data-reveal-delay="3"
-      >
+      <div class="mx-auto mt-8 flex max-w-md justify-center">
         <div class="-m-1.5 flex flex-wrap items-center">
           <div class="w-auto p-1.5">
             <div class="flex flex-wrap">

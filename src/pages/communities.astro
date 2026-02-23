@@ -115,7 +115,6 @@ const communities = [
           communities.map((community, index) => (
             <div
               class={`grid items-center gap-8 md:grid-cols-2 md:gap-12 ${index % 2 === 1 ? "md:grid-flow-dense" : ""}`}
-              data-reveal="fade-up"
             >
               <div class={`${index % 2 === 1 ? "md:col-start-2" : ""}`}>
                 <div class="bg-secondary/30 flex aspect-video items-center justify-center overflow-hidden rounded-2xl border p-8 shadow-lg">
@@ -194,7 +193,7 @@ const communities = [
   <!-- CTA Section -->
   <section class="bg-secondary/30 py-16 md:py-24">
     <div class="site-container">
-      <div class="mx-auto max-w-3xl text-center" data-reveal="fade-up">
+      <div class="mx-auto max-w-3xl text-center">
         <div
           class="bg-primary/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
         >

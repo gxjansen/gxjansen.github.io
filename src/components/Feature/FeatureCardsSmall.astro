@@ -53,7 +53,7 @@ const shouldReduceMotion =
   aria-labelledby="features-heading"
 >
   <div class="relative" role="presentation">
-    <div class="mx-auto mb-16 text-center md:max-w-4xl" data-reveal="fade-up">
+    <div class="mx-auto mb-16 text-center md:max-w-4xl">
       <Badge>Strategic Impact</Badge>
       <h2 id="features-heading" class="h2 mb-4">Strategic Impact Areas</h2>
       <p
@@ -77,8 +77,6 @@ const shouldReduceMotion =
               text={feature.text}
               icon={feature.icon}
               suffix="-desktop"
-              data-reveal="zoom-in"
-              data-reveal-delay={idx + 1}
             />
           </div>
         ))
@@ -147,8 +145,6 @@ const shouldReduceMotion =
                   text={feature.text}
                   icon={feature.icon}
                   suffix="-mobile"
-                  data-reveal="zoom-in"
-                  data-reveal-delay={idx + 1}
                 />
               </div>
             ))
@@ -283,37 +279,3 @@ const shouldReduceMotion =
     </script>
   </div>
 </section>
-
-<script>
-  // Handle reduced motion preference changes
-  if (typeof window !== "undefined") {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
-      const elements = document.querySelectorAll("[data-reveal]");
-      elements.forEach((element) => {
-        if (e.matches) {
-          element.setAttribute("data-reveal", "");
-          element.removeAttribute("data-reveal-delay");
-        } else {
-          // Restore original animations
-          const isHeader = element.classList.contains("mb-16");
-          const isCard = element.closest('[role="listitem"]');
-
-          if (isHeader) {
-            element.setAttribute("data-reveal", "fade-up");
-          } else if (isCard) {
-            const index = Array.from(
-              document.querySelectorAll('[role="listitem"]'),
-            ).indexOf(isCard);
-            element.setAttribute("data-reveal", "zoom-in");
-            element.setAttribute("data-reveal-delay", (index + 1).toString());
-          }
-        }
-      });
-    }
-
-    mediaQuery.addEventListener("change", handleMotionPreference);
-    handleMotionPreference(mediaQuery);
-  }
-</script>

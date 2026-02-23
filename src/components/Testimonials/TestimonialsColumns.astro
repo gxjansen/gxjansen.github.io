@@ -22,7 +22,7 @@ const testimonialData = getTranslatedData("testimonialData", currLocale);
   <div class="site-container">
     <div class="relative">
       <div class="relative">
-        <div class="mb-16 mr-auto md:max-w-4xl" data-reveal="fade-up">
+        <div class="mb-16 mr-auto md:max-w-4xl">
           <Badge>Testimonials</Badge>
           <h2 class="h2 mb-4">Hear from our customers</h2>
           <p class="description text-lg md:text-xl">
@@ -35,11 +35,7 @@ const testimonialData = getTranslatedData("testimonialData", currLocale);
         >
           {
             testimonialData.map((testimonial, idx) => (
-              <TestimonialCard
-                {...testimonial}
-                data-reveal="zoom-in"
-                data-reveal-delay={idx + 1}
-              />
+              <TestimonialCard {...testimonial} />
             ))
           }
         </div>

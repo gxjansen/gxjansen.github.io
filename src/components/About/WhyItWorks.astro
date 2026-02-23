@@ -45,7 +45,7 @@ const approaches: Approach[] = [
     <div class="mx-auto max-w-5xl">
       <div class="grid items-start gap-12 md:grid-cols-2 md:gap-16">
         <!-- Left column: Main content -->
-        <div data-reveal="fade-right">
+        <div>
           <Badge>The Psychology Edge</Badge>
           <h2 id="why-heading" class="h2 mb-6">Why This Approach Works</h2>
           <div class="space-y-4 text-lg text-base-700 dark:text-base-300">
@@ -67,14 +67,10 @@ const approaches: Approach[] = [
         </div>
 
         <!-- Right column: Approach list -->
-        <div class="space-y-4" data-reveal="fade-left">
+        <div class="space-y-4">
           {
             approaches.map((approach, index) => (
-              <div
-                class="rounded-xl bg-base-50 p-4 shadow-sm transition-all duration-300 hover:shadow-md sm:p-5 dark:bg-base-800"
-                data-reveal="fade-up"
-                data-reveal-delay={index + 1}
-              >
+              <div class="rounded-xl bg-base-50 p-4 shadow-sm transition-all duration-300 hover:shadow-md sm:p-5 dark:bg-base-800">
                 <div class="flex flex-col gap-3 sm:flex-row sm:gap-4">
                   <div class="flex-shrink-0">
                     <div class="w-fit rounded-lg bg-primary-100 p-2 dark:bg-primary-900/30">
@@ -102,7 +98,6 @@ const approaches: Approach[] = [
       <!-- Experimentation background -->
       <div
         class="mt-12 rounded-2xl bg-gradient-to-r from-primary-50 to-primary-100/50 p-5 sm:mt-16 sm:p-8 md:p-10 dark:from-primary-900/20 dark:to-primary-800/10"
-        data-reveal="fade-up"
       >
         <div class="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
           <div class="flex-shrink-0">
@@ -139,7 +134,7 @@ const approaches: Approach[] = [
       </div>
 
       <!-- Cross-link to Author page -->
-      <div class="mt-10 text-center" data-reveal="fade-up">
+      <div class="mt-10 text-center">
         <a
           href="/authors/gxjansen/"
           class="inline-flex items-center font-medium text-primary-600 transition-colors duration-200 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"

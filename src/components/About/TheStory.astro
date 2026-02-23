@@ -72,7 +72,7 @@ const shouldReduceMotion =
 >
   <div class="site-container px-2 sm:px-4" role="presentation">
     <!-- Section header -->
-    <div class="mx-auto mb-12 max-w-3xl text-center" data-reveal="fade-up">
+    <div class="mx-auto mb-12 max-w-3xl text-center">
       <Badge>The Backstory</Badge>
       <h2 id="story-heading" class="h2 mb-4">How I Got Here</h2>
       <p class="description text-lg md:text-xl">
@@ -154,37 +154,9 @@ const shouldReduceMotion =
             idx={idx}
             ctaText={story.ctaText}
             showCta={story.showCta}
-            data-reveal={idx % 2 === 0 ? "fade-right" : "fade-left"}
           />
         ))
       }
     </div>
   </div>
 </section>
-
-<script>
-  // Handle reduced motion preference changes
-  if (typeof window !== "undefined") {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    function handleMotionPreference(e: MediaQueryListEvent | MediaQueryList) {
-      const elements = document.querySelectorAll("[data-reveal]");
-      elements.forEach((element) => {
-        if (e.matches) {
-          element.setAttribute("data-reveal", "");
-        } else {
-          const index = Array.from(
-            document.querySelectorAll('[role="listitem"]'),
-          ).indexOf(element);
-          element.setAttribute(
-            "data-reveal",
-            index % 2 === 0 ? "fade-right" : "fade-left",
-          );
-        }
-      });
-    }
-
-    mediaQuery.addEventListener("change", handleMotionPreference);
-    handleMotionPreference(mediaQuery);
-  }
-</script>

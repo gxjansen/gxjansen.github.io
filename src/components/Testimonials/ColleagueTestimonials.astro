@@ -21,7 +21,7 @@ const initialTestimonials = getRandomTestimonials(4);
 
 <section id="colleague-testimonials" class="py-24 md:py-28">
   <div class="site-container px-2 sm:px-4">
-    <div class="mx-auto mb-12 max-w-3xl text-center" data-reveal="fade-up">
+    <div class="mx-auto mb-12 max-w-3xl text-center">
       <Badge>Testimonials</Badge>
       <h2 class="h2 mb-4">
         <a
@@ -47,8 +47,6 @@ const initialTestimonials = getRandomTestimonials(4);
           <div
             data-testimonial-id={testimonial.id}
             class="testimonial-card-wrapper"
-            data-reveal="fade-up"
-            data-reveal-delay={index + 1}
           >
             <ColleagueTestimonialCard {...testimonial} />
           </div>
@@ -97,7 +95,7 @@ const initialTestimonials = getRandomTestimonials(4);
     const cardsHTML = testimonials
       .map(
         (testimonial, index) => `
-      <div data-testimonial-id="${testimonial.id}" class="testimonial-card-wrapper" data-reveal="fade-up" data-reveal-delay="${index + 1}">
+      <div data-testimonial-id="${testimonial.id}" class="testimonial-card-wrapper">
         <article class="colleague-testimonial-card bg-base-50 dark:bg-base-800 rounded-xl shadow-md p-4 sm:p-6 h-full flex flex-col transition-all duration-300 hover:shadow-lg">
           <blockquote class="flex-grow mb-6">
             <svg class="w-8 h-8 text-primary-600 dark:text-primary-400 mb-4" fill="currentColor" viewBox="0 0 24 24">
@@ -129,8 +127,6 @@ const initialTestimonials = getRandomTestimonials(4);
     setTimeout(() => {
       grid.innerHTML = cardsHTML;
       grid.style.opacity = "1";
-
-      // Note: CSS scroll-driven animations auto-detect new data-reveal elements
     }, 150);
   }
 
