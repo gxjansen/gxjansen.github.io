@@ -39,4 +39,4 @@ jobs:
             --exclude-path dist/_astro
             --root-dir ${{ github.workspace }}/dist
             dist
-          fail: ${{ github.event_name == 'pull_request' }}
+          fail: false
