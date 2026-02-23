@@ -21,32 +21,34 @@ interface SubscriptionRequest {
   altcha?: string;
 }
 
+const commonHeaders: Record<string, string> = {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+};
+
 const handler: Handler = async (
   event: HandlerEvent,
   _context: HandlerContext
 ) => {
-  // Only allow POST requests
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
-  }
-
   // Handle CORS preflight
-  if (event.httpMethod === "OPTIONS") {
+  if ((event.httpMethod as string) === "OPTIONS") {
     return {
       statusCode: 204,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",
-      },
+      } as Record<string, string>,
       body: "",
+    };
+  }
+
+  // Only allow POST requests
+  if (event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      headers: { ...commonHeaders },
+      body: JSON.stringify({ error: "Method not allowed" }),
     };
   }
 
@@ -74,10 +76,7 @@ const handler: Handler = async (
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return {
         statusCode: 400,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
+        headers: { ...commonHeaders },
         body: JSON.stringify({ error: "Valid email address required" }),
       };
     }
@@ -140,10 +139,7 @@ const handler: Handler = async (
       console.error("Missing Listmonk API credentials");
       return {
         statusCode: 500,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
+        headers: { ...commonHeaders },
         body: JSON.stringify({
           success: false,
           error: "Server configuration error. Please try again later.",
@@ -211,10 +207,7 @@ const handler: Handler = async (
 
       return {
         statusCode: 200,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
+        headers: { ...commonHeaders },
         body: JSON.stringify({
           success: true,
           message:
@@ -228,10 +221,7 @@ const handler: Handler = async (
       // Already subscribed - treat as success
       return {
         statusCode: 200,
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
+        headers: { ...commonHeaders },
         body: JSON.stringify({
           success: true,
           message: "You're already subscribed! Check your inbox for updates.",

@@ -14,41 +14,48 @@ const authorUrl = `/authors/${author.slug}`;
 ---
 
 <div
-  class={`author-byline flex gap-3 ${showBio && bioShort ? 'items-start' : 'items-center'}`}
+  class={`author-byline flex gap-3 ${showBio && bioShort ? "items-start" : "items-center"}`}
   itemprop="author"
   itemscope
   itemtype="https://schema.org/Person"
 >
-  {avatar && (
-    <a href={authorUrl} class="flex-shrink-0">
-      <Image
-        src={avatar}
-        alt={`${name}'s avatar`}
-        width={variant === "compact" ? 48 : 64}
-        height={variant === "compact" ? 48 : 64}
-        quality="high"
-        loading="eager"
-        class={`rounded-full object-cover ${variant === "compact" ? "h-12 w-12" : "h-16 w-16"}`}
-        itemprop="image"
-      />
-    </a>
-  )}
+  {
+    avatar && (
+      <a href={authorUrl} class="flex-shrink-0">
+        <Image
+          src={avatar}
+          alt={`${name}'s avatar`}
+          width={variant === "compact" ? 48 : 64}
+          height={variant === "compact" ? 48 : 64}
+          quality="high"
+          loading="eager"
+          class={`rounded-full object-cover ${variant === "compact" ? "h-12 w-12" : "h-16 w-16"}`}
+          itemprop="image"
+        />
+      </a>
+    )
+  }
 
   <div class="flex-1">
-    <div class="flex items-baseline gap-2 flex-wrap">
+    <div class="flex flex-wrap items-baseline gap-2">
       <a
         href={authorUrl}
-        class="font-semibold text-base-900 dark:text-base-100 hover:text-primary-500 dark:hover:text-primary-400"
+        class="font-semibold text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400"
         itemprop="url"
       >
         <span itemprop="name">{name}</span>
       </a>
     </div>
 
-    {showBio && bioShort && (
-      <p class="mt-1 text-sm text-base-700 dark:text-base-300" itemprop="description">
-        {bioShort}
-      </p>
-    )}
+    {
+      showBio && bioShort && (
+        <p
+          class="mt-1 text-sm text-base-700 dark:text-base-300"
+          itemprop="description"
+        >
+          {bioShort}
+        </p>
+      )
+    }
   </div>
 </div>

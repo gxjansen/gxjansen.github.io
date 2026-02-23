@@ -74,10 +74,7 @@ export function getTranslatedData<T extends Locale, K extends DataKey<T>>(
  * @param url: current URL (Astro.url)
  * @returns new URL pathname as a string
  */
-export function getLocalizedPathname(
-  locale: LocaleType,
-  url: URL,
-): string {
+export function getLocalizedPathname(locale: LocaleType, url: URL): string {
   // figure out if the current URL has a language in it's path
   const [, lang, ...rest] = url.pathname.split("/");
 

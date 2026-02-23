@@ -18,25 +18,25 @@ export async function getStaticPaths() {
 
   // Get all categories and their original names
   const allCategories = posts
-    .map(post => post.data.categories || [])
+    .map((post) => post.data.categories || [])
     .flat()
     .filter(Boolean);
 
   const uniqueCategories = [...new Set(allCategories)];
-  
+
   // Create a path for each category, storing both slugified and original versions
   // Count posts per category
   const categoryCount = countItems(allCategories);
-  const validCategories = uniqueCategories.filter(category => 
-    categoryCount[slugify(category)]?.count >= 2
+  const validCategories = uniqueCategories.filter(
+    (category) => categoryCount[slugify(category)]?.count >= 2,
   );
 
-  return validCategories.map(category => ({
+  return validCategories.map((category) => ({
     params: { category: slugify(category) },
-    props: { 
+    props: {
       slugifiedCategory: slugify(category),
-      originalCategory: category 
-    }
+      originalCategory: category,
+    },
   }));
 }
 
@@ -52,7 +52,7 @@ const posts = await getCollection("post", ({ data }) => {
 const filteredPosts = posts.filter((post) =>
   (post.data.categories || [])
     .map((cat) => slugify(cat))
-    .includes(slugifiedCategory)
+    .includes(slugifiedCategory),
 );
 
 // Get all categories for sidebar, filtering out undefined/null values
@@ -81,27 +81,28 @@ const description = `Articles categorized under ${originalCategory}`;
           </div>
 
           <!-- Category filters -->
-          <div class="container mx-auto px-4 mb-12">
+          <div class="container mx-auto mb-12 px-4">
             <div class="flex flex-wrap justify-center gap-4">
-              {processedCategories
-                .filter(([_, __, count]) => count >= 2)
-                .map(([slug, original]) => (
-                <a
-                  href={`/categories/${slug}/`}
-                  class="filter-badge"
-                >
-                  {original}
-                </a>
-              ))}
+              {
+                processedCategories
+                  .filter(([_, __, count]) => count >= 2)
+                  .map(([slug, original]) => (
+                    <a href={`/categories/${slug}/`} class="filter-badge">
+                      {original}
+                    </a>
+                  ))
+              }
             </div>
           </div>
 
           <!-- Blog posts grid -->
           <div class="container mx-auto px-4">
             <div class="grid gap-16 sm:grid-cols-2">
-              {filteredPosts.map(post => (
-                <PostCardAtlas post={post} showDescription={true} />
-              ))}
+              {
+                filteredPosts.map((post) => (
+                  <PostCardAtlas post={post} showDescription={true} />
+                ))
+              }
             </div>
           </div>
         </div>

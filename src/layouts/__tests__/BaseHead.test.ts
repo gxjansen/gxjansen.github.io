@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest';
-import { parseHTML } from '../../test/astro-test-utils';
-import { createMockLayoutProps } from '../../test/utils';
+import { describe, it, expect } from "vitest";
+import { parseHTML } from "../../test/astro-test-utils";
+import { createMockLayoutProps } from "../../test/utils";
 
-describe('BaseHead', () => {
-  it('includes required meta tags', () => {
+describe("BaseHead", () => {
+  it("includes required meta tags", () => {
     const props = createMockLayoutProps();
-    
+
     const markup = `
       <head>
         <meta charset="utf-8" />
@@ -23,34 +23,46 @@ describe('BaseHead', () => {
     `.trim();
 
     const parsedHtml = parseHTML(markup);
-    
+
     // Check charset and viewport
     expect(parsedHtml.querySelector('meta[charset="utf-8"]')).toBeTruthy();
-    expect(parsedHtml.querySelector('meta[name="viewport"]')?.getAttribute('content'))
-      .toBe('width=device-width, initial-scale=1.0, viewport-fit=cover');
+    expect(
+      parsedHtml
+        .querySelector('meta[name="viewport"]')
+        ?.getAttribute("content"),
+    ).toBe("width=device-width, initial-scale=1.0, viewport-fit=cover");
 
     // Check color scheme
-    expect(parsedHtml.querySelector('meta[name="color-scheme"]')?.getAttribute('content'))
-      .toBe('dark light');
+    expect(
+      parsedHtml
+        .querySelector('meta[name="color-scheme"]')
+        ?.getAttribute("content"),
+    ).toBe("dark light");
 
     // Check theme colors
     const themeColors = parsedHtml.querySelectorAll('meta[name="theme-color"]');
     expect(themeColors.length).toBe(2);
-    expect(themeColors[0].getAttribute('media')).toBe('(prefers-color-scheme: light)');
-    expect(themeColors[0].getAttribute('content')).toBe('#ffffff');
-    expect(themeColors[1].getAttribute('media')).toBe('(prefers-color-scheme: dark)');
-    expect(themeColors[1].getAttribute('content')).toBe('#0f172a');
+    expect(themeColors[0].getAttribute("media")).toBe(
+      "(prefers-color-scheme: light)",
+    );
+    expect(themeColors[0].getAttribute("content")).toBe("#ffffff");
+    expect(themeColors[1].getAttribute("media")).toBe(
+      "(prefers-color-scheme: dark)",
+    );
+    expect(themeColors[1].getAttribute("content")).toBe("#0f172a");
 
     // Check accessibility meta tags
-    const formatDetection = parsedHtml.querySelectorAll('meta[name="format-detection"]');
+    const formatDetection = parsedHtml.querySelectorAll(
+      'meta[name="format-detection"]',
+    );
     expect(formatDetection.length).toBe(4);
-    expect(formatDetection[0].getAttribute('content')).toBe('telephone=no');
-    expect(formatDetection[1].getAttribute('content')).toBe('date=no');
-    expect(formatDetection[2].getAttribute('content')).toBe('address=no');
-    expect(formatDetection[3].getAttribute('content')).toBe('email=no');
+    expect(formatDetection[0].getAttribute("content")).toBe("telephone=no");
+    expect(formatDetection[1].getAttribute("content")).toBe("date=no");
+    expect(formatDetection[2].getAttribute("content")).toBe("address=no");
+    expect(formatDetection[3].getAttribute("content")).toBe("email=no");
   });
 
-  it('handles font loading optimization', () => {
+  it("handles font loading optimization", () => {
     const markup = `
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
@@ -70,23 +82,24 @@ describe('BaseHead', () => {
     `.trim();
 
     const parsedHtml = parseHTML(markup);
-    
+
     // Check preconnect
     const preconnect = parsedHtml.querySelector('link[rel="preconnect"]');
-    expect(preconnect?.getAttribute('href')).toBe('https://api.fontshare.com');
-    expect(preconnect?.hasAttribute('crossorigin')).toBe(true);
+    expect(preconnect?.getAttribute("href")).toBe("https://api.fontshare.com");
+    expect(preconnect?.hasAttribute("crossorigin")).toBe(true);
 
     // Check main font loading
     const fontLink = parsedHtml.querySelector('link[media="print"]');
-    expect(fontLink?.getAttribute('href')).toContain('poppins@400,500,600,700');
-    expect(fontLink?.getAttribute('onload')).toBe("this.media='all'");
+    expect(fontLink?.getAttribute("href")).toContain("poppins@400,500,600,700");
+    expect(fontLink?.getAttribute("onload")).toBe("this.media='all'");
 
     // Check noscript fallback
-    const noscriptContent = parsedHtml.querySelector('noscript')?.innerHTML || '';
-    expect(noscriptContent).toContain('poppins@400,500,600,700');
+    const noscriptContent =
+      parsedHtml.querySelector("noscript")?.innerHTML || "";
+    expect(noscriptContent).toContain("poppins@400,500,600,700");
   });
 
-  it('includes favicon setup', () => {
+  it("includes favicon setup", () => {
     const markup = `
       <head>
         <link rel="icon" href="/favicons/favicon.ico" />
@@ -103,28 +116,36 @@ describe('BaseHead', () => {
     `.trim();
 
     const parsedHtml = parseHTML(markup);
-    
+
     // Check basic favicon
-    expect(parsedHtml.querySelector('link[rel="icon"][href="/favicons/favicon.ico"]')).toBeTruthy();
+    expect(
+      parsedHtml.querySelector(
+        'link[rel="icon"][href="/favicons/favicon.ico"]',
+      ),
+    ).toBeTruthy();
     expect(parsedHtml.querySelector('link[rel="shortcut icon"]')).toBeTruthy();
 
     // Check apple touch icon
     const appleIcon = parsedHtml.querySelector('link[rel="apple-touch-icon"]');
-    expect(appleIcon?.getAttribute('sizes')).toBe('180x180');
-    expect(appleIcon?.getAttribute('href')).toBe('/favicons/apple-touch-icon.png');
+    expect(appleIcon?.getAttribute("sizes")).toBe("180x180");
+    expect(appleIcon?.getAttribute("href")).toBe(
+      "/favicons/apple-touch-icon.png",
+    );
 
     // Check PNG icons
     const pngIcons = parsedHtml.querySelectorAll('link[type="image/png"]');
     expect(pngIcons.length).toBe(2);
-    expect(pngIcons[0].getAttribute('sizes')).toBe('32x32');
-    expect(pngIcons[1].getAttribute('sizes')).toBe('16x16');
+    expect(pngIcons[0].getAttribute("sizes")).toBe("32x32");
+    expect(pngIcons[1].getAttribute("sizes")).toBe("16x16");
 
     // Check manifest and browser config
     expect(parsedHtml.querySelector('link[rel="manifest"]')).toBeTruthy();
-    expect(parsedHtml.querySelector('meta[name="msapplication-config"]')).toBeTruthy();
+    expect(
+      parsedHtml.querySelector('meta[name="msapplication-config"]'),
+    ).toBeTruthy();
   });
 
-  it('includes theme change script', () => {
+  it("includes theme change script", () => {
     const markup = `
       <head>
         <script>
@@ -164,23 +185,23 @@ describe('BaseHead', () => {
     `.trim();
 
     const parsedHtml = parseHTML(markup);
-    
-    const script = parsedHtml.querySelector('script');
-    expect(script?.textContent).toContain('function initTheme()');
-    expect(script?.textContent).toContain('prefers-color-scheme: dark');
+
+    const script = parsedHtml.querySelector("script");
+    expect(script?.textContent).toContain("function initTheme()");
+    expect(script?.textContent).toContain("prefers-color-scheme: dark");
     expect(script?.textContent).toContain('localStorage.getItem("colorTheme")');
-    expect(script?.textContent).toContain('document.documentElement.classList');
-    expect(script?.textContent).toContain('astro:after-swap');
+    expect(script?.textContent).toContain("document.documentElement.classList");
+    expect(script?.textContent).toContain("astro:after-swap");
   });
 
-  it('handles SEO meta tags', () => {
+  it("handles SEO meta tags", () => {
     const props = createMockLayoutProps({
-      type: 'blog',
-      title: 'Test Blog Post',
-      description: 'This is a test blog post',
-      noindex: true
+      type: "blog",
+      title: "Test Blog Post",
+      description: "This is a test blog post",
+      noindex: true,
     });
-    
+
     const markup = `
       <head>
         <title>${props.title}</title>
@@ -197,23 +218,55 @@ describe('BaseHead', () => {
     `.trim();
 
     const parsedHtml = parseHTML(markup);
-    
+
     // Check basic meta tags
-    expect(parsedHtml.querySelector('title')?.textContent).toBe(props.title);
-    expect(parsedHtml.querySelector('meta[name="description"]')?.getAttribute('content')).toBe(props.description);
-    expect(parsedHtml.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('noindex');
+    expect(parsedHtml.querySelector("title")?.textContent).toBe(props.title);
+    expect(
+      parsedHtml
+        .querySelector('meta[name="description"]')
+        ?.getAttribute("content"),
+    ).toBe(props.description);
+    expect(
+      parsedHtml.querySelector('meta[name="robots"]')?.getAttribute("content"),
+    ).toBe("noindex");
 
     // Check OpenGraph tags
-    expect(parsedHtml.querySelector('meta[property="og:title"]')?.getAttribute('content')).toBe(props.title);
-    expect(parsedHtml.querySelector('meta[property="og:description"]')?.getAttribute('content')).toBe(props.description);
-    expect(parsedHtml.querySelector('meta[property="og:type"]')?.getAttribute('content')).toBe('article');
+    expect(
+      parsedHtml
+        .querySelector('meta[property="og:title"]')
+        ?.getAttribute("content"),
+    ).toBe(props.title);
+    expect(
+      parsedHtml
+        .querySelector('meta[property="og:description"]')
+        ?.getAttribute("content"),
+    ).toBe(props.description);
+    expect(
+      parsedHtml
+        .querySelector('meta[property="og:type"]')
+        ?.getAttribute("content"),
+    ).toBe("article");
 
     // Check Twitter tags
-    expect(parsedHtml.querySelector('meta[name="twitter:title"]')?.getAttribute('content')).toBe(props.title);
-    expect(parsedHtml.querySelector('meta[name="twitter:description"]')?.getAttribute('content')).toBe(props.description);
-    expect(parsedHtml.querySelector('meta[name="twitter:card"]')?.getAttribute('content')).toBe('summary_large_image');
+    expect(
+      parsedHtml
+        .querySelector('meta[name="twitter:title"]')
+        ?.getAttribute("content"),
+    ).toBe(props.title);
+    expect(
+      parsedHtml
+        .querySelector('meta[name="twitter:description"]')
+        ?.getAttribute("content"),
+    ).toBe(props.description);
+    expect(
+      parsedHtml
+        .querySelector('meta[name="twitter:card"]')
+        ?.getAttribute("content"),
+    ).toBe("summary_large_image");
 
     // Check sitemap
-    expect(parsedHtml.querySelector('link[rel="sitemap"]')?.getAttribute('href')).toBe('/sitemap-index.xml');
+    expect(
+      parsedHtml.querySelector('link[rel="sitemap"]')?.getAttribute("href"),
+    ).toBe("/sitemap-index.xml");
   });
 });

@@ -1,25 +1,23 @@
 ---
-import { socialLinks } from '@data/socialLinks';
-import SocialCard from '@components/SocialCard/SocialCard.astro';
+import { socialLinks } from "@data/socialLinks";
+import SocialCard from "@components/SocialCard/SocialCard.astro";
 
 // Determine the current page context
 const currentPath = Astro.url.pathname;
 
 // Determine the current location
-const location = currentPath.includes('/about') 
-  ? 'about' 
-  : currentPath.includes('/contact') 
-    ? 'contact' 
+const location = currentPath.includes("/about")
+  ? "about"
+  : currentPath.includes("/contact")
+    ? "contact"
     : null;
 
 // Filter links based on the current page
-const visibleLinks = location 
-  ? socialLinks.filter(link => link.visibility[location] === true)
+const visibleLinks = location
+  ? socialLinks.filter((link) => link.visibility[location] === true)
   : [];
 ---
 
 <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-  {visibleLinks.map(link => (
-    <SocialCard {...link} />
-  ))}
+  {visibleLinks.map((link) => <SocialCard {...link} />)}
 </div>

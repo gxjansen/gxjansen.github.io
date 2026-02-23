@@ -35,16 +35,18 @@ const {
   idx,
   details,
   imageSide,
-  ctaText = 'Learn more',
+  ctaText = "Learn more",
   showCta = true,
   href2,
-  ctaText2
+  ctaText2,
 } = Astro.props as Props;
 
 const currLocale = getLocaleFromUrl(Astro.url);
-const isExternalLink = href && (href.startsWith('http://') || href.startsWith('https://'));
-const isExternalLink2 = href2 && (href2.startsWith('http://') || href2.startsWith('https://'));
-const cardId = `biography-${title.toLowerCase().replace(/\s+/g, '-')}`;
+const isExternalLink =
+  href && (href.startsWith("http://") || href.startsWith("https://"));
+const isExternalLink2 =
+  href2 && (href2.startsWith("http://") || href2.startsWith("https://"));
+const cardId = `biography-${title.toLowerCase().replace(/\s+/g, "-")}`;
 ---
 
 <article
@@ -54,63 +56,59 @@ const cardId = `biography-${title.toLowerCase().replace(/\s+/g, '-')}`;
   aria-labelledby={`${cardId}-title`}
 >
   <!-- Text content -->
-  <div 
-    class={`${imageSide === "left" ? "md:order-last": ""} col-span-1`}
+  <div
+    class={`${imageSide === "left" ? "md:order-last" : ""} col-span-1`}
     aria-labelledby={`${cardId}-title`}
   >
     <header>
-      <h3 
-        id={`${cardId}-title`}
-        class="h2 mt-6"
-      >
+      <h3 id={`${cardId}-title`} class="h2 mt-6">
         {title}
       </h3>
     </header>
-    <div 
-      class="mt-6"
-      aria-label={`Details about ${title}`}
-    >
-      <p 
-        class="description"
-        id={`${cardId}-description`}
-      >
+    <div class="mt-6" aria-label={`Details about ${title}`}>
+      <p class="description" id={`${cardId}-description`}>
         {details}
       </p>
     </div>
-    {showCta && (
-      <div
-        class="z-20 mt-8 flex flex-wrap gap-4"
-        aria-label={`Actions for ${title}`}
-      >
-        <Button
-          variant="primary"
-          href={isExternalLink ? href : getRelativeLocaleUrl(currLocale, href)}
-          arrow="none"
-          aria-label={`${ctaText} about ${title}${isExternalLink ? ' (opens in new tab)' : ''}`}
-          aria-describedby={`${cardId}-description`}
+    {
+      showCta && (
+        <div
+          class="z-20 mt-8 flex flex-wrap gap-4"
+          aria-label={`Actions for ${title}`}
         >
-          {ctaText}
-        </Button>
-        {href2 && ctaText2 && (
           <Button
-            variant="secondary"
-            href={isExternalLink2 ? href2 : getRelativeLocaleUrl(currLocale, href2)}
+            variant="primary"
+            href={
+              isExternalLink ? href : getRelativeLocaleUrl(currLocale, href)
+            }
             arrow="none"
-            aria-label={`${ctaText2} about ${title}${isExternalLink2 ? ' (opens in new tab)' : ''}`}
+            aria-label={`${ctaText} about ${title}${isExternalLink ? " (opens in new tab)" : ""}`}
             aria-describedby={`${cardId}-description`}
           >
-            {ctaText2}
+            {ctaText}
           </Button>
-        )}
-      </div>
-    )}
+          {href2 && ctaText2 && (
+            <Button
+              variant="secondary"
+              href={
+                isExternalLink2
+                  ? href2
+                  : getRelativeLocaleUrl(currLocale, href2)
+              }
+              arrow="none"
+              aria-label={`${ctaText2} about ${title}${isExternalLink2 ? " (opens in new tab)" : ""}`}
+              aria-describedby={`${cardId}-description`}
+            >
+              {ctaText2}
+            </Button>
+          )}
+        </div>
+      )
+    }
   </div>
 
   <!-- Image content -->
-  <div 
-    class="relative mx-auto max-w-4xl"
-    role="presentation"
-  >
+  <div class="relative mx-auto max-w-4xl" role="presentation">
     <!-- Decorative elements -->
     <div aria-hidden="true">
       <Icon
@@ -128,7 +126,7 @@ const cardId = `biography-${title.toLowerCase().replace(/\s+/g, '-')}`;
         role="presentation"
       />
     </div>
-    
+
     <!-- Main image -->
     <figure>
       <Image
@@ -156,7 +154,7 @@ const cardId = `biography-${title.toLowerCase().replace(/\s+/g, '-')}`;
     .border {
       border-color: CanvasText;
     }
-    
+
     .text-accent-1,
     .text-accent-2,
     .text-accent-3,
@@ -167,7 +165,7 @@ const cardId = `biography-${title.toLowerCase().replace(/\s+/g, '-')}`;
 
   /* Focus styles for interactive elements */
   :focus-visible {
-    outline: 2px solid var(--focus-ring-color, theme('colors.primary.500'));
+    outline: 2px solid var(--focus-ring-color, theme("colors.primary.500"));
     outline-offset: 2px;
   }
 </style>

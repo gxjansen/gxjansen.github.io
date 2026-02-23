@@ -19,7 +19,7 @@ interface FeatureData {
 
 // data
 const featureData: FeatureData[] = [
-{
+  {
     icon: "tabler/outline/broadcast",
     title: "Podcasts",
     text: `Podcasting is a great way to learn, share and get to know people. I've published over 250 episodes for different podcasts.`,
@@ -56,7 +56,7 @@ const featureData: FeatureData[] = [
 
 <section
   id="feature-cards-medium"
-  class="overflow-hidden bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-12 dark:bg-[url('/assets/pattern-dark.svg')] md:py-20"
+  class="overflow-hidden bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-12 md:py-20 dark:bg-[url('/assets/pattern-dark.svg')]"
 >
   <div class="site-container">
     <div class="mx-auto mb-16 text-center md:max-w-4xl">
@@ -66,10 +66,7 @@ const featureData: FeatureData[] = [
         Content!
       </p> -->
     </div>
-    <div
-      id="trigger-medium-cards"
-      class="grid gap-4 md:grid-cols-3"
-    >
+    <div id="trigger-medium-cards" class="grid gap-4 md:grid-cols-3">
       {
         featureData.map((feature, idx) => (
           <FeatureCard

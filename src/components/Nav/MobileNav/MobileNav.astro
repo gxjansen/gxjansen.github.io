@@ -1,11 +1,15 @@
 ---
 // Icon imports
-import MenuIcon from '@icons/ui/menu.svg';
-import CloseIcon from '@icons/ui/close.svg';
+import MenuIcon from "@icons/ui/menu.svg";
+import CloseIcon from "@icons/ui/close.svg";
 
 //components
 import NavLink from "@components/Nav/NavLink.astro";
 import MobileNavDropdown from "@components/Nav/MobileNav/MobileNavDropdown.astro";
+import type {
+  navDropdownItem,
+  navMegaDropdownItem,
+} from "@config/types/configDataTypes";
 import Button from "@components/Button/Button.astro";
 import MobileLanguageSelect from "@components/LanguageSelect/MobileLanguageSelect.astro";
 import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
@@ -46,9 +50,7 @@ import { locales } from "@config/siteSettings.json";
           aria-label="close navigation menu"
         >
           <!-- "X" icon to close menu -->
-          <CloseIcon
-            class="h-8 w-8 text-base-600 dark:text-base-300"
-          />
+          <CloseIcon class="h-8 w-8 text-base-600 dark:text-base-300" />
         </button>
       </div>
 
@@ -64,15 +66,17 @@ import { locales } from "@config/siteSettings.json";
                 "dropdown" in navItem ? (
                   // mobile dropdown menu
                   <>
-                    <MobileNavDropdown navItem={navItem} />
+                    <MobileNavDropdown navItem={navItem as navDropdownItem} />
                     {/* <hr class="mx-4 mb-2 border-base-300 dark:border-base-600/60" /> */}
                   </>
                 ) : "megaMenuColumns" in navItem ? (
                   // mobile mega menu dropdowns
                   <>
-                    {navItem.megaMenuColumns.map((navItem) => (
-                      <MobileNavDropdown navItem={navItem} />
-                    ))}
+                    {(navItem as navMegaDropdownItem).megaMenuColumns.map(
+                      (navItem) => (
+                        <MobileNavDropdown navItem={navItem} />
+                      ),
+                    )}
                     {/* <hr class="mx-4 my-1 border-base-300 dark:border-base-600/60" /> */}
                   </>
                 ) : (
@@ -91,7 +95,7 @@ import { locales } from "@config/siteSettings.json";
           umamiEvent="cta-click"
           umamiEventTarget="book-guido-mobile"
         >
-        Book Guido
+          Book Guido
         </Button>
       </div>
 
@@ -136,8 +140,8 @@ import { locales } from "@config/siteSettings.json";
         mobileNavBurger.setAttribute("aria-expanded", "true");
 
         // Track mobile menu open with Umami
-        if (typeof umami !== 'undefined') {
-          umami.track('nav-click', { target: 'mobile-menu-open' });
+        if (typeof umami !== "undefined") {
+          umami.track("nav-click", { target: "mobile-menu-open" });
         }
 
         // mobile nav content drawer
@@ -192,11 +196,11 @@ import { locales } from "@config/siteSettings.json";
     const mobileNavContent = document.getElementById("mobile-nav__content");
     if (!mobileNavContent) return;
 
-    mobileNavContent.querySelectorAll('a').forEach((link) => {
+    mobileNavContent.querySelectorAll("a").forEach((link) => {
       // Handle click events
-      link.addEventListener('click', function(e) {
-        const href = link.getAttribute('href');
-        if (href && !href.startsWith('#')) {
+      link.addEventListener("click", function (e) {
+        const href = link.getAttribute("href");
+        if (href && !href.startsWith("#")) {
           e.preventDefault();
           e.stopPropagation();
           window.location.href = href;
@@ -204,9 +208,9 @@ import { locales } from "@config/siteSettings.json";
       });
 
       // Handle touchend for mobile touch devices
-      link.addEventListener('touchend', function(e) {
-        const href = link.getAttribute('href');
-        if (href && !href.startsWith('#')) {
+      link.addEventListener("touchend", function (e) {
+        const href = link.getAttribute("href");
+        if (href && !href.startsWith("#")) {
           e.preventDefault();
           e.stopPropagation();
           window.location.href = href;
@@ -248,7 +252,8 @@ import { locales } from "@config/siteSettings.json";
 
   // mobile nav content drawer
   .mobile-nav--slide-in {
-    animation: mobileNavSlideInAnimation cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+    animation: mobileNavSlideInAnimation cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s
+      forwards;
   }
 
   .mobile-nav--slide-out {

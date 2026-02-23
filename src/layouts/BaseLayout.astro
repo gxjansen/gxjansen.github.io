@@ -6,7 +6,7 @@ import BaseHead from "@layouts/BaseHead.astro";
 import Nav from "@components/Nav/Nav.astro";
 import Footer from "@components/Footer/Footer.astro";
 import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
-import EnvironmentBanner from '../components/EnvironmentBanner/EnvironmentBanner.astro';
+import EnvironmentBanner from "../components/EnvironmentBanner/EnvironmentBanner.astro";
 import RandomLinkColors from "@components/Scripts/RandomLinkColors.astro";
 
 // style import
@@ -42,11 +42,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html 
-  lang={currLocale}
-  dir="ltr"
-  class="antialiased"
->
+<html lang={currLocale} dir="ltr" class="antialiased">
   <head>
     <BaseHead
       type={type}
@@ -67,19 +63,40 @@ const currLocale = getLocaleFromUrl(Astro.url);
 
       /* Noise background animation */
       @keyframes noise {
-        0% { transform: translate(0,0) }
-        10% { transform: translate(-5%,-5%) }
-        20% { transform: translate(-10%,5%) }
-        30% { transform: translate(5%,-10%) }
-        40% { transform: translate(-5%,15%) }
-        50% { transform: translate(-10%,5%) }
-        60% { transform: translate(15%,0) }
-        70% { transform: translate(0,10%) }
-        80% { transform: translate(-15%,0) }
-        90% { transform: translate(10%,5%) }
-        100% { transform: translate(5%,0) }
+        0% {
+          transform: translate(0, 0);
+        }
+        10% {
+          transform: translate(-5%, -5%);
+        }
+        20% {
+          transform: translate(-10%, 5%);
+        }
+        30% {
+          transform: translate(5%, -10%);
+        }
+        40% {
+          transform: translate(-5%, 15%);
+        }
+        50% {
+          transform: translate(-10%, 5%);
+        }
+        60% {
+          transform: translate(15%, 0);
+        }
+        70% {
+          transform: translate(0, 10%);
+        }
+        80% {
+          transform: translate(-15%, 0);
+        }
+        90% {
+          transform: translate(10%, 5%);
+        }
+        100% {
+          transform: translate(5%, 0);
+        }
       }
-
     </style>
   </head>
   <body
@@ -89,28 +106,30 @@ const currLocale = getLocaleFromUrl(Astro.url);
     } relative isolate min-h-screen flex flex-col w-screen overflow-x-clip`}
   >
     {/* Background elements */}
-    <div class="fixed inset-0 z-background">
+    <div class="z-background fixed inset-0">
       {/* Noise overlay */}
       <div
         class="noise-background"
-        style={siteSettings.useAnimations ? "animation: noise 8s steps(10) infinite;" : ""}
+        style={siteSettings.useAnimations
+          ? "animation: noise 8s steps(10) infinite;"
+          : ""}
         aria-hidden="true"
         role="presentation"
-      ></div>
-
+      >
+      </div>
     </div>
 
     <EnvironmentBanner />
-    
+
     {/* Main content */}
-    <div class="relative z-base flex-1">
+    <div class="z-base relative flex-1">
       <Nav />
       <div class="site-container px-4">
-        <main 
+        <main
           id="main-content"
-          class="transition-ready" 
-          transition:animate="fade" 
-          transition:animate.duration="0.2" 
+          class="transition-ready"
+          transition:animate="fade"
+          transition:animate.duration="0.2"
           transition:animate.timing="ease-out"
         >
           <slot />
@@ -124,70 +143,83 @@ const currLocale = getLocaleFromUrl(Astro.url);
     <!-- Performance optimizations -->
     <script>
       // Inform the browser about upcoming transitions
-      document.addEventListener('astro:before-preparation', () => {
-        document.querySelectorAll('.transition-ready').forEach(el => {
-          el.style.willChange = 'opacity, transform';
+      document.addEventListener("astro:before-preparation", () => {
+        document.querySelectorAll(".transition-ready").forEach((el) => {
+          (el as HTMLElement).style.willChange = "opacity, transform";
         });
       });
 
       // Clean up after transition
-      document.addEventListener('astro:after-swap', () => {
-        document.querySelectorAll('.transition-ready').forEach(el => {
-          el.style.willChange = 'auto';
+      document.addEventListener("astro:after-swap", () => {
+        document.querySelectorAll(".transition-ready").forEach((el) => {
+          (el as HTMLElement).style.willChange = "auto";
         });
       });
-
     </script>
 
     <!-- Error tracking with Umami -->
     <script is:inline>
-      (function() {
+      (function () {
         // Skip error tracking on localhost/dev environments
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        if (
+          window.location.hostname === "localhost" ||
+          window.location.hostname === "127.0.0.1"
+        ) {
           return;
         }
 
         function trackError(type, data) {
-          if (typeof umami !== 'undefined') {
+          if (typeof umami !== "undefined") {
             umami.track(type, data);
           }
         }
 
         // Track JavaScript errors
-        window.addEventListener('error', function(event) {
-          if (!event.filename || event.filename.includes('extension://')) return;
-          trackError('js-error', {
-            message: (event.message || 'Unknown error').slice(0, 200),
-            file: (event.filename || '').split('/').pop() || 'unknown',
+        window.addEventListener("error", function (event) {
+          if (!event.filename || event.filename.includes("extension://"))
+            return;
+          trackError("js-error", {
+            message: (event.message || "Unknown error").slice(0, 200),
+            file: (event.filename || "").split("/").pop() || "unknown",
             line: event.lineno || 0,
             url: window.location.pathname,
           });
         });
 
         // Track unhandled promise rejections
-        window.addEventListener('unhandledrejection', function(event) {
+        window.addEventListener("unhandledrejection", function (event) {
           var reason = event.reason;
-          var message = 'Promise rejected';
+          var message = "Promise rejected";
           if (reason) {
-            message = typeof reason === 'string' ? reason : (reason.message || message);
+            message =
+              typeof reason === "string" ? reason : reason.message || message;
           }
-          trackError('promise-error', {
+          trackError("promise-error", {
             message: message.slice(0, 200),
             url: window.location.pathname,
           });
         });
 
         // Track resource load failures
-        window.addEventListener('error', function(event) {
-          var target = event.target;
-          if (target && (target.tagName === 'IMG' || target.tagName === 'SCRIPT' || target.tagName === 'LINK')) {
-            trackError('resource-error', {
-              type: target.tagName.toLowerCase(),
-              src: (target.src || target.href || '').slice(0, 200),
-              url: window.location.pathname,
-            });
-          }
-        }, true);
+        window.addEventListener(
+          "error",
+          function (event) {
+            var target = event.target;
+            if (
+              target &&
+              (target.tagName === "IMG" ||
+                target.tagName === "SCRIPT" ||
+                target.tagName === "LINK")
+            ) {
+              trackError("resource-error", {
+                type: target.tagName.toLowerCase(),
+                src: (target.src || target.href || "").slice(0, 200),
+                url: window.location.pathname,
+              });
+            }
+          },
+          true,
+        );
       })();
     </script>
   </body>

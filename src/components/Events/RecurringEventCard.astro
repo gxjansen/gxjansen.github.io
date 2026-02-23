@@ -13,8 +13,8 @@ interface Props {
 const { name, events, icon, url, role } = Astro.props;
 
 // Sort events by date to get the range
-const sortedEvents = [...events].sort((a, b) =>
-  new Date(a.date).getTime() - new Date(b.date).getTime()
+const sortedEvents = [...events].sort(
+  (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
 );
 
 const firstEvent = sortedEvents[0];
@@ -23,73 +23,86 @@ const lastEvent = sortedEvents[sortedEvents.length - 1];
 // Format the date range
 const startYear = new Date(firstEvent.date).getFullYear();
 const endYear = new Date(lastEvent.date).getFullYear();
-const dateRange = startYear === endYear
-  ? `${startYear}`
-  : `${startYear} - ${endYear}`;
+const dateRange =
+  startYear === endYear ? `${startYear}` : `${startYear} - ${endYear}`;
 
 // Count events per year for the summary
-const eventsByYear = events.reduce((acc, event) => {
-  const year = new Date(event.date).getFullYear();
-  acc[year] = (acc[year] || 0) + 1;
-  return acc;
-}, {} as Record<number, number>);
+const eventsByYear = events.reduce(
+  (acc, event) => {
+    const year = new Date(event.date).getFullYear();
+    acc[year] = (acc[year] || 0) + 1;
+    return acc;
+  },
+  {} as Record<number, number>,
+);
 
-const WrapperTag = url ? 'a' : 'div';
-const wrapperProps = url ? {
-  href: url,
-  target: "_blank",
-  rel: "noopener noreferrer",
-} : {};
+const WrapperTag = url ? "a" : "div";
+const wrapperProps = url
+  ? {
+      href: url,
+      target: "_blank",
+      rel: "noopener noreferrer",
+    }
+  : {};
 ---
 
-<article class="event-card group recurring-event-card" role="listitem">
-  <WrapperTag
-    {...wrapperProps}
-    class={url ? "cursor-pointer" : ""}
-  >
-    <div class="flex items-center mb-3">
-      <div class="w-10 h-10 mr-3 bg-base-300 dark:bg-base-800 rounded-lg flex items-center justify-center">
-        {icon ? (
-          <Image
-            src={icon}
-            alt={`${name} Icon`}
-            width={32}
-            height={32}
-            class="opacity-80 contrast-125 dark:opacity-90 dark:contrast-125"
-            loading="lazy"
-          />
-        ) : (
-          <span class="text-2xl">🗓️</span>
-        )}
+<article class="event-card recurring-event-card group" role="listitem">
+  <WrapperTag {...wrapperProps} class={url ? "cursor-pointer" : ""}>
+    <div class="mb-3 flex items-center">
+      <div
+        class="mr-3 flex h-10 w-10 items-center justify-center rounded-lg bg-base-300 dark:bg-base-800"
+      >
+        {
+          icon ? (
+            <Image
+              src={icon}
+              alt={`${name} Icon`}
+              width={32}
+              height={32}
+              class="opacity-80 contrast-125 dark:opacity-90 dark:contrast-125"
+              loading="lazy"
+            />
+          ) : (
+            <span class="text-2xl">🗓️</span>
+          )
+        }
       </div>
       <div class="flex flex-col">
-        <div class="flex items-center gap-2 flex-wrap">
+        <div class="flex flex-wrap items-center gap-2">
           <div class="flex items-center gap-2">
-            <span class="text-lg font-semibold text-primary-600 dark:text-primary-400">
+            <span
+              class="text-lg font-semibold text-primary-600 dark:text-primary-400"
+            >
               {name}
             </span>
-            <span class="text-xs text-primary-600 dark:text-primary-400 px-2 py-1 bg-primary-50 dark:bg-primary-400/10 rounded">
+            <span
+              class="rounded bg-primary-50 px-2 py-1 text-xs text-primary-600 dark:bg-primary-400/10 dark:text-primary-400"
+            >
               {events.length}x
             </span>
-            {url && (
-              <span class="text-primary-600 dark:text-primary-400 group-hover:translate-x-1 transition-transform duration-200">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </span>
-            )}
+            {
+              url && (
+                <span class="text-primary-600 transition-transform duration-200 group-hover:translate-x-1 dark:text-primary-400">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </span>
+              )
+            }
           </div>
         </div>
-        <div class="text-sm text-base-600 dark:text-base-300 flex flex-col sm:flex-row sm:items-center sm:gap-1">
+        <div
+          class="flex flex-col text-sm text-base-600 sm:flex-row sm:items-center sm:gap-1 dark:text-base-300"
+        >
           <span>🌎</span>
           <span>Online event</span>
           <span class="hidden sm:inline">&mdash;</span>
@@ -98,9 +111,13 @@ const wrapperProps = url ? {
       </div>
     </div>
     <div class="mt-2">
-      {role && (
-        <em class="text-sm text-base-600 dark:text-base-400 line-clamp-1">{role}</em>
-      )}
+      {
+        role && (
+          <em class="line-clamp-1 text-sm text-base-600 dark:text-base-400">
+            {role}
+          </em>
+        )
+      }
     </div>
   </WrapperTag>
 </article>

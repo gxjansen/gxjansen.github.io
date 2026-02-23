@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
-import { parseHTML } from '../../../test/astro-test-utils';
+import { describe, it, expect } from "vitest";
+import { parseHTML } from "../../../test/astro-test-utils";
 
-describe('SlideEmbed', () => {
-  const mockSlideKey = 'test123';
+describe("SlideEmbed", () => {
+  const mockSlideKey = "test123";
 
-  it('renders slide embed with correct structure', () => {
+  it("renders slide embed with correct structure", () => {
     const html = `
       <div class="mb-12">
         <h2 class="h3 mb-4">Slides</h2>
@@ -22,31 +22,35 @@ describe('SlideEmbed', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check container structure
-    const container = parsedHtml.querySelector('div.mb-12');
+    const container = parsedHtml.querySelector("div.mb-12");
     expect(container).toBeTruthy();
-    
+
     // Check heading
-    const heading = parsedHtml.querySelector('h2');
+    const heading = parsedHtml.querySelector("h2");
     expect(heading).toBeTruthy();
-    expect(heading?.textContent).toBe('Slides');
+    expect(heading?.textContent).toBe("Slides");
 
     // Check iframe container
-    const iframeContainer = parsedHtml.querySelector(`div[id="slide-container-${mockSlideKey}"]`);
+    const iframeContainer = parsedHtml.querySelector(
+      `div[id="slide-container-${mockSlideKey}"]`,
+    );
     expect(iframeContainer).toBeTruthy();
-    expect(iframeContainer?.classList.contains('relative')).toBe(true);
-    expect(iframeContainer?.classList.contains('bg-slate-100')).toBe(true);
+    expect(iframeContainer?.classList.contains("relative")).toBe(true);
+    expect(iframeContainer?.classList.contains("bg-slate-100")).toBe(true);
 
     // Check iframe attributes
-    const iframe = parsedHtml.querySelector('iframe');
+    const iframe = parsedHtml.querySelector("iframe");
     expect(iframe).toBeTruthy();
-    expect(iframe?.getAttribute('src')).toBe(`//www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}?hostedIn=slideshare&page=upload`);
-    expect(iframe?.getAttribute('loading')).toBe('lazy');
-    expect(iframe?.hasAttribute('allowfullscreen')).toBe(true);
+    expect(iframe?.getAttribute("src")).toBe(
+      `//www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}?hostedIn=slideshare&page=upload`,
+    );
+    expect(iframe?.getAttribute("loading")).toBe("lazy");
+    expect(iframe?.hasAttribute("allowfullscreen")).toBe(true);
   });
 
-  it('includes error handling with fallback content', () => {
+  it("includes error handling with fallback content", () => {
     const html = `
       <div class="mb-12">
         <div class="relative pb-[56.25%] bg-slate-100 dark:bg-slate-800 rounded-lg" id="slide-container-${mockSlideKey}">
@@ -63,17 +67,19 @@ describe('SlideEmbed', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check error handler content
-    const iframe = parsedHtml.querySelector('iframe');
-    const errorHandler = iframe?.getAttribute('onerror');
+    const iframe = parsedHtml.querySelector("iframe");
+    const errorHandler = iframe?.getAttribute("onerror");
     expect(errorHandler).toBeTruthy();
-    expect(errorHandler).toContain('Failed to load slides');
-    expect(errorHandler).toContain('View on SlideShare');
-    expect(errorHandler).toContain(`https://www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}`);
+    expect(errorHandler).toContain("Failed to load slides");
+    expect(errorHandler).toContain("View on SlideShare");
+    expect(errorHandler).toContain(
+      `https://www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}`,
+    );
   });
 
-  it('handles loading state correctly', () => {
+  it("handles loading state correctly", () => {
     const html = `
       <div class="mb-12">
         <div class="relative pb-[56.25%] bg-slate-100 dark:bg-slate-800 rounded-lg" id="slide-container-${mockSlideKey}">
@@ -89,23 +95,25 @@ describe('SlideEmbed', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check loading state classes
-    const container = parsedHtml.querySelector(`div[id="slide-container-${mockSlideKey}"]`);
+    const container = parsedHtml.querySelector(
+      `div[id="slide-container-${mockSlideKey}"]`,
+    );
     expect(container).toBeTruthy();
-    expect(container?.classList.contains('bg-slate-100')).toBe(true);
-    expect(container?.classList.contains('dark:bg-slate-800')).toBe(true);
+    expect(container?.classList.contains("bg-slate-100")).toBe(true);
+    expect(container?.classList.contains("dark:bg-slate-800")).toBe(true);
 
     // Check onload handler removes loading state
-    const iframe = parsedHtml.querySelector('iframe');
-    const onloadHandler = iframe?.getAttribute('onload');
+    const iframe = parsedHtml.querySelector("iframe");
+    const onloadHandler = iframe?.getAttribute("onload");
     expect(onloadHandler).toBeTruthy();
-    expect(onloadHandler).toContain('remove');
-    expect(onloadHandler).toContain('bg-slate-100');
-    expect(onloadHandler).toContain('dark:bg-slate-800');
+    expect(onloadHandler).toContain("remove");
+    expect(onloadHandler).toContain("bg-slate-100");
+    expect(onloadHandler).toContain("dark:bg-slate-800");
   });
 
-  it('includes jQuery error suppression script', () => {
+  it("includes jQuery error suppression script", () => {
     const html = `
       <script>
         window.jQuery = window.jQuery || function() {};
@@ -114,12 +122,12 @@ describe('SlideEmbed', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check script content
-    const script = parsedHtml.querySelector('script');
+    const script = parsedHtml.querySelector("script");
     expect(script).toBeTruthy();
     const scriptContent = script?.textContent;
-    expect(scriptContent).toContain('window.jQuery');
-    expect(scriptContent).toContain('window.$');
+    expect(scriptContent).toContain("window.jQuery");
+    expect(scriptContent).toContain("window.$");
   });
 });

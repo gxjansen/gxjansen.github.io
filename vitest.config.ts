@@ -1,8 +1,7 @@
 import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'url';
-import { getViteConfig } from 'astro/config';
 
-const testConfig = {
+export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
@@ -29,17 +28,4 @@ const testConfig = {
       '@utils': fileURLToPath(new URL('./src/utils', import.meta.url))
     }
   }
-};
-
-export default defineConfig(async () => {
-  const viteConfig = await getViteConfig({});
-  
-  return {
-    ...viteConfig,
-    ...testConfig,
-    test: {
-      ...testConfig.test,
-      ...viteConfig.test
-    }
-  };
 });

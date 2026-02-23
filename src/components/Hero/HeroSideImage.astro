@@ -25,9 +25,10 @@ const t = useTranslations(currLocale);
 
 // Check for reduced motion preference
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-const shouldReduceMotion = typeof window !== "undefined" 
-  ? window.matchMedia(reducedMotionQuery).matches 
-  : false;
+const shouldReduceMotion =
+  typeof window !== "undefined"
+    ? window.matchMedia(reducedMotionQuery).matches
+    : false;
 ---
 
 <section
@@ -36,96 +37,97 @@ const shouldReduceMotion = typeof window !== "undefined"
   class="mt-20 overflow-clip"
   role="banner"
 >
-    <div 
-      class="relative pb-20 pt-10 md:py-28"
-      role="presentation"
-    >
-      <div class="relative flex flex-wrap xl:items-center z-10">
-        <div class="mb-16 w-full md:mb-0 md:w-1/2">
-          <Badge>Community Builder</Badge>
-          <div class="flex flex-col gap-4">
-            <h1
-              id="hero-heading"
-              class="text-pretty text-3xl font-bold leading-normal tracking-normal text-base-900 dark:text-base-100 lg:text-5xl lg:leading-normal"
-            >
-              {t("hero_text")}
-            </h1>
-          </div>
-          <div
-            class="description mb-8 text-pretty text-lg leading-relaxed text-base-700 dark:text-base-300 lg:text-xl [&>br+br]:block [&>br+br]:mb-4"
+  <div class="relative pb-20 pt-10 md:py-28" role="presentation">
+    <div class="relative z-10 flex flex-wrap xl:items-center">
+      <div class="mb-16 w-full md:mb-0 md:w-1/2">
+        <Badge>Community Builder</Badge>
+        <div class="flex flex-col gap-4">
+          <h1
+            id="hero-heading"
+            class="text-pretty text-3xl font-bold leading-normal tracking-normal text-base-900 lg:text-5xl lg:leading-normal dark:text-base-100"
           >
-            <Fragment set:html={t("hero_description").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')} />
-          </div>
-          <div
-            class="mt-6 flex flex-wrap gap-4"
-            role="group"
-            aria-label="Call to action buttons"
+            {t("hero_text")}
+          </h1>
+        </div>
+        <div
+          class="description mb-8 text-pretty text-lg leading-relaxed text-base-700 lg:text-xl dark:text-base-300 [&>br+br]:mb-4 [&>br+br]:block"
+        >
+          <Fragment
+            set:html={t("hero_description")
+              .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+              .replace(/\n\n/g, "<br><br>")
+              .replace(/\n/g, "<br>")}
+          />
+        </div>
+        <div
+          class="mt-6 flex flex-wrap gap-4"
+          role="group"
+          aria-label="Call to action buttons"
+        >
+          <Button
+            variant="primary"
+            href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=gxjansen"
+            aria-label="Follow Guido Jansen on LinkedIn (opens in new tab)"
+            class="min-h-[44px] min-w-[44px] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Button
-              variant="primary"
-              href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=gxjansen"
-              aria-label="Follow Guido Jansen on LinkedIn (opens in new tab)"
-              class="min-h-[44px] min-w-[44px] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>Follow me on LinkedIn</span>
-              <span class="sr-only">(opens in new tab)</span>
-            </Button>
-            <Button
-              variant="outline"
-              href="/contact/"
-              aria-label="Book Guido Jansen for your event"
-              class="min-h-[44px] min-w-[44px] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-            >
-              Book me for your event
-            </Button>
-          </div>
-          <!-- Socials -->
-          <div class="relative">
-            <div class="relative z-20">
-              <SocialLinks
-                class="mt-6"
-                location="hero"
-                context="hero"
-                aria-label="Social media links"
-              />
-            </div>
+            <span>Follow me on LinkedIn</span>
+            <span class="sr-only">(opens in new tab)</span>
+          </Button>
+          <Button
+            variant="outline"
+            href="/contact/"
+            aria-label="Book Guido Jansen for your event"
+            class="min-h-[44px] min-w-[44px] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+          >
+            Book me for your event
+          </Button>
+        </div>
+        <!-- Socials -->
+        <div class="relative">
+          <div class="relative z-20">
+            <SocialLinks
+              class="mt-6"
+              location="hero"
+              context="hero"
+              aria-label="Social media links"
+            />
           </div>
         </div>
-        <div class="w-full md:w-1/2 md:pl-6 lg:pl-8">
-          <div class="relative mx-auto max-w-max md:mr-0">
-            <Icon
-              name="atlas/circle3"
-              class="absolute -left-14 -top-12 z-10 w-28 text-accent-4"
-              aria-hidden="true"
-              role="presentation"
+      </div>
+      <div class="w-full md:w-1/2 md:pl-6 lg:pl-8">
+        <div class="relative mx-auto max-w-max md:mr-0">
+          <Icon
+            name="atlas/circle3"
+            class="absolute -left-14 -top-12 z-10 w-28 text-accent-4"
+            aria-hidden="true"
+            role="presentation"
+          />
+          <Icon
+            name="atlas/dots3"
+            class="absolute -bottom-8 -right-7 z-10 w-28 text-accent-2"
+            aria-hidden="true"
+            role="presentation"
+          />
+          <div
+            class="rounded-7xl relative overflow-hidden rounded-2xl"
+            role="img"
+            aria-label="Profile photo of Guido Jansen"
+          >
+            <Image
+              src={heroImage}
+              class="h-auto min-w-full object-cover"
+              alt="Guido Jansen, a CRO and UX specialist, sitting casually on a modern grey office couch with a laptop. He's wearing casual business attire and has a welcoming expression, representing his approachable consulting style."
+              loading="eager"
+              widths={[360, 600, 768, 1024, 1200]}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 500px"
+              quality={85}
+              format="webp"
             />
-            <Icon
-              name="atlas/dots3"
-              class="absolute -bottom-8 -right-7 z-10 w-28 text-accent-2"
-              aria-hidden="true"
-              role="presentation"
-            />
-            <div
-              class="rounded-7xl relative overflow-hidden rounded-2xl"
-              role="img"
-              aria-label="Profile photo of Guido Jansen"
-            >
-              <Image
-                src={heroImage}
-                class="h-auto min-w-full object-cover"
-                alt="Guido Jansen, a CRO and UX specialist, sitting casually on a modern grey office couch with a laptop. He's wearing casual business attire and has a welcoming expression, representing his approachable consulting style."
-                loading="eager"
-                widths={[360, 600, 768, 1024, 1200]}
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 500px"
-                quality={85}
-                format="webp"
-              />
-            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </section>
-

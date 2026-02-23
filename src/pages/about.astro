@@ -14,15 +14,19 @@ import AwardsSection from "@components/Press/AwardsSection.astro";
 import TheStory from "@components/About/TheStory.astro";
 
 // data
-import { pressCoverage } from '../data/press-coverage';
-import { filterAvailableContent } from '../utils/content-availability';
+import { pressCoverage } from "../data/press-coverage";
+import { filterAvailableContent } from "../utils/content-availability";
 
 // Filter awards and nominations
 const availableCoverage = filterAvailableContent(pressCoverage);
-const sortedCoverage = [...availableCoverage].sort((a, b) =>
-  new Date(b.publicationDate).getTime() - new Date(a.publicationDate).getTime()
+const sortedCoverage = [...availableCoverage].sort(
+  (a, b) =>
+    new Date(b.publicationDate).getTime() -
+    new Date(a.publicationDate).getTime(),
 );
-const awards = sortedCoverage.filter(item => item.category === 'award' || item.category === 'nomination');
+const awards = sortedCoverage.filter(
+  (item) => item.category === "award" || item.category === "nomination",
+);
 import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
 import WhatsNext from "@components/About/WhatsNext.astro";
 import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
@@ -63,10 +67,11 @@ import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
           <Badge>Connect with me</Badge>
           <h2 class="h2 mb-4">Let's Connect</h2>
           <p class="description text-lg md:text-xl">
-            I share thoughts on community building, developer ecosystems, and the psychology behind what makes people contribute.
+            I share thoughts on community building, developer ecosystems, and
+            the psychology behind what makes people contribute.
           </p>
         </div>
-        
+
         <div class="mt-12">
           <SocialCards />
         </div>

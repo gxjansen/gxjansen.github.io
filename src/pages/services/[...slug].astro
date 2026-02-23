@@ -15,7 +15,7 @@ import { defaultLocale } from "@config/siteSettings.json";
 export async function getStaticPaths() {
   const services = await getCollection("services", ({ data }) => {
     // filter out draft services
-    return data.draft !== true;
+    return (data as any).draft !== true;
   });
 
   // get rid of pages from other languages and remove locale from slug
@@ -32,6 +32,6 @@ const service = Astro.props as Props;
 const { Content } = await service.render();
 ---
 
-<ServiceLayoutCenter {...service.data}>
+<ServiceLayoutCenter {...service.data as any}>
   <Content components={{ a: ExternalLink }} />
 </ServiceLayoutCenter>

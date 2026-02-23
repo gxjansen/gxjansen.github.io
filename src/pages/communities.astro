@@ -3,15 +3,15 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 import Badge from "@components/Badge/Badge.astro";
 import Button from "@components/Button/Button.astro";
 
 // images for communities
-import joomlaLogo from '@images/events/joomla.png';
-import magentoLogo from '@images/events/magento.png';
-import crocafeLogo from '@images/events/crocafe.jpg';
-import sprykerLogo from '@images/events/spryker.png';
+import joomlaLogo from "@images/events/joomla.png";
+import magentoLogo from "@images/events/magento.png";
+import crocafeLogo from "@images/events/crocafe.jpg";
+import sprykerLogo from "@images/events/spryker.png";
 
 // Community data
 const communities = [
@@ -22,12 +22,13 @@ const communities = [
     roleType: "volunteer",
     context: "Open source CMS community",
     logo: joomlaLogo,
-    description: "My first community experience. I contributed to the Mambo open source CMS project with (Dutch) translations, then followed the community fork that became Joomla! in 2005. This was my introduction to how open source communities work: the governance challenges, the passion, and how open source communities can build software that competes with commercial products.",
+    description:
+      "My first community experience. I contributed to the Mambo open source CMS project with (Dutch) translations, then followed the community fork that became Joomla! in 2005. This was my introduction to how open source communities work: the governance challenges, the passion, and how open source communities can build software that competes with commercial products.",
     achievements: [
       "Early contributor to what became one of the world's most popular CMS platforms",
       "Learned open source community dynamics firsthand",
-      "Ran the local Dutch community portal, organized meetups and the yearly Joomladays conference."
-    ]
+      "Ran the local Dutch community portal, organized meetups and the yearly Joomladays conference.",
+    ],
   },
   {
     name: "Dutchento / Meet Magento Netherlands",
@@ -36,14 +37,15 @@ const communities = [
     roleType: "volunteer",
     context: "13 years",
     logo: magentoLogo,
-    description: "I founded the Dutch community for the Magento e-commerce platform when there was no local hub for developers and merchants. What started as local meetups grew into Meet Magento Netherlands: an annual event scaling to 600+ attendees that sparked a global event series in other countries.",
+    description:
+      "I founded the Dutch community for the Magento e-commerce platform when there was no local hub for developers and merchants. What started as local meetups grew into Meet Magento Netherlands: an annual event scaling to 600+ attendees that sparked a global event series in other countries.",
     achievements: [
       "Scaled from local meetups to 600+ annual attendees",
       "Organized 11 editions of Meet Magento Netherlands",
       "Received Community Builder Award from eBay CEO John Donahoe",
       "Co-created a model replicated by Meet Magento events worldwide",
-      "Founding Board Member of the global Magento Association"
-    ]
+      "Founding Board Member of the global Magento Association",
+    ],
   },
   {
     name: "CRO.CAFE",
@@ -52,14 +54,15 @@ const communities = [
     roleType: "professional",
     context: "4 years",
     logo: crocafeLogo,
-    description: "I noticed the conversion optimization community lacked a consistent interview-format podcast where practitioners shared how they actually worked. I created CRO.CAFE as a side project where I had1-on-1 conversations with people from agencies, brands, and tool vendors about their real work. The show attracted sponsorship and spun off into Dutch, Spanish, and German versions hosted by other specialists.",
+    description:
+      "I noticed the conversion optimization community lacked a consistent interview-format podcast where practitioners shared how they actually worked. I created CRO.CAFE as a side project where I had1-on-1 conversations with people from agencies, brands, and tool vendors about their real work. The show attracted sponsorship and spun off into Dutch, Spanish, and German versions hosted by other specialists.",
     achievements: [
       "Produced 200+ episodes",
       "Received Experimentation Culture Award for community impact",
       "Expanded to four languages with other hosts",
       "Built sustainable sponsorship model",
-      "Created multi-language network reaching global CRO community"
-    ]
+      "Created multi-language network reaching global CRO community",
+    ],
   },
   {
     name: "Spryker",
@@ -68,16 +71,18 @@ const communities = [
     roleType: "professional",
     context: "4+ years",
     logo: sprykerLogo,
-    description: "Built the enterprise community function from scratch, serving 130+ B2B clients and their developer ecosystem. This was community building in a different context: enterprise software with no freemium tier, where community size is tied to sales rather than organic growth. Required different strategies: Customer Advisory Boards, MIT-licensed module ecosystems, and structures that translate community intelligence into product decisions.",
+    description:
+      "Built the enterprise community function from scratch, serving 130+ B2B clients and their developer ecosystem. This was community building in a different context: enterprise software with no freemium tier, where community size is tied to sales rather than organic growth. Required different strategies: Customer Advisory Boards, MIT-licensed module ecosystems, and structures that translate community intelligence into product decisions.",
     achievements: [
       "Built community platform serving 130+ enterprise accounts with 3-person team",
       "Launched Customer Advisory Board connecting enterprise clients directly to product teams",
       "Established MIT-licensed module ecosystem, creating a vendor-independent innovation layer",
       "Community-driven initiatives now influence 25% of product roadmap decisions",
-      "Multiple hackathon projects adopted into core product"
+      "Multiple hackathon projects adopted into core product",
     ],
-    quote: "Unlike consumer communities where you can grow through free trials, enterprise B2B community requires different strategies. I learned to create value for a smaller, higher-stakes audience."
-  }
+    quote:
+      "Unlike consumer communities where you can grow through free trials, enterprise B2B community requires different strategies. I learned to create value for a smaller, higher-stakes audience.",
+  },
 ];
 ---
 
@@ -94,7 +99,8 @@ const communities = [
           <Badge>Community</Badge>
           <h1 class="h1 mb-4">Building Communities From Zero</h1>
           <p class="description text-lg md:text-xl">
-            I've built community functions from scratch multiple times across different contexts:
+            I've built community functions from scratch multiple times across
+            different contexts:
           </p>
         </div>
       </div>
@@ -105,88 +111,112 @@ const communities = [
   <section class="py-16 md:py-24">
     <div class="site-container">
       <div class="space-y-16 md:space-y-24">
-        {communities.map((community, index) => (
-          <div
-            class={`grid md:grid-cols-2 gap-8 md:gap-12 items-center ${index % 2 === 1 ? 'md:grid-flow-dense' : ''}`}
-           
-          >
-            <!-- Image/Logo side -->
-            <div class={`${index % 2 === 1 ? 'md:col-start-2' : ''}`}>
-              <div class="aspect-video rounded-2xl overflow-hidden bg-secondary/30 border shadow-lg flex items-center justify-center p-8">
-                <Image
-                  src={community.logo}
-                  alt={`${community.name} logo`}
-                  class="max-w-[200px] max-h-[120px] object-contain"
-                  width={200}
-                  height={120}
-                />
+        {
+          communities.map((community, index) => (
+            <div
+              class={`grid items-center gap-8 md:grid-cols-2 md:gap-12 ${index % 2 === 1 ? "md:grid-flow-dense" : ""}`}
+            >
+              <div class={`${index % 2 === 1 ? "md:col-start-2" : ""}`}>
+                <div class="bg-secondary/30 flex aspect-video items-center justify-center overflow-hidden rounded-2xl border p-8 shadow-lg">
+                  <Image
+                    src={community.logo}
+                    alt={`${community.name} logo`}
+                    class="max-h-[120px] max-w-[200px] object-contain"
+                    width={200}
+                    height={120}
+                  />
+                </div>
+              </div>
+
+              <div
+                class={`${index % 2 === 1 ? "md:col-start-1 md:row-start-1" : ""}`}
+              >
+                <div class="space-y-4">
+                  <div class="-ml-0.5 flex flex-wrap items-center gap-3">
+                    <span class="bg-primary/10 rounded-full px-3 py-1 text-sm font-medium text-primary-600 dark:text-primary-400">
+                      {community.period}
+                    </span>
+                    <span class="text-sm text-base-600 dark:text-base-400">
+                      {community.context}
+                    </span>
+                  </div>
+
+                  <h2 class="h2 text-foreground">{community.name}</h2>
+                  <p class="text-muted-foreground font-medium">
+                    {community.role}
+                  </p>
+
+                  <p class="text-muted-foreground leading-relaxed">
+                    {community.description}
+                  </p>
+
+                  <div class="pt-4">
+                    <h3 class="text-primary mb-3 text-sm font-semibold uppercase tracking-wider">
+                      Key Achievements
+                    </h3>
+                    <ul class="space-y-2">
+                      {community.achievements.map((achievement) => (
+                        <li class="text-muted-foreground flex items-start gap-3">
+                          <svg
+                            class="text-primary mt-0.5 h-5 w-5 flex-shrink-0"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <span>{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {community.quote && (
+                    <blockquote class="border-primary/30 text-muted-foreground mt-6 border-l-4 pl-4 italic">
+                      "{community.quote}"
+                    </blockquote>
+                  )}
+                </div>
               </div>
             </div>
-
-            <!-- Content side -->
-            <div class={`${index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
-              <div class="space-y-4">
-                <div class="flex flex-wrap items-center gap-3 -ml-0.5">
-                  <span class="text-sm font-medium text-primary-600 dark:text-primary-400 bg-primary/10 px-3 py-1 rounded-full">
-                    {community.period}
-                  </span>
-                  <span class="text-sm text-base-600 dark:text-base-400">
-                    {community.context}
-                  </span>
-                </div>
-
-                <h2 class="h2 text-foreground">{community.name}</h2>
-                <p class="text-muted-foreground font-medium">{community.role}</p>
-
-                <p class="text-muted-foreground leading-relaxed">
-                  {community.description}
-                </p>
-
-                <!-- Achievements -->
-                <div class="pt-4">
-                  <h3 class="text-sm font-semibold uppercase tracking-wider text-primary mb-3">Key Achievements</h3>
-                  <ul class="space-y-2">
-                    {community.achievements.map((achievement) => (
-                      <li class="flex items-start gap-3 text-muted-foreground">
-                        <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span>{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <!-- Quote if available -->
-                {community.quote && (
-                  <blockquote class="mt-6 pl-4 border-l-4 border-primary/30 italic text-muted-foreground">
-                    "{community.quote}"
-                  </blockquote>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
 
   <!-- CTA Section -->
-  <section class="py-16 md:py-24 bg-secondary/30">
+  <section class="bg-secondary/30 py-16 md:py-24">
     <div class="site-container">
       <div class="mx-auto max-w-3xl text-center">
-        <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center">
-          <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+        <div
+          class="bg-primary/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
+        >
+          <svg
+            class="text-primary h-8 w-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
           </svg>
         </div>
         <h2 class="h2 mb-6">What's Next</h2>
-        <p class="text-lg text-muted-foreground mb-8 leading-relaxed">
-          I'm interested in technical ecosystems that can become genuine growth engines. Particularly interested in open source, AI, automation, commerce and privacy-focused organizations.
+        <p class="text-muted-foreground mb-8 text-lg leading-relaxed">
+          I'm interested in technical ecosystems that can become genuine growth
+          engines. Particularly interested in open source, AI, automation,
+          commerce and privacy-focused organizations.
         </p>
-        <Button variant="primary" href="/contact/">
-          Get in Touch
-        </Button>
+        <Button variant="primary" href="/contact/"> Get in Touch </Button>
       </div>
     </div>
   </section>

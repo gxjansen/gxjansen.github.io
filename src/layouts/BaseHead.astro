@@ -8,7 +8,7 @@ import PassiveEvents from "@components/Scripts/PassiveEvents.astro";
 
 // data
 import siteSettings from "@config/siteSettings.json";
-import { CONFIG } from '../config';  // Use .env for indexing
+import { CONFIG } from "../config"; // Use .env for indexing
 
 export interface Props {
   type?: "blog" | "general" | undefined;
@@ -35,10 +35,21 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <meta charset="utf-8" />
 <!-- Content Security Policy is now handled via Netlify headers for better security -->
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+/>
 <meta name="color-scheme" content="dark light" />
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf4ed" />
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1A1825" />
+<meta
+  name="theme-color"
+  media="(prefers-color-scheme: light)"
+  content="#faf4ed"
+/>
+<meta
+  name="theme-color"
+  media="(prefers-color-scheme: dark)"
+  content="#1A1825"
+/>
 
 <!-- Accessibility meta tags -->
 <meta name="format-detection" content="telephone=no" />
@@ -50,48 +61,48 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <style is:inline>
   /* Inline critical font CSS */
   @font-face {
-    font-family: 'Poppins';
+    font-family: "Poppins";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('/fonts/poppins/poppins-400.woff2') format('woff2');
+    src: url("/fonts/poppins/poppins-400.woff2") format("woff2");
   }
   @font-face {
-    font-family: 'Poppins';
+    font-family: "Poppins";
     font-style: normal;
     font-weight: 500;
     font-display: swap;
-    src: url('/fonts/poppins/poppins-500.woff2') format('woff2');
+    src: url("/fonts/poppins/poppins-500.woff2") format("woff2");
   }
   @font-face {
-    font-family: 'Poppins';
+    font-family: "Poppins";
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url('/fonts/poppins/poppins-600.woff2') format('woff2');
+    src: url("/fonts/poppins/poppins-600.woff2") format("woff2");
   }
   @font-face {
-    font-family: 'Poppins';
+    font-family: "Poppins";
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url('/fonts/poppins/poppins-700.woff2') format('woff2');
+    src: url("/fonts/poppins/poppins-700.woff2") format("woff2");
   }
 </style>
 
 <!-- Preload critical font weights -->
-<link 
-  rel="preload" 
-  href="/fonts/poppins/poppins-400.woff2" 
-  as="font" 
-  type="font/woff2" 
+<link
+  rel="preload"
+  href="/fonts/poppins/poppins-400.woff2"
+  as="font"
+  type="font/woff2"
   crossorigin
 />
-<link 
-  rel="preload" 
-  href="/fonts/poppins/poppins-500.woff2" 
-  as="font" 
-  type="font/woff2" 
+<link
+  rel="preload"
+  href="/fonts/poppins/poppins-500.woff2"
+  as="font"
+  type="font/woff2"
   crossorigin
 />
 
@@ -132,9 +143,9 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <!-- Theme change setup. Run early to eliminate Flash of inAccurate coloR Theme (FART) -->
 <script is:inline>
   function initTheme() {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
     let colorTheme = localStorage.getItem("colorTheme");
-    
+
     function applyTheme(theme) {
       if (theme === "dark") {
         document.documentElement.classList.add("dark");
@@ -185,4 +196,8 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <!-- Umami Analytics -->
 <link rel="dns-prefetch" href="https://u.a11y.nl" />
 <link rel="preconnect" href="https://u.a11y.nl" crossorigin />
-<script async defer src="https://u.a11y.nl/script.js" data-website-id="c5cf1235-9d9d-4543-b0be-2acc2551d8f5"></script>
+<script
+  async
+  defer
+  src="https://u.a11y.nl/script.js"
+  data-website-id="c5cf1235-9d9d-4543-b0be-2acc2551d8f5"></script>

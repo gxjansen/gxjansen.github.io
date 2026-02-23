@@ -63,11 +63,11 @@ const currLocale = getLocaleFromUrl(Astro.url);
               >Error 404</span
             >
             <h2
-              class="mb-4 text-4xl font-bold leading-tight tracking-tighter text-base-900 dark:text-base-100 md:text-5xl"
+              class="mb-4 text-4xl font-bold leading-tight tracking-tighter text-base-900 md:text-5xl dark:text-base-100"
             >
               Oh no! Error 404
             </h2>
-            <p class="mb-6 text-lg text-base-500 dark:text-base-400 md:text-xl">
+            <p class="mb-6 text-lg text-base-500 md:text-xl dark:text-base-400">
               Something went wrong, so this page is broken.
             </p>
             <div class="flex flex-wrap justify-center md:justify-start">
@@ -85,10 +85,10 @@ const currLocale = getLocaleFromUrl(Astro.url);
 
   <!-- Track 404 with Umami -->
   <script>
-    if (typeof umami !== 'undefined') {
-      umami.track('404-page', {
+    if (typeof umami !== "undefined") {
+      umami.track("404-page", {
         url: window.location.pathname,
-        referrer: document.referrer || 'direct',
+        referrer: document.referrer || "direct",
       });
     }
   </script>

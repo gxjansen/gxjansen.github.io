@@ -14,74 +14,102 @@ interface Props {
   githubUrl?: string;
 }
 
-const { name, description, mainImage, link, iconBgColor, license, tagline, githubUrl } = Astro.props;
+const {
+  name,
+  description,
+  mainImage,
+  link,
+  iconBgColor,
+  license,
+  tagline,
+  githubUrl,
+} = Astro.props;
 ---
 
 <article class="card group px-3 py-3 sm:px-4 sm:py-4">
-  <div class="grid grid-cols-1 md:grid-cols-[auto,1fr] gap-8 md:gap-6">
-    <div class="flex-shrink-0 mx-auto md:mx-0 pt-4 md:pt-0">
-      <div class={`rounded-lg ${iconBgColor} p-4 w-20 h-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}>
-      {mainImage.startsWith('/') ? (
-        <Image
-          src={mainImage}
-          alt={`${name} icon`}
-          width={48}
-          height={48}
-          class="w-12 h-12"
-        />
-      ) : (
-        <Icon 
-          name={mainImage}
-          class="w-12 h-12 text-base-50"
-          aria-hidden="true"
-        />
-      )}
+  <div class="grid grid-cols-1 gap-8 md:grid-cols-[auto,1fr] md:gap-6">
+    <div class="mx-auto flex-shrink-0 pt-4 md:mx-0 md:pt-0">
+      <div
+        class={`rounded-lg ${iconBgColor} p-4 w-20 h-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
+      >
+        {
+          mainImage.startsWith("/") ? (
+            <Image
+              src={mainImage}
+              alt={`${name} icon`}
+              width={48}
+              height={48}
+              class="h-12 w-12"
+            />
+          ) : (
+            <Icon
+              name={mainImage}
+              class="h-12 w-12 text-base-50"
+              aria-hidden="true"
+            />
+          )
+        }
       </div>
     </div>
-    <div class="text-center md:text-left flex flex-col">
+    <div class="flex flex-col text-center md:text-left">
       <h2 class="h2 mb-2">
-        {link ? (
-          <a href={link} target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors duration-200">
-            {name}
-          </a>
-        ) : (
-          name
-        )}
+        {
+          link ? (
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-primary transition-colors duration-200"
+            >
+              {name}
+            </a>
+          ) : (
+            name
+          )
+        }
       </h2>
-      {(tagline || license) && (
-        <p class="text-sm text-base-400 mb-2">{tagline || `License: ${license}`}</p>
-      )}
-      <p class="card-description text-lg prose" set:html={description} />
-      <div class="mt-8 flex gap-4 items-center justify-center md:justify-start">
-        {link && (
-          <Button 
-            href={link}
-            variant="primary"
-            arrow="right"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View Project
-            <span class="sr-only">View {name} project</span>
-          </Button>
-        )}
-        {githubUrl && (
-          <Button 
-            href={githubUrl}
-            variant="outline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="flex items-center gap-2">
-              <Icon 
-                name="tabler/filled/brand-github"
-                class="w-5 h-5"
-                aria-hidden="true"
-              />
-              <span>Available on GitHub</span>
-            </span>
-          </Button>
-        )}
+      {
+        (tagline || license) && (
+          <p class="mb-2 text-sm text-base-400">
+            {tagline || `License: ${license}`}
+          </p>
+        )
+      }
+      <p class="card-description prose text-lg" set:html={description} />
+      <div class="mt-8 flex items-center justify-center gap-4 md:justify-start">
+        {
+          link && (
+            <Button
+              href={link}
+              variant="primary"
+              arrow="right"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Project
+              <span class="sr-only">View {name} project</span>
+            </Button>
+          )
+        }
+        {
+          githubUrl && (
+            <Button
+              href={githubUrl}
+              variant="outline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="flex items-center gap-2">
+                <Icon
+                  name="tabler/filled/brand-github"
+                  class="h-5 w-5"
+                  aria-hidden="true"
+                />
+                <span>Available on GitHub</span>
+              </span>
+            </Button>
+          )
+        }
       </div>
     </div>
   </div>

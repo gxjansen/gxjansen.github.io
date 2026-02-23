@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest';
-import { parseHTML } from '../../../../test/astro-test-utils';
-import { createMockNavData } from '../../../../test/utils';
+import { describe, it, expect } from "vitest";
+import { parseHTML } from "../../../../test/astro-test-utils";
+import { createMockNavData } from "../../../../test/utils";
 
-describe('MobileNav', () => {
-  it('renders mobile menu button correctly', () => {
+describe("MobileNav", () => {
+  it("renders mobile menu button correctly", () => {
     const html = `
       <div class="md:hidden">
         <button
@@ -22,29 +22,29 @@ describe('MobileNav', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check button attributes
-    const button = parsedHtml.querySelector('button');
+    const button = parsedHtml.querySelector("button");
     expect(button).toBeTruthy();
-    expect(button?.getAttribute('aria-controls')).toBe('mobile-menu');
-    expect(button?.getAttribute('aria-expanded')).toBe('false');
-    expect(button?.getAttribute('aria-label')).toBe('Open main menu');
+    expect(button?.getAttribute("aria-controls")).toBe("mobile-menu");
+    expect(button?.getAttribute("aria-expanded")).toBe("false");
+    expect(button?.getAttribute("aria-label")).toBe("Open main menu");
 
     // Check screen reader text
-    const srOnly = parsedHtml.querySelector('.sr-only');
+    const srOnly = parsedHtml.querySelector(".sr-only");
     expect(srOnly).toBeTruthy();
-    expect(srOnly?.textContent).toBe('Open main menu');
+    expect(srOnly?.textContent).toBe("Open main menu");
 
     // Check icon
-    const icon = parsedHtml.querySelector('svg');
+    const icon = parsedHtml.querySelector("svg");
     expect(icon).toBeTruthy();
-    expect(icon?.getAttribute('aria-hidden')).toBe('true');
+    expect(icon?.getAttribute("aria-hidden")).toBe("true");
   });
 
-  it('renders mobile menu panel correctly', () => {
+  it("renders mobile menu panel correctly", () => {
     const navData = createMockNavData();
-    const visibleNavItems = navData.filter(item => !item.hidden);
-    
+    const visibleNavItems = navData.filter((item) => !item.hidden);
+
     const html = `
       <div 
         id="mobile-menu" 
@@ -57,9 +57,10 @@ describe('MobileNav', () => {
           <div class="fixed inset-y-0 right-0 z-40 w-full max-w-sm bg-base-50 px-6 py-6 dark:bg-base-900">
             <nav class="flex h-full flex-col">
               <ul class="space-y-4" role="menu">
-                ${visibleNavItems.map(item => {
-                  if (item.dropdown) {
-                    return `
+                ${visibleNavItems
+                  .map((item) => {
+                    if (item.dropdown) {
+                      return `
                       <li role="none">
                         <button 
                           type="button" 
@@ -72,7 +73,9 @@ describe('MobileNav', () => {
                           </svg>
                         </button>
                         <div class="mobile-dropdown-panel mt-2 hidden space-y-2 pl-4">
-                          ${item.dropdown.map(subItem => `
+                          ${item.dropdown
+                            .map(
+                              (subItem) => `
                             <a 
                               href="${subItem.href}"
                               class="block"
@@ -80,12 +83,14 @@ describe('MobileNav', () => {
                             >
                               ${subItem.title}
                             </a>
-                          `).join('')}
+                          `,
+                            )
+                            .join("")}
                         </div>
                       </li>
                     `;
-                  }
-                  return `
+                    }
+                    return `
                     <li role="none">
                       <a 
                         href="${item.href}"
@@ -96,7 +101,8 @@ describe('MobileNav', () => {
                       </a>
                     </li>
                   `;
-                }).join('')}
+                  })
+                  .join("")}
               </ul>
             </nav>
           </div>
@@ -105,40 +111,42 @@ describe('MobileNav', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check panel attributes
-    const panel = parsedHtml.querySelector('#mobile-menu');
+    const panel = parsedHtml.querySelector("#mobile-menu");
     expect(panel).toBeTruthy();
-    expect(panel?.getAttribute('role')).toBe('dialog');
-    expect(panel?.getAttribute('aria-modal')).toBe('true');
-    expect(panel?.getAttribute('aria-label')).toBe('Mobile navigation menu');
+    expect(panel?.getAttribute("role")).toBe("dialog");
+    expect(panel?.getAttribute("aria-modal")).toBe("true");
+    expect(panel?.getAttribute("aria-label")).toBe("Mobile navigation menu");
 
     // Check navigation structure
-    const nav = parsedHtml.querySelector('nav');
+    const nav = parsedHtml.querySelector("nav");
     expect(nav).toBeTruthy();
     const menu = parsedHtml.querySelector('[role="menu"]');
     expect(menu).toBeTruthy();
 
     // Check navigation items (excluding dropdown items)
     const regularItems = parsedHtml.querySelectorAll('li > a[role="menuitem"]');
-    const dropdownToggles = parsedHtml.querySelectorAll('.mobile-dropdown-toggle');
-    const regularNavItems = visibleNavItems.filter(item => !item.dropdown);
-    const dropdownNavItems = visibleNavItems.filter(item => item.dropdown);
-    
+    const dropdownToggles = parsedHtml.querySelectorAll(
+      ".mobile-dropdown-toggle",
+    );
+    const regularNavItems = visibleNavItems.filter((item) => !item.dropdown);
+    const dropdownNavItems = visibleNavItems.filter((item) => item.dropdown);
+
     expect(regularItems.length).toBe(regularNavItems.length);
     expect(dropdownToggles.length).toBe(dropdownNavItems.length);
 
     // Check dropdown structure
-    const dropdownToggle = parsedHtml.querySelector('.mobile-dropdown-toggle');
+    const dropdownToggle = parsedHtml.querySelector(".mobile-dropdown-toggle");
     if (dropdownToggle) {
-      expect(dropdownToggle.getAttribute('aria-expanded')).toBe('false');
-      const dropdownPanel = parsedHtml.querySelector('.mobile-dropdown-panel');
+      expect(dropdownToggle.getAttribute("aria-expanded")).toBe("false");
+      const dropdownPanel = parsedHtml.querySelector(".mobile-dropdown-panel");
       expect(dropdownPanel).toBeTruthy();
-      expect(dropdownPanel?.classList.contains('hidden')).toBe(true);
+      expect(dropdownPanel?.classList.contains("hidden")).toBe(true);
     }
   });
 
-  it('has proper accessibility attributes', () => {
+  it("has proper accessibility attributes", () => {
     const html = `
       <div class="md:hidden">
         <button
@@ -169,17 +177,17 @@ describe('MobileNav', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
-    // Check ARIA attributes
-    const button = parsedHtml.querySelector('button');
-    expect(button?.getAttribute('aria-controls')).toBe('mobile-menu');
-    expect(button?.getAttribute('aria-expanded')).toBe('false');
-    expect(button?.getAttribute('aria-label')).toBe('Open main menu');
 
-    const menu = parsedHtml.querySelector('#mobile-menu');
-    expect(menu?.getAttribute('role')).toBe('dialog');
-    expect(menu?.getAttribute('aria-modal')).toBe('true');
-    expect(menu?.getAttribute('aria-label')).toBe('Mobile navigation menu');
+    // Check ARIA attributes
+    const button = parsedHtml.querySelector("button");
+    expect(button?.getAttribute("aria-controls")).toBe("mobile-menu");
+    expect(button?.getAttribute("aria-expanded")).toBe("false");
+    expect(button?.getAttribute("aria-label")).toBe("Open main menu");
+
+    const menu = parsedHtml.querySelector("#mobile-menu");
+    expect(menu?.getAttribute("role")).toBe("dialog");
+    expect(menu?.getAttribute("aria-modal")).toBe("true");
+    expect(menu?.getAttribute("aria-label")).toBe("Mobile navigation menu");
 
     // Check menu structure
     const menuList = parsedHtml.querySelector('[role="menu"]');

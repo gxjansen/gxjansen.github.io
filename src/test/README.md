@@ -51,12 +51,15 @@ Contains React-specific test utilities:
 Use snapshot testing for component markup:
 
 ```typescript
-import { parseHTML, createTestPresentation } from '../../../test/astro-test-utils';
+import {
+  parseHTML,
+  createTestPresentation,
+} from "../../../test/astro-test-utils";
 
-describe('ComponentName', () => {
-  it('matches snapshot with minimal props', () => {
+describe("ComponentName", () => {
+  it("matches snapshot with minimal props", () => {
     const html = // ... component HTML
-    expect(parseHTML(html).toString()).toMatchSnapshot();
+      expect(parseHTML(html).toString()).toMatchSnapshot();
   });
 });
 ```
@@ -66,12 +69,12 @@ describe('ComponentName', () => {
 Use DOM assertions for interactive elements:
 
 ```typescript
-import { getElement } from '../../../test/astro-test-utils';
+import { getElement } from "../../../test/astro-test-utils";
 
-it('has correct accessibility attributes', () => {
-  const html = // ... component HTML
+it("has correct accessibility attributes", () => {
+  const html = '<div role="button" aria-label="Expected Label">Click me</div>';
   const element = getElement(html, '[role="button"]');
-  expect(element?.getAttribute('aria-label')).toBe('Expected Label');
+  expect(element?.getAttribute("aria-label")).toBe("Expected Label");
 });
 ```
 

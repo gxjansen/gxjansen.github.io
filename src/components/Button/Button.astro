@@ -1,6 +1,6 @@
 ---
-import ArrowLeftIcon from '@icons/ui/arrow-narrow-left.svg';
-import ArrowRightIcon from '@icons/ui/arrow-narrow-right.svg';
+import ArrowLeftIcon from "@icons/ui/arrow-narrow-left.svg";
+import ArrowRightIcon from "@icons/ui/arrow-narrow-right.svg";
 
 /**
  *  * Notes:
@@ -19,6 +19,7 @@ interface Props {
   onclick?: any; // any onclick events
   class?: string; // any additional classes
   disabled?: boolean; // disabled state
+  loading?: boolean; // loading state
   umamiEvent?: string; // Umami event name (e.g., "cta-click")
   umamiEventTarget?: string; // Umami event target (e.g., "book-guido")
   rest?: any; // catch-all for any additional parameters, such as "aria-label"
@@ -39,35 +40,36 @@ const {
 } = Astro.props as Props;
 
 // Determine if the link is external
-const isExternalLink = href && (href.startsWith('http://') || href.startsWith('https://'));
+const isExternalLink =
+  href && (href.startsWith("http://") || href.startsWith("https://"));
 
 // Base button classes
 // Rosé Pine accent colors for outline buttons
-const outlineColors = ['love', 'gold', 'rose', 'pine', 'foam', 'iris'] as const;
+const outlineColors = ["love", "gold", "rose", "pine", "foam", "iris"] as const;
 
 // Get a random color if this is an outline button
-const randomColor = variant === 'outline'
-  ? outlineColors[Math.floor(Math.random() * outlineColors.length)]
-  : undefined;
+const randomColor =
+  variant === "outline"
+    ? outlineColors[Math.floor(Math.random() * outlineColors.length)]
+    : undefined;
 
 const baseClasses = [
   className,
-  'button group',
-  'inline-flex items-center justify-center',
-  'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
-  'disabled:opacity-50 disabled:cursor-not-allowed',
+  "button group",
+  "inline-flex items-center justify-center",
+  "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2",
+  "disabled:opacity-50 disabled:cursor-not-allowed",
   {
-    'button--primary': variant === 'primary',
-    'button--secondary': variant === 'secondary',
-    'button--outline': variant === 'outline',
-    'button--ghost': variant === 'ghost',
-    'button--on-color': variant === 'on-color',
+    "button--primary": variant === "primary",
+    "button--secondary": variant === "secondary",
+    "button--outline": variant === "outline",
+    "button--ghost": variant === "ghost",
+    "button--on-color": variant === "on-color",
   },
 ];
 ---
 
-<!-- Link button -->
-{
+<!-- Link button -->{
   href && (
     <a
       id={id}
@@ -179,20 +181,50 @@ const baseClasses = [
   }
 
   /* Rosé Pine accent colors - light mode */
-  .button--outline[data-color="love"] { --btn-color: #b4637a; }
-  .button--outline[data-color="gold"] { --btn-color: #ea9d34; }
-  .button--outline[data-color="rose"] { --btn-color: #d7827e; }
-  .button--outline[data-color="pine"] { --btn-color: #286983; }
-  .button--outline[data-color="foam"] { --btn-color: #56949f; }
-  .button--outline[data-color="iris"] { --btn-color: #907aa9; }
+  .button--outline[data-color="love"] {
+    --btn-color: #b4637a;
+  }
+  .button--outline[data-color="gold"] {
+    --btn-color: #ea9d34;
+  }
+  .button--outline[data-color="rose"] {
+    --btn-color: #d7827e;
+  }
+  .button--outline[data-color="pine"] {
+    --btn-color: #286983;
+  }
+  .button--outline[data-color="foam"] {
+    --btn-color: #56949f;
+  }
+  .button--outline[data-color="iris"] {
+    --btn-color: #907aa9;
+  }
 
   /* Rosé Pine accent colors - dark mode */
-  :global(.dark) .button--outline[data-color="love"] { --btn-color: #eb6f92; --btn-hover-text: #191724; }
-  :global(.dark) .button--outline[data-color="gold"] { --btn-color: #f6c177; --btn-hover-text: #191724; }
-  :global(.dark) .button--outline[data-color="rose"] { --btn-color: #ebbcba; --btn-hover-text: #191724; }
-  :global(.dark) .button--outline[data-color="pine"] { --btn-color: #31748f; --btn-hover-text: #e0def4; }
-  :global(.dark) .button--outline[data-color="foam"] { --btn-color: #9ccfd8; --btn-hover-text: #191724; }
-  :global(.dark) .button--outline[data-color="iris"] { --btn-color: #c4a7e7; --btn-hover-text: #191724; }
+  :global(.dark) .button--outline[data-color="love"] {
+    --btn-color: #eb6f92;
+    --btn-hover-text: #191724;
+  }
+  :global(.dark) .button--outline[data-color="gold"] {
+    --btn-color: #f6c177;
+    --btn-hover-text: #191724;
+  }
+  :global(.dark) .button--outline[data-color="rose"] {
+    --btn-color: #ebbcba;
+    --btn-hover-text: #191724;
+  }
+  :global(.dark) .button--outline[data-color="pine"] {
+    --btn-color: #31748f;
+    --btn-hover-text: #e0def4;
+  }
+  :global(.dark) .button--outline[data-color="foam"] {
+    --btn-color: #9ccfd8;
+    --btn-hover-text: #191724;
+  }
+  :global(.dark) .button--outline[data-color="iris"] {
+    --btn-color: #c4a7e7;
+    --btn-hover-text: #191724;
+  }
 
   .button--ghost {
     @apply bg-transparent text-base-800 hover:bg-base-200 dark:text-base-100 dark:hover:bg-base-800;
@@ -200,6 +232,6 @@ const baseClasses = [
 
   /* Special variant for buttons on colored backgrounds */
   .button--on-color {
-    @apply border-2 border-base-100 text-base-100 bg-transparent hover:bg-base-100 hover:text-primary-500 dark:border-base-900 dark:text-base-900 dark:hover:bg-base-900 dark:hover:text-primary-500;
+    @apply border-2 border-base-100 bg-transparent text-base-100 hover:bg-base-100 hover:text-primary-500 dark:border-base-900 dark:text-base-900 dark:hover:bg-base-900 dark:hover:text-primary-500;
   }
 </style>

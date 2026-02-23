@@ -59,28 +59,27 @@ Each role reinforced the same insight: understanding why people behave the way t
 
 // Check for reduced motion preference
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-const shouldReduceMotion = typeof window !== "undefined"
-  ? window.matchMedia(reducedMotionQuery).matches
-  : false;
+const shouldReduceMotion =
+  typeof window !== "undefined"
+    ? window.matchMedia(reducedMotionQuery).matches
+    : false;
 ---
 
 <section
   id="the-story"
-  class="overflow-hidden py-24 md:py-28 bg-base-50 dark:bg-base-800/50"
+  class="overflow-hidden bg-base-50 py-24 md:py-28 dark:bg-base-800/50"
   aria-labelledby="story-heading"
 >
-  <div
-    class="site-container px-2 sm:px-4"
-    role="presentation"
-  >
+  <div class="site-container px-2 sm:px-4" role="presentation">
     <!-- Section header -->
-    <div class="mx-auto text-center max-w-3xl mb-12">
+    <div class="mx-auto mb-12 max-w-3xl text-center">
       <Badge>The Backstory</Badge>
-      <h2 id="story-heading" class="h2 mb-4">
-        How I Got Here
-      </h2>
+      <h2 id="story-heading" class="h2 mb-4">How I Got Here</h2>
       <p class="description text-lg md:text-xl">
-        Before community strategy, there was competitive swimming. I spent my early years training for national and European championships: learning discipline, competition, and the value of showing up consistently. That chapter ended in 2004, and a new one began.
+        Before community strategy, there was competitive swimming. I spent my
+        early years training for national and European championships: learning
+        discipline, competition, and the value of showing up consistently. That
+        chapter ended in 2004, and a new one began.
       </p>
     </div>
 
@@ -91,14 +90,13 @@ const shouldReduceMotion = typeof window !== "undefined"
       aria-label="Name explanation"
     >
       <div class="alert-content px-8 py-4">
-        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-          <div
-            class="flex items-center justify-center"
-            aria-hidden="true"
-          >
+        <div
+          class="flex flex-col items-center justify-center gap-4 md:flex-row"
+        >
+          <div class="flex items-center justify-center" aria-hidden="true">
             <Icon
               name="tabler:letter-g"
-              class="w-10 h-10 text-white"
+              class="h-10 w-10 text-white"
               stroke-width="1"
               stroke="currentColor"
               fill="none"
@@ -106,7 +104,7 @@ const shouldReduceMotion = typeof window !== "undefined"
             />
             <Icon
               name="tabler:letter-x"
-              class="w-14 h-14 text-base-100 -ml-3"
+              class="-ml-3 h-14 w-14 text-base-100"
               stroke-width="8"
               stroke="currentColor"
               fill="none"
@@ -114,7 +112,7 @@ const shouldReduceMotion = typeof window !== "undefined"
             />
             <Icon
               name="tabler:letter-j"
-              class="w-10 h-10 text-white -ml-4"
+              class="-ml-4 h-10 w-10 text-white"
               stroke-width="1"
               stroke="currentColor"
               fill="none"
@@ -122,15 +120,18 @@ const shouldReduceMotion = typeof window !== "undefined"
             />
             <Icon
               name="tabler:question-mark"
-              class="w-12 h-12 text-white -ml-2"
+              class="-ml-2 h-12 w-12 text-white"
               stroke-width="3"
               stroke="currentColor"
               fill="none"
               role="presentation"
             />
           </div>
-          <p class="text-lg !text-white text-center md:text-left">
-            To answer a common question right out of the gate: Yes, the <span class="text-black font-bold">X</span> in my name is not just there for decorative reasons: my second name is <span class="font-bold">Xavier</span>!
+          <p class="text-center text-lg !text-white md:text-left">
+            To answer a common question right out of the gate: Yes, the <span
+              class="font-bold text-black">X</span
+            > in my name is not just there for decorative reasons: my second name
+            is <span class="font-bold">Xavier</span>!
           </p>
         </div>
       </div>
@@ -148,7 +149,7 @@ const shouldReduceMotion = typeof window !== "undefined"
             title={story.title}
             details={story.details}
             image={story.image}
-            href={story.href ?? '#'}
+            href={story.href ?? "#"}
             imageSide={idx % 2 === 0 ? "right" : "left"}
             idx={idx}
             ctaText={story.ctaText}
@@ -159,4 +160,3 @@ const shouldReduceMotion = typeof window !== "undefined"
     </div>
   </div>
 </section>
-

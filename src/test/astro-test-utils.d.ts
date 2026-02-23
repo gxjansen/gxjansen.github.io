@@ -1,4 +1,4 @@
-import type { HTMLElement } from 'node-html-parser';
+import type { HTMLElement } from "node-html-parser";
 
 // Basic type for Astro components
 export type AstroComponent = {
@@ -22,10 +22,14 @@ export function getElement(html: string, selector: string): HTMLElement | null;
  */
 export function renderComponent(
   Component: AstroComponent,
-  props?: Record<string, unknown>
+  props?: Record<string, unknown>,
 ): Promise<string>;
 
 /**
  * Type helper for Astro component props
  */
-export type AstroComponentProps<T> = T extends { default: (props: infer P) => any } ? P : never;
+export type AstroComponentProps<T> = T extends {
+  default: (props: infer P) => any;
+}
+  ? P
+  : never;

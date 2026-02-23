@@ -12,7 +12,7 @@ export async function GET(context: APIContext) {
   // Sort posts by publication date in descending order
   const sortedPosts = posts.sort(
     (a, b) =>
-      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
   );
 
   const siteData = getTranslatedData("siteData", defaultLocale);
@@ -20,7 +20,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: siteData.title,
     description: siteData.description,
-    site: context.site,
+    site: context.site!,
     items: sortedPosts.map((post) => ({
       title: post.data.title,
       pubDate: new Date(post.data.pubDate),

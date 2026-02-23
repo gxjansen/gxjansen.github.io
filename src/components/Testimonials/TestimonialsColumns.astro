@@ -18,10 +18,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
 const testimonialData = getTranslatedData("testimonialData", currLocale);
 ---
 
-<section
-  id="testimonials-columns"
-  class="py-24 md:py-28"
->
+<section id="testimonials-columns" class="py-24 md:py-28">
   <div class="site-container">
     <div class="relative">
       <div class="relative">
@@ -38,9 +35,7 @@ const testimonialData = getTranslatedData("testimonialData", currLocale);
         >
           {
             testimonialData.map((testimonial, idx) => (
-              <TestimonialCard
-                {...testimonial}
-              />
+              <TestimonialCard {...testimonial} />
             ))
           }
         </div>

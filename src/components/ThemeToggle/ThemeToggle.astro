@@ -1,7 +1,7 @@
 ---
 // Icon imports
-import MoonIcon from '@icons/ui/moon.svg';
-import SunIcon from '@icons/ui/sun.svg';
+import MoonIcon from "@icons/ui/moon.svg";
+import SunIcon from "@icons/ui/sun.svg";
 
 interface Props {
   class?: string; // any additional classes
@@ -14,7 +14,7 @@ const { class: className, ...rest } = Astro.props as Props;
 <button
   class:list={[
     className,
-    "theme-toggle primary-focus rounded-full p-2 text-base-600 transition-colors hover:text-base-700 dark:text-base-300 dark:hover:text-base-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2",
+    "theme-toggle primary-focus rounded-full p-2 text-base-600 transition-colors hover:text-base-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:text-base-300 dark:hover:text-base-200",
   ]}
   aria-label="Toggle color theme"
   aria-pressed="false"
@@ -27,12 +27,12 @@ const { class: className, ...rest } = Astro.props as Props;
     aria-hidden="true"
     role="presentation"
   />
-  <SunIcon 
-    class="theme-toggle__light-icon hidden h-5 w-5" 
+  <SunIcon
+    class="theme-toggle__light-icon hidden h-5 w-5"
     aria-hidden="true"
     role="presentation"
   />
-  <span class="sr-only theme-toggle__label">Switch to light theme</span>
+  <span class="theme-toggle__label sr-only">Switch to light theme</span>
 </button>
 
 <script>
@@ -57,16 +57,22 @@ const { class: className, ...rest } = Astro.props as Props;
     const themeToggleBtns = document.querySelectorAll(".theme-toggle");
 
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-    let colorTheme = localStorage.getItem("colorTheme") || (prefersDark.matches ? "dark" : "light");
-    
+    let colorTheme =
+      localStorage.getItem("colorTheme") ||
+      (prefersDark.matches ? "dark" : "light");
+
     // Update button state and icons based on current theme
     function updateThemeToggleState(theme: "dark" | "light") {
       themeToggleLoaders.forEach((loader) => loader.classList.add("hidden"));
-      
+
       const isDark = theme === "dark";
-      themeToggleDarkIcons.forEach((icon) => icon.classList.toggle("hidden", !isDark));
-      themeToggleLightIcons.forEach((icon) => icon.classList.toggle("hidden", isDark));
-      
+      themeToggleDarkIcons.forEach((icon) =>
+        icon.classList.toggle("hidden", !isDark),
+      );
+      themeToggleLightIcons.forEach((icon) =>
+        icon.classList.toggle("hidden", isDark),
+      );
+
       // Update ARIA states
       themeToggleBtns.forEach((btn) => {
         btn.setAttribute("aria-pressed", isDark ? "true" : "false");
@@ -78,27 +84,29 @@ const { class: className, ...rest } = Astro.props as Props;
     }
 
     // Initial state
-    updateThemeToggleState(colorTheme);
+    updateThemeToggleState(colorTheme as "dark" | "light");
 
     // Handle button clicks
     themeToggleBtns.forEach((btn) => {
       btn.addEventListener("click", function () {
-        const newTheme = localStorage.getItem("colorTheme") === "light" ? "dark" : "light";
+        const newTheme =
+          localStorage.getItem("colorTheme") === "light" ? "dark" : "light";
         changeTheme(newTheme);
         localStorage.setItem("colorTheme", newTheme);
         updateThemeToggleState(newTheme);
 
         // Track theme toggle with Umami
-        if (typeof umami !== 'undefined') {
-          umami.track('theme-toggle', { value: newTheme });
+        if (typeof umami !== "undefined") {
+          umami.track("theme-toggle", { value: newTheme });
         }
       });
 
       // Handle keyboard events
-      btn.addEventListener("keydown", function(event) {
-        if (event.key === "Enter" || event.key === " ") {
+      btn.addEventListener("keydown", function (event) {
+        const e = event as KeyboardEvent;
+        if (e.key === "Enter" || e.key === " ") {
           event.preventDefault();
-          btn.click();
+          (btn as HTMLElement).click();
         }
       });
     });

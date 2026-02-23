@@ -1,7 +1,7 @@
 /**
  * Represents a role at an event
  */
-export type EventRole = 
+export type EventRole =
   | "Presenter" // Default role when there's a presentation
   | "Event host/moderator"
   | "Main event organizer"
@@ -55,7 +55,7 @@ export interface Presentation {
 export interface PresentationEvent extends Event {
   /** Related presentation slug if any */
   presentationSlug?: string;
-  
+
   /** Role played at the event */
   role: EventRole;
 }

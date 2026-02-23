@@ -28,9 +28,9 @@ const page = Astro.props;
 
 // Ensure we have valid page data
 if (!page?.data) {
-  return new Response('Page not found', {
+  return new Response("Page not found", {
     status: 404,
-    statusText: 'Not Found'
+    statusText: "Not Found",
   });
 }
 
@@ -41,13 +41,13 @@ const { Content } = await page.render();
 <BaseLayout title={title} description={description}>
   <section class="site-container mt-16 overflow-x-clip">
     <div
-      class="w-full bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-20 text-center dark:bg-[url('/assets/pattern-dark.svg')] md:py-32"
+      class="w-full bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-20 text-center md:py-32 dark:bg-[url('/assets/pattern-dark.svg')]"
     >
       <h1 class="h1">{title}</h1>
     </div>
     <div class="mx-auto max-w-3xl">
       <div
-        class="text-base-900 dark:text-base-100 prose mt-10 max-w-none text-sm md:text-base"
+        class="prose mt-10 max-w-none text-sm text-base-900 md:text-base dark:text-base-100"
       >
         <Content components={{ a: ExternalLink }} />
       </div>

@@ -19,6 +19,11 @@ interface ListmonkSubscribersResponse {
   };
 }
 
+const commonHeaders: Record<string, string> = {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+};
+
 const handler: Handler = async (
   event: HandlerEvent,
   _context: HandlerContext
@@ -27,10 +32,7 @@ const handler: Handler = async (
   if (event.httpMethod !== "GET") {
     return {
       statusCode: 405,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: { ...commonHeaders },
       body: JSON.stringify({ error: "Method not allowed" }),
     };
   }
@@ -42,11 +44,7 @@ const handler: Handler = async (
     // Return a fallback when credentials aren't configured
     return {
       statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "public, max-age=3600", // Cache for 1 hour
-      },
+      headers: { ...commonHeaders, "Cache-Control": "public, max-age=3600" },
       body: JSON.stringify({
         success: true,
         subscriberCount: null,
@@ -81,11 +79,7 @@ const handler: Handler = async (
 
     return {
       statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "public, max-age=3600", // Cache for 1 hour
-      },
+      headers: { ...commonHeaders, "Cache-Control": "public, max-age=3600" },
       body: JSON.stringify({
         success: true,
         subscriberCount: totalSubscribers,
@@ -96,10 +90,7 @@ const handler: Handler = async (
 
     return {
       statusCode: 200, // Return 200 to not break the page
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: { ...commonHeaders },
       body: JSON.stringify({
         success: false,
         subscriberCount: null,

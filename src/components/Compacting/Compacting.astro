@@ -3,7 +3,8 @@ interface Props {
   message?: string;
 }
 
-const { message = "Compacting our conversation so we can keep chatting..." } = Astro.props;
+const { message = "Compacting our conversation so we can keep chatting..." } =
+  Astro.props;
 ---
 
 <div class="compacting">
@@ -61,7 +62,7 @@ const { message = "Compacting our conversation so we can keep chatting..." } = A
     position: absolute;
     width: 5px;
     height: 5px;
-    background-color: #E28E6E;
+    background-color: #e28e6e;
     border-radius: 50%;
     left: 50%;
     top: 50%;
@@ -69,16 +70,21 @@ const { message = "Compacting our conversation so we can keep chatting..." } = A
     animation-delay: calc(var(--i) * 0.1s);
   }
 
-  .dot { transform: rotate(calc(var(--i) * 30deg)) translateX(-50%) translateY(-16px); }
+  .dot {
+    transform: rotate(calc(var(--i) * 30deg)) translateX(-50%) translateY(-16px);
+  }
 
   @keyframes dot-pulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 0.2;
-      transform: rotate(calc(var(--i) * 30deg)) translateX(-50%) translateY(-16px) scale(0.8);
+      transform: rotate(calc(var(--i) * 30deg)) translateX(-50%)
+        translateY(-16px) scale(0.8);
     }
     50% {
       opacity: 1;
-      transform: rotate(calc(var(--i) * 30deg)) translateX(-50%) translateY(-16px) scale(1.1);
+      transform: rotate(calc(var(--i) * 30deg)) translateX(-50%)
+        translateY(-16px) scale(1.1);
     }
   }
 
@@ -120,15 +126,21 @@ const { message = "Compacting our conversation so we can keep chatting..." } = A
     left: 0;
     bottom: 0;
     width: 0%;
-    background-color: #E28E6E;
+    background-color: #e28e6e;
     border-radius: 3px;
     animation: fill-progress 18s ease-out infinite;
   }
 
   @keyframes fill-progress {
-    0% { width: 0%; }
-    90% { width: 100%; }
-    100% { width: 100%; }
+    0% {
+      width: 0%;
+    }
+    90% {
+      width: 100%;
+    }
+    100% {
+      width: 100%;
+    }
   }
 
   .progress-percent {
@@ -146,15 +158,36 @@ const { message = "Compacting our conversation so we can keep chatting..." } = A
   }
 
   @keyframes count-up {
-    0% { content: "0%"; }
-    10% { content: "12%"; }
-    20% { content: "27%"; }
-    30% { content: "38%"; }
-    40% { content: "51%"; }
-    50% { content: "63%"; }
-    60% { content: "74%"; }
-    70% { content: "82%"; }
-    80% { content: "91%"; }
-    90%, 100% { content: "100%"; }
+    0% {
+      content: "0%";
+    }
+    10% {
+      content: "12%";
+    }
+    20% {
+      content: "27%";
+    }
+    30% {
+      content: "38%";
+    }
+    40% {
+      content: "51%";
+    }
+    50% {
+      content: "63%";
+    }
+    60% {
+      content: "74%";
+    }
+    70% {
+      content: "82%";
+    }
+    80% {
+      content: "91%";
+    }
+    90%,
+    100% {
+      content: "100%";
+    }
   }
 </style>

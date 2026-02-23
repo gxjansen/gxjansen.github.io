@@ -1,0 +1,42 @@
+name: Links
+
+on:
+  pull_request:
+    branches: [master, development]
+    paths:
+      - "src/content/**"
+      - "src/pages/**"
+      - "src/data/**"
+  schedule:
+    - cron: "0 8 * * 1" # Every Monday at 08:00 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: links-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-links:
+    name: Check Links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx astro build
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --exclude-loopback
+            --accept 100..=399
+            --timeout 30
+            --max-retries 3
+            --exclude-path dist/_astro
+            --root-dir ${{ github.workspace }}/dist
+            dist
+          fail: false

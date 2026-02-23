@@ -27,14 +27,14 @@ const currLocale = getLocaleFromUrl(Astro.url);
           <Badge>Projects</Badge>
           <h1 class="h1 mb-4">IndieHacker Projects</h1>
           <p class="description text-lg md:text-xl">
-            Here are some of the indie or community projects I've worked on recently. All are available on GitHub under MIT license, or on their respective marketplaces.
+            Here are some of the indie or community projects I've worked on
+            recently. All are available on GitHub under MIT license, or on their
+            respective marketplaces.
           </p>
         </div>
-        
+
         <div class="mt-12 grid gap-8">
-          {indieProjects.map((project) => (
-            <ProjectCard {...project} />
-          ))}
+          {indieProjects.map((project) => <ProjectCard {...project} />)}
         </div>
       </div>
     </div>

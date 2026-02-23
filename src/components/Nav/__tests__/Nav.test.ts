@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest';
-import { parseHTML } from '../../../test/astro-test-utils';
-import { createMockNavData } from '../../../test/utils';
+import { describe, it, expect } from "vitest";
+import { parseHTML } from "../../../test/astro-test-utils";
+import { createMockNavData } from "../../../test/utils";
 
-describe('Nav', () => {
-  it('renders basic structure correctly', () => {
+describe("Nav", () => {
+  it("renders basic structure correctly", () => {
     const navData = createMockNavData();
-    
+
     const html = `
       <div id="nav__container" class="navbar--initial fixed left-0 top-0 z-30 flex w-full flex-col border-b" role="banner">
         <div class="mx-auto flex w-full">
@@ -20,9 +20,9 @@ describe('Nav', () => {
               <nav class="hidden flex-auto md:block" aria-label="Desktop navigation">
                 <ul class="flex h-fit items-center justify-center space-x-6" role="menubar" aria-label="Primary navigation menu">
                   ${navData
-                    .filter(item => !item.hidden)
-                    .map(item => {
-                      if ('dropdown' in item) {
+                    .filter((item) => !item.hidden)
+                    .map((item) => {
+                      if ("dropdown" in item) {
                         return `
                           <li role="none">
                             <button type="button" aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">
@@ -39,7 +39,7 @@ describe('Nav', () => {
                         </li>
                       `;
                     })
-                    .join('')}
+                    .join("")}
                 </ul>
               </nav>
 
@@ -59,50 +59,58 @@ describe('Nav', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check basic structure
     const nav = parsedHtml.querySelector('[role="banner"]');
     expect(nav).toBeTruthy();
-    expect(nav?.classList.contains('navbar--initial')).toBe(true);
+    expect(nav?.classList.contains("navbar--initial")).toBe(true);
 
     // Check skip link
     const skipLink = parsedHtml.querySelector('a[href="#main-content"]');
     expect(skipLink).toBeTruthy();
-    expect(skipLink?.textContent?.trim()).toBe('Skip to main content');
+    expect(skipLink?.textContent?.trim()).toBe("Skip to main content");
 
     // Check navigation items
-    const visibleNavItems = navData.filter(item => !item.hidden);
-    const navLinks = parsedHtml.querySelectorAll('[role="menuitem"], .nav-dropdown-toggle');
+    const visibleNavItems = navData.filter((item) => !item.hidden);
+    const navLinks = parsedHtml.querySelectorAll(
+      '[role="menuitem"], .nav-dropdown-toggle',
+    );
     expect(navLinks.length).toBe(visibleNavItems.length);
 
     // Check desktop/mobile visibility
-    const desktopNav = parsedHtml.querySelector('nav[aria-label="Desktop navigation"]');
-    expect(desktopNav?.classList.contains('hidden')).toBe(true);
-    expect(desktopNav?.classList.contains('md:block')).toBe(true);
+    const desktopNav = parsedHtml.querySelector(
+      'nav[aria-label="Desktop navigation"]',
+    );
+    expect(desktopNav?.classList.contains("hidden")).toBe(true);
+    expect(desktopNav?.classList.contains("md:block")).toBe(true);
 
     // Check right side items
-    const themeToggle = parsedHtml.querySelector('button[aria-label="Toggle dark mode"]');
+    const themeToggle = parsedHtml.querySelector(
+      'button[aria-label="Toggle dark mode"]',
+    );
     expect(themeToggle).toBeTruthy();
-    expect(themeToggle?.classList.contains('hidden')).toBe(true);
-    expect(themeToggle?.classList.contains('md:block')).toBe(true);
+    expect(themeToggle?.classList.contains("hidden")).toBe(true);
+    expect(themeToggle?.classList.contains("md:block")).toBe(true);
 
-    const ctaButton = parsedHtml.querySelector('a[aria-label="Book Guido for your event"]');
+    const ctaButton = parsedHtml.querySelector(
+      'a[aria-label="Book Guido for your event"]',
+    );
     expect(ctaButton).toBeTruthy();
-    expect(ctaButton?.classList.contains('hidden')).toBe(true);
-    expect(ctaButton?.classList.contains('md:block')).toBe(true);
+    expect(ctaButton?.classList.contains("hidden")).toBe(true);
+    expect(ctaButton?.classList.contains("md:block")).toBe(true);
   });
 
-  it('handles dropdown navigation items', () => {
+  it("handles dropdown navigation items", () => {
     const navData = createMockNavData([
       {
-        title: 'Services',
-        href: '/services',
+        title: "Services",
+        href: "/services",
         dropdown: [
-          { title: 'Consulting', href: '/services/consulting' },
-          { title: 'Training', href: '/services/training' }
+          { title: "Consulting", href: "/services/consulting" },
+          { title: "Training", href: "/services/training" },
         ],
-        hidden: false
-      }
+        hidden: false,
+      },
     ]);
 
     const html = `
@@ -139,31 +147,31 @@ describe('Nav', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check dropdown structure
-    const dropdown = parsedHtml.querySelector('.nav-dropdown');
+    const dropdown = parsedHtml.querySelector(".nav-dropdown");
     expect(dropdown).toBeTruthy();
 
     // Check dropdown toggle
-    const toggle = parsedHtml.querySelector('.nav-dropdown-toggle');
+    const toggle = parsedHtml.querySelector(".nav-dropdown-toggle");
     expect(toggle).toBeTruthy();
-    expect(toggle?.getAttribute('aria-expanded')).toBe('false');
-    expect(toggle?.getAttribute('aria-haspopup')).toBe('true');
+    expect(toggle?.getAttribute("aria-expanded")).toBe("false");
+    expect(toggle?.getAttribute("aria-haspopup")).toBe("true");
 
     // Check dropdown panel
-    const panel = parsedHtml.querySelector('.nav-dropdown-panel');
+    const panel = parsedHtml.querySelector(".nav-dropdown-panel");
     expect(panel).toBeTruthy();
-    expect(panel?.getAttribute('role')).toBe('menu');
-    expect(panel?.getAttribute('aria-orientation')).toBe('vertical');
+    expect(panel?.getAttribute("role")).toBe("menu");
+    expect(panel?.getAttribute("aria-orientation")).toBe("vertical");
 
     // Check dropdown items
-    const items = parsedHtml.querySelectorAll('.nav-dropdown-item');
+    const items = parsedHtml.querySelectorAll(".nav-dropdown-item");
     expect(items.length).toBe(2);
-    expect(items[0]?.getAttribute('href')).toBe('/services/consulting/');
-    expect(items[1]?.getAttribute('href')).toBe('/services/training/');
+    expect(items[0]?.getAttribute("href")).toBe("/services/consulting/");
+    expect(items[1]?.getAttribute("href")).toBe("/services/training/");
   });
 
-  it('has proper accessibility attributes', () => {
+  it("has proper accessibility attributes", () => {
     const html = `
       <div id="nav__container" class="navbar--initial" role="banner">
         <header role="navigation" aria-label="Main navigation">
@@ -193,7 +201,7 @@ describe('Nav', () => {
     `.trim();
 
     const parsedHtml = parseHTML(html);
-    
+
     // Check ARIA roles
     expect(parsedHtml.querySelector('[role="banner"]')).toBeTruthy();
     expect(parsedHtml.querySelector('[role="navigation"]')).toBeTruthy();
@@ -201,10 +209,20 @@ describe('Nav', () => {
     expect(parsedHtml.querySelector('[role="menuitem"]')).toBeTruthy();
 
     // Check ARIA labels
-    expect(parsedHtml.querySelector('[aria-label="Main navigation"]')).toBeTruthy();
-    expect(parsedHtml.querySelector('[aria-label="Desktop navigation"]')).toBeTruthy();
-    expect(parsedHtml.querySelector('[aria-label="Primary navigation menu"]')).toBeTruthy();
-    expect(parsedHtml.querySelector('[aria-label="Toggle dark mode"]')).toBeTruthy();
-    expect(parsedHtml.querySelector('[aria-label="Toggle mobile menu"]')).toBeTruthy();
+    expect(
+      parsedHtml.querySelector('[aria-label="Main navigation"]'),
+    ).toBeTruthy();
+    expect(
+      parsedHtml.querySelector('[aria-label="Desktop navigation"]'),
+    ).toBeTruthy();
+    expect(
+      parsedHtml.querySelector('[aria-label="Primary navigation menu"]'),
+    ).toBeTruthy();
+    expect(
+      parsedHtml.querySelector('[aria-label="Toggle dark mode"]'),
+    ).toBeTruthy();
+    expect(
+      parsedHtml.querySelector('[aria-label="Toggle mobile menu"]'),
+    ).toBeTruthy();
   });
 });

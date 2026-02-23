@@ -23,80 +23,80 @@ export interface SocialLink {
 
 export const socialLinks: SocialLink[] = [
   {
-    name: 'Signal',
-    href: 'https://signal.me/#eu/-unUEm2N_tIpI5lcvxWOfJ2NeMRZ2KJ_etky02xAzQiKdoxJ4P9Nxqgl05zJBEMd',
-    icon: 'signal',
+    name: "Signal",
+    href: "https://signal.me/#eu/-unUEm2N_tIpI5lcvxWOfJ2NeMRZ2KJ_etky02xAzQiKdoxJ4P9Nxqgl05zJBEMd",
+    icon: "signal",
     visibility: {
       footer: true,
       hero: true,
       about: true,
-      contact: true
-    }
-  },
-    {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=gxjansen',
-    icon: 'linkedin',
-    visibility: {
-      footer: true,
-      hero: true,
-      about: true,
-      contact: true
-    }
+      contact: true,
+    },
   },
   {
-    name: 'YouTube',
-    href: 'https://www.youtube.com/@gxjansen',
-    icon: 'tabler/filled/brand-youtube',
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=gxjansen",
+    icon: "linkedin",
     visibility: {
       footer: true,
       hero: true,
       about: true,
-      contact: false
-    }
+      contact: true,
+    },
   },
   {
-    name: 'GitHub',
-    href: 'https://github.com/gxjansen',
-    icon: 'tabler/filled/brand-github',
+    name: "YouTube",
+    href: "https://www.youtube.com/@gxjansen",
+    icon: "tabler/filled/brand-youtube",
     visibility: {
       footer: true,
       hero: true,
       about: true,
-      contact: true
-    }
+      contact: false,
+    },
   },
   {
-    name: 'BlueSky',
-    href: 'https://bsky.app/profile/gui.do',
-    icon: 'bluesky',
+    name: "GitHub",
+    href: "https://github.com/gxjansen",
+    icon: "tabler/filled/brand-github",
     visibility: {
       footer: true,
       hero: true,
       about: true,
-      contact: true
-    }
+      contact: true,
+    },
   },
   {
-    name: 'Instagram',
-    href: 'https://www.instagram.com/gxjansen',
-    icon: 'instagram',
+    name: "BlueSky",
+    href: "https://bsky.app/profile/gui.do",
+    icon: "bluesky",
+    visibility: {
+      footer: true,
+      hero: true,
+      about: true,
+      contact: true,
+    },
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/gxjansen",
+    icon: "instagram",
     visibility: {
       footer: false,
       hero: false,
       about: false,
-      contact: false
-    }
+      contact: false,
+    },
   },
   {
-    name: 'RSS Feed',
-    href: '/rss.xml',
-    icon: 'rss',
+    name: "RSS Feed",
+    href: "/rss.xml",
+    icon: "rss",
     visibility: {
       footer: true,
       hero: false,
       about: false,
-      contact: false
-    }
-  }
+      contact: false,
+    },
+  },
 ];

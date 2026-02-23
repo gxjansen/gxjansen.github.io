@@ -6,19 +6,24 @@
 import { Icon } from "astro-icon";
 import type { ColleagueTestimonial } from "@config/colleagueTestimonialData";
 
-const { name, role, company, workRelationship, quote, category } = Astro.props as ColleagueTestimonial;
+const { name, role, company, workRelationship, quote, category } =
+  Astro.props as ColleagueTestimonial;
 ---
 
-<article class="h-full flex flex-col bg-base-0 dark:bg-base-800 rounded-xl p-4 sm:p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 border border-base-200 dark:border-base-700">
+<article
+  class="bg-base-0 flex h-full flex-col rounded-xl border border-base-200 p-4 shadow-sm transition-all duration-300 hover:shadow-md sm:p-6 md:p-8 dark:border-base-700 dark:bg-base-800"
+>
   <!-- Quote section -->
   <div class="flex-1">
     <div class="relative">
       <Icon
         name="atlas/quotes-top"
-        class="absolute -top-2 -left-2 w-8 h-8 text-primary-200 dark:text-primary-700 opacity-60"
+        class="absolute -left-2 -top-2 h-8 w-8 text-primary-200 opacity-60 dark:text-primary-700"
         aria-hidden="true"
       />
-      <blockquote class="text-base-700 dark:text-base-200 text-lg leading-relaxed pl-4 mb-4">
+      <blockquote
+        class="mb-4 pl-4 text-lg leading-relaxed text-base-700 dark:text-base-200"
+      >
         "{quote}"
       </blockquote>
     </div>
@@ -26,18 +31,20 @@ const { name, role, company, workRelationship, quote, category } = Astro.props a
 
   <!-- Attribution section -->
   <footer class="mt-auto">
-    <div class="border-t border-base-200 dark:border-base-600 pt-4">
+    <div class="border-t border-base-200 pt-4 dark:border-base-600">
       <cite class="not-italic">
-        <div class="font-semibold text-base-900 dark:text-base-100 text-lg">
+        <div class="text-lg font-semibold text-base-900 dark:text-base-100">
           {name}
         </div>
-        <div class="text-base-600 dark:text-base-300 mt-1">
+        <div class="mt-1 text-base-600 dark:text-base-300">
           {role}
-          {company && (
-            <span class="text-base-500 dark:text-base-400"> • {company}</span>
-          )}
+          {
+            company && (
+              <span class="text-base-500 dark:text-base-400"> • {company}</span>
+            )
+          }
         </div>
-        <div class="text-sm text-base-500 dark:text-base-400 mt-1">
+        <div class="mt-1 text-sm text-base-500 dark:text-base-400">
           {workRelationship}
         </div>
       </cite>

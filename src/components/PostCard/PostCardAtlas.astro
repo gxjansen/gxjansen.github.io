@@ -24,11 +24,25 @@ const {
   class: className,
   ...rest
 } = Astro.props as Props;
-const { title, description, categories = [], authors = [], pubDate, heroImage } =
-  post.data;
+const {
+  title,
+  description,
+  categories = [],
+  authors = [],
+  pubDate,
+  heroImage,
+} = post.data;
 
 const currLocale = getLocaleFromUrl(Astro.url);
-const authorsData = authors && authors.length > 0 ? await getEntries(authors.map(author => ({ collection: 'authors', id: author }))) : [];
+const authorsData =
+  authors && authors.length > 0
+    ? await getEntries(
+        authors.map((author) => ({
+          collection: "authors" as const,
+          id: author,
+        })),
+      )
+    : [];
 
 // Get all posts to filter categories by count
 const allPosts = await getCollection("post", ({ data }) => !data.draft);
@@ -37,19 +51,21 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
 
 <article class={`card group ${className}`} {...rest}>
   <a href={`/post/${post.slug}/`}>
-    {heroImage && (
-      <Image
-        src={heroImage}
-        alt={`Cover for ${title}`}
-        widths={[360, 640, 768, 1024, 1600]}
-        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33.333vw, 400px"
-        class="w-full rounded-t-xl object-cover"
-        transition:name={`heroImage-${post.slug}`}
-        style="background: transparent;"
-        quality={85}
-        format="webp"
-      />
-    )}
+    {
+      heroImage && (
+        <Image
+          src={heroImage}
+          alt={`Cover for ${title}`}
+          widths={[360, 640, 768, 1024, 1600]}
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33.333vw, 400px"
+          class="w-full rounded-t-xl object-cover"
+          transition:name={`heroImage-${post.slug}`}
+          style="background: transparent;"
+          quality={85}
+          format="webp"
+        />
+      )
+    }
   </a>
   <div class="card-content">
     <!-- categories and date -->
@@ -57,31 +73,46 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
       <div class="flex flex-wrap gap-2">
         {filteredCategories.map((category) => <Category category={category} />)}
       </div>
-      <time datetime={new Date(pubDate).toISOString()} class="text-sm text-base-600 dark:text-base-300">
+      <time
+        datetime={new Date(pubDate).toISOString()}
+        class="text-sm text-base-600 dark:text-base-300"
+      >
         {formatDate(pubDate, currLocale)}
       </time>
     </div>
 
     <!-- title -->
     <h2 class="card-title">
-      <a href={`/post/${post.slug}/`} class="hover:text-primary-500 dark:hover:text-primary-400">
+      <a
+        href={`/post/${post.slug}/`}
+        class="hover:text-primary-500 dark:hover:text-primary-400"
+      >
         {title}
       </a>
     </h2>
 
     <!-- description -->
-    {showDescription && description && (
-      <p class="text-base-600 dark:text-base-300">
-        {description}
-      </p>
-    )}
+    {
+      showDescription && description && (
+        <p class="text-base-600 dark:text-base-300">{description}</p>
+      )
+    }
 
     <!-- read post link -->
     <div class="mt-6">
       <a href={`/post/${post.slug}/`} class="inline-flex items-center gap-2">
-        Read Post 
-        <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
+        Read Post
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="size-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
         </svg>
       </a>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface Props {
   videoId: string;
@@ -10,34 +10,34 @@ export default function LazyYouTube({ videoId, title }: Props) {
   const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
   const loadVideo = () => {
-    console.log('Loading video:', { videoId, title });
+    console.log("Loading video:", { videoId, title });
     setIsLoaded(true);
   };
 
   return (
-    <div className="lazy-youtube aspect-video bg-neutral-100 dark:bg-white/[.075] relative rounded-lg overflow-hidden">
+    <div className="lazy-youtube relative aspect-video overflow-hidden rounded-lg bg-neutral-100 dark:bg-white/[.075]">
       {!isLoaded ? (
         <>
-          <img 
+          <img
             src={thumbnailUrl}
             alt={`Preview thumbnail for video: ${title}`}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
             loading="lazy"
             decoding="async"
           />
           <button
             type="button"
-            className="absolute inset-0 w-full h-full flex items-center justify-center group"
+            className="group absolute inset-0 flex h-full w-full items-center justify-center"
             aria-label={`Play video: ${title}`}
             onClick={loadVideo}
           >
-            <div className="w-16 h-12 bg-red-600 rounded-lg flex items-center justify-center group-hover:bg-red-700 transition-colors">
-              <svg 
-                className="w-6 h-6 text-white" 
-                viewBox="0 0 24 24" 
+            <div className="flex h-12 w-16 items-center justify-center rounded-lg bg-red-600 transition-colors group-hover:bg-red-700">
+              <svg
+                className="h-6 w-6 text-white"
+                viewBox="0 0 24 24"
                 fill="currentColor"
               >
-                <path d="M8 5v14l11-7z"/>
+                <path d="M8 5v14l11-7z" />
               </svg>
             </div>
           </button>
@@ -46,7 +46,7 @@ export default function LazyYouTube({ videoId, title }: Props) {
         <iframe
           src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
           title={title}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 h-full w-full"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen

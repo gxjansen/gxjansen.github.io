@@ -35,14 +35,14 @@ const label =
 
 {
   variant === "terminal" ? (
-    <div class="admonition my-3 rounded-lg border-l-4 px-4 py-3 border-gold bg-gold/10 font-mono text-sm text-base-600 dark:text-base-300 prose-code:bg-gold/20 dark:prose-code:bg-gold/20">
+    <div class="admonition my-3 rounded-lg border-l-4 border-gold bg-gold/10 px-4 py-3 font-mono text-sm text-base-600 prose-code:bg-gold/20 dark:text-base-300 dark:prose-code:bg-gold/20">
       <span
-        class="inline-flex items-center gap-1.5 align-middle mr-2"
+        class="mr-2 inline-flex items-center gap-1.5 align-middle"
         style="transform: translateY(-1px);"
       >
         <Icon
           name={icon}
-          class="size-5 text-base-600 dark:text-base-300 inline"
+          class="inline size-5 text-base-600 dark:text-base-300"
           aria-hidden="true"
         />
         <span class="font-bold">{label}</span>
@@ -50,14 +50,14 @@ const label =
       <slot />
     </div>
   ) : variant === "prompt" ? (
-    <div class="admonition my-3 rounded-lg border-l-4 px-4 py-3 border-pine bg-pine/10 font-mono text-sm text-base-600 dark:text-base-300">
+    <div class="admonition my-3 rounded-lg border-l-4 border-pine bg-pine/10 px-4 py-3 font-mono text-sm text-base-600 dark:text-base-300">
       <span
-        class="inline-flex items-center gap-1.5 align-middle mr-2"
+        class="mr-2 inline-flex items-center gap-1.5 align-middle"
         style="transform: translateY(-1px);"
       >
         <Icon
           name={icon}
-          class="size-5 text-base-600 dark:text-base-300 inline"
+          class="inline size-5 text-base-600 dark:text-base-300"
           aria-hidden="true"
         />
         <span class="font-bold">{label}</span>

@@ -14,38 +14,47 @@ const latestEpisodes: PodcastEpisode[] = [];
   transition:animate="slide"
 >
   <ServicesIcon />
-  
+
   <div class="mt-16" transition:animate="fade">
     <div id="podcast-feed-container">
       <div class="text-center">
-        <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary-500"></div>
+        <div
+          class="inline-block h-8 w-8 animate-spin rounded-full border-b-2 border-t-2 border-primary-500"
+        >
+        </div>
         <p class="mt-4 text-base-500">Loading podcast episodes...</p>
       </div>
     </div>
 
     <script>
       async function loadPodcastFeed() {
-        const container = document.getElementById('podcast-feed-container');
+        const container = document.getElementById("podcast-feed-container");
         if (!container) return;
 
         try {
           // In development, use the Netlify Dev server URL from the environment
-          const baseUrl = import.meta.env.DEV 
-            ? `http://localhost:${import.meta.env.NETLIFY_PORT || '8888'}`
-            : '';
-          const response = await fetch(`${baseUrl}/.netlify/functions/getPodcastFeeds`);
+          const baseUrl = import.meta.env.DEV
+            ? `http://localhost:${import.meta.env.NETLIFY_PORT || "8888"}`
+            : "";
+          const response = await fetch(
+            `${baseUrl}/.netlify/functions/getPodcastFeeds`,
+          );
           if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+            throw new Error(
+              errorData.error || `HTTP error! status: ${response.status}`,
+            );
           }
-          
+
           const episodes = await response.json();
-          
+
           // Filter out episodes without valid links
-          const validEpisodes = episodes.filter(episode => 
-            episode.link && episode.link.startsWith('https://share.transistor.fm/')
+          const validEpisodes = episodes.filter(
+            (episode) =>
+              episode.link &&
+              episode.link.startsWith("https://share.transistor.fm/"),
           );
-          
+
           if (validEpisodes.length === 0) {
             container.innerHTML = `
               <div class="text-center p-8 bg-yellow-50 rounded-lg">
@@ -59,9 +68,11 @@ const latestEpisodes: PodcastEpisode[] = [];
             `;
             return;
           }
-          
+
           // Replace loading spinner with episodes
-          container.innerHTML = validEpisodes.map(episode => `
+          container.innerHTML = validEpisodes
+            .map(
+              (episode) => `
             <div class="w-full bg-base-800 rounded-lg overflow-hidden mb-6">
               <iframe 
                 width="100%" 
@@ -75,15 +86,18 @@ const latestEpisodes: PodcastEpisode[] = [];
                 allow="encrypted-media"
               ></iframe>
             </div>
-          `).join('');
-
+          `,
+            )
+            .join("");
         } catch (error) {
-          console.error('Error loading podcast feed:', error);
+          console.error("Error loading podcast feed:", error);
           container.innerHTML = `
             <div class="text-center p-8 bg-red-50 rounded-lg">
-              <p class="text-red-600 mb-4">${error.message === 'Timeout while fetching podcast feeds'
-                ? 'The podcast feeds are taking longer than usual to load. Please try again in a moment.'
-                : 'We\'re having trouble loading the podcast feeds right now. Please try again later.'}</p>
+              <p class="text-red-600 mb-4">${
+                error.message === "Timeout while fetching podcast feeds"
+                  ? "The podcast feeds are taking longer than usual to load. Please try again in a moment."
+                  : "We're having trouble loading the podcast feeds right now. Please try again later."
+              }</p>
               <p class="text-base-500">In the meantime, you can visit the podcasts directly:</p>
               <div class="mt-4 space-y-2">
                 <a href="https://sheeptank.transistor.fm/" class="text-primary-500 hover:underline block">Sheeptank</a>
@@ -98,7 +112,7 @@ const latestEpisodes: PodcastEpisode[] = [];
       loadPodcastFeed();
 
       // Reload feed when navigating back to the page
-      document.addEventListener('astro:page-load', loadPodcastFeed);
+      document.addEventListener("astro:page-load", loadPodcastFeed);
     </script>
   </div>
 </BaseLayout>

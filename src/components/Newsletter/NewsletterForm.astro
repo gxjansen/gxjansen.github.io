@@ -68,374 +68,315 @@ const formId = `newsletter-form-${Math.random().toString(36).slice(2, 9)}`;
 const signupPage = Astro.url.pathname;
 ---
 
-{variant === "card" && (
-  <div
-    class:list={[
-      "newsletter-card rounded-lg bg-base-200 dark:bg-base-800 p-6 md:p-8",
-      className
-    ]}
-  >
-    {title && (
-      <h3 class="text-xl md:text-2xl font-bold text-base-900 dark:text-base-100 mb-2" set:html={title} />
-    )}
-    {showSubscriberCount && (
-      <p
-        class="subscriber-count text-base-600 dark:text-base-400 mb-2 hidden"
-        data-subscriber-count
+{
+  variant === "card" && (
+    <div
+      class:list={[
+        "newsletter-card rounded-lg bg-base-200 p-6 md:p-8 dark:bg-base-800",
+        className,
+      ]}
+    >
+      {title && (
+        <h3
+          class="mb-2 text-xl font-bold text-base-900 md:text-2xl dark:text-base-100"
+          set:html={title}
+        />
+      )}
+      {showSubscriberCount && (
+        <p
+          class="subscriber-count mb-2 hidden text-base-600 dark:text-base-400"
+          data-subscriber-count
+        >
+          Join <span class="subscriber-number" /> newsletter subscribers
+        </p>
+      )}
+      {description && (
+        <p class="mb-6 text-base-600 dark:text-base-400">{description}</p>
+      )}
+      <form
+        id={formId}
+        method="post"
+        action={actionUrl}
+        class="newsletter-form flex flex-col gap-4"
+        data-newsletter-form
       >
-        Join <span class="subscriber-number"></span> newsletter subscribers
-      </p>
-    )}
-    {description && (
-      <p class="text-base-600 dark:text-base-400 mb-6">
-        {description}
-      </p>
-    )}
+        <input type="hidden" name="nonce" />
+        <input type="hidden" name="l" value={listId} />
+        <input type="hidden" name="signupPage" value={signupPage} />
+
+        <div class="flex flex-col gap-3">
+          <div class="w-full">
+            <label for={`${formId}-email`} class="sr-only">
+              Email address
+            </label>
+            <input
+              type="email"
+              name="email"
+              id={`${formId}-email`}
+              required
+              placeholder={emailPlaceholder}
+              class="form__input h-[46px] w-full"
+              aria-required="true"
+              aria-describedby={`${formId}-status`}
+            />
+          </div>
+
+          {showName && (
+            <div class="w-full">
+              <label for={`${formId}-name`} class="sr-only">
+                Name (optional)
+              </label>
+              <input
+                type="text"
+                name="name"
+                id={`${formId}-name`}
+                placeholder={namePlaceholder}
+                class="form__input h-[46px] w-full"
+                aria-required="false"
+              />
+            </div>
+          )}
+
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div
+              class="altcha-container flex-shrink-0"
+              role="group"
+              aria-label="Spam verification"
+            >
+              <span id={`${formId}-altcha-desc`} class="sr-only">
+                Complete the verification checkbox to prove you're human
+              </span>
+              <altcha-widget
+                challengeurl={altchaChallengeUrl}
+                hidefooter
+                hidelogo
+                aria-describedby={`${formId}-altcha-desc`}
+              />
+            </div>
+
+            <Button
+              type="submit"
+              variant="primary"
+              class="w-full flex-shrink-0 whitespace-nowrap sm:w-auto"
+            >
+              {buttonText}
+            </Button>
+          </div>
+        </div>
+
+        <div
+          id={`${formId}-status`}
+          class="newsletter-status text-sm"
+          role="status"
+          aria-live="polite"
+        />
+
+        {note && (
+          <p class="mt-2 text-xs text-base-500 dark:text-base-400">{note}</p>
+        )}
+      </form>
+    </div>
+  )
+}
+
+{
+  variant === "cta" && (
+    <section class="py-10" aria-labelledby={`${formId}-heading`}>
+      <div class="site-container">
+        <div
+          class:list={[
+            "relative overflow-hidden rounded-md bg-primary-500 px-4 py-8 sm:px-8 sm:py-11 md:px-16 md:py-14",
+            className,
+          ]}
+          role="region"
+          aria-label="Newsletter signup"
+        >
+          <Icon
+            name="atlas/dots3"
+            class="absolute left-4 top-0 z-10 size-16 text-accent-4"
+            aria-hidden="true"
+            role="presentation"
+          />
+          <Icon
+            name="atlas/dots3"
+            class="absolute bottom-0 right-4 z-10 size-16 text-accent-4"
+            aria-hidden="true"
+            role="presentation"
+          />
+          <Icon
+            name="atlas/wave-bg-basic"
+            class="absolute left-1/2 top-1/2 h-full w-full max-w-full -translate-x-1/2 -translate-y-1/2 object-cover text-base-100/5"
+            aria-hidden="true"
+            role="presentation"
+          />
+
+          <div class="relative z-20 mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
+            {title && (
+              <h2
+                id={`${formId}-heading`}
+                class="text-2xl font-bold tracking-tighter text-base-100 sm:text-3xl md:text-4xl dark:text-base-900"
+                set:html={title}
+              />
+            )}
+            {showSubscriberCount && (
+              <p
+                class="subscriber-count hidden font-medium text-base-100/90 dark:text-base-900/90"
+                data-subscriber-count
+              >
+                Join <span class="subscriber-number" /> newsletter subscribers
+              </p>
+            )}
+            {description && (
+              <p class="max-w-lg font-medium text-base-100/90 dark:text-base-900/90">
+                {description}
+              </p>
+            )}
+
+            <form
+              id={formId}
+              method="post"
+              action={actionUrl}
+              class="newsletter-form w-full max-w-md"
+              data-newsletter-form
+            >
+              <input type="hidden" name="nonce" />
+              <input type="hidden" name="l" value={listId} />
+              <input type="hidden" name="signupPage" value={signupPage} />
+
+              <div class="flex flex-col gap-3">
+                <div class="mx-auto w-full max-w-md">
+                  <label for={`${formId}-email`} class="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    id={`${formId}-email`}
+                    required
+                    placeholder={emailPlaceholder}
+                    class="form__input h-[46px] w-full border-transparent bg-base-100 text-base-900 placeholder:text-base-500 dark:bg-base-900 dark:text-base-100"
+                    aria-required="true"
+                    aria-describedby={`${formId}-status`}
+                  />
+                </div>
+
+                {showName && (
+                  <div class="mx-auto w-full max-w-md">
+                    <label for={`${formId}-name`} class="sr-only">
+                      Name (optional)
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id={`${formId}-name`}
+                      placeholder={namePlaceholder}
+                      class="form__input h-[46px] w-full border-transparent bg-base-100 text-base-900 placeholder:text-base-500 dark:bg-base-900 dark:text-base-100"
+                      aria-required="false"
+                    />
+                  </div>
+                )}
+
+                <div class="mx-auto flex w-full max-w-md flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
+                  <div
+                    class="altcha-container altcha-container--cta flex-shrink-0"
+                    role="group"
+                    aria-label="Spam verification"
+                  >
+                    <span id={`${formId}-altcha-desc`} class="sr-only">
+                      Complete the verification checkbox to prove you're human
+                    </span>
+                    <altcha-widget
+                      challengeurl={altchaChallengeUrl}
+                      hidefooter
+                      hidelogo
+                      aria-describedby={`${formId}-altcha-desc`}
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    variant="on-color"
+                    class="w-full flex-shrink-0 whitespace-nowrap shadow-none sm:w-auto"
+                  >
+                    {buttonText}
+                  </Button>
+                </div>
+              </div>
+
+              <div
+                id={`${formId}-status`}
+                class="newsletter-status newsletter-status--cta mt-3 text-sm"
+                role="status"
+                aria-live="polite"
+              />
+
+              {note && (
+                <p class="mt-3 text-xs text-base-100/80 dark:text-base-900/80">
+                  {note}
+                </p>
+              )}
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{
+  variant === "inline" && (
     <form
       id={formId}
       method="post"
       action={actionUrl}
-      class="newsletter-form flex flex-col gap-4"
+      class:list={[
+        "newsletter-form newsletter-inline flex flex-col gap-3",
+        className,
+      ]}
       data-newsletter-form
     >
       <input type="hidden" name="nonce" />
       <input type="hidden" name="l" value={listId} />
       <input type="hidden" name="signupPage" value={signupPage} />
 
-      <div class="flex flex-col gap-3">
-        <!-- Row 1: Email field (full width) -->
-        <div class="w-full">
-          <label for={`${formId}-email`} class="sr-only">Email address</label>
-          <input
-            type="email"
-            name="email"
-            id={`${formId}-email`}
-            required
-            placeholder={emailPlaceholder}
-            class="form__input w-full h-[46px]"
-            aria-required="true"
-            aria-describedby={`${formId}-status`}
-          />
-        </div>
-
-        {showName && (
-          <div class="w-full">
-            <label for={`${formId}-name`} class="sr-only">Name (optional)</label>
-            <input
-              type="text"
-              name="name"
-              id={`${formId}-name`}
-              placeholder={namePlaceholder}
-              class="form__input w-full h-[46px]"
-              aria-required="false"
-            />
-          </div>
-        )}
-
-        <!-- Row 2: ALTCHA + Subscribe button -->
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-          <!-- ALTCHA spam protection widget -->
-          <div class="altcha-container flex-shrink-0" role="group" aria-label="Spam verification">
-            <span id={`${formId}-altcha-desc`} class="sr-only">
-              Complete the verification checkbox to prove you're human
-            </span>
-            <altcha-widget
-              challengeurl={altchaChallengeUrl}
-              hidefooter
-              hidelogo
-              aria-describedby={`${formId}-altcha-desc`}
-            ></altcha-widget>
-          </div>
-
-          <Button
-            type="submit"
-            variant="primary"
-            class="whitespace-nowrap flex-shrink-0 w-full sm:w-auto"
-          >
-            {buttonText}
-          </Button>
-        </div>
-      </div>
-
-      <div
-        id={`${formId}-status`}
-        class="newsletter-status text-sm"
-        role="status"
-        aria-live="polite"
-      ></div>
-
-      {note && (
-        <p class="text-xs text-base-500 dark:text-base-400 mt-2">
-          {note}
-        </p>
-      )}
-    </form>
-  </div>
-)}
-
-{variant === "cta" && (
-  <section class="py-10" aria-labelledby={`${formId}-heading`}>
-    <div class="site-container">
-      <div
-        class:list={[
-          "relative overflow-hidden rounded-md bg-primary-500 px-4 sm:px-8 md:px-16 py-8 sm:py-11 md:py-14",
-          className
-        ]}
-        role="region"
-        aria-label="Newsletter signup"
-      >
-        <!-- Decorative elements -->
-        <Icon
-          name="atlas/dots3"
-          class="absolute left-4 top-0 z-10 size-16 text-accent-4"
-          aria-hidden="true"
-          role="presentation"
-        />
-        <Icon
-          name="atlas/dots3"
-          class="absolute bottom-0 right-4 z-10 size-16 text-accent-4"
-          aria-hidden="true"
-          role="presentation"
-        />
-        <Icon
-          name="atlas/wave-bg-basic"
-          class="absolute left-1/2 top-1/2 h-full w-full max-w-full -translate-x-1/2 -translate-y-1/2 object-cover text-base-100/5"
-          aria-hidden="true"
-          role="presentation"
-        />
-
-        <div
-          class="relative z-20 mx-auto flex max-w-2xl flex-col items-center gap-6 text-center"
-        >
-          {title && (
-            <h2
-              id={`${formId}-heading`}
-              class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tighter text-base-100 dark:text-base-900"
-              set:html={title}
-            />
-          )}
-          {showSubscriberCount && (
-            <p
-              class="subscriber-count text-base-100/90 dark:text-base-900/90 font-medium hidden"
-              data-subscriber-count
-            >
-              Join <span class="subscriber-number"></span> newsletter subscribers
-            </p>
-          )}
-          {description && (
-            <p class="font-medium text-base-100/90 dark:text-base-900/90 max-w-lg">
-              {description}
-            </p>
-          )}
-
-          <form
-            id={formId}
-            method="post"
-            action={actionUrl}
-            class="newsletter-form w-full max-w-md"
-            data-newsletter-form
-          >
-            <input type="hidden" name="nonce" />
-            <input type="hidden" name="l" value={listId} />
-            <input type="hidden" name="signupPage" value={signupPage} />
-
-            <div class="flex flex-col gap-3">
-              <!-- Row 1: Email field (full width) -->
-              <div class="w-full max-w-md mx-auto">
-                <label for={`${formId}-email`} class="sr-only">Email address</label>
-                <input
-                  type="email"
-                  name="email"
-                  id={`${formId}-email`}
-                  required
-                  placeholder={emailPlaceholder}
-                  class="form__input w-full h-[46px] bg-base-100 dark:bg-base-900 text-base-900 dark:text-base-100 placeholder:text-base-500 border-transparent"
-                  aria-required="true"
-                  aria-describedby={`${formId}-status`}
-                />
-              </div>
-
-              {showName && (
-                <div class="w-full max-w-md mx-auto">
-                  <label for={`${formId}-name`} class="sr-only">Name (optional)</label>
-                  <input
-                    type="text"
-                    name="name"
-                    id={`${formId}-name`}
-                    placeholder={namePlaceholder}
-                    class="form__input w-full h-[46px] bg-base-100 dark:bg-base-900 text-base-900 dark:text-base-100 placeholder:text-base-500 border-transparent"
-                    aria-required="false"
-                  />
-                </div>
-              )}
-
-              <!-- Row 2: ALTCHA + Subscribe button -->
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 w-full max-w-md mx-auto">
-                <!-- ALTCHA spam protection widget -->
-                <div class="altcha-container altcha-container--cta flex-shrink-0" role="group" aria-label="Spam verification">
-                  <span id={`${formId}-altcha-desc`} class="sr-only">
-                    Complete the verification checkbox to prove you're human
-                  </span>
-                  <altcha-widget
-                    challengeurl={altchaChallengeUrl}
-                    hidefooter
-                    hidelogo
-                    aria-describedby={`${formId}-altcha-desc`}
-                  ></altcha-widget>
-                </div>
-
-                <Button
-                  type="submit"
-                  variant="on-color"
-                  class="whitespace-nowrap shadow-none flex-shrink-0 w-full sm:w-auto"
-                >
-                  {buttonText}
-                </Button>
-              </div>
-            </div>
-
-            <div
-              id={`${formId}-status`}
-              class="newsletter-status newsletter-status--cta text-sm mt-3"
-              role="status"
-              aria-live="polite"
-            ></div>
-
-            {note && (
-              <p class="text-xs text-base-100/80 dark:text-base-900/80 mt-3">
-                {note}
-              </p>
-            )}
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-)}
-
-{variant === "inline" && (
-  <form
-    id={formId}
-    method="post"
-    action={actionUrl}
-    class:list={[
-      "newsletter-form newsletter-inline flex flex-col gap-3",
-      className
-    ]}
-    data-newsletter-form
-  >
-    <input type="hidden" name="nonce" />
-    <input type="hidden" name="l" value={listId} />
-    <input type="hidden" name="signupPage" value={signupPage} />
-
-    <!-- Row 1: Email field (full width) -->
-    <div class="w-full">
-      <label for={`${formId}-email`} class="sr-only">Email address</label>
-      <input
-        type="email"
-        name="email"
-        id={`${formId}-email`}
-        required
-        placeholder={emailPlaceholder}
-        class="form__input w-full h-[46px]"
-        aria-required="true"
-        aria-describedby={`${formId}-status`}
-      />
-    </div>
-
-    {showName && (
       <div class="w-full">
-        <label for={`${formId}-name`} class="sr-only">Name (optional)</label>
-        <input
-          type="text"
-          name="name"
-          id={`${formId}-name`}
-          placeholder={namePlaceholder}
-          class="form__input w-full h-[46px]"
-          aria-required="false"
-        />
-      </div>
-    )}
-
-    <!-- Row 2: ALTCHA + Subscribe button -->
-    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-      <!-- ALTCHA spam protection widget -->
-      <div class="altcha-container flex-shrink-0" role="group" aria-label="Spam verification">
-        <span id={`${formId}-altcha-desc`} class="sr-only">
-          Complete the verification checkbox to prove you're human
-        </span>
-        <altcha-widget
-          challengeurl={altchaChallengeUrl}
-          hidefooter
-          hidelogo
-          aria-describedby={`${formId}-altcha-desc`}
-        ></altcha-widget>
-      </div>
-
-      <Button
-        type="submit"
-        variant="primary"
-        class="whitespace-nowrap w-full sm:w-auto flex-shrink-0"
-      >
-        {buttonText}
-      </Button>
-    </div>
-
-    <div
-      id={`${formId}-status`}
-      class="newsletter-status text-sm w-full"
-      role="status"
-      aria-live="polite"
-    ></div>
-  </form>
-)}
-
-{variant === "minimal" && (
-  <form
-    id={formId}
-    method="post"
-    action={actionUrl}
-    class:list={["newsletter-form newsletter-minimal", className]}
-    data-newsletter-form
-  >
-    <input type="hidden" name="nonce" />
-    <input type="hidden" name="l" value={listId} />
-    <input type="hidden" name="signupPage" value={signupPage} />
-
-    <div class="flex flex-col gap-3">
-      <!-- Row 1: Email field (full width) -->
-      <div>
-        <label for={`${formId}-email`} class="sr-only">Email address</label>
+        <label for={`${formId}-email`} class="sr-only">
+          Email address
+        </label>
         <input
           type="email"
           name="email"
           id={`${formId}-email`}
           required
           placeholder={emailPlaceholder}
-          class="form__input w-full"
+          class="form__input h-[46px] w-full"
           aria-required="true"
           aria-describedby={`${formId}-status`}
         />
       </div>
 
       {showName && (
-        <div>
-          <label for={`${formId}-name`} class="sr-only">Name (optional)</label>
+        <div class="w-full">
+          <label for={`${formId}-name`} class="sr-only">
+            Name (optional)
+          </label>
           <input
             type="text"
             name="name"
             id={`${formId}-name`}
             placeholder={namePlaceholder}
-            class="form__input w-full"
+            class="form__input h-[46px] w-full"
             aria-required="false"
           />
         </div>
       )}
 
-      <!-- Row 2: ALTCHA + Subscribe button -->
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-        <!-- ALTCHA spam protection widget -->
-        <div class="altcha-container flex-shrink-0" role="group" aria-label="Spam verification">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div
+          class="altcha-container flex-shrink-0"
+          role="group"
+          aria-label="Spam verification"
+        >
           <span id={`${formId}-altcha-desc`} class="sr-only">
             Complete the verification checkbox to prove you're human
           </span>
@@ -444,13 +385,13 @@ const signupPage = Astro.url.pathname;
             hidefooter
             hidelogo
             aria-describedby={`${formId}-altcha-desc`}
-          ></altcha-widget>
+          />
         </div>
 
         <Button
           type="submit"
           variant="primary"
-          class="w-full sm:w-auto"
+          class="w-full flex-shrink-0 whitespace-nowrap sm:w-auto"
         >
           {buttonText}
         </Button>
@@ -458,23 +399,102 @@ const signupPage = Astro.url.pathname;
 
       <div
         id={`${formId}-status`}
-        class="newsletter-status text-sm"
+        class="newsletter-status w-full text-sm"
         role="status"
         aria-live="polite"
-      ></div>
-    </div>
-  </form>
-)}
+      />
+    </form>
+  )
+}
+
+{
+  variant === "minimal" && (
+    <form
+      id={formId}
+      method="post"
+      action={actionUrl}
+      class:list={["newsletter-form newsletter-minimal", className]}
+      data-newsletter-form
+    >
+      <input type="hidden" name="nonce" />
+      <input type="hidden" name="l" value={listId} />
+      <input type="hidden" name="signupPage" value={signupPage} />
+
+      <div class="flex flex-col gap-3">
+        <div>
+          <label for={`${formId}-email`} class="sr-only">
+            Email address
+          </label>
+          <input
+            type="email"
+            name="email"
+            id={`${formId}-email`}
+            required
+            placeholder={emailPlaceholder}
+            class="form__input w-full"
+            aria-required="true"
+            aria-describedby={`${formId}-status`}
+          />
+        </div>
+
+        {showName && (
+          <div>
+            <label for={`${formId}-name`} class="sr-only">
+              Name (optional)
+            </label>
+            <input
+              type="text"
+              name="name"
+              id={`${formId}-name`}
+              placeholder={namePlaceholder}
+              class="form__input w-full"
+              aria-required="false"
+            />
+          </div>
+        )}
+
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div
+            class="altcha-container flex-shrink-0"
+            role="group"
+            aria-label="Spam verification"
+          >
+            <span id={`${formId}-altcha-desc`} class="sr-only">
+              Complete the verification checkbox to prove you're human
+            </span>
+            <altcha-widget
+              challengeurl={altchaChallengeUrl}
+              hidefooter
+              hidelogo
+              aria-describedby={`${formId}-altcha-desc`}
+            />
+          </div>
+
+          <Button type="submit" variant="primary" class="w-full sm:w-auto">
+            {buttonText}
+          </Button>
+        </div>
+
+        <div
+          id={`${formId}-status`}
+          class="newsletter-status text-sm"
+          role="status"
+          aria-live="polite"
+        />
+      </div>
+    </form>
+  )
+}
 
 <script>
   // Dynamically load ALTCHA widget script
   function loadAltchaScript() {
-    if (document.querySelector('script[data-altcha]')) return;
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js';
-    script.type = 'module';
+    if (document.querySelector("script[data-altcha]")) return;
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js";
+    script.type = "module";
     script.async = true;
-    script.dataset.altcha = 'true';
+    script.dataset.altcha = "true";
     document.head.appendChild(script);
   }
   loadAltchaScript();
@@ -487,91 +507,112 @@ const signupPage = Astro.url.pathname;
 
     constructor(form: HTMLFormElement) {
       this.form = form;
-      this.submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      this.statusElement = form.querySelector('.newsletter-status') as HTMLElement;
-      this.originalButtonText = this.submitButton.querySelector('.button__text')?.textContent || 'Subscribe';
+      this.submitButton = form.querySelector(
+        'button[type="submit"]',
+      ) as HTMLButtonElement;
+      this.statusElement = form.querySelector(
+        ".newsletter-status",
+      ) as HTMLElement;
+      this.originalButtonText =
+        this.submitButton.querySelector(".button__text")?.textContent ||
+        "Subscribe";
 
       this.init();
     }
 
     private init() {
-      this.form.addEventListener('submit', this.handleSubmit.bind(this));
+      this.form.addEventListener("submit", this.handleSubmit.bind(this));
 
       // Validate email on input
-      const emailInput = this.form.querySelector('input[type="email"]') as HTMLInputElement;
-      emailInput?.addEventListener('input', () => this.validateEmail(emailInput));
+      const emailInput = this.form.querySelector(
+        'input[type="email"]',
+      ) as HTMLInputElement;
+      emailInput?.addEventListener("input", () =>
+        this.validateEmail(emailInput),
+      );
     }
 
     private validateEmail(input: HTMLInputElement): boolean {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const isValid = emailRegex.test(input.value);
 
-      input.setAttribute('aria-invalid', (!isValid && input.value.length > 0).toString());
+      input.setAttribute(
+        "aria-invalid",
+        (!isValid && input.value.length > 0).toString(),
+      );
       return isValid;
     }
 
-    private setStatus(message: string, type: 'success' | 'error' | 'loading') {
+    private setStatus(message: string, type: "success" | "error" | "loading") {
       this.statusElement.textContent = message;
 
       // Check if this is a CTA variant (has special class - on teal background)
-      const isCta = this.statusElement.classList.contains('newsletter-status--cta');
+      const isCta = this.statusElement.classList.contains(
+        "newsletter-status--cta",
+      );
 
       // Reset classes but preserve base and CTA classes
       this.statusElement.className = isCta
-        ? 'newsletter-status newsletter-status--cta text-sm mt-3'
-        : 'newsletter-status text-sm mt-2';
+        ? "newsletter-status newsletter-status--cta text-sm mt-3"
+        : "newsletter-status text-sm mt-2";
 
-      if (type === 'success') {
+      if (type === "success") {
         // CTA: light text on teal background
         this.statusElement.classList.add(
-          isCta ? 'text-base-100' : 'text-green-600',
-          isCta ? 'dark:text-base-900' : 'dark:text-green-400',
-          isCta ? 'font-medium' : ''
+          isCta ? "text-base-100" : "text-green-600",
+          isCta ? "dark:text-base-900" : "dark:text-green-400",
+          isCta ? "font-medium" : "",
         );
-      } else if (type === 'error') {
+      } else if (type === "error") {
         // CTA: use high-contrast color on teal background
         this.statusElement.classList.add(
-          isCta ? 'text-white' : 'text-red-600',
-          isCta ? 'dark:text-base-950' : 'dark:text-red-400',
-          'font-semibold'
+          isCta ? "text-white" : "text-red-600",
+          isCta ? "dark:text-base-950" : "dark:text-red-400",
+          "font-semibold",
         );
       } else {
         // Loading/neutral state - full opacity for contrast
         this.statusElement.classList.add(
-          isCta ? 'text-base-100' : 'text-base-600',
-          isCta ? 'dark:text-base-900' : 'dark:text-base-300'
+          isCta ? "text-base-100" : "text-base-600",
+          isCta ? "dark:text-base-900" : "dark:text-base-300",
         );
       }
     }
 
     private setButtonState(loading: boolean) {
       this.submitButton.disabled = loading;
-      const buttonText = this.submitButton.querySelector('.button__text');
+      const buttonText = this.submitButton.querySelector(".button__text");
       if (buttonText) {
-        buttonText.textContent = loading ? 'Subscribing...' : this.originalButtonText;
+        buttonText.textContent = loading
+          ? "Subscribing..."
+          : this.originalButtonText;
       }
     }
 
     private async handleSubmit(e: Event) {
       e.preventDefault();
 
-      const emailInput = this.form.querySelector('input[type="email"]') as HTMLInputElement;
+      const emailInput = this.form.querySelector(
+        'input[type="email"]',
+      ) as HTMLInputElement;
 
       if (!this.validateEmail(emailInput)) {
-        this.setStatus('Please enter a valid email address.', 'error');
+        this.setStatus("Please enter a valid email address.", "error");
         emailInput.focus();
         return;
       }
 
       this.setButtonState(true);
-      this.setStatus('', 'loading');
+      this.setStatus("", "loading");
 
       // Get ALTCHA solution from widget
-      const altchaInput = this.form.querySelector('input[name="altcha"]') as HTMLInputElement;
+      const altchaInput = this.form.querySelector(
+        'input[name="altcha"]',
+      ) as HTMLInputElement;
       const altchaSolution = altchaInput?.value;
 
       if (!altchaSolution) {
-        this.setStatus('Please wait for verification to complete.', 'error');
+        this.setStatus("Please wait for verification to complete.", "error");
         this.setButtonState(false);
         return;
       }
@@ -579,17 +620,25 @@ const signupPage = Astro.url.pathname;
       // Build JSON payload for our Netlify function
       const payload = {
         email: emailInput.value,
-        listId: (this.form.querySelector('input[name="l"]') as HTMLInputElement)?.value,
-        name: (this.form.querySelector('input[name="name"]') as HTMLInputElement)?.value || undefined,
-        signupPage: (this.form.querySelector('input[name="signupPage"]') as HTMLInputElement)?.value || undefined,
+        listId: (this.form.querySelector('input[name="l"]') as HTMLInputElement)
+          ?.value,
+        name:
+          (this.form.querySelector('input[name="name"]') as HTMLInputElement)
+            ?.value || undefined,
+        signupPage:
+          (
+            this.form.querySelector(
+              'input[name="signupPage"]',
+            ) as HTMLInputElement
+          )?.value || undefined,
         altcha: altchaSolution,
       };
 
       try {
         const response = await fetch(this.form.action, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),
         });
@@ -597,10 +646,14 @@ const signupPage = Astro.url.pathname;
         const result = await response.json();
 
         if (response.ok && result.success) {
-          this.setStatus(result.message || 'Thanks for subscribing! Please check your email to confirm.', 'success');
+          this.setStatus(
+            result.message ||
+              "Thanks for subscribing! Please check your email to confirm.",
+            "success",
+          );
 
           // Move focus to status for screen reader announcement
-          this.statusElement.setAttribute('tabindex', '-1');
+          this.statusElement.setAttribute("tabindex", "-1");
           this.statusElement.focus();
 
           this.form.reset();
@@ -610,20 +663,22 @@ const signupPage = Astro.url.pathname;
             this.setButtonState(false);
           }, 2000);
         } else {
-          this.setStatus(result.error || 'Something went wrong. Please try again.', 'error');
+          this.setStatus(
+            result.error || "Something went wrong. Please try again.",
+            "error",
+          );
 
           // Move focus to error message for screen reader announcement
-          this.statusElement.setAttribute('tabindex', '-1');
+          this.statusElement.setAttribute("tabindex", "-1");
           this.statusElement.focus();
 
           this.setButtonState(false);
         }
-
       } catch {
-        this.setStatus('Something went wrong. Please try again.', 'error');
+        this.setStatus("Something went wrong. Please try again.", "error");
 
         // Move focus to error message for screen reader announcement
-        this.statusElement.setAttribute('tabindex', '-1');
+        this.statusElement.setAttribute("tabindex", "-1");
         this.statusElement.focus();
 
         this.setButtonState(false);
@@ -633,27 +688,29 @@ const signupPage = Astro.url.pathname;
 
   // Initialize all newsletter forms
   function initNewsletterForms() {
-    document.querySelectorAll<HTMLFormElement>('[data-newsletter-form]').forEach(form => {
-      // Avoid re-initializing
-      if (!form.dataset.initialized) {
-        new NewsletterFormHandler(form);
-        form.dataset.initialized = 'true';
-      }
-    });
+    document
+      .querySelectorAll<HTMLFormElement>("[data-newsletter-form]")
+      .forEach((form) => {
+        // Avoid re-initializing
+        if (!form.dataset.initialized) {
+          new NewsletterFormHandler(form);
+          form.dataset.initialized = "true";
+        }
+      });
   }
 
   // Fetch and display subscriber count
   async function fetchSubscriberCount() {
     try {
-      const response = await fetch('/.netlify/functions/newsletter-stats');
+      const response = await fetch("/.netlify/functions/newsletter-stats");
       const data = await response.json();
 
       if (data.success && data.subscriberCount && data.subscriberCount > 10) {
-        document.querySelectorAll('[data-subscriber-count]').forEach(el => {
-          const numberEl = el.querySelector('.subscriber-number');
+        document.querySelectorAll("[data-subscriber-count]").forEach((el) => {
+          const numberEl = el.querySelector(".subscriber-number");
           if (numberEl) {
             numberEl.textContent = data.subscriberCount.toLocaleString();
-            el.classList.remove('hidden');
+            el.classList.remove("hidden");
           }
         });
       }
@@ -663,14 +720,14 @@ const signupPage = Astro.url.pathname;
   }
 
   // Initialize on page load
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     loadAltchaScript();
     initNewsletterForms();
     fetchSubscriberCount();
   });
 
   // Re-initialize after Astro view transitions
-  document.addEventListener('astro:after-swap', () => {
+  document.addEventListener("astro:after-swap", () => {
     loadAltchaScript();
     initNewsletterForms();
     fetchSubscriberCount();
@@ -715,13 +772,25 @@ const signupPage = Astro.url.pathname;
   }
 
   /* ALTCHA checkbox - gold checkmark (high specificity to override defaults) */
-  :global(.newsletter-form .altcha-container altcha-widget .altcha-checkbox input[type="checkbox"]) {
+  :global(
+    .newsletter-form
+      .altcha-container
+      altcha-widget
+      .altcha-checkbox
+      input[type="checkbox"]
+  ) {
     accent-color: #f6c177;
   }
 
   /* Filter to colorize checkbox to rosé-pine gold (#ea9d34 / #f6c177) */
   /* sepia gives ~30-40° base hue, then fine-tune with hue-rotate and saturate */
-  :global(.newsletter-form .altcha-container altcha-widget .altcha-checkbox input[type="checkbox"]:checked) {
+  :global(
+    .newsletter-form
+      .altcha-container
+      altcha-widget
+      .altcha-checkbox
+      input[type="checkbox"]:checked
+  ) {
     filter: sepia(1) saturate(2) hue-rotate(15deg) brightness(1.05);
   }
 
@@ -757,7 +826,9 @@ const signupPage = Astro.url.pathname;
     border-color: #ea9d34;
     color: #191724;
   }
-  :global(.dark) .newsletter-form :global(button.button.button--on-color:hover) {
+  :global(.dark)
+    .newsletter-form
+    :global(button.button.button--on-color:hover) {
     background-color: #f6c177;
     border-color: #f6c177;
     color: #191724;

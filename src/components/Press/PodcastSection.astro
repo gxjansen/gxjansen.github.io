@@ -1,8 +1,8 @@
 ---
-import { formatDate } from '@utils/pressUtils';
-import AudioPlayer from './AudioPlayer.astro';
-import PodcastLinks from './PodcastLinks.astro';
-import type { PressCoverage } from '@types/press';
+import { formatDate } from "@utils/pressUtils";
+import AudioPlayer from "./AudioPlayer.astro";
+import PodcastLinks from "./PodcastLinks.astro";
+import type { PressCoverage } from "../../types/press";
 
 interface Props {
   podcasts: PressCoverage[];
@@ -11,21 +11,12 @@ interface Props {
 const { podcasts } = Astro.props;
 ---
 
-<section 
-  id="podcasts" 
-  class="mb-16"
-  aria-labelledby="podcasts-heading"
->
+<section id="podcasts" class="mb-16" aria-labelledby="podcasts-heading">
   <h2 id="podcasts-heading" class="h2 mb-4">Podcast Appearances</h2>
-  <div 
-    class="cards-grid"
-    role="list"
-  >
-    {podcasts.map(podcast => (
-        <article
-          class="card"
-          role="listitem"
-        >
+  <div class="cards-grid" role="list">
+    {
+      podcasts.map((podcast) => (
+        <article class="card" role="listitem">
           {podcast.audioFile ? (
             <AudioPlayer
               src={podcast.audioFile}
@@ -40,19 +31,24 @@ const { podcasts } = Astro.props;
             />
           )}
           <div class="card-content">
-            <h3 id={`podcast-${podcast.spotifyEmbedId || podcast.title.toLowerCase().replace(/\s+/g, '-')}`} class="card-title">{podcast.title}</h3>
-            <p 
+            <h3
+              id={`podcast-${podcast.spotifyEmbedId || podcast.title.toLowerCase().replace(/\s+/g, "-")}`}
+              class="card-title"
+            >
+              {podcast.title}
+            </h3>
+            <p
               class="card-meta"
-              aria-label={`Published on ${formatDate(podcast.publicationDate)}${podcast.personOrganization ? ` by ${podcast.personOrganization}` : ''}`}
+              aria-label={`Published on ${formatDate(podcast.publicationDate)}${podcast.personOrganization ? ` by ${podcast.personOrganization}` : ""}`}
             >
               {formatDate(podcast.publicationDate)}
               {podcast.personOrganization && ` • ${podcast.personOrganization}`}
             </p>
             {podcast.articleUrl && (
-              <a 
-                href={podcast.articleUrl} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href={podcast.articleUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={`Read article about ${podcast.title} (opens in new tab)`}
               >
                 View article <span aria-hidden="true">→</span>
@@ -60,6 +56,7 @@ const { podcasts } = Astro.props;
             )}
           </div>
         </article>
-    ))}
+      ))
+    }
   </div>
 </section>

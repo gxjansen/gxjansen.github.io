@@ -1,14 +1,12 @@
 ---
-import Button from './Button.astro';
-
 interface Props {
   fallback?: string;
 }
 
-const { fallback = 'Something went wrong' } = Astro.props;
+const { fallback = "Something went wrong" } = Astro.props;
 ---
 
-<div class="error-boundary">
+<div class="error-boundary" data-fallback={fallback}>
   <slot />
 </div>
 
@@ -16,47 +14,48 @@ const { fallback = 'Something went wrong' } = Astro.props;
   class ErrorBoundary extends HTMLElement {
     constructor() {
       super();
-      this.addEventListener('error', this.handleError.bind(this));
+      this.addEventListener("error", this.handleError.bind(this));
     }
 
-    logError(error) {
+    logError(error: Error) {
       const errorData = {
         timestamp: new Date().toISOString(),
         component: this.tagName,
         error: error.message,
         stack: error.stack,
-        location: window.location.href
+        location: window.location.href,
       };
-      
+
       // Send error to logging endpoint
-      fetch('/.netlify/functions/log-error', {
-        method: 'POST',
+      fetch("/.netlify/functions/log-error", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(errorData)
+        body: JSON.stringify(errorData),
       }).catch(() => {
         // Fallback to console if logging fails
-        console.error('Error logging failed:', errorData);
+        console.error("Error logging failed:", errorData);
       });
     }
 
-    handleError(event) {
+    handleError(event: ErrorEvent) {
       event.preventDefault();
-      const error = event.error || new Error('Unknown error');
+      const error = event.error || new Error("Unknown error");
       this.logError(error);
-      
+
+      const fallbackText = this.dataset.fallback || "Something went wrong";
       this.innerHTML = `
         <div class="p-4 rounded-lg bg-red-50 border border-red-100 text-red-800">
-          <p class="mb-2">${fallback}</p>
+          <p class="mb-2">${fallbackText}</p>
           <button class="retry-btn">Retry</button>
         </div>
       `;
-      this.querySelector('.retry-btn')?.addEventListener('click', () => {
+      this.querySelector(".retry-btn")?.addEventListener("click", () => {
         window.location.reload();
       });
     }
   }
 
-  customElements.define('error-boundary', ErrorBoundary);
+  customElements.define("error-boundary", ErrorBoundary);
 </script>

@@ -15,113 +15,142 @@ interface Approach {
 const approaches: Approach[] = [
   {
     title: "Designing onboarding that turns newcomers into contributors",
-    description: "Understanding the psychology of first impressions and commitment escalation.",
-    icon: "tabler:door"
+    description:
+      "Understanding the psychology of first impressions and commitment escalation.",
+    icon: "tabler:door",
   },
   {
-    title: "Creating participation structures that tap into intrinsic motivation",
-    description: "Building systems that reward genuine engagement over vanity metrics.",
-    icon: "tabler:star"
+    title:
+      "Creating participation structures that tap into intrinsic motivation",
+    description:
+      "Building systems that reward genuine engagement over vanity metrics.",
+    icon: "tabler:star",
   },
   {
     title: "Building feedback mechanisms that surface real sentiment",
     description: "Distinguishing signal from noise in community interactions.",
-    icon: "tabler:message"
+    icon: "tabler:message",
   },
   {
     title: "Understanding the difference between activity and engagement",
-    description: "Measuring what actually matters for community health and business value.",
-    icon: "tabler:chart-bar"
-  }
+    description:
+      "Measuring what actually matters for community health and business value.",
+    icon: "tabler:chart-bar",
+  },
 ];
 ---
 
-<section
-  id="why-it-works"
-  class="py-24 md:py-28"
-  aria-labelledby="why-heading"
->
+<section id="why-it-works" class="py-24 md:py-28" aria-labelledby="why-heading">
   <div class="site-container px-2 sm:px-4">
-    <div class="max-w-5xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+    <div class="mx-auto max-w-5xl">
+      <div class="grid items-start gap-12 md:grid-cols-2 md:gap-16">
         <!-- Left column: Main content -->
         <div>
           <Badge>The Psychology Edge</Badge>
-          <h2 id="why-heading" class="h2 mb-6">
-            Why This Approach Works
-          </h2>
+          <h2 id="why-heading" class="h2 mb-6">Why This Approach Works</h2>
           <div class="space-y-4 text-lg text-base-700 dark:text-base-300">
             <p class="description">
-              My cognitive psychology background shapes how I approach community building. I understand <span class="text-primary-500 font-semibold">why</span> developers and technical users behave the way they do (or know how to figure it out), which lets me design interventions that actually work.
+              My cognitive psychology background shapes how I approach community
+              building. I understand <span
+                class="font-semibold text-primary-500">why</span
+              > developers and technical users behave the way they do (or know how
+              to figure it out), which lets me design interventions that actually
+              work.
             </p>
             <p class="description">
-              Where others ask "how do we get more people?" I ask "<span class="text-primary-500 font-semibold">why would someone stay, contribute, and advocate?</span>"
+              Where others ask "how do we get more people?" I ask "<span
+                class="font-semibold text-primary-500"
+                >why would someone stay, contribute, and advocate?</span
+              >"
             </p>
           </div>
         </div>
 
         <!-- Right column: Approach list -->
         <div class="space-y-4">
-          {approaches.map((approach, index) => (
-            <div
-              class="bg-base-50 dark:bg-base-800 rounded-xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-all duration-300"
-            >
-              <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <div class="flex-shrink-0">
-                  <div class="p-2 bg-primary-100 dark:bg-primary-900/30 rounded-lg w-fit">
-                    <Icon
-                      name={approach.icon}
-                      class="w-5 h-5 text-primary-600 dark:text-primary-400"
-                    />
+          {
+            approaches.map((approach, index) => (
+              <div class="rounded-xl bg-base-50 p-4 shadow-sm transition-all duration-300 hover:shadow-md sm:p-5 dark:bg-base-800">
+                <div class="flex flex-col gap-3 sm:flex-row sm:gap-4">
+                  <div class="flex-shrink-0">
+                    <div class="w-fit rounded-lg bg-primary-100 p-2 dark:bg-primary-900/30">
+                      <Icon
+                        name={approach.icon}
+                        class="h-5 w-5 text-primary-600 dark:text-primary-400"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="mb-1 font-semibold text-base-900 dark:text-base-100">
+                      {approach.title}
+                    </h3>
+                    <p class="text-sm text-base-600 dark:text-base-400">
+                      {approach.description}
+                    </p>
                   </div>
                 </div>
-                <div>
-                  <h3 class="font-semibold text-base-900 dark:text-base-100 mb-1">
-                    {approach.title}
-                  </h3>
-                  <p class="text-sm text-base-600 dark:text-base-400">
-                    {approach.description}
-                  </p>
-                </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
 
       <!-- Experimentation background -->
       <div
-        class="mt-12 sm:mt-16 bg-gradient-to-r from-primary-50 to-primary-100/50 dark:from-primary-900/20 dark:to-primary-800/10 rounded-2xl p-5 sm:p-8 md:p-10"
+        class="mt-12 rounded-2xl bg-gradient-to-r from-primary-50 to-primary-100/50 p-5 sm:mt-16 sm:p-8 md:p-10 dark:from-primary-900/20 dark:to-primary-800/10"
       >
-        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+        <div class="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
           <div class="flex-shrink-0">
-            <div class="p-2 sm:p-3 bg-primary-200 dark:bg-primary-800/50 rounded-xl w-fit">
+            <div
+              class="w-fit rounded-xl bg-primary-200 p-2 sm:p-3 dark:bg-primary-800/50"
+            >
               <Icon
                 name="tabler:flask"
-                class="w-6 h-6 sm:w-8 sm:h-8 text-primary-700 dark:text-primary-300"
+                class="h-6 w-6 text-primary-700 sm:h-8 sm:w-8 dark:text-primary-300"
               />
             </div>
           </div>
           <div>
-            <h3 class="text-lg sm:text-xl font-bold text-base-900 dark:text-base-100 mb-2 sm:mb-3">
+            <h3
+              class="mb-2 text-lg font-bold text-base-900 sm:mb-3 sm:text-xl dark:text-base-100"
+            >
               Data-Driven, Not Just Relational
             </h3>
-            <p class="text-base sm:text-lg text-base-700 dark:text-base-300 leading-relaxed">
-              My experimentation background (running <span class="text-primary-600 dark:text-primary-400 font-semibold">500+ A/B tests</span> at companies like Randstad and JDE) taught me to measure what matters and prove what's actually working. This makes me a different kind of community leader: one who thinks <span class="text-primary-600 dark:text-primary-400 font-semibold">strategically and analytically</span>, not just relationally.
+            <p
+              class="text-base leading-relaxed text-base-700 sm:text-lg dark:text-base-300"
+            >
+              My experimentation background (running <span
+                class="font-semibold text-primary-600 dark:text-primary-400"
+                >500+ A/B tests</span
+              > at companies like Randstad and JDE) taught me to measure what matters
+              and prove what's actually working. This makes me a different kind of
+              community leader: one who thinks <span
+                class="font-semibold text-primary-600 dark:text-primary-400"
+                >strategically and analytically</span
+              >, not just relationally.
             </p>
           </div>
         </div>
       </div>
 
       <!-- Cross-link to Author page -->
-      <div class="text-center mt-10">
+      <div class="mt-10 text-center">
         <a
           href="/authors/gxjansen/"
-          class="inline-flex items-center text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium transition-colors duration-200"
+          class="inline-flex items-center font-medium text-primary-600 transition-colors duration-200 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
         >
           See my credentials, awards, and articles
-          <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          <svg
+            class="ml-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"></path>
           </svg>
         </a>
       </div>

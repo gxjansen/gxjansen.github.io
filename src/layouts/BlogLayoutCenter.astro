@@ -2,7 +2,7 @@
 import { type CollectionEntry, getEntries } from "astro:content";
 import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { YouTube } from 'astro-embed';
+import { YouTube } from "astro-embed";
 
 // main layout
 import BaseLayout from "./BaseLayout.astro";
@@ -48,112 +48,161 @@ const postUrl = new URL(`/post/${post.slug}/`, Astro.site).toString();
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
-const authorsData = authors && authors.length > 0 ? await getEntries(authors.map(author => ({ collection: 'authors', id: author }))) : [];
+const authorsData =
+  authors && authors.length > 0
+    ? await getEntries(
+        authors.map((author) => ({
+          collection: "authors" as const,
+          id: author,
+        })),
+      )
+    : [];
 
 // Filter categories to only show those with 2+ posts
 const filteredCategories = filterCategoriesByCount(categories, allPosts);
 
 // Generate dynamic newsletter description based on categories
-const categoryNames = categories.map(cat => humanize(cat)).slice(0, 3);
-const newsletterDescription = categoryNames.length > 0
-  ? `Want more on ${categoryNames.join(', ')}? Subscribe for curated insights on community, AI & open tech.`
-  : "Curated insights on community, AI & open tech. No spam, no tracking pixels, unsubscribe anytime.";
+const categoryNames = categories.map((cat) => humanize(cat)).slice(0, 3);
+const newsletterDescription =
+  categoryNames.length > 0
+    ? `Want more on ${categoryNames.join(", ")}? Subscribe for curated insights on community, AI & open tech.`
+    : "Curated insights on community, AI & open tech. No spam, no tracking pixels, unsubscribe anytime.";
 ---
 
 <BaseLayout
   type="blog"
   title={title}
-  description={description}
+  description={description || ""}
   image={heroImage}
   authorsData={authorsData}
   postFrontmatter={post.data}
 >
-  <article 
+  <article
     class="mt-24"
     aria-labelledby="article-title"
-    itemscope 
+    itemscope
     itemtype="https://schema.org/BlogPosting"
   >
     <div class="relative">
-        <!-- Blog post info -->
-        <div class="flex w-full flex-col items-center px-4">
-          <div class="mx-auto flex w-full max-w-2xl">
-            <div class="mx-auto max-w-full text-center">
-              <!-- Categories -->
-              <div
-                class="flex justify-center gap-4"
-                role="list"
-                aria-label="Article categories"
-              >
-                {filteredCategories.map((category) => <Category category={category} />)}
+      <!-- Blog post info -->
+      <div class="flex w-full flex-col items-center px-4">
+        <div class="mx-auto flex w-full max-w-2xl">
+          <div class="mx-auto max-w-full text-center">
+            <!-- Categories -->
+            <div
+              class="flex justify-center gap-4"
+              role="list"
+              aria-label="Article categories"
+            >
+              {
+                filteredCategories.map((category) => (
+                  <Category category={category} />
+                ))
+              }
+            </div>
+
+            <!-- title -->
+            <h1 id="article-title" class="h1 mt-6" itemprop="headline">
+              {title}
+            </h1>
+
+            <div
+              class="mt-6 flex w-full flex-wrap items-center justify-center gap-4 font-medium text-base-500 dark:text-base-400"
+            >
+              <!-- Author info -->
+              <div class="flex flex-wrap items-center gap-4">
+                {
+                  authorsData.map((authorData, index) => (
+                    <>
+                      <AuthorByline
+                        author={authorData}
+                        showBio={false}
+                        variant="compact"
+                      />
+                      {index < authorsData.length - 1 && (
+                        <span class="text-base-400">&</span>
+                      )}
+                    </>
+                  ))
+                }
               </div>
 
-              <!-- title -->
-              <h1 id="article-title" class="h1 mt-6" itemprop="headline">{title}</h1>
+              {
+                authorsData.length > 0 && pubDate && (
+                  <span class="hidden text-base-400 sm:inline">&bull;</span>
+                )
+              }
 
-              <div
-                class="mt-6 flex w-full flex-wrap justify-center gap-4 items-center font-medium text-base-500 dark:text-base-400"
-              >
-                <!-- Author info -->
-                <div class="flex flex-wrap gap-4 items-center">
-                  {authorsData.map((authorData, index) => (
-                    <>
-                      <AuthorByline author={authorData} showBio={false} variant="compact" />
-                      {index < authorsData.length - 1 && <span class="text-base-400">&</span>}
-                    </>
-                  ))}
-                </div>
-
-                {authorsData.length > 0 && pubDate && <span class="hidden sm:inline text-base-400">&bull;</span>}
-
-                <!-- Date -->
-                {pubDate && (
+              <!-- Date -->
+              {
+                pubDate && (
                   <time
                     class="my-auto h-full"
-                    datetime={pubDate instanceof Date ? pubDate.toISOString() : pubDate}
+                    datetime={
+                      (pubDate as unknown) instanceof Date
+                        ? (pubDate as unknown as Date).toISOString()
+                        : String(pubDate)
+                    }
                     itemprop="datePublished"
                   >
-                    <span aria-label="Published on">{formatDate(pubDate, currLocale)}</span>
+                    <span aria-label="Published on">
+                      {formatDate(pubDate, currLocale)}
+                    </span>
                   </time>
-                )}
+                )
+              }
 
-                <!-- Bluesky comment link (only if linked) -->
-                {blueskyUri && (
+              <!-- Bluesky comment link (only if linked) -->
+              {
+                blueskyUri && (
                   <>
                     <span class="text-base-400">&bull;</span>
                     <a
                       href={blueskyUri}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="inline-flex items-center gap-1.5 text-foam-light dark:text-foam hover:underline"
+                      class="inline-flex items-center gap-1.5 text-foam-light hover:underline dark:text-foam"
                     >
-                      <svg class="w-4 h-4" viewBox="0 0 568 501" fill="currentColor" aria-hidden="true">
+                      <svg
+                        class="h-4 w-4"
+                        viewBox="0 0 568 501"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
                         <path d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.781C285.169 375.521 284.017 372.502 284 376.101C283.983 372.502 282.831 375.521 280.369 383.781C266.939 422.461 214.527 576.312 94.6667 453.32C31.5556 388.56 60.7778 323.8 175.653 304.249C109.933 315.434 36.0533 296.954 15.7778 224.501C9.94525 203.659 0 75.2916 0 57.9464C0 -28.9064 76.1345 -1.61183 123.121 33.6637Z" />
                       </svg>
                       Comment
                     </a>
                   </>
-                )}
-              </div>
+                )
+              }
             </div>
           </div>
-          <div class="flex justify-center pt-5">
-            <a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
-              <Image
-                src={HumanNotAI}
-                alt="Written-By-Human-Not-By-AI"
-                decoding="async"
-                loading="lazy"
-                width={100}
-              />
-            </a>
-          </div>
-          <!-- blog post main image -->
-          {heroImage && (
+        </div>
+        <div class="flex justify-center pt-5">
+          <a
+            href="https://notbyai.fyi/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src={HumanNotAI}
+              alt="Written-By-Human-Not-By-AI"
+              decoding="async"
+              loading="lazy"
+              width={100}
+            />
+          </a>
+        </div>
+        <!-- blog post main image -->
+        {
+          heroImage && (
             <div class="mt-6 w-full max-w-2xl overflow-hidden">
               <Image
                 src={heroImage}
-                alt={heroImage.alt || `Cover image for article: ${title}`}
+                alt={
+                  (heroImage as any).alt || `Cover image for article: ${title}`
+                }
                 widths={[640, 768, 1024, 1600, 2000]}
                 sizes="(max-width: 1024px) 100vw, 1000px"
                 class="max-h-[70vh] w-full rounded-xl object-cover"
@@ -165,54 +214,63 @@ const newsletterDescription = categoryNames.length > 0
                 format="webp"
               />
             </div>
-          )}
-        </div>
+          )
+        }
       </div>
     </div>
+  </article>
 
-    <!-- article content -->
-    <div class="mt-10 w-full px-4">
+  <!-- article content -->
+  <div class="mt-10 w-full px-4">
+    <div class="mx-auto max-w-2xl">
+      <div class="text-base text-base-900 dark:text-base-100">
+        {
+          updatedDate && (
+            <div class="mb-6 italic">
+              <time
+                datetime={
+                  (updatedDate as unknown) instanceof Date
+                    ? (updatedDate as unknown as Date).toISOString()
+                    : String(updatedDate)
+                }
+              >
+                {t("updated")}: {formatDate(updatedDate, currLocale)}
+              </time>
+            </div>
+          )
+        }
+        <section
+          id="blog-post-content"
+          class="prose mx-auto"
+          itemprop="articleBody"
+          aria-label="Article content"
+        >
+          <slot />
+        </section>
+      </div>
+
+      <!-- Bluesky Comments -->
       <div class="mx-auto max-w-2xl">
-        <div class="text-base-900 dark:text-base-100 text-base">
-          {
-            updatedDate && (
-              <div class="mb-6 italic">
-                <time datetime={updatedDate instanceof Date ? updatedDate.toISOString() : updatedDate}>
-                  {t("updated")}: {formatDate(updatedDate, currLocale)}
-                </time>
-              </div>
-            )
-          }
-          <section
-            id="blog-post-content"
-            class="prose mx-auto"
-            itemprop="articleBody"
-            aria-label="Article content"
-          >
-            <slot />
-          </section>
-        </div>
+        <BlueskyComments
+          client:load
+          uri={blueskyUri}
+          postTitle={title}
+          postUrl={postUrl}
+        />
+      </div>
 
-        <!-- Bluesky Comments -->
-        <div class="mx-auto max-w-2xl">
-          <BlueskyComments
-            client:load
-            uri={blueskyUri}
-            postTitle={title}
-            postUrl={postUrl}
-          />
-        </div>
-
-        <!-- Author Bio Box -->
-        {authorsData.length > 0 && (
+      <!-- Author Bio Box -->
+      {
+        authorsData.length > 0 && (
           <div class="mx-auto max-w-2xl">
-            {authorsData.map(authorData => (
+            {authorsData.map((authorData) => (
               <AuthorBioBox author={authorData} />
             ))}
           </div>
-        )}
+        )
+      }
     </div>
-  </article>
+  </div>
 
   <!-- Newsletter CTA -->
   <div class="mt-8">
@@ -224,10 +282,7 @@ const newsletterDescription = categoryNames.length > 0
   </div>
 
   <!-- Navigation -->
-  <nav 
-    class="mx-auto max-w-2xl"
-    aria-label="Blog post navigation"
-  >
+  <nav class="mx-auto max-w-2xl" aria-label="Blog post navigation">
     <BlogNav currentSlug={post.slug} posts={allPosts} />
   </nav>
 </BaseLayout>

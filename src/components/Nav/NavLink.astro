@@ -33,7 +33,7 @@ const isCurrentPage = Astro.url.pathname === actualLink;
 <li role="none">
   <a
     class:list={[
-      `primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${className}`,
+      `primary-focus relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 font-medium leading-tight text-base-500 transition hover:text-base-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:text-base-400 dark:hover:text-base-300 ${className}`,
       {
         "aria-current": isCurrentPage,
         "font-semibold text-primary-600 dark:text-primary-400": isCurrentPage,
@@ -56,9 +56,7 @@ const isCurrentPage = Astro.url.pathname === actualLink;
       )
     }
     <span>{text}</span>
-    {newTab && (
-      <span class="sr-only">(opens in new tab)</span>
-    )}
+    {newTab && <span class="sr-only">(opens in new tab)</span>}
   </a>
 </li>
 
@@ -72,7 +70,7 @@ const isCurrentPage = Astro.url.pathname === actualLink;
 
   /* Focus styles */
   .primary-focus:focus-visible {
-    outline: 2px solid var(--focus-ring-color, theme('colors.primary.500'));
+    outline: 2px solid var(--focus-ring-color, theme("colors.primary.500"));
     outline-offset: 2px;
   }
 </style>

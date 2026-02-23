@@ -1,21 +1,21 @@
 ---
 // Define the company logos with their names and image paths
 const companies = [
-  { name: 'ANWB', logo: '/images/companies/anwb.png' },
-  { name: 'Bol.com', logo: '/images/companies/bolcom.png' },
-  { name: 'Canal Digital', logo: '/images/companies/canaldigital.png' },
-  { name: 'eBay', logo: '/images/companies/ebay.png' },
-  { name: 'Euroflorist', logo: '/images/companies/euroflorist.png' },
-  { name: 'Favorite Gifts', logo: '/images/companies/favorite-gifts.png' },
-  { name: 'Heineken', logo: '/images/companies/heineken.png' },
-  { name: 'Helly Hansen', logo: '/images/companies/hellyhansen.png' },
-  { name: 'ING', logo: '/images/companies/ing.png' },
-  { name: 'KPN', logo: '/images/companies/kpn.png' },
-  { name: "O'Neal", logo: '/images/companies/oneal.png' },
-  { name: 'Randstad', logo: '/images/companies/randstad.png' },
-  { name: 'Sanoma', logo: '/images/companies/sanoma.png' },
-  { name: 'Sara Lee', logo: '/images/companies/saralee.png' },
-  { name: 'T-Mobile', logo: '/images/companies/tmobile.png' }
+  { name: "ANWB", logo: "/images/companies/anwb.png" },
+  { name: "Bol.com", logo: "/images/companies/bolcom.png" },
+  { name: "Canal Digital", logo: "/images/companies/canaldigital.png" },
+  { name: "eBay", logo: "/images/companies/ebay.png" },
+  { name: "Euroflorist", logo: "/images/companies/euroflorist.png" },
+  { name: "Favorite Gifts", logo: "/images/companies/favorite-gifts.png" },
+  { name: "Heineken", logo: "/images/companies/heineken.png" },
+  { name: "Helly Hansen", logo: "/images/companies/hellyhansen.png" },
+  { name: "ING", logo: "/images/companies/ing.png" },
+  { name: "KPN", logo: "/images/companies/kpn.png" },
+  { name: "O'Neal", logo: "/images/companies/oneal.png" },
+  { name: "Randstad", logo: "/images/companies/randstad.png" },
+  { name: "Sanoma", logo: "/images/companies/sanoma.png" },
+  { name: "Sara Lee", logo: "/images/companies/saralee.png" },
+  { name: "T-Mobile", logo: "/images/companies/tmobile.png" },
 ];
 ---
 
@@ -26,23 +26,28 @@ const companies = [
         <div class="mx-auto mb-16 text-center md:max-w-4xl">
           <h2 class="h2 mb-4">Brands I've worked with</h2>
           <p class="description text-lg md:text-xl">
-            From retail to telecom to financial services, I've helped teams across industries build stronger communities.
+            From retail to telecom to financial services, I've helped teams
+            across industries build stronger communities.
           </p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 md:gap-16">
-          {companies.map(company => (
-            <div class="flex items-center justify-center h-28">
-              <div class="w-full max-w-[200px] flex items-center justify-center px-6">
-                <img 
-                  src={company.logo} 
-                  alt={`${company.name} logo`}
-                  class="w-auto max-w-[140px] max-h-14 object-contain opacity-50 hover:opacity-100 transition-opacity duration-300 invert dark:invert-0"
-                  loading="lazy"
-                />
+        <div
+          class="grid grid-cols-2 gap-12 md:grid-cols-3 md:gap-16 lg:grid-cols-5"
+        >
+          {
+            companies.map((company) => (
+              <div class="flex h-28 items-center justify-center">
+                <div class="flex w-full max-w-[200px] items-center justify-center px-6">
+                  <img
+                    src={company.logo}
+                    alt={`${company.name} logo`}
+                    class="max-h-14 w-auto max-w-[140px] object-contain opacity-50 invert transition-opacity duration-300 hover:opacity-100 dark:invert-0"
+                    loading="lazy"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </div>

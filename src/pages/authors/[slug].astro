@@ -41,7 +41,7 @@ const {
   credentials = [],
   awards = [],
   publications = [],
-  yearsOfExperience
+  yearsOfExperience,
 } = author.data;
 
 // Map social links (LinkedIn, GitHub, Bluesky as per user requirement)
@@ -49,15 +49,18 @@ const socialLinks = [
   { url: linkedin, icon: "linkedin", label: "LinkedIn" },
   { url: github, icon: "github", label: "GitHub" },
   { url: bluesky, icon: "bluesky", label: "Bluesky" },
-].filter(link => link.url);
+].filter((link): link is { url: string; icon: string; label: string } =>
+  Boolean(link.url),
+);
 
 // Add website link separately
-const hasWebsite = website && website.includes('gui.do');
+const hasWebsite = website && website.includes("gui.do");
 
 // Custom meta description for gxjansen, default to bio for other authors
-const metaDescription = author.slug === "gxjansen"
-  ? `${name} — Community strategist, 20+ years building developer ecosystems. Credentials, awards, and ${sortedPosts.length}+ articles on community building, experimentation, and e-commerce.`
-  : (bio || `Articles and insights from ${name}`);
+const metaDescription =
+  author.slug === "gxjansen"
+    ? `${name} — Community strategist, 20+ years building developer ecosystems. Credentials, awards, and ${sortedPosts.length}+ articles on community building, experimentation, and e-commerce.`
+    : bio || `Articles and insights from ${name}`;
 
 // Build Person schema for E-E-A-T
 const sameAsLinks = [
@@ -65,7 +68,7 @@ const sameAsLinks = [
   github,
   bluesky,
   website,
-  author.data.authorLink
+  author.data.authorLink,
 ].filter(Boolean);
 
 const personSchema = {
@@ -80,8 +83,8 @@ const personSchema = {
     worksFor: {
       "@type": "Organization",
       name: organization,
-      ...(author.data.organizationUrl && { url: author.data.organizationUrl })
-    }
+      ...(author.data.organizationUrl && { url: author.data.organizationUrl }),
+    },
   }),
   ...(sameAsLinks.length > 0 && { sameAs: sameAsLinks }),
   ...(awards.length > 0 && { award: awards }),
@@ -91,9 +94,9 @@ const personSchema = {
   ...(author.slug === "gxjansen" && {
     alumniOf: {
       "@type": "EducationalOrganization",
-      name: "Utrecht University"
-    }
-  })
+      name: "Utrecht University",
+    },
+  }),
 };
 ---
 
@@ -105,176 +108,213 @@ const personSchema = {
   <article class="mt-24">
     <!-- Author Header -->
     <div class="mx-auto max-w-4xl px-4">
-      <div class="flex flex-col md:flex-row gap-8 items-start">
-        {avatar && (
-          <div class="flex-shrink-0">
-            <Image
-              src={avatar}
-              alt={`${name}'s avatar`}
-              width={200}
-              height={200}
-              quality="high"
-              class="h-32 w-32 md:h-48 md:w-48 rounded-full object-cover"
-            />
-          </div>
-        )}
+      <div class="flex flex-col items-start gap-8 md:flex-row">
+        {
+          avatar && (
+            <div class="flex-shrink-0">
+              <Image
+                src={avatar}
+                alt={`${name}'s avatar`}
+                width={200}
+                height={200}
+                quality="high"
+                class="h-32 w-32 rounded-full object-cover md:h-48 md:w-48"
+              />
+            </div>
+          )
+        }
 
         <div class="flex-1">
-          <h1 class="text-4xl md:text-5xl font-bold text-base-900 dark:text-base-100">
+          <h1
+            class="text-4xl font-bold text-base-900 md:text-5xl dark:text-base-100"
+          >
             {name}
           </h1>
 
-          {(jobTitle || organization) && (
-            <div class="mt-2 text-xl text-base-600 dark:text-base-400">
-              {jobTitle}
-              {jobTitle && organization && " at "}
-              {organization}
-            </div>
-          )}
+          {
+            (jobTitle || organization) && (
+              <div class="mt-2 text-xl text-base-600 dark:text-base-400">
+                {jobTitle}
+                {jobTitle && organization && " at "}
+                {organization}
+              </div>
+            )
+          }
 
-          {yearsOfExperience && (
-            <div class="mt-2 text-base-600 dark:text-base-400">
-              {yearsOfExperience}+ years of experience
-            </div>
-          )}
+          {
+            yearsOfExperience && (
+              <div class="mt-2 text-base-600 dark:text-base-400">
+                {yearsOfExperience}+ years of experience
+              </div>
+            )
+          }
 
-          {bio && (
-            <div class="mt-4 text-lg text-base-700 dark:text-base-300 prose dark:prose-invert max-w-none">
-              <p>{bio}</p>
-            </div>
-          )}
+          {
+            bio && (
+              <div class="prose mt-4 max-w-none text-lg text-base-700 dark:prose-invert dark:text-base-300">
+                <p>{bio}</p>
+              </div>
+            )
+          }
 
           {/* CTA to About page - only show for gxjansen */}
-          {author.slug === "gxjansen" && (
-            <div class="mt-6">
-              <a
-                href="/about/"
-                class="inline-flex items-center px-5 py-2.5 border-2 border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-base-900 rounded-lg font-medium transition-colors duration-200"
-              >
-                Read the Full Story
-                <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-              </a>
-            </div>
-          )}
-
-          {(socialLinks.length > 0 || hasWebsite) && (
-            <div class="mt-6 flex flex-wrap items-center gap-2">
-              {socialLinks.map(link => (
-                <SocialIcon
-                  icon={link.icon}
-                  social={link.label}
-                  href={link.url}
-                />
-              ))}
-              {hasWebsite && (
+          {
+            author.slug === "gxjansen" && (
+              <div class="mt-6">
                 <a
-                  href={website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 ml-2"
+                  href="/about/"
+                  class="inline-flex items-center rounded-lg border-2 border-primary-600 px-5 py-2.5 font-medium text-primary-600 transition-colors duration-200 hover:bg-primary-600 hover:text-white dark:border-primary-400 dark:text-primary-400 dark:hover:bg-primary-400 dark:hover:text-base-900"
                 >
-                  gui.do →
+                  Read the Full Story
+                  <svg
+                    class="ml-2 h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
                 </a>
-              )}
-            </div>
-          )}
+              </div>
+            )
+          }
+
+          {
+            (socialLinks.length > 0 || hasWebsite) && (
+              <div class="mt-6 flex flex-wrap items-center gap-2">
+                {socialLinks.map((link) => (
+                  <SocialIcon
+                    icon={link.icon}
+                    social={link.label}
+                    href={link.url}
+                  />
+                ))}
+                {hasWebsite && (
+                  <a
+                    href={website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="ml-2 text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                  >
+                    gui.do →
+                  </a>
+                )}
+              </div>
+            )
+          }
         </div>
       </div>
 
       <!-- Expertise -->
-      {expertise.length > 0 && (
-        <section class="mt-12">
-          <h2 class="text-2xl font-bold text-base-900 dark:text-base-100 mb-4">
-            Areas of Expertise
-          </h2>
-          <div class="flex flex-wrap gap-3">
-            {expertise.map((topic: string) => (
-              <span class="px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 font-medium">
-                {topic}
-              </span>
-            ))}
-          </div>
-        </section>
-      )}
+      {
+        expertise.length > 0 && (
+          <section class="mt-12">
+            <h2 class="mb-4 text-2xl font-bold text-base-900 dark:text-base-100">
+              Areas of Expertise
+            </h2>
+            <div class="flex flex-wrap gap-3">
+              {expertise.map((topic: string) => (
+                <span class="rounded-full bg-primary-100 px-4 py-2 font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                  {topic}
+                </span>
+              ))}
+            </div>
+          </section>
+        )
+      }
 
       <!-- Credentials -->
-      {credentials.length > 0 && (
-        <section class="mt-12">
-          <h2 class="text-2xl font-bold text-base-900 dark:text-base-100 mb-4">
-            Credentials & Qualifications
-          </h2>
-          <ul class="list-disc list-inside space-y-2 text-base-700 dark:text-base-300">
-            {credentials.map((credential: string) => (
-              <li>{credential}</li>
-            ))}
-          </ul>
-        </section>
-      )}
+      {
+        credentials.length > 0 && (
+          <section class="mt-12">
+            <h2 class="mb-4 text-2xl font-bold text-base-900 dark:text-base-100">
+              Credentials & Qualifications
+            </h2>
+            <ul class="list-inside list-disc space-y-2 text-base-700 dark:text-base-300">
+              {credentials.map((credential: string) => (
+                <li>{credential}</li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
 
       <!-- Awards -->
-      {awards.length > 0 && (
-        <section class="mt-12">
-          <h2 class="text-2xl font-bold text-base-900 dark:text-base-100 mb-4">
-            Awards & Recognition
-          </h2>
-          <ul class="list-disc list-inside space-y-2 text-base-700 dark:text-base-300">
-            {awards.map((award: string) => (
-              <li>{award}</li>
-            ))}
-          </ul>
-        </section>
-      )}
+      {
+        awards.length > 0 && (
+          <section class="mt-12">
+            <h2 class="mb-4 text-2xl font-bold text-base-900 dark:text-base-100">
+              Awards & Recognition
+            </h2>
+            <ul class="list-inside list-disc space-y-2 text-base-700 dark:text-base-300">
+              {awards.map((award: string) => (
+                <li>{award}</li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
 
       <!-- Notable Publications -->
-      {publications.length > 0 && (
-        <section class="mt-12">
-          <h2 class="text-2xl font-bold text-base-900 dark:text-base-100 mb-4">
-            Notable Publications
-          </h2>
-          <ul class="space-y-3">
-            {publications.map((pub) => (
-              <li>
-                <a
-                  href={pub.url}
-                  class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium"
-                >
-                  {pub.title}
-                </a>
-                {(pub.publication || pub.date) && (
-                  <span class="text-sm text-base-600 dark:text-base-400 ml-2">
-                    {pub.publication && `— ${pub.publication}`}
-                    {pub.date && ` (${pub.date})`}
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      {
+        publications.length > 0 && (
+          <section class="mt-12">
+            <h2 class="mb-4 text-2xl font-bold text-base-900 dark:text-base-100">
+              Notable Publications
+            </h2>
+            <ul class="space-y-3">
+              {publications.map((pub) => (
+                <li>
+                  <a
+                    href={pub.url}
+                    class="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                  >
+                    {pub.title}
+                  </a>
+                  {(pub.publication || pub.date) && (
+                    <span class="ml-2 text-sm text-base-600 dark:text-base-400">
+                      {pub.publication && `— ${pub.publication}`}
+                      {pub.date && ` (${pub.date})`}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
 
       <!-- MDX Content (if any) -->
-      <div class="mt-12 prose dark:prose-invert max-w-none">
+      <div class="prose mt-12 max-w-none dark:prose-invert">
         <Content />
       </div>
 
       <!-- Articles by Author -->
-      {sortedPosts.length > 0 && (
-        <section class="mt-16">
-          <h2 class="text-3xl font-bold text-base-900 dark:text-base-100 mb-8">
-            Articles by {name} ({sortedPosts.length})
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sortedPosts.map(post => (
-              <PostCardAtlas post={post} showDescription={true} />
-            ))}
-          </div>
-        </section>
-      )}
+      {
+        sortedPosts.length > 0 && (
+          <section class="mt-16">
+            <h2 class="mb-8 text-3xl font-bold text-base-900 dark:text-base-100">
+              Articles by {name} ({sortedPosts.length})
+            </h2>
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {sortedPosts.map((post) => (
+                <PostCardAtlas post={post} showDescription={true} />
+              ))}
+            </div>
+          </section>
+        )
+      }
     </div>
   </article>
 
   <!-- Person Schema for E-E-A-T -->
-  <script type="application/ld+json" set:html={JSON.stringify(personSchema, null, 2)} />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(personSchema, null, 2)}
+  />
 </BaseLayout>

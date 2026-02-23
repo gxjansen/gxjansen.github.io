@@ -28,7 +28,7 @@ interface BlogProps extends BaseProps {
   type: "blog";
   image?: ImageMetadata;
   authors?: CollectionEntry<"authors">[];
-  postFrontmatter?: CollectionEntry<"blog">["data"];
+  postFrontmatter?: CollectionEntry<"post">["data"];
 }
 
 const {
@@ -60,9 +60,9 @@ if (type === "blog") {
 
   jsonLD = jsonLDGenerator({
     type: "blog",
-    postFrontmatter: postFrontmatter,
+    postFrontmatter: postFrontmatter as any,
     image: optimizedImage,
-    authors: authors,
+    authors: authors as any,
     canonicalUrl: canonicalUrl,
   });
 }
@@ -74,8 +74,8 @@ else {
 }
 
 // Ensure we have an absolute URL for the image
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
-const imageUrl = optimizedImage 
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, "") : "";
+const imageUrl = optimizedImage
   ? new URL(optimizedImage.src, siteUrl).toString()
   : new URL(siteData.defaultImage.src, siteUrl).toString();
 
@@ -105,20 +105,28 @@ const formatDate = (date: Date | undefined) => {
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type === "blog" ? "article" : "website"} />
 <meta property="og:locale" content={currLocale} />
-{type === "blog" && (
-  <>
-    {formatDate(Astro.props.postFrontmatter?.publishDate) && (
-      <meta property="article:published_time" content={formatDate(Astro.props.postFrontmatter?.publishDate)} />
-    )}
-    {formatDate(Astro.props.postFrontmatter?.updateDate) && (
-      <meta property="article:modified_time" content={formatDate(Astro.props.postFrontmatter?.updateDate)} />
-    )}
-    <meta property="article:author" content={siteData.author.name} />
-    {Astro.props.postFrontmatter?.tags?.map((tag: string) => (
-      <meta property="article:tag" content={tag} />
-    ))}
-  </>
-)}
+{
+  type === "blog" && (
+    <>
+      {formatDate(Astro.props.postFrontmatter?.publishDate) && (
+        <meta
+          property="article:published_time"
+          content={formatDate(Astro.props.postFrontmatter?.publishDate)}
+        />
+      )}
+      {formatDate(Astro.props.postFrontmatter?.updateDate) && (
+        <meta
+          property="article:modified_time"
+          content={formatDate(Astro.props.postFrontmatter?.updateDate)}
+        />
+      )}
+      <meta property="article:author" content={siteData.author.name} />
+      {Astro.props.postFrontmatter?.tags?.map((tag: string) => (
+        <meta property="article:tag" content={tag} />
+      ))}
+    </>
+  )
+}
 <meta property="og:url" content={canonicalUrl.toString()} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -142,14 +150,28 @@ const formatDate = (date: Date | undefined) => {
 <Fragment set:html={jsonLD} />
 
 <!-- Additional Accessibility Meta Tags -->
-{type === "blog" && (
-  <>
-    <meta name="author" content={Astro.props.authors?.map(author => author.data.name).join(', ') || siteData.author.name} />
-    {formatDate(Astro.props.postFrontmatter?.publishDate) && (
-      <meta name="date" content={formatDate(Astro.props.postFrontmatter?.publishDate)} />
-    )}
-    {formatDate(Astro.props.postFrontmatter?.updateDate) && (
-      <meta name="last-modified" content={formatDate(Astro.props.postFrontmatter?.updateDate)} />
-    )}
-  </>
-)}
+{
+  type === "blog" && (
+    <>
+      <meta
+        name="author"
+        content={
+          Astro.props.authors?.map((author) => author.data.name).join(", ") ||
+          siteData.author.name
+        }
+      />
+      {formatDate(Astro.props.postFrontmatter?.publishDate) && (
+        <meta
+          name="date"
+          content={formatDate(Astro.props.postFrontmatter?.publishDate)}
+        />
+      )}
+      {formatDate(Astro.props.postFrontmatter?.updateDate) && (
+        <meta
+          name="last-modified"
+          content={formatDate(Astro.props.postFrontmatter?.updateDate)}
+        />
+      )}
+    </>
+  )
+}

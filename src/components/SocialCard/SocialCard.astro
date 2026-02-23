@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon';
+import { Icon } from "astro-icon";
 
 /**
  * Props for the SocialCard component
@@ -17,7 +17,7 @@ interface Props {
 const { name, href, icon } = Astro.props;
 ---
 
-<a 
+<a
   href={href}
   target="_blank"
   rel="noopener noreferrer"
@@ -27,7 +27,9 @@ const { name, href, icon } = Astro.props;
   <div class="social-card-icon-wrapper">
     <Icon name={icon} class="size-6" aria-hidden="true" />
   </div>
-  <h3 class="social-card-title hover:text-primary-500 dark:hover:text-primary-400">
+  <h3
+    class="social-card-title hover:text-primary-500 dark:hover:text-primary-400"
+  >
     {name}
   </h3>
 </a>

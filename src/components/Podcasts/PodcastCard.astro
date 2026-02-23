@@ -11,16 +11,18 @@ const { episode } = Astro.props;
 const formattedDate = new Date(episode.pubDate).toLocaleDateString("en-US", {
   month: "short",
   day: "numeric",
-  year: "numeric"
+  year: "numeric",
 });
 
 // Truncate description to a reasonable length
-const truncatedDescription = episode.description.length > 150 
-  ? `${episode.description.slice(0, 150)}...` 
-  : episode.description;
+const truncatedDescription =
+  episode.description.length > 150
+    ? `${episode.description.slice(0, 150)}...`
+    : episode.description;
 
 // Define classes for the card
-const cardClasses = "block bg-base-50 dark:bg-base-800 p-6 rounded-lg shadow-lg border-2 border-primary-400/30 hover:border-primary-400 hover:shadow-xl hover:-translate-y-1 cursor-pointer group transition-all duration-200";
+const cardClasses =
+  "block bg-base-50 dark:bg-base-800 p-6 rounded-lg shadow-lg border-2 border-primary-400/30 hover:border-primary-400 hover:shadow-xl hover:-translate-y-1 cursor-pointer group transition-all duration-200";
 ---
 
 <a
@@ -32,26 +34,30 @@ const cardClasses = "block bg-base-50 dark:bg-base-800 p-6 rounded-lg shadow-lg 
   <div class="flex items-start gap-4">
     {/* Podcast Image */}
     <div class="flex-shrink-0">
-      {episode.imageUrl ? (
-        <img
-          src={episode.imageUrl}
-          alt={`${episode.podcastName} Cover`}
-          width={80}
-          height={80}
-          class="rounded-lg object-cover"
-        />
-      ) : (
-        <div class="w-20 h-20 bg-base-200 dark:bg-base-700 rounded-lg flex items-center justify-center">
-          <span class="text-2xl">🎙️</span>
-        </div>
-      )}
+      {
+        episode.imageUrl ? (
+          <img
+            src={episode.imageUrl}
+            alt={`${episode.podcastName} Cover`}
+            width={80}
+            height={80}
+            class="rounded-lg object-cover"
+          />
+        ) : (
+          <div class="flex h-20 w-20 items-center justify-center rounded-lg bg-base-200 dark:bg-base-700">
+            <span class="text-2xl">🎙️</span>
+          </div>
+        )
+      }
     </div>
 
     {/* Episode Details */}
-    <div class="flex-1 min-w-0">
+    <div class="min-w-0 flex-1">
       {/* Podcast Name and Date */}
-      <div class="flex items-center justify-between mb-1">
-        <span class="text-sm font-medium text-primary-600 dark:text-primary-400">
+      <div class="mb-1 flex items-center justify-between">
+        <span
+          class="text-sm font-medium text-primary-600 dark:text-primary-400"
+        >
           {episode.podcastName}
         </span>
         <span class="text-sm text-base-500 dark:text-base-400">
@@ -60,12 +66,14 @@ const cardClasses = "block bg-base-50 dark:bg-base-800 p-6 rounded-lg shadow-lg 
       </div>
 
       {/* Episode Title */}
-      <h3 class="text-xl font-semibold text-primary-600 dark:text-primary-400 mb-2 group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors duration-200">
+      <h3
+        class="mb-2 text-xl font-semibold text-primary-600 transition-colors duration-200 group-hover:text-primary-700 dark:text-primary-400 dark:group-hover:text-primary-300"
+      >
         {episode.title}
       </h3>
 
       {/* Description */}
-      <p class="text-base-600 dark:text-base-300 text-sm mb-3">
+      <p class="mb-3 text-sm text-base-600 dark:text-base-300">
         {truncatedDescription}
       </p>
 
@@ -74,19 +82,20 @@ const cardClasses = "block bg-base-50 dark:bg-base-800 p-6 rounded-lg shadow-lg 
         <span class="text-sm text-base-500 dark:text-base-400">
           {episode.duration}
         </span>
-        <span class="inline-flex items-center gap-1 text-sm text-primary-600 dark:text-primary-400 group-hover:translate-x-1 transition-transform duration-200">
+        <span
+          class="inline-flex items-center gap-1 text-sm text-primary-600 transition-transform duration-200 group-hover:translate-x-1 dark:text-primary-400"
+        >
           Listen Now
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            class="h-4 w-4" 
-            viewBox="0 0 20 20" 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            viewBox="0 0 20 20"
             fill="currentColor"
           >
-            <path 
-              fill-rule="evenodd" 
-              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-              clip-rule="evenodd" 
-            />
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
           </svg>
         </span>
       </div>

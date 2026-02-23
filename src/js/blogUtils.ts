@@ -91,9 +91,9 @@ export function formatPosts(
   }: FormatPostsOptions = {},
 ): BlogPost[] {
   // Create a deep copy of the posts array to avoid mutating the original
-  const postsCopy = posts.map(post => ({
+  const postsCopy = posts.map((post) => ({
     ...post,
-    data: { ...post.data }
+    data: { ...post.data },
   }));
 
   const filteredPosts = postsCopy.reduce((acc: BlogPost[], post) => {
@@ -142,10 +142,7 @@ export function formatPosts(
  * @param postTwo: BlogPost
  * @returns true if the posts are related, false if not
  */
-export function arePostsRelated(
-  postOne: BlogPost,
-  postTwo: BlogPost,
-): boolean {
+export function arePostsRelated(postOne: BlogPost, postTwo: BlogPost): boolean {
   // if titles are the same, then they are the same post. return false
   if (postOne.slug === postTwo.slug) return false;
 
@@ -180,7 +177,7 @@ export function countItems(items: string[]): CountedItems {
       ...acc,
       [slugifiedItem]: {
         original: item,
-        count: val + 1
+        count: val + 1,
       },
     };
   }, {});
@@ -193,7 +190,9 @@ export function countItems(items: string[]): CountedItems {
  * @param countedItems - Record of counted items from countItems()
  * @returns array of [slug, original, count] tuples, sorted by count descending
  */
-export function sortByValue(countedItems: CountedItems): [string, string, number][] {
+export function sortByValue(
+  countedItems: CountedItems,
+): [string, string, number][] {
   const array: [string, string, number][] = [];
   for (const key in countedItems) {
     array.push([key, countedItems[key].original, countedItems[key].count]);
@@ -212,7 +211,7 @@ export function sortByValue(countedItems: CountedItems): [string, string, number
 export function filterCategoriesByCount(
   categories: string[],
   allPosts: PostWithCategories[],
-  minCount: number = 2
+  minCount: number = 2,
 ): string[] {
   // Get all categories from all posts
   const allCategories = allPosts
