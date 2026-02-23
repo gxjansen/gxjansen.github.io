@@ -13,12 +13,13 @@ interface IndieProject {
 export const indieProjects: IndieProject[] = [
   {
     name: "Barazo Forum",
-    description: "Privacy-focused, decentralized forum software built on the AT Protocol. Your identity. Your communities. Everywhere.",
+    description:
+      "Privacy-focused, decentralized forum software built on the AT Protocol. Your identity. Your communities. Everywhere.",
     mainImage: "/icons/barazo-dark.svg",
     link: "https://barazo.forum",
     iconBgColor: "bg-[#1a1a2e]",
     githubUrl: "https://github.com/barazo-forum",
-    license: "MIT / AGPL-3.0"
+    license: "MIT / AGPL-3.0",
   },
   {
     name: "n8n Pulse",
@@ -32,12 +33,13 @@ export const indieProjects: IndieProject[] = [
   },
   {
     name: "Claude Code Meter",
-    description: "macOS desktop widget that monitors Claude Code usage limits in real time. Displays both 5-hour and 7-day rolling windows with progress bars, countdown timers, and color-coded warnings via Ubersicht.",
+    description:
+      "macOS desktop widget that monitors Claude Code usage limits in real time. Displays both 5-hour and 7-day rolling windows with progress bars, countdown timers, and color-coded warnings via Ubersicht.",
     mainImage: "tabler:gauge",
     link: "https://github.com/gxjansen/claude-code-meter",
     iconBgColor: "bg-[#D97706]",
     githubUrl: "https://github.com/gxjansen/claude-code-meter",
-    license: "MIT"
+    license: "MIT",
   },
   {
     name: "AI Consensus Answers",
