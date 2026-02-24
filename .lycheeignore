@@ -27,6 +27,17 @@ https?://nomadmage\.com/.*
 https?://devrims\.com/.*
 https?://saufter\.io/.*
 
+# YouTube thumbnails (maxresdefault.jpg often missing for older videos)
+https?://i\.ytimg\.com/.*
+
+# Dead domains (historical references in old blog posts)
+https?://(www\.)?community\.magento\.com/.*
+https?://(www\.)?magentocommerce\.com/.*
+https?://(www\.)?artio\.net/.*
+https?://(www\.)?betterhumans\.coach\.me/.*
+https?://(www\.)?webinsight\.be/.*
+https?://(www\.)?objeqt\.com/.*
+
 # Netlify serverless functions (not static files)
 \.netlify/functions/
 
