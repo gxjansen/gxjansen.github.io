@@ -10,7 +10,7 @@ describe("SlideEmbed", () => {
         <h2 class="h3 mb-4">Slides</h2>
         <div class="relative pb-[56.25%] bg-slate-100 dark:bg-slate-800 rounded-lg" id="slide-container-${mockSlideKey}">
           <iframe 
-            src="//www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}?hostedIn=slideshare&amp;page=upload"
+            src="https://www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}?hostedIn=slideshare&amp;page=upload"
             class="absolute top-0 left-0 w-full h-full border-none rounded-lg"
             allowfullscreen
             loading="lazy"
@@ -44,7 +44,7 @@ describe("SlideEmbed", () => {
     const iframe = parsedHtml.querySelector("iframe");
     expect(iframe).toBeTruthy();
     expect(iframe?.getAttribute("src")).toBe(
-      `//www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}?hostedIn=slideshare&page=upload`,
+      `https://www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}?hostedIn=slideshare&page=upload`,
     );
     expect(iframe?.getAttribute("loading")).toBe("lazy");
     expect(iframe?.hasAttribute("allowfullscreen")).toBe(true);
@@ -55,7 +55,7 @@ describe("SlideEmbed", () => {
       <div class="mb-12">
         <div class="relative pb-[56.25%] bg-slate-100 dark:bg-slate-800 rounded-lg" id="slide-container-${mockSlideKey}">
           <iframe 
-            src="//www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}?hostedIn=slideshare&amp;page=upload"
+            src="https://www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}?hostedIn=slideshare&amp;page=upload"
             class="absolute top-0 left-0 w-full h-full border-none rounded-lg"
             allowfullscreen
             loading="lazy"
@@ -84,7 +84,7 @@ describe("SlideEmbed", () => {
       <div class="mb-12">
         <div class="relative pb-[56.25%] bg-slate-100 dark:bg-slate-800 rounded-lg" id="slide-container-${mockSlideKey}">
           <iframe 
-            src="//www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}?hostedIn=slideshare&amp;page=upload"
+            src="https://www.slideshare.net/slideshow/embed_code/key/${mockSlideKey}?hostedIn=slideshare&amp;page=upload"
             class="absolute top-0 left-0 w-full h-full border-none rounded-lg"
             allowfullscreen
             loading="lazy"
