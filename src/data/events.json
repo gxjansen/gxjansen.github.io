@@ -608,7 +608,7 @@
     "role": "Speaker",
     "topic": "Grow Smart or Die Fast: 5 Guidelines to Navigate the Recession",
     "relatedPresentationSlugs": [
-      "5-guiding-principles-to-not-f-k-up-modern-b2b-commerce"
+      "innovate-or-get-kodaked-5-guiding-principles-to-not-f-k-up-modern-commerce"
     ]
   },
   {
@@ -1283,9 +1283,7 @@
     "workshop": false,
     "role": "Speaker",
     "topic": "Management buy-in for CRO",
-    "relatedPresentationSlugs": [
-      "management-buy-in-for-cro"
-    ]
+    "relatedPresentationSlugs": []
   },
   {
     "id": "measurefest-2017-11",
@@ -1403,9 +1401,7 @@
     "workshop": false,
     "role": "Speaker",
     "topic": "Conversion optimization",
-    "relatedPresentationSlugs": [
-      "conversion-optimization"
-    ]
+    "relatedPresentationSlugs": []
   },
   {
     "id": "meet-magento-china-2017-08",
@@ -1596,9 +1592,7 @@
     "workshop": true,
     "role": "Speaker",
     "topic": "Online sales for florists",
-    "relatedPresentationSlugs": [
-      "workshop-online-sales-for-florists"
-    ]
+    "relatedPresentationSlugs": []
   },
   {
     "id": "magento-2-seminar-2016-10",
@@ -2128,9 +2122,7 @@
     "workshop": false,
     "role": "Speaker",
     "topic": "Hack your users brain",
-    "relatedPresentationSlugs": [
-      "hack-your-users-brain"
-    ]
+    "relatedPresentationSlugs": []
   },
   {
     "id": "rockstart-answers-2015-04",
@@ -2288,9 +2280,7 @@
     "workshop": false,
     "role": "Speaker",
     "topic": "Introduction to A/B testing",
-    "relatedPresentationSlugs": [
-      "introduction-to-a-b-testing"
-    ]
+    "relatedPresentationSlugs": []
   },
   {
     "id": "sanoma-breeze-2014-03",
@@ -2421,9 +2411,7 @@
     "workshop": false,
     "role": "Speaker",
     "topic": "Marketing with Magento",
-    "relatedPresentationSlugs": [
-      "marketing-with-magento"
-    ]
+    "relatedPresentationSlugs": []
   },
   {
     "id": "webwinkel-vakdagen-2013-01",
@@ -2511,9 +2499,7 @@
     "workshop": false,
     "role": "Speaker",
     "topic": "Marketing with Magento",
-    "relatedPresentationSlugs": [
-      "marketing-with-magento"
-    ]
+    "relatedPresentationSlugs": []
   },
   {
     "id": "joomla-world-conference-2012-10",
@@ -2848,9 +2834,7 @@
     "workshop": false,
     "role": "Speaker",
     "topic": "Conversion optimization",
-    "relatedPresentationSlugs": [
-      "conversion-optimization"
-    ]
+    "relatedPresentationSlugs": []
   },
   {
     "id": "joomladays-netherlands-2009-12",
