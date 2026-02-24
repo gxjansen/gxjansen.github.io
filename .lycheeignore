@@ -1,6 +1,5 @@
-# LinkedIn returns 999 for automated requests
-https?://www\.linkedin\.com/.*
-https?://linkedin\.com/.*
+# LinkedIn returns 999 for automated requests (includes country subdomains)
+https?://([a-z]{2}\.)?linkedin\.com/.*
 
 # Twitter/X rate-limits aggressively
 https?://(www\.)?twitter\.com/.*
