@@ -3,6 +3,7 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
+import { Image } from "astro:assets";
 import Badge from "@components/Badge/Badge.astro";
 import RelatedPresentations from "@components/RelatedPresentations/RelatedPresentations.astro";
 import EventCard from "@components/Events/EventCard.astro";
@@ -100,12 +101,14 @@ const metaDescription = descriptionParts.filter(Boolean).join(" ");
               }
             </div>
             {
-              event.icon && (
+              event.loadedIcon && (
                 <div class="h-24 w-24">
-                  <img
-                    src={`@images/events/${event.icon}`}
+                  <Image
+                    src={event.loadedIcon}
                     alt={`${event.name} logo`}
                     class="h-full w-full object-contain"
+                    width={96}
+                    height={96}
                     loading="lazy"
                   />
                 </div>
