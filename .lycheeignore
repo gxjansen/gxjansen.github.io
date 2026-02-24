@@ -10,5 +10,28 @@ https?://(www\.)?x\.com/.*
 https?://localhost.*
 https?://127\.0\.0\.1.*
 
+# Medium blocks automated requests
+https?://(www\.)?medium\.com/.*
+
+# Forbes blocks automated requests
+https?://(www\.)?forbes\.com/.*
+
+# Reddit blocks automated requests
+https?://(www\.)?reddit\.com/.*
+
+# Other sites that block bots
+https?://(www\.)?raspberrypi\.com/.*
+https?://help\.openai\.com/.*
+https?://(www\.)?encora\.com/.*
+https?://nomadmage\.com/.*
+https?://devrims\.com/.*
+https?://saufter\.io/.*
+
+# Netlify serverless functions (not static files)
+\.netlify/functions/
+
+# Bluesky AT Protocol URIs
+at:/did:plc:
+
 # Anchor-only links
 ^#
