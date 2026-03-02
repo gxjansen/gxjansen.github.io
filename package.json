@@ -37,7 +37,7 @@
     "@types/react-dom": "^18.3.7",
     "altcha-lib": "^1.4.1",
     "animejs": "^3.2.2",
-    "astro": "^5.17.3",
+    "astro": "^5.18.0",
     "astro-auto-import": "^0.5.1",
     "astro-embed": "^0.12.0",
     "astro-icon": "0.8.2",
