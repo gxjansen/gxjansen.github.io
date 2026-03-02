@@ -7,7 +7,6 @@ import { Icon } from "astro-icon";
 
 // components
 import ServiceCard from "@components/ServiceCard/ServiceCardSideImage.astro";
-import Badge from "@components/Badge/Badge.astro";
 
 // images
 import image1 from "@images/house.jpg";
@@ -72,13 +71,6 @@ I switched focus to e-commerce and between 2008 and 2021 focussed on one system 
 In 2021 it was time to focus on something new and I became the Global Business & Technology Evangelist at the digital commerce visionairy Spryker.`,
   },
 ];
-
-// Check for reduced motion preference
-const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-const shouldReduceMotion =
-  typeof window !== "undefined"
-    ? window.matchMedia(reducedMotionQuery).matches
-    : false;
 ---
 
 <section

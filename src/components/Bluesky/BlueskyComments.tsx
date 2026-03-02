@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "bluesky-comments/bluesky-comments.css";
 import {
   BlueskyComments as BlueskyCommentsLib,

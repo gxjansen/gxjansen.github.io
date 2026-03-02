@@ -8,8 +8,6 @@
  * ! If the icon is at src/icons/tabler/paint.svg then you put in "tabler/paint"
  */
 
-import { Icon } from "astro-icon";
-
 // components
 import FeatureCard from "@components/FeatureCard/FeatureCardSmall.astro";
 import Badge from "@components/Badge/Badge.astro";
@@ -38,13 +36,6 @@ const featureData: FeatureData[] = [
     text: `I help companies restructure around community-led growth, aligning engineering, marketing, and business development for ecosystem success. This includes designing measurement frameworks, incentive models, and cross-functional processes that scale community impact without proportional resource increases.`,
   },
 ];
-
-// Check for reduced motion preference
-const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-const shouldReduceMotion =
-  typeof window !== "undefined"
-    ? window.matchMedia(reducedMotionQuery).matches
-    : false;
 ---
 
 <section
@@ -70,7 +61,7 @@ const shouldReduceMotion =
       aria-label="Services grid"
     >
       {
-        featureData.map((feature, idx) => (
+        featureData.map((feature) => (
           <div role="listitem">
             <FeatureCard
               title={feature.title}
@@ -138,7 +129,7 @@ const shouldReduceMotion =
           id="feature-cards-container"
         >
           {
-            featureData.map((feature, idx) => (
+            featureData.map((feature) => (
               <div class="scroll-item" role="listitem">
                 <FeatureCard
                   title={feature.title}
@@ -157,7 +148,7 @@ const shouldReduceMotion =
       </div>
     </div>
 
-    <script define:vars={{ totalItems: featureData.length }}>
+    <script is:inline define:vars={{ totalItems: featureData.length }}>
       // Handle carousel navigation
       const wrapper = document.querySelector("#feature-cards-carousel");
       const container = wrapper?.querySelector("#feature-cards-container");

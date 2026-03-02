@@ -8,7 +8,7 @@ interface Props {
   rest?: any; // catch-all for any additional parameters, such as "aria-label"
 }
 
-const { class: className, ...rest } = Astro.props as Props;
+const { class: className } = Astro.props as Props;
 ---
 
 <button

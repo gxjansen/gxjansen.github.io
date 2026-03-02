@@ -39,8 +39,8 @@ const {
   noindex = false,
 } = Astro.props as GenProps | BlogProps;
 
-let optimizedImage;
-let jsonLD;
+let optimizedImage: any;
+let jsonLD: any;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 // if this is a blog page we do things differently
@@ -156,7 +156,7 @@ const formatDate = (date: Date | undefined) => {
       <meta
         name="author"
         content={
-          Astro.props.authors?.map((author) => author.data.name).join(", ") ||
+          Astro.props.authors?.map((author: { data: { name: string } }) => author.data.name).join(", ") ||
           siteData.author.name
         }
       />

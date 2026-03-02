@@ -52,7 +52,7 @@ if (remainder === 0) {
     {
       faqCols.map((faqCol) => (
         <div class="flex w-full flex-col gap-10">
-          {faqCol.map(({ question, answer }, idx) => (
+          {faqCol.map(({ question, answer }) => (
             <FaqCard {question} {answer} />
           ))}
         </div>

@@ -108,7 +108,7 @@ function extractUrlsFromMarkdown(
 
   // Match markdown links: [text](url)
   const markdownLinkRegex = /\[([^\]]*)\]\((https?:\/\/[^)]+)\)/g;
-  let match;
+  let match: RegExpExecArray | null;
   while ((match = markdownLinkRegex.exec(content)) !== null) {
     const url = match[2].trim();
     if (!seenUrls.has(url)) {

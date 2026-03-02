@@ -12,7 +12,6 @@ import ColleagueTestimonialCard from "./ColleagueTestimonialCard.astro";
 // data
 import {
   getRandomTestimonials,
-  colleagueTestimonials,
 } from "@config/colleagueTestimonialData";
 
 // Get initial testimonials for SSR (will be replaced client-side)
@@ -43,7 +42,7 @@ const initialTestimonials = getRandomTestimonials(4);
       class="grid gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-2 xl:grid-cols-2"
     >
       {
-        initialTestimonials.map((testimonial, index) => (
+        initialTestimonials.map((testimonial) => (
           <div
             data-testimonial-id={testimonial.id}
             class="testimonial-card-wrapper"
@@ -94,7 +93,7 @@ const initialTestimonials = getRandomTestimonials(4);
     // Build HTML for each testimonial card with AOS attributes
     const cardsHTML = testimonials
       .map(
-        (testimonial, index) => `
+        (testimonial) => `
       <div data-testimonial-id="${testimonial.id}" class="testimonial-card-wrapper">
         <article class="colleague-testimonial-card bg-base-50 dark:bg-base-800 rounded-xl shadow-md p-4 sm:p-6 h-full flex flex-col transition-all duration-300 hover:shadow-lg">
           <blockquote class="flex-grow mb-6">

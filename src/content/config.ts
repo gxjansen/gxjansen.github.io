@@ -5,7 +5,7 @@ import { defineCollection, z } from "astro:content";
  */
 const presentations = defineCollection({
   type: "content",
-  schema: ({ image }) =>
+  schema: () =>
     z.object({
       isHidden: z.boolean(), // Make isHidden required and strictly boolean
       title: z.string().optional(), // Make title optional

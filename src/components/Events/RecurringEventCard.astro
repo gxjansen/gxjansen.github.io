@@ -26,16 +26,6 @@ const endYear = new Date(lastEvent.date).getFullYear();
 const dateRange =
   startYear === endYear ? `${startYear}` : `${startYear} - ${endYear}`;
 
-// Count events per year for the summary
-const eventsByYear = events.reduce(
-  (acc, event) => {
-    const year = new Date(event.date).getFullYear();
-    acc[year] = (acc[year] || 0) + 1;
-    return acc;
-  },
-  {} as Record<number, number>,
-);
-
 const WrapperTag = url ? "a" : "div";
 const wrapperProps = url
   ? {

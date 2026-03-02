@@ -14,7 +14,7 @@
  *   BLUESKY_APP_PASSWORD - App password from https://bsky.app/settings/app-passwords
  */
 
-import { BskyAgent, RichText } from '@atproto/api';
+import { AtpAgent, RichText } from '@atproto/api';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -126,7 +126,7 @@ async function createBlueskyPost(agent, title, url) {
   let embed = undefined;
   try {
     // Use Bluesky's link card resolver
-    const cardData = await agent.app.bsky.embed.external.main({
+    const _cardData = await agent.app.bsky.embed.external.main({
       external: {
         uri: url,
         title: title,
@@ -213,7 +213,7 @@ async function main() {
 
   // Login to Bluesky
   console.log(`\nLogging in as ${handle}...`);
-  const agent = new BskyAgent({ service: 'https://bsky.social' });
+  const agent = new AtpAgent({ service: 'https://bsky.social' });
 
   try {
     await agent.login({ identifier: handle, password });

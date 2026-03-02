@@ -57,12 +57,6 @@ Each role reinforced the same insight: understanding why people behave the way t
   },
 ];
 
-// Check for reduced motion preference
-const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-const shouldReduceMotion =
-  typeof window !== "undefined"
-    ? window.matchMedia(reducedMotionQuery).matches
-    : false;
 ---
 
 <section

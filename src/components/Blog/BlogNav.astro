@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getLocaleFromUrl } from "@js/localeUtils";
 
 interface Props {
   currentSlug: string;
@@ -8,7 +7,6 @@ interface Props {
 }
 
 const { currentSlug, posts } = Astro.props;
-const currLocale = getLocaleFromUrl(Astro.url);
 
 // Sort posts by date, newest first
 const sortedPosts = posts.sort(

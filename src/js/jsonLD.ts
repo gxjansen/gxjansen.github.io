@@ -143,7 +143,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
       return authorSchema;
     });
 
-    let authorsJsonLd;
+    let authorsJsonLd: any;
 
     if (authorsJsonLdArray.length === 1) {
       authorsJsonLd = authorsJsonLdArray[0];

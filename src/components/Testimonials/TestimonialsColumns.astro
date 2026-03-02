@@ -3,8 +3,6 @@
  * * Testimonials section columns (not swiper)
  */
 
-import { Icon } from "astro-icon";
-
 // components
 import TestimonialCard from "./TestimonialItemCard.astro";
 import Badge from "@components/Badge/Badge.astro";
@@ -34,7 +32,7 @@ const testimonialData = getTranslatedData("testimonialData", currLocale);
           id="trigger-testimonial-cards"
         >
           {
-            testimonialData.map((testimonial, idx) => (
+            testimonialData.map((testimonial) => (
               <TestimonialCard {...testimonial} />
             ))
           }

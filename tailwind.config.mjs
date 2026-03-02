@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-import colors from "tailwindcss/colors";
 import typography from "@tailwindcss/typography";
 import forms from "@tailwindcss/forms";
 
@@ -12,7 +11,7 @@ export default {
       "./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}",
     ],
     extract: {
-      markdown: content => {
+      markdown: _content => {
         // Don't process markdown files - let MDX handle it
         return [];
       }

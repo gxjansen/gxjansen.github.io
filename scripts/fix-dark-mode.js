@@ -2,11 +2,6 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 // Color mappings for hardcoded values to Tailwind classes
 const colorMappings = {
@@ -105,7 +100,7 @@ function fixShadowsAndGradients(line) {
     if (line.includes(pattern)) {
       newLine = newLine.replace(
         /style="([^"]*)"/g,
-        (match, style) => {
+        (_match, style) => {
           const newStyle = style.replace(pattern, '').trim();
           return newStyle ? `style="${newStyle}" class="${replacement}"` : `class="${replacement}"`;
         }
@@ -125,7 +120,7 @@ function fixHardcodedColors(line) {
     if (styleRegex.test(line)) {
       newLine = newLine.replace(
         /style="([^"]*)"/g,
-        (match, style) => {
+        (_match, style) => {
           const newStyle = style.replace(color, '');
           return newStyle.trim() ? `style="${newStyle}"` : `class="${replacement}"`;
         }

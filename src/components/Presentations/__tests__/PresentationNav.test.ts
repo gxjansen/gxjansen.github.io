@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { parseHTML } from "../../../test/astro-test-utils";
 
 describe("PresentationNav", () => {
-  const mockPresentations = [
+  const _mockPresentations = [
     {
       slug: "presentation-1",
       data: { title: "Presentation 1" },

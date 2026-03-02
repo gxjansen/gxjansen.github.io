@@ -102,7 +102,7 @@ describe("PodcastCard", () => {
   });
 
   it("renders fallback image when imageUrl is not provided", () => {
-    const episode = createMockPodcastEpisode({ imageUrl: undefined });
+    const _episode = createMockPodcastEpisode({ imageUrl: undefined });
 
     const html = `
       <div class="flex-shrink-0">
@@ -123,7 +123,7 @@ describe("PodcastCard", () => {
 
   it("truncates long descriptions", () => {
     const longDescription = "A".repeat(200);
-    const episode = createMockPodcastEpisode({ description: longDescription });
+    const _episode = createMockPodcastEpisode({ description: longDescription });
 
     const html = `
       <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
@@ -142,7 +142,7 @@ describe("PodcastCard", () => {
 
   it("does not truncate short descriptions", () => {
     const shortDescription = "A".repeat(100);
-    const episode = createMockPodcastEpisode({ description: shortDescription });
+    const _episode = createMockPodcastEpisode({ description: shortDescription });
 
     const html = `
       <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">

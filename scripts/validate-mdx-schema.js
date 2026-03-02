@@ -12,7 +12,6 @@ const presentationsDir = path.join(__dirname, '../src/content/presentations');
 
 // Required fields
 const requiredFields = ['title'];
-const optionalFields = ['duration', 'intendedAudience', 'isWorkshop', 'isFeatured', 'image', 'slideshareKey', 'youtubeId', 'relatedEventSlugs'];
 
 // Process all MDX files
 const files = fs.readdirSync(presentationsDir)

@@ -10,12 +10,6 @@ import Badge from "@components/Badge/Badge.astro";
 const desktopImagePath = "/images/guido-left.png";
 const mobileImagePath = "/images/guido-up.png";
 
-// Check for reduced motion preference
-const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-const shouldReduceMotion =
-  typeof window !== "undefined"
-    ? window.matchMedia(reducedMotionQuery).matches
-    : false;
 ---
 
 <section

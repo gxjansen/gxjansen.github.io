@@ -1,12 +1,8 @@
 // utils
 import {
   removeLocaleFromSlug,
-  filterCollectionByLanguage,
 } from "@js/localeUtils";
 import { slugify } from "@js/textUtils";
-
-// data
-import { locales } from "@config/siteSettings.json";
 
 /**
  * Interface for counted item results

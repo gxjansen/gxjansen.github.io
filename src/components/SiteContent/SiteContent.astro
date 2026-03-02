@@ -8,8 +8,6 @@
  * ! You can copy to actual SVG into src/icons, name it whatever, and use similar to below example "tabler/calendar-check"
  */
 
-import { Icon } from "astro-icon";
-
 // components
 import ContentCard from "@components/SiteContent/ContentCard.astro";
 import Badge from "@components/Badge/Badge.astro";
@@ -150,7 +148,7 @@ const featureData: FeatureData[] = [
             </div>
           </div>
 
-          <script define:vars={{ totalItems: featureData.length }}>
+          <script is:inline define:vars={{ totalItems: featureData.length }}>
             // Handle carousel navigation
             const wrapper = document.querySelector('.scroll-container-wrapper');
             const container = wrapper?.querySelector('.scroll-container');

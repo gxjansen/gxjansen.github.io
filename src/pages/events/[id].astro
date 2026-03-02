@@ -6,12 +6,10 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import Badge from "@components/Badge/Badge.astro";
 import RelatedPresentations from "@components/RelatedPresentations/RelatedPresentations.astro";
-import EventCard from "@components/Events/EventCard.astro";
 
 // utils
 import { getAllEvents } from "@utils/eventUtils";
 import {
-  getEventById,
   getPresentationUrl,
 } from "@utils/eventPresentationRelations";
 import type { Event } from "@utils/eventUtils";
@@ -29,7 +27,7 @@ export async function getStaticPaths() {
 }
 
 // Get event data
-const { event, presentationUrl } = Astro.props as {
+const { event } = Astro.props as {
   event: Event;
   presentationUrl?: string;
 };

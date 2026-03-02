@@ -38,7 +38,7 @@ const testimonialData = getTranslatedData("testimonialData", currLocale);
         <div class="swiper-wrapper">
           <!-- Slides -->
           {
-            testimonialData.map((testimonial, idx) => (
+            testimonialData.map((testimonial) => (
               <div class="swiper-slide">
                 <TestimonialItemQuotes {...testimonial} />
               </div>

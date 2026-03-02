@@ -6,7 +6,6 @@
  */
 import { Icon } from "astro-icon";
 import { Image } from "astro:assets";
-import { getRelativeLocaleUrl } from "astro:i18n";
 import SocialLinks from "@components/SocialLinks/SocialLinks.astro";
 
 // components
@@ -22,13 +21,6 @@ import heroImage from "@assets/images/guido-couch.jpg";
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
-
-// Check for reduced motion preference
-const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
-const shouldReduceMotion =
-  typeof window !== "undefined"
-    ? window.matchMedia(reducedMotionQuery).matches
-    : false;
 ---
 
 <section

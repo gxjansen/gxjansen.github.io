@@ -8,14 +8,10 @@
  * ! If the icon is at src/icons/tabler/paint.svg then you put in "tabler/paint"
  */
 
-import { getRelativeLocaleUrl } from "astro:i18n";
 import { Icon } from "astro-icon";
 
 // components
 import Button from "@components/Button/Button.astro";
-
-// utils
-import { getLocaleFromUrl } from "@js/localeUtils";
 
 interface Props {
   icon: string; // icon string for astro-icon
@@ -27,8 +23,6 @@ interface Props {
 }
 
 const { icon, title, text, href, idx, ...rest } = Astro.props as Props;
-
-const currLocale = getLocaleFromUrl(Astro.url);
 ---
 
 <div {...rest} class="h-full">

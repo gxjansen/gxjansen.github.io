@@ -1,14 +1,11 @@
 ---
 import { type CollectionEntry, getEntries } from "astro:content";
 import { Image } from "astro:assets";
-import { getRelativeLocaleUrl } from "astro:i18n";
-import { YouTube } from "astro-embed";
 
 // main layout
 import BaseLayout from "./BaseLayout.astro";
 
 // components
-import Button from "@components/Button/Button.astro";
 import Category from "@components/Category/Category.astro";
 import BlogNav from "@components/Blog/BlogNav.astro";
 import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
@@ -17,7 +14,7 @@ import AuthorBioBox from "@components/Author/AuthorBioBox.astro";
 import BlueskyComments from "@components/Bluesky/BlueskyComments";
 
 // utils
-import { formatDate, humanize, slugify } from "@js/textUtils";
+import { formatDate, humanize } from "@js/textUtils";
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { useTranslations } from "@js/translationUtils";
 import { filterCategoriesByCount } from "@js/blogUtils";

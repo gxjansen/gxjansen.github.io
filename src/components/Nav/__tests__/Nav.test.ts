@@ -101,7 +101,7 @@ describe("Nav", () => {
   });
 
   it("handles dropdown navigation items", () => {
-    const navData = createMockNavData([
+    const _navData = createMockNavData([
       {
         title: "Services",
         href: "/services",

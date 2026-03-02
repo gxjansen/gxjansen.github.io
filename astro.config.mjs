@@ -5,7 +5,6 @@ import mdx from "@astrojs/mdx";
 import AutoImport from "astro-auto-import";
 import react from "@astrojs/react";
 import netlify from "@astrojs/netlify";
-import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { contentValidationPlugin } from './src/utils/content-validation-plugin.ts';
 

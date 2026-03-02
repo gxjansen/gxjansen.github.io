@@ -2,11 +2,6 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 // Text-related Tailwind classes that should have dark mode variants
 const textClasses = [
@@ -69,7 +64,7 @@ async function findAstroFiles(dir) {
   return astroFiles;
 }
 
-function checkLine(line, lineNumber, filePath) {
+function checkLine(line, lineNumber, _filePath) {
   // Skip lines that match excluded patterns
   if (excludedPatterns.some(pattern => line.includes(pattern))) {
     return [];

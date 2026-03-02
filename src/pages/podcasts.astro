@@ -1,11 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ServicesIcon from "@components/Services/ServicesIcon.astro";
-import PodcastFeed from "@components/Podcasts/PodcastFeed.astro";
-import type { PodcastEpisode } from "../types/podcast";
-
-// Episodes will be loaded client-side
-const latestEpisodes: PodcastEpisode[] = [];
 ---
 
 <BaseLayout
@@ -50,7 +45,7 @@ const latestEpisodes: PodcastEpisode[] = [];
 
           // Filter out episodes without valid links
           const validEpisodes = episodes.filter(
-            (episode) =>
+            (episode: { link: string; title: string }) =>
               episode.link &&
               episode.link.startsWith("https://share.transistor.fm/"),
           );
@@ -72,7 +67,7 @@ const latestEpisodes: PodcastEpisode[] = [];
           // Replace loading spinner with episodes
           container.innerHTML = validEpisodes
             .map(
-              (episode) => `
+              (episode: { link: string; title: string }) => `
             <div class="w-full bg-base-800 rounded-lg overflow-hidden mb-6">
               <iframe 
                 width="100%" 
