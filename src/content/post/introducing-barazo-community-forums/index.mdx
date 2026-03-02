@@ -1,0 +1,137 @@
+---
+title: "Barazo: community forums where members own their data"
+description: "I'm building an open source forum platform on the AT Protocol. Members log in with their Bluesky account, posts live on their own data server, and reputation follows them across communities."
+draft: false
+authors:
+  - gxjansen
+pubDate: 2026-02-14
+heroImage: ./heroImage.jpg
+heroImageAlt: "Abstract network of interconnected nodes in teal and purple on a dark background, representing decentralized community infrastructure"
+categories:
+  - Community
+  - Open Source
+  - DevRel
+---
+
+import { Image } from "astro:assets";
+import barazoBanner from "./barazo-banner.jpg";
+
+I've started communities from zero three (and a half) times now. Mambo/Joomla!, Dutchento (the Dutch Magento community), CRO.CAFE, Spryker's developer ecosystem. Each time, the same thing happened: years of member contributions, relationships, and reputation... locked inside a platform that neither I (as admin) or the members actually controlled.
+
+Enshittification all around. Slack continuously putting up all kinds of new restrictions on small/open-source communities (e.g. all your messages disappearing after 90 days), Discord adding mandatory ID verification, Vanilla getting more expensive every year. And Twitter... well...
+
+And your members? They start over every time they switch platforms. New account, new identity, zero history. No reputation you can bring with you. Moving to a better place is hard if you need to leave everything behind.
+
+And on top of that, AI-slop posts that are getting harder to counter. This is only going to get worse (by a lot).
+
+These patterns bugged me enough to try building something different. (Apparently "just build it yourself" is how my brain handles frustration.)
+
+## What is Barazo?
+
+<a href="https://barazo.forum">
+  <Image
+    src={barazoBanner}
+    alt="Barazo banner: Your identity. Your communities. Everywhere. Built on ATProtocol."
+  />
+</a>
+
+Barazo is an open source community forum built on the [AT Protocol](https://atproto.com/) (the protocol behind [Bluesky](https://bsky.app/)). Inspired by Joomla (which comes from "jumla"), the name comes from the Swahili word "baraza," meaning council or assembly. A place where people come together to discuss.
+
+Three things make it different from Discourse, Flarum, Circle, or any other forum platform:
+
+**1. Portable identity**
+
+Members log in with their AT Protocol account (like their Bluesky handle). No new account to create. Their identity works across every Barazo forum, and it belongs to them, not to any single community. A bit like how you only need a single Slack or Discord account to access all workspaces/servers.
+
+**2. User data ownership**
+
+When someone creates a topic or posts a reply, that content is written to their own Personal Data Server (PDS), not Barazo's database. Barazo maintains an index for fast searching and browsing, but the source of truth lives with you. If a forum shuts down, your content doesn't disappear with it. (You don't have to host your own PDS. Just create a Bluesky account and you're good.)
+
+**3. Cross-community reputation**
+
+Activity and contributions are tracked across forum instances (even self-hosted ones). A member who's helpful in three different communities carries that reputation with them. No current forum platform (or even Discord or Slack) does this because they're all isolated silos.
+
+## Why AT Protocol?
+
+I've written before about [building anti-fragile communities](/post/start-building-anti-fragile-communities/). Communities built on platforms you don't control are structurally fragile. One vendor decision can wipe out years of work.
+
+AT Protocol solves this at the protocol level. Identity is portable (you can move your account between providers). Data lives on personal data servers. And applications are "views" into the protocol data instead of walled gardens holding it hostage.
+
+ActivityPub (Mastodon, Lemmy) tried something similar but ran into sync problems. Lemmy's federation is fragile: comments routinely fail to sync between instances, and when an instance goes down, there's no way to recover what was lost. AT Protocol's architecture avoids this: user data lives on PDSs that are independent of any single app.
+
+The protocol is still young, but it already has 40M+ users through Bluesky. That's 40M+ people who can log into any Barazo forum without creating a new account.
+
+## How it works
+
+The architecture has three main pieces (I'll keep this brief... the repos have all the details):
+
+<img
+  src="/images/post/barazo-architecture.svg"
+  alt="Barazo architecture: three main components (Lexicons, AppView, Frontend) with user data flowing from PDS through the firehose to the AppView"
+/>
+
+**Lexicons** define the data structure. I've registered the `forum.barazo.*` namespace with record types for topics, replies, reactions, and user preferences. Think of them as the shared contract between all the pieces. Published as an [open source TypeScript package](https://github.com/barazo-forum/barazo-lexicons).
+
+**The AppView** (the [backend API](https://github.com/barazo-forum/barazo-api)) subscribes to the AT Protocol firehose through [Tap](https://github.com/bluesky-social/indigo), filtering for `forum.barazo.*` records. It indexes everything into PostgreSQL for fast reads, handles authentication via AT Protocol OAuth, and exposes a REST API for all forum operations.
+
+**The frontend** ([Next.js app](https://github.com/barazo-forum/barazo-web)) consumes that API and renders the forum. Server-side rendered, accessible (targeting WCAG 2.2 AA), with full-text search, moderation tools, notifications, and an admin panel.
+
+A nice bonus: every new topic can automatically cross-post to Bluesky with a link card back to the forum. Free distribution to the entire Bluesky network without extra work from members or moderators.
+
+## What's built so far
+
+This is alpha software, but it's functional. Staging environment is already up-and-running (Hetzner VPS, EU-hosted, privacy-first). Five repos, all open, all tested, and probably all in need of more eyeballs:
+
+- [barazo-lexicons](https://github.com/barazo-forum/barazo-lexicons): AT Protocol schemas + generated TypeScript types (MIT)
+- [barazo-api](https://github.com/barazo-forum/barazo-api): Fastify backend with OAuth, firehose, full REST API (AGPL-3.0)
+- [barazo-web](https://github.com/barazo-forum/barazo-web): Next.js frontend (MIT)
+- [barazo-deploy](https://github.com/barazo-forum/barazo-deploy): Docker Compose for self-hosting (MIT)
+
+The backend is AGPL (protecting the core from closed-source forks), while the frontend and lexicons are MIT (encouraging adoption and custom frontends).
+
+## What's next
+
+- **Migration tools**: CLI to import from Discourse, Flarum, and phpBB
+- **Managed hosting**: For communities that don't want to self-host (EUR 19-99/month)
+- **Plugin system**: Core features (search, notifications, moderation) are already built as plugins internally, which validates the architecture for third-party extensions
+- **Global aggregator**: barazo.forum itself will run in "global mode," showing activity across all Barazo forums, like a Reddit for the decentralized web
+
+## Why this stack?
+
+I wanted everything open source, EU-hostable, and something I could actually maintain as a solo builder. That led to:
+
+| **Layer**  | **Technology**                                             |
+| ---------- | ---------------------------------------------------------- |
+| Runtime    | Node.js 24 LTS, TypeScript (strict mode)                   |
+| Backend    | Fastify, Drizzle ORM, PostgreSQL 16, Valkey                |
+| Frontend   | Next.js 16, React 19, TailwindCSS, Radix UI                |
+| Protocol   | @atproto/api, @atproto/oauth-client-node, @atproto/tap     |
+| Search     | PostgreSQL full-text + pgvector (optional semantic search) |
+| Hosting    | Hetzner VPS + Bunny.net CDN (EU-based)                     |
+| Monitoring | GlitchTip (self-hosted, Sentry SDK compatible)             |
+
+Everything open source. Everything EU-hosted. No tracking, no ads, no engagement-for-extraction metrics.
+
+## Challenges
+
+**Adoption chicken-and-egg.** AT Protocol has 40M+ users through Bluesky, but "log in with Bluesky" is still unfamiliar to most people. I'm betting on the protocol growing, but it's a bet.
+
+**Moderation at the AppView level.** Since Barazo doesn't control users' data servers, all moderation happens at the indexing layer. It can remove content from its index, but can't delete it from someone's PDS. That's a feature (censorship resistance), but it means moderation requires more thought. I've built first-post queues, burst detection, cross-community ban propagation, and new-account trust ramps to handle this.
+
+**Solo builder.** I'm building this with AI assistance (more on that in a separate post), which is great and also limiting. The architecture is solid, the code is tested, but there's only one person making product decisions. I probably have blind spots.
+
+## How you can help
+
+This is alpha. Best time to tell me something's wrong is now, before it gets harder to change.
+
+If you build communities: does portable identity + user data ownership matter to you? What am I missing?
+
+If you write code: the [repos are open](https://github.com/orgs/barazo-forum/repositories). Issues, PRs, architectural feedback... all welcome.
+
+Or just tell me what you think. Comment below, DM, whatever works.
+
+Check it out at [barazo.forum](https://barazo.forum) (for now just a direct link to the Github org, website is pending)
+
+What would convince you to move your community to a platform where members actually own their data?
+
+PS: I'll write about the Barazo/ATproto reputation system next. This is not necessarily a forum-specific issue, but in these days of rapidly growing AI-slop content an important one to address from the foundational level.
