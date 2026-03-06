@@ -143,11 +143,17 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <MarkdownAlternateLink patterns={["/post/"]} />
 
 {/* Standard.site document verification (ATProto long-form publishing) */}
-{standardSiteConfig.enabled && type === "blog" && (() => {
-  const slug = Astro.url.pathname.replace(/^\/post\//, '').replace(/\/$/, '');
-  const href = `at://${standardSiteConfig.did}/site.standard.document/${slug}`;
-  return <link rel="site.standard.document" href={href} />;
-})()}
+{
+  standardSiteConfig.enabled &&
+    type === "blog" &&
+    (() => {
+      const slug = Astro.url.pathname
+        .replace(/^\/post\//, "")
+        .replace(/\/$/, "");
+      const href = `at://${standardSiteConfig.did}/site.standard.document/${slug}`;
+      return <link rel="site.standard.document" href={href} />;
+    })()
+}
 
 <!-- Performance optimizations -->
 <PassiveEvents />
