@@ -137,6 +137,11 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <meta name="generator" content={Astro.generator} />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
+<!-- Markdown alternate for AI agents (blog posts only) -->
+{type === "blog" && Astro.url.pathname.startsWith("/post/") && (
+  <link rel="alternate" type="text/markdown" href={`${Astro.url.pathname.replace(/\/$/, '')}.md`} />
+)}
+
 <!-- Performance optimizations -->
 <PassiveEvents />
 
