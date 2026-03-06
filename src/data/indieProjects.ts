@@ -34,7 +34,7 @@ export const indieProjects: IndieProject[] = [
   {
     name: "astro-md-alternate",
     description:
-      "Astro integration that serves markdown versions of your content pages for AI agents and LLMs. Adds .md endpoints and auto-discovery via link rel=\"alternate\" tags.",
+      'Astro integration that serves markdown versions of your content pages for AI agents and LLMs. Adds .md endpoints and auto-discovery via link rel="alternate" tags.',
     mainImage: "tabler:markdown",
     link: "https://www.npmjs.com/package/astro-md-alternate",
     iconBgColor: "bg-[#BC52EE]",
