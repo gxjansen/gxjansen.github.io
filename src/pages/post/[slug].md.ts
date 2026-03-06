@@ -15,17 +15,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
  * to produce clean, readable markdown for AI agents and readers.
  */
 function mdxToMarkdown(body: string): string {
-  return body
-    .split("\n")
-    // Remove import statements
-    .filter((line) => !line.match(/^import\s+.*from\s+["']/))
-    // Remove standalone JSX component tags (self-closing and block)
-    .filter((line) => !line.match(/^<[A-Z]\w*\s[^>]*\/>\s*$/))
-    .filter((line) => !line.match(/^<\/?[A-Z]\w*\s*>\s*$/))
-    .join("\n")
-    // Collapse 3+ consecutive blank lines into 2
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
+  return (
+    body
+      .split("\n")
+      // Remove import statements
+      .filter((line) => !line.match(/^import\s+.*from\s+["']/))
+      // Remove standalone JSX component tags (self-closing and block)
+      .filter((line) => !line.match(/^<[A-Z]\w*\s[^>]*\/>\s*$/))
+      .filter((line) => !line.match(/^<\/?[A-Z]\w*\s*>\s*$/))
+      .join("\n")
+      // Collapse 3+ consecutive blank lines into 2
+      .replace(/\n{3,}/g, "\n\n")
+      .trim()
+  );
 }
 
 function formatDate(date: string | Date): string {
@@ -42,9 +44,7 @@ export const GET: APIRoute = ({ props }) => {
   const frontmatterLines = [`title: "${title.replace(/"/g, '\\"')}"`];
 
   if (description) {
-    frontmatterLines.push(
-      `description: "${description.replace(/"/g, '\\"')}"`,
-    );
+    frontmatterLines.push(`description: "${description.replace(/"/g, '\\"')}"`);
   }
 
   frontmatterLines.push(`date: ${formatDate(pubDate)}`);
