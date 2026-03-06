@@ -156,8 +156,9 @@ const formatDate = (date: Date | undefined) => {
       <meta
         name="author"
         content={
-          Astro.props.authors?.map((author: { data: { name: string } }) => author.data.name).join(", ") ||
-          siteData.author.name
+          Astro.props.authors
+            ?.map((author: { data: { name: string } }) => author.data.name)
+            .join(", ") || siteData.author.name
         }
       />
       {formatDate(Astro.props.postFrontmatter?.publishDate) && (

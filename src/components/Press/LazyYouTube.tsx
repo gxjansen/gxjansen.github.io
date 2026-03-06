@@ -47,7 +47,7 @@ export default function LazyYouTube({ videoId, title }: Props) {
           src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
           title={title}
           className="absolute inset-0 h-full w-full"
-          style={{ border: 'none' }}
+          style={{ border: "none" }}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />

@@ -10,9 +10,7 @@ import Badge from "@components/Badge/Badge.astro";
 import ColleagueTestimonialCard from "./ColleagueTestimonialCard.astro";
 
 // data
-import {
-  getRandomTestimonials,
-} from "@config/colleagueTestimonialData";
+import { getRandomTestimonials } from "@config/colleagueTestimonialData";
 
 // Get initial testimonials for SSR (will be replaced client-side)
 const initialTestimonials = getRandomTestimonials(4);

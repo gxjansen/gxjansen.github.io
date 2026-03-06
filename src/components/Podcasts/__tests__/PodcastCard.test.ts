@@ -142,7 +142,9 @@ describe("PodcastCard", () => {
 
   it("does not truncate short descriptions", () => {
     const shortDescription = "A".repeat(100);
-    const _episode = createMockPodcastEpisode({ description: shortDescription });
+    const _episode = createMockPodcastEpisode({
+      description: shortDescription,
+    });
 
     const html = `
       <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">

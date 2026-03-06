@@ -1,7 +1,5 @@
 // utils
-import {
-  removeLocaleFromSlug,
-} from "@js/localeUtils";
+import { removeLocaleFromSlug } from "@js/localeUtils";
 import { slugify } from "@js/textUtils";
 
 /**

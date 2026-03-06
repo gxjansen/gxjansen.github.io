@@ -23,13 +23,7 @@ const {
   class: className,
   ...rest
 } = Astro.props as Props;
-const {
-  title,
-  description,
-  categories = [],
-  pubDate,
-  heroImage,
-} = post.data;
+const { title, description, categories = [], pubDate, heroImage } = post.data;
 
 const currLocale = getLocaleFromUrl(Astro.url);
 
