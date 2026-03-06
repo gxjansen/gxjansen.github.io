@@ -60,6 +60,12 @@
   # Only redirect paths without file extensions and not starting with _
   conditions = {path = ["!/*.*", "!/_*"]}
 
+# Serve .well-known files directly (before catch-all)
+[[redirects]]
+  from = "/.well-known/*"
+  to = "/.well-known/:splat"
+  status = 200
+
 # Function handling (keep this last)
 [[redirects]]
   from = "/*"
