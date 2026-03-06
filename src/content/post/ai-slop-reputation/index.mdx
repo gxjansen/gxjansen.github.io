@@ -1,0 +1,131 @@
+---
+title: "AI slop is drowning communities. Reputation systems can fix it."
+description: "AI-generated junk content is flooding every community platform. Traditional moderation can't keep up. Portable, cross-community reputation is a structural fix that addresses the root cause."
+draft: false
+authors:
+  - gxjansen
+pubDate: 2026-03-03
+heroImage: ./heroImage.jpg
+heroImageAlt: "3D render of a Buddha statue dissolving into digital particles"
+categories:
+  - AI
+  - Community
+  - Open Source
+---
+
+In my [last post introducing Barazo](/post/introducing-barazo-community-forums/), I mentioned I'd write about the reputation system next so here it is. This turned out to be less about [Barazo](https://barazo.forum/) specifically and more about a problem that affects every online community and social media platform right now.
+
+## The slop problem
+
+I don't think I have to explain what AI slop is and why that's a issue? Generated content that exists to fill space, game algorithms, or fake engagement. And it's getting worse fast.
+
+Slop and "gaming the algorythms" of course existed before AI, but when content generation nears 0 cost, and the tools to detect it fall behind, the volume explodes.
+
+To be clear: not all AI generated content it is bad. But the ratio of generated noise to genuine signal is climbing in every community I participate in (hello Linkedin, YouTube, Reddit and microblogging platforms). And then there's the problem of content pretending to be human but is not. Like I'm fine with getting an AI answer on a productforum that is specificaly trained to address issues around this product and can instantly get me on the right path. I just want to move forward and don't are who the answer gave. But in many other instances, the source dóes matter.
+
+I've run communities on Slack, Discord, Vanilla, and self-hosted forums (remember vBulletin and phpBB? #YesImOld). The moderation load has changed. The old playbook (spam filters, manual review, rate limiting) was built for human-speed abuse. It doesn't work when one person with a script can flood your forum with plausible-looking posts faster than your mod team can read them.
+
+## Why traditional moderation fails
+
+Most community platforms handle moderation at the content level. Flag a post. Review a post. Remove a post. Repeat.
+
+This is a losing game against AI slop.
+
+Volume is one part. A human moderator can review maybe 100 posts per hour. A slop generator can produce 100 posts per minute. The math doesn't work.
+
+Then there's quality: where early AI spam was obviously fake, current slop is harder to spot. It uses correct grammar, references real concepts, and sometimes even makes valid points 😅. The tells are subtle, and I would only expect the LLMs te become better at it since that is quite litteraly what they are being designed to do.
+
+And then there is the persistence:
+
+- Ban an account > they create another.
+- IP blocks > VPN
+- Email verification > Disposable addresses.
+  Every barrier you add costs real members more than it costs bad actors. They just update their scripts once and move on.
+
+Now don't get me wrong: content-level moderation is necessary but these days it's not enough by a long shot.
+
+## Account-level reputation helps (but only locally)
+
+The bigger social media platforms have already moved on: instead of evaluating each post in isolation, they look at the person posting it. Account age, contribution history, how the community responded to their previous posts. Stack Overflow's reputation system, Reddit's karma, Discourse's trust levels: they all work this way.
+
+[Discourse](https://www.discourse.org/) probably has the most thought-out system here. Five trust levels (TL0 through TL4), where new users start sandboxed (limited links, images, and posting frequency) and earn privileges by actually reading and participating. TL3 status requires months of consistent engagement and is revocable if you go inactive. They even added [LLM-based spam detection](https://meta.discourse.org/t/ai-powered-spam-detection/343543) in late 2024 after Akismet stopped catching AI-generated content. It scans posts from low-trust users and checks whether they're actually engaging with the thread or just producing filler.
+
+And it works, IF you have scale. A platform like LinkedIn or Reddit has millions of users and tons of activity. A three-year-old account with hundreds of helpful answers gets treated differently than one created five minutes ago. There's enough data to make that distinction. And a mid-sized Discourse forum with a few thousand active members generates enough signal for the trust levels to be meaningful.
+
+On smaller forums and communities you don't have that luxury. When most of your active members are relatively new and have a handful of posts, account-level reputation doesn't give you much signal. You (or your algorythms) are basically guessing.
+
+Those big platforms don't need cross-platform reputation. They have enough internal data. But smaller communities? They'd benefit a lot from knowing that a new member already has a solid track record somewhere else.
+
+And it creates a massive opening for AI slop. If everyone starts at zero everywhere, there's no way to tell a new genuine member from a new bot account.
+
+## Portable reputation
+
+What if trust could follow you across communities? A verifiable history of contributions that you control, not locked inside one platform's database. (I keep calling it "portable reputation" because that's the best label I have... open to better names 😅)
+
+This idea isn't new. Klout tried it from 2008 to 2018, aggregating social media activity into a single 0-100 influence score. It got acquired for $200M and then shut down. The problems: an opaque algorithm that was trivially gamed (follower count was basically the score), a single context-free number that meant nothing (Goodhart's Law in action), and dependency on platform APIs that could cut access anytime. Kred, PeerIndex, and Skorr tried the same model and failed the same way.
+
+The lesson from all of them: a centralized third party extracting a single score across contexts is inherently meaningless. Reputation only means something within the context where the action happened. So what I'm building works differently: reputation scores stay local to each community. What travels between communities are trust signals and labels, not a single number. Each community decides how to interpret those signals.
+
+When a member logs into a new community, their history from other communities is visible. The content stays with each community, but the reputation signal travels: how much they contributed, how the community received it, and whether they were flagged for abuse.
+
+So what changes with this?
+
+New accounts start with zero trust. A reasonable default. First posts go through review. As contributions prove genuine, restrictions loosen automatically. At Spryker we built something similar (new-account trust ramps), and it worked well even without cross-community data.
+
+Established members get the benefit of the doubt. Someone with verified contributions across three communities doesn't need their posts pre-screened. They've earned that through behavior, not time.
+
+Slop accounts can't fake history. You can generate a thousand plausible forum posts. You can't fake two years of helpful contributions that other real people actually engaged with across independent communities. This is the bit that makes the biggest difference, I think.
+
+And bad behavior has lasting consequences. If you trash your reputation in one community, that information is available to other communities. It's signal, not an automatic ban. Each community still makes its own moderation decisions.
+
+## How this works on AT Protocol
+
+I'm building Barazo on [AT Protocol](https://atproto.com/) because the protocol's architecture makes portable reputation possible without a central authority.
+
+Identity is decentralized. Your AT Protocol identity (your Bluesky handle) isn't owned by any single application. You can move it between providers. Your reputation is tied to an identity you control, not an account some company controls.
+
+Data is user-owned. When you post in a Barazo forum, that content is written to your Personal Data Server (PDS). Every topic, reply, and reaction is a record on your PDS that you control. Barazo's backend indexes a copy for fast browsing and search, but the PDS is the source of truth. No platform can inflate or erase your contributions because they don't control the source data.
+
+AT Protocol's firehose broadcasts all public PDS records, and that's what makes cross-community reputation possible. When you like a post in Forum A, that reaction record propagates through the firehose and any other forum's backend can index it. The raw activity data (posts, replies, reactions you gave and received) is accessible to the whole network, not locked in one forum's database.
+
+But the reputation score itself is different. Scores are never stored on your PDS. They're computed server-side by each forum's backend, which cross-references your activity against everyone else's across the network. So while you own all the raw inputs, each forum computes its own reputation scores from the shared data.
+
+Now you might wonder: if users own their PDS, can't they fake the inputs to inflate their reputation? They could write fake reaction records to their PDS, sure. But reputation doesn't come from your own reactions. It comes from how other real people responded to your contributions, and those reactions live on their PDS, not yours. Creating fake accounts to upvote yourself doesn't work either: the trust algorithm (EigenTrust) only propagates reputation from accounts that are themselves already trusted, and cluster detection catches coordinated groups.
+
+Scoring looks at multiple signals. Reputation isn't a post count. It looks at how others responded (genuine engagement vs. ignored posts), consistency over time, and diversity across communities. Gaming one metric is easy. Gaming all of them simultaneously across independent communities... much harder.
+
+Each forum instance decides how much weight to give external reputation. A technical community might care most about contribution quality in similar communities. A local community might prioritize local participation. The reputation data is shared; the interpretation is local.
+
+And reputation isn't permanent. Old contributions matter less than recent ones. If someone had a bad period, sustained good behavior rebuilds trust. People change. The system should reflect that.
+
+## Beyond forums
+
+AI slop is hitting every platform. Forums, social media, comment sections, all of it. And the reputation problem (starting from zero everywhere, trust locked in silos) exists across the entire internet.
+
+The work I'm doing with Barazo is a starting point. AT Protocol's open nature means any application can participate in the reputation ecosystem. A comment on a Bluesky post, a contribution to an open source project, a helpful answer in a forum... these could all feed into a portable reputation that you carry with you.
+
+That's where this is going. Switch community platforms without losing everything you've built. Moderators get signal about whether a post is probably genuine before they even read it. The protocol infrastructure to build this already exists.
+
+## What this doesn't solve
+
+Cross-community reputation is harder to game than single-platform systems, but coordinated groups could still inflate each other's scores. The multi-signal scoring and decay mechanisms help. No system is bulletproof though.
+
+Privacy is a real tradeoff. Portable reputation means your activity in one community is visible to others. That's the point, but it's also a fair concern. The system needs controls for what you share, where, and with whom. I'm still working through the right defaults here.
+
+And even with perfect reputation data, communities still need human moderators making judgment calls. Reputation adds signal, it doesn't replace human decisions.
+
+Then there's adoption. A reputation system is only as useful as the network participating in it. One forum's reputation data is a data point. A thousand forums' reputation data is an ecosystem. Getting there takes time. (Sound familiar? Same chicken-and-egg problem every protocol faces.)
+
+## Where this is going
+
+AI-generated content is only going to increase. The models are getting better, cheaper, and more accessible. Within a year or two, I think the difference between human-written and AI-generated text will be nearly undetectable by automated tools.
+
+Content-level moderation can't win this arms race alone. Reputation systems that carry real weight across communities, tied to identities that people actually invest in, make it structurally unattractive to produce slop. That's the kind of solution I think we're missing.
+
+The current internet architecture (isolated platforms, siloed identities, starting from zero everywhere) was built before AI content generation existed. It doesn't fit a world where content is cheap and trust is scarce.
+
+I'd rather build something that works for the world we're actually living in than keep patching what we have.
+
+[Barazo is open source](https://github.com/orgs/singi-labs/repositories) and the reputation system is being built in the open. If you're working on similar problems or have thoughts on the approach, I'd like to hear from you.
+
+What's your community's strategy for dealing with AI-generated content? And does portable reputation sound like a solution you'd actually use?

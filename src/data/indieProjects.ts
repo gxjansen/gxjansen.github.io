@@ -18,7 +18,7 @@ export const indieProjects: IndieProject[] = [
     mainImage: "/icons/barazo-dark.svg",
     link: "https://barazo.forum",
     iconBgColor: "bg-[#1a1a2e]",
-    githubUrl: "https://github.com/barazo-forum",
+    githubUrl: "https://github.com/singi-labs",
     license: "MIT / AGPL-3.0",
   },
   {

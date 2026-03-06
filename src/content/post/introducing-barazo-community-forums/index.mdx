@@ -71,11 +71,11 @@ The architecture has three main pieces (I'll keep this brief... the repos have a
   alt="Barazo architecture: three main components (Lexicons, AppView, Frontend) with user data flowing from PDS through the firehose to the AppView"
 />
 
-**Lexicons** define the data structure. I've registered the `forum.barazo.*` namespace with record types for topics, replies, reactions, and user preferences. Think of them as the shared contract between all the pieces. Published as an [open source TypeScript package](https://github.com/barazo-forum/barazo-lexicons).
+**Lexicons** define the data structure. I've registered the `forum.barazo.*` namespace with record types for topics, replies, reactions, and user preferences. Think of them as the shared contract between all the pieces. Published as an [open source TypeScript package](https://github.com/singi-labs/barazo-lexicons).
 
-**The AppView** (the [backend API](https://github.com/barazo-forum/barazo-api)) subscribes to the AT Protocol firehose through [Tap](https://github.com/bluesky-social/indigo), filtering for `forum.barazo.*` records. It indexes everything into PostgreSQL for fast reads, handles authentication via AT Protocol OAuth, and exposes a REST API for all forum operations.
+**The AppView** (the [backend API](https://github.com/singi-labs/barazo-api)) subscribes to the AT Protocol firehose through [Tap](https://github.com/bluesky-social/indigo), filtering for `forum.barazo.*` records. It indexes everything into PostgreSQL for fast reads, handles authentication via AT Protocol OAuth, and exposes a REST API for all forum operations.
 
-**The frontend** ([Next.js app](https://github.com/barazo-forum/barazo-web)) consumes that API and renders the forum. Server-side rendered, accessible (targeting WCAG 2.2 AA), with full-text search, moderation tools, notifications, and an admin panel.
+**The frontend** ([Next.js app](https://github.com/singi-labs/barazo-web)) consumes that API and renders the forum. Server-side rendered, accessible (targeting WCAG 2.2 AA), with full-text search, moderation tools, notifications, and an admin panel.
 
 A nice bonus: every new topic can automatically cross-post to Bluesky with a link card back to the forum. Free distribution to the entire Bluesky network without extra work from members or moderators.
 
@@ -83,10 +83,10 @@ A nice bonus: every new topic can automatically cross-post to Bluesky with a lin
 
 This is alpha software, but it's functional. Staging environment is already up-and-running (Hetzner VPS, EU-hosted, privacy-first). Five repos, all open, all tested, and probably all in need of more eyeballs:
 
-- [barazo-lexicons](https://github.com/barazo-forum/barazo-lexicons): AT Protocol schemas + generated TypeScript types (MIT)
-- [barazo-api](https://github.com/barazo-forum/barazo-api): Fastify backend with OAuth, firehose, full REST API (AGPL-3.0)
-- [barazo-web](https://github.com/barazo-forum/barazo-web): Next.js frontend (MIT)
-- [barazo-deploy](https://github.com/barazo-forum/barazo-deploy): Docker Compose for self-hosting (MIT)
+- [barazo-lexicons](https://github.com/singi-labs/barazo-lexicons): AT Protocol schemas + generated TypeScript types (MIT)
+- [barazo-api](https://github.com/singi-labs/barazo-api): Fastify backend with OAuth, firehose, full REST API (AGPL-3.0)
+- [barazo-web](https://github.com/singi-labs/barazo-web): Next.js frontend (MIT)
+- [barazo-deploy](https://github.com/singi-labs/barazo-deploy): Docker Compose for self-hosting (MIT)
 
 The backend is AGPL (protecting the core from closed-source forks), while the frontend and lexicons are MIT (encouraging adoption and custom frontends).
 
@@ -127,7 +127,7 @@ This is alpha. Best time to tell me something's wrong is now, before it gets har
 
 If you build communities: does portable identity + user data ownership matter to you? What am I missing?
 
-If you write code: the [repos are open](https://github.com/orgs/barazo-forum/repositories). Issues, PRs, architectural feedback... all welcome.
+If you write code: the [repos are open](https://github.com/orgs/singi-labs/repositories). Issues, PRs, architectural feedback... all welcome.
 
 Or just tell me what you think. Comment below, DM, whatever works.
 
