@@ -9,6 +9,7 @@ import { MarkdownAlternateLink } from "astro-md-alternate/components";
 
 // data
 import siteSettings from "@config/siteSettings.json";
+import standardSiteConfig from "@config/standardSite.json";
 import { CONFIG } from "../config"; // Use .env for indexing
 
 export interface Props {
@@ -140,6 +141,13 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 
 <!-- Markdown alternate for AI agents (blog posts only) -->
 <MarkdownAlternateLink patterns={["/post/"]} />
+
+{/* Standard.site document verification (ATProto long-form publishing) */}
+{standardSiteConfig.enabled && type === "blog" && (() => {
+  const slug = Astro.url.pathname.replace(/^\/post\//, '').replace(/\/$/, '');
+  const href = `at://${standardSiteConfig.did}/site.standard.document/${slug}`;
+  return <link rel="site.standard.document" href={href} />;
+})()}
 
 <!-- Performance optimizations -->
 <PassiveEvents />

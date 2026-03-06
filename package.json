@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "dev:netlify": "netlify dev",
-    "build": "astro build && node scripts/test-robots.js",
+    "build": "node scripts/standard-site-publish.mjs && astro build && node scripts/test-robots.js",
     "preview": "astro build --mode preview",
     "production": "astro build --mode production",
     "astro": "astro",
@@ -16,6 +16,8 @@
     "test:robots": "node scripts/test-robots.js",
     "validate-content": "node scripts/validate-content.js",
     "bluesky:link": "node scripts/bluesky-link.mjs",
+    "standard-site:setup": "node scripts/standard-site-setup.mjs",
+    "standard-site:publish": "node scripts/standard-site-publish.mjs",
     "check:trailing-slashes": "node scripts/check-trailing-slashes.js",
     "format:check": "prettier --check \"src/**/*.{astro,ts,tsx,js,jsx,mjs,css,md,mdx}\"",
     "typecheck": "astro check"
