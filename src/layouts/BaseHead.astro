@@ -5,6 +5,7 @@ import { ClientRouter } from "astro:transitions";
 // component imports
 import Seo from "@components/Seo/Seo.astro";
 import PassiveEvents from "@components/Scripts/PassiveEvents.astro";
+import { MarkdownAlternateLink } from "astro-md-alternate/components";
 
 // data
 import siteSettings from "@config/siteSettings.json";
@@ -138,15 +139,7 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 <!-- Markdown alternate for AI agents (blog posts only) -->
-{
-  type === "blog" && Astro.url.pathname.startsWith("/post/") && (
-    <link
-      rel="alternate"
-      type="text/markdown"
-      href={`${Astro.url.pathname.replace(/\/$/, "")}.md`}
-    />
-  )
-}
+<MarkdownAlternateLink patterns={["/post/"]} />
 
 <!-- Performance optimizations -->
 <PassiveEvents />
