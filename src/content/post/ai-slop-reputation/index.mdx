@@ -51,7 +51,7 @@ The bigger social platforms have already moved beyond content-level moderation: 
 
 [Discourse](https://www.discourse.org/) probably has the most thought-out system here. Five trust levels (TL0 through TL4), where new users start sandboxed (limited links, images, and posting frequency) and earn privileges by actually reading and participating. TL3 requires months of consistent engagement and is revocable if you go inactive. They even added [LLM-based spam detection](https://meta.discourse.org/t/ai-powered-spam-detection/343543) in late 2024 after Akismet stopped catching AI-generated content, scanning posts from low-trust users to check whether they're actually engaging with the thread or just producing filler.
 
-And it works, *IF* you have scale. A platform like LinkedIn or Reddit has millions of users and tons of activity, so a three-year-old account with hundreds of helpful answers gets treated differently than one created five minutes ago. A mid-sized Discourse forum with a few thousand active members generates enough signal for the trust levels to be meaningful too.
+And it works, _IF_ you have scale. A platform like LinkedIn or Reddit has millions of users and tons of activity, so a three-year-old account with hundreds of helpful answers gets treated differently than one created five minutes ago. A mid-sized Discourse forum with a few thousand active members generates enough signal for the trust levels to be meaningful too.
 
 On smaller forums you don't have that luxury. When most of your active members are relatively new and have a handful of posts, account-level trust gives you almost no signal. You're basically guessing.
 
@@ -89,11 +89,11 @@ I'm building Barazo on [AT Protocol](https://atproto.com/) because it makes port
 
 **User-owned data.** When you post in a Barazo forum, that content is written to your Personal Data Server (PDS). Every topic, reply, and reaction is a record on your PDS. Barazo's backend indexes a copy for fast browsing and search, but the PDS is the source of truth. No platform can inflate or erase your contributions because they don't control the source data.
 
-{/* TODO: diagram showing PDS → firehose → forum backends indexing activity */}
+![How AT Protocol makes cross-community track records possible: content flows from your forum through your PDS to the firehose, where other forums and a global aggregator can index your activity](./at-protocol-flow.png)
 
 AT Protocol's firehose broadcasts all public PDS records, and that's what makes cross-community track records possible: when you react to a post in Forum A, that reaction propagates through the firehose and any other forum's backend can index it. The raw activity data (posts, replies, reactions you gave and received) is accessible to the whole network, not locked in one forum's database.
 
-Now you might wonder: if users own their PDS, can't they fake the inputs? They could write fake reaction records, sure. But your track record doesn't come from your own reactions, it comes from how *other* real people responded to your contributions, and those reactions live on *their* PDS, not yours. Creating fake accounts to upvote yourself doesn't work either: the trust algorithm ([EigenTrust](https://en.wikipedia.org/wiki/EigenTrust)) that runs internally for abuse detection only propagates trust from accounts that are themselves already trusted, and cluster detection catches coordinated groups.
+Now you might wonder: if users own their PDS, can't they fake the inputs? They could write fake reaction records, sure. But your track record doesn't come from your own reactions, it comes from how _other_ real people responded to your contributions, and those reactions live on _their_ PDS, not yours. Creating fake accounts to upvote yourself doesn't work either: the trust algorithm ([EigenTrust](https://en.wikipedia.org/wiki/EigenTrust)) that runs internally for abuse detection only propagates trust from accounts that are themselves already trusted, and cluster detection catches coordinated groups.
 
 **Show your work.** I've been thinking about this a lot, and computed scores are the wrong abstraction for displaying trust: a number like 0.72 means nothing to a human, and the more real you make a score, the more it can be used to exclude people.
 
