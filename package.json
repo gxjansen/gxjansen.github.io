@@ -41,7 +41,7 @@
     "astro-auto-import": "^0.5.1",
     "astro-embed": "^0.12.0",
     "astro-icon": "0.8.2",
-    "astro-md-alternate": "github:gxjansen/astro-md-alternate",
+    "astro-md-alternate": "^0.1.0",
     "astro-seo": "^0.8.4",
     "bluesky-comments": "^0.13.1",
     "csv-parse": "^6.1.0",
