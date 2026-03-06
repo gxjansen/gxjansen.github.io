@@ -32,6 +32,16 @@ export const indieProjects: IndieProject[] = [
     license: "MIT",
   },
   {
+    name: "astro-md-alternate",
+    description:
+      'Astro integration that serves markdown versions of your content pages for AI agents and LLMs. Adds .md endpoints and auto-discovery via link rel="alternate" tags.',
+    mainImage: "tabler:markdown",
+    link: "https://www.npmjs.com/package/astro-md-alternate",
+    iconBgColor: "bg-[#BC52EE]",
+    githubUrl: "https://github.com/gxjansen/astro-md-alternate",
+    license: "MIT",
+  },
+  {
     name: "Claude Code Meter",
     description:
       "macOS desktop widget that monitors Claude Code usage limits in real time. Displays both 5-hour and 7-day rolling windows with progress bars, countdown timers, and color-coded warnings via Ubersicht.",
