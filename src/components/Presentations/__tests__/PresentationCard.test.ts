@@ -17,15 +17,15 @@ describe("PresentationCard HTML Structure", () => {
 
     const html = `
       <article class="card group">
-        <a href="/presentations/${presentation.slug}/">
+        <a href="/presentations/${presentation.id}/">
           <h2 class="card-title">
-            <a href="/presentations/${presentation.slug}/" class="hover:text-primary-500 dark:hover:text-primary-400">
+            <a href="/presentations/${presentation.id}/" class="hover:text-primary-500 dark:hover:text-primary-400">
               ${presentation.data.title}
             </a>
           </h2>
         </a>
         <div class="mt-6">
-          <a href="/presentations/${presentation.slug}/" class="inline-flex items-center gap-2">
+          <a href="/presentations/${presentation.id}/" class="inline-flex items-center gap-2">
             View Presentation
             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -55,7 +55,7 @@ describe("PresentationCard HTML Structure", () => {
 
     const html = `
       <article class="card group">
-        <a href="/presentations/${presentation.slug}/">
+        <a href="/presentations/${presentation.id}/">
           ${presentation.data.image}
         </a>
         <div class="card-content">
@@ -69,7 +69,7 @@ describe("PresentationCard HTML Structure", () => {
           </div>
 
           <h2 class="card-title">
-            <a href="/presentations/${presentation.slug}/" class="hover:text-primary-500 dark:hover:text-primary-400">
+            <a href="/presentations/${presentation.id}/" class="hover:text-primary-500 dark:hover:text-primary-400">
               ${presentation.data.title}
             </a>
           </h2>
@@ -79,7 +79,7 @@ describe("PresentationCard HTML Structure", () => {
           </p>
 
           <div class="mt-6">
-            <a href="/presentations/${presentation.slug}/" class="inline-flex items-center gap-2">
+            <a href="/presentations/${presentation.id}/" class="inline-flex items-center gap-2">
               View Presentation
               <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>

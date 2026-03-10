@@ -87,12 +87,12 @@ export default function jsonLDGenerator(props: JsonLDProps) {
       const authorUrl =
         author.data.authorLink ||
         author.data.website ||
-        `${import.meta.env.SITE}/authors/${author.slug}`;
+        `${import.meta.env.SITE}/authors/${author.id}`;
 
       // Build the base author schema
       const authorSchema: PersonSchema = {
         "@type": "Person",
-        "@id": `${import.meta.env.SITE}/authors/${author.slug}#person`,
+        "@id": `${import.meta.env.SITE}/authors/${author.id}#person`,
         name: author.data.name,
         url: authorUrl,
       };

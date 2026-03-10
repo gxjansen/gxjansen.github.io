@@ -24,8 +24,7 @@ vi.mock("@config/siteSettings.json", () => ({
 // Mock blog posts
 const mockPosts: BlogPost[] = [
   {
-    id: "1",
-    slug: "en/first-post",
+    id: "en/first-post",
     data: {
       title: "First Post",
       description: "First post description",
@@ -41,8 +40,7 @@ const mockPosts: BlogPost[] = [
     },
   },
   {
-    id: "2",
-    slug: "en/future-post",
+    id: "en/future-post",
     data: {
       title: "Future Post",
       description: "Future post description",
@@ -58,8 +56,7 @@ const mockPosts: BlogPost[] = [
     },
   },
   {
-    id: "3",
-    slug: "en/second-post",
+    id: "en/second-post",
     data: {
       title: "Second Post",
       description: "Second post description",
@@ -92,33 +89,33 @@ describe("blogUtils", () => {
     it("filters out future posts by default", () => {
       const result = formatPosts(mockPosts);
       expect(result).toHaveLength(2);
-      expect(result.map((post) => post.id)).not.toContain("2"); // Future post
+      expect(result.map((post) => post.id)).not.toContain("future-post"); // Future post
     });
 
     it("includes future posts when filterOutFuturePosts is false", () => {
       const result = formatPosts(mockPosts, { filterOutFuturePosts: false });
       expect(result).toHaveLength(3);
-      expect(result.map((post) => post.id)).toContain("2"); // Future post
+      expect(result.map((post) => post.id)).toContain("future-post"); // Future post (locale stripped)
     });
 
     it("sorts posts by date in descending order by default", () => {
       const result = formatPosts(mockPosts, { filterOutFuturePosts: false });
-      expect(result[0].id).toBe("2"); // Future post (2025)
-      expect(result[1].id).toBe("3"); // Second post (2023-06)
-      expect(result[2].id).toBe("1"); // First post (2023-01)
+      expect(result[0].id).toBe("future-post"); // Future post (2025, locale stripped)
+      expect(result[1].id).toBe("second-post"); // Second post (2023-06, locale stripped)
+      expect(result[2].id).toBe("first-post"); // First post (2023-01, locale stripped)
     });
 
     it("removes locale from slugs by default", () => {
       const result = formatPosts(mockPosts);
       result.forEach((post) => {
-        expect(post.slug).not.toMatch(/^[a-z]{2}\//);
+        expect(post.id).not.toMatch(/^[a-z]{2}\//);
       });
     });
 
     it("keeps locale in slugs when removeLocale is false", () => {
       const result = formatPosts(mockPosts, { removeLocale: false });
       result.forEach((post) => {
-        expect(post.slug).toMatch(/^[a-z]{2}\//);
+        expect(post.id).toMatch(/^[a-z]{2}\//);
       });
     });
 

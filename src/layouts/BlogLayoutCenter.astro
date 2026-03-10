@@ -41,7 +41,7 @@ const {
 } = post.data;
 
 // Generate the canonical post URL for Bluesky sharing
-const postUrl = new URL(`/post/${post.slug}/`, Astro.site).toString();
+const postUrl = new URL(`/post/${post.id}/`, Astro.site).toString();
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
@@ -280,6 +280,6 @@ const newsletterDescription =
 
   <!-- Navigation -->
   <nav class="mx-auto max-w-2xl" aria-label="Blog post navigation">
-    <BlogNav currentSlug={post.slug} posts={allPosts} />
+    <BlogNav currentSlug={post.id} posts={allPosts} />
   </nav>
 </BaseLayout>

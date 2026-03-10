@@ -1,10 +1,26 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
+
+/**
+ * Custom ID generator that strips "/index" suffix from directory-based content.
+ * This matches the old slug behavior where src/content/post/my-post/index.mdx
+ * had slug "my-post" instead of "my-post/index".
+ */
+function stripIndexId({ entry }: { entry: string }) {
+  // Remove file extension first, then strip /index suffix
+  const withoutExt = entry.replace(/\.(md|mdx)$/, "");
+  return withoutExt.replace(/\/index$/, "");
+}
 
 /**
  * Presentation collection schema
  */
 const presentations = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/presentations",
+    generateId: stripIndexId,
+  }),
   schema: () =>
     z.object({
       isHidden: z.boolean(), // Make isHidden required and strictly boolean
@@ -25,7 +41,11 @@ const presentations = defineCollection({
  * Events collection schema
  */
 const events = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/events",
+    generateId: stripIndexId,
+  }),
   schema: z.object({
     title: z.string(),
     date: z.string(), // ISO date string
@@ -41,7 +61,11 @@ const events = defineCollection({
  * Authors collection schema
  */
 const authors = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/authors",
+    generateId: stripIndexId,
+  }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -95,7 +119,11 @@ const authors = defineCollection({
  * Post collection schema (formerly blog)
  */
 const post = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/post",
+    generateId: stripIndexId,
+  }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -128,7 +156,11 @@ const post = defineCollection({
  * Countries collection schema
  */
 const countries = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/countries",
+    generateId: stripIndexId,
+  }),
   schema: z.object({}),
 });
 
@@ -136,7 +168,11 @@ const countries = defineCollection({
  * Other pages collection schema
  */
 const otherPages = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/otherPages",
+    generateId: stripIndexId,
+  }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -148,7 +184,11 @@ const otherPages = defineCollection({
  * Services collection schema
  */
 const services = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/services",
+    generateId: stripIndexId,
+  }),
   schema: z.object({}),
 });
 

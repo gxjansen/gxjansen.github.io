@@ -1,5 +1,5 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PostCardAtlas from "@components/PostCard/PostCardAtlas.astro";
@@ -8,17 +8,17 @@ import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
 export async function getStaticPaths() {
   const authors = await getCollection("authors");
   return authors.map((author) => ({
-    params: { slug: author.slug },
+    params: { slug: author.id },
     props: { author },
   }));
 }
 
 const { author } = Astro.props as { author: CollectionEntry<"authors"> };
-const { Content } = await author.render();
+const { Content } = await render(author);
 
 // Get all posts by this author
 const allPosts = await getCollection("post", ({ data }) => {
-  return !data.draft && data.authors && data.authors.includes(author.slug);
+  return !data.draft && data.authors && data.authors.includes(author.id);
 });
 
 const sortedPosts = allPosts.sort((a, b) => {
@@ -58,7 +58,7 @@ const hasWebsite = website && website.includes("gui.do");
 
 // Custom meta description for gxjansen, default to bio for other authors
 const metaDescription =
-  author.slug === "gxjansen"
+  author.id === "gxjansen"
     ? `${name} — Community strategist, 20+ years building developer ecosystems. Credentials, awards, and ${sortedPosts.length}+ articles on community building, experimentation, and e-commerce.`
     : bio || `Articles and insights from ${name}`;
 
@@ -74,9 +74,9 @@ const sameAsLinks = [
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  "@id": `${import.meta.env.SITE}/authors/${author.slug}#person`,
+  "@id": `${import.meta.env.SITE}/authors/${author.id}#person`,
   name: name,
-  url: `${import.meta.env.SITE}/authors/${author.slug}`,
+  url: `${import.meta.env.SITE}/authors/${author.id}`,
   description: bio,
   jobTitle: jobTitle,
   ...(organization && {
@@ -91,7 +91,7 @@ const personSchema = {
   ...(expertise.length > 0 && { knowsAbout: expertise }),
   ...(author.data.email && { email: author.data.email }),
   // Alumni - specific for gxjansen
-  ...(author.slug === "gxjansen" && {
+  ...(author.id === "gxjansen" && {
     alumniOf: {
       "@type": "EducationalOrganization",
       name: "Utrecht University",
@@ -159,7 +159,7 @@ const personSchema = {
 
           {/* CTA to About page - only show for gxjansen */}
           {
-            author.slug === "gxjansen" && (
+            author.id === "gxjansen" && (
               <div class="mt-6">
                 <a
                   href="/about/"

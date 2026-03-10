@@ -30,7 +30,7 @@ export function createTestPresentation(
   overrides: Record<string, unknown> = {},
 ) {
   return {
-    slug: "test-presentation",
+    id: "test-presentation",
     data: {
       title: "Test Presentation",
       duration: "45 minutes",

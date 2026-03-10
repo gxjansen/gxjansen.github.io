@@ -46,7 +46,7 @@ describe("typeGuards", () => {
   describe("isPresentation", () => {
     const validPresentation = {
       title: "Test Presentation",
-      slug: "test-presentation",
+      id: "test-presentation",
       description: "A test presentation",
       duration: "30 minutes",
       isWorkshop: false,
@@ -93,7 +93,7 @@ describe("typeGuards", () => {
   describe("validatePresentation", () => {
     const validPresentation = {
       title: "Test Presentation",
-      slug: "test-presentation",
+      id: "test-presentation",
       description: "A test presentation",
       duration: "30 minutes",
       isWorkshop: false,
@@ -119,13 +119,7 @@ describe("typeGuards", () => {
     });
 
     it("validates required fields", () => {
-      const stringFields = [
-        "title",
-        "slug",
-        "description",
-        "duration",
-        "image",
-      ];
+      const stringFields = ["title", "id", "description", "duration", "image"];
       const booleanFields = ["isWorkshop", "isFeatured"];
 
       // Test string fields
@@ -148,13 +142,7 @@ describe("typeGuards", () => {
     });
 
     it("validates empty strings", () => {
-      const stringFields = [
-        "title",
-        "slug",
-        "description",
-        "duration",
-        "image",
-      ];
+      const stringFields = ["title", "id", "description", "duration", "image"];
 
       stringFields.forEach((field) => {
         const invalidPresentation = {
@@ -209,10 +197,10 @@ describe("typeGuards", () => {
       });
     });
 
-    it("validates slug format", () => {
-      const invalidSlugs = [
-        "Invalid Slug",
-        "UPPERCASE-SLUG",
+    it("validates id format", () => {
+      const invalidIds = [
+        "Invalid Id",
+        "UPPERCASE-ID",
         "special@characters",
         "-starts-with-dash",
         "ends-with-dash-",
@@ -220,18 +208,18 @@ describe("typeGuards", () => {
         "underscore_instead_of_dash",
       ];
 
-      invalidSlugs.forEach((slug) => {
+      invalidIds.forEach((id) => {
         const invalidPresentation = {
           ...validPresentation,
-          slug,
+          id,
         };
         const errors = validatePresentation(invalidPresentation);
-        expect(errors).toContain("Slug must be in kebab-case format");
+        expect(errors).toContain("ID must be in kebab-case format");
       });
     });
 
-    it("accepts valid slug formats", () => {
-      const validSlugs = [
+    it("accepts valid id formats", () => {
+      const validIds = [
         "valid-slug",
         "another-valid-slug",
         "with-123-numbers",
@@ -240,13 +228,13 @@ describe("typeGuards", () => {
         "no-trailing-or-leading-dashes",
       ];
 
-      validSlugs.forEach((slug) => {
-        const validPresentationWithSlug = {
+      validIds.forEach((id) => {
+        const validPresentationWithId = {
           ...validPresentation,
-          slug,
+          id,
         };
-        const errors = validatePresentation(validPresentationWithSlug);
-        expect(errors).not.toContain("Slug must be in kebab-case format");
+        const errors = validatePresentation(validPresentationWithId);
+        expect(errors).not.toContain("ID must be in kebab-case format");
       });
     });
   });

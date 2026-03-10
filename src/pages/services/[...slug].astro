@@ -1,6 +1,6 @@
 ---
 import { type InferGetStaticPropsType } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 // layout
 import ServiceLayoutCenter from "@layouts/ServiceLayoutCenter.astro";
@@ -22,14 +22,14 @@ export async function getStaticPaths() {
   const filteredServices = filterCollectionByLanguage(services, defaultLocale);
 
   return filteredServices.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: post,
   }));
 }
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const service = Astro.props as Props;
-const { Content } = await service.render();
+const { Content } = await render(service);
 ---
 
 <ServiceLayoutCenter {...service.data as any}>
