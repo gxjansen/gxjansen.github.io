@@ -5,7 +5,8 @@ import { ClientRouter } from "astro:transitions";
 // component imports
 import Seo from "@components/Seo/Seo.astro";
 import PassiveEvents from "@components/Scripts/PassiveEvents.astro";
-import { MarkdownAlternateLink } from "astro-md-alternate/components";
+// TODO: Re-enable after updating astro-md-alternate for Astro 6
+// import { MarkdownAlternateLink } from "astro-md-alternate/components";
 
 // data
 import siteSettings from "@config/siteSettings.json";
@@ -139,8 +140,8 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <meta name="generator" content={Astro.generator} />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
-<!-- Markdown alternate for AI agents (blog posts only) -->
-<MarkdownAlternateLink patterns={["/post/"]} />
+<!-- TODO: Re-enable after updating astro-md-alternate for Astro 6 -->
+<!-- <MarkdownAlternateLink patterns={["/post/"]} /> -->
 
 {/* Standard.site document verification (ATProto long-form publishing) */}
 {
