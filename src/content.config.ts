@@ -16,7 +16,11 @@ function stripIndexId({ entry }: { entry: string }) {
  * Presentation collection schema
  */
 const presentations = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/presentations", generateId: stripIndexId }),
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/presentations",
+    generateId: stripIndexId,
+  }),
   schema: () =>
     z.object({
       isHidden: z.boolean(), // Make isHidden required and strictly boolean
@@ -37,7 +41,11 @@ const presentations = defineCollection({
  * Events collection schema
  */
 const events = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/events", generateId: stripIndexId }),
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/events",
+    generateId: stripIndexId,
+  }),
   schema: z.object({
     title: z.string(),
     date: z.string(), // ISO date string
@@ -53,7 +61,11 @@ const events = defineCollection({
  * Authors collection schema
  */
 const authors = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/authors", generateId: stripIndexId }),
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/authors",
+    generateId: stripIndexId,
+  }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -107,7 +119,11 @@ const authors = defineCollection({
  * Post collection schema (formerly blog)
  */
 const post = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/post", generateId: stripIndexId }),
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/post",
+    generateId: stripIndexId,
+  }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -140,7 +156,11 @@ const post = defineCollection({
  * Countries collection schema
  */
 const countries = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/countries", generateId: stripIndexId }),
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/countries",
+    generateId: stripIndexId,
+  }),
   schema: z.object({}),
 });
 
@@ -148,7 +168,11 @@ const countries = defineCollection({
  * Other pages collection schema
  */
 const otherPages = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/otherPages", generateId: stripIndexId }),
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/otherPages",
+    generateId: stripIndexId,
+  }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -160,7 +184,11 @@ const otherPages = defineCollection({
  * Services collection schema
  */
 const services = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/services", generateId: stripIndexId }),
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/services",
+    generateId: stripIndexId,
+  }),
   schema: z.object({}),
 });
 

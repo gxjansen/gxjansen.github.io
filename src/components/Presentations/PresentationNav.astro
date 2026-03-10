@@ -14,9 +14,7 @@ const sortedPresentations = presentations.sort((a, b) =>
 );
 
 // Find current presentation index
-const currentIndex = sortedPresentations.findIndex(
-  (p) => p.id === currentSlug,
-);
+const currentIndex = sortedPresentations.findIndex((p) => p.id === currentSlug);
 const prevPresentation =
   currentIndex > 0 ? sortedPresentations[currentIndex - 1] : null;
 const nextPresentation =

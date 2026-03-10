@@ -119,13 +119,7 @@ describe("typeGuards", () => {
     });
 
     it("validates required fields", () => {
-      const stringFields = [
-        "title",
-        "id",
-        "description",
-        "duration",
-        "image",
-      ];
+      const stringFields = ["title", "id", "description", "duration", "image"];
       const booleanFields = ["isWorkshop", "isFeatured"];
 
       // Test string fields
@@ -148,13 +142,7 @@ describe("typeGuards", () => {
     });
 
     it("validates empty strings", () => {
-      const stringFields = [
-        "title",
-        "id",
-        "description",
-        "duration",
-        "image",
-      ];
+      const stringFields = ["title", "id", "description", "duration", "image"];
 
       stringFields.forEach((field) => {
         const invalidPresentation = {

@@ -92,8 +92,7 @@ export function validatePresentation(presentation: unknown): string[] {
   // Required fields
   if (!p.title?.trim())
     errors.push("title field is required and must not be empty");
-  if (!p.id?.trim())
-    errors.push("id field is required and must not be empty");
+  if (!p.id?.trim()) errors.push("id field is required and must not be empty");
   if (!p.description?.trim())
     errors.push("description field is required and must not be empty");
   if (!p.duration?.trim())
