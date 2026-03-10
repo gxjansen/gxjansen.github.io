@@ -33,7 +33,6 @@ export function getLocaleFromUrl(url: URL): Locale {
  */
 interface CollectionItem {
   id: string;
-  slug: string;
   [key: string]: unknown;
 }
 
@@ -76,7 +75,7 @@ export function filterCollectionByLanguage<T extends CollectionItem>(
   if (removeLocale) {
     return filteredCollection.map((item) => ({
       ...item,
-      slug: removeLocaleFromSlug(item.slug),
+      id: removeLocaleFromSlug(item.id),
     }));
   }
 

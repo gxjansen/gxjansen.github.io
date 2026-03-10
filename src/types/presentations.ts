@@ -18,8 +18,8 @@ export interface Presentation {
   /** Title of the presentation */
   title: string;
 
-  /** URL-friendly slug */
-  slug: string;
+  /** URL-friendly ID */
+  id: string;
 
   /** HTML description of the presentation */
   description: string;

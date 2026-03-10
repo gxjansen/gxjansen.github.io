@@ -1,7 +1,12 @@
-import purgecss from '@fullhuman/postcss-purgecss';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+import purgecssModule from '@fullhuman/postcss-purgecss';
+const purgecss = purgecssModule.default || purgecssModule;
 
 export default {
   plugins: [
+    tailwindcss(),
+    autoprefixer(),
     purgecss({
       content: [
         './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',

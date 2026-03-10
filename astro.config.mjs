@@ -1,11 +1,12 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import AutoImport from "astro-auto-import";
+import icon from "astro-icon";
 import react from "@astrojs/react";
 import netlify from "@astrojs/netlify";
-import mdAlternate from "astro-md-alternate";
+// TODO: Update astro-md-alternate to support Astro 6 (entry.slug → entry.id, entry.body removed)
+// import mdAlternate from "astro-md-alternate";
 import * as path from 'node:path';
 import { contentValidationPlugin } from './src/utils/content-validation-plugin.ts';
 
@@ -94,10 +95,13 @@ export default defineConfig({
       // Configure MDX to be more lenient
       extendMarkdownConfig: true,
       optimize: false,
-      experimentalLayout: false
     }),
     react(),
-    tailwind(),
+    icon({
+      include: {
+        tabler: ["chart-bar", "door", "flask", "gauge", "letter-g", "letter-j", "letter-x", "markdown", "message", "question-mark", "speakerphone", "star"],
+      },
+    }),
     sitemap({
       filter: (page) => !page.includes('/conference-terms') && !page.includes('/examples/') && !page.includes('/categories/'),
       changefreq: 'weekly',
@@ -110,11 +114,12 @@ export default defineConfig({
       }
     }),
     contentValidationPlugin(),
-    mdAlternate({
-      collections: [
-        { name: "post", pattern: "/post/[slug]" },
-      ],
-    }),
+    // TODO: Re-enable after updating astro-md-alternate for Astro 6
+    // mdAlternate({
+    //   collections: [
+    //     { name: "post", pattern: "/post/[slug]" },
+    //   ],
+    // }),
   ],
 
   vite: {

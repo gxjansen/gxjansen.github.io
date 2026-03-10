@@ -106,12 +106,10 @@ export interface AccessibilityControls {
 
 export interface Author {
   id: string;
-  slug: string;
   data: AuthorData;
 }
 
 export interface BlogPost {
   id: string;
-  slug: string;
   data: BlogData;
 }

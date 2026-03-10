@@ -25,13 +25,13 @@ export async function GET(context: APIContext) {
       title: post.data.title,
       pubDate: new Date(post.data.pubDate),
       description: post.data.description,
-      link: `/post/${post.slug}/`,
+      link: `/post/${post.id}/`,
       author: post.data.authors?.join(", "),
       categories: post.data.categories || [],
       content: post.data.description,
       customData: post.data.heroImage
         ? `<media:content
-            url="${context.site}post/${post.slug}/heroImage.jpg"
+            url="${context.site}post/${post.id}/heroImage.jpg"
             medium="image"
             type="image/jpeg" />`
         : "",

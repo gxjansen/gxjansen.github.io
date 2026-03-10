@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import BlogLayoutCenter from "@layouts/BlogLayoutCenter.astro";
 
 // Get static paths for all posts
@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   });
 
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post, allPosts: posts },
   }));
 }
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 const { post, allPosts } = Astro.props;
 
 // Get the rendered content
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <BlogLayoutCenter post={post} allPosts={allPosts}>

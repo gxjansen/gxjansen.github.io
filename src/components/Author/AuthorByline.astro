@@ -10,7 +10,7 @@ interface Props {
 
 const { author, showBio = true, variant = "compact" } = Astro.props;
 const { name, avatar, bioShort } = author.data;
-const authorUrl = `/authors/${author.slug}`;
+const authorUrl = `/authors/${author.id}`;
 ---
 
 <div

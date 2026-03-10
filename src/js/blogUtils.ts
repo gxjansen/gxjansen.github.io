@@ -41,7 +41,6 @@ function shuffleArray<T>(array: T[]): T[] {
 // Client-side safe types (without any astro:content imports)
 export interface BlogPost {
   id: string;
-  slug: string;
   data: {
     title: string;
     description: string;
@@ -118,7 +117,7 @@ export function formatPosts(
   // remove locale from URL
   if (removeLocale) {
     sortedPosts.forEach((post) => {
-      post.slug = removeLocaleFromSlug(post.slug);
+      post.id = removeLocaleFromSlug(post.id);
     });
   }
 
@@ -138,7 +137,7 @@ export function formatPosts(
  */
 export function arePostsRelated(postOne: BlogPost, postTwo: BlogPost): boolean {
   // if titles are the same, then they are the same post. return false
-  if (postOne.slug === postTwo.slug) return false;
+  if (postOne.id === postTwo.id) return false;
 
   const postOneCategories = postOne.data.categories.map((category) =>
     slugify(category),
