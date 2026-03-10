@@ -40,7 +40,7 @@
     "@types/react-dom": "^18.3.7",
     "altcha-lib": "^1.4.1",
     "animejs": "^3.2.2",
-    "astro": "^6.0.1",
+    "astro": "^6.0.2",
     "astro-auto-import": "^0.5.1",
     "astro-embed": "^0.12.0",
     "astro-icon": "^1.1.5",
@@ -74,7 +74,7 @@
     "lightningcss": "^1.31.1",
     "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "svgo": "2.8.0",
+    "svgo": "2.8.2",
     "typescript": "^5.9.3",
     "vitest": "^3.2.4"
   },
