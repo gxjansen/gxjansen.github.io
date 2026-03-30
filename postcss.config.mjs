@@ -27,12 +27,16 @@ export default {
           // State classes
           'active', 'disabled', 'loading', 'error', 'success',
           // Focus and hover states
-          /^focus:/, /^hover:/, /^group-hover:/
+          /^focus:/, /^hover:/, /^group-hover:/,
+          // Prose typography class (needed to keep element-based selectors like .prose th)
+          'prose',
         ],
         deep: [
           /dark$/, /light$/, /active$/, /open$/, /closed$/,
           // Dynamic theme classes
           /^bg-/, /^text-/, /^border-/,
+          // Prose element selectors (table, headings, etc.)
+          /^prose/,
         ],
         greedy: [
           /show$/, /hide$/, /sr-only$/, /visible$/, /invisible$/,
