@@ -58,12 +58,10 @@
     @apply border-b border-b-base-400 dark:border-b-base-700;
   }
   th {
-    text-align: left !important;
-    @apply px-3 py-2 font-semibold text-base-900 dark:text-base-100;
+    @apply px-3 py-2 text-left font-semibold text-base-900 dark:text-base-100;
   }
   td {
-    text-align: left !important;
-    @apply px-3 py-2 text-base-500 dark:text-base-300;
+    @apply px-3 py-2 text-left text-base-500 dark:text-base-300;
   }
   tr {
     @apply border-b border-b-base-200 dark:border-b-base-800;
