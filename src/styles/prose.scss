@@ -4,13 +4,22 @@
   @apply overflow-x-hidden;
   /* emergency word break */
   @apply break-words;
-  /* heading font sizes */
-  @apply prose-h1:text-3xl prose-h1:font-bold md:prose-h1:text-4xl;
-  @apply prose-h2:text-2xl prose-h2:font-bold md:prose-h2:text-3xl;
-  @apply prose-h3:text-2xl prose-h3:font-semibold md:prose-h3:text-[1.75rem];
-  @apply prose-h4:text-lg prose-h4:font-semibold md:prose-h4:text-xl;
-  /* all headings */
-  @apply prose-headings:mb-5 prose-headings:mt-7 prose-headings:text-base-900 dark:prose-headings:text-base-100;
+  /* heading sizes - use direct selectors to beat :where() specificity from typography plugin */
+  h1 {
+    @apply text-3xl font-bold md:text-4xl;
+  }
+  h2 {
+    @apply text-2xl font-bold md:text-3xl;
+  }
+  h3 {
+    @apply text-xl font-semibold md:text-2xl;
+  }
+  h4 {
+    @apply text-lg font-semibold md:text-xl;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply mb-5 mt-7 text-base-900 dark:text-base-100;
+  }
   /* paragraphs */
   @apply prose-p:my-2 prose-p:leading-normal prose-p:text-base-500 dark:prose-p:text-white;
   /* bold text */
@@ -40,14 +49,22 @@
   @apply prose-blockquote:border-l-primary-500;
   /* horizontal rule - WCAG 1.4.11 requires 3:1 contrast for UI components */
   @apply prose-hr:my-8 prose-hr:border-base-400 dark:prose-hr:border-base-600;
-  /* table - scrollable on mobile without breaking column alignment */
-  @apply prose-table:max-w-full prose-table:overflow-x-auto prose-table:w-full;
-  /* table head */
-  @apply prose-thead:border-b-base-400 prose-thead:text-left dark:prose-thead:border-b-base-700;
-  /* table cells - consistent left alignment */
-  @apply prose-th:text-left prose-td:text-left;
-  /* table row */
-  @apply prose-tr:border-b-base-200 dark:text-base-300 dark:prose-tr:border-b-base-800;
+  /* table - direct selectors to beat :where() specificity */
+  table {
+    @apply w-full max-w-full overflow-x-auto;
+  }
+  thead {
+    @apply border-b border-b-base-400 text-left dark:border-b-base-700;
+  }
+  th {
+    @apply text-left;
+  }
+  td {
+    @apply text-left;
+  }
+  tr {
+    @apply border-b border-b-base-200 dark:border-b-base-800;
+  }
 
   /* SVGs and other wide elements */
   svg {
