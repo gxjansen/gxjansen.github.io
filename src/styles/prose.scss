@@ -51,7 +51,7 @@
   @apply prose-hr:my-8 prose-hr:border-base-400 dark:prose-hr:border-base-600;
   /* table - direct selectors to beat :where() specificity */
   table {
-    @apply w-full max-w-full overflow-x-auto;
+    @apply w-full max-w-full overflow-x-auto my-8;
     display: table;
   }
   thead {
