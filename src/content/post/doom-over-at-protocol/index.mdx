@@ -55,7 +55,7 @@ Key events from Jetstream arrive asynchronously while the engine may be mid-tick
 
 ### Frame encoding
 
-Doom renders with a 256-color palette, which is great for indexed-color PNG. A minimal PNG encoder:
+Doom renders with a 256-color palette, which is great for indexed-color PNG. Claude Code wrote a minimal PNG encoder that:
 
 1. Scans the RGBA framebuffer for unique colors (always under 256 for Doom)
 2. Builds a palette
