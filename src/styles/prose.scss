@@ -40,8 +40,8 @@
   @apply prose-blockquote:border-l-primary-500;
   /* horizontal rule - WCAG 1.4.11 requires 3:1 contrast for UI components */
   @apply prose-hr:my-8 prose-hr:border-base-400 dark:prose-hr:border-base-600;
-  /* table - scrollable wrapper on mobile */
-  @apply prose-table:block prose-table:max-w-full prose-table:overflow-x-auto;
+  /* table - scrollable on mobile without breaking column alignment */
+  @apply prose-table:max-w-full prose-table:overflow-x-auto;
   /* table head */
   @apply prose-thead:border-b-base-400 prose-thead:text-left dark:prose-thead:border-b-base-700;
   /* table row */
