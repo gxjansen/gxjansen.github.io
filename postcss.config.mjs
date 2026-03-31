@@ -37,6 +37,9 @@ export default {
           /^bg-/, /^text-/, /^border-/,
           // Prose element selectors (table, headings, etc.)
           /^prose/,
+          // Bluesky comments library uses CSS modules with hashed class names
+          // that only exist at runtime -- preserve our attribute selectors
+          /bluesky-comments-wrapper/,
         ],
         greedy: [
           /show$/, /hide$/, /sr-only$/, /visible$/, /invisible$/,
