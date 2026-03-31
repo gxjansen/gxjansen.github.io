@@ -47,6 +47,10 @@
   @apply prose-video:mr-auto prose-video:min-w-0 prose-video:max-w-full;
   /* blockquote */
   @apply prose-blockquote:border-l-primary-500;
+  /* blockquote attribution */
+  blockquote footer {
+    @apply mt-2 text-sm not-italic text-base-600 dark:text-base-500;
+  }
   /* horizontal rule - WCAG 1.4.11 requires 3:1 contrast for UI components */
   @apply prose-hr:my-8 prose-hr:border-base-400 dark:prose-hr:border-base-600;
   /* table - direct selectors to beat :where() specificity */
