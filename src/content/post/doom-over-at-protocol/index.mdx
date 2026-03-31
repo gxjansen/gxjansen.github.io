@@ -71,12 +71,12 @@ The browser captures keyboard events and encodes them as a 19-bit bitmask:
 
 ![Bitmask layout diagram: bits 0-3 for movement (forward, backward, left, right), bits 4-7 for actions (fire, use, strafe, speed), bits 8-15 for weapon selection (8 weapon slots), and bits 16-18 for menu (escape, enter, tab).](./diagram-bitmask.png)
 
-| Bits | Purpose |
-|------|---------|
-| 0-3 | Movement: forward, backward, left, right |
-| 4-7 | Actions: fire, use, strafe, speed |
-| 8-15 | Weapon selection (8 slots) |
-| 16-18 | Menu: escape, enter, tab |
+| Bits  | Purpose                                  |
+| ----- | ---------------------------------------- |
+| 0-3   | Movement: forward, backward, left, right |
+| 4-7   | Actions: fire, use, strafe, speed        |
+| 8-15  | Weapon selection (8 slots)               |
+| 16-18 | Menu: escape, enter, tab                 |
 
 Key state changes (not every keypress) are batched and written to the player's PDS as `dev.singi.doom.input` records every 500ms. That keeps the write rate at ~2 records/sec.
 
@@ -116,7 +116,7 @@ The first implementation used `listRecords` polling every 200ms for everything. 
 
 Switching to Jetstream for input delivery solved all three. It's the AT Protocol's real-time event firehose, delivered over WebSocket. Events arrive within ~50-200ms of record creation. The server subscribes filtered by the player's DID and the `dev.singi.doom.input` collection.
 
-But: frame delivery went *back* to polling. A newly self-hosted PDS needs to be crawled by the relay network before Jetstream sees its events, and that can take minutes or fail silently. Since the game server and client run on the same machine as the PDS, polling localhost at 100ms is actually faster than waiting for relay propagation.
+But: frame delivery went _back_ to polling. A newly self-hosted PDS needs to be crawled by the relay network before Jetstream sees its events, and that can take minutes or fail silently. Since the game server and client run on the same machine as the PDS, polling localhost at 100ms is actually faster than waiting for relay propagation.
 
 So the final architecture is a pragmatic hybrid: Jetstream where it's the only option (cross-PDS input delivery from bsky.social), direct PDS polling where it's faster (same-machine frame delivery).
 
@@ -142,20 +142,20 @@ The `artifact` lexicon enables a second mode inspired directly by the DNS projec
 
 Here's where the latency lives:
 
-| Step | Time |
-|------|------|
-| WASM tick | 2-20ms |
-| PNG encode | ~5ms |
-| PDS write (localhost) | ~5-20ms |
-| Localhost frame poll interval | 100ms |
-| Jetstream input delivery | ~50-200ms |
+| Step                                 | Time           |
+| ------------------------------------ | -------------- |
+| WASM tick                            | 2-20ms         |
+| PNG encode                           | ~5ms           |
+| PDS write (localhost)                | ~5-20ms        |
+| Localhost frame poll interval        | 100ms          |
+| Jetstream input delivery             | ~50-200ms      |
 | **Full round-trip (input to frame)** | **~200-500ms** |
 
-| Metric | Value |
-|--------|-------|
-| Visible FPS | 5-15 (varies with Jetstream latency) |
-| Game ticks per write batch | 5 |
-| Write interval | 500ms |
+| Metric                     | Value                                |
+| -------------------------- | ------------------------------------ |
+| Visible FPS                | 5-15 (varies with Jetstream latency) |
+| Game ticks per write batch | 5                                    |
+| Write interval             | 500ms                                |
 
 ![Latency breakdown diagram: horizontal bar showing where time is spent in the round-trip. WASM tick and PNG encoding are small slivers. PDS writes take a modest chunk. Jetstream propagation dominates the input path. Frame delivery via localhost polling is fast. Total: 200-500ms per round-trip.](./diagram-latency.png)
 
