@@ -220,16 +220,15 @@
     @apply text-base-600 dark:text-base-400 text-sm mb-4;
   }
 
-  /* Constrain SVG icons to library's intended size */
-  [class*="_icon_"] {
+  /* Constrain SVG icons to library's intended size.
+     .prose svg sets h-auto which overrides the library's sizing,
+     so we need !important on all size rules here. */
+  svg[class*="_icon_"],
+  [class*="_statItem_"] svg,
+  [class*="_actionsRow_"] svg,
+  [class*="_actionsContainer_"] svg {
     width: 1.25rem !important;
     height: 1.25rem !important;
-  }
-
-  [class*="_statItem_"] svg,
-  [class*="_actionsRow_"] svg {
-    width: 1.25rem;
-    height: 1.25rem;
     flex-shrink: 0;
   }
 
