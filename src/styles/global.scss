@@ -206,105 +206,24 @@
   }
 }
 
-/* Bluesky Comments Styling */
+/* Bluesky Comments Styling
+   NOTE: All rules use plain CSS values instead of @apply because Tailwind's
+   content purger strips [class*="..."] attribute selectors (the CSS module
+   class names only exist at runtime, not in source files). */
 .bluesky-comments-wrapper {
-  /* Style the library's "Comments" title to match our design */
-  [class*="_commentsTitle_"] {
-    @apply mb-4 text-xl font-bold text-base-900 dark:text-base-100;
-    margin-top: 0 !important; /* Override library's margin-top */
-  }
-
-  /* Style the stats bar (likes, reposts, etc.) */
-  [class*="_statsBar_"] {
-    @apply mb-4 text-sm text-base-600 dark:text-base-400;
-  }
-
-  /* Constrain SVG icons to library's intended size.
-     .prose svg sets h-auto which overrides the library's sizing,
-     so we need !important on all size rules here. */
-  svg[class*="_icon_"],
-  [class*="_statItem_"] svg,
-  [class*="_actionsRow_"] svg,
-  [class*="_actionsContainer_"] svg {
+  /* Constrain all SVG icons to the library's intended 1.25rem size.
+     Without this, Tailwind preflight makes SVGs display:block and they
+     expand to fill their container (672px+) since they have no width/height attrs. */
+  svg {
     width: 1.25rem !important;
     height: 1.25rem !important;
     flex-shrink: 0;
   }
 
-  /* Style the reply text */
-  [class*="_replyText_"] {
-    @apply text-base-600 dark:text-base-400;
-  }
-
-  /* Style the divider */
-  [class*="_divider_"] {
-    @apply border-base-200 dark:border-base-700;
-    border-top-width: 1px;
-    border-top-style: solid;
-  }
-
-  /* Comments list spacing */
-  [class*="_commentsList_"] {
-    @apply mt-4;
-  }
-
-  /* Individual comment styling */
-  [class*="_commentContainer_"] {
-    @apply py-3;
-  }
-
-  /* Comment content */
-  [class*="_commentContent_"] {
-    @apply max-w-none;
-  }
-
-  /* Author link styling */
-  [class*="_authorLink_"] {
-    @apply text-base-900 dark:text-base-100;
-
-    &:hover {
-      @apply text-primary-600 dark:text-primary-400;
-    }
-  }
-
-  /* Author name */
-  [class*="_authorName_"] {
-    @apply font-medium text-base-900 dark:text-base-100;
-  }
-
-  /* Handle (username) */
-  [class*="_handle_"] {
-    @apply text-base-500 dark:text-base-400;
-  }
-
-  /* Avatar styling */
-  [class*="_avatar_"] {
-    @apply bg-base-200 dark:bg-base-700;
-  }
-
-  /* Replies container (nested comments) */
-  [class*="_repliesContainer_"] {
-    @apply border-base-300 dark:border-base-600;
-    border-left-width: 2px;
-  }
-
-  /* Actions container */
-  [class*="_actionsContainer_"] {
-    @apply text-xs text-base-500 dark:text-base-400;
-  }
-
-  /* Show more button */
-  [class*="_showMoreButton_"] {
-    @apply border-base-300 text-base-600 dark:border-base-600 dark:text-base-300;
-    @apply hover:bg-base-100 dark:hover:bg-base-800;
-    @apply rounded-md px-3 py-1.5;
-    background: transparent !important;
-  }
-
-  /* Loading and error text */
-  [class*="_loadingText_"],
-  [class*="_errorText_"] {
-    @apply text-base-600 dark:text-base-400;
+  /* The reply link SVGs have explicit width/height="20" attrs, respect those */
+  a svg[width] {
+    width: auto !important;
+    height: auto !important;
   }
 
   /* Link styling inside comments - WCAG AA compliance */
@@ -314,10 +233,5 @@
 
   :root[class~="dark"] & a {
     @apply text-foam;
-  }
-
-  /* Override library container max-width */
-  [class*="_container_"] {
-    max-width: none !important;
   }
 }
