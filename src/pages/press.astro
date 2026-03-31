@@ -9,7 +9,7 @@ import VideoSection from "@components/Press/VideoSection.astro";
 import PodcastSection from "@components/Press/PodcastSection.astro";
 import ArticleSection from "@components/Press/ArticleSection.astro";
 import ListingsSection from "@components/Press/ListingsSection.astro";
-import LinkedInCTA from "@components/Press/LinkedInCTA.astro";
+import SifaCTA from "@components/Press/SifaCTA.astro";
 
 // data
 import { pressCoverage } from "../data/press-coverage";
@@ -128,7 +128,7 @@ const firstVideoIds = videos
     {listings.length > 0 && <ListingsSection listings={listings} />}
   </div>
 
-  <LinkedInCTA />
+  <SifaCTA />
 </BaseLayout>
 
 <script>
