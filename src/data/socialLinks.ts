@@ -34,6 +34,17 @@ export const socialLinks: SocialLink[] = [
     },
   },
   {
+    name: "Sifa",
+    href: "https://sifa.id/p/gui.do",
+    icon: "sifa",
+    visibility: {
+      footer: true,
+      hero: true,
+      about: true,
+      contact: true,
+    },
+  },
+  {
     name: "LinkedIn",
     href: "https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=gxjansen",
     icon: "linkedin",
