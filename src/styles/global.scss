@@ -207,31 +207,272 @@
 }
 
 /* Bluesky Comments Styling
-   NOTE: All rules use plain CSS values instead of @apply because Tailwind's
-   content purger strips [class*="..."] attribute selectors (the CSS module
-   class names only exist at runtime, not in source files). */
+   =========================================================================
+   The bluesky-comments library uses CSS Modules with hashed class names
+   (e.g. _statsBar_yf3k8_12). These styles are NOT included in the build
+   output, so we replicate them here.
+
+   CRITICAL: All rules use plain CSS values, NOT @apply with Tailwind
+   utilities. Tailwind's content purger strips attribute selectors like
+   [class*="_icon_"] because the hashed class names don't exist in source
+   files. Plain CSS values are always preserved.
+
+   Colors reference the Rose Pine palette:
+   - Light (Dawn): base #faf4ed, surface #fffaf3, text #575279, muted #9893a5
+   - Dark (Main):  base #191724, surface #1f1d2e, text #e0def4, muted #6e6a86
+   - Foam light: #56949f  |  Foam dark: #9ccfd8
+   ========================================================================= */
 .bluesky-comments-wrapper {
-  /* Constrain all SVG icons to the library's intended 1.25rem size.
+  max-width: 100%;
+  color: #575279; /* Dawn text */
+  font-size: 0.9375rem;
+  line-height: 1.6;
+
+  /* --- Global resets inside the component --- */
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* --- SVG icon sizing ---
      Without this, Tailwind preflight makes SVGs display:block and they
-     expand to fill their container (672px+) since they have no width/height attrs. */
+     expand to fill their container (672px+) since they have no explicit
+     width/height attributes. */
   svg {
     width: 1.25rem !important;
     height: 1.25rem !important;
     flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
   }
 
-  /* The reply link SVGs have explicit width/height="20" attrs, respect those */
+  /* Reply-link SVGs have explicit width/height="20" attrs -- respect those */
   a svg[width] {
-    width: auto !important;
-    height: auto !important;
+    width: 20px !important;
+    height: 20px !important;
   }
 
-  /* Link styling inside comments - WCAG AA compliance */
+  /* --- Links --- */
   a {
-    @apply text-foam-light hover:underline;
+    color: #56949f; /* foam-light */
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  a:hover {
+    text-decoration: underline;
   }
 
-  :root[class~="dark"] & a {
-    @apply text-foam;
+  /* --- Stats bar (likes / reposts / replies for original post) --- */
+  [class*="_statsBar_"] {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #797593; /* Dawn muted */
+  }
+
+  [class*="_statItem_"] {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    white-space: nowrap;
+  }
+
+  /* --- Section heading & intro text --- */
+  [class*="_commentsTitle_"] {
+    margin-top: 1.25rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #575279; /* Dawn text */
+  }
+
+  [class*="_replyText_"] {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #797593; /* Dawn muted */
+  }
+
+  /* --- Divider --- */
+  [class*="_divider_"] {
+    margin-top: 0.75rem;
+    border: none;
+    border-top: 1px solid #dfdad3; /* base-300 light */
+  }
+
+  /* --- Comments list --- */
+  [class*="_commentsList_"] {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  /* --- Individual comment --- */
+  [class*="_commentContainer_"] {
+    margin: 0.75rem 0;
+    padding: 0;
+    border: none;
+    font-size: 0.875rem;
+    font-style: normal; /* override blockquote italic default */
+  }
+
+  [class*="_commentContent_"] {
+    display: flex;
+    max-width: 36rem;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  /* Comment text paragraphs */
+  [class*="_commentContent_"] > p {
+    line-height: 1.5;
+    word-break: break-word;
+  }
+
+  /* --- Author row (avatar + name) --- */
+  [class*="_authorLink_"] {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none !important;
+  }
+
+  /* Avatar */
+  [class*="_avatar_"] {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+    border-radius: 9999px;
+    background-color: #dfdad3; /* placeholder bg */
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  /* Author name */
+  [class*="_authorName_"] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #575279; /* Dawn text */
+  }
+
+  /* Handle (@username) */
+  [class*="_handle_"] {
+    font-weight: 400;
+    color: #797593; /* Dawn muted */
+  }
+
+  /* --- Nested replies --- */
+  [class*="_repliesContainer_"] {
+    border-left: 2px solid #dfdad3; /* base-300 light */
+    padding-left: 1rem;
+    margin-left: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  /* --- Comment actions (reply / repost / like counts) --- */
+  [class*="_actionsContainer_"] {
+    margin-top: 0.35rem;
+    display: flex;
+    width: 100%;
+    max-width: 14rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  [class*="_actionsRow_"] {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #797593; /* Dawn muted */
+    font-size: 0.8125rem;
+  }
+
+  [class*="_actionsRow_"] svg {
+    width: 1rem !important;
+    height: 1rem !important;
+    opacity: 0.6;
+  }
+
+  /* --- Screen-reader only text --- */
+  [class*="_screenReader_"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* --- "Reply to @handle" link at bottom of each comment --- */
+  a.replyLink,
+  a[class*="replyLink"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+    font-size: 0.8125rem;
+    color: #56949f; /* foam-light */
+  }
+
+  /* =====================================================================
+     DARK MODE OVERRIDES
+     Applied when the root element has class "dark" (Astro/Tailwind convention)
+     ===================================================================== */
+  :root[class~="dark"] & {
+    color: #e0def4; /* Main text */
+
+    a {
+      color: #9ccfd8; /* foam dark */
+    }
+
+    [class*="_statsBar_"] {
+      color: #908caa; /* Main muted */
+    }
+
+    [class*="_commentsTitle_"] {
+      color: #e0def4; /* Main text */
+    }
+
+    [class*="_replyText_"] {
+      color: #908caa; /* Main muted */
+    }
+
+    [class*="_divider_"] {
+      border-top-color: #393552; /* ~base-700 dark */
+    }
+
+    [class*="_authorName_"] {
+      color: #e0def4; /* Main text */
+    }
+
+    [class*="_handle_"] {
+      color: #908caa; /* Main muted */
+    }
+
+    [class*="_repliesContainer_"] {
+      border-left-color: #393552; /* ~base-700 dark */
+    }
+
+    [class*="_actionsRow_"] {
+      color: #908caa; /* Main muted */
+    }
+
+    [class*="_avatar_"] {
+      background-color: #393552;
+    }
+
+    a.replyLink,
+    a[class*="replyLink"] {
+      color: #9ccfd8; /* foam dark */
+    }
   }
 }
