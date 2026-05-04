@@ -13,7 +13,7 @@ describe("SocialCards", () => {
       expect(link.name).toBeTruthy();
       expect(link.href).toMatch(/^https?:\/\//);
       expect(link.icon).toMatch(
-        /^(tabler\/|signal|linkedin|instagram|bluesky)/,
+        /^(tabler\/|signal|sifa|linkedin|instagram|bluesky)/,
       );
     });
   });

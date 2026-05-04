@@ -14,9 +14,7 @@ const sortedPresentations = presentations.sort((a, b) =>
 );
 
 // Find current presentation index
-const currentIndex = sortedPresentations.findIndex(
-  (p) => p.slug === currentSlug,
-);
+const currentIndex = sortedPresentations.findIndex((p) => p.id === currentSlug);
 const prevPresentation =
   currentIndex > 0 ? sortedPresentations[currentIndex - 1] : null;
 const nextPresentation =
@@ -49,7 +47,7 @@ const nextPresentation =
     {
       prevPresentation && (
         <a
-          href={`/presentations/${prevPresentation.slug}/`}
+          href={`/presentations/${prevPresentation.id}/`}
           class="group flex-1 rounded-lg border border-base-200 p-4 hover:border-primary-500 dark:border-base-800 dark:hover:border-primary-400"
         >
           <span class="flex items-center gap-1 text-sm text-base-500 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400">
@@ -75,7 +73,7 @@ const nextPresentation =
     {
       nextPresentation && (
         <a
-          href={`/presentations/${nextPresentation.slug}/`}
+          href={`/presentations/${nextPresentation.id}/`}
           class="group flex-1 rounded-lg border border-base-200 p-4 text-right hover:border-primary-500 dark:border-base-800 dark:hover:border-primary-400"
         >
           <span class="flex items-center justify-end gap-1 text-sm text-base-500 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400">

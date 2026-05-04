@@ -10,7 +10,7 @@ const allPosts = await getCollection("post", ({ data }) => !data.draft);
 const authorPostCounts = authors
   .map((author) => {
     const postCount = allPosts.filter(
-      (post) => post.data.authors && post.data.authors.includes(author.slug),
+      (post) => post.data.authors && post.data.authors.includes(author.id),
     ).length;
     return { author, postCount };
   })
@@ -35,7 +35,7 @@ const authorPostCounts = authors
       {
         authorPostCounts.map(({ author, postCount }) => (
           <article class="rounded-xl border border-base-300 p-6 transition-shadow hover:shadow-lg dark:border-base-700">
-            <a href={`/authors/${author.slug}/`} class="flex gap-6">
+            <a href={`/authors/${author.id}/`} class="flex gap-6">
               {author.data.avatar && (
                 <div class="flex-shrink-0">
                   <Image

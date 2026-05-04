@@ -33,7 +33,7 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
 ---
 
 <article class={`card group ${className}`} {...rest}>
-  <a href={`/post/${post.slug}/`}>
+  <a href={`/post/${post.id}/`}>
     {
       heroImage && (
         <Image
@@ -42,7 +42,7 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
           widths={[360, 640, 768, 1024, 1600]}
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33.333vw, 400px"
           class="w-full rounded-t-xl object-cover"
-          transition:name={`heroImage-${post.slug}`}
+          transition:name={`heroImage-${post.id}`}
           style="background: transparent;"
           quality={85}
           format="webp"
@@ -67,7 +67,7 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
     <!-- title -->
     <h2 class="card-title">
       <a
-        href={`/post/${post.slug}/`}
+        href={`/post/${post.id}/`}
         class="hover:text-primary-500 dark:hover:text-primary-400"
       >
         {title}
@@ -83,7 +83,7 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
 
     <!-- read post link -->
     <div class="mt-6">
-      <a href={`/post/${post.slug}/`} class="inline-flex items-center gap-2">
+      <a href={`/post/${post.id}/`} class="inline-flex items-center gap-2">
         Read Post
         <svg
           xmlns="http://www.w3.org/2000/svg"

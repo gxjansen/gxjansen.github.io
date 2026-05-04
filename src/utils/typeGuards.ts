@@ -32,7 +32,7 @@ export function isPresentation(value: unknown): value is Presentation {
   // Check required fields
   if (
     typeof presentation.title !== "string" ||
-    typeof presentation.slug !== "string" ||
+    typeof presentation.id !== "string" ||
     typeof presentation.description !== "string" ||
     typeof presentation.duration !== "string" ||
     typeof presentation.isWorkshop !== "boolean" ||
@@ -92,8 +92,7 @@ export function validatePresentation(presentation: unknown): string[] {
   // Required fields
   if (!p.title?.trim())
     errors.push("title field is required and must not be empty");
-  if (!p.slug?.trim())
-    errors.push("slug field is required and must not be empty");
+  if (!p.id?.trim()) errors.push("id field is required and must not be empty");
   if (!p.description?.trim())
     errors.push("description field is required and must not be empty");
   if (!p.duration?.trim())
@@ -134,8 +133,8 @@ export function validatePresentation(presentation: unknown): string[] {
   }
 
   // Slug format validation
-  if (p.slug && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.slug)) {
-    errors.push("Slug must be in kebab-case format");
+  if (p.id && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.id)) {
+    errors.push("ID must be in kebab-case format");
   }
 
   return errors;

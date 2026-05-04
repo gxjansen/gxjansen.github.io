@@ -101,10 +101,13 @@ async function readPost(slug) {
   }
 
   // Extract plain text from body (strip MDX/markdown syntax)
-  const textContent = body
+  let stripped = body
     .replace(/import\s+.*?from\s+['"].*?['"]\s*;?\s*/g, '')
-    .replace(/export\s+.*?;?\s*/g, '')
-    .replace(/<[^>]+>/g, '')
+    .replace(/export\s+.*?;?\s*/g, '');
+  // Loop HTML tag removal until stable to handle incomplete multi-char sequences
+  let prev;
+  do { prev = stripped; stripped = stripped.replace(/<[^>]+>/g, ''); } while (stripped !== prev);
+  const textContent = stripped
     .replace(/!\[.*?\]\(.*?\)/g, '')
     .replace(/\[([^\]]+)\]\(.*?\)/g, '$1')
     .replace(/#{1,6}\s+/g, '')

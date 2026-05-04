@@ -5,7 +5,8 @@ import { ClientRouter } from "astro:transitions";
 // component imports
 import Seo from "@components/Seo/Seo.astro";
 import PassiveEvents from "@components/Scripts/PassiveEvents.astro";
-import { MarkdownAlternateLink } from "astro-md-alternate/components";
+// TODO: Re-enable after updating astro-md-alternate for Astro 6
+// import { MarkdownAlternateLink } from "astro-md-alternate/components";
 
 // data
 import siteSettings from "@config/siteSettings.json";
@@ -138,16 +139,23 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 <!-- other -->
 <meta name="generator" content={Astro.generator} />
 <link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="me" href="https://sifa.id/p/gui.do" />
 
-<!-- Markdown alternate for AI agents (blog posts only) -->
-<MarkdownAlternateLink patterns={["/post/"]} />
+<!-- TODO: Re-enable after updating astro-md-alternate for Astro 6 -->
+<!-- <MarkdownAlternateLink patterns={["/post/"]} /> -->
 
 {/* Standard.site document verification (ATProto long-form publishing) */}
-{standardSiteConfig.enabled && type === "blog" && (() => {
-  const slug = Astro.url.pathname.replace(/^\/post\//, '').replace(/\/$/, '');
-  const href = `at://${standardSiteConfig.did}/site.standard.document/${slug}`;
-  return <link rel="site.standard.document" href={href} />;
-})()}
+{
+  standardSiteConfig.enabled &&
+    type === "blog" &&
+    (() => {
+      const slug = Astro.url.pathname
+        .replace(/^\/post\//, "")
+        .replace(/\/$/, "");
+      const href = `at://${standardSiteConfig.did}/site.standard.document/${slug}`;
+      return <link rel="site.standard.document" href={href} />;
+    })()
+}
 
 <!-- Performance optimizations -->
 <PassiveEvents />

@@ -10,7 +10,7 @@ import PresentationNav from "@components/Presentations/PresentationNav.astro";
 import RelatedEvents from "@components/RelatedEvents/RelatedEvents.astro";
 
 // content
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 // Generate static paths for all non-hidden presentations
 export async function getStaticPaths() {
@@ -21,13 +21,13 @@ export async function getStaticPaths() {
   );
 
   return visiblePresentations.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry, presentations: visiblePresentations },
   }));
 }
 
 const { entry, presentations } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 const {
   title,
   duration,
@@ -104,7 +104,7 @@ const metaImage = image ? new URL(image, Astro.site) : undefined;
                 class="absolute inset-0 h-full w-full rounded-lg object-cover"
                 loading="eager"
                 style="z-index: 100;"
-                transition:name={`presentation-image-${entry.slug}`}
+                transition:name={`presentation-image-${entry.id}`}
               />
             </div>
 
@@ -115,11 +115,11 @@ const metaImage = image ? new URL(image, Astro.site) : undefined;
           {youtubeId && <VideoEmbed youtubeId={youtubeId} />}
 
           <PresentationNav
-            currentSlug={entry.slug}
+            currentSlug={entry.id}
             presentations={presentations}
           />
 
-          <RelatedEvents presentationSlug={entry.slug} />
+          <RelatedEvents presentationSlug={entry.id} />
         </div>
       </div>
     </div>

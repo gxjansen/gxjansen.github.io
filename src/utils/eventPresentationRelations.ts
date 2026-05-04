@@ -32,7 +32,7 @@ export function getRelatedPresentations(
   if (!event || !event.relatedPresentationSlugs) return [];
 
   return presentations.filter((presentation) =>
-    event.relatedPresentationSlugs.includes(presentation.slug),
+    event.relatedPresentationSlugs.includes(presentation.id),
   );
 }
 

@@ -1,10 +1,10 @@
 /* Import Component Styles */
-@use './utilities/utilities';
-@use './components/alerts';
-@use './components/cards';
-@use './components/links';
-@use './base/typography';
-@use './prose';
+@use "./utilities/utilities";
+@use "./components/alerts";
+@use "./components/cards";
+@use "./components/links";
+@use "./base/typography";
+@use "./prose";
 
 /* Base Styles */
 @tailwind base;
@@ -30,7 +30,7 @@
 @layer components {
   /* Card Base Styles */
   .card {
-    @apply bg-base-50 dark:bg-base-900 rounded-xl shadow-lg transition-all duration-300 overflow-hidden;
+    @apply overflow-hidden rounded-xl bg-base-50 shadow-lg transition-all duration-300 dark:bg-base-900;
   }
 
   .card-container {
@@ -38,15 +38,15 @@
   }
 
   .card-content {
-    @apply p-4 sm:p-6 md:p-8 flex flex-col;
+    @apply flex flex-col p-4 sm:p-6 md:p-8;
   }
 
   .card-title {
-    @apply text-xl font-semibold mb-4 text-base-900 dark:text-base-100;
+    @apply mb-4 text-xl font-semibold text-base-900 dark:text-base-100;
   }
 
   .card-meta {
-    @apply text-sm text-base-500 dark:text-base-400 flex flex-wrap gap-2 mb-4;
+    @apply mb-4 flex flex-wrap gap-2 text-sm text-base-500 dark:text-base-400;
   }
 
   .cards-grid {
@@ -56,21 +56,21 @@
   /* Card Media */
   .card img:first-child,
   .card iframe:first-child {
-    @apply aspect-video object-cover mb-0;
+    @apply mb-0 aspect-video object-cover;
   }
 
   /* Video Card */
   .lazy-youtube {
-    @apply aspect-video relative;
+    @apply relative aspect-video;
 
     img {
-      @apply w-full h-full object-cover;
+      @apply h-full w-full object-cover;
     }
   }
 
   /* Horizontal Scroll Container */
   .scroll-container {
-    @apply flex overflow-x-auto gap-3 pb-6 snap-x snap-mandatory px-2;
+    @apply flex snap-x snap-mandatory gap-3 overflow-x-auto px-2 pb-6;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -86,7 +86,7 @@
   }
 
   .scroll-item {
-    @apply flex-none snap-center w-[calc(100%-1rem)] sm:w-[calc(50%-0.5rem)] max-w-full box-border;
+    @apply box-border w-[calc(100%-1rem)] max-w-full flex-none snap-center sm:w-[calc(50%-0.5rem)];
   }
 
   /* Carousel Header and Progress */
@@ -95,29 +95,29 @@
   }
 
   .carousel-progress {
-    @apply flex gap-2 justify-center items-center mt-2;
+    @apply mt-2 flex items-center justify-center gap-2;
   }
 
   .progress-dot {
-    @apply w-2 h-2 rounded-full transition-all duration-300;
+    @apply h-2 w-2 rounded-full transition-all duration-300;
     @apply bg-base-300 dark:bg-base-600;
 
     &[data-active="true"] {
-      @apply w-3 h-3;
+      @apply h-3 w-3;
       @apply bg-primary-500 dark:bg-primary-400;
     }
   }
 
   /* Navigation Buttons */
   .nav-button {
-    @apply absolute top-1/2 -translate-y-1/2 z-10;
-    @apply w-12 h-12 flex items-center justify-center;
-    @apply bg-base-50/95 dark:bg-base-800/95 rounded-full;
-    @apply text-base-800 dark:text-base-200 text-2xl;
+    @apply absolute top-1/2 z-10 -translate-y-1/2;
+    @apply flex h-12 w-12 items-center justify-center;
+    @apply rounded-full bg-base-50/95 dark:bg-base-800/95;
+    @apply text-2xl text-base-800 dark:text-base-200;
     @apply shadow-lg transition-all duration-300;
     @apply hover:bg-base-100 dark:hover:bg-base-700;
     @apply focus:outline-none focus:ring-2 focus:ring-primary-500;
-    @apply disabled:opacity-30 disabled:cursor-not-allowed;
+    @apply disabled:cursor-not-allowed disabled:opacity-30;
     @apply disabled:hover:bg-base-50/95 dark:disabled:hover:bg-base-800/95;
     /* Improved touch target size */
     @apply touch-manipulation;
@@ -132,7 +132,7 @@
 
     /* Prevent button clicks from triggering card links */
     &::before {
-      content: '';
+      content: "";
       @apply absolute inset-0;
     }
 
@@ -143,9 +143,8 @@
   }
 
   .site-container {
-    @apply mx-auto max-w-7xl w-full box-border px-2 sm:px-4;
+    @apply mx-auto box-border w-full max-w-7xl px-2 sm:px-4;
   }
-
 
   /* Z-index Management */
   .z-background {
@@ -185,12 +184,12 @@
   }
   to {
     outline-offset: 3px;
-    outline-color: theme('colors.primary.500');
+    outline-color: theme("colors.primary.500");
   }
 }
 
 :focus-visible {
-  outline: 2px solid theme('colors.primary.500');
+  outline: 2px solid theme("colors.primary.500");
   outline-offset: 3px;
   animation: focus-ring-expand 0.2s cubic-bezier(0.33, 1, 0.68, 1);
 }
@@ -207,106 +206,273 @@
   }
 }
 
-/* Bluesky Comments Styling */
+/* Bluesky Comments Styling
+   =========================================================================
+   The bluesky-comments library uses CSS Modules with hashed class names
+   (e.g. _statsBar_yf3k8_12). These styles are NOT included in the build
+   output, so we replicate them here.
+
+   CRITICAL: All rules use plain CSS values, NOT @apply with Tailwind
+   utilities. Tailwind's content purger strips attribute selectors like
+   [class*="_icon_"] because the hashed class names don't exist in source
+   files. Plain CSS values are always preserved.
+
+   Colors reference the Rose Pine palette:
+   - Light (Dawn): base #faf4ed, surface #fffaf3, text #575279, muted #9893a5
+   - Dark (Main):  base #191724, surface #1f1d2e, text #e0def4, muted #6e6a86
+   - Foam light: #56949f  |  Foam dark: #9ccfd8
+   ========================================================================= */
 .bluesky-comments-wrapper {
-  /* Style the library's "Comments" title to match our design */
-  [class*="_commentsTitle_"] {
-    @apply text-xl font-bold mb-4 text-base-900 dark:text-base-100;
-    margin-top: 0 !important; /* Override library's margin-top */
+  max-width: 100%;
+  color: #575279; /* Dawn text */
+  font-size: 0.9375rem;
+  line-height: 1.6;
+
+  /* --- Global resets inside the component --- */
+  * {
+    margin: 0;
+    padding: 0;
   }
 
-  /* Style the stats bar (likes, reposts, etc.) */
+  /* --- SVG icon sizing ---
+     Without this, Tailwind preflight makes SVGs display:block and they
+     expand to fill their container (672px+) since they have no explicit
+     width/height attributes. */
+  svg {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+    flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  /* Reply-link SVGs have explicit width/height="20" attrs -- respect those */
+  a svg[width] {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  /* --- Links --- */
+  a {
+    color: #56949f; /* foam-light */
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* --- Stats bar (likes / reposts / replies for original post) --- */
   [class*="_statsBar_"] {
-    @apply text-base-600 dark:text-base-400 text-sm mb-4;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #797593; /* Dawn muted */
   }
 
-  /* Style the reply text */
+  [class*="_statItem_"] {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    white-space: nowrap;
+  }
+
+  /* --- Section heading & intro text --- */
+  [class*="_commentsTitle_"] {
+    margin-top: 1.25rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #575279; /* Dawn text */
+  }
+
   [class*="_replyText_"] {
-    @apply text-base-600 dark:text-base-400;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #797593; /* Dawn muted */
   }
 
-  /* Style the divider */
+  /* --- Divider --- */
   [class*="_divider_"] {
-    @apply border-base-200 dark:border-base-700;
-    border-top-width: 1px;
-    border-top-style: solid;
+    margin-top: 0.75rem;
+    border: none;
+    border-top: 1px solid #dfdad3; /* base-300 light */
   }
 
-  /* Comments list spacing */
+  /* --- Comments list --- */
   [class*="_commentsList_"] {
-    @apply mt-4;
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
   }
 
-  /* Individual comment styling */
+  /* --- Individual comment --- */
   [class*="_commentContainer_"] {
-    @apply py-3;
+    margin: 0.75rem 0;
+    padding: 0;
+    border: none;
+    font-size: 0.875rem;
+    font-style: normal; /* override blockquote italic default */
   }
 
-  /* Comment content */
   [class*="_commentContent_"] {
-    @apply max-w-none;
+    display: flex;
+    max-width: 36rem;
+    flex-direction: column;
+    gap: 0.4rem;
   }
 
-  /* Author link styling */
-  [class*="_authorLink_"] {
-    @apply text-base-900 dark:text-base-100;
+  /* Comment text paragraphs */
+  [class*="_commentContent_"] > p {
+    line-height: 1.5;
+    word-break: break-word;
+  }
 
-    &:hover {
-      @apply text-primary-600 dark:text-primary-400;
-    }
+  /* --- Author row (avatar + name) --- */
+  [class*="_authorLink_"] {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none !important;
+  }
+
+  /* Avatar */
+  [class*="_avatar_"] {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+    border-radius: 9999px;
+    background-color: #dfdad3; /* placeholder bg */
+    object-fit: cover;
+    flex-shrink: 0;
   }
 
   /* Author name */
   [class*="_authorName_"] {
-    @apply font-medium text-base-900 dark:text-base-100;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #575279; /* Dawn text */
   }
 
-  /* Handle (username) */
+  /* Handle (@username) */
   [class*="_handle_"] {
-    @apply text-base-500 dark:text-base-400;
+    font-weight: 400;
+    color: #797593; /* Dawn muted */
   }
 
-  /* Avatar styling */
-  [class*="_avatar_"] {
-    @apply bg-base-200 dark:bg-base-700;
-  }
-
-  /* Replies container (nested comments) */
+  /* --- Nested replies --- */
   [class*="_repliesContainer_"] {
-    @apply border-base-300 dark:border-base-600;
-    border-left-width: 2px;
+    border-left: 2px solid #dfdad3; /* base-300 light */
+    padding-left: 1rem;
+    margin-left: 0.875rem;
+    margin-top: 0.25rem;
   }
 
-  /* Actions container */
+  /* --- Comment actions (reply / repost / like counts) --- */
   [class*="_actionsContainer_"] {
-    @apply text-base-500 dark:text-base-400 text-xs;
+    margin-top: 0.35rem;
+    display: flex;
+    width: 100%;
+    max-width: 14rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  /* Show more button */
-  [class*="_showMoreButton_"] {
-    @apply text-base-600 dark:text-base-300 border-base-300 dark:border-base-600;
-    @apply hover:bg-base-100 dark:hover:bg-base-800;
-    @apply rounded-md px-3 py-1.5;
-    background: transparent !important;
+  [class*="_actionsRow_"] {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #797593; /* Dawn muted */
+    font-size: 0.8125rem;
   }
 
-  /* Loading and error text */
-  [class*="_loadingText_"],
-  [class*="_errorText_"] {
-    @apply text-base-600 dark:text-base-400;
+  [class*="_actionsRow_"] svg {
+    width: 1rem !important;
+    height: 1rem !important;
+    opacity: 0.6;
   }
 
-  /* Link styling inside comments - WCAG AA compliance */
-  a {
-    @apply text-foam-light hover:underline;
+  /* --- Screen-reader only text --- */
+  [class*="_screenReader_"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 
-  :root[class~="dark"] & a {
-    @apply text-foam;
+  /* --- "Reply to @handle" link at bottom of each comment --- */
+  a.replyLink,
+  a[class*="replyLink"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+    font-size: 0.8125rem;
+    color: #56949f; /* foam-light */
   }
 
-  /* Override library container max-width */
-  [class*="_container_"] {
-    max-width: none !important;
+  /* =====================================================================
+     DARK MODE OVERRIDES
+     Applied when the root element has class "dark" (Astro/Tailwind convention)
+     ===================================================================== */
+  :root[class~="dark"] & {
+    color: #e0def4; /* Main text */
+
+    a {
+      color: #9ccfd8; /* foam dark */
+    }
+
+    [class*="_statsBar_"] {
+      color: #908caa; /* Main muted */
+    }
+
+    [class*="_commentsTitle_"] {
+      color: #e0def4; /* Main text */
+    }
+
+    [class*="_replyText_"] {
+      color: #908caa; /* Main muted */
+    }
+
+    [class*="_divider_"] {
+      border-top-color: #393552; /* ~base-700 dark */
+    }
+
+    [class*="_authorName_"] {
+      color: #e0def4; /* Main text */
+    }
+
+    [class*="_handle_"] {
+      color: #908caa; /* Main muted */
+    }
+
+    [class*="_repliesContainer_"] {
+      border-left-color: #393552; /* ~base-700 dark */
+    }
+
+    [class*="_actionsRow_"] {
+      color: #908caa; /* Main muted */
+    }
+
+    [class*="_avatar_"] {
+      background-color: #393552;
+    }
+
+    a.replyLink,
+    a[class*="replyLink"] {
+      color: #9ccfd8; /* foam dark */
+    }
   }
 }

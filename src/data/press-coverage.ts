@@ -13,6 +13,16 @@ export const pressCoverage: PressCoverage[] = [
     category: "award",
   },
   {
+    title: "From Psychology to Spryker - Guido Jansen",
+    language: "english",
+    publicationDate: "2025-08-29",
+    youtubeLink: "https://www.youtube.com/watch?v=8pQG86R0_-c",
+    spotifyEmbedId: "",
+    articleUrl:
+      "https://martechtherapy.substack.com/p/from-psychology-to-spryker-guido",
+    personOrganization: "MartechTherapy",
+  },
+  {
     title: "We Automated My Entire Podcast Guest Pipeline with n8n + Apify!",
     language: "english",
     publicationDate: "2025-12-11",

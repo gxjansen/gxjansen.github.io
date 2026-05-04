@@ -1,7 +1,12 @@
-import purgecss from '@fullhuman/postcss-purgecss';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+import purgecssModule from '@fullhuman/postcss-purgecss';
+const purgecss = purgecssModule.default || purgecssModule;
 
 export default {
   plugins: [
+    tailwindcss(),
+    autoprefixer(),
     purgecss({
       content: [
         './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
@@ -22,12 +27,19 @@ export default {
           // State classes
           'active', 'disabled', 'loading', 'error', 'success',
           // Focus and hover states
-          /^focus:/, /^hover:/, /^group-hover:/
+          /^focus:/, /^hover:/, /^group-hover:/,
+          // Prose typography class (needed to keep element-based selectors like .prose th)
+          'prose',
         ],
         deep: [
           /dark$/, /light$/, /active$/, /open$/, /closed$/,
           // Dynamic theme classes
           /^bg-/, /^text-/, /^border-/,
+          // Prose element selectors (table, headings, etc.)
+          /^prose/,
+          // Bluesky comments library uses CSS modules with hashed class names
+          // that only exist at runtime -- preserve our attribute selectors
+          /bluesky-comments-wrapper/,
         ],
         greedy: [
           /show$/, /hide$/, /sr-only$/, /visible$/, /invisible$/,
