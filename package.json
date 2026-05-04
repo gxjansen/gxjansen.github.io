@@ -74,7 +74,7 @@
     "lightningcss": "^1.31.1",
     "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "svgo": "2.8.0",
+    "svgo": "^2.8.2",
     "typescript": "^5.9.3",
     "vitest": "^3.2.4"
   },
