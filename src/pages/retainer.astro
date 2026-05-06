@@ -16,36 +16,36 @@ const faqs = [
   {
     question: "How many open seats?",
     answer:
-      "Three concurrent. Application waitlist when full. One company per competitive space — additional applications queue.",
+      "Three concurrent. Waitlist when full. One company per competitive space, the rest queue.",
   },
   {
     question: "How does this fit alongside your other work?",
     answer:
-      "Advisory, speaking, and selective full-time leadership conversations are separate tracks. The advisory engagement has a defined six-month scope and a written continuity commitment (see above) — it is delivered regardless of what else is on my calendar.",
+      "Advisory, speaking, and selective full-time leadership conversations are separate tracks. The advisory engagement has a defined six-month minimum scope and a written continuity commitment (see above), so it gets delivered regardless of what else is on my calendar.",
   },
   {
-    question: "Can we renew after six months?",
+    question: "How long can the engagement run?",
     answer:
-      "Renewal is discussed at month six with one month's notice either way. About one in three advisory engagements eventually convert into full-time leadership conversations — a healthy outcome, not a surprise.",
+      "The first six months are a fixed commitment, long enough to cover the Week 1 baseline, the Month 3 review, and the Month 6 synthesis. After that the engagement runs month-to-month with thirty days' notice from either side. No forced renewal conversation, no cliff.",
   },
   {
     question: "What if the engagement isn't delivering value?",
     answer:
-      "A re-baseline conversation at month three is built in. Beyond that: thirty days' notice from either side, prorated through the notice period, all artifacts delivered to the cutoff date.",
+      "A re-baseline conversation at month three is built in. Beyond that, thirty days' notice from either side. The notice period is prorated, and all artifacts get delivered up to the cutoff date.",
   },
   {
     question: "Is the engagement confidential?",
     answer:
-      "Yes. Company name, strategy, and the existence of the engagement are not disclosed unless you ask for the opposite.",
+      "Yes. Company name, strategy, and the existence of the engagement aren't disclosed unless you specifically want them to be.",
   },
   {
     question: "Can we do weekly calls instead?",
     answer:
-      "The default cadence is one call every two weeks. Weekly calls are possible during specific intensive windows — migrations, launches, hiring sprints — at no additional fee.",
+      "The default cadence is one call every two weeks. During specific intensive windows like migrations, launches, or hiring sprints, we can switch to weekly. No additional fee.",
   },
   {
     question: "Can we talk to a past advisee?",
-    answer: "Yes — references on request after the scoping call.",
+    answer: "Yes. References on request after the scoping call.",
   },
   {
     question: "What if our community lead quits in month three?",
@@ -53,18 +53,14 @@ const faqs = [
       "The advisory continues. Hiring the replacement is a conversation we have together, using the hiring scorecard built during the engagement.",
   },
   {
-    question: "How is billing handled?",
-    answer:
-      "Through an umbrella entity (Tentoo or equivalent). Clean invoicing and VAT handling for international clients.",
-  },
-  {
     question: "Do you do implementation?",
     answer:
-      "No. The advisory designs and decides; your team or contractors execute. This keeps the offer clean and avoids the conflict of interest that comes with advising on the work you also bill to deliver.",
+      "No. The advisory works on the design and the decisions; your team or contractors run the execution. It keeps the offer clean and avoids the conflict of interest where I'd be advising on work I also bill to deliver.",
   },
 ];
 
 // Testimonials — locked from retainer-page-plan.md §16
+// (preserved verbatim — these are authentic quotes from real recommendations)
 const testimonials = [
   {
     quote:
@@ -94,8 +90,8 @@ const testimonials = [
 ---
 
 <BaseLayout
-  title="Retainer — Senior community leadership for companies not yet ready to hire one"
-  description="A six-month advisory engagement on building community and ecosystem functions that drive product decisions, reduce support costs, and create competitive moats. Three concurrent seats. Application or 30-min scoping call."
+  title="Retainer: Senior community leadership for companies not yet ready to hire one"
+  description="A community and ecosystem advisory engagement. Six-month minimum, then rolling. Three concurrent seats. Apply or schedule a 30-min scoping call."
 >
   <!-- Hero (mt-14 matches fixed nav height h-14) -->
   <section
@@ -115,20 +111,19 @@ const testimonials = [
         <p
           class="mt-6 max-w-3xl text-pretty text-lg leading-relaxed text-base-700 md:text-xl dark:text-base-300"
         >
-          Strategic guidance on building community and ecosystem functions that
-          drive product decisions, reduce support costs, and create competitive
-          moats. For technical companies ready to treat community as
-          infrastructure, not as activity.
+          How to build community and ecosystem functions that actually move
+          product decisions and lower support costs. For technical companies
+          that treat community as infrastructure.
         </p>
         <p
           class="mt-6 max-w-3xl text-base leading-relaxed text-base-600 dark:text-base-400"
         >
-          Built community at <strong>Spryker</strong> (130+ enterprise clients, 25%
-          of product roadmap influenced by community), <strong
+          I've built community at <strong>Spryker</strong> (130+ enterprise clients,
+          with about 25% of product roadmap traceable to community signal), <strong
             >Dutchento / Meet Magento</strong
           > (600+ annual attendees), and <strong>CRO.CAFE</strong> (200+ episodes
-          across four languages). 200+ talks across 26 countries. Community Builder
-          Award (eBay/Magento). Experimentation Culture Award.
+          across four languages). 200+ talks in 26 countries, plus the Community Builder
+          Award from eBay/Magento and the Experimentation Culture Award.
         </p>
         <div
           class="mt-10 flex flex-wrap items-center gap-4"
@@ -191,25 +186,26 @@ const testimonials = [
           >
             <p>
               I'm <strong>Guido X Jansen</strong>. I've built community
-              functions from zero in three different contexts — as a volunteer
-              founder (Dutchento / Meet Magento), as a creator (CRO.CAFE), and
-              as an employee leading the function (Spryker). Same pattern, three
-              different stages.
+              functions from zero three times: as a volunteer founder (Dutchento
+              / Meet Magento), as a creator (CRO.CAFE), and as an employee
+              leading the function (Spryker). Same pattern, three different
+              stages.
             </p>
             <p>
               My background is cognitive psychology, then conversion
-              optimisation, then community and developer relations. That order
-              matters: it's why I think about community design through how
-              technical users actually behave, why I measure community work like
-              an experimentation programme, and why I keep coming back to the
-              question — what would make someone stay, contribute, and advocate?
+              optimisation, then community and DevRel. That order matters.
+              Psychology mostly taught me you can't reliably predict what
+              developers will do, which is exactly why measurement and iteration
+              matter. So I think about community design as an experimentation
+              programme: build a small thing, see what people actually do with
+              it, and adjust.
             </p>
             <p>
               At Spryker I built the enterprise community function from scratch,
-              serving 130+ enterprise clients. Twenty-five percent of product
-              roadmap decisions traced back to community signal. We launched a
-              Customer Advisory Board, an MIT-licensed module ecosystem, and
-              contribution programmes that survived three rounds of layoffs.
+              serving 130+ enterprise clients. About 25% of product roadmap
+              decisions traced back to community signal. The Customer Advisory
+              Board, MIT-licensed module ecosystem, and contribution programmes
+              we built there survived three rounds of layoffs.
             </p>
           </div>
           <p class="mt-6">
@@ -244,7 +240,7 @@ const testimonials = [
           class="mb-12 text-lg leading-relaxed text-base-700 dark:text-base-300"
         >
           Advisory work fails when there's nothing concrete to show at the end
-          of it. Here's what's on the table at month six.
+          of it. So at month six, this is what's on the table.
         </p>
 
         <div class="grid gap-8 md:grid-cols-2">
@@ -254,30 +250,25 @@ const testimonials = [
             </h3>
             <ul class="space-y-4 text-base-700 dark:text-base-300">
               <li>
-                <strong class="text-base-900 dark:text-base-100"
-                  >Community and ecosystem architecture.</strong
-                > Who your community is for, how participation is designed, where
-                signal flows back into the business. Yours to keep, evolve, and hand
-                to a new hire.
+                A community and ecosystem architecture: who your community is
+                for, how participation is designed, and where signal flows back
+                into the business. Yours to keep, evolve, and hand to a new
+                hire.
               </li>
               <li>
-                <strong class="text-base-900 dark:text-base-100"
-                  >Hiring scorecard</strong
-                > for community / DevRel / ecosystem roles, calibrated to your stage
-                and product. Used at month six. Used again at year two.
+                A hiring scorecard for community / DevRel / ecosystem roles,
+                calibrated to your stage and product. Useful at month six and
+                again at year two.
               </li>
               <li>
-                <strong class="text-base-900 dark:text-base-100"
-                  >Signal-to-roadmap process.</strong
-                > The specific mechanism that translates community input into product,
-                sales, and strategic decisions. Workflow document, lightweight enough
-                to actually run.
+                A signal-to-roadmap process: the actual mechanism that
+                translates community input into product, sales, and strategic
+                decisions. Lightweight enough that someone will actually run it.
               </li>
               <li>
-                <strong class="text-base-900 dark:text-base-100"
-                  >Measurement framework.</strong
-                > What to track, what to ignore, what would falsify your community
-                thesis. Borrowed from CRO and experimentation heritage.
+                A measurement framework: what to track, what to ignore, and what
+                would falsify your community thesis. Borrowed from the CRO and
+                experimentation playbook.
               </li>
             </ul>
           </div>
@@ -287,27 +278,26 @@ const testimonials = [
             </h3>
             <ul class="space-y-4 text-base-700 dark:text-base-300">
               <li>
-                Whether to hire a senior community / DevRel lead — when, with
+                Whether to hire a senior community / DevRel lead, when, and with
                 what scorecard.
               </li>
               <li>
-                Which existing community spend or activity to <em>stop</em>.
+                What existing community spend or activity to <em>stop</em>.
               </li>
               <li>
-                Which one or two community bets to double down on for the next
-                twelve months.
+                The one or two community bets worth doubling down on for the
+                next twelve months.
               </li>
               <li>
-                Which governance structure (advisory board, contributor
-                programme, ambassador track) fits your stage.
+                The governance structure that fits your stage: advisory board,
+                contributor programme, or ambassador track.
               </li>
             </ul>
             <p
               class="mt-8 rounded-xl bg-base-100/60 p-4 text-sm leading-relaxed text-base-600 dark:bg-base-900/40 dark:text-base-400"
             >
-              <strong>What this is not.</strong> A guarantee of community size growth,
-              signups, or traffic. The advisory designs the system that produces those
-              outcomes. Your team executes.
+              <strong>Caveat:</strong> this isn't a guarantee of community size, signups,
+              or traffic. The advisory designs the system. Your team executes.
             </p>
           </div>
         </div>
@@ -326,14 +316,13 @@ const testimonials = [
         <p
           class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
         >
-          01 — Core offering
+          01. Core offering
         </p>
         <h2
           id="core-offering-heading"
           class="h2 mb-6 text-base-900 dark:text-base-100"
         >
-          External strategic oversight, so the internal team can focus on
-          execution.
+          Senior thinking partner. So your team gets to actually execute.
         </h2>
         <div
           class="space-y-4 text-lg leading-relaxed text-base-700 dark:text-base-300"
@@ -345,17 +334,15 @@ const testimonials = [
             Product trying to figure it out alongside the rest of the roadmap.
           </p>
           <p>
-            This is where I come in. Not as a replacement for the person
-            internally, but as a senior strategic partner who covers the
-            patterns they haven't seen yet — what to invest in, what to stop,
-            and what to ignore.
+            That's where I come in: as a senior thinking partner for whoever is
+            currently doing the work, covering the patterns they haven't seen
+            yet (what to invest in, what to stop, what to ignore).
           </p>
           <p
             class="border-l-4 border-primary-500 bg-base-100/40 py-3 pl-6 italic dark:bg-base-900/30"
           >
-            Your existing community lead becomes 3× more effective. Your roadmap
-            stops drifting. Your community spend stops going to the wrong
-            things.
+            In practice: the person already doing this work gets 3× more
+            leverage, and the roadmap stops drifting.
           </p>
         </div>
       </div>
@@ -373,7 +360,7 @@ const testimonials = [
         <p
           class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
         >
-          02 — Framework
+          02. Framework
         </p>
         <h2
           id="framework-heading"
@@ -393,15 +380,16 @@ const testimonials = [
             Psychology
           </p>
           <h3 class="mb-4 text-xl font-bold text-base-900 dark:text-base-100">
-            Designed for how technical users actually behave.
+            Built for how technical users actually behave.
           </h3>
           <p class="text-base leading-relaxed text-base-700 dark:text-base-300">
-            Most community work fails because it's designed for the community
-            manager's idea of community, not for how developers and technical
-            users actually behave. My cognitive psychology background shapes
-            every recommendation. Why do developers stay, contribute, and
-            advocate? What flips a member from lurker to active? Where does
-            intrinsic motivation beat extrinsic, and where doesn't it?
+            Most community work is designed for the community manager's idea of
+            community. Which usually has very little to do with how developers
+            actually behave in the wild. My cognitive psychology background
+            mostly taught me one thing: you can't reliably predict what people
+            will do. So everything I recommend is built to be tested. Who stays,
+            who contributes, what flips a lurker into a contributor. You find
+            that out by running the thing, not by guessing.
           </p>
         </div>
 
@@ -414,17 +402,17 @@ const testimonials = [
             Pattern
           </p>
           <h3 class="mb-4 text-xl font-bold text-base-900 dark:text-base-100">
-            Three zero-to-community builds. Same pattern.
+            Three zero-to-community builds. Same pattern, different decade.
           </h3>
           <p class="text-base leading-relaxed text-base-700 dark:text-base-300">
-            Dutchento (volunteer founder, scaled to 600+ annual attendees,
-            Community Builder Award from eBay/Magento). CRO.CAFE (200+ podcast
-            episodes across four languages, Experimentation Culture Award).
-            Spryker (built enterprise community function from scratch,
-            MIT-licensed module ecosystem, Customer Advisory Board). Three
-            different contexts, same pattern. The advisory shortcuts your team
-            to the patterns that work — and warns you off the ones that look
-            right but aren't.
+            Dutchento (volunteer founder, 600+ annual attendees, Community
+            Builder Award from eBay/Magento). CRO.CAFE (200+ podcast episodes
+            across four languages, Experimentation Culture Award). Spryker
+            (enterprise community function from scratch, MIT-licensed module
+            ecosystem, Customer Advisory Board). Three different contexts, same
+            pattern. What you get out of an advisory engagement is the shortcut:
+            the moves that work, and the moves that look right but turn out to
+            be a waste of three months.
           </p>
         </div>
 
@@ -440,12 +428,13 @@ const testimonials = [
             Community work that survives the budget review.
           </h3>
           <p class="text-base leading-relaxed text-base-700 dark:text-base-300">
-            Community work that can't be tied to business outcomes gets cut at
-            the first budget review. My CRO and experimentation heritage means
-            everything is built to be measured. At Spryker, 25% of product
-            roadmap decisions traced back to community signal. The advisory
-            installs the measurement and decision pipelines that make community
-            a defensible budget line — not a "nice to have."
+            Community work that can't be tied to business outcomes is the first
+            thing cut at budget review. I came up through CRO and
+            experimentation, so what we build together is set up to be measured.
+            At Spryker, about 25% of product roadmap decisions traced back to
+            community signal. That's what makes community a real line item:
+            defensible at every budget review, not a soft cost-center waiting to
+            get cut.
           </p>
         </div>
       </div>
@@ -492,13 +481,13 @@ const testimonials = [
         <p
           class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
         >
-          03 — How the engagement runs
+          03. How the engagement runs
         </p>
         <h2
           id="how-it-runs-heading"
           class="h2 mb-12 text-base-900 dark:text-base-100"
         >
-          A six-month rhythm, with the right level of pressure.
+          A structured six months. Rolling thereafter.
         </h2>
 
         <ol class="space-y-10 border-l-2 border-primary-500/30 pl-8">
@@ -510,15 +499,15 @@ const testimonials = [
               W1
             </span>
             <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Week 1 — Onboarding and ecosystem baseline
+              Week 1: Onboarding and ecosystem baseline
             </h3>
             <p
               class="text-base leading-relaxed text-base-700 dark:text-base-300"
             >
-              A 90–120 minute kickoff call. A written ecosystem baseline — where
-              your community stands, what's worth building first, what to stop
-              spending on. This is the moment when prior investment stops
-              compounding wrong.
+              A 90–120 minute kickoff call, plus a written baseline of where
+              your community stands, what's worth building first, and what to
+              stop spending on. The point of week one is to make sure none of
+              your investment gets wasted on the wrong direction.
             </p>
           </li>
 
@@ -530,14 +519,15 @@ const testimonials = [
               ✕12
             </span>
             <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Every two weeks — A standing strategy call
+              Every two weeks: a standing strategy call
             </h3>
             <p
               class="text-base leading-relaxed text-base-700 dark:text-base-300"
             >
-              Twelve sessions across six months. Sixty minutes each. The one
-              conversation where community strategy gets senior attention
-              without competing against everything else on your team's plate.
+              Twelve sessions of sixty minutes each, across the first six
+              months. The one place on the calendar where community strategy
+              gets senior attention without fighting for it against everything
+              else on your team's plate.
             </p>
           </li>
 
@@ -549,13 +539,14 @@ const testimonials = [
               ✕6
             </span>
             <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Every month — A one-page written brief
+              Every month: a one-page written brief
             </h3>
             <p
               class="text-base leading-relaxed text-base-700 dark:text-base-300"
             >
-              What to do next. What to stop. What to watch. Written, not spoken
-              — so it can be forwarded to your CEO or board without translation.
+              The next things to act on, the things to stop, and what to keep an
+              eye on. Written so it can be forwarded to your CEO or board
+              without translation.
             </p>
           </li>
 
@@ -567,13 +558,14 @@ const testimonials = [
               M3
             </span>
             <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Month 3 — Mid-engagement review
+              Month 3: mid-engagement review
             </h3>
             <p
               class="text-base leading-relaxed text-base-700 dark:text-base-300"
             >
-              A hard mid-point audit. Are we building the right thing? What
-              changed since week one? Re-baseline if needed.
+              A hard mid-point audit. Are we still building the right thing,
+              given what we've learned and what changed in your business? We
+              re-baseline if needed.
             </p>
           </li>
 
@@ -585,14 +577,34 @@ const testimonials = [
               M6
             </span>
             <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Month 6 — Synthesis and handoff
+              Month 6: synthesis and decision point
             </h3>
             <p
               class="text-base leading-relaxed text-base-700 dark:text-base-300"
             >
-              The artifacts above, finalized. Renewal or conversion
-              conversation. Either way, you walk away with documents that
-              outlast the engagement.
+              The artifacts from the previous sections, finalized. Decision
+              point: continue rolling, pause, or close. Either way, you walk
+              away with documents your team keeps using long after I'm out of
+              the calendar.
+            </p>
+          </li>
+
+          <li class="relative">
+            <span
+              class="absolute -left-[2.4rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
+              aria-hidden="true"
+            >
+              ↻
+            </span>
+            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
+              Beyond month 6: rolling cadence
+            </h3>
+            <p
+              class="text-base leading-relaxed text-base-700 dark:text-base-300"
+            >
+              Same rhythm, no fixed end. Calls, monthly briefs, async channel:
+              nothing changes about the cadence. Either side gives thirty days'
+              notice when the engagement no longer fits.
             </p>
           </li>
 
@@ -604,13 +616,13 @@ const testimonials = [
               ⇄
             </span>
             <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Throughout — A dedicated async channel
+              Throughout: a dedicated async channel
             </h3>
             <p
               class="text-base leading-relaxed text-base-700 dark:text-base-300"
             >
-              Slack, Signal, or your tool of choice. For the in-between
-              questions that shouldn't wait two weeks.
+              Slack, Signal, or whichever tool you already use. For the
+              questions that come up between calls and shouldn't wait two weeks.
             </p>
           </li>
         </ol>
@@ -629,7 +641,7 @@ const testimonials = [
         <p
           class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
         >
-          04 — Scope and fit
+          04. Scope and fit
         </p>
         <h2
           id="scope-heading"
@@ -644,7 +656,7 @@ const testimonials = [
             <ul class="space-y-2 text-base-700 dark:text-base-300">
               <li>Community / DevRel / ecosystem strategy</li>
               <li>
-                Community ops design — governance, contribution structures,
+                Community ops design: governance, contribution structures,
                 advisory boards
               </li>
               <li>DevRel function design and metrics</li>
@@ -652,8 +664,8 @@ const testimonials = [
               <li>Hiring input for community / DevRel / ecosystem roles</li>
               <li>
                 Coaching the existing person currently holding this
-                responsibility — often a junior IC or someone wearing it as 30%
-                of their job
+                responsibility (often a junior IC, or someone wearing it as 30%
+                of their job)
               </li>
             </ul>
           </div>
@@ -679,8 +691,8 @@ const testimonials = [
             <ul class="space-y-2 text-base-700 dark:text-base-300">
               <li>Series A–C company, technical or developer-led product</li>
               <li>
-                Has product traction but no senior community/ecosystem hire yet
-                — or has a junior person in role who needs guidance
+                Has product traction but no senior community/ecosystem hire yet,
+                or has a junior person in role who needs guidance
               </li>
               <li>
                 Leadership treats community as strategic, not as a megaphone
@@ -696,8 +708,8 @@ const testimonials = [
             <h3 class="h3 mb-4 text-base-900 dark:text-base-100">Not a fit</h3>
             <ul class="space-y-2 text-base-700 dark:text-base-300">
               <li>
-                Need someone to <em>run</em> community ops — this is advisory, not
-                fractional execution
+                Need someone to <em>run</em> community ops. This is advisory, not
+                fractional execution.
               </li>
               <li>
                 Want guaranteed traffic, signups, or community-size growth
@@ -725,7 +737,7 @@ const testimonials = [
         <p
           class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
         >
-          05 — Editorial integrity
+          05. Editorial integrity
         </p>
         <h2
           id="integrity-heading"
@@ -737,16 +749,15 @@ const testimonials = [
           class="space-y-4 text-lg leading-relaxed text-base-700 dark:text-base-300"
         >
           <p>
-            Advisory engagements are kept strictly separate from public
-            platforms. Clients receive no preferential treatment in conference
-            speaking referrals, no priority introductions through the community
-            network, and no positioning boost when I'm asked for recommendations
-            in public.
+            Advisory work and public platforms stay strictly separate. Paying
+            clients don't get conference speaking referrals, priority intros
+            through my community network, or a boost when someone asks me for
+            recommendations in public.
           </p>
           <p>
-            This independence preserves credibility on both sides. When I
-            mention a company publicly, it's because they earned it — not
-            because they're paying for the advisory.
+            This independence is the only thing that keeps credibility intact.
+            If I mention a company publicly, it's because they earned the
+            mention. Paying for the advisory has nothing to do with it.
           </p>
         </div>
       </div>
@@ -764,7 +775,7 @@ const testimonials = [
         <p
           class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
         >
-          06 — Continuity commitment
+          06. Continuity commitment
         </p>
         <h2
           id="continuity-heading"
@@ -773,14 +784,13 @@ const testimonials = [
           The engagement is delivered. Period.
         </h2>
         <p class="text-lg leading-relaxed text-base-700 dark:text-base-300">
-          Advisory engagements are scoped, scheduled, and delivered regardless
-          of any other work I'm doing — including if I take a senior in-house
-          role mid-engagement. If that happens, the engagement either continues
-          to its scheduled close (most common — senior roles take 3–4 months to
-          start) or transitions through a written handoff package and a prorated
-          arrangement that covers the calls and artifacts not yet delivered. <strong
-            >No engagement leaves a client mid-air.</strong
-          >
+          Advisory engagements run on their schedule regardless of what else I'm
+          doing, including the case where I take an in-house role
+          mid-engagement. If that happens, the engagement either continues
+          through its committed period (which is the usual outcome, since senior
+          roles take 3–4 months to start) or transitions via a written handoff
+          and a prorated arrangement that covers the calls and artifacts not yet
+          delivered. <strong>No engagement gets left mid-air.</strong>
         </p>
       </div>
     </div>
@@ -834,8 +844,8 @@ const testimonials = [
         <p
           class="mb-12 text-lg leading-relaxed text-base-700 dark:text-base-300"
         >
-          Pick the path that fits. Pricing range is shared by email after the
-          first contact, regardless of outcome.
+          Pick the path that fits. The pricing range is shared by email after
+          the first contact, regardless of outcome.
         </p>
       </div>
 
@@ -844,7 +854,7 @@ const testimonials = [
           class="flex flex-col rounded-2xl border-2 border-primary-500/30 bg-primary-500/5 p-8"
         >
           <h3 class="mb-3 text-xl font-bold text-base-900 dark:text-base-100">
-            A — 30-minute scoping call
+            A: 30-minute scoping call
           </h3>
           <p class="mb-6 text-base-700 dark:text-base-300">
             Best if you're not yet sure whether the engagement fits. We talk for
@@ -855,7 +865,7 @@ const testimonials = [
             Tell me up front: <strong>company name</strong>, <strong
               >your role</strong
             >, one sentence on what you're trying to figure out, and one
-            sentence on your current community/ecosystem state.
+            sentence on your current community / ecosystem state.
           </p>
           <div class="mt-auto">
             <Button
@@ -873,12 +883,13 @@ const testimonials = [
           class="flex flex-col rounded-2xl border border-base-200 bg-base-50/40 p-8 dark:border-base-800 dark:bg-base-900/30"
         >
           <h3 class="mb-3 text-xl font-bold text-base-900 dark:text-base-100">
-            B — Direct application
+            B: Direct application
           </h3>
           <p class="mb-4 text-base-700 dark:text-base-300">
             Best if you already know you want this. Email the items below.
-            Response within five business days — acceptance, decline with brief
-            reason, or scoping invite. Pricing range disclosed in the response.
+            Response within five business days: acceptance, decline with a brief
+            reason, or a scoping invite. Pricing range comes back in the
+            response either way.
           </p>
           <ul
             class="mb-6 list-disc space-y-1 pl-5 text-sm text-base-700 dark:text-base-300"
@@ -887,7 +898,7 @@ const testimonials = [
             <li>Company + your role</li>
             <li>Company website</li>
             <li>Stage (Series, ARR range, or "pre-revenue")</li>
-            <li>Current community / ecosystem state — one sentence</li>
+            <li>Current community / ecosystem state, in one sentence</li>
             <li>
               <em>Optional:</em> Six-month outcome you'd want
             </li>
