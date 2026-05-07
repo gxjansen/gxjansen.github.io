@@ -4,6 +4,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import Badge from "@components/Badge/Badge.astro";
 import Button from "@components/Button/Button.astro";
 import Accordion from "@components/Accordion/Accordion.astro";
@@ -249,26 +250,55 @@ const testimonials = [
               Artifacts you keep
             </h3>
             <ul class="space-y-4 text-base-700 dark:text-base-300">
-              <li>
-                A community and ecosystem architecture: who your community is
-                for, how participation is designed, and where signal flows back
-                into the business. Yours to keep, evolve, and hand to a new
-                hire.
+              <li class="flex gap-3">
+                <Icon
+                  name="tabler/outline/file-check"
+                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+                  aria-hidden="true"
+                />
+                <span>
+                  A community and ecosystem architecture: who your community is
+                  for, how participation is designed, and where signal flows
+                  back into the business. Yours to keep, evolve, and hand to a
+                  new hire.
+                </span>
               </li>
-              <li>
-                A hiring scorecard for community / DevRel / ecosystem roles,
-                calibrated to your stage and product. Useful at month six and
-                again at year two.
+              <li class="flex gap-3">
+                <Icon
+                  name="tabler/outline/file-check"
+                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+                  aria-hidden="true"
+                />
+                <span>
+                  A hiring scorecard for community / DevRel / ecosystem roles,
+                  calibrated to your stage and product. Useful at month six and
+                  again at year two.
+                </span>
               </li>
-              <li>
-                A signal-to-roadmap process: the actual mechanism that
-                translates community input into product, sales, and strategic
-                decisions. Lightweight enough that someone will actually run it.
+              <li class="flex gap-3">
+                <Icon
+                  name="tabler/outline/file-check"
+                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+                  aria-hidden="true"
+                />
+                <span>
+                  A signal-to-roadmap process: the actual mechanism that
+                  translates community input into product, sales, and strategic
+                  decisions. Lightweight enough that someone will actually run
+                  it.
+                </span>
               </li>
-              <li>
-                A measurement framework: what to track, what to ignore, and what
-                would falsify your community thesis. Borrowed from the CRO and
-                experimentation playbook.
+              <li class="flex gap-3">
+                <Icon
+                  name="tabler/outline/file-check"
+                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+                  aria-hidden="true"
+                />
+                <span>
+                  A measurement framework: what to track, what to ignore, and
+                  what would falsify your community thesis. Borrowed from the
+                  CRO and experimentation playbook.
+                </span>
               </li>
             </ul>
           </div>
@@ -277,20 +307,48 @@ const testimonials = [
               Decisions made together
             </h3>
             <ul class="space-y-4 text-base-700 dark:text-base-300">
-              <li>
-                Whether to hire a senior community / DevRel lead, when, and with
-                what scorecard.
+              <li class="flex gap-3">
+                <Icon
+                  name="tabler/outline/arrow-right"
+                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+                  aria-hidden="true"
+                />
+                <span>
+                  Whether to hire a senior community / DevRel lead, when, and
+                  with what scorecard.
+                </span>
               </li>
-              <li>
-                What existing community spend or activity to <em>stop</em>.
+              <li class="flex gap-3">
+                <Icon
+                  name="tabler/outline/arrow-right"
+                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+                  aria-hidden="true"
+                />
+                <span>
+                  What existing community spend or activity to <em>stop</em>.
+                </span>
               </li>
-              <li>
-                The one or two community bets worth doubling down on for the
-                next twelve months.
+              <li class="flex gap-3">
+                <Icon
+                  name="tabler/outline/arrow-right"
+                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+                  aria-hidden="true"
+                />
+                <span>
+                  The one or two community bets worth doubling down on for the
+                  next twelve months.
+                </span>
               </li>
-              <li>
-                The governance structure that fits your stage: advisory board,
-                contributor programme, or ambassador track.
+              <li class="flex gap-3">
+                <Icon
+                  name="tabler/outline/arrow-right"
+                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+                  aria-hidden="true"
+                />
+                <span>
+                  The governance structure that fits your stage: advisory board,
+                  contributor programme, or ambassador track.
+                </span>
               </li>
             </ul>
             <p
