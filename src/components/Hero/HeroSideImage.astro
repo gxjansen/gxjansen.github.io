@@ -58,22 +58,23 @@ const t = useTranslations(currLocale);
         >
           <Button
             variant="primary"
-            href="https://sifa.id/p/gui.do"
-            aria-label="Follow Guido Jansen on Sifa ID (opens in new tab)"
+            href="/retainer/"
+            aria-label="Work with Guido on a community advisory engagement"
             class="min-h-[44px] min-w-[44px] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-            target="_blank"
-            rel="noopener noreferrer"
+            umamiEvent="cta-click"
+            umamiEventTarget="work-with-me-hero"
           >
-            <span>Follow me on Sifa ID</span>
-            <span class="sr-only">(opens in new tab)</span>
+            Work with me
           </Button>
           <Button
             variant="outline"
-            href="/contact/"
-            aria-label="Book Guido Jansen for your event"
+            href="/speaker/"
+            aria-label="Invite Guido to speak at your event"
             class="min-h-[44px] min-w-[44px] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+            umamiEvent="cta-click"
+            umamiEventTarget="invite-to-speak-hero"
           >
-            Book me for your event
+            Invite me to speak
           </Button>
         </div>
         <!-- Socials -->
