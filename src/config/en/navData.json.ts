@@ -42,6 +42,16 @@ const navConfig = [
         icon: "tabler/outline/user",
       },
       {
+        text: "Retainer",
+        link: "/retainer",
+        icon: "tabler/outline/briefcase",
+      },
+      {
+        text: "Speak at your event",
+        link: "/speaker",
+        icon: "tabler/outline/microphone",
+      },
+      {
         text: "Press & Media Features",
         link: "/press",
         icon: "tabler/outline/news",
