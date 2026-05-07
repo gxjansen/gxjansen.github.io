@@ -60,6 +60,45 @@ const faqs = [
   },
 ];
 
+// Schema.org Service structured data
+// Pricing intentionally omitted (priced by application, not publicly disclosed)
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Community and Ecosystem Advisory Retainer",
+  url: "https://gui.do/retainer/",
+  description:
+    "A six-month minimum advisory engagement on community, ecosystem, and DevRel strategy for technical companies. Three concurrent seats. Application or 30-min scoping call.",
+  serviceType: "Strategic advisory",
+  category: ["Community strategy", "Developer relations", "Ecosystem strategy"],
+  provider: {
+    "@type": "Person",
+    name: "Guido X Jansen",
+    url: "https://gui.do/",
+    jobTitle: "Community strategist and advisor",
+    sameAs: [
+      "https://www.linkedin.com/in/gxjansen/",
+      "https://bsky.app/profile/gui.do",
+      "https://sifa.id/p/gui.do",
+    ],
+  },
+  audience: {
+    "@type": "BusinessAudience",
+    audienceType:
+      "Series A to Series C technical SaaS companies with developer-led products",
+  },
+  areaServed: {
+    "@type": "Place",
+    name: "Worldwide (remote, based in the Netherlands)",
+  },
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/LimitedAvailability",
+    url: "https://gui.do/retainer/#apply",
+    businessFunction: "https://schema.org/Sell",
+  },
+};
+
 // Testimonials, locked from retainer-page-plan.md §16
 // (preserved verbatim, these are authentic quotes from real recommendations)
 const testimonials = [
@@ -94,6 +133,12 @@ const testimonials = [
   title="Retainer: Senior community leadership for companies not yet ready to hire one"
   description="A community and ecosystem advisory engagement. Six-month minimum, then rolling. Three concurrent seats. Apply or schedule a 30-min scoping call."
 >
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(serviceSchema)}
+  />
+
   <!-- Hero (mt-14 matches fixed nav height h-14) -->
   <section
     id="hero"
