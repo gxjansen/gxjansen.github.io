@@ -10,16 +10,12 @@
 import siteDataEn from "./en/siteData.json.ts";
 import navDataEn from "./en/navData.json.ts";
 import faqDataEn from "./en/faqData.json.ts";
-import teamDataEn from "./en/teamData.json.ts";
-import testimonialDataEn from "./en/testimonialData.json.ts";
 
 export const dataTranslations = {
   en: {
     siteData: siteDataEn,
     navData: navDataEn,
     faqData: faqDataEn,
-    teamData: teamDataEn,
-    testimonialData: testimonialDataEn,
   },
 } as const;
 
