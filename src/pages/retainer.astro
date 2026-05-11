@@ -276,7 +276,8 @@ const testimonials = [
             burned a quarter on plays that should have been killed in week one.
           </p>
           <p class="font-medium text-base-900 dark:text-base-100">
-            The retainer covers the gap until you can hire well.
+            Two ways to use it: as a bridge to a senior hire, or as ongoing
+            senior leverage if you don't plan to make one.
           </p>
         </div>
       </div>
@@ -434,7 +435,7 @@ const testimonials = [
                 </dt>
                 <dd class="mt-1 font-medium text-base-900 dark:text-base-100">
                   A scorecard, a working system, and the decisions already made.
-                  So you hire well when you're ready.
+                  Whether or not a senior hire ends up making sense.
                 </dd>
               </div>
             </dl>
@@ -776,7 +777,7 @@ const testimonials = [
               <blockquote class="text-base leading-relaxed text-base-800 dark:text-base-200">
                 <p>“{t.quote}”</p>
               </blockquote>
-              <figcaption class="mt-auto flex items-start gap-4">
+              <figcaption class="mt-auto flex min-h-[7.5rem] items-start gap-4">
                 <Image
                   src={t.image}
                   alt={`Portrait of ${t.name}`}
@@ -786,11 +787,11 @@ const testimonials = [
                   format="webp"
                   class="h-12 w-12 flex-shrink-0 rounded-full object-cover ring-1 ring-base-200/70 dark:ring-base-700/70"
                 />
-                <div>
-                  <p class="font-semibold text-base-900 dark:text-base-100">
+                <div class="leading-tight">
+                  <p class="!my-0 font-semibold text-base-900 dark:text-base-100">
                     {t.name}
                   </p>
-                  <p class="text-sm text-base-600 dark:text-base-400">
+                  <p class="!mb-0 !mt-1 text-sm text-base-600 dark:text-base-400">
                     {t.role}, {t.company}
                   </p>
                 </div>
