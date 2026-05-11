@@ -12,23 +12,27 @@ import CompanyLogos from "@components/Companies/CompanyLogos.astro";
 
 // images
 import advisorImage from "@assets/images/headshot/08.02.2022_Spryker_CEO_2636.jpg";
+import heroImage from "@assets/images/hero/guido-speaking.jpg";
+import borisImage from "@assets/images/testimonials/boris.webp";
+import chrisImage from "@assets/images/testimonials/chris.webp";
+import svitlanaImage from "@assets/images/testimonials/svitlana.webp";
 
 // Live seat availability. Edit these two values when seats fill, both hero
 // and Apply CTAs update from the same source.
-const seatsTotal = 3;
+const seatsTotal = 5;
 const seatsOpen = 3;
 const seatAvailabilityLabel = `${seatsOpen} of ${seatsTotal} seats open right now`;
 
 // Pricing anchor line, reused in hero + Apply section so wording stays in sync.
 const pricingAnchor =
-  "Less than a quarter of the loaded cost of a senior community hire — and available next week, not month four.";
+  "Less than a quarter of the loaded cost of a senior community hire. Starts next week, not month four.";
 
 // FAQ data, locked from retainer-page-plan.md §9
 const faqs = [
   {
     question: "How many open seats?",
     answer:
-      "Three concurrent. Waitlist when full. One company per competitive space, the rest queue.",
+      "Five concurrent at most. Waitlist when full. One company per competitive space, the rest queue.",
   },
   {
     question: "How does this fit alongside your other work?",
@@ -48,7 +52,7 @@ const faqs = [
   {
     question: "What if the month 3 review says it's not working?",
     answer:
-      "Either side can call it at month three. We deliver every artifact through the cutoff date, and the most recent monthly fee is refunded. No extended notice, no fighting. Month three is when we find out — that's the point of having a hard mid-point review.",
+      "Either side can call it at month three. We deliver every artifact through the cutoff date, and the most recent monthly fee is refunded. No extended notice, no fighting. Month three is when we find out. That's the point of having a hard mid-point review.",
   },
   {
     question: "Is the engagement confidential?",
@@ -84,7 +88,7 @@ const serviceSchema = {
   name: "Community and Ecosystem Advisory Retainer",
   url: "https://gui.do/retainer/",
   description:
-    "A six-month minimum advisory engagement on community, ecosystem, and DevRel strategy for technical companies. Three concurrent seats. Application or 30-min scoping call.",
+    "A six-month minimum advisory engagement on community, ecosystem, and DevRel strategy for technical companies. Five concurrent seats. Application or 30-min scoping call.",
   serviceType: "Strategic advisory",
   category: ["Community strategy", "Developer relations", "Ecosystem strategy"],
   provider: {
@@ -125,6 +129,7 @@ const testimonials = [
     role: "Co-Founder & CEO",
     company: "Spryker",
     pillar: "Pattern",
+    image: borisImage,
   },
   {
     quote:
@@ -133,6 +138,7 @@ const testimonials = [
     role: "Chief Customer Officer",
     company: "Supermetrics",
     pillar: "Proof",
+    image: chrisImage,
   },
   {
     quote:
@@ -141,13 +147,14 @@ const testimonials = [
     role: "Senior Manager for L&D Business Engagement",
     company: "PwC Luxembourg",
     pillar: "Psychology",
+    image: svitlanaImage,
   },
 ];
 ---
 
 <BaseLayout
   title="Retainer: Senior community leadership for companies not yet ready to hire one"
-  description="A community and ecosystem advisory engagement. Six-month minimum, then rolling. Three concurrent seats. Apply or schedule a 30-min scoping call."
+  description="A community and ecosystem advisory engagement. Six-month minimum, then rolling. Five concurrent seats. Apply or schedule a 30-min scoping call."
 >
   <script
     type="application/ld+json"
@@ -162,55 +169,74 @@ const testimonials = [
     class="relative mt-14 overflow-hidden py-20 md:py-28"
   >
     <div class="site-container relative">
-      <div class="mx-auto max-w-4xl">
-        <Badge>Retainer Advisory</Badge>
-        <h1
-          id="hero-heading"
-          class="text-pretty text-4xl font-bold leading-tight tracking-tight text-base-900 md:text-5xl lg:text-6xl lg:leading-[1.1] dark:text-base-100"
-        >
-          Senior community leadership for companies not yet ready to hire one.
-        </h1>
-        <p
-          class="mt-6 max-w-3xl text-pretty text-lg leading-relaxed text-base-700 md:text-xl dark:text-base-300"
-        >
-          How to build community and ecosystem functions that actually move
-          product decisions and lower support costs. For technical companies
-          that treat community as infrastructure.
-        </p>
-        <p
-          class="mt-6 max-w-3xl text-pretty text-base font-medium leading-relaxed text-base-800 md:text-lg dark:text-base-200"
-        >
-          {pricingAnchor}
-        </p>
-        <p
-          class="mt-6 max-w-3xl text-base leading-relaxed text-base-600 dark:text-base-400"
-        >
-          I've built community at <strong>Spryker</strong> (130+ enterprise clients,
-          with about 25% of product roadmap traceable to community signal), <strong
-            >Dutchento / Meet Magento</strong
-          > (600+ annual attendees), and <strong>CRO.CAFE</strong> (200+ episodes
-          across four languages). 200+ talks in 26 countries, plus the Community Builder
-          Award from eBay/Magento and the Experimentation Culture Award.
-        </p>
-        <div
-          class="mt-10 flex flex-wrap items-center gap-4"
-          role="group"
-          aria-label="Call to action buttons"
-        >
-          <Button
-            variant="primary"
-            href="#apply"
-            aria-label="Work with me, go to application section"
-            umamiEvent="cta-click"
-            umamiEventTarget="retainer-hero-work-with-me"
+      <div class="grid items-center gap-12 lg:grid-cols-[7fr_5fr] lg:gap-16">
+        <div>
+          <Badge>Retainer Advisory</Badge>
+          <h1
+            id="hero-heading"
+            class="text-pretty text-4xl font-bold leading-tight tracking-tight text-base-900 md:text-5xl lg:text-6xl lg:leading-[1.1] dark:text-base-100"
           >
-            Work with me
-          </Button>
-          <span class="text-sm text-base-500 dark:text-base-400">
-            <strong class="text-base-700 dark:text-base-300"
-              >{seatAvailabilityLabel}</strong
-            > · Application or 30-min scoping call
-          </span>
+            Senior community leadership for companies not yet ready to hire one.
+          </h1>
+          <p
+            class="mt-6 text-pretty text-lg leading-relaxed text-base-700 md:text-xl dark:text-base-300"
+          >
+            How to build community and ecosystem functions that actually move
+            product decisions and lower support costs. For technical companies
+            that treat community as infrastructure.
+          </p>
+          <p
+            class="mt-6 text-pretty text-base font-medium leading-relaxed text-base-800 md:text-lg dark:text-base-200"
+          >
+            {pricingAnchor}
+          </p>
+          <p
+            class="mt-6 text-base leading-relaxed text-base-600 dark:text-base-400"
+          >
+            I've built community at <strong>Spryker</strong> (130+ enterprise clients,
+            with about 25% of product roadmap traceable to community signal),
+            <strong>Dutchento / Meet Magento</strong> (600+ annual attendees), and
+            <strong>CRO.CAFE</strong> (200+ episodes across four languages). 200+
+            talks in 26 countries, plus the Community Builder Award from eBay/Magento
+            and the Experimentation Culture Award.
+          </p>
+          <div
+            class="mt-10 flex flex-wrap items-center gap-4"
+            role="group"
+            aria-label="Call to action buttons"
+          >
+            <Button
+              variant="primary"
+              href="#apply"
+              aria-label="Work with me, go to application section"
+              umamiEvent="cta-click"
+              umamiEventTarget="retainer-hero-work-with-me"
+            >
+              Work with me
+            </Button>
+            <span class="text-sm text-base-500 dark:text-base-400">
+              <strong class="text-base-700 dark:text-base-300"
+                >{seatAvailabilityLabel}</strong
+              > · Application or 30-min scoping call
+            </span>
+          </div>
+        </div>
+        <div class="hidden lg:block">
+          <div
+            class="overflow-hidden rounded-2xl shadow-xl ring-1 ring-base-200/60 dark:ring-base-800/60"
+            role="img"
+            aria-label="Guido on stage speaking at a conference"
+          >
+            <Image
+              src={heroImage}
+              alt="Guido Jansen speaking on stage at a technology conference"
+              widths={[480, 720, 960]}
+              sizes="(max-width: 1280px) 40vw, 480px"
+              quality={82}
+              format="webp"
+              class="h-auto w-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -297,7 +323,6 @@ const testimonials = [
   >
     <div class="site-container">
       <div class="mx-auto max-w-3xl">
-        <Badge>Hook</Badge>
         <h2
           id="why-this-offer-heading"
           class="h2 mb-8 text-base-900 dark:text-base-100"
@@ -308,8 +333,8 @@ const testimonials = [
           class="space-y-5 text-lg leading-relaxed text-base-700 dark:text-base-300"
         >
           <p>
-            Most Series A–C companies with developer-led products land in the
-            same place: a growing community held together by a junior IC or a
+            Most Series A–C companies with developer-led products end up in the
+            same spot: a growing community held together by a junior IC or a
             founder's spare cycles, while the roadmap drifts and the next budget
             review can't see what community spend produces.
           </p>
@@ -319,7 +344,7 @@ const testimonials = [
             times.
           </p>
           <p class="font-medium text-base-900 dark:text-base-100">
-            This offer is the second one — until you're ready for the first.
+            This offer is the second one, until you're ready for the first.
           </p>
         </div>
       </div>
@@ -344,68 +369,73 @@ const testimonials = [
         <p
           class="mb-12 text-lg leading-relaxed text-base-700 dark:text-base-300"
         >
-          Six months in, the company doesn't just have documents. The way
-          community work happens has shifted. Concretely:
+          Six months in, the way community work happens has shifted. Here's
+          what's different:
         </p>
 
         <ul class="mb-12 space-y-5 text-base-700 dark:text-base-300">
-          <li class="flex gap-3">
-            <Icon
-              name="tabler/outline/arrow-right"
-              class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+          <li class="flex gap-4">
+            <span
+              class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
               aria-hidden="true"
-            />
-            <span>
+            >
+              <Icon name="tabler/outline/calendar-check" class="h-5 w-5" />
+            </span>
+            <span class="pt-1">
               <strong class="text-base-900 dark:text-base-100"
                 >Senior community attention lives on the calendar.</strong
               > Questions that used to sit open for weeks get closed in the next call.
             </span>
           </li>
-          <li class="flex gap-3">
-            <Icon
-              name="tabler/outline/arrow-right"
-              class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+          <li class="flex gap-4">
+            <span
+              class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
               aria-hidden="true"
-            />
-            <span>
+            >
+              <Icon name="tabler/outline/scissors" class="h-5 w-5" />
+            </span>
+            <span class="pt-1">
               <strong class="text-base-900 dark:text-base-100"
                 >Wasted community spend has been cut.</strong
               > What wasn't producing was killed in week one; what was producing got
               doubled down on.
             </span>
           </li>
-          <li class="flex gap-3">
-            <Icon
-              name="tabler/outline/arrow-right"
-              class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+          <li class="flex gap-4">
+            <span
+              class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
               aria-hidden="true"
-            />
-            <span>
+            >
+              <Icon name="tabler/outline/bolt" class="h-5 w-5" />
+            </span>
+            <span class="pt-1">
               <strong class="text-base-900 dark:text-base-100"
                 >The person currently holding community has 3× leverage.</strong
               > Patterns they hadn't seen yet show up before the mistake gets made.
             </span>
           </li>
-          <li class="flex gap-3">
-            <Icon
-              name="tabler/outline/arrow-right"
-              class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+          <li class="flex gap-4">
+            <span
+              class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
               aria-hidden="true"
-            />
-            <span>
+            >
+              <Icon name="tabler/outline/target-arrow" class="h-5 w-5" />
+            </span>
+            <span class="pt-1">
               <strong class="text-base-900 dark:text-base-100"
                 >Roadmap drift on community signal has stopped.</strong
               > There's a defined process, running on cadence, defensible at budget
               review.
             </span>
           </li>
-          <li class="flex gap-3">
-            <Icon
-              name="tabler/outline/arrow-right"
-              class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+          <li class="flex gap-4">
+            <span
+              class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
               aria-hidden="true"
-            />
-            <span>
+            >
+              <Icon name="tabler/outline/clipboard-check" class="h-5 w-5" />
+            </span>
+            <span class="pt-1">
               <strong class="text-base-900 dark:text-base-100"
                 >A hiring scorecard exists for when you're ready.</strong
               > A wrong senior community hire is a €200K mistake. The scorecard reduces
@@ -525,13 +555,120 @@ const testimonials = [
             In practice: the person already doing this work gets 3× more
             leverage, and the roadmap stops drifting.
           </p>
-          <p>
-            The alternative is a senior community/DevRel hire: 3–4 months to
-            land, north of €150K loaded, and right now you don't have the
-            scorecard to hire well. The retainer is less than a quarter of that,
-            starts next week, and at month six you walk away with the scorecard
-            for when you are ready to hire.
-          </p>
+        </div>
+
+        <!-- Hire-vs-retainer comparison panel -->
+        <div class="mt-12 grid gap-6 md:grid-cols-2 md:gap-6">
+          <div
+            class="flex flex-col rounded-2xl border border-base-200 bg-base-100/40 p-6 dark:border-base-800 dark:bg-base-900/30"
+          >
+            <p
+              class="mb-1 text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+            >
+              The alternative
+            </p>
+            <h3 class="mb-6 text-xl font-bold text-base-900 dark:text-base-100">
+              Senior community / DevRel hire
+            </h3>
+            <dl class="space-y-5 text-base">
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  Loaded cost
+                </dt>
+                <dd class="mt-1 text-base-800 dark:text-base-200">
+                  €150K+ per year
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  Time to start
+                </dt>
+                <dd class="mt-1 text-base-800 dark:text-base-200">
+                  3–4 months to land
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  Wrong-hire risk
+                </dt>
+                <dd class="mt-1 text-base-800 dark:text-base-200">
+                  High. No scorecard yet to hire well.
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  At month 6
+                </dt>
+                <dd class="mt-1 text-base-800 dark:text-base-200">
+                  Maybe an onboarded leader.
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div
+            class="flex flex-col rounded-2xl border-2 border-primary-500/50 bg-primary-500/5 p-6 dark:border-primary-500/40 dark:bg-primary-500/10"
+          >
+            <p
+              class="mb-1 text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
+            >
+              The retainer
+            </p>
+            <h3 class="mb-6 text-xl font-bold text-base-900 dark:text-base-100">
+              Six-month advisory
+            </h3>
+            <dl class="space-y-5 text-base">
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
+                >
+                  Loaded cost
+                </dt>
+                <dd class="mt-1 font-medium text-base-900 dark:text-base-100">
+                  Less than a quarter of the hire.
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
+                >
+                  Time to start
+                </dt>
+                <dd class="mt-1 font-medium text-base-900 dark:text-base-100">
+                  Next week.
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
+                >
+                  Wrong-hire risk
+                </dt>
+                <dd class="mt-1 font-medium text-base-900 dark:text-base-100">
+                  Tested before the hire.
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
+                >
+                  At month 6
+                </dt>
+                <dd class="mt-1 font-medium text-base-900 dark:text-base-100">
+                  A scorecard, a working system, and the decisions already made.
+                  So you hire well when you're ready.
+                </dd>
+              </div>
+            </dl>
+          </div>
         </div>
       </div>
     </div>
@@ -572,10 +709,10 @@ const testimonials = [
           </h3>
           <p class="text-base leading-relaxed text-base-700 dark:text-base-300">
             Most community work is designed for the community manager's idea of
-            community. Which usually has very little to do with how developers
+            community, which usually has very little to do with how developers
             actually behave in the wild. My cognitive psychology background
             mostly taught me one thing: you can't reliably predict what people
-            will do. So everything I recommend is built to be tested. Who stays,
+            will do. So everything I recommend is built to be tested: who stays,
             who contributes, what flips a lurker into a contributor. You find
             that out by running the thing, not by guessing.
           </p>
@@ -598,13 +735,13 @@ const testimonials = [
             <p>
               AI changed community work in ways most playbooks haven't caught up
               to. Half the lurkers are now agents. Bot signal looks like human
-              signal until it doesn't. Trust gets built differently when anyone
+              signal until it doesn't. You build trust differently when anyone
               can spin up a credible-sounding contributor in an afternoon. The
               moves that worked in 2022 burn three months in 2026.
             </p>
             <p>
-              I've built community from zero in three very different contexts —
-              same underlying pattern, now with the AI-era plays layered in. The
+              I've built community from zero in three very different contexts.
+              Same underlying pattern, now with the AI-era plays layered in. The
               advisory is the shortcut: what still works, what's quietly broken,
               and which AI-flavored plays look exciting but waste a quarter.
             </p>
@@ -670,13 +807,24 @@ const testimonials = [
               <blockquote class="text-base leading-relaxed text-base-800 dark:text-base-200">
                 <p>“{t.quote}”</p>
               </blockquote>
-              <figcaption class="mt-auto">
-                <p class="font-semibold text-base-900 dark:text-base-100">
-                  {t.name}
-                </p>
-                <p class="text-sm text-base-600 dark:text-base-400">
-                  {t.role}, {t.company}
-                </p>
+              <figcaption class="mt-auto flex items-center gap-4">
+                <Image
+                  src={t.image}
+                  alt={`Portrait of ${t.name}`}
+                  widths={[96, 144]}
+                  sizes="48px"
+                  quality={85}
+                  format="webp"
+                  class="h-12 w-12 flex-shrink-0 rounded-full object-cover ring-1 ring-base-200/70 dark:ring-base-700/70"
+                />
+                <div>
+                  <p class="font-semibold text-base-900 dark:text-base-100">
+                    {t.name}
+                  </p>
+                  <p class="text-sm text-base-600 dark:text-base-400">
+                    {t.role}, {t.company}
+                  </p>
+                </div>
               </figcaption>
             </figure>
           ))
@@ -705,146 +853,201 @@ const testimonials = [
           A structured six months. Rolling thereafter.
         </h2>
 
-        <ol class="space-y-10 border-l-2 border-primary-500/30 pl-8">
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              W1
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Week 1: Onboarding and ecosystem baseline
-            </h3>
+        <div class="space-y-12">
+          <div>
             <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
+              class="mb-6 text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
             >
-              A 90–120 minute kickoff call, plus a written baseline of where
-              your community stands, what's worth building first, and what to
-              stop spending on. The point of week one is to make sure none of
-              your investment gets wasted on the wrong direction.
+              Phase 1 · Inside the first six months
             </p>
-          </li>
+            <ol class="relative space-y-10 border-l-2 border-primary-500 pl-12">
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white shadow-md ring-4 ring-base-50 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  W1
+                </span>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Week 1: Onboarding and ecosystem baseline
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  A 90–120 minute kickoff call, plus a written baseline of where
+                  your community stands, what's worth building first, and what
+                  to stop spending on. The point of week one is to make sure
+                  none of your investment gets wasted on the wrong direction.
+                </p>
+              </li>
 
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              ✕12
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Every two weeks: a standing strategy call
-            </h3>
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary-500 bg-base-50 text-sm font-bold text-primary-600 ring-4 ring-base-50 dark:bg-base-950 dark:text-primary-400 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  ×12
+                </span>
+                <p
+                  class="mb-1 text-[11px] font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  Recurring cadence
+                </p>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Every two weeks: a standing strategy call
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  Twelve sessions of sixty minutes each, across the first six
+                  months. The one place on the calendar where community strategy
+                  gets senior attention without fighting for it against
+                  everything else on your team's plate.
+                </p>
+              </li>
+
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary-500 bg-base-50 text-sm font-bold text-primary-600 ring-4 ring-base-50 dark:bg-base-950 dark:text-primary-400 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  ×6
+                </span>
+                <p
+                  class="mb-1 text-[11px] font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  Recurring cadence
+                </p>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Every month: a one-page written brief
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  The next things to act on, the things to stop, and what to
+                  keep an eye on. Written so it can be forwarded to your CEO or
+                  board without translation.
+                </p>
+              </li>
+
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white shadow-md ring-4 ring-base-50 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  M3
+                </span>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Month 3: mid-engagement review
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  A hard mid-point audit. Are we still building the right thing,
+                  given what we've learned and what changed in your business? We
+                  re-baseline if needed. <em
+                    >If the review surfaces a fundamental mismatch, either side
+                    can exit clean: refund of the most recent month, all
+                    artifacts delivered through the cutoff.</em
+                  >
+                </p>
+              </li>
+
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white shadow-md ring-4 ring-base-50 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  M6
+                </span>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Month 6: synthesis and decision point
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  The artifacts from the previous sections, finalized. Decision
+                  point: continue rolling, pause, or close. Either way, you walk
+                  away with documents your team keeps using long after I'm out
+                  of the calendar.
+                </p>
+              </li>
+            </ol>
+          </div>
+
+          <div>
             <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
+              class="mb-6 text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
             >
-              Twelve sessions of sixty minutes each, across the first six
-              months. The one place on the calendar where community strategy
-              gets senior attention without fighting for it against everything
-              else on your team's plate.
+              Phase 2 · Beyond six months, if it's working
             </p>
-          </li>
+            <ol
+              class="relative space-y-10 border-l-2 border-dashed border-primary-500/50 pl-12"
+            >
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary-500/60 bg-base-50 text-base font-bold text-primary-600 ring-4 ring-base-50 dark:bg-base-950 dark:text-primary-400 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  ↻
+                </span>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Beyond month 6: rolling cadence
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  Same rhythm, no fixed end. Calls, monthly briefs, async
+                  channel: nothing changes about the cadence. Either side gives
+                  thirty days' notice when the engagement no longer fits.
+                </p>
+              </li>
+            </ol>
+          </div>
 
-          <li class="relative">
+          <div
+            class="flex gap-4 rounded-2xl border border-base-200 bg-base-100/50 p-5 dark:border-base-800 dark:bg-base-900/40"
+            role="note"
+          >
             <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              ✕6
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Every month: a one-page written brief
-            </h3>
-            <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
-            >
-              The next things to act on, the things to stop, and what to keep an
-              eye on. Written so it can be forwarded to your CEO or board
-              without translation.
-            </p>
-          </li>
-
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              M3
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Month 3: mid-engagement review
-            </h3>
-            <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
-            >
-              A hard mid-point audit. Are we still building the right thing,
-              given what we've learned and what changed in your business? We
-              re-baseline if needed. <em
-                >If the review surfaces a fundamental mismatch, either side can
-                exit clean — refund of the most recent month, all artifacts
-                delivered through the cutoff.</em
-              >
-            </p>
-          </li>
-
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              M6
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Month 6: synthesis and decision point
-            </h3>
-            <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
-            >
-              The artifacts from the previous sections, finalized. Decision
-              point: continue rolling, pause, or close. Either way, you walk
-              away with documents your team keeps using long after I'm out of
-              the calendar.
-            </p>
-          </li>
-
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              ↻
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Beyond month 6: rolling cadence
-            </h3>
-            <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
-            >
-              Same rhythm, no fixed end. Calls, monthly briefs, async channel:
-              nothing changes about the cadence. Either side gives thirty days'
-              notice when the engagement no longer fits.
-            </p>
-          </li>
-
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-base-300 text-sm font-bold text-base-900 dark:bg-base-700 dark:text-base-100"
+              class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-base-200 text-base font-bold text-base-700 dark:bg-base-800 dark:text-base-200"
               aria-hidden="true"
             >
               ⇄
             </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Throughout: a dedicated async channel
-            </h3>
-            <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
-            >
-              Slack, Signal, or whichever tool you already use. For the
-              questions that come up between calls and shouldn't wait two weeks.
-            </p>
-          </li>
-        </ol>
+            <div>
+              <p
+                class="mb-1 text-[11px] font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+              >
+                Throughout · the whole engagement
+              </p>
+              <h3
+                class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+              >
+                A dedicated async channel
+              </h3>
+              <p
+                class="text-base leading-relaxed text-base-700 dark:text-base-300"
+              >
+                Slack, Signal, or whichever tool you already use. For the
+                questions that come up between calls and shouldn't wait two
+                weeks.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1077,7 +1280,7 @@ const testimonials = [
           <div class="mt-auto">
             <Button
               variant="primary"
-              href="mailto:x@gui.do?subject=Retainer%20%E2%80%94%20scoping%20call%20request&body=Company%3A%20%0AYour%20role%3A%20%0AWhat%20you're%20trying%20to%20figure%20out%3A%20%0ACurrent%20community%20%2F%20ecosystem%20state%3A%20%0A"
+              href="mailto:x@gui.do?subject=Retainer%3A%20scoping%20call%20request&body=Company%3A%20%0AYour%20role%3A%20%0AWhat%20you're%20trying%20to%20figure%20out%3A%20%0ACurrent%20community%20%2F%20ecosystem%20state%3A%20%0A"
               umamiEvent="cta-click"
               umamiEventTarget="retainer-scoping-call"
             >
@@ -1116,7 +1319,7 @@ const testimonials = [
           <div class="mt-auto">
             <Button
               variant="outline"
-              href="mailto:x@gui.do?subject=Retainer%20%E2%80%94%20application&body=Name%3A%20%0AWork%20email%3A%20%0ACompany%3A%20%0AYour%20role%3A%20%0ACompany%20website%3A%20%0AStage%20(Series%2C%20ARR%2C%20or%20pre-revenue)%3A%20%0ACurrent%20community%20%2F%20ecosystem%20state%3A%20%0ASix-month%20outcome%20you'd%20want%20(optional)%3A%20%0ADesired%20start%20date%20(optional)%3A%20%0A"
+              href="mailto:x@gui.do?subject=Retainer%3A%20application&body=Name%3A%20%0AWork%20email%3A%20%0ACompany%3A%20%0AYour%20role%3A%20%0ACompany%20website%3A%20%0AStage%20(Series%2C%20ARR%2C%20or%20pre-revenue)%3A%20%0ACurrent%20community%20%2F%20ecosystem%20state%3A%20%0ASix-month%20outcome%20you'd%20want%20(optional)%3A%20%0ADesired%20start%20date%20(optional)%3A%20%0A"
               umamiEvent="cta-click"
               umamiEventTarget="retainer-direct-application"
             >
