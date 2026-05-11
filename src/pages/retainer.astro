@@ -8,21 +8,36 @@ import { Icon } from "astro-icon/components";
 import Badge from "@components/Badge/Badge.astro";
 import Button from "@components/Button/Button.astro";
 import Accordion from "@components/Accordion/Accordion.astro";
+import CompanyLogos from "@components/Companies/CompanyLogos.astro";
 
 // images
 import advisorImage from "@assets/images/headshot/08.02.2022_Spryker_CEO_2636.jpg";
+import heroImage from "@assets/images/hero/guido-speaking.jpg";
+import borisImage from "@assets/images/testimonials/boris.webp";
+import chrisImage from "@assets/images/testimonials/chris.webp";
+import svitlanaImage from "@assets/images/testimonials/svitlana.webp";
+
+// Live seat availability. Edit these two values when seats fill, both hero
+// and Apply CTAs update from the same source.
+const seatsTotal = 5;
+const seatsOpen = 3;
+const seatAvailabilityLabel = `${seatsOpen} of ${seatsTotal} seats open right now`;
+
+// Pricing anchor line, reused in hero + Apply section so wording stays in sync.
+const pricingAnchor =
+  "Less than a quarter of the loaded cost of a senior community hire. Starts next week, not month four.";
 
 // FAQ data, locked from retainer-page-plan.md §9
 const faqs = [
   {
     question: "How many open seats?",
     answer:
-      "Three concurrent. Waitlist when full. One company per competitive space, the rest queue.",
+      "Five concurrent at most. Waitlist when full. One company per competitive space, the rest queue.",
   },
   {
     question: "How does this fit alongside your other work?",
     answer:
-      "Advisory, speaking, and selective full-time leadership conversations are separate tracks. The advisory engagement has a defined six-month minimum scope and a written continuity commitment (see above), so it gets delivered regardless of what else is on my calendar.",
+      "Advisory, speaking, and selective full-time leadership conversations are separate tracks. The advisory engagement has a defined six-month minimum scope, with the written commitments below covering what happens if anything changes mid-engagement.",
   },
   {
     question: "How long can the engagement run?",
@@ -33,6 +48,16 @@ const faqs = [
     question: "What if the engagement isn't delivering value?",
     answer:
       "A re-baseline conversation at month three is built in. Beyond that, thirty days' notice from either side. The notice period is prorated, and all artifacts get delivered up to the cutoff date.",
+  },
+  {
+    question: "What if the month 3 review says it's not working?",
+    answer:
+      "Either side can call it at month three. We deliver every artifact through the cutoff date, and the most recent monthly fee is refunded. No extended notice, no fighting. Month three is when we find out. That's the point of having a hard mid-point review.",
+  },
+  {
+    question: "What happens if you take an in-house role mid-engagement?",
+    answer:
+      "The engagement continues through its committed period. Senior roles take 3–4 months to start, so in practice nothing changes. In the rare case it can't continue, every open artifact gets delivered through the cutoff, and I personally introduce you to a vetted advisor from my network. No engagement gets left mid-air.",
   },
   {
     question: "Is the engagement confidential?",
@@ -68,7 +93,7 @@ const serviceSchema = {
   name: "Community and Ecosystem Advisory Retainer",
   url: "https://gui.do/retainer/",
   description:
-    "A six-month minimum advisory engagement on community, ecosystem, and DevRel strategy for technical companies. Three concurrent seats. Application or 30-min scoping call.",
+    "A six-month minimum advisory engagement on community, ecosystem, and DevRel strategy for technical companies. Five concurrent seats. Application or 30-min scoping call.",
   serviceType: "Strategic advisory",
   category: ["Community strategy", "Developer relations", "Ecosystem strategy"],
   provider: {
@@ -109,6 +134,7 @@ const testimonials = [
     role: "Co-Founder & CEO",
     company: "Spryker",
     pillar: "Pattern",
+    image: borisImage,
   },
   {
     quote:
@@ -117,6 +143,7 @@ const testimonials = [
     role: "Chief Customer Officer",
     company: "Supermetrics",
     pillar: "Proof",
+    image: chrisImage,
   },
   {
     quote:
@@ -125,13 +152,14 @@ const testimonials = [
     role: "Senior Manager for L&D Business Engagement",
     company: "PwC Luxembourg",
     pillar: "Psychology",
+    image: svitlanaImage,
   },
 ];
 ---
 
 <BaseLayout
   title="Retainer: Senior community leadership for companies not yet ready to hire one"
-  description="A community and ecosystem advisory engagement. Six-month minimum, then rolling. Three concurrent seats. Apply or schedule a 30-min scoping call."
+  description="A community and ecosystem advisory engagement. Six-month minimum, then rolling. Five concurrent seats. Apply or schedule a 30-min scoping call."
 >
   <script
     type="application/ld+json"
@@ -146,262 +174,110 @@ const testimonials = [
     class="relative mt-14 overflow-hidden py-20 md:py-28"
   >
     <div class="site-container relative">
-      <div class="mx-auto max-w-4xl">
-        <Badge>Retainer Advisory</Badge>
-        <h1
-          id="hero-heading"
-          class="text-pretty text-4xl font-bold leading-tight tracking-tight text-base-900 md:text-5xl lg:text-6xl lg:leading-[1.1] dark:text-base-100"
-        >
-          Senior community leadership for companies not yet ready to hire one.
-        </h1>
-        <p
-          class="mt-6 max-w-3xl text-pretty text-lg leading-relaxed text-base-700 md:text-xl dark:text-base-300"
-        >
-          How to build community and ecosystem functions that actually move
-          product decisions and lower support costs. For technical companies
-          that treat community as infrastructure.
-        </p>
-        <p
-          class="mt-6 max-w-3xl text-base leading-relaxed text-base-600 dark:text-base-400"
-        >
-          I've built community at <strong>Spryker</strong> (130+ enterprise clients,
-          with about 25% of product roadmap traceable to community signal), <strong
-            >Dutchento / Meet Magento</strong
-          > (600+ annual attendees), and <strong>CRO.CAFE</strong> (200+ episodes
-          across four languages). 200+ talks in 26 countries, plus the Community Builder
-          Award from eBay/Magento and the Experimentation Culture Award.
-        </p>
-        <div
-          class="mt-10 flex flex-wrap items-center gap-4"
-          role="group"
-          aria-label="Call to action buttons"
-        >
-          <Button
-            variant="primary"
-            href="#apply"
-            aria-label="Work with me, go to application section"
-            umamiEvent="cta-click"
-            umamiEventTarget="retainer-hero-work-with-me"
+      <div class="grid items-center gap-12 lg:grid-cols-[7fr_5fr] lg:gap-16">
+        <div>
+          <Badge>Retainer Advisory</Badge>
+          <h1
+            id="hero-heading"
+            class="text-pretty text-4xl font-bold leading-tight tracking-tight text-base-900 md:text-5xl lg:text-6xl lg:leading-[1.1] dark:text-base-100"
           >
-            Work with me
-          </Button>
-          <span class="text-sm text-base-500 dark:text-base-400">
-            Three seats · Application or 30-min scoping call
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About the Advisor -->
-  <section
-    id="about-advisor"
-    aria-labelledby="about-advisor-heading"
-    class="border-t border-base-200/60 py-20 md:py-24 dark:border-base-800/60"
-  >
-    <div class="site-container">
-      <div class="grid gap-12 md:grid-cols-[1fr_2fr] md:items-start md:gap-16">
-        <div class="md:sticky md:top-24">
+            Senior community leadership for companies not yet ready to hire one.
+          </h1>
+          <p
+            class="mt-6 text-pretty text-lg leading-relaxed text-base-700 md:text-xl dark:text-base-300"
+          >
+            How to build community and ecosystem functions that actually move
+            product decisions and lower support costs. For technical companies
+            that treat community as infrastructure.
+          </p>
+          <p
+            class="mt-6 text-pretty text-base font-medium leading-relaxed text-base-800 md:text-lg dark:text-base-200"
+          >
+            {pricingAnchor}
+          </p>
+          <p
+            class="mt-6 text-base leading-relaxed text-base-600 dark:text-base-400"
+          >
+            I've built community at <strong>Spryker</strong> (130+ enterprise clients,
+            with about 25% of product roadmap traceable to community signal),
+            <strong>Dutchento / Meet Magento</strong> (600+ annual attendees), and
+            <strong>CRO.CAFE</strong> (200+ episodes across four languages). 200+
+            talks in 26 countries, plus the Community Builder Award from eBay/Magento
+            and the Experimentation Culture Award.
+          </p>
           <div
-            class="overflow-hidden rounded-2xl"
+            class="mt-10 flex flex-wrap items-center gap-4"
+            role="group"
+            aria-label="Call to action buttons"
+          >
+            <Button
+              variant="primary"
+              href="#apply"
+              aria-label="Work with me, go to application section"
+              umamiEvent="cta-click"
+              umamiEventTarget="retainer-hero-work-with-me"
+            >
+              Work with me
+            </Button>
+            <span class="text-sm text-base-500 dark:text-base-400">
+              <strong class="text-base-700 dark:text-base-300"
+                >{seatAvailabilityLabel}</strong
+              > · Application or 30-min scoping call
+            </span>
+          </div>
+        </div>
+        <div class="hidden lg:block">
+          <div
+            class="overflow-hidden rounded-2xl shadow-xl ring-1 ring-base-200/60 dark:ring-base-800/60"
             role="img"
-            aria-label="Headshot of Guido Jansen"
+            aria-label="Guido on stage speaking at a conference"
           >
             <Image
-              src={advisorImage}
-              alt="Guido Jansen, community strategist"
-              widths={[280, 400, 560]}
-              sizes="(max-width: 768px) 60vw, 280px"
-              quality={85}
+              src={heroImage}
+              alt="Guido Jansen speaking on stage at a technology conference"
+              widths={[480, 720, 960]}
+              sizes="(max-width: 1280px) 40vw, 480px"
+              quality={82}
               format="webp"
               class="h-auto w-full object-cover"
             />
           </div>
         </div>
-        <div>
-          <Badge>About the advisor</Badge>
-          <h2
-            id="about-advisor-heading"
-            class="h2 mb-6 text-base-900 dark:text-base-100"
-          >
-            Twenty years building communities that the business actually cares
-            about.
-          </h2>
-          <div
-            class="space-y-4 text-lg leading-relaxed text-base-700 dark:text-base-300"
-          >
-            <p>
-              I'm <strong>Guido X Jansen</strong>. I've built community
-              functions from zero multiple times: as a volunteer founder
-              (Dutchento / Meet Magento), as a creator (CRO.CAFE), and in B2B
-              Enterprise leading the function (Spryker).
-            </p>
-            <p>
-              My background is cognitive psychology, conversion optimisation and
-              community/DevRel. Where psychology mostly taught me you can't
-              reliably predict what people do, CRO taught me how to implement
-              measurement and experimentation to reliably improve your business.
-              So I think about community design as an experimentation programme:
-              build a small thing, see what people actually do with it, and
-              adjust.
-            </p>
-            <p>
-              At Spryker I built the enterprise community function from scratch,
-              serving 130+ enterprise clients. About 25% of product roadmap
-              decisions traced back to community signal. We built a Customer
-              Advisory Board, an MIT-licensed module ecosystem, and contribution
-              programmes. All still in use today.
-            </p>
-          </div>
-          <p class="mt-6">
-            <a
-              href="/about"
-              class="inline-flex items-center gap-1 font-medium text-primary-600 hover:underline dark:text-primary-400"
-            >
-              Read the longer version on /about →
-            </a>
-          </p>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- What success looks like at month 6 -->
+  <!-- Why this offer exists, LinkedIn-quotable hook block -->
   <section
-    id="success"
-    aria-labelledby="success-heading"
+    id="why-this-offer"
+    aria-labelledby="why-this-offer-heading"
     class="border-t border-base-200/60 py-20 md:py-24 dark:border-base-800/60"
   >
     <div class="site-container">
-      <div class="mx-auto max-w-4xl">
-        <Badge>What success looks like at month 6</Badge>
+      <div class="mx-auto max-w-3xl">
         <h2
-          id="success-heading"
-          class="h2 mb-6 text-base-900 dark:text-base-100"
+          id="why-this-offer-heading"
+          class="h2 mb-8 text-base-900 dark:text-base-100"
         >
-          Tangible artifacts you keep.
+          Why this offer exists.
         </h2>
-        <p
-          class="mb-12 text-lg leading-relaxed text-base-700 dark:text-base-300"
+        <div
+          class="space-y-5 text-lg leading-relaxed text-base-700 dark:text-base-300"
         >
-          Advisory work fails when there's nothing concrete to show at the end
-          of it. So at month six, this is what's on the table.
-        </p>
-
-        <div class="grid gap-8 md:grid-cols-2">
-          <div>
-            <h3 class="h3 mb-4 text-base-900 dark:text-base-100">
-              Artifacts you keep
-            </h3>
-            <ul class="space-y-4 text-base-700 dark:text-base-300">
-              <li class="flex gap-3">
-                <Icon
-                  name="tabler/outline/file-check"
-                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
-                  aria-hidden="true"
-                />
-                <span>
-                  A community and ecosystem architecture: who your community is
-                  for, how participation is designed, and where signal flows
-                  back into the business. Yours to keep, evolve, and hand to a
-                  new hire.
-                </span>
-              </li>
-              <li class="flex gap-3">
-                <Icon
-                  name="tabler/outline/file-check"
-                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
-                  aria-hidden="true"
-                />
-                <span>
-                  A hiring scorecard for community / DevRel / ecosystem roles,
-                  calibrated to your stage and product. Useful at month six and
-                  again at year two.
-                </span>
-              </li>
-              <li class="flex gap-3">
-                <Icon
-                  name="tabler/outline/file-check"
-                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
-                  aria-hidden="true"
-                />
-                <span>
-                  A signal-to-roadmap process: the actual mechanism that
-                  translates community input into product, sales, and strategic
-                  decisions. Lightweight enough that someone will actually run
-                  it.
-                </span>
-              </li>
-              <li class="flex gap-3">
-                <Icon
-                  name="tabler/outline/file-check"
-                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
-                  aria-hidden="true"
-                />
-                <span>
-                  A measurement framework: what to track, what to ignore, and
-                  what would falsify your community thesis. Borrowed from the
-                  CRO and experimentation playbook.
-                </span>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="h3 mb-4 text-base-900 dark:text-base-100">
-              Decisions made together
-            </h3>
-            <ul class="space-y-4 text-base-700 dark:text-base-300">
-              <li class="flex gap-3">
-                <Icon
-                  name="tabler/outline/arrow-right"
-                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
-                  aria-hidden="true"
-                />
-                <span>
-                  Whether to hire a senior community / DevRel lead, when, and
-                  with what scorecard.
-                </span>
-              </li>
-              <li class="flex gap-3">
-                <Icon
-                  name="tabler/outline/arrow-right"
-                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
-                  aria-hidden="true"
-                />
-                <span>
-                  What existing community spend or activity to <em>stop</em>.
-                </span>
-              </li>
-              <li class="flex gap-3">
-                <Icon
-                  name="tabler/outline/arrow-right"
-                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
-                  aria-hidden="true"
-                />
-                <span>
-                  The one or two community bets worth doubling down on for the
-                  next twelve months.
-                </span>
-              </li>
-              <li class="flex gap-3">
-                <Icon
-                  name="tabler/outline/arrow-right"
-                  class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
-                  aria-hidden="true"
-                />
-                <span>
-                  The governance structure that fits your stage: advisory board,
-                  contributor programme, or ambassador track.
-                </span>
-              </li>
-            </ul>
-            <p
-              class="mt-8 rounded-xl bg-base-100/60 p-4 text-sm leading-relaxed text-base-600 dark:bg-base-900/40 dark:text-base-400"
-            >
-              <strong>Caveat:</strong> this isn't a guarantee of community size, signups,
-              or traffic. The advisory designs the system. Your team executes.
-            </p>
-          </div>
+          <p>
+            Most Series A–C developer-led companies hit the same wall: a
+            community held together by a junior IC or a founder's spare cycles,
+            with the roadmap drifting in parallel.
+          </p>
+          <p>
+            The cost shows up in three places. The next budget review can't see
+            what community spend produced. Product roadmap drifts off real
+            signal. And by the time you're ready for a senior hire, you've
+            burned a quarter on plays that should have been killed in week one.
+          </p>
+          <p class="font-medium text-base-900 dark:text-base-100">
+            The retainer covers the gap until you can hire well.
+          </p>
         </div>
       </div>
     </div>
@@ -414,7 +290,7 @@ const testimonials = [
     class="border-t border-base-200/60 py-20 md:py-24 dark:border-base-800/60"
   >
     <div class="site-container">
-      <div class="mx-auto max-w-4xl">
+      <div class="mx-auto max-w-3xl">
         <p
           class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
         >
@@ -430,23 +306,290 @@ const testimonials = [
           class="space-y-4 text-lg leading-relaxed text-base-700 dark:text-base-300"
         >
           <p>
-            Most companies at Series A–C don't yet need (or can't yet justify) a
-            full-time VP of Community or Head of DevRel. They have a junior or
-            mid-level person wearing community as 30% of their job, or a Head of
-            Product trying to figure it out alongside the rest of the roadmap.
+            You're probably one of three people: a founder figuring this out
+            alongside the roadmap, a junior IC carrying community as 30% of the
+            job, or a senior leader who's done it before but is stretched across
+            four other priorities. The retainer fits all three.
           </p>
           <p>
-            That's where I come in: as a senior thinking partner for whoever is
-            currently doing the work, covering the patterns they haven't seen
-            yet (what to invest in, what to stop, what to ignore).
+            I work as a senior thinking partner for whoever is currently doing
+            the work, covering the patterns they haven't seen yet (what to
+            invest in, what to stop, what to ignore).
           </p>
           <p
             class="border-l-4 border-primary-500 bg-base-100/40 py-3 pl-6 italic dark:bg-base-900/30"
           >
-            In practice: the person already doing this work gets 3× more
-            leverage, and the roadmap stops drifting.
+            In practice: the person already doing this work has senior backup.
+            Decisions move faster, and the roadmap stops drifting off community
+            signal.
           </p>
         </div>
+      </div>
+
+      <!-- Hire-vs-retainer comparison panel, in a wider container -->
+      <div class="mx-auto mt-12 max-w-6xl">
+        <div class="grid gap-6 md:grid-cols-2 md:gap-6">
+          <div
+            class="flex flex-col rounded-2xl border border-base-200 bg-base-100/40 p-6 dark:border-base-800 dark:bg-base-900/30"
+          >
+            <p
+              class="mb-1 text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+            >
+              The alternative
+            </p>
+            <h3 class="mb-6 text-xl font-bold text-base-900 dark:text-base-100">
+              Senior community / DevRel hire
+            </h3>
+            <dl class="space-y-5 text-base">
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  Loaded cost
+                </dt>
+                <dd class="mt-1 text-base-800 dark:text-base-200">
+                  €150K+ per year
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  Time to start
+                </dt>
+                <dd class="mt-1 text-base-800 dark:text-base-200">
+                  3–4 months to land
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  Wrong-hire risk
+                </dt>
+                <dd class="mt-1 text-base-800 dark:text-base-200">
+                  High. No scorecard yet to hire well.
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  At month 6
+                </dt>
+                <dd class="mt-1 text-base-800 dark:text-base-200">
+                  Maybe an onboarded leader.
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div
+            class="flex flex-col rounded-2xl border-2 border-primary-500/50 bg-primary-500/5 p-6 dark:border-primary-500/40 dark:bg-primary-500/10"
+          >
+            <p
+              class="mb-1 text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
+            >
+              The retainer
+            </p>
+            <h3 class="mb-6 text-xl font-bold text-base-900 dark:text-base-100">
+              Six-month advisory
+            </h3>
+            <dl class="space-y-5 text-base">
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
+                >
+                  Loaded cost
+                </dt>
+                <dd class="mt-1 font-medium text-base-900 dark:text-base-100">
+                  Less than a quarter of the hire.
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
+                >
+                  Time to start
+                </dt>
+                <dd class="mt-1 font-medium text-base-900 dark:text-base-100">
+                  Next week.
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
+                >
+                  Wrong-hire risk
+                </dt>
+                <dd class="mt-1 font-medium text-base-900 dark:text-base-100">
+                  Tested before the hire.
+                </dd>
+              </div>
+              <div>
+                <dt
+                  class="text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
+                >
+                  At month 6
+                </dt>
+                <dd class="mt-1 font-medium text-base-900 dark:text-base-100">
+                  A scorecard, a working system, and the decisions already made.
+                  So you hire well when you're ready.
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outcomes at month six, after the offer is named -->
+  <section
+    id="success"
+    aria-labelledby="success-heading"
+    class="border-t border-base-200/60 py-20 md:py-24 dark:border-base-800/60"
+  >
+    <div class="site-container">
+      <div class="mx-auto max-w-3xl">
+        <Badge>Outcomes at month 6</Badge>
+        <h2
+          id="success-heading"
+          class="h2 mb-6 text-base-900 dark:text-base-100"
+        >
+          What's different at month six.
+        </h2>
+        <p
+          class="mb-12 text-lg leading-relaxed text-base-700 dark:text-base-300"
+        >
+          Six months in, the way community work happens has shifted. Here's
+          what's different:
+        </p>
+
+        <ul class="mb-12 space-y-5 text-base-700 dark:text-base-300">
+          <li class="flex gap-4">
+            <span
+              class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
+              aria-hidden="true"
+            >
+              <Icon name="tabler/outline/calendar-check" class="h-5 w-5" />
+            </span>
+            <span class="pt-1">
+              <strong class="text-base-900 dark:text-base-100"
+                >Senior community attention lives on the calendar.</strong
+              > Questions that used to sit open for weeks get closed in the next call.
+            </span>
+          </li>
+          <li class="flex gap-4">
+            <span
+              class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
+              aria-hidden="true"
+            >
+              <Icon name="tabler/outline/scissors" class="h-5 w-5" />
+            </span>
+            <span class="pt-1">
+              <strong class="text-base-900 dark:text-base-100"
+                >Wasted community spend has been cut.</strong
+              > What wasn't producing was killed in week one; what was producing got
+              doubled down on.
+            </span>
+          </li>
+          <li class="flex gap-4">
+            <span
+              class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
+              aria-hidden="true"
+            >
+              <Icon name="tabler/outline/bolt" class="h-5 w-5" />
+            </span>
+            <span class="pt-1">
+              <strong class="text-base-900 dark:text-base-100"
+                >The person currently holding community has senior backup.</strong
+              > Decisions move faster, and harder calls don't sit open for weeks.
+            </span>
+          </li>
+          <li class="flex gap-4">
+            <span
+              class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
+              aria-hidden="true"
+            >
+              <Icon name="tabler/outline/target-arrow" class="h-5 w-5" />
+            </span>
+            <span class="pt-1">
+              <strong class="text-base-900 dark:text-base-100"
+                >Roadmap drift on community signal has stopped.</strong
+              > There's a defined process, running on cadence, defensible at budget
+              review.
+            </span>
+          </li>
+          <li class="flex gap-4">
+            <span
+              class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
+              aria-hidden="true"
+            >
+              <Icon name="tabler/outline/clipboard-check" class="h-5 w-5" />
+            </span>
+            <span class="pt-1">
+              <strong class="text-base-900 dark:text-base-100"
+                >A hiring scorecard exists for when you're ready.</strong
+              > A wrong senior community hire is a €200K mistake. The scorecard reduces
+              that risk.
+            </span>
+          </li>
+        </ul>
+
+        <h3 class="h3 mb-6 text-base-900 dark:text-base-100">
+          And the documents you walk away with:
+        </h3>
+        <ul class="space-y-4 text-base-700 dark:text-base-300">
+          <li class="flex gap-3">
+            <Icon
+              name="tabler/outline/file-check"
+              class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+              aria-hidden="true"
+            />
+            <span>
+              A community and ecosystem architecture: who your community is for,
+              how participation is designed, and where signal flows back into
+              the business. Yours to keep, evolve, and hand to a new hire.
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <Icon
+              name="tabler/outline/file-check"
+              class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+              aria-hidden="true"
+            />
+            <span>
+              A hiring scorecard for community / DevRel / ecosystem roles,
+              calibrated to your stage and product. Useful at month six and
+              again at year two.
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <Icon
+              name="tabler/outline/file-check"
+              class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+              aria-hidden="true"
+            />
+            <span>
+              A signal-to-roadmap process: the actual mechanism that translates
+              community input into product, sales, and strategic decisions.
+              Lightweight enough that someone will actually run it.
+            </span>
+          </li>
+          <li class="flex gap-3">
+            <Icon
+              name="tabler/outline/file-check"
+              class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
+              aria-hidden="true"
+            />
+            <span>
+              A measurement framework: what to track, what to ignore, and what
+              would falsify your community thesis. Borrowed from the CRO and
+              experimentation playbook.
+            </span>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -458,7 +601,7 @@ const testimonials = [
     class="border-t border-base-200/60 py-20 md:py-24 dark:border-base-800/60"
   >
     <div class="site-container">
-      <div class="mx-auto max-w-4xl">
+      <div class="mx-auto max-w-3xl">
         <p
           class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
         >
@@ -486,10 +629,10 @@ const testimonials = [
           </h3>
           <p class="text-base leading-relaxed text-base-700 dark:text-base-300">
             Most community work is designed for the community manager's idea of
-            community. Which usually has very little to do with how developers
+            community, which usually has very little to do with how developers
             actually behave in the wild. My cognitive psychology background
             mostly taught me one thing: you can't reliably predict what people
-            will do. So everything I recommend is built to be tested. Who stays,
+            will do. So everything I recommend is built to be tested: who stays,
             who contributes, what flips a lurker into a contributor. You find
             that out by running the thing, not by guessing.
           </p>
@@ -504,13 +647,14 @@ const testimonials = [
             Pattern
           </p>
           <h3 class="mb-4 text-xl font-bold text-base-900 dark:text-base-100">
-            Three zero-to-community builds. Ready for the age of AI.
+            Three zero-to-community builds, retooled for the AI era.
           </h3>
           <p class="text-base leading-relaxed text-base-700 dark:text-base-300">
-            Three very different contexts, one underlying pattern. AI is
-            changing what counts as signal in a community, who shows up, and how
-            trust gets built. The advisory is the shortcut: the moves that work,
-            and the AI-flavored plays that look exciting but waste three months.
+            Three very different contexts (Spryker, Dutchento, CRO.CAFE), same
+            underlying pattern, retooled for an era when half the lurkers are
+            agents and bot signal looks like human signal until it doesn't. The
+            advisory is the shortcut: what still works, what's quietly broken,
+            and which AI-flavored plays look exciting but waste a quarter.
           </p>
         </div>
 
@@ -539,13 +683,92 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- Testimonials -->
+  <!-- About the advisor, slim credibility band -->
+  <section
+    id="about-advisor"
+    aria-labelledby="about-advisor-heading"
+    class="border-t border-base-200/60 py-16 dark:border-base-800/60"
+  >
+    <div class="site-container">
+      <div class="mx-auto max-w-3xl">
+        <div
+          class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8"
+        >
+          <div
+            class="flex-shrink-0 overflow-hidden rounded-2xl"
+            role="img"
+            aria-label="Headshot of Guido Jansen"
+          >
+            <Image
+              src={advisorImage}
+              alt="Guido Jansen, community strategist"
+              widths={[160, 240, 320]}
+              sizes="120px"
+              quality={85}
+              format="webp"
+              class="h-28 w-28 object-cover sm:h-32 sm:w-32"
+            />
+          </div>
+          <div
+            class="space-y-3 text-base leading-relaxed text-base-700 dark:text-base-300"
+          >
+            <h2
+              id="about-advisor-heading"
+              class="text-xl font-bold text-base-900 dark:text-base-100"
+            >
+              About the advisor.
+            </h2>
+            <p>
+              <strong class="text-base-900 dark:text-base-100"
+                >Guido X Jansen.</strong
+              > Twenty years building communities, most recently the enterprise community
+              function at Spryker (130+ enterprise clients, about 25% of product roadmap
+              traceable to community signal). Cognitive psychology and CRO background,
+              which mostly taught me you can't reliably predict what people will do,
+              so I design community work as small experiments and watch what they
+              actually do with them.
+            </p>
+            <p>
+              <a
+                href="/about"
+                class="inline-flex items-center gap-1 font-medium text-primary-600 hover:underline dark:text-primary-400"
+              >
+                Read the longer version on /about →
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brands I've worked with, reused from homepage -->
+  <div class="border-t border-base-200/60 dark:border-base-800/60">
+    <CompanyLogos />
+  </div>
+
+  <!-- Past colleagues and clients on the work -->
   <section
     id="testimonials"
-    aria-label="Testimonials from senior leaders"
+    aria-labelledby="testimonials-heading"
     class="border-t border-base-200/60 py-20 md:py-24 dark:border-base-800/60"
   >
     <div class="site-container">
+      <div class="mx-auto mb-12 max-w-3xl text-center">
+        <h2
+          id="testimonials-heading"
+          class="h2 mb-4 text-base-900 dark:text-base-100"
+        >
+          Past colleagues and clients on the work.
+        </h2>
+        <p
+          class="text-base leading-relaxed text-base-600 md:text-lg dark:text-base-400"
+        >
+          These quotes are from working relationships before this advisory
+          existed. Once the first cohort is delivered, I'll add
+          advisory-specific references here.
+        </p>
+      </div>
       <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
         {
           testimonials.map((t) => (
@@ -553,13 +776,24 @@ const testimonials = [
               <blockquote class="text-base leading-relaxed text-base-800 dark:text-base-200">
                 <p>“{t.quote}”</p>
               </blockquote>
-              <figcaption class="mt-auto">
-                <p class="font-semibold text-base-900 dark:text-base-100">
-                  {t.name}
-                </p>
-                <p class="text-sm text-base-600 dark:text-base-400">
-                  {t.role}, {t.company}
-                </p>
+              <figcaption class="mt-auto flex items-start gap-4">
+                <Image
+                  src={t.image}
+                  alt={`Portrait of ${t.name}`}
+                  widths={[96, 144]}
+                  sizes="48px"
+                  quality={85}
+                  format="webp"
+                  class="h-12 w-12 flex-shrink-0 rounded-full object-cover ring-1 ring-base-200/70 dark:ring-base-700/70"
+                />
+                <div>
+                  <p class="font-semibold text-base-900 dark:text-base-100">
+                    {t.name}
+                  </p>
+                  <p class="text-sm text-base-600 dark:text-base-400">
+                    {t.role}, {t.company}
+                  </p>
+                </div>
               </figcaption>
             </figure>
           ))
@@ -575,7 +809,7 @@ const testimonials = [
     class="border-t border-base-200/60 py-20 md:py-24 dark:border-base-800/60"
   >
     <div class="site-container">
-      <div class="mx-auto max-w-4xl">
+      <div class="mx-auto max-w-3xl">
         <p
           class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
         >
@@ -588,142 +822,201 @@ const testimonials = [
           A structured six months. Rolling thereafter.
         </h2>
 
-        <ol class="space-y-10 border-l-2 border-primary-500/30 pl-8">
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              W1
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Week 1: Onboarding and ecosystem baseline
-            </h3>
+        <div class="space-y-12">
+          <div>
             <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
+              class="mb-6 text-xs font-semibold uppercase tracking-wider text-primary-600 dark:text-primary-400"
             >
-              A 90–120 minute kickoff call, plus a written baseline of where
-              your community stands, what's worth building first, and what to
-              stop spending on. The point of week one is to make sure none of
-              your investment gets wasted on the wrong direction.
+              Phase 1 · Inside the first six months
             </p>
-          </li>
+            <ol class="relative space-y-10 border-l-2 border-primary-500 pl-12">
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white shadow-md ring-4 ring-base-50 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  W1
+                </span>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Week 1: Onboarding and ecosystem baseline
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  A 90–120 minute kickoff call, plus a written baseline of where
+                  your community stands, what's worth building first, and what
+                  to stop spending on. The point of week one is to make sure
+                  none of your investment gets wasted on the wrong direction.
+                </p>
+              </li>
 
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              ✕12
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Every two weeks: a standing strategy call
-            </h3>
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary-500 bg-base-50 text-sm font-bold text-primary-600 ring-4 ring-base-50 dark:bg-base-950 dark:text-primary-400 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  ×12
+                </span>
+                <p
+                  class="mb-1 text-[11px] font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  Recurring cadence
+                </p>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Every two weeks: a standing strategy call
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  Twelve sessions of sixty minutes each, across the first six
+                  months. The one place on the calendar where community strategy
+                  gets senior attention without fighting for it against
+                  everything else on your team's plate.
+                </p>
+              </li>
+
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary-500 bg-base-50 text-sm font-bold text-primary-600 ring-4 ring-base-50 dark:bg-base-950 dark:text-primary-400 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  ×6
+                </span>
+                <p
+                  class="mb-1 text-[11px] font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+                >
+                  Recurring cadence
+                </p>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Every month: a one-page written brief
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  The next things to act on, the things to stop, and what to
+                  keep an eye on. Written so it can be forwarded to your CEO or
+                  board without translation.
+                </p>
+              </li>
+
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white shadow-md ring-4 ring-base-50 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  M3
+                </span>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Month 3: mid-engagement review
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  A hard mid-point audit. Are we still building the right thing,
+                  given what we've learned and what changed in your business? We
+                  re-baseline if needed. <em
+                    >If the review surfaces a fundamental mismatch, either side
+                    can exit clean: refund of the most recent month, all
+                    artifacts delivered through the cutoff.</em
+                  >
+                </p>
+              </li>
+
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white shadow-md ring-4 ring-base-50 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  M6
+                </span>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Month 6: synthesis and decision point
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  The artifacts from the previous sections, finalized. Decision
+                  point: continue rolling, pause, or close. Either way, you walk
+                  away with documents your team keeps using long after I'm out
+                  of the calendar.
+                </p>
+              </li>
+            </ol>
+          </div>
+
+          <div>
             <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
+              class="mb-6 text-xs font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
             >
-              Twelve sessions of sixty minutes each, across the first six
-              months. The one place on the calendar where community strategy
-              gets senior attention without fighting for it against everything
-              else on your team's plate.
+              Phase 2 · Beyond six months, if it's working
             </p>
-          </li>
+            <ol
+              class="relative space-y-10 border-l-2 border-dashed border-primary-500/50 pl-12"
+            >
+              <li class="relative">
+                <span
+                  class="absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary-500/60 bg-base-50 text-base font-bold text-primary-600 ring-4 ring-base-50 dark:bg-base-950 dark:text-primary-400 dark:ring-base-950"
+                  aria-hidden="true"
+                >
+                  ↻
+                </span>
+                <h3
+                  class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+                >
+                  Beyond month 6: rolling cadence
+                </h3>
+                <p
+                  class="text-base leading-relaxed text-base-700 dark:text-base-300"
+                >
+                  Same rhythm, no fixed end. Calls, monthly briefs, async
+                  channel: nothing changes about the cadence. Either side gives
+                  thirty days' notice when the engagement no longer fits.
+                </p>
+              </li>
+            </ol>
+          </div>
 
-          <li class="relative">
+          <div
+            class="flex gap-4 rounded-2xl border-2 border-base-300/80 bg-base-100 p-5 dark:border-base-700/80 dark:bg-base-900/60"
+            role="note"
+          >
             <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              ✕6
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Every month: a one-page written brief
-            </h3>
-            <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
-            >
-              The next things to act on, the things to stop, and what to keep an
-              eye on. Written so it can be forwarded to your CEO or board
-              without translation.
-            </p>
-          </li>
-
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              M3
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Month 3: mid-engagement review
-            </h3>
-            <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
-            >
-              A hard mid-point audit. Are we still building the right thing,
-              given what we've learned and what changed in your business? We
-              re-baseline if needed.
-            </p>
-          </li>
-
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              M6
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Month 6: synthesis and decision point
-            </h3>
-            <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
-            >
-              The artifacts from the previous sections, finalized. Decision
-              point: continue rolling, pause, or close. Either way, you walk
-              away with documents your team keeps using long after I'm out of
-              the calendar.
-            </p>
-          </li>
-
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-primary-500 text-sm font-bold text-white"
-              aria-hidden="true"
-            >
-              ↻
-            </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Beyond month 6: rolling cadence
-            </h3>
-            <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
-            >
-              Same rhythm, no fixed end. Calls, monthly briefs, async channel:
-              nothing changes about the cadence. Either side gives thirty days'
-              notice when the engagement no longer fits.
-            </p>
-          </li>
-
-          <li class="relative">
-            <span
-              class="absolute -left-[3.5rem] flex h-12 w-12 items-center justify-center rounded-full bg-base-300 text-sm font-bold text-base-900 dark:bg-base-700 dark:text-base-100"
+              class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-base-200 text-base font-bold text-base-700 dark:bg-base-800 dark:text-base-200"
               aria-hidden="true"
             >
               ⇄
             </span>
-            <h3 class="mb-2 text-xl font-bold text-base-900 dark:text-base-100">
-              Throughout: a dedicated async channel
-            </h3>
-            <p
-              class="text-base leading-relaxed text-base-700 dark:text-base-300"
-            >
-              Slack, Signal, or whichever tool you already use. For the
-              questions that come up between calls and shouldn't wait two weeks.
-            </p>
-          </li>
-        </ol>
+            <div>
+              <p
+                class="mb-1 text-[11px] font-semibold uppercase tracking-wider text-base-500 dark:text-base-400"
+              >
+                Throughout · the whole engagement
+              </p>
+              <h3
+                class="mb-2 text-xl font-bold text-base-900 dark:text-base-100"
+              >
+                A dedicated async channel
+              </h3>
+              <p
+                class="text-base leading-relaxed text-base-700 dark:text-base-300"
+              >
+                Slack, Signal, or whichever tool you already use. For the
+                questions that come up between calls and shouldn't wait two
+                weeks.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -735,7 +1028,7 @@ const testimonials = [
     class="border-t border-base-200/60 py-20 md:py-24 dark:border-base-800/60"
   >
     <div class="site-container">
-      <div class="mx-auto max-w-5xl">
+      <div class="mx-auto max-w-6xl">
         <p
           class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
         >
@@ -825,9 +1118,11 @@ const testimonials = [
                 Looking primarily for social media marketing rather than
                 community strategy
               </li>
+              <li>Adtech, gambling, fossil fuel, or Russian-owned companies</li>
               <li>
-                Adtech, gambling, fossil fuel, Big Tech (Magnificent 7), or
-                Russian-owned companies
+                <em>Also:</em> advisory and public platform stay strictly separate.
+                Paying clients don't get conference referrals, intros, or public recommendations.
+                If you're buying influence, this isn't the offer.
               </li>
             </ul>
           </div>
@@ -836,79 +1131,7 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- Section 05, Editorial integrity -->
-  <section
-    id="editorial-integrity"
-    aria-labelledby="integrity-heading"
-    class="border-t border-base-200/60 py-20 md:py-24 dark:border-base-800/60"
-  >
-    <div class="site-container">
-      <div class="mx-auto max-w-3xl">
-        <p
-          class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
-        >
-          05. Editorial integrity
-        </p>
-        <h2
-          id="integrity-heading"
-          class="h2 mb-6 text-base-900 dark:text-base-100"
-        >
-          Advisory clients buy advice. Not influence.
-        </h2>
-        <div
-          class="space-y-4 text-lg leading-relaxed text-base-700 dark:text-base-300"
-        >
-          <p>
-            Advisory work and public platforms stay strictly separate. Paying
-            clients don't get conference speaking referrals, priority intros
-            through my community network, or a boost when someone asks me for
-            recommendations in public.
-          </p>
-          <p>
-            This independence is the only thing that keeps credibility intact.
-            If I mention a company publicly, it's because they earned the
-            mention. Paying for the advisory has nothing to do with it.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 06, Continuity commitment -->
-  <section
-    id="continuity"
-    aria-labelledby="continuity-heading"
-    class="border-t border-base-200/60 py-20 md:py-24 dark:border-base-800/60"
-  >
-    <div class="site-container">
-      <div class="mx-auto max-w-3xl">
-        <p
-          class="mb-2 text-sm uppercase tracking-wider text-primary-600 dark:text-primary-400"
-        >
-          06. Continuity commitment
-        </p>
-        <h2
-          id="continuity-heading"
-          class="h2 mb-6 text-base-900 dark:text-base-100"
-        >
-          The engagement is delivered. Period.
-        </h2>
-        <p class="text-lg leading-relaxed text-base-700 dark:text-base-300">
-          Advisory engagements run on their schedule regardless of what else I'm
-          doing, including the case where I take an in-house role
-          mid-engagement. The usual outcome is that the engagement continues
-          through its committed period anyway, since senior roles take 3–4
-          months to start. In the rare case it can't, I deliver every open
-          artifact before stepping back and personally introduce you to a vetted
-          advisor from my network who can take the relationship forward. <strong
-            >No engagement gets left mid-air.</strong
-          >
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 07, FAQ -->
+  <!-- Section 06, FAQ -->
   <section
     id="faq"
     aria-labelledby="faq-heading"
@@ -941,18 +1164,28 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- Section 08, Apply or scope -->
+  <!-- Section 07, Apply or scope -->
   <section
     id="apply"
     aria-labelledby="apply-heading"
     class="border-t border-base-200/60 py-20 md:py-28 dark:border-base-800/60"
   >
     <div class="site-container">
-      <div class="mx-auto max-w-4xl text-center">
+      <div class="mx-auto max-w-3xl text-center">
         <Badge>Apply or scope</Badge>
         <h2 id="apply-heading" class="h2 mb-6 text-base-900 dark:text-base-100">
           Two ways in.
         </h2>
+        <p
+          class="mb-4 text-base font-semibold text-base-900 dark:text-base-100"
+        >
+          {seatAvailabilityLabel} · Application or 30-min scoping call.
+        </p>
+        <p
+          class="mb-4 text-lg leading-relaxed text-base-700 dark:text-base-300"
+        >
+          {pricingAnchor}
+        </p>
         <p
           class="mb-12 text-lg leading-relaxed text-base-700 dark:text-base-300"
         >
@@ -961,7 +1194,7 @@ const testimonials = [
         </p>
       </div>
 
-      <div class="mx-auto mt-8 grid max-w-5xl gap-8 md:grid-cols-2">
+      <div class="mx-auto mt-8 grid max-w-6xl gap-8 md:grid-cols-2">
         <div
           class="flex flex-col rounded-2xl border-2 border-primary-500/30 bg-primary-500/5 p-8"
         >
@@ -982,7 +1215,7 @@ const testimonials = [
           <div class="mt-auto">
             <Button
               variant="primary"
-              href="mailto:x@gui.do?subject=Retainer%20%E2%80%94%20scoping%20call%20request&body=Company%3A%20%0AYour%20role%3A%20%0AWhat%20you're%20trying%20to%20figure%20out%3A%20%0ACurrent%20community%20%2F%20ecosystem%20state%3A%20%0A"
+              href="mailto:x@gui.do?subject=Retainer%3A%20scoping%20call%20request&body=Company%3A%20%0AYour%20role%3A%20%0AWhat%20you're%20trying%20to%20figure%20out%3A%20%0ACurrent%20community%20%2F%20ecosystem%20state%3A%20%0A"
               umamiEvent="cta-click"
               umamiEventTarget="retainer-scoping-call"
             >
@@ -1021,7 +1254,7 @@ const testimonials = [
           <div class="mt-auto">
             <Button
               variant="outline"
-              href="mailto:x@gui.do?subject=Retainer%20%E2%80%94%20application&body=Name%3A%20%0AWork%20email%3A%20%0ACompany%3A%20%0AYour%20role%3A%20%0ACompany%20website%3A%20%0AStage%20(Series%2C%20ARR%2C%20or%20pre-revenue)%3A%20%0ACurrent%20community%20%2F%20ecosystem%20state%3A%20%0ASix-month%20outcome%20you'd%20want%20(optional)%3A%20%0ADesired%20start%20date%20(optional)%3A%20%0A"
+              href="mailto:x@gui.do?subject=Retainer%3A%20application&body=Name%3A%20%0AWork%20email%3A%20%0ACompany%3A%20%0AYour%20role%3A%20%0ACompany%20website%3A%20%0AStage%20(Series%2C%20ARR%2C%20or%20pre-revenue)%3A%20%0ACurrent%20community%20%2F%20ecosystem%20state%3A%20%0ASix-month%20outcome%20you'd%20want%20(optional)%3A%20%0ADesired%20start%20date%20(optional)%3A%20%0A"
               umamiEvent="cta-click"
               umamiEventTarget="retainer-direct-application"
             >
