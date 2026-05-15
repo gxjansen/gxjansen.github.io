@@ -21,7 +21,25 @@ import svitlanaImage from "@assets/images/testimonials/svitlana.webp";
 // and Apply CTAs update from the same source.
 const seatsTotal = 5;
 const seatsOpen = 3;
-const seatAvailabilityLabel = `${seatsOpen} of ${seatsTotal} seats open right now`;
+
+// Next intake close date, computed at build time. End of current month, rolling
+// to end of next month if fewer than 7 days remain (avoids fake-urgency
+// "closes tomorrow" surprises). Netlify rebuilds on a schedule, so this stays
+// fresh without manual edits.
+const today = new Date();
+let nextIntakeClose = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+const daysRemaining = Math.ceil(
+  (nextIntakeClose.getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
+);
+if (daysRemaining < 7) {
+  nextIntakeClose = new Date(today.getFullYear(), today.getMonth() + 2, 0);
+}
+const nextIntakeLabel = nextIntakeClose.toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+});
+
+const seatAvailabilityLabel = `${seatsOpen} of ${seatsTotal} seats open · Next intake closes ${nextIntakeLabel}`;
 
 // Pricing anchor line, reused in hero + Apply section so wording stays in sync.
 const pricingAnchor =
@@ -82,6 +100,11 @@ const faqs = [
     question: "Do you do implementation?",
     answer:
       "No. The advisory works on the design and the decisions; your team or contractors run the execution. It keeps the offer clean and avoids the conflict of interest where I'd be advising on work I also bill to deliver.",
+  },
+  {
+    question: "What if our IC is too junior to operationalize the advice?",
+    answer:
+      "Common situation. The retainer is designed for it. Inside the first 30 days, the IC gets a written prioritization of what to start, stop, and ignore, plus a measurement framework that makes their work defensible at the next budget review. What doesn't change: the IC is still the one doing the work. The retainer is senior backup on the decisions, not on the execution. If the IC can't run the advised plays at all, the month 3 review surfaces it early and either side can exit clean.",
   },
 ];
 
@@ -267,14 +290,36 @@ const testimonials = [
           <p>
             Most Series A–C developer-led companies hit the same wall: a
             community held together by a junior IC or a founder's spare cycles,
-            with the roadmap drifting in parallel.
+            with the roadmap drifting in parallel. Four costs compound from
+            there:
           </p>
-          <p>
-            The cost shows up in three places. The next budget review can't see
-            what community spend produced. Product roadmap drifts off real
-            signal. And by the time you're ready for a senior hire, you've
-            burned a quarter on plays that should have been killed in week one.
-          </p>
+          <ul class="space-y-4">
+            <li>
+              <strong class="text-base-900 dark:text-base-100"
+                >Roadmap drift on community signal.</strong
+              > Product decisions stop tracing back to what users are actually asking
+              for. The team can feel it months before the dashboard catches up.
+            </li>
+            <li>
+              <strong class="text-base-900 dark:text-base-100"
+                >Junior-IC burnout.</strong
+              > The person carrying community gets stretched, makes calls they aren't
+              senior enough to make, and either churns out or stops trying. The function
+              rebuilds from zero.
+            </li>
+            <li>
+              <strong class="text-base-900 dark:text-base-100"
+                >Budget-review carnage.</strong
+              > Community is the first line cut when nobody can defend it with numbers.
+              You spend a year rebuilding what got knifed in one finance meeting.
+            </li>
+            <li>
+              <strong class="text-base-900 dark:text-base-100"
+                >The €200K wrong-hire.</strong
+              > Senior community hires without a tested thesis are a year lost and a
+              re-recruit. The retainer tests the thesis before the hire.
+            </li>
+          </ul>
           <p class="font-medium text-base-900 dark:text-base-100">
             Two ways to use it: as a bridge to a senior hire, or as ongoing
             senior leverage if you don't plan to make one.
@@ -762,12 +807,9 @@ const testimonials = [
         >
           Past colleagues and clients on the work.
         </h2>
-        <p
-          class="text-base leading-relaxed text-base-600 md:text-lg dark:text-base-400"
-        >
-          These quotes are from working relationships before this advisory
-          existed. Once the first cohort is delivered, I'll add
-          advisory-specific references here.
+        <p class="text-sm text-base-500 dark:text-base-400">
+          Quotes from work pre-advisory. Advisory references on request after
+          the scoping call.
         </p>
       </div>
       <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
