@@ -15,6 +15,9 @@
 @layer base {
   html {
     font-size: 16px;
+    /* Normalize fallback font x-height to Poppins to prevent CLS on font swap.
+       Baseline since 2024-07-25. */
+    font-size-adjust: from-font;
 
     @screen sm {
       font-size: 18px;
