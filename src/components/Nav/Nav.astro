@@ -47,22 +47,17 @@ const shouldReduceMotion =
     ? ""
     : "transition: background-color 0.3s cubic-bezier(0.33, 1, 0.68, 1), border-color 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;"}
   transition:name={`nav`}
-  role="banner"
 >
   <div class="mx-auto flex w-full">
     <div class="site-container flex h-14 w-full items-center px-4">
-      <header
-        class="relative flex w-full items-center justify-between gap-4"
-        role="navigation"
-        aria-label="Main navigation"
-      >
+      <header class="relative flex w-full items-center justify-between gap-4">
         <!-- Logo/Home link -->
         <div class="flex-none">
           <SiteLogo />
         </div>
 
         <!-- Desktop navigation -->
-        <nav class="hidden flex-auto md:block" aria-label="Desktop navigation">
+        <nav class="hidden flex-auto md:block" aria-label="Main navigation">
           <ul
             class="flex h-fit items-center justify-center space-x-6"
             role="menubar"
