@@ -17,9 +17,6 @@ export default defineConfig({
   build: {
     inlineStylesheets: "auto", // Inline critical CSS automatically
   },
-  viewTransitions: {
-    fallback: true // Enable fallback animations for browsers that don't support view transitions
-  },
   // Prefetch destination HTML so View Transition swaps feel instant.
   // Without this, clicking a link on a slow connection sits on the old page
   // until the fetch completes — no native loading spinner under ClientRouter.
