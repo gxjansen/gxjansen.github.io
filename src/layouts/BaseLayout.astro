@@ -53,11 +53,10 @@ const currLocale = getLocaleFromUrl(Astro.url);
       noindex={noindex}
     />
     <style>
-      /* Performance optimizations for transitions */
-      .transition-ready {
+      /* will-change applied only during active transitions via JS.
+         Letting browser compositor decide layer promotion (no manual hacks). */
+      .transition-ready.is-transitioning {
         will-change: opacity, transform;
-        transform: translateZ(0);
-        backface-visibility: hidden;
       }
 
       /* Noise background animation */
@@ -144,14 +143,14 @@ const currLocale = getLocaleFromUrl(Astro.url);
       // Inform the browser about upcoming transitions
       document.addEventListener("astro:before-preparation", () => {
         document.querySelectorAll(".transition-ready").forEach((el) => {
-          (el as HTMLElement).style.willChange = "opacity, transform";
+          el.classList.add("is-transitioning");
         });
       });
 
       // Clean up after transition
       document.addEventListener("astro:after-swap", () => {
         document.querySelectorAll(".transition-ready").forEach((el) => {
-          (el as HTMLElement).style.willChange = "auto";
+          el.classList.remove("is-transitioning");
         });
       });
     </script>
