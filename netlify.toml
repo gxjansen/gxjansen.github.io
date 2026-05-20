@@ -76,7 +76,16 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://u.a11y.nl https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://u.a11y.nl https://public.api.bsky.app; media-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://share.transistor.fm https://open.spotify.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://share.transistor.fm; object-src 'none'; worker-src 'self' blob:; upgrade-insecure-requests;"
+    # NOTE: 'unsafe-inline' is intentionally kept (for now). The site contains
+    # many inline event handlers (onload/onclick/onerror on iframes for lazy-loaded
+    # YouTube/Spotify/SlideShare embeds), inline scripts that vary per-page via
+    # Astro `define:vars` (carousel components on home/blog, slide embeds), and
+    # per-page JSON-LD blocks (author pages, retainer). Hash-based CSP for all of
+    # these is not feasible without significant refactor — see issue #132 for the
+    # full inventory. 'unsafe-eval' has been removed: a build-output audit
+    # (grep eval(/new Function( across dist/_astro/*.js) confirmed nothing in the
+    # shipped browser bundle relies on it.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://u.a11y.nl https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://u.a11y.nl https://public.api.bsky.app; media-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://share.transistor.fm https://open.spotify.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://share.transistor.fm; object-src 'none'; worker-src 'self' blob:; upgrade-insecure-requests;"
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
