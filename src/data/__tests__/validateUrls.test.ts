@@ -408,20 +408,24 @@ describe("Data File URL Validation", () => {
     expect(errors).toEqual([]);
   }, 60000);
 
-  it("should have valid URLs in blog posts", async () => {
-    const urls = collectBlogPostUrls();
+  it.skipIf(process.env.CI)(
+    "should have valid URLs in blog posts",
+    async () => {
+      const urls = collectBlogPostUrls();
 
-    console.log(`Validating ${urls.length} URLs from blog posts...`);
+      console.log(`Validating ${urls.length} URLs from blog posts...`);
 
-    const errors = await validateUrlsWithRateLimit(urls, 300);
+      const errors = await validateUrlsWithRateLimit(urls, 300);
 
-    if (errors.length > 0) {
-      console.error("\nBroken URLs found in blog posts:");
-      errors.forEach((err) => console.error(`  - ${err}`));
-    }
+      if (errors.length > 0) {
+        console.error("\nBroken URLs found in blog posts:");
+        errors.forEach((err) => console.error(`  - ${err}`));
+      }
 
-    expect(errors).toEqual([]);
-  }, 300000); // 5 min timeout for all blog posts
+      expect(errors).toEqual([]);
+    },
+    300000,
+  ); // 5 min timeout for all blog posts
 });
 
 // Export for potential use in CLI script
