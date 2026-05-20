@@ -5,8 +5,6 @@ import AutoImport from "astro-auto-import";
 import icon from "astro-icon";
 import react from "@astrojs/react";
 import netlify from "@astrojs/netlify";
-// TODO: Update astro-md-alternate to support Astro 6 (entry.slug → entry.id, entry.body removed)
-// import mdAlternate from "astro-md-alternate";
 import * as path from 'node:path';
 import { contentValidationPlugin } from './src/utils/content-validation-plugin.ts';
 
@@ -118,12 +116,6 @@ export default defineConfig({
       }
     }),
     contentValidationPlugin(),
-    // TODO: Re-enable after updating astro-md-alternate for Astro 6
-    // mdAlternate({
-    //   collections: [
-    //     { name: "post", pattern: "/post/[slug]" },
-    //   ],
-    // }),
   ],
 
   vite: {
