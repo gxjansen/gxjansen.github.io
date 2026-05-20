@@ -8,7 +8,7 @@
  * ! If the icon is at src/icons/tabler/paint.svg then you put in "tabler/paint"
  */
 
-import { Icon } from "astro-icon/components";
+import DynamicIcon from "@components/Icon/DynamicIcon.astro";
 
 interface Props {
   icon: string;
@@ -34,7 +34,7 @@ const cardId = `feature-${title.toLowerCase().replace(/\s+/g, "-")}${suffix}`;
     <div class="flex h-full flex-col">
       <header class="flex items-start gap-2">
         <div class="mt-1 flex-shrink-0" aria-hidden="true">
-          <Icon
+          <DynamicIcon
             name={icon}
             class="h-5 w-5 text-primary-500 transition-transform group-focus-within:rotate-3 group-focus-within:scale-110 group-hover:rotate-3 group-hover:scale-110"
             role="presentation"

@@ -3,7 +3,7 @@
  * * Dropdown menu that opens on click
  * This is for non-mobile devices
  */
-import { Icon } from "astro-icon/components";
+import ChevronDown from "@icons/tabler/chevron-down.svg";
 
 // components
 import NavLink from "@components/Nav/NavLink.astro";
@@ -27,8 +27,7 @@ const { navItem } = Astro.props as Props;
     aria-controls={`${navItem.text} dropdown menu content`}
   >
     {navItem.text}
-    <Icon
-      name="tabler/chevron-down"
+    <ChevronDown
       aria-hidden="true"
       class="nav__dropdown-chevron size-5 shrink-0 transition-transform"
     />

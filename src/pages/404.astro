@@ -1,5 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
+import AtlasDots1 from "@icons/atlas/dots1.svg";
+import AtlasDots3 from "@icons/atlas/dots3.svg";
 import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -35,23 +36,19 @@ const currLocale = getLocaleFromUrl(Astro.url);
           />
 
           <!-- corner icons -->
-          <Icon
-            name="atlas/dots1"
+          <AtlasDots1
             class="absolute -left-6 -top-6 z-10 w-28 text-accent-1"
             aria-hidden="true"
           />
-          <Icon
-            name="atlas/dots3"
+          <AtlasDots3
             class="absolute -right-6 -top-6 z-10 w-28 text-primary-500"
             aria-hidden="true"
           />
-          <Icon
-            name="atlas/dots1"
+          <AtlasDots1
             class="absolute -bottom-6 -right-6 w-28 text-accent-4"
             aria-hidden="true"
           />
-          <Icon
-            name="atlas/dots3"
+          <AtlasDots3
             class="absolute -bottom-6 -left-6 w-28 text-accent-3"
             aria-hidden="true"
           />

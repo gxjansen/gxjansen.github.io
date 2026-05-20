@@ -1,6 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { Icon } from "astro-icon/components";
+import DynamicIcon from "@components/Icon/DynamicIcon.astro";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
@@ -47,7 +47,7 @@ const isCurrentPage = Astro.url.pathname === actualLink;
   >
     {
       icon && !noIcon && (
-        <Icon
+        <DynamicIcon
           name={icon}
           aria-hidden="true"
           role="presentation"

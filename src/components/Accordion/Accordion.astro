@@ -4,7 +4,7 @@
  * Uses the `name` attribute to enable "only one open at a time" behavior
  * when multiple accordions share the same group name.
  */
-import { Icon } from "astro-icon/components";
+import CircleArrowUp from "@icons/tabler/circle-arrow-up.svg";
 
 interface Props {
   title: string;
@@ -21,8 +21,7 @@ const { title, details, group = "accordion" } = Astro.props;
     class="primary-focus flex cursor-pointer list-none items-center justify-between gap-2 py-3 text-lg font-bold text-base-900 transition hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-500"
   >
     {title}
-    <Icon
-      name="tabler/circle-arrow-up"
+    <CircleArrowUp
       aria-hidden="true"
       class="accordion__chevron size-6 shrink-0 rotate-180 text-primary-500 transition-transform duration-[400ms] ease-[cubic-bezier(0.33,1,0.68,1)]"
     />

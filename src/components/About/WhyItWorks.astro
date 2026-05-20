@@ -4,7 +4,8 @@
  * Section 3 of the About page restructure
  */
 import Badge from "@components/Badge/Badge.astro";
-import { Icon } from "astro-icon/components";
+import DynamicIcon from "@components/Icon/DynamicIcon.astro";
+import Flask from "@icons/tabler/outline/flask.svg";
 
 interface Approach {
   title: string;
@@ -74,7 +75,7 @@ const approaches: Approach[] = [
                 <div class="flex flex-col gap-3 sm:flex-row sm:gap-4">
                   <div class="flex-shrink-0">
                     <div class="w-fit rounded-lg bg-primary-100 p-2 dark:bg-primary-900/30">
-                      <Icon
+                      <DynamicIcon
                         name={approach.icon}
                         class="h-5 w-5 text-primary-600 dark:text-primary-400"
                       />
@@ -104,8 +105,7 @@ const approaches: Approach[] = [
             <div
               class="w-fit rounded-xl bg-primary-200 p-2 sm:p-3 dark:bg-primary-800/50"
             >
-              <Icon
-                name="tabler:flask"
+              <Flask
                 class="h-6 w-6 text-primary-700 sm:h-8 sm:w-8 dark:text-primary-300"
               />
             </div>

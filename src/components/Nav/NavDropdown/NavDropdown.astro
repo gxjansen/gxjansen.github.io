@@ -3,7 +3,7 @@
  * * Dropdown menu that opens on hover
  * This is for non-mobile devices
  */
-import { Icon } from "astro-icon/components";
+import ChevronDown from "@icons/tabler/chevron-down.svg";
 
 // components
 import NavLink from "@components/Nav/NavLink.astro";
@@ -37,8 +37,7 @@ const shouldReduceMotion =
     data-dropdown-toggle
   >
     <span>{navItem.text}</span>
-    <Icon
-      name="tabler/chevron-down"
+    <ChevronDown
       class={`size-5 transition-transform ${shouldReduceMotion ? "" : "group-hover:rotate-180 group-focus-within:rotate-180"}`}
       aria-hidden="true"
       role="presentation"

@@ -3,7 +3,10 @@
  * * These are alternating side cards with titles, text, and images
  * Recommend using 2 or 3 cards in a row
  */
-import { Icon } from "astro-icon/components";
+import LetterG from "@icons/tabler/outline/letter-g.svg";
+import LetterX from "@icons/tabler/outline/letter-x.svg";
+import LetterJ from "@icons/tabler/outline/letter-j.svg";
+import QuestionMark from "@icons/tabler/outline/question-mark.svg";
 
 // components
 import ServiceCard from "@components/ServiceCard/ServiceCardSideImage.astro";
@@ -92,32 +95,28 @@ In 2021 it was time to focus on something new and I became the Global Business &
           class="flex flex-col items-center justify-center gap-4 md:flex-row"
         >
           <div class="flex items-center justify-center" aria-hidden="true">
-            <Icon
-              name="tabler:letter-g"
+            <LetterG
               class="h-10 w-10 text-white"
               stroke-width="1"
               stroke="currentColor"
               fill="none"
               role="presentation"
             />
-            <Icon
-              name="tabler:letter-x"
+            <LetterX
               class="-ml-3 h-14 w-14 text-base-100"
               stroke-width="8"
               stroke="currentColor"
               fill="none"
               role="presentation"
             />
-            <Icon
-              name="tabler:letter-j"
+            <LetterJ
               class="-ml-4 h-10 w-10 text-white"
               stroke-width="1"
               stroke="currentColor"
               fill="none"
               role="presentation"
             />
-            <Icon
-              name="tabler:question-mark"
+            <QuestionMark
               class="-ml-2 h-12 w-12 text-white"
               stroke-width="3"
               stroke="currentColor"

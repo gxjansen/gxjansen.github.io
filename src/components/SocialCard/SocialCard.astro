@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon/components";
+import DynamicIcon from "@components/Icon/DynamicIcon.astro";
 
 /**
  * Props for the SocialCard component
@@ -25,7 +25,7 @@ const { name, href, icon } = Astro.props;
   aria-label={`Connect with me on ${name}`}
 >
   <div class="social-card-icon-wrapper">
-    <Icon name={icon} class="size-6" aria-hidden="true" />
+    <DynamicIcon name={icon} class="size-6" aria-hidden="true" />
   </div>
   <h3
     class="social-card-title hover:text-primary-500 dark:hover:text-primary-400"

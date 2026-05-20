@@ -1,7 +1,8 @@
 ---
 // src/components/EnvironmentBanner/EnvironmentBanner.astro
 import { CONFIG } from "src/config.ts";
-import { Icon } from "astro-icon/components";
+import AlertTriangle from "@icons/tabler/alert-triangle.svg";
+import X from "@icons/tabler/x.svg";
 
 const isProduction = CONFIG.ALLOW_INDEXING;
 ---
@@ -15,8 +16,7 @@ const isProduction = CONFIG.ALLOW_INDEXING;
       aria-live="polite"
     >
       <div class="banner-content">
-        <Icon
-          name="tabler/alert-triangle"
+        <AlertTriangle
           class="h-4 w-4"
           aria-hidden="true"
           role="presentation"
@@ -27,8 +27,7 @@ const isProduction = CONFIG.ALLOW_INDEXING;
           class="banner-close"
           aria-label="Dismiss preview environment notification"
         >
-          <Icon
-            name="tabler/x"
+          <X
             class="h-4 w-4"
             aria-hidden="true"
             role="presentation"

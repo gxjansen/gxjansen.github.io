@@ -1,5 +1,10 @@
 ---
-import { Icon } from "astro-icon/components";
+import Bulb from "@icons/tabler/bulb.svg";
+import AlertTriangle from "@icons/tabler/alert-triangle.svg";
+import Flame from "@icons/tabler/flame.svg";
+import InfoCircle from "@icons/tabler/info-circle.svg";
+import Terminal2 from "@icons/tabler/terminal-2.svg";
+import User from "@icons/tabler/user.svg";
 
 interface Props {
   variant: "tip" | "caution" | "danger" | "info" | "terminal" | "prompt";
@@ -7,21 +12,22 @@ interface Props {
 
 const { variant } = Astro.props as Props;
 
-// create a switch statement that switches on "variant" and returns the appropriate icon
-const icon = (() => {
+// Switch the icon component (not just a name string) so native SVG imports
+// stay statically resolvable.
+const IconComponent = (() => {
   switch (variant) {
     case "tip":
-      return "tabler/bulb";
+      return Bulb;
     case "caution":
-      return "tabler/alert-triangle";
+      return AlertTriangle;
     case "danger":
-      return "tabler/flame";
+      return Flame;
     case "info":
-      return "tabler/info-circle";
+      return InfoCircle;
     case "terminal":
-      return "tabler/terminal-2";
+      return Terminal2;
     case "prompt":
-      return "tabler/user";
+      return User;
   }
 })();
 
@@ -40,8 +46,7 @@ const label =
         class="mr-2 inline-flex items-center gap-1.5 align-middle"
         style="transform: translateY(-1px);"
       >
-        <Icon
-          name={icon}
+        <IconComponent
           class="inline size-5 text-base-600 dark:text-base-300"
           aria-hidden="true"
         />
@@ -55,8 +60,7 @@ const label =
         class="mr-2 inline-flex items-center gap-1.5 align-middle"
         style="transform: translateY(-1px);"
       >
-        <Icon
-          name={icon}
+        <IconComponent
           class="inline size-5 text-base-600 dark:text-base-300"
           aria-hidden="true"
         />
@@ -87,8 +91,7 @@ const label =
       ]}
     >
       <div class="flex items-center gap-2 pb-2">
-        <Icon
-          name={icon}
+        <IconComponent
           class="size-7 text-base-600 dark:text-base-300"
           aria-hidden="true"
         />

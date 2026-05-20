@@ -1,5 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
+import DynamicIcon from "@components/Icon/DynamicIcon.astro";
+import BrandGithub from "@icons/tabler/filled/brand-github.svg";
 import { Image } from "astro:assets";
 import Button from "@components/Button/Button.astro";
 
@@ -42,7 +43,7 @@ const {
               class="h-12 w-12"
             />
           ) : (
-            <Icon
+            <DynamicIcon
               name={mainImage}
               class="h-12 w-12 text-base-50"
               aria-hidden="true"
@@ -100,8 +101,7 @@ const {
               rel="noopener noreferrer"
             >
               <span class="flex items-center gap-2">
-                <Icon
-                  name="tabler/filled/brand-github"
+                <BrandGithub
                   class="h-5 w-5"
                   aria-hidden="true"
                 />

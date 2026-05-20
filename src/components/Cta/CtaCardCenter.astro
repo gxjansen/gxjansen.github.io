@@ -3,7 +3,8 @@
  * * CTA card center with dark background and light text
  */
 
-import { Icon } from "astro-icon/components";
+import AtlasDots3 from "@icons/atlas/dots3.svg";
+import AtlasWaveBgBasic from "@icons/atlas/wave-bg-basic.svg";
 
 // components
 import Button from "@components/Button/Button.astro";
@@ -14,18 +15,15 @@ import Button from "@components/Button/Button.astro";
     <div
       class="relative overflow-hidden rounded-md bg-base-900 px-16 py-11 md:py-20"
     >
-      <Icon
-        name="atlas/dots3"
+      <AtlasDots3
         class="absolute left-4 top-0 z-10 size-16 text-accent-3"
         aria-hidden="true"
       />
-      <Icon
-        name="atlas/dots3"
+      <AtlasDots3
         class="absolute bottom-0 right-4 z-10 size-16 text-accent-1"
         aria-hidden="true"
       />
-      <Icon
-        name="atlas/wave-bg-basic"
+      <AtlasWaveBgBasic
         class="absolute left-1/2 top-1/2 h-full -translate-x-1/2 -translate-y-1/2 object-cover text-base-900 dark:text-base-100/5"
         aria-hidden="true"
       />

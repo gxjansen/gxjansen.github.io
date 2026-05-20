@@ -4,7 +4,12 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
 import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
+import CalendarCheck from "@icons/tabler/outline/calendar-check.svg";
+import Scissors from "@icons/tabler/outline/scissors.svg";
+import Bolt from "@icons/tabler/outline/bolt.svg";
+import TargetArrow from "@icons/tabler/outline/target-arrow.svg";
+import ClipboardCheck from "@icons/tabler/outline/clipboard-check.svg";
+import FileCheck from "@icons/tabler/outline/file-check.svg";
 import Badge from "@components/Badge/Badge.astro";
 import Button from "@components/Button/Button.astro";
 import Accordion from "@components/Accordion/Accordion.astro";
@@ -518,7 +523,7 @@ const testimonials = [
               class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
               aria-hidden="true"
             >
-              <Icon name="tabler/outline/calendar-check" class="h-5 w-5" />
+              <CalendarCheck class="h-5 w-5" />
             </span>
             <span class="pt-1">
               <strong class="text-base-900 dark:text-base-100"
@@ -531,7 +536,7 @@ const testimonials = [
               class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
               aria-hidden="true"
             >
-              <Icon name="tabler/outline/scissors" class="h-5 w-5" />
+              <Scissors class="h-5 w-5" />
             </span>
             <span class="pt-1">
               <strong class="text-base-900 dark:text-base-100"
@@ -545,7 +550,7 @@ const testimonials = [
               class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
               aria-hidden="true"
             >
-              <Icon name="tabler/outline/bolt" class="h-5 w-5" />
+              <Bolt class="h-5 w-5" />
             </span>
             <span class="pt-1">
               <strong class="text-base-900 dark:text-base-100"
@@ -558,7 +563,7 @@ const testimonials = [
               class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
               aria-hidden="true"
             >
-              <Icon name="tabler/outline/target-arrow" class="h-5 w-5" />
+              <TargetArrow class="h-5 w-5" />
             </span>
             <span class="pt-1">
               <strong class="text-base-900 dark:text-base-100"
@@ -572,7 +577,7 @@ const testimonials = [
               class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400"
               aria-hidden="true"
             >
-              <Icon name="tabler/outline/clipboard-check" class="h-5 w-5" />
+              <ClipboardCheck class="h-5 w-5" />
             </span>
             <span class="pt-1">
               <strong class="text-base-900 dark:text-base-100"
@@ -588,8 +593,7 @@ const testimonials = [
         </h3>
         <ul class="space-y-4 text-base-700 dark:text-base-300">
           <li class="flex gap-3">
-            <Icon
-              name="tabler/outline/file-check"
+            <FileCheck
               class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
               aria-hidden="true"
             />
@@ -600,8 +604,7 @@ const testimonials = [
             </span>
           </li>
           <li class="flex gap-3">
-            <Icon
-              name="tabler/outline/file-check"
+            <FileCheck
               class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
               aria-hidden="true"
             />
@@ -612,8 +615,7 @@ const testimonials = [
             </span>
           </li>
           <li class="flex gap-3">
-            <Icon
-              name="tabler/outline/file-check"
+            <FileCheck
               class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
               aria-hidden="true"
             />
@@ -624,8 +626,7 @@ const testimonials = [
             </span>
           </li>
           <li class="flex gap-3">
-            <Icon
-              name="tabler/outline/file-check"
+            <FileCheck
               class="mt-1 h-5 w-5 flex-shrink-0 text-primary-500"
               aria-hidden="true"
             />

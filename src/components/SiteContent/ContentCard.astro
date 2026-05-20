@@ -8,13 +8,13 @@
  * ! If the icon is at src/icons/tabler/paint.svg then you put in "tabler/paint"
  */
 
-import { Icon } from "astro-icon/components";
+import DynamicIcon from "@components/Icon/DynamicIcon.astro";
 
 // components
 import Button from "@components/Button/Button.astro";
 
 interface Props {
-  icon: string; // icon string for astro-icon
+  icon: string; // icon name resolved via DynamicIcon registry
   title: string;
   text: string;
   href: string;
@@ -35,7 +35,7 @@ const { icon, title, text, href, ctaText, idx, ...rest } = Astro.props as Props;
       <div
         class="mx-auto mb-7 inline-flex size-16 items-center justify-center rounded-lg bg-primary-500 text-base-100 dark:text-base-900"
       >
-        <Icon
+        <DynamicIcon
           name={icon}
           class="size-7 text-base-100 dark:text-base-900"
           aria-hidden="true"

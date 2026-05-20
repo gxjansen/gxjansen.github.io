@@ -3,7 +3,7 @@
  * * Individual colleague testimonial card component
  */
 
-import { Icon } from "astro-icon/components";
+import QuotesTop from "@icons/atlas/quotes-top.svg";
 import type { ColleagueTestimonial } from "@config/colleagueTestimonialData";
 
 const { name, role, company, workRelationship, quote } =
@@ -16,8 +16,7 @@ const { name, role, company, workRelationship, quote } =
   <!-- Quote section -->
   <div class="flex-1">
     <div class="relative">
-      <Icon
-        name="atlas/quotes-top"
+      <QuotesTop
         class="absolute -left-2 -top-2 h-8 w-8 text-primary-200 opacity-60 dark:text-primary-700"
         aria-hidden="true"
       />

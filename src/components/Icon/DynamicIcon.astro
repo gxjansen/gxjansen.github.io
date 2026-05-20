@@ -1,0 +1,157 @@
+---
+/**
+ * DynamicIcon
+ *
+ * Registry component for icons whose name comes from data (props, JSON, TS data
+ * files). Native Astro 6 SVG imports require static paths, so anywhere we used
+ * to do <Icon name={dynamicVar} /> via astro-icon, we now route through this
+ * registry which maps every known icon name to a statically-imported SVG.
+ *
+ * Static-name usages (e.g. <Icon name="atlas/circle3" />) should import the
+ * SVG directly in the consuming component instead of using DynamicIcon, for
+ * better tree-shaking and clarity.
+ *
+ * Naming conventions handled:
+ *   - "tabler/foo"               → src/icons/tabler/foo.svg
+ *   - "tabler/outline/foo"       → src/icons/tabler/outline/foo.svg
+ *   - "tabler/filled/foo"        → src/icons/tabler/filled/foo.svg
+ *   - "tabler:foo" (iconify)     → src/icons/tabler/outline/foo.svg
+ *   - "atlas/foo"                → src/icons/atlas/foo.svg
+ *   - bare social names          → src/icons/<name>.svg (top-level)
+ */
+
+// Local / atlas icons referenced through data
+import Sheep from "@icons/sheep.svg";
+import Signal from "@icons/signal.svg";
+import Sifa from "@icons/sifa.svg";
+import Linkedin from "@icons/linkedin.svg";
+import Bluesky from "@icons/bluesky.svg";
+import Instagram from "@icons/instagram.svg";
+
+// Tabler (top-level) icons referenced through data or Admonition
+import TablerAlertTriangle from "@icons/tabler/alert-triangle.svg";
+import TablerBulb from "@icons/tabler/bulb.svg";
+import TablerCategory from "@icons/tabler/category.svg";
+import TablerCircle from "@icons/tabler/circle.svg";
+import TablerDiamonds from "@icons/tabler/diamonds.svg";
+import TablerEditCircle from "@icons/tabler/edit-circle.svg";
+import TablerFlame from "@icons/tabler/flame.svg";
+import TablerInfoCircle from "@icons/tabler/info-circle.svg";
+import TablerListCheck from "@icons/tabler/list-check.svg";
+import TablerPencil from "@icons/tabler/pencil.svg";
+import TablerRss from "@icons/tabler/rss.svg";
+import TablerStar from "@icons/tabler/star.svg";
+import TablerTerminal2 from "@icons/tabler/terminal-2.svg";
+import TablerUser from "@icons/tabler/user.svg";
+
+// Tabler filled variants
+import TablerFilledBrandGithub from "@icons/tabler/filled/brand-github.svg";
+import TablerFilledBrandYoutube from "@icons/tabler/filled/brand-youtube.svg";
+
+// Tabler outline variants (used by navData, content data, and tabler: iconify
+// shorthand which defaults to outline)
+import TablerOutlineAB from "@icons/tabler/outline/a-b.svg";
+import TablerOutlineArticle from "@icons/tabler/outline/article.svg";
+import TablerOutlineBriefcase from "@icons/tabler/outline/briefcase.svg";
+import TablerOutlineBroadcast from "@icons/tabler/outline/broadcast.svg";
+import TablerOutlineBuildingEstate from "@icons/tabler/outline/building-estate.svg";
+import TablerOutlineCalendarEvent from "@icons/tabler/outline/calendar-event.svg";
+import TablerOutlineChartBar from "@icons/tabler/outline/chart-bar.svg";
+import TablerOutlineCode from "@icons/tabler/outline/code.svg";
+import TablerOutlineDoor from "@icons/tabler/outline/door.svg";
+import TablerOutlineFriends from "@icons/tabler/outline/friends.svg";
+import TablerOutlineGauge from "@icons/tabler/outline/gauge.svg";
+import TablerOutlineMarkdown from "@icons/tabler/outline/markdown.svg";
+import TablerOutlineMessage from "@icons/tabler/outline/message.svg";
+import TablerOutlineMessages from "@icons/tabler/outline/messages.svg";
+import TablerOutlineMicrophone from "@icons/tabler/outline/microphone.svg";
+import TablerOutlineNews from "@icons/tabler/outline/news.svg";
+import TablerOutlinePresentation from "@icons/tabler/outline/presentation.svg";
+import TablerOutlineSpeakerphone from "@icons/tabler/outline/speakerphone.svg";
+import TablerOutlineStar from "@icons/tabler/outline/star.svg";
+import TablerOutlineTransform from "@icons/tabler/outline/transform.svg";
+import TablerOutlineUser from "@icons/tabler/outline/user.svg";
+import TablerOutlineUsers from "@icons/tabler/outline/users.svg";
+import TablerOutlineUsersGroup from "@icons/tabler/outline/users-group.svg";
+
+type SvgComponent = (typeof Sheep) | (typeof TablerStar);
+
+interface Props {
+  name: string;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { name, ...rest } = Astro.props as Props;
+
+// Resolve any naming convention (path-style "tabler/foo" or iconify-style
+// "tabler:foo") to a single imported component.
+const registry: Record<string, SvgComponent> = {
+  // Bare top-level social/local icons
+  sheep: Sheep,
+  signal: Signal,
+  sifa: Sifa,
+  linkedin: Linkedin,
+  bluesky: Bluesky,
+  instagram: Instagram,
+  rss: TablerRss,
+
+  // Iconify-style "tabler:foo" → outline variant (tabler default)
+  "tabler:chart-bar": TablerOutlineChartBar,
+  "tabler:door": TablerOutlineDoor,
+  "tabler:gauge": TablerOutlineGauge,
+  "tabler:markdown": TablerOutlineMarkdown,
+  "tabler:message": TablerOutlineMessage,
+  "tabler:speakerphone": TablerOutlineSpeakerphone,
+  "tabler:star": TablerOutlineStar,
+
+  // Path-style top-level "tabler/foo"
+  "tabler/alert-triangle": TablerAlertTriangle,
+  "tabler/bulb": TablerBulb,
+  "tabler/category": TablerCategory,
+  "tabler/circle": TablerCircle,
+  "tabler/diamonds": TablerDiamonds,
+  "tabler/edit-circle": TablerEditCircle,
+  "tabler/flame": TablerFlame,
+  "tabler/info-circle": TablerInfoCircle,
+  "tabler/list-check": TablerListCheck,
+  "tabler/pencil": TablerPencil,
+  "tabler/rss": TablerRss,
+  "tabler/star": TablerStar,
+  "tabler/terminal-2": TablerTerminal2,
+  "tabler/user": TablerUser,
+
+  // Path-style "tabler/filled/foo"
+  "tabler/filled/brand-github": TablerFilledBrandGithub,
+  "tabler/filled/brand-youtube": TablerFilledBrandYoutube,
+
+  // Path-style "tabler/outline/foo"
+  "tabler/outline/a-b": TablerOutlineAB,
+  "tabler/outline/article": TablerOutlineArticle,
+  "tabler/outline/briefcase": TablerOutlineBriefcase,
+  "tabler/outline/broadcast": TablerOutlineBroadcast,
+  "tabler/outline/building-estate": TablerOutlineBuildingEstate,
+  "tabler/outline/calendar-event": TablerOutlineCalendarEvent,
+  "tabler/outline/code": TablerOutlineCode,
+  "tabler/outline/friends": TablerOutlineFriends,
+  "tabler/outline/messages": TablerOutlineMessages,
+  "tabler/outline/microphone": TablerOutlineMicrophone,
+  "tabler/outline/news": TablerOutlineNews,
+  "tabler/outline/presentation": TablerOutlinePresentation,
+  "tabler/outline/transform": TablerOutlineTransform,
+  "tabler/outline/user": TablerOutlineUser,
+  "tabler/outline/users": TablerOutlineUsers,
+  "tabler/outline/users-group": TablerOutlineUsersGroup,
+};
+
+const Component = registry[name];
+
+if (!Component && import.meta.env.DEV) {
+  // eslint-disable-next-line no-console
+  console.warn(
+    `[DynamicIcon] No icon registered for name "${name}". Add it to src/components/Icon/DynamicIcon.astro.`,
+  );
+}
+---
+
+{Component && <Component {...rest} />}

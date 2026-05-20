@@ -4,7 +4,8 @@
  *
  * There is a commented out "awards" section below in case you want that
  */
-import { Icon } from "astro-icon/components";
+import AtlasCircle3 from "@icons/atlas/circle3.svg";
+import AtlasDots3 from "@icons/atlas/dots3.svg";
 import { Image } from "astro:assets";
 import SocialLinks from "@components/SocialLinks/SocialLinks.astro";
 
@@ -91,14 +92,12 @@ const t = useTranslations(currLocale);
       </div>
       <div class="w-full md:w-1/2 md:pl-6 lg:pl-8">
         <div class="relative mx-auto max-w-max md:mr-0">
-          <Icon
-            name="atlas/circle3"
+          <AtlasCircle3
             class="absolute -left-14 -top-12 z-10 w-28 text-accent-4"
             aria-hidden="true"
             role="presentation"
           />
-          <Icon
-            name="atlas/dots3"
+          <AtlasDots3
             class="absolute -bottom-8 -right-7 z-10 w-28 text-accent-2"
             aria-hidden="true"
             role="presentation"

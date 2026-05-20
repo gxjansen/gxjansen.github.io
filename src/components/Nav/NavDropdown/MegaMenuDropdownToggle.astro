@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon/components";
+import ChevronDown from "@icons/tabler/chevron-down.svg";
 
 // components
 import NavLink from "../NavLink.astro";
@@ -42,8 +42,7 @@ if (cols >= 5) {
     aria-controls={`${navItem.text} mega menu menu content`}
   >
     {navItem.text}
-    <Icon
-      name="tabler/chevron-down"
+    <ChevronDown
       aria-hidden="true"
       class="mega-menu__dropdown-chevron size-5 shrink-0 transition-transform"
     />

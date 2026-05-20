@@ -2,7 +2,6 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import AutoImport from "astro-auto-import";
-import icon from "astro-icon";
 import react from "@astrojs/react";
 import netlify from "@astrojs/netlify";
 import * as path from 'node:path';
@@ -99,11 +98,6 @@ export default defineConfig({
       optimize: false,
     }),
     react(),
-    icon({
-      include: {
-        tabler: ["chart-bar", "door", "flask", "gauge", "letter-g", "letter-j", "letter-x", "markdown", "message", "question-mark", "speakerphone", "star"],
-      },
-    }),
     sitemap({
       filter: (page) => !page.includes('/conference-terms') && !page.includes('/examples/') && !page.includes('/categories/'),
       changefreq: 'weekly',

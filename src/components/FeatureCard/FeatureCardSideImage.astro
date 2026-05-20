@@ -4,7 +4,9 @@
  */
 
 import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
+import CircleCheck from "@icons/tabler/circle-check.svg";
+import AtlasCircle3 from "@icons/atlas/circle3.svg";
+import AtlasDots3 from "@icons/atlas/dots3.svg";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 // components
@@ -46,8 +48,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
         {
           items.map((item) => (
             <li class="description mt-4 flex items-center">
-              <Icon
-                name="tabler/circle-check"
+              <CircleCheck
                 class="mr-2 size-6 text-primary-500"
                 aria-hidden="true"
               />
@@ -70,15 +71,13 @@ const currLocale = getLocaleFromUrl(Astro.url);
 
   <!-- image -->
   <div class="relative mx-auto max-w-4xl">
-    <Icon
-      name="atlas/circle3"
+    <AtlasCircle3
       class={`absolute -left-8 -top-4 z-10 w-20  md:-top-8 md:w-28 ${
         imageSide === "right" ? "text-accent-1" : "text-accent-4 rotate-90"
       }`}
       aria-hidden="true"
     />
-    <Icon
-      name="atlas/dots3"
+    <AtlasDots3
       class={`absolute -bottom-4 -right-7 z-10 w-20 text-accent-2 md:-bottom-8 md:w-28 ${
         imageSide === "right" ? "text-accent-2" : "text-accent-3"
       }`}

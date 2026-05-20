@@ -5,7 +5,8 @@
  */
 
 import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
+import AtlasCircle3 from "@icons/atlas/circle3.svg";
+import AtlasDots3 from "@icons/atlas/dots3.svg";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 // components
@@ -110,15 +111,13 @@ const cardId = `biography-${title.toLowerCase().replace(/\s+/g, "-")}`;
   <div class="relative mx-auto max-w-4xl" role="presentation">
     <!-- Decorative elements -->
     <div aria-hidden="true">
-      <Icon
-        name="atlas/circle3"
+      <AtlasCircle3
         class={`absolute -left-8 -top-4 z-10 w-20 md:-top-8 md:w-28 ${
           imageSide === "right" ? "text-accent-1" : "text-accent-4 rotate-90"
         }`}
         role="presentation"
       />
-      <Icon
-        name="atlas/dots3"
+      <AtlasDots3
         class={`absolute -bottom-4 -right-7 z-10 w-20 text-accent-2 md:-bottom-8 md:w-28 ${
           imageSide === "right" ? "text-accent-2" : "text-accent-3"
         }`}
