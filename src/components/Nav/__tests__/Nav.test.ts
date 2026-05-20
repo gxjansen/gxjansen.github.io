@@ -10,14 +10,14 @@ describe("Nav", () => {
       <div id="nav__container" class="navbar--initial fixed left-0 top-0 z-30 flex w-full flex-col border-b" role="banner">
         <div class="mx-auto flex w-full">
           <div class="site-container flex h-14 w-full items-center px-4">
-            <header class="relative flex w-full items-center justify-between gap-4" role="navigation" aria-label="Main navigation">
+            <header class="relative flex w-full items-center justify-between gap-4">
               <!-- Skip link -->
               <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:block focus:rounded-md focus:bg-primary-500 focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
                 Skip to main content
               </a>
 
               <!-- Desktop navigation -->
-              <nav class="hidden flex-auto md:block" aria-label="Desktop navigation">
+              <nav class="hidden flex-auto md:block" aria-label="Main navigation">
                 <ul class="flex h-fit items-center justify-center space-x-6" role="menubar" aria-label="Primary navigation menu">
                   ${navData
                     .filter((item) => !item.hidden)
@@ -79,7 +79,7 @@ describe("Nav", () => {
 
     // Check desktop/mobile visibility
     const desktopNav = parsedHtml.querySelector(
-      'nav[aria-label="Desktop navigation"]',
+      'nav[aria-label="Main navigation"]',
     );
     expect(desktopNav?.classList.contains("hidden")).toBe(true);
     expect(desktopNav?.classList.contains("md:block")).toBe(true);
@@ -174,8 +174,8 @@ describe("Nav", () => {
   it("has proper accessibility attributes", () => {
     const html = `
       <div id="nav__container" class="navbar--initial" role="banner">
-        <header role="navigation" aria-label="Main navigation">
-          <nav aria-label="Desktop navigation">
+        <header>
+          <nav aria-label="Main navigation">
             <ul role="menubar" aria-label="Primary navigation menu">
               <li role="none">
                 <a href="/" role="menuitem">Home</a>
@@ -204,16 +204,14 @@ describe("Nav", () => {
 
     // Check ARIA roles
     expect(parsedHtml.querySelector('[role="banner"]')).toBeTruthy();
-    expect(parsedHtml.querySelector('[role="navigation"]')).toBeTruthy();
+    // <nav> element carries the implicit navigation role (a11y best practice)
+    expect(parsedHtml.querySelector("nav")).toBeTruthy();
     expect(parsedHtml.querySelector('[role="menubar"]')).toBeTruthy();
     expect(parsedHtml.querySelector('[role="menuitem"]')).toBeTruthy();
 
     // Check ARIA labels
     expect(
       parsedHtml.querySelector('[aria-label="Main navigation"]'),
-    ).toBeTruthy();
-    expect(
-      parsedHtml.querySelector('[aria-label="Desktop navigation"]'),
     ).toBeTruthy();
     expect(
       parsedHtml.querySelector('[aria-label="Primary navigation menu"]'),

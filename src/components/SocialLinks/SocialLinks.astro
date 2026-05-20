@@ -20,12 +20,21 @@ const visibleLinks = socialLinks.filter((link) => {
   // Use context for filtering, with a fallback to location
   return link.visibility[context] === true;
 });
+
+// Build a unique aria-label per placement so multiple SocialLinks on the
+// same page (e.g. hero + footer) don't collide on the landmark-unique rule.
+const labelMap: Record<NonNullable<Props["location"]>, string> = {
+  footer: "Footer social media links",
+  hero: "Hero social media links",
+  contact: "Contact social media links",
+  about: "About social media links",
+};
+const navLabel = labelMap[location] ?? "Social media links";
 ---
 
 <nav
   class:list={["relative", className]}
-  role="navigation"
-  aria-label="Social media links"
+  aria-label={navLabel}
 >
   <ul
     class:list={[
