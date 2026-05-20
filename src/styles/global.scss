@@ -206,6 +206,10 @@
   }
 }
 
+/* TODO: Audit for duplication with library CSS after PurgeCSS removal -- see #126 follow-up.
+   This wrapper was originally a PurgeCSS workaround. With PurgeCSS gone (#126),
+   the bluesky-comments library's own CSS modules should now load, which may
+   produce duplicate styling against the rules below. Trim once render is verified. */
 /* Bluesky Comments Styling
    =========================================================================
    The bluesky-comments library uses CSS Modules with hashed class names
