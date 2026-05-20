@@ -28,18 +28,32 @@ const siteData = getTranslatedData("siteData", currLocale);
 
 <BaseLayout title={siteData.title} description={siteData.description}>
   <HeroSideImage />
-  <SiteContent />
-  <FeatureCardsSmall />
-  <FeatureGalleryMarquee />
-  <ColleagueTestimonials />
+  <div class="defer-render"><SiteContent /></div>
+  <div class="defer-render"><FeatureCardsSmall /></div>
+  <div class="defer-render"><FeatureGalleryMarquee /></div>
+  <div class="defer-render"><ColleagueTestimonials /></div>
 
-  <UpcomingEvents events={eventIcons} />
+  <div class="defer-render"><UpcomingEvents events={eventIcons} /></div>
 
-  <FeatureFlagsMarquee />
+  <div class="defer-render"><FeatureFlagsMarquee /></div>
 
-  <CompanyLogos />
-  <NewsletterForm
-    variant="cta"
-    title="Subscribe to Guido's <span class='underline decoration-gold-light dark:decoration-gold decoration-2 underline-offset-4'>Golden</span> Nuggets"
-  />
+  <div class="defer-render"><CompanyLogos /></div>
+  <div class="defer-render">
+    <NewsletterForm
+      variant="cta"
+      title="Subscribe to Guido's <span class='underline decoration-gold-light dark:decoration-gold decoration-2 underline-offset-4'>Golden</span> Nuggets"
+    />
+  </div>
 </BaseLayout>
+
+<style>
+  /* Defer rendering of below-the-fold sections to reduce initial paint work.
+     content-visibility: auto skips rendering until the section approaches the
+     viewport. contain-intrinsic-size reserves a placeholder size so the
+     scrollbar doesn't jump; 'auto' lets the browser remember the real size
+     after the first render. See GitHub issue #125. */
+  .defer-render {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
+</style>
