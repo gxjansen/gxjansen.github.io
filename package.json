@@ -65,7 +65,6 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.7",
-    "@fullhuman/postcss-purgecss": "^7.0.2",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.2",
     "baseline-browser-mapping": "^2.10.29",
