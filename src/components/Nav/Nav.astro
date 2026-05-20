@@ -199,12 +199,6 @@ const shouldReduceMotion =
 
         this.navbar?.classList.toggle("navbar--scrolled", shouldShowBackground);
         this.navbar?.classList.toggle("navbar--initial", !shouldShowBackground);
-
-        // Update ARIA attributes
-        this.navbar?.setAttribute(
-          "aria-expanded",
-          shouldShowBackground.toString(),
-        );
       });
     };
 
