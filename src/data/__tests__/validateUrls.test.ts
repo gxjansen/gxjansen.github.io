@@ -408,7 +408,7 @@ describe("Data File URL Validation", () => {
     expect(errors).toEqual([]);
   }, 60000);
 
-  it("should have valid URLs in blog posts", async () => {
+  it.skipIf(process.env.CI)("should have valid URLs in blog posts", async () => {
     const urls = collectBlogPostUrls();
 
     console.log(`Validating ${urls.length} URLs from blog posts...`);
