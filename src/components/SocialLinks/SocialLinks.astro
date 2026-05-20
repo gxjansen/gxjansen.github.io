@@ -32,10 +32,7 @@ const labelMap: Record<NonNullable<Props["location"]>, string> = {
 const navLabel = labelMap[location] ?? "Social media links";
 ---
 
-<nav
-  class:list={["relative", className]}
-  aria-label={navLabel}
->
+<nav class:list={["relative", className]} aria-label={navLabel}>
   <ul
     class:list={[
       "pointer-events-auto flex items-center gap-2 overflow-x-auto whitespace-nowrap sm:gap-3 md:gap-4 [&::-webkit-scrollbar]:hidden",
