@@ -80,6 +80,7 @@ src/components/SiteContent/SiteContent.astro
 /.claude
 .claude-flow/
 .playwright-mcp/
+.gstack/
 
 # Generated/lock files
 deno.lock
