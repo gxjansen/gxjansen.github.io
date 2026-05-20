@@ -6,7 +6,6 @@ import BaseHead from "@layouts/BaseHead.astro";
 import Nav from "@components/Nav/Nav.astro";
 import Footer from "@components/Footer/Footer.astro";
 import EnvironmentBanner from "../components/EnvironmentBanner/EnvironmentBanner.astro";
-import RandomLinkColors from "@components/Scripts/RandomLinkColors.astro";
 
 // style import
 import "../styles/global.scss";
@@ -137,7 +136,6 @@ const currLocale = getLocaleFromUrl(Astro.url);
     </div>
 
     <Footer />
-    <RandomLinkColors />
 
     <!-- Performance optimizations -->
     <script>
