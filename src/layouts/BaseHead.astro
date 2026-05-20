@@ -4,7 +4,6 @@ import { ClientRouter } from "astro:transitions";
 
 // component imports
 import Seo from "@components/Seo/Seo.astro";
-import PassiveEvents from "@components/Scripts/PassiveEvents.astro";
 // TODO: Re-enable after updating astro-md-alternate for Astro 6
 // import { MarkdownAlternateLink } from "astro-md-alternate/components";
 
@@ -156,9 +155,6 @@ const noindex = !CONFIG.ALLOW_INDEXING;
       return <link rel="site.standard.document" href={href} />;
     })()
 }
-
-<!-- Performance optimizations -->
-<PassiveEvents />
 
 <!-- Theme change setup. Run early to eliminate Flash of inAccurate coloR Theme (FART) -->
 <script is:inline>
