@@ -154,6 +154,15 @@ const currLocale = getLocaleFromUrl(Astro.url);
           (el as HTMLElement).style.willChange = "auto";
         });
       });
+
+      // Pause noise animation when tab is backgrounded to save CPU/battery
+      const noiseEl = document.querySelector(".noise-background");
+      if (noiseEl) {
+        document.addEventListener("visibilitychange", () => {
+          (noiseEl as HTMLElement).style.animationPlayState =
+            document.hidden ? "paused" : "running";
+        });
+      }
     </script>
 
     <!-- Error tracking with Umami -->
