@@ -15,18 +15,12 @@
 /* Base Typography */
 @layer base {
   html {
-    font-size: 16px;
+    /* Fluid root: 16px at 360px viewport → 22.4px at 1024px viewport.
+       Linear interpolation between those breakpoints; clamped at the edges. */
+    font-size: clamp(1rem, 0.65rem + 1.55vw, 1.4rem);
     /* Normalize fallback font x-height to Poppins to prevent CLS on font swap.
        Baseline since 2024-07-25. */
     font-size-adjust: from-font;
-
-    @screen sm {
-      font-size: 18px;
-    }
-
-    @screen md {
-      font-size: 22.4px; /* 1.4rem */
-    }
   }
 }
 
