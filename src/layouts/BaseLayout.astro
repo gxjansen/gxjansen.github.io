@@ -7,7 +7,9 @@ import Nav from "@components/Nav/Nav.astro";
 import Footer from "@components/Footer/Footer.astro";
 import EnvironmentBanner from "../components/EnvironmentBanner/EnvironmentBanner.astro";
 
-// style import
+// style imports — Tailwind v4 entry MUST load before global.scss so that
+// @apply directives in SCSS resolve against the v4 theme.
+import "../styles/tailwind.css";
 import "../styles/global.scss";
 
 // utils
