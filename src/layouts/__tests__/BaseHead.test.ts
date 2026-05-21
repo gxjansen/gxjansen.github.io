@@ -146,13 +146,17 @@ describe("BaseHead", () => {
   });
 
   it("includes theme change script", () => {
+    // ClientRouter has been removed in favour of CSS-only view transitions
+    // (issue #131). The inline theme script only needs to run once per
+    // document — full-page navigation re-runs it automatically, so the
+    // legacy astro:after-swap listener is no longer needed.
     const markup = `
       <head>
         <script>
           function initTheme() {
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
             let colorTheme = localStorage.getItem("colorTheme");
-            
+
             function applyTheme(theme) {
               if (theme === "dark") {
                 document.documentElement.classList.add("dark");
@@ -179,7 +183,6 @@ describe("BaseHead", () => {
           }
 
           initTheme();
-          document.addEventListener("astro:after-swap", initTheme);
         </script>
       </head>
     `.trim();
@@ -191,7 +194,7 @@ describe("BaseHead", () => {
     expect(script?.textContent).toContain("prefers-color-scheme: dark");
     expect(script?.textContent).toContain('localStorage.getItem("colorTheme")');
     expect(script?.textContent).toContain("document.documentElement.classList");
-    expect(script?.textContent).toContain("astro:after-swap");
+    expect(script?.textContent).not.toContain("astro:after-swap");
   });
 
   it("handles SEO meta tags", () => {
