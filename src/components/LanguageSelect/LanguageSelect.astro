@@ -34,7 +34,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
   {...rest}
 >
   <button
-    class="primary-focus lang-select__dropdown-button flex items-center gap-0.5 whitespace-nowrap rounded-sm py-1 font-medium leading-tight text-base-600 transition hover:text-base-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 md:flex dark:text-base-300 dark:hover:text-base-200"
+    class="primary-focus lang-select__dropdown-button text-base-600 hover:text-base-700 focus:ring-primary-500 dark:text-base-300 dark:hover:text-base-200 flex items-center gap-0.5 rounded-sm py-1 leading-tight font-medium whitespace-nowrap transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden md:flex"
     type="button"
     aria-expanded="false"
     aria-haspopup="true"
@@ -57,14 +57,14 @@ const currLocale = getLocaleFromUrl(Astro.url);
     class="lang-select__dropdown-content invisible absolute top-full z-10 mt-2 w-full opacity-0 transition-all"
   >
     <ul
-      class="mx-auto mt-3 w-fit max-w-xs whitespace-nowrap rounded-md border border-solid border-base-200 bg-base-50 px-3 py-1.5 drop-shadow-xs dark:border-base-800 dark:bg-base-900"
+      class="border-base-200 bg-base-50 dark:border-base-800 dark:bg-base-900 mx-auto mt-3 w-fit max-w-xs rounded-md border border-solid px-3 py-1.5 whitespace-nowrap drop-shadow-xs"
       role="menu"
     >
       {
         locales.map((lang) => (
           <li class="flex w-full justify-center" role="menuitem">
             <a
-              class="primary-focus relative block w-full whitespace-nowrap rounded-sm py-1 font-medium leading-tight text-base-600 transition hover:text-base-700 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:text-base-300 dark:hover:text-base-200"
+              class="primary-focus text-base-600 hover:text-base-700 focus:ring-primary-500 dark:text-base-300 dark:hover:text-base-200 relative block w-full rounded-sm py-1 leading-tight font-medium whitespace-nowrap transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
               href={getLocalizedPathname(lang, Astro.url)}
               aria-label={`Change language to ${languageSwitcherMap[lang]}`}
               lang={lang}

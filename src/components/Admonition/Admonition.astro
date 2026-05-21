@@ -35,14 +35,14 @@ const label =
 
 {
   variant === "terminal" ? (
-    <div class="admonition my-3 rounded-lg border-l-4 border-gold bg-gold/10 px-4 py-3 font-mono text-sm text-base-600 prose-code:bg-gold/20 dark:text-base-300 dark:prose-code:bg-gold/20">
+    <div class="admonition border-gold bg-gold/10 text-base-600 prose-code:bg-gold/20 dark:text-base-300 dark:prose-code:bg-gold/20 my-3 rounded-lg border-l-4 px-4 py-3 font-mono text-sm">
       <span
         class="mr-2 inline-flex items-center gap-1.5 align-middle"
         style="transform: translateY(-1px);"
       >
         <Icon
           name={icon}
-          class="inline size-5 text-base-600 dark:text-base-300"
+          class="text-base-600 dark:text-base-300 inline size-5"
           aria-hidden="true"
         />
         <span class="font-bold">{label}</span>
@@ -50,14 +50,14 @@ const label =
       <slot />
     </div>
   ) : variant === "prompt" ? (
-    <div class="admonition my-3 rounded-lg border-l-4 border-pine bg-pine/10 px-4 py-3 font-mono text-sm text-base-600 dark:text-base-300">
+    <div class="admonition border-pine bg-pine/10 text-base-600 dark:text-base-300 my-3 rounded-lg border-l-4 px-4 py-3 font-mono text-sm">
       <span
         class="mr-2 inline-flex items-center gap-1.5 align-middle"
         style="transform: translateY(-1px);"
       >
         <Icon
           name={icon}
-          class="inline size-5 text-base-600 dark:text-base-300"
+          class="text-base-600 dark:text-base-300 inline size-5"
           aria-hidden="true"
         />
         <span class="font-bold">{label}</span>
@@ -67,7 +67,7 @@ const label =
   ) : (
     <div
       class:list={[
-        "admonition my-3 rounded-lg border-l-4 px-4 py-3 text-base-600 dark:text-base-300",
+        "admonition text-base-600 dark:text-base-300 my-3 rounded-lg border-l-4 px-4 py-3",
         {
           "border-success bg-success/10 text-success-content prose-code:bg-success/20 dark:prose-code:bg-success/20":
             variant === "tip",
@@ -89,7 +89,7 @@ const label =
       <div class="flex items-center gap-2 pb-2">
         <Icon
           name={icon}
-          class="size-7 text-base-600 dark:text-base-300"
+          class="text-base-600 dark:text-base-300 size-7"
           aria-hidden="true"
         />
         <p class="text-sm font-bold">{label}</p>

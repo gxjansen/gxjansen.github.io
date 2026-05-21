@@ -46,7 +46,7 @@ const marqueeBottom = {
         <div class="mx-auto mb-16 text-center md:max-w-4xl">
           <Badge>Flags</Badge>
           <h2 class="h2">Countries where I presented</h2>
-          <p class="description mt-4 text-pretty text-lg md:text-xl">
+          <p class="description mt-4 text-lg text-pretty md:text-xl">
             {uniqueCountries.length} and counting!
           </p>
         </div>
@@ -65,12 +65,12 @@ const marqueeBottom = {
         {/* marquee top row */}
         <div class="marquee-top relative flex gap-3 overflow-hidden md:gap-5">
           <div
-            class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
+            class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-3 md:gap-5"
           >
             {
               marqueeTop.flags.map((flag) => (
                 <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-                  <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10" />
+                  <div class="shadow-base-200/10 dark:shadow-base-800/10 absolute inset-0 rounded-md shadow-[inset_0_0_0_1px]" />
                   <Image
                     src={flag.image}
                     alt={`${flag.countryName} flag`}
@@ -90,12 +90,12 @@ const marqueeBottom = {
           </div>
           <div
             aria-hidden="true"
-            class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
+            class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-3 md:gap-5"
           >
             {
               marqueeTop.flags.map((flag) => (
                 <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-                  <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10" />
+                  <div class="shadow-base-200/10 dark:shadow-base-800/10 absolute inset-0 rounded-md shadow-[inset_0_0_0_1px]" />
                   <Image
                     src={flag.image}
                     alt={`${flag.countryName} flag`}
@@ -119,12 +119,12 @@ const marqueeBottom = {
           class="marquee-middle relative flex gap-3 overflow-hidden md:gap-5"
         >
           <div
-            class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
+            class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
           >
             {
               marqueeMiddle.flags.map((flag) => (
                 <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-                  <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10" />
+                  <div class="shadow-base-200/10 dark:shadow-base-800/10 absolute inset-0 rounded-md shadow-[inset_0_0_0_1px]" />
                   <Image
                     src={flag.image}
                     alt={`${flag.countryName} flag`}
@@ -143,12 +143,12 @@ const marqueeBottom = {
           </div>
           <div
             aria-hidden="true"
-            class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
+            class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-3 [animation-direction:reverse] md:gap-5"
           >
             {
               marqueeMiddle.flags.map((flag) => (
                 <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-                  <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10" />
+                  <div class="shadow-base-200/10 dark:shadow-base-800/10 absolute inset-0 rounded-md shadow-[inset_0_0_0_1px]" />
                   <Image
                     src={flag.image}
                     alt={`${flag.countryName} flag`}
@@ -172,12 +172,12 @@ const marqueeBottom = {
           class="marquee-bottom relative flex gap-3 overflow-hidden md:gap-5"
         >
           <div
-            class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
+            class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-3 md:gap-5"
           >
             {
               marqueeBottom.flags.map((flag) => (
                 <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-                  <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10" />
+                  <div class="shadow-base-200/10 dark:shadow-base-800/10 absolute inset-0 rounded-md shadow-[inset_0_0_0_1px]" />
                   <Image
                     src={flag.image}
                     alt={`${flag.countryName} flag`}
@@ -196,12 +196,12 @@ const marqueeBottom = {
           </div>
           <div
             aria-hidden="true"
-            class="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-3 md:gap-5"
+            class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-3 md:gap-5"
           >
             {
               marqueeBottom.flags.map((flag) => (
                 <div class="relative w-[clamp(3rem,28vmin,5rem)] overflow-hidden">
-                  <div class="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px] shadow-base-200/10 dark:shadow-base-800/10" />
+                  <div class="shadow-base-200/10 dark:shadow-base-800/10 absolute inset-0 rounded-md shadow-[inset_0_0_0_1px]" />
                   <Image
                     src={flag.image}
                     alt={`${flag.countryName} flag`}

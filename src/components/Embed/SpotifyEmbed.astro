@@ -21,11 +21,11 @@ const { episodeId, title } = Astro.props;
       style="opacity: 0; transition: opacity 0.3s ease-in-out"
       onload="this.style.opacity = 1"></iframe>
     <div
-      class="absolute inset-0 flex items-center justify-center rounded-lg bg-base-200"
+      class="bg-base-200 absolute inset-0 flex items-center justify-center rounded-lg"
       id={`spotify-load-button-${episodeId}`}
     >
       <button
-        class="rounded-sm bg-primary-500 px-4 py-2 text-white transition-colors hover:bg-primary-600"
+        class="bg-primary-500 hover:bg-primary-600 rounded-sm px-4 py-2 text-white transition-colors"
         onclick="document.getElementById(`spotify-embed-${episodeId}`).src = `https://open.spotify.com/embed/episode/${episodeId}`; this.parentElement.style.display = 'none';"
       >
         Load Spotify Player

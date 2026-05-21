@@ -41,8 +41,7 @@
   --font-sans:
     Poppins, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
-  --font-serif:
-    Poppins, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: Poppins, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
@@ -65,7 +64,7 @@
   --color-primary-950: #0f2a35;
 
   /* Base colors */
-  --color-base-50: #fffaf3;  /* Dawn surface */
+  --color-base-50: #fffaf3; /* Dawn surface */
   --color-base-100: #faf4ed; /* Dawn base */
   --color-base-200: #f2e9e1; /* Dawn overlay */
   --color-base-300: #dfdad3; /* Dawn muted bg */

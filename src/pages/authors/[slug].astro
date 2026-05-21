@@ -126,14 +126,14 @@ const personSchema = {
 
         <div class="flex-1">
           <h1
-            class="text-4xl font-bold text-base-900 md:text-5xl dark:text-base-100"
+            class="text-base-900 dark:text-base-100 text-4xl font-bold md:text-5xl"
           >
             {name}
           </h1>
 
           {
             (jobTitle || organization) && (
-              <div class="mt-2 text-xl text-base-600 dark:text-base-400">
+              <div class="text-base-600 dark:text-base-400 mt-2 text-xl">
                 {jobTitle}
                 {jobTitle && organization && " at "}
                 {organization}
@@ -143,7 +143,7 @@ const personSchema = {
 
           {
             yearsOfExperience && (
-              <div class="mt-2 text-base-600 dark:text-base-400">
+              <div class="text-base-600 dark:text-base-400 mt-2">
                 {yearsOfExperience}+ years of experience
               </div>
             )
@@ -151,7 +151,7 @@ const personSchema = {
 
           {
             bio && (
-              <div class="prose mt-4 max-w-none text-lg text-base-700 dark:prose-invert dark:text-base-300">
+              <div class="prose text-base-700 dark:prose-invert dark:text-base-300 mt-4 max-w-none text-lg">
                 <p>{bio}</p>
               </div>
             )
@@ -163,7 +163,7 @@ const personSchema = {
               <div class="mt-6">
                 <a
                   href="/about/"
-                  class="inline-flex items-center rounded-lg border-2 border-primary-600 px-5 py-2.5 font-medium text-primary-600 transition-colors duration-200 hover:bg-primary-600 hover:text-white dark:border-primary-400 dark:text-primary-400 dark:hover:bg-primary-400 dark:hover:text-base-900"
+                  class="border-primary-600 text-primary-600 hover:bg-primary-600 dark:border-primary-400 dark:text-primary-400 dark:hover:bg-primary-400 dark:hover:text-base-900 inline-flex items-center rounded-lg border-2 px-5 py-2.5 font-medium transition-colors duration-200 hover:text-white"
                 >
                   Read the Full Story
                   <svg
@@ -199,7 +199,7 @@ const personSchema = {
                     href={website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="ml-2 text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                    class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 ml-2 text-sm font-medium"
                   >
                     gui.do →
                   </a>
@@ -214,12 +214,12 @@ const personSchema = {
       {
         expertise.length > 0 && (
           <section class="mt-12">
-            <h2 class="mb-4 text-2xl font-bold text-base-900 dark:text-base-100">
+            <h2 class="text-base-900 dark:text-base-100 mb-4 text-2xl font-bold">
               Areas of Expertise
             </h2>
             <div class="flex flex-wrap gap-3">
               {expertise.map((topic: string) => (
-                <span class="rounded-full bg-primary-100 px-4 py-2 font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                <span class="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 rounded-full px-4 py-2 font-medium">
                   {topic}
                 </span>
               ))}
@@ -232,10 +232,10 @@ const personSchema = {
       {
         credentials.length > 0 && (
           <section class="mt-12">
-            <h2 class="mb-4 text-2xl font-bold text-base-900 dark:text-base-100">
+            <h2 class="text-base-900 dark:text-base-100 mb-4 text-2xl font-bold">
               Credentials & Qualifications
             </h2>
-            <ul class="list-inside list-disc space-y-2 text-base-700 dark:text-base-300">
+            <ul class="text-base-700 dark:text-base-300 list-inside list-disc space-y-2">
               {credentials.map((credential: string) => (
                 <li>{credential}</li>
               ))}
@@ -248,10 +248,10 @@ const personSchema = {
       {
         awards.length > 0 && (
           <section class="mt-12">
-            <h2 class="mb-4 text-2xl font-bold text-base-900 dark:text-base-100">
+            <h2 class="text-base-900 dark:text-base-100 mb-4 text-2xl font-bold">
               Awards & Recognition
             </h2>
-            <ul class="list-inside list-disc space-y-2 text-base-700 dark:text-base-300">
+            <ul class="text-base-700 dark:text-base-300 list-inside list-disc space-y-2">
               {awards.map((award: string) => (
                 <li>{award}</li>
               ))}
@@ -264,7 +264,7 @@ const personSchema = {
       {
         publications.length > 0 && (
           <section class="mt-12">
-            <h2 class="mb-4 text-2xl font-bold text-base-900 dark:text-base-100">
+            <h2 class="text-base-900 dark:text-base-100 mb-4 text-2xl font-bold">
               Notable Publications
             </h2>
             <ul class="space-y-3">
@@ -272,12 +272,12 @@ const personSchema = {
                 <li>
                   <a
                     href={pub.url}
-                    class="font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                    class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-medium"
                   >
                     {pub.title}
                   </a>
                   {(pub.publication || pub.date) && (
-                    <span class="ml-2 text-sm text-base-600 dark:text-base-400">
+                    <span class="text-base-600 dark:text-base-400 ml-2 text-sm">
                       {pub.publication && `— ${pub.publication}`}
                       {pub.date && ` (${pub.date})`}
                     </span>
@@ -290,7 +290,7 @@ const personSchema = {
       }
 
       <!-- MDX Content (if any) -->
-      <div class="prose mt-12 max-w-none dark:prose-invert">
+      <div class="prose dark:prose-invert mt-12 max-w-none">
         <Content />
       </div>
 
@@ -298,7 +298,7 @@ const personSchema = {
       {
         sortedPosts.length > 0 && (
           <section class="mt-16">
-            <h2 class="mb-8 text-3xl font-bold text-base-900 dark:text-base-100">
+            <h2 class="text-base-900 dark:text-base-100 mb-8 text-3xl font-bold">
               Articles by {name} ({sortedPosts.length})
             </h2>
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

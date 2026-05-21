@@ -13,7 +13,7 @@ import Button from "@components/Button/Button.astro";
 
 <section
   id="contact"
-  class="mx-auto min-w-fit max-w-3xl rounded-lg"
+  class="mx-auto max-w-3xl min-w-fit rounded-lg"
   aria-labelledby="contact-form-heading"
 >
   <h2 id="contact-form-heading" class="sr-only">Contact Form</h2>
@@ -278,7 +278,7 @@ import Button from "@components/Button/Button.astro";
   @reference "../../styles/tailwind.css";
   /* Focus styles */
   .form__input:focus-visible {
-    @apply outline-hidden ring-2 ring-primary-500 ring-offset-2;
+    @apply ring-primary-500 ring-2 ring-offset-2 outline-hidden;
   }
 
   /* Invalid state styles */

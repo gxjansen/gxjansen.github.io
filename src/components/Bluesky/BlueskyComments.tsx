@@ -69,14 +69,14 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
     return (
       <section className="bluesky-comments-section mt-12">
         <aside
-          className="rounded-xl border border-base-300 bg-base-50 p-6 dark:border-base-700 dark:bg-base-900"
+          className="border-base-300 bg-base-50 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
           aria-label="Comments"
         >
-          <h3 className="mb-4 text-xl font-bold text-base-900 dark:text-base-100">
+          <h3 className="text-base-900 dark:text-base-100 mb-4 text-xl font-bold">
             Comments
           </h3>
           <div className="py-4 text-center">
-            <p className="mb-4 text-base-600 dark:text-base-400">
+            <p className="text-base-600 dark:text-base-400 mb-4">
               Want to discuss this post? Start a conversation on Bluesky.
             </p>
             <a
@@ -105,14 +105,14 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
     return (
       <section className="bluesky-comments-section mt-12">
         <aside
-          className="rounded-xl border border-base-300 bg-base-50 p-6 dark:border-base-700 dark:bg-base-900"
+          className="border-base-300 bg-base-50 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
           aria-label="Comments"
         >
-          <h3 className="mb-4 text-xl font-bold text-base-900 dark:text-base-100">
+          <h3 className="text-base-900 dark:text-base-100 mb-4 text-xl font-bold">
             Comments
           </h3>
           <div className="py-4 text-center">
-            <p className="mb-4 text-base-600 dark:text-base-400">
+            <p className="text-base-600 dark:text-base-400 mb-4">
               {isError
                 ? "Couldn't load comments. Join the conversation on Bluesky!"
                 : "No comments yet. Be the first to join the conversation!"}
@@ -136,7 +136,7 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
   return (
     <section className="bluesky-comments-section mt-12">
       <aside
-        className="rounded-xl border border-base-300 bg-base-50 p-6 dark:border-base-700 dark:bg-base-900"
+        className="border-base-300 bg-base-50 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
         aria-label="Comments from Bluesky"
       >
         <div className="bluesky-comments-wrapper">
@@ -146,7 +146,7 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
             onEmpty={handleEmpty}
           />
         </div>
-        <div className="mt-6 border-t border-base-200 pt-4 text-center dark:border-base-700">
+        <div className="border-base-200 dark:border-base-700 mt-6 border-t pt-4 text-center">
           <a
             href={replyUrl}
             target="_blank"

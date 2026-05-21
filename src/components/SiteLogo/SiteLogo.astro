@@ -55,10 +55,10 @@ const currLocale = getLocaleFromUrl(Astro.url);
 
 <a
   transition:persist
-  class="site-logo primary-focus flex items-center gap-2 align-middle text-xl font-bold text-base-600 dark:text-base-200"
+  class="site-logo primary-focus text-base-600 dark:text-base-200 flex items-center gap-2 align-middle text-xl font-bold"
   href={getRelativeLocaleUrl(currLocale)}
 >
   <p class="site-logo-text">Guido</p>
-  <LogoIcon class="site-logo-icon size-7 text-primary-500" aria-hidden="true" />
+  <LogoIcon class="site-logo-icon text-primary-500 size-7" aria-hidden="true" />
   <p class="site-logo-text">Jansen</p>
 </a>

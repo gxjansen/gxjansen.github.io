@@ -24,16 +24,16 @@ const currLocale = getLocaleFromUrl(Astro.url);
   class="fixed inset-x-6 bottom-6 z-50 hidden justify-center"
 >
   <div
-    class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-md border border-base-200 bg-base-50 p-4"
+    class="border-base-200 bg-base-50 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-md border p-4"
   >
     <div class="text-center">
       <p
-        class="text-sm font-medium text-base-500 lg:text-base dark:text-base-400"
+        class="text-base-500 dark:text-base-400 text-sm font-medium lg:text-base"
       >
         We use cookies to improve your experience on this site. To learn more,
         see our <a
           href={getRelativeLocaleUrl(currLocale, "/privacy-policy")}
-          class="text-base-700 underline decoration-primary-500 transition hover:text-primary-500 dark:text-base-200"
+          class="text-base-700 decoration-primary-500 hover:text-primary-500 dark:text-base-200 underline transition"
           >Privacy Policy</a
         >.
       </p>

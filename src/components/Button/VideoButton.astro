@@ -32,7 +32,7 @@ import video from "@videos/placeholder-space.mp4";
     <!-- backdrop button to close video -->
     <button
       id="video-button__backdrop-button"
-      class="absolute inset-0 z-30 h-full w-full bg-base-900 transition-all"
+      class="bg-base-900 absolute inset-0 z-30 h-full w-full transition-all"
     >
     </button>
 
@@ -57,10 +57,10 @@ import video from "@videos/placeholder-space.mp4";
       <button
         id="video-button__close-button"
         aria-label="close video"
-        class="group absolute right-0 top-0 z-30 h-7 w-7 rounded-full border-2 border-base-50 transition-all hover:border-primary-500"
+        class="group border-base-50 hover:border-primary-500 absolute top-0 right-0 z-30 h-7 w-7 rounded-full border-2 transition-all"
       >
         <XIcon
-          class="m-auto aspect-square h-full max-h-14 w-full text-base-50 transition group-hover:text-primary-500 dark:text-base-950"
+          class="text-base-50 group-hover:text-primary-500 dark:text-base-950 m-auto aspect-square h-full max-h-14 w-full transition"
           aria-hidden="true"
         />
       </button>

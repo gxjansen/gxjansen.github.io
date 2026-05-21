@@ -26,7 +26,7 @@ const cardId = `feature-${title.toLowerCase().replace(/\s+/g, "-")}${suffix}`;
 
 <article {...rest} class="group">
   <div
-    class="h-full rounded-md p-6 transition duration-200 focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:bg-white hover:shadow-xl dark:hover:bg-base-900"
+    class="focus-within:ring-primary-500 dark:hover:bg-base-900 h-full rounded-md p-6 transition duration-200 focus-within:ring-2 focus-within:ring-offset-2 hover:bg-white hover:shadow-xl"
     tabindex="0"
     aria-labelledby={`${cardId}-title`}
     aria-describedby={`${cardId}-description`}
@@ -36,7 +36,7 @@ const cardId = `feature-${title.toLowerCase().replace(/\s+/g, "-")}${suffix}`;
         <div class="mt-1 flex-shrink-0" aria-hidden="true">
           <Icon
             name={icon}
-            class="h-5 w-5 text-primary-500 transition-transform group-focus-within:rotate-3 group-focus-within:scale-110 group-hover:rotate-3 group-hover:scale-110"
+            class="text-primary-500 h-5 w-5 transition-transform group-focus-within:scale-110 group-focus-within:rotate-3 group-hover:scale-110 group-hover:rotate-3"
             role="presentation"
           />
         </div>

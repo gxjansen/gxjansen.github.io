@@ -22,13 +22,13 @@ const nextPost =
 ---
 
 <nav
-  class="mt-12 border-t border-base-200 pt-8 dark:border-base-800"
+  class="border-base-200 dark:border-base-800 mt-12 border-t pt-8"
   aria-label="Blog post navigation"
 >
   <div class="flex items-center justify-between">
     <a
       href={`/post/`}
-      class="flex items-center gap-2 rounded-sm text-base-600 hover:text-primary-500 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:text-base-400 dark:hover:text-primary-400"
+      class="text-base-600 hover:text-primary-500 focus:ring-primary-500 dark:text-base-400 dark:hover:text-primary-400 flex items-center gap-2 rounded-sm focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
       aria-label="Return to article overview"
       data-umami-event="nav-click"
       data-umami-event-target="blog-overview"
@@ -54,12 +54,12 @@ const nextPost =
       prevPost && (
         <a
           href={`/post/${prevPost.id}/`}
-          class="group flex-1 rounded-lg border border-base-200 p-4 hover:border-primary-500 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-base-800 dark:hover:border-primary-400"
+          class="group border-base-200 hover:border-primary-500 focus:ring-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4 focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
           aria-label={`Previous article: ${prevPost.data.title}`}
           data-umami-event="nav-click"
           data-umami-event-target="blog-prev"
         >
-          <span class="flex items-center gap-1 text-sm text-base-500 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400">
+          <span class="text-base-500 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center gap-1 text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-4 w-4"
@@ -74,7 +74,7 @@ const nextPost =
             </svg>
             <span>Previous</span>
           </span>
-          <p class="mt-1 line-clamp-2 font-medium text-base-900 group-hover:text-primary-500 dark:text-white dark:group-hover:text-primary-400">
+          <p class="text-base-900 group-hover:text-primary-500 dark:group-hover:text-primary-400 mt-1 line-clamp-2 font-medium dark:text-white">
             {prevPost.data.title}
           </p>
         </a>
@@ -85,12 +85,12 @@ const nextPost =
       nextPost && (
         <a
           href={`/post/${nextPost.id}/`}
-          class="group flex-1 rounded-lg border border-base-200 p-4 text-right hover:border-primary-500 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-base-800 dark:hover:border-primary-400"
+          class="group border-base-200 hover:border-primary-500 focus:ring-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4 text-right focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
           aria-label={`Next article: ${nextPost.data.title}`}
           data-umami-event="nav-click"
           data-umami-event-target="blog-next"
         >
-          <span class="flex items-center justify-end gap-1 text-sm text-base-500 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400">
+          <span class="text-base-500 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center justify-end gap-1 text-sm">
             <span>Next</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@ const nextPost =
               <path d="M9 6l6 6l-6 6" />
             </svg>
           </span>
-          <p class="mt-1 line-clamp-2 font-medium text-base-900 group-hover:text-primary-500 dark:text-white dark:group-hover:text-primary-400">
+          <p class="text-base-900 group-hover:text-primary-500 dark:group-hover:text-primary-400 mt-1 line-clamp-2 font-medium dark:text-white">
             {nextPost.data.title}
           </p>
         </a>

@@ -24,19 +24,19 @@ const bar = "█".repeat(filled) + "░".repeat(empty);
 ---
 
 <div
-  class="mana-bar my-4 rounded-lg border border-base-700 bg-base-950 p-3 font-mono text-sm"
+  class="mana-bar border-base-700 bg-base-950 my-4 rounded-lg border p-3 font-mono text-sm"
 >
   <div class="flex flex-wrap gap-x-4 gap-y-1">
-    <span class="whitespace-nowrap text-foam">{bar} {percent}%</span>
-    <span class="whitespace-nowrap text-foam">⏱ {time}</span>
+    <span class="text-foam whitespace-nowrap">{bar} {percent}%</span>
+    <span class="text-foam whitespace-nowrap">⏱ {time}</span>
     {
       attunementLow && !attunementCritical && (
-        <span class="whitespace-nowrap text-gold">⚠ ATTUNEMENT LOW</span>
+        <span class="text-gold whitespace-nowrap">⚠ ATTUNEMENT LOW</span>
       )
     }
     {
       attunementCritical && (
-        <span class="animate-pulse whitespace-nowrap text-love">
+        <span class="text-love animate-pulse whitespace-nowrap">
           ⚠ ATTUNEMENT CRITICAL
         </span>
       )
@@ -44,8 +44,8 @@ const bar = "█".repeat(filled) + "░".repeat(empty);
   </div>
   {
     depleted && message && (
-      <div class="mt-2 border-t border-base-700 pt-2 text-center">
-        <div class="font-bold text-love">SESSION MANA DEPLETED</div>
+      <div class="border-base-700 mt-2 border-t pt-2 text-center">
+        <div class="text-love font-bold">SESSION MANA DEPLETED</div>
         <div class="text-base-500">{message}</div>
       </div>
     )

@@ -28,21 +28,21 @@ const t = useTranslations(currLocale);
   aria-labelledby="hero-heading"
   class="mt-20 overflow-clip"
 >
-  <div class="relative pb-20 pt-10 md:py-28" role="presentation">
+  <div class="relative pt-10 pb-20 md:py-28" role="presentation">
     <div class="relative z-10 flex flex-wrap xl:items-center">
       <div class="mb-16 w-full md:mb-0 md:w-1/2">
         <Badge>Community Builder</Badge>
         <div class="flex flex-col gap-4">
           <h1
             id="hero-heading"
-            class="text-balance font-bold leading-normal tracking-normal text-base-900 dark:text-base-100"
+            class="text-base-900 dark:text-base-100 leading-normal font-bold tracking-normal text-balance"
             style="font-size: clamp(1.875rem, 1.25rem + 2.5vw, 3rem); line-height: 1.2;"
           >
             {t("hero_text")}
           </h1>
         </div>
         <div
-          class="description mb-8 text-pretty text-lg leading-relaxed text-base-700 lg:text-xl dark:text-base-300 [&>br+br]:mb-4 [&>br+br]:block"
+          class="description text-base-700 dark:text-base-300 mb-8 text-lg leading-relaxed text-pretty lg:text-xl [&>br+br]:mb-4 [&>br+br]:block"
         >
           <Fragment
             set:html={t("hero_description")
@@ -60,7 +60,7 @@ const t = useTranslations(currLocale);
             variant="primary"
             href="/retainer/"
             aria-label="Work with Guido on a community advisory engagement"
-            class="min-h-[44px] min-w-[44px] focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+            class="focus:ring-primary-500 min-h-[44px] min-w-[44px] focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
             umamiEvent="cta-click"
             umamiEventTarget="work-with-me-hero"
           >
@@ -70,7 +70,7 @@ const t = useTranslations(currLocale);
             variant="outline"
             href="/speaker/"
             aria-label="Invite Guido to speak at your event"
-            class="min-h-[44px] min-w-[44px] focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+            class="focus:ring-primary-500 min-h-[44px] min-w-[44px] focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
             umamiEvent="cta-click"
             umamiEventTarget="invite-to-speak-hero"
           >
@@ -88,13 +88,13 @@ const t = useTranslations(currLocale);
         <div class="relative mx-auto max-w-max md:mr-0">
           <Icon
             name="atlas/circle3"
-            class="absolute -left-14 -top-12 z-10 w-28 text-accent-4"
+            class="text-accent-4 absolute -top-12 -left-14 z-10 w-28"
             aria-hidden="true"
             role="presentation"
           />
           <Icon
             name="atlas/dots3"
-            class="absolute -bottom-8 -right-7 z-10 w-28 text-accent-2"
+            class="text-accent-2 absolute -right-7 -bottom-8 z-10 w-28"
             aria-hidden="true"
             role="presentation"
           />

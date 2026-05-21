@@ -48,18 +48,18 @@ const approaches: Approach[] = [
         <div>
           <Badge>The Psychology Edge</Badge>
           <h2 id="why-heading" class="h2 mb-6">Why This Approach Works</h2>
-          <div class="space-y-4 text-lg text-base-700 dark:text-base-300">
+          <div class="text-base-700 dark:text-base-300 space-y-4 text-lg">
             <p class="description">
               My cognitive psychology background shapes how I approach community
               building. I understand <span
-                class="font-semibold text-primary-500">why</span
+                class="text-primary-500 font-semibold">why</span
               > developers and technical users behave the way they do (or know how
               to figure it out), which lets me design interventions that actually
               work.
             </p>
             <p class="description">
               Where others ask "how do we get more people?" I ask "<span
-                class="font-semibold text-primary-500"
+                class="text-primary-500 font-semibold"
                 >why would someone stay, contribute, and advocate?</span
               >"
             </p>
@@ -70,21 +70,21 @@ const approaches: Approach[] = [
         <div class="space-y-4">
           {
             approaches.map((approach) => (
-              <div class="rounded-xl bg-base-50 p-4 shadow-xs transition-all duration-300 hover:shadow-md sm:p-5 dark:bg-base-800">
+              <div class="bg-base-50 dark:bg-base-800 rounded-xl p-4 shadow-xs transition-all duration-300 hover:shadow-md sm:p-5">
                 <div class="flex flex-col gap-3 sm:flex-row sm:gap-4">
                   <div class="flex-shrink-0">
-                    <div class="w-fit rounded-lg bg-primary-100 p-2 dark:bg-primary-900/30">
+                    <div class="bg-primary-100 dark:bg-primary-900/30 w-fit rounded-lg p-2">
                       <Icon
                         name={approach.icon}
-                        class="h-5 w-5 text-primary-600 dark:text-primary-400"
+                        class="text-primary-600 dark:text-primary-400 h-5 w-5"
                       />
                     </div>
                   </div>
                   <div>
-                    <h3 class="mb-1 font-semibold text-base-900 dark:text-base-100">
+                    <h3 class="text-base-900 dark:text-base-100 mb-1 font-semibold">
                       {approach.title}
                     </h3>
-                    <p class="text-sm text-base-600 dark:text-base-400">
+                    <p class="text-base-600 dark:text-base-400 text-sm">
                       {approach.description}
                     </p>
                   </div>
@@ -97,35 +97,35 @@ const approaches: Approach[] = [
 
       <!-- Experimentation background -->
       <div
-        class="mt-12 rounded-2xl bg-gradient-to-r from-primary-50 to-primary-100/50 p-5 sm:mt-16 sm:p-8 md:p-10 dark:from-primary-900/20 dark:to-primary-800/10"
+        class="from-primary-50 to-primary-100/50 dark:from-primary-900/20 dark:to-primary-800/10 mt-12 rounded-2xl bg-gradient-to-r p-5 sm:mt-16 sm:p-8 md:p-10"
       >
         <div class="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
           <div class="flex-shrink-0">
             <div
-              class="w-fit rounded-xl bg-primary-200 p-2 sm:p-3 dark:bg-primary-800/50"
+              class="bg-primary-200 dark:bg-primary-800/50 w-fit rounded-xl p-2 sm:p-3"
             >
               <Icon
                 name="tabler:flask"
-                class="h-6 w-6 text-primary-700 sm:h-8 sm:w-8 dark:text-primary-300"
+                class="text-primary-700 dark:text-primary-300 h-6 w-6 sm:h-8 sm:w-8"
               />
             </div>
           </div>
           <div>
             <h3
-              class="mb-2 text-lg font-bold text-base-900 sm:mb-3 sm:text-xl dark:text-base-100"
+              class="text-base-900 dark:text-base-100 mb-2 text-lg font-bold sm:mb-3 sm:text-xl"
             >
               Data-Driven, Not Just Relational
             </h3>
             <p
-              class="text-base leading-relaxed text-base-700 sm:text-lg dark:text-base-300"
+              class="text-base-700 dark:text-base-300 text-base leading-relaxed sm:text-lg"
             >
               My experimentation background (running <span
-                class="font-semibold text-primary-600 dark:text-primary-400"
+                class="text-primary-600 dark:text-primary-400 font-semibold"
                 >500+ A/B tests</span
               > at companies like Randstad and JDE) taught me to measure what matters
               and prove what's actually working. This makes me a different kind of
               community leader: one who thinks <span
-                class="font-semibold text-primary-600 dark:text-primary-400"
+                class="text-primary-600 dark:text-primary-400 font-semibold"
                 >strategically and analytically</span
               >, not just relationally.
             </p>
@@ -137,7 +137,7 @@ const approaches: Approach[] = [
       <div class="mt-10 text-center">
         <a
           href="/authors/gxjansen/"
-          class="inline-flex items-center font-medium text-primary-600 transition-colors duration-200 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+          class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 inline-flex items-center font-medium transition-colors duration-200"
         >
           See my credentials, awards, and articles
           <svg

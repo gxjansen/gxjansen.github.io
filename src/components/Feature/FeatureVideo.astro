@@ -39,21 +39,21 @@ import video from "@videos/placeholder-space.mp4";
           />
 
           <div
-            class="absolute left-0 top-0 m-auto flex h-full w-full items-center justify-center"
+            class="absolute top-0 left-0 m-auto flex h-full w-full items-center justify-center"
           >
             <div class="relative m-auto aspect-square h-[20%] max-h-16">
               <!-- background glow of play button -->
               <div
-                class="absolute inset-2 z-10 rounded-full bg-primary-500/70 motion-safe:animate-ping"
+                class="bg-primary-500/70 absolute inset-2 z-10 rounded-full motion-safe:animate-ping"
               >
               </div>
               <!-- play button -->
               <div
-                class="relative z-20 h-full w-full rounded-full bg-primary-500 p-2 transition-all duration-300 group-hover:bg-primary-600 xs:p-4"
+                class="bg-primary-500 group-hover:bg-primary-600 xs:p-4 relative z-20 h-full w-full rounded-full p-2 transition-all duration-300"
               >
                 <Icon
                   name="tabler/player-play"
-                  class="m-auto aspect-square h-full w-full text-base-50 dark:text-base-950"
+                  class="text-base-50 dark:text-base-950 m-auto aspect-square h-full w-full"
                   aria-hidden="true"
                 />
               </div>
@@ -62,12 +62,12 @@ import video from "@videos/placeholder-space.mp4";
 
           <Icon
             name="atlas/wave"
-            class="absolute -left-8 -top-8 z-10 w-40 text-primary-500"
+            class="text-primary-500 absolute -top-8 -left-8 z-10 w-40"
             aria-hidden="true"
           />
           <Icon
             name="atlas/wave"
-            class="absolute -bottom-8 -right-8 -z-10 w-40 text-accent-1"
+            class="text-accent-1 absolute -right-8 -bottom-8 -z-10 w-40"
             aria-hidden="true"
           />
         </button>
@@ -81,7 +81,7 @@ import video from "@videos/placeholder-space.mp4";
             <!-- backdrop button to close video -->
             <button
               id="feature-video__backdrop-button"
-              class="absolute inset-0 z-30 h-full w-full bg-base-900 transition-all"
+              class="bg-base-900 absolute inset-0 z-30 h-full w-full transition-all"
             >
             </button>
 
@@ -106,11 +106,11 @@ import video from "@videos/placeholder-space.mp4";
               <button
                 id="feature-video__close-button"
                 aria-label="close video"
-                class="group absolute right-0 top-0 z-30 h-7 w-7 rounded-full border-2 border-base-50 transition-all hover:border-primary-400"
+                class="group border-base-50 hover:border-primary-400 absolute top-0 right-0 z-30 h-7 w-7 rounded-full border-2 transition-all"
               >
                 <Icon
                   name="tabler/x"
-                  class="m-auto aspect-square h-full max-h-14 w-full text-base-50 transition group-hover:text-primary-400 dark:text-base-950"
+                  class="text-base-50 group-hover:text-primary-400 dark:text-base-950 m-auto aspect-square h-full max-h-14 w-full transition"
                   aria-hidden="true"
                 />
               </button>
