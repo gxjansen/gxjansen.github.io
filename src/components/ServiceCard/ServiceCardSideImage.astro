@@ -55,10 +55,7 @@ const cardId = `biography-${title.toLowerCase().replace(/\s+/g, "-")}`;
   aria-labelledby={`${cardId}-title`}
 >
   <!-- Text content -->
-  <div
-    class={`${imageSide === "left" ? "md:order-last" : ""} col-span-1`}
-    aria-labelledby={`${cardId}-title`}
-  >
+  <div class={`${imageSide === "left" ? "md:order-last" : ""} col-span-1`}>
     <header>
       <h3 id={`${cardId}-title`} class="h2 mt-6">
         {title}
