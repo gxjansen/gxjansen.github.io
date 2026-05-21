@@ -25,8 +25,6 @@ export interface PressCoverage {
   youtubeLink?: string;
   /** Spotify episode ID for podcast embeds */
   spotifyEmbedId?: string;
-  /** Local audio file path (DRM-free alternative to Spotify embed) */
-  audioFile?: string;
   /** Podcast cover image path */
   coverImage?: string;
   /** Apple Podcasts URL for fallback links */
