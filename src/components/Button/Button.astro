@@ -171,9 +171,15 @@ const baseClasses = [
 
   .button--outline {
     @apply border-2 bg-transparent transition-all duration-200;
-    /* Use CSS custom property for color - set by data-color attribute */
+    /* Border carries the brand accent; text uses a high-contrast neutral
+       so the button passes WCAG AA regardless of which random accent is
+       assigned. Hover state still fills with the brand colour. */
     border-color: var(--btn-color);
-    color: var(--btn-color);
+    color: #191724; /* Rose Pine base — passes contrast on every page bg */
+  }
+
+  :global(.dark) .button--outline {
+    color: #e0def4; /* Rose Pine text — passes contrast on dark page bg */
   }
 
   .button--outline:hover {
