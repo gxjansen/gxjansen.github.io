@@ -1,6 +1,5 @@
 ---
 import { formatDate } from "@utils/pressUtils";
-import AudioPlayer from "./AudioPlayer.astro";
 import PodcastLinks from "./PodcastLinks.astro";
 import type { PressCoverage } from "../../types/press";
 
@@ -17,19 +16,11 @@ const { podcasts } = Astro.props;
     {
       podcasts.map((podcast) => (
         <article class="card" role="listitem">
-          {podcast.audioFile ? (
-            <AudioPlayer
-              src={podcast.audioFile}
-              title={podcast.title}
-              coverImage={podcast.coverImage}
-            />
-          ) : (
-            <PodcastLinks
-              spotifyId={podcast.spotifyEmbedId}
-              applePodcastsUrl={podcast.applePodcastsUrl}
-              title={podcast.title}
-            />
-          )}
+          <PodcastLinks
+            spotifyId={podcast.spotifyEmbedId}
+            applePodcastsUrl={podcast.applePodcastsUrl}
+            title={podcast.title}
+          />
           <div class="card-content">
             <h3
               id={`podcast-${podcast.spotifyEmbedId || podcast.title.toLowerCase().replace(/\s+/g, "-")}`}
