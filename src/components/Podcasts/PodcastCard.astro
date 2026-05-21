@@ -44,7 +44,7 @@ const cardClasses =
             class="rounded-lg object-cover"
           />
         ) : (
-          <div class="flex h-20 w-20 items-center justify-center rounded-lg bg-base-200 dark:bg-base-700">
+          <div class="bg-base-200 dark:bg-base-700 flex h-20 w-20 items-center justify-center rounded-lg">
             <span class="text-2xl">🎙️</span>
           </div>
         )
@@ -56,34 +56,34 @@ const cardClasses =
       {/* Podcast Name and Date */}
       <div class="mb-1 flex items-center justify-between">
         <span
-          class="text-sm font-medium text-primary-600 dark:text-primary-400"
+          class="text-primary-600 dark:text-primary-400 text-sm font-medium"
         >
           {episode.podcastName}
         </span>
-        <span class="text-sm text-base-500 dark:text-base-400">
+        <span class="text-base-500 dark:text-base-400 text-sm">
           {formattedDate}
         </span>
       </div>
 
       {/* Episode Title */}
       <h3
-        class="mb-2 text-xl font-semibold text-primary-600 transition-colors duration-200 group-hover:text-primary-700 dark:text-primary-400 dark:group-hover:text-primary-300"
+        class="text-primary-600 group-hover:text-primary-700 dark:text-primary-400 dark:group-hover:text-primary-300 mb-2 text-xl font-semibold transition-colors duration-200"
       >
         {episode.title}
       </h3>
 
       {/* Description */}
-      <p class="mb-3 text-sm text-base-600 dark:text-base-300">
+      <p class="text-base-600 dark:text-base-300 mb-3 text-sm">
         {truncatedDescription}
       </p>
 
       {/* Duration and Listen Button */}
       <div class="flex items-center justify-between">
-        <span class="text-sm text-base-500 dark:text-base-400">
+        <span class="text-base-500 dark:text-base-400 text-sm">
           {episode.duration}
         </span>
         <span
-          class="inline-flex items-center gap-1 text-sm text-primary-600 transition-transform duration-200 group-hover:translate-x-1 dark:text-primary-400"
+          class="text-primary-600 dark:text-primary-400 inline-flex items-center gap-1 text-sm transition-transform duration-200 group-hover:translate-x-1"
         >
           Listen Now
           <svg

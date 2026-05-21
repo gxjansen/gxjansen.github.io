@@ -68,14 +68,14 @@ const metaImage = image ? new URL(image, Astro.site) : undefined;
             <div class="mb-6 flex flex-wrap gap-3">
               {
                 duration && (
-                  <span class="rounded-full bg-base-100 px-3 py-1 text-sm text-base-700 dark:bg-base-800 dark:text-base-300">
+                  <span class="bg-base-100 text-base-700 dark:bg-base-800 dark:text-base-300 rounded-full px-3 py-1 text-sm">
                     {duration}
                   </span>
                 )
               }
               {
                 isWorkshop && (
-                  <span class="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                  <span class="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 rounded-full px-3 py-1 text-sm">
                     Workshop
                   </span>
                 )
@@ -84,14 +84,14 @@ const metaImage = image ? new URL(image, Astro.site) : undefined;
 
             {
               intendedAudience && (
-                <p class="text-lg text-base-400 dark:text-base-300">
+                <p class="text-base-400 dark:text-base-300 text-lg">
                   For: {intendedAudience}
                 </p>
               )
             }
           </div>
 
-          <div class="prose prose-lg mb-12 dark:prose-invert">
+          <div class="prose prose-lg dark:prose-invert mb-12">
             <div
               class="relative mb-8 aspect-video rounded-lg"
               style="transform: translateZ(0);"

@@ -40,7 +40,7 @@ const authorUrl = `/authors/${author.id}`;
     <div class="flex flex-wrap items-baseline gap-2">
       <a
         href={authorUrl}
-        class="font-semibold text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400"
+        class="text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400 font-semibold"
         itemprop="url"
       >
         <span itemprop="name">{name}</span>
@@ -50,7 +50,7 @@ const authorUrl = `/authors/${author.id}`;
     {
       showBio && bioShort && (
         <p
-          class="mt-1 text-sm text-base-700 dark:text-base-300"
+          class="text-base-700 dark:text-base-300 mt-1 text-sm"
           itemprop="description"
         >
           {bioShort}

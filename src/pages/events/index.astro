@@ -153,11 +153,11 @@ sortedYears.forEach((year) => {
           return (
             <div class="year-group">
               <div class="mb-8 flex items-center gap-4">
-                <h2 class="text-2xl font-bold text-base-800 dark:text-base-200">
+                <h2 class="text-base-800 dark:text-base-200 text-2xl font-bold">
                   {year}
                 </h2>
-                <div class="h-px flex-1 bg-base-300 dark:bg-base-700" />
-                <span class="text-sm text-base-500 dark:text-base-400">
+                <div class="bg-base-300 dark:bg-base-700 h-px flex-1" />
+                <span class="text-base-500 dark:text-base-400 text-sm">
                   {allYearEvents.length}{" "}
                   {allYearEvents.length === 1 ? "event" : "events"}
                 </span>

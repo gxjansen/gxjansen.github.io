@@ -1,7 +1,7 @@
 @layer components {
   /* Card System */
   article[class*="card"]:not(.event-card) {
-    @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
+    @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur-sm group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -19,13 +19,15 @@
     grid-auto-rows: min-content;
   }
 
-  @screen md {
+  /* @screen md / lg replaced with raw media queries (Tailwind v4 dropped @screen).
+     Breakpoints match the @theme block in src/styles/tailwind.css. */
+  @media (min-width: 1000px) {
     .cards-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  @screen lg {
+  @media (min-width: 1124px) {
     .cards-grid {
       grid-template-columns: repeat(3, 1fr);
     }
@@ -96,7 +98,7 @@
 
   /* Event Card Specifics */
   .event-card {
-    @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
+    @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur-sm group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
     @apply p-4;
     transition:
       border-color 0.3s ease,

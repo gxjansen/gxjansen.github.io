@@ -1,4 +1,5 @@
-/* Import Component Styles */
+/* Import Component Styles
+   Sass requires @use rules to come first, before any other directives. */
 @use "./utilities/utilities";
 @use "./components/alerts";
 @use "./components/cards";
@@ -7,10 +8,16 @@
 @use "./base/typography";
 @use "./prose";
 
-/* Base Styles */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Reference Tailwind v4 theme so @apply directives in this file resolve
+   without producing utilities twice. Required because PostCSS processes
+   this .scss independently from tailwind.css. */
+@reference "./tailwind.css";
+
+/* Base Styles
+   Tailwind v4 entry lives in ./tailwind.css and is imported separately from
+   BaseLayout.astro BEFORE this file. The v3 `@tailwind base/components/utilities`
+   directives have been removed in favour of `@import "tailwindcss"` in
+   tailwind.css. */
 
 /* Base Typography */
 @layer base {
@@ -114,7 +121,7 @@
     @apply text-2xl text-base-800 dark:text-base-200;
     @apply shadow-lg transition-all duration-300;
     @apply hover:bg-base-100 dark:hover:bg-base-700;
-    @apply focus:outline-none focus:ring-2 focus:ring-primary-500;
+    @apply focus:outline-hidden focus:ring-2 focus:ring-primary-500;
     @apply disabled:cursor-not-allowed disabled:opacity-30;
     @apply disabled:hover:bg-base-50/95 dark:disabled:hover:bg-base-800/95;
     /* Improved touch target size */
@@ -182,12 +189,12 @@
   }
   to {
     outline-offset: 3px;
-    outline-color: theme("colors.primary.500");
+    outline-color: var(--color-primary-500);
   }
 }
 
 :focus-visible {
-  outline: 2px solid theme("colors.primary.500");
+  outline: 2px solid var(--color-primary-500);
   outline-offset: 3px;
   animation: focus-ring-expand 0.2s cubic-bezier(0.33, 1, 0.68, 1);
 }

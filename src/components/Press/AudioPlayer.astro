@@ -9,7 +9,7 @@ const { src, title, coverImage } = Astro.props;
 ---
 
 <div
-  class="audio-player w-full rounded-xl bg-base-200 p-4 transition-colors dark:bg-base-800"
+  class="audio-player bg-base-200 dark:bg-base-800 w-full rounded-xl p-4 transition-colors"
 >
   {
     coverImage && (
@@ -31,7 +31,7 @@ const { src, title, coverImage } = Astro.props;
       <a
         href={src}
         download
-        class="text-primary-600 underline dark:text-primary-400"
+        class="text-primary-600 dark:text-primary-400 underline"
         >Download the audio</a
       >
     </p>

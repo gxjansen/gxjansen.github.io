@@ -28,23 +28,23 @@ const { icon, title, text, href, idx, ...rest } = Astro.props as Props;
 <div {...rest} class="h-full">
   <a
     href={href}
-    class="group flex h-full flex-col justify-between overflow-hidden rounded-xl px-4 py-8 text-center transition-all duration-300 hover:bg-white hover:shadow-xl dark:hover:bg-base-900"
+    class="group dark:hover:bg-base-900 flex h-full flex-col justify-between overflow-hidden rounded-xl px-4 py-8 text-center transition-all duration-300 hover:bg-white hover:shadow-xl"
   >
     <div>
       <div
-        class="mx-auto mb-7 inline-flex size-16 items-center justify-center rounded-lg bg-primary-500 text-base-100 dark:text-base-900"
+        class="bg-primary-500 text-base-100 dark:text-base-900 mx-auto mb-7 inline-flex size-16 items-center justify-center rounded-lg"
       >
         <Icon
           name={icon}
-          class="size-7 text-base-100 dark:text-base-900"
+          class="text-base-100 dark:text-base-900 size-7"
           aria-hidden="true"
         />
       </div>
 
-      <h4 class="heading-card mb-3 text-base-900 dark:text-base-100">
+      <h4 class="heading-card text-base-900 dark:text-base-100 mb-3">
         {title}
       </h4>
-      <p class="description text-pretty text-base-400">{text}</p>
+      <p class="description text-base-400 text-pretty">{text}</p>
     </div>
     <div class="mt-6 flex justify-center">
       <Button variant="outline" arrow="right">

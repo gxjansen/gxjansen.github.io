@@ -41,7 +41,7 @@ const secondColumnEvents = upcomingEvents.filter((_, i) => i % 2 === 1);
               {events.filter((event) => new Date(event.date) >= today).length >
                 maxEvents && (
                 <p
-                  class="mt-4 text-base-400 dark:text-base-500"
+                  class="text-base-400 dark:text-base-500 mt-4"
                   aria-live="polite"
                 >
                   Showing {maxEvents} of{" "}

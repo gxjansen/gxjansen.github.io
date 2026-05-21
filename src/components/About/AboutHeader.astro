@@ -12,7 +12,7 @@ const mobileImagePath = "/images/guido-up.png";
 ---
 
 <section
-  class="overflow-hidden pb-0 pt-24 md:pb-0 md:pt-28"
+  class="overflow-hidden pt-24 pb-0 md:pt-28 md:pb-0"
   aria-labelledby="about-header-heading"
   role="region"
 >
@@ -32,13 +32,13 @@ const mobileImagePath = "/images/guido-up.png";
           aria-label="Professional introduction"
         >
           <p class="description">
-            I build <span class="font-semibold text-primary-500"
+            I build <span class="text-primary-500 font-semibold"
               >communities that matter to the business</span
             >, not just to the community itself.
           </p>
           <p class="description">
             Where many optimize for engagement metrics, I design systems that
-            translate <span class="font-semibold text-primary-500"
+            translate <span class="text-primary-500 font-semibold"
               >developer and customer intelligence</span
             > into product strategy, reduce support costs, and create competitive
             moats built on trust rather than lock-in.
@@ -46,7 +46,7 @@ const mobileImagePath = "/images/guido-up.png";
           <p class="description">
             I've done this from zero <a
               href="/communities/"
-              class="text-primary-500 underline underline-offset-2 transition-colors hover:text-primary-600 dark:hover:text-primary-400"
+              class="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 underline underline-offset-2 transition-colors"
               >multiple times</a
             >. My psychology background helps me understand why technical users
             behave the way they do and to design interventions that actually
@@ -58,7 +58,7 @@ const mobileImagePath = "/images/guido-up.png";
       <!-- Image Container -->
       <div class="md:w-1/3" role="complementary" aria-label="Profile images">
         <!-- Desktop Image -->
-        <figure class="hidden md:absolute md:bottom-0 md:right-4 md:block">
+        <figure class="hidden md:absolute md:right-4 md:bottom-0 md:block">
           <img
             src={desktopImagePath}
             alt="Guido X Jansen, community strategist and cognitive psychologist, standing confidently in a professional setting"
@@ -96,7 +96,7 @@ const mobileImagePath = "/images/guido-up.png";
 
   /* Ensure proper focus visibility */
   :focus-visible {
-    outline: 2px solid var(--focus-ring-color, theme("colors.primary.500"));
+    outline: 2px solid var(--focus-ring-color, var(--color-primary-500));
     outline-offset: 2px;
   }
 </style>

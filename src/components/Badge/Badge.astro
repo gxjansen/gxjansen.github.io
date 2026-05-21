@@ -21,7 +21,7 @@ const classes = [
   "uppercase",
   "leading-5",
   "text-primary-500",
-  "shadow-sm",
+  "shadow-xs",
   "shadow-base-200/20",
   "dark:bg-primary-500",
   "dark:text-base-100",
@@ -41,10 +41,10 @@ const classes = [
 <style>
   /* Ensure proper color contrast in all themes */
   span {
-    --badge-bg-light: theme("colors.primary.100");
-    --badge-text-light: theme("colors.primary.700");
-    --badge-bg-dark: theme("colors.primary.500");
-    --badge-text-dark: theme("colors.base.100");
+    --badge-bg-light: var(--color-primary-100);
+    --badge-text-light: var(--color-primary-700);
+    --badge-bg-dark: var(--color-primary-500);
+    --badge-text-dark: var(--color-base-100);
   }
 
   /* Light theme */

@@ -85,7 +85,8 @@
   /* paragraphs */
   @apply prose-p:mb-0 prose-p:mt-0;
   /* code */
-  @apply prose-code:rounded-lg prose-code:border-opacity-0 prose-code:px-[.1rem] prose-code:font-normal prose-code:text-inherit sm:prose-code:text-base;
+  /* v4: border-opacity-* removed → use border-transparent or color/alpha modifier */
+  @apply prose-code:rounded-lg prose-code:border-transparent prose-code:px-[.1rem] prose-code:font-normal prose-code:text-inherit sm:prose-code:text-base;
   /* anchor links */
   @apply prose-a:text-inherit prose-a:underline prose-a:transition hover:prose-a:text-inherit hover:prose-a:opacity-80;
 }

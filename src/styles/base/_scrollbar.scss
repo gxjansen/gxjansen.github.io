@@ -8,11 +8,13 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-base-300 bg-opacity-90;
+    /* v4: bg-opacity-* removed → use color/alpha modifier */
+    @apply rounded-full bg-base-300/90;
   }
 
   /* Custom focus styles for better accessibility */
   a:focus {
-    @apply outline-none ring-1 ring-primary-500/20 rounded;
+    /* v4: outline-none → outline-hidden; bare rounded → rounded-sm */
+    @apply outline-hidden ring-1 ring-primary-500/20 rounded-sm;
   }
 }

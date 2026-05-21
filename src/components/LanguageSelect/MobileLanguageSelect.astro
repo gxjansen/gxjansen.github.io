@@ -32,7 +32,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
   {...rest}
 >
   <button
-    class="primary-focus mobile-lang__dropdown-button flex w-full flex-1 items-center justify-between gap-0.5 rounded-md px-4 py-2 text-left font-medium text-base-500 transition duration-300 hover:text-base-600 dark:text-base-400 dark:hover:text-base-300"
+    class="primary-focus mobile-lang__dropdown-button text-base-500 hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 flex w-full flex-1 items-center justify-between gap-0.5 rounded-md px-4 py-2 text-left font-medium transition duration-300"
     type="button"
     aria-expanded="false"
     aria-haspopup="true"
@@ -58,7 +58,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
         locales.map((lang) => (
           <li class="flex w-full">
             <a
-              class="primary-focus relative block w-full whitespace-nowrap py-1 pl-8 font-medium leading-tight text-base-500 transition hover:text-base-600 dark:text-base-400 dark:hover:text-base-300"
+              class="primary-focus text-base-500 hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 relative block w-full py-1 pl-8 leading-tight font-medium whitespace-nowrap transition"
               href={getLocalizedPathname(lang, Astro.url)}
               aria-label={`Change language to ${lang.toUpperCase()}`}
             >

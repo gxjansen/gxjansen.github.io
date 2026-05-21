@@ -23,7 +23,7 @@ const relatedPresentations = getRelatedPresentations(eventId, allPresentations);
         {relatedPresentations.map((presentation) => (
           <a
             href={`/presentations/${presentation.id}/`}
-            class="block rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg dark:bg-base-900"
+            class="dark:bg-base-900 block rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg"
           >
             <div class="relative">
               {presentation.data.image && (
@@ -34,7 +34,7 @@ const relatedPresentations = getRelatedPresentations(eventId, allPresentations);
                 />
               )}
               {presentation.data.isWorkshop && (
-                <span class="absolute right-2 top-2 rounded bg-primary-600 px-2 py-1 text-sm text-base-100 dark:text-base-900">
+                <span class="bg-primary-600 text-base-100 dark:text-base-900 absolute top-2 right-2 rounded-sm px-2 py-1 text-sm">
                   Workshop
                 </span>
               )}
@@ -44,12 +44,12 @@ const relatedPresentations = getRelatedPresentations(eventId, allPresentations);
                 {presentation.data.title}
               </h3>
               {presentation.data.duration && (
-                <p class="text-sm text-base-600 dark:text-base-400">
+                <p class="text-base-600 dark:text-base-400 text-sm">
                   Duration: {presentation.data.duration}
                 </p>
               )}
               {presentation.data.intendedAudience && (
-                <p class="mt-1 text-sm text-base-600 dark:text-base-400">
+                <p class="text-base-600 dark:text-base-400 mt-1 text-sm">
                   For: {presentation.data.intendedAudience}
                 </p>
               )}

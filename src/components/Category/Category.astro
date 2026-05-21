@@ -16,7 +16,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
 
 <div role="listitem">
   <a
-    class="inline-block rounded-full bg-primary-100/70 px-3 py-1 text-xs font-medium uppercase leading-5 text-primary-500 shadow-sm shadow-base-200/20 transition-colors hover:bg-primary-200/70 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:bg-primary-500/90 dark:text-base-50 dark:shadow-none dark:hover:bg-primary-600"
+    class="bg-primary-100/70 text-primary-500 shadow-base-200/20 hover:bg-primary-200/70 focus:ring-primary-500 dark:bg-primary-500/90 dark:text-base-50 dark:hover:bg-primary-600 inline-block rounded-full px-3 py-1 text-xs leading-5 font-medium uppercase shadow-xs transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-hidden dark:shadow-none"
     href={getRelativeLocaleUrl(currLocale, `/categories/${slugify(category)}`)}
     aria-label={`View all posts in category: ${humanize(category)}`}
     role="link"

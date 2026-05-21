@@ -12,25 +12,25 @@ import Button from "@components/Button/Button.astro";
 <section class="py-10" aria-labelledby="cta-heading">
   <div class="site-container">
     <div
-      class="relative overflow-hidden rounded-md bg-primary-500 px-4 py-8 sm:px-8 sm:py-11 md:px-16 md:py-20"
+      class="bg-primary-500 relative overflow-hidden rounded-md px-4 py-8 sm:px-8 sm:py-11 md:px-16 md:py-20"
       role="region"
       aria-label="Call to action"
     >
       <Icon
         name="atlas/dots3"
-        class="absolute left-4 top-0 z-10 size-16 text-accent-4"
+        class="text-accent-4 absolute top-0 left-4 z-10 size-16"
         aria-hidden="true"
         role="presentation"
       />
       <Icon
         name="atlas/dots3"
-        class="absolute bottom-0 right-4 z-10 size-16 text-accent-4"
+        class="text-accent-4 absolute right-4 bottom-0 z-10 size-16"
         aria-hidden="true"
         role="presentation"
       />
       <Icon
         name="atlas/wave-bg-basic"
-        class="absolute left-1/2 top-1/2 h-full w-full max-w-full -translate-x-1/2 -translate-y-1/2 object-cover text-base-100/5"
+        class="text-base-100/5 absolute top-1/2 left-1/2 h-full w-full max-w-full -translate-x-1/2 -translate-y-1/2 object-cover"
         aria-hidden="true"
         role="presentation"
       />
@@ -42,12 +42,12 @@ import Button from "@components/Button/Button.astro";
         <div class="w-full p-3 md:w-1/2">
           <h2
             id="cta-heading"
-            class="mb-4 text-2xl font-bold tracking-tighter text-base-100 sm:mb-6 sm:text-3xl md:text-4xl dark:text-base-900"
+            class="text-base-100 dark:text-base-900 mb-4 text-2xl font-bold tracking-tighter sm:mb-6 sm:text-3xl md:text-4xl"
           >
             Ready to discover what your ecosystem could become?
           </h2>
           <p
-            class="font-semibold text-base-100 dark:text-base-900"
+            class="text-base-100 dark:text-base-900 font-semibold"
             aria-describedby="cta-heading"
           >
             I speak at international conferences regularly and often get voted
@@ -58,7 +58,7 @@ import Button from "@components/Button/Button.astro";
           <Button
             variant="on-color"
             href="/speaker/"
-            class="shadow-none focus:outline-none focus:ring-2 focus:ring-base-100 focus:ring-offset-2 focus:ring-offset-primary-500"
+            class="focus:ring-base-100 focus:ring-offset-primary-500 shadow-none focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
             aria-label="Invite Guido to speak at your event"
           >
             <span>Invite me to speak</span>

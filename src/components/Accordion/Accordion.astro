@@ -18,17 +18,17 @@ const { title, details, group = "accordion" } = Astro.props;
 
 <details class="accordion group" name={group}>
   <summary
-    class="primary-focus flex cursor-pointer list-none items-center justify-between gap-2 py-3 text-lg font-bold text-base-900 transition hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-500"
+    class="primary-focus text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-500 flex cursor-pointer list-none items-center justify-between gap-2 py-3 text-lg font-bold transition"
   >
     {title}
     <Icon
       name="tabler/circle-arrow-up"
       aria-hidden="true"
-      class="accordion__chevron size-6 shrink-0 rotate-180 text-primary-500 transition-transform duration-[400ms] ease-[cubic-bezier(0.33,1,0.68,1)]"
+      class="accordion__chevron text-primary-500 size-6 shrink-0 rotate-180 transition-transform duration-[400ms] ease-[cubic-bezier(0.33,1,0.68,1)]"
     />
   </summary>
   <div class="accordion__content">
-    <p class="description prose mb-4 mr-auto mt-1 max-w-lg leading-snug">
+    <p class="description prose mt-1 mr-auto mb-4 max-w-lg leading-snug">
       <Fragment set:html={details} />
     </p>
   </div>

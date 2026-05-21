@@ -1,7 +1,7 @@
 @layer utilities {
   /* Focus Utilities */
   .primary-focus {
-    @apply focus:outline-none focus-visible:rounded-sm focus-visible:outline-primary-500;
+    @apply focus:outline-hidden focus-visible:rounded-xs focus-visible:outline-primary-500;
   }
 
   /* Animation Controls */
@@ -62,6 +62,6 @@
   }
 
   .code-block {
-    @apply rounded bg-base-100/20 px-2 py-1 text-sm text-base-900 dark:bg-base-800 dark:text-base-100;
+    @apply rounded-sm bg-base-100/20 px-2 py-1 text-sm text-base-900 dark:bg-base-800 dark:text-base-100;
   }
 }

@@ -48,7 +48,7 @@ describe("PodcastFeed", () => {
       <div class="flex justify-center mt-8">
         <button 
           type="button" 
-          class="button button--primary inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" 
+          class="button button--primary inline-flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" 
           aria-label="View my appearances in 3rd party podcasts"
         >
           <a href="/press/#podcasts" class="text-white hover:text-white">
@@ -111,7 +111,7 @@ describe("PodcastFeed", () => {
       <div class="flex justify-center mt-8">
         <button 
           type="button" 
-          class="button button--primary inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" 
+          class="button button--primary inline-flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" 
           aria-label="View my appearances in 3rd party podcasts"
         >
           <a href="/press/#podcasts" class="text-white hover:text-white">
@@ -161,7 +161,7 @@ describe("PodcastFeed", () => {
       <div class="flex justify-center mt-8">
         <button 
           type="button" 
-          class="button button--primary inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" 
+          class="button button--primary inline-flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2" 
           aria-label="View my appearances in 3rd party podcasts"
         >
           <a href="/press/#podcasts" class="text-white hover:text-white">

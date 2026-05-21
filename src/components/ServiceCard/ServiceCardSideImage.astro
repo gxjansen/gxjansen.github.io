@@ -164,7 +164,7 @@ const cardId = `biography-${title.toLowerCase().replace(/\s+/g, "-")}`;
 
   /* Focus styles for interactive elements */
   :focus-visible {
-    outline: 2px solid var(--focus-ring-color, theme("colors.primary.500"));
+    outline: 2px solid var(--focus-ring-color, var(--color-primary-500));
     outline-offset: 2px;
   }
 </style>

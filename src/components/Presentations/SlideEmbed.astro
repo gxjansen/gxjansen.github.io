@@ -9,12 +9,12 @@ const { slideshareKey } = Astro.props;
 <div class="mb-12">
   <h2 class="h3 mb-4">Slides</h2>
   <div
-    class="relative rounded-lg bg-base-200 pb-[56.25%] dark:bg-base-800"
+    class="bg-base-200 dark:bg-base-800 relative rounded-lg pb-[56.25%]"
     id={`slide-container-${slideshareKey}`}
   >
     <iframe
       src={`https://www.slideshare.net/slideshow/embed_code/key/${slideshareKey}?hostedIn=slideshare&page=upload`}
-      class="absolute left-0 top-0 h-full w-full rounded-lg border-none"
+      class="absolute top-0 left-0 h-full w-full rounded-lg border-none"
       allowfullscreen
       loading="lazy"
       onload="this.parentElement.classList.remove('bg-base-200', 'dark:bg-base-800')"

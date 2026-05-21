@@ -38,10 +38,10 @@ const hasWebsite = website && website.includes("gui.do");
 ---
 
 <aside
-  class="mt-12 rounded-xl border border-base-300 bg-base-50 p-6 dark:border-base-700 dark:bg-base-900"
+  class="border-base-300 bg-base-50 dark:border-base-700 dark:bg-base-900 mt-12 rounded-xl border p-6"
   aria-label={`About ${name}`}
 >
-  <h3 class="mb-4 text-xl font-bold text-base-900 dark:text-base-100">
+  <h3 class="text-base-900 dark:text-base-100 mb-4 text-xl font-bold">
     About the Author
   </h3>
 
@@ -56,7 +56,7 @@ const hasWebsite = website && website.includes("gui.do");
               width={120}
               height={120}
               quality="high"
-              class="md:h-30 md:w-30 h-24 w-24 rounded-full object-cover"
+              class="h-24 w-24 rounded-full object-cover md:h-30 md:w-30"
             />
           </a>
         </div>
@@ -66,14 +66,14 @@ const hasWebsite = website && website.includes("gui.do");
     <div class="flex-1">
       <a
         href={authorUrl}
-        class="text-xl font-semibold text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400"
+        class="text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400 text-xl font-semibold"
       >
         {name}
       </a>
 
       {
         (jobTitle || organization) && (
-          <div class="mt-1 text-base-600 dark:text-base-400">
+          <div class="text-base-600 dark:text-base-400 mt-1">
             {jobTitle}
             {jobTitle && organization && " at "}
             {organization}
@@ -83,7 +83,7 @@ const hasWebsite = website && website.includes("gui.do");
 
       {
         bio && (
-          <div class="prose prose-sm mt-3 max-w-none text-base-700 dark:prose-invert dark:text-base-300">
+          <div class="prose prose-sm text-base-700 dark:prose-invert dark:text-base-300 mt-3 max-w-none">
             <p>{bio}</p>
           </div>
         )
@@ -92,12 +92,12 @@ const hasWebsite = website && website.includes("gui.do");
       {
         expertise.length > 0 && (
           <div class="mt-4">
-            <h4 class="mb-2 text-sm font-semibold text-base-900 dark:text-base-100">
+            <h4 class="text-base-900 dark:text-base-100 mb-2 text-sm font-semibold">
               Areas of Expertise
             </h4>
             <div class="flex flex-wrap gap-2">
               {expertise.map((topic: string) => (
-                <span class="rounded-full bg-primary-100 px-3 py-1 text-xs text-primary-800 dark:bg-primary-900 dark:text-primary-200">
+                <span class="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 rounded-full px-3 py-1 text-xs">
                   {topic}
                 </span>
               ))}
@@ -109,10 +109,10 @@ const hasWebsite = website && website.includes("gui.do");
       {
         credentials.length > 0 && (
           <div class="mt-4">
-            <h4 class="mb-2 text-sm font-semibold text-base-900 dark:text-base-100">
+            <h4 class="text-base-900 dark:text-base-100 mb-2 text-sm font-semibold">
               Credentials
             </h4>
-            <ul class="list-inside list-disc space-y-1 text-sm text-base-700 dark:text-base-300">
+            <ul class="text-base-700 dark:text-base-300 list-inside list-disc space-y-1 text-sm">
               {credentials.map((credential: string) => (
                 <li>{credential}</li>
               ))}
@@ -137,7 +137,7 @@ const hasWebsite = website && website.includes("gui.do");
                 href={website}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="ml-2 text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+                class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 ml-2 text-sm font-medium"
               >
                 gui.do →
               </a>
@@ -149,7 +149,7 @@ const hasWebsite = website && website.includes("gui.do");
       <div class="mt-4">
         <a
           href={authorUrl}
-          class="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
+          class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 text-sm font-medium"
         >
           View all posts by {name} →
         </a>
