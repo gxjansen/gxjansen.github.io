@@ -1,7 +1,7 @@
 /* buttons, 4 types "primary", "secondary", "outline", "ghost" */
 .button {
   @apply flex items-center justify-center rounded-md px-7 py-3 font-medium;
-  @apply focus:outline-none;
+  @apply focus:outline-hidden;
   @apply disabled:pointer-events-none;
   transition:
     background-color 0.2s ease,
@@ -26,28 +26,29 @@
   @apply bg-primary-500 text-white shadow-md;
   @apply hover:bg-primary-600;
   @apply dark:bg-primary-500 dark:text-base-100 dark:hover:bg-primary-400;
-  @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-opacity-50;
+  /* v4: ring-opacity-* removed → use color/alpha modifier */
+  @apply focus-visible:ring-2 focus-visible:ring-primary-500/50;
 }
 
 .button--secondary {
-  @apply bg-base-500 text-base-50 shadow-sm;
+  @apply bg-base-500 text-base-50 shadow-xs;
   @apply hover:bg-base-600;
   @apply dark:bg-base-600 dark:text-base-200 dark:hover:bg-base-500;
-  @apply focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-opacity-50;
+  @apply focus-visible:ring-2 focus-visible:ring-base-500/50;
 }
 
 .button--outline {
-  @apply border border-base-200 bg-base-50 text-base-800 shadow-sm;
+  @apply border border-base-200 bg-base-50 text-base-800 shadow-xs;
   @apply hover:bg-base-100;
   @apply dark:border-base-700 dark:bg-base-900 dark:text-base-200 dark:hover:bg-base-800;
-  @apply focus-visible:ring-2 focus-visible:ring-base-200 focus-visible:ring-opacity-50 dark:focus-visible:ring-base-600;
+  @apply focus-visible:ring-2 focus-visible:ring-base-200/50 dark:focus-visible:ring-base-600;
 }
 
 .button--ghost {
   @apply bg-base-50 text-base-800;
   @apply hover:bg-base-200;
   @apply dark:bg-transparent dark:text-base-200 dark:hover:bg-base-800;
-  @apply focus-visible:ring-2 focus-visible:ring-base-200 focus-visible:ring-opacity-50 dark:focus-visible:ring-base-600;
+  @apply focus-visible:ring-2 focus-visible:ring-base-200/50 dark:focus-visible:ring-base-600;
 }
 
 @media (prefers-reduced-motion: reduce) {

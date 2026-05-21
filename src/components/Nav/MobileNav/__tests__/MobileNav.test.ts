@@ -53,7 +53,7 @@ describe("MobileNav", () => {
         aria-modal="true"
         aria-label="Mobile navigation menu"
       >
-        <div class="fixed inset-0 z-40 bg-base-900/50 backdrop-blur-sm dark:bg-base-900/80">
+        <div class="fixed inset-0 z-40 bg-base-900/50 backdrop-blur-xs dark:bg-base-900/80">
           <div class="fixed inset-y-0 right-0 z-40 w-full max-w-sm bg-base-50 px-6 py-6 dark:bg-base-900">
             <nav class="flex h-full flex-col">
               <ul class="space-y-4" role="menu">

@@ -28,7 +28,7 @@ const nextPost =
   <div class="flex items-center justify-between">
     <a
       href={`/post/`}
-      class="flex items-center gap-2 rounded text-base-600 hover:text-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:text-base-400 dark:hover:text-primary-400"
+      class="flex items-center gap-2 rounded-sm text-base-600 hover:text-primary-500 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:text-base-400 dark:hover:text-primary-400"
       aria-label="Return to article overview"
       data-umami-event="nav-click"
       data-umami-event-target="blog-overview"
@@ -54,7 +54,7 @@ const nextPost =
       prevPost && (
         <a
           href={`/post/${prevPost.id}/`}
-          class="group flex-1 rounded-lg border border-base-200 p-4 hover:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-base-800 dark:hover:border-primary-400"
+          class="group flex-1 rounded-lg border border-base-200 p-4 hover:border-primary-500 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-base-800 dark:hover:border-primary-400"
           aria-label={`Previous article: ${prevPost.data.title}`}
           data-umami-event="nav-click"
           data-umami-event-target="blog-prev"
@@ -85,7 +85,7 @@ const nextPost =
       nextPost && (
         <a
           href={`/post/${nextPost.id}/`}
-          class="group flex-1 rounded-lg border border-base-200 p-4 text-right hover:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-base-800 dark:hover:border-primary-400"
+          class="group flex-1 rounded-lg border border-base-200 p-4 text-right hover:border-primary-500 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:border-base-800 dark:hover:border-primary-400"
           aria-label={`Next article: ${nextPost.data.title}`}
           data-umami-event="nav-click"
           data-umami-event-target="blog-next"

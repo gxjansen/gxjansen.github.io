@@ -231,6 +231,7 @@ import { locales } from "@config/siteSettings.json";
 </script>
 
 <style lang="scss">
+  @reference "../../../styles/tailwind.css";
   // backdrop button to close mobile nav
   .mobile-nav__backdrop--fade-in {
     animation: MobileNavFadeInAnimation ease-in-out 0.3s forwards;
@@ -243,10 +244,10 @@ import { locales } from "@config/siteSettings.json";
 
   @keyframes MobileNavFadeInAnimation {
     0% {
-      @apply opacity-0;
+      opacity: 0;
     }
     100% {
-      @apply opacity-40;
+      opacity: 0.4;
     }
   }
 
@@ -262,19 +263,19 @@ import { locales } from "@config/siteSettings.json";
 
   @keyframes mobileNavSlideInAnimation {
     0% {
-      @apply -right-72;
+      right: -18rem;
     }
     100% {
-      @apply right-0;
+      right: 0;
     }
   }
 
   @keyframes mobileNavSlideOutAnimation {
     0% {
-      @apply right-0;
+      right: 0;
     }
     100% {
-      @apply -right-72;
+      right: -18rem;
     }
   }
 </style>

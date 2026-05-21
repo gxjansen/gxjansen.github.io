@@ -81,7 +81,7 @@
   }
 
   .alert-button {
-    @apply flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-none h-8 px-4 py-2 text-xs font-medium rounded-md;
+    @apply flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-hidden h-8 px-4 py-2 text-xs font-medium rounded-md;
   }
 
   .alert-button-primary {

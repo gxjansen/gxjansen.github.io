@@ -735,12 +735,13 @@ const signupPage = Astro.url.pathname;
 </script>
 
 <style>
+  @reference "../../styles/tailwind.css";
   .newsletter-form input[aria-invalid="true"] {
     @apply border-red-500 dark:border-red-400;
   }
 
   .newsletter-form input:focus-visible {
-    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+    @apply outline-hidden ring-2 ring-primary-500 ring-offset-2;
   }
 
   .newsletter-status:empty {

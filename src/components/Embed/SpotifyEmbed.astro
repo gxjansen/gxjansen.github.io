@@ -25,7 +25,7 @@ const { episodeId, title } = Astro.props;
       id={`spotify-load-button-${episodeId}`}
     >
       <button
-        class="rounded bg-primary-500 px-4 py-2 text-white transition-colors hover:bg-primary-600"
+        class="rounded-sm bg-primary-500 px-4 py-2 text-white transition-colors hover:bg-primary-600"
         onclick="document.getElementById(`spotify-embed-${episodeId}`).src = `https://open.spotify.com/embed/episode/${episodeId}`; this.parentElement.style.display = 'none';"
       >
         Load Spotify Player

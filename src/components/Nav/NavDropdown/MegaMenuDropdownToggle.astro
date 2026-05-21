@@ -58,7 +58,7 @@ if (cols >= 5) {
   >
     <ul
       class:list={[
-        "mt-[.9rem] grid w-full min-w-[150px] max-w-full gap-3 rounded-md border border-solid border-base-200 bg-base-50 px-1.5 py-3 drop-shadow-sm dark:border-base-800 dark:bg-base-900",
+        "mt-[.9rem] grid w-full min-w-[150px] max-w-full gap-3 rounded-md border border-solid border-base-200 bg-base-50 px-1.5 py-3 drop-shadow-xs dark:border-base-800 dark:bg-base-900",
         gridClass,
       ]}
     >
@@ -134,6 +134,7 @@ if (cols >= 5) {
 </script>
 
 <style lang="scss">
+  @reference "../../../styles/tailwind.css";
   .mega-menu--fade-in {
     animation: navDropdownFadeInAnimation ease-out 0.15s forwards;
     @apply visible opacity-100;
@@ -141,10 +142,10 @@ if (cols >= 5) {
 
   @keyframes navDropdownFadeInAnimation {
     0% {
-      @apply top-[80%];
+      top: 80%;
     }
     100% {
-      @apply top-full;
+      top: 100%;
     }
   }
 </style>

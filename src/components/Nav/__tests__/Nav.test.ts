@@ -12,7 +12,7 @@ describe("Nav", () => {
           <div class="site-container flex h-14 w-full items-center px-4">
             <header class="relative flex w-full items-center justify-between gap-4">
               <!-- Skip link -->
-              <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:block focus:rounded-md focus:bg-primary-500 focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
+              <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:block focus:rounded-md focus:bg-primary-500 focus:px-4 focus:py-2 focus:text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2">
                 Skip to main content
               </a>
 

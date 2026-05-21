@@ -275,9 +275,10 @@ import Button from "@components/Button/Button.astro";
 </script>
 
 <style>
+  @reference "../../styles/tailwind.css";
   /* Focus styles */
   .form__input:focus-visible {
-    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+    @apply outline-hidden ring-2 ring-primary-500 ring-offset-2;
   }
 
   /* Invalid state styles */

@@ -61,8 +61,8 @@ const cardId = `feature-${title.toLowerCase().replace(/\s+/g, "-")}${suffix}`;
   .focus-within\:ring-2:focus-within {
     outline: none;
     box-shadow:
-      0 0 0 2px var(--ring-color, theme("colors.primary.500")),
-      0 0 0 4px var(--ring-offset-color, theme("colors.white"));
+      0 0 0 2px var(--ring-color, var(--color-primary-500)),
+      0 0 0 4px var(--ring-offset-color, #fff);
   }
 
   /* Enhance hover state for better visibility */

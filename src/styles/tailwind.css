@@ -1,0 +1,140 @@
+/* Tailwind CSS v4 entry.
+   Migrated from tailwind.config.mjs (v3 JS config) to CSS-first @theme block.
+   See: https://tailwindcss.com/docs/upgrade-guide
+
+   Loaded BEFORE global.scss in BaseLayout.astro so that @apply directives
+   inside .scss files (compiled to CSS by Sass before PostCSS runs) can
+   resolve against this theme. */
+
+@import "tailwindcss";
+
+/* Plugins (still separate npm packages in v4). */
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+/* Custom dark mode variant.
+   Preserves the v3 behaviour: dark styles apply when an ancestor has
+   class="dark", UNLESS a closer ancestor has class="light" (used to opt
+   sections back out of dark mode). */
+@custom-variant dark (&:is(.dark *):not(.light *));
+
+/* Safelist classes that may be added at runtime via JavaScript and won't
+   appear in source scans. v4 uses @source inline() for this. */
+@source inline("dark");
+@source inline("light");
+@source inline("animate-marquee");
+@source inline("active");
+@source inline("open");
+@source inline("show");
+@source inline("hide");
+
+@theme {
+  /* ---------- Breakpoints ---------- */
+  --breakpoint-xs: 400px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 1000px;
+  --breakpoint-lg: 1124px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ---------- Font families ---------- */
+  --font-sans:
+    Poppins, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-serif:
+    Poppins, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  /* ---------- Rosé Pine palette ----------
+     Dark mode: Main variant | Light mode: Dawn variant
+     https://rosepinetheme.com/palette/ */
+
+  /* Primary accent - Pine (teal) */
+  --color-primary-50: #f0f5f7;
+  --color-primary-100: #dceaef;
+  --color-primary-200: #b8d5df;
+  --color-primary-300: #9ccfd8; /* foam (Main) */
+  --color-primary-400: #56949f; /* foam (Dawn) */
+  --color-primary-500: #31748f; /* pine (Main) */
+  --color-primary-600: #286983; /* pine (Dawn) */
+  --color-primary-700: #1f5a73;
+  --color-primary-800: #1a4a5e;
+  --color-primary-900: #153a4a;
+  --color-primary-950: #0f2a35;
+
+  /* Base colors */
+  --color-base-50: #fffaf3;  /* Dawn surface */
+  --color-base-100: #faf4ed; /* Dawn base */
+  --color-base-200: #f2e9e1; /* Dawn overlay */
+  --color-base-300: #dfdad3; /* Dawn muted bg */
+  --color-base-400: #9893a5; /* Dawn muted text */
+  --color-base-500: #908caa; /* Main subtle */
+  --color-base-600: #6e6a86; /* Main muted */
+  --color-base-700: #393552; /* Main highlight-high */
+  --color-base-800: #26233a; /* Main overlay */
+  --color-base-900: #1f1d2e; /* Main surface */
+  --color-base-950: #191724; /* Main base */
+
+  /* Rosé Pine accent colors */
+  --color-accent-1: #f6c177; /* gold */
+  --color-accent-2: #9ccfd8; /* foam */
+  --color-accent-3: #c4a7e7; /* iris */
+  --color-accent-4: #eb6f92; /* love */
+
+  /* Backgrounds */
+  --color-background: #faf4ed;
+  --color-background-dark: #1a1825;
+
+  /* Semantic colors using Rosé Pine accents */
+  --color-info: #9ccfd8;
+  --color-info-content: #191724;
+  --color-success: #31748f;
+  --color-success-content: #e0def4;
+  --color-warning: #f6c177;
+  --color-warning-content: #191724;
+  --color-error: #eb6f92;
+  --color-error-content: #191724;
+
+  /* Direct Rosé Pine accent access (DEFAULT + light variants) */
+  --color-love: #eb6f92;
+  --color-love-light: #b4637a;
+  --color-gold: #f6c177;
+  --color-gold-light: #ea9d34;
+  --color-rose: #ebbcba;
+  --color-rose-light: #d7827e;
+  --color-pine: #31748f;
+  --color-pine-light: #286983;
+  --color-foam: #9ccfd8;
+  --color-foam-light: #56949f;
+  --color-iris: #c4a7e7;
+  --color-iris-light: #907aa9;
+
+  /* Text colors for direct use */
+  --color-rp-text: #e0def4;
+  --color-rp-text-light: #575279;
+  --color-rp-subtle: #908caa;
+  --color-rp-subtle-light: #797593;
+  --color-rp-muted: #6e6a86;
+  --color-rp-muted-light: #9893a5;
+
+  /* ---------- Animations ---------- */
+  --animate-marquee: marquee 100s linear infinite;
+}
+
+/* Keyframes for the @theme --animate-marquee custom animation. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - 2.5rem));
+  }
+}
+
+/* ---------- Source paths ----------
+   v4 auto-detects content by scanning the project. Explicit @source rules
+   here mirror the v3 `content.files` glob for clarity and to be safe in
+   monorepo / virtual-file scenarios. */
+@source "../**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}";

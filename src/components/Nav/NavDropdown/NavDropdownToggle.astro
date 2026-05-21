@@ -39,7 +39,7 @@ const { navItem } = Astro.props as Props;
     class="nav__dropdown-content invisible absolute left-0 z-10 opacity-0 transition-all"
   >
     <ul
-      class="mt-4 w-[12rem] min-w-[9rem] max-w-[20rem] rounded-md border border-solid border-base-200 bg-base-50 p-1.5 drop-shadow-sm dark:border-base-800 dark:bg-base-900"
+      class="mt-4 w-[12rem] min-w-[9rem] max-w-[20rem] rounded-md border border-solid border-base-200 bg-base-50 p-1.5 drop-shadow-xs dark:border-base-800 dark:bg-base-900"
     >
       {
         navItem.dropdown.map((dropdownItem) => (
@@ -106,6 +106,7 @@ const { navItem } = Astro.props as Props;
 </script>
 
 <style lang="scss">
+  @reference "../../../styles/tailwind.css";
   .dropdown--fade-in {
     animation: navDropdownFadeInAnimation ease-out 0.15s forwards;
     @apply visible opacity-100;
@@ -113,10 +114,10 @@ const { navItem } = Astro.props as Props;
 
   @keyframes navDropdownFadeInAnimation {
     0% {
-      @apply top-[80%];
+      top: 80%;
     }
     100% {
-      @apply top-full;
+      top: 100%;
     }
   }
 </style>

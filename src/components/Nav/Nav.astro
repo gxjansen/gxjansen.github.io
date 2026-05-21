@@ -35,7 +35,7 @@ const shouldReduceMotion =
 <!-- Skip to main content link -->
 <a
   href="#main-content"
-  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:block focus:rounded-md focus:bg-primary-500 focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:block focus:rounded-md focus:bg-primary-500 focus:px-4 focus:py-2 focus:text-white focus:outline-hidden focus:ring-2 focus:ring-white focus:ring-offset-2"
 >
   Skip to main content
 </a>
@@ -89,7 +89,7 @@ const shouldReduceMotion =
           <!-- CTA Button -->
           <Button
             variant="secondary"
-            class="my-auto hidden px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 md:block"
+            class="my-auto hidden px-4 py-1.5 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 md:block"
             href="/retainer/"
             aria-label="Work with Guido on a community advisory engagement"
             umamiEvent="cta-click"
@@ -119,6 +119,7 @@ const shouldReduceMotion =
 </div>
 
 <style>
+  @reference "../../styles/tailwind.css";
   /* Navigation states */
   .navbar--scrolled {
     @apply border-b-base-200 bg-base-50 dark:border-b-base-800 dark:bg-base-950;
@@ -150,7 +151,7 @@ const shouldReduceMotion =
 
   /* Focus styles */
   :focus-visible {
-    outline: 2px solid var(--focus-ring-color, theme("colors.primary.500"));
+    outline: 2px solid var(--focus-ring-color, var(--color-primary-500));
     outline-offset: 2px;
   }
 </style>
