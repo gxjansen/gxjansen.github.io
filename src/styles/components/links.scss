@@ -1,20 +1,20 @@
 /* Link Colors - Rosé Pine accent palette */
 :root {
   /* Light mode colors (Dawn variant) */
-  --link-love-light: #b4637a;      /* love (Dawn) - reds/errors */
-  --link-gold-light: #ea9d34;      /* gold (Dawn) - yellows/warnings */
-  --link-rose-light: #d7827e;      /* rose (Dawn) - highlights */
-  --link-pine-light: #286983;      /* pine (Dawn) - greens/keywords */
-  --link-foam-light: #56949f;      /* foam (Dawn) - blues/information */
-  --link-iris-light: #907aa9;      /* iris (Dawn) - magentas/hints */
+  --link-love-light: #b4637a; /* love (Dawn) - reds/errors */
+  --link-gold-light: #ea9d34; /* gold (Dawn) - yellows/warnings */
+  --link-rose-light: #d7827e; /* rose (Dawn) - highlights */
+  --link-pine-light: #286983; /* pine (Dawn) - greens/keywords */
+  --link-foam-light: #56949f; /* foam (Dawn) - blues/information */
+  --link-iris-light: #907aa9; /* iris (Dawn) - magentas/hints */
 
   /* Dark mode colors (Main variant) */
-  --link-love-dark: #eb6f92;       /* love (Main) */
-  --link-gold-dark: #f6c177;       /* gold (Main) */
-  --link-rose-dark: #ebbcba;       /* rose (Main) */
-  --link-pine-dark: #31748f;       /* pine (Main) */
-  --link-foam-dark: #9ccfd8;       /* foam (Main) */
-  --link-iris-dark: #c4a7e7;       /* iris (Main) */
+  --link-love-dark: #eb6f92; /* love (Main) */
+  --link-gold-dark: #f6c177; /* gold (Main) */
+  --link-rose-dark: #ebbcba; /* rose (Main) */
+  --link-pine-dark: #31748f; /* pine (Main) */
+  --link-foam-dark: #9ccfd8; /* foam (Main) */
+  --link-iris-dark: #c4a7e7; /* iris (Main) */
 }
 
 /* Base link styling */
@@ -33,7 +33,7 @@ a:not(
   .site-content *,
   .services-icon a,
   .services-icon *,
-  [class*="group flex h-full"],
+  .group.flex.h-full, /* order-independent — Tailwind v4 may sort dark: variants between these */
   .linkedin-cta a,
   .content-type-selector a,
   [class*="bg-primary-"],
@@ -50,10 +50,10 @@ a:not(
   text-decoration: underline;
   text-decoration-thickness: 0.2em;
   text-underline-offset: 0.1em;
-  
+
   /* Default color that will be overridden by JS */
   text-decoration-color: transparent;
-  
+
   &:hover {
     @apply opacity-80;
   }
@@ -73,7 +73,7 @@ footer a,
 .site-content *,
 .services-icon a,
 .services-icon *,
-[class*="group flex h-full"],
+.group.flex.h-full, /* order-independent — Tailwind v4 may sort dark: variants between these */
 .linkedin-cta a,
 .content-type-selector a,
 [class*="bg-primary-"],
@@ -89,7 +89,12 @@ footer a,
 }
 
 /* Heading links inherit heading styles but keep underline */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   a {
     @apply text-base-900 dark:text-base-100;
   }

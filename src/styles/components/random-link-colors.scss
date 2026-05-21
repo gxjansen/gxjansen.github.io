@@ -21,7 +21,7 @@ a:not(
   .site-content *,
   .services-icon a,
   .services-icon *,
-  [class*="group flex h-full"],
+  .group.flex.h-full, /* order-independent — Tailwind v4 may sort dark: variants between these */
   .linkedin-cta a,
   .content-type-selector a,
   [class*="bg-primary-"],
@@ -35,12 +35,24 @@ a:not(
   [class*="rounded-full"],
   .no-random-underline
 ) {
-  &:nth-of-type(6n + 1) { text-decoration-color: var(--link-love-light); }
-  &:nth-of-type(6n + 2) { text-decoration-color: var(--link-gold-light); }
-  &:nth-of-type(6n + 3) { text-decoration-color: var(--link-rose-light); }
-  &:nth-of-type(6n + 4) { text-decoration-color: var(--link-pine-light); }
-  &:nth-of-type(6n + 5) { text-decoration-color: var(--link-foam-light); }
-  &:nth-of-type(6n + 6) { text-decoration-color: var(--link-iris-light); }
+  &:nth-of-type(6n + 1) {
+    text-decoration-color: var(--link-love-light);
+  }
+  &:nth-of-type(6n + 2) {
+    text-decoration-color: var(--link-gold-light);
+  }
+  &:nth-of-type(6n + 3) {
+    text-decoration-color: var(--link-rose-light);
+  }
+  &:nth-of-type(6n + 4) {
+    text-decoration-color: var(--link-pine-light);
+  }
+  &:nth-of-type(6n + 5) {
+    text-decoration-color: var(--link-foam-light);
+  }
+  &:nth-of-type(6n + 6) {
+    text-decoration-color: var(--link-iris-light);
+  }
 }
 
 /* Dark mode (Main variants) ------------------------------------------- */
@@ -60,7 +72,7 @@ a:not(
   .site-content *,
   .services-icon a,
   .services-icon *,
-  [class*="group flex h-full"],
+  .group.flex.h-full, /* order-independent — Tailwind v4 may sort dark: variants between these */
   .linkedin-cta a,
   .content-type-selector a,
   [class*="bg-primary-"],
@@ -74,10 +86,22 @@ a:not(
   [class*="rounded-full"],
   .no-random-underline
 ) {
-  &:nth-of-type(6n + 1) { text-decoration-color: var(--link-love-dark); }
-  &:nth-of-type(6n + 2) { text-decoration-color: var(--link-gold-dark); }
-  &:nth-of-type(6n + 3) { text-decoration-color: var(--link-rose-dark); }
-  &:nth-of-type(6n + 4) { text-decoration-color: var(--link-pine-dark); }
-  &:nth-of-type(6n + 5) { text-decoration-color: var(--link-foam-dark); }
-  &:nth-of-type(6n + 6) { text-decoration-color: var(--link-iris-dark); }
+  &:nth-of-type(6n + 1) {
+    text-decoration-color: var(--link-love-dark);
+  }
+  &:nth-of-type(6n + 2) {
+    text-decoration-color: var(--link-gold-dark);
+  }
+  &:nth-of-type(6n + 3) {
+    text-decoration-color: var(--link-rose-dark);
+  }
+  &:nth-of-type(6n + 4) {
+    text-decoration-color: var(--link-pine-dark);
+  }
+  &:nth-of-type(6n + 5) {
+    text-decoration-color: var(--link-foam-dark);
+  }
+  &:nth-of-type(6n + 6) {
+    text-decoration-color: var(--link-iris-dark);
+  }
 }
