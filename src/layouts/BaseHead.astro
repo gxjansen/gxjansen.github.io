@@ -1,12 +1,10 @@
 ---
 import { type CollectionEntry } from "astro:content";
-import { ClientRouter } from "astro:transitions";
 
 // component imports
 import Seo from "@components/Seo/Seo.astro";
 
 // data
-import siteSettings from "@config/siteSettings.json";
 import standardSiteConfig from "@config/standardSite.json";
 import { CONFIG } from "../config"; // Use .env for indexing
 
@@ -186,9 +184,6 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 
   // runs on initial page load
   initTheme();
-
-  // runs on view transitions navigation
-  document.addEventListener("astro:after-swap", initTheme);
 </script>
 
 <Seo
@@ -200,9 +195,6 @@ const noindex = !CONFIG.ALLOW_INDEXING;
   postFrontmatter={postFrontmatter}
   noindex={noindex}
 />
-
-<!-- no fallback as I saw issues with firefox fallback -->
-{siteSettings.useViewTransitions && <ClientRouter fallback="none" />}
 
 {
   /*

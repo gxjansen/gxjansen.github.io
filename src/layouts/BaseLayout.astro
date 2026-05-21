@@ -54,12 +54,6 @@ const currLocale = getLocaleFromUrl(Astro.url);
       noindex={noindex}
     />
     <style>
-      /* will-change applied only during active transitions via JS.
-         Letting browser compositor decide layer promotion (no manual hacks). */
-      .transition-ready.is-transitioning {
-        will-change: opacity, transform;
-      }
-
       /* Noise background animation */
       @keyframes noise {
         0% {
@@ -124,13 +118,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
     <div class="z-base relative flex-1">
       <Nav />
       <div class="site-container px-4">
-        <main
-          id="main-content"
-          class="transition-ready"
-          transition:animate="fade"
-          transition:animate.duration="0.2"
-          transition:animate.timing="ease-out"
-        >
+        <main id="main-content" class="transition-ready">
           <slot />
         </main>
       </div>
@@ -140,20 +128,6 @@ const currLocale = getLocaleFromUrl(Astro.url);
 
     <!-- Performance optimizations -->
     <script>
-      // Inform the browser about upcoming transitions
-      document.addEventListener("astro:before-preparation", () => {
-        document.querySelectorAll(".transition-ready").forEach((el) => {
-          el.classList.add("is-transitioning");
-        });
-      });
-
-      // Clean up after transition
-      document.addEventListener("astro:after-swap", () => {
-        document.querySelectorAll(".transition-ready").forEach((el) => {
-          el.classList.remove("is-transitioning");
-        });
-      });
-
       // Pause noise animation when tab is backgrounded to save CPU/battery
       const noiseEl = document.querySelector(".noise-background");
       if (noiseEl) {

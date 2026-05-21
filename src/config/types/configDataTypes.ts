@@ -76,6 +76,5 @@ export interface teamMember {
 // --------------------------------------------------------
 // site settings types
 export interface SiteSettingsProps {
-  useViewTransitions?: boolean;
   useAnimations?: boolean;
 }

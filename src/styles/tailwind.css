@@ -137,3 +137,26 @@
    here mirror the v3 `content.files` glob for clarity and to be safe in
    monorepo / virtual-file scenarios. */
 @source "../**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}";
+
+/* ---------- Cross-document view transitions (Baseline 2024) ----------
+   Native CSS-only replacement for Astro's ClientRouter SPA (issue #131).
+   Firefox view-transition support is incomplete and will degrade gracefully
+   to plain full-page navigation. */
+@view-transition {
+  navigation: auto;
+}
+
+/* Smooth fade transition for the main content swap */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.2s;
+  animation-timing-function: ease-out;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
