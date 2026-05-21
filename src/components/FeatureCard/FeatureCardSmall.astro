@@ -24,12 +24,15 @@ const { icon, title, text, suffix = "", ...rest } = Astro.props as Props;
 const cardId = `feature-${title.toLowerCase().replace(/\s+/g, "-")}${suffix}`;
 ---
 
-<article {...rest} class="group">
+<article
+  {...rest}
+  class="group"
+  aria-labelledby={`${cardId}-title`}
+  aria-describedby={`${cardId}-description`}
+>
   <div
     class="focus-within:ring-primary-500 dark:hover:bg-base-900 h-full rounded-md p-6 transition duration-200 focus-within:ring-2 focus-within:ring-offset-2 hover:bg-white hover:shadow-xl"
     tabindex="0"
-    aria-labelledby={`${cardId}-title`}
-    aria-describedby={`${cardId}-description`}
   >
     <div class="flex h-full flex-col">
       <header class="flex items-start gap-2">
