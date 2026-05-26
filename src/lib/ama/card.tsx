@@ -1527,6 +1527,23 @@ export function pickAdjective(persona: Persona, question: string): string {
   return persona.adjectives[idx];
 }
 
+/**
+ * Random pick for all three identity dimensions at once. Used by the
+ * admin Regenerate button and the Telegram inline-keyboard regenerate
+ * callback. The current pick may come up again — that's fine, just hit
+ * Regenerate again. Cheaper than tracking exclusions.
+ */
+export function pickRandomOverrides(): {
+  variantId: string;
+  personaName: string;
+  adjective: string;
+} {
+  const v = variants[Math.floor(Math.random() * variants.length)];
+  const p = personas[Math.floor(Math.random() * personas.length)];
+  const a = p.adjectives[Math.floor(Math.random() * p.adjectives.length)];
+  return { variantId: v.id, personaName: p.name, adjective: a };
+}
+
 // Different salt from the variant pick so persona and variant are
 // independent — same question stays stable across renders.
 export function pickPersona(question: string): Persona {
