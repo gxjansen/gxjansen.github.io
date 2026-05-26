@@ -43,20 +43,23 @@ let optimizedImage: any;
 let jsonLD: any;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
+// Process the custom OG image up-front so any page type can use it.
+// (Previously only blog pages did this, which silently dropped the
+// override for general pages.)
+if (image) {
+  optimizedImage = await getImage({
+    src: image,
+    format: "webp",
+    quality: "high",
+    width: 1200,
+    height: 630,
+    fit: "cover",
+  });
+}
+
 // if this is a blog page we do things differently
 if (type === "blog") {
   const { authors = [], postFrontmatter } = Astro.props as BlogProps;
-
-  if (image) {
-    optimizedImage = await getImage({
-      src: image,
-      format: "webp",
-      quality: "high",
-      width: 1200,
-      height: 630,
-      fit: "cover",
-    });
-  }
 
   jsonLD = jsonLDGenerator({
     type: "blog",
