@@ -89,10 +89,10 @@ const description =
           </div>
 
           <p class="text-base-500 dark:text-base-400 text-xs">
-            URLs and questions over 500 characters are blocked. There's no email
-            or name field, and your IP isn't stored (just a short-lived hash for
-            rate limiting). Whatever you type in the question is stored as-is,
-            so leave out any (personal) info you don't want shared in the public
+            Questions over 500 characters are blocked. There's no email or name
+            field, and your IP isn't stored (just a short-lived hash for rate
+            limiting). Whatever you type in the question is stored as-is, so
+            leave out any (personal) info you don't want shared in the public
             answer.
           </p>
 
@@ -248,10 +248,6 @@ const description =
       const q = textarea.value.trim();
       if (q.length < 10) {
         setError("A bit too short. Give me a few more words.");
-        return;
-      }
-      if (/(https?:\/\/|www\.)/i.test(q)) {
-        setError("Links aren't allowed in questions.");
         return;
       }
 

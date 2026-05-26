@@ -54,9 +54,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     if (question.length < MIN_LEN || question.length > MAX_LEN) {
       return json({ error: "Question must be 10–500 characters." }, 400);
     }
-    if (/(https?:\/\/|www\.)/i.test(question)) {
-      return json({ error: "Links aren't allowed in questions." }, 400);
-    }
+    // Links allowed — the card renderer highlights them like @-mentions
+    // and strips the http(s):// + www. prefix for display.
 
     const altchaKey = process.env.ALTCHA_HMAC_KEY;
     if (altchaKey) {
