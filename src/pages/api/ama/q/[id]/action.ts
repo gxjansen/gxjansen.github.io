@@ -8,7 +8,7 @@
 import type { APIRoute } from "astro";
 import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
-import { variants, personas } from "../../../../../lib/ama/card";
+import { pickRandomOverrides } from "../../../../../lib/ama/card";
 
 export const prerender = false;
 
@@ -29,10 +29,6 @@ function constantTimeEqual(a: string, b: string): boolean {
   } catch {
     return false;
   }
-}
-
-function pickRandom<T>(items: readonly T[]): T {
-  return items[Math.floor(Math.random() * items.length)];
 }
 
 export const POST: APIRoute = async ({ params, request, url }) => {
@@ -75,19 +71,7 @@ export const POST: APIRoute = async ({ params, request, url }) => {
   }
 
   if (action === "regenerate") {
-    // Random pick for all three. The current pick may come up again
-    // for any individual dimension — that's fine, just hit Regenerate
-    // again. Cheaper than tracking exclusions and the user already has
-    // the feedback loop right here.
-    const nextVariant = pickRandom(variants);
-    const nextPersona = pickRandom(personas);
-    const nextAdjective = pickRandom(nextPersona.adjectives);
-    await store.setJSON(id, {
-      ...data,
-      variantId: nextVariant.id,
-      personaName: nextPersona.name,
-      adjective: nextAdjective,
-    });
+    await store.setJSON(id, { ...data, ...pickRandomOverrides() });
     return new Response(null, {
       status: 303,
       headers: { location: adminUrl },

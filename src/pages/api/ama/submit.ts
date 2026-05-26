@@ -12,6 +12,13 @@ import { verifySolution } from "altcha-lib";
 import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
 import { renderAmaCard } from "../../../lib/ama/render";
+import {
+  adminTokenFor,
+  adminUrlFor,
+  captionFor,
+  keyboardFor,
+  sendPhoto,
+} from "../../../lib/ama/telegram";
 
 export const prerender = false;
 
@@ -104,24 +111,16 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
     if (botToken && chatId) {
-      const adminToken = hmac(signingSecret, `admin:${id}`).slice(0, 16);
-      const adminUrl = `https://gui.do/ama/q/${id}?t=${adminToken}`;
-      // Telegram captions cap at 1024 chars; question is ≤500 so plenty of room.
-      const caption = `New AMA question:\n\n"${question}"\n\nAdmin: ${adminUrl}`;
-
-      const form = new FormData();
-      form.append("chat_id", chatId);
-      form.append("caption", caption);
-      form.append(
-        "photo",
-        new Blob([new Uint8Array(png)], { type: "image/png" }),
-        `ama-${id}.png`,
-      );
-
-      const tgRes = await fetch(
-        `https://api.telegram.org/bot${botToken}/sendPhoto`,
-        { method: "POST", body: form },
-      );
+      const token = adminTokenFor(id, signingSecret);
+      const adminUrl = adminUrlFor(id, token);
+      const tgRes = await sendPhoto({
+        botToken,
+        chatId,
+        png,
+        caption: captionFor(question, adminUrl),
+        filename: `ama-${id}.png`,
+        keyboard: keyboardFor(id, adminUrl),
+      });
       if (!tgRes.ok) {
         console.error(
           "Telegram sendPhoto failed:",
