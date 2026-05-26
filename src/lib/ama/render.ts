@@ -4,14 +4,17 @@
    renders don't re-read them.
    ===================================================================== */
 import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
 import satori from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import { AmaCard, type Persona, type Variant } from "./card";
 import { OgFeedStack } from "./og";
 
-const fontDir = join(dirname(fileURLToPath(import.meta.url)), "fonts");
+// import.meta.url points at the bundled chunk path on Netlify (e.g.
+// .netlify/build/chunks/render_XXX.mjs), not at src/lib/ama/render.ts.
+// Resolve from the function's working directory instead — the adapter
+// sets includedFiles:['**/*'] so the project tree is present at runtime.
+const fontDir = join(process.cwd(), "src/lib/ama/fonts");
 
 const fonts = [
   {

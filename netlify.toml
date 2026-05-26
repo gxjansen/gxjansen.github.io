@@ -66,11 +66,11 @@
   to = "/.well-known/:splat"
   status = 200
 
-# Function handling (keep this last)
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/entry"
-  status = 200
+# SSR routing is handled by the @astrojs/netlify adapter via its v2
+# function in .netlify/v1/functions/ssr (declared path: "/*",
+# preferStatic: true). A previous catch-all here pointed at a
+# non-existent /.netlify/functions/entry, which silently 404'd every
+# dynamic route once SSR endpoints landed in /api/.
 
 # Content Security Policy headers
 [[headers]]

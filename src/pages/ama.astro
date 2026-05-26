@@ -89,9 +89,11 @@ const description =
           </div>
 
           <p class="text-base-500 dark:text-base-400 text-xs">
-            URLs and questions over 500 characters are blocked. Submitting
-            doesn't store an email, name, or IP address — only a short-lived
-            hash for rate limiting.
+            URLs and questions over 500 characters are blocked. There's no email
+            or name field, and your IP isn't stored (just a short-lived hash for
+            rate limiting). Whatever you type in the question is stored as-is,
+            so leave out any (personal) info you don't want shared in the public
+            answer.
           </p>
 
           <div
@@ -127,7 +129,7 @@ const description =
             <path d="M5 12l5 5L20 7"></path>
           </svg>
         </div>
-        <h2 class="h2 mb-3">Thanks — your question is in.</h2>
+        <h2 class="h2 mb-3">Thanks, your question is in.</h2>
         <p class="description mb-8 text-base md:text-lg">
           I answer on Bluesky. Follow me there to see the reply when it lands.
         </p>
@@ -192,7 +194,7 @@ const description =
           id="ama-feed-empty"
           class="text-base-500 dark:text-base-400 hidden text-center text-sm"
         >
-          No answered questions yet — yours could be the first.
+          No answered questions yet. Yours could be the first.
         </div>
       </div>
     </div>
@@ -245,7 +247,7 @@ const description =
 
       const q = textarea.value.trim();
       if (q.length < 10) {
-        setError("A bit too short — give me a few more words.");
+        setError("A bit too short. Give me a few more words.");
         return;
       }
       if (/(https?:\/\/|www\.)/i.test(q)) {
@@ -265,7 +267,10 @@ const description =
       status.className = "ama-status text-sm text-base-600 dark:text-base-400";
 
       try {
-        const res = await fetch("/api/ama/submit", {
+        // Trailing slash matters: netlify.toml redirects extension-less
+        // paths to /...path/, which a browser follows as GET and 404s our
+        // POST handler. recent.json is exempted because it has an extension.
+        const res = await fetch("/api/ama/submit/", {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({ question: q, altcha: altchaSolution }),
@@ -283,7 +288,7 @@ const description =
         }
       } catch (err) {
         console.error("AMA submit failed:", err);
-        setError("Network error — please try again.");
+        setError("Network error. Please try again.");
         if (submitBtn) submitBtn.removeAttribute("disabled");
       }
     });
