@@ -82,7 +82,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     if (prev && now - prev.first < RATE_LIMIT_WINDOW_MS) {
       if (prev.count >= RATE_LIMIT_MAX) {
         return json(
-          { error: "Too many questions — try again in an hour." },
+          { error: "Too many questions. Try again in an hour." },
           429,
         );
       }
