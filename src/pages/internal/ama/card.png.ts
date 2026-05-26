@@ -11,6 +11,7 @@ export const GET: APIRoute = async ({ url }) => {
   const q = url.searchParams.get("q") ?? DEFAULT_Q;
   const variantId = url.searchParams.get("variant");
   const personaName = url.searchParams.get("persona");
+  const adjectiveOverride = url.searchParams.get("adjective");
 
   if (q.length > 500) {
     return new Response("question too long (max 500 chars)", { status: 400 });
@@ -26,6 +27,13 @@ export const GET: APIRoute = async ({ url }) => {
       (x) => x.name.toLowerCase() === personaName.toLowerCase(),
     );
     if (p) overrides.persona = p;
+  }
+  if (adjectiveOverride && overrides.persona) {
+    // Only honor an adjective override that actually belongs to the
+    // chosen persona — keeps the alliteration invariant.
+    if (overrides.persona.adjectives.includes(adjectiveOverride)) {
+      overrides.adjective = adjectiveOverride;
+    }
   }
 
   try {

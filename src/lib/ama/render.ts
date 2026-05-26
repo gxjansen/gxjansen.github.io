@@ -41,9 +41,23 @@ const fonts = [
     weight: 600 as const,
     style: "normal" as const,
   },
+  // Source Serif 4 Bold, used only for the opening quote glyph.
+  // Poppins' " is flat; a serif gives the typographic curl Satori
+  // would otherwise have to fake (badly). The matching change in
+  // PR #176 didn't survive the squash-merge — re-bundling here.
+  {
+    name: "Source Serif",
+    data: readFileSync(join(fontDir, "SourceSerif4-Bold.ttf")),
+    weight: 700 as const,
+    style: "normal" as const,
+  },
 ];
 
-export type RenderOverrides = { variant?: Variant; persona?: Persona };
+export type RenderOverrides = {
+  variant?: Variant;
+  persona?: Persona;
+  adjective?: string;
+};
 
 export async function renderAmaCard(
   question: string,
