@@ -1,0 +1,347 @@
+---
+/**
+ * AMA — Ask Me Anything
+ *
+ * Anonymous question form. Submissions go to Guido's Telegram; he answers
+ * on Bluesky and the answers appear inline below the form (pulled from his
+ * #ama tagged posts).
+ *
+ * Not listed in primary nav by design — discoverable via sitemap, direct
+ * link, and social share. See workspace doc:
+ * ~/Documents/CoreNotes/Workspaces/brand/2026-05-25-ama-feature-design.md
+ *
+ * Submit endpoint is a stub until the Telegram backend lands.
+ */
+
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Badge from "@components/Badge/Badge.astro";
+import Button from "@components/Button/Button.astro";
+
+import ogImage from "@images/ama/og.png";
+
+const altchaChallengeUrl = "/.netlify/functions/altcha-challenge";
+
+const description =
+  "Ask me anything, anonymously. I'll answer on Bluesky. No login, no email, no tracking.";
+---
+
+<BaseLayout title="Ask Me Anything" description={description} image={ogImage}>
+  <!-- Hero -->
+  <section class="pt-24 pb-8 md:pt-28">
+    <div class="site-container px-4">
+      <div class="mx-auto max-w-2xl text-center">
+        <Badge>AMA · Open</Badge>
+        <h1 class="h1 mb-4">Ask me anything</h1>
+        <p class="description text-lg md:text-xl">
+          Anonymous. No login, no email, no tracking. I'll answer on Bluesky.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form -->
+  <section id="ama-form-section" class="pb-16 md:pb-20">
+    <div class="site-container px-4">
+      <div class="mx-auto max-w-2xl">
+        <form id="ama-form" class="flex flex-col gap-4" novalidate>
+          <label for="ama-question" class="sr-only">Your question</label>
+          <textarea
+            id="ama-question"
+            name="question"
+            required
+            minlength="10"
+            maxlength="500"
+            rows="5"
+            placeholder="What would you like to ask?"
+            aria-describedby="ama-counter ama-status"
+            class="border-base-300 dark:border-base-700 bg-base-50/60 dark:bg-base-900/40 text-base-900 dark:text-base-100 focus:border-primary-500 focus:ring-primary-500/30 rounded-lg border px-4 py-3 text-base leading-relaxed transition focus:ring-2 focus:outline-none"
+          ></textarea>
+
+          <div
+            id="ama-counter"
+            aria-live="polite"
+            class="text-base-500 dark:text-base-400 -mt-2 text-right text-xs"
+          >
+            <span data-counter="current">0</span> / 500
+          </div>
+
+          <div
+            class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div
+              class="altcha-container flex-shrink-0"
+              role="group"
+              aria-label="Spam verification"
+            >
+              <span id="ama-altcha-desc" class="sr-only">
+                Complete the verification to prove you're human
+              </span>
+              <altcha-widget
+                challengeurl={altchaChallengeUrl}
+                hidefooter
+                hidelogo
+                aria-describedby="ama-altcha-desc"></altcha-widget>
+            </div>
+
+            <Button type="submit" variant="primary" arrow="right">
+              Send question
+            </Button>
+          </div>
+
+          <p class="text-base-500 dark:text-base-400 text-xs">
+            URLs and questions over 500 characters are blocked. Submitting
+            doesn't store an email, name, or IP address — only a short-lived
+            hash for rate limiting.
+          </p>
+
+          <div
+            id="ama-status"
+            class="ama-status text-sm"
+            role="status"
+            aria-live="polite"
+          >
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success state — hidden until submit -->
+  <section id="ama-success" class="hidden pb-16 md:pb-20">
+    <div class="site-container px-4">
+      <div
+        class="border-primary-200 dark:border-primary-800 bg-primary-50/60 dark:bg-primary-950/40 mx-auto max-w-2xl rounded-xl border p-8 text-center md:p-12"
+      >
+        <div class="mb-4 flex justify-center">
+          <svg
+            class="text-primary-500 size-12"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12l5 5L20 7"></path>
+          </svg>
+        </div>
+        <h2 class="h2 mb-3">Thanks — your question is in.</h2>
+        <p class="description mb-8 text-base md:text-lg">
+          I answer on Bluesky. Follow me there to see the reply when it lands.
+        </p>
+        <div
+          class="flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
+        >
+          <Button
+            href="https://bsky.app/profile/gui.do"
+            target="_blank"
+            rel="noopener"
+            variant="primary"
+            arrow="right"
+          >
+            Follow on Bluesky
+          </Button>
+          <Button
+            href="https://bsky.app/hashtag/ama?author=gui.do"
+            target="_blank"
+            rel="noopener"
+            variant="outline"
+          >
+            Browse answered AMAs
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent answered Q&As -->
+  <section class="pb-24 md:pb-28">
+    <div class="site-container px-4">
+      <div class="mx-auto max-w-5xl">
+        <div class="mb-8 flex items-end justify-between">
+          <h2 class="h3">Recently answered</h2>
+          <a
+            href="https://bsky.app/hashtag/ama?author=gui.do"
+            target="_blank"
+            rel="noopener"
+            class="text-primary-600 dark:text-primary-400 text-sm font-medium hover:underline"
+          >
+            View more on Bluesky →
+          </a>
+        </div>
+
+        <div id="ama-feed" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Placeholders shown while fetching -->
+          <div
+            class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 h-72 animate-pulse rounded-xl border p-6"
+          >
+          </div>
+          <div
+            class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 h-72 animate-pulse rounded-xl border p-6"
+          >
+          </div>
+          <div
+            class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 h-72 animate-pulse rounded-xl border p-6"
+          >
+          </div>
+        </div>
+
+        <div
+          id="ama-feed-empty"
+          class="text-base-500 dark:text-base-400 hidden text-center text-sm"
+        >
+          No answered questions yet — yours could be the first.
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  // Inline so the script lands directly in the HTML — avoids the dev-server
+  // module/MIME quirk that blocks Astro-hoisted scripts under the Netlify
+  // middleware. No TS types here, just JS.
+
+  // ── ALTCHA widget (shared loader) ─────────────────────────────────────
+  (function loadAltchaScript() {
+    if (document.querySelector("script[data-altcha]")) return;
+    const s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js";
+    s.type = "module";
+    s.async = true;
+    s.dataset.altcha = "true";
+    document.head.appendChild(s);
+  })();
+
+  // ── Char counter ──────────────────────────────────────────────────────
+  const textarea = document.getElementById("ama-question");
+  const counter = document.querySelector('[data-counter="current"]');
+  if (textarea) {
+    textarea.addEventListener("input", () => {
+      if (counter) counter.textContent = String(textarea.value.length);
+    });
+  }
+
+  // ── Form submit (stubbed until backend lands) ─────────────────────────
+  const form = document.getElementById("ama-form");
+  const status = document.getElementById("ama-status");
+  const formSection = document.getElementById("ama-form-section");
+  const successSection = document.getElementById("ama-success");
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!status || !textarea) return;
+
+      const q = textarea.value.trim();
+      if (q.length < 10) {
+        status.textContent = "A bit too short — give me a few more words.";
+        status.className = "ama-status text-sm text-red-600 dark:text-red-400";
+        return;
+      }
+      if (/(https?:\/\/|www\.)/i.test(q)) {
+        status.textContent = "Links aren't allowed in questions.";
+        status.className = "ama-status text-sm text-red-600 dark:text-red-400";
+        return;
+      }
+
+      // STUB: backend wiring lands in a follow-up PR. For now, immediately
+      // pretend success so the UI flow is testable end-to-end.
+      if (formSection) formSection.classList.add("hidden");
+      if (successSection) {
+        successSection.classList.remove("hidden");
+        successSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
+  // ── Recent answered Q&As (proxied through /api/ama/recent.json) ───────
+  async function loadFeed() {
+    const feed = document.getElementById("ama-feed");
+    const empty = document.getElementById("ama-feed-empty");
+    if (!feed) return;
+
+    try {
+      const res = await fetch("/api/ama/recent.json", {
+        headers: { accept: "application/json" },
+      });
+      if (!res.ok) throw new Error("API " + res.status);
+      const data = await res.json();
+      const posts = data.posts || [];
+
+      feed.innerHTML = "";
+
+      if (posts.length === 0) {
+        feed.classList.add("hidden");
+        if (empty) empty.classList.remove("hidden");
+        return;
+      }
+
+      const fmt = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+      const now = Date.now();
+      function relativeTime(iso) {
+        const diff = (new Date(iso).getTime() - now) / 1000;
+        const units = [
+          ["year", 60 * 60 * 24 * 365],
+          ["month", 60 * 60 * 24 * 30],
+          ["week", 60 * 60 * 24 * 7],
+          ["day", 60 * 60 * 24],
+          ["hour", 60 * 60],
+          ["minute", 60],
+        ];
+        for (const [unit, secs] of units) {
+          if (Math.abs(diff) >= secs)
+            return fmt.format(Math.round(diff / secs), unit);
+        }
+        return fmt.format(Math.round(diff), "second");
+      }
+
+      function escapeHtml(s) {
+        return s.replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      }
+
+      feed.innerHTML = posts
+        .map(
+          (p) => `
+        <a href="${escapeHtml(p.bskyUrl)}" target="_blank" rel="noopener"
+           class="ama-feed-card border-base-200 dark:border-base-800 bg-base-50/60 dark:bg-base-900/40 hover:border-primary-400 dark:hover:border-primary-600 group block overflow-hidden rounded-xl border transition">
+          <img src="${escapeHtml(p.image.thumb)}"
+               alt="${escapeHtml(p.image.alt || "AMA question card")}"
+               loading="lazy" decoding="async"
+               width="1200" height="630"
+               class="aspect-[1.91/1] w-full object-cover" />
+          <div class="flex flex-col gap-2 p-4">
+            <p class="text-base-700 dark:text-base-300 line-clamp-3 text-sm">${escapeHtml(p.text)}</p>
+            <p class="text-base-500 dark:text-base-400 text-xs">${relativeTime(p.createdAt)} · on Bluesky →</p>
+          </div>
+        </a>`,
+        )
+        .join("");
+    } catch (err) {
+      console.error("AMA feed failed:", err);
+      feed.classList.add("hidden");
+      if (empty) empty.classList.remove("hidden");
+    }
+  }
+
+  loadFeed();
+</script>
+
+<style is:global>
+  /* Match the site's altcha sizing from the newsletter form. */
+  altcha-widget {
+    --altcha-max-width: 100%;
+  }
+</style>
