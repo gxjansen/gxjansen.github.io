@@ -1,0 +1,92 @@
+---
+import { variants, personas } from '../../../lib/ama/card';
+
+export const prerender = false;
+
+const SAMPLE_Q = "I'm a solo founder trying to grow a developer tool. Should I start a Discord, a forum, or just be active on Bluesky in the first 90 days?";
+
+const LENGTHS = {
+  short:  "Why do most community programs fail in their first year?",
+  medium: "I'm a solo founder trying to grow a developer tool. Should I start a Discord, a forum, or just be active on Bluesky — and what's actually worth the energy in the first 90 days?",
+  long:   "I keep reading about psychology-driven design but every time I bring it up at my retail company the marketing team treats it like academic fluff. How do you frame the conversation with executives who only care about quarterly conversion numbers — do you lead with the science, the A/B test numbers, or with customer stories? And what do you do when the experiment results contradict the HiPPO's gut feeling?",
+};
+
+const FEED = [
+  "Discord, Slack, or self-hosted forum for a 200-person dev community?",
+  "What's the most overrated metric in community work?",
+  "Why do most community programs fail in their first year?",
+  "What's the single biggest mistake you see new community managers make?",
+  "Best book on community work you've read this year?",
+  "What changed about your work after moving from agency to in-house?",
+  "How do you measure community ROI without falling into vanity metrics?",
+  "When did you realise psychology was the missing piece in conversion work?",
+  "How do you stay focused when your job is mostly listening?",
+  "What's one EU tech conference convention you'd happily kill?",
+];
+
+const enc = (s: string) => encodeURIComponent(s);
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>AMA card · dev gallery</title>
+<style>
+  body { margin: 0; padding: 32px; background: #1a1825; color: #e0def4;
+    font: 14px/1.5 -apple-system, system-ui, sans-serif; }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  h2 { font-size: 16px; margin: 32px 0 12px; color: #f3f1ff; }
+  p.sub { color: #908caa; max-width: 900px; margin: 0 0 24px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .card { display: flex; flex-direction: column; gap: 8px; }
+  .label { color: #908caa; font-size: 12px; font-family: ui-monospace, monospace; }
+  img { width: 100%; height: auto; border-radius: 8px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04), 0 8px 24px rgba(0,0,0,0.4); }
+</style>
+</head>
+<body>
+<h1>AMA card · dev gallery</h1>
+<p class="sub">Each tile hits <code>/internal/ama/card.png</code> with different params. Forced variant/persona for the first two sections; hash-driven for the feed.</p>
+
+<h2>Gallery · 7 colour variants (forced)</h2>
+<div class="grid">
+  {variants.map((v) => (
+    <div class="card">
+      <span class="label">{v.id}</span>
+      <img src={`/internal/ama/card.png?q=${enc(SAMPLE_Q)}&variant=${v.id}&persona=${enc(personas[0].name)}`} alt={v.id} loading="lazy" />
+    </div>
+  ))}
+</div>
+
+<h2>Sizing · pickFontSize across three length tiers</h2>
+<div class="grid">
+  {Object.entries(LENGTHS).map(([id, q]) => (
+    <div class="card">
+      <span class="label">{id} · {q.length} chars</span>
+      <img src={`/internal/ama/card.png?q=${enc(q)}&variant=${variants[0].id}&persona=${enc(personas[1].name)}`} alt={id} loading="lazy" />
+    </div>
+  ))}
+</div>
+
+<h2>Feed · 10 questions (hash-driven, no overrides)</h2>
+<div class="grid">
+  {FEED.map((q, i) => (
+    <div class="card">
+      <span class="label">Q{i+1}</span>
+      <img src={`/internal/ama/card.png?q=${enc(q)}`} alt={`Q${i+1}`} loading="lazy" />
+    </div>
+  ))}
+</div>
+
+<h2>Personas · all {personas.length} animals on one variant</h2>
+<div class="grid">
+  {personas.map((p) => (
+    <div class="card">
+      <span class="label">{p.adjective} {p.name}</span>
+      <img src={`/internal/ama/card.png?q=${enc(`How do you think about ${p.name.toLowerCase()}-style community work in 2026?`)}&variant=${variants[0].id}&persona=${enc(p.name)}`} alt={p.name} loading="lazy" />
+    </div>
+  ))}
+</div>
+
+</body>
+</html>
