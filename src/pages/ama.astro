@@ -65,7 +65,9 @@ const description =
             <span data-counter="current">0</span> / 500
           </div>
 
-          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div
+            class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+          >
             <div
               class="altcha-container flex-shrink-0"
               role="group"
@@ -78,8 +80,7 @@ const description =
                 challengeurl={altchaChallengeUrl}
                 hidefooter
                 hidelogo
-                aria-describedby="ama-altcha-desc"
-              />
+                aria-describedby="ama-altcha-desc"></altcha-widget>
             </div>
 
             <Button type="submit" variant="primary" arrow="right">
@@ -88,9 +89,9 @@ const description =
           </div>
 
           <p class="text-base-500 dark:text-base-400 text-xs">
-            URLs and questions over 500 characters are blocked.
-            Submitting doesn't store an email, name, or IP address — only a
-            short-lived hash for rate limiting.
+            URLs and questions over 500 characters are blocked. Submitting
+            doesn't store an email, name, or IP address — only a short-lived
+            hash for rate limiting.
           </p>
 
           <div
@@ -98,7 +99,8 @@ const description =
             class="ama-status text-sm"
             role="status"
             aria-live="polite"
-          ></div>
+          >
+          </div>
         </form>
       </div>
     </div>
@@ -108,7 +110,7 @@ const description =
   <section id="ama-success" class="hidden pb-16 md:pb-20">
     <div class="site-container px-4">
       <div
-        class="border-primary-200 dark:border-primary-800 bg-primary-50/60 dark:bg-primary-950/40 mx-auto max-w-2xl rounded-xl border p-8 md:p-12 text-center"
+        class="border-primary-200 dark:border-primary-800 bg-primary-50/60 dark:bg-primary-950/40 mx-auto max-w-2xl rounded-xl border p-8 text-center md:p-12"
       >
         <div class="mb-4 flex justify-center">
           <svg
@@ -122,14 +124,16 @@ const description =
             stroke-linejoin="round"
             aria-hidden="true"
           >
-            <path d="M5 12l5 5L20 7" />
+            <path d="M5 12l5 5L20 7"></path>
           </svg>
         </div>
         <h2 class="h2 mb-3">Thanks — your question is in.</h2>
         <p class="description mb-8 text-base md:text-lg">
           I answer on Bluesky. Follow me there to see the reply when it lands.
         </p>
-        <div class="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <div
+          class="flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
+        >
           <Button
             href="https://bsky.app/profile/gui.do"
             target="_blank"
@@ -162,7 +166,7 @@ const description =
             href="https://bsky.app/hashtag/ama?author=gui.do"
             target="_blank"
             rel="noopener"
-            class="text-primary-600 dark:text-primary-400 hover:underline text-sm font-medium"
+            class="text-primary-600 dark:text-primary-400 text-sm font-medium hover:underline"
           >
             View more on Bluesky →
           </a>
@@ -170,9 +174,18 @@ const description =
 
         <div id="ama-feed" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <!-- Placeholders shown while fetching -->
-          <div class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 animate-pulse rounded-xl border p-6 h-72"></div>
-          <div class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 animate-pulse rounded-xl border p-6 h-72"></div>
-          <div class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 animate-pulse rounded-xl border p-6 h-72"></div>
+          <div
+            class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 h-72 animate-pulse rounded-xl border p-6"
+          >
+          </div>
+          <div
+            class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 h-72 animate-pulse rounded-xl border p-6"
+          >
+          </div>
+          <div
+            class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 h-72 animate-pulse rounded-xl border p-6"
+          >
+          </div>
         </div>
 
         <div
@@ -271,24 +284,37 @@ const description =
       function relativeTime(iso) {
         const diff = (new Date(iso).getTime() - now) / 1000;
         const units = [
-          ["year",   60 * 60 * 24 * 365],
-          ["month",  60 * 60 * 24 * 30],
-          ["week",   60 * 60 * 24 * 7],
-          ["day",    60 * 60 * 24],
-          ["hour",   60 * 60],
+          ["year", 60 * 60 * 24 * 365],
+          ["month", 60 * 60 * 24 * 30],
+          ["week", 60 * 60 * 24 * 7],
+          ["day", 60 * 60 * 24],
+          ["hour", 60 * 60],
           ["minute", 60],
         ];
         for (const [unit, secs] of units) {
-          if (Math.abs(diff) >= secs) return fmt.format(Math.round(diff / secs), unit);
+          if (Math.abs(diff) >= secs)
+            return fmt.format(Math.round(diff / secs), unit);
         }
         return fmt.format(Math.round(diff), "second");
       }
 
       function escapeHtml(s) {
-        return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+        return s.replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
       }
 
-      feed.innerHTML = posts.map((p) => `
+      feed.innerHTML = posts
+        .map(
+          (p) => `
         <a href="${escapeHtml(p.bskyUrl)}" target="_blank" rel="noopener"
            class="ama-feed-card border-base-200 dark:border-base-800 bg-base-50/60 dark:bg-base-900/40 hover:border-primary-400 dark:hover:border-primary-600 group block overflow-hidden rounded-xl border transition">
           <img src="${escapeHtml(p.image.thumb)}"
@@ -300,8 +326,9 @@ const description =
             <p class="text-base-700 dark:text-base-300 line-clamp-3 text-sm">${escapeHtml(p.text)}</p>
             <p class="text-base-500 dark:text-base-400 text-xs">${relativeTime(p.createdAt)} · on Bluesky →</p>
           </div>
-        </a>`
-      ).join("");
+        </a>`,
+        )
+        .join("");
     } catch (err) {
       console.error("AMA feed failed:", err);
       feed.classList.add("hidden");

@@ -45,8 +45,11 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 
 // Process the custom OG image up-front so any page type can use it.
 // (Previously only blog pages did this, which silently dropped the
-// override for general pages.)
-if (image) {
+// override for general pages.) Only run getImage on real ImageMetadata —
+// some callers (e.g. presentations) pass a URL/string with `as any`.
+const isImageMetadata =
+  image && typeof image === "object" && "src" in image && "format" in image;
+if (isImageMetadata) {
   optimizedImage = await getImage({
     src: image,
     format: "webp",

@@ -18,7 +18,7 @@
    Ported verbatim from the Claude Design handoff at
    ~/Documents/CoreNotes/Workspaces/brand/2026-05-25-ama-feature-design.md
    ===================================================================== */
-import * as React from 'react';
+import * as React from "react";
 
 /* =====================================================================
    Types
@@ -36,7 +36,6 @@ export type Persona = {
   Avatar: React.ComponentType;
 };
 
-
 /* =====================================================================
    pickFontSize — auto-scale the question type to its length.
      ≤  90 chars → 64px  (short, hero-sized)
@@ -48,7 +47,6 @@ export function pickFontSize(len: number): number {
   if (len <= 240) return 46;
   return 30;
 }
-
 
 /* =====================================================================
    fnv1a — deterministic 32-bit hash.
@@ -64,24 +62,58 @@ export function fnv1a(str: string): number {
   return h >>> 0;
 }
 
-
 /* =====================================================================
    variants — 7 background+text token bundles, spread across Rosé Pine.
    Contrast audited at Poppins SemiBold ≥ 30px (AA Large threshold 3:1).
    ===================================================================== */
 export const variants: Variant[] = [
-  { id: 'cream-pine',    bg: '#faf4ed', textColor: '#1a1825', subtleColor: '#575279', accent: '#286983' },
-  { id: 'pine-gold',     bg: '#1b4a5c', textColor: '#fffaf3', subtleColor: '#bdc8cd', accent: '#f6c177' },
-  { id: 'iris-cream',    bg: '#907aa9', textColor: '#fffaf3', subtleColor: '#e8e1ef', accent: '#f6c177' },
-  { id: 'foam-cream',    bg: '#3d7782', textColor: '#fffaf3', subtleColor: '#d6e6ea', accent: '#f6c177' },
-  { id: 'overlay-love',  bg: '#f2e9e1', textColor: '#1a1825', subtleColor: '#575279', accent: '#b4637a' },
-  { id: 'gold-ink',      bg: '#ea9d34', textColor: '#1a1825', subtleColor: '#4a3a1c', accent: '#1b4a5c' },
+  {
+    id: "cream-pine",
+    bg: "#faf4ed",
+    textColor: "#1a1825",
+    subtleColor: "#575279",
+    accent: "#286983",
+  },
+  {
+    id: "pine-gold",
+    bg: "#1b4a5c",
+    textColor: "#fffaf3",
+    subtleColor: "#bdc8cd",
+    accent: "#f6c177",
+  },
+  {
+    id: "iris-cream",
+    bg: "#907aa9",
+    textColor: "#fffaf3",
+    subtleColor: "#e8e1ef",
+    accent: "#f6c177",
+  },
+  {
+    id: "foam-cream",
+    bg: "#3d7782",
+    textColor: "#fffaf3",
+    subtleColor: "#d6e6ea",
+    accent: "#f6c177",
+  },
+  {
+    id: "overlay-love",
+    bg: "#f2e9e1",
+    textColor: "#1a1825",
+    subtleColor: "#575279",
+    accent: "#b4637a",
+  },
+  {
+    id: "gold-ink",
+    bg: "#ea9d34",
+    textColor: "#1a1825",
+    subtleColor: "#4a3a1c",
+    accent: "#1b4a5c",
+  },
 ];
 
 export function pickVariant(question: string): Variant {
   return variants[fnv1a(question) % variants.length];
 }
-
 
 /* =====================================================================
    Avatars — every animal is its own SVG, 80×80 viewBox.
@@ -90,20 +122,20 @@ export function pickVariant(question: string): Variant {
    The avatar's own palette is chosen to read on every variant bg.
    ===================================================================== */
 const C = {
-  ink:    '#1a1825',
-  cream:  '#fffaf3',
-  beige:  '#f2e9e1',
-  rose:   '#d7827e',
-  love:   '#b4637a',
-  loveBr: '#eb6f92', // Rosé Pine Main love — bright red, used for the Robin bib
-  gold:   '#ea9d34',
-  goldDk: '#c47e1e',
-  pine:   '#286983',
-  pineDk: '#1b4a5c',
-  foam:   '#56949f',
-  foamDk: '#3d7782',
-  iris:   '#907aa9',
-  irisDk: '#735e8a',
+  ink: "#1a1825",
+  cream: "#fffaf3",
+  beige: "#f2e9e1",
+  rose: "#d7827e",
+  love: "#b4637a",
+  loveBr: "#eb6f92", // Rosé Pine Main love — bright red, used for the Robin bib
+  gold: "#ea9d34",
+  goldDk: "#c47e1e",
+  pine: "#286983",
+  pineDk: "#1b4a5c",
+  foam: "#56949f",
+  foamDk: "#3d7782",
+  iris: "#907aa9",
+  irisDk: "#735e8a",
 };
 
 /* ── Birds ──────────────────────────────────────────────────────────── */
@@ -139,24 +171,68 @@ function HeronAvatar() {
     <svg width="100%" height="100%" viewBox="0 0 80 80">
       <circle cx="40" cy="40" r="40" fill={C.foam} />
       {/* LONG thin yellow legs (extend nearly to the bottom of the circle) */}
-      <path d="M 42 50 L 40 76" stroke={C.gold} strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M 50 50 L 52 76" stroke={C.gold} strokeWidth="2.5" strokeLinecap="round" />
+      <path
+        d="M 42 50 L 40 76"
+        stroke={C.gold}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 50 50 L 52 76"
+        stroke={C.gold}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
       {/* feet hints */}
-      <path d="M 36 76 L 44 76" stroke={C.gold} strokeWidth="2" strokeLinecap="round" />
-      <path d="M 48 76 L 56 76" stroke={C.gold} strokeWidth="2" strokeLinecap="round" />
+      <path
+        d="M 36 76 L 44 76"
+        stroke={C.gold}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 48 76 L 56 76"
+        stroke={C.gold}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
       {/* compact body sits higher to leave leg room */}
       <ellipse cx="46" cy="46" rx="13" ry="9" fill={C.beige} />
       {/* dramatic S-curve long neck */}
-      <path d="M 42 42 C 58 38, 26 32, 26 20" stroke={C.beige} strokeWidth="6" fill="none" strokeLinecap="round" />
+      <path
+        d="M 42 42 C 58 38, 26 32, 26 20"
+        stroke={C.beige}
+        strokeWidth="6"
+        fill="none"
+        strokeLinecap="round"
+      />
       {/* small head */}
       <circle cx="26" cy="18" r="5.5" fill={C.beige} />
       {/* long sharp dagger bill */}
       <path d="M 20 18 L 4 14 L 20 22 Z" fill={C.gold} />
       {/* trailing breeding plumes */}
-      <path d="M 28 14 Q 38 8 42 10" stroke={C.foamDk} strokeWidth="1.8" fill="none" strokeLinecap="round" />
-      <path d="M 28 10 Q 36 4 40 6" stroke={C.foamDk} strokeWidth="1.4" fill="none" strokeLinecap="round" />
+      <path
+        d="M 28 14 Q 38 8 42 10"
+        stroke={C.foamDk}
+        strokeWidth="1.8"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 28 10 Q 36 4 40 6"
+        stroke={C.foamDk}
+        strokeWidth="1.4"
+        fill="none"
+        strokeLinecap="round"
+      />
       {/* wing fold */}
-      <path d="M 44 44 Q 56 38 60 50" stroke={C.foamDk} strokeWidth="1.5" fill="none" opacity="0.55" />
+      <path
+        d="M 44 44 Q 56 38 60 50"
+        stroke={C.foamDk}
+        strokeWidth="1.5"
+        fill="none"
+        opacity="0.55"
+      />
       {/* eye */}
       <circle cx="26" cy="16" r="1.3" fill={C.ink} />
     </svg>
@@ -169,7 +245,12 @@ function KingfisherAvatar() {
     <svg width="100%" height="100%" viewBox="0 0 80 80">
       <circle cx="40" cy="40" r="40" fill={C.cream} />
       {/* perch line */}
-      <path d="M 12 64 L 68 64" stroke={C.goldDk} strokeWidth="2" strokeLinecap="round" />
+      <path
+        d="M 12 64 L 68 64"
+        stroke={C.goldDk}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
       {/* stout body — mostly blue back */}
       <ellipse cx="44" cy="50" rx="20" ry="15" fill={C.pine} />
       {/* RUST belly */}
@@ -181,8 +262,18 @@ function KingfisherAvatar() {
       {/* LONG straight dagger bill */}
       <path d="M 18 32 L -4 28 L 18 38 Z" fill={C.ink} />
       {/* foot stubs on perch */}
-      <path d="M 38 62 L 38 66" stroke={C.goldDk} strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M 50 62 L 50 66" stroke={C.goldDk} strokeWidth="1.6" strokeLinecap="round" />
+      <path
+        d="M 38 62 L 38 66"
+        stroke={C.goldDk}
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 50 62 L 50 66"
+        stroke={C.goldDk}
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
       {/* tail */}
       <path d="M 60 50 L 72 52 L 64 56 Z" fill={C.pine} />
       {/* eye */}
@@ -206,9 +297,18 @@ function HornbillAvatar() {
       {/* huge downward-curving beak */}
       <path d="M 28 38 Q 8 38 4 48 Q 8 52 28 48 Z" fill={C.gold} />
       {/* CASQUE on top of beak — the diagnostic feature */}
-      <path d="M 12 32 Q 24 22 32 30 Q 32 38 26 40 Q 14 40 12 32 Z" fill={C.love} />
+      <path
+        d="M 12 32 Q 24 22 32 30 Q 32 38 26 40 Q 14 40 12 32 Z"
+        fill={C.love}
+      />
       {/* casque crease */}
-      <path d="M 14 32 Q 22 28 28 32" stroke={C.goldDk} strokeWidth="1.2" fill="none" opacity="0.6" />
+      <path
+        d="M 14 32 Q 22 28 28 32"
+        stroke={C.goldDk}
+        strokeWidth="1.2"
+        fill="none"
+        opacity="0.6"
+      />
       {/* eye */}
       <circle cx="44" cy="34" r="2.4" fill={C.cream} />
       <circle cx="44" cy="34" r="1.2" fill={C.ink} />
@@ -222,9 +322,15 @@ function SwiftAvatar() {
     <svg width="100%" height="100%" viewBox="0 0 80 80">
       <circle cx="40" cy="40" r="40" fill={C.foam} />
       {/* left wing — long sweeping sickle */}
-      <path d="M 40 42 Q 28 36 10 16 Q 16 30 32 38 Q 36 40 40 42 Z" fill={C.pineDk} />
+      <path
+        d="M 40 42 Q 28 36 10 16 Q 16 30 32 38 Q 36 40 40 42 Z"
+        fill={C.pineDk}
+      />
       {/* right wing — mirrored sickle */}
-      <path d="M 40 42 Q 52 36 70 16 Q 64 30 48 38 Q 44 40 40 42 Z" fill={C.pineDk} />
+      <path
+        d="M 40 42 Q 52 36 70 16 Q 64 30 48 38 Q 44 40 40 42 Z"
+        fill={C.pineDk}
+      />
       {/* slim body — vertical cigar */}
       <ellipse cx="40" cy="46" rx="4" ry="16" fill={C.pineDk} />
       {/* tiny round head */}
@@ -272,16 +378,32 @@ function FalconAvatar() {
     <svg width="100%" height="100%" viewBox="0 0 80 80">
       <circle cx="40" cy="40" r="40" fill={C.beige} />
       {/* DARK peregrine HOOD — wraps top + sides of head */}
-      <path d="M 8 36 Q 10 12 40 8 Q 70 12 72 36 Q 70 50 60 56 Q 56 44 48 42 L 32 42 Q 24 44 20 56 Q 10 50 8 36 Z" fill={C.ink} />
+      <path
+        d="M 8 36 Q 10 12 40 8 Q 70 12 72 36 Q 70 50 60 56 Q 56 44 48 42 L 32 42 Q 24 44 20 56 Q 10 50 8 36 Z"
+        fill={C.ink}
+      />
       {/* white face/cheeks */}
       <path d="M 22 44 Q 40 62 58 44 L 54 60 Q 40 70 26 60 Z" fill={C.cream} />
       {/* THICK MALAR STRIPES on both sides */}
-      <path d="M 30 38 L 24 60" stroke={C.ink} strokeWidth="4.5" strokeLinecap="round" />
-      <path d="M 50 38 L 56 60" stroke={C.ink} strokeWidth="4.5" strokeLinecap="round" />
+      <path
+        d="M 30 38 L 24 60"
+        stroke={C.ink}
+        strokeWidth="4.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 50 38 L 56 60"
+        stroke={C.ink}
+        strokeWidth="4.5"
+        strokeLinecap="round"
+      />
       {/* yellow cere (above beak) */}
       <rect x="34" y="38" width="12" height="6" rx="2" fill={C.gold} />
       {/* HOOKED BEAK — curving sharply down */}
-      <path d="M 34 44 L 40 56 L 46 44 Q 44 52 40 52 Q 36 52 34 44 Z" fill={C.goldDk} />
+      <path
+        d="M 34 44 L 40 56 L 46 44 Q 44 52 40 52 Q 36 52 34 44 Z"
+        fill={C.goldDk}
+      />
       {/* piercing yellow-rimmed eyes */}
       <ellipse cx="30" cy="32" rx="4" ry="4.5" fill={C.gold} />
       <ellipse cx="50" cy="32" rx="4" ry="4.5" fill={C.gold} />
@@ -362,7 +484,13 @@ function ToucanAvatar() {
       {/* MASSIVE colourful curved bill */}
       <path d="M 30 30 Q 0 22 -2 38 Q 4 50 30 40 Z" fill={C.gold} />
       {/* red band on bill */}
-      <path d="M 28 32 Q 8 30 -2 32" stroke={C.love} strokeWidth="4" fill="none" strokeLinecap="round" />
+      <path
+        d="M 28 32 Q 8 30 -2 32"
+        stroke={C.love}
+        strokeWidth="4"
+        fill="none"
+        strokeLinecap="round"
+      />
       {/* darker bill tip */}
       <path d="M -2 38 Q 2 36 6 38 L 4 42 Q 0 42 -2 38 Z" fill={C.goldDk} />
       {/* beak base ring */}
@@ -382,10 +510,30 @@ function HoopoeAvatar() {
       {/* body */}
       <ellipse cx="40" cy="50" rx="20" ry="16" fill={C.gold} />
       {/* BARRED wings */}
-      <path d="M 44 44 L 64 44" stroke={C.ink} strokeWidth="3" strokeLinecap="round" />
-      <path d="M 44 50 L 64 50" stroke={C.ink} strokeWidth="3" strokeLinecap="round" />
-      <path d="M 44 56 L 64 56" stroke={C.ink} strokeWidth="3" strokeLinecap="round" />
-      <path d="M 44 62 L 60 62" stroke={C.ink} strokeWidth="3" strokeLinecap="round" />
+      <path
+        d="M 44 44 L 64 44"
+        stroke={C.ink}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 44 50 L 64 50"
+        stroke={C.ink}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 44 56 L 64 56"
+        stroke={C.ink}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 44 62 L 60 62"
+        stroke={C.ink}
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
       {/* head */}
       <circle cx="30" cy="36" r="10" fill={C.gold} />
       {/* FAN CREST — 5 plumes with black tips */}
@@ -396,11 +544,17 @@ function HoopoeAvatar() {
       <path d="M 36 30 L 42 12 L 38 28 Z" fill={C.gold} />
       <circle cx="18" cy="12" r="2" fill={C.ink} />
       <circle cx="24" cy="10" r="2" fill={C.ink} />
-      <circle cx="30" cy="8"  r="2" fill={C.ink} />
+      <circle cx="30" cy="8" r="2" fill={C.ink} />
       <circle cx="36" cy="10" r="2" fill={C.ink} />
       <circle cx="42" cy="12" r="2" fill={C.ink} />
       {/* long curved decurved bill */}
-      <path d="M 22 38 Q 12 38 4 46" stroke={C.ink} strokeWidth="2.8" fill="none" strokeLinecap="round" />
+      <path
+        d="M 22 38 Q 12 38 4 46"
+        stroke={C.ink}
+        strokeWidth="2.8"
+        fill="none"
+        strokeLinecap="round"
+      />
       {/* eye */}
       <circle cx="30" cy="34" r="1.8" fill={C.ink} />
     </svg>
@@ -413,14 +567,30 @@ function CraneAvatar() {
     <svg width="100%" height="100%" viewBox="0 0 80 80">
       <circle cx="40" cy="40" r="40" fill={C.beige} />
       {/* long thin legs */}
-      <path d="M 38 60 L 38 72" stroke={C.ink} strokeWidth="2" strokeLinecap="round" />
-      <path d="M 48 60 L 48 72" stroke={C.ink} strokeWidth="2" strokeLinecap="round" />
+      <path
+        d="M 38 60 L 38 72"
+        stroke={C.ink}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 48 60 L 48 72"
+        stroke={C.ink}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
       {/* body */}
       <ellipse cx="44" cy="58" rx="16" ry="10" fill={C.cream} />
       {/* black wing tip */}
       <ellipse cx="58" cy="56" rx="7" ry="4" fill={C.ink} />
       {/* LONG THIN neck */}
-      <path d="M 38 54 C 30 42, 26 28, 24 18" stroke={C.cream} strokeWidth="5" fill="none" strokeLinecap="round" />
+      <path
+        d="M 38 54 C 30 42, 26 28, 24 18"
+        stroke={C.cream}
+        strokeWidth="5"
+        fill="none"
+        strokeLinecap="round"
+      />
       {/* head */}
       <circle cx="24" cy="18" r="6" fill={C.cream} />
       {/* RED CROWN patch */}
@@ -495,8 +665,18 @@ function MothAvatar() {
       <path d="M 40 22 L 14 58 L 40 54 Z" fill={C.irisDk} />
       <path d="M 40 22 L 66 58 L 40 54 Z" fill={C.iris} />
       {/* wing veining */}
-      <path d="M 40 26 L 22 52" stroke={C.ink} strokeWidth="0.8" opacity="0.5" />
-      <path d="M 40 26 L 58 52" stroke={C.ink} strokeWidth="0.8" opacity="0.5" />
+      <path
+        d="M 40 26 L 22 52"
+        stroke={C.ink}
+        strokeWidth="0.8"
+        opacity="0.5"
+      />
+      <path
+        d="M 40 26 L 58 52"
+        stroke={C.ink}
+        strokeWidth="0.8"
+        opacity="0.5"
+      />
       {/* EYE-SPOTS */}
       <circle cx="22" cy="46" r="4" fill={C.gold} />
       <circle cx="22" cy="46" r="2" fill={C.ink} />
@@ -507,11 +687,29 @@ function MothAvatar() {
       {/* head */}
       <circle cx="40" cy="22" r="5" fill={C.ink} />
       {/* FEATHERY antennae */}
-      <path d="M 37 20 L 28 10" stroke={C.ink} strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M 43 20 L 52 10" stroke={C.ink} strokeWidth="1.5" strokeLinecap="round" />
+      <path
+        d="M 37 20 L 28 10"
+        stroke={C.ink}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 43 20 L 52 10"
+        stroke={C.ink}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
       {/* feather barbs */}
-      <path d="M 35 16 L 31 14 M 33 14 L 29 12 M 31 12 L 27 10" stroke={C.ink} strokeWidth="0.8" />
-      <path d="M 45 16 L 49 14 M 47 14 L 51 12 M 49 12 L 53 10" stroke={C.ink} strokeWidth="0.8" />
+      <path
+        d="M 35 16 L 31 14 M 33 14 L 29 12 M 31 12 L 27 10"
+        stroke={C.ink}
+        strokeWidth="0.8"
+      />
+      <path
+        d="M 45 16 L 49 14 M 47 14 L 51 12 M 49 12 L 53 10"
+        stroke={C.ink}
+        strokeWidth="0.8"
+      />
     </svg>
   );
 }
@@ -527,16 +725,52 @@ function DragonflyAvatar() {
       <ellipse cx="24" cy="46" rx="16" ry="4" fill={C.iris} opacity="0.6" />
       <ellipse cx="56" cy="46" rx="16" ry="4" fill={C.iris} opacity="0.6" />
       {/* wing outlines for clarity */}
-      <ellipse cx="24" cy="30" rx="18" ry="5" fill="none" stroke={C.foamDk} strokeWidth="0.7" />
-      <ellipse cx="56" cy="30" rx="18" ry="5" fill="none" stroke={C.foamDk} strokeWidth="0.7" />
-      <ellipse cx="24" cy="46" rx="16" ry="4" fill="none" stroke={C.irisDk} strokeWidth="0.7" />
-      <ellipse cx="56" cy="46" rx="16" ry="4" fill="none" stroke={C.irisDk} strokeWidth="0.7" />
+      <ellipse
+        cx="24"
+        cy="30"
+        rx="18"
+        ry="5"
+        fill="none"
+        stroke={C.foamDk}
+        strokeWidth="0.7"
+      />
+      <ellipse
+        cx="56"
+        cy="30"
+        rx="18"
+        ry="5"
+        fill="none"
+        stroke={C.foamDk}
+        strokeWidth="0.7"
+      />
+      <ellipse
+        cx="24"
+        cy="46"
+        rx="16"
+        ry="4"
+        fill="none"
+        stroke={C.irisDk}
+        strokeWidth="0.7"
+      />
+      <ellipse
+        cx="56"
+        cy="46"
+        rx="16"
+        ry="4"
+        fill="none"
+        stroke={C.irisDk}
+        strokeWidth="0.7"
+      />
       {/* thorax — connects wings to body */}
       <ellipse cx="40" cy="38" rx="5" ry="6" fill={C.pineDk} />
       {/* long slender abdomen */}
       <ellipse cx="40" cy="52" rx="2.5" ry="18" fill={C.pine} />
       {/* body segments */}
-      <path d="M 38 44 L 42 44 M 38 50 L 42 50 M 38 56 L 42 56 M 38 62 L 42 62" stroke={C.pineDk} strokeWidth="0.8" />
+      <path
+        d="M 38 44 L 42 44 M 38 50 L 42 50 M 38 56 L 42 56 M 38 62 L 42 62"
+        stroke={C.pineDk}
+        strokeWidth="0.8"
+      />
       {/* HUGE compound eyes nearly touching */}
       <circle cx="34" cy="22" r="6" fill={C.gold} />
       <circle cx="46" cy="22" r="6" fill={C.gold} />
@@ -556,8 +790,24 @@ function BeeAvatar() {
       {/* wings */}
       <ellipse cx="22" cy="28" rx="13" ry="10" fill={C.cream} opacity="0.92" />
       <ellipse cx="58" cy="28" rx="13" ry="10" fill={C.cream} opacity="0.92" />
-      <ellipse cx="22" cy="28" rx="13" ry="10" fill="none" stroke={C.foamDk} strokeWidth="1" />
-      <ellipse cx="58" cy="28" rx="13" ry="10" fill="none" stroke={C.foamDk} strokeWidth="1" />
+      <ellipse
+        cx="22"
+        cy="28"
+        rx="13"
+        ry="10"
+        fill="none"
+        stroke={C.foamDk}
+        strokeWidth="1"
+      />
+      <ellipse
+        cx="58"
+        cy="28"
+        rx="13"
+        ry="10"
+        fill="none"
+        stroke={C.foamDk}
+        strokeWidth="1"
+      />
       {/* yellow body */}
       <ellipse cx="40" cy="48" rx="22" ry="18" fill={C.gold} />
       {/* HORIZONTAL black stripes */}
@@ -574,8 +824,20 @@ function BeeAvatar() {
       <circle cx="36" cy="26" r="1.8" fill={C.gold} />
       <circle cx="44" cy="26" r="1.8" fill={C.gold} />
       {/* antennae */}
-      <path d="M 36 22 Q 32 14 30 10" stroke={C.ink} strokeWidth="1.2" fill="none" strokeLinecap="round" />
-      <path d="M 44 22 Q 48 14 50 10" stroke={C.ink} strokeWidth="1.2" fill="none" strokeLinecap="round" />
+      <path
+        d="M 36 22 Q 32 14 30 10"
+        stroke={C.ink}
+        strokeWidth="1.2"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 44 22 Q 48 14 50 10"
+        stroke={C.ink}
+        strokeWidth="1.2"
+        fill="none"
+        strokeLinecap="round"
+      />
       <circle cx="30" cy="10" r="1.5" fill={C.ink} />
       <circle cx="50" cy="10" r="1.5" fill={C.ink} />
       {/* stinger */}
@@ -590,8 +852,18 @@ function BeetleAvatar() {
     <svg width="100%" height="100%" viewBox="0 0 80 80">
       <circle cx="40" cy="40" r="40" fill={C.beige} />
       {/* 6 legs behind body */}
-      <path d="M 20 38 L 8 30 M 18 48 L 6 50 M 22 58 L 12 66" stroke={C.ink} strokeWidth="2" strokeLinecap="round" />
-      <path d="M 60 38 L 72 30 M 62 48 L 74 50 M 58 58 L 68 66" stroke={C.ink} strokeWidth="2" strokeLinecap="round" />
+      <path
+        d="M 20 38 L 8 30 M 18 48 L 6 50 M 22 58 L 12 66"
+        stroke={C.ink}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 60 38 L 72 30 M 62 48 L 74 50 M 58 58 L 68 66"
+        stroke={C.ink}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
       {/* DOMED elytra body */}
       <ellipse cx="40" cy="48" rx="24" ry="22" fill={C.iris} />
       {/* gleam */}
@@ -603,8 +875,18 @@ function BeetleAvatar() {
       {/* head */}
       <ellipse cx="40" cy="16" rx="7" ry="5" fill={C.ink} />
       {/* CLUBBED antennae */}
-      <path d="M 35 12 L 28 6" stroke={C.ink} strokeWidth="1.4" strokeLinecap="round" />
-      <path d="M 45 12 L 52 6" stroke={C.ink} strokeWidth="1.4" strokeLinecap="round" />
+      <path
+        d="M 35 12 L 28 6"
+        stroke={C.ink}
+        strokeWidth="1.4"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 45 12 L 52 6"
+        stroke={C.ink}
+        strokeWidth="1.4"
+        strokeLinecap="round"
+      />
       <ellipse cx="27" cy="6" rx="2.4" ry="1.6" fill={C.ink} />
       <ellipse cx="53" cy="6" rx="2.4" ry="1.6" fill={C.ink} />
       {/* small eyes */}
@@ -641,8 +923,20 @@ function ButterflyAvatar() {
       {/* head */}
       <circle cx="40" cy="28" r="3" fill={C.ink} />
       {/* CLUBBED antennae */}
-      <path d="M 38 26 Q 32 18 28 12" stroke={C.ink} strokeWidth="1.3" fill="none" strokeLinecap="round" />
-      <path d="M 42 26 Q 48 18 52 12" stroke={C.ink} strokeWidth="1.3" fill="none" strokeLinecap="round" />
+      <path
+        d="M 38 26 Q 32 18 28 12"
+        stroke={C.ink}
+        strokeWidth="1.3"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 42 26 Q 48 18 52 12"
+        stroke={C.ink}
+        strokeWidth="1.3"
+        fill="none"
+        strokeLinecap="round"
+      />
       <circle cx="28" cy="12" r="1.8" fill={C.ink} />
       <circle cx="52" cy="12" r="1.8" fill={C.ink} />
     </svg>
@@ -671,12 +965,22 @@ function FlyingFishAvatar() {
       {/* tail */}
       <path d="M 60 44 L 76 36 L 70 44 L 76 52 Z" fill={C.pine} />
       {/* gill */}
-      <path d="M 28 42 Q 26 44 28 48" stroke={C.pineDk} strokeWidth="1.5" fill="none" />
+      <path
+        d="M 28 42 Q 26 44 28 48"
+        stroke={C.pineDk}
+        strokeWidth="1.5"
+        fill="none"
+      />
       {/* eye */}
       <circle cx="22" cy="42" r="3.5" fill={C.cream} />
       <circle cx="22" cy="42" r="1.8" fill={C.ink} />
       {/* mouth */}
-      <path d="M 16 46 Q 14 48 16 50" stroke={C.pineDk} strokeWidth="1.2" fill="none" />
+      <path
+        d="M 16 46 Q 14 48 16 50"
+        stroke={C.pineDk}
+        strokeWidth="1.2"
+        fill="none"
+      />
     </svg>
   );
 }
@@ -687,11 +991,27 @@ function BatAvatar() {
     <svg width="100%" height="100%" viewBox="0 0 80 80">
       <circle cx="40" cy="40" r="40" fill={C.iris} />
       {/* SPREAD leathery wings with scalloped edges */}
-      <path d="M 6 38 Q 14 22 26 32 L 28 46 Q 24 50 16 48 Q 12 54 8 50 Q 4 52 6 46 Q 2 44 6 38 Z" fill={C.irisDk} />
-      <path d="M 74 38 Q 66 22 54 32 L 52 46 Q 56 50 64 48 Q 68 54 72 50 Q 76 52 74 46 Q 78 44 74 38 Z" fill={C.irisDk} />
+      <path
+        d="M 6 38 Q 14 22 26 32 L 28 46 Q 24 50 16 48 Q 12 54 8 50 Q 4 52 6 46 Q 2 44 6 38 Z"
+        fill={C.irisDk}
+      />
+      <path
+        d="M 74 38 Q 66 22 54 32 L 52 46 Q 56 50 64 48 Q 68 54 72 50 Q 76 52 74 46 Q 78 44 74 38 Z"
+        fill={C.irisDk}
+      />
       {/* finger-bones */}
-      <path d="M 26 36 L 10 26 M 28 40 L 8 38 M 28 44 L 12 50" stroke={C.iris} strokeWidth="1" opacity="0.65" />
-      <path d="M 54 36 L 70 26 M 52 40 L 72 38 M 52 44 L 68 50" stroke={C.iris} strokeWidth="1" opacity="0.65" />
+      <path
+        d="M 26 36 L 10 26 M 28 40 L 8 38 M 28 44 L 12 50"
+        stroke={C.iris}
+        strokeWidth="1"
+        opacity="0.65"
+      />
+      <path
+        d="M 54 36 L 70 26 M 52 40 L 72 38 M 52 44 L 68 50"
+        stroke={C.iris}
+        strokeWidth="1"
+        opacity="0.65"
+      />
       {/* small body */}
       <ellipse cx="40" cy="46" rx="13" ry="16" fill={C.irisDk} />
       {/* POINTED ears */}
@@ -734,11 +1054,20 @@ function PterosaurAvatar() {
       <ellipse cx="34" cy="30" rx="8" ry="6" fill={C.iris} />
       {/* BACKWARD CREST (Pteranodon style) */}
       <path d="M 40 26 L 56 16 L 44 28 Z" fill={C.love} />
-      <path d="M 40 28 L 56 20 Q 50 24 44 28" stroke={C.ink} strokeWidth="0.8" fill="none" />
+      <path
+        d="M 40 28 L 56 20 Q 50 24 44 28"
+        stroke={C.ink}
+        strokeWidth="0.8"
+        fill="none"
+      />
       {/* tail */}
       <path d="M 46 52 L 56 66 L 50 56 Z" fill={C.iris} />
       {/* small teeth in beak */}
-      <path d="M 22 30 L 20 32 M 18 30 L 16 32" stroke={C.cream} strokeWidth="0.8" />
+      <path
+        d="M 22 30 L 20 32 M 18 30 L 16 32"
+        stroke={C.cream}
+        strokeWidth="0.8"
+      />
       {/* eye */}
       <circle cx="30" cy="28" r="1.6" fill={C.ink} />
     </svg>
@@ -771,7 +1100,12 @@ function OrigamiCraneAvatar() {
       {/* head tip — small fold */}
       <path d="M 16 16 L 12 12 L 20 18 Z" fill={C.beige} />
       {/* faint center fold */}
-      <path d="M 40 30 L 40 60" stroke={C.love} strokeWidth="0.8" opacity="0.4" />
+      <path
+        d="M 40 30 L 40 60"
+        stroke={C.love}
+        strokeWidth="0.8"
+        opacity="0.4"
+      />
     </svg>
   );
 }
@@ -782,9 +1116,30 @@ function PaperPlaneAvatar() {
     <svg width="100%" height="100%" viewBox="0 0 80 80">
       <circle cx="40" cy="40" r="40" fill={C.pine} />
       {/* motion trails behind the plane */}
-      <path d="M 14 56 Q 6 48 10 38" stroke={C.foam} strokeWidth="2.2" fill="none" strokeLinecap="round" opacity="0.8" />
-      <path d="M 20 62 Q 12 54 16 44" stroke={C.foam} strokeWidth="1.8" fill="none" strokeLinecap="round" opacity="0.55" />
-      <path d="M 6 50 Q 0 44 4 34" stroke={C.foam} strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.4" />
+      <path
+        d="M 14 56 Q 6 48 10 38"
+        stroke={C.foam}
+        strokeWidth="2.2"
+        fill="none"
+        strokeLinecap="round"
+        opacity="0.8"
+      />
+      <path
+        d="M 20 62 Q 12 54 16 44"
+        stroke={C.foam}
+        strokeWidth="1.8"
+        fill="none"
+        strokeLinecap="round"
+        opacity="0.55"
+      />
+      <path
+        d="M 6 50 Q 0 44 4 34"
+        stroke={C.foam}
+        strokeWidth="1.5"
+        fill="none"
+        strokeLinecap="round"
+        opacity="0.4"
+      />
       {/* TOP wing — cream */}
       <path d="M 14 58 L 70 14 L 42 44 Z" fill={C.cream} />
       {/* UNDERSIDE fold — GOLD for high contrast against pine bg */}
@@ -794,7 +1149,12 @@ function PaperPlaneAvatar() {
       {/* sharp center crease */}
       <path d="M 70 14 L 40 66" stroke={C.pineDk} strokeWidth="2" />
       {/* top fold edge */}
-      <path d="M 14 58 L 42 44" stroke={C.beige} strokeWidth="0.8" opacity="0.5" />
+      <path
+        d="M 14 58 L 42 44"
+        stroke={C.beige}
+        strokeWidth="0.8"
+        opacity="0.5"
+      />
     </svg>
   );
 }
@@ -811,11 +1171,23 @@ function GooseAvatar() {
       {/* darker wing shading */}
       <ellipse cx="58" cy="56" rx="10" ry="7" fill={C.goldDk} opacity="0.45" />
       {/* LONG S-curved BLACK neck */}
-      <path d="M 42 56 C 30 46, 36 30, 24 22" stroke={C.ink} strokeWidth="9" fill="none" strokeLinecap="round" />
+      <path
+        d="M 42 56 C 30 46, 36 30, 24 22"
+        stroke={C.ink}
+        strokeWidth="9"
+        fill="none"
+        strokeLinecap="round"
+      />
       {/* black head */}
       <circle cx="24" cy="20" r="8" fill={C.ink} />
       {/* WHITE CHINSTRAP */}
-      <path d="M 16 22 Q 24 28 30 22" stroke={C.cream} strokeWidth="3.5" fill="none" strokeLinecap="round" />
+      <path
+        d="M 16 22 Q 24 28 30 22"
+        stroke={C.cream}
+        strokeWidth="3.5"
+        fill="none"
+        strokeLinecap="round"
+      />
       {/* short dark beak */}
       <path d="M 16 20 L 6 18 L 16 24 Z" fill={C.ink} />
       {/* eye */}
@@ -840,7 +1212,12 @@ function CrowAvatar() {
       {/* THICK STRAIGHT beak */}
       <path d="M 20 30 L 4 26 L 20 36 Z" fill={C.ink} />
       {/* beak undershadow for definition on dark bg */}
-      <path d="M 20 30 L 4 26" stroke={C.beige} strokeWidth="0.6" opacity="0.35" />
+      <path
+        d="M 20 30 L 4 26"
+        stroke={C.beige}
+        strokeWidth="0.6"
+        opacity="0.35"
+      />
       {/* sharp gold eye */}
       <circle cx="32" cy="28" r="3" fill={C.gold} />
       <circle cx="32" cy="28" r="1.5" fill={C.ink} />
@@ -869,11 +1246,35 @@ function CatAvatar() {
       {/* pink triangular nose */}
       <path d="M 35 50 L 45 50 L 40 56 Z" fill={C.rose} />
       {/* mouth */}
-      <path d="M 40 56 Q 36 60 32 58" stroke={C.ink} strokeWidth="1.6" fill="none" strokeLinecap="round" />
-      <path d="M 40 56 Q 44 60 48 58" stroke={C.ink} strokeWidth="1.6" fill="none" strokeLinecap="round" />
+      <path
+        d="M 40 56 Q 36 60 32 58"
+        stroke={C.ink}
+        strokeWidth="1.6"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 40 56 Q 44 60 48 58"
+        stroke={C.ink}
+        strokeWidth="1.6"
+        fill="none"
+        strokeLinecap="round"
+      />
       {/* WHISKERS */}
-      <path d="M 28 52 L 14 50 M 28 55 L 14 56 M 28 58 L 14 62" stroke={C.ink} strokeWidth="1" strokeLinecap="round" opacity="0.7" />
-      <path d="M 52 52 L 66 50 M 52 55 L 66 56 M 52 58 L 66 62" stroke={C.ink} strokeWidth="1" strokeLinecap="round" opacity="0.7" />
+      <path
+        d="M 28 52 L 14 50 M 28 55 L 14 56 M 28 58 L 14 62"
+        stroke={C.ink}
+        strokeWidth="1"
+        strokeLinecap="round"
+        opacity="0.7"
+      />
+      <path
+        d="M 52 52 L 66 50 M 52 55 L 66 56 M 52 58 L 66 62"
+        stroke={C.ink}
+        strokeWidth="1"
+        strokeLinecap="round"
+        opacity="0.7"
+      />
     </svg>
   );
 }
@@ -904,8 +1305,20 @@ function DogAvatar() {
       <ellipse cx="38" cy="47" rx="1.2" ry="0.8" fill={C.cream} opacity="0.6" />
       {/* mouth */}
       <path d="M 40 52 L 40 58" stroke={C.ink} strokeWidth="1.5" />
-      <path d="M 40 58 Q 35 62 30 60" stroke={C.ink} strokeWidth="1.5" fill="none" strokeLinecap="round" />
-      <path d="M 40 58 Q 45 62 50 60" stroke={C.ink} strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      <path
+        d="M 40 58 Q 35 62 30 60"
+        stroke={C.ink}
+        strokeWidth="1.5"
+        fill="none"
+        strokeLinecap="round"
+      />
+      <path
+        d="M 40 58 Q 45 62 50 60"
+        stroke={C.ink}
+        strokeWidth="1.5"
+        fill="none"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -921,7 +1334,10 @@ function HorseAvatar() {
       <path d="M 26 20 L 25 12 L 30 18 Z" fill={C.rose} />
       <path d="M 54 20 L 55 12 L 50 18 Z" fill={C.rose} />
       {/* MANE TUFT */}
-      <path d="M 28 18 Q 36 8 40 14 Q 44 8 52 18 Q 48 26 40 22 Q 32 26 28 18 Z" fill={C.love} />
+      <path
+        d="M 28 18 Q 36 8 40 14 Q 44 8 52 18 Q 48 26 40 22 Q 32 26 28 18 Z"
+        fill={C.love}
+      />
       {/* LONG FACE */}
       <ellipse cx="40" cy="46" rx="18" ry="26" fill={C.goldDk} />
       {/* face blaze */}
@@ -935,7 +1351,13 @@ function HorseAvatar() {
       <ellipse cx="36" cy="60" rx="2" ry="3" fill={C.ink} />
       <ellipse cx="44" cy="60" rx="2" ry="3" fill={C.ink} />
       {/* mouth */}
-      <path d="M 32 68 Q 40 71 48 68" stroke={C.ink} strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      <path
+        d="M 32 68 Q 40 71 48 68"
+        stroke={C.ink}
+        strokeWidth="1.5"
+        fill="none"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -947,74 +1369,99 @@ function HorseAvatar() {
    ===================================================================== */
 export const personas: Persona[] = [
   // Birds (14)
-  { name: 'Owl',           adjective: 'Observant',       Avatar: OwlAvatar           },
-  { name: 'Heron',         adjective: 'Heckling',        Avatar: HeronAvatar         },
-  { name: 'Kingfisher',    adjective: 'Kibitzing',       Avatar: KingfisherAvatar    },
-  { name: 'Hornbill',      adjective: 'Hollering',       Avatar: HornbillAvatar      },
-  { name: 'Swift',         adjective: 'Subtweet',        Avatar: SwiftAvatar         },
-  { name: 'Hummingbird',   adjective: 'Hovering',        Avatar: HummingbirdAvatar   },
-  { name: 'Falcon',        adjective: 'Fact-checking',   Avatar: FalconAvatar        },
-  { name: 'Magpie',        adjective: 'Meddling',        Avatar: MagpieAvatar        },
-  { name: 'Albatross',     adjective: 'Argumentative',   Avatar: AlbatrossAvatar     },
-  { name: 'Toucan',        adjective: 'Tweeting',        Avatar: ToucanAvatar        },
-  { name: 'Hoopoe',        adjective: 'Howling',         Avatar: HoopoeAvatar        },
-  { name: 'Crane',         adjective: 'Contemplative',   Avatar: CraneAvatar         },
-  { name: 'Robin',         adjective: 'Replying',        Avatar: RobinAvatar         },
-  { name: 'Goldfinch',     adjective: 'Glittering',      Avatar: GoldfinchAvatar     },
+  { name: "Owl", adjective: "Observant", Avatar: OwlAvatar },
+  { name: "Heron", adjective: "Heckling", Avatar: HeronAvatar },
+  { name: "Kingfisher", adjective: "Kibitzing", Avatar: KingfisherAvatar },
+  { name: "Hornbill", adjective: "Hollering", Avatar: HornbillAvatar },
+  { name: "Swift", adjective: "Subtweet", Avatar: SwiftAvatar },
+  { name: "Hummingbird", adjective: "Hovering", Avatar: HummingbirdAvatar },
+  { name: "Falcon", adjective: "Fact-checking", Avatar: FalconAvatar },
+  { name: "Magpie", adjective: "Meddling", Avatar: MagpieAvatar },
+  { name: "Albatross", adjective: "Argumentative", Avatar: AlbatrossAvatar },
+  { name: "Toucan", adjective: "Tweeting", Avatar: ToucanAvatar },
+  { name: "Hoopoe", adjective: "Howling", Avatar: HoopoeAvatar },
+  { name: "Crane", adjective: "Contemplative", Avatar: CraneAvatar },
+  { name: "Robin", adjective: "Replying", Avatar: RobinAvatar },
+  { name: "Goldfinch", adjective: "Glittering", Avatar: GoldfinchAvatar },
   // Insects (5)
-  { name: 'Moth',          adjective: 'Mysterious',      Avatar: MothAvatar          },
-  { name: 'Dragonfly',     adjective: 'Doom-scrolling',  Avatar: DragonflyAvatar     },
-  { name: 'Honeybee',      adjective: 'Hashtagging',     Avatar: BeeAvatar           },
-  { name: 'Beetle',        adjective: 'Brooding',        Avatar: BeetleAvatar        },
-  { name: 'Butterfly',     adjective: 'Browsing',        Avatar: ButterflyAvatar     },
+  { name: "Moth", adjective: "Mysterious", Avatar: MothAvatar },
+  { name: "Dragonfly", adjective: "Doom-scrolling", Avatar: DragonflyAvatar },
+  { name: "Honeybee", adjective: "Hashtagging", Avatar: BeeAvatar },
+  { name: "Beetle", adjective: "Brooding", Avatar: BeetleAvatar },
+  { name: "Butterfly", adjective: "Browsing", Avatar: ButterflyAvatar },
   // Other flyers (3)
-  { name: 'Flying Fish',   adjective: 'Floundering',     Avatar: FlyingFishAvatar    },
-  { name: 'Bat',           adjective: 'Broadcasting',    Avatar: BatAvatar           },
-  { name: 'Pterosaur',     adjective: 'Posting',         Avatar: PterosaurAvatar     },
+  { name: "Flying Fish", adjective: "Floundering", Avatar: FlyingFishAvatar },
+  { name: "Bat", adjective: "Broadcasting", Avatar: BatAvatar },
+  { name: "Pterosaur", adjective: "Posting", Avatar: PterosaurAvatar },
   // Wildcards (2)
-  { name: 'Origami Crane', adjective: 'Outspoken',       Avatar: OrigamiCraneAvatar  },
-  { name: 'Paper Plane',   adjective: 'Pinging',         Avatar: PaperPlaneAvatar    },
+  { name: "Origami Crane", adjective: "Outspoken", Avatar: OrigamiCraneAvatar },
+  { name: "Paper Plane", adjective: "Pinging", Avatar: PaperPlaneAvatar },
   // Companions (5)
-  { name: 'Goose',         adjective: 'Gossiping',       Avatar: GooseAvatar         },
-  { name: 'Crow',          adjective: 'Cryptic',         Avatar: CrowAvatar          },
-  { name: 'Cat',           adjective: 'Curious',         Avatar: CatAvatar           },
-  { name: 'Dog',           adjective: "DM'ing",          Avatar: DogAvatar           },
-  { name: 'Horse',         adjective: 'Hot-take',        Avatar: HorseAvatar         },
+  { name: "Goose", adjective: "Gossiping", Avatar: GooseAvatar },
+  { name: "Crow", adjective: "Cryptic", Avatar: CrowAvatar },
+  { name: "Cat", adjective: "Curious", Avatar: CatAvatar },
+  { name: "Dog", adjective: "DM'ing", Avatar: DogAvatar },
+  { name: "Horse", adjective: "Hot-take", Avatar: HorseAvatar },
 ];
 
 // Different salt from the variant pick so persona and variant are
 // independent — same question stays stable across renders.
 export function pickPersona(question: string): Persona {
-  return personas[fnv1a('persona/' + question) % personas.length];
+  return personas[fnv1a("persona/" + question) % personas.length];
 }
 
-
 /* ---------- Wordmark — "Guido × Jansen" ----------------------------- */
-export function Wordmark({ size = 16, color, xColor }: { size?: number; color: string; xColor: string }) {
+export function Wordmark({
+  size = 16,
+  color,
+  xColor,
+}: {
+  size?: number;
+  color: string;
+  xColor: string;
+}) {
   const x = Math.round(size * 1.2);
   return (
-    <div style={{
-      display: 'flex', alignItems: 'center',
-      fontFamily: '"Poppins", system-ui, sans-serif',
-      fontWeight: 700, fontSize: size, letterSpacing: '-0.01em',
-      color, lineHeight: 1,
-    }}>
-      <span style={{ display: 'flex' }}>Guido</span>
-      <div style={{
-        display: 'flex', width: Math.round(x * 1.5), height: x,
-        alignItems: 'center', justifyContent: 'center',
-      }}>
-        <svg width={x} height={x} viewBox="0 0 24 24" fill="none"
-             stroke={xColor} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        fontFamily: '"Poppins", system-ui, sans-serif',
+        fontWeight: 700,
+        fontSize: size,
+        letterSpacing: "-0.01em",
+        color,
+        lineHeight: 1,
+      }}
+    >
+      <span style={{ display: "flex" }}>Guido</span>
+      <div
+        style={{
+          display: "flex",
+          width: Math.round(x * 1.5),
+          height: x,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <svg
+          width={x}
+          height={x}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke={xColor}
+          strokeWidth="2.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M18 6l-12 12" />
           <path d="M6 6l12 12" />
         </svg>
       </div>
-      <span style={{ display: 'flex' }}>Jansen</span>
+      <span style={{ display: "flex" }}>Jansen</span>
     </div>
   );
 }
-
 
 /* =====================================================================
    AmaCard — renders one 1200×630 image.
@@ -1028,108 +1475,209 @@ export function Wordmark({ size = 16, color, xColor }: { size?: number; color: s
      │ gui.do/ama · ask anonymously                  #ama      │
      └─────────────────────────────────────────────────────────┘
    ===================================================================== */
-export function AmaCard({ question, variant, persona }: { question: string; variant?: Variant; persona?: Persona }) {
+export function AmaCard({
+  question,
+  variant,
+  persona,
+}: {
+  question: string;
+  variant?: Variant;
+  persona?: Persona;
+}) {
   const v = variant ?? pickVariant(question);
   const p = persona ?? pickPersona(question);
   const fs = pickFontSize(question.length);
 
-  const FONT      = '"Poppins", system-ui, sans-serif';
-  const FONT_MONO = '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
-  const Avatar    = p.Avatar;
+  const FONT = '"Poppins", system-ui, sans-serif';
+  const FONT_MONO =
+    '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
+  const Avatar = p.Avatar;
 
   return (
-    <div style={{
-      width: 1200, height: 630, display: 'flex', flexDirection: 'column',
-      background: v.bg, color: v.textColor, fontFamily: FONT,
-      padding: '44px 64px', position: 'relative', overflow: 'hidden',
-      boxSizing: 'border-box',
-    }}>
-
+    <div
+      style={{
+        width: 1200,
+        height: 630,
+        display: "flex",
+        flexDirection: "column",
+        background: v.bg,
+        color: v.textColor,
+        fontFamily: FONT,
+        padding: "44px 64px",
+        position: "relative",
+        overflow: "hidden",
+        boxSizing: "border-box",
+      }}
+    >
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 26, zIndex: 1 }}>
-        <div style={{
-          display: 'flex', width: 128, height: 128, borderRadius: 128,
-          overflow: 'hidden', flexShrink: 0,
-        }}>
+      <div
+        style={{ display: "flex", alignItems: "center", gap: 26, zIndex: 1 }}
+      >
+        <div
+          style={{
+            display: "flex",
+            width: 128,
+            height: 128,
+            borderRadius: 128,
+            overflow: "hidden",
+            flexShrink: 0,
+          }}
+        >
           <Avatar />
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <div style={{
-            display: 'flex', fontSize: 38, fontWeight: 700,
-            letterSpacing: '-0.015em', color: v.textColor, lineHeight: 1.1,
-          }}>
-            <span style={{ display: 'flex' }}>{`${p.adjective} ${p.name}`}</span>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 38,
+              fontWeight: 700,
+              letterSpacing: "-0.015em",
+              color: v.textColor,
+              lineHeight: 1.1,
+            }}
+          >
+            <span
+              style={{ display: "flex" }}
+            >{`${p.adjective} ${p.name}`}</span>
           </div>
-          <div style={{
-            display: 'flex', fontSize: 26, fontWeight: 500,
-            color: v.subtleColor, lineHeight: 1.2,
-          }}>
-            <span style={{ display: 'flex' }}>asked Guido…</span>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 26,
+              fontWeight: 500,
+              color: v.subtleColor,
+              lineHeight: 1.2,
+            }}
+          >
+            <span style={{ display: "flex" }}>asked Guido…</span>
           </div>
         </div>
       </div>
 
       {/* Question */}
-      <div style={{
-        display: 'flex', flex: 1, alignItems: 'center', zIndex: 1,
-        marginTop: 4, marginBottom: 4,
-      }}>
-        <div style={{ display: 'flex', flex: 1, minWidth: 0, alignItems: 'flex-start' }}>
-          <div style={{
-            display: 'flex', flexShrink: 0,
-            width:  Math.round(fs * 1.0),
-            marginRight: Math.round(fs * 0.32),
-            marginTop: Math.round(-fs * 0.18),
-            fontFamily: 'Georgia, "Times New Roman", serif',
-            fontSize: Math.round(fs * 1.7), lineHeight: 1,
-            color: v.accent, fontWeight: 700,
-          }}>“</div>
-          <div style={{
-            display: 'flex', flex: 1, minWidth: 0,
-            flexWrap: 'wrap', alignContent: 'flex-start',
-            fontSize: fs, lineHeight: 1.22,
-            letterSpacing: '-0.02em', fontWeight: 600,
-            color: v.textColor,
-            columnGap: `${Math.round(fs * 0.27)}px`,
-            rowGap: `${Math.round(fs * 0.08)}px`,
-          }}>
-            {question.split(/\s+/).filter(Boolean).map((w, i) => {
-              // Mentions: @handle, @handle.tld — coloured with the variant accent.
-              const isMention = /^@[\w.-]+/.test(w);
-              return (
-                <span key={i} style={{
-                  display: 'flex',
-                  color: isMention ? v.accent : v.textColor,
-                }}>{w}</span>
-              );
-            })}
+      <div
+        style={{
+          display: "flex",
+          flex: 1,
+          alignItems: "center",
+          zIndex: 1,
+          marginTop: 4,
+          marginBottom: 4,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flex: 1,
+            minWidth: 0,
+            alignItems: "flex-start",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexShrink: 0,
+              width: Math.round(fs * 1.0),
+              marginRight: Math.round(fs * 0.32),
+              marginTop: Math.round(-fs * 0.18),
+              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontSize: Math.round(fs * 1.7),
+              lineHeight: 1,
+              color: v.accent,
+              fontWeight: 700,
+            }}
+          >
+            “
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flex: 1,
+              minWidth: 0,
+              flexWrap: "wrap",
+              alignContent: "flex-start",
+              fontSize: fs,
+              lineHeight: 1.22,
+              letterSpacing: "-0.02em",
+              fontWeight: 600,
+              color: v.textColor,
+              columnGap: `${Math.round(fs * 0.27)}px`,
+              rowGap: `${Math.round(fs * 0.08)}px`,
+            }}
+          >
+            {question
+              .split(/\s+/)
+              .filter(Boolean)
+              .map((w, i) => {
+                // Mentions: @handle, @handle.tld — coloured with the variant accent.
+                const isMention = /^@[\w.-]+/.test(w);
+                return (
+                  <span
+                    key={i}
+                    style={{
+                      display: "flex",
+                      color: isMention ? v.accent : v.textColor,
+                    }}
+                  >
+                    {w}
+                  </span>
+                );
+              })}
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <div style={{
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        zIndex: 1, paddingTop: 14,
-      }}>
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: 16,
-          fontFamily: FONT_MONO, fontSize: 26, fontWeight: 600,
-          color: v.textColor, letterSpacing: '-0.01em',
-        }}>
-          <span style={{ display: 'flex' }}>gui.do/ama</span>
-          <span style={{ display: 'flex', color: v.subtleColor, opacity: 0.7 }}>·</span>
-          <span style={{
-            display: 'flex', color: v.subtleColor, fontFamily: FONT,
-            fontSize: 24, fontWeight: 500,
-          }}>ask anonymously</span>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          zIndex: 1,
+          paddingTop: 14,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            fontFamily: FONT_MONO,
+            fontSize: 26,
+            fontWeight: 600,
+            color: v.textColor,
+            letterSpacing: "-0.01em",
+          }}
+        >
+          <span style={{ display: "flex" }}>gui.do/ama</span>
+          <span style={{ display: "flex", color: v.subtleColor, opacity: 0.7 }}>
+            ·
+          </span>
+          <span
+            style={{
+              display: "flex",
+              color: v.subtleColor,
+              fontFamily: FONT,
+              fontSize: 24,
+              fontWeight: 500,
+            }}
+          >
+            ask anonymously
+          </span>
         </div>
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: 6,
-          fontFamily: FONT_MONO, fontSize: 30, fontWeight: 600,
-          color: v.accent, letterSpacing: '-0.01em',
-        }}>
-          <span style={{ display: 'flex' }}>#ama</span>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            fontFamily: FONT_MONO,
+            fontSize: 30,
+            fontWeight: 600,
+            color: v.accent,
+            letterSpacing: "-0.01em",
+          }}
+        >
+          <span style={{ display: "flex" }}>#ama</span>
         </div>
       </div>
     </div>

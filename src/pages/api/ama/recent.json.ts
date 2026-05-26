@@ -9,11 +9,11 @@
  * Returns up to 9 most recent answer posts that have at least one image
  * and include `#ama` or `gui.do/ama` in the text.
  */
-import type { APIRoute } from 'astro';
+import type { APIRoute } from "astro";
 
 export const prerender = false;
 
-const BSKY_HANDLE = 'gui.do';
+const BSKY_HANDLE = "gui.do";
 
 type BskyImgView = { thumb: string; fullsize: string; alt?: string };
 type BskyPostView = {
@@ -36,29 +36,29 @@ type SlimPost = {
 };
 
 function bskyUrl(uri: string): string {
-  const parts = uri.replace('at://', '').split('/');
+  const parts = uri.replace("at://", "").split("/");
   return `https://bsky.app/profile/${parts[0]}/post/${parts[2]}`;
 }
 
 export const GET: APIRoute = async () => {
   const url =
-    'https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed' +
+    "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed" +
     `?actor=${BSKY_HANDLE}&filter=posts_with_media&limit=50`;
 
   try {
     const res = await fetch(url, {
       headers: {
-        accept: 'application/json',
-        'user-agent': 'gui.do-ama (+https://gui.do/ama)',
+        accept: "application/json",
+        "user-agent": "gui.do-ama (+https://gui.do/ama)",
       },
     });
     if (!res.ok) {
       return new Response(JSON.stringify({ error: `bluesky ${res.status}` }), {
         status: 502,
-        headers: { 'content-type': 'application/json' },
+        headers: { "content-type": "application/json" },
       });
     }
-    const data = await res.json() as { feed?: FeedItem[] };
+    const data = (await res.json()) as { feed?: FeedItem[] };
     const items = data.feed ?? [];
 
     const slim: SlimPost[] = items
@@ -73,21 +73,21 @@ export const GET: APIRoute = async () => {
           bskyUrl: bskyUrl(p.uri),
           text: p.record.text,
           createdAt: p.record.createdAt,
-          image: { thumb: img.thumb, alt: img.alt ?? '' },
+          image: { thumb: img.thumb, alt: img.alt ?? "" },
         };
       });
 
     return new Response(JSON.stringify({ posts: slim }), {
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
         // Cache at the edge for 1 minute, allow stale while revalidating.
-        'cache-control': 'public, s-maxage=60, stale-while-revalidate=300',
+        "cache-control": "public, s-maxage=60, stale-while-revalidate=300",
       },
     });
   } catch (e) {
     return new Response(JSON.stringify({ error: (e as Error).message }), {
       status: 502,
-      headers: { 'content-type': 'application/json' },
+      headers: { "content-type": "application/json" },
     });
   }
 };
