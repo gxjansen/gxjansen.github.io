@@ -4,8 +4,8 @@
  *
  * Token-gated (HMAC of `admin:<id>` against AMA_SIGNING_SECRET, shipped in
  * the Telegram deep-link). Lets Guido see the question, view/download the
- * rendered card, reroll the variant or persona if the deterministic pick
- * landed poorly, and delete spam.
+ * rendered card, regenerate the card art if the deterministic pick landed
+ * poorly, and delete spam.
  *
  * GET renders the page; POST to the sibling action endpoint mutates the
  * stored question and redirects back here.
@@ -53,6 +53,7 @@ type StoredQuestion = {
   ipHash?: string;
   variantId?: string;
   personaName?: string;
+  adjective?: string;
 };
 
 const store = getStore("ama-questions");
@@ -69,9 +70,18 @@ const personaOverride = data.personaName
   ? personas.find((p) => p.name === data.personaName)
   : undefined;
 
+// Only honor a stored adjective if it belongs to the chosen persona.
+const adjectiveOverride =
+  data.adjective &&
+  personaOverride &&
+  personaOverride.adjectives.includes(data.adjective)
+    ? data.adjective
+    : undefined;
+
 const overrides: RenderOverrides = {
   variant: variantOverride,
   persona: personaOverride,
+  adjective: adjectiveOverride,
 };
 
 const png = await renderAmaCard(data.question, overrides);
@@ -115,12 +125,8 @@ const description = "Admin view for a submitted AMA question.";
 
       <div class="flex flex-wrap gap-3">
         <form method="POST" action={actionUrl} class="contents">
-          <input type="hidden" name="action" value="reroll-variant" />
-          <Button type="submit" variant="outline">Reroll colors</Button>
-        </form>
-        <form method="POST" action={actionUrl} class="contents">
-          <input type="hidden" name="action" value="reroll-persona" />
-          <Button type="submit" variant="outline">Reroll persona</Button>
+          <input type="hidden" name="action" value="regenerate" />
+          <Button type="submit" variant="primary">Regenerate</Button>
         </form>
         <a
           href={dataUrl}
@@ -141,7 +147,8 @@ const description = "Admin view for a submitted AMA question.";
       </div>
 
       <p class="text-base-500 dark:text-base-400 mt-6 text-xs">
-        Reroll cycles to the next entry in the list. Delete is permanent.
+        Regenerate picks a fresh random variant, persona, and adjective. Hit it
+        again if you don't like the result. Delete is permanent.
       </p>
     </div>
   </section>

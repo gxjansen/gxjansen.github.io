@@ -8,12 +8,7 @@
 import type { APIRoute } from "astro";
 import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
-import {
-  variants,
-  personas,
-  pickVariant,
-  pickPersona,
-} from "../../../../../lib/ama/card";
+import { variants, personas } from "../../../../../lib/ama/card";
 
 export const prerender = false;
 
@@ -24,6 +19,7 @@ type StoredQuestion = {
   ipHash?: string;
   variantId?: string;
   personaName?: string;
+  adjective?: string;
 };
 
 function constantTimeEqual(a: string, b: string): boolean {
@@ -35,8 +31,8 @@ function constantTimeEqual(a: string, b: string): boolean {
   }
 }
 
-function nextIndex<T>(items: T[], current: number): number {
-  return (current + 1) % items.length;
+function pickRandom<T>(items: readonly T[]): T {
+  return items[Math.floor(Math.random() * items.length)];
 }
 
 export const POST: APIRoute = async ({ params, request, url }) => {
@@ -78,30 +74,20 @@ export const POST: APIRoute = async ({ params, request, url }) => {
     });
   }
 
-  if (action === "reroll-variant") {
-    const currentVariant = data.variantId
-      ? variants.find((v) => v.id === data.variantId)
-      : pickVariant(data.question);
-    const currentIdx = variants.findIndex(
-      (v) => v.id === (currentVariant?.id ?? ""),
-    );
-    const nextVariant = variants[nextIndex(variants, currentIdx)];
-    await store.setJSON(id, { ...data, variantId: nextVariant.id });
-    return new Response(null, {
-      status: 303,
-      headers: { location: adminUrl },
+  if (action === "regenerate") {
+    // Random pick for all three. The current pick may come up again
+    // for any individual dimension — that's fine, just hit Regenerate
+    // again. Cheaper than tracking exclusions and the user already has
+    // the feedback loop right here.
+    const nextVariant = pickRandom(variants);
+    const nextPersona = pickRandom(personas);
+    const nextAdjective = pickRandom(nextPersona.adjectives);
+    await store.setJSON(id, {
+      ...data,
+      variantId: nextVariant.id,
+      personaName: nextPersona.name,
+      adjective: nextAdjective,
     });
-  }
-
-  if (action === "reroll-persona") {
-    const currentPersona = data.personaName
-      ? personas.find((p) => p.name === data.personaName)
-      : pickPersona(data.question);
-    const currentIdx = personas.findIndex(
-      (p) => p.name === (currentPersona?.name ?? ""),
-    );
-    const nextPersona = personas[nextIndex(personas, currentIdx)];
-    await store.setJSON(id, { ...data, personaName: nextPersona.name });
     return new Response(null, {
       status: 303,
       headers: { location: adminUrl },

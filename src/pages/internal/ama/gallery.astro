@@ -147,7 +147,7 @@ const enc = (s: string) => encodeURIComponent(s);
         personas.map((p) => (
           <div class="card">
             <span class="label">
-              {p.adjective} {p.name}
+              {p.adjectives.join(" / ")} {p.name}
             </span>
             <img
               src={`/internal/ama/card.png?q=${enc(`How do you think about ${p.name.toLowerCase()}-style community work in 2026?`)}&variant=${variants[0].id}&persona=${enc(p.name)}`}

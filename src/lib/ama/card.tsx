@@ -32,7 +32,9 @@ export type Variant = {
 };
 export type Persona = {
   name: string;
-  adjective: string;
+  // 3+ alliterating adjectives per persona. One is picked
+  // deterministically per question (see pickAdjective).
+  adjectives: [string, string, string, ...string[]];
   Avatar: React.ComponentType;
 };
 
@@ -1369,40 +1371,161 @@ function HorseAvatar() {
    ===================================================================== */
 export const personas: Persona[] = [
   // Birds (14)
-  { name: "Owl", adjective: "Observant", Avatar: OwlAvatar },
-  { name: "Heron", adjective: "Heckling", Avatar: HeronAvatar },
-  { name: "Kingfisher", adjective: "Kibitzing", Avatar: KingfisherAvatar },
-  { name: "Hornbill", adjective: "Hollering", Avatar: HornbillAvatar },
-  { name: "Swift", adjective: "Subtweet", Avatar: SwiftAvatar },
-  { name: "Hummingbird", adjective: "Hovering", Avatar: HummingbirdAvatar },
-  { name: "Falcon", adjective: "Fact-checking", Avatar: FalconAvatar },
-  { name: "Magpie", adjective: "Meddling", Avatar: MagpieAvatar },
-  { name: "Albatross", adjective: "Argumentative", Avatar: AlbatrossAvatar },
-  { name: "Toucan", adjective: "Tweeting", Avatar: ToucanAvatar },
-  { name: "Hoopoe", adjective: "Howling", Avatar: HoopoeAvatar },
-  { name: "Crane", adjective: "Contemplative", Avatar: CraneAvatar },
-  { name: "Robin", adjective: "Replying", Avatar: RobinAvatar },
-  { name: "Goldfinch", adjective: "Glittering", Avatar: GoldfinchAvatar },
+  {
+    name: "Owl",
+    adjectives: ["Observant", "Owlish", "Overthinking"],
+    Avatar: OwlAvatar,
+  },
+  {
+    name: "Heron",
+    adjectives: ["Heckling", "Hangry", "Haunting"],
+    Avatar: HeronAvatar,
+  },
+  {
+    name: "Kingfisher",
+    adjectives: ["Kibitzing", "Knowing", "Kvetching"],
+    Avatar: KingfisherAvatar,
+  },
+  {
+    name: "Hornbill",
+    adjectives: ["Hollering", "Hectoring", "Honking"],
+    Avatar: HornbillAvatar,
+  },
+  {
+    name: "Swift",
+    adjectives: ["Subtweeting", "Skeptical", "Scheming"],
+    Avatar: SwiftAvatar,
+  },
+  {
+    name: "Hummingbird",
+    adjectives: ["Hovering", "Hyped", "Humming"],
+    Avatar: HummingbirdAvatar,
+  },
+  {
+    name: "Falcon",
+    adjectives: ["Fact-checking", "Fuming", "Forensic"],
+    Avatar: FalconAvatar,
+  },
+  {
+    name: "Magpie",
+    adjectives: ["Meddling", "Mocking", "Muckraking"],
+    Avatar: MagpieAvatar,
+  },
+  {
+    name: "Albatross",
+    adjectives: ["Argumentative", "Anxious", "Aloof"],
+    Avatar: AlbatrossAvatar,
+  },
+  {
+    name: "Toucan",
+    adjectives: ["Tweeting", "Talkative", "Trolling"],
+    Avatar: ToucanAvatar,
+  },
+  {
+    name: "Hoopoe",
+    adjectives: ["Howling", "Hapless", "Hounding"],
+    Avatar: HoopoeAvatar,
+  },
+  {
+    name: "Crane",
+    adjectives: ["Contemplative", "Crooning", "Calculating"],
+    Avatar: CraneAvatar,
+  },
+  {
+    name: "Robin",
+    adjectives: ["Replying", "Ranting", "Roasting"],
+    Avatar: RobinAvatar,
+  },
+  {
+    name: "Goldfinch",
+    adjectives: ["Glittering", "Gleeful", "Galvanized"],
+    Avatar: GoldfinchAvatar,
+  },
   // Insects (5)
-  { name: "Moth", adjective: "Mysterious", Avatar: MothAvatar },
-  { name: "Dragonfly", adjective: "Doom-scrolling", Avatar: DragonflyAvatar },
-  { name: "Honeybee", adjective: "Hashtagging", Avatar: BeeAvatar },
-  { name: "Beetle", adjective: "Brooding", Avatar: BeetleAvatar },
-  { name: "Butterfly", adjective: "Browsing", Avatar: ButterflyAvatar },
+  {
+    name: "Moth",
+    adjectives: ["Mysterious", "Mournful", "Meditative"],
+    Avatar: MothAvatar,
+  },
+  {
+    name: "Dragonfly",
+    adjectives: ["Doom-scrolling", "Daring", "Dramatic"],
+    Avatar: DragonflyAvatar,
+  },
+  {
+    name: "Honeybee",
+    adjectives: ["Hashtagging", "Hassling", "Humble-bragging"],
+    Avatar: BeeAvatar,
+  },
+  {
+    name: "Beetle",
+    adjectives: ["Brooding", "Bickering", "Belaboring"],
+    Avatar: BeetleAvatar,
+  },
+  {
+    name: "Butterfly",
+    adjectives: ["Browsing", "Beaming", "Babbling"],
+    Avatar: ButterflyAvatar,
+  },
   // Other flyers (3)
-  { name: "Flying Fish", adjective: "Floundering", Avatar: FlyingFishAvatar },
-  { name: "Bat", adjective: "Broadcasting", Avatar: BatAvatar },
-  { name: "Pterosaur", adjective: "Posting", Avatar: PterosaurAvatar },
+  {
+    name: "Flying Fish",
+    adjectives: ["Floundering", "Flailing", "Fretting"],
+    Avatar: FlyingFishAvatar,
+  },
+  {
+    name: "Bat",
+    adjectives: ["Broadcasting", "Bewildered", "Bantering"],
+    Avatar: BatAvatar,
+  },
+  {
+    name: "Pterosaur",
+    adjectives: ["Posting", "Pontificating", "Preachy"],
+    Avatar: PterosaurAvatar,
+  },
   // Wildcards (2)
-  { name: "Origami Crane", adjective: "Outspoken", Avatar: OrigamiCraneAvatar },
-  { name: "Paper Plane", adjective: "Pinging", Avatar: PaperPlaneAvatar },
+  {
+    name: "Origami Crane",
+    adjectives: ["Outspoken", "Opining", "Off-topic"],
+    Avatar: OrigamiCraneAvatar,
+  },
+  {
+    name: "Paper Plane",
+    adjectives: ["Pinging", "Pondering", "Parachuting"],
+    Avatar: PaperPlaneAvatar,
+  },
   // Companions (5)
-  { name: "Goose", adjective: "Gossiping", Avatar: GooseAvatar },
-  { name: "Crow", adjective: "Cryptic", Avatar: CrowAvatar },
-  { name: "Cat", adjective: "Curious", Avatar: CatAvatar },
-  { name: "Dog", adjective: "DM'ing", Avatar: DogAvatar },
-  { name: "Horse", adjective: "Hot-take", Avatar: HorseAvatar },
+  {
+    name: "Goose",
+    adjectives: ["Gossiping", "Grumpy", "Goading"],
+    Avatar: GooseAvatar,
+  },
+  {
+    name: "Crow",
+    adjectives: ["Cryptic", "Cackling", "Croaking"],
+    Avatar: CrowAvatar,
+  },
+  { name: "Cat", adjectives: ["Curious", "Catty", "Coy"], Avatar: CatAvatar },
+  {
+    name: "Dog",
+    adjectives: ["DM'ing", "Devoted", "Distracted"],
+    Avatar: DogAvatar,
+  },
+  {
+    name: "Horse",
+    adjectives: ["Hot-take", "Huffy", "Honest"],
+    Avatar: HorseAvatar,
+  },
 ];
+
+// Different salt from variant + persona so the adjective varies
+// independently. Same (question, persona) → same adjective every time.
+export function pickAdjective(persona: Persona, question: string): string {
+  const idx =
+    fnv1a("adjective/" + persona.name + "/" + question) %
+    persona.adjectives.length;
+  return persona.adjectives[idx];
+}
 
 // Different salt from the variant pick so persona and variant are
 // independent — same question stays stable across renders.
@@ -1479,13 +1602,16 @@ export function AmaCard({
   question,
   variant,
   persona,
+  adjective,
 }: {
   question: string;
   variant?: Variant;
   persona?: Persona;
+  adjective?: string;
 }) {
   const v = variant ?? pickVariant(question);
   const p = persona ?? pickPersona(question);
+  const a = adjective ?? pickAdjective(p, question);
   const fs = pickFontSize(question.length);
 
   const FONT = '"Poppins", system-ui, sans-serif';
@@ -1536,9 +1662,7 @@ export function AmaCard({
               lineHeight: 1.1,
             }}
           >
-            <span
-              style={{ display: "flex" }}
-            >{`${p.adjective} ${p.name}`}</span>
+            <span style={{ display: "flex" }}>{`${a} ${p.name}`}</span>
           </div>
           <div
             style={{
@@ -1580,7 +1704,7 @@ export function AmaCard({
               width: Math.round(fs * 1.0),
               marginRight: Math.round(fs * 0.32),
               marginTop: Math.round(-fs * 0.18),
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: '"Source Serif", Georgia, serif',
               fontSize: Math.round(fs * 1.7),
               lineHeight: 1,
               color: v.accent,

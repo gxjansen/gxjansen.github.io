@@ -230,7 +230,7 @@ export function OgFeedStack() {
                   >
                     <span
                       style={{ display: "flex" }}
-                    >{`${s.persona.adjective} ${s.persona.name}`}</span>
+                    >{`${s.persona.adjectives[0]} ${s.persona.name}`}</span>
                   </div>
                   <div
                     style={{
