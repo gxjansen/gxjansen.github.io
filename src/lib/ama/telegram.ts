@@ -30,16 +30,25 @@ export function captionFor(question: string, adminUrl: string): string {
 }
 
 /**
- * Bluesky compose intent URL with the standard answer footer pre-filled.
- * Two leading newlines so the cursor lands at the top of the composer
- * with the footer visible underneath — type the answer above it.
+ * Bluesky compose intent URL.
+ *
+ * Layout in the composer body when a question is provided:
+ *
+ *   {question}
+ *   <blank line>
+ *   gui.do/ama #ama
+ *
+ * The question is prefilled so Guido can cut it and paste it as the
+ * image alt text in one motion. Footer always present so the answer
+ * post is back-linkable to the AMA page.
  *
  * Bluesky's compose intent only accepts `text=`. There's no way to
  * pre-attach an image, so this is a tab-switch + manual image attach.
  */
-export function blueskyComposeUrl(): string {
-  const footer = "\n\ngui.do/ama #ama";
-  return `https://bsky.app/intent/compose?text=${encodeURIComponent(footer)}`;
+export function blueskyComposeUrl(question?: string): string {
+  const footer = "gui.do/ama #ama";
+  const body = question ? `${question}\n\n${footer}` : `\n\n${footer}`;
+  return `https://bsky.app/intent/compose?text=${encodeURIComponent(body)}`;
 }
 
 /**
@@ -53,7 +62,7 @@ export function blueskyComposeUrl(): string {
  *
  * callback_data must be ≤64 bytes; "regen:<8-hex-id>" = 14 bytes, fine.
  */
-export function keyboardFor(id: string, adminUrl: string) {
+export function keyboardFor(id: string, adminUrl: string, question?: string) {
   return {
     inline_keyboard: [
       [
@@ -61,7 +70,7 @@ export function keyboardFor(id: string, adminUrl: string) {
         { text: "🗑 Delete", callback_data: `delete:${id}` },
       ],
       [
-        { text: "🦋 Post on Bluesky", url: blueskyComposeUrl() },
+        { text: "🦋 Post on Bluesky", url: blueskyComposeUrl(question) },
         { text: "Open admin →", url: adminUrl },
       ],
     ],

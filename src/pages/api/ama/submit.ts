@@ -119,7 +119,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
         png,
         caption: captionFor(question, adminUrl),
         filename: `ama-${id}.png`,
-        keyboard: keyboardFor(id, adminUrl),
+        keyboard: keyboardFor(id, adminUrl, question),
       });
       if (!tgRes.ok) {
         console.error(

@@ -137,7 +137,7 @@ const description = "Admin view for a submitted AMA question.";
           Download card
         </a>
         <a
-          href={blueskyComposeUrl()}
+          href={blueskyComposeUrl(data.question)}
           target="_blank"
           rel="noopener"
           class="border-base-300 dark:border-base-700 text-base-900 dark:text-base-100 hover:bg-base-100 dark:hover:bg-base-800 inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium"
@@ -158,8 +158,9 @@ const description = "Admin view for a submitted AMA question.";
       <p class="text-base-500 dark:text-base-400 mt-6 text-xs">
         Regenerate picks a fresh random variant, persona, and adjective. Hit it
         again if you don't like the result. Delete is permanent. Bluesky opens a
-        composer with the footer pre-filled; attach the downloaded card manually
-        (Bluesky's intent URL doesn't accept images).
+        composer with the question on top and the footer below; cut the question
+        and paste it as the image alt text, then attach the downloaded card
+        (Bluesky's intent URL doesn't accept image attachments).
       </p>
     </div>
   </section>
