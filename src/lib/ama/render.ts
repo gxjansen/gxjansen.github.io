@@ -41,6 +41,15 @@ const fonts = [
     weight: 600 as const,
     style: "normal" as const,
   },
+  // Source Serif 4 Bold, used only for the opening quote glyph.
+  // Poppins' " is flat; a serif gives the typographic curl Satori
+  // would otherwise have to fake (badly).
+  {
+    name: "Source Serif",
+    data: readFileSync(join(fontDir, "SourceSerif4-Bold.ttf")),
+    weight: 700 as const,
+    style: "normal" as const,
+  },
 ];
 
 export type RenderOverrides = { variant?: Variant; persona?: Persona };

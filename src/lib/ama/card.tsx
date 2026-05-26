@@ -1580,7 +1580,7 @@ export function AmaCard({
               width: Math.round(fs * 1.0),
               marginRight: Math.round(fs * 0.32),
               marginTop: Math.round(-fs * 0.18),
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: '"Source Serif", Georgia, serif',
               fontSize: Math.round(fs * 1.7),
               lineHeight: 1,
               color: v.accent,
