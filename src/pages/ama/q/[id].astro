@@ -18,6 +18,7 @@ import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
 import { renderAmaCard, type RenderOverrides } from "../../../lib/ama/render";
 import { variants, personas } from "../../../lib/ama/card";
+import { blueskyComposeUrl } from "../../../lib/ama/telegram";
 
 const id = Astro.params.id;
 const token = Astro.url.searchParams.get("t") ?? "";
@@ -135,6 +136,14 @@ const description = "Admin view for a submitted AMA question.";
         >
           Download card
         </a>
+        <a
+          href={blueskyComposeUrl()}
+          target="_blank"
+          rel="noopener"
+          class="border-base-300 dark:border-base-700 hover:bg-base-100 dark:hover:bg-base-800 inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium"
+        >
+          🦋 Post on Bluesky
+        </a>
         <form method="POST" action={actionUrl} class="contents">
           <input type="hidden" name="action" value="delete" />
           <button
@@ -148,7 +157,9 @@ const description = "Admin view for a submitted AMA question.";
 
       <p class="text-base-500 dark:text-base-400 mt-6 text-xs">
         Regenerate picks a fresh random variant, persona, and adjective. Hit it
-        again if you don't like the result. Delete is permanent.
+        again if you don't like the result. Delete is permanent. Bluesky opens a
+        composer with the footer pre-filled; attach the downloaded card manually
+        (Bluesky's intent URL doesn't accept images).
       </p>
     </div>
   </section>
