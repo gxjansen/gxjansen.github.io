@@ -224,35 +224,67 @@ const description =
     });
   }
 
-  // ── Form submit (stubbed until backend lands) ─────────────────────────
+  // ── Form submit ───────────────────────────────────────────────────────
   const form = document.getElementById("ama-form");
   const status = document.getElementById("ama-status");
   const formSection = document.getElementById("ama-form-section");
   const successSection = document.getElementById("ama-success");
+  const submitBtn = form && form.querySelector('button[type="submit"]');
+
+  function setError(msg) {
+    if (!status) return;
+    status.textContent = msg;
+    status.className = "ama-status text-sm text-red-600 dark:text-red-400";
+  }
 
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!status || !textarea) return;
+      status.textContent = "";
 
       const q = textarea.value.trim();
       if (q.length < 10) {
-        status.textContent = "A bit too short — give me a few more words.";
-        status.className = "ama-status text-sm text-red-600 dark:text-red-400";
+        setError("A bit too short — give me a few more words.");
         return;
       }
       if (/(https?:\/\/|www\.)/i.test(q)) {
-        status.textContent = "Links aren't allowed in questions.";
-        status.className = "ama-status text-sm text-red-600 dark:text-red-400";
+        setError("Links aren't allowed in questions.");
         return;
       }
 
-      // STUB: backend wiring lands in a follow-up PR. For now, immediately
-      // pretend success so the UI flow is testable end-to-end.
-      if (formSection) formSection.classList.add("hidden");
-      if (successSection) {
-        successSection.classList.remove("hidden");
-        successSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      const altchaInput = form.querySelector('input[name="altcha"]');
+      const altchaSolution = altchaInput && altchaInput.value;
+      if (!altchaSolution) {
+        setError("Please wait for verification to complete, then try again.");
+        return;
+      }
+
+      if (submitBtn) submitBtn.setAttribute("disabled", "true");
+      status.textContent = "Sending…";
+      status.className = "ama-status text-sm text-base-600 dark:text-base-400";
+
+      try {
+        const res = await fetch("/api/ama/submit", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ question: q, altcha: altchaSolution }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          setError(data.error || "Something went wrong. Try again.");
+          if (submitBtn) submitBtn.removeAttribute("disabled");
+          return;
+        }
+        if (formSection) formSection.classList.add("hidden");
+        if (successSection) {
+          successSection.classList.remove("hidden");
+          successSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      } catch (err) {
+        console.error("AMA submit failed:", err);
+        setError("Network error — please try again.");
+        if (submitBtn) submitBtn.removeAttribute("disabled");
       }
     });
   }
