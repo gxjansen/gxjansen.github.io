@@ -67,8 +67,15 @@ export const POST: APIRoute = async ({ request }) => {
   const webhookSecret = process.env.TELEGRAM_WEBHOOK_SECRET;
 
   if (!botToken || !signingSecret || !webhookSecret) {
-    console.error("Telegram callback missing env vars");
-    return new Response("misconfigured", { status: 500 });
+    const missing = [
+      !botToken && "TELEGRAM_BOT_TOKEN",
+      !signingSecret && "AMA_SIGNING_SECRET",
+      !webhookSecret && "TELEGRAM_WEBHOOK_SECRET",
+    ]
+      .filter(Boolean)
+      .join(", ");
+    console.error("Telegram callback missing env vars:", missing);
+    return new Response(`misconfigured: missing ${missing}`, { status: 500 });
   }
 
   // Telegram sets this header on every webhook call when secret_token
