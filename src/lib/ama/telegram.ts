@@ -17,12 +17,29 @@ export function adminTokenFor(id: string, secret: string): string {
 }
 
 export function adminUrlFor(id: string, token: string): string {
-  return `https://gui.do/ama/q/${id}?t=${token}`;
+  // Trailing slash matters: site's trailing-slash redirect runs with
+  // force=false but the @astrojs/netlify SSR function's path:"/*" wins,
+  // so /ama/q/<id> goes straight to Astro which doesn't match
+  // (trailingSlash: 'always') and 404s. Bake the slash in here.
+  return `https://gui.do/ama/q/${id}/?t=${token}`;
 }
 
 export function captionFor(question: string, adminUrl: string): string {
   // Telegram captions cap at 1024 chars; question is ≤500 so plenty of room.
   return `New AMA question:\n\n"${question}"\n\nAdmin: ${adminUrl}`;
+}
+
+/**
+ * Bluesky compose intent URL with the standard answer footer pre-filled.
+ * Two leading newlines so the cursor lands at the top of the composer
+ * with the footer visible underneath — type the answer above it.
+ *
+ * Bluesky's compose intent only accepts `text=`. There's no way to
+ * pre-attach an image, so this is a tab-switch + manual image attach.
+ */
+export function blueskyComposeUrl(): string {
+  const footer = "\n\ngui.do/ama #ama";
+  return `https://bsky.app/intent/compose?text=${encodeURIComponent(footer)}`;
 }
 
 /**
@@ -43,7 +60,10 @@ export function keyboardFor(id: string, adminUrl: string) {
         { text: "🎲 Regenerate", callback_data: `regen:${id}` },
         { text: "🗑 Delete", callback_data: `delete:${id}` },
       ],
-      [{ text: "Open admin →", url: adminUrl }],
+      [
+        { text: "🦋 Post on Bluesky", url: blueskyComposeUrl() },
+        { text: "Open admin →", url: adminUrl },
+      ],
     ],
   };
 }
