@@ -26,6 +26,19 @@ export function captionFor(question: string, adminUrl: string): string {
 }
 
 /**
+ * Bluesky compose intent URL with the standard answer footer pre-filled.
+ * Two leading newlines so the cursor lands at the top of the composer
+ * with the footer visible underneath — type the answer above it.
+ *
+ * Bluesky's compose intent only accepts `text=`. There's no way to
+ * pre-attach an image, so this is a tab-switch + manual image attach.
+ */
+export function blueskyComposeUrl(): string {
+  const footer = "\n\ngui.do/ama #ama";
+  return `https://bsky.app/intent/compose?text=${encodeURIComponent(footer)}`;
+}
+
+/**
  * Inline keyboard attached to every AMA photo message.
  *
  * Two callback buttons + one URL button:
@@ -43,7 +56,10 @@ export function keyboardFor(id: string, adminUrl: string) {
         { text: "🎲 Regenerate", callback_data: `regen:${id}` },
         { text: "🗑 Delete", callback_data: `delete:${id}` },
       ],
-      [{ text: "Open admin →", url: adminUrl }],
+      [
+        { text: "🦋 Post on Bluesky", url: blueskyComposeUrl() },
+        { text: "Open admin →", url: adminUrl },
+      ],
     ],
   };
 }
