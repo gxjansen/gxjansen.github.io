@@ -267,7 +267,10 @@ const description =
       status.className = "ama-status text-sm text-base-600 dark:text-base-400";
 
       try {
-        const res = await fetch("/api/ama/submit", {
+        // Trailing slash matters: netlify.toml redirects extension-less
+        // paths to /...path/, which a browser follows as GET and 404s our
+        // POST handler. recent.json is exempted because it has an extension.
+        const res = await fetch("/api/ama/submit/", {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({ question: q, altcha: altchaSolution }),
