@@ -35,19 +35,32 @@ export function captionFor(question: string, adminUrl: string): string {
  * Layout in the composer body when a question is provided:
  *
  *   {question}
- *   <blank line>
+ *   <blank line, NBSP>
  *   gui.do/ama #ama
  *
  * The question is prefilled so Guido can cut it and paste it as the
  * image alt text in one motion. Footer always present so the answer
  * post is back-linkable to the AMA page.
  *
+ * NBSP on the middle line — Android's Bluesky composer collapses
+ * consecutive newlines into one. A non-breaking space makes the
+ * line "non-empty" and survives, preserving the blank-row visual on
+ * both desktop and Android. Renders identically on desktop where the
+ * collapse doesn't happen.
+ *
+ * Note on the hashtag: Firefox-for-Android's URL handler strips the
+ * `#ama` portion when handing off to Bluesky, because it parses the
+ * decoded `#` as a URL fragment. Accepted trade-off — the auto-tag
+ * works on desktop where most answers happen, and posts stay
+ * discoverable via the gui.do/ama URL.
+ *
  * Bluesky's compose intent only accepts `text=`. There's no way to
  * pre-attach an image, so this is a tab-switch + manual image attach.
  */
 export function blueskyComposeUrl(question?: string): string {
   const footer = "gui.do/ama #ama";
-  const body = question ? `${question}\n\n${footer}` : `\n\n${footer}`;
+  const blank = "\n \n";
+  const body = question ? `${question}${blank}${footer}` : `${blank}${footer}`;
   return `https://bsky.app/intent/compose?text=${encodeURIComponent(body)}`;
 }
 
