@@ -204,7 +204,14 @@ export function OgFeedStack() {
                 overflow: "hidden",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 14,
+                  height: 64,
+                }}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -212,6 +219,15 @@ export function OgFeedStack() {
                     height: 64,
                     borderRadius: 64,
                     overflow: "hidden",
+                    // Without flexShrink:0, Satori shrinks the 64px
+                    // circle to match the text-block height beside it.
+                    // The Owl's ear tufts sit at the top edge of its
+                    // SVG, so the shrink visually crops them — looking
+                    // like a card-colored bar across the avatar.
+                    flexShrink: 0,
+                    // Match the question card's visible ring so the
+                    // circle stays distinct from the card bg.
+                    boxShadow: `0 0 0 2px ${s.variant.subtleColor}`,
                   }}
                 >
                   <PAvatar />
