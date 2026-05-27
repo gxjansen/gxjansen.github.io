@@ -158,8 +158,8 @@ const description =
     </div>
   </section>
 
-  <!-- Recent answered Q&As -->
-  <section class="pb-24 md:pb-28">
+  <!-- Recent answered Q&As: hidden until loadFeed confirms ≥6 posts. -->
+  <section id="ama-feed-section" class="hidden pb-24 md:pb-28">
     <div class="site-container px-4">
       <div class="mx-auto max-w-5xl">
         <div class="mb-8 flex items-end justify-between">
@@ -175,26 +175,6 @@ const description =
         </div>
 
         <div id="ama-feed" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <!-- Placeholders shown while fetching -->
-          <div
-            class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 h-72 animate-pulse rounded-xl border p-6"
-          >
-          </div>
-          <div
-            class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 h-72 animate-pulse rounded-xl border p-6"
-          >
-          </div>
-          <div
-            class="ama-feed-skeleton border-base-200 dark:border-base-800 bg-base-100/60 dark:bg-base-900/40 h-72 animate-pulse rounded-xl border p-6"
-          >
-          </div>
-        </div>
-
-        <div
-          id="ama-feed-empty"
-          class="text-base-500 dark:text-base-400 hidden text-center text-sm"
-        >
-          No answered questions yet. Yours could be the first.
         </div>
       </div>
     </div>
@@ -293,8 +273,14 @@ const description =
   // ── Recent answered Q&As (proxied through /api/ama/recent.json) ───────
   async function loadFeed() {
     const feed = document.getElementById("ama-feed");
-    const empty = document.getElementById("ama-feed-empty");
-    if (!feed) return;
+    const section = document.getElementById("ama-feed-section");
+    if (!feed || !section) return;
+
+    // The section is hidden by default. Only reveal it once we
+    // know there are at least 6 answered posts to populate the grid.
+    // Below that threshold, the whole "Recently answered" section
+    // stays out of the layout entirely (no header, no empty state).
+    const MIN_POSTS = 6;
 
     try {
       const res = await fetch("/api/ama/recent.json", {
@@ -304,13 +290,7 @@ const description =
       const data = await res.json();
       const posts = data.posts || [];
 
-      feed.innerHTML = "";
-
-      if (posts.length === 0) {
-        feed.classList.add("hidden");
-        if (empty) empty.classList.remove("hidden");
-        return;
-      }
+      if (posts.length < MIN_POSTS) return;
 
       const fmt = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
       const now = Date.now();
@@ -362,10 +342,12 @@ const description =
         </a>`,
         )
         .join("");
+
+      section.classList.remove("hidden");
     } catch (err) {
       console.error("AMA feed failed:", err);
-      feed.classList.add("hidden");
-      if (empty) empty.classList.remove("hidden");
+      // Leave the section hidden on error — better than showing an
+      // empty grid or an error state on an otherwise-clean page.
     }
   }
 
