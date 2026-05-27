@@ -139,7 +139,7 @@ export const POST: APIRoute = async ({ request }) => {
       png,
       caption: captionFor(data.question, adminUrl),
       filename: `ama-${id}.png`,
-      keyboard: keyboardFor(id, adminUrl),
+      keyboard: keyboardFor(id, adminUrl, data.question),
     });
     if (!editRes.ok) {
       console.error(

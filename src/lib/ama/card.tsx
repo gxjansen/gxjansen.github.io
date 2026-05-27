@@ -1664,6 +1664,11 @@ export function AmaCard({
             borderRadius: 128,
             overflow: "hidden",
             flexShrink: 0,
+            // Ring in the variant's subtle token so the avatar circle is
+            // always visible against the card bg, even when an avatar's
+            // internal backdrop is near-identical to the card (e.g.
+            // cream-Robin on cream-pine — see PR feedback).
+            boxShadow: `0 0 0 3px ${v.subtleColor}`,
           }}
         >
           <Avatar />
@@ -1750,17 +1755,33 @@ export function AmaCard({
               .split(/\s+/)
               .filter(Boolean)
               .map((w, i) => {
-                // Mentions: @handle, @handle.tld — coloured with the variant accent.
-                const isMention = /^@[\w.-]+/.test(w);
+                // Strip trailing punctuation so "gui.do," still matches
+                // as a URL and "@user." still matches as a mention.
+                const trailMatch = w.match(/[.,!?;:)\]]+$/);
+                const trail = trailMatch ? trailMatch[0] : "";
+                const core = trail ? w.slice(0, -trail.length) : w;
+
+                // Mentions: @handle, @handle.tld → accent color, kept as-is.
+                const mentionMatch = /^@[\w.-]+$/.test(core);
+                // URLs: http(s)/www optional, requires a domain with a
+                // letter TLD, optional path. Catches bare "gui.do" and
+                // "bsky.social". Display strips http(s):// + www.
+                const urlMatch = core.match(
+                  /^(?:https?:\/\/)?(?:www\.)?([a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9-]+)+(?:\/[^\s]*)?)$/i,
+                );
+
+                const isLink = mentionMatch || !!urlMatch;
+                const display = urlMatch ? urlMatch[1] : core;
                 return (
                   <span
                     key={i}
                     style={{
                       display: "flex",
-                      color: isMention ? v.accent : v.textColor,
+                      color: isLink ? v.accent : v.textColor,
                     }}
                   >
-                    {w}
+                    {display}
+                    {trail}
                   </span>
                 );
               })}
