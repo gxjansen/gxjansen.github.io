@@ -12,6 +12,7 @@ import { verifySolution } from "altcha-lib";
 import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
 import { renderAmaCard } from "../../../lib/ama/render";
+import { sanitizeQuestion } from "../../../lib/ama/sanitize";
 import {
   adminTokenFor,
   adminUrlFor,
@@ -47,8 +48,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       question?: unknown;
       altcha?: unknown;
     };
-    const question =
-      typeof body.question === "string" ? body.question.trim() : "";
+    const rawQuestion = typeof body.question === "string" ? body.question : "";
+    const question = sanitizeQuestion(rawQuestion);
     const altcha = typeof body.altcha === "string" ? body.altcha : undefined;
 
     if (question.length < MIN_LEN || question.length > MAX_LEN) {
