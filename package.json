@@ -19,6 +19,7 @@
     "standard-site:setup": "node scripts/standard-site-setup.mjs",
     "standard-site:publish": "node scripts/standard-site-publish.mjs",
     "check:trailing-slashes": "node scripts/check-trailing-slashes.js",
+    "optimize-images": "node scripts/optimize-images.mjs",
     "format:check": "prettier --check \"src/**/*.{astro,ts,tsx,js,jsx,mjs,css,md,mdx}\"",
     "typecheck": "astro check"
   },
