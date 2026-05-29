@@ -205,26 +205,75 @@ export default function jsonLDGenerator(props: JsonLDProps) {
     </script>`;
   }
 
+  const site = import.meta.env.SITE;
+  const inLanguage = "language" in siteData ? (siteData as any).language : "en";
+
+  // Person graph for Guido — sourced from the authors collection front-matter
+  // (src/content/authors/gxjansen/index.mdx). Kept in sync manually because
+  // siteData has no access to the content layer at this point.
+  const personId = `${site}/about/#guido`;
+  const person = {
+    "@type": "Person",
+    "@id": personId,
+    name: "Guido X Jansen",
+    alternateName: "Guido Jansen",
+    url: site,
+    email: "mailto:x@gui.do",
+    jobTitle: "Global Business & Technology Evangelist",
+    description:
+      "Community strategist with 20+ years building technical ecosystems around open-source platforms.",
+    worksFor: {
+      "@type": "Organization",
+      name: "Spryker",
+      url: "https://spryker.com/",
+    },
+    knowsAbout: [
+      "Community Building",
+      "Developer Relations",
+      "E-commerce & CRO",
+      "Experimentation & A/B Testing",
+      "Open Source Strategy",
+      "Digital Usability",
+      "Community-Led Growth",
+      "Developer Experience",
+    ],
+    sameAs: [
+      "https://www.linkedin.com/in/guidoxjansen/",
+      "https://github.com/gxjansen",
+      "https://bsky.app/profile/gui.do",
+      "https://sifa.id/p/gui.do",
+    ],
+  };
+
+  const website = {
+    "@type": "WebSite",
+    "@id": `${site}/#website`,
+    name: siteData.title,
+    url: site,
+    inLanguage,
+    publisher: { "@id": personId },
+    author: { "@id": personId },
+    accessibilityAPI: "ARIA",
+    accessibilityControl: [
+      "fullKeyboardControl",
+      "fullMouseControl",
+      "fullTouchControl",
+    ],
+    accessibilityFeature: [
+      "alternativeText",
+      "structuralNavigation",
+      "highContrastDisplay",
+      "largePrint",
+    ],
+    accessibilityHazard: "none",
+  };
+
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [website, person],
+  };
+
   return `<script type="application/ld+json">
-    {
-      "@context": "https://schema.org/",
-      "@type": "WebSite",
-      "name": "${siteData.title}",
-      "url": "${import.meta.env.SITE}",
-      "inLanguage": "${"language" in siteData ? (siteData as any).language : "en"}",
-      "accessibilityAPI": "ARIA",
-      "accessibilityControl": [
-        "fullKeyboardControl",
-        "fullMouseControl",
-        "fullTouchControl"
-      ],
-      "accessibilityFeature": [
-        "alternativeText",
-        "structuralNavigation",
-        "highContrastDisplay",
-        "largePrint"
-      ],
-      "accessibilityHazard": "none"
-    }
-  </script>`;
+${JSON.stringify(graph, null, 2)}
+</script>`;
 }

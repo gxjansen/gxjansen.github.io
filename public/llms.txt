@@ -1,0 +1,54 @@
+# Guido X Jansen — gui.do
+
+> Community strategist and DevRel leader with 20+ years building technical
+> ecosystems around open-source platforms. Founded communities around
+> Joomla! and Magento (Meet Magento NL, 600+ attendees), created the
+> CRO.CAFE podcast (200+ episodes, 4 languages), and built the community
+> function at Spryker. Based in the Netherlands.
+
+This file follows the llms.txt convention (https://llmstxt.org/) and the
+specification.website agent-readiness spec
+(https://specification.website/spec/agent-readiness/llms-txt/).
+
+## About
+
+- [About Guido](https://gui.do/about/): biography, expertise, credentials, awards
+- [Contact](https://gui.do/contact/): how to reach Guido
+- [Press kit](https://gui.do/press/): bio, headshots, brand assets
+- [Author profile](https://gui.do/authors/gxjansen/): canonical author page with all social profiles
+
+## Services
+
+- [Retainer / advisory](https://gui.do/retainer/): community + DevRel advisory engagements
+- [Services overview](https://gui.do/services/): the engagement menu
+- [Speaker](https://gui.do/speaker/): conference and event speaking
+
+## Speaking and presentations
+
+- [Events](https://gui.do/events/): conferences, workshops, and meetups Guido has spoken at
+- [Presentations](https://gui.do/presentations/): talk catalogue with abstracts
+
+## Communities and projects
+
+- [Communities](https://gui.do/communities/): communities Guido has founded, led, or shaped
+- [Projects](https://gui.do/projects/): notable initiatives and side projects
+- [Podcasts](https://gui.do/podcasts/): CRO.CAFE and other podcast work
+
+## Writing
+
+- [Articles](https://gui.do/post/): long-form posts on community, DevRel, experimentation, e-commerce
+- [Newsletter](https://gui.do/newsletter/): how to subscribe
+- [RSS feed](https://gui.do/rss.xml): full-text feed for syndication
+
+## AMA
+
+- [Ask Guido anything](https://gui.do/ama/): public AMA powered by AT Protocol / Bluesky
+
+## Site
+
+- [Sitemap index](https://gui.do/sitemap-index.xml): full URL index
+- [robots.txt](https://gui.do/robots.txt): crawl policy (AI crawlers are explicitly allowed)
+
+## Optional
+
+- [Privacy](https://gui.do/privacy/): privacy policy

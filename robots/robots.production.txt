@@ -2,4 +2,106 @@ User-agent: *
 Disallow: /conference-terms
 Disallow: /styleguide
 
+# Named AI crawlers — explicit allow per
+# https://specification.website/spec/agent-readiness/robots-for-ai-crawlers/
+User-agent: GPTBot
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: GoogleOther
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: Bingbot
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: CCBot
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: YouBot
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
+User-agent: MistralAI-User
+Allow: /
+Disallow: /conference-terms
+Disallow: /styleguide
+
 Sitemap: https://gui.do/sitemap-index.xml
