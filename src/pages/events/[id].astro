@@ -53,7 +53,12 @@ const descriptionParts = [
 const metaDescription = descriptionParts.filter(Boolean).join(" ");
 ---
 
-<BaseLayout title={enhancedTitle} description={metaDescription}>
+<BaseLayout
+  title={enhancedTitle}
+  description={metaDescription}
+  type="event"
+  event={event}
+>
   <section class="py-24 md:py-28">
     <div class="site-container">
       <div class="mx-auto max-w-4xl">

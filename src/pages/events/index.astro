@@ -87,7 +87,12 @@ sortedYears.forEach((year) => {
 });
 ---
 
-<BaseLayout title="Events" description="Overview of all events">
+<BaseLayout
+  title="Events"
+  description="Overview of all events"
+  type="eventList"
+  events={events}
+>
   {/* Upcoming Events Section */}
   <section class="py-24 md:py-28">
     <UpcomingEvents events={sortedEvents} />
