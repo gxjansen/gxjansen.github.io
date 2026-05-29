@@ -7,6 +7,7 @@ import react from "@astrojs/react";
 import netlify from "@astrojs/netlify";
 import * as path from 'node:path';
 import { contentValidationPlugin } from './src/utils/content-validation-plugin.ts';
+import { markdownEndpoints } from './src/integrations/markdown-endpoints.ts';
 
 // https://astro.build/config
 export default defineConfig({
@@ -116,6 +117,7 @@ export default defineConfig({
       }
     }),
     contentValidationPlugin(),
+    markdownEndpoints(),
   ],
 
   vite: {
