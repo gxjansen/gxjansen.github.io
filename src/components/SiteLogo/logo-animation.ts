@@ -10,15 +10,12 @@ export function initLogoAnimation() {
   utils.remove(".site-logo-text, .site-logo-icon");
 
   createTimeline({ defaults: { ease: "outExpo" } })
-    .add(
-      ".site-logo-text",
-      {
-        opacity: [0, 1],
-        translateY: [20, 0],
-        delay: stagger(100),
-        duration: 1200,
-      },
-    )
+    .add(".site-logo-text", {
+      opacity: [0, 1],
+      translateY: [20, 0],
+      delay: stagger(100),
+      duration: 1200,
+    })
     .add(
       ".site-logo-icon",
       {
