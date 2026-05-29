@@ -3,7 +3,7 @@ interface IndieProject {
   description: string;
   mainImage: string;
 
-  link: string;
+  link?: string;
   iconBgColor: string; // Tailwind color class for the icon background
   license?: string; // Optional license information
   tagline?: string; // Optional custom tagline (overrides license display)
@@ -94,7 +94,6 @@ export const indieProjects: IndieProject[] = [
     description:
       "AI-powered conversation starter generator for BlueSky followers. You can use the SaaS version, run it locally or host it yourself (Netlify instructions included).",
     mainImage: "/icons/bluespark.svg",
-    link: "https://bluespark.gui.do/",
     iconBgColor: "bg-black-600",
     githubUrl: "https://github.com/gxjansen/bluespark",
     license: "MIT",
