@@ -46,6 +46,9 @@ const metaImage = image ? new URL(image, Astro.site) : undefined;
   title={`${title} | Presentations`}
   description={metaDescription}
   image={metaImage as any}
+  type="presentation"
+  presentation={entry.data}
+  presentationSlug={entry.id}
 >
   <div slot="head">
     <link rel="preload" as="image" href={image} />

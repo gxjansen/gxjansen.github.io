@@ -42,6 +42,9 @@ const otherPresentations: CollectionEntry<"presentations">[] =
 <BaseLayout
   title="Presentations"
   description="Presentations and workshops by Guido Jansen."
+  type="presentationList"
+  presentations={validPresentations.map((p) => p.data)}
+  presentationSlugs={validPresentations.map((p) => p.id)}
 >
   <section class="py-24 md:py-28">
     <div class="site-container">

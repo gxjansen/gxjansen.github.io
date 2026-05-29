@@ -7,15 +7,36 @@ import Seo from "@components/Seo/Seo.astro";
 // data
 import standardSiteConfig from "@config/standardSite.json";
 import { CONFIG } from "../config"; // Use .env for indexing
+import type { EventData, PresentationData, CommunityData } from "@js/jsonLD";
 
 export interface Props {
-  type?: "blog" | "general" | undefined;
+  type?:
+    | "blog"
+    | "general"
+    | "event"
+    | "eventList"
+    | "presentation"
+    | "presentationList"
+    | "communities"
+    | undefined;
   title: string;
   description: string;
   image?: ImageMetadata;
   postFrontmatter?: CollectionEntry<"post">["data"];
   authors?: CollectionEntry<"authors">[];
   noindex?: boolean;
+  // Event detail
+  event?: EventData;
+  // Events index
+  events?: EventData[];
+  // Presentation detail
+  presentation?: PresentationData;
+  presentationSlug?: string;
+  // Presentations index
+  presentations?: PresentationData[];
+  presentationSlugs?: string[];
+  // Communities page
+  communities?: CommunityData[];
 }
 
 const {
@@ -25,6 +46,13 @@ const {
   image,
   authors,
   postFrontmatter,
+  event,
+  events,
+  presentation,
+  presentationSlug,
+  presentations,
+  presentationSlugs,
+  communities,
 } = Astro.props as Props;
 // Use the environment variable to determine noindex
 const noindex = !CONFIG.ALLOW_INDEXING;
@@ -187,13 +215,20 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 </script>
 
 <Seo
-  type={type}
+  type={type as any}
   title={title}
   description={description}
   image={image}
   authors={authors}
   postFrontmatter={postFrontmatter}
   noindex={noindex}
+  event={event as any}
+  events={events as any}
+  presentation={presentation as any}
+  slug={presentationSlug as any}
+  presentations={presentations as any}
+  slugs={presentationSlugs as any}
+  communities={communities as any}
 />
 
 {

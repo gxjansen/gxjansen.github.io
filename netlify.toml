@@ -72,6 +72,108 @@
 # non-existent /.netlify/functions/entry, which silently 404'd every
 # dynamic route once SSR endpoints landed in /api/.
 
+# Serve .md files with correct Content-Type for agents / curl clients
+[[headers]]
+  for = "/*.md"
+  [headers.values]
+    Content-Type = "text/markdown; charset=utf-8"
+
+# Content negotiation: browsers/agents that send Accept: text/markdown
+# are redirected to the pre-built .md file for that route.
+# These must appear BEFORE the trailing-slash splat and the SSR catch-all.
+# Explicit per-route blocks are used instead of a global splat because
+# Netlify's header-condition matching on splat redirects is unreliable
+# when combined with the existing trailing-slash splat rule.
+[[redirects]]
+  from = "/about/"
+  to = "/about.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/services/"
+  to = "/services.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/services/*"
+  to = "/services/:splat.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/communities/"
+  to = "/communities.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/projects/"
+  to = "/projects.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/speaker/"
+  to = "/speaker.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/press/"
+  to = "/press.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/contact/"
+  to = "/contact.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/retainer/"
+  to = "/retainer.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/podcasts/"
+  to = "/podcasts.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/post/*"
+  to = "/post/:splat.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/events/"
+  to = "/events.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/events/*"
+  to = "/events/:splat.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/presentations/"
+  to = "/presentations.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/presentations/*"
+  to = "/presentations/:splat.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
 # Content Security Policy headers
 [[headers]]
   for = "/*"

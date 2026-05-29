@@ -14,18 +14,39 @@ import "../styles/global.scss";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
+import { breadcrumbGenerator } from "@js/jsonLD";
+import type { EventData, PresentationData, CommunityData } from "@js/jsonLD";
 
 // data
 import siteSettings from "@config/siteSettings.json";
 
 interface Props {
-  type?: "blog" | "general";
+  type?:
+    | "blog"
+    | "general"
+    | "event"
+    | "eventList"
+    | "presentation"
+    | "presentationList"
+    | "communities";
   title: string;
   description: string;
   image?: ImageMetadata;
   authorsData?: CollectionEntry<"authors">[];
   postFrontmatter?: CollectionEntry<"post">["data"];
   noindex?: boolean;
+  // Event detail
+  event?: EventData;
+  // Events index
+  events?: EventData[];
+  // Presentation detail
+  presentation?: PresentationData;
+  presentationSlug?: string;
+  // Presentations index
+  presentations?: PresentationData[];
+  presentationSlugs?: string[];
+  // Communities page
+  communities?: CommunityData[];
 }
 
 const {
@@ -36,9 +57,20 @@ const {
   authorsData,
   postFrontmatter,
   noindex = false,
+  event,
+  events,
+  presentation,
+  presentationSlug,
+  presentations,
+  presentationSlugs,
+  communities,
 } = Astro.props as Props;
 
 const currLocale = getLocaleFromUrl(Astro.url);
+
+// BreadcrumbList: generated for every non-root route
+const site = Astro.site ? Astro.site.toString() : "https://gui.do/";
+const breadcrumbLD = breadcrumbGenerator(Astro.url.pathname, site);
 ---
 
 <!doctype html>
@@ -52,7 +84,17 @@ const currLocale = getLocaleFromUrl(Astro.url);
       authors={authorsData ? authorsData : undefined}
       postFrontmatter={postFrontmatter ? postFrontmatter : undefined}
       noindex={noindex}
+      event={event}
+      events={events}
+      presentation={presentation}
+      presentationSlug={presentationSlug}
+      presentations={presentations}
+      presentationSlugs={presentationSlugs}
+      communities={communities}
     />
+    <!-- BreadcrumbList JSON-LD (site-wide, every non-root route) -->
+    {breadcrumbLD && <Fragment set:html={breadcrumbLD} />}
+    <slot name="head" />
     <style>
       /* Noise background animation */
       @keyframes noise {
