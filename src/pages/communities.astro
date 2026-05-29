@@ -13,6 +13,14 @@ import magentoLogo from "@images/events/magento.png";
 import crocafeLogo from "@images/events/crocafe.jpg";
 import sprykerLogo from "@images/events/spryker.png";
 
+// Community URLs for JSON-LD
+const communityUrls: Record<string, string> = {
+  "Mambo/Joomla!": "https://www.joomla.org/",
+  "Dutchento / Meet Magento Netherlands": "https://www.dutchento.org/",
+  "CRO.CAFE": "https://cro.cafe/",
+  Spryker: "https://spryker.com/",
+};
+
 // Community data
 const communities = [
   {
@@ -89,6 +97,11 @@ const communities = [
 <BaseLayout
   title="Community Building | Guido X Jansen"
   description="Track record of building developer and technical communities from zero: Joomla!, Dutchento/Meet Magento, CRO.CAFE, and Spryker. Community Builder Award recipient."
+  type="communities"
+  communities={communities.map((c) => ({
+    name: c.name,
+    url: communityUrls[c.name],
+  }))}
 >
   <!-- Hero Section -->
   <section class="py-24 md:py-28">

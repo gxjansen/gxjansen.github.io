@@ -12,6 +12,7 @@ const siteData = getTranslatedData("siteData", currLocale);
 
 // component import
 import jsonLDGenerator from "@js/jsonLD";
+import type { EventData, PresentationData, CommunityData } from "@js/jsonLD";
 
 interface BaseProps {
   title: string;
@@ -31,13 +32,54 @@ interface BlogProps extends BaseProps {
   postFrontmatter?: CollectionEntry<"post">["data"];
 }
 
+interface EventProps extends BaseProps {
+  type: "event";
+  image?: ImageMetadata;
+  event: EventData;
+}
+
+interface EventListProps extends BaseProps {
+  type: "eventList";
+  image?: ImageMetadata;
+  events: EventData[];
+}
+
+interface PresentationProps extends BaseProps {
+  type: "presentation";
+  image?: ImageMetadata;
+  presentation: PresentationData;
+  slug: string;
+}
+
+interface PresentationListProps extends BaseProps {
+  type: "presentationList";
+  image?: ImageMetadata;
+  presentations: PresentationData[];
+  slugs: string[];
+}
+
+interface CommunitiesProps extends BaseProps {
+  type: "communities";
+  image?: ImageMetadata;
+  communities: CommunityData[];
+}
+
+type SeoProps =
+  | GenProps
+  | BlogProps
+  | EventProps
+  | EventListProps
+  | PresentationProps
+  | PresentationListProps
+  | CommunitiesProps;
+
 const {
   type,
   title,
   description,
   image,
   noindex = false,
-} = Astro.props as GenProps | BlogProps;
+} = Astro.props as SeoProps;
 
 let optimizedImage: any;
 let jsonLD: any;
@@ -71,9 +113,45 @@ if (type === "blog") {
     authors: authors as any,
     canonicalUrl: canonicalUrl,
   });
-}
-// for general pages
-else {
+} else if (type === "event") {
+  const { event } = Astro.props as EventProps;
+  jsonLD = jsonLDGenerator({
+    type: "event",
+    event,
+    canonicalUrl,
+  });
+} else if (type === "eventList") {
+  const { events } = Astro.props as EventListProps;
+  jsonLD = jsonLDGenerator({
+    type: "eventList",
+    events,
+    canonicalUrl,
+  });
+} else if (type === "presentation") {
+  const { presentation, slug } = Astro.props as PresentationProps;
+  jsonLD = jsonLDGenerator({
+    type: "presentation",
+    presentation,
+    slug,
+    canonicalUrl,
+  });
+} else if (type === "presentationList") {
+  const { presentations, slugs } = Astro.props as PresentationListProps;
+  jsonLD = jsonLDGenerator({
+    type: "presentationList",
+    presentations,
+    slugs,
+    canonicalUrl,
+  });
+} else if (type === "communities") {
+  const { communities } = Astro.props as CommunitiesProps;
+  jsonLD = jsonLDGenerator({
+    type: "communities",
+    communities,
+    canonicalUrl,
+  });
+} else {
+  // for general pages
   jsonLD = jsonLDGenerator({
     type: "general",
   });

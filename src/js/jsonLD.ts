@@ -42,6 +42,37 @@ interface PersonSchema {
   email?: string;
 }
 
+// ── Event (eventUtils Event shape) ──────────────────────────────────────────
+export interface EventData {
+  id: string;
+  name: string;
+  date: string; // ISO string
+  url?: string;
+  city: string;
+  country: string;
+  topic?: string;
+  role?: string;
+  workshop?: boolean;
+  loadedIcon?: { src: string } | null;
+}
+
+// ── Presentation (content collection entry data) ─────────────────────────────
+export interface PresentationData {
+  title?: string;
+  duration?: string;
+  intendedAudience?: string;
+  isWorkshop?: boolean;
+  image?: string;
+  slideshareKey?: string;
+  youtubeId?: string;
+}
+
+// ── Community (inline data from communities.astro) ───────────────────────────
+export interface CommunityData {
+  name: string;
+  url?: string;
+}
+
 interface GeneralProps {
   type: "general";
 }
@@ -54,7 +85,49 @@ export interface BlogProps {
   canonicalUrl?: URL;
 }
 
-export type JsonLDProps = BlogProps | GeneralProps;
+export interface EventProps {
+  type: "event";
+  event: EventData;
+  canonicalUrl: URL;
+}
+
+export interface EventListProps {
+  type: "eventList";
+  events: EventData[];
+  canonicalUrl: URL;
+}
+
+export interface PresentationProps {
+  type: "presentation";
+  presentation: PresentationData;
+  slug: string;
+  canonicalUrl: URL;
+}
+
+export interface PresentationListProps {
+  type: "presentationList";
+  presentations: PresentationData[];
+  slugs: string[];
+  canonicalUrl: URL;
+}
+
+export interface CommunitiesProps {
+  type: "communities";
+  communities: CommunityData[];
+  canonicalUrl: URL;
+}
+
+export type JsonLDProps =
+  | BlogProps
+  | GeneralProps
+  | EventProps
+  | EventListProps
+  | PresentationProps
+  | PresentationListProps
+  | CommunitiesProps;
+
+// Canonical ID for Guido — referenced by all page-specific schemas.
+const GUIDO_ID = "https://gui.do/about/#guido";
 
 export default function jsonLDGenerator(props: JsonLDProps) {
   const { type } = props;
@@ -205,13 +278,197 @@ export default function jsonLDGenerator(props: JsonLDProps) {
     </script>`;
   }
 
+  // ── Event detail page ──────────────────────────────────────────────────────
+  if (type === "event") {
+    const { event, canonicalUrl } = props as EventProps;
+    const pageUrl = canonicalUrl.toString();
+    const eventUrl = event.url || pageUrl;
+
+    const description = [
+      event.topic ? `Topic: ${event.topic}.` : "",
+      event.role ? `Role: ${event.role}.` : "",
+      event.workshop ? "Hands-on workshop." : "",
+    ]
+      .filter(Boolean)
+      .join(" ");
+
+    const jsonLD: Record<string, any> = {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "@id": pageUrl,
+      name: event.name,
+      startDate: event.date,
+      location: {
+        "@type": "Place",
+        name: `${event.city}, ${event.country}`,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: event.city,
+          addressCountry: event.country,
+        },
+      },
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      performer: { "@id": GUIDO_ID },
+      organizer: { "@id": GUIDO_ID },
+      url: eventUrl,
+    };
+
+    if (description) {
+      jsonLD["description"] = description;
+    }
+
+    if (
+      event.loadedIcon &&
+      typeof event.loadedIcon === "object" &&
+      "src" in event.loadedIcon
+    ) {
+      jsonLD["image"] = event.loadedIcon.src;
+    }
+
+    return `<script type="application/ld+json">
+${JSON.stringify(jsonLD, null, 2)}
+</script>`;
+  }
+
+  // ── Events index page — ItemList ───────────────────────────────────────────
+  if (type === "eventList") {
+    const { events, canonicalUrl } = props as EventListProps;
+    const site = import.meta.env.SITE;
+
+    const jsonLD = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "@id": canonicalUrl.toString(),
+      name: "Events",
+      description: "Events where Guido X Jansen has spoken or presented.",
+      itemListElement: events.map((event, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: event.name,
+        url: `${site}/events/${event.id}/`,
+      })),
+    };
+
+    return `<script type="application/ld+json">
+${JSON.stringify(jsonLD, null, 2)}
+</script>`;
+  }
+
+  // ── Presentation detail page ───────────────────────────────────────────────
+  if (type === "presentation") {
+    const { presentation, slug, canonicalUrl } = props as PresentationProps;
+    const pageUrl = canonicalUrl.toString();
+
+    const description = [
+      presentation.intendedAudience
+        ? `For: ${presentation.intendedAudience}.`
+        : "",
+      presentation.duration ? `Duration: ${presentation.duration}.` : "",
+      presentation.isWorkshop ? "Workshop." : "",
+    ]
+      .filter(Boolean)
+      .join(" ");
+
+    const jsonLD: Record<string, any> = {
+      "@context": "https://schema.org",
+      "@type": "PresentationDigitalDocument",
+      "@id": pageUrl,
+      name: presentation.title || slug,
+      headline: presentation.title || slug,
+      url: pageUrl,
+      author: { "@id": GUIDO_ID },
+      creator: { "@id": GUIDO_ID },
+    };
+
+    if (description) {
+      jsonLD["description"] = description;
+    }
+
+    if (presentation.image) {
+      jsonLD["image"] = presentation.image;
+      jsonLD["thumbnailUrl"] = presentation.image;
+    }
+
+    if (presentation.youtubeId) {
+      jsonLD["video"] = {
+        "@type": "VideoObject",
+        "@id": `https://www.youtube.com/watch?v=${presentation.youtubeId}`,
+        url: `https://www.youtube.com/watch?v=${presentation.youtubeId}`,
+        embedUrl: `https://www.youtube.com/embed/${presentation.youtubeId}`,
+        name: presentation.title || slug,
+      };
+    }
+
+    return `<script type="application/ld+json">
+${JSON.stringify(jsonLD, null, 2)}
+</script>`;
+  }
+
+  // ── Presentations index page — ItemList ────────────────────────────────────
+  if (type === "presentationList") {
+    const { presentations, slugs, canonicalUrl } =
+      props as PresentationListProps;
+    const site = import.meta.env.SITE;
+
+    const jsonLD = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "@id": canonicalUrl.toString(),
+      name: "Presentations",
+      description: "Presentations and workshops by Guido X Jansen.",
+      itemListElement: presentations.map((p, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: p.title || slugs[index],
+        url: `${site}/presentations/${slugs[index]}/`,
+      })),
+    };
+
+    return `<script type="application/ld+json">
+${JSON.stringify(jsonLD, null, 2)}
+</script>`;
+  }
+
+  // ── Communities page — ItemList of Organizations ───────────────────────────
+  if (type === "communities") {
+    const { communities, canonicalUrl } = props as CommunitiesProps;
+
+    const jsonLD = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "@id": canonicalUrl.toString(),
+      name: "Communities",
+      description:
+        "Technical and developer communities built or contributed to by Guido X Jansen.",
+      itemListElement: communities.map((community, index) => {
+        const item: Record<string, any> = {
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "Organization",
+            name: community.name,
+          },
+        };
+        if (community.url) {
+          item["item"]["url"] = community.url;
+        }
+        return item;
+      }),
+    };
+
+    return `<script type="application/ld+json">
+${JSON.stringify(jsonLD, null, 2)}
+</script>`;
+  }
+
   const site = import.meta.env.SITE;
   const inLanguage = "language" in siteData ? (siteData as any).language : "en";
 
   // Person graph for Guido — sourced from the authors collection front-matter
   // (src/content/authors/gxjansen/index.mdx). Kept in sync manually because
   // siteData has no access to the content layer at this point.
-  const personId = `${site}/about/#guido`;
+  const personId = GUIDO_ID;
   const person = {
     "@type": "Person",
     "@id": personId,
@@ -275,5 +532,62 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 
   return `<script type="application/ld+json">
 ${JSON.stringify(graph, null, 2)}
+</script>`;
+}
+
+/**
+ * Generates a BreadcrumbList JSON-LD block from a URL pathname.
+ * Returns an empty string for the root path.
+ */
+export function breadcrumbGenerator(pathname: string, site: string): string {
+  // Normalize: strip trailing slash, then split
+  const clean = pathname.replace(/\/$/, "");
+  if (!clean || clean === "") {
+    return "";
+  }
+
+  const segments = clean.split("/").filter(Boolean);
+  if (segments.length === 0) {
+    return "";
+  }
+
+  // Build breadcrumb items: Home + each path segment
+  const items: Array<{
+    "@type": "ListItem";
+    position: number;
+    name: string;
+    item: string;
+  }> = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: site.replace(/\/$/, "") + "/",
+    },
+  ];
+
+  let accumulated = "";
+  for (let i = 0; i < segments.length; i++) {
+    accumulated += "/" + segments[i];
+    const name = segments[i]
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+    items.push({
+      "@type": "ListItem",
+      position: i + 2,
+      name,
+      item: site.replace(/\/$/, "") + accumulated + "/",
+    });
+  }
+
+  const jsonLD = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items,
+  };
+
+  return `<script type="application/ld+json">
+${JSON.stringify(jsonLD, null, 2)}
 </script>`;
 }
