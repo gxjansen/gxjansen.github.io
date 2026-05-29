@@ -206,8 +206,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
   }
 
   const site = import.meta.env.SITE;
-  const inLanguage =
-    "language" in siteData ? (siteData as any).language : "en";
+  const inLanguage = "language" in siteData ? (siteData as any).language : "en";
 
   // Person graph for Guido — sourced from the authors collection front-matter
   // (src/content/authors/gxjansen/index.mdx). Kept in sync manually because
