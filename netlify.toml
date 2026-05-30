@@ -199,11 +199,12 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    # Agent-discovery Link header: advertises machine-readable resources so
-    # crawlers and AI agents find them without parsing HTML.
-    # TODO: add </foo.md>; rel="alternate"; type="text/markdown" per-page entries
-    #       once issue #189 (Markdown alternate endpoints) lands.
-    Link = "</sitemap-index.xml>; rel=\"sitemap\", </llms.txt>; rel=\"alternate\"; type=\"text/plain\", <https://gui.do/about/#guido>; rel=\"describedby\"; type=\"application/ld+json\""
+    # NOTE: the agent-discovery `Link:` header (sitemap, llms.txt, Person @id,
+    # and per-page .md alternates) is emitted via the generated dist/_headers
+    # file by the markdown-endpoints integration — NOT here. Keeping it in a
+    # single file avoids Netlify's undocumented precedence when the same header
+    # is set in both netlify.toml and _headers. See
+    # src/integrations/markdown-endpoints.ts.
 
 [[headers]]
   for = "/.netlify/functions/getPodcastFeeds"
