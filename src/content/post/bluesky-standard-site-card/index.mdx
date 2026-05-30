@@ -1,0 +1,190 @@
+---
+title: "Make links to your blog render the custom \"View publication\" card + CTA"
+description: "Short guide. The mechanism is simpler than it looks, and it doesn't involve any /.well-known file or DNS TXT record."
+draft: false
+authors:
+  - gxjansen
+pubDate: 2026-05-30
+heroImage: ../bluesky-standard-site-card/heroImage.png
+categories:
+  - Technology
+  - AT Protocol
+  - Open Source
+---
+
+You may have recently started seeing really nice article URL preview cards on Bluesky with their logo, your own accent color and a neat CTA button to View or Subscribe. If you want that too for your articles on your own domain: this guide is for you!
+
+Bluesky [v1.122](https://bsky.app/profile/bsky.app/post/3mmwmla3xph26) now renders Standard.site publications as rich link cards: title, reading time, author, site name, theme colours, and an action button that takes the reader straight into the publication. In the same week, WordPress shipped its [ATmosphere 1.0.0 plugin](https://activitypub.blog/2026/05/20/atmosphere-1-0-0-liftoff/), so a chunk of the open web can now publish as Standard.site too.
+
+Let's get you set up!
+
+## What you need
+
+**A `site.standard.publication` record on your AT Protocol PDS, whose `url` field matches the URL of your site.**
+
+That's it. Bluesky's AppView indexes Standard.site records from the firehose and matches them to post links by URL. See the matching logic in [`packages/bsky/src/util/standard-site.ts`](https://github.com/bluesky-social/atproto/blob/main/packages/bsky/src/util/standard-site.ts). When a post links to a URL matching the `url` field of an indexed publication, the card renders.
+
+No need to change DNS settings or place any `/.well-known/` files.
+
+## So how to get your content on standard.site
+
+Three paths:
+
+1. **Publish through a Standard.site app.** [Leaflet](https://leaflet.pub), [pckt.blog](https://pckt.blog), or [Offprint](https://offprint.app) all create and maintain a `site.standard.publication` record for you when you set up a publication. The publication's `url` will be on that platform (`yourname.leaflet.pub`, etc.), so links to that URL get the card. As a bonus, the card's action button reads **"Subscribe on Leaflet"** (or pckt / Offprint), because [Bluesky's social-app ships a hardcoded allowlist of those three hosts](https://github.com/bluesky-social/social-app/blob/main/src/components/Post/Embed/StandardSiteEmbed/publishers.ts) and shows the branded button when the publication URL matches.
+
+2. **WordPress with the [ATmosphere plugin](https://activitypub.blog/2026/05/20/atmosphere-1-0-0-liftoff/).** Installing it gives your WP site a Standard.site publication record automatically, with `url` set to your blog. The card's button reads **"View publication"** with a generic arrow icon (your domain isn't on the hardcoded allowlist, so no platform branding). Functionally identical otherwise.
+
+3. **Roll your own.** If you have your own AT Protocol account and a static blog, you can publish a `site.standard.publication` record on your PDS pointing to your domain. Steve Simkins' [Sequoia CLI](https://sequoia.pub/) is the most common tool for this; he also wrote a [guide on indexing Standard.site records](https://atproto.com/blog/indexing-standard-site) that doubles as a primer on the data model. The card again reads "View publication."
+
+In all three cases, the card appears in Bluesky once the AppView has indexed the record from the firehose, usually within seconds.
+
+## What about DNS TXT and `/.well-known/` files?
+
+Some community write-ups may suggest one of these is needed but they're not. The confusion doesn't come out of thin air though.
+
+What each does:
+
+| File / record | What it does | Required for the Bluesky card? |
+|---|---|---|
+| **DNS TXT `_atproto.<domain>`** with `did=<your-did>` | [AT Protocol handle resolution](https://atproto.com/specs/handle): proves a domain maps to an AT Protocol DID. Used to make a custom domain work as a Bluesky handle. | No |
+| **`/.well-known/atproto-did`** (plain-text DID) | Same purpose as above: handle resolution. An alternative to the DNS TXT record, useful for hosts where you can't set TXT records, or for handles too long for DNS. | No |
+| **`/.well-known/site.standard.publication`** (AT-URI) | [Standard.site's own verification](https://standard.site/docs/verification/): lets a reader confirm that the domain claims a specific publication record. Used by some Standard.site consumers (and worth having on principle), but Bluesky does not fetch it. | No |
+
+All of these are useful for *other* things. DNS TXT and `atproto-did` make your domain usable as a Bluesky handle. The Standard.site verification file lets third-party readers cryptographically link a domain to a publication. Worth setting up if you want full discoverability across the network. But none of them get the card to render on Bluesky. The AppView doesn't load your website at all, it only reads from the PDS.
+
+### What if your hosting blocks `/.well-known/`?
+
+A common gotcha: Ghost Pro, some managed WordPress hosts, and certain SaaS site builders block the `/.well-known/` path or don't let you add DNS TXT records. It doesn't matter for the Bluesky card, so the card will still appear as long as a publication record exists with `url` matching your site.
+
+What you *do* lose on these hosts is the ability to use your custom domain as a Bluesky handle, and the ability to participate in Standard.site verification for any consumer that does check the well-known file (e.g. Sequoia, some third-party readers). If those matter to you, move to a host where you control either DNS or `/.well-known/`. Most static hosts (GitHub Pages, Netlify, Cloudflare Pages, a plain nginx) let you serve files at any path in seconds.
+
+## Setting the card's button colour and icon
+
+The button colour and the avatar shown on the card both come from the publication record itself.
+
+- **Colour** is the `basicTheme` block (four RGB colours).
+- **Icon** is a `blob` reference, square image, at least 256×256, max 1MB.
+
+> *FYI: Bluesky raised its own profile-avatar upload limit to 2MB in v1.121 (April 2026), but the `site.standard.publication` lexicon still caps the publication icon at 1MB, which honestly, should be enough for an icon... The PDS validates against the lexicon, so anything larger gets rejected at record write.*
+
+If you publish through Leaflet, pckt, or Offprint, the platform sets both for you (usually matching your publication's overall theme). For roll-your-own setups, you have to add them yourself.
+
+Here's how:
+
+### Colours: edit the record on pdsls.dev
+
+[pdsls.dev](https://pdsls.dev) is a web UI for browsing and editing AT Protocol records. Log in with your handle + an app password (Bluesky → Settings → App Passwords), navigate to your `site.standard.publication` record, and paste this `basicTheme` block into the existing JSON:
+
+```json
+"basicTheme": {
+  "$type": "site.standard.theme.basic",
+  "accent":           {"$type": "site.standard.theme.color#rgb", "r": 49,  "g": 116, "b": 143},
+  "accentForeground": {"$type": "site.standard.theme.color#rgb", "r": 255, "g": 255, "b": 255},
+  "background":       {"$type": "site.standard.theme.color#rgb", "r": 255, "g": 255, "b": 255},
+  "foreground":       {"$type": "site.standard.theme.color#rgb", "r": 0,   "g": 0,   "b": 0}
+}
+```
+
+| Field | Used for |
+|---|---|
+| `accent` | Button background |
+| `accentForeground` | Button text |
+| `background` | (Not used by Bluesky's renderer at the moment) |
+| `foreground` | (Same) |
+
+Replace the RGB values with your brand colours. Only `accent` and `accentForeground` actually affect what Bluesky shows you right now (the card body stays in Bluesky's own theme). The renderer also handles hover (5% darker) and disabled states (5% lighter) automatically from `accent`, so you don't need to specify those.
+
+> *FYI: all four colours are required by the lexicon, so you can't drop `background` and `foreground` even though Bluesky's current card doesn't use them. The PDS will reject the record without them. Other Standard.site renderers (Leaflet, pckt, Offprint) use the full set for the publication page, and Bluesky may extend the card to use them later.*
+
+Save the record. Within seconds the AppView indexes the new version and your next link on Bluesky shows the coloured button.
+
+### Icon: reuse a blob you already have, or upload a new one
+
+In AT Protocol, blobs are content-addressed by hash and reusable across records on the same PDS. If you've already uploaded an image to Bluesky as your profile avatar, banner, or a post image, you can paste that exact blob object into the publication record's `icon` field. No upload step needed.
+
+**Easiest path: reuse your Bluesky avatar.** Fetch your profile record:
+
+```sh
+curl -s "https://bsky.social/xrpc/com.atproto.repo.getRecord?repo=<your-handle>&collection=app.bsky.actor.profile&rkey=self" | jq .value.avatar
+```
+
+That returns something like:
+
+```json
+{
+  "$type": "blob",
+  "ref": { "$link": "bafkreih7flx4skmjivhxle5eqod6jo44k4ux4ewvkbjq6ycha4iwb27j7y" },
+  "size": 466276,
+  "mimeType": "image/jpeg"
+}
+```
+
+Copy that whole object, head back to pdsls.dev, open your `site.standard.publication` record, and paste it in as the `icon` field. Save. Done.
+
+(Same trick works for your banner, or any image you've posted on Bluesky. Whatever blob is already on your PDS is fair game.)
+
+**If you want a different image** that isn't already on your PDS, you have to upload it, since pdsls.dev intentionally doesn't expose blob upload. Two options:
+
+The [`goat` CLI](https://github.com/bluesky-social/indigo/tree/main/cmd/goat) handles upload + record update with `goat blob upload <file>` followed by `goat record put`. Cleanest if you already use goat for other things.
+
+Or save this as `set-icon.sh`:
+
+```sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+HANDLE="your.handle"
+IMAGE="${1:?usage: ./set-icon.sh path/to/image.png}"
+RKEY="<your-publication-rkey>"
+COLLECTION="site.standard.publication"
+PDS="https://bsky.social"   # or your own PDS endpoint
+
+read -srp "App password: " APP_PW; echo
+MIME=$(file -b --mime-type "$IMAGE")
+SIZE=$(stat -c%s "$IMAGE" 2>/dev/null || stat -f%z "$IMAGE")
+
+SESSION=$(curl -sS -X POST "$PDS/xrpc/com.atproto.server.createSession" \
+  -H "Content-Type: application/json" \
+  -d "{\"identifier\":\"$HANDLE\",\"password\":\"$APP_PW\"}")
+JWT=$(echo "$SESSION" | jq -r .accessJwt)
+DID=$(echo "$SESSION" | jq -r .did)
+
+BLOB=$(curl -sS -X POST "$PDS/xrpc/com.atproto.repo.uploadBlob" \
+  -H "Authorization: Bearer $JWT" -H "Content-Type: $MIME" \
+  --data-binary "@$IMAGE" | jq -c .blob)
+
+CURRENT=$(curl -sS "$PDS/xrpc/com.atproto.repo.getRecord?repo=$DID&collection=$COLLECTION&rkey=$RKEY" | jq .value)
+NEW=$(echo "$CURRENT" | jq --argjson blob "$BLOB" '. + {icon: $blob}')
+
+curl -sS -X POST "$PDS/xrpc/com.atproto.repo.putRecord" \
+  -H "Authorization: Bearer $JWT" -H "Content-Type: application/json" \
+  -d "$(jq -n --arg repo "$DID" --arg coll "$COLLECTION" --arg rkey "$RKEY" --argjson record "$NEW" \
+        '{repo:$repo,collection:$coll,rkey:$rkey,record:$record}')" | jq .
+```
+
+Edit `HANDLE`, `RKEY`, and `PDS` at the top, then run:
+
+```sh
+chmod +x set-icon.sh
+./set-icon.sh ~/path/to/your-avatar.png
+```
+
+The script logs into your PDS, uploads the image, fetches your current publication record, adds the `icon` blob ref, and writes the record back. Same propagation as the colour change: within seconds the card on Bluesky shows your avatar instead of a fallback letter.
+
+### Where to find your rkey
+
+In pdsls.dev, your publication record's URL ends in something like `.../site.standard.publication/3mgfeypogdk2r`. The string after the last `/` is the `rkey`. You can also list your records via the PDS API:
+
+```sh
+curl -s "https://bsky.social/xrpc/com.atproto.repo.listRecords?repo=<your-handle>&collection=site.standard.publication" | jq .
+```
+
+## Verifying it works
+
+Post a link to your publication URL on Bluesky and watch the embed render. If the card doesn't appear:
+
+- Confirm a `site.standard.publication` record actually exists on your account's PDS. You can browse your records with [pdsls.dev](https://pdsls.dev).
+- Confirm its `url` field exactly matches the URL you're linking to. The AppView canonicalises (lowercase host, strip trailing slash, drop query/fragment) but otherwise needs a match. For the Leaflet/pckt/Offprint hosts, subpaths are also accepted.
+- Give the firehose a minute to propagate.
+
+That's the entire mechanism. The well-known files have their own value, but they're not on the critical path for the Bluesky card. The publication record is.
