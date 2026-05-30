@@ -1,10 +1,11 @@
 # Guido X Jansen — gui.do
 
-> Community strategist and DevRel leader with 20+ years building technical
-> ecosystems around open-source platforms. Founded communities around
-> Joomla! and Magento (Meet Magento NL, 600+ attendees), created the
-> CRO.CAFE podcast (200+ episodes, 4 languages), and built the community
-> function at Spryker. Based in the Netherlands.
+> Guido X Jansen builds community functions for tech products. 20+ years
+> turning open-source platforms into working ecosystems: he founded
+> communities around Joomla! and Magento (Meet Magento NL, 600+ attendees),
+> created the CRO.CAFE podcast (200+ episodes across 4 languages), and built
+> the community function at Spryker from zero. Cognitive psychologist by
+> training. Based in the Netherlands.
 
 This file follows the llms.txt convention (https://llmstxt.org/) and the
 specification.website agent-readiness spec
