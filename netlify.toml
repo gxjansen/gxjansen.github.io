@@ -78,6 +78,13 @@
   [headers.values]
     Content-Type = "text/markdown; charset=utf-8"
 
+# Serve the AT Protocol DID well-known file as text/plain so consumers
+# (e.g. Bluesky's Standard.site discovery) parse it verbatim.
+[[headers]]
+  for = "/.well-known/atproto-did"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+
 # Content negotiation: browsers/agents that send Accept: text/markdown
 # are redirected to the pre-built .md file for that route.
 # These must appear BEFORE the trailing-slash splat and the SSR catch-all.
