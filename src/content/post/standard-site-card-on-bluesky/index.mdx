@@ -1,5 +1,5 @@
 ---
-title: "Make links to your blog render the custom \"View publication\" card + CTA"
+title: 'Make links to your blog render the custom "View publication" card + CTA'
 description: "Short guide. The mechanism is simpler than it looks, and it doesn't involve any /.well-known file or DNS TXT record."
 draft: false
 authors:
@@ -44,19 +44,19 @@ Some community write-ups may suggest one of these is needed but they're not. The
 
 What each does:
 
-| File / record | What it does | Required for the Bluesky card? |
-|---|---|---|
-| **DNS TXT `_atproto.<domain>`** with `did=<your-did>` | [AT Protocol handle resolution](https://atproto.com/specs/handle): proves a domain maps to an AT Protocol DID. Used to make a custom domain work as a Bluesky handle. | No |
-| **`/.well-known/atproto-did`** (plain-text DID) | Same purpose as above: handle resolution. An alternative to the DNS TXT record, useful for hosts where you can't set TXT records, or for handles too long for DNS. | No |
-| **`/.well-known/site.standard.publication`** (AT-URI) | [Standard.site's own verification](https://standard.site/docs/verification/): lets a reader confirm that the domain claims a specific publication record. Used by some Standard.site consumers (and worth having on principle), but Bluesky does not fetch it. | No |
+| File / record                                         | What it does                                                                                                                                                                                                                                                   | Required for the Bluesky card? |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| **DNS TXT `_atproto.<domain>`** with `did=<your-did>` | [AT Protocol handle resolution](https://atproto.com/specs/handle): proves a domain maps to an AT Protocol DID. Used to make a custom domain work as a Bluesky handle.                                                                                          | No                             |
+| **`/.well-known/atproto-did`** (plain-text DID)       | Same purpose as above: handle resolution. An alternative to the DNS TXT record, useful for hosts where you can't set TXT records, or for handles too long for DNS.                                                                                             | No                             |
+| **`/.well-known/site.standard.publication`** (AT-URI) | [Standard.site's own verification](https://standard.site/docs/verification/): lets a reader confirm that the domain claims a specific publication record. Used by some Standard.site consumers (and worth having on principle), but Bluesky does not fetch it. | No                             |
 
-All of these are useful for *other* things. DNS TXT and `atproto-did` make your domain usable as a Bluesky handle. The Standard.site verification file lets third-party readers cryptographically link a domain to a publication. Worth setting up if you want full discoverability across the network. But none of them get the card to render on Bluesky. The AppView doesn't load your website at all, it only reads from the PDS.
+All of these are useful for _other_ things. DNS TXT and `atproto-did` make your domain usable as a Bluesky handle. The Standard.site verification file lets third-party readers cryptographically link a domain to a publication. Worth setting up if you want full discoverability across the network. But none of them get the card to render on Bluesky. The AppView doesn't load your website at all, it only reads from the PDS.
 
 ### What if your hosting blocks `/.well-known/`?
 
 A common gotcha: Ghost Pro, some managed WordPress hosts, and certain SaaS site builders block the `/.well-known/` path or don't let you add DNS TXT records. It doesn't matter for the Bluesky card, so the card will still appear as long as a publication record exists with `url` matching your site.
 
-What you *do* lose on these hosts is the ability to use your custom domain as a Bluesky handle, and the ability to participate in Standard.site verification for any consumer that does check the well-known file (e.g. Sequoia, some third-party readers). If those matter to you, move to a host where you control either DNS or `/.well-known/`. Most static hosts (GitHub Pages, Netlify, Cloudflare Pages, a plain nginx) let you serve files at any path in seconds.
+What you _do_ lose on these hosts is the ability to use your custom domain as a Bluesky handle, and the ability to participate in Standard.site verification for any consumer that does check the well-known file (e.g. Sequoia, some third-party readers). If those matter to you, move to a host where you control either DNS or `/.well-known/`. Most static hosts (GitHub Pages, Netlify, Cloudflare Pages, a plain nginx) let you serve files at any path in seconds.
 
 ## Setting the card's button colour and icon
 
@@ -65,7 +65,7 @@ The button colour and the avatar shown on the card both come from the publicatio
 - **Colour** is the `basicTheme` block (four RGB colours).
 - **Icon** is a `blob` reference, square image, at least 256×256, max 1MB.
 
-> *FYI: Bluesky raised its own profile-avatar upload limit to 2MB in v1.121 (April 2026), but the `site.standard.publication` lexicon still caps the publication icon at 1MB, which honestly, should be enough for an icon... The PDS validates against the lexicon, so anything larger gets rejected at record write.*
+> _FYI: Bluesky raised its own profile-avatar upload limit to 2MB in v1.121 (April 2026), but the `site.standard.publication` lexicon still caps the publication icon at 1MB, which honestly, should be enough for an icon... The PDS validates against the lexicon, so anything larger gets rejected at record write._
 
 If you publish through Leaflet, pckt, or Offprint, the platform sets both for you (usually matching your publication's overall theme). For roll-your-own setups, you have to add them yourself.
 
@@ -85,16 +85,16 @@ Here's how:
 }
 ```
 
-| Field | Used for |
-|---|---|
-| `accent` | Button background |
-| `accentForeground` | Button text |
-| `background` | (Not used by Bluesky's renderer at the moment) |
-| `foreground` | (Same) |
+| Field              | Used for                                       |
+| ------------------ | ---------------------------------------------- |
+| `accent`           | Button background                              |
+| `accentForeground` | Button text                                    |
+| `background`       | (Not used by Bluesky's renderer at the moment) |
+| `foreground`       | (Same)                                         |
 
 Replace the RGB values with your brand colours. Only `accent` and `accentForeground` actually affect what Bluesky shows you right now (the card body stays in Bluesky's own theme). The renderer also handles hover (5% darker) and disabled states (5% lighter) automatically from `accent`, so you don't need to specify those.
 
-> *FYI: all four colours are required by the lexicon, so you can't drop `background` and `foreground` even though Bluesky's current card doesn't use them. The PDS will reject the record without them. Other Standard.site renderers (Leaflet, pckt, Offprint) use the full set for the publication page, and Bluesky may extend the card to use them later.*
+> _FYI: all four colours are required by the lexicon, so you can't drop `background` and `foreground` even though Bluesky's current card doesn't use them. The PDS will reject the record without them. Other Standard.site renderers (Leaflet, pckt, Offprint) use the full set for the publication page, and Bluesky may extend the card to use them later._
 
 Save the record. Within seconds the AppView indexes the new version and your next link on Bluesky shows the coloured button.
 
@@ -113,7 +113,9 @@ That returns something like:
 ```json
 {
   "$type": "blob",
-  "ref": { "$link": "bafkreih7flx4skmjivhxle5eqod6jo44k4ux4ewvkbjq6ycha4iwb27j7y" },
+  "ref": {
+    "$link": "bafkreih7flx4skmjivhxle5eqod6jo44k4ux4ewvkbjq6ycha4iwb27j7y"
+  },
   "size": 466276,
   "mimeType": "image/jpeg"
 }
