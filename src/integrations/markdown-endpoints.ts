@@ -371,7 +371,9 @@ function writeLlmsFullFile(
     "> /llms.txt. Per-page markdown is also available at <page>.md.\n\n" +
     "---\n";
 
-  const sections = sorted.map((p) => `\n# Source: ${p.url}\n\n${p.md.trim()}\n`);
+  const sections = sorted.map(
+    (p) => `\n# Source: ${p.url}\n\n${p.md.trim()}\n`,
+  );
 
   const out = header + sections.join("\n---\n");
 
