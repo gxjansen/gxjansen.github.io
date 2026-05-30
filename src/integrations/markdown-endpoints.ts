@@ -12,6 +12,21 @@
  * Excluded: homepage, /ama, /api/*, *.xml, *.json, nav-data, rss,
  * 404, /styleguide, /categories/*, /authors/*, /examples/*,
  * /internal/*, /overview, /newsletter, /privacy, /conference-terms.
+ *
+ * It ALSO generates dist/_headers with one exact-path rule per built page,
+ * advertising machine-readable resources through an HTTP `Link:` header
+ * (issue #190). Every static page gets the site-wide resources (sitemap,
+ * llms.txt, the canonical Person `@id`); content pages additionally get a
+ * `rel="alternate"; type="text/markdown"` link to their own .md endpoint.
+ *
+ * Why generate `_headers` here instead of declaring the Link in netlify.toml?
+ *   1. Per-page `.md` alternates need the concrete route URL, which a
+ *      netlify.toml `[[headers]]` glob cannot interpolate into a value.
+ *   2. Netlify's precedence when the SAME header is set in both netlify.toml
+ *      and _headers (or across overlapping rules) is undocumented. Emitting
+ *      one exact-path rule per page — and keeping the Link OUT of
+ *      netlify.toml — means each request matches exactly one rule, so the
+ *      result is deterministic regardless of Netlify's merge semantics.
  */
 
 import type { AstroIntegration } from "astro";
@@ -19,6 +34,43 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import { NodeHtmlMarkdown } from "node-html-markdown";
 import { parse as parseHtml } from "node-html-parser";
+
+// ---------------------------------------------------------------------------
+// HTTP Link header (agent resource discovery — issue #190)
+// ---------------------------------------------------------------------------
+
+/**
+ * Site-wide resources advertised on every static page. Kept in sync with the
+ * historical netlify.toml `/*` Link header (the Link line was moved out of
+ * netlify.toml so this integration is the single source of truth — see the
+ * file header for why). Each entry is one RFC 8288 link-value.
+ */
+const SITE_LINK_RESOURCES = [
+  '</sitemap-index.xml>; rel="sitemap"',
+  '</llms.txt>; rel="alternate"; type="text/plain"',
+  '<https://gui.do/about/#guido>; rel="describedby"; type="application/ld+json"',
+];
+
+/**
+ * Builds the comma-joined `Link` header value for a page. When the page has a
+ * markdown source endpoint, its `.md` alternate is appended. Comma-joining
+ * multiple link-values in one header line is valid per RFC 7230/8288 and
+ * matches what netlify.toml previously emitted.
+ */
+function buildLinkValue(mdAlternate: string | null): string {
+  const values = [...SITE_LINK_RESOURCES];
+  if (mdAlternate) {
+    values.push(`<${mdAlternate}>; rel="alternate"; type="text/markdown"`);
+  }
+  return values.join(", ");
+}
+
+/**
+ * Renders a Netlify `_headers` rule block for a single exact path.
+ */
+function renderHeaderRule(urlPath: string, linkValue: string): string {
+  return `${urlPath}\n  Link: ${linkValue}\n`;
+}
 
 // ---------------------------------------------------------------------------
 // Route filtering
@@ -176,12 +228,32 @@ export function markdownEndpoints(): AstroIntegration {
         let written = 0;
         let skipped = 0;
 
+        // Collected for the _headers file: { urlPath, mdAlternate } per page.
+        // urlPath is the canonical trailing-slash route ("/about/", "/"); every
+        // static page gets one entry so it carries the site-wide Link header.
+        const headerRoutes: { urlPath: string; mdAlternate: string | null }[] =
+          [];
+
         // Walk the dist directory recursively looking for index.html files
         const htmlFiles = findHtmlFiles(distDir);
 
         for (const absPath of htmlFiles) {
           const rel = path.relative(distDir, absPath);
-          if (!isContentPage(rel)) {
+
+          // Canonical route URL for this page. path.dirname() of "about/index.html"
+          // is "about"; the root "index.html" becomes ".". Normalise separators
+          // for URL use (Netlify builds on Linux, but be defensive).
+          const routeSegment = path.dirname(rel).replace(/\\/g, "/");
+          const urlPath = routeSegment === "." ? "/" : `/${routeSegment}/`;
+
+          const isContent = isContentPage(rel);
+          const mdAlternate =
+            isContent && routeSegment !== "." ? `/${routeSegment}.md` : null;
+
+          // Record every static page for the _headers file (content or not).
+          headerRoutes.push({ urlPath, mdAlternate });
+
+          if (!isContent) {
             skipped++;
             continue;
           }
@@ -202,7 +274,6 @@ export function markdownEndpoints(): AstroIntegration {
 
           // Write dist/<route>.md  (flat alias)
           // rel looks like "about/index.html" → flatName is "about"
-          const routeSegment = path.dirname(rel); // e.g. "about" or "post/my-slug"
           if (routeSegment && routeSegment !== ".") {
             const flatMdPath = path.join(distDir, `${routeSegment}.md`);
             // Ensure parent dir exists (for nested routes like post/slug)
@@ -216,6 +287,8 @@ export function markdownEndpoints(): AstroIntegration {
         logger.info(
           `markdown-endpoints: wrote ${written} .md files (${skipped} pages skipped).`,
         );
+
+        writeHeadersFile(distDir, headerRoutes, logger);
       },
     },
   };
@@ -224,6 +297,42 @@ export function markdownEndpoints(): AstroIntegration {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+/**
+ * Writes dist/_headers with one exact-path `Link` rule per built page.
+ * Any content already present in dist/_headers (e.g. copied from public/) is
+ * preserved as a prefix so we never clobber hand-authored rules.
+ */
+function writeHeadersFile(
+  distDir: string,
+  routes: { urlPath: string; mdAlternate: string | null }[],
+  logger: { info(msg: string): void },
+): void {
+  // Deterministic ordering keeps deploy diffs and header output stable.
+  const sorted = [...routes].sort((a, b) => a.urlPath.localeCompare(b.urlPath));
+
+  const blocks = sorted.map((r) =>
+    renderHeaderRule(r.urlPath, buildLinkValue(r.mdAlternate)),
+  );
+
+  const generated =
+    "# Generated by the markdown-endpoints integration (issue #190).\n" +
+    "# Advertises sitemap, llms.txt, the Person @id, and per-page .md\n" +
+    "# alternates via HTTP Link headers. Do not edit by hand — see\n" +
+    "# src/integrations/markdown-endpoints.ts.\n\n" +
+    blocks.join("\n");
+
+  const headersPath = path.join(distDir, "_headers");
+  let existing = "";
+  if (fs.existsSync(headersPath)) {
+    existing = fs.readFileSync(headersPath, "utf-8").trimEnd() + "\n\n";
+  }
+
+  fs.writeFileSync(headersPath, existing + generated, "utf-8");
+  logger.info(
+    `markdown-endpoints: wrote _headers with ${sorted.length} Link rules.`,
+  );
+}
 
 function findHtmlFiles(dir: string): string[] {
   const results: string[] = [];
