@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+# Auto-format staged source files with Prettier so CI's `Format` check
+# (npm run format:check) never fails on a push. Enabled via the `prepare`
+# npm script, which sets core.hooksPath to .githooks on install.
+#
+# Scope mirrors format:check exactly: only files under src/ matching the
+# Prettier glob. Anything else is left untouched.
+
+PRETTIER="./node_modules/.bin/prettier"
+if [ ! -x "$PRETTIER" ]; then
+  echo "pre-commit: prettier not installed (run npm install) — skipping format" >&2
+  exit 0
+fi
+
+staged=$(git diff --cached --name-only --diff-filter=ACM \
+  | grep -E '^src/.*\.(astro|ts|tsx|js|jsx|mjs|css|md|mdx)$' || true)
+
+[ -z "$staged" ] && exit 0
+
+echo "$staged" | xargs "$PRETTIER" --write --log-level warn
+echo "$staged" | xargs git add
+echo "pre-commit: prettier-formatted staged src files"
