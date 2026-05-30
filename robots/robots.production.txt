@@ -1,6 +1,11 @@
 User-agent: *
 Disallow: /conference-terms
 Disallow: /styleguide
+# Content Signals — declare permitted content usage per
+# https://specification.website/spec/agent-readiness/content-signals/
+# This is a public personal-brand site: search, AI answers, and training are
+# all welcome, matching the explicit allow rules for named AI crawlers below.
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 
 # Named AI crawlers — explicit allow per
 # https://specification.website/spec/agent-readiness/robots-for-ai-crawlers/

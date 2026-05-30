@@ -9,7 +9,11 @@
  *   dist/<route>/index.md  — served at /<route>/index.md
  *   dist/<route>.md        — served at /<route>.md  (flat alias)
  *
- * Excluded: homepage, /ama, /api/*, *.xml, *.json, nav-data, rss,
+ * The homepage is included; its markdown lives at /index.md (no flat alias,
+ * since "/.md" is meaningless). All generated markdown is additionally
+ * concatenated into dist/llms-full.txt (llmstxt.org full companion).
+ *
+ * Excluded: /ama, /api/*, *.xml, *.json, nav-data, rss,
  * 404, /styleguide, /categories/*, /authors/*, /examples/*,
  * /internal/*, /overview, /newsletter, /privacy, /conference-terms.
  *
@@ -87,9 +91,11 @@ function isContentPage(pathname: string): boolean {
   // Must be an HTML file
   if (!p.endsWith(".html")) return false;
 
+  // Homepage is included; its .md is served at /index.md (no flat alias).
+  if (p === "index.html") return true;
+
   // Exact exclusions (resolved to their index.html form)
   const excluded = new Set([
-    "index.html", // homepage – skip
     "404.html",
     "404/index.html",
     "styleguide/index.html",
@@ -234,6 +240,10 @@ export function markdownEndpoints(): AstroIntegration {
         const headerRoutes: { urlPath: string; mdAlternate: string | null }[] =
           [];
 
+        // Collected for dist/llms-full.txt: the full markdown of every content
+        // page, keyed by canonical URL so the companion file is deterministic.
+        const fullParts: { url: string; md: string }[] = [];
+
         // Walk the dist directory recursively looking for index.html files
         const htmlFiles = findHtmlFiles(distDir);
 
@@ -247,8 +257,11 @@ export function markdownEndpoints(): AstroIntegration {
           const urlPath = routeSegment === "." ? "/" : `/${routeSegment}/`;
 
           const isContent = isContentPage(rel);
-          const mdAlternate =
-            isContent && routeSegment !== "." ? `/${routeSegment}.md` : null;
+          const mdAlternate = isContent
+            ? routeSegment === "."
+              ? "/index.md"
+              : `/${routeSegment}.md`
+            : null;
 
           // Record every static page for the _headers file (content or not).
           headerRoutes.push({ urlPath, mdAlternate });
@@ -267,6 +280,9 @@ export function markdownEndpoints(): AstroIntegration {
           }
 
           const md = extractMarkdown(html, rel);
+
+          // Collect for the llms-full.txt companion (full content concat).
+          fullParts.push({ url: `https://gui.do${urlPath}`, md });
 
           // Write dist/<route>/index.md  (sibling to index.html)
           const indexMdPath = path.join(path.dirname(absPath), "index.md");
@@ -288,6 +304,7 @@ export function markdownEndpoints(): AstroIntegration {
           `markdown-endpoints: wrote ${written} .md files (${skipped} pages skipped).`,
         );
 
+        writeLlmsFullFile(distDir, fullParts, logger);
         writeHeadersFile(distDir, headerRoutes, logger);
       },
     },
@@ -331,6 +348,38 @@ function writeHeadersFile(
   fs.writeFileSync(headersPath, existing + generated, "utf-8");
   logger.info(
     `markdown-endpoints: wrote _headers with ${sorted.length} Link rules.`,
+  );
+}
+
+/**
+ * Writes dist/llms-full.txt — the llmstxt.org "full" companion that
+ * concatenates the complete markdown of every content page into one file,
+ * each section prefixed with its source URL. Deterministic ordering (by URL)
+ * keeps deploy diffs stable.
+ */
+function writeLlmsFullFile(
+  distDir: string,
+  parts: { url: string; md: string }[],
+  logger: { info(msg: string): void },
+): void {
+  const sorted = [...parts].sort((a, b) => a.url.localeCompare(b.url));
+
+  const header =
+    "# Guido X Jansen — gui.do (full content)\n\n" +
+    "> Concatenated markdown of every content page on gui.do, following the\n" +
+    "> llms.txt convention (https://llmstxt.org/). For the curated index see\n" +
+    "> /llms.txt. Per-page markdown is also available at <page>.md.\n\n" +
+    "---\n";
+
+  const sections = sorted.map(
+    (p) => `\n# Source: ${p.url}\n\n${p.md.trim()}\n`,
+  );
+
+  const out = header + sections.join("\n---\n");
+
+  fs.writeFileSync(path.join(distDir, "llms-full.txt"), out, "utf-8");
+  logger.info(
+    `markdown-endpoints: wrote llms-full.txt (${sorted.length} pages).`,
   );
 }
 
