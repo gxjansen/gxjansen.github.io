@@ -21,6 +21,8 @@
     "check:trailing-slashes": "node scripts/check-trailing-slashes.js",
     "optimize-images": "node scripts/optimize-images.mjs",
     "format:check": "prettier --check \"src/**/*.{astro,ts,tsx,js,jsx,mjs,css,md,mdx}\"",
+    "format": "prettier --write \"src/**/*.{astro,ts,tsx,js,jsx,mjs,css,md,mdx}\"",
+    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true",
     "typecheck": "astro check"
   },
   "dependencies": {
