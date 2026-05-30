@@ -127,7 +127,7 @@ Copy that whole object, head back to pdsls.dev, open your `site.standard.publica
 
 **If you want a different image** that isn't already on your PDS, you have to upload it, since pdsls.dev intentionally doesn't expose blob upload. Two options:
 
-The [`goat` CLI](https://github.com/bluesky-social/indigo/tree/main/cmd/goat) handles upload + record update with `goat blob upload <file>` followed by `goat record put`. Cleanest if you already use goat for other things.
+The [`goat` CLI](https://github.com/bluesky-social/goat) handles upload + record update with `goat blob upload <file>` followed by `goat record update --rkey <your-publication-rkey>`. Cleanest if you already use goat for other things.
 
 Or save this as `set-icon.sh`:
 
