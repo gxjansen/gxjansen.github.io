@@ -42,15 +42,15 @@ In all three cases, the card appears in Bluesky once the AppView has indexed the
 
 Some community write-ups may suggest one of these is needed but they're not. The confusion doesn't come out of thin air though.
 
-What each does:
+None of them are needed for the Bluesky card. Here's what each one actually does:
 
-| File / record                                         | What it does                                                                                                                                                                                                                                                   | Required for the Bluesky card? |
-| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| **DNS TXT `_atproto.<domain>`** with `did=<your-did>` | [AT Protocol handle resolution](https://atproto.com/specs/handle): proves a domain maps to an AT Protocol DID. Used to make a custom domain work as a Bluesky handle.                                                                                          | No                             |
-| **`/.well-known/atproto-did`** (plain-text DID)       | Same purpose as above: handle resolution. An alternative to the DNS TXT record, useful for hosts where you can't set TXT records, or for handles too long for DNS.                                                                                             | No                             |
-| **`/.well-known/site.standard.publication`** (AT-URI) | [Standard.site's own verification](https://standard.site/docs/verification/): lets a reader confirm that the domain claims a specific publication record. Used by some Standard.site consumers (and worth having on principle), but Bluesky does not fetch it. | No                             |
+| File / record                                         | What it does                                                                                                                                                                                                                                                                                                  |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **DNS TXT `_atproto.<domain>`** with `did=<your-did>` | [AT Protocol handle resolution](https://atproto.com/specs/handle): proves a domain maps to an AT Protocol DID. Used to make a custom domain work as a Bluesky handle.                                                                                                                                         |
+| **`/.well-known/atproto-did`** (plain-text DID)       | Same purpose as above: handle resolution. An alternative to the DNS TXT record, useful for hosts where you can't set TXT records, or for handles too long for DNS.                                                                                                                                            |
+| **`/.well-known/site.standard.publication`** (AT-URI) | [Standard.site's own verification](https://standard.site/docs/verification/): proves your domain controls the publication record, so a consumer that checks it won't trust an impersonator. The Standard.site docs call verification a best practice for production records. Bluesky's card doesn't check it. |
 
-All of these are useful for _other_ things. DNS TXT and `atproto-did` make your domain usable as a Bluesky handle. The Standard.site verification file lets third-party readers cryptographically link a domain to a publication. Worth setting up if you want full discoverability across the network. But none of them get the card to render on Bluesky. The AppView doesn't load your website at all, it only reads from the PDS.
+All of these have their own jobs. DNS TXT and `atproto-did` make your domain usable as a Bluesky handle. The Standard.site verification file proves your domain controls the publication record, which is how a consumer knows the record isn't someone impersonating you. The Standard.site docs recommend verification as a best practice for production, and a strict reader can refuse to trust an unverified record. But none of them get the card to render on Bluesky. The AppView doesn't load your website at all, it only reads from the PDS.
 
 ### What if your hosting blocks `/.well-known/`?
 
@@ -190,3 +190,15 @@ Post a link to your publication URL on Bluesky and watch the embed render. If th
 - Give the firehose a minute to propagate.
 
 That's the entire mechanism. The well-known files have their own value, but they're not on the critical path for the Bluesky card. The publication record is.
+
+## One record, many readers
+
+Your `site.standard.publication` record lives on your PDS as a plain AT Protocol record, and Bluesky is just one of the apps reading it. Any app that indexes the firehose can pick up the same record and show your publication however it likes, without you signing up for anything.
+
+[Sifa](https://sifa.id) does exactly that:
+
+![Sifa showing the gui.do guide as a publication card (title, description, gui.do avatar and a "View publication" button) under Sifa's own Articles filter tabs](./sifa-standard-site.png)
+
+It reads the same Standard.site records straight from the network and shows your publication in a completely different app. The two don't even render it the same way: Sifa uses the `background` and `foreground` colours Bluesky's card ignores, and for discovery it reads a DNS TXT record on top of the publication record. Same data, different readers, each taking the parts it cares about. Set the record once and you're done: that's the point of publishing to an open protocol instead of one platform's API.
+
+Hannah Shelley wrote up [putting her Neocities blog on ATProto](https://hannahshelley.neocities.org/blog/2026_05_31_ATProto.html), a nice real-world walkthrough of the roll-your-own path on a fully static host. She goes a bit further than the Bluesky card strictly needs and also adds the `/.well-known/` verification file and per-post `site.standard.document` records: exactly the domain-ownership verification I flagged earlier as a Standard.site best practice.
