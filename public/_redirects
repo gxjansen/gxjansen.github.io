@@ -19,6 +19,8 @@
 /theme/contact-us/contact-us /about       301
 /theme/contact      /about                301
 /presentations      /presentation         301
+/privacy-policy     /privacy              301
+/privacy-policy/    /privacy/             301
 
 # External redirects
 /kit                https://kit.co/gxjansen 301
