@@ -38,6 +38,8 @@ Three paths:
 
 In all three cases, the card appears in Bluesky once the AppView has indexed the record from the firehose, usually within seconds.
 
+If you don't have Standard.site set up on your site at all yet, start there first: the [Standard.site implementations guide](https://standard.site/docs/implementations/) walks through the options for getting a publication record in place. Without that record there's nothing for Bluesky to render, so the rest of this article (making the embed look nice) only matters once you've got one. Get it working, then come back here for the polish.
+
 ## What about DNS TXT and `/.well-known/` files?
 
 Some community write-ups may suggest one of these is needed but they're not. The confusion doesn't come out of thin air though.
@@ -191,14 +193,14 @@ Post a link to your publication URL on Bluesky and watch the embed render. If th
 
 That's the entire mechanism. The well-known files have their own value, but they're not on the critical path for the Bluesky card. The publication record is.
 
-## One record, many readers
+## One record, many different apps
 
 Your `site.standard.publication` record lives on your PDS as a plain AT Protocol record, and Bluesky is just one of the apps reading it. Any app that indexes the firehose can pick up the same record and show your publication however it likes, without you signing up for anything.
 
-[Sifa](https://sifa.id) does exactly that:
+[Sifa ID](https://sifa.id) does exactly that:
 
 ![Sifa showing the gui.do guide as a publication card (title, description, gui.do avatar and a "View publication" button) under Sifa's own Articles filter tabs](./sifa-standard-site.png)
 
-It reads the same Standard.site records straight from the network and shows your publication in a completely different app. The two don't even render it the same way: Sifa uses the `background` and `foreground` colours Bluesky's card ignores, and for discovery it reads a DNS TXT record on top of the publication record. Same data, different readers, each taking the parts it cares about. Set the record once and you're done: that's the point of publishing to an open protocol instead of one platform's API.
+It reads the same Standard.site records straight from the network and shows your publication in a completely different app. Same data, different readers, each taking the parts it cares about. Set the record once and you're done: that's the point of publishing to an open protocol instead of one platform's API. Interoperability FTW!
 
-Hannah Shelley wrote up [putting her Neocities blog on ATProto](https://hannahshelley.neocities.org/blog/2026_05_31_ATProto.html), a nice real-world walkthrough of the roll-your-own path on a fully static host. She goes a bit further than the Bluesky card strictly needs and also adds the `/.well-known/` verification file and per-post `site.standard.document` records: exactly the domain-ownership verification I flagged earlier as a Standard.site best practice.
+Hannah Shelley wrote up [putting her Neocities blog on ATProto](https://hannahshelley.neocities.org/blog/2026_05_31_ATProto.html), a nice real-world walkthrough of the roll-your-own path on a fully static host.
