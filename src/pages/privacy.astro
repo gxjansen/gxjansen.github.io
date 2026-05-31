@@ -1,7 +1,7 @@
 ---
 /**
- * Privacy policy page covering data handling practices,
- * particularly for the newsletter.
+ * Privacy policy. Canonical at /privacy/. Covers data handling for the site,
+ * analytics, the newsletter, and your rights under GDPR and CCPA.
  */
 
 // main layout
@@ -33,6 +33,10 @@ import Badge from "@components/Badge/Badge.astro";
     <div class="site-container px-4">
       <div class="mx-auto max-w-2xl">
         <div class="prose dark:prose-invert mx-auto">
+          <p class="text-base-500 dark:text-base-400 text-sm">
+            <em>Last updated: 31 May 2026</em>
+          </p>
+
           <h2>Website analytics</h2>
           <p>
             I self-host <a
@@ -48,6 +52,27 @@ import Badge from "@components/Badge/Badge.astro";
             <li>Device type and browser (anonymized)</li>
           </ul>
           <p>I use zero cookies. Each visit stands alone.</p>
+
+          <h2>Cookies</h2>
+          <p>
+            <strong>This site sets no cookies.</strong> No first-party cookies, no
+            tracking cookies, no consent banner because there's nothing to consent
+            to. Embedded third-party content (YouTube via youtube-nocookie.com,
+            Spotify, Transistor.fm) may set cookies only after you interact with
+            it — those are controlled by the embedding service, not by me.
+          </p>
+
+          <h2>Global Privacy Control (GPC)</h2>
+          <p>
+            I honour the <a
+              href="https://globalprivacycontrol.org/"
+              target="_blank"
+              rel="noopener noreferrer">GPC</a
+            > browser signal. Since I don't sell personal data, share it for
+            cross-context behavioural advertising, or run third-party trackers,
+            there's nothing on the site that needs to be switched off — GPC
+            arrives at a site that already matches what it asks for.
+          </p>
 
           <h2 id="newsletter">Newsletter</h2>
           <p>
@@ -90,6 +115,56 @@ import Badge from "@components/Badge/Badge.astro";
             >) so my analytics can count newsletter referrals. These parameters
             remain anonymous. I see aggregate numbers like "47 people clicked
             through" rather than individual behavior.
+          </p>
+
+          <h2>Your rights</h2>
+          <p>
+            Regardless of where you live, you can ask me to:
+          </p>
+          <ul>
+            <li>
+              <strong>Access</strong> the personal information I hold about you
+              (realistically, your newsletter subscription record or our email
+              thread)
+            </li>
+            <li><strong>Correct</strong> anything inaccurate</li>
+            <li>
+              <strong>Delete</strong> it — the Listmonk record, the email thread,
+              or both
+            </li>
+            <li>
+              <strong>Object</strong> to any processing you don't agree with
+            </li>
+          </ul>
+
+          <h3>If you're in the EU/EEA (GDPR)</h3>
+          <p>
+            On top of the rights above you have the right to data portability,
+            to restrict processing, to withdraw consent at any time, and to
+            <a
+              href="https://edpb.europa.eu/about-edpb/board/members_en"
+              target="_blank"
+              rel="noopener noreferrer">lodge a complaint with your local data
+              protection authority</a
+            >. My lawful basis for the newsletter is your consent (double opt-in).
+            For replying to emails you've sent me, it's legitimate interest.
+          </p>
+
+          <h3>If you're in California (CCPA / CPRA)</h3>
+          <p>
+            I do <strong>not</strong> sell or share personal information for
+            cross-context behavioural advertising, and I haven't in the past
+            twelve months. I do not collect sensitive personal information. You
+            have the right to know, delete, correct, and not be discriminated
+            against for exercising any of these rights. Email me with "California
+            Privacy Rights" in the subject and I'll respond within the legal
+            window.
+          </p>
+
+          <h3>How to exercise your rights</h3>
+          <p>
+            <a href="/contact/">Email me</a>. Tell me which right you want to
+            exercise. I'll reply within 30 days.
           </p>
 
           <h2>GDPR compliance</h2>
@@ -136,6 +211,59 @@ import Badge from "@components/Badge/Badge.astro";
               > are publicly auditable
             </li>
           </ul>
+
+          <h2>Hosting and international transfers</h2>
+          <p>
+            The site itself is served from Netlify's CDN, which may process
+            request metadata (IP, user agent, timestamps in standard server logs)
+            in the United States and other regions. Netlify operates under SOC 2
+            Type II and publishes <a
+              href="https://www.netlify.com/gdpr-ccpa/"
+              target="_blank"
+              rel="noopener noreferrer">its GDPR/CCPA position</a
+            >. Newsletter and analytics data stays on EU-hosted infrastructure I
+            control.
+          </p>
+
+          <h2>Data retention</h2>
+          <ul>
+            <li>
+              <strong>Newsletter subscription:</strong> until you unsubscribe or
+              ask me to delete it
+            </li>
+            <li>
+              <strong>Email threads with me:</strong> kept as long as needed to
+              maintain a useful record; deletable on request
+            </li>
+            <li>
+              <strong>Netlify server logs:</strong> retained by Netlify per their
+              policy; I don't have analytics access to them
+            </li>
+            <li>
+              <strong>Umami analytics:</strong> aggregate counts, no personal
+              identifiers, retained indefinitely
+            </li>
+          </ul>
+
+          <h2>Children's privacy</h2>
+          <p>
+            This site isn't aimed at children under 16 and I don't knowingly
+            collect anything from them. If you're a parent and think a child
+            subscribed or contacted me, <a href="/contact/">let me know</a> and
+            I'll delete the record.
+          </p>
+
+          <h2>Changes to this policy</h2>
+          <p>
+            I'll update the "last updated" date above when this changes. For
+            material changes I'll add a visible notice on the site.
+          </p>
+
+          <h2>Data controller</h2>
+          <p>
+            Guido X Jansen, Ouderkerk aan de Amstel, The Netherlands.
+            Reach me at <a href="mailto:x@gui.do">x@gui.do</a>.
+          </p>
 
           <h2>Questions?</h2>
           <p>
