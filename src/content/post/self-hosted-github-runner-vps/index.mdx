@@ -72,6 +72,7 @@ A note on security: a self-hosted runner runs whatever your workflow tells it to
 ## The setup, step by step
 
 Here's the setups step by step for you to execute, or to point your LLM to. In may experience, agents can do a pretty good job in handling this setup much faster than you can manually set this up.
+
 ### 1. Provision the VPS
 
 I use Hetzner Cloud, which is a few clicks: Ubuntu 24.04, the size you want, an SSH key. Same idea on any box/provider.
@@ -192,16 +193,16 @@ Two things to notice.
 In my setup, every job moved to self-hosted except the final aggregator:
 
 ```yaml
-  check:
-    needs: [lint, typecheck, test, build, audit]
-    runs-on: ubuntu-latest   # intentionally stays GitHub-hosted
-    if: always()
-    steps:
-      - name: Fail if any dependency failed or was cancelled
-        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
-        run: exit 1
-      - name: Success
-        run: echo "All jobs passed"
+check:
+  needs: [lint, typecheck, test, build, audit]
+  runs-on: ubuntu-latest # intentionally stays GitHub-hosted
+  if: always()
+  steps:
+    - name: Fail if any dependency failed or was cancelled
+      if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+      run: exit 1
+    - name: Success
+      run: echo "All jobs passed"
 ```
 
 I did this becasue the aggregator is the required check that gates merges. If your self-hosted box goes down mid-run, jobs that haven't started yet get stuck in "queued" forever, but the aggregator on `ubuntu-latest` will still resolve and at least give you a clean failure signal. It's also a near-zero-cost job: GitHub-hosted minutes for a 5-second `exit 0` are noise on the bill.
@@ -225,7 +226,7 @@ For private-repo work where the team is small and trusted, these are all managea
 
 The CI workload is bursty: peaks during the workday, idle most evenings and weekends (well... it should be at least... 😳). That's a lot of compute and bandwidth to leave unused. A few things that pair well with a CI box without fighting it for resources:
 
-- **Encrypted backup target.** This is what I did. [restic](https://restic.net/) over SFTP, with a dedicated user on the runner box restricted to `internal-sftp` only. Daily cron pushes encrypted snapshots. CI doesn't notice, backups don't notice, and you save the cost of a separate backup service. 
+- **Encrypted backup target.** This is what I did. [restic](https://restic.net/) over SFTP, with a dedicated user on the runner box restricted to `internal-sftp` only. Daily cron pushes encrypted snapshots. CI doesn't notice, backups don't notice, and you save the cost of a separate backup service.
 - **Monitoring / metrics hub.** Run Prometheus or VictoriaMetrics plus Grafana to scrape your other servers. CI jobs are intermittent CPU spikes that don't conflict with steady metric ingestion.
 - **Tailscale / WireGuard exit node** or coordination server for your homelab.
 - **A staging environment** for one of your projects.
