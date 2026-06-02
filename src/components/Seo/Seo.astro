@@ -227,8 +227,11 @@ const formatDate = (date: Date | undefined) => {
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={imageUrl} />
-<meta name="twitter:site" content={"@" + siteData.author.twitter} />
-<meta name="twitter:creator" content={"@" + siteData.author.twitter} />
+<!--
+  twitter:site / twitter:creator removed — Guido no longer maintains a
+  Twitter/X presence. The other twitter:* tags stay because LinkedIn, Slack,
+  and other consumers still read them for link-preview rendering.
+-->
 
 <!-- JSON LD -->
 <Fragment set:html={jsonLD} />

@@ -181,6 +181,53 @@ const breadcrumbLD = breadcrumbGenerator(Astro.url.pathname, site);
       }
     </script>
 
+    <!-- Copy-to-clipboard button on code blocks -->
+    <script>
+      const COPY_ICON =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"/><path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"/></svg>';
+      const CHECK_ICON =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg>';
+
+      function addCopyButtons() {
+        const blocks = document.querySelectorAll<HTMLPreElement>(".prose pre");
+        blocks.forEach((pre) => {
+          const parent = pre.parentElement;
+          if (parent && parent.classList.contains("code-block-wrapper")) return;
+
+          const wrapper = document.createElement("div");
+          wrapper.className = "code-block-wrapper";
+          pre.before(wrapper);
+          wrapper.appendChild(pre);
+
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "copy-code-button";
+          btn.setAttribute("aria-label", "Copy code to clipboard");
+          btn.innerHTML = COPY_ICON;
+
+          btn.addEventListener("click", () => {
+            const codeEl = pre.querySelector("code");
+            const text = (codeEl ?? pre).textContent ?? "";
+            if (!navigator.clipboard) return;
+            navigator.clipboard.writeText(text).then(() => {
+              btn.innerHTML = CHECK_ICON;
+              btn.classList.add("is-copied");
+              btn.setAttribute("aria-label", "Copied");
+              window.setTimeout(() => {
+                btn.innerHTML = COPY_ICON;
+                btn.classList.remove("is-copied");
+                btn.setAttribute("aria-label", "Copy code to clipboard");
+              }, 2000);
+            });
+          });
+
+          wrapper.appendChild(btn);
+        });
+      }
+
+      addCopyButtons();
+    </script>
+
     <!-- Error tracking with Umami -->
     <script is:inline>
       (function () {

@@ -17,8 +17,13 @@
   h4 {
     @apply text-lg font-semibold md:text-xl;
   }
-  h1, h2, h3, h4, h5, h6 {
-    @apply mb-5 mt-7 text-base-900 dark:text-base-100;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-base-900 dark:text-base-100 mt-7 mb-5;
   }
   /* paragraphs */
   @apply prose-p:my-2 prose-p:leading-normal prose-p:text-base-500 dark:prose-p:text-white;
@@ -33,9 +38,13 @@
   code::after {
     content: "";
   }
-  /* code blocks - scrollable on overflow */
+  /* code blocks - scrollable on overflow, sized slightly under body text
+     (Shiki output otherwise inherits larger than the surrounding prose) */
   pre {
-    @apply max-w-full overflow-x-auto;
+    @apply max-w-full overflow-x-auto text-sm;
+  }
+  pre code {
+    @apply text-sm;
   }
   /* lists */
   @apply prose-li:text-base-500 dark:prose-li:text-base-300;
@@ -49,31 +58,33 @@
   @apply prose-blockquote:border-l-primary-500;
   /* blockquote attribution */
   blockquote footer {
-    @apply mt-2 text-sm not-italic text-base-600 dark:text-base-500;
+    @apply text-base-600 dark:text-base-500 mt-2 text-sm not-italic;
   }
   /* horizontal rule - WCAG 1.4.11 requires 3:1 contrast for UI components */
   @apply prose-hr:my-8 prose-hr:border-base-400 dark:prose-hr:border-base-600;
-  /* table - direct selectors to beat :where() specificity */
+  /* table - direct selectors to beat :where() specificity.
+     display:block + overflow-x makes a wide table scroll horizontally on the
+     narrow article column instead of squashing headers onto many lines. */
   table {
-    @apply w-full max-w-full overflow-x-auto my-8;
-    display: table;
+    @apply my-8 max-w-full overflow-x-auto;
+    display: block;
   }
   thead {
-    @apply border-b border-b-base-400 dark:border-b-base-700;
+    @apply border-b-base-400 dark:border-b-base-700 border-b;
   }
   th {
-    @apply px-3 py-2 text-left font-semibold text-base-900 dark:text-base-100;
+    @apply text-base-900 dark:text-base-100 px-3 py-2 text-left font-semibold whitespace-nowrap;
   }
   td {
-    @apply px-3 py-2 text-left text-base-500 dark:text-base-300;
+    @apply text-base-500 dark:text-base-300 px-3 py-2 text-left;
   }
   tr {
-    @apply border-b border-b-base-200 dark:border-b-base-800;
+    @apply border-b-base-200 dark:border-b-base-800 border-b;
   }
 
   /* SVGs and other wide elements */
   svg {
-    @apply max-w-full h-auto;
+    @apply h-auto max-w-full;
   }
 }
 
@@ -81,7 +92,7 @@
    These are meant to override any of the normal prose stylings above */
 .admonition {
   /* headings */
-  @apply mt-0 prose-headings:mb-0;
+  @apply prose-headings:mb-0 mt-0;
   /* paragraphs */
   @apply prose-p:mb-0 prose-p:mt-0;
   /* code */
@@ -116,7 +127,7 @@
 
 /* youtube embed */
 .prose iframe {
-  @apply mr-auto min-w-0 max-w-full;
+  @apply mr-auto max-w-full min-w-0;
 }
 
 /* ASCII/plaintext code blocks - transparent text background */
@@ -126,10 +137,10 @@
 
 /* Game UI ASCII block - retro terminal style (use with .game-ui-desktop wrapper) */
 .game-ui-desktop pre {
-  @apply text-[10px] xs:text-[11px] sm:text-xs md:text-sm;
+  @apply xs:text-[11px] text-[10px] sm:text-xs md:text-sm;
   @apply leading-[1.15] tracking-tight;
   @apply bg-base-950 font-mono;
-  @apply border border-base-700 rounded-lg;
+  @apply border-base-700 rounded-lg border;
   @apply p-3 sm:p-4;
   @apply mx-auto;
   width: fit-content;
@@ -142,4 +153,28 @@
 
 .game-ui-desktop pre code span {
   color: inherit !important;
+}
+
+/* Copy-to-clipboard button on code blocks.
+   The wrapper is injected around each `.prose pre` by the script in
+   BaseLayout.astro; the button sits in the wrapper (not inside the scrolling
+   <pre>) so it stays pinned top-right while the code scrolls. */
+.code-block-wrapper {
+  @apply relative;
+}
+.copy-code-button {
+  @apply border-base-300 bg-base-50/90 text-base-600 dark:border-base-700 dark:bg-base-800/90 dark:text-base-300 absolute top-2 right-2 z-10 inline-flex items-center justify-center rounded-md border p-1.5 opacity-0 transition focus-visible:opacity-100;
+  cursor: pointer;
+}
+.code-block-wrapper:hover .copy-code-button {
+  @apply opacity-100;
+}
+.copy-code-button:hover {
+  @apply text-base-900 dark:text-base-50;
+}
+.copy-code-button.is-copied {
+  @apply text-green-600 opacity-100 dark:text-green-400;
+}
+.copy-code-button svg {
+  @apply h-4 w-4;
 }

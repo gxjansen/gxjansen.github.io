@@ -1,0 +1,7 @@
+# Security contact for gui.do — RFC 9116
+# https://www.rfc-editor.org/rfc/rfc9116
+
+Contact: mailto:x@gui.do
+Expires: 2027-05-31T00:00:00.000Z
+Preferred-Languages: en, nl
+Canonical: https://gui.do/.well-known/security.txt
