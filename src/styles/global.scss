@@ -297,10 +297,10 @@
     color: #575279; /* Dawn text */
   }
 
+  /* Hide the library's "Join the conversation by replying on Bluesky." line —
+     duplicated by our own "Join the conversation on Bluesky" link below. */
   [class*="_replyText_"] {
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
-    color: #797593; /* Dawn muted */
+    display: none;
   }
 
   /* --- Divider --- */
@@ -452,7 +452,7 @@
     }
 
     [class*="_replyText_"] {
-      color: #908caa; /* Main muted */
+      display: none;
     }
 
     [class*="_divider_"] {
