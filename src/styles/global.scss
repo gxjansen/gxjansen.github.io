@@ -399,6 +399,10 @@
      below the comments already covers that. */
   [class*="_actionsContainer_"] {
     margin-top: 0.35rem;
+    /* Override the library's `width: 100%; justify-content: space-between` so
+       the items stay bundled together instead of spreading edge-to-edge. */
+    width: auto !important;
+    justify-content: flex-start !important;
     display: flex;
     flex-direction: row;
     align-items: center;
