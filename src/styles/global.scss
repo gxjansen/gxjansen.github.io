@@ -275,7 +275,7 @@
   [class*="_statsBar_"] {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
     padding: 0.5rem 0;
     font-size: 0.875rem;
     font-weight: 500;
@@ -285,8 +285,17 @@
   [class*="_statItem_"] {
     display: flex;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.4rem;
     white-space: nowrap;
+  }
+
+  /* Force monochrome icons in the top stats bar — the library hardcodes
+     fill="pink" / stroke="green" / fill="#7FBADC". Override so they match
+     the per-comment action row and the rest of the muted comments section. */
+  [class*="_statsBar_"] svg {
+    fill: none !important;
+    stroke: currentColor !important;
+    opacity: 0.7;
   }
 
   /* --- Section heading & intro text --- */
@@ -297,10 +306,10 @@
     color: #575279; /* Dawn text */
   }
 
+  /* Hide the library's "Join the conversation by replying on Bluesky." line —
+     duplicated by our own "Join the conversation on Bluesky" link below. */
   [class*="_replyText_"] {
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
-    color: #797593; /* Dawn muted */
+    display: none;
   }
 
   /* --- Divider --- */
@@ -383,29 +392,46 @@
     margin-top: 0.25rem;
   }
 
-  /* --- Comment actions (reply / repost / like counts) --- */
+  /* --- Comment actions (reply / repost / like counts) ---
+     Library renders 4 rows in order: replies, reposts, likes, reply-arrow.
+     We reorder to match the top stats bar (likes, reposts, replies) and hide
+     the redundant reply-arrow — the "Join the conversation on Bluesky" link
+     below the comments already covers that. */
   [class*="_actionsContainer_"] {
     margin-top: 0.35rem;
+    /* Override the library's `width: 100%; justify-content: space-between` so
+       the items stay bundled together instead of spreading edge-to-edge. */
+    width: auto !important;
+    justify-content: flex-start !important;
     display: flex;
-    width: 100%;
-    max-width: 14rem;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    gap: 1.25rem;
   }
 
   [class*="_actionsRow_"] {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.4rem;
     color: #797593; /* Dawn muted */
     font-size: 0.8125rem;
+  }
+
+  /* Reorder per-comment actions to match the top stats bar:
+     likes (3rd in markup) → 1st, reposts (2nd) → 2nd, replies (1st) → 3rd. */
+  [class*="_actionsRow_"]:nth-child(1) { order: 3; }
+  [class*="_actionsRow_"]:nth-child(2) { order: 2; }
+  [class*="_actionsRow_"]:nth-child(3) { order: 1; }
+
+  /* Hide the per-comment reply-arrow row (4th item, also tagged _replyAction_) */
+  [class*="_replyAction_"] {
+    display: none;
   }
 
   [class*="_actionsRow_"] svg {
     width: 1rem !important;
     height: 1rem !important;
-    opacity: 0.6;
+    opacity: 0.7;
   }
 
   /* --- Screen-reader only text --- */
@@ -452,7 +478,7 @@
     }
 
     [class*="_replyText_"] {
-      color: #908caa; /* Main muted */
+      display: none;
     }
 
     [class*="_divider_"] {

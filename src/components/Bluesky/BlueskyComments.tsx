@@ -40,6 +40,65 @@ function getReplyUrl(uri: string): string {
     .replace("/app.bsky.feed.post/", "/post/");
 }
 
+// Parse a bsky.app web URL or AT URI into { authority, rkey }
+function parseBlueskyUri(
+  uri: string,
+): { authority: string; rkey: string } | null {
+  if (uri.startsWith("https://bsky.app/profile/")) {
+    const m = uri.match(/\/profile\/([^/]+)\/post\/([^/?#]+)/);
+    if (!m) return null;
+    return { authority: m[1], rkey: m[2] };
+  }
+  if (uri.startsWith("at://")) {
+    const m = uri.match(/^at:\/\/([^/]+)\/app\.bsky\.feed\.post\/([^/?#]+)$/);
+    if (!m) return null;
+    return { authority: m[1], rkey: m[2] };
+  }
+  return null;
+}
+
+interface OpPost {
+  text: string;
+  authorName: string;
+  authorHandle: string;
+  authorAvatar?: string;
+  createdAt?: string;
+}
+
+async function fetchOpPost(uri: string): Promise<OpPost | null> {
+  const parsed = parseBlueskyUri(uri);
+  if (!parsed) return null;
+
+  let did = parsed.authority;
+  // Resolve handle to DID if needed
+  if (!did.startsWith("did:")) {
+    const r = await fetch(
+      `https://public.api.bsky.app/xrpc/com.atproto.identity.resolveHandle?handle=${encodeURIComponent(did)}`,
+    );
+    if (!r.ok) return null;
+    const data = await r.json();
+    if (!data?.did) return null;
+    did = data.did;
+  }
+
+  const atUri = `at://${did}/app.bsky.feed.post/${parsed.rkey}`;
+  const r = await fetch(
+    `https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=${encodeURIComponent(atUri)}&depth=0`,
+  );
+  if (!r.ok) return null;
+  const data = await r.json();
+  const post = data?.thread?.post;
+  if (!post) return null;
+
+  return {
+    text: post.record?.text ?? "",
+    authorName: post.author?.displayName ?? post.author?.handle ?? "",
+    authorHandle: post.author?.handle ?? "",
+    authorAvatar: post.author?.avatar,
+    createdAt: post.record?.createdAt,
+  };
+}
+
 /**
  * Bluesky Comments component for blog posts
  * - If uri is provided: Shows comments from that Bluesky post
@@ -49,6 +108,25 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
   const [emptyDetails, setEmptyDetails] = useState<CommentEmptyDetails | null>(
     null,
   );
+  const [opPost, setOpPost] = useState<OpPost | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    if (!uri) {
+      setOpPost(null);
+      return;
+    }
+    fetchOpPost(uri)
+      .then((p) => {
+        if (!cancelled) setOpPost(p);
+      })
+      .catch(() => {
+        if (!cancelled) setOpPost(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [uri]);
 
   // Generate share URL for posts not yet linked
   const shareText = `${postTitle}\n\n${postUrl}`;
@@ -139,6 +217,36 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
         className="border-base-300 bg-base-50 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
         aria-label="Comments from Bluesky"
       >
+        {opPost && (
+          <article className="bluesky-op-post border-base-200 dark:border-base-700 mb-4 rounded-lg border p-4">
+            <header className="mb-2 flex items-center gap-3">
+              {opPost.authorAvatar && (
+                <img
+                  src={opPost.authorAvatar}
+                  alt=""
+                  className="h-10 w-10 rounded-full"
+                  loading="lazy"
+                />
+              )}
+              <a
+                href={getReplyUrl(uri!)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-base-900 dark:text-base-100 font-semibold hover:underline"
+              >
+                {opPost.authorName}
+                {opPost.authorHandle && (
+                  <span className="text-base-500 dark:text-base-400 ml-2 text-sm font-normal">
+                    @{opPost.authorHandle}
+                  </span>
+                )}
+              </a>
+            </header>
+            <p className="text-base-800 dark:text-base-200 whitespace-pre-wrap">
+              {opPost.text}
+            </p>
+          </article>
+        )}
         <div className="bluesky-comments-wrapper">
           <BlueskyCommentsLib
             uri={uri}
