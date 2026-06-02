@@ -34,6 +34,8 @@ A "box" here can be a refurbished mini PC under your desk, a Raspberry Pi cluste
 
 If you've already moved your code to [Tangled](https://tangled.org/) (the atproto-native git forge): you also have this option. You just run a [Spindle](https://blog.tangled.org/ci/) on it instead of a GitHub Actions runner. Spindles are Tangled's CI runners, self-hosted by design: they subscribe to pipeline events from your knot over a websocket, spin up a Docker container per run, and pull dependencies from nixpkgs. The same "rent a small VPS, run the runner there" maths works exactly the same way. Setup is in the [official Spindle blog post](https://blog.tangled.org/ci/), and the YAML syntax is close enough to GitHub Actions that porting workflows is mostly mechanical.
 
+If you want to keep using something other than Spindle's native pipelines, take a look at [mitchellh.com/tack](https://tangled.org/mitchellh.com/tack), which helps you stitch arbitrary CI into Tangled.
+
 The rest of this guide is GitHub-specific, but the sizing, security, and "what else to do with the box" sections are the same
 
 ## The problem with paying GitHub for hosted minutes
