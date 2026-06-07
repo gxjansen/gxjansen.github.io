@@ -236,7 +236,7 @@ export default function BlueskyComments({ uri, postTitle, postUrl }: Props) {
               >
                 {opPost.authorName}
                 {opPost.authorHandle && (
-                  <span className="text-base-500 dark:text-base-400 ml-2 text-sm font-normal">
+                  <span className="text-base-600 dark:text-base-400 ml-2 text-sm font-normal">
                     @{opPost.authorHandle}
                   </span>
                 )}

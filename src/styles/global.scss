@@ -35,7 +35,7 @@
 @layer components {
   /* Card Base Styles */
   .card {
-    @apply overflow-hidden rounded-xl bg-base-50 shadow-lg transition-all duration-300 dark:bg-base-900;
+    @apply bg-base-50 dark:bg-base-900 overflow-hidden rounded-xl shadow-lg transition-all duration-300;
   }
 
   .card-container {
@@ -47,11 +47,11 @@
   }
 
   .card-title {
-    @apply mb-4 text-xl font-semibold text-base-900 dark:text-base-100;
+    @apply text-base-900 dark:text-base-100 mb-4 text-xl font-semibold;
   }
 
   .card-meta {
-    @apply mb-4 flex flex-wrap gap-2 text-sm text-base-500 dark:text-base-400;
+    @apply text-base-600 dark:text-base-400 mb-4 flex flex-wrap gap-2 text-sm;
   }
 
   .cards-grid {
@@ -117,11 +117,11 @@
   .nav-button {
     @apply absolute top-1/2 z-10 -translate-y-1/2;
     @apply flex h-12 w-12 items-center justify-center;
-    @apply rounded-full bg-base-50/95 dark:bg-base-800/95;
-    @apply text-2xl text-base-800 dark:text-base-200;
+    @apply bg-base-50/95 dark:bg-base-800/95 rounded-full;
+    @apply text-base-800 dark:text-base-200 text-2xl;
     @apply shadow-lg transition-all duration-300;
     @apply hover:bg-base-100 dark:hover:bg-base-700;
-    @apply focus:outline-hidden focus:ring-2 focus:ring-primary-500;
+    @apply focus:ring-primary-500 focus:ring-2 focus:outline-hidden;
     @apply disabled:cursor-not-allowed disabled:opacity-30;
     @apply disabled:hover:bg-base-50/95 dark:disabled:hover:bg-base-800/95;
     /* Improved touch target size */
@@ -143,7 +143,7 @@
 
     /* Improved focus styles */
     &:focus-visible {
-      @apply ring-offset-2 ring-offset-base-50 dark:ring-offset-base-900;
+      @apply ring-offset-base-50 dark:ring-offset-base-900 ring-offset-2;
     }
   }
 
@@ -419,9 +419,15 @@
 
   /* Reorder per-comment actions to match the top stats bar:
      likes (3rd in markup) → 1st, reposts (2nd) → 2nd, replies (1st) → 3rd. */
-  [class*="_actionsRow_"]:nth-child(1) { order: 3; }
-  [class*="_actionsRow_"]:nth-child(2) { order: 2; }
-  [class*="_actionsRow_"]:nth-child(3) { order: 1; }
+  [class*="_actionsRow_"]:nth-child(1) {
+    order: 3;
+  }
+  [class*="_actionsRow_"]:nth-child(2) {
+    order: 2;
+  }
+  [class*="_actionsRow_"]:nth-child(3) {
+    order: 1;
+  }
 
   /* Hide the per-comment reply-arrow row (4th item, also tagged _replyAction_) */
   [class*="_replyAction_"] {

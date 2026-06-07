@@ -172,7 +172,7 @@ const signupPage = Astro.url.pathname;
         />
 
         {note && (
-          <p class="text-base-500 dark:text-base-400 mt-2 text-xs">{note}</p>
+          <p class="text-base-600 dark:text-base-400 mt-2 text-xs">{note}</p>
         )}
       </form>
     </div>
@@ -220,16 +220,14 @@ const signupPage = Astro.url.pathname;
             )}
             {showSubscriberCount && (
               <p
-                class="subscriber-count text-base-100/90 dark:text-base-900/90 hidden font-medium"
+                class="subscriber-count text-base-50 hidden font-medium"
                 data-subscriber-count
               >
                 Join <span class="subscriber-number" /> newsletter subscribers
               </p>
             )}
             {description && (
-              <p class="text-base-100/90 dark:text-base-900/90 max-w-lg font-medium">
-                {description}
-              </p>
+              <p class="text-base-50 max-w-lg font-medium">{description}</p>
             )}
 
             <form
@@ -310,11 +308,7 @@ const signupPage = Astro.url.pathname;
                 aria-live="polite"
               />
 
-              {note && (
-                <p class="text-base-100/80 dark:text-base-900/80 mt-3 text-xs">
-                  {note}
-                </p>
-              )}
+              {note && <p class="text-base-50 mt-3 text-xs">{note}</p>}
             </form>
           </div>
         </div>
@@ -759,7 +753,10 @@ const signupPage = Astro.url.pathname;
   }
 
   .altcha-container--cta {
-    /* Centered in CTA variant */
+    /* CTA sits on a fixed teal (primary-500) background in both themes, so the
+       ALTCHA label text must be light for WCAG AA contrast. `color` inherits
+       across the widget (and its shadow root). */
+    color: #faf4ed;
   }
 
   /* Make ALTCHA widget blend with form design - remove border per UX recommendation */

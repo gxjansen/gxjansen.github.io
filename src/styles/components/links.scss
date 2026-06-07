@@ -44,9 +44,10 @@ a:not(
   .card h2 a,
   [class*="hover:text-primary"],
   [class*="bg-primary-100"],
-  [class*="rounded-full"]
+  [class*="rounded-full"],
+  .podcast-links a
 ) {
-  @apply text-primary-700 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-400 transition-all duration-200;
+  @apply text-primary-700 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 transition-all duration-200;
   text-decoration: underline;
   text-decoration-thickness: 0.2em;
   text-underline-offset: 0.1em;
@@ -84,7 +85,8 @@ footer a,
 .card h2 a,
 [class*="hover:text-primary"],
 [class*="bg-primary-100"],
-[class*="rounded-full"] {
+[class*="rounded-full"],
+.podcast-links a {
   text-decoration: none;
 }
 

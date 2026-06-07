@@ -18,7 +18,7 @@ describe("PodcastFeed", () => {
           <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-4">
             Latest Podcast Episodes
           </h1>
-          <p class="text-xl text-base-500 dark:text-base-400">
+          <p class="text-xl text-base-600 dark:text-base-400">
             Listen to the latest episodes from podcasts that I host. <br/> For podcasts I'm a guest in, check out the <a href="/press/#podcasts" class="text-blue-500 hover:underline">Press page</a>.
           </p>
         </div>
@@ -93,7 +93,7 @@ describe("PodcastFeed", () => {
           <h1 class="text-4xl font-bold text-base-900 dark:text-base-100 mb-4">
             Latest Podcast Episodes
           </h1>
-          <p class="text-xl text-base-500 dark:text-base-400">
+          <p class="text-xl text-base-600 dark:text-base-400">
             Listen to the latest episodes from podcasts that I host. <br/> For podcasts I'm a guest in, check out the <a href="/press/#podcasts" class="text-blue-500 hover:underline">Press page</a>.
           </p>
         </div>
@@ -103,7 +103,7 @@ describe("PodcastFeed", () => {
           <h3 class="text-xl font-semibold text-base-900 dark:text-base-100 mb-2">
             No Episodes Available
           </h3>
-          <p class="text-base-500 dark:text-base-400">
+          <p class="text-base-600 dark:text-base-400">
             Check back soon for new podcast episodes!
           </p>
         </div>

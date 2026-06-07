@@ -15,7 +15,7 @@ const { youtubeId } = Astro.props;
       allowfullscreen
       loading="lazy"
       onload="this.parentElement.classList.remove('bg-base-200', 'dark:bg-base-800')"
-      onerror="this.parentElement.innerHTML = '<div class=\'absolute inset-0 flex items-center justify-center text-base-500 dark:text-base-400\'>Failed to load video. <a href=\'https://www.youtube.com/watch?v=' + this.youtubeId + '\' target=\'_blank\' class=\'ml-2 text-primary-500 hover:underline\'>Watch on YouTube</a></div>'"
+      onerror="this.parentElement.innerHTML = '<div class=\'absolute inset-0 flex items-center justify-center text-base-600 dark:text-base-400\'>Failed to load video. <a href=\'https://www.youtube.com/watch?v=' + this.youtubeId + '\' target=\'_blank\' class=\'ml-2 text-primary-500 hover:underline\'>Watch on YouTube</a></div>'"
     ></iframe>
   </div>
 </div>

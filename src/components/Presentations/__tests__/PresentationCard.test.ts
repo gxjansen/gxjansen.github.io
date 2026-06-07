@@ -74,7 +74,7 @@ describe("PresentationCard HTML Structure", () => {
             </a>
           </h2>
 
-          <p class="text-base-500 dark:text-base-400">
+          <p class="text-base-600 dark:text-base-400">
             <span class="font-medium">For:</span> ${presentation.data.intendedAudience}
           </p>
 
