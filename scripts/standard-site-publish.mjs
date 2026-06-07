@@ -254,14 +254,19 @@ async function main() {
     if (post.updatedDate) record.updatedAt = new Date(post.updatedDate).toISOString();
     if (post.tags.length > 0) record.tags = post.tags;
 
-    // Check if update is needed by comparing key fields
+    // Check if update is needed by comparing all synced fields.
+    // textContent and tags MUST be included: body-only edits (the common
+    // case) leave title/description/dates untouched, so omitting them here
+    // makes every body change look "unchanged" and the record never re-syncs.
     if (existing) {
       const val = existing.value;
       const same = val.title === record.title
         && val.path === record.path
         && val.publishedAt === record.publishedAt
         && val.description === record.description
-        && val.updatedAt === record.updatedAt;
+        && val.updatedAt === record.updatedAt
+        && val.textContent === record.textContent
+        && JSON.stringify(val.tags || []) === JSON.stringify(record.tags || []);
 
       if (same) {
         unchanged++;
