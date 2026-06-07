@@ -11,15 +11,15 @@ categories:
   - Development
 ---
 
-If you want to customize an LLM of choice with more context about you/your project/your company, you have a couple of options to do so. ✔︎
+If you want to customize an LLM of choice with more context about you/your project/your company, you have a couple of options to do so.
 
-For most people **(re)training** their own AI is **not** an option because it requires quite some hardware/resources. OpenAI has revealed that to train GPT-4 (so not even the latest models) it cost them $100M and took 100 days, utilizing 25,000 NVIDIA A100 GPUs. 😱
+For most people **(re)training** their own AI is **not** an option because it requires quite some hardware/resources. OpenAI has revealed that to train GPT-4 (so not even the latest models) it cost them $100M and took 100 days, using 25,000 NVIDIA A100 GPUs. 😱
 
 So yeah, let's not do that. But you still have some very powerful options for customizing pre-trained models that are either free or at least far below $100M... 👇
 
 ## 1. Stuff your prompts with context
 
-The most accessible way to customize LLM behavior is through prompt engineering. This involves crafting specific instructions that guide the model's responses. There are thousands of ways to structure prompts (and YouTube videos on how to do it), but specifically for enriching your LLM with context you can add/upload documents, files, or even just plain text.
+The most accessible way to customize LLM behavior is prompt engineering: crafting specific instructions that guide the model's responses. There are thousands of ways to structure prompts (and YouTube videos on how to do it), but specifically for enriching your LLM with context you can add/upload documents, files, or even just plain text.
 
 You can include any additional context in the prompt (plain text or documents). This is also what happens when you add "instructions" or "projects" with files. You store documents that the LLM will include in _every_ prompt.
 
@@ -35,9 +35,7 @@ Fine-tuning does adjust the model's weights to better align with your use case a
 
 ## 3. RAG (Retrieval-Augmented Generation)
 
-RAG retrieves relevant information from an external knowledge base and dynamically incorporates it. This allows you to go beyond context windows and doesn't require re-training when the data changes. So if your data source is up-to-date, so will your LLM responses be. However, it does require you to have a vector database and retrieval system set up.
-
-RAG combines the LLM's capabilities with external knowledge bases. It retrieves relevant information and incorporates it into the generation process.
+RAG retrieves relevant information from an external knowledge base and feeds it into the generation. This lets you go beyond context windows and doesn't require re-training when the data changes. So if your data source is up-to-date, so will your LLM responses be. But it does require you to have a vector database and retrieval system set up.
 
 ## 4. MCP (Model Context Protocol)
 

@@ -57,7 +57,7 @@ On that box I run four parallel runner agents, all registered to the same self-h
 
 The CI workflow then asks for that pool by label, and the GitHub-hosted aggregator step only kicks in at the end to fan-in the results.
 
-> **The real unlock is that "one CI job at a time" is the wrong default. Once you control the box, you can run several jobs in parallel and shard slow suites across them.**
+> Most of the speed-up comes from dropping the "one CI job at a time" default: once you control the box, you can run several jobs in parallel and shard slow suites across them.
 
 End result on my biggest repo: ~12 minutes down to ~3-4 minutes wall-clock, for about half the monthly cost.
 
