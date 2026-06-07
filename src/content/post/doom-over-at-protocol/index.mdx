@@ -13,11 +13,11 @@ categories:
 blueskyUri: "at://did:plc:45uheisi25szrjvjurfpritx/app.bsky.feed.post/3miarycjd4c25"
 ---
 
-Someone ran Doom through DNS. [Adam Rice stored the entire game in TXT records](https://blog.rice.is/post/doom-over-dns/) and it actually worked. I saw that and - being at an AT Protocol conference - thought: can the AT Protocol do the same thing? Store the game and actually play it, with every player input and every rendered frame traveling through the protocol?
+Someone ran Doom through DNS. [Adam Rice stored the entire game in TXT records](https://blog.rice.is/post/doom-over-dns/) and it actually worked. I saw that and, being at an AT Protocol conference, thought: can the AT Protocol do the same thing? Store the game and actually play it, with every player input and every rendered frame traveling through the protocol?
 
 The answer is yes. Sorta. It plays terribly. No-one should want this. But it works. [You can try it yourself.](https://doom.singi.dev/)
 
-Fair warning: this is a technical post. If you're here for the details, you're in the right place.
+Fair warning: this is a technical post.
 
 ## The data flow
 
@@ -179,7 +179,7 @@ The realistic ceiling is probably ~15-20fps with favorable Jetstream latency. Fo
 
 **AT Protocol is very flexible.** Custom lexicons, blob storage, OAuth with granular scopes, federation... the building blocks for applications far beyond social media are already there. I'm building [Barazo](https://barazo.com) and [Sifa ID](https://sifa.id) as serious projects on the protocol. This was the fun side project that showed me how much room there is to experiment.
 
-**Self-host your PDS if you're building anything non-trivial.** The AT Protocol is designed for federation. Running your own PDS isn't just about avoiding rate limits, it's about being the authority for your data. The game server produces frame data, so it should host that data on its own PDS. This also eliminates dependency on relay crawling delays.
+**Self-host your PDS if you're building anything non-trivial.** The AT Protocol is designed for federation. Running your own PDS does more than dodge rate limits: it makes you the authority for your data. The game server produces frame data, so it should host that data on its own PDS. This also eliminates dependency on relay crawling delays.
 
 **Jetstream deserves more attention.** Any application built on AT Protocol records can use it for real-time event delivery. Feed generation is the obvious use case, but it works for anything. And it's what makes this game "playable".
 
