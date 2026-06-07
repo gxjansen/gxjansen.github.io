@@ -7,96 +7,124 @@
       @apply flex flex-col gap-0 pl-7;
 
       .alert-header {
-        @apply flex items-center gap-1.5 mb-0;
+        @apply mb-0 flex items-center gap-1.5;
 
         .alert-icon {
-          @apply flex-shrink-0 -ml-6;
+          @apply -ml-6 flex-shrink-0;
           svg {
             @apply size-5;
           }
         }
 
         .alert-title {
-          @apply text-base leading-none font-medium m-0;
+          @apply m-0 text-base leading-none font-medium;
         }
       }
 
       .alert-description {
-        @apply text-sm leading-none font-medium m-0 mt-2;
+        @apply m-0 mt-2 text-sm leading-none font-medium;
       }
 
       .alert-list {
-        @apply space-y-1 ml-4;
+        @apply ml-4 space-y-1;
         li {
           @apply list-disc;
         }
       }
 
       .alert-actions {
-        @apply mt-6 flex gap-2 items-center;
+        @apply mt-6 flex items-center gap-2;
       }
     }
   }
 
   .alert-info {
-    @apply bg-primary-50 border border-primary-100 text-primary-600 dark:bg-primary-950 dark:border-primary-900/50 dark:text-foam;
-    .alert-title { @apply text-primary-700 dark:text-foam; }
-    .alert-description { @apply text-primary-600 dark:text-primary-300; }
+    @apply bg-primary-50 border-primary-100 text-primary-600 dark:bg-primary-950 dark:border-primary-900/50 dark:text-foam border;
+    .alert-title {
+      @apply text-primary-700 dark:text-foam;
+    }
+    .alert-description {
+      @apply text-primary-600 dark:text-primary-300;
+    }
   }
 
   .alert-success {
-    @apply bg-primary-50 border border-primary-200 text-primary-600 dark:bg-primary-950 dark:border-primary-800 dark:text-primary-300;
-    .alert-title { @apply text-primary-700 dark:text-primary-200; }
-    .alert-description { @apply text-primary-600 dark:text-primary-300; }
+    @apply bg-primary-50 border-primary-200 text-primary-600 dark:bg-primary-950 dark:border-primary-800 dark:text-primary-300 border;
+    .alert-title {
+      @apply text-primary-700 dark:text-primary-200;
+    }
+    .alert-description {
+      @apply text-primary-600 dark:text-primary-300;
+    }
   }
 
   .alert-warning {
-    @apply bg-[#fef9ee] border border-gold-light/20 text-gold-light dark:bg-[#2a2118] dark:border-gold/20 dark:text-gold;
-    .alert-title { @apply text-[#8a5b1a] dark:text-gold; }
-    .alert-description { @apply text-gold-light dark:text-gold/80; }
+    @apply border-gold-light/20 text-gold-light dark:border-gold/20 dark:text-gold border bg-[#fef9ee] dark:bg-[#2a2118];
+    .alert-title {
+      @apply dark:text-gold text-[#8a5b1a];
+    }
+    .alert-description {
+      @apply text-gold-light dark:text-gold/80;
+    }
   }
 
   .alert-error {
-    @apply bg-[#fef2f4] border border-love-light/20 text-love-light dark:bg-[#2a1520] dark:border-love/20 dark:text-love;
-    .alert-title { @apply text-love-light dark:text-love; }
-    .alert-description { @apply text-love-light/80 dark:text-love/80; }
+    @apply border-love-light/20 text-love-light dark:border-love/20 dark:text-love border bg-[#fef2f4] dark:bg-[#2a1520];
+    .alert-title {
+      @apply text-love-light dark:text-love;
+    }
+    .alert-description {
+      @apply text-love-light/80 dark:text-love/80;
+    }
   }
 
   .alert-neutral {
     @apply bg-base-50 text-base-500 dark:bg-base-900 dark:text-base-400;
-    .alert-title { @apply text-base-700 dark:text-base-200; }
-    .alert-description { @apply text-base-500 dark:text-base-400; }
+    .alert-title {
+      @apply text-base-700 dark:text-base-200;
+    }
+    .alert-description {
+      @apply text-base-600 dark:text-base-400;
+    }
   }
 
   .alert-neutral-dark {
     @apply bg-base-950 text-white ring-1 ring-white/5;
-    .alert-title { @apply text-base-100; }
-    .alert-description { @apply text-base-300; }
+    .alert-title {
+      @apply text-base-100;
+    }
+    .alert-description {
+      @apply text-base-300;
+    }
   }
 
   .alert-accent {
     @apply bg-primary-500 text-white ring-1 ring-white/5;
-    .alert-title { @apply text-white; }
-    .alert-description { @apply text-base-100; }
+    .alert-title {
+      @apply text-white;
+    }
+    .alert-description {
+      @apply text-base-100;
+    }
   }
 
   .alert-button {
-    @apply flex items-center justify-center transition-all duration-200 focus:ring-2 focus:outline-hidden h-8 px-4 py-2 text-xs font-medium rounded-md;
+    @apply flex h-8 items-center justify-center rounded-md px-4 py-2 text-xs font-medium transition-all duration-200 focus:ring-2 focus:outline-hidden;
   }
 
   .alert-button-primary {
-    @apply text-black bg-base-50 hover:bg-base-200 focus:ring-base-500/50;
+    @apply bg-base-50 hover:bg-base-200 focus:ring-base-500/50 text-black;
   }
 
   .alert-button-secondary {
-    @apply text-white bg-base-900 hover:text-primary-400 ring-1 ring-base-700 focus:ring-primary-400;
+    @apply bg-base-900 hover:text-primary-400 ring-base-700 focus:ring-primary-400 text-white ring-1;
   }
 
   .alert-button-accent {
-    @apply text-white bg-primary-600 hover:bg-primary-700 focus:ring-primary-500/50;
+    @apply bg-primary-600 hover:bg-primary-700 focus:ring-primary-500/50 text-white;
   }
 
   .alert-button-outline {
-    @apply text-base-500 bg-base-50 hover:text-primary-500 ring-1 ring-base-200 focus:ring-primary-500;
+    @apply text-base-500 bg-base-50 hover:text-primary-500 ring-base-200 focus:ring-primary-500 ring-1;
   }
 }

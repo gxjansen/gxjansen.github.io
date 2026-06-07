@@ -18,7 +18,7 @@ const { slideshareKey } = Astro.props;
       allowfullscreen
       loading="lazy"
       onload="this.parentElement.classList.remove('bg-base-200', 'dark:bg-base-800')"
-      onerror={`document.getElementById('slide-container-${slideshareKey}').innerHTML = '<div class="absolute inset-0 flex items-center justify-center text-base-500 dark:text-base-400">Failed to load slides. <a href="https://www.slideshare.net/slideshow/embed_code/key/${slideshareKey}" target="_blank" class="ml-2 text-primary-500 hover:underline">View on SlideShare</a></div>'`}
+      onerror={`document.getElementById('slide-container-${slideshareKey}').innerHTML = '<div class="absolute inset-0 flex items-center justify-center text-base-600 dark:text-base-400">Failed to load slides. <a href="https://www.slideshare.net/slideshow/embed_code/key/${slideshareKey}" target="_blank" class="ml-2 text-primary-500 hover:underline">View on SlideShare</a></div>'`}
     ></iframe>
   </div>
 </div>

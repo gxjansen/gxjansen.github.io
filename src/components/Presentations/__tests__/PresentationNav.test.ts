@@ -31,7 +31,7 @@ describe("PresentationNav", () => {
 
         <div class="flex justify-between items-center mt-8 gap-4">
           <a href="/presentations/presentation-1/" class="flex-1 p-4 rounded-lg border border-base-200 dark:border-base-800 hover:border-primary-500 dark:hover:border-primary-400 group">
-            <span class="text-sm text-base-500 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1">
+            <span class="text-sm text-base-600 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
                 <path d="M15 6l-6 6l6 6" />
               </svg>
@@ -43,7 +43,7 @@ describe("PresentationNav", () => {
           </a>
 
           <a href="/presentations/presentation-3/" class="flex-1 p-4 rounded-lg border border-base-200 dark:border-base-800 hover:border-primary-500 dark:hover:border-primary-400 group text-right">
-            <span class="text-sm text-base-500 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1 justify-end">
+            <span class="text-sm text-base-600 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1 justify-end">
               Next
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
                 <path d="M9 6l6 6l-6 6" />
@@ -97,7 +97,7 @@ describe("PresentationNav", () => {
 
         <div class="flex justify-between items-center mt-8 gap-4">
           <a href="/presentations/presentation-2/" class="flex-1 p-4 rounded-lg border border-base-200 dark:border-base-800 hover:border-primary-500 dark:hover:border-primary-400 group text-right">
-            <span class="text-sm text-base-500 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1 justify-end">
+            <span class="text-sm text-base-600 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1 justify-end">
               Next
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
                 <path d="M9 6l6 6l-6 6" />
@@ -140,7 +140,7 @@ describe("PresentationNav", () => {
 
         <div class="flex justify-between items-center mt-8 gap-4">
           <a href="/presentations/presentation-2/" class="flex-1 p-4 rounded-lg border border-base-200 dark:border-base-800 hover:border-primary-500 dark:hover:border-primary-400 group">
-            <span class="text-sm text-base-500 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1">
+            <span class="text-sm text-base-600 dark:text-base-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 flex items-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none">
                 <path d="M15 6l-6 6l6 6" />
               </svg>

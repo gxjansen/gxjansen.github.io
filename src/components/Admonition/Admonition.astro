@@ -42,7 +42,7 @@ const label =
       >
         <Icon
           name={icon}
-          class="text-base-600 dark:text-base-300 inline size-5"
+          class="text-base-700 dark:text-base-300 inline size-5"
           aria-hidden="true"
         />
         <span class="font-bold">{label}</span>
@@ -50,14 +50,14 @@ const label =
       <slot />
     </div>
   ) : variant === "prompt" ? (
-    <div class="admonition border-pine bg-pine/10 text-base-600 dark:text-base-300 my-3 rounded-lg border-l-4 px-4 py-3 font-mono text-sm">
+    <div class="admonition border-pine bg-pine/10 text-base-700 dark:text-base-300 my-3 rounded-lg border-l-4 px-4 py-3 font-mono text-sm">
       <span
         class="mr-2 inline-flex items-center gap-1.5 align-middle"
         style="transform: translateY(-1px);"
       >
         <Icon
           name={icon}
-          class="text-base-600 dark:text-base-300 inline size-5"
+          class="text-base-700 dark:text-base-300 inline size-5"
           aria-hidden="true"
         />
         <span class="font-bold">{label}</span>
@@ -67,7 +67,7 @@ const label =
   ) : (
     <div
       class:list={[
-        "admonition text-base-600 dark:text-base-300 my-3 rounded-lg border-l-4 px-4 py-3",
+        "admonition text-base-700 dark:text-base-300 my-3 rounded-lg border-l-4 px-4 py-3",
         {
           "border-success bg-success/10 text-success-content prose-code:bg-success/20 dark:prose-code:bg-success/20":
             variant === "tip",
@@ -89,7 +89,7 @@ const label =
       <div class="flex items-center gap-2 pb-2">
         <Icon
           name={icon}
-          class="text-base-600 dark:text-base-300 size-7"
+          class="text-base-700 dark:text-base-300 size-7"
           aria-hidden="true"
         />
         <p class="text-sm font-bold">{label}</p>
