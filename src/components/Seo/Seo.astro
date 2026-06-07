@@ -92,9 +92,13 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const isImageMetadata =
   image && typeof image === "object" && "src" in image && "format" in image;
 if (isImageMetadata) {
+  // og:image must be PNG/JPEG, not WebP. Many social/link-preview scrapers
+  // (X/Twitter, plus various embed tools) silently fail to render WebP
+  // og:image, leaving a blank card. JPEG keeps photographic hero images
+  // small while staying universally supported.
   optimizedImage = await getImage({
     src: image,
-    format: "webp",
+    format: "jpeg",
     quality: "high",
     width: 1200,
     height: 630,
