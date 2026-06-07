@@ -75,7 +75,10 @@ const {
           </p>
         )
       }
-      <p class="card-description prose text-lg" set:html={description} />
+      <p
+        class="card-description prose text-base-700 dark:text-base-300 text-lg"
+        set:html={description}
+      />
       <div class="mt-8 flex items-center justify-center gap-4 md:justify-start">
         {
           link && (
