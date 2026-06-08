@@ -130,3 +130,6 @@ hive-mind-prompt-*.txt
 
 # Backup files
 *.mdxbackup
+
+# Playwright
+playwright-report/
