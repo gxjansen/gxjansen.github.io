@@ -254,7 +254,7 @@ async function validateUrl(urlInfo: UrlToValidate): Promise<string | null> {
       method: string,
     ): Promise<Response> => {
       const timeoutPromise = new Promise<never>((_, reject) => {
-        setTimeout(() => reject(new Error("Request timeout")), 15000);
+        setTimeout(() => reject(new Error("Request timeout")), 8000);
       });
 
       const fetchPromise = fetch(fetchUrl, {
@@ -321,22 +321,37 @@ async function validateUrl(urlInfo: UrlToValidate): Promise<string | null> {
 }
 
 /**
- * Validate URLs with rate limiting to avoid overwhelming servers
+ * Validate URLs with bounded concurrency so one slow host cannot blow the
+ * test's wall-clock budget. Workers pull from a shared queue; with N workers
+ * the total time is roughly (urls / N) * per-request-time instead of the sum.
+ * A small per-request delay keeps each worker polite to its servers.
  */
 async function validateUrlsWithRateLimit(
   urls: UrlToValidate[],
   delayMs: number = 100,
+  concurrency: number = 6,
 ): Promise<string[]> {
   const errors: string[] = [];
+  let next = 0;
 
-  for (const urlInfo of urls) {
-    const error = await validateUrl(urlInfo);
-    if (error) {
-      errors.push(error);
+  async function worker(): Promise<void> {
+    while (next < urls.length) {
+      const urlInfo = urls[next++];
+      const error = await validateUrl(urlInfo);
+      if (error) {
+        errors.push(error);
+      }
+      if (delayMs > 0) {
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+      }
     }
-    // Small delay between requests to be polite to servers
-    await new Promise((resolve) => setTimeout(resolve, delayMs));
   }
+
+  const workers = Array.from(
+    { length: Math.min(concurrency, urls.length) },
+    () => worker(),
+  );
+  await Promise.all(workers);
 
   return errors;
 }
