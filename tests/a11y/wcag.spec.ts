@@ -46,10 +46,22 @@ async function gotoThemed(page: Page, route: string, theme: string) {
   if (theme === "dark") {
     await expect(page.locator("html")).toHaveClass(/dark/);
   }
-  // Let fonts and any JS-driven content (timers, reveal animations) settle
-  // so axe samples the final rendered state, not a transient one.
+  // Force every CSS animation/transition to its end state so axe never samples
+  // a mid-fade frame (e.g. the logo's 2s opacity intro, which blends the text
+  // toward the background and reads as a false low-contrast value). Also pin the
+  // intro-animated logo to full opacity in case it is driven via JS.
+  await page.addStyleTag({
+    content: `*, *::before, *::after {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        transition: none !important;
+      }
+      .site-logo-text, .site-logo-icon { opacity: 1 !important; }`,
+  });
+  // Let fonts and any JS-driven content (timers) settle so axe samples the
+  // final rendered state, not a transient one.
   await page.evaluate(() => document.fonts.ready);
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(400);
 }
 
 // Inventory mode: set A11Y_INVENTORY=1 to collect all violations into a JSON
