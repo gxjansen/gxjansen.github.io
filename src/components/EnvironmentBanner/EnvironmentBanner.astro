@@ -46,7 +46,7 @@ const isProduction = CONFIG.ALLOW_INDEXING;
     left: 0;
     right: 0;
     background-color: #eb6f92; /* Rosé Pine love */
-    color: white;
+    color: #191724; /* Rosé Pine base — dark text passes WCAG AA (6.4:1) on love */
     text-align: center;
     z-index: 9999;
     font-weight: 600;
@@ -68,24 +68,25 @@ const isProduction = CONFIG.ALLOW_INDEXING;
     position: absolute;
     right: 1rem;
     padding: 0.25rem;
-    color: white;
+    color: #191724;
     border-radius: 0.25rem;
     transition: background-color 0.2s;
   }
 
   .banner-close:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(25, 23, 36, 0.12);
   }
 
   .banner-close:focus {
-    outline: 2px solid white;
+    outline: 2px solid #191724;
     outline-offset: 2px;
   }
 
-  /* Ensure proper color contrast */
+  /* prefers-contrast: more — lighten the pink so the dark text contrast
+     ratio increases further (the point of this media query). */
   @media (prefers-contrast: more) {
     .environment-banner {
-      background-color: #b4637a; /* Rosé Pine love (Dawn) for better contrast */
+      background-color: #fde4ea;
     }
   }
 
