@@ -8,7 +8,19 @@
     "country": "GB",
     "url": "https://experimentationelite.com/?utm_source=gui.do&utm_medium=events&utm_campaign=space-academy-2026",
     "workshop": false,
-    "role": "Advisor & Podcast host",
+    "role": "Advisor & Podcast host · Sifa unconference session",
+    "topic": "",
+    "relatedPresentationSlugs": []
+  },
+  {
+    "id": "atmosphereconf-2026",
+    "name": "ATmosphereConf",
+    "date": "2026-03-28",
+    "city": "Vancouver",
+    "country": "CA",
+    "url": "https://atmosphereconf.org/",
+    "workshop": false,
+    "role": "Unconference session on Sifa",
     "topic": "",
     "relatedPresentationSlugs": []
   },
