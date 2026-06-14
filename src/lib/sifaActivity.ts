@@ -213,6 +213,7 @@ function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
         title,
         sub: subParts.join(" · ") || undefined,
         rating,
+        imageUrl: str(record.posterUrl) ?? str(record.backdropUrl),
       };
     }
     case "Code": {

@@ -433,12 +433,15 @@
     @apply inline-flex items-center gap-1;
   }
   .home .poster {
-    @apply relative flex w-12 flex-shrink-0 flex-col items-center justify-center gap-0.5 rounded-lg text-white;
+    @apply relative flex aspect-[2/3] w-12 flex-shrink-0 flex-col items-center justify-center gap-0.5 overflow-hidden rounded-lg text-white;
     background: linear-gradient(
       150deg,
       var(--app-c, var(--color-app-fallback)),
       color-mix(in oklab, var(--app-c, var(--color-app-fallback)) 35%, var(--color-base-200))
     );
+  }
+  .home .poster img {
+    @apply absolute inset-0 size-full object-cover;
   }
   .home .poster-i {
     @apply font-display text-base font-extrabold;
