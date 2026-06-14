@@ -268,3 +268,12 @@
   color: var(--juttu-accent-color);
   text-decoration: underline;
 }
+
+/* The site's global link styles underline + randomly recolor every <a>. The
+   Juttu widget manages its own link affordances (color only, no underline on
+   names/handles/timestamps), so opt the whole widget out. Id specificity beats
+   the global `a`/random-link rules without !important. The standalone
+   "Discuss on Bluesky" CTA keeps its underline via the more specific rule above. */
+#juttu-comments a {
+  text-decoration: none;
+}
