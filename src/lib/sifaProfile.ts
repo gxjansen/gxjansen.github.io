@@ -53,6 +53,23 @@ const locOf = (loc: any): string | undefined => {
   );
 };
 
+/** Decode HTML entities (Sifa text can contain e.g. `&#x20;`, `&amp;`). */
+function decodeEntities(s?: string | null): string | undefined {
+  if (!s) return undefined;
+  return s
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) =>
+      String.fromCodePoint(parseInt(h, 16)),
+    )
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)))
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .trim();
+}
+
 const FALLBACK: CvData = {
   name: "Guido X Jansen",
   headline: "Community builder · Cognitive psychologist · Experimentation",
@@ -104,9 +121,9 @@ export async function getCV(): Promise<CvData> {
         String(b.startedAt).localeCompare(String(a.startedAt)),
       )
       .map((x: any) => ({
-        title: x.title,
-        company: x.company,
-        description: x.description,
+        title: decodeEntities(x.title) ?? x.title,
+        company: decodeEntities(x.company) ?? x.company,
+        description: decodeEntities(x.description),
         period: period(x.startedAt, x.endedAt),
         location: locOf(x.location),
       }));
@@ -142,9 +159,9 @@ export async function getCV(): Promise<CvData> {
       .slice(0, 24);
 
     return {
-      name: p.displayName ?? p.handle ?? FALLBACK.name,
-      headline: p.headline ?? undefined,
-      about: p.about ?? undefined,
+      name: decodeEntities(p.displayName) ?? p.handle ?? FALLBACK.name,
+      headline: decodeEntities(p.headline),
+      about: decodeEntities(p.about),
       avatar: p.avatar ?? undefined,
       location: locOf(p.location) ?? p.locationCountry ?? FALLBACK.location,
       experience: experience.length ? experience : FALLBACK.experience,

@@ -1,19 +1,22 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
+import SocialLinks from "@components/SocialLinks/SocialLinks.astro";
 import { getCV } from "../lib/sifaProfile";
 import { stats, talks } from "@data/homeContent";
 import { colleagueTestimonials } from "@config/colleagueTestimonialData";
-import { socialLinks } from "@data/socialLinks";
 
 const cv = await getCV();
 
-// Top recommendations (real, from colleagues) for the endorsements section.
-const endorsements = [...colleagueTestimonials]
-  .sort((a, b) => b.priority - a.priority)
-  .slice(0, 4);
-
-const findMe = socialLinks.filter((s) => s.visibility.footer);
+// Endorsements: pin Boris & Eric, then fill with the highest-priority others.
+const PINNED = ["boris-lokschin", "eric-schreiner"];
+const byId = Object.fromEntries(colleagueTestimonials.map((t) => [t.id, t]));
+const endorsements = [
+  ...PINNED.map((id) => byId[id]).filter(Boolean),
+  ...colleagueTestimonials
+    .filter((t) => !PINNED.includes(t.id))
+    .sort((a, b) => b.priority - a.priority),
+].slice(0, 6);
 
 const box =
   "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-5";
@@ -117,33 +120,9 @@ const sectionTitle =
         </div>
       </div>
 
-      <!-- ===== Track-record banner ===== -->
-      <div
-        class="border-primary-600/40 dark:border-primary-400/40 bg-primary-600/5 dark:bg-primary-400/5 my-8 flex flex-wrap items-center gap-3 rounded-xl border border-dashed px-4 py-3"
-      >
-        <span class="text-primary-600 dark:text-primary-400 font-hand text-xl"
-          >not just claims →</span
-        >
-        <p
-          class="text-base-600 dark:text-base-400 m-0 flex-1 text-sm leading-relaxed"
-        >
-          Every role and number below is backed by a <strong
-            class="text-base-900 dark:text-base-100"
-            >verifiable track record on the AT&nbsp;Protocol</strong
-          >: real contributions and endorsements that live on my own data
-          server, not a platform's. <a
-            href="https://sifa.id/p/gui.do"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-primary-600 dark:text-primary-400 font-bold"
-            >See the record on Sifa ↗</a
-          >
-        </p>
-      </div>
-
       {
         cv.about && (
-          <p class="text-base-700 dark:text-base-300 mb-10 max-w-[64ch] text-lg leading-relaxed">
+          <p class="text-base-700 dark:text-base-300 mt-8 mb-10 text-lg leading-relaxed">
             {cv.about}
           </p>
         )
@@ -251,10 +230,14 @@ const sectionTitle =
                 ))
               }
             </div>
-            <p class="text-base-500 mt-3 text-sm">
-              + 80&plus; more endorsements from colleagues at Spryker, Randstad
-              &amp; the wider community — these sync once recommendations land
-              on Sifa.
+            <p class="text-base-500 mt-4 text-sm">
+              <a
+                href="https://www.linkedin.com/in/gxjansen/details/recommendations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary-600 dark:text-primary-400 font-semibold"
+                >80+ more recommendations on LinkedIn</a
+              >. They'll sync to Sifa once that lexicon lands.
             </p>
           </section>
         </div>
@@ -311,27 +294,16 @@ const sectionTitle =
                 ))
               }
             </ul>
+            <a
+              href="/speaker/"
+              class="text-primary-600 dark:text-primary-400 mt-3 inline-flex items-center gap-1 text-sm font-semibold"
+              >All speaking <span aria-hidden="true">→</span></a
+            >
           </div>
 
           <div class={box}>
             <h3 class={boxTitle}>Find me</h3>
-            <ul class="flex flex-col">
-              {
-                findMe.map((s) => (
-                  <li>
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="text-base-600 hover:text-primary-600 dark:text-base-400 dark:hover:text-primary-400 flex items-center justify-between py-1.5 text-[0.9rem] font-semibold"
-                    >
-                      {s.name}
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
+            <SocialLinks location="footer" context="footer" />
           </div>
         </aside>
       </div>

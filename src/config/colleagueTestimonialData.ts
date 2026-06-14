@@ -244,6 +244,28 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     category: "Leadership & Team Building",
     priority: 4,
   },
+  {
+    id: "boris-lokschin",
+    name: "Boris Lokschin",
+    role: "Co-Founder & CEO",
+    company: "Spryker",
+    workRelationship: "Peer",
+    quote:
+      "Guido is a thought leader in community building and developer relations. Any company serious about building an ecosystem should talk to him.",
+    category: "Leadership & Team Building",
+    priority: 5,
+  },
+  {
+    id: "eric-schreiner",
+    name: "Eric Schreiner",
+    role: "Chief Customer Officer",
+    company: "Spryker",
+    workRelationship: "Manager",
+    quote:
+      "With a small, high-performing team, Guido created a developer and customer community from scratch and turned it into a real asset for the business.",
+    category: "Leadership & Team Building",
+    priority: 5,
+  },
 ];
 
 /**

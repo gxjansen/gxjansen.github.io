@@ -28,6 +28,7 @@ import {
   talks,
   aboutQuote,
   countryCount,
+  speakingCount,
   type Accent,
 } from "@data/homeContent";
 import { getActivity } from "../lib/sifaActivity";
@@ -213,7 +214,9 @@ const ArrowRight = "→";
     <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]" id="talks">
       <div class="sec-head">
         <div>
-          <span class="hand-note">50+ stages, {countryCount} countries</span>
+          <span class="hand-note"
+            >{speakingCount} talks, {countryCount} countries</span
+          >
           <h2>Talks &amp; speaking</h2>
         </div>
         <a href="/speaker/" class="more"

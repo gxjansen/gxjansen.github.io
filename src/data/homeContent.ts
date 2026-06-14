@@ -96,19 +96,34 @@ export const heroCopy = {
   lead: "For 20+ years I've helped tech teams turn <strong>developer &amp; customer intelligence</strong> into product strategy, grounded in cognitive psychology and a habit of testing my assumptions. I help build communities, and the teams that run them.",
 };
 
-// Unique countries Guido has presented in — derived at build time from the
-// same events data that drives the flag marquee (single source of truth).
+// Build-time stats derived from real data (single sources of truth).
 import eventsData from "./events.json";
+
+// Years building communities — since Guido's first community role (2004-11-12).
+const COMMUNITY_START = Date.UTC(2004, 10, 12); // month is 0-indexed
+export const yearsBuilding = Math.floor(
+  (Date.now() - COMMUNITY_START) / (365.25 * 86_400_000),
+);
+
+// Unique countries presented in (same events data that drives the flag marquee).
 export const countryCount = new Set(
   (eventsData as { country?: string }[])
     .map((e) => e.country)
     .filter((c): c is string => Boolean(c)),
 ).size;
 
+// Events spoken at — on-stage roles (speaker / host / moderator / panel /
+// workshop / session), excluding pure organiser roles.
+const SPEAKING_ROLE =
+  /speak|keynote|talk|workshop|present|panel|host|moderat|session/i;
+export const speakingCount = (eventsData as { role?: string }[]).filter((e) =>
+  SPEAKING_ROLE.test(e.role ?? ""),
+).length;
+
 export const stats: Stat[] = [
-  { n: "20+", l: "years building communities" },
+  { n: `${yearsBuilding}+`, l: "years building communities" },
   { n: "500+", l: "experiments run" },
-  { n: "50+", l: "conference keynotes" },
+  { n: `${speakingCount}`, l: "events spoken at" },
   { n: `${countryCount}`, l: "countries presented in" },
 ];
 
@@ -159,7 +174,7 @@ export const engagements: Engagement[] = [
   },
   {
     t: "Event speaker",
-    d: `Keynotes and workshops at your conference, company event or developer meetup. ${countryCount} countries, 50+ stages so far.`,
+    d: `Keynotes and workshops at your conference, company event or developer meetup. ${countryCount} countries, ${speakingCount} talks so far.`,
     icon: "tabler/filled/microphone",
     accent: "rose",
     cta: "Invite me to speak",
