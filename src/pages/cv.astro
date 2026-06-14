@@ -1,0 +1,198 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+import { getCV } from "../lib/sifaProfile";
+
+const cv = await getCV();
+---
+
+<BaseLayout
+  title="CV | Guido X Jansen"
+  description="Guido X Jansen's résumé — a verifiable track record of community building, developer relations, experimentation and open tech, seeded from his Sifa profile."
+>
+  <div class="home cv-page">
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <!-- Header -->
+      <div class="flex flex-col gap-6 sm:flex-row sm:items-start">
+        <img
+          src="/images/redesign/avatar.png"
+          alt="Guido X Jansen"
+          width="96"
+          height="96"
+          class="border-base-200 dark:border-base-800 bg-primary-600/10 size-24 shrink-0 rounded-2xl border object-cover"
+        />
+        <div class="min-w-0 flex-1">
+          <span class="eyebrow mb-2">Curriculum vitae</span>
+          <h1
+            class="font-display text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+          >
+            {cv.name}
+          </h1>
+          {
+            cv.headline && (
+              <p class="text-base-700 dark:text-base-300 mt-2 max-w-2xl text-lg leading-relaxed">
+                {cv.headline}
+              </p>
+            )
+          }
+          <div
+            class="text-base-500 mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm"
+          >
+            {
+              cv.location && (
+                <span class="inline-flex items-center gap-1.5">
+                  <Icon
+                    name="tabler/map-pin"
+                    class="size-4"
+                    aria-hidden="true"
+                  />
+                  {cv.location}
+                </span>
+              )
+            }
+            <a
+              href="https://sifa.id/p/gui.do"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary-600 dark:text-primary-400 inline-flex items-center gap-1.5 font-semibold"
+            >
+              <Icon name="sifa" class="size-4" aria-hidden="true" />
+              {cv.live ? "Verified on Sifa" : "Profile on Sifa"}
+            </a>
+          </div>
+        </div>
+        <button
+          type="button"
+          id="cv-print"
+          class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 text-base-900 dark:text-base-100 no-print font-display inline-flex shrink-0 items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-bold transition"
+        >
+          <Icon
+            name="tabler/outline/printer"
+            class="size-4"
+            aria-hidden="true"
+          />
+          Print / PDF
+        </button>
+      </div>
+
+      {
+        cv.about && (
+          <p class="text-base-700 dark:text-base-300 mt-8 max-w-3xl text-base leading-relaxed">
+            {cv.about}
+          </p>
+        )
+      }
+
+      <div class="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[1.6fr_1fr]">
+        <!-- Experience -->
+        <div>
+          <h2
+            class="font-display mb-6 text-2xl font-extrabold tracking-[-0.02em]"
+          >
+            Experience
+          </h2>
+          <ol
+            class="border-base-200 dark:border-base-800 flex flex-col gap-7 border-l pl-6"
+          >
+            {
+              cv.experience.map((x) => (
+                <li class="relative">
+                  <span
+                    class="bg-primary-600 dark:bg-primary-400 absolute top-1.5 -left-[1.65rem] size-2.5 rounded-full ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
+                    aria-hidden="true"
+                  />
+                  <div class="text-base-500 text-sm font-medium">
+                    {x.period}
+                  </div>
+                  <h3 class="font-display mt-0.5 text-lg font-bold">
+                    {x.title}
+                  </h3>
+                  <div class="text-primary-600 dark:text-primary-400 font-semibold">
+                    {x.company}
+                    {x.location && (
+                      <span class="text-base-500 font-normal">
+                        {" "}
+                        · {x.location}
+                      </span>
+                    )}
+                  </div>
+                  {x.description && (
+                    <p class="text-base-600 dark:text-base-400 mt-1.5 text-[0.95rem] leading-relaxed">
+                      {x.description}
+                    </p>
+                  )}
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+
+        <!-- Sidebar: education + skills -->
+        <div class="flex flex-col gap-10">
+          <div>
+            <h2
+              class="font-display mb-5 text-2xl font-extrabold tracking-[-0.02em]"
+            >
+              Education
+            </h2>
+            <ul class="flex flex-col gap-5">
+              {
+                cv.education.map((e) => (
+                  <li>
+                    <div class="text-base-500 text-sm font-medium">
+                      {e.period}
+                    </div>
+                    <h3 class="font-display mt-0.5 font-bold">
+                      {e.institution}
+                    </h3>
+                    {e.detail && (
+                      <div class="text-base-600 dark:text-base-400 text-[0.95rem]">
+                        {e.detail}
+                      </div>
+                    )}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div>
+            <h2
+              class="font-display mb-5 text-2xl font-extrabold tracking-[-0.02em]"
+            >
+              Skills
+            </h2>
+            <ul class="flex flex-wrap gap-2">
+              {cv.skills.map((s) => <li class="chip chip--plain">{s}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {
+        cv.live && (
+          <p class="text-base-500 no-print mt-12 text-sm">
+            This CV is generated live from my{" "}
+            <a
+              href="https://sifa.id/p/gui.do"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary-600 dark:text-primary-400 font-semibold"
+            >
+              Sifa profile
+            </a>{" "}
+            — a verifiable track record on the AT Protocol.
+          </p>
+        )
+      }
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  document
+    .getElementById("cv-print")
+    ?.addEventListener("click", () => window.print());
+</script>

@@ -135,3 +135,26 @@
     }
   }
 }
+
+/* Print: drop site chrome and decoration so any page (esp. the CV) prints clean.
+   Unlayered + global so it wins regardless of cascade layers. */
+@media print {
+  #nav__container,
+  #mobile-nav__container,
+  footer[role="contentinfo"],
+  .noise-background,
+  #environment-banner,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .reading-progress {
+    display: none !important;
+  }
+  a {
+    text-decoration: none !important;
+  }
+}
