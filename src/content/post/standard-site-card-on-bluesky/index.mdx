@@ -15,7 +15,9 @@ categories:
 
 You may have recently started seeing really nice article URL preview cards on Bluesky with their logo, your own accent color and a neat CTA button to View or Subscribe. If you want that too for your articles on your own domain: this guide is for you!
 
-Bluesky [v1.122](https://bsky.app/profile/bsky.app/post/3mmwmla3xph26) now renders Standard.site publications as rich link cards: title, reading time, author, site name, theme colours, and an action button that takes the reader straight into the publication. In the same week, WordPress shipped its [ATmosphere 1.0.0 plugin](https://activitypub.blog/2026/05/20/atmosphere-1-0-0-liftoff/), so a chunk of the open web can now publish as Standard.site too.
+Bluesky [v1.122](https://bsky.app/profile/bsky.app/post/3mmwmla3xph26) now renders Standard.site publications as rich link cards: title, reading time, author, site name, theme colours, and an action button. The card title links to the exact post you shared; the action button (Subscribe / View publication) goes to the publication's home, not that specific post. In the same week, WordPress shipped its [ATmosphere 1.0.0 plugin](https://activitypub.blog/2026/05/20/atmosphere-1-0-0-liftoff/), so a chunk of the open web can now publish as Standard.site too.
+
+> _One thing about the card before you set this up: it has two separate tap targets. The title, image and body go to the post you shared. The filled "Subscribe" / "View publication" button goes to the publication's home instead. That's intended, but it caught me out (the button is the loudest thing on the card, yet it doesn't open the article), so I wrote it up as [a UX issue on social-app](https://github.com/bluesky-social/social-app/issues/10905)._
 
 Let's get you set up!
 
@@ -181,6 +183,18 @@ In pdsls.dev, your publication record's URL ends in something like `.../site.sta
 ```sh
 curl -s "https://bsky.social/xrpc/com.atproto.repo.listRecords?repo=<your-handle>&collection=site.standard.publication" | jq .
 ```
+
+## Running more than one publication on one domain
+
+One publication record per site is the common case, but you can run several on the same domain: a main blog at the root, plus a separate publication for a series or section at its own path. Jason Lengstorf set this up for CodeTV, where the main blog and the Web Dev Challenge series are two distinct publications on one site, and wrote up exactly how: [Multiple Standard Site publications on one website](https://codetv.dev/blog/multiple-standard-site-publications-on-one-website).
+
+The short version:
+
+- Each publication is its own `site.standard.publication` record, with its own `url` pointing at the relevant path, e.g. `https://codetv.dev/series/web-dev-challenge`.
+- Each post is a `site.standard.document` record that attaches to a publication through its `site` field (the publication's AT-URI) and a `path` relative to that publication, e.g. `"path": "/s3/e4-rebuild-your-website-again"`.
+- If you also want Standard.site verification (the optional well-known file from earlier, not needed for the Bluesky card), make `/.well-known/site.standard.publication` a directory instead of a single file and nest each publication's path under it: `/.well-known/site.standard.publication/series/web-dev-challenge`, with that file holding the publication's AT-URI.
+
+Two things Jason flagged from doing it for real: you can't set a per-post author on a document, so the publication itself shows up as the author, and he created the records by hand with [Taproot](https://atproto.at) rather than automating it. You can check any of this with the [Standard Site validator](https://site-validator.fly.dev/).
 
 ## Verifying it works
 
