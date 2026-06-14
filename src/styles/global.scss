@@ -223,7 +223,7 @@
       data-juttu-theme auto-detection, which can mis-fire and isn't tied to the
       site toggle.
 
-   Values map to the site's base-*/foam tokens and are chosen for WCAG AA: the
+   Values map to the site's base-* and foam tokens and are chosen for WCAG AA: the
    muted step clears 4.5:1 on its background, and since Juttu reuses the accent
    for BOTH link text and white-on-accent buttons, each mode picks an accent for
    the constrained case (and dark overrides the hardcoded white button text,
