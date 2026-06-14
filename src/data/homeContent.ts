@@ -75,6 +75,9 @@ export interface ActivityItem {
   likes?: number;
   replies?: number;
   reposts?: number;
+  /** Thumbnail URL for posts that embed an image. */
+  imageUrl?: string;
+  imageAlt?: string;
   /** Source URL (live items link to the original post/review/etc.). */
   url?: string;
 }

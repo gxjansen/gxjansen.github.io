@@ -345,7 +345,7 @@
     transform: rotate(8deg);
   }
   .home .feed {
-    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex max-h-[min(82vh,760px)] flex-col overflow-hidden rounded-3xl border shadow-2xl;
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex max-h-[min(86vh,820px)] min-h-[min(74vh,660px)] flex-col overflow-hidden rounded-3xl border shadow-2xl;
   }
   .home .feed-head {
     @apply border-base-200 dark:border-base-800 bg-base-200/40 dark:bg-base-800/30 flex flex-shrink-0 items-center gap-2.5 border-b px-5 py-4;
@@ -423,13 +423,7 @@
     @apply text-base-900 dark:text-base-100;
   }
   .home .fi-img {
-    @apply mt-2.5 flex h-[84px] items-center justify-center rounded-lg;
-    background: linear-gradient(
-      135deg,
-      color-mix(in oklab, var(--color-foam) 30%, var(--color-base-200)),
-      color-mix(in oklab, var(--color-iris) 26%, var(--color-base-200))
-    );
-    color: var(--color-base-500);
+    @apply border-base-200 dark:border-base-800 mt-2.5 max-h-[220px] w-full rounded-lg border object-cover;
   }
   .home .fi-meta {
     @apply text-base-500 mt-2.5 flex gap-4 text-[0.78rem];

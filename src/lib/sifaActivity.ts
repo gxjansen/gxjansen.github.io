@@ -37,22 +37,35 @@ function cardUrl(raw: any): string | undefined {
   }
 }
 
-interface Engagement {
+interface PostMeta {
   likes: number;
   reposts: number;
   replies: number;
+  image?: string;
+  imageAlt?: string;
+}
+
+/** Pull the first image thumbnail (if any) from a getPosts embed view. */
+function extractImage(embed: any): { image?: string; imageAlt?: string } {
+  if (!embed) return {};
+  const imgs = embed.images ?? embed.media?.images;
+  if (imgs?.[0]?.thumb)
+    return { image: imgs[0].thumb, imageAlt: imgs[0].alt || undefined };
+  if (embed.external?.thumb)
+    return {
+      image: embed.external.thumb,
+      imageAlt: embed.external.title || undefined,
+    };
+  return {};
 }
 
 /**
- * Real engagement counts for Bluesky posts from the PUBLIC Bluesky AppView
- * (app.bsky.feed.getPosts) — no auth, no API key, batched (max 25 URIs). The
- * Sifa activity feed doesn't carry counts, so we fetch them here. Build-time
- * fresh; never throws.
+ * Engagement counts + image thumbnails for Bluesky posts from the PUBLIC
+ * Bluesky AppView (app.bsky.feed.getPosts) — no auth, no key, batched (max 25
+ * URIs). The Sifa feed carries neither, so we fetch them here. Never throws.
  */
-async function fetchEngagement(
-  uris: string[],
-): Promise<Map<string, Engagement>> {
-  const map = new Map<string, Engagement>();
+async function fetchPostMeta(uris: string[]): Promise<Map<string, PostMeta>> {
+  const map = new Map<string, PostMeta>();
   if (!uris.length) return map;
   try {
     for (let i = 0; i < uris.length; i += 25) {
@@ -68,13 +81,41 @@ async function fetchEngagement(
           likes: p.likeCount ?? 0,
           reposts: p.repostCount ?? 0,
           replies: p.replyCount ?? 0,
+          ...extractImage(p.embed),
         });
       }
     }
   } catch {
-    /* fall back to no counts */
+    /* fall back to no counts / images */
   }
   return map;
+}
+
+/**
+ * The single most-recent item for each non-post category (Reviews, Code,
+ * Events) — fetched per-category so these rarer types always surface, however
+ * old, independent of how frequently Guido posts. Never throws.
+ */
+async function fetchVariety(): Promise<ActivityItem[]> {
+  const cats = ["Reviews", "Code", "Events"];
+  const lists = await Promise.all(
+    cats.map(async (category) => {
+      try {
+        const r = await fetchActivityFeed({ baseUrl: SIFA_BASE }, HANDLE, {
+          category,
+          limit: 3,
+        });
+        for (const raw of r?.items ?? []) {
+          const m = mapItem(raw);
+          if (m) return m;
+        }
+      } catch {
+        /* skip this category */
+      }
+      return null;
+    }),
+  );
+  return lists.filter((x): x is ActivityItem => x !== null);
 }
 
 /** Sort weight — high-engagement posts float up; non-post items keep a modest
@@ -104,7 +145,7 @@ const WORK_TYPE_LABEL: Record<string, string> = {
 
 /** Map one raw SDK activity item to the display shape, or null to drop it.
  *  `eng` carries real Bluesky engagement counts when available. */
-function mapItem(raw: any, eng?: Engagement): ActivityItem | null {
+function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
   const record = (raw?.record ?? {}) as Record<string, unknown>;
   const app = str(raw?.appId) ?? "fallback";
   const time = formatRelativeTime(str(raw?.indexedAt) ?? "");
@@ -122,7 +163,12 @@ function mapItem(raw: any, eng?: Engagement): ActivityItem | null {
         type: "post",
         kind: isReply ? "Reply" : "Post",
         text,
-        ...eng,
+        likes: meta?.likes,
+        reposts: meta?.reposts,
+        replies: meta?.replies,
+        hasImage: !!meta?.image,
+        imageUrl: meta?.image,
+        imageAlt: meta?.imageAlt,
       };
     }
     case "Reviews": {
@@ -162,8 +208,11 @@ function mapItem(raw: any, eng?: Engagement): ActivityItem | null {
       };
     }
     case "Events": {
-      const title = str(record.name) ?? str(record.title);
-      if (!title) return null;
+      const title =
+        str(record.name) ??
+        str(record.title) ??
+        str(record.text) ??
+        "Community event";
       return {
         ...base,
         type: "event",
@@ -190,47 +239,41 @@ const RECENT_DAYS = 7;
 
 export async function getActivity(limit = 10): Promise<ActivityItem[]> {
   try {
-    const res = await fetchActivityFeed({ baseUrl: SIFA_BASE }, "gui.do", {
-      limit: 40,
-    });
-    if (!res?.items?.length) return activitySeed;
+    // Main feed (posts + engagement) and the per-category variety in parallel.
+    const [res, variety] = await Promise.all([
+      fetchActivityFeed({ baseUrl: SIFA_BASE }, HANDLE, { limit: 40 }),
+      fetchVariety(),
+    ]);
+    const items = res?.items ?? [];
+    if (!items.length && !variety.length) return activitySeed;
 
-    // Real engagement counts for Bluesky posts (public AppView, no auth).
-    const bskyUris = res.items
+    // Engagement counts + image thumbnails for Bluesky posts (public AppView).
+    const bskyUris = items
       .filter((i: any) => i.collection === "app.bsky.feed.post")
       .map((i: any) => i.uri);
-    const eng = await fetchEngagement(bskyUris);
+    const meta = await fetchPostMeta(bskyUris);
 
+    // The 7-day window applies ONLY to posts (frequent); non-post categories
+    // surface their latest item regardless of age (via fetchVariety).
     const cutoff = Date.now() - RECENT_DAYS * 86_400_000;
     const recentEnough = (raw: any) => {
       const t = new Date(raw.indexedAt).getTime();
       return Number.isNaN(t) || t >= cutoff;
     };
 
-    // Posts from the last week, ranked by interactions (best on top).
-    const posts = res.items
+    const posts = items
       .filter(
         (r: any) => r.collection === "app.bsky.feed.post" && recentEnough(r),
       )
-      .map((r: any) => mapItem(r, eng.get(r.uri)))
+      .map((r: any) => mapItem(r, meta.get(r.uri)))
       .filter((x): x is ActivityItem => x !== null)
       .sort((a, b) => interestScore(b) - interestScore(a));
 
-    // The freshest non-post items (reviews, code, events) — kept as variety so
-    // those filters always have content, regardless of post engagement.
-    const others = res.items
-      .filter((r: any) => r.collection !== "app.bsky.feed.post")
-      .map((r: any) => mapItem(r))
-      .filter((x): x is ActivityItem => x !== null);
-
-    // One most-recent item per non-post category (review / code / event) so each
-    // present filter always has content, without burying the top posts.
-    const byCategory = new Map<string, ActivityItem>();
-    for (const o of others)
-      if (!byCategory.has(o.type)) byCategory.set(o.type, o);
-    const variety = [...byCategory.values()].slice(0, Math.floor(limit / 3));
-
-    const mapped = [...posts.slice(0, limit - variety.length), ...variety];
+    const varietyN = Math.min(variety.length, Math.floor(limit / 3));
+    const mapped = [
+      ...posts.slice(0, limit - varietyN),
+      ...variety.slice(0, varietyN),
+    ];
 
     return mapped.length ? mapped : activitySeed;
   } catch {

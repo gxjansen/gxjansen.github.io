@@ -132,10 +132,14 @@ const fragments = (text: string) =>
                       )}
                     </p>
                   )}
-                  {item.hasImage && (
-                    <div class="fi-img" aria-hidden="true">
-                      <Icon name="tabler/outline/photo" class="size-6" />
-                    </div>
+                  {item.imageUrl && (
+                    <img
+                      class="fi-img"
+                      src={item.imageUrl}
+                      alt={item.imageAlt || ""}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   )}
                   {(item.likes || item.replies || item.reposts) && (
                     <div class="fi-meta">
