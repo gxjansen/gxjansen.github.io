@@ -23,7 +23,7 @@
 @layer components {
   /* ---- hero ---- */
   .home .kicker {
-    @apply text-primary-600 dark:text-primary-400 mb-4 inline-block font-hand text-[1.9rem] leading-none;
+    @apply text-primary-600 dark:text-primary-400 mb-3 inline-block font-hand text-[1.9rem] leading-none;
     transform: rotate(-3deg);
     transform-origin: left center;
   }
@@ -42,17 +42,14 @@
     background: color-mix(in oklab, var(--color-primary-600) 18%, transparent);
     transform: rotate(-1deg);
   }
-  .home .hero-h1 {
-    @apply mb-[0.45em];
-  }
   .home .lead {
-    @apply text-base-600 dark:text-base-400 mb-9 max-w-[46ch] text-[clamp(1.05rem,1.6vw,1.3rem)] leading-[1.6];
+    @apply text-base-600 dark:text-base-400 mb-6 max-w-[46ch] text-[clamp(1.05rem,1.6vw,1.25rem)] leading-[1.55];
   }
   .home .lead strong {
     @apply text-base-900 dark:text-base-100 font-bold;
   }
   .home .cta-row {
-    @apply mb-10 flex flex-wrap gap-2.5;
+    @apply mb-7 flex flex-wrap gap-2.5;
   }
 
   /* ---- stats ---- */
@@ -129,7 +126,7 @@
     color: var(--ac, var(--color-primary-600));
   }
   .home .art .read-time {
-    @apply text-base-500 font-hand text-[1rem] leading-none font-bold;
+    @apply text-base-500 text-[0.8rem];
   }
   .home .art-thumb {
     @apply mb-4 aspect-[16/7] w-full overflow-hidden rounded-xl;

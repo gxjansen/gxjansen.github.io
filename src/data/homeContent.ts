@@ -93,11 +93,20 @@ export const heroCopy = {
   lead: "For 20+ years I've helped tech teams turn <strong>developer &amp; customer intelligence</strong> into product strategy — grounded in cognitive psychology and a habit of testing my assumptions. I help build communities, and the teams that run them.",
 };
 
+// Unique countries Guido has presented in — derived at build time from the
+// same events data that drives the flag marquee (single source of truth).
+import eventsData from "./events.json";
+export const countryCount = new Set(
+  (eventsData as { country?: string }[])
+    .map((e) => e.country)
+    .filter((c): c is string => Boolean(c)),
+).size;
+
 export const stats: Stat[] = [
   { n: "20+", l: "years building communities" },
   { n: "500+", l: "experiments run" },
   { n: "50+", l: "conference keynotes" },
-  { n: "26", l: "countries presented in" },
+  { n: `${countryCount}`, l: "countries presented in" },
 ];
 
 export const pillars: Pillar[] = [
@@ -147,7 +156,7 @@ export const engagements: Engagement[] = [
   },
   {
     t: "Event speaker",
-    d: "Keynotes and workshops at your conference, company event or developer meetup. 26 countries, 50+ stages so far.",
+    d: `Keynotes and workshops at your conference, company event or developer meetup. ${countryCount} countries, 50+ stages so far.`,
     icon: "tabler/filled/microphone",
     accent: "rose",
     cta: "Invite me to speak",
