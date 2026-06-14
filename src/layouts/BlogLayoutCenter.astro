@@ -18,6 +18,7 @@ import { formatDate, humanize } from "@js/textUtils";
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { useTranslations } from "@js/translationUtils";
 import { filterCategoriesByCount } from "@js/blogUtils";
+import { readingTime } from "../utils/readingTime";
 
 interface Props {
   post: CollectionEntry<"post">;
@@ -38,6 +39,9 @@ const {
 
 // Generate the canonical post URL for Bluesky sharing
 const postUrl = new URL(`/post/${post.id}/`, Astro.site).toString();
+
+// Estimated reading time (computed locally from the article body).
+const readTime = readingTime(post.body);
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
@@ -149,6 +153,10 @@ const newsletterDescription =
                   </time>
                 )
               }
+
+              <!-- Reading time -->
+              <span class="text-base-600 dark:text-base-400">&bull;</span>
+              <span aria-label="Estimated reading time">{readTime}</span>
 
               <!-- Bluesky comment link (only if linked) -->
               {

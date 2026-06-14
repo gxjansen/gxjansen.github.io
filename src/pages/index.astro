@@ -30,6 +30,7 @@ import {
   type Accent,
 } from "@data/homeContent";
 import { getActivity } from "../lib/sifaActivity";
+import { readingTimeShort } from "../utils/readingTime";
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const siteData = getTranslatedData("siteData", currLocale);
@@ -50,6 +51,7 @@ const posts = (await getCollection("post", ({ data }) => !data.draft))
     description: post.data.description,
     href: `/post/${post.id}/`,
     date: format(new Date(post.data.pubDate), "MMM d, yyyy"),
+    read: readingTimeShort(post.body),
     categories: post.data.categories.slice(0, 2),
     heroImage: post.data.heroImage,
     accent: accents[i % accents.length],
@@ -160,6 +162,8 @@ const ArrowRight = "→";
               {featured.description && <p>{featured.description}</p>}
               <div class="m">
                 <span>{featured.date}</span>
+                <span aria-hidden="true">·</span>
+                <span class="read-time">{featured.read}</span>
                 <span class="read">
                   Read <span aria-hidden="true">↗</span>
                 </span>
@@ -185,6 +189,8 @@ const ArrowRight = "→";
                   <h3>{a.title}</h3>
                   <div class="m">
                     <span>{a.date}</span>
+                    <span aria-hidden="true">·</span>
+                    <span class="read-time">{a.read}</span>
                     <span class="read" aria-hidden="true">
                       ↗
                     </span>
