@@ -7,17 +7,23 @@ import { getLocaleFromUrl } from "@js/localeUtils";
 interface Props {
   /** Render the dot in gold for pine/dark surfaces (avatar tiles, pine cards). */
   onPine?: boolean;
+  /** Show the caricature avatar (the person) left of the wordmark. */
+  showAvatar?: boolean;
   class?: string;
 }
 
-const { onPine = false, class: className } = Astro.props as Props;
+const {
+  onPine = false,
+  showAvatar = false,
+  class: className,
+} = Astro.props as Props;
 
 const currLocale = getLocaleFromUrl(Astro.url);
 
 /**
- * The gui.do wordmark — the brand mark for the site & content.
- * The dot is a real SLD·TLD separator: pine by default, gold on a pine
- * surface. Never crop to a dangling "g." or ".do".
+ * The gui.do wordmark — the brand mark for the site & content. Optionally
+ * paired with the caricature avatar (the person) in the navbar.
+ * The dot is a real SLD·TLD separator: pine by default, gold on a pine surface.
  */
 const dotColor = onPine
   ? "text-gold"
@@ -26,20 +32,33 @@ const dotColor = onPine
 
 <a
   class:list={[
-    "primary-focus group font-display text-base-900 dark:text-base-100 inline-flex items-baseline text-[1.3rem] leading-none font-black tracking-[-0.035em] no-underline",
+    "primary-focus group font-display text-base-900 dark:text-base-100 inline-flex items-center gap-2.5 text-[1.3rem] leading-none font-black tracking-[-0.035em] no-underline",
     onPine && "text-base-50",
     className,
   ]}
   href={getRelativeLocaleUrl(currLocale)}
   aria-label="gui.do — home"
 >
-  <span aria-hidden="true">gui</span>
-  <span
-    class:list={[
-      "inline-block text-[1.15em] transition-transform duration-200 ease-out group-hover:scale-[1.4] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
-      dotColor,
-    ]}
-    aria-hidden="true">.</span
-  >
-  <span aria-hidden="true">do</span>
+  {
+    showAvatar && (
+      <img
+        src="/images/redesign/avatar.png"
+        alt=""
+        width="32"
+        height="32"
+        class="ring-primary-600/20 dark:ring-primary-400/25 size-8 shrink-0 rounded-full ring-2"
+      />
+    )
+  }
+  <span class="inline-flex items-baseline">
+    <span aria-hidden="true">gui</span>
+    <span
+      class:list={[
+        "inline-block text-[1.15em] transition-transform duration-200 ease-out group-hover:scale-[1.4] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
+        dotColor,
+      ]}
+      aria-hidden="true">.</span
+    >
+    <span aria-hidden="true">do</span>
+  </span>
 </a>

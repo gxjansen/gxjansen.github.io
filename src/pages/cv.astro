@@ -2,191 +2,339 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 import { getCV } from "../lib/sifaProfile";
+import { stats, talks } from "@data/homeContent";
+import { colleagueTestimonials } from "@config/colleagueTestimonialData";
+import { socialLinks } from "@data/socialLinks";
 
 const cv = await getCV();
+
+// Top recommendations (real, from colleagues) for the endorsements section.
+const endorsements = [...colleagueTestimonials]
+  .sort((a, b) => b.priority - a.priority)
+  .slice(0, 4);
+
+const findMe = socialLinks.filter((s) => s.visibility.footer);
+
+const box =
+  "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-5";
+const boxTitle =
+  "text-base-500 mb-3 text-xs font-bold tracking-[0.08em] uppercase";
+const sectionTitle =
+  "text-base-500 mb-5 border-base-200 dark:border-base-800 border-b pb-2 font-display text-sm font-bold tracking-[0.1em] uppercase";
 ---
 
 <BaseLayout
   title="CV | Guido X Jansen"
-  description="Guido X Jansen's résumé — a verifiable track record of community building, developer relations, experimentation and open tech, seeded from his Sifa profile."
+  description="Guido X Jansen's résumé — a verifiable track record of community building, developer relations, experimentation and open tech, generated live from his Sifa profile."
 >
   <div class="home cv-page">
     <section
       class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
     >
-      <!-- Header -->
+      <!-- ===== Identity header ===== -->
       <div class="flex flex-col gap-6 sm:flex-row sm:items-start">
         <img
-          src="/images/redesign/avatar.png"
+          src="/images/redesign/guido.webp"
           alt="Guido X Jansen"
-          width="96"
-          height="96"
-          class="border-base-200 dark:border-base-800 bg-primary-600/10 size-24 shrink-0 rounded-2xl border object-cover"
+          width="112"
+          height="112"
+          class="border-base-50 dark:border-base-900 bg-base-200 size-28 shrink-0 rounded-full border-4 object-cover shadow-lg"
         />
         <div class="min-w-0 flex-1">
-          <span class="eyebrow mb-2">Curriculum vitae</span>
-          <h1
-            class="font-display text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
-          >
-            {cv.name}
-          </h1>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <h1
+              class="font-display text-[clamp(2rem,4.5vw,2.9rem)] leading-none font-black tracking-[-0.03em]"
+            >
+              {cv.name}
+            </h1>
+            {
+              cv.live && (
+                <span class="text-primary-600 dark:text-primary-400 inline-flex items-center gap-1 text-sm font-bold">
+                  <Icon name="sifa" class="size-4" aria-hidden="true" />
+                  Verified on atproto
+                </span>
+              )
+            }
+          </div>
+          <p class="text-base-500 mt-1.5 text-[0.95rem]">
+            @<a
+              href="https://sifa.id/p/gui.do"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary-600 dark:text-primary-400 font-semibold"
+              >gui.do</a
+            > · he/him
+          </p>
           {
             cv.headline && (
-              <p class="text-base-700 dark:text-base-300 mt-2 max-w-2xl text-lg leading-relaxed">
+              <p class="text-base-700 dark:text-base-300 font-display mt-2 max-w-2xl text-lg font-semibold">
                 {cv.headline}
               </p>
             )
           }
-          <div
-            class="text-base-500 mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm"
-          >
+          <div class="mt-3 flex flex-wrap items-center gap-2">
+            <span class="chip">
+              <span
+                class="bg-primary-600 dark:bg-primary-400 size-2 rounded-full"
+                aria-hidden="true"></span>
+              Available for work
+            </span>
             {
               cv.location && (
-                <span class="inline-flex items-center gap-1.5">
+                <span class="text-base-500 inline-flex items-center gap-1.5 text-sm">
                   <Icon
                     name="tabler/map-pin"
                     class="size-4"
                     aria-hidden="true"
                   />
-                  {cv.location}
+                  {cv.location} · remote-first
                 </span>
               )
             }
+          </div>
+          <div class="no-print mt-4 flex flex-wrap gap-2">
             <a
               href="https://sifa.id/p/gui.do"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-primary-600 dark:text-primary-400 inline-flex items-center gap-1.5 font-semibold"
+              class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-bold text-white transition"
             >
-              <Icon name="sifa" class="size-4" aria-hidden="true" />
-              {cv.live ? "Verified on Sifa" : "Profile on Sifa"}
+              View on Sifa <span aria-hidden="true">↗</span>
             </a>
+            <button
+              type="button"
+              id="cv-print"
+              class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 text-base-900 dark:text-base-100 font-display inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-bold transition"
+            >
+              <Icon
+                name="tabler/outline/printer"
+                class="size-4"
+                aria-hidden="true"
+              />
+              Save as PDF
+            </button>
           </div>
         </div>
-        <button
-          type="button"
-          id="cv-print"
-          class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 text-base-900 dark:text-base-100 no-print font-display inline-flex shrink-0 items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-bold transition"
+      </div>
+
+      <!-- ===== Track-record banner ===== -->
+      <div
+        class="border-primary-600/40 dark:border-primary-400/40 bg-primary-600/5 dark:bg-primary-400/5 my-8 flex flex-wrap items-center gap-3 rounded-xl border border-dashed px-4 py-3"
+      >
+        <span class="text-primary-600 dark:text-primary-400 font-hand text-xl"
+          >not just claims →</span
         >
-          <Icon
-            name="tabler/outline/printer"
-            class="size-4"
-            aria-hidden="true"
-          />
-          Print / PDF
-        </button>
+        <p
+          class="text-base-600 dark:text-base-400 m-0 flex-1 text-sm leading-relaxed"
+        >
+          Every role and number below is backed by a <strong
+            class="text-base-900 dark:text-base-100"
+            >verifiable track record on the AT&nbsp;Protocol</strong
+          > — real contributions and endorsements that live on my own data server,
+          not a platform's. <a
+            href="https://sifa.id/p/gui.do"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-primary-600 dark:text-primary-400 font-bold"
+            >See the record on Sifa ↗</a
+          >
+        </p>
       </div>
 
       {
         cv.about && (
-          <p class="text-base-700 dark:text-base-300 mt-8 max-w-3xl text-base leading-relaxed">
+          <p class="text-base-700 dark:text-base-300 mb-10 max-w-[64ch] text-lg leading-relaxed">
             {cv.about}
           </p>
         )
       }
 
-      <div class="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[1.6fr_1fr]">
-        <!-- Experience -->
+      <!-- ===== Grid: main + sidebar ===== -->
+      <div
+        class="grid grid-cols-1 gap-[clamp(1.5rem,4vw,3rem)] lg:grid-cols-[1fr_280px]"
+      >
+        <!-- Main column -->
         <div>
-          <h2
-            class="font-display mb-6 text-2xl font-extrabold tracking-[-0.02em]"
-          >
-            Experience
-          </h2>
-          <ol
-            class="border-base-200 dark:border-base-800 flex flex-col gap-7 border-l pl-6"
-          >
-            {
-              cv.experience.map((x) => (
-                <li class="relative">
-                  <span
-                    class="bg-primary-600 dark:bg-primary-400 absolute top-1.5 -left-[1.65rem] size-2.5 rounded-full ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
-                    aria-hidden="true"
-                  />
-                  <div class="text-base-500 text-sm font-medium">
-                    {x.period}
-                  </div>
-                  <h3 class="font-display mt-0.5 text-lg font-bold">
-                    {x.title}
-                  </h3>
-                  <div class="text-primary-600 dark:text-primary-400 font-semibold">
-                    {x.company}
-                    {x.location && (
-                      <span class="text-base-500 font-normal">
-                        {" "}
-                        · {x.location}
+          <!-- Experience -->
+          <section class="mb-10">
+            <h2 class={sectionTitle}>Experience</h2>
+            <ol class="flex flex-col">
+              {
+                cv.experience.map((x) => (
+                  <li class="border-base-200 dark:border-base-800 relative border-l-2 pb-6 pl-6 last:pb-0">
+                    <span
+                      class="bg-primary-600 dark:bg-primary-400 absolute top-1 -left-[7px] size-3 rounded-full ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
+                      aria-hidden="true"
+                    />
+                    <div class="flex flex-wrap items-baseline gap-x-2.5">
+                      <h3 class="font-display text-[1.15rem] font-extrabold">
+                        {x.title}
+                      </h3>
+                      <span class="text-primary-600 dark:text-primary-400 font-bold">
+                        {x.company}
                       </span>
+                      <span class="text-base-500 ml-auto text-[0.82rem] tabular-nums">
+                        {x.period}
+                      </span>
+                    </div>
+                    {x.location && (
+                      <div class="text-base-500 mt-0.5 text-[0.82rem]">
+                        {x.location}
+                      </div>
                     )}
-                  </div>
-                  {x.description && (
-                    <p class="text-base-600 dark:text-base-400 mt-1.5 text-[0.95rem] leading-relaxed">
-                      {x.description}
-                    </p>
-                  )}
-                </li>
-              ))
-            }
-          </ol>
-        </div>
+                    {x.description && (
+                      <p class="text-base-600 dark:text-base-400 mt-1.5 text-[0.92rem] leading-relaxed">
+                        {x.description}
+                      </p>
+                    )}
+                  </li>
+                ))
+              }
+            </ol>
+          </section>
 
-        <!-- Sidebar: education + skills -->
-        <div class="flex flex-col gap-10">
-          <div>
-            <h2
-              class="font-display mb-5 text-2xl font-extrabold tracking-[-0.02em]"
-            >
-              Education
-            </h2>
-            <ul class="flex flex-col gap-5">
+          <!-- Education -->
+          <section class="mb-10">
+            <h2 class={sectionTitle}>Education &amp; background</h2>
+            <ul class="flex flex-col gap-4">
               {
                 cv.education.map((e) => (
                   <li>
-                    <div class="text-base-500 text-sm font-medium">
-                      {e.period}
+                    <div class="flex flex-wrap items-baseline gap-x-2.5">
+                      <h3 class="font-display text-[1.05rem] font-extrabold">
+                        {e.institution}
+                      </h3>
+                      <span class="text-base-500 ml-auto text-[0.82rem] tabular-nums">
+                        {e.period}
+                      </span>
                     </div>
-                    <h3 class="font-display mt-0.5 font-bold">
-                      {e.institution}
-                    </h3>
                     {e.detail && (
-                      <div class="text-base-600 dark:text-base-400 text-[0.95rem]">
+                      <p class="text-base-600 dark:text-base-400 mt-0.5 text-[0.9rem]">
                         {e.detail}
-                      </div>
+                      </p>
                     )}
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+
+          <!-- Endorsements -->
+          <section>
+            <h2 class={`${sectionTitle} flex flex-wrap items-baseline gap-2`}>
+              Endorsements
+              <span
+                class="text-rose-light dark:text-rose font-hand text-base tracking-normal normal-case"
+              >
+                from people I've worked with
+              </span>
+            </h2>
+            <div class="flex flex-col gap-4">
+              {
+                endorsements.map((t) => (
+                  <figure class={box}>
+                    <blockquote class="text-base-700 dark:text-base-300 m-0 leading-relaxed text-pretty">
+                      <span class="text-primary-600 dark:text-primary-400 font-display">
+                        “
+                      </span>
+                      {t.quote}
+                    </blockquote>
+                    <figcaption class="mt-3">
+                      <span class="font-display text-base-900 dark:text-base-100 block text-[0.95rem] font-bold">
+                        {t.name}
+                      </span>
+                      <span class="text-base-500 text-[0.82rem]">
+                        {t.role}, {t.company}
+                      </span>
+                    </figcaption>
+                  </figure>
+                ))
+              }
+            </div>
+            <p class="text-base-500 mt-3 text-sm">
+              + 80&plus; more endorsements from colleagues at Spryker, Randstad
+              &amp; the wider community — these sync once recommendations land
+              on Sifa.
+            </p>
+          </section>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="flex flex-col gap-4">
+          <div class={box}>
+            <h3 class={boxTitle}>By the numbers</h3>
+            <dl class="flex flex-col">
+              {
+                stats.map((s) => (
+                  <div class="flex items-baseline justify-between py-1">
+                    <dt class="font-display text-base-900 dark:text-base-100 text-[1.3rem] font-black">
+                      {s.n}
+                    </dt>
+                    <dd class="text-base-500 max-w-[13ch] text-right text-[0.82rem]">
+                      {s.l}
+                    </dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </div>
+
+          <div class={box}>
+            <h3 class={boxTitle}>Focus areas</h3>
+            <ul class="flex flex-wrap gap-2">
+              {
+                cv.skills
+                  .slice(0, 14)
+                  .map((s) => <li class="chip chip--plain">{s}</li>)
+              }
+            </ul>
+          </div>
+
+          <div class={box}>
+            <h3 class={boxTitle}>Selected speaking</h3>
+            <ul class="flex flex-col">
+              {
+                talks.slice(0, 5).map((t) => (
+                  <li class="border-base-200 dark:border-base-800 flex items-baseline gap-2 border-b py-2 last:border-0">
+                    <div class="min-w-0">
+                      <div class="font-display text-base-800 dark:text-base-200 text-[0.92rem] leading-tight font-semibold">
+                        {t.t}
+                      </div>
+                      <div class="text-base-500 mt-0.5 text-[0.8rem]">
+                        {t.venue}
+                      </div>
+                    </div>
+                    <span class="text-base-500 ml-auto text-[0.8rem]">
+                      {t.year}
+                    </span>
                   </li>
                 ))
               }
             </ul>
           </div>
 
-          <div>
-            <h2
-              class="font-display mb-5 text-2xl font-extrabold tracking-[-0.02em]"
-            >
-              Skills
-            </h2>
-            <ul class="flex flex-wrap gap-2">
-              {cv.skills.map((s) => <li class="chip chip--plain">{s}</li>)}
+          <div class={box}>
+            <h3 class={boxTitle}>Find me</h3>
+            <ul class="flex flex-col">
+              {
+                findMe.map((s) => (
+                  <li>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-base-600 hover:text-primary-600 dark:text-base-400 dark:hover:text-primary-400 flex items-center justify-between py-1.5 text-[0.9rem] font-semibold"
+                    >
+                      {s.name}
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ))
+              }
             </ul>
           </div>
-        </div>
+        </aside>
       </div>
-
-      {
-        cv.live && (
-          <p class="text-base-500 no-print mt-12 text-sm">
-            This CV is generated live from my{" "}
-            <a
-              href="https://sifa.id/p/gui.do"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-primary-600 dark:text-primary-400 font-semibold"
-            >
-              Sifa profile
-            </a>{" "}
-            — a verifiable track record on the AT Protocol.
-          </p>
-        )
-      }
     </section>
   </div>
 </BaseLayout>

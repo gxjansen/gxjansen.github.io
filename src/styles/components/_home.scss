@@ -314,6 +314,7 @@
   /* ---- :has() spotlight — hovering one card dims its siblings (focus aid) ---- */
   @media (hover: hover) and (pointer: fine) {
     .home .art-grid:has(.art:hover) .art:not(:hover),
+    .home #article-grid:has(.art:hover) .art:not(:hover),
     .home .projects:has(.proj:hover) .proj:not(:hover),
     .home .training-grid:has(.tcourse:hover) .tcourse:not(:hover),
     .home .talks:has(.talk:hover) .talk:not(:hover) {
