@@ -3,57 +3,433 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
-import HeroSideImage from "@components/Hero/HeroSideImage.astro";
-import FeatureCardsSmall from "@components/Feature/FeatureCardsSmall.astro";
-import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
-import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
-import SiteContent from "@components/SiteContent/SiteContent.astro";
-import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
-import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+import Button from "@components/Button/Button.astro";
+import ActivityFeed from "@components/Activity/ActivityFeed.astro";
 import CompanyLogos from "@components/Companies/CompanyLogos.astro";
+import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
+import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
 import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
-
-// utils
-import { getLocaleFromUrl } from "@js/localeUtils";
-import { getTranslatedData } from "@js/translationUtils";
-import { getAllEvents } from "../utils/eventUtils";
-
-// Load all events with their icons
-const eventIcons = await getAllEvents();
+import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 
 // data
+import { getLocaleFromUrl } from "@js/localeUtils";
+import { getTranslatedData } from "@js/translationUtils";
+import { format } from "date-fns";
+import {
+  heroCopy,
+  stats,
+  pillars,
+  engagements,
+  trainingCards,
+  projects,
+  talks,
+  aboutQuote,
+  activitySeed,
+  type Accent,
+} from "@data/homeContent";
+
 const currLocale = getLocaleFromUrl(Astro.url);
 const siteData = getTranslatedData("siteData", currLocale);
+
+// Recent articles from the post collection (real data, working links).
+const accents: Accent[] = ["gold", "foam", "pine", "iris", "love", "rose"];
+const posts = (await getCollection("post", ({ data }) => !data.draft))
+  .sort(
+    (a, b) =>
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+  )
+  .slice(0, 5)
+  .map((post, i) => ({
+    title: post.data.title,
+    description: post.data.description,
+    href: `/post/${post.id}/`,
+    date: format(new Date(post.data.pubDate), "MMM d, yyyy"),
+    categories: post.data.categories.slice(0, 2),
+    heroImage: post.data.heroImage,
+    accent: accents[i % accents.length],
+  }));
+
+const featured = posts[0];
+const rest = posts.slice(1, 5);
+
+const ac = (accent: Accent) => `--ac:var(--color-${accent})`;
+const ArrowRight = "→";
 ---
 
 <BaseLayout title={siteData.title} description={siteData.description}>
-  <HeroSideImage />
-  <div class="defer-render"><SiteContent /></div>
-  <div class="defer-render"><FeatureCardsSmall /></div>
-  <div class="defer-render"><FeatureGalleryMarquee /></div>
-  <div class="defer-render"><ColleagueTestimonials /></div>
+  <div class="home">
+    <!-- ============ HERO ============ -->
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,4vw,3.5rem)]"
+      aria-label="Introduction"
+    >
+      <div
+        class="grid grid-cols-1 items-center gap-[clamp(1.5rem,4vw,3.5rem)] lg:grid-cols-[1.02fr_0.98fr]"
+      >
+        <div>
+          <span class="kicker">{heroCopy.kicker}</span>
+          <h1 class="hero-h1">
+            I build <span class="u">{heroCopy.emphasis}</span> for tech products.
+          </h1>
+          <p class="lead" set:html={heroCopy.lead} />
+          <div class="cta-row">
+            <Button
+              variant="primary"
+              class="font-display rounded-full"
+              href="/retainer/"
+              arrow="right"
+              umamiEvent="cta-click"
+              umamiEventTarget="hero-work-with-me">Work with me</Button
+            >
+            <Button
+              variant="outline"
+              class="font-display rounded-full"
+              href="/speaker/">Invite me to speak</Button
+            >
+            <Button
+              variant="ghost"
+              class="font-display rounded-full"
+              href="https://sifa.id/p/gui.do">Follow me on Sifa ID</Button
+            >
+          </div>
+          <div class="stats">
+            {
+              stats.map((s) => (
+                <div class="stat">
+                  <div class="n">{s.n}</div>
+                  <div class="l">{s.l}</div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
 
-  <div class="defer-render"><UpcomingEvents events={eventIcons} /></div>
+        <ActivityFeed items={activitySeed} />
+      </div>
+    </section>
 
-  <div class="defer-render"><FeatureFlagsMarquee /></div>
+    <!-- ============ BRANDS STRIP ============ -->
+    <section
+      class="relative z-10 py-[clamp(1.5rem,3vw,2.5rem)]"
+      aria-label="Organisations I've worked with"
+    >
+      <CompanyLogos />
+    </section>
 
-  <div class="defer-render"><CompanyLogos /></div>
-  <div class="defer-render">
-    <NewsletterForm
-      variant="cta"
-      title="Subscribe to Guido's <span class='underline decoration-gold-light dark:decoration-gold decoration-2 underline-offset-4'>Golden</span> Nuggets"
-    />
+    <!-- ============ WRITING ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]" id="writing">
+      <div class="sec-head">
+        <div>
+          <span class="hand-note">freshly published</span>
+          <h2>Writing</h2>
+        </div>
+        <a href="/post/" class="more"
+          >All articles <span aria-hidden="true">{ArrowRight}</span></a
+        >
+      </div>
+      <div class="art-grid">
+        {
+          featured && (
+            <a
+              class="art feat reveal"
+              href={featured.href}
+              style={ac(featured.accent)}
+            >
+              {featured.heroImage && (
+                <div class="art-thumb">
+                  <Image
+                    src={featured.heroImage}
+                    alt=""
+                    width={840}
+                    height={368}
+                  />
+                </div>
+              )}
+              <div class="tags">
+                {featured.categories.map((t) => (
+                  <span class="tg">{t}</span>
+                ))}
+              </div>
+              <h3>{featured.title}</h3>
+              {featured.description && <p>{featured.description}</p>}
+              <div class="m">
+                <span>{featured.date}</span>
+                <span class="read">
+                  Read <span aria-hidden="true">↗</span>
+                </span>
+              </div>
+            </a>
+          )
+        }
+        <div class="art-col">
+          {
+            rest.map((a) => (
+              <a class="art sm reveal" href={a.href} style={ac(a.accent)}>
+                {a.heroImage && (
+                  <div class="art-thumb">
+                    <Image src={a.heroImage} alt="" width={120} height={120} />
+                  </div>
+                )}
+                <div class="sm-body">
+                  <div class="tags">
+                    {a.categories.map((t) => (
+                      <span class="tg">{t}</span>
+                    ))}
+                  </div>
+                  <h3>{a.title}</h3>
+                  <div class="m">
+                    <span>{a.date}</span>
+                    <span class="read" aria-hidden="true">
+                      ↗
+                    </span>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TALKS ============ -->
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]" id="talks">
+      <div class="sec-head">
+        <div>
+          <span class="hand-note">50+ stages, 26 countries</span>
+          <h2>Talks &amp; speaking</h2>
+        </div>
+        <a href="/speaker/" class="more"
+          >All talks <span aria-hidden="true">{ArrowRight}</span></a
+        >
+      </div>
+      <div class="talks">
+        {
+          talks.map((t) => (
+            <a class="talk reveal" href={t.url}>
+              <div class="ic">
+                <Icon
+                  name="tabler/filled/microphone"
+                  class="size-5"
+                  aria-hidden="true"
+                />
+              </div>
+              <div>
+                <div class="t">{t.t}</div>
+                <div class="v">
+                  {t.fmt} · {t.venue} · {t.loc}
+                </div>
+              </div>
+              <span class="yr">{t.year}</span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ============ COUNTRIES ============ -->
+    <section
+      class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]"
+      aria-label="Countries I've presented in"
+    >
+      <FeatureFlagsMarquee />
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]" id="about">
+      <div
+        class="grid grid-cols-1 items-center gap-[clamp(1.5rem,4vw,3rem)] md:grid-cols-[0.85fr_1.15fr]"
+      >
+        <div class="portrait reveal">
+          <img
+            src="/images/redesign/guido-portrait.webp"
+            alt="Guido X Jansen"
+            width="480"
+            height="600"
+            loading="lazy"
+          />
+          <span class="tag">that's me</span>
+        </div>
+        <div>
+          <span class="eyebrow">The psychology edge</span>
+          <h2
+            class="font-display my-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+          >
+            Why this approach works
+          </h2>
+          <p
+            class="text-base-600 dark:text-base-400 max-w-[52ch] text-[1.05rem] leading-[1.6]"
+          >
+            I lean on two things that don't always sit together: a <strong
+              class="text-primary-600 dark:text-primary-400"
+              >cognitive-psychology</strong
+            > read on how developers and customers actually behave, and an experimentation
+            habit — <strong class="text-primary-600 dark:text-primary-400"
+              >500+ A/B tests</strong
+            > at Randstad &amp; JDE — to check what works instead of guessing. I'm
+            still learning, mostly in the open.
+          </p>
+          <div class="pillars">
+            {
+              pillars.slice(0, 4).map((p) => (
+                <div class="pillar">
+                  <div class="ic">
+                    <Icon name={p.icon} class="size-5" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <div class="k">{p.k}</div>
+                    <div class="d">{p.d}</div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <figure class="quote-card">
+            <blockquote>{aboutQuote.q}</blockquote>
+            <figcaption class="by">
+              <span class="n">{aboutQuote.who}</span>
+              <span class="r">{aboutQuote.role}</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY ============ -->
+    <section
+      class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]"
+      aria-label="Photo gallery"
+    >
+      <FeatureGalleryMarquee />
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]" id="projects">
+      <div class="sec-head">
+        <div>
+          <span class="hand-note">things I'm building</span>
+          <h2>Projects</h2>
+        </div>
+      </div>
+      <div class="projects">
+        {
+          projects.map((p) => (
+            <a class="proj reveal" href={p.url} style={ac(p.accent)}>
+              <div class="top">
+                <span class="nm">{p.t}</span>
+                <span class="st">{p.tag}</span>
+              </div>
+              <p class="bd">{p.d}</p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ============ TRAINING ============ -->
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]" id="training">
+      <div class="sec-head">
+        <div>
+          <span class="hand-note">learn by building</span>
+          <h2>Training</h2>
+        </div>
+        <a href="/training/" class="more"
+          >All training <span aria-hidden="true">{ArrowRight}</span></a
+        >
+      </div>
+      <div class="training-grid">
+        {
+          trainingCards.map((c) => (
+            <a class="tcourse reveal" href={c.url} style={ac(c.accent)}>
+              <span class="tlevel">
+                {c.level} · {c.fmt}
+              </span>
+              <h3>{c.t}</h3>
+              <p>{c.sub}</p>
+              <ul class="tcourse-list">
+                {c.points.map((pt) => (
+                  <li>{pt}</li>
+                ))}
+              </ul>
+              <div class="tfoot">
+                <span class="tbook">
+                  Find out more <span aria-hidden="true">↗</span>
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section
+      class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]"
+      aria-label="What people say"
+    >
+      <ColleagueTestimonials />
+    </section>
+
+    <!-- ============ WORK WITH ME ============ -->
+    <section
+      class="relative z-10 py-[clamp(3rem,6vw,5rem)]"
+      id="contact"
+      aria-label="Work with me"
+    >
+      <div class="mb-8 text-center">
+        <span class="hand-note">let's make something</span>
+        <h2
+          class="font-display text-[clamp(2rem,4.5vw,3.2rem)] font-black tracking-[-0.03em]"
+        >
+          Work with me
+        </h2>
+        <p
+          class="text-base-600 dark:text-base-400 mx-auto max-w-[48ch] text-[1.05rem]"
+        >
+          A handful of engagements each year — choose the format that fits what
+          you're trying to achieve.
+        </p>
+      </div>
+      <div class="wwm-cards">
+        {
+          engagements.map((w) => (
+            <div class="wwm-card" style={ac(w.accent)}>
+              <div class="wwm-ic">
+                <Icon name={w.icon} class="size-6" aria-hidden="true" />
+              </div>
+              <h3>{w.t}</h3>
+              <p>{w.d}</p>
+              <a href={w.url} class="wbtn">
+                {w.cta} <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-base-500 mt-6 text-center text-[0.92rem]">
+        or just <a
+          href="mailto:hi@gui.do"
+          class="text-primary-600 dark:text-primary-400 font-semibold hover:underline"
+          >send me a note</a
+        > · <a
+          href="https://sifa.id/p/gui.do"
+          class="text-primary-600 dark:text-primary-400 font-semibold hover:underline"
+          >follow on Sifa ID</a
+        >
+      </p>
+    </section>
+
+    <!-- ============ NEWSLETTER ============ -->
+    <section
+      class="relative z-10 py-[clamp(3rem,6vw,5rem)]"
+      aria-label="Newsletter"
+    >
+      <NewsletterForm
+        variant="cta"
+        title="Subscribe to Guido's <span class='underline decoration-gold-light dark:decoration-gold decoration-2 underline-offset-4'>Golden</span> Nuggets"
+      />
+    </section>
   </div>
 </BaseLayout>
-
-<style>
-  /* Defer rendering of below-the-fold sections to reduce initial paint work.
-     content-visibility: auto skips rendering until the section approaches the
-     viewport. contain-intrinsic-size reserves a placeholder size so the
-     scrollbar doesn't jump; 'auto' lets the browser remember the real size
-     after the first render. See GitHub issue #125. */
-  .defer-render {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 600px;
-  }
-</style>

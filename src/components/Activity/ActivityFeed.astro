@@ -1,0 +1,181 @@
+---
+import { Icon } from "astro-icon/components";
+import { APP_REGISTRY, type ActivityItem } from "@data/homeContent";
+
+interface Props {
+  items: ActivityItem[];
+}
+
+const { items } = Astro.props as Props;
+
+// Map an item type to its filter category.
+const catOf = (t: ActivityItem["type"]) =>
+  t === "post" || t === "repost" ? "posts" : t;
+
+const filters: { cat: string; label: string }[] = [
+  { cat: "all", label: "All" },
+  { cat: "posts", label: "Posts" },
+  { cat: "review", label: "Reviews" },
+  { cat: "code", label: "Code" },
+  { cat: "event", label: "Events" },
+];
+
+const app = (key: string) =>
+  APP_REGISTRY[key] ?? { label: key, color: "var(--color-app-fallback)" };
+
+// Highlight @handles in post text without dangerouslySetInnerHTML on raw input:
+// split into plain + mention fragments.
+const fragments = (text: string) =>
+  text.split(/(@[\w.-]+)/g).map((part) => ({
+    mention: part.startsWith("@"),
+    value: part,
+  }));
+---
+
+<section class="feed-wrap" aria-label="Live activity from the AT Protocol">
+  <p class="feed-note" aria-hidden="true">
+    this is live<span class="arr">↓</span>
+  </p>
+  <div class="feed">
+    <div class="feed-head">
+      <span class="live" aria-hidden="true"><span class="blip"></span></span>
+      <span class="title">Right now</span>
+      <span class="src">
+        via
+        <a
+          href="https://sifa.id/p/gui.do/activity"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1"
+          ><Icon name="sifa" class="size-3.5" aria-hidden="true" />Sifa ID</a
+        >
+      </span>
+    </div>
+
+    <div class="feed-filters" role="tablist" aria-label="Filter activity">
+      {
+        filters.map((f, i) => (
+          <button
+            class:list={["fbtn", i === 0 && "active"]}
+            data-cat={f.cat}
+            role="tab"
+            type="button"
+            aria-selected={i === 0 ? "true" : "false"}
+          >
+            {f.label}
+          </button>
+        ))
+      }
+    </div>
+
+    <ul class="feed-list" role="list">
+      {
+        items.map((item) => {
+          const a = app(item.app);
+          return (
+            <li
+              class="feed-item"
+              data-cat={catOf(item.type)}
+              style={`--app-c:${a.color}`}
+            >
+              {item.type === "review" ? (
+                <div class="fi-review">
+                  <div class="poster" aria-hidden="true">
+                    <span class="poster-i">{item.title?.[0] ?? "★"}</span>
+                  </div>
+                  <div style="min-width:0;flex:1">
+                    <div class="fi-head">
+                      <span class="app-badge">
+                        <span class="app-dot" />
+                        {a.label}
+                      </span>
+                      <span class="fi-time">{item.time}</span>
+                    </div>
+                    <div class="fi-title">{item.title}</div>
+                    <div class="fi-sub">{item.sub}</div>
+                    {typeof item.rating === "number" && (
+                      <div class="fi-rate">
+                        <span aria-hidden="true">★</span>
+                        <span>
+                          <b>{item.rating}</b>/10
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div class="fi-head">
+                    <span class="app-badge">
+                      <span class="app-dot" />
+                      {a.label}
+                    </span>
+                    <span class="fi-kind">{item.kind}</span>
+                    <span class="fi-time">{item.time}</span>
+                  </div>
+                  {item.title && <div class="fi-title">{item.title}</div>}
+                  {item.sub && <div class="fi-sub">{item.sub}</div>}
+                  {item.text && (
+                    <p class="fi-text">
+                      {fragments(item.text).map((fr) =>
+                        fr.mention ? (
+                          <span class="mention">{fr.value}</span>
+                        ) : (
+                          fr.value
+                        ),
+                      )}
+                    </p>
+                  )}
+                  {item.hasImage && (
+                    <div class="fi-img" aria-hidden="true">
+                      🖼
+                    </div>
+                  )}
+                  {(item.likes || item.replies || item.reposts) && (
+                    <div class="fi-meta">
+                      {typeof item.replies === "number" && (
+                        <span>💬 {item.replies}</span>
+                      )}
+                      {typeof item.reposts === "number" && (
+                        <span>🔁 {item.reposts}</span>
+                      )}
+                      {typeof item.likes === "number" && (
+                        <span>♡ {item.likes}</span>
+                      )}
+                    </div>
+                  )}
+                </>
+              )}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  function initActivityFilters() {
+    document.querySelectorAll<HTMLElement>(".feed-wrap").forEach((wrap) => {
+      const buttons = wrap.querySelectorAll<HTMLButtonElement>(".fbtn");
+      const items = wrap.querySelectorAll<HTMLElement>(".feed-item");
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const cat = btn.dataset.cat;
+          buttons.forEach((b) => {
+            const active = b === btn;
+            b.classList.toggle("active", active);
+            b.setAttribute("aria-selected", active ? "true" : "false");
+          });
+          items.forEach((item) => {
+            const show = cat === "all" || item.dataset.cat === cat;
+            item.style.display = show ? "" : "none";
+          });
+        });
+      });
+    });
+  }
+
+  initActivityFilters();
+  document.addEventListener("astro:after-swap", initActivityFilters);
+</script>
