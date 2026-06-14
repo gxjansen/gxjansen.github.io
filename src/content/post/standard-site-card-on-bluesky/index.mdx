@@ -23,9 +23,13 @@ Let's get you set up!
 
 ## What you need
 
-**A `site.standard.publication` record on your AT Protocol PDS, whose `url` field matches the URL of your site.**
+**A `site.standard.publication` record on your AT Protocol PDS, whose `url` field matches the URL of your site.** That covers the case where someone links your publication's home URL: Bluesky matches it exactly and renders the publication card from that one record.
 
-That's it. Bluesky's AppView indexes Standard.site records from the firehose and matches them to post links by URL. See the matching logic in [`packages/bsky/src/util/standard-site.ts`](https://github.com/bluesky-social/atproto/blob/main/packages/bsky/src/util/standard-site.ts). When a post links to a URL matching the `url` field of an indexed publication, the card renders.
+For the rich card on an **individual post** (the one with the title, author and reading time), you also need a `site.standard.document` record for that post. Bluesky builds the match by joining `publication.url` with the document's `path` and comparing it to the shared link, so without a matching document a post link won't render the rich card. Bluesky compares publication URLs exactly, it doesn't treat a post as a subpath of your home page, except on the Leaflet / pckt / Offprint hosts. The card's reading time is also derived from the document's stored text, so include the post body in the record if you want it shown.
+
+Either way, Bluesky's AppView indexes these records from the firehose and matches them to post links by URL. It never loads your website. See the matching logic in [`packages/bsky/src/util/standard-site.ts`](https://github.com/bluesky-social/atproto/blob/main/packages/bsky/src/util/standard-site.ts).
+
+The good news: every publishing path below (Leaflet, pckt, Offprint, WordPress, Sequoia) creates both records for you. You only have to think about this if you're rolling your own.
 
 No need to change DNS settings or place any `/.well-known/` files.
 
@@ -37,7 +41,7 @@ Three paths:
 
 2. **WordPress with the [ATmosphere plugin](https://activitypub.blog/2026/05/20/atmosphere-1-0-0-liftoff/).** Installing it gives your WP site a Standard.site publication record automatically, with `url` set to your blog. The card's button reads **"View publication"** with a generic arrow icon (your domain isn't on the hardcoded allowlist, so no platform branding). Functionally identical otherwise.
 
-3. **Roll your own.** If you have your own AT Protocol account and a static blog, you can publish a `site.standard.publication` record on your PDS pointing to your domain. Steve Simkins' [Sequoia CLI](https://sequoia.pub/) is the most common tool for this; he also wrote a [guide on indexing Standard.site records](https://atproto.com/blog/indexing-standard-site) that doubles as a primer on the data model. The card again reads "View publication."
+3. **Roll your own.** If you have your own AT Protocol account and a static blog, you publish a `site.standard.publication` record pointing to your domain, plus a `site.standard.document` record per post (its `path` joined to the publication `url` is what Bluesky matches against the shared link). Steve Simkins' [Sequoia CLI](https://sequoia.pub/) is the most common tool for this; he also wrote a [guide on indexing Standard.site records](https://atproto.com/blog/indexing-standard-site) that doubles as a primer on the data model. The card again reads "View publication."
 
 In all three cases, the card appears in Bluesky once the AppView has indexed the record from the firehose, usually within seconds.
 
@@ -96,6 +100,8 @@ Here's how:
 | `foreground`       | (Same)                                         |
 
 Replace the RGB values with your brand colours. Only `accent` and `accentForeground` actually affect what Bluesky shows you right now (the card body stays in Bluesky's own theme). The renderer also handles hover (5% darker) and disabled states (5% lighter) automatically from `accent`, so you don't need to specify those.
+
+One catch: Bluesky only applies your custom pair if `accent` and `accentForeground` have a contrast ratio of at least 4.5:1. If they don't, it silently ignores them and falls back to its default button styling. So a nice-looking but low-contrast combination just won't show up, with no error to tell you why.
 
 > _FYI: all four colours are required by the lexicon, so you can't drop `background` and `foreground` even though Bluesky's current card doesn't use them. The PDS will reject the record without them. Other Standard.site renderers (Leaflet, pckt, Offprint) use the full set for the publication page, and Bluesky may extend the card to use them later._
 
@@ -201,7 +207,7 @@ Two things Jason flagged from doing it for real: you can't set a per-post author
 Post a link to your publication URL on Bluesky and watch the embed render. If the card doesn't appear:
 
 - Confirm a `site.standard.publication` record actually exists on your account's PDS. You can browse your records with [pdsls.dev](https://pdsls.dev).
-- Confirm its `url` field exactly matches the URL you're linking to. The AppView canonicalises (lowercase host, strip trailing slash, drop query/fragment) but otherwise needs a match. For the Leaflet/pckt/Offprint hosts, subpaths are also accepted.
+- Confirm its `url` field exactly matches the URL you're linking to. The AppView canonicalises (lowercase host, strip trailing slash, drop query/fragment) but otherwise needs a match. On the Leaflet/pckt/Offprint hosts (and their subdomains) a post link can extend the record URL with extra path segments and still match; everywhere else the publication URL must match exactly, which is why individual posts need their own document record.
 - Give the firehose a minute to propagate.
 
 That's the entire mechanism. The well-known files have their own value, but they're not on the critical path for the Bluesky card. The publication record is.
