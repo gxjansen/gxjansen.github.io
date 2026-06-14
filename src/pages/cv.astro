@@ -1,17 +1,45 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
-import SocialLinks from "@components/SocialLinks/SocialLinks.astro";
-import { getCV } from "../lib/sifaProfile";
-import { stats, talks } from "@data/homeContent";
+import { getCollection } from "astro:content";
+import { getCV, richText } from "../lib/sifaProfile";
+import { stats } from "@data/homeContent";
 import { colleagueTestimonials } from "@config/colleagueTestimonialData";
 
 const cv = await getCV();
 
-// Endorsements: a couple of featured quotes, then a names wall for breadth.
-const FEATURED = ["boris-lokschin", "eric-schreiner"];
+// Selected speaking: pull from the presentations collection and link each to
+// its detail page (rather than the static homepage talks list).
+const speaking = (await getCollection("presentations"))
+  .filter((p) => !p.data.isHidden && p.data.title && p.data.isFeatured)
+  .sort((a, b) => (a.data.title ?? "").localeCompare(b.data.title ?? ""))
+  .slice(0, 6)
+  .map((p) => ({
+    slug: p.id,
+    title: p.data.title as string,
+    workshop: p.data.isWorkshop,
+    duration: p.data.duration,
+  }));
+
+// Endorsements: a few featured quotes, then a names wall for breadth.
+const FEATURED = [
+  "boris-lokschin",
+  "eric-schreiner",
+  "svitlana-1",
+  "michael-tuerk-1",
+];
 const byId = Object.fromEntries(colleagueTestimonials.map((t) => [t.id, t]));
-const featured = FEATURED.map((id) => byId[id]).filter(Boolean);
+// Shorter verbatim excerpts for the featured cards (the full versions still
+// run on /about). One clean sentence each reads better here.
+const FEATURED_EXCERPT: Record<string, string> = {
+  "svitlana-1":
+    "Guido has a rare ability to translate community insights into tangible business intelligence and vice versa bring business closer to the community.",
+  "michael-tuerk-1":
+    "At Spryker, Guido became one of the key figures driving our community's success.",
+};
+const featured = FEATURED.map((id) => byId[id])
+  .filter(Boolean)
+  .map((t) => ({ ...t, quote: FEATURED_EXCERPT[t.id] ?? t.quote }));
 
 // Wall: everyone else, deduped by name (some appear more than once).
 const shownNames = new Set(featured.map((t) => t.name));
@@ -22,6 +50,19 @@ const wall = colleagueTestimonials.filter((t) => {
 });
 const LINKEDIN_RECS =
   "https://www.linkedin.com/in/gxjansen/details/recommendations/";
+
+// Curated focus areas (from the jobsearch CV master), AT Protocol + Agentic
+// Engineering included.
+const FOCUS_AREAS = [
+  "Community strategy",
+  "Developer relations",
+  "Cognitive psychology",
+  "Business experimentation",
+  "AT Protocol",
+  "Agentic engineering",
+  "Open-source ecosystems",
+  "C-suite advisory",
+];
 
 const box =
   "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-5";
@@ -49,30 +90,14 @@ const sectionTitle =
           class="border-base-50 dark:border-base-900 bg-base-200 size-28 shrink-0 rounded-full border-4 object-cover shadow-lg"
         />
         <div class="min-w-0 flex-1">
-          <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <h1
-              class="font-display text-[clamp(2rem,4.5vw,2.9rem)] leading-none font-black tracking-[-0.03em]"
+          <h1
+            class="font-display text-[clamp(2rem,4.5vw,2.9rem)] leading-none font-black tracking-[-0.03em]"
+          >
+            {cv.name}<span
+              class="text-base-500 ml-2 align-middle text-base font-normal tracking-normal"
+              >he/him</span
             >
-              {cv.name}
-            </h1>
-            {
-              cv.live && (
-                <span class="text-primary-600 dark:text-primary-400 inline-flex items-center gap-1 text-sm font-bold">
-                  <Icon name="sifa" class="size-4" aria-hidden="true" />
-                  Verified on atproto
-                </span>
-              )
-            }
-          </div>
-          <p class="text-base-500 mt-1.5 text-[0.95rem]">
-            @<a
-              href="https://sifa.id/p/gui.do"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-primary-600 dark:text-primary-400 font-semibold"
-              >gui.do</a
-            > · he/him
-          </p>
+          </h1>
           {
             cv.headline && (
               <p class="text-base-700 dark:text-base-300 font-display mt-2 max-w-2xl text-lg font-semibold">
@@ -80,26 +105,15 @@ const sectionTitle =
               </p>
             )
           }
-          <div class="mt-3 flex flex-wrap items-center gap-2">
-            <span class="chip">
-              <span
-                class="bg-primary-600 dark:bg-primary-400 size-2 rounded-full"
-                aria-hidden="true"></span>
-              Available for work
-            </span>
-            {
-              cv.location && (
-                <span class="text-base-500 inline-flex items-center gap-1.5 text-sm">
-                  <Icon
-                    name="tabler/map-pin"
-                    class="size-4"
-                    aria-hidden="true"
-                  />
-                  {cv.location} · remote-first
-                </span>
-              )
-            }
-          </div>
+          {
+            cv.location && (
+              <div class="text-base-500 mt-2 inline-flex items-center gap-1.5 text-sm">
+                <Icon name="tabler/map-pin" class="size-4" aria-hidden="true" />
+                {cv.location}
+                {cv.workplace && <span>· {cv.workplace}</span>}
+              </div>
+            )
+          }
           <div class="no-print mt-4 flex flex-wrap gap-2">
             <a
               href="https://sifa.id/p/gui.do"
@@ -107,7 +121,11 @@ const sectionTitle =
               rel="noopener noreferrer"
               class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-bold text-white transition"
             >
-              View on Sifa <span aria-hidden="true">↗</span>
+              View on Sifa ID <Icon
+                name="sifa"
+                class="size-4"
+                aria-hidden="true"
+              />
             </a>
             <button
               type="button"
@@ -127,11 +145,47 @@ const sectionTitle =
 
       {
         cv.about && (
-          <p class="text-base-700 dark:text-base-300 mt-8 mb-10 text-lg leading-relaxed">
-            {cv.about}
-          </p>
+          <div class="text-base-700 dark:text-base-300 mt-8 mb-8 space-y-4 text-lg leading-relaxed">
+            {richText(cv.about).map((b) =>
+              b.type === "p" ? (
+                <p>{b.text}</p>
+              ) : (
+                <ul class="marker:text-primary-600 dark:marker:text-primary-400 ml-5 list-disc space-y-1">
+                  {b.items.map((i) => (
+                    <li>{i}</li>
+                  ))}
+                </ul>
+              ),
+            )}
+          </div>
         )
       }
+
+      <!-- ===== Open to work ===== -->
+      <div
+        class="bg-gold text-base-950 mb-10 flex flex-col gap-3 rounded-2xl p-6 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <div>
+          <div
+            class="font-display flex items-center gap-2 text-lg font-extrabold"
+          >
+            <span
+              class="bg-base-950/80 size-2.5 animate-pulse rounded-full"
+              aria-hidden="true"></span>
+            Open to work
+          </div>
+          <p class="text-base-950/80 mt-1.5 max-w-xl text-sm font-medium">
+            If you're working on a product with a community that needs clearer
+            direction or better outcomes, let's talk about your ambitions.
+          </p>
+        </div>
+        <a
+          href="/contact/"
+          class="bg-base-950 text-gold font-display inline-flex shrink-0 items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-bold transition hover:opacity-90"
+        >
+          Get in touch <span aria-hidden="true">→</span>
+        </a>
+      </div>
 
       <!-- ===== Grid: main + sidebar ===== -->
       <div
@@ -167,9 +221,19 @@ const sectionTitle =
                       </div>
                     )}
                     {x.description && (
-                      <p class="text-base-600 dark:text-base-400 mt-1.5 text-[0.92rem] leading-relaxed">
-                        {x.description}
-                      </p>
+                      <div class="text-base-600 dark:text-base-400 mt-1.5 space-y-1.5 text-[0.92rem] leading-relaxed">
+                        {richText(x.description).map((b) =>
+                          b.type === "p" ? (
+                            <p>{b.text}</p>
+                          ) : (
+                            <ul class="marker:text-primary-600 dark:marker:text-primary-400 ml-4 list-disc space-y-0.5">
+                              {b.items.map((i) => (
+                                <li>{i}</li>
+                              ))}
+                            </ul>
+                          ),
+                        )}
+                      </div>
                     )}
                   </li>
                 ))
@@ -223,6 +287,9 @@ const sectionTitle =
                         “
                       </span>
                       {t.quote}
+                      <span class="text-primary-600 dark:text-primary-400 font-display">
+                        ”
+                      </span>
                     </blockquote>
                     <figcaption class="mt-3 flex flex-wrap items-baseline justify-between gap-x-2">
                       <span>
@@ -288,11 +355,11 @@ const sectionTitle =
             <dl class="flex flex-col">
               {
                 stats.map((s) => (
-                  <div class="flex items-baseline justify-between py-1">
-                    <dt class="font-display text-base-900 dark:text-base-100 text-[1.3rem] font-black">
+                  <div class="flex items-center justify-between gap-3 py-1.5">
+                    <dt class="font-display text-base-900 dark:text-base-100 shrink-0 text-[1.3rem] leading-none font-black">
                       {s.n}
                     </dt>
-                    <dd class="text-base-500 max-w-[13ch] text-right text-[0.82rem]">
+                    <dd class="text-base-500 text-right text-[0.82rem] leading-tight">
                       {s.l}
                     </dd>
                   </div>
@@ -303,12 +370,8 @@ const sectionTitle =
 
           <div class={box}>
             <h3 class={boxTitle}>Focus areas</h3>
-            <ul class="flex flex-wrap gap-2">
-              {
-                cv.skills
-                  .slice(0, 14)
-                  .map((s) => <li class="chip chip--plain">{s}</li>)
-              }
+            <ul class="flex flex-wrap justify-center gap-2">
+              {FOCUS_AREAS.map((s) => <li class="chip chip--plain">{s}</li>)}
             </ul>
           </div>
 
@@ -316,33 +379,67 @@ const sectionTitle =
             <h3 class={boxTitle}>Selected speaking</h3>
             <ul class="flex flex-col">
               {
-                talks.slice(0, 5).map((t) => (
-                  <li class="border-base-200 dark:border-base-800 flex items-baseline gap-2 border-b py-2 last:border-0">
-                    <div class="min-w-0">
-                      <div class="font-display text-base-800 dark:text-base-200 text-[0.92rem] leading-tight font-semibold">
-                        {t.t}
+                speaking.map((t) => (
+                  <li class="border-base-200 dark:border-base-800 border-b last:border-0">
+                    <a
+                      href={`/presentations/${t.slug}/`}
+                      class="group flex items-baseline gap-2 py-2"
+                    >
+                      <div class="min-w-0">
+                        <div class="font-display text-base-800 dark:text-base-200 group-hover:text-primary-600 dark:group-hover:text-primary-400 text-[0.92rem] leading-tight font-semibold transition">
+                          {t.title}
+                        </div>
+                        {t.duration && (
+                          <div class="text-base-500 mt-0.5 text-[0.8rem]">
+                            {t.duration}
+                          </div>
+                        )}
                       </div>
-                      <div class="text-base-500 mt-0.5 text-[0.8rem]">
-                        {t.venue}
-                      </div>
-                    </div>
-                    <span class="text-base-500 ml-auto text-[0.8rem]">
-                      {t.year}
-                    </span>
+                      {t.workshop && (
+                        <span class="text-primary-600 dark:text-primary-400 ml-auto text-[0.72rem] font-bold tracking-wide uppercase">
+                          Workshop
+                        </span>
+                      )}
+                    </a>
                   </li>
                 ))
               }
             </ul>
             <a
-              href="/speaker/"
+              href="/presentations/"
               class="text-primary-600 dark:text-primary-400 mt-3 inline-flex items-center gap-1 text-sm font-semibold"
-              >All speaking <span aria-hidden="true">→</span></a
+              >All presentations <span aria-hidden="true">→</span></a
             >
           </div>
 
           <div class={box}>
-            <h3 class={boxTitle}>Find me</h3>
-            <SocialLinks location="footer" context="footer" />
+            <h3 class={boxTitle}>Get in touch</h3>
+            <a
+              href="/contact/"
+              class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 font-display inline-flex items-center gap-2 text-sm font-bold"
+            >
+              <Icon
+                name="tabler/outline/mail"
+                class="size-4"
+                aria-hidden="true"
+              />
+              Contact me
+            </a>
+            <p class="text-base-500 mt-2 text-[0.82rem]">
+              or on <a
+                href="https://sifa.id/p/gui.do"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary-600 dark:text-primary-400 font-semibold"
+                >Sifa</a
+              > &amp; <a
+                href="https://bsky.app/profile/gui.do"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary-600 dark:text-primary-400 font-semibold"
+                >Bluesky</a
+              >
+            </p>
           </div>
         </aside>
       </div>

@@ -19,17 +19,110 @@ export interface CvEducation {
   detail?: string;
   period: string;
 }
+/** A rendered block from a free-text field: a paragraph or a bullet list. */
+export type RichBlock =
+  | { type: "p"; text: string }
+  | { type: "ul"; items: string[] };
+
+// Markers Sifa text uses for bullets: → ✭ ★ ☆ ✦ • ▪ ● » plus - * –.
+const BULLET = /^[→✭★☆✦•▪●»\-*–]\s+/u;
+
+/**
+ * Parse a free-text field (Sifa about / position descriptions) into paragraphs
+ * and bullet lists. Blank lines separate paragraphs; lines that open with a
+ * bullet marker become list items. Consecutive bullet lines — even when split
+ * by blank lines — group into one list, so a hand-written "→ … → … → …" block
+ * renders as a single list instead of a wall of text.
+ */
+export function richText(s?: string | null): RichBlock[] {
+  if (!s) return [];
+  const blocks: RichBlock[] = [];
+  let para: string[] = [];
+  let list: string[] = [];
+  const flushPara = () => {
+    if (para.length) blocks.push({ type: "p", text: para.join(" ") });
+    para = [];
+  };
+  const flushList = () => {
+    if (list.length) blocks.push({ type: "ul", items: list });
+    list = [];
+  };
+  for (const raw of s.split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line) {
+      flushPara(); // keep the list open across blank lines
+      continue;
+    }
+    if (BULLET.test(line)) {
+      flushPara();
+      list.push(line.replace(BULLET, "").trim());
+      continue;
+    }
+    flushList(); // a normal line ends any list
+    para.push(line);
+  }
+  flushPara();
+  flushList();
+  return blocks;
+}
+
 export interface CvData {
   name: string;
   headline?: string;
   about?: string;
   avatar?: string;
   location?: string;
+  openTo: string[];
+  workplace?: string;
   experience: CvExperience[];
   education: CvEducation[];
   skills: string[];
   live: boolean;
 }
+
+// id.sifa.defs# tokens → readable labels.
+const OPEN_TO_LABELS: Record<string, string> = {
+  collaborations: "Collaborations",
+  boardPositions: "Board & advisory roles",
+  mentoringOthers: "Mentoring",
+  fullTimeRoles: "Full-time roles",
+  partTimeRoles: "Part-time roles",
+  contractRoles: "Contract work",
+  consulting: "Consulting",
+  speaking: "Speaking",
+  advisoryRoles: "Advisory roles",
+};
+const WORKPLACE_LABELS: Record<string, string> = {
+  remoteGlobal: "Remote, anywhere",
+  remoteRegion: "Remote (same region)",
+  remoteLocal: "Remote (same country)",
+  remote: "Remote",
+  hybrid: "Hybrid",
+  onSite: "On-site",
+};
+const defKey = (v: string) => v.split("#").pop() ?? v;
+const openToLabels = (arr: any): string[] =>
+  Array.isArray(arr)
+    ? arr
+        .map((v) => OPEN_TO_LABELS[defKey(String(v))])
+        .filter((x): x is string => Boolean(x))
+    : [];
+// Pick the most permissive workplace preference for a single clean label.
+const workplaceLabel = (arr: any): string | undefined => {
+  if (!Array.isArray(arr)) return undefined;
+  const keys = arr.map((v) => defKey(String(v)));
+  for (const k of [
+    "remoteGlobal",
+    "hybrid",
+    "onSite",
+    "remote",
+    "remoteRegion",
+    "remoteLocal",
+  ]) {
+    if (keys.includes(k)) return WORKPLACE_LABELS[k];
+  }
+  return undefined;
+};
 
 /** Format "2026-03" / "2000" → "Mar 2026" / "2000". */
 function fmtDate(s?: string): string {
@@ -76,6 +169,8 @@ const FALLBACK: CvData = {
   about:
     "Community builder and cognitive psychologist. For 20+ years I've helped grow developer & customer communities — and the teams that run them — using psychology and experimentation to turn participation into product strategy.",
   location: "Netherlands",
+  openTo: ["Collaborations", "Board & advisory roles", "Mentoring"],
+  workplace: "Remote, anywhere",
   experience: [
     {
       title: "Community & Developer Relations leadership",
@@ -164,6 +259,10 @@ export async function getCV(): Promise<CvData> {
       about: decodeEntities(p.about),
       avatar: p.avatar ?? undefined,
       location: locOf(p.location) ?? p.locationCountry ?? FALLBACK.location,
+      openTo: openToLabels(p.openTo).length
+        ? openToLabels(p.openTo)
+        : FALLBACK.openTo,
+      workplace: workplaceLabel(p.preferredWorkplace) ?? FALLBACK.workplace,
       experience: experience.length ? experience : FALLBACK.experience,
       education: education.length ? education : FALLBACK.education,
       skills: skills.length ? skills : FALLBACK.skills,
