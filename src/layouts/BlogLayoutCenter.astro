@@ -70,6 +70,9 @@ const newsletterDescription =
   authorsData={authorsData}
   postFrontmatter={post.data}
 >
+  <!-- Reading progress (pure-CSS scroll-timeline; hidden where unsupported) -->
+  <div class="reading-progress" aria-hidden="true"></div>
+
   <article
     class="mt-24"
     aria-labelledby="article-title"
@@ -226,6 +229,7 @@ const newsletterDescription =
         >
           <slot />
         </section>
+        <p class="article-signature" aria-hidden="true">— Guido</p>
       </div>
 
       <!-- Bluesky Comments -->

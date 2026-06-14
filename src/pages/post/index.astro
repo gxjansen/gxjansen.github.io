@@ -1,53 +1,155 @@
 ---
 // utils
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import { format } from "date-fns";
+import { humanize } from "@js/textUtils";
 
 // components
 import BaseLayout from "@layouts/BaseLayout.astro";
-import PostCardAtlas from "@components/PostCard/PostCardAtlas.astro";
-import Badge from "@components/Badge/Badge.astro";
 
-// Get all posts
-const posts = await getCollection("post", ({ data }) => {
-  return !data.draft;
-});
-
-// Sort by date (newest first)
-const sortedPosts = posts.sort(
+// Get all non-draft posts, newest first.
+const posts = (await getCollection("post", ({ data }) => !data.draft)).sort(
   (a, b) =>
     new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
 );
+
+const accents = ["gold", "foam", "pine", "iris", "love", "rose"] as const;
+
+const articles = posts.map((post, i) => ({
+  title: post.data.title,
+  description: post.data.description,
+  href: `/post/${post.id}/`,
+  date: format(new Date(post.data.pubDate), "MMM d, yyyy"),
+  categories: post.data.categories,
+  heroImage: post.data.heroImage,
+  accent: accents[i % accents.length],
+}));
+
+// Category filter: the most-used categories (>= 2 posts), by frequency then
+// name, capped so the filter bar stays tidy.
+const counts = new Map<string, number>();
+articles.forEach((a) =>
+  a.categories.forEach((c) => counts.set(c, (counts.get(c) ?? 0) + 1)),
+);
+const categories = [...counts.entries()]
+  .filter(([, n]) => n >= 2)
+  .sort((a, b) => b[1] - a[1] || humanize(a[0]).localeCompare(humanize(b[0])))
+  .slice(0, 10)
+  .map(([c]) => c);
 ---
 
 <BaseLayout
-  title="Blog | Guido X Jansen"
-  description="Articles on community building, developer ecosystems, experimentation, and psychology-driven growth strategies."
+  title="Writing | Guido X Jansen"
+  description="Articles on community building, developer ecosystems, experimentation, psychology-driven growth, AI workflows and open tech."
 >
-  <section class="py-24 md:py-28">
-    <div class="site-container">
-      <div>
-        <div class="relative">
-          <div class="mx-auto mb-16 text-center md:max-w-4xl">
-            <Badge>Blog</Badge>
-            <h1 class="h1 mb-4">Latest Articles</h1>
-            <p class="description text-lg md:text-xl">
-              I write about psychology, experimentation, e-commerce, homelabbing
-              and more. Below you can find my latest articles.
-            </p>
-          </div>
-
-          <!-- Blog posts grid -->
-          <div class="mx-auto max-w-6xl">
-            <div class="cards-grid">
-              {
-                sortedPosts.map((post) => (
-                  <PostCardAtlas post={post} showDescription={true} />
-                ))
-              }
-            </div>
-          </div>
-        </div>
+  <div class="home">
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div class="mb-10 max-w-3xl">
+        <span class="eyebrow mb-3">The writing</span>
+        <h1
+          class="font-display mt-2 text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Articles &amp; field notes
+        </h1>
+        <p
+          class="text-base-600 dark:text-base-400 mt-4 text-lg leading-relaxed"
+        >
+          Psychology, experimentation, community building, AI workflows, open
+          tech and homelabbing — what I'm learning, mostly in the open.
+        </p>
       </div>
-    </div>
-  </section>
+
+      <!-- Category filter -->
+      <div
+        class="mb-8 flex flex-wrap gap-2"
+        role="group"
+        aria-label="Filter articles by category"
+      >
+        <button class="fbtn active" data-cat="all" type="button">
+          All <span class="opacity-60">({articles.length})</span>
+        </button>
+        {
+          categories.map((cat) => (
+            <button class="fbtn" data-cat={cat} type="button">
+              {humanize(cat)}
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Article grid -->
+      <div
+        class="grid grid-cols-1 gap-[1.1rem] sm:grid-cols-2 lg:grid-cols-3"
+        id="article-grid"
+      >
+        {
+          articles.map((a) => (
+            <a
+              class="art reveal"
+              href={a.href}
+              style={`--ac:var(--color-${a.accent})`}
+              data-cats={a.categories.join(" ")}
+            >
+              {a.heroImage && (
+                <div class="art-thumb">
+                  <Image src={a.heroImage} alt="" width={520} height={280} />
+                </div>
+              )}
+              <div class="tags">
+                {a.categories.slice(0, 2).map((t) => (
+                  <span class="tg">{humanize(t)}</span>
+                ))}
+              </div>
+              <h3>{a.title}</h3>
+              {a.description && <p>{a.description}</p>}
+              <div class="m">
+                <span>{a.date}</span>
+                <span class="read">
+                  Read <span aria-hidden="true">↗</span>
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+      <p
+        id="no-results"
+        class="text-base-500 mt-8 hidden text-center"
+        role="status"
+      >
+        No articles in this category yet.
+      </p>
+    </section>
+  </div>
 </BaseLayout>
+
+<script>
+  function initArticleFilter() {
+    const buttons =
+      document.querySelectorAll<HTMLButtonElement>(".fbtn[data-cat]");
+    const cards = document.querySelectorAll<HTMLElement>("#article-grid .art");
+    const empty = document.getElementById("no-results");
+    if (!buttons.length || !cards.length) return;
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const cat = btn.dataset.cat;
+        buttons.forEach((b) => b.classList.toggle("active", b === btn));
+        let shown = 0;
+        cards.forEach((card) => {
+          const cats = (card.dataset.cats || "").split(" ");
+          const show = cat === "all" || cats.includes(cat || "");
+          card.style.display = show ? "" : "none";
+          if (show) shown++;
+        });
+        if (empty) empty.classList.toggle("hidden", shown > 0);
+      });
+    });
+  }
+
+  initArticleFilter();
+  document.addEventListener("astro:after-swap", initArticleFilter);
+</script>

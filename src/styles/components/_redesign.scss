@@ -78,6 +78,38 @@
       color-mix(in oklab, var(--app-c, var(--color-app-fallback)) 18%, transparent);
   }
 
+  /* ---- reading-progress bar (CSS scroll-timeline; graceful + reduced-motion safe) ---- */
+  .reading-progress {
+    @apply bg-primary-600 dark:bg-primary-400 fixed inset-x-0 top-0 z-50 h-[3px] origin-left;
+    transform: scaleX(0);
+    animation: reading-progress-grow linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes reading-progress-grow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  /* Hide where scroll-driven animations aren't supported, or motion is reduced. */
+  @supports not (animation-timeline: scroll()) {
+    .reading-progress {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reading-progress {
+      display: none;
+    }
+  }
+
+  /* ---- article signature (handwritten sign-off) ---- */
+  .article-signature {
+    @apply text-rose-light dark:text-rose mt-10 font-hand text-[2rem] leading-none;
+  }
+
   /* ---- reveal-on-scroll ----
      Always degrades to visible: the hidden start state only applies when JS is
      active (html.js, set before paint) and an IntersectionObserver adds `.in`
