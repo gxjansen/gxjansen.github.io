@@ -12,13 +12,15 @@ const { items } = Astro.props as Props;
 const catOf = (t: ActivityItem["type"]) =>
   t === "post" || t === "repost" ? "posts" : t;
 
-const filters: { cat: string; label: string }[] = [
+// Only show filters for categories that actually have items.
+const catsPresent = new Set(items.map((i) => catOf(i.type)));
+const filters = [
   { cat: "all", label: "All" },
   { cat: "posts", label: "Posts" },
   { cat: "review", label: "Reviews" },
   { cat: "code", label: "Code" },
   { cat: "event", label: "Events" },
-];
+].filter((f) => f.cat === "all" || catsPresent.has(f.cat));
 
 const app = (key: string) =>
   APP_REGISTRY[key] ?? { label: key, color: "var(--color-app-fallback)" };
@@ -95,7 +97,11 @@ const fragments = (text: string) =>
                     <div class="fi-sub">{item.sub}</div>
                     {typeof item.rating === "number" && (
                       <div class="fi-rate">
-                        <span aria-hidden="true">★</span>
+                        <Icon
+                          name="tabler/star"
+                          class="text-gold size-4"
+                          aria-hidden="true"
+                        />
                         <span>
                           <b>{item.rating}</b>/10
                         </span>
@@ -128,19 +134,40 @@ const fragments = (text: string) =>
                   )}
                   {item.hasImage && (
                     <div class="fi-img" aria-hidden="true">
-                      🖼
+                      <Icon name="tabler/outline/photo" class="size-6" />
                     </div>
                   )}
                   {(item.likes || item.replies || item.reposts) && (
                     <div class="fi-meta">
                       {typeof item.replies === "number" && (
-                        <span>💬 {item.replies}</span>
+                        <span aria-label={`${item.replies} replies`}>
+                          <Icon
+                            name="tabler/outline/message-2"
+                            class="size-3.5"
+                            aria-hidden="true"
+                          />
+                          {item.replies}
+                        </span>
                       )}
                       {typeof item.reposts === "number" && (
-                        <span>🔁 {item.reposts}</span>
+                        <span aria-label={`${item.reposts} reposts`}>
+                          <Icon
+                            name="tabler/outline/repeat"
+                            class="size-3.5"
+                            aria-hidden="true"
+                          />
+                          {item.reposts}
+                        </span>
                       )}
                       {typeof item.likes === "number" && (
-                        <span>♡ {item.likes}</span>
+                        <span aria-label={`${item.likes} likes`}>
+                          <Icon
+                            name="tabler/outline/heart"
+                            class="size-3.5"
+                            aria-hidden="true"
+                          />
+                          {item.likes}
+                        </span>
                       )}
                     </div>
                   )}
