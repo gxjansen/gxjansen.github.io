@@ -33,7 +33,8 @@ a:not(
   [class*="hover:text-primary"],
   [class*="bg-primary-100"],
   [class*="rounded-full"],
-  .no-random-underline
+  .no-random-underline,
+  .home a
 ) {
   &:nth-of-type(6n + 1) {
     text-decoration-color: var(--link-love-light);
@@ -84,7 +85,8 @@ a:not(
   [class*="hover:text-primary"],
   [class*="bg-primary-100"],
   [class*="rounded-full"],
-  .no-random-underline
+  .no-random-underline,
+  .home a
 ) {
   &:nth-of-type(6n + 1) {
     text-decoration-color: var(--link-love-dark);

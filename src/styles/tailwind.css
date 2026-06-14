@@ -37,11 +37,21 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
 
-  /* ---------- Font families ---------- */
+  /* ---------- Font families ----------
+     Display / headings  → Schibsted Grotesk (700–900).
+     Body / reading      → Atkinson Hyperlegible Next (WCAG-AAA legibility).
+     Handwritten accents → LiebeHeide Fineliner (licensed, self-hosted).
+     All self-hosted under /public/fonts (see scripts/fetch-redesign-fonts.mjs);
+     @font-face rules live in public/fonts/redesign-fonts.css, linked from BaseHead. */
   --font-sans:
-    Poppins, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --font-serif: Poppins, Georgia, Cambria, "Times New Roman", Times, serif;
+    "Atkinson Hyperlegible Next", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display:
+    "Schibsted Grotesk", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-hand: "LiebeHeide", "Caveat", "Segoe Script", cursive;
+  --font-serif:
+    "Schibsted Grotesk", Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
@@ -118,8 +128,61 @@
   --color-rp-muted: #6e6a86;
   --color-rp-muted-light: #9893a5;
 
+  /* ---------- atproto app-source accents ----------
+     Per-app colours for the activity feed badges (Bluesky, Popfeed, Tangled, …).
+     Light values here; the few that shift for dark mode are overridden in the
+     `.dark` block below. Generate `text-app-*` / `bg-app-*` utilities. The feed
+     sets `--app-c` per item (data-driven hook) and the .app-badge reads it. */
+  --color-app-bluesky: oklch(0.55 0.17 230);
+  --color-app-popfeed: oklch(0.55 0.22 280);
+  --color-app-tangled: oklch(0.55 0.15 160);
+  --color-app-smokesignal: oklch(0.58 0.18 50);
+  --color-app-standard: oklch(0.5 0.08 270);
+  --color-app-whitewind: oklch(0.45 0.02 260);
+  --color-app-frontpage: oklch(0.5 0.22 290);
+  --color-app-bookhive: oklch(0.58 0.14 60);
+  --color-app-crate: oklch(0.52 0.12 138);
+  --color-app-github: #238636;
+  --color-app-linkat: oklch(0.55 0.15 160);
+  --color-app-margin: oklch(0.5 0.14 265);
+  --color-app-flashes: oklch(0.55 0.2 350);
+  --color-app-grain: oklch(0.55 0.14 85);
+  --color-app-leaflet: oklch(0.55 0.16 145);
+  --color-app-plyr: oklch(0.58 0.18 155);
+  --color-app-beaconbits: oklch(0.6 0.18 27);
+  --color-app-spark: oklch(0.6 0.27 345);
+  --color-app-opensocial: oklch(0.55 0.15 235);
+  --color-app-atmorsvp: oklch(0.58 0.12 185);
+  --color-app-fallback: oklch(0.5 0.01 260);
+
   /* ---------- Animations ---------- */
   --animate-marquee: marquee 100s linear infinite;
+}
+
+/* Dark-mode app-source accents (brighter for contrast on the Main base).
+   Overrides the @theme custom properties; `text-app-*` utilities cascade. */
+:root.dark {
+  --color-app-bluesky: oklch(0.6 0.17 230);
+  --color-app-popfeed: oklch(0.65 0.22 280);
+  --color-app-tangled: oklch(0.6 0.15 160);
+  --color-app-smokesignal: oklch(0.63 0.18 50);
+  --color-app-standard: oklch(0.55 0.08 270);
+  --color-app-whitewind: oklch(0.5 0.02 260);
+  --color-app-frontpage: oklch(0.55 0.22 290);
+  --color-app-bookhive: oklch(0.62 0.14 60);
+  --color-app-crate: oklch(0.62 0.12 138);
+  --color-app-github: #2ea043;
+  --color-app-linkat: oklch(0.6 0.15 160);
+  --color-app-margin: oklch(0.62 0.14 265);
+  --color-app-flashes: oklch(0.6 0.2 350);
+  --color-app-grain: oklch(0.6 0.14 85);
+  --color-app-leaflet: oklch(0.6 0.16 145);
+  --color-app-plyr: oklch(0.65 0.18 155);
+  --color-app-beaconbits: oklch(0.65 0.18 27);
+  --color-app-spark: oklch(0.7 0.25 345);
+  --color-app-opensocial: oklch(0.66 0.15 235);
+  --color-app-atmorsvp: oklch(0.68 0.12 185);
+  --color-app-fallback: oklch(0.55 0.01 260);
 }
 
 /* Keyframes for the @theme --animate-marquee custom animation. */

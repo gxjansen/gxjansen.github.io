@@ -18,7 +18,7 @@ const navConfig = [
         icon: "tabler/outline/presentation",
       },
       {
-        text: "Indie Projects",
+        text: "Projects",
         link: "/projects",
         icon: "tabler/outline/code",
       },
@@ -34,6 +34,10 @@ const navConfig = [
     link: "/events",
   },
   {
+    text: "Training",
+    link: "/training",
+  },
+  {
     text: "About",
     dropdown: [
       {
@@ -42,7 +46,7 @@ const navConfig = [
         icon: "tabler/outline/user",
       },
       {
-        text: "Retainer",
+        text: "Work with me",
         link: "/retainer",
         icon: "tabler/outline/briefcase",
       },
@@ -52,7 +56,7 @@ const navConfig = [
         icon: "tabler/outline/microphone",
       },
       {
-        text: "Press & Media Features",
+        text: "Press & Media",
         link: "/press",
         icon: "tabler/outline/news",
       },
@@ -64,55 +68,8 @@ const navConfig = [
     ],
   },
   {
-    text: "Pages",
-    hidden: true,
-    megaMenuColumns: [
-      {
-        title: "Landing Pages",
-        items: [
-          {
-            text: "Landing 1",
-            link: "/",
-            icon: "tabler/star",
-          },
-          {
-            text: "Landing 2",
-            link: "/examples/landing2",
-            icon: "tabler/diamonds",
-          },
-          {
-            text: "Landing 3",
-            link: "/examples/landing3",
-            icon: "tabler/circle",
-          },
-        ],
-      },
-      {
-        title: "Blog",
-        items: [
-          {
-            text: "Blog Index 1",
-            link: "/post",
-            icon: "tabler/pencil",
-          },
-          {
-            text: "Blog Index 2",
-            link: "/examples/blogIndex2",
-            icon: "tabler/pencil",
-          },
-          {
-            text: "Categories",
-            link: "/categories",
-            icon: "tabler/category",
-          },
-          {
-            text: "Blog Post",
-            link: "/post/tsconfig-paths-setup",
-            icon: "tabler/edit-circle",
-          },
-        ],
-      },
-    ],
+    text: "CV",
+    link: "/cv",
   },
 ];
 

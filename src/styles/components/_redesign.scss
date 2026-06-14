@@ -1,0 +1,105 @@
+/* ============================================================================
+   Redesign UI primitives (2026)
+   Small reusable pieces shared across pages, ported from the prototype
+   (foundation/ui.css) but rebuilt Tailwind-first: @apply + existing Rosé Pine
+   tokens and `dark:` variants. Raw CSS is reserved only for what utilities
+   can't express (color-mix app-source accents, keyframe animations).
+   The gui.do wordmark is built with utilities directly in SiteLogo.astro.
+   Page-specific components (feed, cards, pillars, …) are added as pages port.
+   ============================================================================ */
+
+@layer components {
+  /* ---- primary nav: top-level items use the display face ----
+     Global (not scoped) so it reaches the NavLink / NavDropdown child
+     components; dropdown submenu links keep the body face. */
+  nav[aria-label="Main navigation"] > ul > li > a,
+  nav[aria-label="Main navigation"] > ul > li > button {
+    @apply font-display font-semibold;
+  }
+
+  /* ---- eyebrow / kicker label ---- */
+  .eyebrow {
+    @apply text-primary-600 dark:text-primary-400 inline-flex items-center gap-2 font-display text-[0.8rem] font-bold uppercase tracking-[0.08em];
+  }
+
+  /* ---- pills / chips ---- */
+  .chip {
+    @apply text-primary-600 dark:text-primary-400 bg-primary-600/10 dark:bg-primary-400/15 border-primary-600/20 dark:border-primary-400/25 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.8rem] font-bold tracking-[0.01em];
+  }
+  .chip--plain {
+    @apply text-base-600 dark:text-base-400 bg-base-200 dark:bg-base-800 border-base-300/60 dark:border-base-700;
+  }
+
+  /* ---- live dot (handwritten "live" label + pulsing blip) ---- */
+  .live {
+    @apply text-love-light dark:text-love inline-flex items-center gap-1.5 font-hand text-[1.15rem] font-bold;
+  }
+  .live .blip {
+    @apply bg-love-light dark:bg-love size-[9px] rounded-full;
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-love) 60%, transparent);
+    animation: blip 2s cubic-bezier(0.2, 0.7, 0.2, 1) infinite;
+  }
+  @keyframes blip {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-love) 55%, transparent);
+    }
+    70% {
+      box-shadow: 0 0 0 10px transparent;
+    }
+    100% {
+      box-shadow: 0 0 0 0 transparent;
+    }
+  }
+
+  /* ---- atproto app-source badge ----
+     `--app-c` is set per feed item (data-driven hook); falls back to neutral.
+     color-mix tints/borders can't be expressed as utilities, so kept raw. */
+  .app-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full border py-1 pr-2.5 pl-1.5 text-[0.74rem] font-bold tracking-[0.02em];
+    color: var(--app-c, var(--color-app-fallback));
+    background: color-mix(
+      in oklab,
+      var(--app-c, var(--color-app-fallback)) 13%,
+      transparent
+    );
+    border-color: color-mix(
+      in oklab,
+      var(--app-c, var(--color-app-fallback)) 26%,
+      transparent
+    );
+  }
+  .app-badge svg {
+    @apply size-3.5;
+  }
+  .app-dot {
+    @apply size-[9px] shrink-0 rounded-full;
+    background: var(--app-c, var(--color-app-fallback));
+    box-shadow: 0 0 0 3px
+      color-mix(in oklab, var(--app-c, var(--color-app-fallback)) 18%, transparent);
+  }
+
+  /* ---- reveal-on-scroll ----
+     Always degrades to visible: the hidden start state only applies when JS is
+     active (html.js, set before paint) and an IntersectionObserver adds `.in`
+     as elements enter the viewport. No JS → content is simply visible. */
+  .reveal {
+    transition:
+      opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  :root.js .reveal:not(.in) {
+    @apply translate-y-[18px] opacity-0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .live .blip {
+      animation: none;
+    }
+    :root.js .reveal:not(.in) {
+      @apply translate-y-0 opacity-100;
+    }
+    .reveal {
+      transition: none;
+    }
+  }
+}

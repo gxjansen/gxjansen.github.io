@@ -63,40 +63,50 @@ describe("BaseHead", () => {
   });
 
   it("handles font loading optimization", () => {
+    // Fonts are self-hosted (no Google/Fontshare CDN at runtime): a stylesheet
+    // with the @font-face rules plus preloads of the two critical latin faces
+    // (Atkinson Hyperlegible Next body + Schibsted Grotesk display).
     const markup = `
       <head>
-        <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-        <link 
-          href="https://api.fontshare.com/v2/css?f[]=poppins@400,500,600,700&display=swap"
-          rel="stylesheet"
-          media="print"
-          onload="this.media='all'"
+        <link rel="stylesheet" href="/fonts/redesign-fonts.css" />
+        <link
+          rel="preload"
+          href="/fonts/atkinson-hyperlegible-next/atkinson-hyperlegible-next-03.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
         />
-        <noscript>
-          <link
-            href="https://api.fontshare.com/v2/css?f[]=poppins@400,500,600,700&display=swap"
-            rel="stylesheet"
-          />
-        </noscript>
+        <link
+          rel="preload"
+          href="/fonts/schibsted-grotesk/schibsted-grotesk-03.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        />
       </head>
     `.trim();
 
     const parsedHtml = parseHTML(markup);
 
-    // Check preconnect
-    const preconnect = parsedHtml.querySelector('link[rel="preconnect"]');
-    expect(preconnect?.getAttribute("href")).toBe("https://api.fontshare.com");
-    expect(preconnect?.hasAttribute("crossorigin")).toBe(true);
+    // Self-hosted stylesheet (no third-party font CDN)
+    const fontCss = parsedHtml.querySelector('link[rel="stylesheet"]');
+    expect(fontCss?.getAttribute("href")).toBe("/fonts/redesign-fonts.css");
+    expect(parsedHtml.querySelector('link[href*="fontshare"]')).toBeFalsy();
+    expect(parsedHtml.querySelector('link[href*="googleapis"]')).toBeFalsy();
 
-    // Check main font loading
-    const fontLink = parsedHtml.querySelector('link[media="print"]');
-    expect(fontLink?.getAttribute("href")).toContain("poppins@400,500,600,700");
-    expect(fontLink?.getAttribute("onload")).toBe("this.media='all'");
-
-    // Check noscript fallback
-    const noscriptContent =
-      parsedHtml.querySelector("noscript")?.innerHTML || "";
-    expect(noscriptContent).toContain("poppins@400,500,600,700");
+    // Preloaded critical faces
+    const preloads = parsedHtml.querySelectorAll(
+      'link[rel="preload"][as="font"]',
+    );
+    expect(preloads.length).toBe(2);
+    expect(preloads[0].getAttribute("href")).toContain(
+      "atkinson-hyperlegible-next",
+    );
+    expect(preloads[1].getAttribute("href")).toContain("schibsted-grotesk");
+    preloads.forEach((link) => {
+      expect(link.getAttribute("type")).toBe("font/woff2");
+      expect(link.hasAttribute("crossorigin")).toBe(true);
+    });
   });
 
   it("includes favicon setup", () => {

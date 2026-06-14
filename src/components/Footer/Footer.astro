@@ -2,7 +2,6 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 // components
-import FooterLink from "@components/Footer/FooterLink.astro";
 import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
 import SocialLinks from "@components/SocialLinks/SocialLinks.astro";
 
@@ -15,91 +14,99 @@ const currLocale = getLocaleFromUrl(Astro.url);
 const siteData = getTranslatedData("siteData", currLocale);
 
 const today = new Date();
+
+const rel = (path: string) => getRelativeLocaleUrl(currLocale, path);
+
+// Footer link columns. Every kept page has a home here.
+const columns: {
+  title: string;
+  links: { text: string; href: string; newTab?: boolean }[];
+}[] = [
+  {
+    title: "Creations",
+    links: [
+      { text: "Articles", href: rel("/post") },
+      { text: "Podcasts", href: rel("/podcasts") },
+      { text: "Presentations", href: rel("/presentations") },
+      { text: "Projects", href: rel("/projects") },
+      { text: "Communities", href: rel("/communities") },
+    ],
+  },
+  {
+    title: "Work with me",
+    links: [
+      { text: "Retainer", href: rel("/retainer") },
+      { text: "Speak at your event", href: rel("/speaker") },
+      { text: "Training", href: rel("/training") },
+      { text: "CV", href: rel("/cv") },
+      { text: "Contact", href: rel("/contact") },
+    ],
+  },
+  {
+    title: "More",
+    links: [
+      { text: "About", href: rel("/about") },
+      { text: "Events", href: rel("/events") },
+      { text: "Ask me anything", href: rel("/ama") },
+      { text: "Press & Media", href: rel("/press") },
+      { text: "Newsletter", href: rel("/newsletter") },
+      { text: "Privacy", href: rel("/privacy") },
+    ],
+  },
+];
 ---
 
 <footer
-  class="text-base-600 dark:text-base-400 relative z-10 overflow-x-clip pt-20 pb-16 font-medium"
+  class="border-base-200/60 bg-base-50/60 dark:border-base-800/60 dark:bg-base-950/40 relative z-10 mt-24 overflow-x-clip border-t pt-16 pb-12 backdrop-blur-sm"
   role="contentinfo"
   aria-label="Site footer"
 >
-  <div class="site-container px-2 sm:px-4">
-    <div class="mt-6 flex flex-wrap items-center justify-between gap-6">
-      <div class="flex items-center">
+  <div class="site-container px-4">
+    <div
+      class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]"
+    >
+      <!-- Brand column -->
+      <div class="flex flex-col gap-4">
         <SiteLogo />
+        <p
+          class="text-base-600 dark:text-base-400 max-w-xs text-sm leading-relaxed"
+        >
+          I build community functions for tech products — at the intersection of
+          psychology, experimentation, and open technology.
+        </p>
+        <SocialLinks location="footer" context="footer" class="mt-1" />
       </div>
 
-      <nav class="flex flex-wrap gap-x-4" aria-label="Footer navigation">
-        <ul class="flex flex-wrap gap-x-4" role="list">
-          <li role="listitem">
-            <FooterLink
-              href={getRelativeLocaleUrl(currLocale, "/about")}
-              aria-label="Learn more about Guido"
-            >
-              About Guido
-            </FooterLink>
-          </li>
-          <li role="listitem">
-            <FooterLink
-              href={getRelativeLocaleUrl(currLocale, "/post")}
-              aria-label="Read Guido's articles"
-            >
-              Articles
-            </FooterLink>
-          </li>
-          <li role="listitem">
-            <FooterLink
-              href={getRelativeLocaleUrl(currLocale, "/retainer")}
-              aria-label="Work with Guido on a community advisory engagement"
-            >
-              Retainer
-            </FooterLink>
-          </li>
-          <li role="listitem">
-            <FooterLink
-              href={getRelativeLocaleUrl(currLocale, "/contact")}
-              aria-label="Contact Guido"
-            >
-              Contact
-            </FooterLink>
-          </li>
-          <li role="listitem">
-            <FooterLink
-              href={getRelativeLocaleUrl(currLocale, "/newsletter")}
-              aria-label="Subscribe to newsletter"
-            >
-              Newsletter
-            </FooterLink>
-          </li>
-          <li role="listitem">
-            <FooterLink
-              href={getRelativeLocaleUrl(currLocale, "/privacy")}
-              aria-label="Privacy policy"
-            >
-              Privacy
-            </FooterLink>
-          </li>
-        </ul>
-      </nav>
+      <!-- Link columns -->
+      {
+        columns.map((col) => (
+          <nav class="flex flex-col gap-1" aria-label={`Footer: ${col.title}`}>
+            <h2 class="text-base-500 dark:text-base-500 mb-1 text-xs font-bold tracking-[0.08em] uppercase">
+              {col.title}
+            </h2>
+            {col.links.map((link) => (
+              <a
+                href={link.href}
+                target={link.newTab ? "_blank" : undefined}
+                rel={link.newTab ? "noopener noreferrer" : undefined}
+                class="text-base-600 hover:text-primary-600 dark:text-base-400 dark:hover:text-primary-400 focus:ring-primary-500 -mx-1 rounded-sm px-1 py-1.5 text-[0.95rem] transition focus:ring-2 focus:outline-hidden"
+              >
+                {link.text}
+                {link.newTab && <span class="sr-only">(opens in new tab)</span>}
+              </a>
+            ))}
+          </nav>
+        ))
+      }
     </div>
-  </div>
 
-  <div
-    class="border-t-base-200/50 text-base-600 dark:text-base-500 mt-2 border-t text-sm"
-  >
-    <div class="site-container px-2 sm:px-4">
-      <div class="mt-2">
-        <div class="flex flex-col justify-between gap-6 sm:flex-row">
-          <p class="order-2 my-auto pt-8 sm:order-1">
-            &copy; {today.getFullYear()}
-            {" "}{siteData.name}. All rights reserved.
-          </p>
-
-          <!-- Social Links -->
-          <div class="order-1 w-full overflow-x-auto sm:order-2 sm:w-auto">
-            <SocialLinks />
-          </div>
-        </div>
-      </div>
+    <!-- Bottom bar -->
+    <div
+      class="border-base-200/60 dark:border-base-800/60 text-base-500 dark:text-base-500 mt-12 flex flex-col gap-2 border-t pt-6 text-sm sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>
+        &copy; {today.getFullYear()}{" "}{siteData.name}. All rights reserved.
+      </p>
     </div>
   </div>
 </footer>

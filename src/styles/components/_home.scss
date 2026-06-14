@@ -1,0 +1,443 @@
+/* ============================================================================
+   Homepage components (2026 redesign)
+   Ported from the prototype (components.css / layout.css), rebuilt Tailwind-first
+   and namespaced under `.home` to avoid any collision with existing classes.
+   Standard styling uses @apply + Rosé Pine tokens; raw CSS is reserved for the
+   per-card `--ac` accent hook and color-mix tints that utilities can't express.
+   ============================================================================ */
+
+/* Card-style links must never pick up the global content-link underline.
+   Kept UNLAYERED (outside @layer) so it overrides the unlayered global
+   `a:not(...)` underline rule in links.scss — layered rules always lose to
+   unlayered ones regardless of specificity. */
+.home .art,
+.home .talk,
+.home .proj,
+.home .tcourse,
+.home .more,
+.home .feed-head .src a,
+.home .wwm-card .wbtn {
+  text-decoration: none;
+}
+
+@layer components {
+  /* ---- hero ---- */
+  .home .kicker {
+    @apply text-primary-600 dark:text-primary-400 mb-3 inline-block font-hand text-[1.9rem] leading-none;
+    transform: rotate(-3deg);
+    transform-origin: left center;
+  }
+  .home .hero-h1 {
+    @apply font-display text-[clamp(2.6rem,6.2vw,4.6rem)] leading-[0.98] font-black tracking-[-0.035em];
+    @apply my-[0.1em] mb-[0.35em];
+  }
+  .home .hero-h1 .u {
+    @apply text-primary-600 dark:text-primary-400 relative whitespace-nowrap;
+  }
+  .home .hero-h1 .u::after {
+    content: "";
+    @apply absolute inset-x-0 -z-10;
+    bottom: 0.04em;
+    height: 0.42em;
+    background: color-mix(in oklab, var(--color-primary-600) 18%, transparent);
+    transform: rotate(-1deg);
+  }
+  .home .lead {
+    @apply text-base-600 dark:text-base-400 mb-6 max-w-[46ch] text-[clamp(1.05rem,1.6vw,1.25rem)] leading-[1.55];
+  }
+  .home .lead strong {
+    @apply text-base-900 dark:text-base-100 font-bold;
+  }
+  .home .cta-row {
+    @apply mb-7 flex flex-wrap gap-2.5;
+  }
+
+  /* ---- stats ---- */
+  .home .stats {
+    @apply flex flex-wrap gap-x-[clamp(1rem,3vw,2.25rem)] gap-y-4;
+  }
+  .home .stat .n {
+    @apply text-base-900 dark:text-base-100 font-hand text-[2.4rem] leading-none font-bold;
+  }
+  .home .stat .l {
+    @apply text-base-500 mt-1 max-w-[14ch] text-[0.82rem];
+  }
+
+  /* ---- section heads ---- */
+  .home .sec-head {
+    @apply mb-8 flex flex-wrap items-end justify-between gap-4;
+  }
+  .home .sec-head h2 {
+    @apply font-display text-[clamp(1.9rem,3.6vw,2.9rem)] font-black tracking-[-0.03em];
+  }
+  .home .hand-note {
+    @apply text-rose-light dark:text-rose mb-3 inline-block font-hand text-[1.5rem] leading-none;
+    transform: rotate(-2deg);
+    transform-origin: left center;
+  }
+  .home .more {
+    @apply text-primary-600 dark:text-primary-400 inline-flex items-center gap-1.5 font-display text-[0.95rem] font-bold no-underline transition-[gap];
+  }
+  .home .more:hover {
+    @apply gap-2.5;
+  }
+
+  /* ---- article cards ---- */
+  .home .art-grid {
+    @apply grid grid-cols-1 gap-[1.1rem] md:grid-cols-[1.4fr_1fr];
+  }
+  .home .art {
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative block overflow-hidden rounded-2xl border p-6 text-inherit no-underline transition-all duration-200;
+  }
+  .home .art::before {
+    content: "";
+    @apply absolute inset-y-0 left-0 w-1 opacity-0 transition-opacity duration-200;
+    background: var(--ac, var(--color-primary-600));
+  }
+  .home .art:hover {
+    @apply -translate-y-0.5 shadow-lg;
+    border-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 50%, var(--color-base-200));
+  }
+  .home .art:hover::before {
+    @apply opacity-100;
+  }
+  .home .art .tags {
+    @apply mb-3 flex flex-wrap gap-1.5;
+  }
+  .home .art .tg {
+    @apply rounded-full px-2 py-1 text-[0.72rem] font-bold whitespace-nowrap;
+    color: var(--ac, var(--color-primary-600));
+    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 12%, transparent);
+  }
+  .home .art h3 {
+    @apply font-display mb-2 text-[1.2rem] leading-[1.18] font-extrabold tracking-[-0.015em];
+  }
+  .home .art.feat h3 {
+    @apply text-[clamp(1.5rem,2.6vw,2rem)];
+  }
+  .home .art p {
+    @apply text-base-600 dark:text-base-400 mb-3.5 text-[0.95rem] leading-[1.5];
+  }
+  .home .art .m {
+    @apply text-base-500 flex items-center gap-2.5 text-[0.8rem];
+  }
+  .home .art .read {
+    @apply ml-auto inline-flex items-center gap-1 font-bold;
+    color: var(--ac, var(--color-primary-600));
+  }
+  .home .art .read-time {
+    @apply text-base-500 font-hand text-[1rem] leading-none font-bold;
+  }
+  .home .art-thumb {
+    @apply mb-4 aspect-[16/7] w-full overflow-hidden rounded-xl;
+  }
+  .home .art-thumb img {
+    @apply h-full w-full object-cover;
+  }
+  .home .art-col {
+    @apply flex flex-col gap-[1.1rem];
+  }
+  .home .art.sm {
+    @apply flex items-start gap-3.5 p-4;
+  }
+  .home .art.sm .art-thumb {
+    @apply mb-0 aspect-square w-[60px] flex-[0_0_60px];
+  }
+  .home .art.sm .sm-body {
+    @apply min-w-0 flex-1;
+  }
+  .home .art.sm h3 {
+    @apply text-[1.05rem];
+  }
+
+  /* ---- talk cards ---- */
+  .home .talks {
+    @apply grid grid-cols-1 gap-3.5 md:grid-cols-2;
+  }
+  .home .talk {
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex items-center gap-4 rounded-2xl border p-4 text-inherit no-underline transition-all duration-200;
+  }
+  .home .talk:hover {
+    @apply border-primary-600 dark:border-primary-400 translate-x-1;
+  }
+  .home .talk .ic {
+    @apply bg-primary-600/10 dark:bg-primary-400/15 text-primary-600 dark:text-primary-400 flex size-11 flex-shrink-0 items-center justify-center rounded-xl;
+  }
+  .home .talk .t {
+    @apply text-base-900 dark:text-base-100 font-display leading-[1.22] font-bold;
+  }
+  .home .talk .v {
+    @apply text-base-500 mt-0.5 text-[0.82rem];
+  }
+  .home .talk .yr {
+    @apply text-rose-light dark:text-rose ml-auto font-hand text-[1.3rem];
+  }
+
+  /* ---- about: portrait + pillars + quote ---- */
+  .home .portrait {
+    @apply border-base-200 dark:border-base-800 relative aspect-[4/5] overflow-hidden rounded-3xl border shadow-2xl;
+  }
+  .home .portrait img {
+    @apply h-full w-full object-cover;
+  }
+  .home .portrait .tag {
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 text-primary-600 dark:text-primary-400 absolute bottom-3.5 left-3.5 rounded-full border px-3.5 py-1.5 font-hand text-[1.2rem] font-bold shadow-lg;
+  }
+  .home .pillars {
+    @apply mt-5 flex flex-col gap-3;
+  }
+  .home .pillar {
+    @apply flex items-start gap-3.5;
+  }
+  .home .pillar .ic {
+    @apply bg-primary-600/10 dark:bg-primary-400/15 text-primary-600 dark:text-primary-400 flex size-10 flex-shrink-0 items-center justify-center rounded-xl;
+  }
+  .home .pillar .k {
+    @apply text-base-900 dark:text-base-100 font-display font-bold;
+  }
+  .home .pillar .d {
+    @apply text-base-600 dark:text-base-400 text-[0.88rem] leading-[1.45];
+  }
+  .home .quote-card {
+    @apply bg-primary-600/5 dark:bg-primary-400/5 mt-5 rounded-r-xl py-4 pr-5 pl-5;
+    border-left: 3px solid color-mix(in oklab, var(--color-primary-600) 50%, var(--color-base-200));
+  }
+  .home .quote-card blockquote {
+    @apply text-base-800 dark:text-base-200 m-0 text-[1.02rem] leading-[1.5];
+    text-wrap: pretty;
+  }
+  .home .quote-card .by {
+    @apply mt-2.5 flex flex-wrap items-baseline gap-2;
+  }
+  .home .quote-card .by .n {
+    @apply text-base-900 dark:text-base-100 font-display text-[0.9rem] font-bold;
+  }
+  .home .quote-card .by .r {
+    @apply text-base-500 text-[0.82rem];
+  }
+
+  /* ---- project cards ---- */
+  .home .projects {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  .home .proj {
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 block rounded-2xl border p-6 text-inherit no-underline transition-all duration-200;
+  }
+  .home .proj:hover {
+    @apply -translate-y-1 shadow-lg;
+    border-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 50%, var(--color-base-200));
+  }
+  .home .proj .top {
+    @apply mb-3 flex items-center justify-between;
+  }
+  .home .proj .nm {
+    @apply font-display text-[1.3rem] font-extrabold;
+    color: var(--ac, var(--color-primary-600));
+  }
+  .home .proj .bd {
+    @apply text-base-600 dark:text-base-400 text-[0.92rem] leading-[1.5];
+  }
+  .home .proj .st {
+    @apply rounded-full px-2 py-1 text-[0.72rem] font-bold tracking-[0.06em] uppercase;
+    color: var(--ac, var(--color-primary-600));
+    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 13%, transparent);
+  }
+
+  /* ---- training course cards ---- */
+  .home .training-grid {
+    @apply grid grid-cols-1 gap-[1.1rem] md:grid-cols-2;
+  }
+  .home .tcourse {
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex flex-col overflow-hidden rounded-2xl border p-6 text-inherit no-underline transition-all duration-200;
+  }
+  .home .tcourse::before {
+    content: "";
+    @apply absolute inset-y-0 left-0 w-1 opacity-70;
+    background: var(--ac, var(--color-primary-600));
+  }
+  .home .tcourse:hover {
+    @apply -translate-y-1 shadow-lg;
+    border-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 40%, var(--color-base-200));
+  }
+  .home .tcourse .tlevel {
+    @apply mb-3 self-start rounded-full px-2.5 py-1 text-[0.72rem] font-bold tracking-[0.07em] whitespace-nowrap uppercase;
+    color: var(--ac, var(--color-primary-600));
+    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 12%, transparent);
+  }
+  .home .tcourse h3 {
+    @apply font-display mb-2 text-[1.3rem] leading-[1.18] font-extrabold tracking-[-0.02em];
+  }
+  .home .tcourse p {
+    @apply text-base-600 dark:text-base-400 mb-4 flex-1 text-[0.95rem] leading-[1.5];
+  }
+  .home .tcourse-list {
+    @apply text-base-600 dark:text-base-400 mt-1 mb-4 list-disc pl-5 text-[0.88rem] leading-[1.5];
+  }
+  .home .tcourse-list li {
+    @apply mb-1.5;
+  }
+  .home .tcourse .tbook {
+    @apply font-display ml-auto inline-flex items-center gap-1 font-bold;
+    color: var(--ac, var(--color-primary-600));
+  }
+
+  /* ---- work-with-me cards ---- */
+  .home .wwm-cards {
+    @apply grid grid-cols-1 gap-4 md:grid-cols-3;
+  }
+  .home .wwm-card {
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex flex-col overflow-hidden rounded-3xl border p-6 transition-all duration-200;
+  }
+  .home .wwm-card:hover {
+    @apply -translate-y-1 shadow-lg;
+    border-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 40%, var(--color-base-200));
+  }
+  .home .wwm-ic {
+    @apply mb-4 flex size-12 items-center justify-center rounded-xl;
+    color: var(--ac, var(--color-primary-600));
+    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 14%, transparent);
+  }
+  .home .wwm-card h3 {
+    @apply text-base-900 dark:text-base-100 font-display mb-1.5 text-[1.25rem] font-extrabold tracking-[-0.02em];
+  }
+  .home .wwm-card p {
+    @apply text-base-600 dark:text-base-400 mb-5 flex-1 text-[0.92rem] leading-[1.5];
+  }
+  .home .wwm-card .wbtn {
+    @apply font-display inline-flex items-center gap-1.5 self-start rounded-full px-4 py-2.5 text-[0.9rem] font-bold text-white no-underline transition-all duration-200;
+    background: var(--ac, var(--color-primary-600));
+  }
+  .home .wwm-card .wbtn:hover {
+    @apply -translate-y-px brightness-110;
+  }
+
+  /* ---- :has() spotlight — hovering one card dims its siblings (focus aid) ---- */
+  @media (hover: hover) and (pointer: fine) {
+    .home .art-grid:has(.art:hover) .art:not(:hover),
+    .home .projects:has(.proj:hover) .proj:not(:hover),
+    .home .training-grid:has(.tcourse:hover) .tcourse:not(:hover),
+    .home .talks:has(.talk:hover) .talk:not(:hover) {
+      opacity: 0.55;
+      filter: saturate(0.65);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .home .art,
+    .home .talk,
+    .home .proj,
+    .home .tcourse,
+    .home .wwm-card {
+      @apply transition-none;
+    }
+  }
+
+  /* ---- live activity feed ---- */
+  .home .feed-wrap {
+    @apply relative;
+  }
+  .home .feed-note {
+    @apply text-love-light dark:text-love absolute left-5 font-hand text-[1.5rem] leading-none font-bold;
+    top: -2.6rem;
+    transform: rotate(-4deg);
+  }
+  .home .feed-note .arr {
+    @apply block text-[1.6rem];
+    transform: rotate(-22deg) translateX(-10px);
+  }
+  .home .feed {
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex max-h-[min(72vh,640px)] flex-col overflow-hidden rounded-3xl border shadow-2xl;
+  }
+  .home .feed-head {
+    @apply border-base-200 dark:border-base-800 bg-base-200/40 dark:bg-base-800/30 flex flex-shrink-0 items-center gap-2.5 border-b px-5 py-4;
+  }
+  .home .feed-head .title {
+    @apply text-base-900 dark:text-base-100 font-display text-[1.05rem] font-extrabold whitespace-nowrap;
+  }
+  .home .feed-head .src {
+    @apply text-base-500 ml-auto flex items-center gap-1 text-[0.74rem] whitespace-nowrap;
+  }
+  .home .feed-head .src a {
+    @apply text-primary-600 dark:text-primary-400 font-bold no-underline;
+  }
+  .home .feed-filters {
+    @apply border-base-200 dark:border-base-800 flex flex-shrink-0 gap-1.5 overflow-x-auto border-b px-5 py-3;
+    scrollbar-width: none;
+  }
+  .home .feed-filters::-webkit-scrollbar {
+    @apply hidden;
+  }
+  .home .fbtn {
+    @apply text-base-600 dark:text-base-400 border-base-200 dark:border-base-700 flex-shrink-0 cursor-pointer rounded-full border bg-transparent px-3 py-1.5 font-display text-[0.82rem] font-semibold whitespace-nowrap transition-all duration-200;
+  }
+  .home .fbtn:hover {
+    @apply border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400;
+  }
+  .home .fbtn.active {
+    @apply bg-primary-600 dark:bg-primary-500 border-primary-600 dark:border-primary-500 text-white;
+  }
+  .home .feed-list {
+    @apply flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto p-1.5;
+  }
+  .home .feed-item {
+    @apply rounded-xl border border-transparent p-3.5 transition-colors duration-200;
+  }
+  .home .feed-item:hover {
+    @apply bg-base-200/50 dark:bg-base-800/40 border-base-200 dark:border-base-800;
+  }
+  .home .fi-head {
+    @apply mb-2 flex items-center gap-2;
+  }
+  .home .fi-kind {
+    @apply text-base-500 text-[0.76rem] font-semibold;
+  }
+  .home .fi-time {
+    @apply text-base-500 ml-auto text-[0.74rem];
+  }
+  .home .fi-text {
+    @apply text-base-800 dark:text-base-200 m-0 text-[0.95rem] leading-[1.45];
+  }
+  .home .fi-text .mention {
+    @apply text-primary-600 dark:text-primary-400 font-bold;
+  }
+  .home .fi-review {
+    @apply flex items-center gap-3;
+  }
+  .home .fi-title {
+    @apply text-base-900 dark:text-base-100 font-display text-[0.98rem] leading-[1.2] font-bold;
+  }
+  .home .fi-sub {
+    @apply text-base-500 mt-0.5 text-[0.8rem];
+  }
+  .home .fi-rate {
+    @apply text-base-600 dark:text-base-400 mt-1.5 flex items-center gap-2 text-[0.85rem];
+  }
+  .home .fi-rate b {
+    @apply text-base-900 dark:text-base-100;
+  }
+  .home .fi-img {
+    @apply mt-2.5 flex h-[84px] items-center justify-center rounded-lg;
+    background: linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--color-foam) 30%, var(--color-base-200)),
+      color-mix(in oklab, var(--color-iris) 26%, var(--color-base-200))
+    );
+    color: var(--color-base-500);
+  }
+  .home .fi-meta {
+    @apply text-base-500 mt-2.5 flex gap-4 text-[0.78rem];
+  }
+  .home .fi-meta span {
+    @apply inline-flex items-center gap-1;
+  }
+  .home .poster {
+    @apply relative flex w-12 flex-shrink-0 flex-col items-center justify-center gap-0.5 rounded-lg text-white;
+    background: linear-gradient(
+      150deg,
+      var(--app-c, var(--color-app-fallback)),
+      color-mix(in oklab, var(--app-c, var(--color-app-fallback)) 35%, var(--color-base-200))
+    );
+  }
+  .home .poster-i {
+    @apply font-display text-base font-extrabold;
+  }
+}
