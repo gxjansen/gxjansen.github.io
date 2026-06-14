@@ -213,34 +213,58 @@
 
 /* Juttu comments (self-hosted Bluesky comments at comments.gui.do)
    =========================================================================
-   Juttu renders into #juttu-comments in light DOM, themed entirely via
-   --juttu-* custom properties on .juttu-comments. Values mirror the site's
-   Rose Pine palette so the widget matches light/dark. Juttu sets
-   data-juttu-theme on the root from the inherited text color.
-   ========================================================================= */
-.juttu-comments {
+   Juttu renders into #juttu-comments (light DOM), themed via --juttu-* custom
+   properties. Two things to know:
+
+   1. Juttu injects its own <style> at runtime, AFTER this stylesheet, so a
+      plain `.juttu-comments` override loses on equal specificity. We scope to
+      `#juttu-comments .juttu-comments` (id) so ours wins.
+   2. Dark mode keys off the site's own `:root.dark` class — NOT Juttu's
+      data-juttu-theme auto-detection, which can mis-fire and isn't tied to the
+      site toggle.
+
+   Values map to the site's base-*/foam tokens and are chosen for WCAG AA: the
+   muted step clears 4.5:1 on its background, and since Juttu reuses the accent
+   for BOTH link text and white-on-accent buttons, each mode picks an accent for
+   the constrained case (and dark overrides the hardcoded white button text,
+   where the accent is light). */
+#juttu-comments .juttu-comments {
   --juttu-bg: transparent;
   --juttu-font-size: 0.9375rem;
   --juttu-radius: 12px;
-  /* Light (Rose Pine Dawn) */
-  --juttu-text: #575279;
-  --juttu-text-muted: #9893a5;
-  --juttu-surface: #fffaf3;
-  --juttu-border-color: #dfdad9;
-  --juttu-accent-color: #56949f; /* foam light */
-  --juttu-like-color: #b4637a; /* love light */
-  --juttu-repost-color: #286983; /* pine light */
-  --juttu-autocomplete-bg: #fffaf3;
+  /* Light: dark text on the light aside background */
+  --juttu-text: #1f1d2e; /* base-900 */
+  --juttu-text-muted: #6e6a86; /* base-600 — ~5:1 on light */
+  --juttu-surface: #faf4ed; /* base-100 */
+  --juttu-border-color: #dfdad3; /* base-300 */
+  --juttu-accent-color: #286983; /* pine — AA as link text AND under white btn text */
+  --juttu-link-color: #286983;
+  --juttu-like-color: #b4637a; /* love */
+  --juttu-repost-color: #286983; /* pine */
+  --juttu-autocomplete-bg: #faf4ed;
 }
 
-.juttu-comments[data-juttu-theme="dark"] {
-  /* Dark (Rose Pine Main) */
-  --juttu-text: #e0def4;
-  --juttu-text-muted: #6e6a86;
-  --juttu-surface: #1f1d2e;
-  --juttu-border-color: #403d52;
-  --juttu-accent-color: #9ccfd8; /* foam dark */
-  --juttu-like-color: #eb6f92; /* love dark */
-  --juttu-repost-color: #3e8fb0; /* pine dark */
-  --juttu-autocomplete-bg: #1f1d2e;
+:root.dark #juttu-comments .juttu-comments {
+  --juttu-text: #faf4ed; /* base-100 */
+  --juttu-text-muted: #908caa; /* base-500 — ~5:1 on dark */
+  --juttu-surface: #26233a; /* base-800 */
+  --juttu-border-color: #393552; /* base-700 */
+  --juttu-accent-color: #9ccfd8; /* foam — AA as link text on dark */
+  --juttu-link-color: #9ccfd8;
+  --juttu-like-color: #eb6f92; /* love (dark) */
+  --juttu-repost-color: #9ccfd8;
+  --juttu-autocomplete-bg: #26233a;
+}
+
+/* In dark mode the accent is light, so Juttu's hardcoded white button text
+   fails contrast — use dark text on the light accent instead. */
+:root.dark #juttu-comments .juttu-sort-btn--active,
+:root.dark #juttu-comments .juttu-submit-btn {
+  color: #1f1d2e; /* base-900 on foam accent */
+}
+
+/* Empty-state "Discuss on Bluesky" link (renderUnlinked) — accent is AA. */
+#juttu-comments .juttu-discuss-link {
+  color: var(--juttu-accent-color);
+  text-decoration: underline;
 }
