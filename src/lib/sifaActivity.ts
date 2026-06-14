@@ -43,19 +43,25 @@ interface PostMeta {
   replies: number;
   image?: string;
   imageAlt?: string;
+  isGif?: boolean;
 }
 
-/** Pull the first image thumbnail (if any) from a getPosts embed view. */
-function extractImage(embed: any): { image?: string; imageAlt?: string } {
+/** Pull the first image/GIF from a getPosts embed view. GIFs (Tenor/Klipy
+ *  externals) use the animated `.gif` URL so they play; other externals use the
+ *  static thumbnail. */
+function extractImage(embed: any): {
+  image?: string;
+  imageAlt?: string;
+  isGif?: boolean;
+} {
   if (!embed) return {};
   const imgs = embed.images ?? embed.media?.images;
   if (imgs?.[0]?.thumb)
     return { image: imgs[0].thumb, imageAlt: imgs[0].alt || undefined };
-  if (embed.external?.thumb)
-    return {
-      image: embed.external.thumb,
-      imageAlt: embed.external.title || undefined,
-    };
+  const ext = embed.external ?? embed.media?.external;
+  if (ext?.uri && /\.gif(\?|$)/i.test(ext.uri))
+    return { image: ext.uri, imageAlt: ext.title || "GIF", isGif: true };
+  if (ext?.thumb) return { image: ext.thumb, imageAlt: ext.title || undefined };
   return {};
 }
 
@@ -92,30 +98,46 @@ async function fetchPostMeta(uris: string[]): Promise<Map<string, PostMeta>> {
 }
 
 /**
- * The single most-recent item for each non-post category (Reviews, Code,
- * Events) — fetched per-category so these rarer types always surface, however
- * old, independent of how frequently Guido posts. Never throws.
+ * Recent non-post activity, several items per category (Reviews, Code, Events),
+ * fetched per-category so each surfaces regardless of post frequency or age,
+ * then merged newest-first. Never throws.
  */
-async function fetchVariety(): Promise<ActivityItem[]> {
-  const cats = ["Reviews", "Code", "Events"];
+async function fetchRecentNonPosts(): Promise<ActivityItem[]> {
+  const cats: [string, number][] = [
+    ["Reviews", 4],
+    ["Code", 2],
+    ["Events", 2],
+  ];
   const lists = await Promise.all(
-    cats.map(async (category) => {
+    cats.map(async ([category, n]) => {
       try {
         const r = await fetchActivityFeed({ baseUrl: SIFA_BASE }, HANDLE, {
           category,
-          limit: 3,
+          limit: n + 2,
         });
-        for (const raw of r?.items ?? []) {
-          const m = mapItem(raw);
-          if (m) return m;
-        }
+        const seen = new Set<string>();
+        return (r?.items ?? [])
+          .map((raw: any) => ({
+            at: new Date(raw.indexedAt).getTime() || 0,
+            item: mapItem(raw),
+          }))
+          .filter((x): x is { at: number; item: ActivityItem } => {
+            if (!x.item) return false;
+            const key = (x.item.title ?? x.item.text ?? "").toLowerCase();
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          })
+          .slice(0, n);
       } catch {
-        /* skip this category */
+        return [];
       }
-      return null;
     }),
   );
-  return lists.filter((x): x is ActivityItem => x !== null);
+  return lists
+    .flat()
+    .sort((a, b) => b.at - a.at)
+    .map((x) => x.item as ActivityItem);
 }
 
 /** Sort weight — high-engagement posts float up; non-post items keep a modest
@@ -208,18 +230,28 @@ function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
       };
     }
     case "Events": {
+      // Smoke Signal RSVPs: the event name lives on record.eventMeta.name and
+      // the attendance status on record.status (#going / #interested / #notgoing).
+      const meta = (record.eventMeta ?? {}) as Record<string, unknown>;
       const title =
-        str(record.name) ??
-        str(record.title) ??
-        str(record.text) ??
-        "Community event";
-      return {
-        ...base,
-        type: "event",
-        kind: "Event",
-        title,
-        sub: str(record.location) ?? str(record.subtitle),
-      };
+        str(meta.name) ?? str(record.name) ?? str(record.title) ?? "Event";
+      const status = (str(record.status) ?? "").toLowerCase();
+      const kind = status.includes("notgoing")
+        ? "Not going"
+        : status.includes("going")
+          ? "Going"
+          : status.includes("interested")
+            ? "Interested"
+            : "RSVP";
+      const starts = str(meta.startsAt);
+      const sub = starts
+        ? new Date(starts).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })
+        : (str(meta.location) ?? undefined);
+      return { ...base, type: "event", kind, title, sub };
     }
     case "Articles": {
       const title = str(record.title) ?? str(record.text);
@@ -236,16 +268,18 @@ function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
  * failure or empty result. Never throws.
  */
 const RECENT_DAYS = 7;
+const POST_HIGHLIGHTS = 6; // top posts by engagement, then the non-post tail
 
-export async function getActivity(limit = 10): Promise<ActivityItem[]> {
+export async function getActivity(): Promise<ActivityItem[]> {
   try {
-    // Main feed (posts + engagement) and the per-category variety in parallel.
-    const [res, variety] = await Promise.all([
+    // Highlight posts (main feed + engagement) and the recent non-post activity
+    // (per-category) in parallel.
+    const [res, nonPosts] = await Promise.all([
       fetchActivityFeed({ baseUrl: SIFA_BASE }, HANDLE, { limit: 40 }),
-      fetchVariety(),
+      fetchRecentNonPosts(),
     ]);
     const items = res?.items ?? [];
-    if (!items.length && !variety.length) return activitySeed;
+    if (!items.length && !nonPosts.length) return activitySeed;
 
     // Engagement counts + image thumbnails for Bluesky posts (public AppView).
     const bskyUris = items
@@ -253,8 +287,7 @@ export async function getActivity(limit = 10): Promise<ActivityItem[]> {
       .map((i: any) => i.uri);
     const meta = await fetchPostMeta(bskyUris);
 
-    // The 7-day window applies ONLY to posts (frequent); non-post categories
-    // surface their latest item regardless of age (via fetchVariety).
+    // The 7-day window applies ONLY to posts (frequent). Rank them by interactions.
     const cutoff = Date.now() - RECENT_DAYS * 86_400_000;
     const recentEnough = (raw: any) => {
       const t = new Date(raw.indexedAt).getTime();
@@ -267,14 +300,11 @@ export async function getActivity(limit = 10): Promise<ActivityItem[]> {
       )
       .map((r: any) => mapItem(r, meta.get(r.uri)))
       .filter((x): x is ActivityItem => x !== null)
-      .sort((a, b) => interestScore(b) - interestScore(a));
+      .sort((a, b) => interestScore(b) - interestScore(a))
+      .slice(0, POST_HIGHLIGHTS);
 
-    const varietyN = Math.min(variety.length, Math.floor(limit / 3));
-    const mapped = [
-      ...posts.slice(0, limit - varietyN),
-      ...variety.slice(0, varietyN),
-    ];
-
+    // Top posts first, then the recent multi-app activity (reviews/code/events).
+    const mapped = [...posts, ...nonPosts];
     return mapped.length ? mapped : activitySeed;
   } catch {
     return activitySeed;

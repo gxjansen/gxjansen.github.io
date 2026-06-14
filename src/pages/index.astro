@@ -37,7 +37,7 @@ const currLocale = getLocaleFromUrl(Astro.url);
 const siteData = getTranslatedData("siteData", currLocale);
 
 // Live gui.do activity from the Sifa AppView (falls back to seed on failure).
-const activity = await getActivity(10);
+const activity = await getActivity();
 
 // Recent articles from the post collection (real data, working links).
 const accents: Accent[] = ["gold", "foam", "pine", "iris", "love", "rose"];
