@@ -75,6 +75,8 @@ export interface ActivityItem {
   likes?: number;
   replies?: number;
   reposts?: number;
+  /** Source URL (live items link to the original post/review/etc.). */
+  url?: string;
 }
 
 export interface Testimonial {
@@ -367,7 +369,18 @@ export const APP_REGISTRY: Record<string, { label: string; color: string }> = {
   bluesky: { label: "Bluesky", color: "var(--color-app-bluesky)" },
   popfeed: { label: "Popfeed", color: "var(--color-app-popfeed)" },
   tangled: { label: "Tangled", color: "var(--color-app-tangled)" },
-  events: { label: "Events", color: "var(--color-app-atmorsvp)" },
-  standard: { label: "Standard", color: "var(--color-app-standard)" },
   github: { label: "GitHub", color: "var(--color-app-github)" },
+  standard: { label: "Standard", color: "var(--color-app-standard)" },
+  whitewind: { label: "WhiteWind", color: "var(--color-app-whitewind)" },
+  leaflet: { label: "Leaflet", color: "var(--color-app-leaflet)" },
+  crate: { label: "Crate", color: "var(--color-app-crate)" },
+  frontpage: { label: "Frontpage", color: "var(--color-app-frontpage)" },
+  smokesignal: { label: "Smoke Signal", color: "var(--color-app-smokesignal)" },
+  atmorsvp: { label: "ATmosphere", color: "var(--color-app-atmorsvp)" },
+  events: { label: "Events", color: "var(--color-app-atmorsvp)" },
+  flashes: { label: "Flashes", color: "var(--color-app-flashes)" },
+  grain: { label: "Grain", color: "var(--color-app-grain)" },
+  bookhive: { label: "Bookhive", color: "var(--color-app-bookhive)" },
+  spark: { label: "Spark", color: "var(--color-app-spark)" },
+  plyr: { label: "Plyr", color: "var(--color-app-plyr)" },
 };

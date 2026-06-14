@@ -38,6 +38,7 @@
     "@iconify-json/tabler": "^1.2.35",
     "@netlify/blobs": "^10.7.8",
     "@resvg/resvg-js": "^2.6.2",
+    "@singi-labs/sifa-sdk": "^0.10.18",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/postcss": "^4.3.0",
     "@tailwindcss/typography": "^0.5.16",

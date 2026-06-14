@@ -336,13 +336,13 @@
     @apply relative;
   }
   .home .feed-note {
-    @apply text-love-light dark:text-love absolute left-5 font-hand text-[1.5rem] leading-none font-bold;
-    top: -2.6rem;
-    transform: rotate(-4deg);
+    @apply text-love-light dark:text-love absolute left-4 z-[1] inline-flex items-center gap-1 font-hand text-[1.05rem] leading-none font-bold;
+    top: -1.6rem;
+    transform: rotate(-3deg);
   }
   .home .feed-note .arr {
-    @apply block text-[1.6rem];
-    transform: rotate(-22deg) translateX(-10px);
+    @apply text-[1.2rem];
+    transform: rotate(8deg);
   }
   .home .feed {
     @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex max-h-[min(72vh,640px)] flex-col overflow-hidden rounded-3xl border shadow-2xl;
@@ -379,10 +379,18 @@
     @apply flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto p-1.5;
   }
   .home .feed-item {
-    @apply rounded-xl border border-transparent p-3.5 transition-colors duration-200;
+    @apply relative rounded-xl border border-transparent p-3.5 transition-colors duration-200;
   }
   .home .feed-item:hover {
     @apply bg-base-200/50 dark:bg-base-800/40 border-base-200 dark:border-base-800;
+  }
+  /* Stretched link makes the whole item clickable to its source. */
+  .home .fi-link {
+    @apply absolute inset-0 z-[1];
+  }
+  /* Keep mentions selectable/above the stretched link. */
+  .home .fi-text .mention {
+    @apply relative z-[2];
   }
   .home .fi-head {
     @apply mb-2 flex items-center gap-2;

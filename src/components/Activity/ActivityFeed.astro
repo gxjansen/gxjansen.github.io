@@ -146,6 +146,18 @@ const fragments = (text: string) =>
                   )}
                 </>
               )}
+              {item.url && (
+                <a
+                  class="fi-link"
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="sr-only">
+                    Open this {a.label} {item.type} in a new tab
+                  </span>
+                </a>
+              )}
             </li>
           );
         })
