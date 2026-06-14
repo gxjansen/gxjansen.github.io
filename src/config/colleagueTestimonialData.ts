@@ -12,6 +12,8 @@ export interface ColleagueTestimonial {
   quote: string;
   category: string;
   priority: number; // 1-5, higher is more likely to be selected
+  /** When the recommendation was written (e.g. "Jan 2026"). */
+  date?: string;
 }
 
 export const colleagueTestimonials: ColleagueTestimonial[] = [
@@ -254,6 +256,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
       "Guido is a thought leader in community building and developer relations. Any company serious about building an ecosystem should talk to him.",
     category: "Leadership & Team Building",
     priority: 5,
+    date: "Jan 2026",
   },
   {
     id: "eric-schreiner",
@@ -265,6 +268,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
       "With a small, high-performing team, Guido created a developer and customer community from scratch and turned it into a real asset for the business.",
     category: "Leadership & Team Building",
     priority: 5,
+    date: "Jan 2026",
   },
 ];
 
