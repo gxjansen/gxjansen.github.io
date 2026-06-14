@@ -15,15 +15,21 @@ categories:
 
 You may have recently started seeing really nice article URL preview cards on Bluesky with their logo, your own accent color and a neat CTA button to View or Subscribe. If you want that too for your articles on your own domain: this guide is for you!
 
-Bluesky [v1.122](https://bsky.app/profile/bsky.app/post/3mmwmla3xph26) now renders Standard.site publications as rich link cards: title, reading time, author, site name, theme colours, and an action button that takes the reader straight into the publication. In the same week, WordPress shipped its [ATmosphere 1.0.0 plugin](https://activitypub.blog/2026/05/20/atmosphere-1-0-0-liftoff/), so a chunk of the open web can now publish as Standard.site too.
+Bluesky [v1.122](https://bsky.app/profile/bsky.app/post/3mmwmla3xph26) now renders Standard.site publications as rich link cards: title, reading time, author, site name, theme colours, and an action button. The card title links to the exact post you shared; the action button (Subscribe / View publication) goes to the publication's home, not that specific post. In the same week, WordPress shipped its [ATmosphere 1.0.0 plugin](https://activitypub.blog/2026/05/20/atmosphere-1-0-0-liftoff/), so a chunk of the open web can now publish as Standard.site too.
+
+> _One thing about the card before you set this up: it has two separate tap targets. The title, image and body go to the post you shared. The filled "Subscribe" / "View publication" button goes to the publication's home instead. That's intended, but it caught me out (the button is the loudest thing on the card, yet it doesn't open the article), so I wrote it up as [a UX issue on social-app](https://github.com/bluesky-social/social-app/issues/10905)._
 
 Let's get you set up!
 
 ## What you need
 
-**A `site.standard.publication` record on your AT Protocol PDS, whose `url` field matches the URL of your site.**
+**A `site.standard.publication` record on your AT Protocol PDS, whose `url` field matches the URL of your site.** That covers the case where someone links your publication's home URL: Bluesky matches it exactly and renders the publication card from that one record.
 
-That's it. Bluesky's AppView indexes Standard.site records from the firehose and matches them to post links by URL. See the matching logic in [`packages/bsky/src/util/standard-site.ts`](https://github.com/bluesky-social/atproto/blob/main/packages/bsky/src/util/standard-site.ts). When a post links to a URL matching the `url` field of an indexed publication, the card renders.
+For the rich card on an **individual post** (the one with the title, author and reading time), you also need a `site.standard.document` record for that post. Bluesky builds the match by joining `publication.url` with the document's `path` and comparing it to the shared link, so without a matching document a post link won't render the rich card. Bluesky compares publication URLs exactly, it doesn't treat a post as a subpath of your home page, except on the Leaflet / pckt / Offprint hosts. The card's reading time is also derived from the document's stored text, so include the post body in the record if you want it shown.
+
+Either way, Bluesky's AppView indexes these records from the firehose and matches them to post links by URL. It never loads your website. See the matching logic in [`packages/bsky/src/util/standard-site.ts`](https://github.com/bluesky-social/atproto/blob/main/packages/bsky/src/util/standard-site.ts).
+
+The good news: every publishing path below (Leaflet, pckt, Offprint, WordPress, Sequoia) creates both records for you. You only have to think about this if you're rolling your own.
 
 No need to change DNS settings or place any `/.well-known/` files.
 
@@ -35,7 +41,7 @@ Three paths:
 
 2. **WordPress with the [ATmosphere plugin](https://activitypub.blog/2026/05/20/atmosphere-1-0-0-liftoff/).** Installing it gives your WP site a Standard.site publication record automatically, with `url` set to your blog. The card's button reads **"View publication"** with a generic arrow icon (your domain isn't on the hardcoded allowlist, so no platform branding). Functionally identical otherwise.
 
-3. **Roll your own.** If you have your own AT Protocol account and a static blog, you can publish a `site.standard.publication` record on your PDS pointing to your domain. Steve Simkins' [Sequoia CLI](https://sequoia.pub/) is the most common tool for this; he also wrote a [guide on indexing Standard.site records](https://atproto.com/blog/indexing-standard-site) that doubles as a primer on the data model. The card again reads "View publication."
+3. **Roll your own.** If you have your own AT Protocol account and a static blog, you publish a `site.standard.publication` record pointing to your domain, plus a `site.standard.document` record per post (its `path` joined to the publication `url` is what Bluesky matches against the shared link). Steve Simkins' [Sequoia CLI](https://sequoia.pub/) is the most common tool for this; he also wrote a [guide on indexing Standard.site records](https://atproto.com/blog/indexing-standard-site) that doubles as a primer on the data model. The card again reads "View publication."
 
 In all three cases, the card appears in Bluesky once the AppView has indexed the record from the firehose, usually within seconds.
 
@@ -94,6 +100,8 @@ Here's how:
 | `foreground`       | (Same)                                         |
 
 Replace the RGB values with your brand colours. Only `accent` and `accentForeground` actually affect what Bluesky shows you right now (the card body stays in Bluesky's own theme). The renderer also handles hover (5% darker) and disabled states (5% lighter) automatically from `accent`, so you don't need to specify those.
+
+One catch: Bluesky only applies your custom pair if `accent` and `accentForeground` have a contrast ratio of at least 4.5:1. If they don't, it silently ignores them and falls back to its default button styling. So a nice-looking but low-contrast combination just won't show up, with no error to tell you why.
 
 > _FYI: all four colours are required by the lexicon, so you can't drop `background` and `foreground` even though Bluesky's current card doesn't use them. The PDS will reject the record without them. Other Standard.site renderers (Leaflet, pckt, Offprint) use the full set for the publication page, and Bluesky may extend the card to use them later._
 
@@ -182,12 +190,24 @@ In pdsls.dev, your publication record's URL ends in something like `.../site.sta
 curl -s "https://bsky.social/xrpc/com.atproto.repo.listRecords?repo=<your-handle>&collection=site.standard.publication" | jq .
 ```
 
+## Running more than one publication on one domain
+
+One publication record per site is the common case, but you can run several on the same domain: a main blog at the root, plus a separate publication for a series or section at its own path. Jason Lengstorf set this up for CodeTV, where the main blog and the Web Dev Challenge series are two distinct publications on one site, and wrote up exactly how: [Multiple Standard Site publications on one website](https://codetv.dev/blog/multiple-standard-site-publications-on-one-website).
+
+The short version:
+
+- Each publication is its own `site.standard.publication` record, with its own `url` pointing at the relevant path, e.g. `https://codetv.dev/series/web-dev-challenge`.
+- Each post is a `site.standard.document` record that attaches to a publication through its `site` field (the publication's AT-URI) and a `path` relative to that publication, e.g. `"path": "/s3/e4-rebuild-your-website-again"`.
+- If you also want Standard.site verification (the optional well-known file from earlier, not needed for the Bluesky card), make `/.well-known/site.standard.publication` a directory instead of a single file and nest each publication's path under it: `/.well-known/site.standard.publication/series/web-dev-challenge`, with that file holding the publication's AT-URI.
+
+Two things Jason flagged from doing it for real: you can't set a per-post author on a document, so the publication itself shows up as the author, and he created the records by hand with [Taproot](https://atproto.at) rather than automating it. You can check any of this with the [Standard Site validator](https://site-validator.fly.dev/).
+
 ## Verifying it works
 
 Post a link to your publication URL on Bluesky and watch the embed render. If the card doesn't appear:
 
 - Confirm a `site.standard.publication` record actually exists on your account's PDS. You can browse your records with [pdsls.dev](https://pdsls.dev).
-- Confirm its `url` field exactly matches the URL you're linking to. The AppView canonicalises (lowercase host, strip trailing slash, drop query/fragment) but otherwise needs a match. For the Leaflet/pckt/Offprint hosts, subpaths are also accepted.
+- Confirm its `url` field exactly matches the URL you're linking to. The AppView canonicalises (lowercase host, strip trailing slash, drop query/fragment) but otherwise needs a match. On the Leaflet/pckt/Offprint hosts (and their subdomains) a post link can extend the record URL with extra path segments and still match; everywhere else the publication URL must match exactly, which is why individual posts need their own document record.
 - Give the firehose a minute to propagate.
 
 That's the entire mechanism. The well-known files have their own value, but they're not on the critical path for the Bluesky card. The publication record is.
