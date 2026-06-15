@@ -843,6 +843,19 @@ const awards = split(cv.awards);
 </BaseLayout>
 
 <script>
+  // Print in light mode so dark-mode text colours don't end up white-on-white
+  // on the page. Handles both the button and Ctrl/Cmd+P; restores afterwards.
+  const root = document.documentElement;
+  let wasDark = false;
+  window.addEventListener("beforeprint", () => {
+    wasDark = root.classList.contains("dark");
+    if (wasDark) root.classList.remove("dark");
+  });
+  window.addEventListener("afterprint", () => {
+    if (wasDark) root.classList.add("dark");
+    wasDark = false;
+  });
+
   document
     .getElementById("cv-print")
     ?.addEventListener("click", () => window.print());
