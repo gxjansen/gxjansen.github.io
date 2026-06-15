@@ -10,26 +10,38 @@ interface Props {
 const { podcasts } = Astro.props;
 ---
 
-<section id="podcasts" class="mb-16" aria-labelledby="podcasts-heading">
-  <h2 id="podcasts-heading" class="h2 mb-4">Podcast Appearances</h2>
-  <div class="cards-grid" role="list">
+<section
+  id="podcasts"
+  class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+  aria-labelledby="podcasts-heading"
+>
+  <div class="sec-head">
+    <div>
+      <span class="hand-note">on the mic</span>
+      <h2 id="podcasts-heading">Podcast Appearances</h2>
+    </div>
+  </div>
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" role="list">
     {
       podcasts.map((podcast) => (
-        <article class="card" role="listitem">
+        <article
+          class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 reveal overflow-hidden rounded-2xl border"
+          role="listitem"
+        >
           <PodcastLinks
             spotifyId={podcast.spotifyEmbedId}
             applePodcastsUrl={podcast.applePodcastsUrl}
             title={podcast.title}
           />
-          <div class="card-content">
+          <div class="p-6">
             <h3
               id={`podcast-${podcast.spotifyEmbedId || podcast.title.toLowerCase().replace(/\s+/g, "-")}`}
-              class="card-title"
+              class="text-base-900 dark:text-base-100 mb-2 text-lg font-semibold"
             >
               {podcast.title}
             </h3>
             <p
-              class="card-meta"
+              class="text-base-600 dark:text-base-400 text-sm"
               aria-label={`Published on ${formatDate(podcast.publicationDate)}${podcast.personOrganization ? ` by ${podcast.personOrganization}` : ""}`}
             >
               {formatDate(podcast.publicationDate)}
@@ -40,6 +52,7 @@ const { podcasts } = Astro.props;
                 href={podcast.articleUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 mt-3 inline-flex items-center gap-1 text-sm font-semibold"
                 aria-label={`Read article about ${podcast.title} (opens in new tab)`}
               >
                 View article <span aria-hidden="true">→</span>

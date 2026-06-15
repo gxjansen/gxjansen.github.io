@@ -17,19 +17,24 @@ function getYouTubeId(url: string): string {
 }
 ---
 
-<section id="videos" class="mb-16">
-  <h2 class="h2 mb-4">Video Interviews</h2>
-  <div class="cards-grid">
+<section id="videos" class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+  <div class="sec-head">
+    <div>
+      <span class="hand-note">on camera</span>
+      <h2>Video Interviews</h2>
+    </div>
+  </div>
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
     {
       videos.map((video) => {
         const videoId = getYouTubeId(video.youtubeLink || "");
         if (!videoId) return null;
 
         return (
-          <article class="card">
-            <div class="relative">
+          <article class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 group reveal overflow-hidden rounded-2xl border transition hover:-translate-y-0.5 hover:shadow-lg">
+            <div class="relative aspect-video">
               <div
-                class="lazy-youtube"
+                class="lazy-youtube absolute inset-0"
                 data-video-id={videoId}
                 data-title={video.title}
               >
@@ -38,7 +43,7 @@ function getYouTubeId(url: string): string {
                 <img
                   src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
                   alt={`Preview thumbnail for video: ${video.title}`}
-                  class="card-image"
+                  class="h-full w-full object-cover"
                   loading="lazy"
                   decoding="async"
                   onerror="this.onerror=null; this.src=this.src.replace('maxresdefault', 'hqdefault');"
@@ -46,7 +51,7 @@ function getYouTubeId(url: string): string {
 
                 <button
                   type="button"
-                  class="group absolute inset-0 flex h-full w-full items-center justify-center"
+                  class="play-btn absolute inset-0 flex h-full w-full items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary-500)]"
                   aria-label={`Play video: ${video.title}`}
                   onclick={`
                   const container = this.closest('.lazy-youtube');
@@ -73,7 +78,7 @@ function getYouTubeId(url: string): string {
                   button.classList.add('hidden');
                 `}
                 >
-                  <div class="flex h-12 w-16 items-center justify-center rounded-lg bg-red-600 transition-colors group-hover:bg-red-700">
+                  <div class="flex h-12 w-16 items-center justify-center rounded-lg bg-red-600 transition-colors group-hover:bg-red-700 motion-reduce:transition-none forced-colors:border-2 forced-colors:border-[currentColor]">
                     <svg
                       class="h-6 w-6 text-white"
                       viewBox="0 0 24 24"
@@ -85,9 +90,11 @@ function getYouTubeId(url: string): string {
                 </button>
               </div>
             </div>
-            <div class="card-content">
-              <h3 class="card-title">{video.title}</h3>
-              <p class="card-meta">
+            <div class="p-6">
+              <h3 class="text-base-900 dark:text-base-100 mb-2 text-lg font-semibold">
+                {video.title}
+              </h3>
+              <p class="text-base-600 dark:text-base-400 text-sm">
                 {formatDate(video.publicationDate)}
                 {video.personOrganization && ` • ${video.personOrganization}`}
               </p>
@@ -96,6 +103,7 @@ function getYouTubeId(url: string): string {
                   href={video.articleUrl}
                   target="_blank"
                   rel="noopener noreferrer"
+                  class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 mt-3 inline-flex items-center gap-1 text-sm font-semibold"
                   aria-label={`View article about ${video.title} (opens in new tab)`}
                 >
                   View article <span aria-hidden="true">→</span>
@@ -108,24 +116,3 @@ function getYouTubeId(url: string): string {
     }
   </div>
 </section>
-
-<style>
-  .lazy-youtube button:focus {
-    outline: 2px solid var(--color-primary-500);
-    outline-offset: 2px;
-  }
-
-  /* High contrast mode support */
-  @media (forced-colors: active) {
-    .lazy-youtube button {
-      border: 2px solid currentColor;
-    }
-  }
-
-  /* Reduced motion support */
-  @media (prefers-reduced-motion: reduce) {
-    .lazy-youtube .transition-colors {
-      transition: none;
-    }
-  }
-</style>

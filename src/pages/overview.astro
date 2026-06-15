@@ -4,135 +4,139 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 // main layout
 import BaseLayout from "@layouts/BaseLayout.astro";
 
-// components
-import Button from "@components/Button/Button.astro";
-import Badge from "@components/Badge/Badge.astro";
-
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
 
 const currLocale = getLocaleFromUrl(Astro.url);
+
+const headingClass =
+  "font-display text-base-900 dark:text-base-100 mt-6 mb-4 text-xl font-bold md:text-2xl";
+const linkClass =
+  "text-base-500 hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 my-[.15rem] text-left leading-snug font-medium transition";
 ---
 
 <BaseLayout
   title="Recent Blog Posts"
   description="Recent Blog Posts Description"
 >
-  <section
-    class="site-container bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-36 dark:bg-[url('/assets/pattern-dark.svg')]"
-  >
-    <div class="mx-auto max-w-4xl text-center">
-      <Badge>Overview</Badge>
-      <h1 class="h1 -mt-3">The various pages of Atlas</h1>
-      <!-- <p class="description mt-2">The various pages of Atlas</p> -->
-      <div class="xs:grid-cols-2 mx-auto mt-10 grid gap-4 md:grid-cols-3">
-        <!-- Landing pages -->
-        <div class="flex flex-col">
-          <h3 class="overview-heading">Landing Pages</h3>
-          <a class="overview-link" href={getRelativeLocaleUrl(currLocale, "/")}
-            >Home Page</a
-          >
-        </div>
-
-        <!-- Blog pages -->
-        <div class="flex flex-col">
-          <h3 class="overview-heading">Blog</h3>
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/post")}>Blog Index</a
-          >
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/categories")}>Categories</a
-          >
-        </div>
-
-        <!-- Site Pages -->
-        <div class="flex flex-col">
-          <h3 class="overview-heading">Site Pages</h3>
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/contact")}>Contact</a
-          >
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/projects")}>Projects</a
-          >
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/podcasts")}>Podcasts</a
-          >
-        </div>
-
-        <!-- Widgets -->
-        <div class="flex flex-col">
-          <h3 class="overview-heading">Widgets</h3>
-          <!-- CookieConsent component should be used in BaseLayout.astro if desired -->
-          <button id="test-consent-demo-btn" class="overview-link"
-            >Cookie Consent</button
-          >
-        </div>
-
-        <!-- Other -->
-        <div class="flex flex-col">
-          <h3 class="overview-heading">Other</h3>
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/about")}>About</a
-          >
-          <a
-            class="overview-link"
-            href={getRelativeLocaleUrl(currLocale, "/press")}>Press</a
-          >
-          <a
-            class="overview-link"
-            href="/rss.xml"
-            target="_blank"
-            rel="noopener noreferrer">RSS Feed</a
-          >
-        </div>
-      </div>
-    </div>
-
-    <!-- CookieConsent component should be used in BaseLayout.astro if desired -->
-    <div
-      id="test-banner"
-      class="fixed inset-x-6 bottom-6 z-50 hidden justify-center"
+  <div class="home overview-page">
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
     >
-      <div
-        class="border-base-200 bg-base-50 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-md border p-4"
-      >
-        <div class="text-center">
-          <p
-            class="text-base-600 dark:text-base-400 text-sm font-medium lg:text-base"
-          >
-            We use cookies to improve your experience on this site. To learn
-            more, see our <a
-              href={getRelativeLocaleUrl(currLocale, "/privacy-policy")}
-              class="text-base-700 decoration-primary-500 hover:text-primary-500 dark:text-base-200 underline transition"
-              >Privacy Policy</a
-            >.
-          </p>
-        </div>
-        <div class="mx-auto flex gap-2">
-          <Button variant="primary" type="button">Accept</Button>
-          <Button variant="ghost" type="button">Decline</Button>
+      <div class="mx-auto max-w-4xl text-center">
+        <span class="eyebrow">Overview</span>
+        <h1
+          class="font-display mt-2 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          The various pages of Atlas
+        </h1>
+        <div class="xs:grid-cols-2 mx-auto mt-10 grid gap-4 md:grid-cols-3">
+          <!-- Landing pages -->
+          <div class="flex flex-col">
+            <h3 class={headingClass}>Landing Pages</h3>
+            <a class={linkClass} href={getRelativeLocaleUrl(currLocale, "/")}
+              >Home Page</a
+            >
+          </div>
+
+          <!-- Blog pages -->
+          <div class="flex flex-col">
+            <h3 class={headingClass}>Blog</h3>
+            <a
+              class={linkClass}
+              href={getRelativeLocaleUrl(currLocale, "/post")}>Blog Index</a
+            >
+            <a
+              class={linkClass}
+              href={getRelativeLocaleUrl(currLocale, "/categories")}
+              >Categories</a
+            >
+          </div>
+
+          <!-- Site Pages -->
+          <div class="flex flex-col">
+            <h3 class={headingClass}>Site Pages</h3>
+            <a
+              class={linkClass}
+              href={getRelativeLocaleUrl(currLocale, "/contact")}>Contact</a
+            >
+            <a
+              class={linkClass}
+              href={getRelativeLocaleUrl(currLocale, "/projects")}>Projects</a
+            >
+            <a
+              class={linkClass}
+              href={getRelativeLocaleUrl(currLocale, "/podcasts")}>Podcasts</a
+            >
+          </div>
+
+          <!-- Widgets -->
+          <div class="flex flex-col">
+            <h3 class={headingClass}>Widgets</h3>
+            <!-- CookieConsent component should be used in BaseLayout.astro if desired -->
+            <button id="test-consent-demo-btn" class={linkClass}
+              >Cookie Consent</button
+            >
+          </div>
+
+          <!-- Other -->
+          <div class="flex flex-col">
+            <h3 class={headingClass}>Other</h3>
+            <a
+              class={linkClass}
+              href={getRelativeLocaleUrl(currLocale, "/about")}>About</a
+            >
+            <a
+              class={linkClass}
+              href={getRelativeLocaleUrl(currLocale, "/press")}>Press</a
+            >
+            <a
+              class={linkClass}
+              href="/rss.xml"
+              target="_blank"
+              rel="noopener noreferrer">RSS Feed</a
+            >
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-</BaseLayout>
 
-<style lang="scss">
-  @reference "../styles/tailwind.css";
-  .overview-heading {
-    @apply dark:text-base-300 mt-6 mb-4 text-xl font-bold md:text-2xl;
-  }
-  .overview-link {
-    // @apply text-primary-600 hover:text-primary-700 hover:underline;
-    @apply text-base-500 hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 my-[.15rem] leading-snug font-medium transition;
-  }
-</style>
+      <!-- CookieConsent component should be used in BaseLayout.astro if desired -->
+      <div
+        id="test-banner"
+        class="fixed inset-x-6 bottom-6 z-50 hidden justify-center"
+      >
+        <div
+          class="border-base-200 bg-base-50 dark:border-base-800 dark:bg-base-900 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-2xl border p-4"
+        >
+          <div class="text-center">
+            <p
+              class="text-base-600 dark:text-base-400 text-sm font-medium lg:text-base"
+            >
+              We use cookies to improve your experience on this site. To learn
+              more, see our <a
+                href={getRelativeLocaleUrl(currLocale, "/privacy-policy")}
+                class="text-base-700 decoration-primary-500 hover:text-primary-500 dark:text-base-200 underline transition"
+                >Privacy Policy</a
+              >.
+            </p>
+          </div>
+          <div class="mx-auto flex gap-2">
+            <button
+              type="button"
+              class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
+              >Accept</button
+            >
+            <button
+              type="button"
+              class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 font-display inline-flex items-center gap-1.5 rounded-full border px-6 py-3 text-sm font-bold transition"
+              >Decline</button
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
 
 <script>
   //Script purely for demo of the CookieConsent component. Use the actual <CookieConsent /> component in BaseLayout.astro if desired.

@@ -4,14 +4,167 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
 import { Image } from "astro:assets";
-import Badge from "@components/Badge/Badge.astro";
-import Button from "@components/Button/Button.astro";
+import { Icon } from "astro-icon/components";
 
 // images
 import speakerImage from "@images/headshot/08.02.2022_Spryker_CEO_0278.jpg";
 import headshot1 from "@images/headshot/08.02.2022_Spryker_CEO_0278.jpg";
 import headshot2 from "@images/headshot/08.02.2022_Spryker_CEO_2636.jpg";
 import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
+
+const card =
+  "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-6";
+
+// Section overview cards
+const overview = [
+  {
+    icon: "tabler/outline/file-text",
+    title: "Rider Kit",
+    desc: "Technical and logistical requirements",
+  },
+  {
+    icon: "tabler/outline/user",
+    title: "Bio Format",
+    desc: "Speaker biography and credentials",
+  },
+  {
+    icon: "tabler/outline/currency-euro",
+    title: "Fee",
+    desc: "Speaking fees and expenses",
+  },
+  {
+    icon: "tabler/outline/quote",
+    title: "Testimonials",
+    desc: "What others say about my talks",
+  },
+  {
+    icon: "tabler/outline/map-pin",
+    title: "Travel & Accommodation",
+    desc: "Logistics and requirements",
+  },
+  {
+    icon: "tabler/outline/device-tv",
+    title: "AV/Tech Requirements",
+    desc: "Technical setup needed",
+  },
+  {
+    icon: "tabler/outline/news",
+    title: "Content for Your Marketing",
+    desc: "Materials to promote the event",
+  },
+  {
+    icon: "tabler/outline/sparkles",
+    title: "And the Rest...",
+    desc: "Additional information and details",
+  },
+];
+
+// Testimonials
+const testimonials = [
+  {
+    initial: "E",
+    quote:
+      "Guido is an excellent public speaker. Whether it's a workshop, a conference talk, or a meetup, he always manages to bring energy and knowledge to his presentations.",
+    name: "Erin Weigel",
+    role: "Advisor, ABsmartly",
+  },
+  {
+    initial: "A",
+    quote: "Give him a stage and the audience will love him!",
+    name: "Alex Franke",
+    role: "EVP, Spryker",
+  },
+  {
+    initial: "J",
+    quote:
+      "His session was extremely well received by a diverse audience of web development professionals. Guido's ability to communicate complex topics in a clear and engaging manner made his talk a highlight of the event.",
+    name: "John O'Connor",
+    role: "Development Inspector, Charles White Limited",
+  },
+  {
+    initial: "T",
+    quote:
+      "I attended Guido's CRO session at Growth Tribe and I was mind-blown. He's articulate, knowledgeable, and uses real examples and frameworks that you can actually apply.",
+    name: "Thomas Paris",
+    role: "Director of Demand Generation, Posh",
+  },
+  {
+    initial: "M",
+    quote:
+      "Guido brought his 'Persuasive eCommerce' topic to our meetup in Jakarta and the audience loved it. Very engaging speaker with deep practical knowledge.",
+    name: "Muliadi Jeo",
+    role: "Founder and Director, ICUBE",
+  },
+  {
+    initial: "F",
+    quote:
+      "Guido has a unique combination of knowledge about psychology, experimentation, and e-commerce that makes his talks both insightful and highly practical.",
+    name: "Florian Gendrault",
+    role: "CEO, Alleo",
+  },
+  {
+    initial: "R",
+    quote:
+      "Guido brings a unique blend of technical expertise and practical insights. His presentation style is engaging and the content is always relevant to our audience.",
+    name: "Rob Janssen",
+    role: "Event Director, Digital Analytics Congress",
+  },
+  {
+    initial: "K",
+    quote:
+      "Working with Guido was a pleasure. He understood our audience needs and delivered content that was both educational and actionable. Our attendees loved it!",
+    name: "Koen Verhagen",
+    role: "Conference Organizer, Meet Magento",
+  },
+  {
+    initial: "S",
+    quote:
+      "Guido's expertise in conversion optimization and his ability to translate complex concepts into practical advice made his session one of the most valuable at our event.",
+    name: "Sandra de Vries",
+    role: "Head of Programming, How to Web",
+  },
+];
+
+// Featured presentations
+const presentations = [
+  {
+    img: "/images/presentations/Guido_Jansen_Spryker_2663.jpg",
+    title: "Still A/B Testing Your Buttons?",
+    desc: "You need to think much bigger. How to move beyond basic button tests to meaningful experimentation.",
+    duration: "20 minutes",
+    href: "/presentations/still-a-b-testing-your-buttons-you-need-to-think-much-bigger/",
+  },
+  {
+    img: "/images/presentations/presentation-e4967d73.jpeg",
+    title: "Persuasive E-commerce",
+    desc: "Applying psychology principles to optimize digital customer experiences and drive conversions.",
+    duration: "40 minutes - 4 hours",
+    href: "/presentations/persuasive-e-commerce/",
+  },
+  {
+    img: "/images/presentations/presentation-8858f7b7.jpeg",
+    title: "Creating an Optimization Culture",
+    desc: "How to build experimentation teams and make data-driven decisions part of how an organization works.",
+    duration: "20-30 minutes",
+    href: "/presentations/creating-an-optimization-culture/",
+  },
+];
+
+// Headshots
+const headshots = [
+  {
+    src: headshot1,
+    href: "/images/headshot/08.02.2022_Spryker_CEO_0278.jpg",
+  },
+  {
+    src: headshot2,
+    href: "/images/headshot/08.02.2022_Spryker_CEO_2636.jpg",
+  },
+  {
+    src: headshot3,
+    href: "/images/headshot/08.02.2022_Spryker_CEO_2669.jpg",
+  },
+];
 ---
 
 <BaseLayout
@@ -19,331 +172,131 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
   description="Everything organizers typically want to know about me. Speaking terms, requirements, and booking information."
   noindex={true}
 >
-  <!-- Hero Section (mt-14 matches fixed nav height h-14) -->
-  <section class="relative mt-14 overflow-hidden py-24 md:py-32">
-    <!-- Background with speaking photo -->
-    <div class="absolute inset-0 z-0">
-      <div
-        class="from-primary-500/90 via-primary-500/70 to-accent-2/80 absolute inset-0 bg-gradient-to-br"
-      >
-      </div>
-      <div class="absolute inset-0 bg-black/30"></div>
-    </div>
-
-    <div class="site-container relative z-10">
-      <div class="mx-auto max-w-4xl text-center text-white">
-        <Badge class="mb-6">Speaker Information</Badge>
-        <h1 class="h1 mb-6 text-white">Conference Terms</h1>
-        <p class="mb-8 text-xl opacity-90 md:text-2xl">
+  <div class="home speaker-page">
+    <!-- ============ HERO ============ -->
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow">Speaker Information</span>
+        <h1
+          class="font-display mt-2 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Conference Terms
+        </h1>
+        <p
+          class="text-base-700 dark:text-base-300 text-[clamp(1.1rem,2vw,1.35rem)] leading-relaxed"
+        >
           Everything organizers typically want to know about me
         </p>
-        <p class="mx-auto max-w-2xl text-lg opacity-80">
+        <p
+          class="text-base-600 dark:text-base-400 mx-auto mt-4 max-w-2xl text-lg leading-relaxed"
+        >
           Community Builder with 20+ years creating technical ecosystems. 200+
           conference talks across 26 countries. If you're interested in having
           me speak at your event, you'll find all the information you need
           below.
         </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- What You Can Find Section -->
-  <section class="py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-16 text-center md:max-w-3xl">
-        <h2 class="h2 mb-4">What you can find on this page:</h2>
+    <!-- ============ WHAT YOU CAN FIND ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mb-10 text-center">
+        <span class="hand-note">on this page</span>
+        <h2
+          class="font-display text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+        >
+          What you can find on this page:
+        </h2>
       </div>
 
-      <div class="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
-        <div class="group text-center">
-          <div
-            class="bg-base-200 group-hover:bg-primary-500/20 dark:bg-base-700/50 dark:group-hover:bg-primary-500/30 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl transition-colors"
-          >
-            <svg
-              class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-base-900 dark:text-base-100 mb-2 font-semibold">
-            Rider Kit
-          </h3>
-          <p class="text-base-600 dark:text-base-400 text-sm">
-            Technical and logistical requirements
-          </p>
-        </div>
-
-        <div class="group text-center">
-          <div
-            class="bg-base-200 group-hover:bg-primary-500/20 dark:bg-base-700/50 dark:group-hover:bg-primary-500/30 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl transition-colors"
-          >
-            <svg
-              class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-base-900 dark:text-base-100 mb-2 font-semibold">
-            Bio Format
-          </h3>
-          <p class="text-base-600 dark:text-base-400 text-sm">
-            Speaker biography and credentials
-          </p>
-        </div>
-
-        <div class="group text-center">
-          <div
-            class="bg-base-200 group-hover:bg-primary-500/20 dark:bg-base-700/50 dark:group-hover:bg-primary-500/30 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl transition-colors"
-          >
-            <svg
-              class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-base-900 dark:text-base-100 mb-2 font-semibold">
-            Fee
-          </h3>
-          <p class="text-base-600 dark:text-base-400 text-sm">
-            Speaking fees and expenses
-          </p>
-        </div>
-
-        <div class="group text-center">
-          <div
-            class="bg-base-200 group-hover:bg-primary-500/20 dark:bg-base-700/50 dark:group-hover:bg-primary-500/30 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl transition-colors"
-          >
-            <svg
-              class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-base-900 dark:text-base-100 mb-2 font-semibold">
-            Testimonials
-          </h3>
-          <p class="text-base-600 dark:text-base-400 text-sm">
-            What others say about my talks
-          </p>
-        </div>
-
-        <div class="group text-center">
-          <div
-            class="bg-base-200 group-hover:bg-primary-500/20 dark:bg-base-700/50 dark:group-hover:bg-primary-500/30 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl transition-colors"
-          >
-            <svg
-              class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              ></path>
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-base-900 dark:text-base-100 mb-2 font-semibold">
-            Travel & Accommodation
-          </h3>
-          <p class="text-base-600 dark:text-base-400 text-sm">
-            Logistics and requirements
-          </p>
-        </div>
-
-        <div class="group text-center">
-          <div
-            class="bg-base-200 group-hover:bg-primary-500/20 dark:bg-base-700/50 dark:group-hover:bg-primary-500/30 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl transition-colors"
-          >
-            <svg
-              class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-base-900 dark:text-base-100 mb-2 font-semibold">
-            AV/Tech Requirements
-          </h3>
-          <p class="text-base-600 dark:text-base-400 text-sm">
-            Technical setup needed
-          </p>
-        </div>
-
-        <div class="group text-center">
-          <div
-            class="bg-base-200 group-hover:bg-primary-500/20 dark:bg-base-700/50 dark:group-hover:bg-primary-500/30 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl transition-colors"
-          >
-            <svg
-              class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-base-900 dark:text-base-100 mb-2 font-semibold">
-            Content for Your Marketing
-          </h3>
-          <p class="text-base-600 dark:text-base-400 text-sm">
-            Materials to promote the event
-          </p>
-        </div>
-
-        <div class="group text-center">
-          <div
-            class="bg-base-200 group-hover:bg-primary-500/20 dark:bg-base-700/50 dark:group-hover:bg-primary-500/30 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl transition-colors"
-          >
-            <svg
-              class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-base-900 dark:text-base-100 mb-2 font-semibold">
-            And the Rest...
-          </h3>
-          <p class="text-base-600 dark:text-base-400 text-sm">
-            Additional information and details
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Bio Section -->
-  <section class="bg-base-200/30 dark:bg-base-700/30 py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto max-w-6xl">
-        <div class="grid items-center gap-12 md:grid-cols-2">
-          <div>
-            <Image
-              src={speakerImage}
-              alt="Guido Jansen speaking at a conference"
-              class="w-full rounded-2xl shadow-lg"
-              widths={[400, 800, 1200]}
-              sizes="(min-width: 768px) 50vw, 100vw"
-              quality={90}
-              format="webp"
-            />
-          </div>
-          <div>
-            <Badge class="mb-4">About the Speaker</Badge>
-            <h2 class="h2 mb-6">Guido Jansen</h2>
-            <div
-              class="prose prose-lg text-base-600 dark:text-base-400 space-y-4"
-            >
-              <p>
-                Guido is a Community Builder who turns technical ecosystems into
-                real business growth. With 20+ years at the intersection of
-                psychology and technology, he has built community functions from
-                zero multiple times.
-              </p>
-              <p>
-                His cognitive psychology background shapes how he approaches
-                community work. Not by predicting how developers will behave,
-                but by testing assumptions and watching what they actually do,
-                because the one thing psychology reliably teaches is that you
-                can't reliably predict people.
-              </p>
-              <p>
-                He has presented at 200+ conferences across 26 countries on
-                topics including composable commerce, community building, and
-                digital psychology.
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+        {
+          overview.map((item) => (
+            <div class={`${card} text-center`}>
+              <div class="text-primary-600 dark:text-primary-400 mx-auto mb-3 flex size-12 items-center justify-center">
+                <Icon name={item.icon} class="size-7" aria-hidden="true" />
+              </div>
+              <h3 class="font-display text-[1rem] leading-snug font-bold">
+                {item.title}
+              </h3>
+              <p class="text-base-600 dark:text-base-400 mt-1.5 text-sm leading-relaxed">
+                {item.desc}
               </p>
             </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ============ BIO ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div
+        class="grid items-center gap-[clamp(1.5rem,4vw,3rem)] md:grid-cols-2"
+      >
+        <div>
+          <Image
+            src={speakerImage}
+            alt="Guido Jansen speaking at a conference"
+            class="w-full rounded-2xl"
+            widths={[400, 800, 1200]}
+            sizes="(min-width: 768px) 50vw, 100vw"
+            quality={90}
+            format="webp"
+          />
+        </div>
+        <div>
+          <span class="eyebrow">About the Speaker</span>
+          <h2
+            class="font-display mt-2 mb-5 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+          >
+            Guido Jansen
+          </h2>
+          <div
+            class="prose dark:prose-invert text-base-700 dark:text-base-300 max-w-none space-y-4 text-[1.05rem] leading-relaxed"
+          >
+            <p>
+              Guido is a Community Builder who turns technical ecosystems into
+              real business growth. With 20+ years at the intersection of
+              psychology and technology, he has built community functions from
+              zero multiple times.
+            </p>
+            <p>
+              His cognitive psychology background shapes how he approaches
+              community work. Not by predicting how developers will behave, but
+              by testing assumptions and watching what they actually do, because
+              the one thing psychology reliably teaches is that you can't
+              reliably predict people.
+            </p>
+            <p>
+              He has presented at 200+ conferences across 26 countries on topics
+              including composable commerce, community building, and digital
+              psychology.
+            </p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Am I the Right Fit Section -->
-  <section class="py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-12 max-w-4xl text-center">
-        <div
-          class="bg-primary-500/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
+    <!-- ============ AM I THE RIGHT FIT ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="eyebrow">
+          <Icon
+            name="tabler/outline/circle-check"
+            class="size-5"
+            aria-hidden="true"
+          />
+          The fit
+        </span>
+        <h2
+          class="font-display mt-2 mb-6 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
         >
-          <svg
-            class="text-primary-600 dark:text-primary-400 h-8 w-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-        </div>
-        <h2 class="h2 mb-6">Am I the right fit?</h2>
-      </div>
-
-      <div class="mx-auto max-w-3xl">
+          Am I the right fit?
+        </h2>
         <div
-          class="prose prose-lg text-base-600 dark:text-base-400 mx-auto space-y-6 text-center"
+          class="prose dark:prose-invert text-base-600 dark:text-base-400 mx-auto max-w-none space-y-6 text-[1.05rem] leading-relaxed"
         >
           <p>
             Before you reach out, it helps to be clear on what the session is
@@ -358,42 +311,37 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
             at least 3 months before your event.
           </p>
         </div>
-        <div class="mt-8 text-center">
-          <Button href="/contact/" variant="primary">
-            Contact Information Form
-          </Button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Talk Format Section -->
-  <section class="bg-base-200/30 dark:bg-base-700/30 py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-12 max-w-4xl text-center">
-        <div
-          class="bg-primary-500/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
-        >
-          <svg
-            class="text-primary-600 dark:text-primary-400 h-8 w-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        <div class="mt-8">
+          <a
+            href="/contact/"
+            class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m0 0V3a1 1 0 011 1v1M7 4V3a1 1 0 011-1m0 0h8m-8 0V2m8 2v1m0-1V2m0 2h1M8 7h8v10H8V7z"
-            ></path>
-          </svg>
+            Contact Information Form <span aria-hidden="true">→</span>
+          </a>
         </div>
-        <h2 class="h2 mb-6">Talk format</h2>
       </div>
+    </section>
 
+    <!-- ============ TALK FORMAT ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
       <div class="mx-auto max-w-3xl">
+        <div class="mb-8 text-center">
+          <span class="eyebrow">
+            <Icon
+              name="tabler/outline/presentation"
+              class="size-5"
+              aria-hidden="true"
+            />
+            On stage
+          </span>
+          <h2
+            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+          >
+            Talk format
+          </h2>
+        </div>
         <div
-          class="prose prose-lg text-base-600 dark:text-base-400 mx-auto space-y-6"
+          class="prose dark:prose-invert text-base-600 dark:text-base-400 mx-auto max-w-none space-y-6 text-[1.05rem] leading-relaxed"
         >
           <p>
             My talks are easy to understand sessions on usability, persuasion,
@@ -420,40 +368,33 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
           </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Fee Section -->
-  <section class="py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-12 max-w-4xl text-center">
-        <div
-          class="bg-primary-500/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
-        >
-          <svg
-            class="text-primary-600 dark:text-primary-400 h-8 w-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+    <!-- ============ FEE ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mx-auto max-w-3xl">
+        <div class="mb-8 text-center">
+          <span class="eyebrow">
+            <Icon
+              name="tabler/outline/currency-euro"
+              class="size-5"
+              aria-hidden="true"
+            />
+            Investment
+          </span>
+          <h2
+            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-            ></path>
-          </svg>
+            Fee
+          </h2>
         </div>
-        <h2 class="h2 mb-6">Fee</h2>
-      </div>
 
-      <div class="mx-auto max-w-4xl">
         <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-2xl border p-8 shadow-xs"
+          class="border-base-200 dark:border-base-800 from-gold/15 rounded-3xl border bg-gradient-to-br to-transparent p-[clamp(1.5rem,4vw,3rem)]"
         >
           <div class="mb-8 text-center">
             <div
-              class="text-primary-600 dark:text-primary-400 mb-2 text-4xl font-bold"
+              class="font-display text-primary-600 dark:text-primary-400 mb-2 text-[clamp(2.4rem,5vw,3.2rem)] leading-none font-black tabular-nums"
             >
               €5000
             </div>
@@ -463,7 +404,7 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
           </div>
 
           <div
-            class="prose prose-lg text-base-600 dark:text-base-400 space-y-6"
+            class="prose dark:prose-invert text-base-700 dark:text-base-300 max-w-none space-y-6 text-[1.05rem] leading-relaxed"
           >
             <p>
               My talks are about entertaining and teaching an audience. I don't
@@ -481,20 +422,21 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Payment Terms Section -->
-  <section class="bg-base-200/30 dark:bg-base-700/30 py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-12 max-w-4xl text-center">
-        <h2 class="h2 mb-6">Payment terms</h2>
-      </div>
+    <!-- ============ PAYMENT TERMS ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mx-auto max-w-4xl">
+        <div class="sec-head justify-center text-center">
+          <div>
+            <span class="hand-note">the fine print</span>
+            <h2>Payment terms</h2>
+          </div>
+        </div>
 
-      <div class="mx-auto max-w-6xl">
         <div class="space-y-8">
           <div
-            class="prose prose-lg text-base-600 dark:text-base-400 max-w-none space-y-6"
+            class="prose dark:prose-invert text-base-600 dark:text-base-400 max-w-none space-y-6 text-[1.05rem] leading-relaxed"
           >
             <p>
               The fee is paid in EUR (€) via wire transfer or PayPal. I pay my
@@ -508,42 +450,30 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
             </p>
           </div>
 
-          <div class="grid gap-8 md:grid-cols-2">
-            <div
-              class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-            >
-              <h3
-                class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-              >
-                Deposit
-              </h3>
-              <p class="text-base-600 dark:text-base-400">
+          <div class="grid gap-6 md:grid-cols-2">
+            <div class={card}>
+              <h3 class="font-display mb-3 text-[1.1rem] font-bold">Deposit</h3>
+              <p class="text-base-600 dark:text-base-400 leading-relaxed">
                 50% of the quoted fee, paid to confirm and reserve your date.
               </p>
             </div>
-            <div
-              class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-            >
-              <h3
-                class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-              >
+            <div class={card}>
+              <h3 class="font-display mb-3 text-[1.1rem] font-bold">
                 Final Payment
               </h3>
-              <p class="text-base-600 dark:text-base-400">
+              <p class="text-base-600 dark:text-base-400 leading-relaxed">
                 The remaining balance due after your session is completed.
               </p>
             </div>
           </div>
 
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-          >
-            <h3
-              class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-            >
+          <div class={card}>
+            <h3 class="font-display mb-4 text-[1.1rem] font-bold">
               Booking Terms
             </h3>
-            <ul class="text-base-600 dark:text-base-400 space-y-2">
+            <ul
+              class="text-base-600 dark:text-base-400 space-y-2 leading-relaxed"
+            >
               <li>
                 • Once the deposit is received, your date is confirmed and
                 reserved for your event.
@@ -562,499 +492,164 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Testimonials Section -->
-  <section class="py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-12 max-w-4xl text-center">
-        <div
-          class="bg-primary-500/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mb-10 text-center">
+        <span class="hand-note">kind words</span>
+        <h2
+          class="font-display text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
         >
-          <svg
-            class="text-primary-600 dark:text-primary-400 h-8 w-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-            ></path>
-          </svg>
-        </div>
-        <h2 class="h2 mb-6">What others say</h2>
-        <p class="text-base-600 dark:text-base-400 text-lg">
+          What others say
+        </h2>
+        <p class="text-base-600 dark:text-base-400 mt-3 text-lg">
           Feedback from event organizers and attendees
         </p>
       </div>
 
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-        >
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div
-                class="bg-base-200 dark:bg-base-700/50 flex h-12 w-12 items-center justify-center rounded-full"
-              >
-                <span
-                  class="text-primary-600 dark:text-primary-400 font-semibold"
-                  >E</span
-                >
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-600 dark:text-base-400 mb-4">
-                "Guido is an excellent public speaker. Whether it's a workshop,
-                a conference talk, or a meetup, he always manages to bring
-                energy and knowledge to his presentations."
-              </blockquote>
-              <div>
-                <div class="text-base-900 dark:text-base-100 font-semibold">
-                  Erin Weigel
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          testimonials.map((t) => (
+            <div class={card}>
+              <div class="flex items-start gap-4">
+                <div class="shrink-0">
+                  <div class="bg-primary-600/10 dark:bg-primary-400/15 text-primary-600 dark:text-primary-400 font-display flex size-12 items-center justify-center rounded-full font-bold">
+                    {t.initial}
+                  </div>
                 </div>
-                <div class="text-base-600 dark:text-base-400 text-sm">
-                  Advisor, ABsmartly
+                <div>
+                  <blockquote class="text-base-700 dark:text-base-300 mb-4 leading-relaxed">
+                    {t.quote}
+                  </blockquote>
+                  <div>
+                    <div class="font-display font-bold">{t.name}</div>
+                    <div class="text-base-500 text-sm">{t.role}</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-        >
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div
-                class="bg-base-200 dark:bg-base-700/50 flex h-12 w-12 items-center justify-center rounded-full"
-              >
-                <span
-                  class="text-primary-600 dark:text-primary-400 font-semibold"
-                  >A</span
-                >
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-600 dark:text-base-400 mb-4">
-                "Give him a stage and the audience will love him!"
-              </blockquote>
-              <div>
-                <div class="text-base-900 dark:text-base-100 font-semibold">
-                  Alex Franke
-                </div>
-                <div class="text-base-600 dark:text-base-400 text-sm">
-                  EVP, Spryker
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-        >
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div
-                class="bg-base-200 dark:bg-base-700/50 flex h-12 w-12 items-center justify-center rounded-full"
-              >
-                <span
-                  class="text-primary-600 dark:text-primary-400 font-semibold"
-                  >J</span
-                >
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-600 dark:text-base-400 mb-4">
-                "His session was extremely well received by a diverse audience
-                of web development professionals. Guido's ability to communicate
-                complex topics in a clear and engaging manner made his talk a
-                highlight of the event."
-              </blockquote>
-              <div>
-                <div class="text-base-900 dark:text-base-100 font-semibold">
-                  John O'Connor
-                </div>
-                <div class="text-base-600 dark:text-base-400 text-sm">
-                  Development Inspector, Charles White Limited
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-        >
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div
-                class="bg-base-200 dark:bg-base-700/50 flex h-12 w-12 items-center justify-center rounded-full"
-              >
-                <span
-                  class="text-primary-600 dark:text-primary-400 font-semibold"
-                  >T</span
-                >
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-600 dark:text-base-400 mb-4">
-                "I attended Guido's CRO session at Growth Tribe and I was
-                mind-blown. He's articulate, knowledgeable, and uses real
-                examples and frameworks that you can actually apply."
-              </blockquote>
-              <div>
-                <div class="text-base-900 dark:text-base-100 font-semibold">
-                  Thomas Paris
-                </div>
-                <div class="text-base-600 dark:text-base-400 text-sm">
-                  Director of Demand Generation, Posh
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-        >
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div
-                class="bg-base-200 dark:bg-base-700/50 flex h-12 w-12 items-center justify-center rounded-full"
-              >
-                <span
-                  class="text-primary-600 dark:text-primary-400 font-semibold"
-                  >M</span
-                >
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-600 dark:text-base-400 mb-4">
-                "Guido brought his 'Persuasive eCommerce' topic to our meetup in
-                Jakarta and the audience loved it. Very engaging speaker with
-                deep practical knowledge."
-              </blockquote>
-              <div>
-                <div class="text-base-900 dark:text-base-100 font-semibold">
-                  Muliadi Jeo
-                </div>
-                <div class="text-base-600 dark:text-base-400 text-sm">
-                  Founder and Director, ICUBE
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-        >
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div
-                class="bg-base-200 dark:bg-base-700/50 flex h-12 w-12 items-center justify-center rounded-full"
-              >
-                <span
-                  class="text-primary-600 dark:text-primary-400 font-semibold"
-                  >F</span
-                >
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-600 dark:text-base-400 mb-4">
-                "Guido has a unique combination of knowledge about psychology,
-                experimentation, and e-commerce that makes his talks both
-                insightful and highly practical."
-              </blockquote>
-              <div>
-                <div class="text-base-900 dark:text-base-100 font-semibold">
-                  Florian Gendrault
-                </div>
-                <div class="text-base-600 dark:text-base-400 text-sm">
-                  CEO, Alleo
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-        >
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div
-                class="bg-base-200 dark:bg-base-700/50 flex h-12 w-12 items-center justify-center rounded-full"
-              >
-                <span
-                  class="text-primary-600 dark:text-primary-400 font-semibold"
-                  >R</span
-                >
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-600 dark:text-base-400 mb-4">
-                "Guido brings a unique blend of technical expertise and
-                practical insights. His presentation style is engaging and the
-                content is always relevant to our audience."
-              </blockquote>
-              <div>
-                <div class="text-base-900 dark:text-base-100 font-semibold">
-                  Rob Janssen
-                </div>
-                <div class="text-base-600 dark:text-base-400 text-sm">
-                  Event Director, Digital Analytics Congress
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-        >
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div
-                class="bg-base-200 dark:bg-base-700/50 flex h-12 w-12 items-center justify-center rounded-full"
-              >
-                <span
-                  class="text-primary-600 dark:text-primary-400 font-semibold"
-                  >K</span
-                >
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-600 dark:text-base-400 mb-4">
-                "Working with Guido was a pleasure. He understood our audience
-                needs and delivered content that was both educational and
-                actionable. Our attendees loved it!"
-              </blockquote>
-              <div>
-                <div class="text-base-900 dark:text-base-100 font-semibold">
-                  Koen Verhagen
-                </div>
-                <div class="text-base-600 dark:text-base-400 text-sm">
-                  Conference Organizer, Meet Magento
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-        >
-          <div class="flex items-start space-x-4">
-            <div class="flex-shrink-0">
-              <div
-                class="bg-base-200 dark:bg-base-700/50 flex h-12 w-12 items-center justify-center rounded-full"
-              >
-                <span
-                  class="text-primary-600 dark:text-primary-400 font-semibold"
-                  >S</span
-                >
-              </div>
-            </div>
-            <div>
-              <blockquote class="text-base-600 dark:text-base-400 mb-4">
-                "Guido's expertise in conversion optimization and his ability to
-                translate complex concepts into practical advice made his
-                session one of the most valuable at our event."
-              </blockquote>
-              <div>
-                <div class="text-base-900 dark:text-base-100 font-semibold">
-                  Sandra de Vries
-                </div>
-                <div class="text-base-600 dark:text-base-400 text-sm">
-                  Head of Programming, How to Web
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          ))
+        }
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Featured Presentations -->
-  <section class="bg-base-200/30 dark:bg-base-700/30 py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-12 max-w-4xl text-center">
-        <h2 class="h2 mb-6">Featured Presentations</h2>
-        <p class="text-base-600 dark:text-base-400 text-lg">
+    <!-- ============ FEATURED PRESENTATIONS ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mb-10 text-center">
+        <span class="eyebrow">
+          <Icon name="tabler/outline/star" class="size-5" aria-hidden="true" />
+          Most requested
+        </span>
+        <h2
+          class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+        >
+          Featured Presentations
+        </h2>
+        <p class="text-base-600 dark:text-base-400 mt-3 text-lg">
           Some of my most popular talks that conference organizers frequently
           request
         </p>
       </div>
 
-      <div class="mb-12 grid gap-8 md:grid-cols-3">
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 overflow-hidden rounded-xl border shadow-xs transition-shadow hover:shadow-md"
-        >
-          <div class="aspect-video overflow-hidden">
-            <img
-              src="/images/presentations/Guido_Jansen_Spryker_2663.jpg"
-              alt="Still A/B Testing Your Buttons?"
-              class="h-full w-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div class="p-6">
-            <h3 class="text-base-900 dark:text-base-100 mb-2 font-semibold">
-              Still A/B Testing Your Buttons?
-            </h3>
-            <p class="text-base-600 dark:text-base-400 mb-4 text-sm">
-              You need to think much bigger. How to move beyond basic button
-              tests to meaningful experimentation.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-base-600 dark:text-base-400 text-xs"
-                >20 minutes</span
-              >
-              <a
-                href="/presentations/still-a-b-testing-your-buttons-you-need-to-think-much-bigger/"
-                class="text-primary-600 dark:text-primary-400 text-sm hover:underline"
-                >Learn more →</a
-              >
+      <div class="mb-10 grid gap-6 md:grid-cols-3">
+        {
+          presentations.map((p) => (
+            <div class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 overflow-hidden rounded-2xl border transition-shadow hover:shadow-md">
+              <div class="aspect-video overflow-hidden">
+                <img
+                  src={p.img}
+                  alt={p.title}
+                  class="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="font-display mb-2 text-[1.05rem] font-bold">
+                  {p.title}
+                </h3>
+                <p class="text-base-600 dark:text-base-400 mb-4 text-sm leading-relaxed">
+                  {p.desc}
+                </p>
+                <div class="flex items-center justify-between">
+                  <span class="text-base-500 text-xs">{p.duration}</span>
+                  <a
+                    href={p.href}
+                    class="text-primary-600 dark:text-primary-400 font-display inline-flex items-center gap-1.5 text-sm font-bold"
+                  >
+                    Learn more <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 overflow-hidden rounded-xl border shadow-xs transition-shadow hover:shadow-md"
-        >
-          <div class="aspect-video overflow-hidden">
-            <img
-              src="/images/presentations/presentation-e4967d73.jpeg"
-              alt="Persuasive E-commerce"
-              class="h-full w-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div class="p-6">
-            <h3 class="text-base-900 dark:text-base-100 mb-2 font-semibold">
-              Persuasive E-commerce
-            </h3>
-            <p class="text-base-600 dark:text-base-400 mb-4 text-sm">
-              Applying psychology principles to optimize digital customer
-              experiences and drive conversions.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-base-600 dark:text-base-400 text-xs"
-                >40 minutes - 4 hours</span
-              >
-              <a
-                href="/presentations/persuasive-e-commerce/"
-                class="text-primary-600 dark:text-primary-400 text-sm hover:underline"
-                >Learn more →</a
-              >
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 overflow-hidden rounded-xl border shadow-xs transition-shadow hover:shadow-md"
-        >
-          <div class="aspect-video overflow-hidden">
-            <img
-              src="/images/presentations/presentation-8858f7b7.jpeg"
-              alt="Creating an Optimization Culture"
-              class="h-full w-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div class="p-6">
-            <h3 class="text-base-900 dark:text-base-100 mb-2 font-semibold">
-              Creating an Optimization Culture
-            </h3>
-            <p class="text-base-600 dark:text-base-400 mb-4 text-sm">
-              How to build experimentation teams and make data-driven decisions
-              part of how an organization works.
-            </p>
-            <div class="flex items-center justify-between">
-              <span class="text-base-600 dark:text-base-400 text-xs"
-                >20-30 minutes</span
-              >
-              <a
-                href="/presentations/creating-an-optimization-culture/"
-                class="text-primary-600 dark:text-primary-400 text-sm hover:underline"
-                >Learn more →</a
-              >
-            </div>
-          </div>
-        </div>
+          ))
+        }
       </div>
 
       <div class="text-center">
-        <Button href="/presentations/" variant="outline">
-          View All Presentations
-        </Button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Travel & Accommodation Section -->
-  <section class="py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-12 max-w-4xl text-center">
-        <div
-          class="bg-base-200 dark:bg-base-700/50 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
+        <a
+          href="/presentations/"
+          class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
         >
-          <svg
-            class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-            ></path>
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          </svg>
-        </div>
-        <h2 class="h2 mb-6">Travel & Accommodation</h2>
+          View All Presentations
+        </a>
       </div>
+    </section>
 
-      <div class="mx-auto max-w-6xl">
-        <div class="grid gap-8 md:grid-cols-2">
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
+    <!-- ============ TRAVEL & ACCOMMODATION ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mx-auto max-w-4xl">
+        <div class="mb-8 text-center">
+          <span class="eyebrow">
+            <Icon
+              name="tabler/outline/map-pin"
+              class="size-5"
+              aria-hidden="true"
+            />
+            Logistics
+          </span>
+          <h2
+            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
           >
-            <h3
-              class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-            >
+            Travel & Accommodation
+          </h2>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class={card}>
+            <div class="text-primary-600 dark:text-primary-400 mb-3">
+              <Icon
+                name="tabler/outline/plane"
+                class="size-6"
+                aria-hidden="true"
+              />
+            </div>
+            <h3 class="font-display mb-4 text-[1.1rem] font-bold">
               Travel Requirements
             </h3>
-            <ul class="text-base-600 dark:text-base-400 space-y-2">
+            <ul
+              class="text-base-600 dark:text-base-400 space-y-2 leading-relaxed"
+            >
               <li>• Flight booking and costs covered by organizer</li>
               <li>• Business class for flights over 3 hours</li>
               <li>• Airport transfers or rental car if needed</li>
               <li>• Travel insurance coverage</li>
             </ul>
           </div>
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-          >
-            <h3
-              class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-            >
+          <div class={card}>
+            <div class="text-primary-600 dark:text-primary-400 mb-3">
+              <Icon
+                name="tabler/outline/luggage"
+                class="size-6"
+                aria-hidden="true"
+              />
+            </div>
+            <h3 class="font-display mb-4 text-[1.1rem] font-bold">
               Accommodation
             </h3>
-            <ul class="text-base-600 dark:text-base-400 space-y-2">
+            <ul
+              class="text-base-600 dark:text-base-400 space-y-2 leading-relaxed"
+            >
               <li>• 4-star hotel or equivalent accommodation</li>
               <li>• Arrival day before event + departure day after</li>
               <li>• Quiet room for preparation (if needed)</li>
@@ -1063,59 +658,62 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- AV/Tech Requirements Section -->
-  <section class="bg-base-200/30 dark:bg-base-700/30 py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-12 max-w-4xl text-center">
-        <div
-          class="bg-base-200 dark:bg-base-700/50 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
-        >
-          <svg
-            class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+    <!-- ============ AV/TECH REQUIREMENTS ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mx-auto max-w-4xl">
+        <div class="mb-8 text-center">
+          <span class="eyebrow">
+            <Icon
+              name="tabler/outline/device-tv"
+              class="size-5"
+              aria-hidden="true"
+            />
+            Setup
+          </span>
+          <h2
+            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-            ></path>
-          </svg>
+            AV/Tech Requirements
+          </h2>
         </div>
-        <h2 class="h2 mb-6">AV/Tech Requirements</h2>
-      </div>
 
-      <div class="mx-auto max-w-6xl">
-        <div class="grid gap-8 md:grid-cols-2">
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-          >
-            <h3
-              class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-            >
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class={card}>
+            <div class="text-primary-600 dark:text-primary-400 mb-3">
+              <Icon
+                name="tabler/outline/tools"
+                class="size-6"
+                aria-hidden="true"
+              />
+            </div>
+            <h3 class="font-display mb-4 text-[1.1rem] font-bold">
               Basic Setup
             </h3>
-            <ul class="text-base-600 dark:text-base-400 space-y-2">
+            <ul
+              class="text-base-600 dark:text-base-400 space-y-2 leading-relaxed"
+            >
               <li>• Projector/large screen for presentations</li>
               <li>• Wireless presentation remote (clicker)</li>
               <li>• Lapel microphone (wireless preferred)</li>
               <li>• Basic lighting (standard conference setup)</li>
             </ul>
           </div>
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-          >
-            <h3
-              class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-            >
+          <div class={card}>
+            <div class="text-primary-600 dark:text-primary-400 mb-3">
+              <Icon
+                name="tabler/outline/plug-connected"
+                class="size-6"
+                aria-hidden="true"
+              />
+            </div>
+            <h3 class="font-display mb-4 text-[1.1rem] font-bold">
               Technical Details
             </h3>
-            <ul class="text-base-600 dark:text-base-400 space-y-2">
+            <ul
+              class="text-base-600 dark:text-base-400 space-y-2 leading-relaxed"
+            >
               <li>• HDMI connection for MacBook Pro</li>
               <li>• Internet connection for live demos</li>
               <li>• Recording equipment (if session is recorded)</li>
@@ -1124,48 +722,37 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Biography Section -->
-  <section class="py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-12 max-w-4xl text-center">
-        <div
-          class="bg-base-200 dark:bg-base-700/50 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
-        >
-          <svg
-            class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+    <!-- ============ BIOGRAPHY ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mx-auto max-w-4xl">
+        <div class="mb-8 text-center">
+          <span class="eyebrow">
+            <Icon
+              name="tabler/outline/user"
+              class="size-5"
+              aria-hidden="true"
+            />
+            Copy-paste ready
+          </span>
+          <h2
+            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-            ></path>
-          </svg>
+            Biography
+          </h2>
+          <p class="text-base-600 dark:text-base-400 mt-3 text-lg">
+            Copy-paste ready speaker bio for your marketing materials
+          </p>
         </div>
-        <h2 class="h2 mb-6">Biography</h2>
-        <p class="text-base-600 dark:text-base-400 text-lg">
-          Copy-paste ready speaker bio for your marketing materials
-        </p>
-      </div>
 
-      <div class="mx-auto max-w-6xl">
-        <div class="space-y-8">
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-8"
-          >
-            <h3
-              class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-            >
+        <div class="space-y-6">
+          <div class={card}>
+            <h3 class="font-display mb-4 text-[1.1rem] font-bold">
               Short Bio (50 words)
             </h3>
             <div
-              class="prose prose-lg text-base-600 dark:text-base-400 max-w-none"
+              class="prose dark:prose-invert text-base-700 dark:text-base-300 max-w-none leading-relaxed"
             >
               <p>
                 Guido X Jansen is a Community Builder with 20+ years creating
@@ -1178,16 +765,12 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
             </div>
           </div>
 
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-8"
-          >
-            <h3
-              class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-            >
+          <div class={card}>
+            <h3 class="font-display mb-4 text-[1.1rem] font-bold">
               Medium Bio (100 words)
             </h3>
             <div
-              class="prose prose-lg text-base-600 dark:text-base-400 max-w-none"
+              class="prose dark:prose-invert text-base-700 dark:text-base-300 max-w-none space-y-4 leading-relaxed"
             >
               <p>
                 Guido X Jansen is a Community Builder who creates technical
@@ -1211,16 +794,12 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
             </div>
           </div>
 
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-8"
-          >
-            <h3
-              class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-            >
+          <div class={card}>
+            <h3 class="font-display mb-4 text-[1.1rem] font-bold">
               Long Bio (200 words)
             </h3>
             <div
-              class="prose prose-lg text-base-600 dark:text-base-400 max-w-none"
+              class="prose dark:prose-invert text-base-700 dark:text-base-300 max-w-none space-y-4 leading-relaxed"
             >
               <p>
                 Guido X Jansen is a Community Builder who turns technical
@@ -1255,47 +834,38 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Content for Marketing Section -->
-  <section class="bg-base-200/30 dark:bg-base-700/30 py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-12 max-w-4xl text-center">
-        <div
-          class="bg-base-200 dark:bg-base-700/50 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
-        >
-          <svg
-            class="text-primary-600 dark:text-primary-400/90 h-8 w-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+    <!-- ============ CONTENT FOR MARKETING ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mx-auto max-w-4xl">
+        <div class="mb-8 text-center">
+          <span class="eyebrow">
+            <Icon
+              name="tabler/outline/speakerphone"
+              class="size-5"
+              aria-hidden="true"
+            />
+            Promotion
+          </span>
+          <h2
+            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-            ></path>
-          </svg>
+            Content for Your Marketing
+          </h2>
+          <p class="text-base-600 dark:text-base-400 mt-3 text-lg">
+            Ready-to-use materials to promote the session
+          </p>
         </div>
-        <h2 class="h2 mb-6">Content for Your Marketing</h2>
-        <p class="text-base-600 dark:text-base-400 text-lg">
-          Ready-to-use materials to promote the session
-        </p>
-      </div>
 
-      <div class="mx-auto max-w-6xl">
-        <div class="grid gap-8 md:grid-cols-2">
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-          >
-            <h3
-              class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-            >
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class={card}>
+            <h3 class="font-display mb-4 text-[1.1rem] font-bold">
               Session Titles
             </h3>
-            <ul class="text-base-600 dark:text-base-400 space-y-2">
+            <ul
+              class="text-base-600 dark:text-base-400 space-y-2 leading-relaxed"
+            >
               <li>• "Building a Culture of Experimentation"</li>
               <li>• "Digital Psychology for Better Conversions"</li>
               <li>• "From A/B Testing to Full Experimentation Culture"</li>
@@ -1303,15 +873,13 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
               <li>• "CRO: Beyond the Buttons and Colors"</li>
             </ul>
           </div>
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
-          >
-            <h3
-              class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-            >
+          <div class={card}>
+            <h3 class="font-display mb-4 text-[1.1rem] font-bold">
               Key Topics
             </h3>
-            <ul class="text-base-600 dark:text-base-400 space-y-2">
+            <ul
+              class="text-base-600 dark:text-base-400 space-y-2 leading-relaxed"
+            >
               <li>• Behavioral psychology principles</li>
               <li>• A/B testing best practices</li>
               <li>• Experimentation culture development</li>
@@ -1321,129 +889,104 @@ import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
           </div>
         </div>
 
-        <div
-          class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 mt-8 rounded-xl border p-6"
-        >
-          <h3
-            class="text-base-900 dark:text-base-100 mb-4 text-xl font-semibold"
-          >
+        <div class={`${card} mt-6`}>
+          <h3 class="font-display mb-4 text-[1.1rem] font-bold">
             Social Media Kit
           </h3>
-          <p class="text-base-600 dark:text-base-400 mb-4">
+          <p class="text-base-600 dark:text-base-400 mb-4 leading-relaxed">
             Professional headshots, social media graphics, and promotional copy
             available upon request for event marketing.
           </p>
-          <Button href="/contact/" variant="outline"
-            >Request Marketing Materials</Button
+          <a
+            href="/contact/"
+            class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
           >
+            Request Marketing Materials
+          </a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Headshots Section -->
-  <section class="py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto mb-12 max-w-4xl text-center">
-        <h2 class="h2 mb-6">Headshots</h2>
-        <p class="text-base-600 dark:text-base-400 text-lg">
+    <!-- ============ HEADSHOTS ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mb-10 text-center">
+        <span class="eyebrow">
+          <Icon
+            name="tabler/outline/camera"
+            class="size-5"
+            aria-hidden="true"
+          />
+          Press kit
+        </span>
+        <h2
+          class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+        >
+          Headshots
+        </h2>
+        <p class="text-base-600 dark:text-base-400 mt-3 text-lg">
           High-resolution headshots for your event marketing materials
         </p>
       </div>
 
       <div class="grid gap-6 md:grid-cols-3">
-        <div class="group">
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 aspect-square overflow-hidden rounded-xl border"
-          >
-            <Image
-              src={headshot1}
-              alt="Guido Jansen headshot"
-              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              widths={[400, 600, 800]}
-              sizes="(min-width: 768px) 33vw, 100vw"
-              quality={90}
-              format="webp"
-            />
-          </div>
-          <div class="mt-4 text-center">
-            <a
-              href="/images/headshot/08.02.2022_Spryker_CEO_0278.jpg"
-              target="_blank"
-              class="button button--outline border-primary-600 text-base-900 hover:bg-primary-600 dark:border-primary-400 dark:text-base-100 inline-flex items-center rounded-md border-2 px-4 py-2 text-sm font-medium transition-colors hover:text-white"
-            >
-              Download High-Res
-            </a>
-          </div>
-        </div>
-
-        <div class="group">
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 aspect-square overflow-hidden rounded-xl border"
-          >
-            <Image
-              src={headshot2}
-              alt="Guido Jansen headshot"
-              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              widths={[400, 600, 800]}
-              sizes="(min-width: 768px) 33vw, 100vw"
-              quality={90}
-              format="webp"
-            />
-          </div>
-          <div class="mt-4 text-center">
-            <a
-              href="/images/headshot/08.02.2022_Spryker_CEO_2636.jpg"
-              target="_blank"
-              class="button button--outline border-primary-600 text-base-900 hover:bg-primary-600 dark:border-primary-400 dark:text-base-100 inline-flex items-center rounded-md border-2 px-4 py-2 text-sm font-medium transition-colors hover:text-white"
-            >
-              Download High-Res
-            </a>
-          </div>
-        </div>
-
-        <div class="group">
-          <div
-            class="border-base-200 bg-base-100 dark:border-base-700 dark:bg-base-900 aspect-square overflow-hidden rounded-xl border"
-          >
-            <Image
-              src={headshot3}
-              alt="Guido Jansen headshot"
-              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              widths={[400, 600, 800]}
-              sizes="(min-width: 768px) 33vw, 100vw"
-              quality={90}
-              format="webp"
-            />
-          </div>
-          <div class="mt-4 text-center">
-            <a
-              href="/images/headshot/08.02.2022_Spryker_CEO_2669.jpg"
-              target="_blank"
-              class="button button--outline border-primary-600 text-base-900 hover:bg-primary-600 dark:border-primary-400 dark:text-base-100 inline-flex items-center rounded-md border-2 px-4 py-2 text-sm font-medium transition-colors hover:text-white"
-            >
-              Download High-Res
-            </a>
-          </div>
-        </div>
+        {
+          headshots.map((h) => (
+            <div class="group">
+              <div class="border-base-200 dark:border-base-800 bg-base-50 dark:bg-base-900 aspect-square overflow-hidden rounded-2xl border">
+                <Image
+                  src={h.src}
+                  alt="Guido Jansen headshot"
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  widths={[400, 600, 800]}
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  quality={90}
+                  format="webp"
+                />
+              </div>
+              <div class="mt-4 text-center">
+                <a
+                  href={h.href}
+                  target="_blank"
+                  class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 font-display inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-bold transition"
+                >
+                  Download High-Res
+                </a>
+              </div>
+            </div>
+          ))
+        }
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact CTA Section -->
-  <section class="py-16 md:py-20">
-    <div class="site-container">
-      <div class="mx-auto max-w-4xl text-center">
-        <h2 class="h2 mb-6">Ready to book me for your event?</h2>
-        <p class="text-base-600 dark:text-base-400 mb-8 text-lg">
-          If you have more info, you can <a
+    <!-- ============ CONTACT CTA ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div
+        class="border-base-200 dark:border-base-800 from-gold/15 rounded-3xl border bg-gradient-to-br to-transparent p-[clamp(1.5rem,4vw,3rem)] text-center"
+      >
+        <div class="mx-auto max-w-2xl">
+          <span class="eyebrow">Let's work together</span>
+          <h2
+            class="font-display mt-2 mb-4 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+          >
+            Ready to book me for your event?
+          </h2>
+          <p
+            class="text-base-700 dark:text-base-300 mb-8 text-[1.05rem] leading-relaxed"
+          >
+            If you have more info, you can <a
+              href="/contact/"
+              class="text-primary-600 dark:text-primary-400 font-semibold"
+              >contact me here</a
+            >.
+          </p>
+          <a
             href="/contact/"
-            class="text-primary-600 dark:text-primary-400 hover:underline"
-            >contact me here</a
-          >.
-        </p>
-        <Button href="/contact/" variant="primary"> Get in Touch </Button>
+            class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
+          >
+            Get in Touch <span aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>

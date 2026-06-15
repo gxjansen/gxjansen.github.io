@@ -5,8 +5,6 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 // components
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import Badge from "@components/Badge/Badge.astro";
-import Button from "@components/Button/Button.astro";
 import Accordion from "@components/Accordion/Accordion.astro";
 import CompanyLogos from "@components/Companies/CompanyLogos.astro";
 
@@ -190,19 +188,21 @@ const testimonials = [
     set:html={JSON.stringify(serviceSchema)}
   />
 
-  <!-- Hero (mt-14 matches fixed nav height h-14) -->
-  <section
-    id="hero"
-    aria-labelledby="hero-heading"
-    class="relative mt-14 overflow-hidden py-20 md:py-28"
-  >
-    <div class="site-container relative">
-      <div class="grid items-center gap-12 lg:grid-cols-[7fr_5fr] lg:gap-16">
+  <div class="home retainer-page">
+    <!-- ============ HERO ============ -->
+    <section
+      id="hero"
+      aria-labelledby="hero-heading"
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div
+        class="grid items-center gap-[clamp(1.5rem,4vw,3rem)] lg:grid-cols-[7fr_5fr]"
+      >
         <div>
-          <Badge>Retainer Advisory</Badge>
+          <span class="eyebrow">Retainer Advisory</span>
           <h1
             id="hero-heading"
-            class="text-base-900 dark:text-base-100 text-4xl leading-tight font-bold tracking-tight text-balance md:text-5xl lg:text-6xl lg:leading-[1.1]"
+            class="font-display mt-2 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em] text-balance"
           >
             Senior community leadership for companies not yet ready to hire one.
           </h1>
@@ -233,15 +233,15 @@ const testimonials = [
             role="group"
             aria-label="Call to action buttons"
           >
-            <Button
-              variant="primary"
+            <a
               href="#apply"
               aria-label="Work with me, go to application section"
-              umamiEvent="cta-click"
-              umamiEventTarget="retainer-hero-work-with-me"
+              data-umami-event="cta-click"
+              data-umami-event-target="retainer-hero-work-with-me"
+              class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
             >
-              Work with me
-            </Button>
+              Work with me <span aria-hidden="true">→</span>
+            </a>
             <span class="text-base-600 dark:text-base-400 text-sm">
               <strong class="text-base-700 dark:text-base-300"
                 >{seatAvailabilityLabel}</strong
@@ -267,20 +267,19 @@ const testimonials = [
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Why this offer exists, LinkedIn-quotable hook block -->
-  <section
-    id="why-this-offer"
-    aria-labelledby="why-this-offer-heading"
-    class="border-base-200/60 dark:border-base-800/60 border-t py-20 md:py-24"
-  >
-    <div class="site-container">
-      <div class="mx-auto max-w-3xl">
+    <!-- ============ WHY THIS OFFER EXISTS ============ -->
+    <section
+      id="why-this-offer"
+      aria-labelledby="why-this-offer-heading"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-3xl">
+        <span class="hand-note">the real problem</span>
         <h2
           id="why-this-offer-heading"
-          class="h2 text-base-900 dark:text-base-100 mb-8"
+          class="font-display mb-8 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
         >
           Why this offer exists.
         </h2>
@@ -295,29 +294,24 @@ const testimonials = [
           </p>
           <ul class="space-y-4">
             <li>
-              <strong class="text-base-900 dark:text-base-100"
-                >Roadmap drift on community signal.</strong
-              > Product decisions stop tracing back to what users are actually asking
-              for. The team can feel it months before the dashboard catches up.
+              <strong>Roadmap drift on community signal.</strong> Product decisions
+              stop tracing back to what users are actually asking for. The team can
+              feel it months before the dashboard catches up.
             </li>
             <li>
-              <strong class="text-base-900 dark:text-base-100"
-                >Junior-IC burnout.</strong
-              > The person carrying community gets stretched, makes calls they aren't
-              senior enough to make, and either churns out or stops trying. The function
-              rebuilds from zero.
+              <strong>Junior-IC burnout.</strong> The person carrying community gets
+              stretched, makes calls they aren't senior enough to make, and either
+              churns out or stops trying. The function rebuilds from zero.
             </li>
             <li>
-              <strong class="text-base-900 dark:text-base-100"
-                >Budget-review carnage.</strong
-              > Community is the first line cut when nobody can defend it with numbers.
-              You spend a year rebuilding what got knifed in one finance meeting.
+              <strong>Budget-review carnage.</strong> Community is the first line
+              cut when nobody can defend it with numbers. You spend a year rebuilding
+              what got knifed in one finance meeting.
             </li>
             <li>
-              <strong class="text-base-900 dark:text-base-100"
-                >The €200K wrong-hire.</strong
-              > Senior community hires without a tested thesis are a year lost and
-              a re-recruit. The retainer tests the thesis before the hire.
+              <strong>The €200K wrong-hire.</strong> Senior community hires without
+              a tested thesis are a year lost and a re-recruit. The retainer tests
+              the thesis before the hire.
             </li>
           </ul>
           <p class="text-base-900 dark:text-base-100 font-medium">
@@ -326,25 +320,19 @@ const testimonials = [
           </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Section 01, Core offering -->
-  <section
-    id="core-offering"
-    aria-labelledby="core-offering-heading"
-    class="border-base-200/60 dark:border-base-800/60 border-t py-20 md:py-24"
-  >
-    <div class="site-container">
-      <div class="mx-auto max-w-3xl">
-        <p
-          class="text-primary-600 dark:text-primary-400 mb-2 text-sm tracking-wider uppercase"
-        >
-          01. Core offering
-        </p>
+    <!-- ============ 01 CORE OFFERING ============ -->
+    <section
+      id="core-offering"
+      aria-labelledby="core-offering-heading"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-3xl">
+        <span class="eyebrow">01. Core offering</span>
         <h2
           id="core-offering-heading"
-          class="h2 text-base-900 dark:text-base-100 mb-6"
+          class="font-display mt-2 mb-6 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
         >
           Senior thinking partner. So your team gets to actually execute.
         </h2>
@@ -363,7 +351,7 @@ const testimonials = [
             invest in, what to stop, what to ignore).
           </p>
           <p
-            class="border-primary-500 bg-base-100/40 dark:bg-base-900/30 border-l-4 py-3 pl-6 italic"
+            class="border-primary-600 dark:border-primary-400 bg-base-50 dark:bg-base-900 border-l-4 py-3 pl-6 italic"
           >
             In practice: the person already doing this work has senior backup.
             Decisions move faster, and the roadmap stops drifting off community
@@ -372,136 +360,132 @@ const testimonials = [
         </div>
       </div>
 
-      <!-- Hire-vs-retainer comparison panel, in a wider container -->
-      <div class="mx-auto mt-12 max-w-6xl">
-        <div class="grid gap-6 md:grid-cols-2 md:gap-6">
-          <div
-            class="border-base-200 bg-base-100/40 dark:border-base-800 dark:bg-base-900/30 flex flex-col rounded-2xl border p-6"
+      <!-- Hire-vs-retainer comparison panel -->
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        <div
+          class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex flex-col rounded-2xl border p-6"
+        >
+          <p
+            class="text-base-600 dark:text-base-400 mb-1 text-xs font-semibold tracking-wider uppercase"
           >
-            <p
-              class="text-base-600 dark:text-base-400 mb-1 text-xs font-semibold tracking-wider uppercase"
-            >
-              The alternative
-            </p>
-            <h3 class="text-base-900 dark:text-base-100 mb-6 text-xl font-bold">
-              Senior community / DevRel hire
-            </h3>
-            <dl class="space-y-5 text-base">
-              <div>
-                <dt
-                  class="text-base-600 dark:text-base-400 text-xs font-semibold tracking-wider uppercase"
-                >
-                  Loaded cost
-                </dt>
-                <dd class="text-base-800 dark:text-base-200 mt-1">
-                  €150K+ per year
-                </dd>
-              </div>
-              <div>
-                <dt
-                  class="text-base-600 dark:text-base-400 text-xs font-semibold tracking-wider uppercase"
-                >
-                  Time to start
-                </dt>
-                <dd class="text-base-800 dark:text-base-200 mt-1">
-                  3–4 months to land
-                </dd>
-              </div>
-              <div>
-                <dt
-                  class="text-base-600 dark:text-base-400 text-xs font-semibold tracking-wider uppercase"
-                >
-                  Wrong-hire risk
-                </dt>
-                <dd class="text-base-800 dark:text-base-200 mt-1">
-                  High. No scorecard yet to hire well.
-                </dd>
-              </div>
-              <div>
-                <dt
-                  class="text-base-600 dark:text-base-400 text-xs font-semibold tracking-wider uppercase"
-                >
-                  At month 6
-                </dt>
-                <dd class="text-base-800 dark:text-base-200 mt-1">
-                  Maybe an onboarded leader.
-                </dd>
-              </div>
-            </dl>
-          </div>
+            The alternative
+          </p>
+          <h3 class="font-display mb-6 text-xl font-bold">
+            Senior community / DevRel hire
+          </h3>
+          <dl class="space-y-5 text-base">
+            <div>
+              <dt
+                class="text-base-600 dark:text-base-400 text-xs font-semibold tracking-wider uppercase"
+              >
+                Loaded cost
+              </dt>
+              <dd class="text-base-800 dark:text-base-200 mt-1">
+                €150K+ per year
+              </dd>
+            </div>
+            <div>
+              <dt
+                class="text-base-600 dark:text-base-400 text-xs font-semibold tracking-wider uppercase"
+              >
+                Time to start
+              </dt>
+              <dd class="text-base-800 dark:text-base-200 mt-1">
+                3–4 months to land
+              </dd>
+            </div>
+            <div>
+              <dt
+                class="text-base-600 dark:text-base-400 text-xs font-semibold tracking-wider uppercase"
+              >
+                Wrong-hire risk
+              </dt>
+              <dd class="text-base-800 dark:text-base-200 mt-1">
+                High. No scorecard yet to hire well.
+              </dd>
+            </div>
+            <div>
+              <dt
+                class="text-base-600 dark:text-base-400 text-xs font-semibold tracking-wider uppercase"
+              >
+                At month 6
+              </dt>
+              <dd class="text-base-800 dark:text-base-200 mt-1">
+                Maybe an onboarded leader.
+              </dd>
+            </div>
+          </dl>
+        </div>
 
-          <div
-            class="border-primary-500/50 bg-primary-500/5 dark:border-primary-500/40 dark:bg-primary-500/10 flex flex-col rounded-2xl border-2 p-6"
+        <div
+          class="bg-base-50 dark:bg-base-900 border-primary-600/40 dark:border-primary-400/40 ring-primary-600/20 flex flex-col rounded-2xl border p-6 ring-1"
+        >
+          <p
+            class="text-primary-600 dark:text-primary-400 mb-1 text-xs font-semibold tracking-wider uppercase"
           >
-            <p
-              class="text-primary-600 dark:text-primary-400 mb-1 text-xs font-semibold tracking-wider uppercase"
-            >
-              The retainer
-            </p>
-            <h3 class="text-base-900 dark:text-base-100 mb-6 text-xl font-bold">
-              Six-month advisory
-            </h3>
-            <dl class="space-y-5 text-base">
-              <div>
-                <dt
-                  class="text-primary-600 dark:text-primary-400 text-xs font-semibold tracking-wider uppercase"
-                >
-                  Loaded cost
-                </dt>
-                <dd class="text-base-900 dark:text-base-100 mt-1 font-medium">
-                  Less than a quarter of the hire.
-                </dd>
-              </div>
-              <div>
-                <dt
-                  class="text-primary-600 dark:text-primary-400 text-xs font-semibold tracking-wider uppercase"
-                >
-                  Time to start
-                </dt>
-                <dd class="text-base-900 dark:text-base-100 mt-1 font-medium">
-                  Next week.
-                </dd>
-              </div>
-              <div>
-                <dt
-                  class="text-primary-600 dark:text-primary-400 text-xs font-semibold tracking-wider uppercase"
-                >
-                  Wrong-hire risk
-                </dt>
-                <dd class="text-base-900 dark:text-base-100 mt-1 font-medium">
-                  Tested before the hire.
-                </dd>
-              </div>
-              <div>
-                <dt
-                  class="text-primary-600 dark:text-primary-400 text-xs font-semibold tracking-wider uppercase"
-                >
-                  At month 6
-                </dt>
-                <dd class="text-base-900 dark:text-base-100 mt-1 font-medium">
-                  A scorecard, a working system, and the decisions already made.
-                  Whether or not a senior hire ends up making sense.
-                </dd>
-              </div>
-            </dl>
-          </div>
+            The retainer
+          </p>
+          <h3 class="font-display mb-6 text-xl font-bold">
+            Six-month advisory
+          </h3>
+          <dl class="space-y-5 text-base">
+            <div>
+              <dt
+                class="text-primary-600 dark:text-primary-400 text-xs font-semibold tracking-wider uppercase"
+              >
+                Loaded cost
+              </dt>
+              <dd class="text-base-900 dark:text-base-100 mt-1 font-medium">
+                Less than a quarter of the hire.
+              </dd>
+            </div>
+            <div>
+              <dt
+                class="text-primary-600 dark:text-primary-400 text-xs font-semibold tracking-wider uppercase"
+              >
+                Time to start
+              </dt>
+              <dd class="text-base-900 dark:text-base-100 mt-1 font-medium">
+                Next week.
+              </dd>
+            </div>
+            <div>
+              <dt
+                class="text-primary-600 dark:text-primary-400 text-xs font-semibold tracking-wider uppercase"
+              >
+                Wrong-hire risk
+              </dt>
+              <dd class="text-base-900 dark:text-base-100 mt-1 font-medium">
+                Tested before the hire.
+              </dd>
+            </div>
+            <div>
+              <dt
+                class="text-primary-600 dark:text-primary-400 text-xs font-semibold tracking-wider uppercase"
+              >
+                At month 6
+              </dt>
+              <dd class="text-base-900 dark:text-base-100 mt-1 font-medium">
+                A scorecard, a working system, and the decisions already made.
+                Whether or not a senior hire ends up making sense.
+              </dd>
+            </div>
+          </dl>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Outcomes at month six, after the offer is named -->
-  <section
-    id="success"
-    aria-labelledby="success-heading"
-    class="border-base-200/60 dark:border-base-800/60 border-t py-20 md:py-24"
-  >
-    <div class="site-container">
-      <div class="mx-auto max-w-3xl">
-        <Badge>Outcomes at month 6</Badge>
+    <!-- ============ OUTCOMES AT MONTH 6 ============ -->
+    <section
+      id="success"
+      aria-labelledby="success-heading"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-3xl">
+        <span class="eyebrow">Outcomes at month 6</span>
         <h2
           id="success-heading"
-          class="h2 text-base-900 dark:text-base-100 mb-6"
+          class="font-display mt-2 mb-6 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
         >
           What's different at month six.
         </h2>
@@ -515,7 +499,7 @@ const testimonials = [
         <ul class="text-base-700 dark:text-base-300 mb-12 space-y-5">
           <li class="flex gap-4">
             <span
-              class="bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400 mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
+              class="bg-primary-600/10 text-primary-600 dark:bg-primary-400/15 dark:text-primary-400 mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
               aria-hidden="true"
             >
               <Icon name="tabler/outline/calendar-check" class="h-5 w-5" />
@@ -528,7 +512,7 @@ const testimonials = [
           </li>
           <li class="flex gap-4">
             <span
-              class="bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400 mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
+              class="bg-primary-600/10 text-primary-600 dark:bg-primary-400/15 dark:text-primary-400 mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
               aria-hidden="true"
             >
               <Icon name="tabler/outline/scissors" class="h-5 w-5" />
@@ -542,7 +526,7 @@ const testimonials = [
           </li>
           <li class="flex gap-4">
             <span
-              class="bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400 mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
+              class="bg-primary-600/10 text-primary-600 dark:bg-primary-400/15 dark:text-primary-400 mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
               aria-hidden="true"
             >
               <Icon name="tabler/outline/bolt" class="h-5 w-5" />
@@ -555,7 +539,7 @@ const testimonials = [
           </li>
           <li class="flex gap-4">
             <span
-              class="bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400 mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
+              class="bg-primary-600/10 text-primary-600 dark:bg-primary-400/15 dark:text-primary-400 mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
               aria-hidden="true"
             >
               <Icon name="tabler/outline/target-arrow" class="h-5 w-5" />
@@ -569,7 +553,7 @@ const testimonials = [
           </li>
           <li class="flex gap-4">
             <span
-              class="bg-primary-500/10 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400 mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
+              class="bg-primary-600/10 text-primary-600 dark:bg-primary-400/15 dark:text-primary-400 mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg"
               aria-hidden="true"
             >
               <Icon name="tabler/outline/clipboard-check" class="h-5 w-5" />
@@ -583,14 +567,14 @@ const testimonials = [
           </li>
         </ul>
 
-        <h3 class="h3 text-base-900 dark:text-base-100 mb-6">
+        <h3 class="font-display mb-6 text-xl font-bold">
           And the documents you walk away with:
         </h3>
         <ul class="text-base-700 dark:text-base-300 space-y-4">
           <li class="flex gap-3">
             <Icon
-              name="tabler/outline/file-check"
-              class="text-primary-500 mt-1 h-5 w-5 flex-shrink-0"
+              name="tabler/outline/check"
+              class="text-primary-600 dark:text-primary-400 mt-0.5 size-5 shrink-0"
               aria-hidden="true"
             />
             <span>
@@ -601,8 +585,8 @@ const testimonials = [
           </li>
           <li class="flex gap-3">
             <Icon
-              name="tabler/outline/file-check"
-              class="text-primary-500 mt-1 h-5 w-5 flex-shrink-0"
+              name="tabler/outline/check"
+              class="text-primary-600 dark:text-primary-400 mt-0.5 size-5 shrink-0"
               aria-hidden="true"
             />
             <span>
@@ -613,8 +597,8 @@ const testimonials = [
           </li>
           <li class="flex gap-3">
             <Icon
-              name="tabler/outline/file-check"
-              class="text-primary-500 mt-1 h-5 w-5 flex-shrink-0"
+              name="tabler/outline/check"
+              class="text-primary-600 dark:text-primary-400 mt-0.5 size-5 shrink-0"
               aria-hidden="true"
             />
             <span>
@@ -625,8 +609,8 @@ const testimonials = [
           </li>
           <li class="flex gap-3">
             <Icon
-              name="tabler/outline/file-check"
-              class="text-primary-500 mt-1 h-5 w-5 flex-shrink-0"
+              name="tabler/outline/check"
+              class="text-primary-600 dark:text-primary-400 mt-0.5 size-5 shrink-0"
               aria-hidden="true"
             />
             <span>
@@ -637,40 +621,34 @@ const testimonials = [
           </li>
         </ul>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Section 02, Framework: Psychology / Pattern / Proof -->
-  <section
-    id="framework"
-    aria-labelledby="framework-heading"
-    class="border-base-200/60 dark:border-base-800/60 border-t py-20 md:py-24"
-  >
-    <div class="site-container">
-      <div class="mx-auto max-w-3xl">
-        <p
-          class="text-primary-600 dark:text-primary-400 mb-2 text-sm tracking-wider uppercase"
-        >
-          02. Framework
-        </p>
+    <!-- ============ 02 FRAMEWORK ============ -->
+    <section
+      id="framework"
+      aria-labelledby="framework-heading"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-3xl">
+        <span class="eyebrow">02. Framework</span>
         <h2
           id="framework-heading"
-          class="h2 text-base-900 dark:text-base-100 mb-12"
+          class="font-display mt-2 mb-12 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
         >
           Three pillars: Psychology, Pattern, Proof.
         </h2>
       </div>
 
-      <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
+      <div class="grid gap-6 md:grid-cols-3">
         <div
-          class="border-base-200 bg-base-50/40 dark:border-base-800 dark:bg-base-900/30 rounded-2xl border p-8"
+          class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-6"
         >
           <p
-            class="dark:text-accent-3 mb-3 text-sm font-semibold tracking-wider text-[#6e5a91] uppercase"
+            class="text-primary-600 dark:text-primary-400 mb-3 text-sm font-semibold tracking-wider uppercase"
           >
             Psychology
           </p>
-          <h3 class="text-base-900 dark:text-base-100 mb-4 text-xl font-bold">
+          <h3 class="font-display mb-4 text-xl font-bold">
             Built for how technical users actually behave.
           </h3>
           <p class="text-base-700 dark:text-base-300 text-base leading-relaxed">
@@ -685,14 +663,14 @@ const testimonials = [
         </div>
 
         <div
-          class="border-base-200 bg-base-50/40 dark:border-base-800 dark:bg-base-900/30 rounded-2xl border p-8"
+          class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-6"
         >
           <p
-            class="dark:text-accent-3 mb-3 text-sm font-semibold tracking-wider text-[#6e5a91] uppercase"
+            class="text-primary-600 dark:text-primary-400 mb-3 text-sm font-semibold tracking-wider uppercase"
           >
             Pattern
           </p>
-          <h3 class="text-base-900 dark:text-base-100 mb-4 text-xl font-bold">
+          <h3 class="font-display mb-4 text-xl font-bold">
             Three zero-to-community builds, retooled for the AI era.
           </h3>
           <p class="text-base-700 dark:text-base-300 text-base leading-relaxed">
@@ -705,14 +683,14 @@ const testimonials = [
         </div>
 
         <div
-          class="border-base-200 bg-base-50/40 dark:border-base-800 dark:bg-base-900/30 rounded-2xl border p-8"
+          class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-6"
         >
           <p
-            class="dark:text-accent-3 mb-3 text-sm font-semibold tracking-wider text-[#6e5a91] uppercase"
+            class="text-primary-600 dark:text-primary-400 mb-3 text-sm font-semibold tracking-wider uppercase"
           >
             Proof
           </p>
-          <h3 class="text-base-900 dark:text-base-100 mb-4 text-xl font-bold">
+          <h3 class="font-display mb-4 text-xl font-bold">
             Community work that survives the budget review.
           </h3>
           <p class="text-base-700 dark:text-base-300 text-base leading-relaxed">
@@ -726,96 +704,83 @@ const testimonials = [
           </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- About the advisor, slim credibility band -->
-  <section
-    id="about-advisor"
-    aria-labelledby="about-advisor-heading"
-    class="border-base-200/60 dark:border-base-800/60 border-t py-16"
-  >
-    <div class="site-container">
-      <div class="mx-auto max-w-3xl">
+    <!-- ============ ABOUT THE ADVISOR ============ -->
+    <section
+      id="about-advisor"
+      aria-labelledby="about-advisor-heading"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div
+        class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex flex-col items-start gap-6 rounded-2xl border p-6 sm:flex-row sm:items-center sm:gap-8"
+      >
         <div
-          class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8"
+          class="flex-shrink-0 overflow-hidden rounded-2xl"
+          role="img"
+          aria-label="Headshot of Guido Jansen"
         >
-          <div
-            class="flex-shrink-0 overflow-hidden rounded-2xl"
-            role="img"
-            aria-label="Headshot of Guido Jansen"
-          >
-            <Image
-              src={advisorImage}
-              alt="Guido Jansen, community strategist"
-              widths={[160, 240, 320]}
-              sizes="120px"
-              quality={85}
-              format="webp"
-              class="h-28 w-28 object-cover sm:h-32 sm:w-32"
-            />
-          </div>
-          <div
-            class="text-base-700 dark:text-base-300 space-y-3 text-base leading-relaxed"
-          >
-            <h2
-              id="about-advisor-heading"
-              class="text-base-900 dark:text-base-100 text-xl font-bold"
+          <Image
+            src={advisorImage}
+            alt="Guido Jansen, community strategist"
+            widths={[160, 240, 320]}
+            sizes="120px"
+            quality={85}
+            format="webp"
+            class="h-28 w-28 object-cover sm:h-32 sm:w-32"
+          />
+        </div>
+        <div
+          class="text-base-700 dark:text-base-300 space-y-3 text-base leading-relaxed"
+        >
+          <h2 id="about-advisor-heading" class="font-display text-xl font-bold">
+            About the advisor.
+          </h2>
+          <p>
+            <strong>Guido X Jansen.</strong> Twenty years building communities, most
+            recently the enterprise community function at Spryker (130+ enterprise
+            clients, about 25% of product roadmap traceable to community signal).
+            Cognitive psychology and CRO background, which mostly taught me you can't
+            reliably predict what people will do, so I design community work as small
+            experiments and watch what they actually do with them.
+          </p>
+          <p>
+            <a
+              href="/about"
+              class="text-primary-600 dark:text-primary-400 inline-flex items-center gap-1 font-semibold hover:underline"
             >
-              About the advisor.
-            </h2>
-            <p>
-              <strong class="text-base-900 dark:text-base-100"
-                >Guido X Jansen.</strong
-              > Twenty years building communities, most recently the enterprise community
-              function at Spryker (130+ enterprise clients, about 25% of product roadmap
-              traceable to community signal). Cognitive psychology and CRO background,
-              which mostly taught me you can't reliably predict what people will do,
-              so I design community work as small experiments and watch what they
-              actually do with them.
-            </p>
-            <p>
-              <a
-                href="/about"
-                class="text-primary-600 dark:text-primary-400 inline-flex items-center gap-1 font-medium hover:underline"
-              >
-                Read the longer version on /about →
-              </a>
-            </p>
-          </div>
+              Read the longer version on /about →
+            </a>
+          </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Brands I've worked with, reused from homepage -->
-  <div class="border-base-200/60 dark:border-base-800/60 border-t">
+    <!-- ============ BRANDS ============ -->
     <CompanyLogos />
-  </div>
 
-  <!-- Past colleagues and clients on the work -->
-  <section
-    id="testimonials"
-    aria-labelledby="testimonials-heading"
-    class="border-base-200/60 dark:border-base-800/60 border-t py-20 md:py-24"
-  >
-    <div class="site-container">
+    <!-- ============ TESTIMONIALS ============ -->
+    <section
+      id="testimonials"
+      aria-labelledby="testimonials-heading"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
       <div class="mx-auto mb-12 max-w-3xl text-center">
         <h2
           id="testimonials-heading"
-          class="h2 text-base-900 dark:text-base-100 mb-4"
+          class="font-display mb-4 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
         >
           Past colleagues and clients on the work.
         </h2>
-        <p class="text-base-600 dark:text-base-400 text-sm">
+        <p class="text-base-500 text-sm">
           Quotes from work pre-advisory. Advisory references on request after
           the scoping call.
         </p>
       </div>
-      <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
+      <div class="grid gap-6 md:grid-cols-3">
         {
           testimonials.map((t) => (
-            <figure class="bg-base-100/50 dark:bg-base-900/40 flex flex-col gap-6 rounded-2xl p-8">
+            <figure class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex flex-col gap-6 rounded-2xl border p-6">
               <blockquote class="text-base-800 dark:text-base-200 text-base leading-relaxed">
                 <p>“{t.quote}”</p>
               </blockquote>
@@ -833,7 +798,7 @@ const testimonials = [
                   <p class="text-base-900 dark:text-base-100 !my-0 font-semibold">
                     {t.name}
                   </p>
-                  <p class="text-base-600 dark:text-base-400 !mt-1 !mb-0 text-sm">
+                  <p class="text-base-500 !mt-1 !mb-0 text-sm">
                     {t.role}, {t.company}
                   </p>
                 </div>
@@ -842,25 +807,19 @@ const testimonials = [
           ))
         }
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Section 03, How the engagement runs -->
-  <section
-    id="how-it-runs"
-    aria-labelledby="how-it-runs-heading"
-    class="border-base-200/60 dark:border-base-800/60 border-t py-20 md:py-24"
-  >
-    <div class="site-container">
-      <div class="mx-auto max-w-3xl">
-        <p
-          class="text-primary-600 dark:text-primary-400 mb-2 text-sm tracking-wider uppercase"
-        >
-          03. How the engagement runs
-        </p>
+    <!-- ============ 03 HOW THE ENGAGEMENT RUNS ============ -->
+    <section
+      id="how-it-runs"
+      aria-labelledby="how-it-runs-heading"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-3xl">
+        <span class="eyebrow">03. How the engagement runs</span>
         <h2
           id="how-it-runs-heading"
-          class="h2 text-base-900 dark:text-base-100 mb-12"
+          class="font-display mt-2 mb-12 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
         >
           A structured six months. Rolling thereafter.
         </h2>
@@ -872,17 +831,17 @@ const testimonials = [
             >
               Phase 1 · Inside the first six months
             </p>
-            <ol class="border-primary-500 relative space-y-10 border-l-2 pl-12">
+            <ol
+              class="border-base-200 dark:border-base-800 relative space-y-10 border-l-2 pl-12"
+            >
               <li class="relative">
                 <span
-                  class="bg-primary-500 ring-base-50 dark:ring-base-950 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold text-white shadow-md ring-4"
+                  class="bg-primary-600 dark:bg-primary-400 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold text-white shadow-md ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
                   aria-hidden="true"
                 >
                   W1
                 </span>
-                <h3
-                  class="text-base-900 dark:text-base-100 mb-2 text-xl font-bold"
-                >
+                <h3 class="font-display mb-2 text-xl font-bold">
                   Week 1: Onboarding and ecosystem baseline
                 </h3>
                 <p
@@ -897,7 +856,7 @@ const testimonials = [
 
               <li class="relative">
                 <span
-                  class="border-primary-500 bg-base-50 text-primary-600 ring-base-50 dark:bg-base-950 dark:text-primary-400 dark:ring-base-950 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 text-sm font-bold ring-4"
+                  class="border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 bg-base-50 dark:bg-base-900 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 text-sm font-bold ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
                   aria-hidden="true"
                 >
                   ×12
@@ -907,9 +866,7 @@ const testimonials = [
                 >
                   Recurring cadence
                 </p>
-                <h3
-                  class="text-base-900 dark:text-base-100 mb-2 text-xl font-bold"
-                >
+                <h3 class="font-display mb-2 text-xl font-bold">
                   Every two weeks: a standing strategy call
                 </h3>
                 <p
@@ -924,7 +881,7 @@ const testimonials = [
 
               <li class="relative">
                 <span
-                  class="border-primary-500 bg-base-50 text-primary-600 ring-base-50 dark:bg-base-950 dark:text-primary-400 dark:ring-base-950 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 text-sm font-bold ring-4"
+                  class="border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 bg-base-50 dark:bg-base-900 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 text-sm font-bold ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
                   aria-hidden="true"
                 >
                   ×6
@@ -934,9 +891,7 @@ const testimonials = [
                 >
                   Recurring cadence
                 </p>
-                <h3
-                  class="text-base-900 dark:text-base-100 mb-2 text-xl font-bold"
-                >
+                <h3 class="font-display mb-2 text-xl font-bold">
                   Every month: a one-page written brief
                 </h3>
                 <p
@@ -950,14 +905,12 @@ const testimonials = [
 
               <li class="relative">
                 <span
-                  class="bg-primary-500 ring-base-50 dark:ring-base-950 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold text-white shadow-md ring-4"
+                  class="bg-primary-600 dark:bg-primary-400 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold text-white shadow-md ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
                   aria-hidden="true"
                 >
                   M3
                 </span>
-                <h3
-                  class="text-base-900 dark:text-base-100 mb-2 text-xl font-bold"
-                >
+                <h3 class="font-display mb-2 text-xl font-bold">
                   Month 3: mid-engagement review
                 </h3>
                 <p
@@ -975,14 +928,12 @@ const testimonials = [
 
               <li class="relative">
                 <span
-                  class="bg-primary-500 ring-base-50 dark:ring-base-950 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold text-white shadow-md ring-4"
+                  class="bg-primary-600 dark:bg-primary-400 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full text-sm font-bold text-white shadow-md ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
                   aria-hidden="true"
                 >
                   M6
                 </span>
-                <h3
-                  class="text-base-900 dark:text-base-100 mb-2 text-xl font-bold"
-                >
+                <h3 class="font-display mb-2 text-xl font-bold">
                   Month 6: synthesis and decision point
                 </h3>
                 <p
@@ -1004,18 +955,16 @@ const testimonials = [
               Phase 2 · Beyond six months, if it's working
             </p>
             <ol
-              class="border-primary-500/50 relative space-y-10 border-l-2 border-dashed pl-12"
+              class="border-base-200 dark:border-base-800 relative space-y-10 border-l-2 border-dashed pl-12"
             >
               <li class="relative">
                 <span
-                  class="border-primary-500/60 bg-base-50 text-primary-600 ring-base-50 dark:bg-base-950 dark:text-primary-400 dark:ring-base-950 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 text-base font-bold ring-4"
+                  class="border-primary-600/60 dark:border-primary-400/60 text-primary-600 dark:text-primary-400 bg-base-50 dark:bg-base-900 absolute -left-[4.25rem] flex h-12 w-12 items-center justify-center rounded-full border-2 text-base font-bold ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
                   aria-hidden="true"
                 >
                   ↻
                 </span>
-                <h3
-                  class="text-base-900 dark:text-base-100 mb-2 text-xl font-bold"
-                >
+                <h3 class="font-display mb-2 text-xl font-bold">
                   Beyond month 6: rolling cadence
                 </h3>
                 <p
@@ -1030,7 +979,7 @@ const testimonials = [
           </div>
 
           <div
-            class="border-base-300/80 bg-base-100 dark:border-base-700/80 dark:bg-base-900/60 flex gap-4 rounded-2xl border-2 p-5"
+            class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex gap-4 rounded-2xl border p-6"
             role="note"
           >
             <span
@@ -1045,9 +994,7 @@ const testimonials = [
               >
                 Throughout · the whole engagement
               </p>
-              <h3
-                class="text-base-900 dark:text-base-100 mb-2 text-xl font-bold"
-              >
+              <h3 class="font-display mb-2 text-xl font-bold">
                 A dedicated async channel
               </h3>
               <p
@@ -1061,133 +1008,115 @@ const testimonials = [
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Section 04, Scope & fit -->
-  <section
-    id="scope"
-    aria-labelledby="scope-heading"
-    class="border-base-200/60 dark:border-base-800/60 border-t py-20 md:py-24"
-  >
-    <div class="site-container">
-      <div class="mx-auto max-w-6xl">
-        <p
-          class="text-primary-600 dark:text-primary-400 mb-2 text-sm tracking-wider uppercase"
-        >
-          04. Scope and fit
-        </p>
+    <!-- ============ 04 SCOPE & FIT ============ -->
+    <section
+      id="scope"
+      aria-labelledby="scope-heading"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-3xl">
+        <span class="eyebrow">04. Scope and fit</span>
         <h2
           id="scope-heading"
-          class="h2 text-base-900 dark:text-base-100 mb-12"
+          class="font-display mt-2 mb-12 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
         >
           Who this works for, who it doesn't.
         </h2>
+      </div>
 
-        <div class="grid gap-10 md:grid-cols-2">
-          <div>
-            <h3 class="h3 text-base-900 dark:text-base-100 mb-4">In scope</h3>
-            <ul
-              class="text-base-700 dark:text-base-300 list-disc space-y-2 pl-5"
-            >
-              <li>Community / DevRel / ecosystem strategy</li>
-              <li>
-                Community ops design: governance, contribution structures,
-                advisory boards
-              </li>
-              <li>DevRel function design and metrics</li>
-              <li>Translating community signal to product roadmap</li>
-              <li>Hiring input for community / DevRel / ecosystem roles</li>
-              <li>
-                Coaching the existing person currently holding this
-                responsibility (often a junior IC, or someone wearing it as 30%
-                of their job)
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="h3 text-base-900 dark:text-base-100 mb-4">
-              Out of scope
-            </h3>
-            <ul
-              class="text-base-700 dark:text-base-300 list-disc space-y-2 pl-5"
-            >
-              <li>Implementation or hands-on community management</li>
-              <li>Content production for your community</li>
-              <li>Hands-on engineering, SDK work, or demo coding</li>
-              <li>Pure marketing or social media management</li>
-              <li>Sales-quota carrying responsibilities</li>
-            </ul>
-          </div>
+      <div class="grid gap-10 md:grid-cols-2">
+        <div>
+          <h3 class="font-display mb-4 text-xl font-bold">In scope</h3>
+          <ul class="text-base-700 dark:text-base-300 list-disc space-y-2 pl-5">
+            <li>Community / DevRel / ecosystem strategy</li>
+            <li>
+              Community ops design: governance, contribution structures,
+              advisory boards
+            </li>
+            <li>DevRel function design and metrics</li>
+            <li>Translating community signal to product roadmap</li>
+            <li>Hiring input for community / DevRel / ecosystem roles</li>
+            <li>
+              Coaching the existing person currently holding this responsibility
+              (often a junior IC, or someone wearing it as 30% of their job)
+            </li>
+          </ul>
         </div>
-
-        <div class="mt-12 grid gap-10 md:grid-cols-2">
-          <div
-            class="border-pine/30 bg-pine/5 dark:border-pine/40 dark:bg-pine/10 rounded-2xl border p-6"
-          >
-            <h3 class="h3 text-base-900 dark:text-base-100 mb-4">Good fit</h3>
-            <ul
-              class="text-base-700 dark:text-base-300 list-disc space-y-2 pl-5"
-            >
-              <li>Series A–C company, technical or developer-led product</li>
-              <li>
-                Has product traction but no senior community/ecosystem hire yet,
-                or has a junior person in role who needs guidance
-              </li>
-              <li>
-                Leadership treats community as strategic, not as a megaphone
-              </li>
-              <li>
-                Organisation can act on architectural and design recommendations
-              </li>
-            </ul>
-          </div>
-          <div
-            class="border-love/30 bg-love/5 dark:border-love/40 dark:bg-love/10 rounded-2xl border p-6"
-          >
-            <h3 class="h3 text-base-900 dark:text-base-100 mb-4">Not a fit</h3>
-            <ul
-              class="text-base-700 dark:text-base-300 list-disc space-y-2 pl-5"
-            >
-              <li>
-                Need someone to <em>run</em> community ops. This is advisory, not
-                fractional execution.
-              </li>
-              <li>
-                Want guaranteed traffic, signups, or community-size growth
-              </li>
-              <li>AI-content-at-scale community plays</li>
-              <li>
-                Looking primarily for social media marketing rather than
-                community strategy
-              </li>
-              <li>Adtech, gambling, fossil fuel, or Russian-owned companies</li>
-              <li>
-                <em>Also:</em> advisory and public platform stay strictly separate.
-                Paying clients don't get conference referrals, intros, or public recommendations.
-                If you're buying influence, this isn't the offer.
-              </li>
-            </ul>
-          </div>
+        <div>
+          <h3 class="font-display mb-4 text-xl font-bold">Out of scope</h3>
+          <ul class="text-base-700 dark:text-base-300 list-disc space-y-2 pl-5">
+            <li>Implementation or hands-on community management</li>
+            <li>Content production for your community</li>
+            <li>Hands-on engineering, SDK work, or demo coding</li>
+            <li>Pure marketing or social media management</li>
+            <li>Sales-quota carrying responsibilities</li>
+          </ul>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Section 06, FAQ -->
-  <section
-    id="faq"
-    aria-labelledby="faq-heading"
-    class="border-base-200/60 dark:border-base-800/60 border-t py-20 md:py-24"
-  >
-    <div class="site-container">
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        <div
+          class="bg-base-50 dark:bg-base-900 border-pine/30 dark:border-pine/40 rounded-2xl border p-6"
+        >
+          <h3 class="font-display mb-4 text-xl font-bold">Good fit</h3>
+          <ul class="text-base-700 dark:text-base-300 list-disc space-y-2 pl-5">
+            <li>Series A–C company, technical or developer-led product</li>
+            <li>
+              Has product traction but no senior community/ecosystem hire yet,
+              or has a junior person in role who needs guidance
+            </li>
+            <li>
+              Leadership treats community as strategic, not as a megaphone
+            </li>
+            <li>
+              Organisation can act on architectural and design recommendations
+            </li>
+          </ul>
+        </div>
+        <div
+          class="bg-base-50 dark:bg-base-900 border-love/30 dark:border-love/40 rounded-2xl border p-6"
+        >
+          <h3 class="font-display mb-4 text-xl font-bold">Not a fit</h3>
+          <ul class="text-base-700 dark:text-base-300 list-disc space-y-2 pl-5">
+            <li>
+              Need someone to <em>run</em> community ops. This is advisory, not fractional
+              execution.
+            </li>
+            <li>Want guaranteed traffic, signups, or community-size growth</li>
+            <li>AI-content-at-scale community plays</li>
+            <li>
+              Looking primarily for social media marketing rather than community
+              strategy
+            </li>
+            <li>Adtech, gambling, fossil fuel, or Russian-owned companies</li>
+            <li>
+              <em>Also:</em> advisory and public platform stay strictly separate.
+              Paying clients don't get conference referrals, intros, or public recommendations.
+              If you're buying influence, this isn't the offer.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 FAQ ============ -->
+    <section
+      id="faq"
+      aria-labelledby="faq-heading"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
       <div class="grid gap-10 md:grid-cols-2 md:gap-16">
         <div class="md:sticky md:top-24 md:self-start">
-          <Badge>FAQ</Badge>
-          <h2 id="faq-heading" class="h2 text-base-900 dark:text-base-100 mb-6">
+          <span class="eyebrow">FAQ</span>
+          <h2
+            id="faq-heading"
+            class="font-display mt-2 mb-6 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+          >
             Questions worth answering before you apply.
           </h2>
-          <p class="description text-base md:text-lg">
+          <p class="text-base-600 dark:text-base-400 text-base md:text-lg">
             If yours isn't here, the 30-minute scoping call is the right place
             for it.
           </p>
@@ -1204,19 +1133,20 @@ const testimonials = [
           }
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Section 07, Apply or scope -->
-  <section
-    id="apply"
-    aria-labelledby="apply-heading"
-    class="border-base-200/60 dark:border-base-800/60 border-t py-20 md:py-28"
-  >
-    <div class="site-container">
+    <!-- ============ 07 APPLY OR SCOPE ============ -->
+    <section
+      id="apply"
+      aria-labelledby="apply-heading"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
       <div class="mx-auto max-w-3xl text-center">
-        <Badge>Apply or scope</Badge>
-        <h2 id="apply-heading" class="h2 text-base-900 dark:text-base-100 mb-6">
+        <span class="eyebrow">Apply or scope</span>
+        <h2
+          id="apply-heading"
+          class="font-display mt-2 mb-6 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+        >
           Two ways in.
         </h2>
         <p
@@ -1237,11 +1167,11 @@ const testimonials = [
         </p>
       </div>
 
-      <div class="mx-auto mt-8 grid max-w-6xl gap-8 md:grid-cols-2">
+      <div class="mx-auto mt-8 grid max-w-6xl gap-6 md:grid-cols-2">
         <div
-          class="border-primary-500/30 bg-primary-500/5 flex flex-col rounded-2xl border-2 p-8"
+          class="bg-base-50 dark:bg-base-900 border-primary-600/40 dark:border-primary-400/40 ring-primary-600/20 flex flex-col rounded-2xl border p-6 ring-1"
         >
-          <h3 class="text-base-900 dark:text-base-100 mb-3 text-xl font-bold">
+          <h3 class="font-display mb-3 text-xl font-bold">
             A: 30-minute scoping call
           </h3>
           <p class="text-base-700 dark:text-base-300 mb-6">
@@ -1249,28 +1179,28 @@ const testimonials = [
             thirty minutes. You leave with the pricing range, a fit assessment,
             and either an application invite or a referral elsewhere.
           </p>
-          <p class="text-base-700 dark:text-base-400 mb-6 text-sm">
+          <p class="text-base-600 dark:text-base-400 mb-6 text-sm">
             Tell me up front: <strong>company name</strong>, <strong
               >your role</strong
             >, one sentence on what you're trying to figure out, and one
             sentence on your current community / ecosystem state.
           </p>
           <div class="mt-auto">
-            <Button
-              variant="primary"
+            <a
               href="mailto:x@gui.do?subject=Retainer%3A%20scoping%20call%20request&body=Company%3A%20%0AYour%20role%3A%20%0AWhat%20you're%20trying%20to%20figure%20out%3A%20%0ACurrent%20community%20%2F%20ecosystem%20state%3A%20%0A"
-              umamiEvent="cta-click"
-              umamiEventTarget="retainer-scoping-call"
+              data-umami-event="cta-click"
+              data-umami-event-target="retainer-scoping-call"
+              class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
             >
-              Request a scoping call
-            </Button>
+              Request a scoping call <span aria-hidden="true">→</span>
+            </a>
           </div>
         </div>
 
         <div
-          class="border-base-200 bg-base-50/40 dark:border-base-800 dark:bg-base-900/30 flex flex-col rounded-2xl border p-8"
+          class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex flex-col rounded-2xl border p-6"
         >
-          <h3 class="text-base-900 dark:text-base-100 mb-3 text-xl font-bold">
+          <h3 class="font-display mb-3 text-xl font-bold">
             B: Direct application
           </h3>
           <p class="text-base-700 dark:text-base-300 mb-4">
@@ -1295,14 +1225,14 @@ const testimonials = [
             </li>
           </ul>
           <div class="mt-auto">
-            <Button
-              variant="outline"
+            <a
               href="mailto:x@gui.do?subject=Retainer%3A%20application&body=Name%3A%20%0AWork%20email%3A%20%0ACompany%3A%20%0AYour%20role%3A%20%0ACompany%20website%3A%20%0AStage%20(Series%2C%20ARR%2C%20or%20pre-revenue)%3A%20%0ACurrent%20community%20%2F%20ecosystem%20state%3A%20%0ASix-month%20outcome%20you'd%20want%20(optional)%3A%20%0ADesired%20start%20date%20(optional)%3A%20%0A"
-              umamiEvent="cta-click"
-              umamiEventTarget="retainer-direct-application"
+              data-umami-event="cta-click"
+              data-umami-event-target="retainer-direct-application"
+              class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
             >
               Send an application
-            </Button>
+            </a>
           </div>
         </div>
       </div>
@@ -1312,12 +1242,12 @@ const testimonials = [
           Looking to book me for a conference or event instead?
           <a
             href="/speaker"
-            class="text-primary-600 dark:text-primary-400 font-medium hover:underline"
+            class="text-primary-600 dark:text-primary-400 font-semibold hover:underline"
           >
             Speaker information →
           </a>
         </p>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>

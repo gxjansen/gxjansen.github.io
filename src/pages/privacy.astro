@@ -6,33 +6,34 @@
 
 // main layout
 import BaseLayout from "@layouts/BaseLayout.astro";
-
-// components
-import Badge from "@components/Badge/Badge.astro";
 ---
 
 <BaseLayout
   title="Privacy"
   description="How I handle your data. Self-hosted infrastructure, no tracking pixels, GDPR compliant."
 >
-  <!-- Header -->
-  <section class="pt-24 pb-8 md:pt-28">
-    <div class="site-container px-4">
+  <div class="home privacy-page">
+    <!-- ============ HERO ============ -->
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
       <div class="mx-auto max-w-2xl text-center">
-        <Badge>Your data</Badge>
-        <h1 class="h1 mb-6">Privacy</h1>
-        <p class="text-base-600 dark:text-base-400 text-lg">
+        <span class="eyebrow">Your data</span>
+        <h1
+          class="font-display mt-2 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Privacy
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
           Here's exactly how I handle your data.
         </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Content section -->
-  <section class="py-12 md:py-16">
-    <div class="site-container px-4">
+    <!-- ============ CONTENT ============ -->
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
       <div class="mx-auto max-w-2xl">
-        <div class="prose dark:prose-invert mx-auto">
+        <div class="prose dark:prose-invert max-w-none">
           <p class="text-base-600 dark:text-base-400 text-sm">
             <em>Last updated: 31 May 2026</em>
           </p>
@@ -268,6 +269,6 @@ import Badge from "@components/Badge/Badge.astro";
           </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>
