@@ -3,12 +3,7 @@
  * Newsletter subscription page with detailed information about
  * content expectations, privacy, and GDPR compliance.
  */
-
-// main layout
 import BaseLayout from "@layouts/BaseLayout.astro";
-
-// components
-import Badge from "@components/Badge/Badge.astro";
 import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 ---
 
@@ -16,55 +11,46 @@ import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
   title="Newsletter"
   description="Big Tech alternatives, AI meets DevRel, automation tips, and personal updates I don't share on social. No spam, no tracking."
 >
-  <!-- Header -->
-  <section class="pt-24 pb-8 md:pt-28">
-    <div class="site-container px-4">
+  <div class="home newsletter-page">
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(1.5rem,4vw,2.5rem)]"
+    >
       <div class="mx-auto max-w-2xl text-center">
-        <Badge>Stay informed</Badge>
-        <h1 class="h1 mb-6">The Newsletter</h1>
-      </div>
-    </div>
-  </section>
-
-  <!-- Newsletter signup form (full-width CTA) -->
-  <NewsletterForm
-    variant="cta"
-    title="Get Guido's <span class='underline decoration-gold-light dark:decoration-gold decoration-2 underline-offset-4'>Golden</span> Nuggets"
-  />
-
-  <!-- Value proposition -->
-  <section class="py-8 md:py-12">
-    <div class="site-container px-4">
-      <div class="mx-auto max-w-2xl text-center">
-        <p class="text-base-600 dark:text-base-400 text-lg">
+        <span class="eyebrow">Stay informed</span>
+        <h1
+          class="font-display mt-2 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          The newsletter
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
           Social media gets the highlights. The newsletter gets the full story.
         </p>
-        <p class="text-base-600 dark:text-base-400 mt-4">
+      </div>
+    </section>
+
+    <NewsletterForm
+      variant="cta"
+      title="Get Guido's <span class='underline decoration-gold-light dark:decoration-gold decoration-2 underline-offset-4'>Golden</span> Nuggets"
+    />
+
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mx-auto max-w-2xl">
+        <p class="text-base-700 dark:text-base-300 text-center text-lg">
           20+ years at the intersection of technology, community, and business.
           This newsletter shares what I've learned and what I'm building for the
           future.
         </p>
-        <p class="text-base-600 dark:text-base-400 mt-3 text-sm">
-          Self-hosted on EU servers. Your data stays private.
-        </p>
-      </div>
-    </div>
-  </section>
 
-  <!-- Content section -->
-  <section class="py-12 md:py-16">
-    <div class="site-container px-4">
-      <div class="mx-auto max-w-2xl">
-        <div class="prose dark:prose-invert mx-auto">
+        <div class="prose dark:prose-invert mx-auto mt-10 max-w-none">
           <h2>What you get</h2>
           <p>A monthly highlight reel, scannable and focused:</p>
           <ul>
             <li>
-              <strong>Big Tech alternatives:</strong> Privacy-respecting tools for
+              <strong>Big Tech alternatives:</strong> privacy-respecting tools for
               becoming more sovereign with your data
             </li>
             <li>
-              <strong>AI + DevRel/Community:</strong> How AI developments intersect
+              <strong>AI + DevRel/Community:</strong> how AI developments intersect
               with community building and developer relations
             </li>
             <li>
@@ -72,7 +58,7 @@ import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
               worth sharing
             </li>
             <li>
-              <strong>Personal updates:</strong> What I'm working on and learning,
+              <strong>Personal updates:</strong> what I'm working on and learning,
               beyond what I share on social
             </li>
           </ul>
@@ -90,6 +76,6 @@ import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
           </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>
