@@ -1,6 +1,6 @@
 /**
- * Live CV data from the Sifa profile (verifiable track record on the AT
- * Protocol). Fetches gui.do's aggregated profile via @singi-labs/sifa-sdk and
+ * Live CV data from the Sifa profile (a portable, AT Protocol-native profile).
+ * Fetches gui.do's aggregated profile via @singi-labs/sifa-sdk and
  * normalizes it for the /cv page. Falls back to a minimal representative set on
  * any failure so the page always renders. Never throws.
  */
@@ -258,7 +258,7 @@ const FALLBACK: CvData = {
     {
       name: "Sifa",
       description:
-        "A verifiable, AT Protocol–native professional profile — the source of this CV.",
+        "My portable professional profile on the AT Protocol, and the source of this CV.",
       url: "https://sifa.id/p/gui.do",
       period: "2025 – Present",
     },

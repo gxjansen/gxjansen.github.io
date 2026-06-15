@@ -197,7 +197,7 @@ export const trainingCards: TrainingCard[] = [
 export const projects: Project[] = [
   {
     t: "Sifa",
-    d: "Portable professional identity on the AT Protocol. A verifiable track record from real community contributions.",
+    d: "Portable professional identity on the AT Protocol. A track record built from real community contributions.",
     tag: "Building",
     url: "https://sifa.id",
     accent: "pine",

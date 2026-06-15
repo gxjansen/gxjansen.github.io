@@ -119,7 +119,7 @@ export const courses: Course[] = [
       "Context on the ecosystem: which apps are building on it and why.",
     ],
     whyMe:
-      "I've been building on the AT Protocol since early 2023. Sifa (verifiable professional identity on atproto) and Barazo (open community forums) are both production projects on the network. I spoke at ATmosphere Conf 2026 in Vancouver. I know where the sharp edges are.",
+      "I've been building on the AT Protocol since early 2023. Sifa (portable professional identity on atproto) and Barazo (open community forums) are both production projects on the network. I spoke at ATmosphere Conf 2026 in Vancouver. I know where the sharp edges are.",
     agenda: [
       {
         time: "Morning",
