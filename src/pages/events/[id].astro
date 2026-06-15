@@ -4,7 +4,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
 import { Image } from "astro:assets";
-import Badge from "@components/Badge/Badge.astro";
+import { Icon } from "astro-icon/components";
 import RelatedPresentations from "@components/RelatedPresentations/RelatedPresentations.astro";
 
 // utils
@@ -29,6 +29,34 @@ const { event } = Astro.props as {
   event: Event;
   presentationUrl?: string;
 };
+
+// Country flag helper: turn an ISO 3166-1 alpha-2 code (e.g. "NL") into a
+// flag emoji via regional-indicator code points. Returns null when the code
+// isn't a valid two-letter code, so the page degrades gracefully (no flag).
+const countryNames = new Intl.DisplayNames(["en"], { type: "region" });
+
+function countryToFlag(code?: string): string | null {
+  if (!code) return null;
+  const cc = code.trim().toUpperCase();
+  if (!/^[A-Z]{2}$/.test(cc)) return null;
+  return String.fromCodePoint(
+    ...[...cc].map((c) => 0x1f1e6 + (c.charCodeAt(0) - 65)),
+  );
+}
+
+function countryToName(code?: string): string | null {
+  if (!code) return null;
+  const cc = code.trim().toUpperCase();
+  if (!/^[A-Z]{2}$/.test(cc)) return null;
+  try {
+    return countryNames.of(cc) ?? cc;
+  } catch {
+    return cc;
+  }
+}
+
+const flag = countryToFlag(event.country);
+const countryName = countryToName(event.country);
 
 // Format date
 const eventDate = new Date(event.date).toLocaleDateString("en-US", {
@@ -59,82 +87,138 @@ const metaDescription = descriptionParts.filter(Boolean).join(" ");
   type="event"
   event={event}
 >
-  <section class="py-24 md:py-28">
-    <div class="site-container">
-      <div class="mx-auto max-w-4xl">
-        <div class="mb-8">
-          <Badge>Event</Badge>
-          <h1 class="h2 text-base-100 dark:text-base-900 mb-4">{event.name}</h1>
+  <div class="home events-detail-page">
+    <!-- ============ HERO ============ -->
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">on the road</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.1] font-black tracking-[-0.03em]"
+        >
+          {event.name}
+        </h1>
 
-          <div class="mb-6 flex flex-wrap gap-3">
+        <div class="mb-5 flex flex-wrap items-center gap-2">
+          <span class="chip chip--plain">
+            <Icon
+              name="tabler/outline/calendar"
+              class="size-5"
+              aria-hidden="true"
+            />
+            {eventDate}
+          </span>
+          <span class="chip chip--plain">
+            <Icon
+              name="tabler/outline/map-pin"
+              class="size-5"
+              aria-hidden="true"
+            />
             <span
-              class="bg-base-100 text-base-700 dark:bg-base-800 dark:text-base-300 rounded-full px-3 py-1 text-sm"
+              >{event.city}{
+                event.country && `, ${countryName ?? event.country}`
+              }</span
             >
-              {eventDate}
-            </span>
-            {
-              event.workshop && (
-                <span class="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 rounded-full px-3 py-1 text-sm">
-                  Workshop
-                </span>
-              )
-            }
-          </div>
-
-          <div class="flex items-start gap-6">
-            <div>
-              <p class="text-base-600 dark:text-base-300 text-lg">
-                {event.city}{event.country && `, ${event.country}`}
-              </p>
-              {
-                event.role && (
-                  <p class="text-base-600 dark:text-base-300 mt-1 text-base">
-                    Role: {event.role}
-                  </p>
-                )
-              }
-              {
-                event.topic && (
-                  <p class="text-base-600 dark:text-base-300 mt-1 text-base">
-                    Topic: {event.topic}
-                  </p>
-                )
-              }
-            </div>
-            {
-              event.loadedIcon && (
-                <div class="h-24 w-24">
-                  <Image
-                    src={event.loadedIcon}
-                    alt={`${event.name} logo`}
-                    class="h-full w-full object-contain"
-                    width={96}
-                    height={96}
-                    loading="lazy"
-                  />
-                </div>
-              )
-            }
-          </div>
+            {flag && <span aria-hidden="true">{flag}</span>}
+          </span>
+          {
+            event.workshop && (
+              <span class="chip">
+                <Icon
+                  name="tabler/outline/tools"
+                  class="size-5"
+                  aria-hidden="true"
+                />
+                Workshop
+              </span>
+            )
+          }
         </div>
+      </div>
+    </section>
 
+    <!-- ============ DETAILS ============ -->
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <div
+        class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex flex-col items-start gap-6 rounded-2xl border p-5 sm:flex-row sm:items-center"
+      >
         {
-          event.url && (
-            <div class="mb-12">
-              <a
-                href={event.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-primary-600 text-base-100 hover:bg-primary-700 dark:text-base-900 inline-block rounded-lg px-6 py-3 transition-colors"
-              >
-                Visit Event Website
-              </a>
+          event.loadedIcon && (
+            <div class="border-base-200 dark:border-base-800 flex size-20 shrink-0 items-center justify-center rounded-xl border bg-white p-2">
+              <Image
+                src={event.loadedIcon}
+                alt={`${event.name} logo`}
+                class="size-full object-contain"
+                width={96}
+                height={96}
+                loading="lazy"
+              />
             </div>
           )
         }
-
-        <RelatedPresentations eventId={event.id} />
+        <dl class="flex flex-1 flex-col gap-3">
+          {
+            event.role && (
+              <div class="flex flex-col gap-0.5">
+                <dt class="text-base-500 text-xs font-bold tracking-[0.06em] uppercase">
+                  Role
+                </dt>
+                <dd class="text-base-700 dark:text-base-300 text-base leading-relaxed">
+                  {event.role}
+                </dd>
+              </div>
+            )
+          }
+          {
+            event.topic && (
+              <div class="flex flex-col gap-0.5">
+                <dt class="text-base-500 text-xs font-bold tracking-[0.06em] uppercase">
+                  Topic
+                </dt>
+                <dd class="text-base-700 dark:text-base-300 text-base leading-relaxed">
+                  {event.topic}
+                </dd>
+              </div>
+            )
+          }
+          <div class="flex flex-col gap-0.5">
+            <dt
+              class="text-base-500 text-xs font-bold tracking-[0.06em] uppercase"
+            >
+              Location
+            </dt>
+            <dd
+              class="text-base-700 dark:text-base-300 flex items-center gap-1.5 text-base leading-relaxed"
+            >
+              <span
+                >{event.city}{
+                  event.country && `, ${countryName ?? event.country}`
+                }</span
+              >
+              {flag && <span aria-hidden="true">{flag}</span>}
+            </dd>
+          </div>
+        </dl>
       </div>
-    </div>
-  </section>
+
+      {
+        event.url && (
+          <a
+            href={event.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display mt-6 inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-bold text-white transition"
+          >
+            Visit event website <span aria-hidden="true">→</span>
+          </a>
+        )
+      }
+    </section>
+
+    <!-- ============ RELATED PRESENTATIONS ============ -->
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <RelatedPresentations eventId={event.id} />
+    </section>
+  </div>
 </BaseLayout>

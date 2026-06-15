@@ -68,7 +68,13 @@
     @apply mb-8 flex flex-wrap items-end justify-between gap-4;
   }
   .home .sec-head h2 {
-    @apply font-display text-[clamp(1.9rem,3.6vw,2.9rem)] font-black tracking-[-0.03em];
+    @apply font-display text-[clamp(1.9rem,3.6vw,2.9rem)] leading-[1.1] font-black tracking-[-0.03em];
+  }
+  /* Baseline line-height for display headings so multi-line titles never
+     overlap. Zero-specificity :where() inside @layer components, so any
+     explicit `leading-*` utility (e.g. hero leading-[1.05]) still wins. */
+  :where(.home h1, .home h2, .home h3) {
+    line-height: 1.12;
   }
   .home .hand-note {
     @apply text-rose-light dark:text-rose mb-3 inline-block font-hand text-[1.5rem] leading-none;
@@ -87,7 +93,7 @@
     @apply grid grid-cols-1 gap-[1.1rem] md:grid-cols-[1.4fr_1fr];
   }
   .home .art {
-    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative block overflow-hidden rounded-2xl border p-6 text-inherit no-underline transition-all duration-200;
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex h-full flex-col overflow-hidden rounded-2xl border p-6 text-inherit no-underline transition-all duration-200;
   }
   .home .art::before {
     content: "";
@@ -119,7 +125,7 @@
     @apply text-base-600 dark:text-base-400 mb-3.5 text-[0.95rem] leading-[1.5];
   }
   .home .art .m {
-    @apply text-base-500 flex items-center gap-2.5 text-[0.8rem];
+    @apply text-base-500 mt-auto flex items-center gap-2.5 pt-2 text-[0.8rem];
   }
   .home .art .read {
     @apply ml-auto inline-flex items-center gap-1 font-bold;
@@ -346,7 +352,25 @@
     transform: rotate(8deg);
   }
   .home .feed {
-    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex max-h-[min(86vh,820px)] min-h-[min(74vh,660px)] flex-col overflow-hidden rounded-3xl border shadow-2xl;
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex max-h-[min(86vh,820px)] min-h-[min(74vh,660px)] flex-col overflow-hidden rounded-3xl border shadow-2xl;
+  }
+  /* Bottom fade hints that the feed scrolls (it's pointer-transparent so it
+     never blocks the items underneath). */
+  .home .feed::after {
+    content: "";
+    @apply pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-12 rounded-b-3xl;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-base-50) 85%
+    );
+  }
+  :global(.dark) .home .feed::after {
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-base-900) 85%
+    );
   }
   .home .feed-head {
     @apply border-base-200 dark:border-base-800 bg-base-200/40 dark:bg-base-800/30 flex flex-shrink-0 items-center gap-2.5 border-b px-5 py-4;
@@ -378,6 +402,21 @@
   }
   .home .feed-list {
     @apply flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto p-1.5;
+    /* Keep a slim scrollbar visible as a second affordance that this scrolls. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-base-300) transparent;
+    scrollbar-gutter: stable;
+  }
+  :global(.dark) .home .feed-list {
+    scrollbar-color: var(--color-base-700) transparent;
+  }
+  .home .feed-list::-webkit-scrollbar {
+    width: 8px;
+  }
+  .home .feed-list::-webkit-scrollbar-thumb {
+    @apply bg-base-300 dark:bg-base-700 rounded-full;
+    border: 2px solid transparent;
+    background-clip: content-box;
   }
   .home .feed-item {
     @apply relative rounded-xl border border-transparent p-3.5 transition-colors duration-200;

@@ -86,6 +86,7 @@ export interface Testimonial {
   q: string;
   who: string;
   role: string;
+  context?: string;
 }
 
 export const heroCopy = {
@@ -204,7 +205,7 @@ export const trainingCards: TrainingCard[] = [
     url: "/training/atproto/",
     accent: "foam",
     points: [
-      "What the AT Protocol actually is — and why it matters for your product",
+      "What the AT Protocol actually is, and why it matters for your product",
       "Set up a PDS, create records, wire a simple Bluesky client",
       "How communities on open networks are different (and why that's an advantage)",
     ],
@@ -287,9 +288,10 @@ export const talks: Talk[] = [
 ];
 
 export const aboutQuote: Testimonial = {
-  q: "A rare ability to translate community insights into tangible business intelligence — and back again.",
+  q: "Guido has a rare ability to translate community insights into tangible business intelligence, and to bring the business closer to the community.",
   who: "Svitlana Kulynych",
   role: "Head of Learning Experience, Spryker",
+  context: "worked with me at Spryker",
 };
 
 /**

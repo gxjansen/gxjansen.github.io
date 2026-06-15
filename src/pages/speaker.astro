@@ -21,41 +21,49 @@ const overview = [
     icon: "tabler/outline/file-text",
     title: "Rider Kit",
     desc: "Technical and logistical requirements",
+    href: "#talk-format",
   },
   {
     icon: "tabler/outline/user",
     title: "Bio Format",
     desc: "Speaker biography and credentials",
+    href: "#biography",
   },
   {
     icon: "tabler/outline/currency-euro",
     title: "Fee",
     desc: "Speaking fees and expenses",
+    href: "#fee",
   },
   {
     icon: "tabler/outline/quote",
     title: "Testimonials",
     desc: "What others say about my talks",
+    href: "#testimonials",
   },
   {
     icon: "tabler/outline/map-pin",
     title: "Travel & Accommodation",
     desc: "Logistics and requirements",
+    href: "#travel",
   },
   {
     icon: "tabler/outline/device-tv",
     title: "AV/Tech Requirements",
     desc: "Technical setup needed",
+    href: "#av-tech",
   },
   {
     icon: "tabler/outline/news",
     title: "Content for Your Marketing",
     desc: "Materials to promote the event",
+    href: "#marketing",
   },
   {
     icon: "tabler/outline/sparkles",
     title: "And the Rest...",
     desc: "Additional information and details",
+    href: "#headshots",
   },
 ];
 
@@ -178,12 +186,16 @@ const headshots = [
       class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
     >
       <div class="mx-auto max-w-3xl text-center">
-        <span class="eyebrow">Speaker Information</span>
-        <h1
-          class="font-display mt-2 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
-        >
-          Conference Terms
-        </h1>
+        <div class="sec-head justify-center text-center">
+          <div>
+            <span class="hand-note">speaker information</span>
+            <h1
+              class="font-display text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.1] font-black tracking-[-0.03em]"
+            >
+              Conference Terms
+            </h1>
+          </div>
+        </div>
         <p
           class="text-base-700 dark:text-base-300 text-[clamp(1.1rem,2vw,1.35rem)] leading-relaxed"
         >
@@ -205,7 +217,7 @@ const headshots = [
       <div class="mb-10 text-center">
         <span class="hand-note">on this page</span>
         <h2
-          class="font-display text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+          class="font-display text-[clamp(1.9rem,3.6vw,2.7rem)] leading-[1.1] font-black tracking-[-0.03em]"
         >
           What you can find on this page:
         </h2>
@@ -214,7 +226,10 @@ const headshots = [
       <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
         {
           overview.map((item) => (
-            <div class={`${card} text-center`}>
+            <a
+              href={item.href}
+              class={`${card} group reveal hover:border-primary-600/40 dark:hover:border-primary-400/40 block text-center no-underline transition hover:-translate-y-0.5 hover:shadow-lg`}
+            >
               <div class="text-primary-600 dark:text-primary-400 mx-auto mb-3 flex size-12 items-center justify-center">
                 <Icon name={item.icon} class="size-7" aria-hidden="true" />
               </div>
@@ -224,14 +239,14 @@ const headshots = [
               <p class="text-base-600 dark:text-base-400 mt-1.5 text-sm leading-relaxed">
                 {item.desc}
               </p>
-            </div>
+            </a>
           ))
         }
       </div>
     </section>
 
     <!-- ============ BIO ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section id="bio" class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
       <div
         class="grid items-center gap-[clamp(1.5rem,4vw,3rem)] md:grid-cols-2"
       >
@@ -247,30 +262,30 @@ const headshots = [
           />
         </div>
         <div>
-          <span class="eyebrow">About the Speaker</span>
-          <h2
-            class="font-display mt-2 mb-5 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-          >
-            Guido Jansen
-          </h2>
+          <div class="sec-head">
+            <div>
+              <span class="hand-note">a quick intro</span>
+              <h2 class="leading-[1.1]">About the Speaker Guido X Jansen</h2>
+            </div>
+          </div>
           <div
             class="prose dark:prose-invert text-base-700 dark:text-base-300 max-w-none space-y-4 text-[1.05rem] leading-relaxed"
           >
             <p>
-              Guido is a Community Builder who turns technical ecosystems into
-              real business growth. With 20+ years at the intersection of
-              psychology and technology, he has built community functions from
-              zero multiple times.
+              I'm a Community Builder who turns technical ecosystems into real
+              business growth. With 20+ years at the intersection of psychology
+              and technology, I've built community functions from zero multiple
+              times.
             </p>
             <p>
-              His cognitive psychology background shapes how he approaches
-              community work. Not by predicting how developers will behave, but
-              by testing assumptions and watching what they actually do, because
-              the one thing psychology reliably teaches is that you can't
-              reliably predict people.
+              My cognitive psychology background shapes how I approach community
+              work. Not by predicting how developers will behave, but by testing
+              assumptions and watching what they actually do, because the one
+              thing psychology reliably teaches is that you can't reliably
+              predict people.
             </p>
             <p>
-              He has presented at 200+ conferences across 26 countries on topics
+              I've presented at 200+ conferences across 26 countries on topics
               including composable commerce, community building, and digital
               psychology.
             </p>
@@ -280,21 +295,14 @@ const headshots = [
     </section>
 
     <!-- ============ AM I THE RIGHT FIT ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section id="fit" class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
       <div class="mx-auto max-w-3xl text-center">
-        <span class="eyebrow">
-          <Icon
-            name="tabler/outline/circle-check"
-            class="size-5"
-            aria-hidden="true"
-          />
-          The fit
-        </span>
-        <h2
-          class="font-display mt-2 mb-6 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-        >
-          Am I the right fit?
-        </h2>
+        <div class="sec-head justify-center text-center">
+          <div>
+            <span class="hand-note">before you ask</span>
+            <h2 class="leading-[1.1]">Am I the right fit?</h2>
+          </div>
+        </div>
         <div
           class="prose dark:prose-invert text-base-600 dark:text-base-400 mx-auto max-w-none space-y-6 text-[1.05rem] leading-relaxed"
         >
@@ -323,22 +331,13 @@ const headshots = [
     </section>
 
     <!-- ============ TALK FORMAT ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section id="talk-format" class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
       <div class="mx-auto max-w-3xl">
-        <div class="mb-8 text-center">
-          <span class="eyebrow">
-            <Icon
-              name="tabler/outline/presentation"
-              class="size-5"
-              aria-hidden="true"
-            />
-            On stage
-          </span>
-          <h2
-            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-          >
-            Talk format
-          </h2>
+        <div class="sec-head justify-center text-center">
+          <div>
+            <span class="hand-note">on stage</span>
+            <h2 class="leading-[1.1]">Talk format</h2>
+          </div>
         </div>
         <div
           class="prose dark:prose-invert text-base-600 dark:text-base-400 mx-auto max-w-none space-y-6 text-[1.05rem] leading-relaxed"
@@ -371,22 +370,13 @@ const headshots = [
     </section>
 
     <!-- ============ FEE ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section id="fee" class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
       <div class="mx-auto max-w-3xl">
-        <div class="mb-8 text-center">
-          <span class="eyebrow">
-            <Icon
-              name="tabler/outline/currency-euro"
-              class="size-5"
-              aria-hidden="true"
-            />
-            Investment
-          </span>
-          <h2
-            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-          >
-            Fee
-          </h2>
+        <div class="sec-head justify-center text-center">
+          <div>
+            <span class="hand-note">the investment</span>
+            <h2 class="leading-[1.1]">Fee</h2>
+          </div>
         </div>
 
         <div
@@ -425,12 +415,15 @@ const headshots = [
     </section>
 
     <!-- ============ PAYMENT TERMS ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section
+      id="payment-terms"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
       <div class="mx-auto max-w-4xl">
         <div class="sec-head justify-center text-center">
           <div>
             <span class="hand-note">the fine print</span>
-            <h2>Payment terms</h2>
+            <h2 class="leading-[1.1]">Payment terms</h2>
           </div>
         </div>
 
@@ -495,14 +488,17 @@ const headshots = [
     </section>
 
     <!-- ============ TESTIMONIALS ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section
+      id="testimonials"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
       <div class="mb-10 text-center">
-        <span class="hand-note">kind words</span>
-        <h2
-          class="font-display text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-        >
-          What others say
-        </h2>
+        <div class="sec-head justify-center text-center">
+          <div>
+            <span class="hand-note">kind words</span>
+            <h2 class="leading-[1.1]">What others say</h2>
+          </div>
+        </div>
         <p class="text-base-600 dark:text-base-400 mt-3 text-lg">
           Feedback from event organizers and attendees
         </p>
@@ -535,17 +531,17 @@ const headshots = [
     </section>
 
     <!-- ============ FEATURED PRESENTATIONS ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section
+      id="presentations"
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+    >
       <div class="mb-10 text-center">
-        <span class="eyebrow">
-          <Icon name="tabler/outline/star" class="size-5" aria-hidden="true" />
-          Most requested
-        </span>
-        <h2
-          class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-        >
-          Featured Presentations
-        </h2>
+        <div class="sec-head justify-center text-center">
+          <div>
+            <span class="hand-note">most requested</span>
+            <h2 class="leading-[1.1]">Featured presentations</h2>
+          </div>
+        </div>
         <p class="text-base-600 dark:text-base-400 mt-3 text-lg">
           Some of my most popular talks that conference organizers frequently
           request
@@ -589,7 +585,7 @@ const headshots = [
       <div class="text-center">
         <a
           href="/presentations/"
-          class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
+          class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 bg-base-50 dark:bg-base-800/60 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
         >
           View All Presentations
         </a>
@@ -597,22 +593,13 @@ const headshots = [
     </section>
 
     <!-- ============ TRAVEL & ACCOMMODATION ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section id="travel" class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
       <div class="mx-auto max-w-4xl">
-        <div class="mb-8 text-center">
-          <span class="eyebrow">
-            <Icon
-              name="tabler/outline/map-pin"
-              class="size-5"
-              aria-hidden="true"
-            />
-            Logistics
-          </span>
-          <h2
-            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-          >
-            Travel & Accommodation
-          </h2>
+        <div class="sec-head justify-center text-center">
+          <div>
+            <span class="hand-note">the logistics</span>
+            <h2 class="leading-[1.1]">Travel &amp; accommodation</h2>
+          </div>
         </div>
 
         <div class="grid gap-6 md:grid-cols-2">
@@ -661,22 +648,13 @@ const headshots = [
     </section>
 
     <!-- ============ AV/TECH REQUIREMENTS ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section id="av-tech" class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
       <div class="mx-auto max-w-4xl">
-        <div class="mb-8 text-center">
-          <span class="eyebrow">
-            <Icon
-              name="tabler/outline/device-tv"
-              class="size-5"
-              aria-hidden="true"
-            />
-            Setup
-          </span>
-          <h2
-            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-          >
-            AV/Tech Requirements
-          </h2>
+        <div class="sec-head justify-center text-center">
+          <div>
+            <span class="hand-note">the setup</span>
+            <h2 class="leading-[1.1]">AV/tech requirements</h2>
+          </div>
         </div>
 
         <div class="grid gap-6 md:grid-cols-2">
@@ -725,22 +703,15 @@ const headshots = [
     </section>
 
     <!-- ============ BIOGRAPHY ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section id="biography" class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
       <div class="mx-auto max-w-4xl">
         <div class="mb-8 text-center">
-          <span class="eyebrow">
-            <Icon
-              name="tabler/outline/user"
-              class="size-5"
-              aria-hidden="true"
-            />
-            Copy-paste ready
-          </span>
-          <h2
-            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-          >
-            Biography
-          </h2>
+          <div class="sec-head justify-center text-center">
+            <div>
+              <span class="hand-note">copy-paste ready</span>
+              <h2 class="leading-[1.1]">Biography</h2>
+            </div>
+          </div>
           <p class="text-base-600 dark:text-base-400 mt-3 text-lg">
             Copy-paste ready speaker bio for your marketing materials
           </p>
@@ -837,22 +808,15 @@ const headshots = [
     </section>
 
     <!-- ============ CONTENT FOR MARKETING ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section id="marketing" class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
       <div class="mx-auto max-w-4xl">
         <div class="mb-8 text-center">
-          <span class="eyebrow">
-            <Icon
-              name="tabler/outline/speakerphone"
-              class="size-5"
-              aria-hidden="true"
-            />
-            Promotion
-          </span>
-          <h2
-            class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-          >
-            Content for Your Marketing
-          </h2>
+          <div class="sec-head justify-center text-center">
+            <div>
+              <span class="hand-note">spread the word</span>
+              <h2 class="leading-[1.1]">Content for your marketing</h2>
+            </div>
+          </div>
           <p class="text-base-600 dark:text-base-400 mt-3 text-lg">
             Ready-to-use materials to promote the session
           </p>
@@ -899,7 +863,7 @@ const headshots = [
           </p>
           <a
             href="/contact/"
-            class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
+            class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 bg-base-50 dark:bg-base-800/60 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
           >
             Request Marketing Materials
           </a>
@@ -908,21 +872,14 @@ const headshots = [
     </section>
 
     <!-- ============ HEADSHOTS ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+    <section id="headshots" class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
       <div class="mb-10 text-center">
-        <span class="eyebrow">
-          <Icon
-            name="tabler/outline/camera"
-            class="size-5"
-            aria-hidden="true"
-          />
-          Press kit
-        </span>
-        <h2
-          class="font-display mt-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-        >
-          Headshots
-        </h2>
+        <div class="sec-head justify-center text-center">
+          <div>
+            <span class="hand-note">grab my face</span>
+            <h2 class="leading-[1.1]">Headshots</h2>
+          </div>
+        </div>
         <p class="text-base-600 dark:text-base-400 mt-3 text-lg">
           High-resolution headshots for your event marketing materials
         </p>
@@ -947,7 +904,7 @@ const headshots = [
                 <a
                   href={h.href}
                   target="_blank"
-                  class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 font-display inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-bold transition"
+                  class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 bg-base-50 dark:bg-base-800/60 font-display inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-bold transition"
                 >
                   Download High-Res
                 </a>
@@ -964,12 +921,12 @@ const headshots = [
         class="border-base-200 dark:border-base-800 from-gold/15 rounded-3xl border bg-gradient-to-br to-transparent p-[clamp(1.5rem,4vw,3rem)] text-center"
       >
         <div class="mx-auto max-w-2xl">
-          <span class="eyebrow">Let's work together</span>
-          <h2
-            class="font-display mt-2 mb-4 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-          >
-            Ready to book me for your event?
-          </h2>
+          <div class="sec-head justify-center text-center">
+            <div>
+              <span class="hand-note">let's work together</span>
+              <h2 class="leading-[1.1]">Ready to book me for your event?</h2>
+            </div>
+          </div>
           <p
             class="text-base-700 dark:text-base-300 mb-8 text-[1.05rem] leading-relaxed"
           >

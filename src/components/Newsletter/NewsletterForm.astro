@@ -72,74 +72,120 @@ const signupPage = Astro.url.pathname;
   variant === "card" && (
     <div
       class:list={[
-        "newsletter-card bg-base-200 dark:bg-base-800 rounded-lg p-6 md:p-8",
+        // Gold corner-wash card — nod to "Golden Nuggets". The two layered
+        // radial gradients (gold top-right, faint pine bottom-left) are baked
+        // into the background via Tailwind arbitrary values so no <style> block
+        // is needed. `relative`/`overflow-hidden` keep the wash inside the card.
+        "newsletter-card relative overflow-hidden rounded-[1.5rem] border p-7 shadow-sm md:p-12",
+        "border-base-300/60 bg-base-50 dark:border-base-700 dark:bg-base-900",
+        "bg-[radial-gradient(70%_130%_at_100%_0%,rgba(246,193,119,0.16),transparent_58%),radial-gradient(60%_120%_at_0%_100%,rgba(40,105,131,0.08),transparent_55%)]",
         className,
       ]}
     >
-      {title && (
-        <h3
-          class="text-base-900 dark:text-base-100 mb-2 text-xl font-bold md:text-2xl"
-          set:html={title}
-        />
-      )}
-      {showSubscriberCount && (
-        <p
-          class="subscriber-count text-base-600 dark:text-base-400 mb-2 hidden"
-          data-subscriber-count
-        >
-          Join <span class="subscriber-number" /> newsletter subscribers
-        </p>
-      )}
-      {description && (
-        <p class="text-base-600 dark:text-base-400 mb-6">{description}</p>
-      )}
-      <form
-        id={formId}
-        method="post"
-        action={actionUrl}
-        class="newsletter-form flex flex-col gap-4"
-        data-newsletter-form
-      >
-        <input type="hidden" name="nonce" />
-        <input type="hidden" name="l" value={listId} />
-        <input type="hidden" name="signupPage" value={signupPage} />
-
-        <div class="flex flex-col gap-3">
-          <div class="w-full">
-            <label for={`${formId}-email`} class="sr-only">
-              Email address
-            </label>
-            <input
-              type="email"
-              name="email"
-              id={`${formId}-email`}
-              required
-              placeholder={emailPlaceholder}
-              class="form__input h-[46px] w-full"
-              aria-required="true"
-              aria-describedby={`${formId}-status`}
+      <div class="relative z-10 grid items-center gap-8 md:grid-cols-[1.08fr_0.92fr] md:gap-12">
+        {/* ── Left column: copy ── */}
+        <div class="min-w-0">
+          <span class="text-gold-light dark:text-gold font-display inline-flex items-center gap-2 text-[0.78rem] font-bold tracking-[0.08em] uppercase">
+            <Icon
+              name="tabler/outline/sparkles"
+              class="size-[15px]"
+              aria-hidden="true"
             />
-          </div>
+            Newsletter
+          </span>
 
-          {showName && (
-            <div class="w-full">
-              <label for={`${formId}-name`} class="sr-only">
-                Name (optional)
-              </label>
-              <input
-                type="text"
-                name="name"
-                id={`${formId}-name`}
-                placeholder={namePlaceholder}
-                class="form__input h-[46px] w-full"
-                aria-required="false"
-              />
-            </div>
+          {title && (
+            <h3
+              class="text-base-900 dark:text-base-100 mt-2 mb-0.5 text-[clamp(1.6rem,3.2vw,2.3rem)] leading-[1.05] font-black tracking-[-0.03em]"
+              set:html={title}
+            />
           )}
 
-          <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <p class="text-gold-light dark:text-gold font-hand inline-block origin-left -rotate-2 text-[1.5rem] leading-none">
+            a few times a year
+          </p>
+
+          {showSubscriberCount && (
+            <p
+              class="subscriber-count text-base-600 dark:text-base-400 mt-3 hidden text-sm"
+              data-subscriber-count
+            >
+              Join <span class="subscriber-number" /> newsletter subscribers
+            </p>
+          )}
+
+          {description && (
+            <p class="text-base-600 dark:text-base-400 [&_strong]:text-base-900 dark:[&_strong]:text-base-100 mt-3 max-w-[42ch] leading-relaxed [&_strong]:font-bold">
+              {description}
+            </p>
+          )}
+        </div>
+
+        {/* ── Right column: form + trust line ── */}
+        <div class="min-w-0">
+          <form
+            id={formId}
+            method="post"
+            action={actionUrl}
+            class="newsletter-form flex flex-col gap-3"
+            data-newsletter-form
+          >
+            <input type="hidden" name="nonce" />
+            <input type="hidden" name="l" value={listId} />
+            <input type="hidden" name="signupPage" value={signupPage} />
+
+            <div class="flex flex-wrap items-center gap-2">
+              <label
+                for={`${formId}-email`}
+                class="relative flex min-w-0 flex-[1_1_200px] items-center"
+              >
+                <span class="sr-only">Email address</span>
+                <Icon
+                  name="tabler/outline/mail"
+                  class="text-base-500 dark:text-base-400 pointer-events-none absolute left-3.5 size-[18px]"
+                  aria-hidden="true"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  id={`${formId}-email`}
+                  required
+                  placeholder={emailPlaceholder}
+                  autocomplete="email"
+                  class="border-base-300 bg-base-100 text-base-900 placeholder:text-base-500 dark:border-base-600 dark:bg-base-950 dark:text-base-100 dark:placeholder:text-base-400 min-h-12 w-full rounded-full border-[1.5px] py-3 pr-4 pl-10 text-base"
+                  aria-required="true"
+                  aria-describedby={`${formId}-status`}
+                />
+              </label>
+
+              {showName && (
+                <label
+                  for={`${formId}-name`}
+                  class="relative flex min-w-0 flex-[1_1_200px] items-center"
+                >
+                  <span class="sr-only">Name (optional)</span>
+                  <input
+                    type="text"
+                    name="name"
+                    id={`${formId}-name`}
+                    placeholder={namePlaceholder}
+                    class="border-base-300 bg-base-100 text-base-900 placeholder:text-base-500 dark:border-base-600 dark:bg-base-950 dark:text-base-100 dark:placeholder:text-base-400 min-h-12 w-full rounded-full border-[1.5px] px-4 py-3 text-base"
+                    aria-required="false"
+                  />
+                </label>
+              )}
+
+              <Button
+                type="submit"
+                variant="primary"
+                class="flex-shrink-0 whitespace-nowrap"
+              >
+                {buttonText}
+              </Button>
+            </div>
+
             <div
-              class="altcha-container flex-shrink-0"
+              class="altcha-container"
               role="group"
               aria-label="Spam verification"
             >
@@ -154,27 +200,36 @@ const signupPage = Astro.url.pathname;
               />
             </div>
 
-            <Button
-              type="submit"
-              variant="primary"
-              class="w-full flex-shrink-0 whitespace-nowrap sm:w-auto"
-            >
-              {buttonText}
-            </Button>
-          </div>
+            <div
+              id={`${formId}-status`}
+              class="newsletter-status text-sm"
+              role="status"
+              aria-live="polite"
+            />
+          </form>
+
+          {/* Trust line — matches reference "No spam · No tracking · unsubscribe in one click" */}
+          <p class="text-base-500 dark:text-base-400 mt-3.5 flex flex-wrap items-center gap-2 text-[0.82rem]">
+            <span class="text-base-600 dark:text-base-300 font-semibold">
+              No spam
+            </span>
+            <span class="opacity-50" aria-hidden="true">
+              ·
+            </span>
+            <span class="text-base-600 dark:text-base-300 font-semibold">
+              No tracking
+            </span>
+            <span class="opacity-50" aria-hidden="true">
+              ·
+            </span>
+            <span>unsubscribe in one click</span>
+          </p>
+
+          {note && (
+            <p class="text-base-500 dark:text-base-400 mt-2 text-xs">{note}</p>
+          )}
         </div>
-
-        <div
-          id={`${formId}-status`}
-          class="newsletter-status text-sm"
-          role="status"
-          aria-live="polite"
-        />
-
-        {note && (
-          <p class="text-base-600 dark:text-base-400 mt-2 text-xs">{note}</p>
-        )}
-      </form>
+      </div>
     </div>
   )
 }
@@ -740,6 +795,30 @@ const signupPage = Astro.url.pathname;
 
   .newsletter-status:empty {
     display: none;
+  }
+
+  /* Success state — render the live status message as a pine checkmark +
+     thank-you row, matching the design reference. The submit script adds
+     `.text-green-600` (light) / `.dark:text-green-400` (dark) to
+     `.newsletter-status` on success; we re-map that to the on-system pine
+     accent and prefix a circular pine checkmark. Behaviour is unchanged —
+     the same `.newsletter-status` element still carries the announced text. */
+  .newsletter-card .newsletter-status.text-green-600 {
+    @apply text-pine-light dark:text-pine font-display flex items-center gap-2.5 font-bold;
+  }
+  .newsletter-card .newsletter-status.text-green-600::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    background-color: color-mix(in oklab, currentColor 16%, transparent);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23286983' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  :global(.dark) .newsletter-card .newsletter-status.text-green-600::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2331748f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E");
   }
 
   /* CTA variant specific styles */

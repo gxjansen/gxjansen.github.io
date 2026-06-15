@@ -98,11 +98,11 @@ const ArrowRight = "→";
             >
             <Button
               variant="ghost"
-              class="font-display rounded-full"
+              class="font-display rounded-full whitespace-nowrap"
               href="https://sifa.id/p/gui.do"
               >Follow me on Sifa ID <Icon
                 name="sifa"
-                class="ml-0.5 size-4"
+                class="ml-0.5 inline size-4 align-text-bottom"
                 aria-hidden="true"
               /></Button
             >
@@ -284,9 +284,9 @@ const ArrowRight = "→";
               class="text-primary-600 dark:text-primary-400"
               >cognitive-psychology</strong
             > read on how developers and customers actually behave, and an experimentation
-            habit — <strong class="text-primary-600 dark:text-primary-400"
+            habit (those <strong class="text-primary-600 dark:text-primary-400"
               >500+ A/B tests</strong
-            > at Randstad &amp; JDE — to check what works instead of guessing. I'm
+            > at Randstad &amp; JDE) to check what works instead of guessing. I'm
             still learning, mostly in the open.
           </p>
           <div class="pillars">
@@ -308,7 +308,13 @@ const ArrowRight = "→";
             <blockquote>{aboutQuote.q}</blockquote>
             <figcaption class="by">
               <span class="n">{aboutQuote.who}</span>
-              <span class="r">{aboutQuote.role}</span>
+              <span class="r">
+                {aboutQuote.role}{
+                  aboutQuote.context && (
+                    <span class="text-base-500"> · {aboutQuote.context}</span>
+                  )
+                }
+              </span>
             </figcaption>
           </figure>
         </div>
@@ -406,7 +412,7 @@ const ArrowRight = "→";
         <p
           class="text-base-600 dark:text-base-400 mx-auto max-w-[48ch] text-[1.05rem]"
         >
-          A handful of engagements each year — choose the format that fits what
+          A handful of engagements each year. Pick the format that fits what
           you're trying to achieve.
         </p>
       </div>

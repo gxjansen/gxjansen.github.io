@@ -24,10 +24,9 @@ const {
 
 const authorUrl = `/authors/${author.id}`;
 
-// Map social links with proper icon names (LinkedIn, GitHub, Bluesky, Website as per user requirement)
+// Social links: lead with Sifa (the portable profile), then Bluesky.
 const socialLinks = [
-  { url: linkedin, icon: "linkedin", label: "LinkedIn" },
-  { url: github, icon: "github", label: "GitHub" },
+  { url: "https://sifa.id/p/gui.do", icon: "sifa", label: "Sifa" },
   { url: bluesky, icon: "bluesky", label: "Bluesky" },
 ].filter((link): link is { url: string; icon: string; label: string } =>
   Boolean(link.url),
@@ -148,7 +147,7 @@ const hasWebsite = website && website.includes("gui.do");
 
       <div class="mt-4">
         <a
-          href={authorUrl}
+          href="/post/"
           class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 text-sm font-medium"
         >
           View all posts by {name} →

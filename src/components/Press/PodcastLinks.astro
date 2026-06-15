@@ -14,13 +14,24 @@ const { spotifyId, applePodcastsUrl, title } = Astro.props;
 const spotifyUrl = spotifyId
   ? `https://open.spotify.com/episode/${spotifyId}`
   : null;
+
+// Count the actual listen platforms we have links for. We only promise
+// "your preferred platform" when more than one option is genuinely available;
+// otherwise we name the single platform so the label doesn't over-promise.
+const platformCount = [spotifyUrl, applePodcastsUrl].filter(Boolean).length;
+const listenLabel =
+  platformCount > 1
+    ? "Listen on your preferred platform:"
+    : applePodcastsUrl && !spotifyUrl
+      ? "Listen on Apple Podcasts:"
+      : "Listen on Spotify:";
 ---
 
 <div
   class="podcast-links bg-base-200 dark:bg-base-800 w-full rounded-xl p-4 transition-colors"
 >
   <p class="text-base-700 dark:text-base-400 mb-3 text-sm">
-    Listen on your preferred platform:
+    {listenLabel}
   </p>
   <div class="flex flex-wrap gap-2">
     {

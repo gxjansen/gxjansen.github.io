@@ -73,7 +73,7 @@ const communities = [
   },
   {
     name: "Spryker",
-    period: "2021-now",
+    period: "2021-2025",
     role: "Employee (Senior Director, Global Business & Technology Evangelist)",
     roleType: "professional",
     context: "4+ years",
@@ -128,12 +128,11 @@ const communities = [
           communities.map((community, index) => (
             <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
               <div class={index % 2 === 1 ? "md:order-2" : ""}>
-                <div class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex aspect-video items-center justify-center overflow-hidden rounded-2xl border p-8">
+                <div class="border-base-200 dark:border-base-800 flex aspect-video min-h-[200px] items-center justify-center rounded-2xl border bg-white p-8">
                   <Image
                     src={community.logo}
                     alt={`${community.name} logo`}
-                    class="max-h-[120px] max-w-[200px] object-contain"
-                    width={200}
+                    class="max-h-[120px] w-auto object-contain"
                     height={120}
                   />
                 </div>
