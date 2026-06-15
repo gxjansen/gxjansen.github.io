@@ -520,12 +520,8 @@ const awards = split(cv.awards);
                         </span>
                       )}
                     </div>
-                    {(x.cause || x.description) && (
+                    {x.description && (
                       <p class="text-base-600 dark:text-base-400 mt-0.5 text-[0.9rem] leading-relaxed">
-                        {x.cause && (
-                          <span class="text-base-500">{x.cause}</span>
-                        )}
-                        {x.cause && x.description ? " · " : ""}
                         {x.description}
                       </p>
                     )}
@@ -556,12 +552,8 @@ const awards = split(cv.awards);
                             </span>
                           )}
                         </div>
-                        {(x.cause || x.description) && (
+                        {x.description && (
                           <p class="text-base-600 dark:text-base-400 mt-0.5 text-[0.9rem] leading-relaxed">
-                            {x.cause && (
-                              <span class="text-base-500">{x.cause}</span>
-                            )}
-                            {x.cause && x.description ? " · " : ""}
                             {x.description}
                           </p>
                         )}

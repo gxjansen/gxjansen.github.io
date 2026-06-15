@@ -100,7 +100,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
   {
     id: "andreas-lummerzheim-1",
     name: "Andreas Lummerzheim",
-    role: "Head of Learning Experience",
+    role: "Partner Manager",
     company: "Spryker",
     workRelationship: "Colleague in the same division, but different team",
     quote:
