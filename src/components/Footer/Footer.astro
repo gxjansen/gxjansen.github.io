@@ -9,6 +9,8 @@ import SocialLinks from "@components/SocialLinks/SocialLinks.astro";
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { getTranslatedData } from "@js/translationUtils";
 
+import { yearsBuilding } from "@data/siteStats";
+
 // data
 const currLocale = getLocaleFromUrl(Astro.url);
 const siteData = getTranslatedData("siteData", currLocale);
@@ -71,10 +73,10 @@ const columns: {
         <p
           class="text-base-600 dark:text-base-400 max-w-sm text-sm leading-relaxed"
         >
-          For 20+ years I've helped tech teams turn developer &amp; customer
-          intelligence into product strategy, grounded in cognitive psychology
-          and a habit of testing my assumptions. I help build communities, and
-          the teams that run them.
+          For {yearsBuilding}+ years I've helped tech teams turn developer &amp;
+          customer intelligence into product strategy, grounded in cognitive
+          psychology and a habit of testing my assumptions. I help build
+          communities, and the teams that run them.
         </p>
         <SocialLinks location="footer" context="footer" class="mt-1" />
       </div>

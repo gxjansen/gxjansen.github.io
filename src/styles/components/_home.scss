@@ -82,7 +82,8 @@
     transform-origin: left center;
   }
   .home .more {
-    @apply text-primary-600 dark:text-primary-400 inline-flex items-center gap-1.5 font-display text-[0.95rem] font-bold no-underline transition-[gap];
+    @apply text-primary-600 dark:text-primary-400 inline-flex items-center gap-1.5 font-display text-[0.95rem] font-bold no-underline;
+    transition: gap 150ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .more:hover {
     @apply gap-2.5;
@@ -93,11 +94,21 @@
     @apply grid grid-cols-1 gap-[1.1rem] md:grid-cols-[1.4fr_1fr];
   }
   .home .art {
-    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex h-full flex-col overflow-hidden rounded-2xl border p-6 text-inherit no-underline transition-all duration-200;
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex h-full flex-col overflow-hidden rounded-2xl border p-6 text-inherit no-underline;
+    transition:
+      border-color,
+      background-color,
+      color,
+      transform,
+      box-shadow,
+      opacity;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .art::before {
     content: "";
-    @apply absolute inset-y-0 left-0 w-1 opacity-0 transition-opacity duration-200;
+    @apply absolute inset-y-0 left-0 w-1 opacity-0;
+    transition: opacity 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
     background: var(--ac, var(--color-primary-600));
   }
   .home .art:hover {
@@ -161,7 +172,16 @@
     @apply grid grid-cols-1 gap-3.5 md:grid-cols-2;
   }
   .home .talk {
-    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex items-center gap-4 rounded-2xl border p-4 text-inherit no-underline transition-all duration-200;
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex items-center gap-4 rounded-2xl border p-4 text-inherit no-underline;
+    transition:
+      border-color,
+      background-color,
+      color,
+      transform,
+      box-shadow,
+      opacity;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .talk:hover {
     @apply border-primary-600 dark:border-primary-400 translate-x-1;
@@ -227,7 +247,16 @@
     @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3;
   }
   .home .proj {
-    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 block rounded-2xl border p-6 text-inherit no-underline transition-all duration-200;
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 block rounded-2xl border p-6 text-inherit no-underline;
+    transition:
+      border-color,
+      background-color,
+      color,
+      transform,
+      box-shadow,
+      opacity;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .proj:hover {
     @apply -translate-y-1 shadow-lg;
@@ -254,7 +283,16 @@
     @apply grid grid-cols-1 gap-[1.1rem] md:grid-cols-2;
   }
   .home .tcourse {
-    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex flex-col overflow-hidden rounded-2xl border p-6 text-inherit no-underline transition-all duration-200;
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex flex-col overflow-hidden rounded-2xl border p-6 text-inherit no-underline;
+    transition:
+      border-color,
+      background-color,
+      color,
+      transform,
+      box-shadow,
+      opacity;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .tcourse::before {
     content: "";
@@ -292,7 +330,16 @@
     @apply grid grid-cols-1 gap-4 md:grid-cols-3;
   }
   .home .wwm-card {
-    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex flex-col overflow-hidden rounded-3xl border p-6 transition-all duration-200;
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex flex-col overflow-hidden rounded-3xl border p-6;
+    transition:
+      border-color,
+      background-color,
+      color,
+      transform,
+      box-shadow,
+      opacity;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .wwm-card:hover {
     @apply -translate-y-1 shadow-lg;
@@ -310,8 +357,18 @@
     @apply text-base-600 dark:text-base-400 mb-5 flex-1 text-[0.92rem] leading-[1.5];
   }
   .home .wwm-card .wbtn {
-    @apply font-display inline-flex items-center gap-1.5 self-start rounded-full px-4 py-2.5 text-[0.9rem] font-bold text-white no-underline transition-all duration-200;
+    @apply font-display inline-flex items-center gap-1.5 self-start rounded-full px-4 py-2.5 text-[0.9rem] font-bold text-white no-underline;
     background: var(--ac, var(--color-primary-600));
+    transition:
+      border-color,
+      background-color,
+      color,
+      transform,
+      box-shadow,
+      opacity,
+      filter;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .wwm-card .wbtn:hover {
     @apply -translate-y-px brightness-110;
@@ -392,7 +449,16 @@
     @apply hidden;
   }
   .home .fbtn {
-    @apply text-base-600 dark:text-base-400 border-base-200 dark:border-base-700 flex-shrink-0 cursor-pointer rounded-full border bg-transparent px-3 py-1.5 font-display text-[0.82rem] font-semibold whitespace-nowrap transition-all duration-200;
+    @apply text-base-600 dark:text-base-400 border-base-200 dark:border-base-700 flex-shrink-0 cursor-pointer rounded-full border bg-transparent px-3 py-1.5 font-display text-[0.82rem] font-semibold whitespace-nowrap;
+    transition:
+      border-color,
+      background-color,
+      color,
+      transform,
+      box-shadow,
+      opacity;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .fbtn:hover {
     @apply border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400;
@@ -419,7 +485,10 @@
     background-clip: content-box;
   }
   .home .feed-item {
-    @apply relative rounded-xl border border-transparent p-3.5 transition-colors duration-200;
+    @apply relative rounded-xl border border-transparent p-3.5;
+    transition: border-color, background-color, color;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .feed-item:hover {
     @apply bg-base-200/50 dark:bg-base-800/40 border-base-200 dark:border-base-800;

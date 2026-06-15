@@ -7,10 +7,10 @@
 }
 
 @layer components {
-  /* Layout & Container Classes */
-  .site-container {
-    @apply mx-auto max-w-[90rem];
-  }
+  /* `.site-container` is intentionally NOT defined here. The single source of
+     truth is global.scss (`mx-auto w-full max-w-7xl px-2 sm:px-4`). A second
+     definition used to live here (`max-w-[90rem]`), so the effective page
+     width depended on import order. Removed to keep one unambiguous width. */
 
   .content-container {
     @apply mx-auto max-w-[800px] px-4;

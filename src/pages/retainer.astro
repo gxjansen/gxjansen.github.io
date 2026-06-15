@@ -15,6 +15,8 @@ import borisImage from "@assets/images/testimonials/boris.webp";
 import chrisImage from "@assets/images/testimonials/chris.webp";
 import svitlanaImage from "@assets/images/testimonials/svitlana.webp";
 
+import { talksCount, countryCount } from "@data/siteStats";
+
 // Live seat availability. Edit these two values when seats fill, both hero
 // and Apply CTAs update from the same source.
 const seatsTotal = 5;
@@ -224,9 +226,10 @@ const testimonials = [
             I've built community at <strong>Spryker</strong> (130+ enterprise clients,
             with about 25% of product roadmap traceable to community signal),
             <strong>Dutchento / Meet Magento</strong> (600+ annual attendees), and
-            <strong>CRO.CAFE</strong> (200+ episodes across four languages). 200+
-            talks in 26 countries, plus the Community Builder Award from eBay/Magento
-            and the Experimentation Culture Award.
+            <strong>CRO.CAFE</strong> (200+ episodes across four languages). {
+              talksCount
+            } talks in {countryCount} countries, plus the Community Builder Award
+            from eBay/Magento and the Experimentation Culture Award.
           </p>
           <div
             class="mt-10 flex flex-wrap items-center gap-4"

@@ -5,6 +5,8 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import PostCardAtlas from "@components/PostCard/PostCardAtlas.astro";
 import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
 
+import { yearsBuilding } from "@data/siteStats";
+
 export async function getStaticPaths() {
   const authors = await getCollection("authors");
   return authors.map((author) => ({
@@ -59,7 +61,7 @@ const hasWebsite = website && website.includes("gui.do");
 // Custom meta description for gxjansen, default to bio for other authors
 const metaDescription =
   author.id === "gxjansen"
-    ? `${name} — Community strategist, 20+ years building developer ecosystems. Credentials, awards, and ${sortedPosts.length}+ articles on community building, experimentation, and e-commerce.`
+    ? `${name} — Community strategist, ${yearsBuilding}+ years building developer ecosystems. Credentials, awards, and ${sortedPosts.length}+ articles on community building, experimentation, and e-commerce.`
     : bio || `Articles and insights from ${name}`;
 
 // Build Person schema for E-E-A-T

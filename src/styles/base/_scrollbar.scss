@@ -12,9 +12,8 @@
     @apply rounded-full bg-base-300/90;
   }
 
-  /* Custom focus styles for better accessibility */
-  a:focus {
-    /* v4: outline-none → outline-hidden; bare rounded → rounded-sm */
-    @apply outline-hidden ring-1 ring-primary-500/20 rounded-sm;
-  }
+  /* Link focus is handled by the single global `:focus-visible` outline in
+     global.scss (solid pine ring, animated offset). A competing `a:focus`
+     ring used to live here, which produced a second, weaker focus language
+     and fired on mouse-click focus too. Removed so there is one focus ring. */
 }

@@ -607,10 +607,12 @@ const signupPage = Astro.url.pathname;
         : "newsletter-status text-sm mt-2";
 
       if (type === "success") {
-        // CTA: light text on teal background
+        // CTA: light text on teal background.
+        // Non-CTA: success maps to PINE (the system has no green). The card
+        // CSS below keys on `.text-primary-600` to render the checkmark row.
         this.statusElement.classList.add(
-          isCta ? "text-base-100" : "text-green-600",
-          isCta ? "dark:text-base-900" : "dark:text-green-400",
+          isCta ? "text-base-100" : "text-primary-600",
+          isCta ? "dark:text-base-900" : "dark:text-primary-400",
           isCta ? "font-medium" : "",
         );
       } else if (type === "error") {
@@ -800,14 +802,14 @@ const signupPage = Astro.url.pathname;
 
   /* Success state — render the live status message as a pine checkmark +
      thank-you row, matching the design reference. The submit script adds
-     `.text-green-600` (light) / `.dark:text-green-400` (dark) to
-     `.newsletter-status` on success; we re-map that to the on-system pine
-     accent and prefix a circular pine checkmark. Behaviour is unchanged —
-     the same `.newsletter-status` element still carries the announced text. */
-  .newsletter-card .newsletter-status.text-green-600 {
+     `.text-primary-600` (light) / `.dark:text-primary-400` (dark) to
+     `.newsletter-status` on success; we render a circular pine checkmark
+     alongside it. Behaviour is unchanged — the same `.newsletter-status`
+     element still carries the announced text. */
+  .newsletter-card .newsletter-status.text-primary-600 {
     @apply text-pine-light dark:text-pine font-display flex items-center gap-2.5 font-bold;
   }
-  .newsletter-card .newsletter-status.text-green-600::before {
+  .newsletter-card .newsletter-status.text-primary-600::before {
     content: "";
     flex: 0 0 auto;
     width: 2rem;
@@ -818,7 +820,7 @@ const signupPage = Astro.url.pathname;
     background-repeat: no-repeat;
     background-position: center;
   }
-  :global(.dark) .newsletter-card .newsletter-status.text-green-600::before {
+  :global(.dark) .newsletter-card .newsletter-status.text-primary-600::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2331748f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E");
   }
 

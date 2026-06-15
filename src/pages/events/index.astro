@@ -12,6 +12,8 @@ import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
 import { getPresentationUrl } from "@utils/eventPresentationRelations";
 import { getAllEvents, getEventIcon } from "@utils/eventUtils";
 
+import { talksCount, countryCount } from "@data/siteStats";
+
 // Get all events and sort them by date
 const events = await getAllEvents();
 const sortedEvents = [...events].sort(
@@ -254,8 +256,8 @@ sortedYears.forEach((year) => {
           <p
             class="text-base-600 dark:text-base-400 mt-2 max-w-[44ch] leading-relaxed"
           >
-            50+ keynotes across 26 countries. Tell me about your event and
-            audience.
+            {talksCount} talks across {countryCount} countries. Tell me about your
+            event and audience.
           </p>
         </div>
         <div class="flex flex-shrink-0 flex-wrap gap-3">

@@ -94,7 +94,7 @@ export const heroCopy = {
   // The emphasised phrase is wrapped on render.
   headline: "I build community functions for tech products.",
   emphasis: "community functions",
-  lead: "For 20+ years I've helped tech teams turn <strong>developer &amp; customer intelligence</strong> into product strategy, grounded in cognitive psychology and a habit of testing my assumptions. I help build communities, and the teams that run them.",
+  lead: `For ${yearsBuilding}+ years I've helped tech teams turn <strong>developer &amp; customer intelligence</strong> into product strategy, grounded in cognitive psychology and a habit of testing my assumptions. I help build communities, and the teams that run them.`,
 };
 
 // Build-time stats — single source of truth lives in ./siteStats.

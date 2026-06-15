@@ -33,9 +33,8 @@ const isCurrentPage = Astro.url.pathname === actualLink;
 <li role="none">
   <a
     class:list={[
-      `primary-focus text-base-600 hover:text-base-700 focus:ring-primary-500 dark:text-base-400 dark:hover:text-base-300 relative block flex w-full items-center gap-1.5 rounded-md px-4 py-2 leading-tight font-medium transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden ${className}`,
+      `primary-focus text-base-600 hover:text-base-700 focus:ring-primary-500 dark:text-base-400 dark:hover:text-base-300 relative flex w-full items-center gap-1.5 rounded-md px-4 py-2 leading-tight font-medium transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden ${className}`,
       {
-        "aria-current": isCurrentPage,
         "text-primary-600 dark:text-primary-400 font-semibold": isCurrentPage,
       },
     ]}

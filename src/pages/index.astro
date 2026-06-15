@@ -41,7 +41,10 @@ const siteData = getTranslatedData("siteData", currLocale);
 const activity = await getActivity();
 
 // Recent articles from the post collection (real data, working links).
-const accents: Accent[] = ["gold", "foam", "pine", "iris", "love", "rose"];
+// Gold is deliberately omitted: gold leads ONLY on the newsletter, never on a
+// home card. The featured post takes the first accent (foam), and `love` sits
+// within the first four so it gets airtime in the rendered cards.
+const accents: Accent[] = ["foam", "iris", "love", "rose", "pine"];
 const posts = (await getCollection("post", ({ data }) => !data.draft))
   .sort(
     (a, b) =>
@@ -63,7 +66,12 @@ const featured = posts[0];
 // Three items beside the featured card keeps the row height balanced.
 const rest = posts.slice(1, 4);
 
-const ac = (accent: Accent) => `--ac:var(--color-${accent})`;
+// Gold leads ONLY on the newsletter, so no home card may render in gold —
+// even when the underlying content data (e.g. the CRO.CAFE project) specifies
+// `accent: "gold"`. Normalise any gold card accent to foam at render time.
+const cardAccent = (accent: Accent): Accent =>
+  accent === "gold" ? "foam" : accent;
+const ac = (accent: Accent) => `--ac:var(--color-${cardAccent(accent)})`;
 const ArrowRight = "→";
 ---
 

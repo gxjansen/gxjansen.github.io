@@ -231,22 +231,24 @@
   }
 }
 
-/* Animated Focus Ring */
+/* Animated Focus Ring
+   The ring colour (pine) is solid from frame 1 so the ring is visible the
+   instant focus lands; only the offset animates outward. (A previous version
+   faded `outline-color` from transparent, leaving the ring invisible for the
+   first ~200ms of every keyboard focus.) */
 @keyframes focus-ring-expand {
   from {
     outline-offset: 0px;
-    outline-color: transparent;
   }
   to {
     outline-offset: 3px;
-    outline-color: var(--color-primary-500);
   }
 }
 
 :focus-visible {
   outline: 2px solid var(--color-primary-500);
   outline-offset: 3px;
-  animation: focus-ring-expand 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+  animation: focus-ring-expand 0.2s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 /* Global Reduced-Motion Safety Net */

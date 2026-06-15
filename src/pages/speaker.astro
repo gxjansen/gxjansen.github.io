@@ -12,6 +12,8 @@ import headshot1 from "@images/headshot/08.02.2022_Spryker_CEO_0278.jpg";
 import headshot2 from "@images/headshot/08.02.2022_Spryker_CEO_2636.jpg";
 import headshot3 from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
 
+import { yearsBuilding, countryCount, talksCount } from "@data/siteStats";
+
 const card =
   "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-6";
 
@@ -204,10 +206,10 @@ const headshots = [
         <p
           class="text-base-600 dark:text-base-400 mx-auto mt-4 max-w-2xl text-lg leading-relaxed"
         >
-          Community Builder with 20+ years creating technical ecosystems. 200+
-          conference talks across 26 countries. If you're interested in having
-          me speak at your event, you'll find all the information you need
-          below.
+          Community Builder with {yearsBuilding}+ years creating technical
+          ecosystems. {talksCount} talks across {countryCount} countries. If you're
+          interested in having me speak at your event, you'll find all the information
+          you need below.
         </p>
       </div>
     </section>
@@ -273,9 +275,9 @@ const headshots = [
           >
             <p>
               I'm a Community Builder who turns technical ecosystems into real
-              business growth. With 20+ years at the intersection of psychology
-              and technology, I've built community functions from zero multiple
-              times.
+              business growth. With {yearsBuilding}+ years at the intersection
+              of psychology and technology, I've built community functions from
+              zero multiple times.
             </p>
             <p>
               My cognitive psychology background shapes how I approach community
@@ -285,9 +287,9 @@ const headshots = [
               predict people.
             </p>
             <p>
-              I've presented at 200+ conferences across 26 countries on topics
-              including composable commerce, community building, and digital
-              psychology.
+              I've presented at {talksCount} talks across {countryCount}
+              countries on topics including composable commerce, community building,
+              and digital psychology.
             </p>
           </div>
         </div>
@@ -726,11 +728,12 @@ const headshots = [
               class="prose dark:prose-invert text-base-700 dark:text-base-300 max-w-none leading-relaxed"
             >
               <p>
-                Guido X Jansen is a Community Builder with 20+ years creating
-                technical ecosystems. Founded Dutchento/Meet Magento, created
-                CRO.CAFE podcast, and led Spryker's enterprise community.
-                Cognitive psychologist turned DevRel leader. 200+ conference
-                talks across 26 countries. Open source and privacy advocate.
+                Guido X Jansen is a Community Builder with {yearsBuilding}+
+                years creating technical ecosystems. Founded Dutchento/Meet
+                Magento, created CRO.CAFE podcast, and led Spryker's enterprise
+                community. Cognitive psychologist turned DevRel leader. {
+                  talksCount
+                } talks across {countryCount} countries. Open source and privacy advocate.
                 Based in the Netherlands.
               </p>
             </div>
@@ -755,7 +758,7 @@ const headshots = [
                 reliably predict how technical users will behave, so he designs
                 community work as experiments and measures what creates real
                 business value instead of chasing activity metrics. He has
-                spoken at 200+ conferences across 26 countries.
+                spoken at {talksCount} talks across {countryCount} countries.
               </p>
               <p>
                 Guido advocates for open source, privacy-first technology, and
@@ -774,10 +777,10 @@ const headshots = [
             >
               <p>
                 Guido X Jansen is a Community Builder who turns technical
-                ecosystems into real business growth. With 20+ years at the
-                intersection of psychology and technology, he has built
-                community functions from zero multiple times: in the early 2000s
-                with Mambo/Joomla!, as founder of Dutchento/Meet Magento
+                ecosystems into real business growth. With {yearsBuilding}+
+                years at the intersection of psychology and technology, he has
+                built community functions from zero multiple times: in the early
+                2000s with Mambo/Joomla!, as founder of Dutchento/Meet Magento
                 (scaling to 600+ annual attendees), as creator of CRO.CAFE (200+
                 episodes across four languages), and at Spryker (serving 130+
                 enterprise clients).
@@ -795,11 +798,11 @@ const headshots = [
                 Guido operates at the intersection of community, product, and
                 customer success. At Spryker, community-driven initiatives
                 influenced 25% of product roadmap decisions. He has presented at
-                200+ conferences across 26 countries on topics including
-                composable commerce, community building, and digital psychology.
-                He advocates for open source principles, privacy protection, and
-                building systems that get stronger under pressure instead of
-                barely surviving it.
+                {talksCount} talks across {countryCount} countries on topics including
+                composable commerce, community building, and digital psychology. He
+                advocates for open source principles, privacy protection, and building
+                systems that get stronger under pressure instead of barely surviving
+                it.
               </p>
             </div>
           </div>

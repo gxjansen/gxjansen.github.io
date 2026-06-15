@@ -1,6 +1,7 @@
 ---
 /**
- * * Dropdown menu that opens on hover
+ * * Dropdown menu that opens on click/tap (works on every input type) with
+ * * hover as a progressive enhancement on fine-pointer devices.
  * This is for non-mobile devices
  */
 import { Icon } from "astro-icon/components";
@@ -39,7 +40,7 @@ const shouldReduceMotion =
     <span>{navItem.text}</span>
     <Icon
       name="tabler/chevron-down"
-      class={`size-5 transition-transform ${shouldReduceMotion ? "" : "group-hover:rotate-180 group-focus-within:rotate-180"}`}
+      class={`dropdown-chevron size-5 transition-transform ${shouldReduceMotion ? "" : "group-hover:rotate-180 group-focus-within:rotate-180"}`}
       aria-hidden="true"
       role="presentation"
     />
@@ -76,9 +77,13 @@ const shouldReduceMotion =
       visibility 0s linear 0.2s;
   }
 
-  /* Dropdown open state */
+  /* Dropdown open state.
+     Click/tap/keyboard set aria-expanded="true" on the button, which works on
+     every input type. Hover and focus-within stay as a fine-pointer/keyboard
+     enhancement so the panel still previews on hover. */
   .dropdown:hover > .dropdown-content,
-  .dropdown:focus-within > .dropdown-content {
+  .dropdown:focus-within > .dropdown-content,
+  .dropdown > [data-dropdown-toggle][aria-expanded="true"] + .dropdown-content {
     visibility: visible;
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -88,11 +93,19 @@ const shouldReduceMotion =
       visibility 0s;
   }
 
+  /* Keep the chevron rotated while the panel is open via click/tap */
+  [data-dropdown-toggle][aria-expanded="true"] .dropdown-chevron {
+    transform: rotate(180deg);
+  }
+
   /* Respect reduced motion preferences */
   @media (prefers-reduced-motion: reduce) {
     .dropdown-content,
     .dropdown:hover > .dropdown-content,
-    .dropdown:focus-within > .dropdown-content {
+    .dropdown:focus-within > .dropdown-content,
+    .dropdown
+      > [data-dropdown-toggle][aria-expanded="true"]
+      + .dropdown-content {
       transition: none;
       transform: none;
     }
@@ -141,6 +154,7 @@ const shouldReduceMotion =
       this.setupKeyboardNav();
       this.setupFocusManagement();
       this.setupHoverEvents();
+      this.setupOutsideClose();
     }
 
     private setupButtonEvents() {
@@ -199,9 +213,32 @@ const shouldReduceMotion =
     }
 
     private setupHoverEvents() {
-      this.dropdown.addEventListener("mouseenter", () => this.openDropdown());
+      // Hover-to-open is a fine-pointer enhancement only. On touch devices a tap
+      // synthesises mouseenter/mouseleave, which would fight the click toggle and
+      // leave the panel hidden. Guard with a fine-pointer media query so touch
+      // relies purely on the click handler + aria-expanded.
+      const finePointer = window.matchMedia(
+        "(hover: hover) and (pointer: fine)",
+      );
+
+      this.dropdown.addEventListener("mouseenter", () => {
+        if (finePointer.matches) this.openDropdown();
+      });
       this.dropdown.addEventListener("mouseleave", () => {
+        if (!finePointer.matches) return;
         if (!this.dropdown.contains(document.activeElement)) {
+          this.closeDropdown();
+        }
+      });
+    }
+
+    private setupOutsideClose() {
+      // Close on a tap/click anywhere outside the dropdown. pointerdown covers
+      // mouse, touch and pen without relying on focus moving (touch taps don't
+      // always move focus, so focusout alone misses this case).
+      document.addEventListener("pointerdown", (e) => {
+        if (this.button.getAttribute("aria-expanded") !== "true") return;
+        if (!this.dropdown.contains(e.target as Node)) {
           this.closeDropdown();
         }
       });
@@ -211,6 +248,11 @@ const shouldReduceMotion =
       const isExpanded = this.button.getAttribute("aria-expanded") === "true";
       if (isExpanded) {
         this.closeDropdown();
+        // On touch/click close, drop focus so the :focus-within CSS rule does
+        // not keep the panel visible after aria-expanded flips to false. Pointer
+        // users get an explicit close; keyboard users close via Escape (which
+        // intentionally returns focus to the button).
+        this.button.blur();
       } else {
         this.openDropdown();
       }
