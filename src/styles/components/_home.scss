@@ -365,7 +365,7 @@
       var(--color-base-50) 85%
     );
   }
-  :global(.dark) .home .feed::after {
+  .dark .home .feed::after {
     background: linear-gradient(
       to bottom,
       transparent,
@@ -407,7 +407,7 @@
     scrollbar-color: var(--color-base-300) transparent;
     scrollbar-gutter: stable;
   }
-  :global(.dark) .home .feed-list {
+  .dark .home .feed-list {
     scrollbar-color: var(--color-base-700) transparent;
   }
   .home .feed-list::-webkit-scrollbar {

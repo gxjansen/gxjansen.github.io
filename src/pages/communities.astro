@@ -78,6 +78,8 @@ const communities = [
     roleType: "professional",
     context: "4+ years",
     logo: sprykerLogo,
+    // White wordmark — needs a dark field to be visible in both themes.
+    logoBg: "bg-base-900",
     description:
       "Built the enterprise community function from scratch, serving 130+ B2B clients and their developer ecosystem. This was community building in a different context: enterprise software with no freemium tier, where community size is tied to sales rather than organic growth. Required different strategies: Customer Advisory Boards, MIT-licensed module ecosystems, and structures that translate community intelligence into product decisions.",
     achievements: [
@@ -128,7 +130,9 @@ const communities = [
           communities.map((community, index) => (
             <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
               <div class={index % 2 === 1 ? "md:order-2" : ""}>
-                <div class="border-base-200 dark:border-base-800 flex aspect-video min-h-[200px] items-center justify-center rounded-2xl border bg-white p-8">
+                <div
+                  class={`border-base-200 dark:border-base-800 flex aspect-video min-h-[200px] items-center justify-center rounded-2xl border p-8 ${community.logoBg ?? "bg-white"}`}
+                >
                   <Image
                     src={community.logo}
                     alt={`${community.name} logo`}

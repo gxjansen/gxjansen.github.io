@@ -8,6 +8,16 @@
    Page-specific components (feed, cards, pillars, …) are added as pages port.
    ============================================================================ */
 
+/* LiebeHeide ships its handwriting variation in `calt`/`liga` (a → a.calt1 →
+   a.calt2…) so repeated letters and digits don't render identically. Browsers
+   enable these by default; we assert them so nothing flattens the hand accents
+   back to a single glyph. Unlayered on purpose — only feature settings, never
+   the font-family utility. (Per the foundry, calt + liga are the right ones.) */
+.font-hand {
+  font-variant-ligatures: contextual common-ligatures;
+  font-feature-settings: "calt" on, "liga" on;
+}
+
 @layer components {
   /* ---- primary nav: top-level items use the display face ----
      Global (not scoped) so it reaches the NavLink / NavDropdown child

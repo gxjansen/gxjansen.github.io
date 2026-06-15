@@ -60,7 +60,8 @@ const posts = (await getCollection("post", ({ data }) => !data.draft))
   }));
 
 const featured = posts[0];
-const rest = posts.slice(1, 5);
+// Three items beside the featured card keeps the row height balanced.
+const rest = posts.slice(1, 4);
 
 const ac = (accent: Accent) => `--ac:var(--color-${accent})`;
 const ArrowRight = "→";
