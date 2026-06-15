@@ -1,7 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
-import Button from "@components/Button/Button.astro";
 
 interface Props {
   name: string;
@@ -26,40 +25,41 @@ const {
 } = Astro.props;
 ---
 
-<article class="card group px-3 py-3 sm:px-4 sm:py-4">
-  <div class="grid grid-cols-1 gap-8 md:grid-cols-[auto,1fr] md:gap-6">
-    <div class="mx-auto flex-shrink-0 pt-4 md:mx-0 md:pt-0">
-      <div
-        class={`rounded-lg ${iconBgColor} p-4 w-20 h-20 flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
-      >
-        {
-          mainImage.startsWith("/") ? (
-            <Image
-              src={mainImage}
-              alt={`${name} icon`}
-              width={48}
-              height={48}
-              class="h-12 w-12"
-            />
-          ) : (
-            <Icon
-              name={mainImage}
-              class="text-base-50 h-12 w-12"
-              aria-hidden="true"
-            />
-          )
-        }
-      </div>
+<article
+  class="group bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 reveal rounded-2xl border p-6 transition hover:shadow-lg sm:p-7"
+>
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-[auto_1fr] sm:items-start">
+    <div
+      class={`${iconBgColor} flex size-20 shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-105`}
+    >
+      {
+        mainImage.startsWith("/") ? (
+          <Image
+            src={mainImage}
+            alt={`${name} icon`}
+            width={48}
+            height={48}
+            class="size-12"
+          />
+        ) : (
+          <Icon
+            name={mainImage}
+            class="size-12 text-white"
+            aria-hidden="true"
+          />
+        )
+      }
     </div>
-    <div class="flex flex-col text-center md:text-left">
-      <h2 class="h2 mb-2">
+
+    <div class="min-w-0">
+      <h2 class="font-display text-[1.4rem] font-extrabold tracking-[-0.02em]">
         {
           link ? (
             <a
               href={link}
               target="_blank"
               rel="noopener noreferrer"
-              class="hover:text-primary transition-colors duration-200"
+              class="hover:text-primary-600 dark:hover:text-primary-400 transition"
             >
               {name}
             </a>
@@ -70,47 +70,45 @@ const {
       </h2>
       {
         (tagline || license) && (
-          <p class="text-base-600 dark:text-base-400 mb-2 text-sm">
+          <p class="text-primary-600 dark:text-primary-400 mt-1 text-sm font-semibold">
             {tagline || `License: ${license}`}
           </p>
         )
       }
-      <p
-        class="card-description prose text-base-700 dark:text-base-300 text-lg"
+      <div
+        class="prose dark:prose-invert text-base-700 dark:text-base-300 mt-3 max-w-none"
         set:html={description}
       />
-      <div class="mt-8 flex items-center justify-center gap-4 md:justify-start">
+
+      <div class="mt-5 flex flex-wrap items-center gap-3">
         {
           link && (
-            <Button
+            <a
               href={link}
-              variant="primary"
-              arrow="right"
               target="_blank"
               rel="noopener noreferrer"
+              class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-bold text-white transition"
             >
-              View Project
+              View project <span aria-hidden="true">→</span>
               <span class="sr-only">View {name} project</span>
-            </Button>
+            </a>
           )
         }
         {
           githubUrl && (
-            <Button
+            <a
               href={githubUrl}
-              variant="outline"
               target="_blank"
               rel="noopener noreferrer"
+              class="border-base-300 hover:border-primary-600 dark:border-base-700 dark:hover:border-primary-400 font-display inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-bold transition"
             >
-              <span class="flex items-center gap-2">
-                <Icon
-                  name="tabler/filled/brand-github"
-                  class="h-5 w-5"
-                  aria-hidden="true"
-                />
-                <span>Available on GitHub</span>
-              </span>
-            </Button>
+              <Icon
+                name="tabler/filled/brand-github"
+                class="size-5"
+                aria-hidden="true"
+              />
+              GitHub
+            </a>
           )
         }
       </div>
