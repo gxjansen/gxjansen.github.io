@@ -211,309 +211,69 @@
   }
 }
 
-/* TODO: Audit for duplication with library CSS after PurgeCSS removal -- see #126 follow-up.
-   This wrapper was originally a PurgeCSS workaround. With PurgeCSS gone (#126),
-   the bluesky-comments library's own CSS modules should now load, which may
-   produce duplicate styling against the rules below. Trim once render is verified. */
-/* Bluesky Comments Styling
+/* Juttu comments (self-hosted Bluesky comments at comments.gui.do)
    =========================================================================
-   The bluesky-comments library uses CSS Modules with hashed class names
-   (e.g. _statsBar_yf3k8_12). These styles are NOT included in the build
-   output, so we replicate them here.
+   Juttu renders into #juttu-comments (light DOM), themed via --juttu-* custom
+   properties. Two things to know:
 
-   CRITICAL: All rules use plain CSS values, NOT @apply with Tailwind
-   utilities. Tailwind's content purger strips attribute selectors like
-   [class*="_icon_"] because the hashed class names don't exist in source
-   files. Plain CSS values are always preserved.
+   1. Juttu injects its own <style> at runtime, AFTER this stylesheet, so a
+      plain `.juttu-comments` override loses on equal specificity. We scope to
+      `#juttu-comments .juttu-comments` (id) so ours wins.
+   2. Dark mode keys off the site's own `:root.dark` class — NOT Juttu's
+      data-juttu-theme auto-detection, which can mis-fire and isn't tied to the
+      site toggle.
 
-   Colors reference the Rose Pine palette:
-   - Light (Dawn): base #faf4ed, surface #fffaf3, text #575279, muted #9893a5
-   - Dark (Main):  base #191724, surface #1f1d2e, text #e0def4, muted #6e6a86
-   - Foam light: #56949f  |  Foam dark: #9ccfd8
-   ========================================================================= */
-.bluesky-comments-wrapper {
-  max-width: 100%;
-  color: #575279; /* Dawn text */
-  font-size: 0.9375rem;
-  line-height: 1.6;
+   Values map to the site's base-* and foam tokens and are chosen for WCAG AA: the
+   muted step clears 4.5:1 on its background, and since Juttu reuses the accent
+   for BOTH link text and white-on-accent buttons, each mode picks an accent for
+   the constrained case (and dark overrides the hardcoded white button text,
+   where the accent is light). */
+#juttu-comments .juttu-comments {
+  --juttu-bg: transparent;
+  --juttu-font-size: 0.9375rem;
+  --juttu-radius: 12px;
+  /* Light: dark text on the light aside background */
+  --juttu-text: #1f1d2e; /* base-900 */
+  --juttu-text-muted: #6e6a86; /* base-600 — ~5:1 on light */
+  --juttu-surface: #faf4ed; /* base-100 */
+  --juttu-border-color: #dfdad3; /* base-300 */
+  --juttu-accent-color: #286983; /* pine — AA as link text AND under white btn text */
+  --juttu-link-color: #286983;
+  --juttu-like-color: #b4637a; /* love */
+  --juttu-repost-color: #286983; /* pine */
+  --juttu-autocomplete-bg: #faf4ed;
+}
 
-  /* --- Global resets inside the component --- */
-  * {
-    margin: 0;
-    padding: 0;
-  }
+:root.dark #juttu-comments .juttu-comments {
+  --juttu-text: #faf4ed; /* base-100 */
+  --juttu-text-muted: #908caa; /* base-500 — ~5:1 on dark */
+  --juttu-surface: #26233a; /* base-800 */
+  --juttu-border-color: #393552; /* base-700 */
+  --juttu-accent-color: #9ccfd8; /* foam — AA as link text on dark */
+  --juttu-link-color: #9ccfd8;
+  --juttu-like-color: #eb6f92; /* love (dark) */
+  --juttu-repost-color: #9ccfd8;
+  --juttu-autocomplete-bg: #26233a;
+}
 
-  /* --- SVG icon sizing ---
-     Without this, Tailwind preflight makes SVGs display:block and they
-     expand to fill their container (672px+) since they have no explicit
-     width/height attributes. */
-  svg {
-    width: 1.25rem !important;
-    height: 1.25rem !important;
-    flex-shrink: 0;
-    display: inline-block;
-    vertical-align: middle;
-  }
+/* In dark mode the accent is light, so Juttu's hardcoded white button text
+   fails contrast — use dark text on the light accent instead. */
+:root.dark #juttu-comments .juttu-sort-btn--active,
+:root.dark #juttu-comments .juttu-submit-btn {
+  color: #1f1d2e; /* base-900 on foam accent */
+}
 
-  /* Reply-link SVGs have explicit width/height="20" attrs -- respect those */
-  a svg[width] {
-    width: 20px !important;
-    height: 20px !important;
-  }
+/* Empty-state "Discuss on Bluesky" link (renderUnlinked) — accent is AA. */
+#juttu-comments .juttu-discuss-link {
+  color: var(--juttu-accent-color);
+  text-decoration: underline;
+}
 
-  /* --- Links --- */
-  a {
-    color: #56949f; /* foam-light */
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* --- Stats bar (likes / reposts / replies for original post) --- */
-  [class*="_statsBar_"] {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    padding: 0.5rem 0;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #6e6a86; /* Dawn muted */
-  }
-
-  [class*="_statItem_"] {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    white-space: nowrap;
-  }
-
-  /* Force monochrome icons in the top stats bar — the library hardcodes
-     fill="pink" / stroke="green" / fill="#7FBADC". Override so they match
-     the per-comment action row and the rest of the muted comments section. */
-  [class*="_statsBar_"] svg {
-    fill: none !important;
-    stroke: currentColor !important;
-    opacity: 0.7;
-  }
-
-  /* --- Section heading & intro text --- */
-  [class*="_commentsTitle_"] {
-    margin-top: 1.25rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #575279; /* Dawn text */
-  }
-
-  /* Hide the library's "Join the conversation by replying on Bluesky." line —
-     duplicated by our own "Join the conversation on Bluesky" link below. */
-  [class*="_replyText_"] {
-    display: none;
-  }
-
-  /* --- Divider --- */
-  [class*="_divider_"] {
-    margin-top: 0.75rem;
-    border: none;
-    border-top: 1px solid #dfdad3; /* base-300 light */
-  }
-
-  /* --- Comments list --- */
-  [class*="_commentsList_"] {
-    margin-top: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  /* --- Individual comment --- */
-  [class*="_commentContainer_"] {
-    margin: 0.75rem 0;
-    padding: 0;
-    border: none;
-    font-size: 0.875rem;
-    font-style: normal; /* override blockquote italic default */
-  }
-
-  [class*="_commentContent_"] {
-    display: flex;
-    max-width: 36rem;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  /* Comment text paragraphs */
-  [class*="_commentContent_"] > p {
-    line-height: 1.5;
-    word-break: break-word;
-  }
-
-  /* --- Author row (avatar + name) --- */
-  [class*="_authorLink_"] {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none !important;
-  }
-
-  /* Avatar */
-  [class*="_avatar_"] {
-    width: 1.75rem !important;
-    height: 1.75rem !important;
-    border-radius: 9999px;
-    background-color: #dfdad3; /* placeholder bg */
-    object-fit: cover;
-    flex-shrink: 0;
-  }
-
-  /* Author name */
-  [class*="_authorName_"] {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-weight: 600;
-    font-size: 0.875rem;
-    color: #575279; /* Dawn text */
-  }
-
-  /* Handle (@username) */
-  [class*="_handle_"] {
-    font-weight: 400;
-    color: #6e6a86; /* Dawn muted */
-  }
-
-  /* --- Nested replies --- */
-  [class*="_repliesContainer_"] {
-    border-left: 2px solid #dfdad3; /* base-300 light */
-    padding-left: 1rem;
-    margin-left: 0.875rem;
-    margin-top: 0.25rem;
-  }
-
-  /* --- Comment actions (reply / repost / like counts) ---
-     Library renders 4 rows in order: replies, reposts, likes, reply-arrow.
-     We reorder to match the top stats bar (likes, reposts, replies) and hide
-     the redundant reply-arrow — the "Join the conversation on Bluesky" link
-     below the comments already covers that. */
-  [class*="_actionsContainer_"] {
-    margin-top: 0.35rem;
-    /* Override the library's `width: 100%; justify-content: space-between` so
-       the items stay bundled together instead of spreading edge-to-edge. */
-    width: auto !important;
-    justify-content: flex-start !important;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1.25rem;
-  }
-
-  [class*="_actionsRow_"] {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: #6e6a86; /* Dawn muted */
-    font-size: 0.8125rem;
-  }
-
-  /* Reorder per-comment actions to match the top stats bar:
-     likes (3rd in markup) → 1st, reposts (2nd) → 2nd, replies (1st) → 3rd. */
-  [class*="_actionsRow_"]:nth-child(1) {
-    order: 3;
-  }
-  [class*="_actionsRow_"]:nth-child(2) {
-    order: 2;
-  }
-  [class*="_actionsRow_"]:nth-child(3) {
-    order: 1;
-  }
-
-  /* Hide the per-comment reply-arrow row (4th item, also tagged _replyAction_) */
-  [class*="_replyAction_"] {
-    display: none;
-  }
-
-  [class*="_actionsRow_"] svg {
-    width: 1rem !important;
-    height: 1rem !important;
-    opacity: 0.7;
-  }
-
-  /* --- Screen-reader only text --- */
-  [class*="_screenReader_"] {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
-
-  /* --- "Reply to @handle" link at bottom of each comment --- */
-  a.replyLink,
-  a[class*="replyLink"] {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    margin-top: 0.35rem;
-    font-size: 0.8125rem;
-    color: #56949f; /* foam-light */
-  }
-
-  /* =====================================================================
-     DARK MODE OVERRIDES
-     Applied when the root element has class "dark" (Astro/Tailwind convention)
-     ===================================================================== */
-  :root[class~="dark"] & {
-    color: #e0def4; /* Main text */
-
-    a {
-      color: #9ccfd8; /* foam dark */
-    }
-
-    [class*="_statsBar_"] {
-      color: #908caa; /* Main muted */
-    }
-
-    [class*="_commentsTitle_"] {
-      color: #e0def4; /* Main text */
-    }
-
-    [class*="_replyText_"] {
-      display: none;
-    }
-
-    [class*="_divider_"] {
-      border-top-color: #393552; /* ~base-700 dark */
-    }
-
-    [class*="_authorName_"] {
-      color: #e0def4; /* Main text */
-    }
-
-    [class*="_handle_"] {
-      color: #908caa; /* Main muted */
-    }
-
-    [class*="_repliesContainer_"] {
-      border-left-color: #393552; /* ~base-700 dark */
-    }
-
-    [class*="_actionsRow_"] {
-      color: #908caa; /* Main muted */
-    }
-
-    [class*="_avatar_"] {
-      background-color: #393552;
-    }
-
-    a.replyLink,
-    a[class*="replyLink"] {
-      color: #9ccfd8; /* foam dark */
-    }
-  }
+/* The site's global link styles underline + randomly recolor every <a>. The
+   Juttu widget manages its own link affordances (color only, no underline on
+   names/handles/timestamps), so opt the whole widget out. Id specificity beats
+   the global `a`/random-link rules without !important. The standalone
+   "Discuss on Bluesky" CTA keeps its underline via the more specific rule above. */
+#juttu-comments a {
+  text-decoration: none;
 }

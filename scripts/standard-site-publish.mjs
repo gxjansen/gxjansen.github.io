@@ -122,10 +122,37 @@ async function readPost(slug) {
     pubDate: get('pubDate'),
     updatedDate: get('updatedDate'),
     description: get('description'),
+    blueskyUri: get('blueskyUri'),
     isDraft,
     tags,
     textContent,
   };
+}
+
+// Resolve a frontmatter blueskyUri (a bsky.app web URL or an at:// URI) to an
+// AT-URI, resolving handle -> DID when needed. Returns null if unparseable.
+async function blueskyUriToAtUri(uri) {
+  if (uri.startsWith('at://')) return uri;
+  const m = uri.match(/bsky\.app\/profile\/([^/]+)\/post\/([^/?#]+)/);
+  if (!m) return null;
+  let authority = m[1];
+  const rkey = m[2];
+  if (!authority.startsWith('did:')) {
+    const r = await fetch(`https://public.api.bsky.app/xrpc/com.atproto.identity.resolveHandle?handle=${encodeURIComponent(authority)}`);
+    if (!r.ok) return null;
+    const data = await r.json();
+    if (!data?.did) return null;
+    authority = data.did;
+  }
+  return `at://${authority}/app.bsky.feed.post/${rkey}`;
+}
+
+// Fetch the CID for a post AT-URI (bskyPostRef needs both uri and cid).
+async function fetchPostCid(atUri) {
+  const r = await fetch(`https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=${encodeURIComponent(atUri)}&depth=0`);
+  if (!r.ok) return null;
+  const data = await r.json();
+  return data?.thread?.post?.cid ?? null;
 }
 
 // Get all post slugs
@@ -254,6 +281,25 @@ async function main() {
     if (post.updatedDate) record.updatedAt = new Date(post.updatedDate).toISOString();
     if (post.tags.length > 0) record.tags = post.tags;
 
+    // Comments link (Juttu): site.standard.document.bskyPostRef ties this article
+    // to a Bluesky post whose reply thread is the comment section. Preserve any
+    // ref already on the record (e.g. linked in-widget via #comments-setup) so a
+    // content edit here never wipes it; a frontmatter `blueskyUri` is
+    // authoritative when present.
+    let bskyPostRef = existing?.value?.bskyPostRef ?? undefined;
+    if (post.blueskyUri) {
+      const atUri = await blueskyUriToAtUri(post.blueskyUri);
+      if (atUri && atUri !== bskyPostRef?.uri) {
+        const cid = await fetchPostCid(atUri);
+        if (cid) {
+          bskyPostRef = { uri: atUri, cid };
+        } else {
+          console.warn(`  ! ${post.slug}: could not resolve CID for ${post.blueskyUri} (leaving comments unlinked)`);
+        }
+      }
+    }
+    if (bskyPostRef) record.bskyPostRef = bskyPostRef;
+
     // Check if update is needed by comparing all synced fields.
     // textContent and tags MUST be included: body-only edits (the common
     // case) leave title/description/dates untouched, so omitting them here
@@ -266,7 +312,8 @@ async function main() {
         && val.description === record.description
         && val.updatedAt === record.updatedAt
         && val.textContent === record.textContent
-        && JSON.stringify(val.tags || []) === JSON.stringify(record.tags || []);
+        && JSON.stringify(val.tags || []) === JSON.stringify(record.tags || [])
+        && JSON.stringify(val.bskyPostRef || null) === JSON.stringify(record.bskyPostRef || null);
 
       if (same) {
         unchanged++;

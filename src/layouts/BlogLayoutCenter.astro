@@ -11,7 +11,6 @@ import BlogNav from "@components/Blog/BlogNav.astro";
 import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 import AuthorByline from "@components/Author/AuthorByline.astro";
 import AuthorBioBox from "@components/Author/AuthorBioBox.astro";
-import BlueskyComments from "@components/Bluesky/BlueskyComments";
 
 // utils
 import { formatDate, humanize } from "@js/textUtils";
@@ -35,9 +34,6 @@ const {
   heroImage,
   blueskyUri,
 } = post.data;
-
-// Generate the canonical post URL for Bluesky sharing
-const postUrl = new URL(`/post/${post.id}/`, Astro.site).toString();
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
@@ -228,15 +224,29 @@ const newsletterDescription =
         </section>
       </div>
 
-      <!-- Bluesky Comments -->
+      <!-- Bluesky-powered comments (Juttu, self-hosted at comments.gui.do).
+           The article<->post link lives in the site.standard.document record
+           (BaseHead renders <link rel="site.standard.document">); Juttu reads
+           it at runtime, so no rebuild is needed to attach/show comments. -->
       <div class="mx-auto max-w-2xl">
-        <BlueskyComments
-          client:load
-          uri={blueskyUri}
-          postTitle={title}
-          postUrl={postUrl}
-        />
+        <section class="mt-12">
+          <aside
+            class="border-base-300 bg-base-50 dark:border-base-700 dark:bg-base-900 rounded-xl border p-6"
+            aria-label="Comments"
+          >
+            <h3 class="text-base-900 dark:text-base-100 mb-4 text-xl font-bold">
+              Comments
+            </h3>
+            <div id="juttu-comments"></div>
+          </aside>
+        </section>
       </div>
+      <script
+        is:inline
+        defer
+        src="https://comments.gui.do/embed/juttu-embed.js"
+        data-api-url="https://comments.gui.do"
+        data-theme="auto"></script>
 
       <!-- Author Bio Box -->
       {

@@ -201,7 +201,7 @@
     # full inventory. 'unsafe-eval' has been removed: a build-output audit
     # (grep eval(/new Function( across dist/_astro/*.js) confirmed nothing in the
     # shipped browser bundle relies on it.
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://u.a11y.nl https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://u.a11y.nl https://public.api.bsky.app; media-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://share.transistor.fm https://open.spotify.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://share.transistor.fm; object-src 'none'; worker-src 'self' blob:; upgrade-insecure-requests;"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://u.a11y.nl https://cdn.jsdelivr.net https://comments.gui.do; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://u.a11y.nl https://public.api.bsky.app https://comments.gui.do https://plc.directory https://*.host.bsky.network; media-src 'self' https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://share.transistor.fm https://open.spotify.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://share.transistor.fm; object-src 'none'; worker-src 'self' blob:; upgrade-insecure-requests;"
     # HSTS: includeSubDomains + preload prepares the domain for the HSTS preload
     # list (https://hstspreload.org/). Submit after deploy to lock all gui.do
     # subdomains to HTTPS at the browser level.
