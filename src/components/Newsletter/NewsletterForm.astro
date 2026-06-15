@@ -115,9 +115,10 @@ const signupPage = Astro.url.pathname;
           )}
 
           {description && (
-            <p class="text-base-600 dark:text-base-400 [&_strong]:text-base-900 dark:[&_strong]:text-base-100 mt-3 max-w-[42ch] leading-relaxed [&_strong]:font-bold">
-              {description}
-            </p>
+            <p
+              class="text-base-600 dark:text-base-400 [&_strong]:text-base-900 dark:[&_strong]:text-base-100 mt-3 max-w-[42ch] leading-relaxed [&_strong]:font-bold"
+              set:html={description}
+            />
           )}
         </div>
 
