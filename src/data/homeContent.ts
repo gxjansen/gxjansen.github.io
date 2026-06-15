@@ -417,12 +417,15 @@ export const APP_REGISTRY: Record<string, { label: string; color: string }> = {
 /**
  * App-source → icon name (astro-icon). Monochrome marks that tint with the app
  * accent (currentColor). bluesky/github are Tabler brand icons; popfeed/tangled
- * are extracted from sifa-web (src/icons/apps). Unknown apps fall back to the
- * coloured dot.
+ * are extracted from sifa-web (src/icons/apps). smokesignal/bookhive mirror the
+ * generic icons Sifa uses (CalendarBlank / BookOpen) via Tabler equivalents.
+ * Unknown apps fall back to the coloured dot.
  */
 export const APP_ICON: Record<string, string> = {
   bluesky: "tabler/brand-bluesky",
   github: "tabler/filled/brand-github",
   popfeed: "apps/popfeed",
   tangled: "apps/tangled",
+  smokesignal: "tabler/outline/calendar",
+  bookhive: "tabler/outline/book",
 };
