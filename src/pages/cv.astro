@@ -70,6 +70,22 @@ const boxTitle =
   "text-base-500 mb-3 text-xs font-bold tracking-[0.08em] uppercase";
 const sectionTitle =
   "text-base-500 mb-5 border-base-200 dark:border-base-800 border-b pb-2 font-display text-sm font-bold tracking-[0.1em] uppercase";
+// Styled <summary> for the "Show all N" expanders: native marker hidden, a
+// "+ / ×" affordance added via the [open] arbitrary variant. Keyboard- and
+// screen-reader-accessible because it's a real <summary>.
+const summary =
+  "marker:hidden [&::-webkit-details-marker]:hidden list-none cursor-pointer text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 mt-3 inline-flex items-center gap-1.5 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 dark:focus-visible:outline-primary-400 rounded";
+
+// Split a list into the first 3 (always shown) and the collapsed remainder.
+const split = <T,>(items: T[]): { head: T[]; rest: T[] } => ({
+  head: items.slice(0, 3),
+  rest: items.slice(3),
+});
+const xp = split(cv.experience);
+const proj = split(cv.projects);
+const certs = split(cv.certifications);
+const vol = split(cv.volunteering);
+const awards = split(cv.awards);
 ---
 
 <BaseLayout
@@ -198,7 +214,7 @@ const sectionTitle =
             <h2 class={sectionTitle}>Experience</h2>
             <ol class="flex flex-col">
               {
-                cv.experience.map((x) => (
+                xp.head.map((x) => (
                   <li class="border-base-200 dark:border-base-800 relative border-l-2 pb-6 pl-6 last:pb-0">
                     <span
                       class="bg-primary-600 dark:bg-primary-400 absolute top-1 -left-[7px] size-3 rounded-full ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
@@ -239,6 +255,59 @@ const sectionTitle =
                 ))
               }
             </ol>
+            {
+              xp.rest.length > 0 && (
+                <details class="group mt-1">
+                  <summary class={summary}>
+                    <span class="group-open:hidden">
+                      + Show all {cv.experience.length} positions
+                    </span>
+                    <span class="hidden group-open:inline">× Show fewer</span>
+                  </summary>
+                  <ol class="mt-4 flex flex-col">
+                    {xp.rest.map((x) => (
+                      <li class="border-base-200 dark:border-base-800 relative border-l-2 pb-6 pl-6 last:pb-0">
+                        <span
+                          class="bg-primary-600 dark:bg-primary-400 absolute top-1 -left-[7px] size-3 rounded-full ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
+                          aria-hidden="true"
+                        />
+                        <div class="flex flex-wrap items-baseline gap-x-2.5">
+                          <h3 class="font-display text-[1.15rem] font-extrabold">
+                            {x.title}
+                          </h3>
+                          <span class="text-primary-600 dark:text-primary-400 font-bold">
+                            {x.company}
+                          </span>
+                          <span class="text-base-500 ml-auto text-[0.82rem] tabular-nums">
+                            {x.period}
+                          </span>
+                        </div>
+                        {x.location && (
+                          <div class="text-base-500 mt-0.5 text-[0.82rem]">
+                            {x.location}
+                          </div>
+                        )}
+                        {x.description && (
+                          <div class="text-base-600 dark:text-base-400 mt-1.5 space-y-1.5 text-[0.92rem] leading-relaxed">
+                            {richText(x.description).map((b) =>
+                              b.type === "p" ? (
+                                <p>{b.text}</p>
+                              ) : (
+                                <ul class="marker:text-primary-600 dark:marker:text-primary-400 ml-4 list-disc space-y-0.5">
+                                  {b.items.map((i) => (
+                                    <li>{i}</li>
+                                  ))}
+                                </ul>
+                              ),
+                            )}
+                          </div>
+                        )}
+                      </li>
+                    ))}
+                  </ol>
+                </details>
+              )
+            }
           </section>
 
           <!-- Education -->
@@ -265,6 +334,312 @@ const sectionTitle =
                 ))
               }
             </ul>
+          </section>
+
+          <!-- Projects -->
+          <section class="mb-10">
+            <h2 class={sectionTitle}>Projects</h2>
+            <ul class="flex flex-col gap-4">
+              {
+                proj.head.map((x) => (
+                  <li>
+                    <div class="flex flex-wrap items-baseline gap-x-2.5">
+                      <h3 class="font-display text-[1.05rem] font-extrabold">
+                        {x.url ? (
+                          <a
+                            href={x.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="hover:text-primary-600 dark:hover:text-primary-400 transition"
+                          >
+                            {x.name}
+                          </a>
+                        ) : (
+                          x.name
+                        )}
+                      </h3>
+                      {x.period && (
+                        <span class="text-base-500 ml-auto text-[0.82rem] tabular-nums">
+                          {x.period}
+                        </span>
+                      )}
+                    </div>
+                    {x.description && (
+                      <p class="text-base-600 dark:text-base-400 mt-0.5 text-[0.9rem] leading-relaxed">
+                        {x.description}
+                      </p>
+                    )}
+                  </li>
+                ))
+              }
+            </ul>
+            {
+              proj.rest.length > 0 && (
+                <details class="group mt-1">
+                  <summary class={summary}>
+                    <span class="group-open:hidden">
+                      + Show all {cv.projects.length} projects
+                    </span>
+                    <span class="hidden group-open:inline">× Show fewer</span>
+                  </summary>
+                  <ul class="mt-4 flex flex-col gap-4">
+                    {proj.rest.map((x) => (
+                      <li>
+                        <div class="flex flex-wrap items-baseline gap-x-2.5">
+                          <h3 class="font-display text-[1.05rem] font-extrabold">
+                            {x.url ? (
+                              <a
+                                href={x.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hover:text-primary-600 dark:hover:text-primary-400 transition"
+                              >
+                                {x.name}
+                              </a>
+                            ) : (
+                              x.name
+                            )}
+                          </h3>
+                          {x.period && (
+                            <span class="text-base-500 ml-auto text-[0.82rem] tabular-nums">
+                              {x.period}
+                            </span>
+                          )}
+                        </div>
+                        {x.description && (
+                          <p class="text-base-600 dark:text-base-400 mt-0.5 text-[0.9rem] leading-relaxed">
+                            {x.description}
+                          </p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )
+            }
+          </section>
+
+          <!-- Credentials -->
+          <section class="mb-10">
+            <h2 class={sectionTitle}>Credentials</h2>
+            <ul class="flex flex-col gap-4">
+              {
+                certs.head.map((x) => (
+                  <li>
+                    <div class="flex flex-wrap items-baseline gap-x-2.5">
+                      <h3 class="font-display text-[1.05rem] font-extrabold">
+                        {x.credentialUrl ? (
+                          <a
+                            href={x.credentialUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="hover:text-primary-600 dark:hover:text-primary-400 transition"
+                          >
+                            {x.name}
+                          </a>
+                        ) : (
+                          x.name
+                        )}
+                      </h3>
+                      {x.date && (
+                        <span class="text-base-500 ml-auto text-[0.82rem] tabular-nums">
+                          {x.date}
+                        </span>
+                      )}
+                    </div>
+                    {x.issuingOrg && (
+                      <p class="text-base-600 dark:text-base-400 mt-0.5 text-[0.9rem]">
+                        {x.issuingOrg}
+                      </p>
+                    )}
+                  </li>
+                ))
+              }
+            </ul>
+            {
+              certs.rest.length > 0 && (
+                <details class="group mt-1">
+                  <summary class={summary}>
+                    <span class="group-open:hidden">
+                      + Show all {cv.certifications.length} credentials
+                    </span>
+                    <span class="hidden group-open:inline">× Show fewer</span>
+                  </summary>
+                  <ul class="mt-4 flex flex-col gap-4">
+                    {certs.rest.map((x) => (
+                      <li>
+                        <div class="flex flex-wrap items-baseline gap-x-2.5">
+                          <h3 class="font-display text-[1.05rem] font-extrabold">
+                            {x.credentialUrl ? (
+                              <a
+                                href={x.credentialUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="hover:text-primary-600 dark:hover:text-primary-400 transition"
+                              >
+                                {x.name}
+                              </a>
+                            ) : (
+                              x.name
+                            )}
+                          </h3>
+                          {x.date && (
+                            <span class="text-base-500 ml-auto text-[0.82rem] tabular-nums">
+                              {x.date}
+                            </span>
+                          )}
+                        </div>
+                        {x.issuingOrg && (
+                          <p class="text-base-600 dark:text-base-400 mt-0.5 text-[0.9rem]">
+                            {x.issuingOrg}
+                          </p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )
+            }
+          </section>
+
+          <!-- Volunteering -->
+          <section class="mb-10">
+            <h2 class={sectionTitle}>Volunteering</h2>
+            <ul class="flex flex-col gap-4">
+              {
+                vol.head.map((x) => (
+                  <li>
+                    <div class="flex flex-wrap items-baseline gap-x-2.5">
+                      <h3 class="font-display text-[1.05rem] font-extrabold">
+                        {x.role ? `${x.role}, ` : ""}
+                        {x.organization}
+                      </h3>
+                      {x.period && (
+                        <span class="text-base-500 ml-auto text-[0.82rem] tabular-nums">
+                          {x.period}
+                        </span>
+                      )}
+                    </div>
+                    {(x.cause || x.description) && (
+                      <p class="text-base-600 dark:text-base-400 mt-0.5 text-[0.9rem] leading-relaxed">
+                        {x.cause && (
+                          <span class="text-base-500">{x.cause}</span>
+                        )}
+                        {x.cause && x.description ? " · " : ""}
+                        {x.description}
+                      </p>
+                    )}
+                  </li>
+                ))
+              }
+            </ul>
+            {
+              vol.rest.length > 0 && (
+                <details class="group mt-1">
+                  <summary class={summary}>
+                    <span class="group-open:hidden">
+                      + Show all {cv.volunteering.length} roles
+                    </span>
+                    <span class="hidden group-open:inline">× Show fewer</span>
+                  </summary>
+                  <ul class="mt-4 flex flex-col gap-4">
+                    {vol.rest.map((x) => (
+                      <li>
+                        <div class="flex flex-wrap items-baseline gap-x-2.5">
+                          <h3 class="font-display text-[1.05rem] font-extrabold">
+                            {x.role ? `${x.role}, ` : ""}
+                            {x.organization}
+                          </h3>
+                          {x.period && (
+                            <span class="text-base-500 ml-auto text-[0.82rem] tabular-nums">
+                              {x.period}
+                            </span>
+                          )}
+                        </div>
+                        {(x.cause || x.description) && (
+                          <p class="text-base-600 dark:text-base-400 mt-0.5 text-[0.9rem] leading-relaxed">
+                            {x.cause && (
+                              <span class="text-base-500">{x.cause}</span>
+                            )}
+                            {x.cause && x.description ? " · " : ""}
+                            {x.description}
+                          </p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )
+            }
+          </section>
+
+          <!-- Awards -->
+          <section class="mb-10">
+            <h2 class={sectionTitle}>Awards</h2>
+            <ul class="flex flex-col gap-4">
+              {
+                awards.head.map((x) => (
+                  <li>
+                    <div class="flex flex-wrap items-baseline gap-x-2.5">
+                      <h3 class="font-display text-[1.05rem] font-extrabold">
+                        {x.title}
+                      </h3>
+                      {x.date && (
+                        <span class="text-base-500 ml-auto text-[0.82rem] tabular-nums">
+                          {x.date}
+                        </span>
+                      )}
+                    </div>
+                    {(x.issuer || x.description) && (
+                      <p class="text-base-600 dark:text-base-400 mt-0.5 text-[0.9rem] leading-relaxed">
+                        {x.issuer && (
+                          <span class="text-base-500">{x.issuer}</span>
+                        )}
+                        {x.issuer && x.description ? " · " : ""}
+                        {x.description}
+                      </p>
+                    )}
+                  </li>
+                ))
+              }
+            </ul>
+            {
+              awards.rest.length > 0 && (
+                <details class="group mt-1">
+                  <summary class={summary}>
+                    <span class="group-open:hidden">
+                      + Show all {cv.awards.length} awards
+                    </span>
+                    <span class="hidden group-open:inline">× Show fewer</span>
+                  </summary>
+                  <ul class="mt-4 flex flex-col gap-4">
+                    {awards.rest.map((x) => (
+                      <li>
+                        <div class="flex flex-wrap items-baseline gap-x-2.5">
+                          <h3 class="font-display text-[1.05rem] font-extrabold">
+                            {x.title}
+                          </h3>
+                          {x.date && (
+                            <span class="text-base-500 ml-auto text-[0.82rem] tabular-nums">
+                              {x.date}
+                            </span>
+                          )}
+                        </div>
+                        {(x.issuer || x.description) && (
+                          <p class="text-base-600 dark:text-base-400 mt-0.5 text-[0.9rem] leading-relaxed">
+                            {x.issuer && (
+                              <span class="text-base-500">{x.issuer}</span>
+                            )}
+                            {x.issuer && x.description ? " · " : ""}
+                            {x.description}
+                          </p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )
+            }
           </section>
 
           <!-- Endorsements -->
@@ -373,6 +748,26 @@ const sectionTitle =
             <ul class="flex flex-wrap justify-center gap-2">
               {FOCUS_AREAS.map((s) => <li class="chip chip--plain">{s}</li>)}
             </ul>
+          </div>
+
+          <div class={box}>
+            <h3 class={boxTitle}>Languages</h3>
+            <dl class="flex flex-col">
+              {
+                cv.languages.map((l) => (
+                  <div class="flex items-baseline justify-between gap-3 py-1.5">
+                    <dt class="font-display text-base-800 dark:text-base-200 text-[0.95rem] font-semibold">
+                      {l.language}
+                    </dt>
+                    {l.proficiency && (
+                      <dd class="text-base-500 text-right text-[0.82rem]">
+                        {l.proficiency}
+                      </dd>
+                    )}
+                  </div>
+                ))
+              }
+            </dl>
           </div>
 
           <div class={box}>

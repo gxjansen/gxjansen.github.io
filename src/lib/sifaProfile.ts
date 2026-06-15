@@ -19,6 +19,35 @@ export interface CvEducation {
   detail?: string;
   period: string;
 }
+export interface CvProject {
+  name: string;
+  description?: string;
+  url?: string;
+  period: string;
+}
+export interface CvCertification {
+  name: string;
+  issuingOrg?: string;
+  date: string;
+  credentialUrl?: string;
+}
+export interface CvVolunteering {
+  organization: string;
+  role?: string;
+  cause?: string;
+  description?: string;
+  period: string;
+}
+export interface CvAward {
+  title: string;
+  issuer?: string;
+  description?: string;
+  date: string;
+}
+export interface CvLanguage {
+  language: string;
+  proficiency?: string;
+}
 /** A rendered block from a free-text field: a paragraph or a bullet list. */
 export type RichBlock =
   | { type: "p"; text: string }
@@ -76,6 +105,11 @@ export interface CvData {
   workplace?: string;
   experience: CvExperience[];
   education: CvEducation[];
+  projects: CvProject[];
+  certifications: CvCertification[];
+  volunteering: CvVolunteering[];
+  awards: CvAward[];
+  languages: CvLanguage[];
   skills: string[];
   live: boolean;
 }
@@ -100,6 +134,25 @@ const WORKPLACE_LABELS: Record<string, string> = {
   hybrid: "Hybrid",
   onSite: "On-site",
 };
+// Language proficiency tokens → readable labels.
+const PROFICIENCY_LABELS: Record<string, string> = {
+  native: "Native",
+  nativeOrBilingual: "Native / bilingual",
+  native_or_bilingual: "Native / bilingual",
+  fullProfessional: "Full professional",
+  full_professional: "Full professional",
+  professionalWorking: "Professional working",
+  professional_working: "Professional working",
+  limitedWorking: "Limited working",
+  limited_working: "Limited working",
+  elementary: "Elementary",
+};
+const proficiencyLabel = (v: any): string | undefined => {
+  const decoded = decodeEntities(v);
+  if (!decoded) return undefined;
+  return PROFICIENCY_LABELS[defKey(decoded)] ?? decoded;
+};
+
 const defKey = (v: string) => v.split("#").pop() ?? v;
 const openToLabels = (arr: any): string[] =>
   Array.isArray(arr)
@@ -194,6 +247,48 @@ const FALLBACK: CvData = {
     },
     { institution: "Psychology, BSc", period: "2002 – 2005" },
   ],
+  projects: [
+    {
+      name: "CRO.CAFE",
+      description:
+        "Podcast network on growth, experimentation & optimization, in EN & NL.",
+      url: "https://www.cro.cafe/",
+      period: "2018 – Present",
+    },
+    {
+      name: "Sifa",
+      description:
+        "A verifiable, AT Protocol–native professional profile — the source of this CV.",
+      url: "https://sifa.id/p/gui.do",
+      period: "2025 – Present",
+    },
+  ],
+  certifications: [
+    {
+      name: "Online Test & Optimization Specialist",
+      issuingOrg: "Online Dialogue",
+      date: "2014",
+    },
+  ],
+  volunteering: [
+    {
+      organization: "CmasterZ",
+      role: "Mentor",
+      cause: "Education",
+      period: "2019 – Present",
+    },
+  ],
+  awards: [
+    {
+      title: "Experimentation Culture Award",
+      issuer: "Community vote",
+      date: "2021",
+    },
+  ],
+  languages: [
+    { language: "Dutch", proficiency: "Native" },
+    { language: "English", proficiency: "Full professional" },
+  ],
   skills: [
     "Community strategy",
     "Developer relations",
@@ -253,6 +348,62 @@ export async function getCV(): Promise<CvData> {
       })
       .slice(0, 24);
 
+    const projects: CvProject[] = (p.projects ?? [])
+      .filter((x: any) => !x.hidden)
+      .sort((a: any, b: any) =>
+        String(b.startDate ?? "").localeCompare(String(a.startDate ?? "")),
+      )
+      .map((x: any) => ({
+        name: decodeEntities(x.name) ?? x.name,
+        description: decodeEntities(x.description),
+        url: x.url || undefined,
+        period: period(x.startDate, x.endDate),
+      }));
+
+    const certifications: CvCertification[] = (p.certifications ?? [])
+      .filter((x: any) => !x.hidden)
+      .sort((a: any, b: any) =>
+        String(b.issueDate ?? "").localeCompare(String(a.issueDate ?? "")),
+      )
+      .map((x: any) => ({
+        name: decodeEntities(x.name) ?? x.name,
+        issuingOrg: decodeEntities(x.issuingOrg),
+        date: fmtDate(x.issueDate),
+        credentialUrl: x.credentialUrl || undefined,
+      }));
+
+    const volunteering: CvVolunteering[] = (p.volunteering ?? [])
+      .filter((x: any) => !x.hidden)
+      .sort((a: any, b: any) =>
+        String(b.startDate ?? "").localeCompare(String(a.startDate ?? "")),
+      )
+      .map((x: any) => ({
+        organization: decodeEntities(x.organization) ?? x.organization,
+        role: decodeEntities(x.role),
+        cause: decodeEntities(x.cause),
+        description: decodeEntities(x.description),
+        period: period(x.startDate, x.endDate),
+      }));
+
+    const awards: CvAward[] = (p.honors ?? [])
+      .filter((x: any) => !x.hidden)
+      .sort((a: any, b: any) =>
+        String(b.date ?? "").localeCompare(String(a.date ?? "")),
+      )
+      .map((x: any) => ({
+        title: decodeEntities(x.title) ?? x.title,
+        issuer: decodeEntities(x.issuer),
+        description: decodeEntities(x.description),
+        date: fmtDate(x.date),
+      }));
+
+    const languages: CvLanguage[] = (p.languages ?? [])
+      .filter((x: any) => !x.hidden)
+      .map((x: any) => ({
+        language: decodeEntities(x.language) ?? x.language,
+        proficiency: proficiencyLabel(x.proficiency),
+      }));
+
     return {
       name: decodeEntities(p.displayName) ?? p.handle ?? FALLBACK.name,
       headline: decodeEntities(p.headline),
@@ -265,6 +416,13 @@ export async function getCV(): Promise<CvData> {
       workplace: workplaceLabel(p.preferredWorkplace) ?? FALLBACK.workplace,
       experience: experience.length ? experience : FALLBACK.experience,
       education: education.length ? education : FALLBACK.education,
+      projects: projects.length ? projects : FALLBACK.projects,
+      certifications: certifications.length
+        ? certifications
+        : FALLBACK.certifications,
+      volunteering: volunteering.length ? volunteering : FALLBACK.volunteering,
+      awards: awards.length ? awards : FALLBACK.awards,
+      languages: languages.length ? languages : FALLBACK.languages,
       skills: skills.length ? skills : FALLBACK.skills,
       live: true,
     };

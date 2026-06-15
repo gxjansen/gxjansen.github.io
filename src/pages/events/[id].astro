@@ -10,6 +10,7 @@ import RelatedPresentations from "@components/RelatedPresentations/RelatedPresen
 // utils
 import { getAllEvents } from "@utils/eventUtils";
 import { getPresentationUrl } from "@utils/eventPresentationRelations";
+import { loadCountryFlag } from "@utils/flagUtils";
 import type { Event } from "@utils/eventUtils";
 
 // Generate static paths for all events
@@ -30,19 +31,11 @@ const { event } = Astro.props as {
   presentationUrl?: string;
 };
 
-// Country flag helper: turn an ISO 3166-1 alpha-2 code (e.g. "NL") into a
-// flag emoji via regional-indicator code points. Returns null when the code
-// isn't a valid two-letter code, so the page degrades gracefully (no flag).
+// Country helpers. Names come from Intl.DisplayNames; flags are rendered as
+// SVGs via the project's flag utilities (svg-country-flags) — the SAME approach
+// used by the events index / EventCard — so flags stay consistent across pages.
+// Both degrade gracefully (no flag / raw code) when the code is invalid.
 const countryNames = new Intl.DisplayNames(["en"], { type: "region" });
-
-function countryToFlag(code?: string): string | null {
-  if (!code) return null;
-  const cc = code.trim().toUpperCase();
-  if (!/^[A-Z]{2}$/.test(cc)) return null;
-  return String.fromCodePoint(
-    ...[...cc].map((c) => 0x1f1e6 + (c.charCodeAt(0) - 65)),
-  );
-}
 
 function countryToName(code?: string): string | null {
   if (!code) return null;
@@ -55,7 +48,8 @@ function countryToName(code?: string): string | null {
   }
 }
 
-const flag = countryToFlag(event.country);
+// Load the country flag SVG at build time (ImageMetadata) — null if unavailable.
+const flagImage = event.country ? await loadCountryFlag(event.country) : null;
 const countryName = countryToName(event.country);
 
 // Format date
@@ -120,7 +114,18 @@ const metaDescription = descriptionParts.filter(Boolean).join(" ");
                 event.country && `, ${countryName ?? event.country}`
               }</span
             >
-            {flag && <span aria-hidden="true">{flag}</span>}
+            {
+              flagImage && (
+                <Image
+                  src={flagImage}
+                  alt={`Flag of ${countryName ?? event.country}`}
+                  width={20}
+                  height={15}
+                  class="inline-block rounded-xs mix-blend-multiply dark:mix-blend-screen"
+                  loading="lazy"
+                />
+              )
+            }
           </span>
           {
             event.workshop && (
@@ -196,7 +201,18 @@ const metaDescription = descriptionParts.filter(Boolean).join(" ");
                   event.country && `, ${countryName ?? event.country}`
                 }</span
               >
-              {flag && <span aria-hidden="true">{flag}</span>}
+              {
+                flagImage && (
+                  <Image
+                    src={flagImage}
+                    alt={`Flag of ${countryName ?? event.country}`}
+                    width={20}
+                    height={15}
+                    class="inline-block rounded-xs mix-blend-multiply dark:mix-blend-screen"
+                    loading="lazy"
+                  />
+                )
+              }
             </dd>
           </div>
         </dl>
@@ -208,7 +224,7 @@ const metaDescription = descriptionParts.filter(Boolean).join(" ");
             href={event.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display mt-6 inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-bold text-white transition"
+            class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display mt-6 inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
           >
             Visit event website <span aria-hidden="true">→</span>
           </a>
