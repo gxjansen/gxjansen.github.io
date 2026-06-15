@@ -27,6 +27,7 @@ const authorUrl = `/authors/${author.id}`;
           alt={`${name}'s avatar`}
           width={variant === "compact" ? 48 : 64}
           height={variant === "compact" ? 48 : 64}
+          densities={[2]}
           quality="high"
           loading="eager"
           class={`rounded-full object-cover ${variant === "compact" ? "h-12 w-12" : "h-16 w-16"}`}
