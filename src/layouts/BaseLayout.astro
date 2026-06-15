@@ -95,44 +95,6 @@ const breadcrumbLD = breadcrumbGenerator(Astro.url.pathname, site);
     <!-- BreadcrumbList JSON-LD (site-wide, every non-root route) -->
     {breadcrumbLD && <Fragment set:html={breadcrumbLD} />}
     <slot name="head" />
-    <style>
-      /* Noise background animation */
-      @keyframes noise {
-        0% {
-          transform: translate(0, 0);
-        }
-        10% {
-          transform: translate(-5%, -5%);
-        }
-        20% {
-          transform: translate(-10%, 5%);
-        }
-        30% {
-          transform: translate(5%, -10%);
-        }
-        40% {
-          transform: translate(-5%, 15%);
-        }
-        50% {
-          transform: translate(-10%, 5%);
-        }
-        60% {
-          transform: translate(15%, 0);
-        }
-        70% {
-          transform: translate(0, 10%);
-        }
-        80% {
-          transform: translate(-15%, 0);
-        }
-        90% {
-          transform: translate(10%, 5%);
-        }
-        100% {
-          transform: translate(5%, 0);
-        }
-      }
-    </style>
   </head>
   <body
     id="body"
@@ -140,18 +102,9 @@ const breadcrumbLD = breadcrumbGenerator(Astro.url.pathname, site);
       siteSettings.useAnimations === true ? "use-animations" : ""
     } relative isolate min-h-screen flex flex-col w-screen overflow-x-clip`}
   >
-    {/* Background elements */}
+    {/* Signature page background: fixed pine/rose corner-wash */}
     <div class="z-background fixed inset-0">
-      {/* Noise overlay */}
-      <div
-        class="noise-background"
-        style={siteSettings.useAnimations
-          ? "animation: noise 8s steps(10) infinite;"
-          : ""}
-        aria-hidden="true"
-        role="presentation"
-      >
-      </div>
+      <div class="page-wash" aria-hidden="true" role="presentation"></div>
     </div>
 
     <EnvironmentBanner />
@@ -213,19 +166,6 @@ const breadcrumbLD = breadcrumbGenerator(Astro.url.pathname, site);
 
       initReveal();
       document.addEventListener("astro:after-swap", initReveal);
-    </script>
-
-    <!-- Performance optimizations -->
-    <script>
-      // Pause noise animation when tab is backgrounded to save CPU/battery
-      const noiseEl = document.querySelector(".noise-background");
-      if (noiseEl) {
-        document.addEventListener("visibilitychange", () => {
-          (noiseEl as HTMLElement).style.animationPlayState = document.hidden
-            ? "paused"
-            : "running";
-        });
-      }
     </script>
 
     <!-- Copy-to-clipboard button on code blocks -->

@@ -33,6 +33,43 @@
   }
 }
 
+/* Signature page background: a fixed pine/rose corner-wash (v2 design system).
+   Pine top-left, rose bottom-right; brighter pine + softer rose in dark mode.
+   Fixed to the viewport so it never scrolls. Plain unlayered CSS so it's never
+   tree-shaken. Lives on the `.page-wash` div in BaseLayout. */
+.page-wash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      60% 60% at 0% 0%,
+      rgba(40, 105, 131, 0.2) 0%,
+      rgba(40, 105, 131, 0.08) 40%,
+      transparent 70%
+    ),
+    radial-gradient(
+      60% 60% at 100% 100%,
+      rgba(215, 130, 126, 0.18) 0%,
+      rgba(215, 130, 126, 0.07) 40%,
+      transparent 70%
+    );
+}
+:root.dark .page-wash {
+  background:
+    radial-gradient(
+      60% 60% at 0% 0%,
+      rgba(62, 143, 176, 0.16) 0%,
+      rgba(62, 143, 176, 0.06) 40%,
+      transparent 70%
+    ),
+    radial-gradient(
+      60% 60% at 100% 100%,
+      rgba(235, 188, 186, 0.1) 0%,
+      transparent 60%
+    );
+}
+
 /* Layer Components */
 @layer components {
   /* Card Base Styles */
