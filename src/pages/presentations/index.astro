@@ -1,93 +1,80 @@
 ---
 import type { CollectionEntry } from "astro:content";
-
-// layout
 import BaseLayout from "@layouts/BaseLayout.astro";
-
-// components
-import Badge from "@components/Badge/Badge.astro";
 import PresentationCard from "@components/Presentations/PresentationCard.astro";
-
-// content
 import { getCollection } from "astro:content";
 
-// Get all presentations
-const allPresentations: CollectionEntry<"presentations">[] =
+const all: CollectionEntry<"presentations">[] =
   await getCollection("presentations");
 
-// Filter out presentations without required data and those with isHidden: true
-const validPresentations: CollectionEntry<"presentations">[] =
-  allPresentations.filter((p) => {
-    // Check if presentation has required fields
-    if (!p.data.title || !p.data.image) {
-      return false;
-    }
+const valid = all.filter(
+  (p) => p.data.title && p.data.image && p.data.isHidden !== true,
+);
+const byTitle = (a: CollectionEntry<"presentations">, b: typeof a) =>
+  (a.data.title ?? "").localeCompare(b.data.title ?? "");
 
-    // Filter out presentations with isHidden: true
-    return p.data.isHidden !== true;
-  });
+const featured = valid.filter((p) => p.data.isFeatured).sort(byTitle);
+const other = valid.filter((p) => !p.data.isFeatured).sort(byTitle);
 
-// Split into featured and non-featured
-const featuredPresentations: CollectionEntry<"presentations">[] =
-  validPresentations
-    .filter((p) => p.data.isFeatured)
-    .sort((a, b) => (a.data.title ?? "").localeCompare(b.data.title ?? ""));
-
-const otherPresentations: CollectionEntry<"presentations">[] =
-  validPresentations
-    .filter((p) => !p.data.isFeatured)
-    .sort((a, b) => (a.data.title ?? "").localeCompare(b.data.title ?? ""));
+const grid = "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3";
 ---
 
 <BaseLayout
   title="Presentations"
-  description="Presentations and workshops by Guido Jansen."
+  description="Presentations and workshops by Guido Jansen on community building, developer ecosystems, experimentation and the psychology of customer behavior."
   type="presentationList"
-  presentations={validPresentations.map((p) => p.data)}
-  presentationSlugs={validPresentations.map((p) => p.id)}
+  presentations={valid.map((p) => p.data)}
+  presentationSlugs={valid.map((p) => p.id)}
 >
-  <section class="py-24 md:py-28">
-    <div class="site-container">
-      <div class="relative">
-        <!-- Featured Presentations -->
-        <div class="mx-auto mb-16 text-center md:max-w-4xl">
-          <Badge>Featured</Badge>
-          <h1 class="h1 mb-4">Featured Presentations</h1>
-          <p class="description text-lg md:text-xl">
-            A selection of my most popular presentations and workshops. Contact
-            me if you're interested in having me speak at your event!
-          </p>
-        </div>
+  <div class="home presentations-page">
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <span class="eyebrow">Speaking</span>
+      <h1
+        class="font-display mt-2 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+      >
+        Presentations &amp; workshops
+      </h1>
+      <p
+        class="text-base-600 dark:text-base-400 max-w-[60ch] text-lg leading-relaxed"
+      >
+        A selection of my most-requested talks and workshops. <a
+          href="/contact/"
+          class="text-primary-600 dark:text-primary-400 font-semibold"
+          >Get in touch</a
+        > if you'd like me to speak at your event.
+      </p>
+    </section>
 
-        <div class="cards-grid mb-32">
-          {
-            featuredPresentations.map((presentation) => (
-              <div>
-                <PresentationCard presentation={presentation} />
-              </div>
-            ))
-          }
-        </div>
-
-        <!-- Other Presentations -->
-        <div class="mx-auto mb-16 text-center md:max-w-4xl">
-          <Badge>More</Badge>
-          <h2 class="h2 mb-4">More Presentations</h2>
-          <p class="description text-lg md:text-xl">
-            Other presentations and workshops I've given at various events.
-          </p>
-        </div>
-
-        <div class="cards-grid">
-          {
-            otherPresentations.map((presentation) => (
-              <div>
-                <PresentationCard presentation={presentation} />
-              </div>
-            ))
-          }
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <div class="sec-head">
+        <div>
+          <span class="hand-note">most requested</span>
+          <h2>Featured</h2>
         </div>
       </div>
-    </div>
-  </section>
+      <div class={grid}>
+        {featured.map((p) => <PresentationCard presentation={p} />)}
+      </div>
+    </section>
+
+    {
+      other.length > 0 && (
+        <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+          <div class="sec-head">
+            <div>
+              <span class="hand-note">more sessions</span>
+              <h2>The full catalogue</h2>
+            </div>
+          </div>
+          <div class={grid}>
+            {other.map((p) => (
+              <PresentationCard presentation={p} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </div>
 </BaseLayout>
