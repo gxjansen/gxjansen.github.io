@@ -70,6 +70,17 @@
     );
 }
 
+/* The "Golden" word in newsletter headings, in gold. The palette gold (#f6c177)
+   is too light to read on the cream card in light mode (~2.2:1), so light mode
+   uses a deeper gold that clears WCAG for large/bold text; dark mode uses the
+   full gold (high contrast on the dark card). */
+.text-golden {
+  color: #9a6a06;
+}
+:root.dark .text-golden {
+  color: var(--color-gold);
+}
+
 /* Layer Components */
 @layer components {
   /* Card Base Styles */
