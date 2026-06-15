@@ -159,6 +159,23 @@
   --animate-marquee: marquee 100s linear infinite;
 }
 
+/* Hand font (LiebeHeide). Defined as a utility so every `@apply font-hand` and
+   `class="font-hand"` carries the same behaviour, not just the family:
+   - font-synthesis:none — LiebeHeide is a single weight (400). Without this,
+     `font-bold` triggers faux-bold, which smears each glyph independently and
+     breaks the connecting strokes between letters. Disabling it keeps the real
+     forms so the handwriting flows (as on the foundry's own specimen).
+   - calt + liga on — the contextual alternates / joining ligatures (per the
+     foundry). These vary repeated glyphs and connect neighbours. */
+@utility font-hand {
+  font-family: var(--font-hand);
+  font-synthesis: none;
+  font-feature-settings:
+    "calt" on,
+    "liga" on;
+  font-variant-ligatures: contextual common-ligatures;
+}
+
 /* Dark-mode app-source accents (brighter for contrast on the Main base).
    Overrides the @theme custom properties; `text-app-*` utilities cascade. */
 :root.dark {
