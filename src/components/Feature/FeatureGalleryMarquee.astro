@@ -7,7 +7,6 @@
 import { Image } from "astro:assets";
 
 // components
-import Badge from "@components/Badge/Badge.astro";
 
 // images
 import image1 from "@assets/images/gallery/couch2.jpg";
@@ -91,11 +90,12 @@ const marqueeBottom: MarqueeImages = {
     <div class="relative">
       <div class="relative">
         <div class="mx-auto mb-16 text-center md:max-w-4xl">
-          <Badge>Gallery</Badge>
-          <h2 class="h2">Me at work</h2>
-          <!-- <p class="description mt-4 text-pretty text-lg md:text-xl">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          </p> -->
+          <span class="hand-note">behind the scenes</span>
+          <h2
+            class="font-display text-[clamp(1.9rem,3.6vw,2.7rem)] leading-[1.1] font-black tracking-[-0.03em]"
+          >
+            Me at work
+          </h2>
         </div>
 
         <div

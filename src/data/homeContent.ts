@@ -97,29 +97,11 @@ export const heroCopy = {
   lead: "For 20+ years I've helped tech teams turn <strong>developer &amp; customer intelligence</strong> into product strategy, grounded in cognitive psychology and a habit of testing my assumptions. I help build communities, and the teams that run them.",
 };
 
-// Build-time stats derived from real data (single sources of truth).
-import eventsData from "./events.json";
-
-// Years building communities — since Guido's first community role (2004-11-12).
-const COMMUNITY_START = Date.UTC(2004, 10, 12); // month is 0-indexed
-export const yearsBuilding = Math.floor(
-  (Date.now() - COMMUNITY_START) / (365.25 * 86_400_000),
-);
-
-// Unique countries presented in (same events data that drives the flag marquee).
-export const countryCount = new Set(
-  (eventsData as { country?: string }[])
-    .map((e) => e.country)
-    .filter((c): c is string => Boolean(c)),
-).size;
-
-// Events spoken at — on-stage roles (speaker / host / moderator / panel /
-// workshop / session), excluding pure organiser roles.
-const SPEAKING_ROLE =
-  /speak|keynote|talk|workshop|present|panel|host|moderat|session/i;
-export const speakingCount = (eventsData as { role?: string }[]).filter((e) =>
-  SPEAKING_ROLE.test(e.role ?? ""),
-).length;
+// Build-time stats — single source of truth lives in ./siteStats.
+import { yearsBuilding, countryCount, talksCount } from "./siteStats";
+export { yearsBuilding, countryCount };
+// Back-compat alias for existing call sites on this page.
+export const speakingCount = talksCount;
 
 export const stats: Stat[] = [
   { n: `${yearsBuilding}+`, l: "years building communities" },
@@ -379,7 +361,7 @@ export const activitySeed: ActivityItem[] = [
     type: "repost",
     app: "bluesky",
     time: "2d",
-    text: "CODETV × ATPROTO — a new episode on building on open networks.",
+    text: "CODETV × atproto: a new episode on building on open networks.",
     kind: "Reposted",
     who: "zeu.dev",
   },

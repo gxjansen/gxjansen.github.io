@@ -158,8 +158,8 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "chris-rauch-1",
     name: "Chris Rauch",
     role: "Chief Customer Officer",
-    company: "Spryker",
-    workRelationship: "Former 2nd level manager",
+    company: "Supermetrics",
+    workRelationship: "Former 2nd level manager at Spryker",
     quote:
       "His strategic thinking impressed me. Guido understood that communities need sustainable business value, not just engagement metrics. The hackathon projects directly influenced what we built next, including some AI features.",
     category: "Business Impact & Innovation",
@@ -169,8 +169,8 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "chris-rauch-2",
     name: "Chris Rauch",
     role: "Chief Customer Officer",
-    company: "Spryker",
-    workRelationship: "Former 2nd level manager",
+    company: "Supermetrics",
+    workRelationship: "Former 2nd level manager at Spryker",
     quote:
       "He delivered results that mattered: developer feedback shaped our product roadmap, engineering teams connected directly with external developers, and our community became stronger after each challenge.",
     category: "Business Impact & Innovation",
