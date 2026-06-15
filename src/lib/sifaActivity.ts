@@ -165,6 +165,38 @@ const WORK_TYPE_LABEL: Record<string, string> = {
   album: "Album",
 };
 
+/** The DID that owns a record, parsed from its at:// URI. */
+const didFromUri = (uri?: string): string | undefined =>
+  uri?.match(/^at:\/\/(did:[^/]+)/)?.[1];
+
+/** Build a CDN image URL from an atproto image blob, for records that store a
+ *  cover blob instead of a ready-made posterUrl (e.g. Bookhive). */
+const blobImage = (did?: string, cid?: string): string | undefined =>
+  did && cid
+    ? `https://cdn.bsky.app/img/feed_thumbnail/plain/${did}/${cid}@jpeg`
+    : undefined;
+
+/** Deep link a review to the actual book/film on its source app, instead of
+ *  the generic profile card the SDK resolver returns. */
+function reviewItemUrl(
+  raw: any,
+  record: Record<string, unknown>,
+): string | undefined {
+  const coll = str(raw?.collection) ?? "";
+  const ids = (record.identifiers ?? {}) as Record<string, unknown>;
+  if (coll.includes("bookhive")) {
+    const hiveId = str(record.hiveId) ?? str(ids.hiveId);
+    return hiveId ? `https://bookhive.buzz/books/${hiveId}` : undefined;
+  }
+  if (coll.includes("popfeed")) {
+    const tmdbId = str(ids.tmdbId);
+    if (!tmdbId) return undefined;
+    const type = str(record.creativeWorkType)?.toLowerCase();
+    return `https://popfeed.social/${type === "tv" ? "tv" : "movie"}/${tmdbId}`;
+  }
+  return undefined;
+}
+
 /** Map one raw SDK activity item to the display shape, or null to drop it.
  *  `eng` carries real Bluesky engagement counts when available. */
 function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
@@ -206,14 +238,23 @@ function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
         typeof record.rating === "number"
           ? (record.rating as number)
           : undefined;
+      const did = didFromUri(str(raw?.uri));
+      const coverCid = (record.cover as any)?.ref?.["$link"];
       return {
         ...base,
+        // Link straight to the book / film, not the profile card.
+        url: reviewItemUrl(raw, record) ?? base.url,
         type: "review",
         kind: "Reviewed",
         title,
         sub: subParts.join(" · ") || undefined,
         rating,
-        imageUrl: str(record.posterUrl) ?? str(record.backdropUrl),
+        // posterUrl (Popfeed) is ready to use; Bookhive only stores a cover
+        // blob, so build its CDN URL from the DID + blob CID.
+        imageUrl:
+          str(record.posterUrl) ??
+          str(record.backdropUrl) ??
+          blobImage(did, str(coverCid)),
       };
     }
     case "Code": {
