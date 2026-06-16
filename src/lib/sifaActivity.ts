@@ -97,6 +97,30 @@ async function fetchPostMeta(uris: string[]): Promise<Map<string, PostMeta>> {
   return map;
 }
 
+/** Just the engagement counts for a Bluesky post (no embed/image). */
+export interface Engagement {
+  likes: number;
+  reposts: number;
+  replies: number;
+}
+
+/**
+ * Engagement counts for a batch of canonical `at://` Bluesky post URIs, keyed
+ * by the canonical URI getPosts echoes back. Thin wrapper over `fetchPostMeta`
+ * (one batched public-AppView call, ≤25 per request). Missing/deleted posts are
+ * simply absent from the map. Never throws — returns an empty map on failure.
+ */
+export async function fetchEngagement(
+  uris: string[],
+): Promise<Map<string, Engagement>> {
+  const meta = await fetchPostMeta(uris);
+  const out = new Map<string, Engagement>();
+  for (const [uri, m] of meta) {
+    out.set(uri, { likes: m.likes, reposts: m.reposts, replies: m.replies });
+  }
+  return out;
+}
+
 /**
  * Recent non-post activity, several items per category (Reviews, Code, Events),
  * fetched per-category so each surfaces regardless of post frequency or age,

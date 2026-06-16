@@ -145,6 +145,11 @@
   .home .art .read-time {
     @apply text-base-500 text-[0.8rem];
   }
+  /* Reserve room so a digit change on client refresh doesn't shift the row. */
+  .home .art .bsky-eng .bsky-eng-n {
+    @apply inline-block text-right;
+    min-width: 1.5ch;
+  }
   .home .art-thumb {
     @apply mb-4 aspect-[16/7] w-full overflow-hidden rounded-xl;
   }

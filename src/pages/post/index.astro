@@ -2,11 +2,20 @@
 // utils
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import { format } from "date-fns";
 import { readingTimeShort } from "../../utils/readingTime";
+import { normalizeBskyUri } from "../../lib/bskyUri";
+import { fetchEngagement } from "../../lib/sifaActivity";
 
 // components
 import BaseLayout from "@layouts/BaseLayout.astro";
+
+/**
+ * Below this total (likes + reposts + replies) a post shows no engagement
+ * count — keeps the index honest and uncluttered. Tunable.
+ */
+const ENGAGEMENT_MIN = 10;
 
 // Get all non-draft posts, newest first.
 const posts = (await getCollection("post", ({ data }) => !data.draft)).sort(
@@ -16,16 +25,42 @@ const posts = (await getCollection("post", ({ data }) => !data.draft)).sort(
 
 const accents = ["gold", "foam", "pine", "iris", "love", "rose"] as const;
 
-const articles = posts.map((post, i) => ({
-  title: post.data.title,
-  description: post.data.description,
-  href: `/post/${post.id}/`,
-  date: format(new Date(post.data.pubDate), "MMM d, yyyy"),
-  read: readingTimeShort(post.body),
-  categories: post.data.categories,
-  heroImage: post.data.heroImage,
-  accent: accents[i % accents.length],
-}));
+// Normalize each post's optional blueskyUri to a canonical at:// URI, then fetch
+// all engagement counts in ONE batched, no-auth getPosts call at build time.
+// fetchEngagement never throws — an offline build just yields an empty map and
+// every card renders without a count.
+const normalized = posts.map((post) =>
+  post.data.blueskyUri ? normalizeBskyUri(post.data.blueskyUri) : null,
+);
+const atUris = [
+  ...new Set(
+    normalized
+      .filter((n): n is NonNullable<typeof n> => !!n)
+      .map((n) => n.atUri),
+  ),
+];
+const engagement = await fetchEngagement(atUris);
+
+const articles = posts.map((post, i) => {
+  const norm = normalized[i];
+  const counts = norm ? engagement.get(norm.atUri) : undefined;
+  const total = counts ? counts.likes + counts.reposts + counts.replies : 0;
+  return {
+    title: post.data.title,
+    description: post.data.description,
+    href: `/post/${post.id}/`,
+    date: format(new Date(post.data.pubDate), "MMM d, yyyy"),
+    read: readingTimeShort(post.body),
+    categories: post.data.categories,
+    heroImage: post.data.heroImage,
+    accent: accents[i % accents.length],
+    // Only bake a count when there's a normalized URI AND it clears the
+    // threshold. The span (when present) is no-JS-safe and CLS-free; the client
+    // script only mutates its digits, never adds/removes it.
+    bskyUri: norm?.atUri,
+    engagement: norm && total >= ENGAGEMENT_MIN ? total : null,
+  };
+});
 
 // Category filter: the most-used categories (>= 2 posts), by frequency then
 // name, capped so the filter bar stays tidy.
@@ -110,6 +145,25 @@ const categories = [...counts.entries()]
                 <span>{a.date}</span>
                 <span aria-hidden="true">·</span>
                 <span class="read-time">{a.read}</span>
+                {a.engagement !== null && (
+                  <>
+                    <span aria-hidden="true">·</span>
+                    <span
+                      class="bsky-eng text-base-500 inline-flex items-center gap-1 text-[0.8rem]"
+                      data-bsky-uri={a.bskyUri}
+                      aria-label={`${a.engagement} interactions on Bluesky`}
+                    >
+                      <Icon
+                        name="tabler/brand-bluesky"
+                        class="size-3.5"
+                        aria-hidden="true"
+                      />
+                      <span class="bsky-eng-n" aria-hidden="true">
+                        {a.engagement}
+                      </span>
+                    </span>
+                  </>
+                )}
                 <span class="read">
                   Read <span aria-hidden="true">↗</span>
                 </span>
@@ -155,4 +209,102 @@ const categories = [...counts.entries()]
 
   initArticleFilter();
   document.addEventListener("astro:after-swap", initArticleFilter);
+</script>
+
+<script>
+  // Live Bluesky engagement counts (stale-while-revalidate), mirroring the live
+  // avatar strategy in SiteLogo.astro. Strategy:
+  //   1. The HTML ships the build-time total baked into each [data-bsky-uri]
+  //      span — no-JS-safe, first-paint-correct, CLS-free.
+  //   2. On load, apply the cached totals from localStorage instantly.
+  //   3. Refresh once per ~2h: ONE batched getPosts call for the at:// URIs in
+  //      the DOM, then update the digits in place and write back to cache.
+  //   4. On any failure, keep the existing numbers.
+  // CRITICAL: the client only UPDATES the digits of already-rendered spans. It
+  // never adds or removes a span — the threshold is a build-time decision, so
+  // there is no layout shift and below-threshold posts stay countless.
+  const KEY = "guido:postEngagement";
+  const TTL = 2 * 60 * 60 * 1000; // a couple of hours
+  const ENDPOINT = "https://public.api.bsky.app/xrpc/app.bsky.feed.getPosts";
+
+  type Counts = { likes: number; reposts: number; replies: number };
+  type Cached = { counts: Record<string, Counts>; ts: number };
+
+  // Update the digit of every existing span whose at:// URI we have a count for.
+  // Never creates or removes spans.
+  function applyCounts(counts: Record<string, Counts>) {
+    document
+      .querySelectorAll<HTMLElement>("#article-grid .bsky-eng[data-bsky-uri]")
+      .forEach((span) => {
+        const uri = span.dataset.bskyUri;
+        if (!uri) return;
+        const c = counts[uri];
+        if (!c) return;
+        const total = (c.likes ?? 0) + (c.reposts ?? 0) + (c.replies ?? 0);
+        const n = span.querySelector<HTMLElement>(".bsky-eng-n");
+        if (n) n.textContent = String(total);
+        span.setAttribute("aria-label", `${total} interactions on Bluesky`);
+      });
+  }
+
+  function runEngagementRefresh() {
+    const spans = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        "#article-grid .bsky-eng[data-bsky-uri]",
+      ),
+    );
+    if (!spans.length) return;
+
+    let cached: Cached | null = null;
+    try {
+      cached = JSON.parse(localStorage.getItem(KEY) || "null");
+    } catch {
+      cached = null;
+    }
+
+    // Apply last-known-good totals immediately (no flash back to stale build #s).
+    if (cached?.counts) applyCounts(cached.counts);
+
+    const fresh = cached && Date.now() - cached.ts < TTL;
+    if (fresh) return;
+
+    // One batched getPosts call for exactly the URIs present in the DOM.
+    const uris = [
+      ...new Set(spans.map((s) => s.dataset.bskyUri).filter(Boolean)),
+    ] as string[];
+    if (!uris.length) return;
+    const qs = uris.map((u) => `uris=${encodeURIComponent(u)}`).join("&");
+
+    fetch(`${ENDPOINT}?${qs}`)
+      .then((r) =>
+        r.ok ? r.json() : Promise.reject(new Error(String(r.status))),
+      )
+      .then((data: any) => {
+        const counts: Record<string, Counts> = {};
+        for (const p of data?.posts ?? []) {
+          if (!p?.uri) continue;
+          counts[p.uri] = {
+            likes: p.likeCount ?? 0,
+            reposts: p.repostCount ?? 0,
+            replies: p.replyCount ?? 0,
+          };
+        }
+        if (!Object.keys(counts).length) return;
+        applyCounts(counts);
+        try {
+          localStorage.setItem(
+            KEY,
+            JSON.stringify({ counts, ts: Date.now() } satisfies Cached),
+          );
+        } catch {
+          /* storage full / disabled — the in-memory update still applied */
+        }
+      })
+      .catch(() => {
+        /* offline / rate-limited / schema change → keep the existing numbers */
+      });
+  }
+
+  runEngagementRefresh();
+  document.addEventListener("astro:after-swap", runEngagementRefresh);
 </script>
