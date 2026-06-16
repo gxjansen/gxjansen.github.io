@@ -34,6 +34,21 @@ import {
 import { getActivity } from "../lib/sifaActivity";
 import { readingTimeShort } from "../utils/readingTime";
 
+// Render the homepage on demand so the live "Right now" feed stays fresh
+// without a rebuild, but cache the rendered page at the Netlify CDN with
+// stale-while-revalidate: Sifa is queried at most ~once per window (not per
+// visitor), visitors get a fast CDN-cached page, and the feed refreshes itself
+// every few minutes. The getActivity() fallback covers Sifa being unreachable.
+export const prerender = false;
+Astro.response.headers.set(
+  "Netlify-CDN-Cache-Control",
+  "public, s-maxage=300, stale-while-revalidate=86400",
+);
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=0, must-revalidate",
+);
+
 const currLocale = getLocaleFromUrl(Astro.url);
 const siteData = getTranslatedData("siteData", currLocale);
 
