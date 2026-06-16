@@ -12,6 +12,7 @@ import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 import AuthorByline from "@components/Author/AuthorByline.astro";
 import AuthorBioBox from "@components/Author/AuthorBioBox.astro";
 import BlueskyComments from "@components/Bluesky/BlueskyComments";
+import Breadcrumb from "@components/Breadcrumb/Breadcrumb.astro";
 
 // utils
 import { formatDate, humanize } from "@js/textUtils";
@@ -88,6 +89,16 @@ const newsletterDescription =
       <div class="flex w-full flex-col items-center px-4">
         <div class="mx-auto flex w-full max-w-2xl">
           <div class="mx-auto max-w-full text-center">
+            <!-- Breadcrumb trail -->
+            <Breadcrumb
+              class="mb-6 flex justify-center text-left"
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Articles", href: "/post/" },
+                { label: title },
+              ]}
+            />
+
             <!-- Categories -->
             <div
               class="flex justify-center gap-4"

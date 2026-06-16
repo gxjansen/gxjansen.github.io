@@ -1,0 +1,67 @@
+---
+/**
+ * Breadcrumb — visible navigation trail for genuinely nested pages.
+ *
+ * Renders a small, muted trail of links separated by a chevron, with the
+ * current page as a non-link carrying aria-current="page". Mirrors the labels
+ * and casing of the JSON-LD breadcrumb (breadcrumbGenerator in src/js/jsonLD.ts)
+ * so the visible trail matches the structured data.
+ *
+ * Pass `items` as an ordered list from the site root to the current page.
+ * The last item is the current page and must omit `href`.
+ *
+ *   <Breadcrumb items={[
+ *     { label: "Home", href: "/" },
+ *     { label: "Articles", href: "/post/" },
+ *     { label: post.data.title },
+ *   ]} />
+ */
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<nav
+  aria-label="Breadcrumb"
+  class:list={["text-[0.85rem] leading-none", className]}
+>
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
+    {
+      items.map((item, i) => {
+        const isLast = i === items.length - 1;
+        return (
+          <li class="flex items-center gap-x-2">
+            {item.href && !isLast ? (
+              <a
+                href={item.href}
+                class="text-base-500 dark:text-base-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <span
+                class="text-base-600 dark:text-base-300 font-medium"
+                aria-current="page"
+              >
+                {item.label}
+              </span>
+            )}
+            {!isLast && (
+              <span class="text-base-400 dark:text-base-500" aria-hidden="true">
+                ›
+              </span>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

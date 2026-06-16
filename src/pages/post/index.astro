@@ -3,7 +3,6 @@
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import { format } from "date-fns";
-import { humanize } from "@js/textUtils";
 import { readingTimeShort } from "../../utils/readingTime";
 
 // components
@@ -36,7 +35,7 @@ articles.forEach((a) =>
 );
 const categories = [...counts.entries()]
   .filter(([, n]) => n >= 2)
-  .sort((a, b) => b[1] - a[1] || humanize(a[0]).localeCompare(humanize(b[0])))
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
   .slice(0, 10)
   .map(([c]) => c);
 ---
@@ -76,7 +75,7 @@ const categories = [...counts.entries()]
         {
           categories.map((cat) => (
             <button class="fbtn" data-cat={cat} type="button">
-              {humanize(cat)}
+              {cat}
             </button>
           ))
         }
@@ -102,7 +101,7 @@ const categories = [...counts.entries()]
               )}
               <div class="tags">
                 {a.categories.slice(0, 2).map((t) => (
-                  <span class="tg">{humanize(t)}</span>
+                  <span class="tg">{t}</span>
                 ))}
               </div>
               <h3>{a.title}</h3>
