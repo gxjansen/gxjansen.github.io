@@ -46,6 +46,7 @@ const dotColor = onPine
         alt=""
         width="32"
         height="32"
+        data-live-avatar
         class="ring-gold-light/40 dark:ring-gold/40 size-8 shrink-0 rounded-full ring-2"
       />
     )
@@ -62,3 +63,69 @@ const dotColor = onPine
     <span aria-hidden="true">do</span>
   </span>
 </a>
+
+<script>
+  // Live caricature avatar: the SAME brand mark, stylized on Bluesky by
+  // location / weather / holidays (it changes ~3x a day). Loaded client-side
+  // because the site can go weeks without a rebuild. Strategy:
+  //   1. The HTML ships the committed static caricature (no-JS + first paint).
+  //   2. On load, apply the last-known-good URL from localStorage instantly.
+  //   3. Try to refresh on each pageload, but only hit the network when the
+  //      cached value is older than ~2h (cached for a couple hours).
+  //   4. On any failure, keep the old version — never fall back to nothing.
+  // The Bluesky avatar URL is content-addressed (immutable), so a cached URL
+  // still renders correctly weeks later.
+  const KEY = "guido:liveAvatar";
+  const TTL = 2 * 60 * 60 * 1000; // a couple of hours
+  const ENDPOINT =
+    "https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=gui.do";
+
+  type Cached = { url: string; ts: number };
+
+  function apply(url: string) {
+    document
+      .querySelectorAll<HTMLImageElement>("[data-live-avatar]")
+      .forEach((img) => {
+        if (img.src === url) return;
+        // Decode first so the swap never flashes a half-loaded image.
+        const pre = new Image();
+        pre.onload = () => {
+          img.src = url;
+        };
+        pre.src = url;
+      });
+  }
+
+  let cached: Cached | null = null;
+  try {
+    cached = JSON.parse(localStorage.getItem(KEY) || "null");
+  } catch {
+    cached = null;
+  }
+
+  // Show the last-known-good immediately (no flash back to the static mark).
+  if (cached?.url) apply(cached.url);
+
+  // Refresh on pageload only once the cache has aged past the TTL.
+  const fresh = cached && Date.now() - cached.ts < TTL;
+  if (!fresh) {
+    fetch(ENDPOINT)
+      .then((r) =>
+        r.ok ? r.json() : Promise.reject(new Error(String(r.status))),
+      )
+      .then((data) => {
+        const url = data?.avatar;
+        if (typeof url === "string" && url) {
+          apply(url);
+          try {
+            localStorage.setItem(KEY, JSON.stringify({ url, ts: Date.now() }));
+          } catch {
+            /* storage full / disabled — the in-memory swap still applied */
+          }
+        }
+      })
+      .catch(() => {
+        /* offline / rate-limited / schema change → keep cached or static */
+      });
+  }
+</script>
