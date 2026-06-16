@@ -61,13 +61,13 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
   communities: {
     url: "gui.do/communities",
     title: "Communities I've built from zero",
-    lead: "Joomla!, Meet Magento, CRO.CAFE, Spryker — developer and technical communities.",
+    lead: "Joomla!, Meet Magento, CRO.CAFE, Spryker. Developer and technical communities.",
     hand: "communities I run",
   },
   projects: {
     url: "gui.do/projects",
     title: "Things I'm building",
-    lead: "Sifa, Barazo, n8n Pulse and more — most open source on GitHub.",
+    lead: "Sifa, Barazo, n8n Pulse and more. Most open source on GitHub.",
     hand: "mostly open source",
   },
   press: {
@@ -85,7 +85,7 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
   podcasts: {
     url: "gui.do/podcasts",
     title: "The podcasts I host & produce",
-    lead: "Sheeptank, CRO.CAFE and more — 250+ episodes on community and experimentation.",
+    lead: "Sheeptank, CRO.CAFE and more. 250+ episodes on community and experimentation.",
     hand: "give it a listen",
   },
   presentations: {
