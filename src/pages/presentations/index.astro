@@ -13,7 +13,23 @@ const valid = all.filter(
 const byTitle = (a: CollectionEntry<"presentations">, b: typeof a) =>
   (a.data.title ?? "").localeCompare(b.data.title ?? "");
 
-const featured = valid.filter((p) => p.data.isFeatured).sort(byTitle);
+// Lead the featured grid with the talks that match what I do now (community,
+// AI, psychology), not the legacy e-commerce/CRO catalogue. Anything featured
+// but not listed here falls in after, alphabetically.
+const FEATURED_ORDER = [
+  "the-future-of-community-where-psychology-tech-and-ai-collide",
+  "n8n-ai-workflow-automation",
+  "data-driven-decisions-meets-psychology",
+  "persuasive-e-commerce",
+];
+const leadIdx = (p: CollectionEntry<"presentations">) => {
+  const i = FEATURED_ORDER.indexOf(p.id);
+  return i === -1 ? Number.MAX_SAFE_INTEGER : i;
+};
+
+const featured = valid
+  .filter((p) => p.data.isFeatured)
+  .sort((a, b) => leadIdx(a) - leadIdx(b) || byTitle(a, b));
 const other = valid.filter((p) => !p.data.isFeatured).sort(byTitle);
 
 const grid = "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3";
