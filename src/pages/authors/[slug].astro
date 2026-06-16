@@ -6,6 +6,7 @@ import PostCardAtlas from "@components/PostCard/PostCardAtlas.astro";
 import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
 
 import { yearsBuilding } from "@data/siteStats";
+import { injectYears } from "@js/textUtils";
 
 export async function getStaticPaths() {
   const authors = await getCollection("authors");
@@ -79,7 +80,7 @@ const personSchema = {
   "@id": `${import.meta.env.SITE}/authors/${author.id}#person`,
   name: name,
   url: `${import.meta.env.SITE}/authors/${author.id}`,
-  description: bio,
+  description: bio ? injectYears(bio) : bio,
   jobTitle: jobTitle,
   ...(organization && {
     worksFor: {
@@ -154,7 +155,7 @@ const personSchema = {
           {
             bio && (
               <div class="prose text-base-700 dark:prose-invert dark:text-base-300 mt-4 max-w-none text-lg">
-                <p>{bio}</p>
+                <p>{injectYears(bio)}</p>
               </div>
             )
           }
@@ -239,7 +240,7 @@ const personSchema = {
             </h2>
             <ul class="text-base-700 dark:text-base-300 list-inside list-disc space-y-2">
               {credentials.map((credential: string) => (
-                <li>{credential}</li>
+                <li>{injectYears(credential)}</li>
               ))}
             </ul>
           </section>

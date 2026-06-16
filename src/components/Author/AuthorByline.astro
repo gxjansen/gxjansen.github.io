@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
+import { injectYears } from "@js/textUtils";
 
 interface Props {
   author: CollectionEntry<"authors">;
@@ -53,7 +54,7 @@ const authorUrl = `/authors/${author.id}`;
           class="text-base-700 dark:text-base-300 mt-1 text-sm"
           itemprop="description"
         >
-          {bioShort}
+          {injectYears(bioShort)}
         </p>
       )
     }
