@@ -127,7 +127,7 @@ const categories = [...counts.entries()]
               class="art reveal"
               href={a.href}
               style={`--ac:var(--color-${a.accent})`}
-              data-cats={a.categories.join(" ")}
+              data-cats={JSON.stringify(a.categories)}
             >
               {a.heroImage && (
                 <div class="art-thumb">
@@ -197,7 +197,7 @@ const categories = [...counts.entries()]
         buttons.forEach((b) => b.classList.toggle("active", b === btn));
         let shown = 0;
         cards.forEach((card) => {
-          const cats = (card.dataset.cats || "").split(" ");
+          const cats = JSON.parse(card.dataset.cats || "[]") as string[];
           const show = cat === "all" || cats.includes(cat || "");
           card.style.display = show ? "" : "none";
           if (show) shown++;

@@ -49,7 +49,7 @@ const { items, class: className } = Astro.props;
             ) : (
               <span
                 class="text-base-600 dark:text-base-300 font-medium"
-                aria-current="page"
+                aria-current={isLast ? "page" : undefined}
               >
                 {item.label}
               </span>

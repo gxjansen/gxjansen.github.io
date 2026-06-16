@@ -10,6 +10,8 @@ const CAL = "https://app.cal.eu/gxjansen/30min";
 // Order: Bluesky, Sifa, Signal, LinkedIn (GitHub intentionally dropped).
 const byIcon = (icon: string) => socialLinks.find((s) => s.icon === icon);
 
+// Missing platforms (no resolvable href) simply don't render — no dead "#"
+// links. Bluesky and Sifa carry hardcoded hrefs, so they always survive.
 const socials = [
   {
     icon: "bluesky",
@@ -21,13 +23,13 @@ const socials = [
     social: "Sifa",
     href: byIcon("sifa")?.href ?? "https://sifa.id/p/gui.do",
   },
-  { icon: "signal", social: "Signal", href: byIcon("signal")?.href ?? "#" },
+  { icon: "signal", social: "Signal", href: byIcon("signal")?.href },
   {
     icon: "linkedin",
     social: "LinkedIn",
-    href: byIcon("linkedin")?.href ?? "#",
+    href: byIcon("linkedin")?.href,
   },
-];
+].filter((s): s is typeof s & { href: string } => Boolean(s.href));
 ---
 
 <BaseLayout

@@ -21,7 +21,7 @@ export interface Stat {
 export interface Pillar {
   k: string;
   d: string;
-  /** tabler icon name (without the `tabler/` prefix) */
+  /** full tabler icon path, including the `tabler/` prefix (e.g. `tabler/outline/brain`) */
   icon: string;
 }
 
