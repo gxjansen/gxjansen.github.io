@@ -90,7 +90,7 @@ export const courses: Course[] = [
     fmt: "Workshop · half or full day",
     accent: "foam",
     points: [
-      "What the AT Protocol actually is — and why it matters for your product",
+      "What AT Protocol actually is — and why it matters for your product",
       "Set up a PDS, create records, wire a simple Bluesky client",
       "How communities on open networks are different (and why that's an advantage)",
     ],
@@ -108,7 +108,7 @@ export const courses: Course[] = [
       {
         icon: "tabler/outline/world",
         t: "Product & engineering leads",
-        d: "Teams evaluating the AT Protocol as an infrastructure choice for their next product.",
+        d: "Teams evaluating AT Protocol as an infrastructure choice for their next product.",
       },
     ],
     outcomes: [
@@ -119,7 +119,7 @@ export const courses: Course[] = [
       "Context on the ecosystem: which apps are building on it and why.",
     ],
     whyMe:
-      "I've been building on the AT Protocol since early 2023. Sifa (portable professional identity on atproto) and Barazo (open community forums) are both production projects on the network. I spoke at ATmosphere Conf 2026 in Vancouver. I know where the sharp edges are.",
+      "I've been building on AT Protocol since early 2023. Sifa (portable professional identity on atproto) and Barazo (open community forums) are both production projects on the network. I spoke at ATmosphere Conf 2026 in Vancouver. I know where the sharp edges are.",
     agenda: [
       {
         time: "Morning",

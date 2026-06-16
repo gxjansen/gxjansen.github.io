@@ -574,7 +574,7 @@ export function HomeCard({ years, countries }: HomeData) {
               boxShadow: `0 0 0 4px ${chipColors(ACCENTS.foam).border}`,
             }}
           />
-          <span style={{ display: "flex" }}>live on the AT Protocol</span>
+          <span style={{ display: "flex" }}>live on AT Protocol</span>
         </div>
       </div>
     </Frame>

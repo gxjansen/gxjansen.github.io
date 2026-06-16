@@ -133,7 +133,7 @@ export const pillars: Pillar[] = [
   },
   {
     k: "Open tech",
-    d: "User freedom over lock-in. Building on open standards like the AT Protocol.",
+    d: "User freedom over lock-in. Building on open standards like AT Protocol.",
     icon: "tabler/outline/lock-open",
   },
 ];
@@ -187,7 +187,7 @@ export const trainingCards: TrainingCard[] = [
     url: "/training/atproto/",
     accent: "foam",
     points: [
-      "What the AT Protocol actually is, and why it matters for your product",
+      "What AT Protocol actually is, and why it matters for your product",
       "Set up a PDS, create records, wire a simple Bluesky client",
       "How communities on open networks are different (and why that's an advantage)",
     ],
@@ -197,7 +197,7 @@ export const trainingCards: TrainingCard[] = [
 export const projects: Project[] = [
   {
     t: "Sifa",
-    d: "Portable professional identity on the AT Protocol. A track record built from real community contributions.",
+    d: "Portable professional identity on AT Protocol. A track record built from real community contributions.",
     tag: "Building",
     url: "https://sifa.id",
     accent: "pine",

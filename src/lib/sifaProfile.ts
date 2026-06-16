@@ -258,7 +258,7 @@ const FALLBACK: CvData = {
     {
       name: "Sifa",
       description:
-        "My portable professional profile on the AT Protocol, and the source of this CV.",
+        "My portable professional profile on AT Protocol, and the source of this CV.",
       url: "https://sifa.id/p/gui.do",
       period: "2025 – Present",
     },
