@@ -106,7 +106,14 @@ export default defineConfig({
       },
     }),
     sitemap({
-      filter: (page) => !page.includes('/conference-terms') && !page.includes('/examples/') && !page.includes('/categories/'),
+      // Keep noindex pages out of the sitemap (mixed signal otherwise).
+      filter: (page) =>
+        !page.includes('/conference-terms') &&
+        !page.includes('/examples/') &&
+        !page.includes('/categories/') &&
+        !page.includes('/speaker') &&
+        !page.includes('/styleguide') &&
+        !page.includes('/ama/q/'),
       changefreq: 'weekly',
       lastmod: new Date(),
       i18n: {

@@ -227,14 +227,8 @@ const shouldReduceMotion =
     navigationManager = new NavigationManager();
   });
 
-  // Re-initialize after view transitions
-  document.addEventListener("astro:after-swap", () => {
-    navigationManager?.cleanup();
-    navigationManager = new NavigationManager();
-  });
-
-  // Cleanup on page unload
-  document.addEventListener("beforeunload", () => {
-    navigationManager?.cleanup();
-  });
+  // Navigation is full-page (CSS-native view transitions, no SPA router), so
+  // the manager re-initialises on each load. No astro:after-swap re-init and no
+  // beforeunload cleanup — the latter would needlessly disqualify the page from
+  // the back/forward cache.
 </script>

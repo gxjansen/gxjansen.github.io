@@ -1,19 +1,22 @@
 {
-    "name": "Atlas",
-    "short_name": "Atlas",
+    "name": "Guido X Jansen",
+    "short_name": "gui.do",
+    "start_url": "/",
     "icons": [
         {
             "src": "/favicons/android-chrome-192x192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "/favicons/android-chrome-512x512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         }
     ],
-    "theme_color": "#22c55e",
-    "background_color": "#22c55e",
+    "theme_color": "#286983",
+    "background_color": "#faf4ed",
     "display": "standalone"
 }

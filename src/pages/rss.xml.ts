@@ -38,8 +38,10 @@ export async function GET(context: APIContext) {
     })),
     xmlns: {
       media: "http://search.yahoo.com/mrss/",
+      atom: "http://www.w3.org/2005/Atom",
     },
     customData: `<language>en-us</language>
+      <atom:link href="${context.site}rss.xml" rel="self" type="application/rss+xml" />
       <media:thumbnail url="${context.site}images/social-card.jpg"/>
       <media:keywords>optimization,psychology,cro,ux</media:keywords>
       <media:category>Technology</media:category>`,

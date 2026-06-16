@@ -209,13 +209,19 @@
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
     # NOTE: the agent-discovery `Link:` header (sitemap, llms.txt, Person @id,
     # and per-page .md alternates) is emitted via the generated dist/_headers
     # file by the markdown-endpoints integration — NOT here. Keeping it in a
     # single file avoids Netlify's undocumented precedence when the same header
     # is set in both netlify.toml and _headers. See
     # src/integrations/markdown-endpoints.ts.
+
+[[headers]]
+  # Fingerprinted, content-hashed build assets never change — cache them hard.
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/.netlify/functions/getPodcastFeeds"
