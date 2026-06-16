@@ -212,99 +212,10 @@ const categories = [...counts.entries()]
 </script>
 
 <script>
-  // Live Bluesky engagement counts (stale-while-revalidate), mirroring the live
-  // avatar strategy in SiteLogo.astro. Strategy:
-  //   1. The HTML ships the build-time total baked into each [data-bsky-uri]
-  //      span — no-JS-safe, first-paint-correct, CLS-free.
-  //   2. On load, apply the cached totals from localStorage instantly.
-  //   3. Refresh once per ~2h: ONE batched getPosts call for the at:// URIs in
-  //      the DOM, then update the digits in place and write back to cache.
-  //   4. On any failure, keep the existing numbers.
-  // CRITICAL: the client only UPDATES the digits of already-rendered spans. It
-  // never adds or removes a span — the threshold is a build-time decision, so
-  // there is no layout shift and below-threshold posts stay countless.
-  const KEY = "guido:postEngagement";
-  const TTL = 2 * 60 * 60 * 1000; // a couple of hours
-  const ENDPOINT = "https://public.api.bsky.app/xrpc/app.bsky.feed.getPosts";
-
-  type Counts = { likes: number; reposts: number; replies: number };
-  type Cached = { counts: Record<string, Counts>; ts: number };
-
-  // Update the digit of every existing span whose at:// URI we have a count for.
-  // Never creates or removes spans.
-  function applyCounts(counts: Record<string, Counts>) {
-    document
-      .querySelectorAll<HTMLElement>("#article-grid .bsky-eng[data-bsky-uri]")
-      .forEach((span) => {
-        const uri = span.dataset.bskyUri;
-        if (!uri) return;
-        const c = counts[uri];
-        if (!c) return;
-        const total = (c.likes ?? 0) + (c.reposts ?? 0) + (c.replies ?? 0);
-        const n = span.querySelector<HTMLElement>(".bsky-eng-n");
-        if (n) n.textContent = String(total);
-        span.setAttribute("aria-label", `${total} interactions on Bluesky`);
-      });
-  }
-
-  function runEngagementRefresh() {
-    const spans = Array.from(
-      document.querySelectorAll<HTMLElement>(
-        "#article-grid .bsky-eng[data-bsky-uri]",
-      ),
-    );
-    if (!spans.length) return;
-
-    let cached: Cached | null = null;
-    try {
-      cached = JSON.parse(localStorage.getItem(KEY) || "null");
-    } catch {
-      cached = null;
-    }
-
-    // Apply last-known-good totals immediately (no flash back to stale build #s).
-    if (cached?.counts) applyCounts(cached.counts);
-
-    const fresh = cached && Date.now() - cached.ts < TTL;
-    if (fresh) return;
-
-    // One batched getPosts call for exactly the URIs present in the DOM.
-    const uris = [
-      ...new Set(spans.map((s) => s.dataset.bskyUri).filter(Boolean)),
-    ] as string[];
-    if (!uris.length) return;
-    const qs = uris.map((u) => `uris=${encodeURIComponent(u)}`).join("&");
-
-    fetch(`${ENDPOINT}?${qs}`)
-      .then((r) =>
-        r.ok ? r.json() : Promise.reject(new Error(String(r.status))),
-      )
-      .then((data: any) => {
-        const counts: Record<string, Counts> = {};
-        for (const p of data?.posts ?? []) {
-          if (!p?.uri) continue;
-          counts[p.uri] = {
-            likes: p.likeCount ?? 0,
-            reposts: p.repostCount ?? 0,
-            replies: p.replyCount ?? 0,
-          };
-        }
-        if (!Object.keys(counts).length) return;
-        applyCounts(counts);
-        try {
-          localStorage.setItem(
-            KEY,
-            JSON.stringify({ counts, ts: Date.now() } satisfies Cached),
-          );
-        } catch {
-          /* storage full / disabled — the in-memory update still applied */
-        }
-      })
-      .catch(() => {
-        /* offline / rate-limited / schema change → keep the existing numbers */
-      });
-  }
-
-  runEngagementRefresh();
-  document.addEventListener("astro:after-swap", runEngagementRefresh);
+  // Live Bluesky engagement counts (stale-while-revalidate). The shared module
+  // finds every `.bsky-eng[data-bsky-uri]` on the page (here: the index grid)
+  // and updates its count in place from one batched getPosts call. See
+  // src/scripts/bskyEngagement.ts for the full strategy.
+  import { initBskyEngagement } from "../../scripts/bskyEngagement";
+  initBskyEngagement();
 </script>
