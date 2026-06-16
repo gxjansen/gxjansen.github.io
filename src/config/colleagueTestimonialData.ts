@@ -55,7 +55,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "sophie-smallwood-1",
     name: "Sophie Smallwood",
     role: "Director, Customer Success",
-    company: "Spryker",
+    company: "Twilio",
     workRelationship: "Leadership peer",
     quote:
       "What stands out most is his ability to balance strong opinions with genuine psychological safety.",
@@ -90,7 +90,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "sophie-smallwood-2",
     name: "Sophie Smallwood",
     role: "Director, Customer Success",
-    company: "Spryker",
+    company: "Twilio",
     workRelationship: "Leadership peer",
     quote:
       "He brings a rare mix of energy, positivity, and technical acumen. He rolls up his sleeves to get things done, while also experimenting with new ideas.",
@@ -101,7 +101,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "andreas-lummerzheim-1",
     name: "Andreas Lummerzheim",
     role: "Partner Manager",
-    company: "Spryker",
+    company: "Shopware",
     workRelationship: "Colleague in the same division, but different team",
     quote:
       "Guido consistently brought energy and openness, making it easy to connect on both professional topics and personal interests like AI and podcasting. He also excelled at connecting people across business and technology, turning community exchanges into actionable collaboration. Guido showed real leadership without ever being my manager, creating alignment and momentum simply by bringing people together.",
@@ -182,7 +182,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "erin-weigel-1",
     name: "Erin Weigel",
     role: "Principal Designer",
-    company: "Freelancer",
+    company: "ABsmartly",
     workRelationship: "Conference attendee",
     quote:
       "Conversion rate optimization, psychology, leadership, and business are just a few of the topics he's spoken to at the highest level.",
@@ -193,7 +193,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "erin-weigel-2",
     name: "Erin Weigel",
     role: "Principal Designer",
-    company: "Freelancer",
+    company: "ABsmartly",
     workRelationship: "Conference attendee",
     quote:
       "Guido is an excellent public speaker who gives his audience practical tips on how to create a company culture that embraces evidence-based decision making.",
