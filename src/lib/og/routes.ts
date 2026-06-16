@@ -47,7 +47,7 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
   events: {
     url: "gui.do/events",
     title: "Where I'll be speaking next",
-    lead: "Conferences, meetups and workshops on community, CRO & open social tech.",
+    lead: "Conferences, meetups and workshops on community, experimentation, AI & the AT Protocol.",
     hand: "come say hi",
     showSpeakingStats: true,
   },
@@ -91,7 +91,7 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
   presentations: {
     url: "gui.do/presentations",
     title: "Talks & workshops",
-    lead: "Keynotes and hands-on sessions on community, CRO and open social tech.",
+    lead: "Keynotes and hands-on sessions on community, experimentation, AI & the AT Protocol.",
     hand: "on stage",
     showSpeakingStats: true,
   },
