@@ -282,9 +282,12 @@ function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
       };
     }
     case "Code": {
+      // record.name is often absent for repo pushes; the rkey is the repo
+      // slug (e.g. "bsky-avatar"), so use it before the generic fallback.
       const title =
         str(record.name) ??
         str(record.title) ??
+        str(raw?.rkey) ??
         str(raw?.appName) ??
         "Repository";
       return {
