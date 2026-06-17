@@ -108,25 +108,30 @@ const ac = `--ac:var(--color-${course.accent});--ac-deep:var(--color-${course.ac
       course.intro && (
         <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]">
           <div class="surface rounded-3xl p-6 sm:p-9" style={ac}>
-            <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
-              <div>
-                <span class="eyebrow" style={ac}>
-                  The shift
-                </span>
-                <p class="font-display text-base-900 dark:text-base-50 mt-4 text-[clamp(1.35rem,2.6vw,1.8rem)] leading-snug font-extrabold tracking-[-0.02em]">
-                  {course.intro[0].split(/(?<=\.)\s+(?=[A-Z])/).map((line) => (
-                    <span class="block">{line}</span>
-                  ))}
-                </p>
-                {course.photo && (
-                  <Image
-                    src={course.photo}
-                    alt="Engineers in a hands-on agentic-engineering workshop"
-                    class="border-base-200/60 dark:border-base-800 mt-6 w-full rounded-2xl border object-cover shadow-lg"
-                    loading="lazy"
-                  />
-                )}
-              </div>
+            <span class="eyebrow" style={ac}>
+              The shift
+            </span>
+            <p class="font-display text-base-900 dark:text-base-50 mt-4 max-w-4xl text-[clamp(1.35rem,2.6vw,1.8rem)] leading-snug font-extrabold tracking-[-0.02em]">
+              {course.intro[0].split(/(?<=\.)\s+(?=[A-Z])/).map((line) => (
+                <span class="block">{line}</span>
+              ))}
+            </p>
+            <div
+              class:list={[
+                "mt-8 grid gap-8 lg:gap-12",
+                course.photo
+                  ? "lg:grid-cols-[0.95fr_1.05fr] lg:items-center"
+                  : "max-w-3xl",
+              ]}
+            >
+              {course.photo && (
+                <Image
+                  src={course.photo}
+                  alt="Engineers in a hands-on agentic-engineering workshop"
+                  class="border-base-200/60 dark:border-base-800 w-full rounded-2xl border object-cover shadow-lg"
+                  loading="lazy"
+                />
+              )}
               <div class="space-y-4">
                 {course.intro.slice(1).map((p) => (
                   <p class="text-base-700 dark:text-base-300 text-lg leading-relaxed">
