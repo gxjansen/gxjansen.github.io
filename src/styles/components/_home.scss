@@ -385,7 +385,8 @@
     .home #article-grid:has(.art:hover) .art:not(:hover),
     .home .projects:has(.proj:hover) .proj:not(:hover),
     .home .training-grid:has(.tcourse:hover) .tcourse:not(:hover),
-    .home .talks:has(.talk:hover) .talk:not(:hover) {
+    .home .talks:has(.talk:hover) .talk:not(:hover),
+    .home .wwm-cards:has(.wwm-card:hover) .wwm-card:not(:hover) {
       opacity: 0.55;
       filter: saturate(0.65);
     }
