@@ -67,7 +67,10 @@ function klipyVideo(
   | undefined {
   try {
     const u = new URL(gifUrl);
-    if (!u.hostname.endsWith("klipy.com")) return undefined;
+    // Exact host or a real subdomain — `.endsWith("klipy.com")` alone would
+    // also match a look-alike like `evilklipy.com`.
+    const host = u.hostname;
+    if (host !== "klipy.com" && !host.endsWith(".klipy.com")) return undefined;
     const webmId = u.searchParams.get("webm");
     const mp4Id = u.searchParams.get("mp4");
     if (!webmId && !mp4Id) return undefined;
