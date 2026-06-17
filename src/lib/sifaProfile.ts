@@ -199,20 +199,31 @@ const locOf = (loc: any): string | undefined => {
   );
 };
 
-/** Decode HTML entities (Sifa text can contain e.g. `&#x20;`, `&amp;`). */
+/** Decode HTML entities (Sifa text can contain e.g. `&#x20;`, `&amp;`). Done in
+ *  ONE pass so a decoded `&` is never re-scanned and double-decoded: input like
+ *  `&amp;lt;` must stay `&lt;`, not collapse to `<` (CWE-116 double-unescaping). */
 function decodeEntities(s?: string | null): string | undefined {
   if (!s) return undefined;
+  const named: Record<string, string> = {
+    amp: "&",
+    lt: "<",
+    gt: ">",
+    quot: '"',
+    apos: "'",
+    nbsp: " ",
+  };
   return s
-    .replace(/&#x([0-9a-f]+);/gi, (_, h) =>
-      String.fromCodePoint(parseInt(h, 16)),
-    )
-    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)))
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;|&apos;/g, "'")
-    .replace(/&nbsp;/g, " ")
+    .replace(/&(#x[0-9a-f]+|#\d+|amp|lt|gt|quot|apos|nbsp);/gi, (m, e) => {
+      const ent = (e as string).toLowerCase();
+      if (ent[0] === "#") {
+        const code =
+          ent[1] === "x"
+            ? parseInt(ent.slice(2), 16)
+            : parseInt(ent.slice(1), 10);
+        return Number.isFinite(code) ? String.fromCodePoint(code) : m;
+      }
+      return named[ent] ?? m;
+    })
     .trim();
 }
 
