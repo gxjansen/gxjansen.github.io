@@ -44,23 +44,85 @@ interface PostMeta {
   image?: string;
   imageAlt?: string;
   isGif?: boolean;
+  videoWebm?: string;
+  videoMp4?: string;
+  poster?: string;
+  mediaWidth?: number;
+  mediaHeight?: number;
 }
 
-/** Pull the first image/GIF from a getPosts embed view. GIFs (Tenor/Klipy
- *  externals) use the animated `.gif` URL so they play; other externals use the
+/**
+ * Klipy serves a tiny WebM/MP4 alongside every animated GIF. Bluesky's GIF
+ * composer embeds the URL with the video IDs + dimensions in the query string:
+ *   .../ii/{hash}/{a}/{b}/{stem}.gif?ww=498&hh=485&webm={id}&mp4={id}
+ * The video lives at the same path with the stem swapped for the id:
+ *   .../ii/{hash}/{a}/{b}/{webmId}.webm   (≈68 KB vs ≈2 MB for the .gif)
+ * Generic by construction — reads the params off whatever klipy GIF the live
+ * feed surfaces. Returns undefined for non-klipy GIFs (e.g. Tenor) so callers
+ * fall back to rendering the .gif. */
+function klipyVideo(
+  gifUrl: string,
+):
+  | { webm?: string; mp4?: string; width?: number; height?: number }
+  | undefined {
+  try {
+    const u = new URL(gifUrl);
+    if (!u.hostname.endsWith("klipy.com")) return undefined;
+    const webmId = u.searchParams.get("webm");
+    const mp4Id = u.searchParams.get("mp4");
+    if (!webmId && !mp4Id) return undefined;
+    // Path directory up to (and including) the last slash, dropping `stem.gif`.
+    const dir = u.pathname.replace(/[^/]+\.gif$/i, "");
+    if (!dir.endsWith("/")) return undefined; // not the expected shape
+    const base = `${u.origin}${dir}`;
+    const dim = (k: string) => {
+      const n = Number(u.searchParams.get(k));
+      return Number.isFinite(n) && n > 0 ? n : undefined;
+    };
+    return {
+      webm: webmId ? `${base}${webmId}.webm` : undefined,
+      mp4: mp4Id ? `${base}${mp4Id}.mp4` : undefined,
+      width: dim("ww"),
+      height: dim("hh"),
+    };
+  } catch {
+    return undefined;
+  }
+}
+
+/** Pull the first image/GIF from a getPosts embed view. Animated GIFs (Klipy)
+ *  get their small WebM/MP4 versions so the feed plays a lightweight <video>;
+ *  the animated `.gif` URL stays as the fallback. Other externals use the
  *  static thumbnail. */
 function extractImage(embed: any): {
   image?: string;
   imageAlt?: string;
   isGif?: boolean;
+  videoWebm?: string;
+  videoMp4?: string;
+  poster?: string;
+  mediaWidth?: number;
+  mediaHeight?: number;
 } {
   if (!embed) return {};
   const imgs = embed.images ?? embed.media?.images;
   if (imgs?.[0]?.thumb)
     return { image: imgs[0].thumb, imageAlt: imgs[0].alt || undefined };
   const ext = embed.external ?? embed.media?.external;
-  if (ext?.uri && /\.gif(\?|$)/i.test(ext.uri))
-    return { image: ext.uri, imageAlt: ext.title || "GIF", isGif: true };
+  if (ext?.uri && /\.gif(\?|$)/i.test(ext.uri)) {
+    const vid = klipyVideo(ext.uri);
+    return {
+      image: ext.uri,
+      imageAlt: ext.title || "GIF",
+      isGif: true,
+      videoWebm: vid?.webm,
+      videoMp4: vid?.mp4,
+      // Static CDN thumbnail (small) → <video> poster, not the multi-MB .gif.
+      poster: typeof ext.thumb === "string" ? ext.thumb : undefined,
+      mediaWidth: vid?.width,
+      mediaHeight: vid?.height,
+    };
+  }
   if (ext?.thumb) return { image: ext.thumb, imageAlt: ext.title || undefined };
   return {};
 }
@@ -247,6 +309,11 @@ function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
         hasImage: !!meta?.image,
         imageUrl: meta?.image,
         imageAlt: meta?.imageAlt,
+        videoWebm: meta?.videoWebm,
+        videoMp4: meta?.videoMp4,
+        mediaPoster: meta?.poster,
+        mediaWidth: meta?.mediaWidth,
+        mediaHeight: meta?.mediaHeight,
       };
     }
     case "Reviews": {
