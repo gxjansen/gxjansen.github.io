@@ -159,6 +159,29 @@
   --animate-marquee: marquee 100s linear infinite;
 }
 
+/* Data-driven accent tokens, always emitted.
+   The site drives per-card/per-page accents at runtime via inline
+   `--ac:var(--color-<accent>)` (home cards, services, training detail pages).
+   Tailwind v4's `@theme` tree-shakes any color var that no static utility
+   references, so an accent only used through runtime `var()` (iris, here)
+   silently drops out and the accent falls back to primary. Re-declaring the
+   six brand accents in a plain :root block guarantees they resolve regardless
+   of utility usage. Values mirror the @theme block above. */
+:root {
+  --color-gold: #f6c177;
+  --color-gold-light: #ea9d34;
+  --color-foam: #9ccfd8;
+  --color-foam-light: #56949f;
+  --color-pine: #31748f;
+  --color-pine-light: #286983;
+  --color-iris: #c4a7e7;
+  --color-iris-light: #907aa9;
+  --color-love: #eb6f92;
+  --color-love-light: #b4637a;
+  --color-rose: #ebbcba;
+  --color-rose-light: #d7827e;
+}
+
 /* Hand font (LiebeHeide). Defined as a utility so every `@apply font-hand` and
    `class="font-hand"` carries the same behaviour, not just the family:
    - font-synthesis:none — LiebeHeide is a single weight (400). Without this,

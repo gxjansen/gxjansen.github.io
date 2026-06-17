@@ -1,7 +1,10 @@
 ---
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { courses, courseBySlug } from "@data/training";
+import execuroLight from "@images/execuro/execuro-light.png";
+import execuroDark from "@images/execuro/execuro-dark.png";
 
 export function getStaticPaths() {
   return courses.map((c) => ({
@@ -19,6 +22,7 @@ const ac = `--ac:var(--color-${course.accent})`;
   description={course.sub}
 >
   <div class="home">
+    <!-- Hero -->
     <section
       class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,4vw,3rem)]"
       style={ac}
@@ -29,32 +33,102 @@ const ac = `--ac:var(--color-${course.accent})`;
         >← All training</a
       >
       <span class="tlevel" style={ac}>{course.level} · {course.fmt}</span>
+
+      {
+        course.coLed && (
+          <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span class="text-base-500 dark:text-base-400 text-sm font-medium">
+              with
+            </span>
+            <a
+              href={course.coLed.partnerUrl}
+              rel="noopener"
+              class="inline-flex items-center transition hover:opacity-80"
+              aria-label={`${course.coLed.partner} workshop`}
+            >
+              <Image
+                src={execuroLight}
+                alt={course.coLed.partner}
+                height={26}
+                class="h-[26px] w-auto dark:hidden"
+                loading="eager"
+              />
+              <Image
+                src={execuroDark}
+                alt={course.coLed.partner}
+                height={26}
+                class="hidden h-[26px] w-auto dark:block"
+                loading="eager"
+              />
+            </a>
+          </div>
+        )
+      }
+
       <h1
-        class="font-display mt-3 max-w-3xl text-[clamp(2.2rem,5vw,3.4rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        class="font-display mt-4 max-w-3xl text-[clamp(2.2rem,5vw,3.4rem)] leading-[1.05] font-black tracking-[-0.03em]"
       >
         {course.t}
       </h1>
+      {
+        course.tagline && (
+          <p
+            class="font-hand mt-3 text-[1.6rem] leading-none"
+            style="color:var(--ac);transform:rotate(-1.5deg);transform-origin:left"
+          >
+            {course.tagline}
+          </p>
+        )
+      }
       <p
-        class="text-base-600 dark:text-base-400 mt-3 max-w-2xl text-xl leading-relaxed"
+        class="text-base-600 dark:text-base-400 mt-4 max-w-2xl text-xl leading-relaxed"
       >
         {course.sub}
       </p>
       <div class="mt-6 flex flex-wrap gap-3">
-        <a
-          href="/contact/"
-          class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 focus:ring-primary-500 font-display inline-flex items-center rounded-full px-6 py-3 font-bold text-white transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
-          >Book this workshop</a
-        >
-        <a
-          href="/speaker/"
-          class="border-base-300 hover:border-primary-600 dark:border-base-500 dark:hover:border-primary-400 bg-base-100 text-base-800 dark:bg-base-700 dark:text-base-100 text-base-900 dark:text-base-100 font-display inline-flex items-center rounded-full border px-6 py-3 font-bold transition"
-          >Other formats</a
-        >
+        <a href="/contact/" class="btn-ac" style={ac}>
+          {course.instructors ? "Book a discovery call" : "Book this workshop"}
+        </a>
+        <a href="/speaker/" class="btn-ac-outline" style={ac}>Other formats</a>
       </div>
+      {
+        course.coLed && (
+          <p class="text-base-600 dark:text-base-400 mt-5 max-w-2xl text-[0.95rem] leading-relaxed">
+            {course.coLed.blurb}
+          </p>
+        )
+      }
     </section>
 
-    <!-- Who it's for -->
-    <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]">
+    <!-- The shift / core message -->
+    {
+      course.intro && (
+        <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]">
+          <div class="surface rounded-3xl p-6 sm:p-9" style={ac}>
+            <span class="eyebrow" style={ac}>
+              The shift
+            </span>
+            <div class="mt-4 max-w-3xl space-y-4">
+              {course.intro.map((p, i) => (
+                <p
+                  class:list={[
+                    "leading-relaxed",
+                    i === 0
+                      ? "font-display text-base-900 dark:text-base-50 text-[clamp(1.3rem,2.6vw,1.7rem)] font-extrabold tracking-[-0.02em]"
+                      : "text-base-700 dark:text-base-300 text-lg",
+                  ]}
+                >
+                  {p}
+                </p>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Who it's for + who it's not for -->
+    <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]" style={ac}>
       <h2 class="font-display mb-6 text-2xl font-extrabold tracking-[-0.02em]">
         Who it's for
       </h2>
@@ -62,7 +136,10 @@ const ac = `--ac:var(--color-${course.accent})`;
         {
           course.forWho.map((w) => (
             <div class="surface rounded-2xl p-6">
-              <div class="text-primary-600 dark:text-primary-400 bg-primary-600/10 dark:bg-primary-400/15 mb-4 flex size-11 items-center justify-center rounded-xl">
+              <div
+                class="mb-4 flex size-11 items-center justify-center rounded-xl"
+                style="color:var(--ac);background:color-mix(in oklab,var(--ac) 12%,transparent)"
+              >
                 <Icon name={w.icon} class="size-5" aria-hidden="true" />
               </div>
               <h3 class="font-display text-lg font-bold">{w.t}</h3>
@@ -73,23 +150,55 @@ const ac = `--ac:var(--color-${course.accent})`;
           ))
         }
       </div>
+
+      {
+        course.notFor && (
+          <div class="surface mt-4 rounded-2xl p-6 sm:p-7">
+            <h3 class="font-display text-lg font-bold">
+              Honestly, not for everyone
+            </h3>
+            <p class="text-base-600 dark:text-base-400 mt-1 text-[0.95rem]">
+              This needs a real team and a real codebase to land. Skip it if
+              you're:
+            </p>
+            <ul class="mt-4 flex flex-col gap-2.5">
+              {course.notFor.map((n) => (
+                <li class="text-base-700 dark:text-base-300 flex items-start gap-3 leading-relaxed">
+                  <span
+                    class="text-base-400 dark:text-base-500 mt-0.5 shrink-0"
+                    aria-hidden="true"
+                  >
+                    <Icon name="tabler/outline/x" class="size-5" />
+                  </span>
+                  <span>{n}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
     </section>
 
-    <!-- What you'll leave with -->
-    <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]">
+    <!-- What you'll leave with + agenda -->
+    <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]" style={ac}>
       <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <h2
             class="font-display mb-6 text-2xl font-extrabold tracking-[-0.02em]"
           >
-            What you'll leave with
+            {
+              course.instructors
+                ? "What your team walks away with"
+                : "What you'll leave with"
+            }
           </h2>
           <ul class="flex flex-col gap-3">
             {
               course.outcomes.map((o) => (
                 <li class="flex items-start gap-3">
                   <span
-                    class="text-primary-600 dark:text-primary-400 mt-0.5 shrink-0"
+                    class="mt-0.5 shrink-0"
+                    style="color:var(--ac)"
                     aria-hidden="true"
                   >
                     <Icon name="tabler/circle-check" class="size-5" />
@@ -108,13 +217,15 @@ const ac = `--ac:var(--color-${course.accent})`;
           <h2
             class="font-display mb-6 text-2xl font-extrabold tracking-[-0.02em]"
           >
-            How the day runs
+            {course.instructors ? "What we cover" : "How the day runs"}
           </h2>
           <div class="flex flex-col gap-4">
             {
               course.agenda.map((a) => (
                 <div class="surface rounded-2xl p-5">
-                  <span class="eyebrow">{a.time}</span>
+                  <span class="eyebrow" style={ac}>
+                    {a.time}
+                  </span>
                   <h3 class="font-display mt-1 text-lg font-bold">{a.t}</h3>
                   <p class="text-base-600 dark:text-base-400 mt-1 text-[0.95rem] leading-relaxed">
                     {a.d}
@@ -127,21 +238,278 @@ const ac = `--ac:var(--color-${course.accent})`;
       </div>
     </section>
 
-    <!-- Why me -->
-    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
-      <div class="surface rounded-3xl p-6 sm:p-8" style={ac}>
-        <span class="hand-note">why learn this from me</span>
-        <p
-          class="text-base-800 dark:text-base-200 mt-3 max-w-3xl text-lg leading-relaxed"
-        >
-          {course.whyMe}
-        </p>
-        <a
-          href="/contact/"
-          class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 focus:ring-primary-500 font-display mt-6 inline-flex items-center rounded-full px-6 py-3 font-bold text-white transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
-          >Talk about a workshop</a
-        >
-      </div>
-    </section>
+    <!-- Formats & pricing -->
+    {
+      course.formats && (
+        <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]" style={ac}>
+          <h2 class="font-display mb-2 text-2xl font-extrabold tracking-[-0.02em]">
+            Formats & pricing
+          </h2>
+          <p class="text-base-600 dark:text-base-400 mb-6 max-w-2xl">
+            Pick the depth that fits your team. Every paid format is hands-on,
+            in your environment, with your code.
+          </p>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {course.formats.map((f) => (
+              <div
+                class="surface flex flex-col rounded-2xl p-6"
+                style={
+                  f.badge === "Most popular"
+                    ? "border-color:color-mix(in oklab,var(--ac) 55%,transparent)"
+                    : undefined
+                }
+              >
+                {f.badge && (
+                  <span class="tlevel mb-3" style={ac}>
+                    {f.badge}
+                  </span>
+                )}
+                <h3 class="font-display text-xl font-extrabold tracking-[-0.02em]">
+                  {f.name}
+                </h3>
+                <p class="text-base-500 dark:text-base-400 mt-0.5 text-[0.85rem] font-medium">
+                  {f.duration}
+                </p>
+                <p
+                  class="font-display mt-3 text-3xl font-black tracking-[-0.02em]"
+                  style="color:var(--ac)"
+                >
+                  {f.price}
+                </p>
+                <p class="text-base-600 dark:text-base-400 mt-3 text-[0.92rem] leading-relaxed">
+                  {f.desc}
+                </p>
+                {f.deliverables && (
+                  <ul class="border-base-200 dark:border-base-800 mt-4 flex flex-col gap-2 border-t pt-4">
+                    {f.deliverables.map((d) => (
+                      <li class="text-base-700 dark:text-base-300 flex items-start gap-2 text-[0.88rem] leading-snug">
+                        <span
+                          class="mt-0.5 shrink-0"
+                          style="color:var(--ac)"
+                          aria-hidden="true"
+                        >
+                          <Icon name="tabler/circle-check" class="size-4" />
+                        </span>
+                        <span>{d}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <a
+                  href="/contact/"
+                  class="btn-ac mt-6 w-full text-[0.95rem]"
+                  style={ac}
+                >
+                  {f.price === "Free" ? "Join the masterclass" : "Book a call"}
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Proof stats -->
+    {
+      course.proof && (
+        <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]" style={ac}>
+          <div class="surface rounded-3xl p-6 sm:p-9">
+            <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-4">
+              {course.proof.map((s) => (
+                <div class="text-center sm:text-left">
+                  <div
+                    class="font-display text-[clamp(2.2rem,5vw,3rem)] leading-none font-black tracking-[-0.03em]"
+                    style="color:var(--ac)"
+                  >
+                    {s.n}
+                  </div>
+                  <div class="text-base-600 dark:text-base-400 mt-2 text-[0.9rem] leading-snug font-medium">
+                    {s.l}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p class="text-base-600 dark:text-base-400 border-base-200 dark:border-base-800 mt-7 max-w-3xl border-t pt-6 text-[0.98rem] leading-relaxed">
+              Teams typically go from a ~10% productivity bump to 60% of their
+              time back on coding tasks, with sprint estimates down at least
+              20%. That's the difference a workflow makes.
+            </p>
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Who runs it (two instructors) -->
+    {
+      course.instructors ? (
+        <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]" style={ac}>
+          <div class="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <h2 class="font-display text-2xl font-extrabold tracking-[-0.02em]">
+              Who runs it
+            </h2>
+            {course.coLed && (
+              <a
+                href={course.coLed.partnerUrl}
+                rel="noopener"
+                class="inline-flex items-center transition hover:opacity-80"
+                aria-label={course.coLed.partner}
+              >
+                <Image
+                  src={execuroLight}
+                  alt={course.coLed.partner}
+                  height={22}
+                  class="h-[22px] w-auto dark:hidden"
+                />
+                <Image
+                  src={execuroDark}
+                  alt={course.coLed.partner}
+                  height={22}
+                  class="hidden h-[22px] w-auto dark:block"
+                />
+              </a>
+            )}
+          </div>
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {course.instructors.map((p) => (
+              <div class="surface rounded-2xl p-6 sm:p-7">
+                <h3 class="font-display text-lg font-extrabold tracking-[-0.02em]">
+                  {p.name}
+                </h3>
+                <p
+                  class="mt-0.5 text-[0.9rem] font-bold"
+                  style="color:var(--ac)"
+                >
+                  {p.role}
+                </p>
+                <p class="text-base-700 dark:text-base-300 mt-3 leading-relaxed">
+                  {p.bio}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]" style={ac}>
+          <div class="surface rounded-3xl p-6 sm:p-8">
+            <span class="hand-note">why learn this from me</span>
+            <p class="text-base-800 dark:text-base-200 mt-3 max-w-3xl text-lg leading-relaxed">
+              {course.whyMe}
+            </p>
+            <a href="/contact/" class="btn-ac mt-6" style={ac}>
+              Talk about a workshop
+            </a>
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Guarantee + prerequisites + security -->
+    {
+      (course.guarantee || course.prerequisites || course.security) && (
+        <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]" style={ac}>
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {course.guarantee && (
+              <div class="surface rounded-2xl p-6">
+                <div
+                  class="mb-3 flex size-10 items-center justify-center rounded-xl"
+                  style="color:var(--ac);background:color-mix(in oklab,var(--ac) 12%,transparent)"
+                >
+                  <Icon
+                    name="tabler/outline/shield-check"
+                    class="size-5"
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 class="font-display text-lg font-bold">
+                  30-day adoption guarantee
+                </h3>
+                <p class="text-base-600 dark:text-base-400 mt-1 text-[0.95rem] leading-relaxed">
+                  {course.guarantee}
+                </p>
+              </div>
+            )}
+            {course.prerequisites && (
+              <div class="surface rounded-2xl p-6">
+                <div
+                  class="mb-3 flex size-10 items-center justify-center rounded-xl"
+                  style="color:var(--ac);background:color-mix(in oklab,var(--ac) 12%,transparent)"
+                >
+                  <Icon
+                    name="tabler/outline/checklist"
+                    class="size-5"
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 class="font-display text-lg font-bold">What to bring</h3>
+                <ul class="mt-2 flex flex-col gap-2">
+                  {course.prerequisites.map((pr) => (
+                    <li class="text-base-600 dark:text-base-400 flex items-start gap-2 text-[0.95rem] leading-snug">
+                      <span
+                        class="mt-0.5 shrink-0"
+                        style="color:var(--ac)"
+                        aria-hidden="true"
+                      >
+                        <Icon name="tabler/circle-check" class="size-4" />
+                      </span>
+                      <span>{pr}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {course.security && (
+              <div class="surface rounded-2xl p-6">
+                <div
+                  class="mb-3 flex size-10 items-center justify-center rounded-xl"
+                  style="color:var(--ac);background:color-mix(in oklab,var(--ac) 12%,transparent)"
+                >
+                  <Icon
+                    name="tabler/outline/lock"
+                    class="size-5"
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 class="font-display text-lg font-bold">
+                  Runs in your environment
+                </h3>
+                <p class="text-base-600 dark:text-base-400 mt-1 text-[0.95rem] leading-relaxed">
+                  {course.security}
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Closing CTA -->
+    {
+      course.instructors && (
+        <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]" style={ac}>
+          <div
+            class="surface flex flex-col gap-4 rounded-3xl p-6 sm:flex-row sm:items-center sm:justify-between sm:p-9"
+            style="border-color:color-mix(in oklab,var(--ac) 40%,transparent)"
+          >
+            <div>
+              <h2 class="font-display text-2xl font-extrabold tracking-[-0.02em] sm:text-3xl">
+                Want to see if this fits your team?
+              </h2>
+              <p class="text-base-600 dark:text-base-400 mt-2 max-w-xl leading-relaxed">
+                Book a 15-minute discovery call. No commitment, no pitch deck.
+                We'll figure out whether your team is ready and which format
+                makes sense.
+              </p>
+            </div>
+            <a
+              href="/contact/"
+              class="btn-ac shrink-0 text-[1.05rem]"
+              style={ac}
+            >
+              Book a discovery call
+            </a>
+          </div>
+        </section>
+      )
+    }
   </div>
 </BaseLayout>

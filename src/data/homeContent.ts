@@ -42,6 +42,8 @@ export interface TrainingCard {
   url: string;
   accent: Accent;
   points: string[];
+  /** Co-led marker (e.g. agentic-engineering with Execuro). */
+  coLed?: { partner: string };
 }
 
 export interface Project {
@@ -168,15 +170,16 @@ export const engagements: Engagement[] = [
 export const trainingCards: TrainingCard[] = [
   {
     t: "Agentic Engineering",
-    sub: "Build reliable AI workflows that actually ship",
-    level: "Intermediate",
+    sub: "Stop typing better prompts. Start delegating to AI agents that ship.",
+    level: "For engineering teams of 5–12",
     fmt: "Workshop · in-company or cohort",
     url: "/training/agentic-engineering/",
     accent: "iris",
+    coLed: { partner: "Execuro" },
     points: [
-      "Design multi-step AI pipelines that don't hallucinate in production",
-      "Prompting, tool use, evaluation loops and human-in-the-loop patterns",
-      "Hands-on: participants ship a working workflow by end of day",
+      "Delegate to AI agents with clear specs, context and rules instead of better prompts",
+      "Build a complete app together: frontend, backend and API, hands-on",
+      "Walk away with reusable agentic workflows and AI coding rulesets you keep",
     ],
   },
   {

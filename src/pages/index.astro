@@ -377,6 +377,11 @@ const ArrowRight = "→";
                 {c.level} · {c.fmt}
               </span>
               <h3>{c.t}</h3>
+              {c.coLed && (
+                <span class="text-base-500 dark:text-base-400 mb-1 inline-block text-[0.8rem] font-bold tracking-[0.01em]">
+                  co-led with {c.coLed.partner}
+                </span>
+              )}
               <p>{c.sub}</p>
               <ul class="tcourse-list">
                 {c.points.map((pt) => (
