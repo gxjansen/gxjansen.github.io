@@ -9,8 +9,6 @@ import { getCollection } from "astro:content";
 import Button from "@components/Button/Button.astro";
 import ActivityFeed from "@components/Activity/ActivityFeed.astro";
 import CompanyLogos from "@components/Companies/CompanyLogos.astro";
-import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
-import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
 import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
 import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 
@@ -271,14 +269,6 @@ const ArrowRight = "→";
       </div>
     </section>
 
-    <!-- ============ COUNTRIES ============ -->
-    <section
-      class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]"
-      aria-label="Countries I've presented in"
-    >
-      <FeatureFlagsMarquee />
-    </section>
-
     <!-- ============ ABOUT ============ -->
     <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]" id="about">
       <div
@@ -343,14 +333,6 @@ const ArrowRight = "→";
           </figure>
         </div>
       </div>
-    </section>
-
-    <!-- ============ GALLERY ============ -->
-    <section
-      class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]"
-      aria-label="Photo gallery"
-    >
-      <FeatureGalleryMarquee />
     </section>
 
     <!-- ============ PROJECTS ============ -->
