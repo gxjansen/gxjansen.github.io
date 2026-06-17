@@ -35,7 +35,13 @@
      per-page `--ac` accent, falling back to primary. */
   .tlevel {
     @apply font-display inline-flex items-center self-start rounded-full px-3 py-1 text-[0.72rem] font-bold tracking-[0.07em] whitespace-nowrap uppercase;
-    color: var(--ac, var(--color-primary-600));
+    /* Small uppercase pill: darken the dawn accent a touch more so the small
+       text clears AA on the light tinted background. */
+    color: color-mix(
+      in oklab,
+      var(--ac-text, var(--ac, var(--color-primary-600))) 72%,
+      var(--color-base-950)
+    );
     background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 12%, transparent);
   }
   :root.dark .tlevel {
@@ -47,20 +53,35 @@
      Mirrors the primary button shape but uses the course accent so the
      iris-themed training page stays on-brand. */
   .btn-ac {
-    @apply font-display inline-flex items-center justify-center rounded-full px-6 py-3 font-bold text-white transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden;
+    @apply font-display inline-flex items-center justify-center rounded-full px-6 py-3 font-bold transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden;
     background: var(--ac, var(--color-primary-600));
+    /* Course accents (iris, foam) are light pastels, so white text fails WCAG
+       (~2:1). Near-black on the bright accent is ~8:1 (AAA). */
+    color: var(--color-base-950);
   }
   .btn-ac:hover {
-    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 86%, black);
+    /* Lighten (not darken) on hover so the dark label keeps its contrast. */
+    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 86%, white);
   }
   .btn-ac:focus {
     --tw-ring-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 70%, transparent);
   }
 
+  /* Accent TEXT color, mode-aware: the bright pastel accent reads fine on dark
+     backgrounds but fails WCAG as text on the light page bg. Use the darker
+     "dawn" (--ac-deep) variant in light mode, the bright one in dark mode.
+     Inherits down from the section that sets --ac / --ac-deep. */
+  [style*="--ac-deep"] {
+    --ac-text: var(--ac-deep, var(--ac, var(--color-primary-600)));
+  }
+  :root.dark [style*="--ac-deep"] {
+    --ac-text: var(--ac, var(--color-primary-400));
+  }
+
   /* ---- accent outline button ---- */
   .btn-ac-outline {
     @apply font-display inline-flex items-center justify-center rounded-full border px-6 py-3 font-bold transition;
-    color: var(--ac, var(--color-primary-600));
+    color: var(--ac-text, var(--ac, var(--color-primary-600)));
     border-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 45%, var(--color-base-300));
   }
   .btn-ac-outline:hover {
