@@ -113,3 +113,31 @@ h6 {
 .no-random-underline {
   text-decoration: none;
 }
+
+/* ---------------------------------------------------------------------------
+   Content & next-step links carry a light underline so they read as links,
+   not just bold/emphasized text (UX best practice). Articles handle their own
+   underline via .prose. Nav and footer live outside `.home`, so they're exempt
+   automatically; buttons, accent/solid pills, eyebrows and whole-card links opt
+   out via the :not() list. The trailing arrow/icon affordance stays clean.
+   --------------------------------------------------------------------------- */
+.home
+  a[href]:not([class*="btn"]):not([class*="bg-primary-5"]):not(
+    [class*="bg-primary-6"]
+  ):not([class*="rounded-full"]):not([class*="after:inset"]):not(.tlevel):not(
+    .no-underline
+  ):not(.fi-link):not(
+    :has(div, p, ul, ol, h2, h3, h4, h5, h6, img, picture, article)
+  ) {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in oklab, currentColor 45%, transparent);
+}
+.home a[href]:hover {
+  text-decoration-color: color-mix(in oklab, currentColor 70%, transparent);
+}
+/* Trailing arrows / icon affordances inside a link stay un-underlined. */
+.home a[href] [aria-hidden="true"] {
+  text-decoration: none;
+}
