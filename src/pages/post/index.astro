@@ -10,6 +10,7 @@ import { fetchEngagement } from "../../lib/sifaActivity";
 
 // components
 import BaseLayout from "@layouts/BaseLayout.astro";
+import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 
 /**
  * Below this total (likes + reposts + replies) a post shows no engagement
@@ -94,7 +95,7 @@ const categories = [...counts.entries()]
           class="text-base-600 dark:text-base-400 mt-4 text-lg leading-relaxed"
         >
           Psychology, experimentation, community building, AI workflows, open
-          tech and homelabbing — what I'm learning, mostly in the open.
+          tech and homelabbing: what I'm learning, mostly in the open.
         </p>
       </div>
 
@@ -179,6 +180,17 @@ const categories = [...counts.entries()]
       >
         No articles in this category yet.
       </p>
+    </section>
+
+    <section
+      class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]"
+      aria-label="Newsletter"
+    >
+      <NewsletterForm
+        variant="card"
+        title="Subscribe to Guido's <span class='text-golden'>Golden</span> Nuggets"
+        description="Occasional field notes on <strong>community, experimentation, AI & open tech</strong>. The things I'd tell a friend over coffee, not a content calendar."
+      />
     </section>
   </div>
 </BaseLayout>
