@@ -41,7 +41,7 @@ const socials = [
     <section
       class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
     >
-      <div class="mx-auto max-w-2xl text-center">
+      <div class="max-w-2xl">
         <span class="hand-note">say hello</span>
         <h1
           class="font-display mt-1 mb-4 text-[clamp(2.4rem,5.5vw,3.8rem)] leading-[1] font-black tracking-[-0.035em]"
@@ -49,13 +49,13 @@ const socials = [
           Get in touch
         </h1>
         <p
-          class="text-base-600 dark:text-base-400 mx-auto max-w-[52ch] text-lg leading-relaxed"
+          class="text-base-600 dark:text-base-400 max-w-[52ch] text-lg leading-relaxed"
         >
           I'm approachable and reply to real messages. Want me to speak at your
           event, advise your team, or just trade notes on community and
           experimentation? Book a slot or reach out, whatever's easiest.
         </p>
-        <div class="mt-7 flex flex-wrap justify-center gap-3">
+        <div class="mt-7 flex flex-wrap gap-3">
           <a
             href={CAL}
             target="_blank"
@@ -74,9 +74,9 @@ const socials = [
       </div>
 
       <!-- ============ SOCIAL ROW ============ -->
-      <div class="mt-14 text-center">
+      <div class="mt-14">
         <span class="hand-note">or find me here</span>
-        <div class="mt-2 flex flex-wrap items-center justify-center gap-3">
+        <div class="mt-2 flex flex-wrap items-center gap-3">
           {
             socials.map((s) => (
               <SocialIcon icon={s.icon} social={s.social} href={s.href} />
