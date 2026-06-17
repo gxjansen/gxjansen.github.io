@@ -6,20 +6,21 @@ import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
 interface Props {
   class?: string;
   location?: "footer" | "hero" | "contact" | "about";
-  context?: "footer" | "hero";
+  context?: "footer" | "hero" | "contact" | "about";
+  /** Explicit curated list (custom order/set). Bypasses visibility filtering. */
+  links?: { name: string; href: string; icon: string }[];
 }
 
 const {
   class: className,
   location = "footer",
   context = location,
+  links,
 } = Astro.props;
 
-// Explicitly filter links based on context
-const visibleLinks = socialLinks.filter((link) => {
-  // Use context for filtering, with a fallback to location
-  return link.visibility[context] === true;
-});
+// Use the explicit list when provided, otherwise filter by context visibility.
+const visibleLinks =
+  links ?? socialLinks.filter((link) => link.visibility[context] === true);
 
 // Build a unique aria-label per placement so multiple SocialLinks on the
 // same page (e.g. hero + footer) don't collide on the landmark-unique rule.

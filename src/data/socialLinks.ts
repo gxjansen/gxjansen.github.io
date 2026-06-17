@@ -34,7 +34,7 @@ export const socialLinks: SocialLink[] = [
     },
   },
   {
-    name: "Sifa",
+    name: "Sifa ID",
     href: "https://sifa.id/p/gui.do",
     icon: "sifa",
     visibility: {

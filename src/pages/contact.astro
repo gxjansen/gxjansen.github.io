@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
+import SocialLinks from "@components/SocialLinks/SocialLinks.astro";
 import { socialLinks } from "../data/socialLinks";
 
 const CAL = "https://app.cal.eu/gxjansen/30min";
@@ -15,18 +15,18 @@ const byIcon = (icon: string) => socialLinks.find((s) => s.icon === icon);
 const socials = [
   {
     icon: "bluesky",
-    social: "Bluesky",
+    name: "Bluesky",
     href: "https://bsky.app/profile/gui.do",
   },
   {
     icon: "sifa",
-    social: "Sifa",
+    name: "Sifa ID",
     href: byIcon("sifa")?.href ?? "https://sifa.id/p/gui.do",
   },
-  { icon: "signal", social: "Signal", href: byIcon("signal")?.href },
+  { icon: "signal", name: "Signal", href: byIcon("signal")?.href },
   {
     icon: "linkedin",
-    social: "LinkedIn",
+    name: "LinkedIn",
     href: byIcon("linkedin")?.href,
   },
 ].filter((s): s is typeof s & { href: string } => Boolean(s.href));
@@ -76,13 +76,7 @@ const socials = [
       <!-- ============ SOCIAL ROW ============ -->
       <div class="mt-14">
         <span class="hand-note">or find me here</span>
-        <div class="mt-2 flex flex-wrap items-center gap-3">
-          {
-            socials.map((s) => (
-              <SocialIcon icon={s.icon} social={s.social} href={s.href} />
-            ))
-          }
-        </div>
+        <SocialLinks location="contact" context="contact" links={socials} />
       </div>
     </section>
   </div>
