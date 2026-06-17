@@ -175,7 +175,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
       // Add optional fields only if they exist
       if (author.data.bio || author.data.bioShort) {
         authorSchema.description = injectYears(
-          author.data.bioShort || author.data.bio,
+          author.data.bioShort || author.data.bio || "",
         );
       }
 

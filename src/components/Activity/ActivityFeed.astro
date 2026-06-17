@@ -13,7 +13,7 @@ const catOf = (t: ActivityItem["type"]) =>
   t === "post" || t === "repost" ? "posts" : t;
 
 // Only show filters for categories that actually have items.
-const catsPresent = new Set(items.map((i) => catOf(i.type)));
+const catsPresent = new Set<string>(items.map((i) => catOf(i.type)));
 const filters = [
   { cat: "all", label: "All" },
   { cat: "posts", label: "Posts" },

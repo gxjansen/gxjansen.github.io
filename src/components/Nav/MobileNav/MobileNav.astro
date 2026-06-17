@@ -61,7 +61,7 @@ import { locales } from "@config/siteSettings.json";
           {
             // if dropdown exists, setup the dropdown, otherwise it is just a link
             navData
-              .filter((navItem) => !navItem.hidden)
+              .filter((navItem) => !(navItem as { hidden?: boolean }).hidden)
               .map((navItem) =>
                 "dropdown" in navItem ? (
                   // mobile dropdown menu
