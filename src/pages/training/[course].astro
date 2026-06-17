@@ -86,7 +86,7 @@ const ac = `--ac:var(--color-${course.accent})`;
         {course.sub}
       </p>
       <div class="mt-6 flex flex-wrap gap-3">
-        <a href="/contact/" class="btn-ac" style={ac}>
+        <a href="https://app.cal.eu/gxjansen/15min" class="btn-ac" style={ac}>
           {course.instructors ? "Book a discovery call" : "Book this workshop"}
         </a>
         <a href="/speaker/" class="btn-ac-outline" style={ac}>Other formats</a>
@@ -111,7 +111,9 @@ const ac = `--ac:var(--color-${course.accent})`;
                   The shift
                 </span>
                 <p class="font-display text-base-900 dark:text-base-50 mt-4 text-[clamp(1.35rem,2.6vw,1.8rem)] leading-snug font-extrabold tracking-[-0.02em]">
-                  {course.intro[0]}
+                  {course.intro[0].split(/(?<=\.)\s+(?=[A-Z])/).map((line) => (
+                    <span class="block">{line}</span>
+                  ))}
                 </p>
               </div>
               <div class="space-y-4">
@@ -213,21 +215,23 @@ const ac = `--ac:var(--color-${course.accent})`;
       <h2 class="font-display mb-6 text-2xl font-extrabold tracking-[-0.02em]">
         {course.instructors ? "What we cover" : "How the day runs"}
       </h2>
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <ol class="flex max-w-3xl flex-col gap-3">
         {
           course.agenda.map((a) => (
-            <div class="surface rounded-2xl p-5">
-              <span class="eyebrow" style={ac}>
+            <li class="surface rounded-2xl p-5 sm:flex sm:gap-5">
+              <span class="eyebrow shrink-0 sm:w-40 sm:pt-1" style={ac}>
                 {a.time}
               </span>
-              <h3 class="font-display mt-1 text-lg font-bold">{a.t}</h3>
-              <p class="text-base-600 dark:text-base-400 mt-1 text-[0.95rem] leading-relaxed">
-                {a.d}
-              </p>
-            </div>
+              <div>
+                <h3 class="font-display text-lg font-bold">{a.t}</h3>
+                <p class="text-base-600 dark:text-base-400 mt-1 text-[0.95rem] leading-relaxed">
+                  {a.d}
+                </p>
+              </div>
+            </li>
           ))
         }
-      </div>
+      </ol>
     </section>
 
     <!-- Formats & pricing -->
@@ -237,7 +241,7 @@ const ac = `--ac:var(--color-${course.accent})`;
           <h2 class="font-display mb-2 text-2xl font-extrabold tracking-[-0.02em]">
             Formats & pricing
           </h2>
-          <p class="text-base-600 dark:text-base-400 mb-6 max-w-2xl">
+          <p class="text-base-600 dark:text-base-400 mb-6 max-w-4xl">
             Pick the depth that fits your team. Every paid format is hands-on,
             in your environment, with your code.
           </p>
@@ -291,7 +295,7 @@ const ac = `--ac:var(--color-${course.accent})`;
                 )}
                 <div class="mt-auto pt-6">
                   <a
-                    href="/contact/"
+                    href="https://app.cal.eu/gxjansen/15min"
                     class="btn-ac w-full text-[0.95rem]"
                     style={ac}
                   >
@@ -370,16 +374,30 @@ const ac = `--ac:var(--color-${course.accent})`;
           <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             {course.instructors.map((p) => (
               <div class="surface rounded-2xl p-6 sm:p-7">
-                <h3 class="font-display text-lg font-extrabold tracking-[-0.02em]">
-                  {p.name}
-                </h3>
-                <p
-                  class="mt-0.5 text-[0.9rem] font-bold"
-                  style="color:var(--ac)"
-                >
-                  {p.role}
-                </p>
-                <p class="text-base-700 dark:text-base-300 mt-3 leading-relaxed">
+                <div class="flex items-center gap-4">
+                  {p.img && (
+                    <Image
+                      src={p.img}
+                      alt={p.name}
+                      width={128}
+                      height={128}
+                      class="size-16 shrink-0 rounded-full object-cover object-top"
+                      loading="lazy"
+                    />
+                  )}
+                  <div>
+                    <h3 class="font-display text-lg font-extrabold tracking-[-0.02em]">
+                      {p.name}
+                    </h3>
+                    <p
+                      class="mt-0.5 text-[0.9rem] font-bold"
+                      style="color:var(--ac)"
+                    >
+                      {p.role}
+                    </p>
+                  </div>
+                </div>
+                <p class="text-base-700 dark:text-base-300 mt-4 leading-relaxed">
                   {p.bio}
                 </p>
               </div>
@@ -393,7 +411,11 @@ const ac = `--ac:var(--color-${course.accent})`;
             <p class="text-base-800 dark:text-base-200 mt-3 max-w-3xl text-lg leading-relaxed">
               {course.whyMe}
             </p>
-            <a href="/contact/" class="btn-ac mt-6" style={ac}>
+            <a
+              href="https://app.cal.eu/gxjansen/15min"
+              class="btn-ac mt-6"
+              style={ac}
+            >
               Talk about a workshop
             </a>
           </div>
@@ -499,7 +521,7 @@ const ac = `--ac:var(--color-${course.accent})`;
               </p>
             </div>
             <a
-              href="/contact/"
+              href="https://app.cal.eu/gxjansen/15min"
               class="btn-ac shrink-0 text-[1.05rem]"
               style={ac}
             >

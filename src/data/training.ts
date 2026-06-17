@@ -8,6 +8,9 @@
  * base fields, so its detail page renders without the co-branded sections.
  */
 import type { Accent } from "@data/homeContent";
+import type { ImageMetadata } from "astro";
+import denisPhoto from "@images/execuro/denis-turkov.png";
+import guidoPhoto from "@images/hero/guido-speaking.jpg";
 
 export interface ForWho {
   icon: string; // tabler icon (full path)
@@ -42,6 +45,7 @@ export interface Instructor {
   name: string;
   role: string;
   bio: string;
+  img?: ImageMetadata;
 }
 
 /** Co-led marker for the hero (partner name + link + one-line blurb). */
@@ -96,15 +100,17 @@ export const courses: Course[] = [
       "Delegate to AI agents with clear specs, context and rules instead of better prompts",
       "Build a complete app together: frontend, backend and API, hands-on",
       "Walk away with reusable agentic workflows and AI coding rulesets you keep",
+      "Build the agent harness, the specs, context and rules, so it runs on any LLM, local models included",
     ],
     intro: [
       "This isn't a prompting workshop. It's a different way to build software.",
       "Most teams already have the tools. Claude Code, Cursor, Copilot, the licenses are paid for. What's missing is the workflow. So people type a prompt, hope for the best, and fall back to writing the code themselves when the output disappoints.",
       "We fix the workflow. You delegate work to AI agents the same way you'd hand it to a junior engineer: with a clear spec, the right context, and rules they have to follow. That's the shift from vibe-coding to structured agentic development, and it's what gets a team from the usual ~10% productivity bump to 60% of their time back on coding tasks.",
+      "And none of it is tied to one model. The real work is the harness around the model: the specs, the context, the rules. You build that yourself, so it runs on whatever LLM your team trusts, local ones included, and keeps working when you switch.",
     ],
     forWho: [
       {
-        icon: "tabler/outline/users-group",
+        icon: "tabler/outline/topology-star-3",
         t: "Engineering teams of 5–12",
         d: "Teams with production-level experience, a real codebase, CI/CD and shared workflows. This works because you bring the actual work, not a toy project.",
       },
@@ -120,14 +126,15 @@ export const courses: Course[] = [
       },
     ],
     notFor: [
-      "Solo developers (this is built around team workflows and shared rulesets)",
-      "Teams under 5 people",
+      "Solo developers and teams under 5 (it's built around team workflows and shared rulesets)",
       "Teams without a real, production-level codebase to work against",
+      "Anyone after a prompting cheat-sheet rather than a change in how they build",
     ],
     outcomes: [
       "Hands-on experience running real agentic workflows. You build, you don't watch slides.",
       "AI coding rulesets at org, project and individual level, written during the session.",
       "Reusable, structured agentic workflows your team keeps and reuses after we leave.",
+      "An agent harness that's model-agnostic. It runs on whatever LLM you trust, local models included, so you're not locked to one vendor.",
       "A complete app built together: frontend, backend and API.",
       "Bootcamp: the approach applied to your own backlog, plus CI/CD integration and an adoption guide.",
     ],
@@ -218,11 +225,13 @@ export const courses: Course[] = [
       {
         name: "Denis Turkov",
         role: "Execuro · former Chief Architect at Spryker",
+        img: denisPhoto,
         bio: "Denis has spent 15+ years leading engineering at enterprise scale. As Chief Architect at Spryker he scaled systems for ALDI, Siemens Healthineers, Hornbach and Pistor (€300M–3B GMV), launched products across 16 countries, and scaled to 50,000 orders a minute. These days he builds production e-commerce agents, support agents and internal tools with agentic workflows, and runs Execuro.",
       },
       {
         name: "Guido X Jansen",
         role: "AI workflows in production · 500+ business experiments",
+        img: guidoPhoto,
         bio: "I bring the experimentation and adoption side. I've run 500+ business experiments, so I treat AI the same way: measure the outcome, not the output. I ship AI workflows in production myself (the pipelines behind parts of Sifa), and I worked with Denis at Spryker. My job in the room is making sure this sticks with your team, not just on demo day.",
       },
     ],
