@@ -8,6 +8,7 @@ export async function GET() {
         { text: "Articles", link: "/post" },
         { text: "Podcasts", link: "/podcasts" },
         { text: "Presentations", link: "/presentations" },
+        { text: "Events", link: "/events" },
         { text: "Projects", link: "/projects" },
         { text: "Communities", link: "/communities" },
       ],
@@ -24,11 +25,11 @@ export async function GET() {
       text: "About",
       dropdown: [
         { text: "About Me", link: "/about" },
+        { text: "CV", link: "/cv" },
         { text: "Press & Media", link: "/press" },
         { text: "Contact", link: "/contact" },
       ],
     },
-    { text: "CV", link: "/cv" },
   ];
 
   return new Response(JSON.stringify(navConfig), {

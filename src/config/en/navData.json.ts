@@ -18,6 +18,11 @@ const navConfig = [
         icon: "tabler/outline/presentation",
       },
       {
+        text: "Events",
+        link: "/events",
+        icon: "tabler/outline/calendar",
+      },
+      {
         text: "Projects",
         link: "/projects",
         icon: "tabler/outline/code",
@@ -58,6 +63,11 @@ const navConfig = [
         icon: "tabler/outline/user",
       },
       {
+        text: "CV",
+        link: "/cv",
+        icon: "tabler/outline/file-text",
+      },
+      {
         text: "Press & Media",
         link: "/press",
         icon: "tabler/outline/news",
@@ -68,10 +78,6 @@ const navConfig = [
         icon: "tabler/outline/messages",
       },
     ],
-  },
-  {
-    text: "CV",
-    link: "/cv",
   },
 ];
 
