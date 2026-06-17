@@ -112,9 +112,7 @@ const ac = `--ac:var(--color-${course.accent});--ac-deep:var(--color-${course.ac
               The shift
             </span>
             <p class="font-display text-base-900 dark:text-base-50 mt-4 max-w-4xl text-[clamp(1.35rem,2.6vw,1.8rem)] leading-snug font-extrabold tracking-[-0.02em]">
-              {course.intro[0].split(/(?<=\.)\s+(?=[A-Z])/).map((line) => (
-                <span class="block">{line}</span>
-              ))}
+              {course.intro[0]}
             </p>
             <div
               class:list={[
