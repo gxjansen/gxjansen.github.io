@@ -232,11 +232,11 @@ export const courses: Course[] = [
         name: "Guido X Jansen",
         role: "AI workflows in production · 500+ business experiments",
         img: guidoPhoto,
-        bio: "I bring the experimentation and adoption side. I've run 500+ business experiments, so I treat AI the same way: measure the outcome, not the output. I ship AI workflows in production myself (the pipelines behind parts of Sifa), and I worked with Denis at Spryker. My job in the room is making sure this sticks with your team, not just on demo day.",
+        bio: "I bring the experimentation and adoption side. I've run 500+ business experiments, so I treat AI the same way: measure the outcome, not the output. I ship AI workflows in production myself (the pipelines behind parts of Sifa ID), and I worked with Denis at Spryker. My job in the room is making sure this sticks with your team, not just on demo day.",
       },
     ],
     whyMe:
-      "I've built and deployed AI workflows in production, including the pipelines that power parts of Sifa. I've also run 500+ business experiments, so I approach AI the same way: measure the outcome, not the output.",
+      "I've built and deployed AI workflows in production, including the pipelines that power parts of Sifa ID. I've also run 500+ business experiments, so I approach AI the same way: measure the outcome, not the output.",
     guarantee:
       "If your team isn't running agentic workflows within 30 days, we come back for a free half-day follow-up. Applies to Accelerator and Bootcamp.",
     prerequisites: [
@@ -284,7 +284,7 @@ export const courses: Course[] = [
       "Context on the ecosystem: which apps are building on it and why.",
     ],
     whyMe:
-      "I've been building on AT Protocol since early 2023. Sifa (portable professional identity on atproto) and Barazo (open community forums) are both production projects on the network. I spoke at ATmosphere Conf 2026 in Vancouver. I know where the sharp edges are.",
+      "I've been teaching people how to use tech products since 2006. I've used Bluesky since mid-2024 and have been building on AT Protocol since Q4 2025: <a href='https://sifa.id' target='_blank' rel='noopener noreferrer' class='underline underline-offset-2 hover:opacity-80' style='color:var(--ac-text,var(--ac))'>Sifa ID</a> (portable professional identity on atproto) and Barazo (open community forums) are both production projects on the network. I hosted an unconference at ATmosphere Conf 2026 in Vancouver. I know where the sharp edges are.",
     agenda: [
       {
         time: "Morning",
