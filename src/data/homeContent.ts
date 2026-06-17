@@ -90,7 +90,7 @@ export interface Testimonial {
 }
 
 export const heroCopy = {
-  kicker: "hi, I'm Guido 👋",
+  kicker: "Hi, I'm Guido 👋",
   // The emphasised phrase is wrapped on render.
   headline: "I build community functions for tech products.",
   emphasis: "community functions",

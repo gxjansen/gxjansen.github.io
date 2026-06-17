@@ -77,15 +77,6 @@ const sortedYears = Array.from(eventsByYear.keys()).sort((a, b) => b - a);
 
 // Load the Spryker icon once for recurring event cards
 const sprykerIcon = await getEventIcon("spryker.png");
-
-// Calculate total event count for display
-// Regular events + 1 per recurring group per year
-let totalDisplayedEvents = 0;
-sortedYears.forEach((year) => {
-  const yearGroup = eventsByYear.get(year)!;
-  totalDisplayedEvents += yearGroup.regularEvents.length;
-  totalDisplayedEvents += yearGroup.recurringGroups.size; // Each recurring group counts as 1
-});
 ---
 
 <BaseLayout
@@ -134,7 +125,7 @@ sortedYears.forEach((year) => {
           <h2>Past events</h2>
         </div>
         <span class="text-base-500 text-sm">
-          {totalDisplayedEvents} events I've spoken at
+          {talksCount} talks across {countryCount} countries
         </span>
       </div>
 
