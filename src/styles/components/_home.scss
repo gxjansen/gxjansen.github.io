@@ -28,7 +28,11 @@
     transform-origin: left center;
   }
   .home .hero-h1 {
-    @apply font-display text-[clamp(2.6rem,6.2vw,4.6rem)] leading-[0.98] font-black tracking-[-0.035em];
+    /* Floor lowered from 2.6rem so the nowrap "community functions" phrase
+       (the .u span) fits one line on phones without forcing the layout
+       viewport wider than the screen. Only affects widths < ~540px; the
+       fluid range and desktop max are unchanged. */
+    @apply font-display text-[clamp(2.05rem,6.2vw,4.6rem)] leading-[0.98] font-black tracking-[-0.035em];
     @apply my-[0.1em] mb-[0.35em];
   }
   .home .hero-h1 .u {
@@ -311,7 +315,13 @@
     border-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 40%, var(--color-base-200));
   }
   .home .tcourse .tlevel {
-    @apply mb-3 self-start rounded-full px-2.5 py-1 text-[0.72rem] font-bold tracking-[0.07em] whitespace-nowrap uppercase;
+    /* whitespace-normal (not just dropping nowrap) is required to override the
+       global `.tlevel` rule in _redesign.scss, which sets nowrap at lower
+       specificity. The longest home label ("For engineering teams of 5–12 ·
+       Workshop · in-company or cohort") otherwise clips inside the card's
+       overflow-hidden box on mobile. rounded-2xl reads better than a pill once
+       the eyebrow wraps to two lines. */
+    @apply mb-3 self-start rounded-2xl px-2.5 py-1 text-[0.72rem] font-bold tracking-[0.07em] whitespace-normal uppercase;
     color: var(--ac, var(--color-primary-600));
     background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 12%, transparent);
   }
@@ -412,7 +422,11 @@
 
   /* ---- live activity feed ---- */
   .home .feed-wrap {
-    @apply relative;
+    /* On stacked (sub-lg) layouts the feed sits below the stats, and the
+       absolutely-positioned "this is live ↓" note (top: -2.7rem) would ride
+       up into the stats row above it. Reserve space so the note clears the
+       stats. Reset at lg where the feed moves into its own column. */
+    @apply relative mt-12 lg:mt-0;
   }
   .home .feed-note {
     @apply text-love-light dark:text-love absolute left-4 z-[1] inline-flex items-center gap-1 font-hand text-[1.05rem] leading-none font-bold;

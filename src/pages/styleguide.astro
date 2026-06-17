@@ -701,7 +701,11 @@ const arrowExamples = [
       <!-- Dropdown Menu -->
       <div id="dropdown-menu" class="mb-8">
         <h3 class="h3">Dropdown Menu</h3>
-        <div class="flex gap-4">
+        <!-- overflow-x-clip: the second demo dropdown's absolutely-positioned
+             menu extends ~9px past a 375px viewport and would otherwise add a
+             horizontal scroll to the whole page. Clip the X overhang only;
+             the menu still opens downward (overflow-y stays visible). -->
+        <div class="flex gap-4 overflow-x-clip">
           <NavDropdown
             navItem={{
               text: "Products",

@@ -34,7 +34,10 @@
      Used bare (outside .tcourse) on the course detail hero. Picks up the
      per-page `--ac` accent, falling back to primary. */
   .tlevel {
-    @apply font-display inline-flex items-center self-start rounded-full px-3 py-1 text-[0.72rem] font-bold tracking-[0.07em] whitespace-nowrap uppercase;
+    /* whitespace-normal: long combined labels ("For engineering teams of 5–12
+       · Workshop · in-company or cohort") must wrap inside narrow mobile cards
+       instead of clipping against the card's overflow-hidden box. */
+    @apply font-display inline-flex items-center self-start rounded-2xl px-3 py-1 text-[0.72rem] font-bold tracking-[0.07em] whitespace-normal uppercase;
     /* Small uppercase pill: darken the dawn accent a touch more so the small
        text clears AA on the light tinted background. */
     color: color-mix(
