@@ -142,13 +142,13 @@ export const courses: Course[] = [
       {
         name: "Ignite",
         duration: "Half day",
-        price: "€3,900",
+        price: "Tailored",
         desc: "A live demo plus hands-on time. The mindset shift, and enough proof to win over the skeptics on your team.",
       },
       {
         name: "Accelerator",
         duration: "1 day · max 12 people",
-        price: "€6,990",
+        price: "Tailored",
         desc: "80% practice, 20% theory. We build a working app together and write your first rulesets.",
         badge: "Most popular",
         deliverables: [
@@ -160,7 +160,7 @@ export const courses: Course[] = [
       {
         name: "Bootcamp",
         duration: "2 days (2×6h)",
-        price: "€12,900",
+        price: "Tailored",
         desc: "Everything in Accelerator, plus a second day on your own backlog: real tickets, granular rulesets, CI/CD with agents, and an adoption guide.",
         deliverables: [
           "Real tickets from your backlog, done with agents",
