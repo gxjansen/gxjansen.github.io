@@ -152,14 +152,38 @@ const fragments = (text: string) =>
                       )}
                     </p>
                   )}
-                  {item.imageUrl && (
-                    <img
+                  {item.videoWebm || item.videoMp4 ? (
+                    <video
                       class="fi-img"
-                      src={item.imageUrl}
-                      alt={item.imageAlt || ""}
-                      loading="lazy"
-                      decoding="async"
-                    />
+                      autoplay
+                      loop
+                      muted
+                      playsinline
+                      preload="none"
+                      poster={item.mediaPoster}
+                      width={item.mediaWidth}
+                      height={item.mediaHeight}
+                      aria-label={item.imageAlt || "Animated GIF"}
+                    >
+                      {item.videoWebm && (
+                        <source src={item.videoWebm} type="video/webm" />
+                      )}
+                      {item.videoMp4 && (
+                        <source src={item.videoMp4} type="video/mp4" />
+                      )}
+                    </video>
+                  ) : (
+                    item.imageUrl && (
+                      <img
+                        class="fi-img"
+                        src={item.imageUrl}
+                        alt={item.imageAlt || ""}
+                        loading="lazy"
+                        decoding="async"
+                        width={item.mediaWidth}
+                        height={item.mediaHeight}
+                      />
+                    )
                   )}
                   {(item.likes || item.replies || item.reposts) && (
                     <div class="fi-meta">

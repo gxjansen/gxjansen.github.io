@@ -80,6 +80,16 @@ export interface ActivityItem {
   /** Thumbnail URL for posts that embed an image. */
   imageUrl?: string;
   imageAlt?: string;
+  /** For animated GIF embeds (Klipy), the much smaller video versions so the
+   *  feed renders a looping <video> instead of a multi-MB .gif. Falls back to
+   *  imageUrl when these are absent. */
+  videoWebm?: string;
+  videoMp4?: string;
+  /** Small static thumbnail shown as the <video> poster before it plays. */
+  mediaPoster?: string;
+  /** Intrinsic media dimensions (from the embed), for explicit width/height. */
+  mediaWidth?: number;
+  mediaHeight?: number;
   /** Source URL (live items link to the original post/review/etc.). */
   url?: string;
 }
