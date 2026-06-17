@@ -22,7 +22,9 @@
   }
 
   .regenerating-text {
-    @apply text-base-500;
+    /* Dark-surface widget: use the lighter muted grey (base-400) since base-500
+       is darkened for light mode. */
+    @apply text-base-400;
     margin-bottom: 1em;
     animation: text-pulse 3s ease-in-out infinite;
   }
@@ -36,7 +38,7 @@
   }
 
   .bar-empty {
-    @apply text-base-600;
+    @apply text-base-400;
   }
 
   .bar-fill {

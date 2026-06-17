@@ -79,8 +79,11 @@
   --color-base-200: #f2e9e1; /* Dawn overlay */
   --color-base-300: #dfdad3; /* Dawn muted bg */
   --color-base-400: #9893a5; /* Dawn muted text */
-  --color-base-500: #908caa; /* Main subtle */
-  --color-base-600: #6e6a86; /* Main muted */
+  /* base-500/600 are mode-aware: darker in light mode so muted text clears
+     WCAG AA on the cream/overlay backgrounds (Rosé Pine's lighter subtle greys
+     only reach ~4:1). :root.dark restores the lighter values for dark mode. */
+  --color-base-500: #5f5b76; /* light: darker subtle */
+  --color-base-600: #565270; /* light: darker muted */
   --color-base-700: #393552; /* Main highlight-high */
   --color-base-800: #26233a; /* Main overlay */
   --color-base-900: #1f1d2e; /* Main surface */
@@ -108,7 +111,7 @@
 
   /* Direct Rosé Pine accent access (DEFAULT + light variants) */
   --color-love: #eb6f92;
-  --color-love-light: #b4637a;
+  --color-love-light: #a8505d;
   --color-gold: #f6c177;
   --color-gold-light: #ea9d34;
   --color-rose: #ebbcba;
@@ -177,7 +180,7 @@
   --color-iris: #c4a7e7;
   --color-iris-light: #907aa9;
   --color-love: #eb6f92;
-  --color-love-light: #b4637a;
+  --color-love-light: #a8505d;
   --color-rose: #ebbcba;
   --color-rose-light: #d7827e;
 }
@@ -229,6 +232,11 @@
      touching light mode. 500 = brand, 400 = lighter step / hover. */
   --color-primary-500: #3e8fb0;
   --color-primary-400: #54a3c2;
+
+  /* Restore the lighter Rosé Pine muted greys for dark mode (the @theme values
+     above are darkened for light-mode AA contrast). */
+  --color-base-500: #908caa; /* Main subtle */
+  --color-base-600: #6e6a86; /* Main muted */
 }
 
 /* Keyframes for the @theme --animate-marquee custom animation. */
