@@ -35,16 +35,22 @@
     @apply font-display text-[clamp(2.05rem,6.2vw,4.6rem)] leading-[0.98] font-black tracking-[-0.035em];
     @apply my-[0.1em] mb-[0.35em];
   }
+  /* Highlight rendered as a per-line background bar (box-decoration-break:
+     clone) instead of a single absolute ::after rect, so the phrase can WRAP
+     on narrow desktop columns without the highlight smearing across the whole
+     bounding box. Removing nowrap also stops the phrase from forcing the hero
+     grid's left track wide enough to push the live feed off-screen. */
   .home .hero-h1 .u {
-    @apply text-primary-600 dark:text-primary-400 relative whitespace-nowrap;
-  }
-  .home .hero-h1 .u::after {
-    content: "";
-    @apply absolute inset-x-0 -z-10;
-    bottom: 0.04em;
-    height: 0.42em;
-    background: color-mix(in oklab, var(--color-primary-600) 18%, transparent);
-    transform: rotate(-1deg);
+    @apply text-primary-600 dark:text-primary-400 relative;
+    background-image: linear-gradient(
+      to top,
+      transparent 0.04em,
+      color-mix(in oklab, var(--color-primary-600) 18%, transparent) 0.04em,
+      color-mix(in oklab, var(--color-primary-600) 18%, transparent) 0.46em,
+      transparent 0.46em
+    );
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
   .home .lead {
     @apply text-base-600 dark:text-base-400 mb-6 max-w-[46ch] text-[clamp(1.05rem,1.6vw,1.25rem)] leading-[1.55];
