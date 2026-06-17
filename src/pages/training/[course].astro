@@ -118,6 +118,14 @@ const ac = `--ac:var(--color-${course.accent});--ac-deep:var(--color-${course.ac
                     <span class="block">{line}</span>
                   ))}
                 </p>
+                {course.photo && (
+                  <Image
+                    src={course.photo}
+                    alt="Engineers in a hands-on agentic-engineering workshop"
+                    class="border-base-200/60 dark:border-base-800 mt-6 w-full rounded-2xl border object-cover shadow-lg"
+                    loading="lazy"
+                  />
+                )}
               </div>
               <div class="space-y-4">
                 {course.intro.slice(1).map((p) => (

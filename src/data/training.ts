@@ -11,6 +11,7 @@ import type { Accent } from "@data/homeContent";
 import type { ImageMetadata } from "astro";
 import denisPhoto from "@images/execuro/denis-turkov.png";
 import guidoPhoto from "@images/hero/guido-speaking.jpg";
+import workshopPhoto from "@images/training/workshop.jpg";
 
 export interface ForWho {
   icon: string; // tabler icon (full path)
@@ -68,6 +69,8 @@ export interface Course {
   whyMe: string;
   agenda: AgendaBlock[];
   // --- optional, co-branded workshop fields (agentic-engineering only) ---
+  /** Workshop photo, rendered inside the "The shift" block. */
+  photo?: ImageMetadata;
   tagline?: string;
   /** The core-message / "the shift" paragraph(s). */
   intro?: string[];
@@ -89,6 +92,7 @@ export const courses: Course[] = [
     level: "For engineering teams of 5–12",
     fmt: "Workshop · in-company or cohort",
     accent: "iris",
+    photo: workshopPhoto,
     tagline: "From vibe-coding to structured agentic development",
     coLed: {
       partner: "Execuro",
