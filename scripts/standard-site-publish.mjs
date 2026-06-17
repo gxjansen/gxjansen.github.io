@@ -19,6 +19,25 @@
  *   BLUESKY_APP_PASSWORD - App password from https://bsky.app/settings/app-passwords
  *
  * Designed to run as part of the Netlify build command.
+ *
+ * --------------------------------------------------------------------------
+ * Auth: deliberate app-password exception
+ * --------------------------------------------------------------------------
+ * The general rule is OAuth, never app passwords, for atproto automation. This
+ * script is a conscious, scoped exception, decided 2026-06-15:
+ *   - It's the site owner's own automation writing the owner's own
+ *     site.standard.document records to the owner's own PDS. No third parties.
+ *   - The secret lives only in the Netlify build environment, never in this
+ *     repo.
+ *   - The OAuth alternative (interactive auth -> rotating refresh token) is a
+ *     poor fit for ephemeral CI and would force a periodic manual re-login that
+ *     breaks the build until done. Not worth it here.
+ * Hardening expected of BLUESKY_APP_PASSWORD:
+ *   - a DEDICATED app password (e.g. named "netlify-standard-site-publish"), so
+ *     it can be revoked in isolation, not a shared one.
+ *   - set only as a Netlify environment variable.
+ * If this script ever writes on behalf of anyone other than the owner, switch
+ * to OAuth.
  */
 
 import { AtpAgent } from '@atproto/api';
