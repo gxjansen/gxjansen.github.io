@@ -105,22 +105,22 @@ const ac = `--ac:var(--color-${course.accent})`;
       course.intro && (
         <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]">
           <div class="surface rounded-3xl p-6 sm:p-9" style={ac}>
-            <span class="eyebrow" style={ac}>
-              The shift
-            </span>
-            <div class="mt-4 max-w-3xl space-y-4">
-              {course.intro.map((p, i) => (
-                <p
-                  class:list={[
-                    "leading-relaxed",
-                    i === 0
-                      ? "font-display text-base-900 dark:text-base-50 text-[clamp(1.3rem,2.6vw,1.7rem)] font-extrabold tracking-[-0.02em]"
-                      : "text-base-700 dark:text-base-300 text-lg",
-                  ]}
-                >
-                  {p}
+            <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-12">
+              <div>
+                <span class="eyebrow" style={ac}>
+                  The shift
+                </span>
+                <p class="font-display text-base-900 dark:text-base-50 mt-4 text-[clamp(1.35rem,2.6vw,1.8rem)] leading-snug font-extrabold tracking-[-0.02em]">
+                  {course.intro[0]}
                 </p>
-              ))}
+              </div>
+              <div class="space-y-4">
+                {course.intro.slice(1).map((p) => (
+                  <p class="text-base-700 dark:text-base-300 text-lg leading-relaxed">
+                    {p}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -179,62 +179,54 @@ const ac = `--ac:var(--color-${course.accent})`;
       }
     </section>
 
-    <!-- What you'll leave with + agenda -->
+    <!-- What you'll leave with -->
     <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]" style={ac}>
-      <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          <h2
-            class="font-display mb-6 text-2xl font-extrabold tracking-[-0.02em]"
-          >
-            {
-              course.instructors
-                ? "What your team walks away with"
-                : "What you'll leave with"
-            }
-          </h2>
-          <ul class="flex flex-col gap-3">
-            {
-              course.outcomes.map((o) => (
-                <li class="flex items-start gap-3">
-                  <span
-                    class="mt-0.5 shrink-0"
-                    style="color:var(--ac)"
-                    aria-hidden="true"
-                  >
-                    <Icon name="tabler/circle-check" class="size-5" />
-                  </span>
-                  <span class="text-base-700 dark:text-base-300 leading-relaxed">
-                    {o}
-                  </span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+      <h2 class="font-display mb-6 text-2xl font-extrabold tracking-[-0.02em]">
+        {
+          course.instructors
+            ? "What your team walks away with"
+            : "What you'll leave with"
+        }
+      </h2>
+      <ul class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-x-10">
+        {
+          course.outcomes.map((o) => (
+            <li class="flex items-start gap-3">
+              <span
+                class="mt-0.5 shrink-0"
+                style="color:var(--ac)"
+                aria-hidden="true"
+              >
+                <Icon name="tabler/circle-check" class="size-5" />
+              </span>
+              <span class="text-base-700 dark:text-base-300 leading-relaxed">
+                {o}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
 
-        <!-- Agenda -->
-        <div>
-          <h2
-            class="font-display mb-6 text-2xl font-extrabold tracking-[-0.02em]"
-          >
-            {course.instructors ? "What we cover" : "How the day runs"}
-          </h2>
-          <div class="flex flex-col gap-4">
-            {
-              course.agenda.map((a) => (
-                <div class="surface rounded-2xl p-5">
-                  <span class="eyebrow" style={ac}>
-                    {a.time}
-                  </span>
-                  <h3 class="font-display mt-1 text-lg font-bold">{a.t}</h3>
-                  <p class="text-base-600 dark:text-base-400 mt-1 text-[0.95rem] leading-relaxed">
-                    {a.d}
-                  </p>
-                </div>
-              ))
-            }
-          </div>
-        </div>
+    <!-- Curriculum / how the day runs -->
+    <section class="relative z-10 pb-[clamp(3rem,6vw,5rem)]" style={ac}>
+      <h2 class="font-display mb-6 text-2xl font-extrabold tracking-[-0.02em]">
+        {course.instructors ? "What we cover" : "How the day runs"}
+      </h2>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {
+          course.agenda.map((a) => (
+            <div class="surface rounded-2xl p-5">
+              <span class="eyebrow" style={ac}>
+                {a.time}
+              </span>
+              <h3 class="font-display mt-1 text-lg font-bold">{a.t}</h3>
+              <p class="text-base-600 dark:text-base-400 mt-1 text-[0.95rem] leading-relaxed">
+                {a.d}
+              </p>
+            </div>
+          ))
+        }
       </div>
     </section>
 

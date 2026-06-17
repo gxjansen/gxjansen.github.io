@@ -90,7 +90,7 @@ export const courses: Course[] = [
       partner: "Execuro",
       partnerUrl: "https://execuro.com/agentic-engineering-workshop/",
       blurb:
-        "I run this one together with Denis Turkov of Execuro. We worked together at Spryker, and we built this around what actually moves a team, not what demos well.",
+        "I run this one together with Denis Turkov from Execuro. We worked together at Spryker, and we built this around what moves a team, not what demos well.",
     },
     points: [
       "Delegate to AI agents with clear specs, context and rules instead of better prompts",
@@ -206,7 +206,7 @@ export const courses: Course[] = [
       {
         time: "Module 6",
         t: "Daily-workflow integration",
-        d: "Folding all of this into how your team actually works day to day, so it survives past the workshop.",
+        d: "Folding all of this into how your team works day to day, so it survives past the workshop.",
       },
       {
         time: "Bootcamp · Day 2",
