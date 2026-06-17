@@ -47,11 +47,6 @@ const navConfig = [
         link: "/speaker",
         icon: "tabler/outline/microphone",
       },
-      {
-        text: "Events",
-        link: "/events",
-        icon: "tabler/outline/calendar",
-      },
     ],
   },
   {

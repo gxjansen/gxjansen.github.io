@@ -18,7 +18,6 @@ export async function GET() {
         { text: "Training", link: "/training" },
         { text: "Advisory", link: "/retainer" },
         { text: "Speaking", link: "/speaker" },
-        { text: "Events", link: "/events" },
       ],
     },
     {
