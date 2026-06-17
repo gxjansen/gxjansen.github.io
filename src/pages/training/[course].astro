@@ -251,11 +251,13 @@ const ac = `--ac:var(--color-${course.accent})`;
                     : undefined
                 }
               >
-                {f.badge && (
-                  <span class="tlevel mb-3" style={ac}>
-                    {f.badge}
-                  </span>
-                )}
+                <span
+                  class:list={["tlevel mb-3", { invisible: !f.badge }]}
+                  style={f.badge ? ac : undefined}
+                  aria-hidden={f.badge ? undefined : "true"}
+                >
+                  {f.badge ?? "placeholder"}
+                </span>
                 <h3 class="font-display text-xl font-extrabold tracking-[-0.02em]">
                   {f.name}
                 </h3>
@@ -287,13 +289,17 @@ const ac = `--ac:var(--color-${course.accent})`;
                     ))}
                   </ul>
                 )}
-                <a
-                  href="/contact/"
-                  class="btn-ac mt-6 w-full text-[0.95rem]"
-                  style={ac}
-                >
-                  {f.price === "Free" ? "Join the masterclass" : "Book a call"}
-                </a>
+                <div class="mt-auto pt-6">
+                  <a
+                    href="/contact/"
+                    class="btn-ac w-full text-[0.95rem]"
+                    style={ac}
+                  >
+                    {f.price === "Free"
+                      ? "Join the masterclass"
+                      : "Book a call"}
+                  </a>
+                </div>
               </div>
             ))}
           </div>
