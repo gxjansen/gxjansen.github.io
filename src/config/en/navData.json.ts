@@ -30,12 +30,29 @@ const navConfig = [
     ],
   },
   {
-    text: "Events",
-    link: "/events",
-  },
-  {
-    text: "Training",
-    link: "/training",
+    text: "Work with me",
+    dropdown: [
+      {
+        text: "Training",
+        link: "/training",
+        icon: "tabler/outline/school",
+      },
+      {
+        text: "Advisory",
+        link: "/retainer",
+        icon: "tabler/outline/briefcase",
+      },
+      {
+        text: "Speaking",
+        link: "/speaker",
+        icon: "tabler/outline/microphone",
+      },
+      {
+        text: "Events",
+        link: "/events",
+        icon: "tabler/outline/calendar",
+      },
+    ],
   },
   {
     text: "About",
@@ -44,16 +61,6 @@ const navConfig = [
         text: "About Me",
         link: "/about",
         icon: "tabler/outline/user",
-      },
-      {
-        text: "Work with me",
-        link: "/retainer",
-        icon: "tabler/outline/briefcase",
-      },
-      {
-        text: "Speak at your event",
-        link: "/speaker",
-        icon: "tabler/outline/microphone",
       },
       {
         text: "Press & Media",

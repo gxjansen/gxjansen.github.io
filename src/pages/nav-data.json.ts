@@ -12,14 +12,19 @@ export async function GET() {
         { text: "Communities", link: "/communities" },
       ],
     },
-    { text: "Events", link: "/events" },
-    { text: "Training", link: "/training" },
+    {
+      text: "Work with me",
+      dropdown: [
+        { text: "Training", link: "/training" },
+        { text: "Advisory", link: "/retainer" },
+        { text: "Speaking", link: "/speaker" },
+        { text: "Events", link: "/events" },
+      ],
+    },
     {
       text: "About",
       dropdown: [
         { text: "About Me", link: "/about" },
-        { text: "Work with me", link: "/retainer" },
-        { text: "Speak at your event", link: "/speaker" },
         { text: "Press & Media", link: "/press" },
         { text: "Contact", link: "/contact" },
       ],
