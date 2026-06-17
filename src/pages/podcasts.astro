@@ -1,114 +1,165 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import ServicesIcon from "@components/Services/ServicesIcon.astro";
+import { Icon } from "astro-icon/components";
+import { getPodcastEpisodes } from "../lib/podcastFeeds";
+
+// Build-time fetch: episodes are baked into the static HTML so crawlers and
+// no-JS browsers see the full list. Never throws — falls back to [] on failure.
+const episodes = await getPodcastEpisodes();
+
+const podcasts = [
+  {
+    icon: "sheep",
+    title: "Sheeptank",
+    text: "A lighthearted, fast-paced format: one interesting business case (pitched by the sheep) and a final verdict (from the wolves).",
+    href: "https://sheeptank.transistor.fm/",
+  },
+  {
+    icon: "tabler/outline/a-b",
+    title: "CRO.CAFE",
+    text: "Conversion rate optimization and business experimentation, with episodes in English, Dutch, Spanish and German.",
+    href: "https://www.cro.cafe",
+  },
+  {
+    icon: "tabler/outline/friends",
+    title: "Spryker Community",
+    text: "Stories from the community, sharing insights and best practices.",
+    href: "https://www.youtube.com/results?search_query=spryker",
+  },
+];
 ---
 
 <BaseLayout
   title="Guido's Podcasts"
-  description="Overview of the podcasts that I host and produce."
+  description="The podcasts Guido X Jansen hosts and produces: Sheeptank, CRO.CAFE and more. Over 250 episodes on community, experimentation and business."
 >
-  <ServicesIcon />
-
-  <div class="mt-16">
-    <div id="podcast-feed-container">
-      <div class="text-center">
-        <div
-          class="border-primary-500 inline-block h-8 w-8 animate-spin rounded-full border-t-2 border-b-2"
+  <div class="home podcasts-page">
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">on the mic</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
         >
-        </div>
-        <p class="text-base-600 dark:text-base-400 mt-4">
-          Loading podcast episodes...
+          Podcasts I host &amp; produce
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
+          Podcasting is a great way to learn, share, and get to know people.
+          I've published over 250 episodes across a few different shows.
         </p>
       </div>
-    </div>
 
-    <script>
-      async function loadPodcastFeed() {
-        const container = document.getElementById("podcast-feed-container");
-        if (!container) return;
-
-        try {
-          // In development, use the Netlify Dev server URL from the environment
-          const baseUrl = import.meta.env.DEV
-            ? `http://localhost:${import.meta.env.NETLIFY_PORT || "8888"}`
-            : "";
-          const response = await fetch(
-            `${baseUrl}/.netlify/functions/getPodcastFeeds`,
-          );
-          if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            throw new Error(
-              errorData.error || `HTTP error! status: ${response.status}`,
-            );
-          }
-
-          const episodes = await response.json();
-
-          // Filter out episodes without valid links
-          const validEpisodes = episodes.filter(
-            (episode: { link: string; title: string }) =>
-              episode.link &&
-              episode.link.startsWith("https://share.transistor.fm/"),
-          );
-
-          if (validEpisodes.length === 0) {
-            container.innerHTML = `
-              <div class="text-center p-8 bg-yellow-50 rounded-lg">
-                <p class="text-yellow-800">No podcast episodes are currently available.</p>
-                <p class="text-base-700 mt-2">Please check back later or visit the podcasts directly:</p>
-                <div class="mt-4 space-y-2">
-                  <a href="https://sheeptank.transistor.fm/" class="!text-primary-700 hover:underline block">Sheeptank</a>
-                  <a href="https://www.cro.cafe" class="!text-primary-700 hover:underline block">CRO.CAFE</a>
-                </div>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          podcasts.map((p) => (
+            <a
+              href={p.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 reveal flex flex-col rounded-2xl border p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              <div class="bg-primary-600/10 text-primary-600 dark:bg-primary-400/10 dark:text-primary-400 mb-4 flex size-12 items-center justify-center rounded-xl">
+                <Icon name={p.icon} class="size-6" aria-hidden="true" />
               </div>
-            `;
-            return;
-          }
-
-          // Replace loading spinner with episodes
-          container.innerHTML = validEpisodes
-            .map(
-              (episode: { link: string; title: string }) => `
-            <div class="w-full bg-base-800 rounded-lg overflow-hidden mb-6">
-              <iframe 
-                width="100%" 
-                height="180" 
-                frameborder="no" 
-                scrolling="no" 
-                seamless 
-                src="${episode.link}"
-                title="${episode.title}"
-                loading="lazy"
-                allow="encrypted-media"
-              ></iframe>
-            </div>
-          `,
-            )
-            .join("");
-        } catch (error) {
-          console.error("Error loading podcast feed:", error);
-          container.innerHTML = `
-            <div class="text-center p-8 bg-red-50 rounded-lg">
-              <p class="text-red-700 mb-4">${
-                error.message === "Timeout while fetching podcast feeds"
-                  ? "The podcast feeds are taking longer than usual to load. Please try again in a moment."
-                  : "We're having trouble loading the podcast feeds right now. Please try again later."
-              }</p>
-              <p class="text-base-700">In the meantime, you can visit the podcasts directly:</p>
-              <div class="mt-4 space-y-2">
-                <a href="https://sheeptank.transistor.fm/" class="!text-primary-700 hover:underline block">Sheeptank</a>
-                <a href="https://www.cro.cafe" class="!text-primary-700 hover:underline block">CRO.CAFE</a>
-              </div>
-            </div>
-          `;
+              <h2 class="font-display group-hover:text-primary-600 dark:group-hover:text-primary-400 text-[1.2rem] font-extrabold transition">
+                {p.title}
+              </h2>
+              <p class="text-base-600 dark:text-base-400 mt-2 text-[0.95rem] leading-relaxed">
+                {p.text}
+              </p>
+              <span class="text-primary-600 dark:text-primary-400 font-display mt-4 inline-flex items-center gap-1.5 text-sm font-bold">
+                Listen <span aria-hidden="true">→</span>
+              </span>
+            </a>
+          ))
         }
-      }
+      </div>
+    </section>
 
-      // Load feed when page loads
-      loadPodcastFeed();
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <div class="sec-head">
+        <div>
+          <span class="hand-note">fresh from the feed</span>
+          <h2>Recent episodes</h2>
+        </div>
+      </div>
 
-      // Reload feed when navigating back to the page
-      document.addEventListener("astro:page-load", loadPodcastFeed);
-    </script>
+      <div id="podcast-feed-container">
+        {
+          episodes.length > 0 ? (
+            <div class="grid gap-6 sm:grid-cols-2">
+              {episodes.map((episode) => (
+                <div class="bg-base-100 dark:bg-base-900 border-base-200 dark:border-base-800 w-full overflow-hidden rounded-2xl border">
+                  <iframe
+                    width="100%"
+                    height="180"
+                    frameborder="no"
+                    scrolling="no"
+                    seamless
+                    src={episode.link}
+                    title={episode.title}
+                    loading="lazy"
+                    allow="encrypted-media"
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="bg-base-100 dark:bg-base-900 rounded-2xl p-8 text-center">
+              <p class="text-base-700 dark:text-base-300">
+                Episodes aren't loading right now. You can visit the podcasts
+                directly:
+              </p>
+              <div class="mt-4 space-y-2">
+                <a
+                  href="https://sheeptank.transistor.fm/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-primary-600 dark:text-primary-400 block font-semibold hover:underline"
+                >
+                  Sheeptank
+                </a>
+                <a
+                  href="https://www.cro.cafe"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-primary-600 dark:text-primary-400 block font-semibold hover:underline"
+                >
+                  CRO.CAFE
+                </a>
+              </div>
+            </div>
+          )
+        }
+      </div>
+    </section>
+
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <div
+        class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex flex-col gap-5 rounded-3xl border p-6 sm:flex-row sm:items-center sm:justify-between sm:p-9"
+      >
+        <div>
+          <span class="hand-note">your turn</span>
+          <h2
+            class="font-display mt-1 text-2xl font-extrabold tracking-[-0.02em] sm:text-3xl"
+          >
+            Want to come on a show?
+          </h2>
+          <p
+            class="text-base-600 dark:text-base-400 mt-2 max-w-xl leading-relaxed"
+          >
+            Got a business case for Sheeptank, an experimentation story for
+            CRO.CAFE, or an idea for a collaboration? Tell me about it.
+          </p>
+        </div>
+        <a
+          href="/contact/"
+          class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex shrink-0 items-center gap-1.5 rounded-full px-6 py-3 font-bold text-white transition"
+        >
+          Get in touch <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
   </div>
 </BaseLayout>

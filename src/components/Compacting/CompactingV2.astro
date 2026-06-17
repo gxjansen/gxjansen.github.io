@@ -230,13 +230,15 @@ const {
   }
 
   .compacting-message {
-    @apply text-base-500;
+    /* This widget always sits on a dark surface, so use the lighter muted grey
+       (base-400) rather than base-500 (which is darkened for light mode). */
+    @apply text-base-400;
     font-style: italic;
     margin-bottom: 0.5em;
   }
 
   .compacting-progress {
-    @apply text-base-500;
+    @apply text-base-400;
     font-size: 0.9em;
   }
 

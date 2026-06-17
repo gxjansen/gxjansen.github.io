@@ -1,7 +1,8 @@
 ---
 import { type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
-import SocialIcon from "@components/SocialIcon/SocialIcon.astro";
+import SocialLinks from "@components/SocialLinks/SocialLinks.astro";
+import { injectYears } from "@js/textUtils";
 
 interface Props {
   author: CollectionEntry<"authors">;
@@ -24,10 +25,9 @@ const {
 
 const authorUrl = `/authors/${author.id}`;
 
-// Map social links with proper icon names (LinkedIn, GitHub, Bluesky, Website as per user requirement)
+// Social links: lead with Sifa (the portable profile), then Bluesky.
 const socialLinks = [
-  { url: linkedin, icon: "linkedin", label: "LinkedIn" },
-  { url: github, icon: "github", label: "GitHub" },
+  { url: "https://sifa.id/p/gui.do", icon: "sifa", label: "Sifa ID" },
   { url: bluesky, icon: "bluesky", label: "Bluesky" },
 ].filter((link): link is { url: string; icon: string; label: string } =>
   Boolean(link.url),
@@ -85,7 +85,7 @@ const hasWebsite = website && website.includes("gui.do");
       {
         bio && (
           <div class="prose prose-sm text-base-700 dark:prose-invert dark:text-base-300 mt-3 max-w-none">
-            <p>{bio}</p>
+            <p>{injectYears(bio)}</p>
           </div>
         )
       }
@@ -115,7 +115,7 @@ const hasWebsite = website && website.includes("gui.do");
             </h4>
             <ul class="text-base-700 dark:text-base-300 list-inside list-disc space-y-1 text-sm">
               {credentials.map((credential: string) => (
-                <li>{credential}</li>
+                <li>{injectYears(credential)}</li>
               ))}
             </ul>
           </div>
@@ -125,14 +125,15 @@ const hasWebsite = website && website.includes("gui.do");
       {
         (socialLinks.length > 0 || hasWebsite) && (
           <div class="mt-4 flex flex-wrap items-center gap-2">
-            {socialLinks.map((link) => (
-              <SocialIcon
-                icon={link.icon}
-                social={link.label}
-                href={link.url}
-                class="h-10 w-10"
-              />
-            ))}
+            <SocialLinks
+              location="about"
+              context="about"
+              links={socialLinks.map((l) => ({
+                name: l.label,
+                href: l.url,
+                icon: l.icon,
+              }))}
+            />
             {hasWebsite && (
               <a
                 href={website}
@@ -149,7 +150,7 @@ const hasWebsite = website && website.includes("gui.do");
 
       <div class="mt-4">
         <a
-          href={authorUrl}
+          href="/post/"
           class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 text-sm font-medium"
         >
           View all posts by {name} →

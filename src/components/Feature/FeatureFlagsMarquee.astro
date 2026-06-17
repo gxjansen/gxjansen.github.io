@@ -6,7 +6,6 @@
  */
 
 import { Image } from "astro:assets";
-import Badge from "@components/Badge/Badge.astro";
 import eventsData from "../../data/events.json";
 import { getAllFlags } from "../../utils/flagUtils";
 
@@ -35,15 +34,21 @@ const marqueeBottom = {
 };
 ---
 
-<section id="feature-flags-marquee" class="relative py-24 md:py-28">
-  <div class="site-container relative">
+<section id="feature-flags-marquee" class="relative">
+  <div class="relative">
     <div class="relative">
       <div class="relative flex justify-center">
-        <div class="mx-auto mb-16 text-center md:max-w-4xl">
-          <Badge>Flags</Badge>
-          <h2 class="h2">Countries where I presented</h2>
-          <p class="description mt-4 text-lg text-pretty md:text-xl">
-            {uniqueCountries.length} and counting!
+        <div class="mx-auto mb-12 text-center md:max-w-4xl">
+          <span class="hand-note">been around a bit</span>
+          <h2
+            class="font-display text-[clamp(1.9rem,3.6vw,2.9rem)] leading-[1.1] font-black tracking-[-0.03em]"
+          >
+            Countries where I presented
+          </h2>
+          <p
+            class="text-base-600 dark:text-base-400 mt-3 text-lg text-pretty md:text-xl"
+          >
+            {uniqueCountries.length} and counting.
           </p>
         </div>
       </div>

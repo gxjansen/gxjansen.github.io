@@ -61,7 +61,7 @@ import { locales } from "@config/siteSettings.json";
           {
             // if dropdown exists, setup the dropdown, otherwise it is just a link
             navData
-              .filter((navItem) => !navItem.hidden)
+              .filter((navItem) => !(navItem as { hidden?: boolean }).hidden)
               .map((navItem) =>
                 "dropdown" in navItem ? (
                   // mobile dropdown menu
@@ -89,8 +89,8 @@ import { locales } from "@config/siteSettings.json";
       </nav>
       <div class="mx-1 mt-3 px-4">
         <Button
-          variant="secondary"
-          class="w-full shadow-none"
+          variant="primary"
+          class="font-display w-full rounded-full shadow-none"
           href="/retainer/"
           umamiEvent="cta-click"
           umamiEventTarget="work-with-me-mobile"

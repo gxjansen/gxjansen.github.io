@@ -14,6 +14,9 @@ const siteData = getTranslatedData("siteData", currLocale);
 import jsonLDGenerator from "@js/jsonLD";
 import type { EventData, PresentationData, CommunityData } from "@js/jsonLD";
 
+// OG share-card routing (build-time generated /og/*.png cards)
+import { ogImageForPath } from "../../lib/og/routes";
+
 interface BaseProps {
   title: string;
   description: string;
@@ -161,11 +164,28 @@ if (type === "blog") {
   });
 }
 
-// Ensure we have an absolute URL for the image
+// Resolve the social-preview image (og:image / twitter:image).
+// The card route is chosen from the page pathname: blog posts get
+// /og/article/<slug>, presentations get /og/talk/<slug>, the homepage /
+// retainer / training / landings get their dedicated card, everything
+// else falls through to /og/default.png.
+//
+// Precedence:
+//   - blog & presentation: ALWAYS use the branded card. These types
+//     carry a hero/listing image meant for in-page + structured data,
+//     but the share card is the on-brand preview we want every link to
+//     show (the article card was redesigned without a thumbnail for
+//     exactly this). The hero still feeds JSON-LD below via optimizedImage.
+//   - every other type: an explicit page image wins, else the card,
+//     else the card's default catch-all.
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, "") : "";
-const imageUrl = optimizedImage
-  ? new URL(optimizedImage.src, siteUrl).toString()
-  : new URL(siteData.defaultImage.src, siteUrl).toString();
+const ogCardPath = ogImageForPath(Astro.url.pathname);
+const ogCardUrl = new URL(ogCardPath, siteUrl).toString();
+const preferCard = type === "blog" || type === "presentation";
+const imageUrl =
+  optimizedImage && !preferCard
+    ? new URL(optimizedImage.src, siteUrl).toString()
+    : ogCardUrl;
 
 // Helper function to safely format dates
 const formatDate = (date: Date | undefined) => {

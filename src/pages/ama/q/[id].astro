@@ -13,7 +13,6 @@
 export const prerender = false;
 
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Button from "@components/Button/Button.astro";
 import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
 import { renderAmaCard, type RenderOverrides } from "../../../lib/ama/render";
@@ -100,13 +99,13 @@ const description = "Admin view for a submitted AMA question.";
 <BaseLayout title="AMA admin" description={description} noindex>
   <section class="pt-24 pb-16 md:pt-28">
     <div class="site-container mx-auto max-w-3xl px-4">
-      <p
-        class="text-base-600 dark:text-base-400 mb-2 text-xs tracking-wide uppercase"
+      <span class="eyebrow mb-3">AMA admin</span>
+      <h1
+        class="font-display mt-2 mb-1 text-[clamp(1.9rem,4vw,2.7rem)] leading-tight font-black tracking-[-0.03em]"
       >
-        AMA admin
-      </p>
-      <h1 class="h2 mb-1">Question</h1>
-      <p class="text-base-600 dark:text-base-400 mb-4 text-xs">
+        Question
+      </h1>
+      <p class="text-base-600 dark:text-base-400 mb-6 text-sm">
         Submitted {submittedAt} · ID {data.id}
       </p>
 
@@ -127,7 +126,12 @@ const description = "Admin view for a submitted AMA question.";
       <div class="flex flex-wrap gap-3">
         <form method="POST" action={actionUrl} class="contents">
           <input type="hidden" name="action" value="regenerate" />
-          <Button type="submit" variant="primary">Regenerate</Button>
+          <button
+            type="submit"
+            class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center rounded-full px-4 py-2 text-sm font-bold text-white transition"
+          >
+            Regenerate
+          </button>
         </form>
         <a
           href={dataUrl}

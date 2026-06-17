@@ -1,14 +1,16 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import { format } from "date-fns";
 
 // components
 import BaseLayout from "@layouts/BaseLayout.astro";
-import PostCardAtlas from "@components/PostCard/PostCardAtlas.astro";
-import Badge from "@components/Badge/Badge.astro";
+import Breadcrumb from "@components/Breadcrumb/Breadcrumb.astro";
 
 // utils
 import { countItems, sortByValue } from "@js/blogUtils";
 import { slugify } from "@js/textUtils";
+import { readingTimeShort } from "../../utils/readingTime";
 
 export async function getStaticPaths() {
   // Get all posts
@@ -49,18 +51,38 @@ const posts = await getCollection("post", ({ data }) => {
 });
 
 // Filter posts by category, ensuring categories exist
-const filteredPosts = posts.filter((post) =>
-  (post.data.categories || [])
-    .map((cat) => slugify(cat))
-    .includes(slugifiedCategory),
-);
+const filteredPosts = posts
+  .filter((post) =>
+    (post.data.categories || [])
+      .map((cat) => slugify(cat))
+      .includes(slugifiedCategory),
+  )
+  .sort(
+    (a, b) =>
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+  );
 
-// Get all categories for sidebar, filtering out undefined/null values
+const accents = ["gold", "foam", "pine", "iris", "love", "rose"] as const;
+
+const articles = filteredPosts.map((post, i) => ({
+  title: post.data.title,
+  description: post.data.description,
+  href: `/post/${post.id}/`,
+  date: format(new Date(post.data.pubDate), "MMM d, yyyy"),
+  read: readingTimeShort(post.body),
+  categories: post.data.categories || [],
+  heroImage: post.data.heroImage,
+  accent: accents[i % accents.length],
+}));
+
+// Get all categories for the filter bar, keeping those with 2+ posts.
 const categories = posts
   .map((post) => post.data.categories || [])
   .flat()
   .filter(Boolean);
-const processedCategories = sortByValue(countItems(categories));
+const processedCategories = sortByValue(countItems(categories)).filter(
+  ([_, __, count]) => count >= 2,
+);
 
 // Set up page metadata
 const title = `Posts in category: ${originalCategory}`;
@@ -68,45 +90,86 @@ const description = `Articles categorized under ${originalCategory}`;
 ---
 
 <BaseLayout title={title} description={description}>
-  <section class="py-24 md:py-28">
-    <div class="site-container">
-      <div>
-        <div class="relative">
-          <div class="mx-auto mb-16 text-center md:max-w-4xl">
-            <Badge>Category</Badge>
-            <h1 class="h1 mb-4">{originalCategory}</h1>
-            <p class="description text-lg md:text-xl">
-              Articles related to {originalCategory.toLowerCase()}
-            </p>
-          </div>
+  <div class="home">
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <Breadcrumb
+        class="mb-8"
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Categories", href: "/post/" },
+          { label: originalCategory },
+        ]}
+      />
 
-          <!-- Category filters -->
-          <div class="container mx-auto mb-12 px-4">
-            <div class="flex flex-wrap justify-center gap-4">
-              {
-                processedCategories
-                  .filter(([_, __, count]) => count >= 2)
-                  .map(([slug, original]) => (
-                    <a href={`/categories/${slug}/`} class="filter-badge">
-                      {original}
-                    </a>
-                  ))
-              }
-            </div>
-          </div>
-
-          <!-- Blog posts grid -->
-          <div class="container mx-auto px-4">
-            <div class="grid gap-16 sm:grid-cols-2">
-              {
-                filteredPosts.map((post) => (
-                  <PostCardAtlas post={post} showDescription={true} />
-                ))
-              }
-            </div>
-          </div>
-        </div>
+      <div class="mb-10 max-w-3xl">
+        <span class="hand-note">category</span>
+        <h1
+          class="font-display mt-2 text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          {originalCategory}
+        </h1>
+        <p
+          class="text-base-600 dark:text-base-400 mt-4 text-lg leading-relaxed"
+        >
+          Articles related to {originalCategory.toLowerCase()}.
+        </p>
       </div>
-    </div>
-  </section>
+
+      <!-- Category filter -->
+      <div
+        class="mb-8 flex flex-wrap gap-2"
+        role="group"
+        aria-label="Browse articles by category"
+      >
+        <a class="fbtn" href="/post/">All articles</a>
+        {
+          processedCategories.map(([slug, original]) => (
+            <a
+              class:list={["fbtn", { active: slug === slugifiedCategory }]}
+              href={`/categories/${slug}/`}
+              aria-current={slug === slugifiedCategory ? "page" : undefined}
+            >
+              {original}
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Article grid -->
+      <div class="grid grid-cols-1 gap-[1.1rem] sm:grid-cols-2 lg:grid-cols-3">
+        {
+          articles.map((a) => (
+            <a
+              class="art reveal"
+              href={a.href}
+              style={`--ac:var(--color-${a.accent})`}
+            >
+              {a.heroImage && (
+                <div class="art-thumb">
+                  <Image src={a.heroImage} alt="" width={520} height={280} />
+                </div>
+              )}
+              <div class="tags">
+                {a.categories.slice(0, 2).map((t) => (
+                  <span class="tg">{t}</span>
+                ))}
+              </div>
+              <h3>{a.title}</h3>
+              {a.description && <p>{a.description}</p>}
+              <div class="m">
+                <span>{a.date}</span>
+                <span aria-hidden="true">·</span>
+                <span class="read-time">{a.read}</span>
+                <span class="read">
+                  Read <span aria-hidden="true">↗</span>
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </div>
 </BaseLayout>

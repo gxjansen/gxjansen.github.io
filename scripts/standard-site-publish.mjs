@@ -157,21 +157,47 @@ async function blueskyUriToAtUri(uri) {
   let authority = m[1];
   const rkey = m[2];
   if (!authority.startsWith('did:')) {
-    const r = await fetch(`https://public.api.bsky.app/xrpc/com.atproto.identity.resolveHandle?handle=${encodeURIComponent(authority)}`);
-    if (!r.ok) return null;
-    const data = await r.json();
-    if (!data?.did) return null;
-    authority = data.did;
+    // Time-box the network call so a slow/hanging Bluesky API never stalls the
+    // Netlify build; degrade gracefully by returning null on any failure.
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    try {
+      const r = await fetch(
+        `https://public.api.bsky.app/xrpc/com.atproto.identity.resolveHandle?handle=${encodeURIComponent(authority)}`,
+        { signal: controller.signal },
+      );
+      if (!r.ok) return null;
+      const data = await r.json();
+      if (!data?.did) return null;
+      authority = data.did;
+    } catch {
+      return null;
+    } finally {
+      clearTimeout(timeout);
+    }
   }
   return `at://${authority}/app.bsky.feed.post/${rkey}`;
 }
 
 // Fetch the CID for a post AT-URI (bskyPostRef needs both uri and cid).
 async function fetchPostCid(atUri) {
-  const r = await fetch(`https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=${encodeURIComponent(atUri)}&depth=0`);
-  if (!r.ok) return null;
-  const data = await r.json();
-  return data?.thread?.post?.cid ?? null;
+  // Time-box the network call so a slow/hanging Bluesky API never stalls the
+  // Netlify build; degrade gracefully by returning null on any failure.
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5000);
+  try {
+    const r = await fetch(
+      `https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=${encodeURIComponent(atUri)}&depth=0`,
+      { signal: controller.signal },
+    );
+    if (!r.ok) return null;
+    const data = await r.json();
+    return data?.thread?.post?.cid ?? null;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 // Get all post slugs

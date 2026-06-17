@@ -4,14 +4,13 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
 import { Image } from "astro:assets";
-import Badge from "@components/Badge/Badge.astro";
-import Button from "@components/Button/Button.astro";
+import { Icon } from "astro-icon/components";
 
 // images for communities
 import joomlaLogo from "@images/events/joomla.png";
 import magentoLogo from "@images/events/magento.png";
-import crocafeLogo from "@images/events/crocafe.jpg";
-import sprykerLogo from "@images/events/spryker.png";
+import crocafeLogo from "@images/events/crocafe-wordmark.png";
+import sprykerLogo from "@images/events/spryker-black.png";
 
 // Community URLs for JSON-LD
 const communityUrls: Record<string, string> = {
@@ -74,7 +73,7 @@ const communities = [
   },
   {
     name: "Spryker",
-    period: "2021-now",
+    period: "2021-2025",
     role: "Employee (Senior Director, Global Business & Technology Evangelist)",
     roleType: "professional",
     context: "4+ years",
@@ -103,133 +102,116 @@ const communities = [
     url: communityUrls[c.name],
   }))}
 >
-  <!-- Hero Section -->
-  <section class="py-24 md:py-28">
-    <div class="site-container px-4">
-      <div class="relative">
-        <div class="mx-auto text-center md:max-w-2xl">
-          <Badge>Community</Badge>
-          <h1 class="h1 mb-4">Building communities from zero</h1>
-          <p class="description text-lg md:text-xl">
-            I've built community functions from scratch multiple times across
-            different contexts:
-          </p>
-        </div>
+  <div class="home communities-page">
+    <!-- Hero -->
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">where I've built</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Building communities from zero
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
+          I've built community functions from scratch multiple times, across
+          very different contexts.
+        </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Communities Section -->
-  <section class="py-16 md:py-24">
-    <div class="site-container">
-      <div class="space-y-16 md:space-y-24">
+    <!-- Communities -->
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <div class="flex flex-col gap-[clamp(3rem,7vw,5rem)]">
         {
           communities.map((community, index) => (
-            <div
-              class={`grid items-center gap-8 md:grid-cols-2 md:gap-12 ${index % 2 === 1 ? "md:grid-flow-dense" : ""}`}
-            >
-              <div class={`${index % 2 === 1 ? "md:col-start-2" : ""}`}>
-                <div class="bg-secondary/30 flex aspect-video items-center justify-center overflow-hidden rounded-2xl border p-8 shadow-lg">
+            <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+              <div class={index % 2 === 1 ? "md:order-2" : ""}>
+                <div class="border-base-200 dark:border-base-800 flex aspect-video min-h-[200px] items-center justify-center rounded-2xl border bg-white p-8">
                   <Image
                     src={community.logo}
                     alt={`${community.name} logo`}
-                    class="max-h-[120px] max-w-[200px] object-contain"
-                    width={200}
+                    class="max-h-[120px] w-auto object-contain"
                     height={120}
                   />
                 </div>
               </div>
 
-              <div
-                class={`${index % 2 === 1 ? "md:col-start-1 md:row-start-1" : ""}`}
-              >
-                <div class="space-y-4">
-                  <div class="-ml-0.5 flex flex-wrap items-center gap-3">
-                    <span class="bg-primary/10 text-primary-600 dark:text-primary-400 rounded-full px-3 py-1 text-sm font-medium">
-                      {community.period}
-                    </span>
-                    <span class="text-base-600 dark:text-base-400 text-sm">
-                      {community.context}
-                    </span>
-                  </div>
-
-                  <h2 class="h2 text-foreground">{community.name}</h2>
-                  <p class="text-muted-foreground font-medium">
-                    {community.role}
-                  </p>
-
-                  <p class="text-muted-foreground leading-relaxed">
-                    {community.description}
-                  </p>
-
-                  <div class="pt-4">
-                    <h3 class="text-primary mb-3 text-sm font-semibold tracking-wider uppercase">
-                      Key Achievements
-                    </h3>
-                    <ul class="space-y-2">
-                      {community.achievements.map((achievement) => (
-                        <li class="text-muted-foreground flex items-start gap-3">
-                          <svg
-                            class="text-primary mt-0.5 h-5 w-5 flex-shrink-0"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M5 13l4 4L19 7"
-                            />
-                          </svg>
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {community.quote && (
-                    <blockquote class="border-primary/30 text-muted-foreground mt-6 border-l-4 pl-4 italic">
-                      "{community.quote}"
-                    </blockquote>
-                  )}
+              <div class={index % 2 === 1 ? "md:order-1" : ""}>
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="chip chip--plain">{community.period}</span>
+                  <span class="text-base-500 text-sm">{community.context}</span>
                 </div>
+
+                <h2 class="font-display mt-3 text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-[-0.02em]">
+                  {community.name}
+                </h2>
+                <p class="text-primary-600 dark:text-primary-400 mt-1 font-semibold">
+                  {community.role}
+                </p>
+
+                <p class="text-base-600 dark:text-base-400 mt-3 leading-relaxed">
+                  {community.description}
+                </p>
+
+                <div class="mt-5">
+                  <h3 class="text-base-500 mb-3 text-xs font-bold tracking-[0.08em] uppercase">
+                    Key achievements
+                  </h3>
+                  <ul class="flex flex-col gap-2">
+                    {community.achievements.map((achievement) => (
+                      <li class="text-base-600 dark:text-base-400 flex items-start gap-2.5">
+                        <Icon
+                          name="tabler/outline/check"
+                          class="text-primary-600 dark:text-primary-400 mt-0.5 size-5 shrink-0"
+                          aria-hidden="true"
+                        />
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {community.quote && (
+                  <blockquote class="border-primary-600/30 dark:border-primary-400/30 text-base-700 dark:text-base-300 mt-6 border-l-4 pl-4 italic">
+                    "{community.quote}"
+                  </blockquote>
+                )}
               </div>
             </div>
           ))
         }
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CTA Section -->
-  <section class="bg-secondary/30 py-16 md:py-24">
-    <div class="site-container">
-      <div class="mx-auto max-w-3xl text-center">
-        <div
-          class="bg-primary/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
-        >
-          <svg
-            class="text-primary h-8 w-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+    <!-- CTA -->
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <div
+        class="border-base-200 dark:border-base-800 from-gold/15 rounded-3xl border bg-gradient-to-br to-transparent p-[clamp(1.5rem,4vw,3rem)] text-center"
+      >
+        <div class="mx-auto max-w-2xl">
+          <span class="hand-note">what's next</span>
+          <h2
+            class="font-display my-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-          </svg>
+            Let's build the next one
+          </h2>
+          <p
+            class="text-base-700 dark:text-base-300 mt-3 text-lg leading-relaxed"
+          >
+            I'm interested in technical ecosystems that can become genuine
+            growth engines. Particularly open source, AI, automation, commerce
+            and privacy-focused organizations.
+          </p>
+          <a
+            href="/retainer/"
+            class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display mt-6 inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
+          >
+            Work with me <span aria-hidden="true">→</span>
+          </a>
         </div>
-        <h2 class="h2 mb-6">What's Next</h2>
-        <p class="text-muted-foreground mb-8 text-lg leading-relaxed">
-          I'm interested in technical ecosystems that can become genuine growth
-          engines. Particularly interested in open source, AI, automation,
-          commerce and privacy-focused organizations.
-        </p>
-        <Button variant="primary" href="/retainer/"> Work with me </Button>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>

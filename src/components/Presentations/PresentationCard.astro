@@ -9,81 +9,47 @@ export interface Props {
 const { presentation } = Astro.props;
 const { title, duration, intendedAudience, isWorkshop, image } =
   presentation.data;
+const href = `/presentations/${presentation.id}/`;
 ---
 
-<article class="card group">
-  <a href={`/presentations/${presentation.id}/`}>
-    {
-      image && (
-        <Image
-          src={image}
-          alt={title || ""}
-          width={1600}
-          height={900}
-          class="w-full rounded-t-xl object-cover"
-          style="background: transparent;"
-        />
-      )
-    }
-  </a>
-  <div class="card-content">
-    <!-- Categories -->
-    <div class="card-meta">
-      {
-        duration && (
-          <span class="bg-base-200 text-base-900 dark:bg-base-800 dark:text-base-100 inline-flex rounded-full px-3 py-1 text-sm font-medium">
-            {duration}
-          </span>
-        )
-      }
-      {
-        isWorkshop && (
-          <span class="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 inline-flex rounded-full px-3 py-1 text-sm font-medium">
-            Workshop
-          </span>
-        )
-      }
+<article
+  class="group bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 reveal relative flex flex-col overflow-hidden rounded-2xl border transition hover:-translate-y-0.5 hover:shadow-lg"
+>
+  {
+    image && (
+      <Image
+        src={image}
+        alt={title || ""}
+        width={1600}
+        height={900}
+        class="aspect-video w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+      />
+    )
+  }
+  <div class="flex flex-1 flex-col p-5">
+    <div class="mb-3 flex flex-wrap gap-2">
+      {duration && <span class="chip chip--plain">{duration}</span>}
+      {isWorkshop && <span class="chip">Workshop</span>}
     </div>
-
-    <!-- Title -->
-    <h2 class="card-title">
+    <h3 class="font-display text-[1.15rem] leading-snug font-extrabold">
       <a
-        href={`/presentations/${presentation.id}/`}
-        class="hover:text-primary-500 dark:hover:text-primary-400"
+        href={href}
+        class="hover:text-primary-600 dark:hover:text-primary-400 after:absolute after:inset-0 after:content-['']"
       >
         {title}
       </a>
-    </h2>
-
-    <!-- Description (Intended Audience) -->
+    </h3>
     {
       intendedAudience && (
-        <p class="text-base-600 dark:text-base-400">
-          <span class="font-medium">For:</span> {intendedAudience}
+        <p class="text-base-600 dark:text-base-400 mt-2 text-[0.92rem] leading-relaxed">
+          <span class="font-semibold">For:</span> {intendedAudience}
         </p>
       )
     }
-
-    <!-- Read More Button -->
-    <div class="mt-6">
-      <a
-        href={`/presentations/${presentation.id}/`}
-        class="inline-flex items-center gap-2"
-      >
-        View Presentation
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="size-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M5 12h14M12 5l7 7-7 7"></path>
-        </svg>
-      </a>
-    </div>
+    <span
+      class="text-primary-600 dark:text-primary-400 font-display mt-4 inline-flex items-center gap-1.5 text-sm font-bold"
+    >
+      View presentation <span aria-hidden="true">→</span>
+    </span>
   </div>
 </article>

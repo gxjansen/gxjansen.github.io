@@ -11,6 +11,8 @@
 // components
 import ContentCard from "@components/SiteContent/ContentCard.astro";
 import Badge from "@components/Badge/Badge.astro";
+
+import { yearsBuilding, countryCount, talksCount } from "@data/siteStats";
 // import FeatureCard from "@components/FeatureCard/FeatureCardTest.astro";
 
 interface FeatureData {
@@ -40,7 +42,7 @@ const featureData: FeatureData[] = [
   {
     icon: "tabler/outline/presentation",
     title: "Speaking on Community, Technology & Human Behavior",
-    text: `Keynotes at 50+ conferences across 25 countries, sharing what 20+ years at the intersection of psychology and technology has taught me. Topics range from developer community building and open source ecosystems to behavioral design and the future of tech communities. Available for strategic discussions on building resilient developer programs.`,
+    text: `${talksCount} talks across ${countryCount} countries, sharing what ${yearsBuilding}+ years at the intersection of psychology and technology has taught me. Topics range from developer community building and open source ecosystems to behavioral design and the future of tech communities. Available for strategic discussions on building resilient developer programs.`,
     href: "/events",
     ctaText: "View Speaking Topics",
   },

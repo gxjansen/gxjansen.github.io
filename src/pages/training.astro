@@ -1,0 +1,84 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { courses } from "@data/training";
+---
+
+<BaseLayout
+  title="Training | Guido X Jansen"
+  description="Hands-on workshops on Agentic Engineering and Building on AT Protocol: in-company or as public cohorts. Participants ship something real by the end of the day."
+>
+  <div class="home">
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div class="max-w-3xl">
+        <span class="hand-note">learn by building</span>
+        <h1
+          class="font-display mt-2 text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Training
+        </h1>
+        <p
+          class="text-base-600 dark:text-base-400 mt-4 text-lg leading-relaxed"
+        >
+          Two hands-on workshops, run in-company or as public cohorts. No
+          slide-deck theory. Participants design and ship something real by the
+          end of the day. Both come from production practice, not demos.
+        </p>
+      </div>
+
+      <div class="training-grid mt-10">
+        {
+          courses.map((c) => (
+            <a
+              class="tcourse reveal"
+              href={`/training/${c.slug}/`}
+              style={`--ac:var(--color-${c.accent})`}
+            >
+              <span class="tlevel">
+                {c.level} · {c.fmt}
+              </span>
+              <h3>{c.t}</h3>
+              {c.coLed && (
+                <span class="text-base-500 dark:text-base-400 mb-1 inline-block text-[0.8rem] font-bold tracking-[0.01em]">
+                  co-led with {c.coLed.partner}
+                </span>
+              )}
+              <p>{c.sub}</p>
+              <ul class="tcourse-list">
+                {c.points.map((pt) => (
+                  <li>{pt}</li>
+                ))}
+              </ul>
+              <div class="tfoot">
+                <span class="tbook">
+                  Course details <span aria-hidden="true">↗</span>
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      <div
+        class="surface mt-10 flex flex-col gap-4 rounded-3xl p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8"
+      >
+        <div>
+          <h2 class="font-display text-2xl font-extrabold tracking-[-0.02em]">
+            Bring a workshop to your team
+          </h2>
+          <p class="text-base-600 dark:text-base-400 mt-1 max-w-xl">
+            In-company sessions are tailored to your stack and use cases. Public
+            cohorts run a few times a year. Get in touch for dates.
+          </p>
+        </div>
+        <a
+          href="/contact/"
+          class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 focus:ring-primary-500 font-display inline-flex shrink-0 items-center justify-center rounded-full px-6 py-3 font-bold text-white transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
+        >
+          Get in touch
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -7,7 +7,7 @@ const siteData: SiteDataProps = {
   title:
     "Guido X Jansen | Community Builder | Technical Ecosystems | DevRel Leadership",
   description:
-    "Building technical ecosystems that create real business value. I build community functions - the strategy, the systems, and the teams to run them.",
+    "I help tech products turn developer and customer communities into product strategy. I build community functions: the strategy, the systems, and the teams to run them.",
   // used on contact page and footer
   contact: {
     address1: "Ouderkerk aan de Amstel,",

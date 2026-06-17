@@ -1,53 +1,233 @@
 ---
 // utils
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import { format } from "date-fns";
+import { readingTimeShort } from "../../utils/readingTime";
+import { normalizeBskyUri } from "../../lib/bskyUri";
+import { fetchEngagement } from "../../lib/sifaActivity";
 
 // components
 import BaseLayout from "@layouts/BaseLayout.astro";
-import PostCardAtlas from "@components/PostCard/PostCardAtlas.astro";
-import Badge from "@components/Badge/Badge.astro";
+import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 
-// Get all posts
-const posts = await getCollection("post", ({ data }) => {
-  return !data.draft;
-});
+/**
+ * Below this total (likes + reposts + replies) a post shows no engagement
+ * count — keeps the index honest and uncluttered. Tunable.
+ */
+const ENGAGEMENT_MIN = 10;
 
-// Sort by date (newest first)
-const sortedPosts = posts.sort(
+// Get all non-draft posts, newest first.
+const posts = (await getCollection("post", ({ data }) => !data.draft)).sort(
   (a, b) =>
     new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
 );
+
+const accents = ["gold", "foam", "pine", "iris", "love", "rose"] as const;
+
+// Normalize each post's optional blueskyUri to a canonical at:// URI, then fetch
+// all engagement counts in ONE batched, no-auth getPosts call at build time.
+// fetchEngagement never throws — an offline build just yields an empty map and
+// every card renders without a count.
+const normalized = posts.map((post) =>
+  post.data.blueskyUri ? normalizeBskyUri(post.data.blueskyUri) : null,
+);
+const atUris = [
+  ...new Set(
+    normalized
+      .filter((n): n is NonNullable<typeof n> => !!n)
+      .map((n) => n.atUri),
+  ),
+];
+const engagement = await fetchEngagement(atUris);
+
+const articles = posts.map((post, i) => {
+  const norm = normalized[i];
+  const counts = norm ? engagement.get(norm.atUri) : undefined;
+  const total = counts ? counts.likes + counts.reposts + counts.replies : 0;
+  return {
+    title: post.data.title,
+    description: post.data.description,
+    href: `/post/${post.id}/`,
+    date: format(new Date(post.data.pubDate), "MMM d, yyyy"),
+    read: readingTimeShort(post.body),
+    categories: post.data.categories,
+    heroImage: post.data.heroImage,
+    accent: accents[i % accents.length],
+    // Only bake a count when there's a normalized URI AND it clears the
+    // threshold. The span (when present) is no-JS-safe and CLS-free; the client
+    // script only mutates its digits, never adds/removes it.
+    bskyUri: norm?.atUri,
+    engagement: norm && total >= ENGAGEMENT_MIN ? total : null,
+  };
+});
+
+// Category filter: the most-used categories (>= 2 posts), by frequency then
+// name, capped so the filter bar stays tidy.
+const counts = new Map<string, number>();
+articles.forEach((a) =>
+  a.categories.forEach((c) => counts.set(c, (counts.get(c) ?? 0) + 1)),
+);
+const categories = [...counts.entries()]
+  .filter(([, n]) => n >= 2)
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .slice(0, 10)
+  .map(([c]) => c);
 ---
 
 <BaseLayout
-  title="Blog | Guido X Jansen"
-  description="Articles on community building, developer ecosystems, experimentation, and psychology-driven growth strategies."
+  title="Writing | Guido X Jansen"
+  description="Articles on community building, developer ecosystems, experimentation, psychology-driven growth, AI workflows and open tech."
 >
-  <section class="py-24 md:py-28">
-    <div class="site-container">
-      <div>
-        <div class="relative">
-          <div class="mx-auto mb-16 text-center md:max-w-4xl">
-            <Badge>Blog</Badge>
-            <h1 class="h1 mb-4">Latest Articles</h1>
-            <p class="description text-lg md:text-xl">
-              I write about psychology, experimentation, e-commerce, homelabbing
-              and more. Below you can find my latest articles.
-            </p>
-          </div>
-
-          <!-- Blog posts grid -->
-          <div class="mx-auto max-w-6xl">
-            <div class="cards-grid">
-              {
-                sortedPosts.map((post) => (
-                  <PostCardAtlas post={post} showDescription={true} />
-                ))
-              }
-            </div>
-          </div>
-        </div>
+  <div class="home">
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div class="mb-10 max-w-3xl">
+        <span class="hand-note">the writing</span>
+        <h1
+          class="font-display mt-2 text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Articles &amp; field notes
+        </h1>
+        <p
+          class="text-base-600 dark:text-base-400 mt-4 text-lg leading-relaxed"
+        >
+          Psychology, experimentation, community building, AI workflows, open
+          tech and homelabbing: what I'm learning, mostly in the open.
+        </p>
       </div>
-    </div>
-  </section>
+
+      <!-- Category filter -->
+      <div
+        class="mb-8 flex flex-wrap gap-2"
+        role="group"
+        aria-label="Filter articles by category"
+      >
+        <button class="fbtn active" data-cat="all" type="button">
+          All <span class="opacity-60">({articles.length})</span>
+        </button>
+        {
+          categories.map((cat) => (
+            <button class="fbtn" data-cat={cat} type="button">
+              {cat}
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Article grid -->
+      <div
+        class="grid grid-cols-1 gap-[1.1rem] sm:grid-cols-2 lg:grid-cols-3"
+        id="article-grid"
+      >
+        {
+          articles.map((a) => (
+            <a
+              class="art reveal"
+              href={a.href}
+              style={`--ac:var(--color-${a.accent})`}
+              data-cats={JSON.stringify(a.categories)}
+            >
+              {a.heroImage && (
+                <div class="art-thumb">
+                  <Image src={a.heroImage} alt="" width={520} height={280} />
+                </div>
+              )}
+              <div class="tags">
+                {a.categories.slice(0, 2).map((t) => (
+                  <span class="tg">{t}</span>
+                ))}
+              </div>
+              <h3>{a.title}</h3>
+              {a.description && <p>{a.description}</p>}
+              <div class="m">
+                <span>{a.date}</span>
+                <span aria-hidden="true">·</span>
+                <span class="read-time">{a.read}</span>
+                {a.engagement !== null && (
+                  <>
+                    <span aria-hidden="true">·</span>
+                    <span
+                      class="bsky-eng text-base-500 inline-flex items-center gap-1 text-[0.8rem]"
+                      data-bsky-uri={a.bskyUri}
+                      aria-label={`${a.engagement} interactions on Bluesky`}
+                    >
+                      <Icon
+                        name="tabler/brand-bluesky"
+                        class="size-3.5"
+                        aria-hidden="true"
+                      />
+                      <span class="bsky-eng-n" aria-hidden="true">
+                        {a.engagement}
+                      </span>
+                    </span>
+                  </>
+                )}
+                <span class="read">
+                  Read <span aria-hidden="true">↗</span>
+                </span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+      <p
+        id="no-results"
+        class="text-base-500 mt-8 hidden text-center"
+        role="status"
+      >
+        No articles in this category yet.
+      </p>
+    </section>
+
+    <section
+      class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]"
+      aria-label="Newsletter"
+    >
+      <NewsletterForm
+        variant="card"
+        title="Subscribe to Guido's <span class='text-golden'>Golden</span> Nuggets"
+        description="Occasional field notes on <strong>community, experimentation, AI & open tech</strong>. The things I'd tell a friend over coffee, not a content calendar."
+      />
+    </section>
+  </div>
 </BaseLayout>
+
+<script>
+  function initArticleFilter() {
+    const buttons =
+      document.querySelectorAll<HTMLButtonElement>(".fbtn[data-cat]");
+    const cards = document.querySelectorAll<HTMLElement>("#article-grid .art");
+    const empty = document.getElementById("no-results");
+    if (!buttons.length || !cards.length) return;
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const cat = btn.dataset.cat;
+        buttons.forEach((b) => b.classList.toggle("active", b === btn));
+        let shown = 0;
+        cards.forEach((card) => {
+          const cats = JSON.parse(card.dataset.cats || "[]") as string[];
+          const show = cat === "all" || cats.includes(cat || "");
+          card.style.display = show ? "" : "none";
+          if (show) shown++;
+        });
+        if (empty) empty.classList.toggle("hidden", shown > 0);
+      });
+    });
+  }
+
+  initArticleFilter();
+  document.addEventListener("astro:after-swap", initArticleFilter);
+</script>
+
+<script>
+  // Live Bluesky engagement counts (stale-while-revalidate). The shared module
+  // finds every `.bsky-eng[data-bsky-uri]` on the page (here: the index grid)
+  // and updates its count in place from one batched getPosts call. See
+  // src/scripts/bskyEngagement.ts for the full strategy.
+  import { initBskyEngagement } from "../../scripts/bskyEngagement";
+  initBskyEngagement();
+</script>

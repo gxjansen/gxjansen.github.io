@@ -18,7 +18,12 @@ const navConfig = [
         icon: "tabler/outline/presentation",
       },
       {
-        text: "Indie Projects",
+        text: "Events",
+        link: "/events",
+        icon: "tabler/outline/calendar",
+      },
+      {
+        text: "Projects",
         link: "/projects",
         icon: "tabler/outline/code",
       },
@@ -30,8 +35,24 @@ const navConfig = [
     ],
   },
   {
-    text: "Events",
-    link: "/events",
+    text: "Work with me",
+    dropdown: [
+      {
+        text: "Training",
+        link: "/training",
+        icon: "tabler/outline/school",
+      },
+      {
+        text: "Advisory",
+        link: "/retainer",
+        icon: "tabler/outline/briefcase",
+      },
+      {
+        text: "Speaking",
+        link: "/speaker",
+        icon: "tabler/outline/microphone",
+      },
+    ],
   },
   {
     text: "About",
@@ -42,17 +63,12 @@ const navConfig = [
         icon: "tabler/outline/user",
       },
       {
-        text: "Retainer",
-        link: "/retainer",
-        icon: "tabler/outline/briefcase",
+        text: "CV",
+        link: "/cv",
+        icon: "tabler/outline/file-text",
       },
       {
-        text: "Speak at your event",
-        link: "/speaker",
-        icon: "tabler/outline/microphone",
-      },
-      {
-        text: "Press & Media Features",
+        text: "Press & Media",
         link: "/press",
         icon: "tabler/outline/news",
       },
@@ -60,57 +76,6 @@ const navConfig = [
         text: "Contact",
         link: "/contact",
         icon: "tabler/outline/messages",
-      },
-    ],
-  },
-  {
-    text: "Pages",
-    hidden: true,
-    megaMenuColumns: [
-      {
-        title: "Landing Pages",
-        items: [
-          {
-            text: "Landing 1",
-            link: "/",
-            icon: "tabler/star",
-          },
-          {
-            text: "Landing 2",
-            link: "/examples/landing2",
-            icon: "tabler/diamonds",
-          },
-          {
-            text: "Landing 3",
-            link: "/examples/landing3",
-            icon: "tabler/circle",
-          },
-        ],
-      },
-      {
-        title: "Blog",
-        items: [
-          {
-            text: "Blog Index 1",
-            link: "/post",
-            icon: "tabler/pencil",
-          },
-          {
-            text: "Blog Index 2",
-            link: "/examples/blogIndex2",
-            icon: "tabler/pencil",
-          },
-          {
-            text: "Categories",
-            link: "/categories",
-            icon: "tabler/category",
-          },
-          {
-            text: "Blog Post",
-            link: "/post/tsconfig-paths-setup",
-            icon: "tabler/edit-circle",
-          },
-        ],
       },
     ],
   },

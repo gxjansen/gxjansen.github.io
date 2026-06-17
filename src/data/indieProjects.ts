@@ -14,17 +14,17 @@ export const indieProjects: IndieProject[] = [
   {
     name: "Sifa",
     description:
-      "Replace your LinkedIn URL with a portable professional profile that updates itself from your real activity across the open web. Built on the AT Protocol, EU-hosted, free, with no lock-in.",
+      "Replace your LinkedIn URL with a portable professional profile that updates itself from your real activity across the open web. Built on AT Protocol, EU-hosted, free, with no lock-in.",
     mainImage: "/icons/sifa-dark.svg",
     link: "https://sifa.id",
     iconBgColor: "bg-[#1a1a2e]",
     githubUrl: "https://github.com/singi-labs",
-    tagline: "EU-hosted · Built on the AT Protocol",
+    tagline: "EU-hosted · Built on AT Protocol",
   },
   {
     name: "Barazo Forum",
     description:
-      "Privacy-focused, decentralized forum software built on the AT Protocol. Your identity. Your communities. Everywhere.",
+      "Privacy-focused, decentralized forum software built on AT Protocol. Your identity. Your communities. Everywhere.",
     mainImage: "/icons/barazo-dark.svg",
     link: "https://barazo.forum",
     iconBgColor: "bg-[#1a1a2e]",

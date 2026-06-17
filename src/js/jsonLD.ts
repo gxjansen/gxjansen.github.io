@@ -2,7 +2,9 @@ import type { BlogData, Author } from "./types";
 
 // utils
 import { getTranslatedData } from "@js/translationUtils";
+import { injectYears } from "@js/textUtils";
 import { defaultLocale } from "@config/siteSettings.json";
+import { yearsBuilding } from "@data/siteStats";
 
 // data - siteData.title should not change based on locale so this should be fine
 const siteData = getTranslatedData("siteData", defaultLocale);
@@ -172,7 +174,9 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 
       // Add optional fields only if they exist
       if (author.data.bio || author.data.bioShort) {
-        authorSchema.description = author.data.bioShort || author.data.bio;
+        authorSchema.description = injectYears(
+          author.data.bioShort || author.data.bio || "",
+        );
       }
 
       if (sameAsLinks.length > 0) {
@@ -477,8 +481,7 @@ ${JSON.stringify(jsonLD, null, 2)}
     url: site,
     email: "mailto:x@gui.do",
     jobTitle: "Global Business & Technology Evangelist",
-    description:
-      "Community strategist with 20+ years building technical ecosystems around open-source platforms.",
+    description: `Community strategist with ${yearsBuilding}+ years building technical ecosystems around open-source platforms.`,
     worksFor: {
       "@type": "Organization",
       name: "Spryker",

@@ -5,6 +5,8 @@
 @use "./components/cards";
 @use "./components/links";
 @use "./components/random-link-colors";
+@use "./components/redesign";
+@use "./components/home";
 @use "./base/typography";
 @use "./prose";
 
@@ -29,6 +31,54 @@
        Baseline since 2024-07-25. */
     font-size-adjust: from-font;
   }
+}
+
+/* Signature page background: a fixed pine/rose corner-wash (v2 design system).
+   Pine top-left, rose bottom-right; brighter pine + softer rose in dark mode.
+   Fixed to the viewport so it never scrolls. Plain unlayered CSS so it's never
+   tree-shaken. Lives on the `.page-wash` div in BaseLayout. */
+.page-wash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      60% 60% at 0% 0%,
+      rgba(40, 105, 131, 0.2) 0%,
+      rgba(40, 105, 131, 0.08) 40%,
+      transparent 70%
+    ),
+    radial-gradient(
+      60% 60% at 100% 100%,
+      rgba(215, 130, 126, 0.18) 0%,
+      rgba(215, 130, 126, 0.07) 40%,
+      transparent 70%
+    );
+}
+:root.dark .page-wash {
+  background:
+    radial-gradient(
+      60% 60% at 0% 0%,
+      rgba(62, 143, 176, 0.16) 0%,
+      rgba(62, 143, 176, 0.06) 40%,
+      transparent 70%
+    ),
+    radial-gradient(
+      60% 60% at 100% 100%,
+      rgba(235, 188, 186, 0.1) 0%,
+      transparent 60%
+    );
+}
+
+/* The "Golden" word in newsletter headings, in gold. The palette gold (#f6c177)
+   is too light to read on the cream card in light mode (~2.2:1), so light mode
+   uses a deeper gold that clears WCAG for large/bold text; dark mode uses the
+   full gold (high contrast on the dark card). */
+.text-golden {
+  color: #9a6a06;
+}
+:root.dark .text-golden {
+  color: var(--color-gold);
 }
 
 /* Layer Components */
@@ -181,22 +231,24 @@
   }
 }
 
-/* Animated Focus Ring */
+/* Animated Focus Ring
+   The ring colour (pine) is solid from frame 1 so the ring is visible the
+   instant focus lands; only the offset animates outward. (A previous version
+   faded `outline-color` from transparent, leaving the ring invisible for the
+   first ~200ms of every keyboard focus.) */
 @keyframes focus-ring-expand {
   from {
     outline-offset: 0px;
-    outline-color: transparent;
   }
   to {
     outline-offset: 3px;
-    outline-color: var(--color-primary-500);
   }
 }
 
 :focus-visible {
   outline: 2px solid var(--color-primary-500);
   outline-offset: 3px;
-  animation: focus-ring-expand 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+  animation: focus-ring-expand 0.2s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 /* Global Reduced-Motion Safety Net */

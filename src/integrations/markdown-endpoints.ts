@@ -191,7 +191,7 @@ function extractMarkdown(htmlContent: string, filePath: string): string {
     "nav",
     "footer",
     // Noise / decorative
-    ".noise-background",
+    ".page-wash",
     "[aria-hidden]",
   ]) {
     main.querySelectorAll(sel).forEach((el) => el.remove());

@@ -1,4 +1,13 @@
 import { locales, localeMap } from "@config/siteSettings.json";
+import { yearsBuilding } from "@data/siteStats";
+
+/**
+ * Replace the `{years}` placeholder with the live years-building figure (the
+ * single source of truth in @data/siteStats), so bios never hardcode the year.
+ */
+export function injectYears(text: string): string {
+  return text.replaceAll("{years}", String(yearsBuilding));
+}
 
 /**
  * * returns "slugified" text.

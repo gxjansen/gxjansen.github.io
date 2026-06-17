@@ -37,11 +37,21 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
 
-  /* ---------- Font families ---------- */
+  /* ---------- Font families ----------
+     Display / headings  → Schibsted Grotesk (700–900).
+     Body / reading      → Atkinson Hyperlegible Next (WCAG-AAA legibility).
+     Handwritten accents → LiebeHeide Fineliner (licensed, self-hosted).
+     All self-hosted under /public/fonts (see scripts/fetch-redesign-fonts.mjs);
+     @font-face rules live in public/fonts/redesign-fonts.css, linked from BaseHead. */
   --font-sans:
-    Poppins, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --font-serif: Poppins, Georgia, Cambria, "Times New Roman", Times, serif;
+    "Atkinson Hyperlegible Next", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display:
+    "Schibsted Grotesk", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-hand: "LiebeHeide", "Caveat", "Segoe Script", cursive;
+  --font-serif:
+    "Schibsted Grotesk", Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
@@ -69,8 +79,11 @@
   --color-base-200: #f2e9e1; /* Dawn overlay */
   --color-base-300: #dfdad3; /* Dawn muted bg */
   --color-base-400: #9893a5; /* Dawn muted text */
-  --color-base-500: #908caa; /* Main subtle */
-  --color-base-600: #6e6a86; /* Main muted */
+  /* base-500/600 are mode-aware: darker in light mode so muted text clears
+     WCAG AA on the cream/overlay backgrounds (Rosé Pine's lighter subtle greys
+     only reach ~4:1). :root.dark restores the lighter values for dark mode. */
+  --color-base-500: #5f5b76; /* light: darker subtle */
+  --color-base-600: #565270; /* light: darker muted */
   --color-base-700: #393552; /* Main highlight-high */
   --color-base-800: #26233a; /* Main overlay */
   --color-base-900: #1f1d2e; /* Main surface */
@@ -84,7 +97,7 @@
 
   /* Backgrounds */
   --color-background: #faf4ed;
-  --color-background-dark: #1a1825;
+  --color-background-dark: #191724; /* Main base, matches --color-base-950 */
 
   /* Semantic colors using Rosé Pine accents */
   --color-info: #9ccfd8;
@@ -98,7 +111,7 @@
 
   /* Direct Rosé Pine accent access (DEFAULT + light variants) */
   --color-love: #eb6f92;
-  --color-love-light: #b4637a;
+  --color-love-light: #a8505d;
   --color-gold: #f6c177;
   --color-gold-light: #ea9d34;
   --color-rose: #ebbcba;
@@ -118,8 +131,112 @@
   --color-rp-muted: #6e6a86;
   --color-rp-muted-light: #9893a5;
 
+  /* ---------- atproto app-source accents ----------
+     Per-app colours for the activity feed badges (Bluesky, Popfeed, Tangled, …).
+     Light values here; the few that shift for dark mode are overridden in the
+     `.dark` block below. Generate `text-app-*` / `bg-app-*` utilities. The feed
+     sets `--app-c` per item (data-driven hook) and the .app-badge reads it. */
+  --color-app-bluesky: oklch(0.55 0.17 230);
+  --color-app-popfeed: oklch(0.55 0.22 280);
+  --color-app-tangled: oklch(0.55 0.15 160);
+  --color-app-smokesignal: oklch(0.58 0.18 50);
+  --color-app-standard: oklch(0.5 0.08 270);
+  --color-app-whitewind: oklch(0.45 0.02 260);
+  --color-app-frontpage: oklch(0.5 0.22 290);
+  --color-app-bookhive: oklch(0.58 0.14 60);
+  --color-app-crate: oklch(0.52 0.12 138);
+  --color-app-github: #238636;
+  --color-app-linkat: oklch(0.55 0.15 160);
+  --color-app-margin: oklch(0.5 0.14 265);
+  --color-app-flashes: oklch(0.55 0.2 350);
+  --color-app-grain: oklch(0.55 0.14 85);
+  --color-app-leaflet: oklch(0.55 0.16 145);
+  --color-app-plyr: oklch(0.58 0.18 155);
+  --color-app-beaconbits: oklch(0.6 0.18 27);
+  --color-app-spark: oklch(0.6 0.27 345);
+  --color-app-opensocial: oklch(0.55 0.15 235);
+  --color-app-atmorsvp: oklch(0.58 0.12 185);
+  --color-app-fallback: oklch(0.5 0.01 260);
+
   /* ---------- Animations ---------- */
   --animate-marquee: marquee 100s linear infinite;
+}
+
+/* Data-driven accent tokens, always emitted.
+   The site drives per-card/per-page accents at runtime via inline
+   `--ac:var(--color-<accent>)` (home cards, services, training detail pages).
+   Tailwind v4's `@theme` tree-shakes any color var that no static utility
+   references, so an accent only used through runtime `var()` (iris, here)
+   silently drops out and the accent falls back to primary. Re-declaring the
+   six brand accents in a plain :root block guarantees they resolve regardless
+   of utility usage. Values mirror the @theme block above. */
+:root {
+  --color-gold: #f6c177;
+  --color-gold-light: #ea9d34;
+  --color-foam: #9ccfd8;
+  --color-foam-light: #56949f;
+  --color-pine: #31748f;
+  --color-pine-light: #286983;
+  --color-iris: #c4a7e7;
+  --color-iris-light: #907aa9;
+  --color-love: #eb6f92;
+  --color-love-light: #a8505d;
+  --color-rose: #ebbcba;
+  --color-rose-light: #d7827e;
+}
+
+/* Hand font (LiebeHeide). Defined as a utility so every `@apply font-hand` and
+   `class="font-hand"` carries the same behaviour, not just the family:
+   - font-synthesis:none — LiebeHeide is a single weight (400). Without this,
+     `font-bold` triggers faux-bold, which smears each glyph independently and
+     breaks the connecting strokes between letters. Disabling it keeps the real
+     forms so the handwriting flows (as on the foundry's own specimen).
+   - calt + liga on — the contextual alternates / joining ligatures (per the
+     foundry). These vary repeated glyphs and connect neighbours. */
+@utility font-hand {
+  font-family: var(--font-hand);
+  font-synthesis: none;
+  font-feature-settings:
+    "calt" on,
+    "liga" on;
+  font-variant-ligatures: contextual common-ligatures;
+}
+
+/* Dark-mode app-source accents (brighter for contrast on the Main base).
+   Overrides the @theme custom properties; `text-app-*` utilities cascade. */
+:root.dark {
+  --color-app-bluesky: oklch(0.6 0.17 230);
+  --color-app-popfeed: oklch(0.65 0.22 280);
+  --color-app-tangled: oklch(0.6 0.15 160);
+  --color-app-smokesignal: oklch(0.63 0.18 50);
+  --color-app-standard: oklch(0.55 0.08 270);
+  --color-app-whitewind: oklch(0.5 0.02 260);
+  --color-app-frontpage: oklch(0.55 0.22 290);
+  --color-app-bookhive: oklch(0.62 0.14 60);
+  --color-app-crate: oklch(0.62 0.12 138);
+  --color-app-github: #2ea043;
+  --color-app-linkat: oklch(0.6 0.15 160);
+  --color-app-margin: oklch(0.62 0.14 265);
+  --color-app-flashes: oklch(0.6 0.2 350);
+  --color-app-grain: oklch(0.6 0.14 85);
+  --color-app-leaflet: oklch(0.6 0.16 145);
+  --color-app-plyr: oklch(0.65 0.18 155);
+  --color-app-beaconbits: oklch(0.65 0.18 27);
+  --color-app-spark: oklch(0.7 0.25 345);
+  --color-app-opensocial: oklch(0.66 0.15 235);
+  --color-app-atmorsvp: oklch(0.68 0.12 185);
+  --color-app-fallback: oklch(0.55 0.01 260);
+
+  /* Brand teal runs brighter in dark mode (v2 system). Overriding the scale
+     vars here lifts every primary-400/500 utility in dark mode without
+     touching light mode. 500 = brand, 400 = lighter step / hover. */
+  --color-primary-500: #3e8fb0;
+  --color-primary-400: #54a3c2;
+
+  /* Restore the lighter Rosé Pine muted greys for dark mode (the @theme values
+     above are darkened for light-mode AA contrast). */
+  --color-base-500: #908caa; /* Main subtle */
+  --color-base-600: #6e6a86; /* Main muted */
 }
 
 /* Keyframes for the @theme --animate-marquee custom animation. */

@@ -12,6 +12,8 @@ export interface ColleagueTestimonial {
   quote: string;
   category: string;
   priority: number; // 1-5, higher is more likely to be selected
+  /** When the recommendation was written (e.g. "Jan 2026"). */
+  date?: string;
 }
 
 export const colleagueTestimonials: ColleagueTestimonial[] = [
@@ -53,7 +55,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "sophie-smallwood-1",
     name: "Sophie Smallwood",
     role: "Director, Customer Success",
-    company: "Spryker",
+    company: "Twilio",
     workRelationship: "Leadership peer",
     quote:
       "What stands out most is his ability to balance strong opinions with genuine psychological safety.",
@@ -88,7 +90,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "sophie-smallwood-2",
     name: "Sophie Smallwood",
     role: "Director, Customer Success",
-    company: "Spryker",
+    company: "Twilio",
     workRelationship: "Leadership peer",
     quote:
       "He brings a rare mix of energy, positivity, and technical acumen. He rolls up his sleeves to get things done, while also experimenting with new ideas.",
@@ -98,8 +100,8 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
   {
     id: "andreas-lummerzheim-1",
     name: "Andreas Lummerzheim",
-    role: "Head of Learning Experience",
-    company: "Spryker",
+    role: "Partner Manager",
+    company: "Shopware",
     workRelationship: "Colleague in the same division, but different team",
     quote:
       "Guido consistently brought energy and openness, making it easy to connect on both professional topics and personal interests like AI and podcasting. He also excelled at connecting people across business and technology, turning community exchanges into actionable collaboration. Guido showed real leadership without ever being my manager, creating alignment and momentum simply by bringing people together.",
@@ -156,8 +158,8 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "chris-rauch-1",
     name: "Chris Rauch",
     role: "Chief Customer Officer",
-    company: "Spryker",
-    workRelationship: "Former 2nd level manager",
+    company: "Supermetrics",
+    workRelationship: "Former 2nd level manager at Spryker",
     quote:
       "His strategic thinking impressed me. Guido understood that communities need sustainable business value, not just engagement metrics. The hackathon projects directly influenced what we built next, including some AI features.",
     category: "Business Impact & Innovation",
@@ -167,8 +169,8 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "chris-rauch-2",
     name: "Chris Rauch",
     role: "Chief Customer Officer",
-    company: "Spryker",
-    workRelationship: "Former 2nd level manager",
+    company: "Supermetrics",
+    workRelationship: "Former 2nd level manager at Spryker",
     quote:
       "He delivered results that mattered: developer feedback shaped our product roadmap, engineering teams connected directly with external developers, and our community became stronger after each challenge.",
     category: "Business Impact & Innovation",
@@ -180,7 +182,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "erin-weigel-1",
     name: "Erin Weigel",
     role: "Principal Designer",
-    company: "Freelancer",
+    company: "ABsmartly",
     workRelationship: "Conference attendee",
     quote:
       "Conversion rate optimization, psychology, leadership, and business are just a few of the topics he's spoken to at the highest level.",
@@ -191,7 +193,7 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     id: "erin-weigel-2",
     name: "Erin Weigel",
     role: "Principal Designer",
-    company: "Freelancer",
+    company: "ABsmartly",
     workRelationship: "Conference attendee",
     quote:
       "Guido is an excellent public speaker who gives his audience practical tips on how to create a company culture that embraces evidence-based decision making.",
@@ -243,6 +245,30 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
       "He can lead from the front, and he can let others lead. He will always give credit to his colleagues and team.",
     category: "Leadership & Team Building",
     priority: 4,
+  },
+  {
+    id: "boris-lokschin",
+    name: "Boris Lokschin",
+    role: "Co-Founder & CEO",
+    company: "Spryker",
+    workRelationship: "Peer",
+    quote:
+      "Guido is a thought leader in community building and developer relations. Any company serious about building an ecosystem should talk to him.",
+    category: "Leadership & Team Building",
+    priority: 5,
+    date: "Jan 2026",
+  },
+  {
+    id: "eric-schreiner",
+    name: "Eric Schreiner",
+    role: "Chief Customer Officer",
+    company: "Spryker",
+    workRelationship: "Manager",
+    quote:
+      "With a small, high-performing team, Guido created a developer and customer community from scratch and turned it into a real asset for the business.",
+    category: "Leadership & Team Building",
+    priority: 5,
+    date: "Jan 2026",
   },
 ];
 

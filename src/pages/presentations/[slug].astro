@@ -3,11 +3,11 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
-import Badge from "@components/Badge/Badge.astro";
 import SlideEmbed from "@components/Presentations/SlideEmbed.astro";
 import VideoEmbed from "@components/Presentations/VideoEmbed.astro";
 import PresentationNav from "@components/Presentations/PresentationNav.astro";
 import RelatedEvents from "@components/RelatedEvents/RelatedEvents.astro";
+import Breadcrumb from "@components/Breadcrumb/Breadcrumb.astro";
 
 // content
 import { getCollection, render } from "astro:content";
@@ -60,70 +60,87 @@ const metaImage = image ? new URL(image, Astro.site) : undefined;
     }
   </div>
 
-  <section class="py-24 md:py-28">
-    <div class="site-container">
-      <div class="relative">
-        <div class="mx-auto max-w-4xl">
-          <div class="mb-8">
-            <Badge>Presentation</Badge>
-            <h1 class="h2 mb-4">{title}</h1>
+  <div class="home presentation-page">
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="mx-auto max-w-3xl">
+        <Breadcrumb
+          class="mb-6"
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Presentations", href: "/presentations/" },
+            { label: title ?? entry.id },
+          ]}
+        />
 
-            <div class="mb-6 flex flex-wrap gap-3">
-              {
-                duration && (
-                  <span class="bg-base-100 text-base-700 dark:bg-base-800 dark:text-base-300 rounded-full px-3 py-1 text-sm">
-                    {duration}
-                  </span>
-                )
-              }
-              {
-                isWorkshop && (
-                  <span class="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 rounded-full px-3 py-1 text-sm">
-                    Workshop
-                  </span>
-                )
-              }
-            </div>
+        <a
+          href="/presentations/"
+          class="text-base-500 hover:text-primary-600 dark:hover:text-primary-400 mb-6 inline-flex items-center gap-1.5 text-sm font-semibold transition"
+        >
+          <span aria-hidden="true">←</span> All presentations
+        </a>
 
-            {
-              intendedAudience && (
-                <p class="text-base-400 dark:text-base-300 text-lg">
-                  For: {intendedAudience}
-                </p>
-              )
-            }
+        <span class="hand-note">{isWorkshop ? "workshop" : "presentation"}</span
+        >
+        <h1
+          class="font-display mt-2 mb-4 text-[clamp(1.9rem,4vw,2.7rem)] leading-tight font-black tracking-[-0.03em]"
+        >
+          {title}
+        </h1>
+
+        <div class="mb-5 flex flex-wrap gap-2">
+          {duration && <span class="chip chip--plain">{duration}</span>}
+          {isWorkshop && <span class="chip">Workshop</span>}
+        </div>
+
+        {
+          intendedAudience && (
+            <p class="text-base-600 dark:text-base-400 text-lg">
+              <span class="font-semibold">For:</span> {intendedAudience}
+            </p>
+          )
+        }
+
+        <div class="prose prose-lg dark:prose-invert mt-8 max-w-none">
+          <div class="not-prose mb-8 overflow-hidden rounded-2xl">
+            <img
+              src={image}
+              alt={title}
+              width="800"
+              height="450"
+              class="aspect-video w-full object-cover"
+              loading="eager"
+            />
           </div>
 
-          <div class="prose prose-lg dark:prose-invert mb-12">
-            <div
-              class="relative mb-8 aspect-video rounded-lg"
-              style="transform: translateZ(0);"
-            >
-              <img
-                src={image}
-                alt={title}
-                width="800"
-                height="450"
-                class="absolute inset-0 h-full w-full rounded-lg object-cover"
-                loading="eager"
-                style="z-index: 100;"
-              />
+          <Content />
+        </div>
+
+        {
+          slideshareKey && (
+            <div class="mt-10">
+              <SlideEmbed slideshareKey={slideshareKey} />
             </div>
+          )
+        }
+        {
+          youtubeId && (
+            <div class="mt-10">
+              <VideoEmbed youtubeId={youtubeId} />
+            </div>
+          )
+        }
 
-            <Content />
-          </div>
-
-          {slideshareKey && <SlideEmbed slideshareKey={slideshareKey} />}
-          {youtubeId && <VideoEmbed youtubeId={youtubeId} />}
-
+        <div class="mt-12">
           <PresentationNav
             currentSlug={entry.id}
             presentations={presentations}
           />
-
-          <RelatedEvents presentationSlug={entry.id} />
         </div>
+
+        <RelatedEvents presentationSlug={entry.id} />
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>

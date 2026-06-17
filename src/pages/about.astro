@@ -1,86 +1,365 @@
 ---
-/**
- * * About page restructured for community strategist positioning
- * New structure: Value Proposition → Why It Works → The Story → Testimonials → What's Next
- */
-
-// main layout
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
 
-// components - ordered by new page structure
-import AboutHeader from "@components/About/AboutHeader.astro";
-import WhyItWorks from "@components/About/WhyItWorks.astro";
+// Shared sections (already on the redesign system)
 import AwardsSection from "@components/Press/AwardsSection.astro";
-import TheStory from "@components/About/TheStory.astro";
+import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
+import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
+import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
+import SocialCards from "@components/SocialCards/SocialCards.astro";
 
-// data
 import { pressCoverage } from "../data/press-coverage";
 import { filterAvailableContent } from "../utils/content-availability";
+import { yearsBuilding, countryCount, talksCount } from "@data/siteStats";
 
-// Filter awards and nominations
-const availableCoverage = filterAvailableContent(pressCoverage);
-const sortedCoverage = [...availableCoverage].sort(
-  (a, b) =>
-    new Date(b.publicationDate).getTime() -
-    new Date(a.publicationDate).getTime(),
-);
-const awards = sortedCoverage.filter(
-  (item) => item.category === "award" || item.category === "nomination",
-);
-import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
-import WhatsNext from "@components/About/WhatsNext.astro";
-import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
-import Badge from "@components/Badge/Badge.astro";
-import SocialCards from "@components/SocialCards/SocialCards.astro";
-import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
+// Awards & nominations, newest first.
+const awards = [...filterAvailableContent(pressCoverage)]
+  .sort(
+    (a, b) =>
+      new Date(b.publicationDate).getTime() -
+      new Date(a.publicationDate).getTime(),
+  )
+  .filter((i) => i.category === "award" || i.category === "nomination");
+
+// How the psychology read turns into community work.
+const approach = [
+  {
+    icon: "tabler/outline/door-enter",
+    title: "Designing onboarding that turns newcomers into contributors",
+    desc: "Understanding the psychology of first impressions and commitment escalation.",
+  },
+  {
+    icon: "tabler/outline/heart-handshake",
+    title:
+      "Creating participation structures that tap into intrinsic motivation",
+    desc: "Building systems that reward genuine engagement over vanity metrics.",
+  },
+  {
+    icon: "tabler/outline/message-2",
+    title: "Building feedback mechanisms that surface real sentiment",
+    desc: "Distinguishing signal from noise in community interactions.",
+  },
+  {
+    icon: "tabler/outline/chart-dots",
+    title: "Understanding the difference between activity and engagement",
+    desc: "Measuring what actually matters for community health and business value.",
+  },
+];
+
+// Biography, told as a short timeline instead of stock photos.
+const story = [
+  {
+    icon: "tabler/outline/swimming",
+    title: "The athletic years",
+    paras: [
+      "I was born in 1982 in Zwolle, in the Netherlands. I lived in Hattem, Tiel, Amersfoort, Utrecht, Breukelen (yes, Brooklyn), Hoofddorp, Amsterdam and now Ouderkerk aan de Amstel (a suburb of Amsterdam).",
+      "Until 2004, I spent most of my time swimming: training for national and European championships. That chapter taught me discipline, competition, and the value of showing up consistently.",
+    ],
+  },
+  {
+    icon: "tabler/outline/school",
+    title: "University & psychology",
+    paras: [
+      "I studied Applied Cognitive Psychology at the University of Utrecht. I was board member of the Student Group of Social Sciences (SGS) in 2006/2007.",
+      "This foundation in psychology became the lens through which I understand community dynamics, user behavior, and what actually motivates people to participate and contribute.",
+    ],
+    cta: {
+      label: "View my LinkedIn profile",
+      href: "https://www.linkedin.com/in/gxjansen/",
+    },
+  },
+  {
+    icon: "tabler/outline/route",
+    title: "Career journey",
+    paras: [
+      "My career has bridged psychology and technology: from running 500+ experiments at companies like Randstad and JDE, to building community functions at major platforms.",
+      "Each role reinforced the same insight: you can't reliably predict why people behave the way they do, so you build systems that test assumptions instead of trusting them. Whether optimizing conversions or growing developer ecosystems, the principle stays the same.",
+    ],
+    cta: {
+      label: "Credentials, awards & articles",
+      href: "/authors/gxjansen/",
+    },
+  },
+];
+
+const eyebrow = "eyebrow";
+const card =
+  "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-5";
 ---
 
 <BaseLayout
   title="About Guido | Community Builder"
-  description="Guido X Jansen: Community Builder with 20+ years creating technical ecosystems. Founded Dutchento/Meet Magento, created CRO.CAFE, led Spryker's enterprise community. Cognitive psychologist turned DevRel leader. 200+ talks across 26 countries."
+  description={`Guido X Jansen: community builder with ${yearsBuilding}+ years creating technical ecosystems. Founded Dutchento/Meet Magento, created CRO.CAFE, led Spryker's enterprise community. Cognitive psychologist turned DevRel leader. ${talksCount} talks across ${countryCount} countries.`}
 >
-  <!-- Section 1: Value Proposition -->
-  <AboutHeader />
-
-  <!-- Section 2: Why It Works - Psychology + business outcome focus -->
-  <WhyItWorks />
-
-  <!-- Section 3: Awards & Nominations -->
-  {awards.length > 0 && <AwardsSection awards={awards} />}
-
-  <!-- Section 4: The Story - Personal background -->
-  <TheStory />
-
-  <!-- Section 4: Testimonials -->
-  <ColleagueTestimonials />
-
-  <!-- Section 5: What's Next - Availability signal -->
-  <WhatsNext />
-
-  <!-- Visual gallery -->
-  <FeatureGalleryMarquee />
-
-  <section class="py-24 md:py-28">
-    <div class="site-container px-2 sm:px-4">
-      <div class="relative">
-        <div class="mx-auto text-center md:max-w-2xl">
-          <Badge>Connect with me</Badge>
-          <h2 class="h2 mb-4">Let's Connect</h2>
-          <p class="description text-lg md:text-xl">
-            I share thoughts on community building, developer ecosystems, and
-            the psychology behind what makes people contribute.
-          </p>
+  <div class="home about-page">
+    <!-- ============ HERO ============ -->
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div
+        class="grid grid-cols-1 items-center gap-[clamp(1.5rem,4vw,3rem)] md:grid-cols-[1.2fr_0.8fr]"
+      >
+        <div>
+          <span class={eyebrow}>About</span>
+          <h1
+            class="font-display mt-2 mb-5 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+          >
+            Hi, I'm Guido <span class="inline-block">👋</span>
+          </h1>
+          <div
+            class="text-base-700 dark:text-base-300 max-w-[56ch] space-y-4 text-[1.08rem] leading-relaxed"
+          >
+            <p>
+              I build communities that matter to the business, and to the people
+              in them.
+            </p>
+            <p>
+              Where many optimize for engagement metrics, I turn what developers
+              and customers tell us into product strategy. That tends to lower
+              support costs and build the kind of trust that keeps people
+              around, without locking them in.
+            </p>
+            <p>
+              I've done this from zero <a
+                href="/communities/"
+                class="text-primary-600 dark:text-primary-400 font-semibold"
+                >multiple times</a
+              >. My psychology background taught me you can't reliably predict
+              how technical users will behave, so I design community work as
+              small experiments and pay attention to what they actually do.
+            </p>
+          </div>
         </div>
-
-        <div class="mt-12">
-          <SocialCards />
+        <div class="portrait reveal mx-auto w-full max-w-[320px]">
+          <img
+            src="/images/redesign/guido-portrait.webp"
+            alt="Guido X Jansen, community strategist and cognitive psychologist"
+            width="480"
+            height="600"
+            loading="eager"
+          />
+          <span class="tag">that's me</span>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <NewsletterForm
-    variant="cta"
-    title="Subscribe to Guido's <span class='underline decoration-gold-light dark:decoration-gold decoration-2 underline-offset-4'>Golden</span> Nuggets"
-  />
+    <!-- ============ WHY IT WORKS ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="max-w-[60ch]">
+        <span class={eyebrow}>The psychology edge</span>
+        <h2
+          class="font-display my-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+        >
+          Why this approach works
+        </h2>
+        <p
+          class="text-base-600 dark:text-base-400 mt-4 text-[1.05rem] leading-[1.6]"
+        >
+          My cognitive psychology background shapes how I approach community
+          building. It mostly taught me one thing: you can't reliably predict
+          how developers and technical users will behave. So instead of
+          guessing, I design community work to be tested and watch what people
+          actually do.
+        </p>
+        <p
+          class="text-base-600 dark:text-base-400 mt-3 text-[1.05rem] leading-[1.6]"
+        >
+          Where others ask "how do we get more people?" I ask "why would someone
+          stay, contribute, and advocate?"
+        </p>
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {
+          approach.map((a) => (
+            <div class={card}>
+              <div class="text-primary-600 dark:text-primary-400 mb-3">
+                <Icon name={a.icon} class="size-6" aria-hidden="true" />
+              </div>
+              <h3 class="font-display text-[1.02rem] leading-snug font-bold">
+                {a.title}
+              </h3>
+              <p class="text-base-600 dark:text-base-400 mt-1.5 text-[0.92rem] leading-relaxed">
+                {a.desc}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div
+        class="border-primary-600/30 bg-primary-600/5 dark:border-primary-400/30 dark:bg-primary-400/10 mt-6 flex flex-col gap-4 rounded-2xl border p-6 sm:flex-row sm:items-center"
+      >
+        <div
+          class="font-display text-primary-600 dark:text-primary-400 shrink-0 text-[2.4rem] leading-none font-black tabular-nums"
+        >
+          500+
+        </div>
+        <div>
+          <h3 class="font-display text-[1.1rem] font-bold">
+            Relationships, backed by data
+          </h3>
+          <p
+            class="text-base-600 dark:text-base-400 mt-1 text-[0.95rem] leading-relaxed"
+          >
+            My experimentation background (running 500+ A/B tests at companies
+            like Randstad and JDE) taught me to measure what matters and prove
+            what's actually working. So I lead community as someone who thinks
+            strategically and analytically, with the relationships backed by
+            data.
+          </p>
+        </div>
+      </div>
+
+      <a
+        href="/authors/gxjansen/"
+        class="text-primary-600 dark:text-primary-400 font-display mt-6 inline-flex items-center gap-1.5 text-[0.95rem] font-bold"
+        >See my credentials, awards, and articles <span aria-hidden="true"
+          >→</span
+        ></a
+      >
+    </section>
+
+    <!-- ============ AWARDS ============ -->
+    {awards.length > 0 && <AwardsSection awards={awards} />}
+
+    <!-- ============ THE STORY ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="max-w-[60ch]">
+        <span class="hand-note">the backstory</span>
+        <h2>How I got here</h2>
+        <p
+          class="text-base-600 dark:text-base-400 mt-4 text-[1.05rem] leading-[1.6]"
+        >
+          Before community strategy, there was competitive swimming. I spent my
+          early years training for national and European championships: learning
+          discipline, competition, and the value of showing up consistently.
+          That chapter ended in 2004, and a new one began.
+        </p>
+        <div class={`${card} mt-6 flex items-start gap-3`}>
+          <Icon
+            name="tabler/outline/letter-x"
+            class="text-primary-600 dark:text-primary-400 mt-0.5 size-5 shrink-0"
+            aria-hidden="true"
+          />
+          <p
+            class="text-base-700 dark:text-base-300 text-[0.95rem] leading-relaxed"
+          >
+            To answer a common question right out of the gate: yes, the X in my
+            name isn't just there for decorative reasons. My second name is
+            Xavier!
+          </p>
+        </div>
+      </div>
+
+      <ol class="mt-10 flex flex-col">
+        {
+          story.map((s) => (
+            <li class="border-base-200 dark:border-base-800 relative border-l-2 pb-8 pl-8 last:pb-0">
+              <span class="bg-primary-600 dark:bg-primary-400 absolute top-0 -left-[15px] flex size-7 items-center justify-center rounded-full ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]">
+                <Icon
+                  name={s.icon}
+                  class="size-4 text-white"
+                  aria-hidden="true"
+                />
+              </span>
+              <h3 class="font-display text-[1.2rem] font-extrabold">
+                {s.title}
+              </h3>
+              <div class="text-base-600 dark:text-base-400 mt-2 max-w-[60ch] space-y-2 text-[0.98rem] leading-relaxed">
+                {s.paras.map((p) => (
+                  <p>{p}</p>
+                ))}
+              </div>
+              {s.cta && (
+                <a
+                  href={s.cta.href}
+                  {...(s.cta.href.startsWith("http")
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  class="text-primary-600 dark:text-primary-400 font-display mt-3 inline-flex items-center gap-1.5 text-sm font-bold"
+                >
+                  {s.cta.label} <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <!-- ============ ENDORSEMENTS ============ -->
+    <ColleagueTestimonials />
+
+    <!-- ============ GALLERY ============ -->
+    <section
+      class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]"
+      aria-label="Photo gallery"
+    >
+      <FeatureGalleryMarquee />
+    </section>
+
+    <!-- ============ WHAT'S NEXT ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div
+        class="border-base-200 dark:border-base-800 from-gold/15 rounded-3xl border bg-gradient-to-br to-transparent p-[clamp(1.5rem,4vw,3rem)]"
+      >
+        <div class="max-w-[60ch]">
+          <span class={eyebrow}>What's next</span>
+          <h2
+            class="font-display my-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+          >
+            Need help and want to collaborate?
+          </h2>
+          <p
+            class="text-base-700 dark:text-base-300 mt-4 text-[1.05rem] leading-[1.6]"
+          >
+            I'm taking on community leadership opportunities at companies with
+            momentum. Where technical ecosystems can become genuine growth
+            engines.
+          </p>
+          <p
+            class="text-base-600 dark:text-base-400 mt-3 text-[1.05rem] leading-[1.6]"
+          >
+            Particularly interested in open source, AI, automation and
+            privacy-focused organizations.
+          </p>
+          <a
+            href="/retainer/"
+            class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display mt-6 inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
+          >
+            Work with me <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONNECT ============ -->
+    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mx-auto max-w-2xl text-center">
+        <span class={eyebrow}>Connect with me</span>
+        <h2
+          class="font-display my-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
+        >
+          Let's connect
+        </h2>
+        <p
+          class="text-base-600 dark:text-base-400 mt-3 text-lg leading-relaxed"
+        >
+          I share thoughts on community building, developer ecosystems, and the
+          psychology behind what makes people contribute.
+        </p>
+      </div>
+      <div class="mt-10">
+        <SocialCards />
+      </div>
+    </section>
+
+    <NewsletterForm
+      variant="card"
+      title="Subscribe to Guido's <span class='text-golden'>Golden</span> Nuggets"
+      description="Occasional field notes on <strong>community, experimentation, AI & open tech</strong>. The things I'd tell a friend over coffee, not a content calendar."
+    />
+  </div>
 </BaseLayout>

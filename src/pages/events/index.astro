@@ -3,7 +3,6 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
-import Badge from "@components/Badge/Badge.astro";
 import EventCard from "@components/Events/EventCard.astro";
 import RecurringEventCard from "@components/Events/RecurringEventCard.astro";
 import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
@@ -12,6 +11,8 @@ import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
 // utils
 import { getPresentationUrl } from "@utils/eventPresentationRelations";
 import { getAllEvents, getEventIcon } from "@utils/eventUtils";
+
+import { talksCount, countryCount } from "@data/siteStats";
 
 // Get all events and sort them by date
 const events = await getAllEvents();
@@ -76,15 +77,6 @@ const sortedYears = Array.from(eventsByYear.keys()).sort((a, b) => b - a);
 
 // Load the Spryker icon once for recurring event cards
 const sprykerIcon = await getEventIcon("spryker.png");
-
-// Calculate total event count for display
-// Regular events + 1 per recurring group per year
-let totalDisplayedEvents = 0;
-sortedYears.forEach((year) => {
-  const yearGroup = eventsByYear.get(year)!;
-  totalDisplayedEvents += yearGroup.regularEvents.length;
-  totalDisplayedEvents += yearGroup.recurringGroups.size; // Each recurring group counts as 1
-});
 ---
 
 <BaseLayout
@@ -93,124 +85,187 @@ sortedYears.forEach((year) => {
   type="eventList"
   events={events}
 >
-  {/* Upcoming Events Section */}
-  <section class="py-24 md:py-28">
-    <UpcomingEvents events={sortedEvents} />
-  </section>
+  <div class="home events-page">
+    {/* Hero */}
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">where you'll find me</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.1] font-black tracking-[-0.03em]"
+        >
+          Events
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
+          Conferences, meetups and workshops I've spoken at or helped run. <a
+            href="/speaker/"
+            class="text-primary-600 dark:text-primary-400 font-semibold"
+            >Get in touch</a
+          > if you'd like me at yours.
+        </p>
+      </div>
+    </section>
 
-  {/* Countries Flags Section */}
-  <section class="py-12">
-    <FeatureFlagsMarquee />
-  </section>
+    {/* Upcoming Events Section */}
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <UpcomingEvents events={sortedEvents} />
+    </section>
 
-  {/* Past Events Section */}
-  <section id="past-events" class="py-24 md:py-28">
-    <div class="mx-auto mb-16 text-center md:max-w-4xl">
-      <Badge>Events</Badge>
-      <h1 class="h2 mb-4">Past Events</h1>
-      <p class="description text-lg md:text-xl">
-        An overview of all {totalDisplayedEvents} events I've spoken at
-      </p>
-    </div>
+    {/* Countries Flags Section */}
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <FeatureFlagsMarquee />
+    </section>
 
-    <div class="space-y-16" id="events-container">
-      {
-        sortedYears.map((year) => {
-          const yearGroup = eventsByYear.get(year)!;
+    {/* Past Events Section */}
+    <section id="past-events" class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <div class="sec-head">
+        <div>
+          <span class="hand-note">the back catalogue</span>
+          <h2>Past events</h2>
+        </div>
+        <span class="text-base-500 text-sm">
+          {talksCount} talks across {countryCount} countries
+        </span>
+      </div>
 
-          // Combine recurring groups and regular events for this year
-          // Place recurring group card at the position of its first occurrence
-          const allYearEvents: CombinedEventItem[] = [];
+      <div class="space-y-16" id="events-container">
+        {
+          sortedYears.map((year) => {
+            const yearGroup = eventsByYear.get(year)!;
 
-          // Add regular events
-          yearGroup.regularEvents.forEach((event) => {
-            allYearEvents.push({
-              type: "regular",
-              event,
-              date: new Date(event.date),
+            // Combine recurring groups and regular events for this year
+            // Place recurring group card at the position of its first occurrence
+            const allYearEvents: CombinedEventItem[] = [];
+
+            // Add regular events
+            yearGroup.regularEvents.forEach((event) => {
+              allYearEvents.push({
+                type: "regular",
+                event,
+                date: new Date(event.date),
+              });
             });
-          });
 
-          // Add recurring groups (use the date of the last event in the group)
-          yearGroup.recurringGroups.forEach((events, key) => {
-            const lastEvent = events[0]; // Events are already sorted desc
-            allYearEvents.push({
-              type: "recurring",
-              recurringKey: key,
-              recurringEvents: events,
-              date: new Date(lastEvent.date),
+            // Add recurring groups (use the date of the last event in the group)
+            yearGroup.recurringGroups.forEach((events, key) => {
+              const lastEvent = events[0]; // Events are already sorted desc
+              allYearEvents.push({
+                type: "recurring",
+                recurringKey: key,
+                recurringEvents: events,
+                date: new Date(lastEvent.date),
+              });
             });
-          });
 
-          // Sort by date descending
-          allYearEvents.sort((a, b) => b.date.getTime() - a.date.getTime());
+            // Sort by date descending
+            allYearEvents.sort((a, b) => b.date.getTime() - a.date.getTime());
 
-          // Split into two columns
-          const firstColumnEvents = allYearEvents.filter((_, i) => i % 2 === 0);
-          const secondColumnEvents = allYearEvents.filter(
-            (_, i) => i % 2 === 1,
-          );
+            // Split into two columns
+            const firstColumnEvents = allYearEvents.filter(
+              (_, i) => i % 2 === 0,
+            );
+            const secondColumnEvents = allYearEvents.filter(
+              (_, i) => i % 2 === 1,
+            );
 
-          return (
-            <div class="year-group">
-              <div class="mb-8 flex items-center gap-4">
-                <h2 class="text-base-800 dark:text-base-200 text-2xl font-bold">
-                  {year}
-                </h2>
-                <div class="bg-base-300 dark:bg-base-700 h-px flex-1" />
-                <span class="text-base-600 dark:text-base-400 text-sm">
-                  {allYearEvents.length}{" "}
-                  {allYearEvents.length === 1 ? "event" : "events"}
-                </span>
-              </div>
-
-              <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
-                {/* First column */}
-                <div class="space-y-6">
-                  {firstColumnEvents.map((item) =>
-                    item.type === "recurring" && item.recurringEvents ? (
-                      <RecurringEventCard
-                        name="Spryker User Group"
-                        events={item.recurringEvents}
-                        icon={sprykerIcon}
-                        url="https://forum.commercequest.space/events/"
-                        role="Organizer & co-host/moderator"
-                      />
-                    ) : item.event ? (
-                      <EventCard
-                        {...item.event}
-                        showPresentationName={true}
-                        presentationUrl={getPresentationUrl(item.event.id)}
-                      />
-                    ) : null,
-                  )}
+            return (
+              <div class="year-group">
+                <div class="mb-8 flex items-center gap-4">
+                  <h3 class="font-display text-base-800 dark:text-base-200 text-2xl font-extrabold tracking-[-0.02em]">
+                    {year}
+                  </h3>
+                  <div class="bg-base-200 dark:bg-base-800 h-px flex-1" />
+                  <span class="text-base-500 text-sm">
+                    {allYearEvents.length}{" "}
+                    {allYearEvents.length === 1 ? "event" : "events"}
+                  </span>
                 </div>
 
-                {/* Second column - offset as a whole */}
-                <div class="space-y-6 md:mt-24">
-                  {secondColumnEvents.map((item) =>
-                    item.type === "recurring" && item.recurringEvents ? (
-                      <RecurringEventCard
-                        name="Spryker User Group"
-                        events={item.recurringEvents}
-                        icon={sprykerIcon}
-                        url="https://forum.commercequest.space/events/"
-                        role="Organizer & co-host/moderator"
-                      />
-                    ) : item.event ? (
-                      <EventCard
-                        {...item.event}
-                        showPresentationName={true}
-                        presentationUrl={getPresentationUrl(item.event.id)}
-                      />
-                    ) : null,
-                  )}
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+                  {/* First column */}
+                  <div class="space-y-6">
+                    {firstColumnEvents.map((item) =>
+                      item.type === "recurring" && item.recurringEvents ? (
+                        <RecurringEventCard
+                          name="Spryker User Group"
+                          events={item.recurringEvents}
+                          icon={sprykerIcon}
+                          url="https://commercequest.space/"
+                          role="Organizer & co-host/moderator"
+                        />
+                      ) : item.event ? (
+                        <EventCard
+                          {...item.event}
+                          showPresentationName={true}
+                          presentationUrl={getPresentationUrl(item.event.id)}
+                        />
+                      ) : null,
+                    )}
+                  </div>
+
+                  {/* Second column - offset as a whole */}
+                  <div class="space-y-6 md:mt-24">
+                    {secondColumnEvents.map((item) =>
+                      item.type === "recurring" && item.recurringEvents ? (
+                        <RecurringEventCard
+                          name="Spryker User Group"
+                          events={item.recurringEvents}
+                          icon={sprykerIcon}
+                          url="https://commercequest.space/"
+                          role="Organizer & co-host/moderator"
+                        />
+                      ) : item.event ? (
+                        <EventCard
+                          {...item.event}
+                          showPresentationName={true}
+                          presentationUrl={getPresentationUrl(item.event.id)}
+                        />
+                      ) : null,
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })
-      }
-    </div>
-  </section>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    {/* CTA band */}
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <div
+        class="bg-primary-600/[0.06] dark:bg-primary-400/[0.06] border-primary-600/15 dark:border-primary-400/20 flex flex-wrap items-center gap-x-8 gap-y-5 rounded-3xl border p-[clamp(1.75rem,4vw,2.75rem)]"
+      >
+        <div class="min-w-[16rem] flex-1">
+          <span class="hand-note">want me at yours?</span>
+          <h2
+            class="font-display text-[clamp(1.7rem,3.5vw,2.4rem)] leading-[1.1] font-black tracking-[-0.03em]"
+          >
+            Invite me to speak
+          </h2>
+          <p
+            class="text-base-600 dark:text-base-400 mt-2 max-w-[44ch] leading-relaxed"
+          >
+            {talksCount} talks across {countryCount} countries. Tell me about your
+            event and audience.
+          </p>
+        </div>
+        <div class="flex flex-shrink-0 flex-wrap gap-3">
+          <a
+            href="/speaker/"
+            class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
+          >
+            Speaker info <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href="/presentations/"
+            class="border-base-300 hover:border-primary-600 dark:border-base-500 dark:hover:border-primary-400 bg-base-100 text-base-800 dark:bg-base-700 dark:text-base-100 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
+          >
+            See all talks
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

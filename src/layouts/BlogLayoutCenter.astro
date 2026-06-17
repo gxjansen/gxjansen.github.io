@@ -11,12 +11,16 @@ import BlogNav from "@components/Blog/BlogNav.astro";
 import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 import AuthorByline from "@components/Author/AuthorByline.astro";
 import AuthorBioBox from "@components/Author/AuthorBioBox.astro";
+import Breadcrumb from "@components/Breadcrumb/Breadcrumb.astro";
 
 // utils
 import { formatDate, humanize } from "@js/textUtils";
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { useTranslations } from "@js/translationUtils";
 import { filterCategoriesByCount } from "@js/blogUtils";
+import { readingTime } from "../utils/readingTime";
+import { normalizeBskyUri } from "../lib/bskyUri";
+import { fetchEngagement } from "../lib/sifaActivity";
 
 interface Props {
   post: CollectionEntry<"post">;
@@ -34,6 +38,22 @@ const {
   heroImage,
   blueskyUri,
 } = post.data;
+
+// Estimated reading time (computed locally from the article body).
+const readTime = readingTime(post.body);
+
+// Bluesky engagement for THIS post (build-time). Normalize the optional
+// blueskyUri to a canonical at:// URI + a clickable bsky.app permalink, then
+// fetch its counts in one no-auth getPosts call. fetchEngagement never throws —
+// an offline build just yields no count and the link falls back to "Comment".
+// Unlike the index grid there's no >=10 threshold: on the article itself any
+// real engagement (>=1) is useful context.
+const bsky = blueskyUri ? normalizeBskyUri(blueskyUri) : null;
+const bskyEngagement = bsky ? await fetchEngagement([bsky.atUri]) : null;
+const bskyCounts = bsky ? bskyEngagement?.get(bsky.atUri) : undefined;
+const bskyTotal = bskyCounts
+  ? bskyCounts.likes + bskyCounts.reposts + bskyCounts.replies
+  : 0;
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
@@ -66,6 +86,9 @@ const newsletterDescription =
   authorsData={authorsData}
   postFrontmatter={post.data}
 >
+  <!-- Reading progress (pure-CSS scroll-timeline; hidden where unsupported) -->
+  <div class="reading-progress" aria-hidden="true"></div>
+
   <article
     class="mt-24"
     aria-labelledby="article-title"
@@ -77,6 +100,16 @@ const newsletterDescription =
       <div class="flex w-full flex-col items-center px-4">
         <div class="mx-auto flex w-full max-w-2xl">
           <div class="mx-auto max-w-full text-center">
+            <!-- Breadcrumb trail -->
+            <Breadcrumb
+              class="mb-6 flex justify-center text-left"
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Articles", href: "/post/" },
+                { label: title },
+              ]}
+            />
+
             <!-- Categories -->
             <div
               class="flex justify-center gap-4"
@@ -143,15 +176,17 @@ const newsletterDescription =
                 )
               }
 
+              <!-- Reading time -->
+              <span class="text-base-600 dark:text-base-400">&bull;</span>
+              <span aria-label="Estimated reading time">{readTime}</span>
+
               <!-- Bluesky comment link (only if linked) -->
               {
                 blueskyUri && (
                   <>
                     <span class="text-base-600 dark:text-base-400">&bull;</span>
                     <a
-                      href={blueskyUri}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="#juttu-comments"
                       class="text-foam-light dark:text-foam inline-flex items-center gap-1.5 hover:underline"
                     >
                       <svg
@@ -162,7 +197,18 @@ const newsletterDescription =
                       >
                         <path d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.781C285.169 375.521 284.017 372.502 284 376.101C283.983 372.502 282.831 375.521 280.369 383.781C266.939 422.461 214.527 576.312 94.6667 453.32C31.5556 388.56 60.7778 323.8 175.653 304.249C109.933 315.434 36.0533 296.954 15.7778 224.501C9.94525 203.659 0 75.2916 0 57.9464C0 -28.9064 76.1345 -1.61183 123.121 33.6637Z" />
                       </svg>
-                      Comment
+                      {bsky && bskyTotal >= 1 ? (
+                        <span
+                          class="bsky-eng inline-flex items-center gap-1"
+                          data-bsky-uri={bsky.atUri}
+                          aria-label={`${bskyTotal} interactions on Bluesky`}
+                        >
+                          <span class="bsky-eng-n">{bskyTotal}</span>{" "}
+                          interactions
+                        </span>
+                      ) : (
+                        "Comment"
+                      )}
                     </a>
                   </>
                 )
@@ -222,6 +268,7 @@ const newsletterDescription =
         >
           <slot />
         </section>
+        <p class="article-signature" aria-hidden="true">— Guido</p>
       </div>
 
       <!-- Bluesky-powered comments (Juttu, self-hosted at comments.gui.do).
@@ -264,8 +311,8 @@ const newsletterDescription =
   <!-- Newsletter CTA -->
   <div class="mt-8">
     <NewsletterForm
-      variant="cta"
-      title="Enjoyed this? Get Guido's <span class='underline decoration-gold-light dark:decoration-gold decoration-2 underline-offset-4'>Golden</span> Nuggets"
+      variant="card"
+      title="Enjoyed this? Get Guido's <span class='text-golden'>Golden</span> Nuggets"
       description={newsletterDescription}
     />
   </div>
@@ -274,4 +321,12 @@ const newsletterDescription =
   <nav class="mx-auto max-w-2xl" aria-label="Blog post navigation">
     <BlogNav currentSlug={post.id} posts={allPosts} />
   </nav>
+
+  <script>
+    // Live Bluesky engagement count in the byline (stale-while-revalidate),
+    // sharing the same module + localStorage cache as the /post/ index. No-ops
+    // when this article has no `.bsky-eng` element. See bskyEngagement.ts.
+    import { initBskyEngagement } from "../scripts/bskyEngagement";
+    initBskyEngagement();
+  </script>
 </BaseLayout>

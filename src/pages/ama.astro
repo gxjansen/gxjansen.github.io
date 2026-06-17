@@ -14,8 +14,7 @@
  */
 
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Badge from "@components/Badge/Badge.astro";
-import Button from "@components/Button/Button.astro";
+import { Icon } from "astro-icon/components";
 
 import ogImage from "@images/ama/og.png";
 
@@ -26,22 +25,29 @@ const description =
 ---
 
 <BaseLayout title="Ask Me Anything" description={description} image={ogImage}>
-  <!-- Hero -->
-  <section class="pt-24 pb-8 md:pt-28">
-    <div class="site-container px-4">
+  <div class="home ama-page">
+    <!-- Hero -->
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
       <div class="mx-auto max-w-2xl text-center">
-        <Badge>AMA · Open</Badge>
-        <h1 class="h1 mb-4">Ask me anything</h1>
-        <p class="description text-lg md:text-xl">
+        <span class="hand-note">ask away</span>
+        <h1
+          class="font-display mt-2 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Ask me anything
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
           Anonymous. No login, no email, no tracking. I'll answer on Bluesky.
         </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Form -->
-  <section id="ama-form-section" class="pb-16 md:pb-20">
-    <div class="site-container px-4">
+    <!-- Form -->
+    <section
+      id="ama-form-section"
+      class="relative z-10 pb-[clamp(3rem,7vw,5rem)]"
+    >
       <div class="mx-auto max-w-2xl">
         <form id="ama-form" class="flex flex-col gap-4" novalidate>
           <label for="ama-question" class="sr-only">Your question</label>
@@ -83,9 +89,12 @@ const description =
                 aria-describedby="ama-altcha-desc"></altcha-widget>
             </div>
 
-            <Button type="submit" variant="primary" arrow="right">
-              Send question
-            </Button>
+            <button
+              type="submit"
+              class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
+            >
+              Send question <span aria-hidden="true">→</span>
+            </button>
           </div>
 
           <p class="text-base-600 dark:text-base-400 text-xs">
@@ -106,32 +115,33 @@ const description =
           </div>
         </form>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Success state — hidden until submit -->
-  <section id="ama-success" class="hidden pb-16 md:pb-20">
-    <div class="site-container px-4">
+    <!-- Success state — hidden until submit -->
+    <section
+      id="ama-success"
+      class="relative z-10 hidden pb-[clamp(3rem,7vw,5rem)]"
+    >
       <div
-        class="border-primary-200 dark:border-primary-800 bg-primary-50/60 dark:bg-primary-950/40 mx-auto max-w-2xl rounded-xl border p-8 text-center md:p-12"
+        class="border-primary-200 dark:border-primary-800 bg-primary-50/60 dark:bg-primary-950/40 mx-auto max-w-2xl rounded-2xl border p-8 text-center md:p-12"
       >
-        <div class="mb-4 flex justify-center">
-          <svg
-            class="text-primary-500 size-12"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+        <div
+          class="text-primary-600 dark:text-primary-400 mb-4 flex justify-center"
+        >
+          <Icon
+            name="tabler/outline/circle-check"
+            class="size-12"
             aria-hidden="true"
-          >
-            <path d="M5 12l5 5L20 7"></path>
-          </svg>
+          />
         </div>
-        <h2 class="h2 mb-3">Thanks, your question is in.</h2>
-        <p class="description mb-8 text-base md:text-lg">
+        <h2
+          class="font-display mb-3 text-[clamp(1.6rem,3vw,2.1rem)] font-black tracking-[-0.03em]"
+        >
+          Thanks, your question is in.
+        </h2>
+        <p
+          class="text-base-600 dark:text-base-400 mx-auto mb-8 max-w-[52ch] text-base leading-relaxed md:text-lg"
+        >
           Really appreciate you asking. I read every question and try to answer
           the ones I've got something worth adding to. Sometimes that takes a
           while. Follow on Bluesky to catch the reply when it lands.
@@ -139,39 +149,46 @@ const description =
         <div
           class="flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
         >
-          <Button
+          <a
             href="https://bsky.app/profile/gui.do"
             target="_blank"
             rel="noopener"
-            variant="primary"
-            arrow="right"
+            class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
           >
-            Follow on Bluesky
-          </Button>
-          <Button
-            href="https://bsky.app/hashtag/ama?author=gui.do"
-            target="_blank"
-            rel="noopener"
-            variant="outline"
-          >
-            Browse answered AMAs
-          </Button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Recent answered Q&As: hidden until loadFeed confirms ≥6 posts. -->
-  <section id="ama-feed-section" class="hidden pb-24 md:pb-28">
-    <div class="site-container px-4">
-      <div class="mx-auto max-w-5xl">
-        <div class="mb-8 flex items-end justify-between">
-          <h2 class="h3">Recently answered</h2>
+            Follow on Bluesky <span aria-hidden="true">→</span>
+          </a>
           <a
             href="https://bsky.app/hashtag/ama?author=gui.do"
             target="_blank"
             rel="noopener"
-            class="text-primary-600 dark:text-primary-400 text-sm font-medium hover:underline"
+            class="border-base-300 hover:border-primary-600 dark:border-base-500 dark:hover:border-primary-400 bg-base-100 text-base-800 dark:bg-base-700 dark:text-base-100 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
+          >
+            Browse answered AMAs
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent answered Q&As: hidden until loadFeed confirms ≥6 posts. -->
+    <section
+      id="ama-feed-section"
+      class="relative z-10 hidden pb-[clamp(4rem,9vw,7rem)]"
+    >
+      <div class="mx-auto max-w-5xl">
+        <div class="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <span class="hand-note">straight answers</span>
+            <h2
+              class="font-display text-[clamp(1.5rem,3vw,2rem)] font-black tracking-[-0.03em]"
+            >
+              Recently answered
+            </h2>
+          </div>
+          <a
+            href="https://bsky.app/hashtag/ama?author=gui.do"
+            target="_blank"
+            rel="noopener"
+            class="text-primary-600 dark:text-primary-400 shrink-0 text-sm font-semibold hover:underline"
           >
             View more on Bluesky →
           </a>
@@ -180,8 +197,8 @@ const description =
         <div id="ama-feed" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>
 
 <script is:inline>

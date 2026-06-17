@@ -39,18 +39,25 @@ const { Content } = await render(page);
 ---
 
 <BaseLayout title={title} description={description}>
-  <section class="site-container mt-16 overflow-x-clip">
-    <div
-      class="w-full bg-[url('/assets/pattern-light.svg')] bg-center bg-no-repeat py-20 text-center md:py-32 dark:bg-[url('/assets/pattern-dark.svg')]"
+  <div class="home other-page">
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
     >
-      <h1 class="h1">{title}</h1>
-    </div>
-    <div class="mx-auto max-w-3xl">
-      <div
-        class="prose text-base-900 dark:text-base-100 mt-10 max-w-none text-sm md:text-base"
-      >
-        <Content components={{ a: ExternalLink }} />
+      <div class="mx-auto max-w-3xl text-center">
+        <h1
+          class="font-display mt-2 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          {title}
+        </h1>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <div class="mx-auto max-w-3xl">
+        <div class="prose dark:prose-invert max-w-none">
+          <Content components={{ a: ExternalLink }} />
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

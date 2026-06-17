@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import type { Event } from "../../utils/eventUtils";
 import { loadCountryFlag } from "../../utils/flagUtils";
 
@@ -70,7 +71,11 @@ const eventDate = new Date(date).toLocaleDateString("en-US", {
               loading="lazy"
             />
           ) : (
-            <span class="text-2xl">🗓️</span>
+            <Icon
+              name="tabler/outline/calendar"
+              class="text-base-400 dark:text-base-500 size-7"
+              aria-hidden="true"
+            />
           )
         }
       </div>

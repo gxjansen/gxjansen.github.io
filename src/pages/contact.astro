@@ -1,31 +1,83 @@
 ---
-// main layout
 import BaseLayout from "@layouts/BaseLayout.astro";
+import SocialLinks from "@components/SocialLinks/SocialLinks.astro";
+import { socialLinks } from "../data/socialLinks";
 
-// components
-import Badge from "@components/Badge/Badge.astro";
-import SocialCards from "@components/SocialCards/SocialCards.astro";
+const CAL = "https://app.cal.eu/gxjansen/30min";
+
+// Inline social row for the contact page only — explicit order and set,
+// independent of the shared <SocialCards> component used elsewhere.
+// Order: Bluesky, Sifa, Signal, LinkedIn (GitHub intentionally dropped).
+const byIcon = (icon: string) => socialLinks.find((s) => s.icon === icon);
+
+// Missing platforms (no resolvable href) simply don't render — no dead "#"
+// links. Bluesky and Sifa carry hardcoded hrefs, so they always survive.
+const socials = [
+  {
+    icon: "bluesky",
+    name: "Bluesky",
+    href: "https://bsky.app/profile/gui.do",
+  },
+  {
+    icon: "sifa",
+    name: "Sifa ID",
+    href: byIcon("sifa")?.href ?? "https://sifa.id/p/gui.do",
+  },
+  { icon: "signal", name: "Signal", href: byIcon("signal")?.href },
+  {
+    icon: "linkedin",
+    name: "LinkedIn",
+    href: byIcon("linkedin")?.href,
+  },
+].filter((s): s is typeof s & { href: string } => Boolean(s.href));
 ---
 
 <BaseLayout
-  title="Book me for your event"
-  description="Get in touch! Contact me using the form below or send me a DM."
+  title="Contact & booking"
+  description="Get in touch with Guido X Jansen: book a call, send a DM, or invite me to speak at your event."
 >
-  <section class="py-24 md:py-28">
-    <div class="site-container px-4">
-      <div class="relative">
-        <div class="mx-auto text-center md:max-w-2xl">
-          <Badge>Connect with me</Badge>
-          <h1 class="h1 mb-4">Contact Me / Book me for your event</h1>
-          <p class="description text-lg md:text-xl">
-            Contact me by sending me a DM on one of the platforms below.
-          </p>
-        </div>
-
-        <div class="mt-12">
-          <SocialCards />
+  <div class="home contact-page">
+    <!-- ============ HERO ============ -->
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-2xl">
+        <span class="hand-note">say hello</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.4rem,5.5vw,3.8rem)] leading-[1] font-black tracking-[-0.035em]"
+        >
+          Get in touch
+        </h1>
+        <p
+          class="text-base-600 dark:text-base-400 max-w-[52ch] text-lg leading-relaxed"
+        >
+          I'm approachable and reply to real messages. Want me to speak at your
+          event, advise your team, or just trade notes on community and
+          experimentation? Book a slot or reach out, whatever's easiest.
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a
+            href={CAL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
+          >
+            Book 30 minutes <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href="/retainer/"
+            class="border-base-300 hover:border-primary-600 dark:border-base-500 dark:hover:border-primary-400 bg-base-100 text-base-800 dark:bg-base-700 dark:text-base-100 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
+          >
+            Work with me
+          </a>
         </div>
       </div>
-    </div>
-  </section>
+
+      <!-- ============ SOCIAL ROW ============ -->
+      <div class="mt-14">
+        <span class="hand-note">or find me here</span>
+        <SocialLinks location="contact" context="contact" links={socials} />
+      </div>
+    </section>
+  </div>
 </BaseLayout>

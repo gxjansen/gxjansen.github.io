@@ -6,33 +6,34 @@
 
 // main layout
 import BaseLayout from "@layouts/BaseLayout.astro";
-
-// components
-import Badge from "@components/Badge/Badge.astro";
 ---
 
 <BaseLayout
   title="Privacy"
   description="How I handle your data. Self-hosted infrastructure, no tracking pixels, GDPR compliant."
 >
-  <!-- Header -->
-  <section class="pt-24 pb-8 md:pt-28">
-    <div class="site-container px-4">
-      <div class="mx-auto max-w-2xl text-center">
-        <Badge>Your data</Badge>
-        <h1 class="h1 mb-6">Privacy</h1>
-        <p class="text-base-600 dark:text-base-400 text-lg">
+  <div class="home privacy-page">
+    <!-- ============ HERO ============ -->
+    <section
+      class="relative z-10 pt-[clamp(4.5rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div class="max-w-2xl">
+        <span class="hand-note">your data</span>
+        <h1
+          class="font-display mt-2 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Privacy
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
           Here's exactly how I handle your data.
         </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Content section -->
-  <section class="py-12 md:py-16">
-    <div class="site-container px-4">
-      <div class="mx-auto max-w-2xl">
-        <div class="prose dark:prose-invert mx-auto">
+    <!-- ============ CONTENT ============ -->
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <div class="max-w-2xl">
+        <div class="prose dark:prose-invert max-w-none">
           <p class="text-base-600 dark:text-base-400 text-sm">
             <em>Last updated: 31 May 2026</em>
           </p>
@@ -49,7 +50,7 @@ import Badge from "@components/Badge/Badge.astro";
             <li>Page views (aggregate, not individual)</li>
             <li>Referrer information</li>
             <li>Country (derived from IP, then discarded)</li>
-            <li>Device type and browser (anonymized)</li>
+            <li>Device type and browser (anonymised)</li>
           </ul>
           <p>I use zero cookies. Each visit stands alone.</p>
 
@@ -58,7 +59,7 @@ import Badge from "@components/Badge/Badge.astro";
             <strong>This site sets no cookies.</strong> No first-party cookies, no
             tracking cookies, no consent banner because there's nothing to consent
             to. Embedded third-party content (YouTube via youtube-nocookie.com, Spotify,
-            Transistor.fm) may set cookies only after you interact with it — those
+            Transistor.fm) may set cookies only after you interact with it. Those
             are controlled by the embedding service, not by me.
           </p>
 
@@ -70,7 +71,7 @@ import Badge from "@components/Badge/Badge.astro";
               rel="noopener noreferrer">GPC</a
             > browser signal. Since I don't sell personal data, share it for cross-context
             behavioural advertising, or run third-party trackers, there's nothing
-            on the site that needs to be switched off — GPC arrives at a site that
+            on the site that needs to be switched off: GPC arrives at a site that
             already matches what it asks for.
           </p>
 
@@ -114,7 +115,7 @@ import Badge from "@components/Badge/Badge.astro";
               >?utm_source=newsletter</code
             >) so my analytics can count newsletter referrals. These parameters
             remain anonymous. I see aggregate numbers like "47 people clicked
-            through" rather than individual behavior.
+            through" rather than individual behaviour.
           </p>
 
           <h2>Your rights</h2>
@@ -126,8 +127,8 @@ import Badge from "@components/Badge/Badge.astro";
             </li>
             <li><strong>Correct</strong> anything inaccurate</li>
             <li>
-              <strong>Delete</strong> it — the Listmonk record, the email thread,
-              or both
+              <strong>Delete</strong> it: the Listmonk record, the email thread, or
+              both
             </li>
             <li>
               <strong>Object</strong> to any processing you don't agree with
@@ -268,6 +269,6 @@ import Badge from "@components/Badge/Badge.astro";
           </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>
