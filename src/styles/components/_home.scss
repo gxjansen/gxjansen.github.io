@@ -317,13 +317,18 @@
     @apply font-display mb-2 text-[1.3rem] leading-[1.18] font-extrabold tracking-[-0.02em];
   }
   .home .tcourse p {
-    @apply text-base-600 dark:text-base-400 mb-4 flex-1 text-[0.95rem] leading-[1.5];
+    @apply text-base-600 dark:text-base-400 mb-4 text-[0.95rem] leading-[1.5];
   }
   .home .tcourse-list {
     @apply text-base-600 dark:text-base-400 mt-1 mb-4 list-disc pl-5 text-[0.88rem] leading-[1.5];
   }
   .home .tcourse-list li {
     @apply mb-1.5;
+  }
+  /* Push the footer to the card bottom so equal-height cards collect their
+     slack below the list (above "Course details"), not above the list. */
+  .home .tcourse .tfoot {
+    @apply mt-auto;
   }
   .home .tcourse .tbook {
     @apply font-display ml-auto inline-flex items-center gap-1 font-bold;
