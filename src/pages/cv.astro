@@ -103,7 +103,7 @@ const awards = split(cv.awards);
           alt="Guido X Jansen"
           width="112"
           height="112"
-          class="border-base-50 dark:border-base-900 bg-base-200 size-28 shrink-0 rounded-full border-4 object-cover shadow-lg"
+          class="border-base-200 dark:border-base-800 bg-base-200 size-28 shrink-0 rounded-2xl border object-cover shadow-lg"
         />
         <div class="min-w-0 flex-1">
           <h1
@@ -126,7 +126,6 @@ const awards = split(cv.awards);
               <div class="text-base-500 mt-2 inline-flex items-center gap-1.5 text-sm">
                 <Icon name="tabler/map-pin" class="size-4" aria-hidden="true" />
                 {cv.location}
-                {cv.workplace && <span>· {cv.workplace}</span>}
               </div>
             )
           }
@@ -737,8 +736,14 @@ const awards = split(cv.awards);
 
           <div class={box}>
             <h3 class={boxTitle}>Focus areas</h3>
-            <ul class="flex flex-wrap justify-center gap-2">
-              {FOCUS_AREAS.map((s) => <li class="chip chip--plain">{s}</li>)}
+            <ul class="flex flex-wrap gap-2">
+              {
+                FOCUS_AREAS.map((s) => (
+                  <li class="chip chip--plain justify-center text-center">
+                    {s}
+                  </li>
+                ))
+              }
             </ul>
           </div>
 
