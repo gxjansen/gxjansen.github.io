@@ -9,10 +9,11 @@
 import ColleagueTestimonialCard from "./ColleagueTestimonialCard.astro";
 
 // data
-import { getRandomTestimonials } from "@config/colleagueTestimonialData";
+import { getTestimonialsWithPinned } from "@config/colleagueTestimonialData";
 
-// Get initial testimonials for SSR (will be replaced client-side)
-const initialTestimonials = getRandomTestimonials(4);
+// Get initial testimonials for SSR (will be replaced client-side).
+// Boris (flagship CEO endorsement) is pinned first; the rest rotate.
+const initialTestimonials = getTestimonialsWithPinned(4);
 ---
 
 <section
@@ -71,14 +72,14 @@ const initialTestimonials = getRandomTestimonials(4);
 </section>
 
 <script>
-  import { getRandomTestimonials } from "@config/colleagueTestimonialData";
+  import { getTestimonialsWithPinned } from "@config/colleagueTestimonialData";
 
   function randomizeTestimonials() {
     const grid = document.getElementById("testimonials-grid");
     if (!grid) return;
 
-    // Get random testimonials
-    const testimonials = getRandomTestimonials(4);
+    // Boris (flagship CEO endorsement) is pinned first; the rest rotate.
+    const testimonials = getTestimonialsWithPinned(4);
 
     // Build HTML for each testimonial card with AOS attributes
     const cardsHTML = testimonials

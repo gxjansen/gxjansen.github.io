@@ -119,9 +119,6 @@ const card =
       </div>
     </section>
 
-    <!-- ============ AWARDS ============ -->
-    {awards.length > 0 && <AwardsSection awards={awards} />}
-
     <!-- ============ THE STORY ============ -->
     <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
       <div class="max-w-[60ch]">
@@ -186,6 +183,9 @@ const card =
         }
       </ol>
     </section>
+
+    <!-- ============ AWARDS ============ -->
+    {awards.length > 0 && <AwardsSection awards={awards} />}
 
     <!-- ============ ENDORSEMENTS ============ -->
     <ColleagueTestimonials />

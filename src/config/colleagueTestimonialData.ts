@@ -76,6 +76,28 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
 
   // Community & Collaboration
   {
+    id: "boris-lokschin",
+    name: "Boris Lokschin",
+    role: "Co-Founder & CEO",
+    company: "Spryker",
+    workRelationship: "CEO who hired me",
+    quote:
+      "Guido is a thought leader in community building and developer relations. Any company serious about building an ecosystem should talk to him.",
+    category: "Community & Collaboration",
+    priority: 5,
+  },
+  {
+    id: "eric-schreiner",
+    name: "Eric Schreiner",
+    role: "Chief Customer Officer",
+    company: "Spryker",
+    workRelationship: "CCO who led my team",
+    quote:
+      "With a small, high-performing team, Guido created a developer and customer community from scratch and turned it into a real asset for the business.",
+    category: "Community & Collaboration",
+    priority: 5,
+  },
+  {
     id: "lauren-kulwicki",
     name: "Lauren Kulwicki",
     role: "Senior Community Manager",
@@ -336,6 +358,31 @@ function shuffleArray<T>(array: T[]): T[] {
  * Uses weighted random selection based on priority scores
  * No preferredId bias - all testimonials have equal opportunity within their priority tier
  */
+/**
+ * ID of the testimonial that is always shown, pinned to the first slot.
+ * Boris Lokschin (Spryker CEO) is the flagship endorsement.
+ */
+export const PINNED_TESTIMONIAL_ID = "boris-lokschin";
+
+/**
+ * Get testimonials with the pinned one always first, followed by a random
+ * selection of the rest (excluding the pinned person to avoid duplicates).
+ */
+export function getTestimonialsWithPinned(
+  count: number = 4,
+): ColleagueTestimonial[] {
+  const pinned = colleagueTestimonials.find(
+    (t) => t.id === PINNED_TESTIMONIAL_ID,
+  );
+  if (!pinned) return getRandomTestimonials(count);
+
+  const others = getRandomTestimonials(count)
+    .filter((t) => t.name !== pinned.name)
+    .slice(0, Math.max(0, count - 1));
+
+  return [pinned, ...others];
+}
+
 export function getRandomTestimonials(
   count: number = 4,
 ): ColleagueTestimonial[] {
