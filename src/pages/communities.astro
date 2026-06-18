@@ -6,11 +6,11 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 
-// images for communities
-import joomlaLogo from "@images/events/joomla.png";
-import magentoLogo from "@images/events/magento.png";
+// images for communities (logo + wordmark variants)
+import joomlaLogo from "@images/events/joomla-wordmark.svg";
+import magentoLogo from "@images/events/magento-wordmark.svg";
 import crocafeLogo from "@images/events/crocafe-wordmark.png";
-import sprykerLogo from "@images/events/spryker-black.png";
+import sprykerLogo from "@images/events/spryker-wordmark.svg";
 
 // Community URLs for JSON-LD
 const communityUrls: Record<string, string> = {
@@ -128,12 +128,11 @@ const communities = [
           communities.map((community, index) => (
             <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
               <div class={index % 2 === 1 ? "md:order-2" : ""}>
-                <div class="border-base-200 dark:border-base-800 flex aspect-video min-h-[200px] items-center justify-center rounded-2xl border bg-white p-8">
+                <div class="border-base-200 dark:border-base-800 flex aspect-video min-h-[200px] items-center justify-center rounded-2xl border bg-white p-6 sm:p-8">
                   <Image
                     src={community.logo}
                     alt={`${community.name} logo`}
-                    class="max-h-[120px] w-auto object-contain"
-                    height={120}
+                    class="h-auto w-[74%] max-w-[420px] object-contain"
                   />
                 </div>
               </div>
