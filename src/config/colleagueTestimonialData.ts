@@ -87,15 +87,15 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
     priority: 5,
   },
   {
-    id: "erik-van-doorne",
-    name: "Erik van Doorne",
-    role: "Director / Owner",
-    company: "Masters of Media",
-    workRelationship: "Community member",
+    id: "eric-schreiner",
+    name: "Eric Schreiner",
+    role: "Chief Customer Officer",
+    company: "Spryker",
+    workRelationship: "CCO who led my team",
     quote:
-      "I attended and was very pleasantly surprised at the professionalism of the organisation, as well as the content and quality of the congress.",
+      "With a small, high-performing team, Guido created a developer and customer community from scratch and turned it into a real asset for the business.",
     category: "Community & Collaboration",
-    priority: 3,
+    priority: 5,
   },
   {
     id: "lauren-kulwicki",
@@ -358,6 +358,31 @@ function shuffleArray<T>(array: T[]): T[] {
  * Uses weighted random selection based on priority scores
  * No preferredId bias - all testimonials have equal opportunity within their priority tier
  */
+/**
+ * ID of the testimonial that is always shown, pinned to the first slot.
+ * Boris Lokschin (Spryker CEO) is the flagship endorsement.
+ */
+export const PINNED_TESTIMONIAL_ID = "boris-lokschin";
+
+/**
+ * Get testimonials with the pinned one always first, followed by a random
+ * selection of the rest (excluding the pinned person to avoid duplicates).
+ */
+export function getTestimonialsWithPinned(
+  count: number = 4,
+): ColleagueTestimonial[] {
+  const pinned = colleagueTestimonials.find(
+    (t) => t.id === PINNED_TESTIMONIAL_ID,
+  );
+  if (!pinned) return getRandomTestimonials(count);
+
+  const others = getRandomTestimonials(count)
+    .filter((t) => t.name !== pinned.name)
+    .slice(0, Math.max(0, count - 1));
+
+  return [pinned, ...others];
+}
+
 export function getRandomTestimonials(
   count: number = 4,
 ): ColleagueTestimonial[] {
