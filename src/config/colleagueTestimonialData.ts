@@ -76,6 +76,28 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
 
   // Community & Collaboration
   {
+    id: "boris-lokschin",
+    name: "Boris Lokschin",
+    role: "Co-Founder & CEO",
+    company: "Spryker",
+    workRelationship: "CEO who hired me",
+    quote:
+      "Guido is a thought leader in community building and developer relations. Any company serious about building an ecosystem should talk to him.",
+    category: "Community & Collaboration",
+    priority: 5,
+  },
+  {
+    id: "erik-van-doorne",
+    name: "Erik van Doorne",
+    role: "Director / Owner",
+    company: "Masters of Media",
+    workRelationship: "Community member",
+    quote:
+      "I attended and was very pleasantly surprised at the professionalism of the organisation, as well as the content and quality of the congress.",
+    category: "Community & Collaboration",
+    priority: 3,
+  },
+  {
     id: "lauren-kulwicki",
     name: "Lauren Kulwicki",
     role: "Senior Community Manager",
