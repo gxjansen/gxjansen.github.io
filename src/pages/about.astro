@@ -22,31 +22,6 @@ const awards = [...filterAvailableContent(pressCoverage)]
   )
   .filter((i) => i.category === "award" || i.category === "nomination");
 
-// How the psychology read turns into community work.
-const approach = [
-  {
-    icon: "tabler/outline/door-enter",
-    title: "Designing onboarding that turns newcomers into contributors",
-    desc: "Understanding the psychology of first impressions and commitment escalation.",
-  },
-  {
-    icon: "tabler/outline/heart-handshake",
-    title:
-      "Creating participation structures that tap into intrinsic motivation",
-    desc: "Building systems that reward genuine engagement over vanity metrics.",
-  },
-  {
-    icon: "tabler/outline/message-2",
-    title: "Building feedback mechanisms that surface real sentiment",
-    desc: "Distinguishing signal from noise in community interactions.",
-  },
-  {
-    icon: "tabler/outline/chart-dots",
-    title: "Understanding the difference between activity and engagement",
-    desc: "Measuring what actually matters for community health and business value.",
-  },
-];
-
 // Biography, told as a short timeline instead of stock photos.
 const story = [
   {
@@ -142,83 +117,6 @@ const card =
           <span class="tag">that's me</span>
         </div>
       </div>
-    </section>
-
-    <!-- ============ WHY IT WORKS ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
-      <div class="max-w-[60ch]">
-        <span class={eyebrow}>The psychology edge</span>
-        <h2
-          class="font-display my-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-        >
-          Why this approach works
-        </h2>
-        <p
-          class="text-base-600 dark:text-base-400 mt-4 text-[1.05rem] leading-[1.6]"
-        >
-          My cognitive psychology background shapes how I approach community
-          building. It mostly taught me one thing: you can't reliably predict
-          how developers and technical users will behave. So instead of
-          guessing, I design community work to be tested and watch what people
-          actually do.
-        </p>
-        <p
-          class="text-base-600 dark:text-base-400 mt-3 text-[1.05rem] leading-[1.6]"
-        >
-          Where others ask "how do we get more people?" I ask "why would someone
-          stay, contribute, and advocate?"
-        </p>
-      </div>
-
-      <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {
-          approach.map((a) => (
-            <div class={card}>
-              <div class="text-primary-600 dark:text-primary-400 mb-3">
-                <Icon name={a.icon} class="size-6" aria-hidden="true" />
-              </div>
-              <h3 class="font-display text-[1.02rem] leading-snug font-bold">
-                {a.title}
-              </h3>
-              <p class="text-base-600 dark:text-base-400 mt-1.5 text-[0.92rem] leading-relaxed">
-                {a.desc}
-              </p>
-            </div>
-          ))
-        }
-      </div>
-
-      <div
-        class="border-primary-600/30 bg-primary-600/5 dark:border-primary-400/30 dark:bg-primary-400/10 mt-6 flex flex-col gap-4 rounded-2xl border p-6 sm:flex-row sm:items-center"
-      >
-        <div
-          class="font-display text-primary-600 dark:text-primary-400 shrink-0 text-[2.4rem] leading-none font-black tabular-nums"
-        >
-          500+
-        </div>
-        <div>
-          <h3 class="font-display text-[1.1rem] font-bold">
-            Relationships, backed by data
-          </h3>
-          <p
-            class="text-base-600 dark:text-base-400 mt-1 text-[0.95rem] leading-relaxed"
-          >
-            My experimentation background (running 500+ A/B tests at companies
-            like Randstad and JDE) taught me to measure what matters and prove
-            what's actually working. So I lead community as someone who thinks
-            strategically and analytically, with the relationships backed by
-            data.
-          </p>
-        </div>
-      </div>
-
-      <a
-        href="/authors/gxjansen/"
-        class="text-primary-600 dark:text-primary-400 font-display mt-6 inline-flex items-center gap-1.5 text-[0.95rem] font-bold"
-        >See my credentials, awards, and articles <span aria-hidden="true"
-          >→</span
-        ></a
-      >
     </section>
 
     <!-- ============ AWARDS ============ -->
