@@ -427,13 +427,18 @@ const ac = `--ac:var(--color-${course.accent});--ac-deep:var(--color-${course.ac
               class="text-base-800 dark:text-base-200 mt-3 max-w-3xl text-lg leading-relaxed"
               set:html={course.whyMe}
             />
-            <a
-              href="https://app.cal.eu/gxjansen/15min"
-              class="btn-ac mt-6"
-              style={ac}
-            >
-              Talk about a workshop
-            </a>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a
+                href="https://app.cal.eu/gxjansen/15min"
+                class="btn-ac"
+                style={ac}
+              >
+                Talk about a workshop
+              </a>
+              <a href="/about/" class="btn-ac-outline" style={ac}>
+                More about me
+              </a>
+            </div>
           </div>
         </section>
       )
