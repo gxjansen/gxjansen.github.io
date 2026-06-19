@@ -1,12 +1,11 @@
 ---
 /**
- * "Currently reading" card for /now — ingests Bookhive (non-fiction only).
- * Three states: one active read (hero), many active reads (grid), or the
- * "Recently read" fallback when nothing is marked reading. No progress bars
+ * Reading card for /now — ingests Bookhive. Shows what's currently being read
+ * (any genre) and a "Recently read" non-fiction shelf. No progress bars
  * (Bookhive exposes no progress).
  */
 import Stars from "./Stars.astro";
-import type { ReadingData, Book } from "../../lib/bookhive";
+import type { ReadingData } from "../../lib/bookhive";
 
 interface Props {
   data: ReadingData;
@@ -15,32 +14,20 @@ interface Props {
 }
 const { data, bookhiveHref = "https://bookhive.buzz/profile/gui.do" } =
   Astro.props as Props;
-const heading =
-  data.mode === "fallback" ? "Recently read" : "Currently reading";
-const books: Book[] = data.mode === "fallback" ? data.recent : data.active;
-
-// Nothing to show at all (e.g. a build-time fetch failure) — render a minimal note.
-const isEmpty = books.length === 0;
+const { active, recent } = data;
+const nothing = active.length === 0 && recent.length === 0;
 ---
 
 <section
   class="reading-card bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative overflow-hidden rounded-2xl border p-6 shadow-sm md:p-7"
-  aria-labelledby="reading-heading"
+  aria-label="Reading"
 >
   <div class="mb-5 flex flex-wrap items-start justify-between gap-3">
-    <div>
-      <p
-        class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.15rem] leading-none"
-      >
-        on the nightstand
-      </p>
-      <h3
-        id="reading-heading"
-        class="text-base-950 dark:text-base-50 font-display mt-1 text-[1.4rem] font-black tracking-[-0.02em]"
-      >
-        {heading}
-      </h3>
-    </div>
+    <p
+      class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.15rem] leading-none"
+    >
+      on the nightstand
+    </p>
     <span class="bookhive-badge">
       <span class="bookhive-dot" aria-hidden="true"></span>
       Bookhive
@@ -48,91 +35,102 @@ const isEmpty = books.length === 0;
   </div>
 
   {
-    isEmpty && (
+    nothing && (
       <p class="text-base-500 dark:text-base-400 text-[.94rem]">
         Reading list is taking a breather.
       </p>
     )
   }
 
+  {/* ── Currently reading (any genre) ── */}
   {
-    data.mode === "one" && books[0] && (
-      <div class="flex flex-wrap items-stretch gap-5">
-        <div
-          class={`bk-cover bk-${books[0].accent} h-[206px] w-[138px] flex-none`}
-        >
-          {books[0].coverUrl ? (
-            <img
-              src={books[0].coverUrl}
-              alt={`Cover of ${books[0].title}`}
-              loading="lazy"
-            />
-          ) : (
-            <>
-              <span class="bk-spine" aria-hidden="true" />
-              <div class="bk-meta">
-                <div class="bk-title">{books[0].title}</div>
-                <div class="bk-author">{books[0].author}</div>
-              </div>
-            </>
-          )}
-        </div>
-        <div class="flex min-w-[200px] flex-[1_1_240px] flex-col justify-center gap-2">
-          <span class="reading-pill">
-            <span class="reading-pill-dot" aria-hidden="true" /> Reading now
-          </span>
-          <div class="text-base-950 dark:text-base-50 font-display text-[1.5rem] leading-[1.1] font-extrabold tracking-[-0.02em]">
-            {books[0].title}
-          </div>
-          <div class="text-base-700 dark:text-base-300 text-[.98rem]">
-            {books[0].author}
-          </div>
-          {books[0].startedLabel && (
-            <div class="text-base-500 dark:text-base-400 text-[.84rem]">
-              {books[0].startedLabel}
-            </div>
-          )}
-        </div>
-      </div>
-    )
-  }
-
-  {
-    data.mode === "many" && (
-      <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
-        {books.map((b) => (
-          <div class="flex flex-col gap-2">
-            <div class={`bk-cover bk-${b.accent} aspect-[2/3] w-full`}>
-              {b.coverUrl ? (
-                <img
-                  src={b.coverUrl}
-                  alt={`Cover of ${b.title}`}
-                  loading="lazy"
-                />
-              ) : (
-                <>
-                  <span class="bk-spine" aria-hidden="true" />
-                  <div class="bk-meta">
-                    <div class="bk-title">{b.title}</div>
-                    <div class="bk-author">{b.author}</div>
-                  </div>
-                </>
-              )}
-            </div>
-            <div class="text-love flex items-center gap-1.5 text-[.74rem] font-bold">
-              <span class="reading-pill-dot" aria-hidden="true" /> Reading now
-            </div>
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-  {
-    data.mode === "fallback" && !isEmpty && (
+    active.length === 1 && (
       <>
+        <h3 class="reading-h">Currently reading</h3>
+        <div class="flex flex-wrap items-stretch gap-5">
+          <div
+            class={`bk-cover bk-${active[0].accent} h-[206px] w-[138px] flex-none`}
+          >
+            {active[0].coverUrl ? (
+              <img
+                src={active[0].coverUrl}
+                alt={`Cover of ${active[0].title}`}
+                loading="lazy"
+              />
+            ) : (
+              <>
+                <span class="bk-spine" aria-hidden="true" />
+                <div class="bk-meta">
+                  <div class="bk-title">{active[0].title}</div>
+                  <div class="bk-author">{active[0].author}</div>
+                </div>
+              </>
+            )}
+          </div>
+          <div class="flex min-w-[200px] flex-[1_1_240px] flex-col justify-center gap-2">
+            <span class="reading-pill">
+              <span class="reading-pill-dot" aria-hidden="true" /> Reading now
+            </span>
+            <div class="text-base-950 dark:text-base-50 font-display text-[1.5rem] leading-[1.1] font-extrabold tracking-[-0.02em]">
+              {active[0].title}
+            </div>
+            <div class="text-base-700 dark:text-base-300 text-[.98rem]">
+              {active[0].author}
+            </div>
+            {active[0].startedLabel && (
+              <div class="text-base-500 dark:text-base-400 text-[.84rem]">
+                {active[0].startedLabel}
+              </div>
+            )}
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  {
+    active.length > 1 && (
+      <>
+        <h3 class="reading-h">Currently reading</h3>
         <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
-          {books.map((b) => (
+          {active.map((b) => (
+            <div class="flex flex-col gap-2">
+              <div class={`bk-cover bk-${b.accent} aspect-[2/3] w-full`}>
+                {b.coverUrl ? (
+                  <img
+                    src={b.coverUrl}
+                    alt={`Cover of ${b.title}`}
+                    loading="lazy"
+                  />
+                ) : (
+                  <>
+                    <span class="bk-spine" aria-hidden="true" />
+                    <div class="bk-meta">
+                      <div class="bk-title">{b.title}</div>
+                      <div class="bk-author">{b.author}</div>
+                    </div>
+                  </>
+                )}
+              </div>
+              <div class="text-love flex items-center gap-1.5 text-[.74rem] font-bold">
+                <span class="reading-pill-dot" aria-hidden="true" /> Reading now
+              </div>
+            </div>
+          ))}
+        </div>
+      </>
+    )
+  }
+
+  {/* ── Recently read (non-fiction) ── */}
+  {
+    recent.length > 0 && (
+      <>
+        <h3 class:list={["reading-h", active.length > 0 && "mt-7"]}>
+          Recently read
+        </h3>
+        <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
+          {recent.map((b) => (
             <div class="flex flex-col gap-2">
               <div class={`bk-cover bk-${b.accent} aspect-[2/3] w-full`}>
                 {b.coverUrl ? (
@@ -179,6 +177,10 @@ const isEmpty = books.length === 0;
 
 <style>
   @reference "../../styles/tailwind.css";
+
+  .reading-h {
+    @apply text-base-950 dark:text-base-50 font-display mb-3 text-[1.4rem] font-black tracking-[-0.02em];
+  }
 
   .reading-more {
     @apply text-primary-600 dark:text-primary-400 mt-4 inline-flex items-center gap-1 self-start text-[0.85rem] font-semibold;
