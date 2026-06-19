@@ -55,9 +55,9 @@ export interface Book {
 }
 
 export interface ReadingData {
-  /** one active read · many active reads · fallback to recently finished */
-  mode: "one" | "many" | "fallback";
+  /** Books marked "reading" right now (any genre). */
   active: Book[];
+  /** Recently-finished non-fiction, capped to ~2 rows. */
   recent: Book[];
 }
 
@@ -83,14 +83,24 @@ const monthYear = (iso?: string): string | undefined => {
   return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 };
 
+// All book records, following the cursor (listRecords pages at 100). Capped at
+// a few pages so a huge shelf can't run away.
 async function listBooks(): Promise<RawBook[]> {
-  const url =
-    `${PDS}/xrpc/com.atproto.repo.listRecords` +
-    `?repo=${GUIDO_DID}&collection=${BOOK_COLLECTION}&limit=100`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`listRecords ${res.status}`);
-  const data = (await res.json()) as { records?: RawBook[] };
-  return data.records ?? [];
+  const all: RawBook[] = [];
+  let cursor: string | undefined;
+  for (let page = 0; page < 6; page++) {
+    const url =
+      `${PDS}/xrpc/com.atproto.repo.listRecords` +
+      `?repo=${GUIDO_DID}&collection=${BOOK_COLLECTION}&limit=100` +
+      (cursor ? `&cursor=${encodeURIComponent(cursor)}` : "");
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`listRecords ${res.status}`);
+    const data = (await res.json()) as { records?: RawBook[]; cursor?: string };
+    all.push(...(data.records ?? []));
+    cursor = data.cursor;
+    if (!cursor || !data.records?.length) break;
+  }
+  return all;
 }
 
 interface Enriched {
@@ -126,14 +136,14 @@ async function catalogInfo(hiveId?: string): Promise<{
 const isNonFiction = (genres: string[]): boolean =>
   !genres.some((g) => FICTION_GENRES.has(g.trim().toLowerCase()));
 
-async function enrichNonFiction(raw: RawBook[]): Promise<Enriched[]> {
-  const enriched = await Promise.all(
+// Fetch genres + cover for each book. No genre filter here — callers decide.
+async function enrich(raw: RawBook[]): Promise<Enriched[]> {
+  return Promise.all(
     raw.map(async (b) => {
       const { genres, cover } = await catalogInfo(b.value.hiveId);
       return { raw: b, genres, catalogCover: cover };
     }),
   );
-  return enriched.filter((e) => isNonFiction(e.genres));
 }
 
 const mapBook = (e: Enriched, i: number): Book => ({
@@ -152,30 +162,32 @@ const mapBook = (e: Enriched, i: number): Book => ({
     : undefined,
 });
 
+const RECENT_CAP = 14; // ~2 rows of the cover grid
+const FINISHED_CANDIDATES = 36; // bound catalog lookups while still yielding 14 NF
+
 export async function getReading(): Promise<ReadingData> {
   try {
     const books = await listBooks();
 
+    // Currently reading — shown regardless of genre (it's THE current read).
     const reading = books.filter((b) => b.value.status === STATUS_READING);
-    const activeNF = await enrichNonFiction(reading);
-    if (activeNF.length > 0) {
-      return {
-        mode: activeNF.length === 1 ? "one" : "many",
-        active: activeNF.map(mapBook),
-        recent: [],
-      };
-    }
+    const active = (await enrich(reading)).map(mapBook);
 
-    // Fallback: most-recent finished non-fiction, capped to ~2 desktop rows of
-    // the cover grid. The card links out to Bookhive for the full shelf.
-    const finished = books
+    // Recently read — most-recent finished, filtered to non-fiction. Only the
+    // newest handful are enriched so the catalog isn't hit hundreds of times.
+    const finishedCandidates = books
       .filter((b) => b.value.status === STATUS_FINISHED)
       .sort((a, b) =>
         (b.value.finishedAt ?? "").localeCompare(a.value.finishedAt ?? ""),
-      );
-    const recentNF = (await enrichNonFiction(finished)).slice(0, 12);
-    return { mode: "fallback", active: [], recent: recentNF.map(mapBook) };
+      )
+      .slice(0, FINISHED_CANDIDATES);
+    const recent = (await enrich(finishedCandidates))
+      .filter((e) => isNonFiction(e.genres))
+      .slice(0, RECENT_CAP)
+      .map(mapBook);
+
+    return { active, recent };
   } catch {
-    return { mode: "fallback", active: [], recent: [] };
+    return { active: [], recent: [] };
   }
 }
