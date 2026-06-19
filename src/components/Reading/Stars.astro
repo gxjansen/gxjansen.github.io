@@ -1,0 +1,54 @@
+---
+/**
+ * Five-star rating with fractional fill. `value` is on a 0–10 scale (Bookhive's
+ * stars), mapped onto 5 stars: 9/10 -> 90% -> 4.5 stars. A gold star row is
+ * clipped by width over a muted track row, so any fraction renders exactly.
+ */
+interface Props {
+  value: number;
+  max?: number;
+  class?: string;
+}
+const { value, max = 10, class: className } = Astro.props as Props;
+const pct = Math.max(0, Math.min(100, (value / max) * 100));
+const rounded = Math.round((value / max) * 5 * 2) / 2; // for the label, to .5
+---
+
+<span
+  class:list={["stars", className]}
+  role="img"
+  aria-label={`${rounded} out of 5 stars`}
+>
+  <span class="stars-track" aria-hidden="true">★★★★★</span>
+  <span class="stars-fill" style={`width:${pct}%`} aria-hidden="true"
+    >★★★★★</span
+  >
+</span>
+
+<style>
+  @reference "../../styles/tailwind.css";
+
+  .stars {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+  }
+  .stars-track,
+  .stars-fill {
+    /* Plain text-presentation star (never the colour-emoji glyph), so the gold
+       fill colour applies. Fill + track use the same font so they align. */
+    font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", Arial, sans-serif;
+  }
+  .stars-track {
+    @apply text-base-300 dark:text-base-700;
+  }
+  .stars-fill {
+    @apply text-gold-light dark:text-gold;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+</style>
