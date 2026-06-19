@@ -5,7 +5,7 @@
  * "Recently read" fallback when nothing is marked reading. No progress bars
  * (Bookhive exposes no progress).
  */
-import { Icon } from "astro-icon/components";
+import Stars from "./Stars.astro";
 import type { ReadingData, Book } from "../../lib/bookhive";
 
 interface Props {
@@ -152,16 +152,7 @@ const isEmpty = books.length === 0;
                   </>
                 )}
               </div>
-              {typeof b.rating === "number" && (
-                <div class="text-gold-light dark:text-gold flex items-center gap-1 text-[.78rem] font-semibold">
-                  <Icon
-                    name="tabler/star"
-                    class="size-3.5"
-                    aria-hidden="true"
-                  />
-                  <span>{b.rating}/10</span>
-                </div>
-              )}
+              {typeof b.rating === "number" && <Stars value={b.rating} />}
               {b.finishedLabel && (
                 <div class="text-base-500 dark:text-base-400 text-[.74rem]">
                   {b.finishedLabel}
