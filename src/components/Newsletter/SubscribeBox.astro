@@ -2,31 +2,33 @@
 /**
  * Post-level subscribe box (bottom of /post/ articles, id="subscribe").
  *
- * "Pick how you want to follow":
- *  - Primary: email via the existing NewsletterForm (Listmonk + ALTCHA).
- *  - Secondary: the open social web — a referral out to Guido's publication on a
- *    reader (Offprint/pckt/Leaflet) where the reader's own "Subscribe with
- *    Bluesky" lives. Subscribing there writes a portable site.standard.graph.
- *    subscription to the reader's own PDS, so it travels across every Atmosphere
- *    app and is counted by the combined subscriber total.
+ * Two tiers, framed by what you actually get:
+ *  - Primary: the EMAIL newsletter (Listmonk + ALTCHA) — the richer channel,
+ *    with previews, personal notes, and content not posted publicly.
+ *  - Secondary: the PUBLIC posts only — follow on the open web (Standard Reader,
+ *    writes a portable site.standard.graph.subscription) or via RSS. Same public
+ *    posts either way; no private content.
  *
- * The combined count itself is shown in the post byline (see BlogLayoutCenter),
- * not here.
+ * The combined subscriber count is shown in the post byline (BlogLayoutCenter).
  */
 import { Icon } from "astro-icon/components";
 import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 
 interface Props {
-  /** Where the open-social-web affordance points (publication on a reader). */
+  /** Where the "follow on the open web" affordance points (publication on a reader). */
   readerHref?: string;
+  /** Public RSS feed. */
+  rssHref?: string;
   class?: string;
 }
 
 const {
   // Standard Reader — the neutral standard.site reference reader. Renders all of
   // gui.do's posts and its "Follow" writes a site.standard.graph.subscription to
-  // the reader's own PDS (counted by the combined total, portable across apps).
+  // the reader's own PDS (counted in the combined total). Like RSS, it carries
+  // only the PUBLIC posts — the newsletter is the richer, private channel.
   readerHref = "https://standard-reader.app/p/did:plc:45uheisi25szrjvjurfpritx/3mgfeypogdk2r",
+  rssHref = "/rss.xml",
   class: className,
 } = Astro.props as Props;
 ---
@@ -60,57 +62,62 @@ const {
       Subscribe
     </h2>
     <p
-      class="text-base-700 dark:text-base-300 max-w-[46ch] text-base leading-[1.55]"
+      class="text-base-700 dark:text-base-300 max-w-[50ch] text-base leading-[1.55]"
     >
-      New posts by email, or follow on the open social web.
-      <span class="text-base-500 dark:text-base-400"
-        >Pick how you want to follow.</span
-      >
+      The newsletter is where the good stuff goes: previews of what I&rsquo;m
+      building, the personal notes, and things I don&rsquo;t post anywhere
+      public.
     </p>
 
     <div class="mt-5">
       <NewsletterForm
         variant="subscribe"
         showSubscriberCount={false}
-        buttonText="Subscribe"
+        buttonText="Get the newsletter"
       />
     </div>
 
-    <div
-      class="border-base-200 dark:border-base-800 mt-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t pt-5"
-    >
-      <div class="max-w-[44ch] min-w-0">
-        <div
-          class="text-base-950 dark:text-base-50 font-display flex items-center gap-[.5em] text-[1.02rem] font-extrabold"
-        >
-          <Icon
-            name="tabler/outline/world"
-            class="text-primary-600 dark:text-primary-400 size-[17px]"
-            aria-hidden="true"
-          />
-          On the open social web
-        </div>
-        <p
-          class="text-base-700 dark:text-base-300 mt-[.3rem] text-[.9rem] leading-[1.5]"
-        >
-          Read it in any Atmosphere app. Subscribe with your Bluesky account and
-          the follow travels with you across the open web.
-        </p>
-      </div>
-      <a
-        href={readerHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="atproto-cta no-random-underline"
+    <div class="border-base-200 dark:border-base-800 mt-6 border-t pt-5">
+      <div
+        class="text-base-950 dark:text-base-50 font-display flex items-center gap-[.5em] text-[1.02rem] font-extrabold"
       >
         <Icon
-          name="bluesky"
-          class="size-[1.15em] shrink-0"
+          name="tabler/outline/world"
+          class="text-primary-600 dark:text-primary-400 size-[17px]"
           aria-hidden="true"
         />
-        <span>Subscribe with your Atmosphere account</span>
-        <span class="sr-only">(opens in new tab)</span>
-      </a>
+        Just the public posts
+      </div>
+      <p
+        class="text-base-700 dark:text-base-300 mt-[.3rem] max-w-[52ch] text-[.9rem] leading-[1.5]"
+      >
+        The same posts you&rsquo;d read here, in whatever reader you like. No
+        email, nothing private: follow on the open web, or grab the RSS feed.
+      </p>
+      <div class="mt-3 flex flex-wrap gap-3">
+        <a
+          href={readerHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="web-cta no-random-underline"
+        >
+          <Icon
+            name="bluesky"
+            class="size-[1.15em] shrink-0"
+            aria-hidden="true"
+          />
+          <span>Follow on the open web</span>
+          <span class="sr-only">(opens in new tab)</span>
+        </a>
+        <a href={rssHref} class="web-cta no-random-underline">
+          <Icon
+            name="tabler/rss"
+            class="size-[1.1em] shrink-0"
+            aria-hidden="true"
+          />
+          <span>RSS</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -149,18 +156,18 @@ const {
 
   /* Open-social-web affordance: outline that resolves to the brand on hover
      (not the Button component's random per-render accent). */
-  .atproto-cta {
+  .web-cta {
     @apply inline-flex min-h-12 items-center gap-[.95em] rounded-full border-2 px-6 py-3 font-medium transition-all duration-200;
     border-color: var(--color-foam-light);
     color: #191724; /* Rosé Pine base — AA on every light page bg */
     text-decoration: none;
   }
-  :global(.dark) .atproto-cta {
+  :global(.dark) .web-cta {
     border-color: var(--color-foam);
     color: #e0def4; /* Rosé Pine text — AA on dark page bg */
   }
-  .atproto-cta:hover,
-  .atproto-cta:focus-visible {
+  .web-cta:hover,
+  .web-cta:focus-visible {
     border-color: var(--color-primary-500);
     color: var(--color-primary-600);
     background-color: color-mix(
@@ -170,22 +177,22 @@ const {
     );
     transform: translateY(-1px);
   }
-  :global(.dark) .atproto-cta:hover,
-  :global(.dark) .atproto-cta:focus-visible {
+  :global(.dark) .web-cta:hover,
+  :global(.dark) .web-cta:focus-visible {
     color: var(--color-primary-400);
   }
-  .atproto-cta:focus-visible {
+  .web-cta:focus-visible {
     outline: none;
     box-shadow: 0 0 0 3px
       color-mix(in oklab, var(--color-primary-500) 35%, transparent);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .atproto-cta {
+    .web-cta {
       transition: none;
     }
-    .atproto-cta:hover,
-    .atproto-cta:focus-visible {
+    .web-cta:hover,
+    .web-cta:focus-visible {
       transform: none;
     }
   }
