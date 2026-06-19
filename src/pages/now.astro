@@ -4,7 +4,7 @@
 // "currently reading" card. Linked from the homepage activity box and the About
 // nav. See the "now page" convention: https://nownownow.com/about
 import BaseLayout from "@layouts/BaseLayout.astro";
-import ActivityFeed from "@components/Activity/ActivityFeed.astro";
+import ActivityBento from "@components/Activity/ActivityBento.astro";
 import ReadingCard from "@components/Reading/ReadingCard.astro";
 import { getActivity } from "../lib/sifaActivity";
 import { getReading } from "../lib/bookhive";
@@ -27,10 +27,10 @@ const reading = await getReading();
 
 <BaseLayout
   title="Now"
-  description="What Guido is posting, reading, and building right now — a live view from across the open social web."
+  description="What Guido is posting, reading, and building right now: a live view from across the open social web."
 >
   <section class="mt-24 w-full px-4">
-    <div class="mx-auto max-w-2xl">
+    <div class="mx-auto max-w-5xl">
       <header class="mb-8">
         <p
           class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.5rem] leading-none"
@@ -50,7 +50,7 @@ const reading = await getReading();
       </header>
 
       <div class="flex flex-col gap-10">
-        <ActivityFeed items={activity} />
+        <ActivityBento items={activity} />
         <ReadingCard data={reading} />
       </div>
     </div>

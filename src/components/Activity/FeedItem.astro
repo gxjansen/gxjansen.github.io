@@ -1,0 +1,184 @@
+---
+/**
+ * A single activity-feed row. Shared by ActivityFeed (homepage "Right now" box)
+ * and ActivityBento (/now per-category cards) so the item markup has one source.
+ * Styling lives in the global `.feed-item` / `.fi-*` / `.poster` rules
+ * (_home.scss, un-scoped from .home) and `.app-badge` (_redesign.scss).
+ */
+import { Icon } from "astro-icon/components";
+import { APP_REGISTRY, APP_ICON, type ActivityItem } from "@data/homeContent";
+
+interface Props {
+  item: ActivityItem;
+}
+const { item } = Astro.props as Props;
+
+const catOf = (t: ActivityItem["type"]) =>
+  t === "post" || t === "repost" ? "posts" : t;
+
+const app = (key: string) =>
+  APP_REGISTRY[key] ?? { label: key, color: "var(--color-app-fallback)" };
+
+// Highlight @handles without dangerouslySetInnerHTML: split into plain + mention.
+const fragments = (text: string) =>
+  text.split(/(@[\w.-]+)/g).map((part) => ({
+    mention: part.startsWith("@"),
+    value: part,
+  }));
+
+const a = app(item.app);
+---
+
+<li class="feed-item" data-cat={catOf(item.type)} style={`--app-c:${a.color}`}>
+  {
+    item.type === "review" ? (
+      <div class="fi-review">
+        <div class="poster" aria-hidden="true">
+          {item.imageUrl ? (
+            <img src={item.imageUrl} alt="" loading="lazy" />
+          ) : (
+            <span class="poster-i">{item.title?.[0] ?? "★"}</span>
+          )}
+        </div>
+        <div style="min-width:0;flex:1">
+          <div class="fi-head">
+            <span class="app-badge">
+              {APP_ICON[item.app] ? (
+                <Icon
+                  name={APP_ICON[item.app]}
+                  class="size-3.5"
+                  aria-hidden="true"
+                />
+              ) : (
+                <span class="app-dot" />
+              )}
+              {a.label}
+            </span>
+            <span class="fi-time">{item.time}</span>
+          </div>
+          <div class="fi-title">{item.title}</div>
+          <div class="fi-sub">{item.sub}</div>
+          {typeof item.rating === "number" && (
+            <div class="fi-rate">
+              <Icon
+                name="tabler/star"
+                class="text-gold size-4"
+                aria-hidden="true"
+              />
+              <span>
+                <b>{item.rating}</b>/10
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    ) : (
+      <>
+        <div class="fi-head">
+          <span class="app-badge">
+            {APP_ICON[item.app] ? (
+              <Icon
+                name={APP_ICON[item.app]}
+                class="size-3.5"
+                aria-hidden="true"
+              />
+            ) : (
+              <span class="app-dot" />
+            )}
+            {a.label}
+          </span>
+          <span class="fi-kind">{item.kind}</span>
+          <span class="fi-time">{item.time}</span>
+        </div>
+        {item.title && <div class="fi-title">{item.title}</div>}
+        {item.sub && <div class="fi-sub">{item.sub}</div>}
+        {item.text && (
+          <p class="fi-text">
+            {fragments(item.text).map((fr) =>
+              fr.mention ? <span class="mention">{fr.value}</span> : fr.value,
+            )}
+          </p>
+        )}
+        {item.videoWebm || item.videoMp4 ? (
+          <video
+            class="fi-img"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="none"
+            poster={item.mediaPoster}
+            width={item.mediaWidth}
+            height={item.mediaHeight}
+            aria-label={item.imageAlt || "Animated GIF"}
+          >
+            {item.videoWebm && (
+              <source src={item.videoWebm} type="video/webm" />
+            )}
+            {item.videoMp4 && <source src={item.videoMp4} type="video/mp4" />}
+          </video>
+        ) : (
+          item.imageUrl && (
+            <img
+              class="fi-img"
+              src={item.imageUrl}
+              alt={item.imageAlt || ""}
+              loading="lazy"
+              decoding="async"
+              width={item.mediaWidth}
+              height={item.mediaHeight}
+            />
+          )
+        )}
+        {(item.likes || item.replies || item.reposts) && (
+          <div class="fi-meta">
+            {typeof item.replies === "number" && (
+              <span aria-label={`${item.replies} replies`}>
+                <Icon
+                  name="tabler/outline/message-2"
+                  class="size-3.5"
+                  aria-hidden="true"
+                />
+                {item.replies}
+              </span>
+            )}
+            {typeof item.reposts === "number" && (
+              <span aria-label={`${item.reposts} reposts`}>
+                <Icon
+                  name="tabler/outline/repeat"
+                  class="size-3.5"
+                  aria-hidden="true"
+                />
+                {item.reposts}
+              </span>
+            )}
+            {typeof item.likes === "number" && (
+              <span aria-label={`${item.likes} likes`}>
+                <Icon
+                  name="tabler/outline/heart"
+                  class="size-3.5"
+                  aria-hidden="true"
+                />
+                {item.likes}
+              </span>
+            )}
+          </div>
+        )}
+      </>
+    )
+  }
+  {
+    item.url && (
+      <a
+        class="fi-link"
+        href={item.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="sr-only">
+          Open this {a.label} {item.type} in a new tab
+        </span>
+      </a>
+    )
+  }
+</li>
