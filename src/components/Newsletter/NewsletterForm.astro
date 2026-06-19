@@ -24,7 +24,7 @@ const altchaChallengeUrl = "/.netlify/functions/altcha-challenge";
 
 interface Props {
   /** Display variant */
-  variant?: "inline" | "card" | "cta" | "minimal";
+  variant?: "inline" | "card" | "cta" | "minimal" | "subscribe";
   /** Form title (used in card/cta variants) */
   title?: string;
   /** Form description (used in card/cta variants) */
@@ -110,7 +110,7 @@ const signupPage = Astro.url.pathname;
               class="subscriber-count text-base-600 dark:text-base-400 mt-3 hidden text-sm"
               data-subscriber-count
             >
-              Join <span class="subscriber-number" /> newsletter subscribers
+              Join <span class="subscriber-number" /> subscribers
             </p>
           )}
 
@@ -236,6 +236,99 @@ const signupPage = Astro.url.pathname;
 }
 
 {
+  /* Bare form for embedding in SubscribeBox (pill input + ALTCHA + trust line);
+     wrapper card/heading/count are provided by the parent. */
+  variant === "subscribe" && (
+    <div class:list={["newsletter-subscribe", className]}>
+      <form
+        id={formId}
+        method="post"
+        action={actionUrl}
+        class="newsletter-form flex flex-col gap-3"
+        data-newsletter-form
+      >
+        <input type="hidden" name="nonce" />
+        <input type="hidden" name="l" value={listId} />
+        <input type="hidden" name="signupPage" value={signupPage} />
+
+        <div class="flex flex-wrap items-center gap-2">
+          <label
+            for={`${formId}-email`}
+            class="relative flex min-w-0 flex-[1_1_220px] items-center"
+          >
+            <span class="sr-only">Email address</span>
+            <Icon
+              name="tabler/outline/mail"
+              class="text-base-500 dark:text-base-400 pointer-events-none absolute left-3.5 size-[18px]"
+              aria-hidden="true"
+            />
+            <input
+              type="email"
+              name="email"
+              id={`${formId}-email`}
+              required
+              placeholder={emailPlaceholder}
+              autocomplete="email"
+              class="border-base-300 bg-base-100 text-base-900 placeholder:text-base-500 dark:border-base-600 dark:bg-base-950 dark:text-base-100 dark:placeholder:text-base-400 min-h-12 w-full rounded-full border-[1.5px] py-3 pr-4 pl-10 text-base"
+              aria-required="true"
+              aria-describedby={`${formId}-status`}
+            />
+          </label>
+
+          <Button
+            type="submit"
+            variant="primary"
+            arrow="right"
+            class="flex-shrink-0 whitespace-nowrap"
+          >
+            {buttonText}
+          </Button>
+        </div>
+
+        <div
+          class="altcha-container"
+          role="group"
+          aria-label="Spam verification"
+        >
+          <span id={`${formId}-altcha-desc`} class="sr-only">
+            Complete the verification checkbox to prove you're human
+          </span>
+          <altcha-widget
+            challengeurl={altchaChallengeUrl}
+            hidefooter
+            hidelogo
+            aria-describedby={`${formId}-altcha-desc`}
+          />
+        </div>
+
+        <div
+          id={`${formId}-status`}
+          class="newsletter-status text-sm"
+          role="status"
+          aria-live="polite"
+        />
+      </form>
+
+      <p class="text-base-500 dark:text-base-400 mt-3.5 flex flex-wrap items-center gap-2 text-[0.82rem]">
+        <span class="text-base-600 dark:text-base-300 font-semibold">
+          No spam
+        </span>
+        <span class="opacity-50" aria-hidden="true">
+          ·
+        </span>
+        <span class="text-base-600 dark:text-base-300 font-semibold">
+          No tracking
+        </span>
+        <span class="opacity-50" aria-hidden="true">
+          ·
+        </span>
+        <span>unsubscribe in one click</span>
+      </p>
+    </div>
+  )
+}
+
+{
   variant === "cta" && (
     <section class="py-10" aria-labelledby={`${formId}-heading`}>
       <div class="site-container">
@@ -279,7 +372,7 @@ const signupPage = Astro.url.pathname;
                 class="subscriber-count text-base-50 hidden font-medium"
                 data-subscriber-count
               >
-                Join <span class="subscriber-number" /> newsletter subscribers
+                Join <span class="subscriber-number" /> subscribers
               </p>
             )}
             {description && (
