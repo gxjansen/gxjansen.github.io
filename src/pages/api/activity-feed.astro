@@ -1,0 +1,25 @@
+---
+import ActivityFeed from "@components/Activity/ActivityFeed.astro";
+import { getActivity } from "../../lib/sifaActivity";
+
+// Partial: returns only the <ActivityFeed> fragment (no layout), fetched by the
+// homepage after first paint so the static HTML never blocks on Sifa/Bluesky.
+export const partial = true;
+export const prerender = false;
+
+// CDN-cache the fragment with stale-while-revalidate so the upstream AppView is
+// queried at most ~once per window, not per visitor. Mirrors the policy the
+// homepage itself used to carry before it became static.
+Astro.response.headers.set(
+  "Netlify-CDN-Cache-Control",
+  "public, s-maxage=300, stale-while-revalidate=86400",
+);
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=0, must-revalidate",
+);
+
+const activity = await getActivity();
+---
+
+<ActivityFeed items={activity} />
