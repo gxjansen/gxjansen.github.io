@@ -41,7 +41,13 @@ async function gotoThemed(page: Page, route: string, theme: string) {
       localStorage.setItem("colorTheme", t);
     } catch {}
   }, theme);
-  await page.goto(route, { waitUntil: "networkidle" });
+  // Use domcontentloaded, not networkidle. Pages like /podcasts/ keep the
+  // network busy (media embeds, players, analytics beacons), so networkidle
+  // never settles and the audit times out — the flake that intermittently
+  // blocked merges. axe samples the rendered DOM and computed CSS, which is
+  // complete once the document parses and fonts load (handled below), so full
+  // network idle buys nothing here.
+  await page.goto(route, { waitUntil: "domcontentloaded" });
   // Sanity: the <html> element should carry the dark class in dark mode.
   if (theme === "dark") {
     await expect(page.locator("html")).toHaveClass(/dark/);
