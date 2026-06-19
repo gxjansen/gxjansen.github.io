@@ -192,10 +192,12 @@ export async function fetchEngagement(
  * then merged newest-first. Never throws.
  */
 async function fetchRecentNonPosts(): Promise<ActivityItem[]> {
+  // Per-category counts. Generous enough to fill the /now bento cards; the
+  // homepage feed scrolls, so extra items there just add variety.
   const cats: [string, number][] = [
-    ["Reviews", 4],
-    ["Code", 2],
-    ["Events", 2],
+    ["Reviews", 12],
+    ["Code", 12],
+    ["Events", 8],
   ];
   const lists = await Promise.all(
     cats.map(async ([category, n]) => {
@@ -407,7 +409,7 @@ function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
  * failure or empty result. Never throws.
  */
 const RECENT_DAYS = 7;
-const POST_HIGHLIGHTS = 6; // top posts by engagement, then the non-post tail
+const POST_HIGHLIGHTS = 12; // top posts by engagement, then the non-post tail
 
 export async function getActivity(): Promise<ActivityItem[]> {
   try {

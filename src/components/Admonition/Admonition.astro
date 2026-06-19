@@ -35,7 +35,7 @@ const label =
 
 {
   variant === "terminal" ? (
-    <div class="admonition border-gold bg-gold/10 text-base-600 prose-code:bg-gold/20 dark:text-base-300 dark:prose-code:bg-gold/20 my-3 rounded-lg border-l-4 px-4 py-3 font-mono text-sm">
+    <div class="admonition border-gold bg-gold/10 text-base-600 prose-code:bg-gold/20 dark:text-base-300 dark:prose-code:bg-gold/20 my-3 rounded-lg border px-4 py-3 font-mono text-sm">
       <span
         class="mr-2 inline-flex items-center gap-1.5 align-middle"
         style="transform: translateY(-1px);"
@@ -50,7 +50,7 @@ const label =
       <slot />
     </div>
   ) : variant === "prompt" ? (
-    <div class="admonition border-pine bg-pine/10 text-base-700 dark:text-base-300 my-3 rounded-lg border-l-4 px-4 py-3 font-mono text-sm">
+    <div class="admonition border-pine bg-pine/10 text-base-700 dark:text-base-300 my-3 rounded-lg border px-4 py-3 font-mono text-sm">
       <span
         class="mr-2 inline-flex items-center gap-1.5 align-middle"
         style="transform: translateY(-1px);"
@@ -67,7 +67,7 @@ const label =
   ) : (
     <div
       class:list={[
-        "admonition text-base-700 dark:text-base-300 my-3 rounded-lg border-l-4 px-4 py-3",
+        "admonition text-base-700 dark:text-base-300 my-3 rounded-lg border px-4 py-3",
         {
           "border-success bg-success/10 text-success-content prose-code:bg-success/20 dark:prose-code:bg-success/20":
             variant === "tip",

@@ -32,25 +32,16 @@ import {
 import { getActivity } from "../lib/sifaActivity";
 import { readingTimeShort } from "../utils/readingTime";
 
-// Render the homepage on demand so the live "Right now" feed stays fresh
-// without a rebuild, but cache the rendered page at the Netlify CDN with
-// stale-while-revalidate: Sifa is queried at most ~once per window (not per
-// visitor), visitors get a fast CDN-cached page, and the feed refreshes itself
-// every few minutes. The getActivity() fallback covers Sifa being unreachable.
-export const prerender = false;
-Astro.response.headers.set(
-  "Netlify-CDN-Cache-Control",
-  "public, s-maxage=300, stale-while-revalidate=86400",
-);
-Astro.response.headers.set(
-  "Cache-Control",
-  "public, max-age=0, must-revalidate",
-);
-
+// The homepage is statically generated so the HTML never blocks on the live
+// "Right now" feed (Sifa/Bluesky). getActivity() runs here at BUILD time, so the
+// static page ships with real recent data baked in; the client then swaps in a
+// fresh fragment after first paint (see the activity-mount script below and
+// /api/activity-feed). This keeps TTFB at CDN-static speed while the feed stays
+// live. getActivity() falls back to the seed if Sifa is unreachable at build.
 const currLocale = getLocaleFromUrl(Astro.url);
 const siteData = getTranslatedData("siteData", currLocale);
 
-// Live gui.do activity from the Sifa AppView (falls back to seed on failure).
+// Build-time gui.do activity from the Sifa AppView (falls back to seed on failure).
 const activity = await getActivity();
 
 // Recent articles from the post collection (real data, working links).
@@ -84,7 +75,15 @@ const rest = posts.slice(1, 4);
 // `accent: "gold"`. Normalise any gold card accent to foam at render time.
 const cardAccent = (accent: Accent): Accent =>
   accent === "gold" ? "foam" : accent;
-const ac = (accent: Accent) => `--ac:var(--color-${cardAccent(accent)})`;
+// Pine is a mid-dark teal: dark text on it fails WCAG AA (3.4:1) and the lavender
+// light text only reaches 3.9:1. Only near-white clears 4.5:1, so the pine card's
+// button takes light text while the pastel accents keep their dark text.
+const cardAccentFg = (accent: Accent): string =>
+  cardAccent(accent) === "pine"
+    ? "var(--color-base-50)"
+    : "var(--color-base-950)";
+const ac = (accent: Accent) =>
+  `--ac:var(--color-${cardAccent(accent)});--ac-fg:${cardAccentFg(accent)}`;
 const ArrowRight = "→";
 ---
 
@@ -141,7 +140,23 @@ const ArrowRight = "→";
           </div>
         </div>
 
-        <ActivityFeed items={activity} />
+        <div>
+          <div id="activity-mount" data-activity-endpoint="/api/activity-feed">
+            <ActivityFeed items={activity} />
+          </div>
+          <a
+            href="/now/"
+            class="no-random-underline text-pine-light dark:text-foam group mt-4 inline-flex items-center gap-1.5 text-[0.92rem] font-bold no-underline"
+          >
+            <span class="underline underline-offset-2"
+              >See what I&rsquo;m up to</span
+            >
+            <span
+              class="transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true">&rarr;</span
+            >
+          </a>
+        </div>
       </div>
     </section>
 
@@ -469,3 +484,21 @@ const ArrowRight = "→";
     </section>
   </div>
 </BaseLayout>
+
+<script>
+  // Hydrate the "Right now" feed after first paint. The static page ships with
+  // build-time data; this swaps in a fresh fragment without ever blocking the
+  // document. Filters keep working via the delegated handler in ActivityFeed.
+  const mount = document.getElementById("activity-mount");
+  const endpoint = mount?.dataset.activityEndpoint;
+  if (mount && endpoint) {
+    fetch(endpoint, { headers: { accept: "text/html" } })
+      .then((res) => (res.ok ? res.text() : null))
+      .then((html) => {
+        if (html && html.trim()) mount.innerHTML = html;
+      })
+      .catch(() => {
+        /* keep the statically-rendered feed on failure */
+      });
+  }
+</script>

@@ -1,0 +1,349 @@
+---
+/**
+ * Reading card for /now — ingests Bookhive. Shows what's currently being read
+ * (any genre) and a "Recently read" non-fiction shelf. No progress bars
+ * (Bookhive exposes no progress).
+ */
+import Stars from "./Stars.astro";
+import type { ReadingData } from "../../lib/bookhive";
+
+interface Props {
+  data: ReadingData;
+  /** Full shelf, linked from "Read more". */
+  bookhiveHref?: string;
+}
+const { data, bookhiveHref = "https://bookhive.buzz/profile/gui.do" } =
+  Astro.props as Props;
+const { active, recent } = data;
+const nothing = active.length === 0 && recent.length === 0;
+---
+
+<section
+  class="reading-card bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative overflow-hidden rounded-2xl border p-6 shadow-sm md:p-7"
+  aria-label="Reading"
+>
+  <div class="mb-5 flex flex-wrap items-start justify-between gap-3">
+    <p
+      class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.15rem] leading-none"
+    >
+      on the nightstand
+    </p>
+    <span class="bookhive-badge">
+      <span class="bookhive-dot" aria-hidden="true"></span>
+      Bookhive
+    </span>
+  </div>
+
+  {
+    nothing && (
+      <p class="text-base-500 dark:text-base-400 text-[.94rem]">
+        Reading list is taking a breather.
+      </p>
+    )
+  }
+
+  {/* ── Currently reading (any genre) ── */}
+  {
+    active.length === 1 && (
+      <>
+        <h3 class="reading-h">Currently reading</h3>
+        <div class="flex flex-wrap items-stretch gap-5">
+          <a
+            class={`bk-cover bk-${active[0].accent} no-random-underline h-[206px] w-[138px] flex-none`}
+            href={active[0].href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${active[0].title} on Bookhive`}
+          >
+            {active[0].coverUrl ? (
+              <img
+                src={active[0].coverUrl}
+                alt={`Cover of ${active[0].title}`}
+                loading="lazy"
+              />
+            ) : (
+              <>
+                <span class="bk-spine" aria-hidden="true" />
+                <div class="bk-meta">
+                  <div class="bk-title">{active[0].title}</div>
+                  <div class="bk-author">{active[0].author}</div>
+                </div>
+              </>
+            )}
+          </a>
+          <div class="flex min-w-[200px] flex-[1_1_240px] flex-col justify-center gap-2">
+            <span class="reading-pill">
+              <span class="reading-pill-dot" aria-hidden="true" /> Reading now
+            </span>
+            <div class="text-base-950 dark:text-base-50 font-display text-[1.5rem] leading-[1.1] font-extrabold tracking-[-0.02em]">
+              {active[0].title}
+            </div>
+            <div class="text-base-700 dark:text-base-300 text-[.98rem]">
+              {active[0].author}
+            </div>
+            {active[0].startedLabel && (
+              <div class="text-base-500 dark:text-base-400 text-[.84rem]">
+                {active[0].startedLabel}
+              </div>
+            )}
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  {
+    active.length > 1 && (
+      <>
+        <h3 class="reading-h">Currently reading</h3>
+        <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
+          {active.map((b) => (
+            <div class="flex flex-col gap-2">
+              <a
+                class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
+                href={b.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${b.title} on Bookhive`}
+              >
+                {b.coverUrl ? (
+                  <img
+                    src={b.coverUrl}
+                    alt={`Cover of ${b.title}`}
+                    loading="lazy"
+                  />
+                ) : (
+                  <>
+                    <span class="bk-spine" aria-hidden="true" />
+                    <div class="bk-meta">
+                      <div class="bk-title">{b.title}</div>
+                      <div class="bk-author">{b.author}</div>
+                    </div>
+                  </>
+                )}
+              </a>
+              <div class="text-love flex items-center gap-1.5 text-[.74rem] font-bold">
+                <span class="reading-pill-dot" aria-hidden="true" /> Reading now
+              </div>
+            </div>
+          ))}
+        </div>
+      </>
+    )
+  }
+
+  {/* ── Recently read (non-fiction) ── */}
+  {
+    recent.length > 0 && (
+      <>
+        <h3 class:list={["reading-h", active.length > 0 && "mt-7"]}>
+          Recently read
+        </h3>
+        <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
+          {recent.map((b) => (
+            <div class="flex flex-col gap-2">
+              <a
+                class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
+                href={b.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${b.title} on Bookhive`}
+              >
+                {b.coverUrl ? (
+                  <img
+                    src={b.coverUrl}
+                    alt={`Cover of ${b.title}`}
+                    loading="lazy"
+                  />
+                ) : (
+                  <>
+                    <span class="bk-spine" aria-hidden="true" />
+                    <div class="bk-meta">
+                      <div class="bk-title">{b.title}</div>
+                      <div class="bk-author">{b.author}</div>
+                    </div>
+                  </>
+                )}
+              </a>
+              {typeof b.rating === "number" && <Stars value={b.rating} />}
+            </div>
+          ))}
+        </div>
+        <a
+          href={bookhiveHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="reading-more no-random-underline"
+        >
+          <span class="underline underline-offset-2">Read more</span>
+          <span class="reading-more-arrow" aria-hidden="true">
+            &rarr;
+          </span>
+          <span class="sr-only">on Bookhive (opens in new tab)</span>
+        </a>
+      </>
+    )
+  }
+</section>
+
+<style>
+  @reference "../../styles/tailwind.css";
+
+  .reading-h {
+    @apply text-base-950 dark:text-base-50 font-display mb-3 text-[1.4rem] font-black tracking-[-0.02em];
+  }
+
+  .reading-more {
+    @apply text-primary-600 dark:text-primary-400 mt-4 inline-flex items-center gap-1 self-start text-[0.85rem] font-semibold;
+    text-decoration: none;
+  }
+  .reading-more-arrow {
+    transition: transform 0.2s ease;
+  }
+  .reading-more:hover .reading-more-arrow,
+  .reading-more:focus-visible .reading-more-arrow {
+    transform: translateX(2px);
+  }
+
+  .bookhive-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[.74rem] font-semibold;
+    color: var(--color-app-bookhive);
+    background: color-mix(in oklab, var(--color-app-bookhive) 12%, transparent);
+  }
+  .bookhive-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-app-bookhive);
+  }
+
+  .reading-pill {
+    @apply inline-flex items-center gap-1.5 self-start rounded-full border px-2.5 py-1 text-[.74rem] font-bold;
+    color: var(--color-love);
+    background: color-mix(in oklab, var(--color-love) 12%, transparent);
+    border-color: color-mix(in oklab, var(--color-love) 26%, transparent);
+  }
+  .reading-pill-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-love);
+    display: inline-block;
+  }
+
+  .bk-cover {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    color: #fff;
+    box-shadow: 0 6px 16px -8px rgb(0 0 0 / 0.5);
+    flex: none;
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  /* Linked covers lift on hover to signal they open the Bookhive page. */
+  a.bk-cover[href] {
+    cursor: pointer;
+  }
+  a.bk-cover[href]:hover,
+  a.bk-cover[href]:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px -8px rgb(0 0 0 / 0.55);
+    outline: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bk-cover {
+      transition: none;
+    }
+    a.bk-cover[href]:hover,
+    a.bk-cover[href]:focus-visible {
+      transform: none;
+    }
+  }
+  .bk-cover img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  /* Darken only when text is overlaid (gradient-placeholder fallback). */
+  .bk-cover:not(:has(img)) .bk-meta {
+    position: relative;
+    z-index: 1;
+    padding: 0.6rem 0.65rem;
+    background: linear-gradient(180deg, transparent, rgb(0 0 0 / 0.55));
+  }
+  .bk-spine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 5px;
+    background: rgb(255 255 255 / 0.22);
+    z-index: 1;
+  }
+  .bk-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.92rem;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+  }
+  .bk-author {
+    font-size: 0.68rem;
+    opacity: 0.92;
+    margin-top: 0.18rem;
+    text-shadow: 0 1px 3px rgb(0 0 0 / 0.35);
+  }
+
+  /* Two-tone accent gradients for cover placeholders. */
+  .bk-pine {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-pine) 96%, #000),
+      color-mix(in oklab, var(--color-pine) 48%, #000)
+    );
+  }
+  .bk-iris {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-iris) 92%, #000),
+      color-mix(in oklab, var(--color-iris) 42%, #000)
+    );
+  }
+  .bk-gold {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-gold) 90%, #000),
+      color-mix(in oklab, var(--color-gold) 45%, #000)
+    );
+  }
+  .bk-foam {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-foam) 92%, #000),
+      color-mix(in oklab, var(--color-foam) 45%, #000)
+    );
+  }
+  .bk-love {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-love) 92%, #000),
+      color-mix(in oklab, var(--color-love) 45%, #000)
+    );
+  }
+  .bk-rose {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-rose) 90%, #000),
+      color-mix(in oklab, var(--color-rose) 45%, #000)
+    );
+  }
+</style>

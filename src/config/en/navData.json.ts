@@ -63,6 +63,11 @@ const navConfig = [
         icon: "tabler/outline/user",
       },
       {
+        text: "Now",
+        link: "/now/",
+        icon: "tabler/clock",
+      },
+      {
         text: "CV",
         link: "/cv",
         icon: "tabler/outline/file-text",

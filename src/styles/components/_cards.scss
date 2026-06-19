@@ -1,7 +1,7 @@
 @layer components {
   /* Card System */
   article[class*="card"]:not(.event-card) {
-    @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur-sm group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
+    @apply rounded-xl border border-base-200/60 bg-base-50 group-hover:border-primary-500/50 dark:border-base-700/50 dark:bg-base-900 dark:group-hover:border-primary-400/50;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -98,7 +98,7 @@
 
   /* Event Card Specifics */
   .event-card {
-    @apply rounded-xl border border-base-200/50 bg-base-100/50 backdrop-blur-sm group-hover:border-primary-500/50 group-hover:bg-primary-500/[0.03] dark:border-base-700/50 dark:bg-base-900/50 dark:group-hover:border-primary-400/50 dark:group-hover:bg-primary-400/[0.03];
+    @apply rounded-xl border border-base-200/60 bg-base-50 group-hover:border-primary-500/50 dark:border-base-700/50 dark:bg-base-900 dark:group-hover:border-primary-400/50;
     @apply p-4;
     transition:
       border-color 0.3s ease,

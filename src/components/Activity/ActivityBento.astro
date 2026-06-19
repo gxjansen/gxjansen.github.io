@@ -1,0 +1,247 @@
+---
+/**
+ * /now "Right Now", pulled apart by category into a bento grid (Posts / Reviews
+ * / Code / Events), each its own card with the source app's accent. Reuses
+ * FeedItem for the rows. The homepage keeps the single scrolling ActivityFeed;
+ * this is the expanded, sectioned view for the /now page.
+ *
+ * Layout: 1 column on mobile, 2 columns from sm (posts taller, events full
+ * width), 3 columns from xl (events spans the right two columns next to posts).
+ */
+import { Icon } from "astro-icon/components";
+import { type ActivityItem } from "@data/homeContent";
+import FeedItem from "./FeedItem.astro";
+
+interface Props {
+  items: ActivityItem[];
+}
+const { items } = Astro.props as Props;
+
+type CatKey = "posts" | "reviews" | "code" | "events";
+const SIFA = "https://sifa.id/p/gui.do/activity";
+const CATS: {
+  key: CatKey;
+  label: string;
+  appColor: string;
+  max: number;
+  seeAllHref: string;
+  match: (t: ActivityItem["type"]) => boolean;
+}[] = [
+  {
+    key: "posts",
+    label: "Posts",
+    appColor: "bluesky",
+    max: 8,
+    seeAllHref: "https://bsky.app/profile/gui.do",
+    match: (t) => t === "post" || t === "repost",
+  },
+  {
+    key: "reviews",
+    label: "Reviews",
+    appColor: "popfeed",
+    max: 6,
+    seeAllHref: SIFA,
+    match: (t) => t === "review",
+  },
+  {
+    key: "code",
+    label: "Code",
+    appColor: "tangled",
+    max: 6,
+    seeAllHref: SIFA,
+    match: (t) => t === "code",
+  },
+  {
+    key: "events",
+    label: "Events",
+    appColor: "smokesignal",
+    max: 6,
+    seeAllHref: SIFA,
+    match: (t) => t === "event",
+  },
+];
+
+const groups = CATS.map((c) => {
+  const all = items.filter((i) => c.match(i.type));
+  return { ...c, count: all.length, items: all.slice(0, c.max) };
+}).filter((g) => g.items.length > 0);
+---
+
+<section class="bento-wrap" aria-label="Activity from AT Protocol, by category">
+  <div class="bento-head">
+    <span class="bento-title">Right Now</span>
+    <span class="live" aria-hidden="true"><span class="blip"></span></span>
+    <span class="bento-src">
+      by category via
+      <a
+        href="https://sifa.id/p/gui.do/activity"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1"
+        >Sifa ID<Icon name="sifa" class="size-3.5" aria-hidden="true" /></a
+      >
+    </span>
+  </div>
+
+  <div class="bento">
+    {
+      groups.map((g) => (
+        <section
+          class:list={["bxcard", `b-${g.key}`]}
+          style={`--bx: var(--color-app-${g.appColor})`}
+          aria-label={g.label}
+        >
+          <div class="bx-head">
+            <span class="bx-dot" aria-hidden="true" />
+            <span class="bx-label">{g.label}</span>
+            <span class="bx-count">{g.count}</span>
+          </div>
+          <ul class="bx-list" role="list">
+            {g.items.map((item) => (
+              <FeedItem item={item} />
+            ))}
+          </ul>
+          <a
+            href={g.seeAllHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bx-more no-random-underline"
+          >
+            <span class="underline underline-offset-2">See all</span>
+            <span class="bx-more-arrow" aria-hidden="true">
+              &rarr;
+            </span>
+            <span class="sr-only">{g.label} (opens in new tab)</span>
+          </a>
+        </section>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  @reference "../../styles/tailwind.css";
+
+  .bento-wrap {
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-3xl border shadow-sm;
+    padding: clamp(1rem, 3vw, 1.4rem);
+  }
+  .bento-head {
+    @apply mb-4 flex flex-wrap items-center gap-2.5;
+  }
+  .bento-title {
+    @apply text-base-950 dark:text-base-50 font-display text-[1.12rem] font-extrabold tracking-[-0.01em];
+  }
+  .bento-src {
+    @apply text-base-500 dark:text-base-400 ml-auto text-[0.8rem];
+  }
+  .bento-src a {
+    @apply text-primary-600 dark:text-primary-400 font-semibold no-underline;
+  }
+
+  /* Masonry via CSS columns: each card sizes to its own content and the cards
+     pack down the columns, so a tall card (Posts, with media) never stretches
+     the short ones. Cards stay whole (break-inside: avoid). */
+  .bento {
+    column-gap: 1rem;
+    columns: 1;
+  }
+  /* Two columns from tablet up: Posts (the tall, media-heavy card) balances
+     against the other three stacked. A third column just leaves one category
+     stranded short, since Posts dwarfs the rest. */
+  @media (min-width: 640px) {
+    .bento {
+      columns: 2;
+    }
+  }
+
+  .bxcard {
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    padding: 1rem 1.05rem 1.1rem;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+    transition:
+      box-shadow 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      border-color 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .bxcard::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--bx);
+    opacity: 0.85;
+  }
+  .bxcard:hover {
+    box-shadow: 0 8px 24px -10px rgb(0 0 0 / 0.25);
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--bx) 40%, var(--color-base-200));
+  }
+  :global(.dark) .bxcard:hover {
+    border-color: color-mix(in oklab, var(--bx) 40%, var(--color-base-800));
+  }
+
+  .bx-head {
+    @apply border-base-200 dark:border-base-800 mb-2 flex items-center gap-2 border-b pb-2;
+  }
+  .bx-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex: none;
+    background: var(--bx);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--bx) 18%, transparent);
+  }
+  .bx-label {
+    @apply text-base-950 dark:text-base-50 font-display text-[1.02rem] font-extrabold tracking-[-0.01em];
+  }
+  .bx-count {
+    @apply text-base-500 dark:text-base-400 bg-base-200 dark:bg-base-800 ml-auto rounded-full px-2 py-0.5 text-[0.74rem] font-semibold;
+  }
+
+  .bx-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Compact post media in the bento so a media-heavy Posts card stays balanced
+     with the text-only categories. */
+  .bxcard .fi-img {
+    max-height: 150px;
+  }
+
+  /* "See all" footer, right under the items. */
+  .bx-more {
+    @apply text-primary-600 dark:text-primary-400 mt-3 inline-flex items-center gap-1 self-start text-[0.8rem] font-semibold;
+    text-decoration: none;
+  }
+  .bx-more-arrow {
+    transition: transform 0.2s ease;
+  }
+  .bx-more:hover .bx-more-arrow,
+  .bx-more:focus-visible .bx-more-arrow {
+    transform: translateX(2px);
+  }
+  /* Events spans full width; keep its rows single-column so the app badge +
+     date never get squeezed onto two lines in a narrow auto-fit column. */
+
+  @media (prefers-reduced-motion: reduce) {
+    .bxcard {
+      transition: none;
+    }
+    .bxcard:hover {
+      transform: none;
+    }
+  }
+</style>

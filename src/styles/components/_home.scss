@@ -15,7 +15,7 @@
 .home .proj,
 .home .tcourse,
 .home .more,
-.home .feed-head .src a,
+.feed-head .src a,
 .home .wwm-card .wbtn {
   text-decoration: none;
 }
@@ -242,8 +242,7 @@
     @apply text-base-600 dark:text-base-400 text-[0.88rem] leading-[1.45];
   }
   .home .quote-card {
-    @apply bg-primary-600/5 dark:bg-primary-400/5 mt-5 rounded-r-xl py-4 pr-5 pl-5;
-    border-left: 3px solid color-mix(in oklab, var(--color-primary-600) 50%, var(--color-base-200));
+    @apply bg-primary-600/5 dark:bg-primary-400/5 border-primary-600/15 dark:border-primary-400/20 mt-5 rounded-xl border py-4 pr-5 pl-5;
   }
   .home .quote-card blockquote {
     @apply text-base-800 dark:text-base-200 m-0 text-[1.02rem] leading-[1.5];
@@ -386,8 +385,9 @@
   }
   .home .wwm-card .wbtn {
     @apply font-display inline-flex items-center gap-1.5 self-start rounded-full px-4 py-2.5 text-[0.9rem] font-bold no-underline;
-    /* Dark text: the per-card accent is a bright pastel, so white fails WCAG. */
-    color: var(--color-base-950);
+    /* Foreground is set per accent in index.astro (ac()): dark text on the bright
+       pastels, light text on the darker pine accent, so both clear WCAG AA. */
+    color: var(--ac-fg, var(--color-base-950));
     background: var(--ac, var(--color-primary-600));
     transition:
       border-color,
@@ -426,29 +426,33 @@
     }
   }
 
-  /* ---- live activity feed ---- */
-  .home .feed-wrap {
+  /* ---- live activity feed ----
+     NOT namespaced under `.home`: the ActivityFeed component is shared (homepage
+     "Right now" box + the /now page), so its styles must apply wherever it's
+     rendered. These class names (.feed*, .fi-*, .fbtn, .poster*) are unique to
+     the feed, so leaving them unscoped is collision-safe. */
+  .feed-wrap {
     /* On stacked (sub-lg) layouts the feed sits below the stats, and the
        absolutely-positioned "this is live ↓" note (top: -2.7rem) would ride
        up into the stats row above it. Reserve space so the note clears the
        stats. Reset at lg where the feed moves into its own column. */
     @apply relative mt-12 lg:mt-0;
   }
-  .home .feed-note {
+  .feed-note {
     @apply text-love-light dark:text-love absolute left-4 z-[1] inline-flex items-center gap-1 font-hand text-[1.05rem] leading-none font-bold;
     top: -2.7rem;
     transform: rotate(-3deg);
   }
-  .home .feed-note .arr {
+  .feed-note .arr {
     @apply text-[1.2rem];
     transform: rotate(8deg);
   }
-  .home .feed {
+  .feed {
     @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex max-h-[min(86vh,820px)] min-h-[min(74vh,660px)] flex-col overflow-hidden rounded-3xl border shadow-2xl;
   }
   /* Bottom fade hints that the feed scrolls (it's pointer-transparent so it
      never blocks the items underneath). */
-  .home .feed::after {
+  .feed::after {
     content: "";
     @apply pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-12 rounded-b-3xl;
     background: linear-gradient(
@@ -457,33 +461,33 @@
       var(--color-base-50) 85%
     );
   }
-  .dark .home .feed::after {
+  .dark .feed::after {
     background: linear-gradient(
       to bottom,
       transparent,
       var(--color-base-900) 85%
     );
   }
-  .home .feed-head {
+  .feed-head {
     @apply border-base-200 dark:border-base-800 bg-base-200/40 dark:bg-base-800/30 flex flex-shrink-0 items-center gap-2.5 border-b px-5 py-4;
   }
-  .home .feed-head .title {
+  .feed-head .title {
     @apply text-base-900 dark:text-base-100 font-display text-[1.05rem] font-extrabold whitespace-nowrap;
   }
-  .home .feed-head .src {
+  .feed-head .src {
     @apply text-base-500 ml-auto flex items-center gap-1 text-[0.74rem] whitespace-nowrap;
   }
-  .home .feed-head .src a {
+  .feed-head .src a {
     @apply text-primary-600 dark:text-primary-400 font-bold no-underline;
   }
-  .home .feed-filters {
+  .feed-filters {
     @apply border-base-200 dark:border-base-800 flex flex-shrink-0 gap-1.5 overflow-x-auto border-b px-5 py-3;
     scrollbar-width: none;
   }
-  .home .feed-filters::-webkit-scrollbar {
+  .feed-filters::-webkit-scrollbar {
     @apply hidden;
   }
-  .home .fbtn {
+  .fbtn {
     @apply text-base-600 dark:text-base-400 border-base-200 dark:border-base-700 flex-shrink-0 cursor-pointer rounded-full border bg-transparent px-3 py-1.5 font-display text-[0.82rem] font-semibold whitespace-nowrap;
     transition:
       border-color,
@@ -495,87 +499,87 @@
     transition-duration: 220ms;
     transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
-  .home .fbtn:hover {
+  .fbtn:hover {
     @apply border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400;
   }
-  .home .fbtn.active {
+  .fbtn.active {
     @apply bg-primary-600 dark:bg-primary-500 border-primary-600 dark:border-primary-500 text-white;
   }
-  .home .feed-list {
+  .feed-list {
     @apply flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto p-1.5;
     /* Keep a slim scrollbar visible as a second affordance that this scrolls. */
     scrollbar-width: thin;
     scrollbar-color: var(--color-base-300) transparent;
     scrollbar-gutter: stable;
   }
-  .dark .home .feed-list {
+  .dark .feed-list {
     scrollbar-color: var(--color-base-700) transparent;
   }
-  .home .feed-list::-webkit-scrollbar {
+  .feed-list::-webkit-scrollbar {
     width: 8px;
   }
-  .home .feed-list::-webkit-scrollbar-thumb {
+  .feed-list::-webkit-scrollbar-thumb {
     @apply bg-base-300 dark:bg-base-700 rounded-full;
     border: 2px solid transparent;
     background-clip: content-box;
   }
-  .home .feed-item {
+  .feed-item {
     @apply relative rounded-xl border border-transparent p-3.5;
     transition: border-color, background-color, color;
     transition-duration: 220ms;
     transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
-  .home .feed-item:hover {
+  .feed-item:hover {
     @apply bg-base-200/50 dark:bg-base-800/40 border-base-200 dark:border-base-800;
   }
   /* Stretched link makes the whole item clickable to its source. */
-  .home .fi-link {
+  .fi-link {
     @apply absolute inset-0 z-[1];
   }
   /* Keep mentions selectable/above the stretched link. */
-  .home .fi-text .mention {
+  .fi-text .mention {
     @apply relative z-[2];
   }
-  .home .fi-head {
+  .fi-head {
     @apply mb-2 flex items-center gap-2;
   }
-  .home .fi-kind {
+  .fi-kind {
     @apply text-base-500 text-[0.76rem] font-semibold;
   }
-  .home .fi-time {
+  .fi-time {
     @apply text-base-500 ml-auto text-[0.74rem];
   }
-  .home .fi-text {
+  .fi-text {
     @apply text-base-800 dark:text-base-200 m-0 text-[0.95rem] leading-[1.45];
   }
-  .home .fi-text .mention {
+  .fi-text .mention {
     @apply text-primary-600 dark:text-primary-400 font-bold;
   }
-  .home .fi-review {
+  .fi-review {
     @apply flex items-center gap-3;
   }
-  .home .fi-title {
+  .fi-title {
     @apply text-base-900 dark:text-base-100 font-display text-[0.98rem] leading-[1.2] font-bold;
   }
-  .home .fi-sub {
+  .fi-sub {
     @apply text-base-500 mt-0.5 text-[0.8rem];
   }
-  .home .fi-rate {
+  .fi-rate {
     @apply text-base-600 dark:text-base-400 mt-1.5 flex items-center gap-2 text-[0.85rem];
   }
-  .home .fi-rate b {
+  .fi-rate b {
     @apply text-base-900 dark:text-base-100;
   }
-  .home .fi-img {
+  .fi-img {
     @apply border-base-200 dark:border-base-800 mt-2.5 max-h-[220px] w-full rounded-lg border object-cover;
   }
-  .home .fi-meta {
+  .fi-meta {
     @apply text-base-500 mt-2.5 flex gap-4 text-[0.78rem];
   }
-  .home .fi-meta span {
+  .fi-meta span {
     @apply inline-flex items-center gap-1;
   }
-  .home .poster {
+  .poster {
     @apply relative flex aspect-[2/3] w-12 flex-shrink-0 flex-col items-center justify-center gap-0.5 overflow-hidden rounded-lg text-white;
     background: linear-gradient(
       150deg,
@@ -583,10 +587,10 @@
       color-mix(in oklab, var(--app-c, var(--color-app-fallback)) 35%, var(--color-base-200))
     );
   }
-  .home .poster img {
+  .poster img {
     @apply absolute inset-0 size-full object-cover;
   }
-  .home .poster-i {
+  .poster-i {
     @apply font-display text-base font-extrabold;
   }
 }

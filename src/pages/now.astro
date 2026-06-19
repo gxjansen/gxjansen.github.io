@@ -1,0 +1,58 @@
+---
+// /now — a live view of what Guido is posting, reading, and building across the
+// open social web. Expanded "Right Now" activity feed (Sifa) + a Bookhive
+// "currently reading" card. Linked from the homepage activity box and the About
+// nav. See the "now page" convention: https://nownownow.com/about
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ActivityBento from "@components/Activity/ActivityBento.astro";
+import ReadingCard from "@components/Reading/ReadingCard.astro";
+import { getActivity } from "../lib/sifaActivity";
+import { getReading } from "../lib/bookhive";
+
+// SSR + CDN stale-while-revalidate, mirroring the homepage: the feed and the
+// reading shelf stay fresh without a rebuild, queried at most ~once per window.
+export const prerender = false;
+Astro.response.headers.set(
+  "Netlify-CDN-Cache-Control",
+  "public, s-maxage=300, stale-while-revalidate=86400",
+);
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=0, must-revalidate",
+);
+
+const activity = await getActivity();
+const reading = await getReading();
+---
+
+<BaseLayout
+  title="Now"
+  description="What Guido is posting, reading, and building right now: a live view from across the open social web."
+>
+  <section class="mt-24 w-full px-4">
+    <div class="mx-auto max-w-5xl">
+      <header class="mb-8">
+        <p
+          class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.5rem] leading-none"
+        >
+          where my head&rsquo;s at
+        </p>
+        <h1 class="h1 mt-2">Now</h1>
+        <p class="text-base-500 dark:text-base-400 mt-2 text-[.85rem]">
+          updated whenever the feed moves
+        </p>
+        <p
+          class="text-base-700 dark:text-base-300 mt-4 text-lg leading-relaxed"
+        >
+          What I&rsquo;m posting, reading, and building right now, pulled
+          straight from my Atmosphere account.
+        </p>
+      </header>
+
+      <div class="flex flex-col gap-10">
+        <ActivityBento items={activity} />
+        <ReadingCard data={reading} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
