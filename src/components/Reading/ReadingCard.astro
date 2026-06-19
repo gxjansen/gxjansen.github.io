@@ -150,11 +150,6 @@ const nothing = active.length === 0 && recent.length === 0;
                 )}
               </div>
               {typeof b.rating === "number" && <Stars value={b.rating} />}
-              {b.finishedLabel && (
-                <div class="text-base-500 dark:text-base-400 text-[.74rem]">
-                  {b.finishedLabel}
-                </div>
-              )}
             </div>
           ))}
         </div>
