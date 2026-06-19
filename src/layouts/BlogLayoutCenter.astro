@@ -8,13 +8,13 @@ import BaseLayout from "./BaseLayout.astro";
 // components
 import Category from "@components/Category/Category.astro";
 import BlogNav from "@components/Blog/BlogNav.astro";
-import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
+import SubscribeBox from "@components/Newsletter/SubscribeBox.astro";
 import AuthorByline from "@components/Author/AuthorByline.astro";
 import AuthorBioBox from "@components/Author/AuthorBioBox.astro";
 import Breadcrumb from "@components/Breadcrumb/Breadcrumb.astro";
 
 // utils
-import { formatDate, humanize } from "@js/textUtils";
+import { formatDate } from "@js/textUtils";
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { useTranslations } from "@js/translationUtils";
 import { filterCategoriesByCount } from "@js/blogUtils";
@@ -69,13 +69,6 @@ const authorsData =
 
 // Filter categories to only show those with 2+ posts
 const filteredCategories = filterCategoriesByCount(categories, allPosts);
-
-// Generate dynamic newsletter description based on categories
-const categoryNames = categories.map((cat) => humanize(cat)).slice(0, 3);
-const newsletterDescription =
-  categoryNames.length > 0
-    ? `Want more on ${categoryNames.join(", ")}? Subscribe for curated insights on community, AI & open tech.`
-    : "Curated insights on community, AI & open tech. No spam, no tracking pixels, unsubscribe anytime.";
 ---
 
 <BaseLayout
@@ -180,6 +173,38 @@ const newsletterDescription =
               <span class="text-base-600 dark:text-base-400">&bull;</span>
               <span aria-label="Estimated reading time">{readTime}</span>
 
+              <!-- Combined subscriber count (newsletter + AT Protocol).
+                   Filled client-side by NewsletterForm's fetchSubscriberCount()
+                   (the SubscribeBox at the foot of the post loads that script);
+                   stays hidden until the count resolves, so no layout shift.
+                   To remove from the byline, delete this block. -->
+              <span class="subscriber-count hidden" data-subscriber-count>
+                <span
+                  class="text-base-600 dark:text-base-400 mr-4"
+                  aria-hidden="true">&bull;</span
+                >
+                <a
+                  href="#subscribe"
+                  class="count-link no-random-underline group/sc relative inline-flex items-center gap-2 align-middle"
+                >
+                  <span class="count-dots" aria-hidden="true">
+                    <span class="count-dot count-dot--gold"></span>
+                    <span class="count-dot count-dot--bsky"></span>
+                  </span>
+                  <span>
+                    <span
+                      class="subscriber-number text-base-700 dark:text-base-300 font-bold"
+                    ></span>
+                    <span class="text-base-500 dark:text-base-400"
+                      >subscribers</span
+                    >
+                  </span>
+                  <span class="count-tip" role="tooltip"
+                    >Newsletter subscribers and open-web followers, combined.</span
+                  >
+                </a>
+              </span>
+
               <!-- Bluesky comment link (only if linked) -->
               {
                 blueskyUri && (
@@ -271,6 +296,12 @@ const newsletterDescription =
         <p class="article-signature" aria-hidden="true">— Guido</p>
       </div>
 
+      <!-- Subscribe: email (Listmonk) + open-social-web referral. id="subscribe"
+           is the anchor target for the byline count link. -->
+      <div class="mx-auto mt-12 max-w-2xl">
+        <SubscribeBox />
+      </div>
+
       <!-- Bluesky-powered comments (Juttu, self-hosted at comments.gui.do).
            The article<->post link lives in the site.standard.document record
            (BaseHead renders <link rel="site.standard.document">); Juttu reads
@@ -308,15 +339,6 @@ const newsletterDescription =
     </div>
   </div>
 
-  <!-- Newsletter CTA -->
-  <div class="mt-8">
-    <NewsletterForm
-      variant="card"
-      title="Enjoyed this? Get Guido's <span class='text-golden'>Golden</span> Nuggets"
-      description={newsletterDescription}
-    />
-  </div>
-
   <!-- Navigation -->
   <nav class="mx-auto max-w-2xl" aria-label="Blog post navigation">
     <BlogNav currentSlug={post.id} posts={allPosts} />
@@ -329,4 +351,82 @@ const newsletterDescription =
     import { initBskyEngagement } from "../scripts/bskyEngagement";
     initBskyEngagement();
   </script>
+
+  <style>
+    /* Combined subscriber-count link in the byline (paired-dot cue + tooltip). */
+    .count-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .count-link:hover,
+    .count-link:focus-visible {
+      color: var(--color-foam-light);
+    }
+    :global(.dark) .count-link:hover,
+    :global(.dark) .count-link:focus-visible {
+      color: var(--color-foam);
+    }
+    /* tint number + label to the link colour on hover (beats the base-* utils) */
+    .count-link:hover span:not(.count-tip),
+    .count-link:focus-visible span:not(.count-tip) {
+      color: inherit;
+    }
+
+    .count-dots {
+      display: inline-flex;
+      align-items: center;
+    }
+    .count-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px var(--color-base-100);
+    }
+    :global(.dark) .count-dot {
+      box-shadow: 0 0 0 2px var(--color-base-950);
+    }
+    .count-dot--gold {
+      background: var(--color-gold-light);
+    }
+    :global(.dark) .count-dot--gold {
+      background: var(--color-gold);
+    }
+    .count-dot--bsky {
+      margin-left: -3px;
+      background: var(--color-app-bluesky);
+    }
+
+    .count-tip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      background: var(--color-base-950);
+      color: var(--color-base-50);
+      font-size: 0.74rem;
+      line-height: 1.2;
+      padding: 0.35em 0.6em;
+      border-radius: 6px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 20;
+    }
+    :global(.dark) .count-tip {
+      background: var(--color-base-50);
+      color: var(--color-base-950);
+    }
+    .count-link:hover .count-tip,
+    .count-link:focus-visible .count-tip {
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .count-link,
+      .count-tip {
+        transition: none;
+      }
+    }
+  </style>
 </BaseLayout>
