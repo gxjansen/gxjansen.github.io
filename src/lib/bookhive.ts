@@ -52,6 +52,8 @@ export interface Book {
   rating?: number; // 0–10 (finished)
   finishedLabel?: string;
   startedLabel?: string;
+  /** Bookhive book page, when the hive id is known. */
+  href?: string;
 }
 
 export interface ReadingData {
@@ -159,6 +161,9 @@ const mapBook = (e: Enriched, i: number): Book => ({
     : undefined,
   startedLabel: e.raw.value.createdAt
     ? `Started ${monthYear(e.raw.value.createdAt)}`
+    : undefined,
+  href: e.raw.value.hiveId
+    ? `https://bookhive.buzz/books/${e.raw.value.hiveId}`
     : undefined,
 });
 
