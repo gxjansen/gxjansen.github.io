@@ -64,7 +64,7 @@ const navConfig = [
       },
       {
         text: "Now",
-        link: "/now",
+        link: "/now/",
         icon: "tabler/clock",
       },
       {
