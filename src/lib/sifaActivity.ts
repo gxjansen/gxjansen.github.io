@@ -409,7 +409,7 @@ function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
  * failure or empty result. Never throws.
  */
 const RECENT_DAYS = 7;
-const POST_HIGHLIGHTS = 6; // top posts by engagement, then the non-post tail
+const POST_HIGHLIGHTS = 12; // top posts by engagement, then the non-post tail
 
 export async function getActivity(): Promise<ActivityItem[]> {
   try {

@@ -166,14 +166,14 @@ export async function getReading(): Promise<ReadingData> {
       };
     }
 
-    // Fallback: every finished non-fiction book, newest first. The card's
-    // auto-fill cover grid wraps to as many rows as it needs.
+    // Fallback: most-recent finished non-fiction, capped to ~2 desktop rows of
+    // the cover grid. The card links out to Bookhive for the full shelf.
     const finished = books
       .filter((b) => b.value.status === STATUS_FINISHED)
       .sort((a, b) =>
         (b.value.finishedAt ?? "").localeCompare(a.value.finishedAt ?? ""),
       );
-    const recentNF = await enrichNonFiction(finished);
+    const recentNF = (await enrichNonFiction(finished)).slice(0, 12);
     return { mode: "fallback", active: [], recent: recentNF.map(mapBook) };
   } catch {
     return { mode: "fallback", active: [], recent: [] };
