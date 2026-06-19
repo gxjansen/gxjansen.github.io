@@ -10,8 +10,11 @@ import type { ReadingData, Book } from "../../lib/bookhive";
 
 interface Props {
   data: ReadingData;
+  /** Full shelf, linked from "Read more". */
+  bookhiveHref?: string;
 }
-const { data } = Astro.props as Props;
+const { data, bookhiveHref = "https://bookhive.buzz/profile/gui.do" } =
+  Astro.props as Props;
 const heading =
   data.mode === "fallback" ? "Recently read" : "Currently reading";
 const books: Book[] = data.mode === "fallback" ? data.recent : data.active;
@@ -157,6 +160,18 @@ const isEmpty = books.length === 0;
             </div>
           ))}
         </div>
+        <a
+          href={bookhiveHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="reading-more no-random-underline"
+        >
+          <span class="underline underline-offset-2">Read more</span>
+          <span class="reading-more-arrow" aria-hidden="true">
+            &rarr;
+          </span>
+          <span class="sr-only">on Bookhive (opens in new tab)</span>
+        </a>
       </>
     )
   }
@@ -164,6 +179,18 @@ const isEmpty = books.length === 0;
 
 <style>
   @reference "../../styles/tailwind.css";
+
+  .reading-more {
+    @apply text-primary-600 dark:text-primary-400 mt-4 inline-flex items-center gap-1 self-start text-[0.85rem] font-semibold;
+    text-decoration: none;
+  }
+  .reading-more-arrow {
+    transition: transform 0.2s ease;
+  }
+  .reading-more:hover .reading-more-arrow,
+  .reading-more:focus-visible .reading-more-arrow {
+    transform: translateX(2px);
+  }
 
   .bookhive-badge {
     @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[.74rem] font-semibold;

@@ -18,39 +18,46 @@ interface Props {
 const { items } = Astro.props as Props;
 
 type CatKey = "posts" | "reviews" | "code" | "events";
+const SIFA = "https://sifa.id/p/gui.do/activity";
 const CATS: {
   key: CatKey;
   label: string;
   appColor: string;
   max: number;
+  seeAllHref: string;
   match: (t: ActivityItem["type"]) => boolean;
 }[] = [
+  // Posts is the tall card; show more so it fills the column next to Reviews+Code.
   {
     key: "posts",
     label: "Posts",
     appColor: "bluesky",
-    max: 10,
+    max: 12,
+    seeAllHref: "https://bsky.app/profile/gui.do",
     match: (t) => t === "post" || t === "repost",
   },
   {
     key: "reviews",
     label: "Reviews",
     appColor: "popfeed",
-    max: 12,
+    max: 6,
+    seeAllHref: SIFA,
     match: (t) => t === "review",
   },
   {
     key: "code",
     label: "Code",
     appColor: "tangled",
-    max: 12,
+    max: 6,
+    seeAllHref: SIFA,
     match: (t) => t === "code",
   },
   {
     key: "events",
     label: "Events",
     appColor: "smokesignal",
-    max: 8,
+    max: 6,
+    seeAllHref: SIFA,
     match: (t) => t === "event",
   },
 ];
@@ -95,6 +102,18 @@ const groups = CATS.map((c) => {
               <FeedItem item={item} />
             ))}
           </ul>
+          <a
+            href={g.seeAllHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bx-more no-random-underline"
+          >
+            <span class="underline underline-offset-2">See all</span>
+            <span class="bx-more-arrow" aria-hidden="true">
+              &rarr;
+            </span>
+            <span class="sr-only">{g.label} (opens in new tab)</span>
+          </a>
         </section>
       ))
     }
@@ -151,6 +170,8 @@ const groups = CATS.map((c) => {
   .bxcard {
     @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border;
     position: relative;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     padding: 1rem 1.05rem 1.1rem;
     box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
@@ -202,6 +223,19 @@ const groups = CATS.map((c) => {
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  /* "See all" footer, pinned to the card bottom so footers line up. */
+  .bx-more {
+    @apply text-primary-600 dark:text-primary-400 mt-auto inline-flex items-center gap-1 self-start pt-3 text-[0.8rem] font-semibold;
+    text-decoration: none;
+  }
+  .bx-more-arrow {
+    transition: transform 0.2s ease;
+  }
+  .bx-more:hover .bx-more-arrow,
+  .bx-more:focus-visible .bx-more-arrow {
+    transform: translateX(2px);
   }
   /* Events spans full width; keep its rows single-column so the app badge +
      date never get squeezed onto two lines in a narrow auto-fit column. */
