@@ -166,13 +166,14 @@ export async function getReading(): Promise<ReadingData> {
       };
     }
 
-    // Fallback: filter non-fiction across all finished, take the 4 most recent.
+    // Fallback: filter non-fiction across all finished, take the 6 most recent
+    // (fills a desktop row of the auto-fill cover grid).
     const finished = books
       .filter((b) => b.value.status === STATUS_FINISHED)
       .sort((a, b) =>
         (b.value.finishedAt ?? "").localeCompare(a.value.finishedAt ?? ""),
       );
-    const recentNF = (await enrichNonFiction(finished)).slice(0, 4);
+    const recentNF = (await enrichNonFiction(finished)).slice(0, 6);
     return { mode: "fallback", active: [], recent: recentNF.map(mapBook) };
   } catch {
     return { mode: "fallback", active: [], recent: [] };
