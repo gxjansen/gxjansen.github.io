@@ -385,8 +385,9 @@
   }
   .home .wwm-card .wbtn {
     @apply font-display inline-flex items-center gap-1.5 self-start rounded-full px-4 py-2.5 text-[0.9rem] font-bold no-underline;
-    /* Dark text: the per-card accent is a bright pastel, so white fails WCAG. */
-    color: var(--color-base-950);
+    /* Foreground is set per accent in index.astro (ac()): dark text on the bright
+       pastels, light text on the darker pine accent, so both clear WCAG AA. */
+    color: var(--ac-fg, var(--color-base-950));
     background: var(--ac, var(--color-primary-600));
     transition:
       border-color,

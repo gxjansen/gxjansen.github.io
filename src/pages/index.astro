@@ -84,7 +84,15 @@ const rest = posts.slice(1, 4);
 // `accent: "gold"`. Normalise any gold card accent to foam at render time.
 const cardAccent = (accent: Accent): Accent =>
   accent === "gold" ? "foam" : accent;
-const ac = (accent: Accent) => `--ac:var(--color-${cardAccent(accent)})`;
+// Pine is a mid-dark teal: dark text on it fails WCAG AA (3.4:1) and the lavender
+// light text only reaches 3.9:1. Only near-white clears 4.5:1, so the pine card's
+// button takes light text while the pastel accents keep their dark text.
+const cardAccentFg = (accent: Accent): string =>
+  cardAccent(accent) === "pine"
+    ? "var(--color-base-50)"
+    : "var(--color-base-950)";
+const ac = (accent: Accent) =>
+  `--ac:var(--color-${cardAccent(accent)});--ac-fg:${cardAccentFg(accent)}`;
 const ArrowRight = "→";
 ---
 
@@ -145,7 +153,7 @@ const ArrowRight = "→";
           <ActivityFeed items={activity} />
           <a
             href="/now/"
-            class="no-random-underline text-foam-light dark:text-foam group mt-4 inline-flex items-center gap-1.5 text-[0.92rem] font-bold no-underline"
+            class="no-random-underline text-pine-light dark:text-foam group mt-4 inline-flex items-center gap-1.5 text-[0.92rem] font-bold no-underline"
           >
             <span class="underline underline-offset-2"
               >See what I&rsquo;m up to</span
