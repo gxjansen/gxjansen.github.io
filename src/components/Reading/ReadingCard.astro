@@ -48,8 +48,12 @@ const nothing = active.length === 0 && recent.length === 0;
       <>
         <h3 class="reading-h">Currently reading</h3>
         <div class="flex flex-wrap items-stretch gap-5">
-          <div
-            class={`bk-cover bk-${active[0].accent} h-[206px] w-[138px] flex-none`}
+          <a
+            class={`bk-cover bk-${active[0].accent} no-random-underline h-[206px] w-[138px] flex-none`}
+            href={active[0].href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${active[0].title} on Bookhive`}
           >
             {active[0].coverUrl ? (
               <img
@@ -66,7 +70,7 @@ const nothing = active.length === 0 && recent.length === 0;
                 </div>
               </>
             )}
-          </div>
+          </a>
           <div class="flex min-w-[200px] flex-[1_1_240px] flex-col justify-center gap-2">
             <span class="reading-pill">
               <span class="reading-pill-dot" aria-hidden="true" /> Reading now
@@ -95,7 +99,13 @@ const nothing = active.length === 0 && recent.length === 0;
         <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
           {active.map((b) => (
             <div class="flex flex-col gap-2">
-              <div class={`bk-cover bk-${b.accent} aspect-[2/3] w-full`}>
+              <a
+                class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
+                href={b.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${b.title} on Bookhive`}
+              >
                 {b.coverUrl ? (
                   <img
                     src={b.coverUrl}
@@ -111,7 +121,7 @@ const nothing = active.length === 0 && recent.length === 0;
                     </div>
                   </>
                 )}
-              </div>
+              </a>
               <div class="text-love flex items-center gap-1.5 text-[.74rem] font-bold">
                 <span class="reading-pill-dot" aria-hidden="true" /> Reading now
               </div>
@@ -132,7 +142,13 @@ const nothing = active.length === 0 && recent.length === 0;
         <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
           {recent.map((b) => (
             <div class="flex flex-col gap-2">
-              <div class={`bk-cover bk-${b.accent} aspect-[2/3] w-full`}>
+              <a
+                class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
+                href={b.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${b.title} on Bookhive`}
+              >
                 {b.coverUrl ? (
                   <img
                     src={b.coverUrl}
@@ -148,7 +164,7 @@ const nothing = active.length === 0 && recent.length === 0;
                     </div>
                   </>
                 )}
-              </div>
+              </a>
               {typeof b.rating === "number" && <Stars value={b.rating} />}
             </div>
           ))}
@@ -225,6 +241,29 @@ const nothing = active.length === 0 && recent.length === 0;
     color: #fff;
     box-shadow: 0 6px 16px -8px rgb(0 0 0 / 0.5);
     flex: none;
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  /* Linked covers lift on hover to signal they open the Bookhive page. */
+  a.bk-cover[href] {
+    cursor: pointer;
+  }
+  a.bk-cover[href]:hover,
+  a.bk-cover[href]:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px -8px rgb(0 0 0 / 0.55);
+    outline: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bk-cover {
+      transition: none;
+    }
+    a.bk-cover[href]:hover,
+    a.bk-cover[href]:focus-visible {
+      transform: none;
+    }
   }
   .bk-cover img {
     position: absolute;
