@@ -203,12 +203,8 @@ const groups = CATS.map((c) => {
     margin: 0;
     padding: 0;
   }
-  /* Events spans full width, so its rows flow into responsive columns. */
-  .b-events .bx-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 0 1.4rem;
-  }
+  /* Events spans full width; keep its rows single-column so the app badge +
+     date never get squeezed onto two lines in a narrow auto-fit column. */
 
   @media (prefers-reduced-motion: reduce) {
     .bxcard {

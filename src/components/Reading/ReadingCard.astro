@@ -128,10 +128,6 @@ const isEmpty = books.length === 0;
   {
     data.mode === "fallback" && !isEmpty && (
       <>
-        <p class="text-base-700 dark:text-base-300 -mt-2 mb-4 max-w-[54ch] text-[.94rem] leading-[1.5]">
-          Nothing on the nightstand right this second. Here&rsquo;s the
-          non&#8209;fiction I just finished.
-        </p>
         <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
           {books.map((b) => (
             <div class="flex flex-col gap-2">
