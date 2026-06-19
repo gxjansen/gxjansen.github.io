@@ -67,27 +67,31 @@ const filters = [
 </section>
 
 <script>
-  function initActivityFilters() {
-    document.querySelectorAll<HTMLElement>(".feed-wrap").forEach((wrap) => {
-      const buttons = wrap.querySelectorAll<HTMLButtonElement>(".fbtn");
-      const items = wrap.querySelectorAll<HTMLElement>(".feed-item");
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const cat = btn.dataset.cat;
-          buttons.forEach((b) => {
-            const active = b === btn;
-            b.classList.toggle("active", active);
-            b.setAttribute("aria-selected", active ? "true" : "false");
-          });
-          items.forEach((item) => {
-            const show = cat === "all" || item.dataset.cat === cat;
-            item.style.display = show ? "" : "none";
-          });
-        });
+  // Delegated on document so filtering keeps working after the homepage swaps in
+  // the freshly-fetched feed fragment (and across view-transition swaps) without
+  // any re-init. Guard against binding twice if this script loads more than once.
+  interface ActivityWindow extends Window {
+    __activityFiltersBound?: boolean;
+  }
+  const w = window as ActivityWindow;
+  if (!w.__activityFiltersBound) {
+    w.__activityFiltersBound = true;
+    document.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement | null;
+      const btn = target?.closest<HTMLButtonElement>(".feed-wrap .fbtn");
+      if (!btn) return;
+      const wrap = btn.closest<HTMLElement>(".feed-wrap");
+      if (!wrap) return;
+      const cat = btn.dataset.cat;
+      wrap.querySelectorAll<HTMLButtonElement>(".fbtn").forEach((b) => {
+        const active = b === btn;
+        b.classList.toggle("active", active);
+        b.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      wrap.querySelectorAll<HTMLElement>(".feed-item").forEach((item) => {
+        const show = cat === "all" || item.dataset.cat === cat;
+        item.style.display = show ? "" : "none";
       });
     });
   }
-
-  initActivityFilters();
-  document.addEventListener("astro:after-swap", initActivityFilters);
 </script>
