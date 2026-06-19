@@ -242,8 +242,7 @@
     @apply text-base-600 dark:text-base-400 text-[0.88rem] leading-[1.45];
   }
   .home .quote-card {
-    @apply bg-primary-600/5 dark:bg-primary-400/5 mt-5 rounded-r-xl py-4 pr-5 pl-5;
-    border-left: 3px solid color-mix(in oklab, var(--color-primary-600) 50%, var(--color-base-200));
+    @apply bg-primary-600/5 dark:bg-primary-400/5 border-primary-600/15 dark:border-primary-400/20 mt-5 rounded-xl border py-4 pr-5 pl-5;
   }
   .home .quote-card blockquote {
     @apply text-base-800 dark:text-base-200 m-0 text-[1.02rem] leading-[1.5];
