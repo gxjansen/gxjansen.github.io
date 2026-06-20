@@ -23,6 +23,10 @@ Astro.response.headers.set(
 
 const activity = await getActivity();
 const reading = await getReading();
+
+// Hand-written focus statement (the actual "/now" bit). Bump this date whenever
+// you edit the copy below.
+const focusUpdated = "20 June 2026";
 ---
 
 <BaseLayout
@@ -39,15 +43,81 @@ const reading = await getReading();
         </p>
         <h1 class="h1 mt-2">Now</h1>
         <p class="text-base-500 dark:text-base-400 mt-2 text-[.85rem]">
-          updated whenever the feed moves
-        </p>
-        <p
-          class="text-base-700 dark:text-base-300 mt-4 text-lg leading-relaxed"
-        >
-          What I&rsquo;m posting, reading, and building right now, pulled
-          straight from my Atmosphere account.
+          Updated {focusUpdated}
         </p>
       </header>
+
+      {/* ── Focus statement (the actual /now bit — owned, hand-written) ── */}
+      <div
+        class="now-focus text-base-700 dark:text-base-300 max-w-2xl text-lg leading-relaxed"
+      >
+        <p>
+          I&rsquo;m heads-down building on AT Protocol, trying to make the open
+          social web feel less like a science project and more like somewhere
+          you&rsquo;d actually want to hang out.
+        </p>
+        <p class="mt-4">A few things have my attention:</p>
+        <ul class="mt-3 flex flex-col gap-2.5">
+          <li>
+            <a
+              class="text-foam-light dark:text-foam no-random-underline font-semibold underline underline-offset-2"
+              href="https://sifa.id/p/gui.do"
+              target="_blank"
+              rel="noopener noreferrer">Sifa</a
+            >: identity and activity for the Atmosphere. It&rsquo;s what powers
+            the live feed further down this page.
+          </li>
+          <li>
+            <a
+              class="text-foam-light dark:text-foam no-random-underline font-semibold underline underline-offset-2"
+              href="https://barazo.forum"
+              target="_blank"
+              rel="noopener noreferrer">Barazo</a
+            >: community forums where the members own their data, not the
+            platform.
+          </li>
+          <li>
+            <a
+              class="text-foam-light dark:text-foam no-random-underline font-semibold underline underline-offset-2"
+              href="https://singi.dev"
+              target="_blank"
+              rel="noopener noreferrer">Singi Labs</a
+            >: the little studio those two live under.
+          </li>
+          <li>
+            <strong class="text-base-900 dark:text-base-100">This site</strong>:
+            my testbed for one question: what does a personal site look like
+            when it reads straight from your own atproto data? (Even the book
+            covers below are pulled live.)
+          </li>
+        </ul>
+        <p class="mt-4">
+          The idea underneath all of it: own what you create, ingest the rest.
+          My writing and the products sit on infrastructure I control; the
+          social stuff gets pulled in.
+        </p>
+        <p class="mt-4">
+          Twenty-plus years into community building and I&rsquo;m still
+          convinced it&rsquo;s the most underrated lever in tech. Right now
+          I&rsquo;m spending it on open protocols.
+        </p>
+        <p class="mt-4">
+          <strong class="text-base-900 dark:text-base-100">Where:</strong> the Netherlands
+          🇪🇺, surrounded by a few too many self-hosted boxes.
+        </p>
+        <p class="mt-4">
+          <strong class="text-base-900 dark:text-base-100"
+            >What I&rsquo;m not doing:</strong
+          > jumping on every shiny new protocol, and staying off anything that won&rsquo;t
+          let me take my data with me.
+        </p>
+      </div>
+
+      <p
+        class="text-base-500 dark:text-base-400 mt-12 mb-6 text-[.9rem] font-medium tracking-wide uppercase"
+      >
+        And the live half, pulled straight from my Atmosphere account
+      </p>
 
       <div class="flex flex-col gap-10">
         <ActivityBento items={activity} />
