@@ -253,7 +253,15 @@ const WORK_TYPE_LABEL: Record<string, string> = {
   show: "TV",
   book: "Book",
   game: "Game",
+  video_game: "Video game",
+  videogame: "Video game",
   album: "Album",
+};
+
+// Fallback for unmapped creative-work types: "video_game" -> "Video game".
+const prettyWorkType = (s?: string): string | undefined => {
+  const t = (s ?? "").replace(/[_-]+/g, " ").trim().toLowerCase();
+  return t ? t.charAt(0).toUpperCase() + t.slice(1) : undefined;
 };
 
 /** The DID that owns a record, parsed from its at:// URI. */
@@ -327,7 +335,8 @@ function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
       const workType = str(record.creativeWorkType)?.toLowerCase() ?? "";
       const credit = str(record.mainCredit);
       const subParts = [
-        WORK_TYPE_LABEL[workType] ?? str(record.creativeWorkType),
+        WORK_TYPE_LABEL[workType] ??
+          prettyWorkType(str(record.creativeWorkType)),
         credit,
       ].filter(Boolean);
       const rating =

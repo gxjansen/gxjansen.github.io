@@ -5,8 +5,9 @@
  * FeedItem for the rows. The homepage keeps the single scrolling ActivityFeed;
  * this is the expanded, sectioned view for the /now page.
  *
- * Layout: 1 column on mobile, 2 columns from sm (posts taller, events full
- * width), 3 columns from xl (events spans the right two columns next to posts).
+ * Layout: 1 column on mobile (cards size to content), 2 equal-height columns
+ * from sm where each card is a fixed height and scrolls internally, so the
+ * columns always end together regardless of how many items each category has.
  */
 import { Icon } from "astro-icon/components";
 import { type ActivityItem } from "@data/homeContent";
@@ -31,7 +32,7 @@ const CATS: {
     key: "posts",
     label: "Posts",
     appColor: "bluesky",
-    max: 8,
+    max: 12,
     seeAllHref: "https://bsky.app/profile/gui.do",
     match: (t) => t === "post" || t === "repost",
   },
@@ -39,7 +40,7 @@ const CATS: {
     key: "reviews",
     label: "Reviews",
     appColor: "popfeed",
-    max: 6,
+    max: 12,
     seeAllHref: SIFA,
     match: (t) => t === "review",
   },
@@ -47,7 +48,7 @@ const CATS: {
     key: "code",
     label: "Code",
     appColor: "tangled",
-    max: 6,
+    max: 12,
     seeAllHref: SIFA,
     match: (t) => t === "code",
   },
@@ -55,7 +56,7 @@ const CATS: {
     key: "events",
     label: "Events",
     appColor: "smokesignal",
-    max: 6,
+    max: 8,
     seeAllHref: SIFA,
     match: (t) => t === "event",
   },
@@ -94,7 +95,6 @@ const groups = CATS.map((c) => {
           <div class="bx-head">
             <span class="bx-dot" aria-hidden="true" />
             <span class="bx-label">{g.label}</span>
-            <span class="bx-count">{g.count}</span>
           </div>
           <ul class="bx-list" role="list">
             {g.items.map((item) => (
@@ -139,19 +139,26 @@ const groups = CATS.map((c) => {
     @apply text-primary-600 dark:text-primary-400 font-semibold no-underline;
   }
 
-  /* Masonry via CSS columns: each card sizes to its own content and the cards
-     pack down the columns, so a tall card (Posts, with media) never stretches
-     the short ones. Cards stay whole (break-inside: avoid). */
+  /* Equal-height grid: from tablet up every card is the same fixed height with
+     its own internal scroll, so the columns always end together no matter how
+     much content each category has. On mobile the cards size to content (a
+     single column has nothing to balance). */
   .bento {
-    column-gap: 1rem;
-    columns: 1;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
   }
-  /* Two columns from tablet up: Posts (the tall, media-heavy card) balances
-     against the other three stacked. A third column just leaves one category
-     stranded short, since Posts dwarfs the rest. */
   @media (min-width: 640px) {
     .bento {
-      columns: 2;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .bxcard {
+      height: 28rem;
+    }
+    .bx-list {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
     }
   }
 
@@ -161,8 +168,6 @@ const groups = CATS.map((c) => {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    break-inside: avoid;
-    margin-bottom: 1rem;
     padding: 1rem 1.05rem 1.1rem;
     box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
     transition:
@@ -203,16 +208,27 @@ const groups = CATS.map((c) => {
   .bx-label {
     @apply text-base-950 dark:text-base-50 font-display text-[1.02rem] font-extrabold tracking-[-0.01em];
   }
-  .bx-count {
-    @apply text-base-500 dark:text-base-400 bg-base-200 dark:bg-base-800 ml-auto rounded-full px-2 py-0.5 text-[0.74rem] font-semibold;
-  }
-
   .bx-list {
     display: flex;
     flex-direction: column;
     list-style: none;
     margin: 0;
     padding: 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-base-300) transparent;
+  }
+  :global(.dark) .bx-list {
+    scrollbar-color: var(--color-base-700) transparent;
+  }
+  .bx-list::-webkit-scrollbar {
+    width: 7px;
+  }
+  .bx-list::-webkit-scrollbar-thumb {
+    background: var(--color-base-300);
+    border-radius: 9999px;
+  }
+  :global(.dark) .bx-list::-webkit-scrollbar-thumb {
+    background: var(--color-base-700);
   }
 
   /* Compact post media in the bento so a media-heavy Posts card stays balanced
@@ -233,8 +249,6 @@ const groups = CATS.map((c) => {
   .bx-more:focus-visible .bx-more-arrow {
     transform: translateX(2px);
   }
-  /* Events spans full width; keep its rows single-column so the app badge +
-     date never get squeezed onto two lines in a narrow auto-fit column. */
 
   @media (prefers-reduced-motion: reduce) {
     .bxcard {
