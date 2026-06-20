@@ -168,7 +168,10 @@ const mapBook = (e: Enriched, i: number): Book => ({
 });
 
 const RECENT_CAP = 14; // ~2 rows of the cover grid
-const FINISHED_CANDIDATES = 36; // bound catalog lookups while still yielding 14 NF
+// Enrich enough of the newest finished books to reliably yield RECENT_CAP
+// non-fiction (the recent shelf skews fairly fiction-heavy), while still
+// bounding the catalog lookups. ~50 newest finished currently yields ~24 NF.
+const FINISHED_CANDIDATES = 50;
 
 export async function getReading(): Promise<ReadingData> {
   try {
