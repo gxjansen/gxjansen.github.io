@@ -36,8 +36,15 @@ const navLabel = labelMap[location] ?? "Social media links";
 <nav class:list={["relative", className]} aria-label={navLabel}>
   <ul
     class:list={[
-      "pointer-events-auto flex items-center gap-2 overflow-x-auto whitespace-nowrap sm:gap-3 md:gap-4 [&::-webkit-scrollbar]:hidden",
-      context === "footer" ? "pr-6" : "px-4 sm:px-0",
+      "pointer-events-auto flex items-center gap-2 sm:gap-3 md:gap-4",
+      // Only the footer is a cramped, single-line scroll container. Setting
+      // overflow-x to auto makes the browser compute overflow-y to auto too,
+      // so the tooltip (rendered below the icon) and the webkit-only scrollbar
+      // hider would otherwise produce stray scrollbars in Firefox elsewhere.
+      // Non-footer placements have room, so let icons wrap instead.
+      context === "footer"
+        ? "overflow-x-auto pr-6 whitespace-nowrap [&::-webkit-scrollbar]:hidden"
+        : "flex-wrap px-4 sm:px-0",
     ]}
     role="list"
   >
