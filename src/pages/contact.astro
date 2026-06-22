@@ -7,12 +7,14 @@ const CAL = "https://app.cal.eu/gxjansen/30min";
 
 // Inline social row for the contact page only — explicit order and set,
 // independent of the shared <SocialCards> component used elsewhere.
-// Order: Bluesky, Sifa, Signal, LinkedIn (GitHub intentionally dropped).
+// Order: Signal, Bluesky, Sifa, LinkedIn (GitHub intentionally dropped —
+// footer-only). Matches the footer's social order.
 const byIcon = (icon: string) => socialLinks.find((s) => s.icon === icon);
 
 // Missing platforms (no resolvable href) simply don't render — no dead "#"
 // links. Bluesky and Sifa carry hardcoded hrefs, so they always survive.
 const socials = [
+  { icon: "signal", name: "Signal", href: byIcon("signal")?.href },
   {
     icon: "bluesky",
     name: "Bluesky",
@@ -23,7 +25,6 @@ const socials = [
     name: "Sifa ID",
     href: byIcon("sifa")?.href ?? "https://sifa.id/p/gui.do",
   },
-  { icon: "signal", name: "Signal", href: byIcon("signal")?.href },
   {
     icon: "linkedin",
     name: "LinkedIn",

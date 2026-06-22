@@ -24,8 +24,19 @@ export interface SocialLink {
 export const socialLinks: SocialLink[] = [
   {
     name: "Signal",
-    href: "https://signal.me/#eu/-unUEm2N_tIpI5lcvxWOfJ2NeMRZ2KJ_etky02xAzQiKdoxJ4P9Nxqgl05zJBEMd",
+    href: "https://signal.me/#eu/Lr-tiA5w5oQBnfHkPvjGDdy3JeWbjeWgORleaaX5-PdIlTGL8uFFjpYLP5cauaCT",
     icon: "signal",
+    visibility: {
+      footer: true,
+      hero: true,
+      about: true,
+      contact: true,
+    },
+  },
+  {
+    name: "BlueSky",
+    href: "https://bsky.app/profile/gui.do",
+    icon: "bluesky",
     visibility: {
       footer: true,
       hero: true,
@@ -56,17 +67,6 @@ export const socialLinks: SocialLink[] = [
     },
   },
   {
-    name: "YouTube",
-    href: "https://www.youtube.com/@gxjansen",
-    icon: "tabler/filled/brand-youtube",
-    visibility: {
-      footer: true,
-      hero: true,
-      about: true,
-      contact: false,
-    },
-  },
-  {
     name: "GitHub",
     href: "https://github.com/gxjansen",
     icon: "tabler/filled/brand-github",
@@ -78,14 +78,14 @@ export const socialLinks: SocialLink[] = [
     },
   },
   {
-    name: "BlueSky",
-    href: "https://bsky.app/profile/gui.do",
-    icon: "bluesky",
+    name: "YouTube",
+    href: "https://www.youtube.com/@gxjansen",
+    icon: "tabler/filled/brand-youtube",
     visibility: {
       footer: true,
       hero: true,
       about: true,
-      contact: true,
+      contact: false,
     },
   },
   {
