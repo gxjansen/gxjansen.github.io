@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
-import AutoImport from "astro-auto-import";
 import icon from "astro-icon";
 import react from "@astrojs/react";
 import netlify from "@astrojs/netlify";
@@ -83,17 +82,6 @@ export default defineConfig({
     }
   },
   integrations: [
-    AutoImport({
-      imports: [
-        "@components/Admonition/Admonition.astro",
-        "@components/Throbber/Throbber.astro",
-        "@components/GameUI/GameUI.astro",
-        "@components/Regenerating/Regenerating.astro",
-        "@components/ManaBar/ManaBar.astro",
-        "@components/Compacting/Compacting.astro",
-        "@components/Compacting/CompactingV2.astro"
-      ]
-    }),
     mdx({
       // Configure MDX to be more lenient
       extendMarkdownConfig: true,
