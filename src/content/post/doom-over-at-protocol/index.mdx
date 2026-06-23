@@ -13,9 +13,18 @@ categories:
 blueskyUri: "at://did:plc:45uheisi25szrjvjurfpritx/app.bsky.feed.post/3miarycjd4c25"
 ---
 
+import Admonition from "@components/Admonition/Admonition.astro";
+
+<Admonition variant="info">
+  **Update (June 2026):** I took the server down after about three months. It
+  was sitting mostly idle on a VPS (no surprise: it's an unplayable
+  proof-of-concept). The code's still public though, so you can run it yourself:
+  [singi-labs/doom-atproto](https://github.com/singi-labs/doom-atproto).
+</Admonition>
+
 Someone ran Doom through DNS. [Adam Rice stored the entire game in TXT records](https://blog.rice.is/post/doom-over-dns/) and it actually worked. I saw that and, being at an AT Protocol conference, thought: can the AT Protocol do the same thing? Store the game and actually play it, with every player input and every rendered frame traveling through the protocol?
 
-The answer is yes. Sorta. It plays terribly. No-one should want this. But it works. [You can try it yourself.](https://doom.singi.dev/)
+The answer is yes. Sorta. It plays terribly. No-one should want this. But it works. [The code's on GitHub if you want to run it yourself.](https://github.com/singi-labs/doom-atproto)
 
 Fair warning: this is a technical post.
 
@@ -201,4 +210,4 @@ Also: DO NOT use your main account/PDS for testing. I got rate-limited for 12 ho
 
 What else would you build on the AT Protocol that isn't social media? I'm curious what other "deliberate misuse" projects people come up with.
 
-Try it: [doom.singi.dev](https://doom.singi.dev/)
+Run it yourself: [singi-labs/doom-atproto](https://github.com/singi-labs/doom-atproto)
