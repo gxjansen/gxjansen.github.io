@@ -2,9 +2,10 @@ import type { CollectionEntry } from "astro:content";
 
 /**
  * A post is publicly visible once it is not a draft AND its `pubDate` has
- * passed. Astro builds are static, so this is evaluated at build time; the
- * daily Netlify rebuild (.github/workflows/daily-rebuild.yml) re-runs the
- * check so scheduled posts surface on their release morning.
+ * passed. Astro builds are static, so this is evaluated at build time: a
+ * future-dated post becomes visible on the next site build after its `pubDate`
+ * passes. Publishing is manual — commit the episode and trigger a deploy when
+ * it's due (or set `pubDate` to now and deploy).
  *
  * Use this in EVERY reader-facing `getCollection("post", ...)` so future-dated
  * episodes stay hidden on the blog index, RSS, category/author pages, OG image
