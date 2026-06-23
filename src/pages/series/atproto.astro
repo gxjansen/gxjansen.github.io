@@ -1,0 +1,582 @@
+---
+import { getCollection } from "astro:content";
+import { format } from "date-fns";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Button from "@components/Button/Button.astro";
+import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
+import { isPublished } from "../../lib/isPublished";
+
+const SERIES_NAME = "apps-as-views";
+const TOTAL = 7;
+const now = new Date();
+
+// Presentation manifest — the spine's source of truth (SERIES.md "Episode
+// titles + pills + glosses" + design/HANDOVER-TO-CODE.md accents & acts).
+// Links for RELEASED episodes come from the matched post; scheduled cards never
+// link. `plannedDate` drives the "Coming {date}" label for episodes not yet
+// written; the real pubDate takes over once an episode ships. Only Episode 1 is
+// drafted so far — the rest render as scheduled until their MDX lands and their
+// pubDate passes.
+const MANIFEST = [
+  {
+    episode: 1,
+    pill: "Ownership",
+    accent: "love",
+    title: "You don't own your network",
+    gloss:
+      "If a platform vanished tomorrow, your network wouldn't survive the move. Someone chose that, and it can be unmade.",
+    plannedDate: "2026-06-16T08:00:00+02:00",
+  },
+  {
+    episode: 2,
+    pill: "Identity",
+    accent: "foam",
+    title: "Your identity isn't your username",
+    gloss:
+      "Change your handle, keep every follower. Why atproto splits who you are from what you're called.",
+    plannedDate: "2026-06-23T08:00:00+02:00",
+  },
+  {
+    episode: 3,
+    pill: "Data",
+    accent: "iris",
+    title: "Where your posts actually live",
+    gloss:
+      "When an app shuts down, what happens to five years of your stuff? Depends who's holding it.",
+    plannedDate: "2026-06-30T08:00:00+02:00",
+  },
+  {
+    episode: 4,
+    pill: "Interop",
+    accent: "pine",
+    title: "Apps that don't need permission",
+    gloss:
+      "A new app can already know your network: no partnership deals, no API keys, no “log in with X” tax.",
+    plannedDate: "2026-07-07T08:00:00+02:00",
+  },
+  {
+    episode: 5,
+    pill: "Control",
+    accent: "gold",
+    title: "You don't have to like the algorithm",
+    gloss:
+      "When a feed decides your reach, you don't get a vote. There's an architecture where you do.",
+    plannedDate: "2026-07-21T08:00:00+02:00",
+  },
+  {
+    episode: 6,
+    pill: "Tradeoffs",
+    accent: "rose",
+    title: "What atproto can't do (yet)",
+    gloss:
+      "The gaps the hype skips. Plus: your whole identity can run on a Raspberry Pi, or hosted free.",
+    plannedDate: "2026-07-28T08:00:00+02:00",
+  },
+  {
+    episode: 7,
+    pill: "Vision",
+    accent: "foam",
+    title: "Bigger than social media",
+    gloss:
+      "I ran Doom over the AT Protocol at five frames per second. Nobody needs that, but it proved what the protocol really is.",
+    plannedDate: "2026-08-04T08:00:00+02:00",
+  },
+] as const;
+
+// Second gradient accent per card (design uses a tonal two-accent thumbnail).
+const PAIR: Record<string, string> = {
+  love: "rose",
+  foam: "iris",
+  iris: "love",
+  pine: "foam",
+  gold: "pine",
+  rose: "gold",
+};
+
+// Act group headers, inserted BEFORE the listed episode (design HANDOVER §2).
+// Acts 2 & 3 get a hairline divider; Act 1 has none (it's first).
+const ACTS: Record<
+  number,
+  { label: string; strap: string; accent: string; divider: boolean }
+> = {
+  1: {
+    label: "Act 1 · The problem",
+    strap: "why the platforms you depend on keep costing you",
+    accent: "love",
+    divider: false,
+  },
+  4: {
+    label: "Act 2 · The shift",
+    strap: "how atproto rewires the relationship",
+    accent: "pine",
+    divider: true,
+  },
+  6: {
+    label: "Act 3 · The honest case",
+    strap: "the limits, and why it's still the bet",
+    accent: "gold",
+    divider: true,
+  },
+};
+
+// Published series posts, keyed by episode number.
+const seriesPosts = await getCollection(
+  "post",
+  ({ data }) => data.series?.name === SERIES_NAME,
+);
+const byEpisode = new Map(
+  seriesPosts.map((p) => [p.data.series!.episode, p] as const),
+);
+
+const episodes = MANIFEST.map((m) => {
+  const post = byEpisode.get(m.episode);
+  const released = !!post && isPublished(post.data, now);
+  return {
+    ...m,
+    num: String(m.episode).padStart(2, "0"),
+    released,
+    href: released ? `/post/${post!.id}/` : null,
+    pair: PAIR[m.accent] ?? "foam",
+    act: ACTS[m.episode] ?? null,
+    notLast: m.episode < TOTAL,
+    statusLabel: released
+      ? `Released ${format(new Date(post!.data.pubDate), "MMM d, yyyy")}`
+      : `Coming ${format(new Date(m.plannedDate), "MMM d, yyyy")}`,
+  };
+});
+
+const releasedCount = episodes.filter((e) => e.released).length;
+const complete = releasedCount >= TOTAL;
+
+const progKicker = complete ? "the whole shelf" : "in progress";
+const progMain = complete
+  ? `Complete series · all ${TOTAL} parts`
+  : `Part ${releasedCount} of ${TOTAL} published`;
+
+const pageTitle = "Series: Apps as Views, Not Vaults";
+const pageDescription =
+  "Your data lives in a bookshelf you own; apps are just the views that read from it. A seven-part series on what the AT Protocol flips, what it doesn't, and why the boring architecture really does impact you.";
+---
+
+<BaseLayout
+  title={`${pageTitle} | Guido X Jansen`}
+  description={pageDescription}
+>
+  <div class="home">
+    <div id="top" class="mx-auto w-full max-w-[860px]">
+      {/* ============ HERO ============ */}
+      <section
+        class="relative z-10 pt-[clamp(3.5rem,8vw,5.5rem)] pb-[clamp(1.4rem,3vw,2rem)]"
+      >
+        <span
+          class="text-primary-600 dark:text-primary-400 bg-primary-600/10 dark:bg-primary-400/10 font-display inline-flex items-center gap-2 rounded-full px-3 py-1 text-[0.78rem] font-bold tracking-[0.07em] uppercase"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6z"
+            ></path>
+          </svg>
+          7-part series · AT Protocol
+        </span>
+
+        <h1
+          class="font-display mt-4 text-[clamp(2.4rem,6.5vw,3.6rem)] leading-[1.0] font-black tracking-[-0.035em]"
+        >
+          Apps as views, not vaults.
+        </h1>
+
+        <p
+          class="text-base-600 dark:text-base-400 mt-4 max-w-[52ch] text-[clamp(1.05rem,1.7vw,1.22rem)] leading-[1.55]"
+        >
+          Your data lives in a bookshelf you own; apps are just the views that
+          read from it. A seven-part series on what the AT Protocol flips, what
+          it doesn't, and why the &ldquo;boring&rdquo; architecture really does
+          impact you a lot.
+        </p>
+
+        {/* progress indicator (build-time; advances on the daily rebuild) */}
+        <div class="my-7 flex max-w-[540px] flex-col gap-3.5">
+          <span
+            class="font-hand text-love-light dark:text-rose self-start text-[1.3rem] leading-none"
+            style="transform:rotate(-2deg);transform-origin:left center;"
+            >{progKicker}</span
+          >
+          <div class="flex gap-1.5" role="presentation" aria-hidden="true">
+            {
+              Array.from({ length: TOTAL }).map((_, i) => (
+                <div
+                  class:list={[
+                    "h-[9px] flex-1 rounded-full",
+                    i < releasedCount
+                      ? "bg-primary-600 dark:bg-primary-400"
+                      : "bg-base-900/12 dark:bg-base-100/15",
+                  ]}
+                />
+              ))
+            }
+          </div>
+          <div class="font-display text-base-800 dark:text-base-100 font-bold">
+            {progMain}
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5">
+          <Button href="#subscribe" variant="primary" arrow="right">
+            Get each part in your inbox
+          </Button>
+          <Button href="#series" variant="secondary" arrow="right">
+            See all 7 parts
+          </Button>
+        </div>
+      </section>
+
+      {/* ============ EPISODE SPINE ============ */}
+      <section id="series" class="mt-6 mb-4 scroll-mt-24">
+        <div class="mb-6">
+          <span class="hand-note">the whole shelf</span>
+          <h2
+            class="font-display text-[clamp(1.7rem,3.4vw,2.4rem)] font-black tracking-[-0.03em]"
+          >
+            The series
+          </h2>
+        </div>
+
+        <ol class="flex list-none flex-col p-0">
+          {
+            episodes.map((e) => (
+              <li
+                style={`--ac:var(--color-${e.accent});--ac-strong:var(--color-${e.accent}-light);--ac2:var(--color-${e.pair})`}
+              >
+                {e.act && (
+                  <div
+                    class:list={[
+                      "mb-4",
+                      e.act.divider &&
+                        "border-base-200 dark:border-base-800 mt-7 border-t pt-6",
+                    ]}
+                  >
+                    <div class="flex flex-wrap items-baseline gap-2.5 pl-[68px]">
+                      <span
+                        class="font-display text-[0.78rem] font-bold tracking-[0.08em] uppercase"
+                        style={`color:var(--color-${e.act.accent})`}
+                      >
+                        {e.act.label}
+                      </span>
+                      <span class="text-base-500 dark:text-base-400 text-[0.85rem]">
+                        {e.act.strap}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                <div class="flex items-stretch gap-4 pb-[18px]">
+                  {/* spine column: number badge + connector */}
+                  <div class="flex flex-none basis-[52px] flex-col items-center">
+                    <div
+                      class:list={[
+                        "font-display flex size-[46px] flex-none items-center justify-center rounded-full text-[1.02rem] font-extrabold",
+                        e.released
+                          ? "ep-badge-released text-white"
+                          : "border-base-300 dark:border-base-700 text-base-500 dark:text-base-400 border-[1.5px] bg-transparent",
+                      ]}
+                    >
+                      {e.num}
+                    </div>
+                    {e.notLast && (
+                      <div class="bg-base-200 dark:bg-base-800 mt-2.5 min-h-[18px] w-0.5 flex-1 rounded" />
+                    )}
+                  </div>
+
+                  {/* the card */}
+                  {e.released ? (
+                    <a
+                      href={e.href}
+                      aria-label={`Part ${e.num}: ${e.title}, read article`}
+                      class="ep-card focus-visible:ring-primary-500 border-base-200 dark:border-base-800 dark:hover:border-base-700 bg-base-50 dark:bg-base-900 block min-w-0 flex-1 rounded-2xl border shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden dark:shadow-none dark:hover:shadow-none"
+                    >
+                      <div class="flex items-center gap-4 p-4">
+                        <div
+                          aria-hidden="true"
+                          class="ep-thumb size-[88px] flex-none rounded-xl"
+                        />
+                        <div class="min-w-0 flex-1">
+                          <span class="ep-pill font-display mb-2 inline-block rounded-full px-2.5 py-1 text-[0.7rem] font-bold tracking-[0.02em] uppercase">
+                            {e.pill}
+                          </span>
+                          <h3 class="font-display text-base-800 dark:text-base-50 text-[1.18rem] leading-[1.2] font-extrabold tracking-[-0.015em]">
+                            {e.title}
+                          </h3>
+                          <p class="text-base-600 dark:text-base-400 mt-1.5 text-[0.92rem] leading-[1.5]">
+                            {e.gloss}
+                          </p>
+                          <div class="text-base-500 mt-3 flex items-center gap-2.5 text-[0.82rem]">
+                            <span class="inline-flex items-center gap-1.5">
+                              <svg
+                                viewBox="0 0 24 24"
+                                width="14"
+                                height="14"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                              >
+                                <rect
+                                  x="4"
+                                  y="5"
+                                  width="16"
+                                  height="16"
+                                  rx="2"
+                                />
+                                <path d="M16 3v4M8 3v4M4 11h16" />
+                              </svg>
+                              {e.statusLabel}
+                            </span>
+                            <span class="ep-read font-display ml-auto inline-flex items-center gap-1 font-bold">
+                              Read
+                              <svg
+                                viewBox="0 0 24 24"
+                                width="15"
+                                height="15"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                              >
+                                <path d="M5 12h14M13 6l6 6-6 6" />
+                              </svg>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  ) : (
+                    <div
+                      aria-disabled="true"
+                      class="border-base-300 dark:border-base-700 bg-base-50/60 dark:bg-base-900/50 block min-w-0 flex-1 rounded-2xl border border-dashed"
+                    >
+                      <div class="flex items-center gap-4 p-4">
+                        <div
+                          aria-hidden="true"
+                          class="ep-hatch size-[88px] flex-none rounded-xl"
+                        />
+                        <div class="min-w-0 flex-1">
+                          <span class="bg-base-200 dark:bg-base-800 text-base-500 dark:text-base-400 font-display mb-2 inline-block rounded-full px-2.5 py-1 text-[0.7rem] font-bold tracking-[0.02em] uppercase">
+                            {e.pill}
+                          </span>
+                          <h3 class="font-display text-base-500 dark:text-base-400 text-[1.18rem] leading-[1.2] font-extrabold tracking-[-0.015em]">
+                            {e.title}
+                          </h3>
+                          <p class="text-base-400 dark:text-base-500 mt-1.5 text-[0.92rem] leading-[1.5]">
+                            {e.gloss}
+                          </p>
+                          <div class="text-base-500 dark:text-base-400 font-display mt-3 flex items-center gap-1.5 text-[0.82rem] font-bold">
+                            <svg
+                              viewBox="0 0 24 24"
+                              width="14"
+                              height="14"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              aria-hidden="true"
+                            >
+                              <rect x="4" y="5" width="16" height="16" rx="2" />
+                              <path d="M16 3v4M8 3v4M4 11h16" />
+                            </svg>
+                            {e.statusLabel}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      {/* ============ NEWSLETTER ============ */}
+      <section id="subscribe" class="my-8 scroll-mt-24" aria-label="Newsletter">
+        <NewsletterForm
+          variant="card"
+          title="Get each episode in your inbox <span class='text-golden'>weekly, for 7 weeks</span>"
+          description="I'll send each part the morning it goes live, no checking back. After the series it settles into a periodic newsletter. If this resonates, you'll probably like the rest."
+          note="No spam, no tracking, unsubscribe in one click."
+        />
+      </section>
+
+      {/* ============ SKIN IN THE GAME ============ */}
+      <section class="my-10">
+        <div
+          class="border-primary-600/25 dark:border-primary-400/25 rounded-2xl border bg-[color-mix(in_oklab,var(--color-primary-600)_6%,var(--color-base-50))] p-[clamp(1.4rem,3.5vw,2rem)] dark:bg-[color-mix(in_oklab,var(--color-primary-400)_8%,var(--color-base-900))]"
+        >
+          <span class="eyebrow">Where I'm coming from</span>
+          <h2
+            class="font-display text-base-800 dark:text-base-50 mt-2 mb-3 text-[clamp(1.3rem,2.6vw,1.7rem)] font-extrabold tracking-[-0.02em]"
+          >
+            Two things you should know about me
+          </h2>
+          <div
+            class="text-base-700 dark:text-base-300 max-w-[64ch] space-y-3 text-[1.02rem] leading-[1.6]"
+          >
+            <p>
+              First: I'm building two products on atproto, Sifa (a professional
+              network) and Barazo (a forum platform). I have direct skin in the
+              game.
+            </p>
+            <p>
+              Second: I've been working on the internet for 25+ years, across
+              open source communities, SaaS platforms, and social tools. After
+              watching that many open protocols get swallowed by platforms, I
+              think this one has a real shot. That's not neutrality, and I'm not
+              pretending it is.
+            </p>
+            <p>
+              Per Taleb: writers without skin in the game produce theory;
+              writers with skin in the game produce signal. Read accordingly. If
+              you want a neutral take, you can find one. This isn't that.
+            </p>
+            <p>
+              Part 7 (the final episode) lists the concrete conditions by 2028
+              that would prove me wrong. Bookmark that paragraph when you get
+              there. Hold me to it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ ABOUT THE WRITER ============ */}
+      <section
+        id="about"
+        class="my-10 flex scroll-mt-24 flex-wrap items-start gap-5"
+      >
+        <img
+          src="/images/redesign/guido-portrait.webp"
+          alt=""
+          width="68"
+          height="68"
+          loading="lazy"
+          class="size-[68px] flex-none rounded-full object-cover ring-2 ring-[color-mix(in_oklab,var(--color-gold)_60%,transparent)]"
+        />
+        <div class="min-w-[240px] flex-1">
+          <h2
+            class="font-hand text-primary-600 dark:text-primary-400 mb-1 inline-block text-[1.3rem] leading-none"
+            style="transform:rotate(-2deg);transform-origin:left center;"
+          >
+            Hi, I'm Guido <span aria-hidden="true">👋</span>
+          </h2>
+          <p
+            class="text-base-600 dark:text-base-400 max-w-[62ch] text-[1rem] leading-[1.6]"
+          >
+            I've spent 25+ years building on the internet, across open source
+            communities, SaaS platforms, and social tools. These days I'm
+            building two products on the AT Protocol, Sifa and Barazo, and
+            writing about why the architecture matters. I write the way I'd
+            explain something to a friend over coffee.
+          </p>
+          <a
+            href="/about/"
+            class="text-primary-600 dark:text-primary-400 font-display mt-3 inline-flex items-center gap-1.5 text-[0.92rem] font-bold"
+          >
+            More about me <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+
+      {/* ============ FOOTNOTES ============ */}
+      <section
+        class="border-base-200 dark:border-base-800 mt-6 mb-12 border-t pt-5"
+      >
+        <ul
+          class="text-base-500 dark:text-base-400 m-0 flex list-none flex-col gap-2 p-0 text-[0.8rem] leading-[1.5]"
+        >
+          <li>
+            &ldquo;atproto&rdquo; is short for the AT Protocol. The ecosystem of
+            apps built on it is the Atmosphere; Bluesky is one app in it, not
+            the protocol itself.
+          </li>
+          <li>
+            It's a young protocol and the facts move fast. I've dated the claims
+            that might shift, and I'll keep the published parts current where I
+            can.
+          </li>
+          <li>
+            Each episode stands on its own. Start anywhere, but they're written
+            to be read in order.
+          </li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Episode-card accent styling. The accent comes from each row's inline
+     `--ac` / `--ac-strong` / `--ac2`. Per the DS craft rule there is NO
+     side-stripe accent bar — the accent lives only in the pill, thumbnail,
+     read-link and hover border. */
+  .ep-card:hover {
+    border-color: color-mix(in oklab, var(--ac) 50%, var(--color-base-200));
+  }
+  :global(.dark) .ep-card:hover {
+    border-color: color-mix(in oklab, var(--ac) 55%, var(--color-base-800));
+  }
+  .ep-thumb {
+    background: linear-gradient(135deg, var(--ac), var(--ac2));
+    box-shadow: inset 0 0 0 1px
+      color-mix(in oklab, var(--color-base-900) 6%, transparent);
+  }
+  .ep-hatch {
+    background: repeating-linear-gradient(
+      135deg,
+      var(--color-base-100),
+      var(--color-base-100) 9px,
+      var(--color-base-200) 9px,
+      var(--color-base-200) 18px
+    );
+  }
+  :global(.dark) .ep-hatch {
+    background: repeating-linear-gradient(
+      135deg,
+      var(--color-base-800),
+      var(--color-base-800) 9px,
+      var(--color-base-700) 9px,
+      var(--color-base-700) 18px
+    );
+  }
+  .ep-pill {
+    color: var(--ac-strong);
+    background: color-mix(in oklab, var(--ac) 14%, transparent);
+  }
+  :global(.dark) .ep-pill {
+    color: var(--ac);
+  }
+  .ep-read {
+    color: var(--ac-strong);
+  }
+  :global(.dark) .ep-read {
+    color: var(--ac);
+  }
+  .ep-badge-released {
+    background: var(--ac-strong);
+    box-shadow: 0 0 0 5px var(--color-background);
+  }
+  :global(.dark) .ep-badge-released {
+    box-shadow: 0 0 0 5px var(--color-background-dark);
+  }
+</style>
