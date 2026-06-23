@@ -1,0 +1,36 @@
+name: Daily rebuild for scheduled posts
+
+# Astro builds are static, so the `pubDate <= now` auto-release filter only
+# re-evaluates at build time. This nudges Netlify to rebuild every morning so
+# scheduled posts (e.g. the atproto series) surface on their release day and
+# the /series/atproto/ progress indicator advances.
+#
+# Requires a repo secret NETLIFY_BUILD_HOOK_URL — create a build hook in
+# Netlify: Site configuration → Build & deploy → Build hooks, then store the
+# URL at Settings → Secrets and variables → Actions.
+
+on:
+  schedule:
+    # Posts publish at 08:00 local (Europe/Amsterdam). The rebuild must run
+    # AFTER that instant, otherwise the build-time `pubDate <= now` check still
+    # evaluates false and the post stays hidden for another full day. 08:00 is
+    # 06:00 UTC in summer (CEST) and 07:00 UTC in winter (CET), so fire twice to
+    # cover both DST states with ~30 min slack for GitHub's cron delay. Daily,
+    # incl. weekends, to keep it simple. Cheap: it just pings a build hook.
+    - cron: "30 6 * * *" # 06:30 UTC — after an 08:00 CEST (summer) publish
+    - cron: "30 7 * * *" # 07:30 UTC — after an 08:00 CET (winter) publish
+  workflow_dispatch:
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Netlify build hook
+        env:
+          NETLIFY_BUILD_HOOK_URL: ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK_URL" ]; then
+            echo "::error::NETLIFY_BUILD_HOOK_URL secret is not set." >&2
+            exit 1
+          fi
+          curl -fsS -X POST -d '{}' "$NETLIFY_BUILD_HOOK_URL"
