@@ -3,11 +3,11 @@ import type { APIContext } from "astro";
 import { getCollection } from "astro:content";
 import { getTranslatedData } from "@js/translationUtils";
 import { defaultLocale } from "@config/siteSettings.json";
+import { isPublished } from "../lib/isPublished";
 
 export async function GET(context: APIContext) {
-  const posts = await getCollection("post", ({ data }) => {
-    return !data.draft;
-  });
+  // Exclude future-dated (scheduled) posts so the feed never leaks them early.
+  const posts = await getCollection("post", ({ data }) => isPublished(data));
 
   // Sort posts by publication date in descending order
   const sortedPosts = posts.sort(

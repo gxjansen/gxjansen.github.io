@@ -13,6 +13,7 @@ import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonial
 import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 
 // data
+import { isPublished } from "../lib/isPublished";
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { getTranslatedData } from "@js/translationUtils";
 import { format } from "date-fns";
@@ -49,7 +50,7 @@ const activity = await getActivity();
 // home card. The featured post takes the first accent (foam), and `love` sits
 // within the first four so it gets airtime in the rendered cards.
 const accents: Accent[] = ["foam", "iris", "love", "rose", "pine"];
-const posts = (await getCollection("post", ({ data }) => !data.draft))
+const posts = (await getCollection("post", ({ data }) => isPublished(data)))
   .sort(
     (a, b) =>
       new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),

@@ -11,12 +11,11 @@ import Breadcrumb from "@components/Breadcrumb/Breadcrumb.astro";
 import { countItems, sortByValue } from "@js/blogUtils";
 import { slugify } from "@js/textUtils";
 import { readingTimeShort } from "../../utils/readingTime";
+import { isPublished } from "../../lib/isPublished";
 
 export async function getStaticPaths() {
   // Get all posts
-  const posts = await getCollection("post", ({ data }) => {
-    return !data.draft;
-  });
+  const posts = await getCollection("post", ({ data }) => isPublished(data));
 
   // Get all categories and their original names
   const allCategories = posts
@@ -45,10 +44,8 @@ export async function getStaticPaths() {
 // Get both versions of the category from props
 const { slugifiedCategory, originalCategory } = Astro.props;
 
-// Get all posts
-const posts = await getCollection("post", ({ data }) => {
-  return !data.draft;
-});
+// Get all published posts
+const posts = await getCollection("post", ({ data }) => isPublished(data));
 
 // Filter posts by category, ensuring categories exist
 const filteredPosts = posts
