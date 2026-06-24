@@ -1,12 +1,13 @@
 ---
 import { getCollection, render } from "astro:content";
 import BlogLayoutCenter from "@layouts/BlogLayoutCenter.astro";
+import { isPublished } from "../../lib/isPublished";
 
-// Get static paths for all posts
+// Get static paths for all published posts. Future-dated (scheduled) posts are
+// excluded, so their URLs 404 until the release date passes and the daily
+// rebuild regenerates the paths.
 export async function getStaticPaths() {
-  const posts = await getCollection("post", ({ data }) => {
-    return !data.draft;
-  });
+  const posts = await getCollection("post", ({ data }) => isPublished(data));
 
   return posts.map((post) => ({
     params: { slug: post.id },

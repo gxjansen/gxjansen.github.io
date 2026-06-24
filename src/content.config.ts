@@ -143,9 +143,25 @@ const post = defineCollection({
         })
         .optional(),
       heroImage: image().optional(),
+      // Which image to use as the OG / social-share card.
+      //   "generated" (default) → the branded /og/article/<slug> card
+      //   "hero"                → this post's heroImage (e.g. a hand-made
+      //                           1200x630 series card)
+      // Falls back to the generated card if "hero" is set but no heroImage
+      // resolves. Only affects og:image / twitter:image, not the in-page cover.
+      ogImage: z.enum(["generated", "hero"]).default("generated"),
       description: z.string().optional(),
       authors: z.array(z.string()).default([]),
       categories: z.array(z.string()).default([]),
+      // Optional series membership — lets episodes be queried as an ordered set
+      // (used by /series/atproto/). Optional so standalone posts keep validating.
+      series: z
+        .object({
+          name: z.string(), // e.g. "apps-as-views"
+          episode: z.number(), // 1-based position in the series
+          total: z.number(), // total episodes, for "Part N of M" labelling
+        })
+        .optional(),
       draft: z.boolean().default(false),
       // Bluesky AT URI for comments (e.g., "at://did:plc:xxx/app.bsky.feed.post/yyy")
       blueskyUri: z.string().optional(),

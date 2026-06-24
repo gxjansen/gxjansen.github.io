@@ -14,6 +14,7 @@ import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import * as React from "react";
 import { renderOgCard } from "../../lib/og/render";
+import { isPublished } from "../../lib/isPublished";
 import {
   HomeCard,
   ArticleCard,
@@ -62,7 +63,9 @@ async function buildCardMap(): Promise<Record<string, CardElement>> {
   }
 
   // Blog posts → article card (per-article accent rotates by index).
-  const posts = (await getCollection("post", ({ data }) => !data.draft)).sort(
+  const posts = (
+    await getCollection("post", ({ data }) => isPublished(data))
+  ).sort(
     (a, b) =>
       new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
   );

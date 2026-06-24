@@ -3,6 +3,7 @@
 import { getCollection } from "astro:content";
 import { countItems, sortByValue } from "@js/blogUtils";
 import { humanize, slugify } from "@js/textUtils";
+import { isPublished } from "../../lib/isPublished";
 
 interface Props {
   showCount?: boolean;
@@ -11,9 +12,7 @@ interface Props {
 const { showCount = true } = Astro.props;
 
 // Get all categories and sort them by count
-const posts = await getCollection("post", ({ data }) => {
-  return !data.draft;
-});
+const posts = await getCollection("post", ({ data }) => isPublished(data));
 
 // Filter out undefined categories and flatten the array
 const categories = posts

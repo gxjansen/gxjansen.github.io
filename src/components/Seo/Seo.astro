@@ -181,7 +181,15 @@ if (type === "blog") {
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, "") : "";
 const ogCardPath = ogImageForPath(Astro.url.pathname);
 const ogCardUrl = new URL(ogCardPath, siteUrl).toString();
-const preferCard = type === "blog" || type === "presentation";
+// Per-article override: a blog post can opt its hero image in as the social
+// card with frontmatter `ogImage: "hero"` (e.g. a hand-made series card).
+// Default stays the branded generated card; falls back to it when the post has
+// no resolvable hero.
+const heroAsOg =
+  type === "blog" &&
+  (Astro.props as BlogProps).postFrontmatter?.ogImage === "hero" &&
+  !!optimizedImage;
+const preferCard = (type === "blog" || type === "presentation") && !heroAsOg;
 const imageUrl =
   optimizedImage && !preferCard
     ? new URL(optimizedImage.src, siteUrl).toString()

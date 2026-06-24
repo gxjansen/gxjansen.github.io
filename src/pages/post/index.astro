@@ -11,6 +11,7 @@ import { fetchEngagement } from "../../lib/sifaActivity";
 // components
 import BaseLayout from "@layouts/BaseLayout.astro";
 import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
+import { isPublished } from "../../lib/isPublished";
 
 /**
  * Below this total (likes + reposts + replies) a post shows no engagement
@@ -18,8 +19,10 @@ import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
  */
 const ENGAGEMENT_MIN = 10;
 
-// Get all non-draft posts, newest first.
-const posts = (await getCollection("post", ({ data }) => !data.draft)).sort(
+// Get all published posts (non-draft, pubDate has passed), newest first.
+const posts = (
+  await getCollection("post", ({ data }) => isPublished(data))
+).sort(
   (a, b) =>
     new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
 );

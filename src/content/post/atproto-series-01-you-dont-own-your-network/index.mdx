@@ -1,0 +1,77 @@
+---
+title: "You don't own your network"
+description: "Three communities, three platforms, three rounds of starting over. The platforms come and go; the architecture is why. Part of 'Apps as Views, Not Vaults': your data is the bookshelf, apps are the views, you own it."
+pubDate: 2026-06-16T08:00:00+02:00
+heroImage: ./heroImage.jpg
+heroImageAlt: "Apps as Views, Not Vaults series card, part 01 (Ownership): 'Who actually owns your network?'"
+ogImage: hero
+authors:
+  - gxjansen
+categories:
+  - AT Protocol
+  - Community
+  - Open Source
+series:
+  name: "apps-as-views"
+  episode: 1
+  total: 7
+draft: false
+---
+
+If your LinkedIn account vanished tomorrow, your network wouldn't survive the move. That's a choice somebody made. And it can be unmade.
+
+Somebody built it that way on purpose, because they'd rather you couldn't leave.
+
+I've built three communities from zero. Across them I've moved between Slack, Facebook Groups, LinkedIn, Meetup, and Twitter, sometimes as the main channel, sometimes as a side tool. Every transition cost us members and history. The communities held, but each platform charged a tax on the way out: the people who didn't follow us to the new place, the years of conversations that stayed behind, locked in a database we didn't control.
+
+The platforms come and go. What keeps costing you is the architecture underneath them.
+
+## The tax is built in
+
+Slack starts deleting your history after 90 days on the free plan. Vanilla changed its pricing and the math stopped working. Twitter became X. Discord decided everyone suddenly needed phone verification. None of these were about my community, they were business decisions at companies I didn't own, and every time, my members paid part of the bill.
+
+You can't take your LinkedIn network to a different LinkedIn. Not because it's technically impossible, but because the people who built it made sure the door only opens one way. That's architecture, not destiny.
+
+## You already accept the opposite, every day
+
+Think about your phone number. You switch carriers and keep it. You call anyone, on any network, and it just works. Now picture a phone that only let you call people on your exact carrier, and the day you switched, you lost every contact and every past conversation. Absurd, right? Nobody would sign up for that.
+
+But that's how social platforms work. Your network only exists inside one app, and it can't leave with you.
+
+## Apps as views, not vaults
+
+There's another way to build this, and it already exists. A protocol where your data lives in something like your own bookshelf, and apps are just views into it. Move the bookshelf, switch the view, nothing gets lost.
+
+{/* TODO: master diagram (Excalidraw -> SVG/PNG): one bookshelf per person, multiple labelled compartments, several apps/views reading from different compartments; a couple compartments marked private with a "?" (deferred to Ep 6). Becomes the visual shorthand for the whole series. */}
+
+Dan Abramov already wrote the best technical explainer of this idea, a piece called "A Social Filesystem." If you want the mechanics, start there. I'm after something else: what living through the alternative actually costs you, and why that should change how you pick the tools you depend on.
+
+The names matter, because mixing them up is most of the confusion. The protocol is called the AT Protocol (atproto for short). The wider ecosystem of apps and servers built on top has its own name: the Atmosphere. Bluesky, the app most people have heard of, is one app in the Atmosphere. Not the protocol itself. One view among many. (Credit to Roel Donckers for the "the Atmosphere is already here" framing.)
+
+I'll keep calling it a vault sometimes, mostly because it reads well in a title. It's a bad word though. Vaults imply locks, and that's the opposite of what this is. Picture the bookshelf in your living room instead: you own it, and it's open to anyone you let in. The point is ownership, not secrecy. The bookshelf is yours, not the bookstore's.
+
+## One company runs most of this today
+
+Worth saying up front, before this turns into a sales pitch: today, one company (Bluesky PBC) runs most of the atproto infrastructure. The dominant data server, the largest relay, the main app view, the default moderation, the only built-in DMs. The protocol is decentralized in its architecture. The operation, right now, isn't. The whole bet of this series is that this changes, that the protocol outlives any single company's stewardship. If you watched email get swallowed by a handful of inboxes, that skepticism is earned, and I'm not going to argue you out of it.
+
+But the change isn't hypothetical anymore. Eurosky launched in 2026 as a European data-server operator, and it didn't stop at storage. It runs its own firehose, mirrors the identity directory, and shipped mu.social, a full replacement for the Bluesky app. The second layer that turns raw data into something usable now runs under governance that isn't Bluesky PBC. Eurosky is a Dutch non-profit (Stichting Modal), hosted in Germany, partnered with Igalia. Alternative infrastructure isn't being promised, it's running, governed by people who aren't the original company. That's the bet starting to pay out.
+
+## What changes when you own the bookshelf
+
+When your data and your network live in something you control, a few things flip:
+
+- Your network is yours, not the platform's.
+- Apps compete on how good the view is, not on how well they trap your data.
+- When an app dies (and apps die), your data survives it.
+
+One concrete example, disclosed plainly: I'm building a forum platform called Barazo where every post lives on the member's own bookshelf, not in Barazo's database. If Barazo disappears tomorrow, the members keep their posts and their connections. That's how building on this protocol works. Episode 4 walks through the wider ecosystem of apps already doing this.
+
+## Still early, and worth watching
+
+This is all still young. The next six weeks dig into what works, what doesn't, and what would make me change my mind. If you've ever felt locked into a platform, stuck paying a tax just to leave, this series is for you.
+
+Next Tuesday: why your username is not your identity, and what that actually buys you.
+
+---
+
+_Part 1 of 7. Full series at [/series/atproto/](/series/atproto/). I'm building two products on atproto, full disclosure on the series page._

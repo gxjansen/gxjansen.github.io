@@ -3,11 +3,12 @@ import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { injectYears } from "@js/textUtils";
+import { isPublished } from "../../lib/isPublished";
 
 const authors = await getCollection("authors");
 
 // Get post counts for each author
-const allPosts = await getCollection("post", ({ data }) => !data.draft);
+const allPosts = await getCollection("post", ({ data }) => isPublished(data));
 const authorPostCounts = authors
   .map((author) => {
     const postCount = allPosts.filter(
