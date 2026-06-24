@@ -1,0 +1,39 @@
+---
+/**
+ * Slim "part of a series" orientation banner, dropped near the top of each
+ * atproto-series episode so a cold reader knows it's part of a set and can jump
+ * to the hub. All series wording lives here so it's defined in one place; the
+ * episode only passes its number.
+ */
+interface Props {
+  /** Which episode this is (1-based). */
+  part: number;
+}
+
+const { part } = Astro.props as Props;
+
+const total = 7;
+const seriesTitle = "Apps as Views, Not Vaults";
+const seriesHref = "/series/atproto/";
+---
+
+<aside
+  aria-label="Part of a series"
+  class="not-prose border-base-200 dark:border-base-800 bg-base-50 dark:bg-base-900 my-6 flex flex-col gap-x-3 gap-y-1 rounded-xl border px-4 py-3 sm:flex-row sm:items-baseline"
+>
+  <span
+    class="font-display text-pine dark:text-foam shrink-0 text-[0.72rem] font-bold tracking-[0.08em] uppercase"
+  >
+    Part {part} of {total}
+  </span>
+  <p class="text-base-700 dark:text-base-300 m-0 text-[0.92rem] leading-snug">
+    <span class="font-display text-base-900 dark:text-base-100 font-bold"
+      >{seriesTitle}.</span
+    > A series on the AT Protocol; each part stands on its own.{" "}
+    <a
+      href={seriesHref}
+      class="text-pine dark:text-foam font-display font-bold underline-offset-2 hover:underline"
+      >See the whole shelf</a
+    >
+  </p>
+</aside>
