@@ -241,18 +241,6 @@ const pageDescription =
         </div>
       </section>
 
-      {/* ============ SERIES DIAGRAM ============ */}
-      <figure class="mt-2 mb-9">
-        <Image
-          src={appsAsViews}
-          alt="The apps-as-views model: one personal data cabinet with labelled compartments (posts, photos, films, a professional profile, a code repo, events, and a private one), read by many atproto apps as different views. Your cabinet, your data, one per person; swap the app, the cabinet stays."
-          widths={[640, 960, 1280, 2400]}
-          sizes="(min-width: 1024px) 1024px, 100vw"
-          class="border-base-200 dark:border-base-800 w-full rounded-2xl border"
-          loading="lazy"
-        />
-      </figure>
-
       {/* ============ EPISODE SPINE ============ */}
       <section id="series" class="mt-6 mb-4 scroll-mt-24">
         <div class="mb-6">
@@ -423,11 +411,24 @@ const pageDescription =
         </ol>
       </section>
 
+      {/* ============ SERIES DIAGRAM ============ */}
+      <figure class="mt-2 mb-9">
+        <Image
+          src={appsAsViews}
+          alt="The apps-as-views model: one personal data cabinet with labelled compartments (posts, photos, films, a professional profile, a code repo, events, and a private one), read by many atproto apps as different views. Your cabinet, your data, one per person; swap the app, the cabinet stays."
+          widths={[640, 960, 1280, 2400]}
+          sizes="(min-width: 1024px) 1024px, 100vw"
+          class="border-base-200 dark:border-base-800 w-full rounded-2xl border"
+          loading="lazy"
+        />
+      </figure>
+
       {/* ============ NEWSLETTER ============ */}
       <section id="subscribe" class="my-8 scroll-mt-24" aria-label="Newsletter">
         <NewsletterForm
           variant="card"
-          title="Get each episode in your inbox <span class='text-golden'>weekly, for 7 weeks</span>"
+          title="Get each episode in your inbox"
+          cadence="weekly, for 7 weeks"
           description="I'll send each part the morning it goes live, no checking back. After the series it settles into a periodic newsletter. If this resonates, you'll probably like the rest."
           note="No spam, no tracking, unsubscribe in one click."
         />
