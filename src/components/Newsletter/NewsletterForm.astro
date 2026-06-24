@@ -29,6 +29,8 @@ interface Props {
   title?: string;
   /** Form description (used in card/cta variants) */
   description?: string;
+  /** Hand-lettered cadence accent under the title (card variant). Pass "" to hide. */
+  cadence?: string;
   /** Optional note below form (e.g., frequency, unsubscribe info) */
   note?: string;
   /** Listmonk list ID (integer) */
@@ -53,6 +55,7 @@ const {
   variant = "card",
   title = "Stay in the loop",
   description = "Curated insights on community, experimentation, AI & open tech. No spam, no tracking pixels, unsubscribe anytime.",
+  cadence = "a few times a year",
   note = "You'll receive a confirmation email. No spam, unsubscribe anytime.",
   listId = 3, // Guido's Golden Nuggets
   actionUrl = "/.netlify/functions/newsletter-subscribe",
@@ -101,9 +104,11 @@ const signupPage = Astro.url.pathname;
             />
           )}
 
-          <p class="text-gold-light dark:text-gold font-hand inline-block origin-left -rotate-2 text-[1.5rem] leading-none">
-            a few times a year
-          </p>
+          {cadence && (
+            <p class="text-gold-light dark:text-gold font-hand inline-block origin-left -rotate-2 text-[1.5rem] leading-none">
+              {cadence}
+            </p>
+          )}
 
           {showSubscriberCount && (
             <p
