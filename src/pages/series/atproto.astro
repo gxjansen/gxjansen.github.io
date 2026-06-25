@@ -7,6 +7,7 @@ import Button from "@components/Button/Button.astro";
 import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 import { isPublished } from "../../lib/isPublished";
 import appsAsViews from "@images/series/apps-as-views.png";
+import ogImage from "@images/series/ogImage.jpg";
 
 const SERIES_NAME = "apps-as-views";
 const TOTAL = 7;
@@ -163,6 +164,7 @@ const pageDescription =
 <BaseLayout
   title={`${pageTitle} | Guido X Jansen`}
   description={pageDescription}
+  image={ogImage}
 >
   <div class="home">
     <div id="top" class="mx-auto w-full max-w-5xl">
