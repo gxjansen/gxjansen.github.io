@@ -150,6 +150,11 @@ const post = defineCollection({
       // Falls back to the generated card if "hero" is set but no heroImage
       // resolves. Only affects og:image / twitter:image, not the in-page cover.
       ogImage: z.enum(["generated", "hero"]).default("generated"),
+      // Output format for the in-page hero cover. Default (unset) → webp, great
+      // for photos. Set "png" for flat / gradient brand graphics (e.g. the
+      // series cards) where lossy webp bands the smooth gradients; png is
+      // lossless and supported everywhere.
+      heroFormat: z.enum(["webp", "avif", "png"]).optional(),
       description: z.string().optional(),
       authors: z.array(z.string()).default([]),
       categories: z.array(z.string()).default([]),

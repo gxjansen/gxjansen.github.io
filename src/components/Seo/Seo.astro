@@ -98,11 +98,13 @@ if (isImageMetadata) {
   // og:image must be PNG/JPEG, not WebP. Many social/link-preview scrapers
   // (X/Twitter, plus various embed tools) silently fail to render WebP
   // og:image, leaving a blank card. JPEG keeps photographic hero images
-  // small while staying universally supported.
+  // small while staying universally supported. Quality 92 (up from the "high"
+  // ~80 preset) keeps smooth gradients on flat brand cards from JPEG-banding,
+  // for a small size cost that's fine on a share card.
   optimizedImage = await getImage({
     src: image,
     format: "jpeg",
-    quality: "high",
+    quality: 92,
     width: 1200,
     height: 630,
     fit: "cover",
