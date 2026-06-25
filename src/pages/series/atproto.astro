@@ -248,7 +248,7 @@ const pageDescription =
         >
           <h2 class="eyebrow">Who this is for</h2>
           <p
-            class="text-base-700 dark:text-base-300 mt-2 max-w-[66ch] text-[1rem] leading-[1.6]"
+            class="text-base-700 dark:text-base-300 mt-2 text-[1rem] leading-[1.6]"
           >
             People who keep hearing about Bluesky and the AT Protocol and want
             to actually get it: web and tech folks, community builders, the
@@ -454,47 +454,6 @@ const pageDescription =
         />
       </section>
 
-      {/* ============ SKIN IN THE GAME ============ */}
-      <section class="my-10">
-        <div
-          class="border-primary-600/25 dark:border-primary-400/25 rounded-2xl border bg-[color-mix(in_oklab,var(--color-primary-600)_6%,var(--color-base-50))] p-[clamp(1.4rem,3.5vw,2rem)] dark:bg-[color-mix(in_oklab,var(--color-primary-400)_8%,var(--color-base-900))]"
-        >
-          <span class="eyebrow">Where I'm coming from</span>
-          <h2
-            class="font-display text-base-800 dark:text-base-50 mt-2 mb-3 text-[clamp(1.3rem,2.6vw,1.7rem)] font-extrabold tracking-[-0.02em]"
-          >
-            Two things you should know about me
-          </h2>
-          <div
-            class="text-base-700 dark:text-base-300 max-w-[64ch] space-y-3 text-[1.02rem] leading-[1.6]"
-          >
-            <p>
-              First: I'm building two products on atproto, Sifa (a professional
-              network) and Barazo (a forum platform). I have direct skin in the
-              game.
-            </p>
-            <p>
-              Second: I've been working on the internet for 25+ years, across
-              open source communities, SaaS platforms, and social tools. After
-              watching that many open protocols get swallowed by platforms, I
-              think this one has a real shot. So no, this isn't a neutral take
-              (claiming I'm neutral while building two products on it would be a
-              bit much).
-            </p>
-            <p>
-              Per Taleb: writers without skin in the game produce theory;
-              writers with skin in the game produce signal. If you'd rather have
-              a neutral overview, there are good ones out there. This one comes
-              with a point of view, and now you know where it's pointing.
-            </p>
-            <p>
-              Part 7 (the final episode) lists the concrete conditions by 2028
-              that would prove me wrong.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* ============ ABOUT THE WRITER ============ */}
       <section
         id="about"
@@ -510,20 +469,43 @@ const pageDescription =
         />
         <div class="min-w-[240px] flex-1">
           <h2
-            class="font-hand text-primary-600 dark:text-primary-400 mb-1 inline-block text-[1.3rem] leading-none"
+            class="font-hand text-primary-600 dark:text-primary-400 mb-2 inline-block text-[1.3rem] leading-none"
             style="transform:rotate(-2deg);transform-origin:left center;"
           >
             Hi, I'm Guido <span aria-hidden="true">👋</span>
           </h2>
-          <p
-            class="text-base-600 dark:text-base-400 max-w-[62ch] text-[1rem] leading-[1.6]"
+          <div
+            class="text-base-700 dark:text-base-300 space-y-3 text-[1rem] leading-[1.6]"
           >
-            I've spent 25+ years building on the internet, across open source
-            communities, SaaS platforms, and social tools. These days I'm
-            building two products on the AT Protocol, Sifa and Barazo, and
-            writing about why the architecture matters. I write the way I'd
-            explain something to a friend over coffee.
-          </p>
+            <p>
+              First: I'm building two products on atproto, Sifa (a professional
+              network) and Barazo (a forum platform). I have direct skin in the
+              game.
+            </p>
+            <p>
+              Second: I've been working on the internet for 25+ years, across
+              open source communities, SaaS platforms, and social tools. After
+              watching that many open protocols get swallowed by platforms, I
+              think this one has a real shot. So no, this isn't a neutral take
+              (claiming I'm neutral while building two products on it would be a
+              bit much).
+            </p>
+            <p>
+              Per <a
+                href="https://bookhive.buzz/books/bk_GOTqVyZtVIMWQOQztXde"
+                class="text-primary-600 dark:text-primary-400 font-semibold underline-offset-2 hover:underline"
+                target="_blank"
+                rel="noopener">Taleb</a
+              >: writers without skin in the game produce theory; writers with
+              skin in the game produce signal. If you'd rather have a neutral
+              overview, there are good ones out there. This one comes with a
+              point of view, and now you know where it's pointing.
+            </p>
+            <p>
+              Part 7 (the final episode) lists the concrete conditions by 2028
+              that would prove me wrong.
+            </p>
+          </div>
           <a
             href="/about/"
             class="text-primary-600 dark:text-primary-400 font-display mt-3 inline-flex items-center gap-1.5 text-[0.92rem] font-bold"
