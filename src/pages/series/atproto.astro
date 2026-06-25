@@ -287,7 +287,7 @@ const pageDescription =
                         "border-base-200 dark:border-base-800 mt-7 border-t pt-6",
                     ]}
                   >
-                    <div class="flex flex-wrap items-baseline gap-2.5 pl-[68px]">
+                    <div class="flex flex-wrap items-baseline gap-2.5 sm:pl-[68px]">
                       <span
                         class="font-display text-[0.78rem] font-bold tracking-[0.08em] uppercase"
                         style={`color:var(--color-${e.act.accent})`}
@@ -326,10 +326,10 @@ const pageDescription =
                       aria-label={`Part ${e.num}: ${e.title}, read article`}
                       class="ep-card focus-visible:ring-primary-500 border-base-200 dark:border-base-800 dark:hover:border-base-700 bg-base-50 dark:bg-base-900 block min-w-0 flex-1 rounded-2xl border shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden dark:shadow-none dark:hover:shadow-none"
                     >
-                      <div class="flex items-center gap-4 p-4">
+                      <div class="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-4">
                         <div
                           aria-hidden="true"
-                          class="ep-thumb size-[88px] flex-none rounded-xl"
+                          class="ep-thumb h-24 w-full flex-none rounded-xl sm:size-[88px]"
                         />
                         <div class="min-w-0 flex-1">
                           <span class="ep-pill font-display mb-2 inline-block rounded-full px-2.5 py-1 text-[0.7rem] font-bold tracking-[0.02em] uppercase">
@@ -390,10 +390,10 @@ const pageDescription =
                       aria-disabled="true"
                       class="border-base-300 dark:border-base-700 bg-base-50/60 dark:bg-base-900/50 block min-w-0 flex-1 rounded-2xl border border-dashed"
                     >
-                      <div class="flex items-center gap-4 p-4">
+                      <div class="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-4">
                         <div
                           aria-hidden="true"
-                          class="ep-hatch size-[88px] flex-none rounded-xl"
+                          class="ep-hatch h-24 w-full flex-none rounded-xl sm:size-[88px]"
                         />
                         <div class="min-w-0 flex-1">
                           <span class="bg-base-200 dark:bg-base-800 text-base-500 dark:text-base-400 font-display mb-2 inline-block rounded-full px-2.5 py-1 text-[0.7rem] font-bold tracking-[0.02em] uppercase">
