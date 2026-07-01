@@ -1,0 +1,103 @@
+---
+title: "Your identity isn't your username"
+description: "Your handle is a label; your identity is a key you own. atproto splits who you are from what you're called, so you can rename freely, prove who you are with a domain you control, and carry one identity across the apps you use. Part of 'Apps as Views, Not Vaults': the things you make are yours; apps are just the viewers."
+pubDate: 2026-07-02T08:00:00+02:00
+heroImage: ./heroImage.png
+heroImageAlt: "'Apps as Views, Not Vaults' series title card, Identity / Part 02: the headline 'Your identity isn't your username' with the subtitle 'Change your handle, change your host, keep every follower', beside a line-drawn display cabinet."
+ogImage: hero
+heroFormat: avif
+authors:
+  - gxjansen
+categories:
+  - AT Protocol
+  - Identity
+  - Open Source
+series:
+  name: "apps-as-views"
+  episode: 2
+  total: 7
+draft: false
+---
+
+import SeriesBanner from "@components/SeriesBanner.astro";
+
+When I first registered at Bluesky, my handle was "@gxjansen.bsky.social". Some months later I changed it to my current one: @gui.do. My followers didn't notice. My posts didn't break. My data didn't move.
+
+Instagram, LinkedIn and other legacy social media providers will (mostly) let you rename yourself too. What's different on atproto is what sits underneath the name. On a closed platform your identity is theirs: your account, your followers and your posts all live in one company's database and it only works inside their app. You are just renting your little space in it. On atproto it's yours. Your identity becomes a key you own, and everything hangs off it, so you can change your name, move your data to a different host, open a different app, or publish in a different format, and it's still you, still yours and your followers can still access your content.
+
+On the platforms you're used to, you can change your name but you can't own it. On atproto, you can do both.
+
+<SeriesBanner part={2} />
+
+## The problem: Identity as a row in their database
+
+Think about what your identity actually is on a closed platform. You don't own your handle; it's a name they let you use, one row in their database with your posts and connections hanging off it. Useful for them, fragile for you.
+
+Delete that row and you stop existing there. Get suspended, and your name can be handed to someone else. You can't take it with you, and you can't run it anywhere they don't allow. Because your name, your identity and your followers are all fused into that one row, the name carries all the weight: lose it and you've lost the person, the handle gets reassigned, old links break, and there's nothing underneath to fall back on.
+
+## atproto doesn't tie your identity to...
+
+### ...your name
+
+[Dan Abramov](https://bsky.app/profile/danabra.mov) puts it well in his ["Open Social"](https://overreacted.io/open-social/): _"Your internet handle being something you actually own is the most user-visible aspect of open social apps."_
+
+Start with the name, since it's the part everyone sees. On a closed platform your @name is a slug you rent in the company's namespace: they can reclaim it or reassign it, because it's theirs, not yours. On [AT Protocol](https://atproto.com/) your handle can be a name you genuinely own, a domain like `gui.do`. Either way it's just a label pointing at your real identity underneath, so you can change it whenever you like and nothing attached to you moves.
+
+The display cabinet from [Episode 1](https://gui.do/post/atproto-series-01-you-dont-own-your-network/) fits this exactly. Your cabinet has a serial number etched into the wood: permanent, yours, not a row in someone's ledger. Your handle is a label on the door. Peel it off, swap it for a new one, and nothing inside changes. Swapping the label is the easy part. Owning the name, and the cabinet it's stuck to, is the point.
+
+### ...your host
+
+If you own your own domain name, you already had this flexibility since the beginning. Switching to another e-mail provider is easy: your own address @ your own domain stays the same whether Google, Fastmail, Proton or your own server is delivering it, because it belongs to your domain, not the provider. Same with your phone number: switch carriers, keep the number, nothing breaks. The thing you hold stays put; the company behind it is swappable.
+
+atproto brings that same portability to where your identity is hosted. Dan Abramov did exactly this recently: he [moved his hosting from Bluesky to Eurosky](https://overreacted.io/there-are-no-instances-in-atproto/) (the European non-profit from Episode 1) and his handle, his followers and his posts didn't budge, same as repointing your domain at a new e-mail host. As he puts it, where your data is hosted and who you are were never the same thing: _"hosting and aggregation are two separate things."_
+
+### ...a single app
+
+If you make things for an audience, your name is your reputation, and on a closed platform that reputation lives inside one app. Illustrator and author [Debbie Ridpath Ohi](https://bsky.app/profile/debbieohi.com) wrote a [clear non-technical explainer](https://debbieohi.leaflet.pub/3mpdy5a53z22u) of why this matters to creators: _"Readers will recognize you, not which app you're using."_
+
+On closed platforms your audience is recognising an account inside an app, and that account only exists there. The same person is a fresh, unconnected account on every other network. When your identity is a key you own, recognition attaches to _you_ instead, and the app becomes just today's viewer.
+
+You can see this already. [Flashes](https://flashes.blue/) shows your photos to the same Bluesky followers you already have; [Leaflet](https://leaflet.pub/) lets you publish long-form under that same identity. One name, recognisably the same person in each, because it's one identity underneath, not separate accounts that happen to share a name.
+
+### ...one content format
+
+Each platform centres one format and rewards it above the rest. Instagram leans on photos and short video, YouTube on video, blogs on long text, podcasts on audio, microblogging on short text. They've all bolted on the others (Instagram has text Notes and Threads, YouTube has Shorts and podcasts), but the audience you build still lives inside that one app, so you're pushed toward the shape it favours, whether it suits the work or not.
+
+If you publish in more than one format, the old platforms make you choose: stop doing it, force everything into a single app's shape, or run multiple accounts and grow a separate audience on each.
+
+Of course there are (strained) workarounds: people post Instagram "stories" that are really just text on a coloured background, because that's the only way to say something wordy to an Instagram crowd. Musicians upload a track to YouTube as a still image over audio, because that's where the listeners are. The format is wrong for the medium; the reach is the only thing keeping them there.
+
+atproto doesn't fully fix this: an app still shows what it's built to show. But the app can actually show multiple formats (e.g. both [Sifa activity stream](https://sifa.id/p/gui.do/activity) and [sill.social](https://sill.social) already do this). And because your identity, your followers and your posts are yours, not locked inside one app, a new medium doesn't mean a new identity or starting from zero. You publish in whatever format fits, under the same you, and the people who know you can pick it up wherever it lives. (Episode 4 gets into how apps share posts and audiences across formats.)
+
+![A wireframe display cabinet holding your things (Posts, Videos, Photos, Contacts, Profile, Notes). A "@gui.do" handle card sits on the door with the note "a card you can slide out and swap", while the old handle "@gxjansen.bsky.social" lies faded to one side, set aside. Etched into the base is a serial number, "did:plc:45uheisi25szrjvjurfpritx", marked "etched in, permanent, yours", with an arrow noting "everything hangs off this, not the label". Caption: change the name, the location, the content types, or how you view it. It's yours regardless.](./handle-and-key.png)
+
+## Verifying who's behind the key
+
+And there's a flip side to the old world where anyone can spin up a handle: squatters grab names, and impersonators try to pass themselves off as you to hoover up your followers. So once your identity is just a key, how does anyone know the key belongs to who it claims? The domain handle from earlier answers that too: a name you own doubles as proof it's really you.
+
+Take a New York Times journalist with the handle `@jane.nytimes.com`: provably someone the Times put on its own domain, because only the Times controls `nytimes.com`. No blue-check approval queue, no central authority deciding who's real. If you own the domain, you own the proof. I use `gui.do` as my handle for exactly this reason: the handle _is_ the credential.
+
+This is also what takes the wind out of squatters. Because your handle is your domain, it's yours on every atproto app at once, including ones that don't exist yet. There's no separate username to claim on each new app, no landgrab, no racing to register `@yourname` before someone else grabs it. Sign into a brand-new app and you're already `@gui.do` there, because you're the only one who can be. That whole "quick, claim your handle before it's gone" reflex just stops being a thing.
+
+Domain verification like this is the floor, not the ceiling. The harder question, "is this really who they say they are, beyond owning a domain?", still stands, because someone can always register a domain that looks like yours. It's a challenge I've been working on with a couple of others: a [draft proposal](https://discourse.atprotocol.community/t/verification-on-the-open-social-web/860) for verifying specific _claims_ (that you finished a course, that you work where you say you do) as scoped, public attestations by someone in a position to vouch, instead of a government-ID upload or a checkmark handed down from above. Whether that beats today's blue checks, I don't know yet. Not solved, but definitely being worked on!
+
+## Where we still need improvement
+
+Two worries you might have (that are actually up to you, not atproto):
+
+1. your handle being a domain: domains expire, get sold, or have their DNS hijacked, the same risk you'd run using your own domain for e-mail ([Rescorla wrote up the weak points early](https://educatedguesswork.org/posts/atproto-firstlook/)). The saving grace is that losing the domain costs you the _label_, not the identity underneath, so you point a new handle at the same key and carry on. Just make sure you enable auto-renew for your critical domains and pay the invoices on time, and you should be good. And of course properly protect your domain registrar login, which brings us to the next point...
+2. the plain old stolen password, which no one has really solved for big audiences. It's your job to take care of a unique password in a password manager, and two-factor or a passkey wherever your app supports it. Both for your atproto account and for your domain registrar.
+
+One issue that's still atproto's to fix (or rather: its ecosystem) is the directory that turns your key into something apps can look up: it's still mostly run by one company (Bluesky). The overall protocol is decentralised, but that lookup layer, in practice, isn't yet. Moving it to an independent non-profit is in progress, and it's not the only group working on it: Eurosky, the non-profit from earlier, already runs its own copy of that directory and most of the rest of the plumbing. Until it's genuinely spread across many hands, "your identity is yours" is true by design and still partly on loan in operation. But the network is still young and a lot of initiatives to address these issues are quickly being rolled out.
+
+## So how about the actual place where you store your data?
+
+Ok so your identity is a unique key you hold, and your handle is a label you can change at will without losing a single follower. That fixes who you are. And you already got a glimpse of the rest moving with it: people are already switching from Bluesky to Eurosky, to Blacksky, or even self-hosting their content, and when they do, it all comes along.
+
+So if your content doesn't live in the app... where DO your posts, your articles, your photos, five years of history actually sit? And what happens to all of it when it's not you leaving, but the app you used shuts down for good?
+
+See you in Episode 3.
+
+---
+
+_Episode 2 of 7. Full series at [/series/atproto/](/series/atproto/). I'm building two products on atproto, full disclosure on the series page._
