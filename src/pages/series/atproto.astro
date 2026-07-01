@@ -16,10 +16,9 @@ const now = new Date();
 // Presentation manifest — the spine's source of truth (SERIES.md "Episode
 // titles + pills + glosses" + design/HANDOVER-TO-CODE.md accents & acts).
 // Links for RELEASED episodes come from the matched post; scheduled cards never
-// link. `plannedDate` drives the "Coming {date}" label for episodes not yet
-// written; the real pubDate takes over once an episode ships. Only Episode 1 is
-// drafted so far — the rest render as scheduled until their MDX lands and their
-// pubDate passes.
+// link. Dates come only from a real post's `pubDate`: a matched-but-unreleased
+// episode shows "Coming {pubDate}", and an episode with no post yet shows a
+// dateless "Coming soon" — nothing is planned until its MDX lands.
 const MANIFEST = [
   {
     episode: 1,
@@ -28,7 +27,6 @@ const MANIFEST = [
     title: "You don't own your network",
     gloss:
       "If a platform vanished tomorrow, your network wouldn't survive the move. Someone chose that, and it can be unmade.",
-    plannedDate: "2026-06-25T06:00:00+02:00",
   },
   {
     episode: 2,
@@ -37,7 +35,6 @@ const MANIFEST = [
     title: "Your identity isn't your username",
     gloss:
       "Change your handle, keep every follower. Why atproto splits who you are from what you're called.",
-    plannedDate: "2026-07-02T08:00:00+02:00",
   },
   {
     episode: 3,
@@ -46,7 +43,6 @@ const MANIFEST = [
     title: "Where your posts actually live",
     gloss:
       "When an app shuts down, what happens to five years of your stuff? Depends who's holding it.",
-    plannedDate: "2026-07-07T08:00:00+02:00",
   },
   {
     episode: 4,
@@ -55,7 +51,6 @@ const MANIFEST = [
     title: "Apps that don't need permission",
     gloss:
       "A new app can already know your network: no partnership deals, no API keys, no “log in with X” tax.",
-    plannedDate: "2026-07-14T08:00:00+02:00",
   },
   {
     episode: 5,
@@ -64,7 +59,6 @@ const MANIFEST = [
     title: "You don't have to like the algorithm",
     gloss:
       "When a feed decides your reach, you don't get a vote. There's an architecture where you do.",
-    plannedDate: "2026-07-28T08:00:00+02:00",
   },
   {
     episode: 6,
@@ -73,7 +67,6 @@ const MANIFEST = [
     title: "What atproto can't do (yet)",
     gloss:
       "The gaps the hype skips. Plus: your whole identity can run on a Raspberry Pi, or hosted free.",
-    plannedDate: "2026-08-04T08:00:00+02:00",
   },
   {
     episode: 7,
@@ -82,7 +75,6 @@ const MANIFEST = [
     title: "Bigger than social media",
     gloss:
       "I ran Doom over the AT Protocol at five frames per second. Nobody needs that, but it proved what the protocol really is.",
-    plannedDate: "2026-08-11T08:00:00+02:00",
   },
 ] as const;
 
@@ -144,7 +136,9 @@ const episodes = MANIFEST.map((m) => {
     notLast: m.episode < TOTAL,
     statusLabel: released
       ? `Released ${format(new Date(post!.data.pubDate), "MMM d, yyyy")}`
-      : `Coming ${format(new Date(m.plannedDate), "MMM d, yyyy")}`,
+      : post
+        ? `Coming ${format(new Date(post.data.pubDate), "MMM d, yyyy")}`
+        : "Coming soon",
   };
 });
 
