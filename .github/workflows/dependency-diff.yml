@@ -1,0 +1,28 @@
+name: Dependency Diff
+
+on:
+  pull_request:
+    branches: [master, development]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: dependency-diff-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  diff:
+    name: Dependency Diff
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create dependency diff
+        uses: e18e/action-dependency-diff@v1
+        with:
+          github-token: ${{ github.token }}
+          pr-number: ${{ github.event.pull_request.number }}
