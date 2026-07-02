@@ -33,7 +33,7 @@ Platforms come and go. However big one looks today, there's a new hype around th
 
 ## The tax is built in
 
-Take Slack's free plan: After 90 days your message history vanishes. Not deleted though, just hidden: they keep your data on their servers (and may well keep training on it), then charge you to see your own conversations again. You wrote it, they store it, you rent access to it. SaaS platforms change their pricing simply because they can and the math stops working for you. Twitter not just became X, but it became a very different environment. Discord decided my community suddenly needed ID verification. None of these were about us, they were business decisions at companies I didn't own, and every time my contacts or community members paid part of the bill.
+Take Slack's free plan: After 90 days your message history vanishes. Not deleted though, just hidden: they keep your data on their servers (and may well keep training on it), then charge you to see your own conversations again. You wrote it, they store it, you rent access to it. SaaS platforms change their pricing simply because they can and the math stops working for you. Twitter didn't just rename to X, the whole environment changed. Discord decided my community suddenly needed ID verification. None of these were about us, they were business decisions at companies I didn't own, and every time my contacts or community members paid part of the bill.
 
 And you can't take your LinkedIn, Instagram or Twitter contacts to a different platform. Not because it's technically impossible, but because whoever built it made sure the door only opens one way. That's purposeful architecture, not just the way it HAS to be. It should be about the people, not the platform (nicely put by [Anuj Ahooja](https://mu.social/profile/quillmatiq.com)).
 
@@ -51,11 +51,11 @@ Protocols.
 
 Open Protocols work for e-mail and phone numbers. They can work for social media too. Picture a protocol where the things you make, your posts, your photos, your follows, your reviews, are all yours, stored and shown off in something like a display cabinet that others can view, but you own and control. Apps are just the viewers that look into it. You can swap the app, and just give them access to your cabinet.
 
-![A single display cabinet with nine labelled compartments (Posts, Books, Photos, Films & reviews, a private compartment marked "?" for Episode 6, Professional profile, Code repo, Events, Publishing), surrounded by atproto apps reading from different compartments as views: Bluesky, mu.social and Blacksky, Sifa, Popfeed, Tangled, Leaflet, Offprint and more. Caption: your cabinet, your data, one per person, rent the space or self-host. Apps are views, not vaults; swap the app, your cabinet stays.](./apps-as-views.png)
+![A single display cabinet with nine labelled compartments (Posts, Books, Photos, Films & reviews, a private compartment marked "?" for Episode 6, Professional profile, Code repo, Events, Publishing), surrounded by atproto apps reading from different compartments as views: Bluesky, mu.social and Blacksky, Sifa, Popfeed, Tangled, Leaflet, Offprint and more. Caption: your cabinet, your data, one per person, rent the space or self-host. Apps are views, not vaults. Swap the app, your cabinet stays.](./apps-as-views.png)
 
 [Dan Abramov](https://bsky.app/profile/danabra.mov) wrote a great technical explainer of this in his ["A Social Filesystem"](https://overreacted.io/a-social-filesystem/). If you ever want the mechanics: read this. The series you are reading now comes at it from the other side: what living through the alternative actually costs you and me, and why that should change how you pick the tools you depend on.
 
-The specific protocol we are talking about is called the [AT Protocol](https://atproto.com/) (atproto for short). The wider ecosystem of apps and servers built on top has its own name: the _Atmosphere_, and the single account you have (that gives you access to all apps and the whole cabinet) is thus called your _Atmosphere account_. Bluesky, the app most people have heard of, is just one app in the Atmosphere. Not the protocol itself. Just one view among many. (Also see [Roel van Hooydonck's](https://bsky.app/profile/roel.vanhooydonck.nl) ["the Atmosphere is already here"](https://donckrr.offprint.app/a/3mlgssxt6xa23-the-atmosphere-is-already-here))
+The specific protocol we are talking about is called [AT Protocol](https://atproto.com/) (atproto for short). The wider ecosystem of apps and servers built on top has its own name: the _Atmosphere_, and the single account you have (that gives you access to all apps and the whole cabinet) is thus called your _Atmosphere account_. Bluesky, the app most people have heard of, is just one app in the Atmosphere. Not the protocol itself. Just one view among many. (Also see [Roel van Hooydonck's](https://bsky.app/profile/roel.vanhooydonck.nl) ["the Atmosphere is already here"](https://donckrr.offprint.app/a/3mlgssxt6xa23-the-atmosphere-is-already-here))
 
 When someone wants a feature Bluesky doesn't have (like a lot of users keep screaming about wanting an edit button), the answer is increasingly "just use a different app on the same network." Apps like [mu.social](https://mu.social) or [Skywalker](https://play.google.com/store/apps/details?id=com.gmail.mfnboer.skywalker&hl=en-US) read the exact same posts and followers, and they do have the edit button Bluesky lacks. Same data, a different view, different features.
 
@@ -63,7 +63,7 @@ And it isn't only microblogging. Any app can add a new kind of content type to t
 
 Sidenote: The cabinet and everything in it is yours: what you make, and your identity. But you don't have to own the building it sits in: most people let a host keep the cabinet (often free), some self-host. Either way you can move the whole thing elsewhere whenever you want. It still feels like a bit of magic, even after years in closed systems: you can move all your content to a new host, yet your links don't break, and every app you use keeps working, nothing to change. And if you ever tried to do this with Mastodon and are afraid this is going to be hard: the UX is actually surprisingly good and simple.
 
-That's the opposite of a vault like LinkedIn or Instagram, where your stuff sits in their building, behind their lock; you can leave, but they keep all your contacts and content.
+That's the opposite of a vault like LinkedIn or Instagram, where your stuff sits in their building, behind their lock: you can leave, but they keep all your contacts and content.
 
 ## One company runs most of this today
 
@@ -83,7 +83,7 @@ When your data and your contacts live in a place you actually control, a few imp
 
 You can feel the incentive shift in small things. On most platforms like LinkedIn and X, posting a link quietly costs you reach, because they'd rather you didn't send users elsewhere. Bluesky's COO [Rose Wang](https://bsky.app/profile/rose.bsky.team) put it the other way round: ["we don't de-promote your links. Post all the links you want, Bluesky is a lobby to the open web."](https://www.nbcnews.com/tech/social-media/bluesky-x-becomes-social-media-rcna181685) When an app doesn't own your audience, it has less reason to hold it hostage.
 
-Another concrete example: I'm building [Sifa](https://sifa.id/), a professional profile on atproto, the useful parts of LinkedIn (your work history, your skills, your contacts) living in your own cabinet, not in Sifa's database. If Sifa disappears tomorrow, you keep your profile, your CV and your contacts, and any other app can still read them. That's how building on this protocol works, and it's pretty much the opposite of the LinkedIn problem in the opening above. Episode 4 walks through the wider ecosystem of apps already doing this.
+Another concrete example: I'm building [Sifa ID](https://sifa.id/), a professional profile on atproto, the useful parts of LinkedIn (your work history, your skills, your contacts) living in your own cabinet, not in Sifa's database. If Sifa disappears tomorrow, you keep your profile, your CV and your contacts, and any other app can still read them. That's how building on this protocol works, and it's pretty much the opposite of the LinkedIn problem in the opening above. Episode 4 walks through the wider ecosystem of apps already doing this.
 
 ## Still early, and worth watching
 
@@ -93,4 +93,4 @@ This also brings us to an interesting next step that is getting some heated disc
 
 ---
 
-_Part 1 of 7. Full series at [/series/atproto/](/series/atproto/). I'm building two products on atproto, full disclosure on the series page._
+_Part 1 of 7. Full series at [/series/atproto/](/series/atproto/). I'm building two products on atproto (details on the series page)._

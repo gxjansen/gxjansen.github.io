@@ -16,7 +16,7 @@ categories:
 
 You may have recently started seeing really nice article URL preview cards on Bluesky with their logo, your own accent color and a neat CTA button to View or Subscribe. If you want that too for your articles on your own domain: this guide is for you!
 
-Bluesky [v1.122](https://bsky.app/profile/bsky.app/post/3mmwmla3xph26) now renders Standard.site publications as rich link cards: title, reading time, author, site name, theme colours, and an action button. The card title links to the exact post you shared; the action button (Subscribe / View publication) goes to the publication's home, not that specific post. In the same week, WordPress shipped its [ATmosphere 1.0.0 plugin](https://activitypub.blog/2026/05/20/atmosphere-1-0-0-liftoff/), so a chunk of the open web can now publish as Standard.site too.
+Bluesky [v1.122](https://bsky.app/profile/bsky.app/post/3mmwmla3xph26) now renders Standard.site publications as rich link cards: title, reading time, author, site name, theme colours, and an action button. The card title links to the exact post you shared. The action button (Subscribe / View publication) goes to the publication's home, not that specific post. In the same week, WordPress shipped its [ATmosphere 1.0.0 plugin](https://activitypub.blog/2026/05/20/atmosphere-1-0-0-liftoff/), so a chunk of the open web can now publish as Standard.site too.
 
 > _One thing about the card before you set this up: it has two separate tap targets. The title, image and body go to the post you shared. The filled "Subscribe" / "View publication" button goes to the publication's home instead. That's intended, but it caught me out (the button is the loudest thing on the card, yet it doesn't open the article), so I wrote it up as [a UX issue on social-app](https://github.com/bluesky-social/social-app/issues/10905)._
 
@@ -42,7 +42,7 @@ Three paths:
 
 2. **WordPress with the [ATmosphere plugin](https://activitypub.blog/2026/05/20/atmosphere-1-0-0-liftoff/).** Installing it gives your WP site a Standard.site publication record automatically, with `url` set to your blog. The card's button reads **"View publication"** with a generic arrow icon (your domain isn't on the hardcoded allowlist, so no platform branding). Functionally identical otherwise.
 
-3. **Roll your own.** If you have your own AT Protocol account and a static blog, you publish a `site.standard.publication` record pointing to your domain, plus a `site.standard.document` record per post (its `path` joined to the publication `url` is what Bluesky matches against the shared link). Steve Simkins' [Sequoia CLI](https://sequoia.pub/) is the most common tool for this; he also wrote a [guide on indexing Standard.site records](https://atproto.com/blog/indexing-standard-site) that doubles as a primer on the data model. The card again reads "View publication."
+3. **Roll your own.** If you have your own AT Protocol account and a static blog, you publish a `site.standard.publication` record pointing to your domain, plus a `site.standard.document` record per post (its `path` joined to the publication `url` is what Bluesky matches against the shared link). Steve Simkins' [Sequoia CLI](https://sequoia.pub/) is the most common tool for this. He also wrote a [guide on indexing Standard.site records](https://atproto.com/blog/indexing-standard-site) that doubles as a primer on the data model. The card again reads "View publication."
 
 In all three cases, the card appears in Bluesky once the AppView has indexed the record from the firehose, usually within seconds.
 
@@ -81,7 +81,7 @@ Here's how:
 
 ### Colours: edit the record on pdsls.dev
 
-[pdsls.dev](https://pdsls.dev) is a web UI for browsing and editing AT Protocol records. Log in with your handle + an app password (Bluesky → Settings → App Passwords), navigate to your `site.standard.publication` record, and paste this `basicTheme` block into the existing JSON:
+[pdsls.dev](https://pdsls.dev) is a web UI for browsing and editing AT Protocol records. Log in with your handle + an app password (Bluesky, then Settings, then App Passwords), navigate to your `site.standard.publication` record, and paste this `basicTheme` block into the existing JSON:
 
 ```json
 "basicTheme": {
@@ -208,7 +208,7 @@ Two things Jason flagged from doing it for real: you can't set a per-post author
 Post a link to your publication URL on Bluesky and watch the embed render. If the card doesn't appear:
 
 - Confirm a `site.standard.publication` record actually exists on your account's PDS. You can browse your records with [pdsls.dev](https://pdsls.dev).
-- Confirm its `url` field exactly matches the URL you're linking to. The AppView canonicalises (lowercase host, strip trailing slash, drop query/fragment) but otherwise needs a match. On the Leaflet/pckt/Offprint hosts (and their subdomains) a post link can extend the record URL with extra path segments and still match; everywhere else the publication URL must match exactly, which is why individual posts need their own document record.
+- Confirm its `url` field exactly matches the URL you're linking to. The AppView canonicalises (lowercase host, strip trailing slash, drop query/fragment) but otherwise needs a match. On the Leaflet/pckt/Offprint hosts (and their subdomains) a post link can extend the record URL with extra path segments and still match. Everywhere else the publication URL must match exactly, which is why individual posts need their own document record.
 - Give the firehose a minute to propagate.
 
 That's the entire mechanism. The well-known files have their own value, but they're not on the critical path for the Bluesky card. The publication record is.
