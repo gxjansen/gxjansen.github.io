@@ -1,0 +1,337 @@
+---
+/**
+ * "Suggest a book" block for /bookshelf.
+ *
+ * Ingest-social, no store to moderate: the suggestion is a normal Bluesky post
+ * that mentions @gui.do. A typeahead (proxied through /api/book-search) lets a
+ * visitor optionally attach the exact Bookhive book — purely a convenience so
+ * Guido doesn't have to look it up. Progressive enhancement: with no JS, the
+ * button is still a plain compose link addressed to @gui.do.
+ */
+const HANDLE = "gui.do";
+
+// No-JS / no-book fallback: a plain compose intent mentioning Guido.
+const fallbackText = `@${HANDLE} a book I think you should read: `;
+const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(fallbackText)}`;
+---
+
+<section class="suggest" aria-labelledby="suggest-heading" data-suggest>
+  <h2 id="suggest-heading" class="suggest-h">Got one I should read?</h2>
+  <p class="suggest-lede text-base-700 dark:text-base-300">
+    Send it my way on Bluesky. Search Bookhive below to attach the exact book if
+    you want (just saves me the lookup), or skip it and describe the book in
+    your own words.
+  </p>
+
+  <div class="suggest-field" hidden data-suggest-field>
+    <label for="book-q" class="sr-only"
+      >Search for a book by title or author</label
+    >
+    <input
+      id="book-q"
+      type="text"
+      class="suggest-input"
+      autocomplete="off"
+      placeholder="Search a book (optional)"
+      role="combobox"
+      aria-expanded="false"
+      aria-controls="book-results"
+      aria-autocomplete="list"
+      data-suggest-input
+    />
+    <ul
+      id="book-results"
+      class="suggest-results"
+      role="listbox"
+      aria-label="Book search results"
+      hidden
+      data-suggest-results
+    >
+    </ul>
+
+    <div class="suggest-selected" hidden data-suggest-selected>
+      <img alt="" class="suggest-selected-cover" data-selected-cover hidden />
+      <span class="suggest-selected-text">
+        <span class="suggest-selected-title" data-selected-title></span>
+        <span class="suggest-selected-author" data-selected-author></span>
+      </span>
+      <button
+        type="button"
+        class="suggest-clear"
+        data-suggest-clear
+        aria-label="Remove selected book"
+      >
+        &times;
+      </button>
+    </div>
+  </div>
+
+  <a
+    class="no-random-underline suggest-button"
+    href={fallbackHref}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-suggest-link
+  >
+    Suggest on Bluesky
+  </a>
+</section>
+
+<script>
+  const HANDLE = "gui.do";
+
+  const root = document.querySelector<HTMLElement>("[data-suggest]");
+  if (root) {
+    const field = root.querySelector<HTMLElement>("[data-suggest-field]");
+    const input = root.querySelector<HTMLInputElement>("[data-suggest-input]");
+    const results = root.querySelector<HTMLUListElement>(
+      "[data-suggest-results]",
+    );
+    const link = root.querySelector<HTMLAnchorElement>("[data-suggest-link]");
+    const selected = root.querySelector<HTMLElement>("[data-suggest-selected]");
+    const selCover = root.querySelector<HTMLImageElement>(
+      "[data-selected-cover]",
+    );
+    const selTitle = root.querySelector<HTMLElement>("[data-selected-title]");
+    const selAuthor = root.querySelector<HTMLElement>("[data-selected-author]");
+    const clearBtn = root.querySelector<HTMLButtonElement>(
+      "[data-suggest-clear]",
+    );
+
+    type Book = {
+      id: string;
+      title: string;
+      author: string;
+      thumbnail: string;
+    };
+
+    if (field && input && results && link) {
+      // JS is on: reveal the optional search field.
+      field.hidden = false;
+
+      const composeUrl = (book: Book | null) => {
+        const text = book
+          ? `@${HANDLE} a book for your want-to-read list: ${book.title}` +
+            (book.author ? ` by ${book.author}` : "") +
+            `\n\nhttps://bookhive.buzz/books/${book.id}`
+          : `@${HANDLE} a book I think you should read: `;
+        return `https://bsky.app/intent/compose?text=${encodeURIComponent(text)}`;
+      };
+
+      let items: Book[] = [];
+      let active = -1;
+      let debounce: number | undefined;
+      let controller: AbortController | null = null;
+
+      const closeList = () => {
+        results.hidden = true;
+        results.innerHTML = "";
+        input.setAttribute("aria-expanded", "false");
+        input.removeAttribute("aria-activedescendant");
+        items = [];
+        active = -1;
+      };
+
+      const selectBook = (book: Book) => {
+        link.href = composeUrl(book);
+        link.textContent = "Suggest this book on Bluesky";
+        if (selected && selTitle && selAuthor) {
+          selTitle.textContent = book.title;
+          selAuthor.textContent = book.author ? `by ${book.author}` : "";
+          if (selCover) {
+            if (book.thumbnail) {
+              selCover.src = book.thumbnail;
+              selCover.hidden = false;
+            } else {
+              selCover.hidden = true;
+            }
+          }
+          selected.hidden = false;
+        }
+        input.value = "";
+        closeList();
+      };
+
+      const clearBook = () => {
+        link.href = composeUrl(null);
+        link.textContent = "Suggest on Bluesky";
+        if (selected) selected.hidden = true;
+        input.focus();
+      };
+
+      const render = () => {
+        results.innerHTML = "";
+        items.forEach((book, i) => {
+          const li = document.createElement("li");
+          li.role = "option";
+          li.id = `book-opt-${i}`;
+          li.className = "suggest-option";
+          li.setAttribute("aria-selected", String(i === active));
+          if (book.thumbnail) {
+            const img = document.createElement("img");
+            img.src = book.thumbnail;
+            img.alt = "";
+            img.className = "suggest-option-cover";
+            img.loading = "lazy";
+            li.appendChild(img);
+          }
+          const txt = document.createElement("span");
+          txt.className = "suggest-option-text";
+          const t = document.createElement("span");
+          t.className = "suggest-option-title";
+          t.textContent = book.title;
+          const a = document.createElement("span");
+          a.className = "suggest-option-author";
+          a.textContent = book.author;
+          txt.append(t, a);
+          li.appendChild(txt);
+          li.addEventListener("mousedown", (e) => {
+            e.preventDefault();
+            selectBook(book);
+          });
+          results.appendChild(li);
+        });
+        results.hidden = items.length === 0;
+        input.setAttribute("aria-expanded", String(items.length > 0));
+      };
+
+      const search = async (q: string) => {
+        controller?.abort();
+        controller = new AbortController();
+        try {
+          // Trailing slash required — the site uses trailingSlash: "always",
+          // so `/api/book-search?q=` would 404-redirect and drop the query.
+          const res = await fetch(
+            `/api/book-search/?q=${encodeURIComponent(q)}`,
+            { signal: controller.signal },
+          );
+          if (!res.ok) return closeList();
+          const data = (await res.json()) as { books?: Book[] };
+          items = data.books ?? [];
+          active = -1;
+          render();
+        } catch (err) {
+          if ((err as Error).name !== "AbortError") closeList();
+        }
+      };
+
+      input.addEventListener("input", () => {
+        const q = input.value.trim();
+        window.clearTimeout(debounce);
+        if (q.length < 2) return closeList();
+        debounce = window.setTimeout(() => search(q), 250);
+      });
+
+      input.addEventListener("keydown", (e) => {
+        if (results.hidden || items.length === 0) return;
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          active = (active + 1) % items.length;
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          active = (active - 1 + items.length) % items.length;
+        } else if (e.key === "Enter") {
+          if (active >= 0) {
+            e.preventDefault();
+            selectBook(items[active]);
+          }
+          return;
+        } else if (e.key === "Escape") {
+          closeList();
+          return;
+        } else {
+          return;
+        }
+        const nodes =
+          results.querySelectorAll<HTMLLIElement>(".suggest-option");
+        nodes.forEach((n, i) =>
+          n.setAttribute("aria-selected", String(i === active)),
+        );
+        if (active >= 0)
+          input.setAttribute("aria-activedescendant", `book-opt-${active}`);
+      });
+
+      input.addEventListener("blur", () => {
+        // Delay so a click on an option registers before the list closes.
+        window.setTimeout(closeList, 120);
+      });
+
+      clearBtn?.addEventListener("click", clearBook);
+    }
+  }
+</script>
+
+<style>
+  @reference "../../styles/tailwind.css";
+
+  .suggest {
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 mt-12 rounded-2xl border p-6 shadow-sm md:p-7;
+  }
+  .suggest-h {
+    @apply text-base-950 dark:text-base-50 font-display mb-2 text-[1.4rem] font-black tracking-[-0.02em];
+  }
+  .suggest-lede {
+    @apply max-w-2xl text-[.98rem] leading-relaxed;
+  }
+
+  .suggest-field {
+    @apply relative mt-5 max-w-md;
+  }
+  .suggest-input {
+    @apply border-base-300 dark:border-base-700 bg-base-100 dark:bg-base-950 text-base-900 dark:text-base-100 placeholder:text-base-500 focus:ring-primary-500 w-full rounded-lg border px-4 py-2.5 text-[.95rem] focus:ring-2 focus:outline-hidden;
+  }
+
+  .suggest-results {
+    @apply border-base-200 dark:border-base-700 bg-base-50 dark:bg-base-900 absolute z-20 mt-1 max-h-80 w-full overflow-y-auto rounded-lg border shadow-lg;
+    list-style: none;
+    padding: 0.25rem;
+    margin-bottom: 0;
+  }
+  .suggest-option {
+    @apply text-base-800 dark:text-base-200 flex cursor-pointer items-center gap-3 rounded-md px-2.5 py-2;
+  }
+  .suggest-option[aria-selected="true"],
+  .suggest-option:hover {
+    @apply bg-base-200/70 dark:bg-base-800/70;
+  }
+  .suggest-option-cover {
+    @apply h-12 w-8 flex-none rounded-sm object-cover;
+    background: var(--color-base-200);
+  }
+  .suggest-option-text {
+    @apply flex min-w-0 flex-col;
+  }
+  .suggest-option-title {
+    @apply truncate text-[.9rem] font-semibold;
+  }
+  .suggest-option-author {
+    @apply text-base-500 dark:text-base-400 truncate text-[.78rem];
+  }
+
+  .suggest-selected {
+    @apply border-primary-300 dark:border-primary-800 bg-primary-50 dark:bg-primary-950/40 mt-3 flex items-center gap-3 rounded-lg border px-3 py-2;
+  }
+  .suggest-selected-cover {
+    @apply h-12 w-8 flex-none rounded-sm object-cover;
+  }
+  .suggest-selected-text {
+    @apply flex min-w-0 flex-col;
+  }
+  .suggest-selected-title {
+    @apply text-base-900 dark:text-base-100 truncate text-[.9rem] font-semibold;
+  }
+  .suggest-selected-author {
+    @apply text-base-500 dark:text-base-400 truncate text-[.78rem];
+  }
+  .suggest-clear {
+    @apply text-base-500 hover:text-base-900 dark:hover:text-base-100 focus:ring-primary-500 ml-auto flex-none rounded-md px-2 text-xl leading-none focus:ring-2 focus:outline-hidden;
+  }
+
+  /* Primary CTA — mirrors the site's Button--primary (bg-primary-600 + white),
+     kept local because those styles are scoped to the Button component. The
+     "button" in the class name also opts it out of the global link-colouring
+     rule in links.scss (its :not([class*="button"]) carve-out). */
+  .suggest-button {
+    @apply bg-primary-600 hover:bg-primary-700 focus-visible:ring-primary-500 dark:bg-primary-500 dark:hover:bg-primary-400 dark:text-base-100 mt-5 inline-flex items-center justify-center rounded-md px-7 py-3 font-medium text-white shadow-md transition focus:outline-hidden focus-visible:ring-2;
+  }
+</style>

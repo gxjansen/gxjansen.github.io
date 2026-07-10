@@ -1,0 +1,181 @@
+---
+/**
+ * A grid of Bookhive book covers, in the same visual language as ReadingCard
+ * (tonal accent placeholder when a cover is missing). Each cover links to its
+ * Bookhive page. Used across the /bookshelf sections; pass `showRatings` for the
+ * "read" shelf so finished books surface their star rating.
+ */
+import Stars from "./Stars.astro";
+import type { Book } from "../../lib/bookhive";
+
+interface Props {
+  books: Book[];
+  showRatings?: boolean;
+}
+const { books, showRatings = false } = Astro.props as Props;
+---
+
+<div class="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-4">
+  {
+    books.map((b) => (
+      <div class="flex flex-col gap-2">
+        <a
+          class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
+          href={b.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${b.title} on Bookhive`}
+        >
+          {/* Placeholder always present; the cover image overlays it and, if it
+              fails to load (e.g. a 403 from the catalog's Goodreads URL), the
+              inline script removes it to reveal this. */}
+          <span class="bk-spine" aria-hidden="true" />
+          <div class="bk-meta">
+            <div class="bk-title">{b.title}</div>
+            <div class="bk-author">{b.author}</div>
+          </div>
+          {b.coverUrl && (
+            <img src={b.coverUrl} alt={`Cover of ${b.title}`} loading="lazy" />
+          )}
+        </a>
+        {showRatings && typeof b.rating === "number" && (
+          <Stars value={b.rating} />
+        )}
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  // Drop any cover image that fails to load so the accent placeholder (with the
+  // title) shows through instead of a broken-image icon. Handles images that
+  // already errored before this module ran via the complete/naturalWidth check.
+  const covers = document.querySelectorAll<HTMLImageElement>(".bk-cover img");
+  covers.forEach((img) => {
+    img.addEventListener("error", () => img.remove());
+    if (img.complete && img.naturalWidth === 0) img.remove();
+  });
+</script>
+
+<style>
+  @reference "../../styles/tailwind.css";
+
+  .bk-cover {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    color: #fff;
+    box-shadow: 0 6px 16px -8px rgb(0 0 0 / 0.5);
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  a.bk-cover[href] {
+    cursor: pointer;
+  }
+  a.bk-cover[href]:hover,
+  a.bk-cover[href]:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px -8px rgb(0 0 0 / 0.55);
+    outline: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bk-cover {
+      transition: none;
+    }
+    a.bk-cover[href]:hover,
+    a.bk-cover[href]:focus-visible {
+      transform: none;
+    }
+  }
+  .bk-cover img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .bk-cover:not(:has(img)) .bk-meta {
+    position: relative;
+    z-index: 1;
+    padding: 0.6rem 0.65rem;
+    background: linear-gradient(180deg, transparent, rgb(0 0 0 / 0.55));
+  }
+  /* Spine + title only decorate the gradient placeholder; when a real cover is
+     present it sits on top and these would just clutter it. */
+  .bk-cover:has(img) .bk-spine,
+  .bk-cover:has(img) .bk-meta {
+    display: none;
+  }
+  .bk-spine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 5px;
+    background: rgb(255 255 255 / 0.22);
+    z-index: 1;
+  }
+  .bk-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.92rem;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+  }
+  .bk-author {
+    font-size: 0.68rem;
+    opacity: 0.92;
+    margin-top: 0.18rem;
+    text-shadow: 0 1px 3px rgb(0 0 0 / 0.35);
+  }
+
+  /* Two-tone accent gradients for cover placeholders. */
+  .bk-pine {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-pine) 96%, #000),
+      color-mix(in oklab, var(--color-pine) 48%, #000)
+    );
+  }
+  .bk-iris {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-iris) 92%, #000),
+      color-mix(in oklab, var(--color-iris) 42%, #000)
+    );
+  }
+  .bk-gold {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-gold) 90%, #000),
+      color-mix(in oklab, var(--color-gold) 45%, #000)
+    );
+  }
+  .bk-foam {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-foam) 92%, #000),
+      color-mix(in oklab, var(--color-foam) 45%, #000)
+    );
+  }
+  .bk-love {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-love) 92%, #000),
+      color-mix(in oklab, var(--color-love) 45%, #000)
+    );
+  }
+  .bk-rose {
+    background: linear-gradient(
+      155deg,
+      color-mix(in oklab, var(--color-rose) 90%, #000),
+      color-mix(in oklab, var(--color-rose) 45%, #000)
+    );
+  }
+</style>
