@@ -26,17 +26,9 @@ const bookhiveHref = "https://bookhive.buzz/profile/gui.do";
 const nothing =
   active.length === 0 && wantToRead.length === 0 && finished.length === 0;
 
-// When there are more read books than the shelf shows, replace the last few
-// covers with faded "mystery" tiles (a continuation of the same grid) and point
-// to the full list on Bookhive. Keeps the tile count steady so the widest view
-// stays a clean set of rows.
-const READ_TEASER = 3;
-const moreRead =
-  finishedCount > finished.length && finished.length > READ_TEASER;
-const readCovers = moreRead
-  ? finished.slice(0, finished.length - READ_TEASER)
-  : finished;
-const readMystery = moreRead ? READ_TEASER : 0;
+// The shelf shows a recent slice; a plain caption states the real total so it
+// doesn't read as if that's everything I've read.
+const moreRead = finishedCount > finished.length;
 ---
 
 <BaseLayout
@@ -102,27 +94,26 @@ const readMystery = moreRead ? READ_TEASER : 0;
                     Recently read
                   </a>
                 </h2>
-                <BookGrid
-                  books={readCovers}
-                  showRatings
-                  mystery={readMystery}
-                />
-                {moreRead && (
+                <BookGrid books={finished} showRatings />
+                <p class="shelf-caption text-base-500 dark:text-base-400">
+                  {moreRead ? (
+                    <>
+                      The {finished.length} most recent of the {finishedCount}{" "}
+                      books I&rsquo;ve read.{" "}
+                    </>
+                  ) : (
+                    <>All {finishedCount} books I&rsquo;ve read. </>
+                  )}
+                  View them all on my{" "}
                   <a
                     href={bookhiveHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="shelf-more no-random-underline"
                   >
-                    <span class="underline underline-offset-2">
-                      Check out all my {finishedCount} read books on Bookhive
-                    </span>
-                    <span class="shelf-more-arrow" aria-hidden="true">
-                      &rarr;
-                    </span>
-                    <span class="sr-only">(opens in new tab)</span>
-                  </a>
-                )}
+                    Bookhive
+                  </a>{" "}
+                  profile.
+                </p>
               </section>
             )}
 
@@ -163,6 +154,9 @@ const readMystery = moreRead ? READ_TEASER : 0;
   .shelf-h {
     @apply text-base-950 dark:text-base-50 font-display mb-4 text-[1.4rem] font-black tracking-[-0.02em];
   }
+  .shelf-caption {
+    @apply mt-5 text-[0.9rem];
+  }
   /* The heading links to its own section so the anchor is copyable; keep the
      heading's colour and only surface an underline on hover/focus. */
   .shelf-anchor {
@@ -173,16 +167,5 @@ const readMystery = moreRead ? READ_TEASER : 0;
     text-decoration: underline;
     text-underline-offset: 0.15em;
     text-decoration-thickness: 2px;
-  }
-  .shelf-more {
-    @apply text-primary-600 dark:text-primary-400 mt-8 inline-flex items-center gap-1 self-start text-[0.9rem] font-semibold;
-    text-decoration: none;
-  }
-  .shelf-more-arrow {
-    transition: transform 0.2s ease;
-  }
-  .shelf-more:hover .shelf-more-arrow,
-  .shelf-more:focus-visible .shelf-more-arrow {
-    transform: translateX(2px);
   }
 </style>
