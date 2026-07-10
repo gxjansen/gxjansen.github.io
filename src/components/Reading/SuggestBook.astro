@@ -49,6 +49,14 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
     >
     </ul>
 
+    <p
+      class="suggest-status text-base-500 dark:text-base-400"
+      hidden
+      aria-live="polite"
+      data-suggest-status
+    >
+    </p>
+
     <div class="suggest-selected" hidden data-suggest-selected>
       <img alt="" class="suggest-selected-cover" data-selected-cover hidden />
       <span class="suggest-selected-text">
@@ -97,6 +105,7 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
     const clearBtn = root.querySelector<HTMLButtonElement>(
       "[data-suggest-clear]",
     );
+    const status = root.querySelector<HTMLElement>("[data-suggest-status]");
 
     type Book = {
       id: string;
@@ -122,6 +131,20 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
       let active = -1;
       let debounce: number | undefined;
       let controller: AbortController | null = null;
+
+      const UNAVAILABLE =
+        "Book search isn't available right now. Just hit the button and tell me in your own words.";
+      const NO_MATCH =
+        "No matches on Bookhive. Hit the button and describe it in your own words.";
+
+      const showStatus = (msg: string) => {
+        if (!status) return;
+        status.textContent = msg;
+        status.hidden = false;
+      };
+      const hideStatus = () => {
+        if (status) status.hidden = true;
+      };
 
       const closeList = () => {
         results.hidden = true;
@@ -149,6 +172,7 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
           selected.hidden = false;
         }
         input.value = "";
+        hideStatus();
         closeList();
       };
 
@@ -156,6 +180,7 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
         link.href = composeUrl(null);
         link.textContent = "Suggest on Bluesky";
         if (selected) selected.hidden = true;
+        hideStatus();
         input.focus();
       };
 
@@ -205,20 +230,33 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
             `/api/book-search/?q=${encodeURIComponent(q)}`,
             { signal: controller.signal },
           );
-          if (!res.ok) return closeList();
+          if (!res.ok) {
+            items = [];
+            render();
+            return showStatus(UNAVAILABLE);
+          }
           const data = (await res.json()) as { books?: Book[] };
           items = data.books ?? [];
           active = -1;
           render();
+          if (items.length === 0) showStatus(NO_MATCH);
+          else hideStatus();
         } catch (err) {
-          if ((err as Error).name !== "AbortError") closeList();
+          if ((err as Error).name !== "AbortError") {
+            items = [];
+            render();
+            showStatus(UNAVAILABLE);
+          }
         }
       };
 
       input.addEventListener("input", () => {
         const q = input.value.trim();
         window.clearTimeout(debounce);
-        if (q.length < 2) return closeList();
+        if (q.length < 2) {
+          hideStatus();
+          return closeList();
+        }
         debounce = window.setTimeout(() => search(q), 250);
       });
 
@@ -306,6 +344,10 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
   }
   .suggest-option-author {
     @apply text-base-500 dark:text-base-400 truncate text-[.78rem];
+  }
+
+  .suggest-status {
+    @apply mt-2 text-[.85rem];
   }
 
   .suggest-selected {
