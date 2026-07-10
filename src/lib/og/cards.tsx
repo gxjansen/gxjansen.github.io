@@ -95,6 +95,16 @@ const ArrowIcon = ({ size = 22 }: IconProps) => (
   </svg>
 );
 
+const BooksIcon = ({ size = 20 }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" {...stroke()}>
+    <path d="M5 4m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+    <path d="M9 4m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" />
+    <path d="M5 8h4" />
+    <path d="M9 16h4" />
+    <path d="M14 5.5l2.5 -.5l3 14l-2.5 .5z" />
+  </svg>
+);
+
 /* --------------------------------------------------------- shared bits */
 
 const FONT_DISPLAY = `"${FONTS.display}"`;
@@ -795,6 +805,100 @@ export function FallbackCard({
       </Middle>
 
       <Byline who="Guido X Jansen" />
+    </Frame>
+  );
+}
+
+/* 8 · Bookshelf ---------------------------------------------------------- */
+
+/** A row of book spines (the shelf motif) in the cover-grid accent palette. */
+const SPINES: { c: string; h: number; w: number }[] = [
+  { c: ACCENTS.pine, h: 128, w: 44 },
+  { c: ACCENTS.gold, h: 150, w: 48 },
+  { c: ACCENTS.iris, h: 116, w: 42 },
+  { c: ACCENTS.love, h: 142, w: 46 },
+  { c: ACCENTS.foam, h: 124, w: 50 },
+  { c: ACCENTS.rose, h: 150, w: 44 },
+  { c: ACCENTS.pine, h: 112, w: 46 },
+  { c: ACCENTS.gold, h: 136, w: 42 },
+  { c: ACCENTS.iris, h: 126, w: 48 },
+  { c: ACCENTS.foam, h: 146, w: 44 },
+  { c: ACCENTS.love, h: 118, w: 46 },
+];
+
+function Shelf() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "flex-end",
+        gap: 11,
+        height: 156,
+        marginBottom: 26,
+      }}
+    >
+      {SPINES.map((s, i) => (
+        <div
+          key={i}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            width: s.w,
+            height: s.h,
+            paddingTop: 18,
+            backgroundColor: s.c,
+            borderTopLeftRadius: 6,
+            borderTopRightRadius: 6,
+          }}
+        >
+          {/* faint "title band" so the spines read as books */}
+          <div
+            style={{
+              display: "flex",
+              width: "58%",
+              height: 5,
+              borderRadius: 3,
+              backgroundColor: "rgba(25,23,36,0.30)",
+            }}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function BookshelfCard() {
+  const ac = ACCENTS.gold;
+  return (
+    <Frame accent={ac} paddingTop={64}>
+      <EyebrowRow
+        pill={
+          <Pill accent={ac} icon={<BooksIcon />}>
+            gui.do/bookshelf
+          </Pill>
+        }
+        hand={
+          <Hand color={ac} size={1.85}>
+            <span style={{ display: "flex" }}>
+              structured streams of thoughts
+            </span>
+          </Hand>
+        }
+      />
+
+      <Middle justify="center">
+        <Title size={3.4}>What I&apos;m reading &amp; want to read next</Title>
+        <Lead>
+          Reading now, the to-read pile, and recently finished. Pulled live from
+          Bookhive.
+        </Lead>
+      </Middle>
+
+      <Shelf />
+
+      <Byline who="Guido X Jansen · my reading shelf" />
     </Frame>
   );
 }
