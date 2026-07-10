@@ -25,6 +25,18 @@ const { active, wantToRead, finished, finishedCount } = await getBookshelf();
 const bookhiveHref = "https://bookhive.buzz/profile/gui.do";
 const nothing =
   active.length === 0 && wantToRead.length === 0 && finished.length === 0;
+
+// When there are more read books than the shelf shows, replace the last few
+// covers with faded "mystery" tiles (a continuation of the same grid) and point
+// to the full list on Bookhive. Keeps the tile count steady so the widest view
+// stays a clean set of rows.
+const READ_TEASER = 3;
+const moreRead =
+  finishedCount > finished.length && finished.length > READ_TEASER;
+const readCovers = moreRead
+  ? finished.slice(0, finished.length - READ_TEASER)
+  : finished;
+const readMystery = moreRead ? READ_TEASER : 0;
 ---
 
 <BaseLayout
@@ -90,27 +102,26 @@ const nothing =
                     Recently read
                   </a>
                 </h2>
-                <BookGrid books={finished} showRatings />
-                {finishedCount > finished.length && (
-                  <>
-                    <div class="mt-4">
-                      <BookGrid mystery={6} />
-                    </div>
-                    <a
-                      href={bookhiveHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="shelf-more no-random-underline"
-                    >
-                      <span class="underline underline-offset-2">
-                        Check out all my {finishedCount} read books on Bookhive
-                      </span>
-                      <span class="shelf-more-arrow" aria-hidden="true">
-                        &rarr;
-                      </span>
-                      <span class="sr-only">(opens in new tab)</span>
-                    </a>
-                  </>
+                <BookGrid
+                  books={readCovers}
+                  showRatings
+                  mystery={readMystery}
+                />
+                {moreRead && (
+                  <a
+                    href={bookhiveHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="shelf-more no-random-underline"
+                  >
+                    <span class="underline underline-offset-2">
+                      Check out all my {finishedCount} read books on Bookhive
+                    </span>
+                    <span class="shelf-more-arrow" aria-hidden="true">
+                      &rarr;
+                    </span>
+                    <span class="sr-only">(opens in new tab)</span>
+                  </a>
                 )}
               </section>
             )}
