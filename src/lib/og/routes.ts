@@ -132,6 +132,7 @@ export function ogImageForPath(pathname: string): string {
   if (p === "/") return "/og/home.png";
   if (p === "/retainer") return "/og/retainer.png";
   if (p === "/training") return "/og/training.png";
+  if (p === "/bookshelf") return "/og/bookshelf.png";
 
   // Landing pages (presentations index lives at /presentations).
   if (p === "/presentations") return "/og/landing/presentations.png";

@@ -23,6 +23,7 @@ import {
   RetainerCard,
   TrainingCard,
   FallbackCard,
+  BookshelfCard,
 } from "../../lib/og/cards";
 import { LANDING_PAGES } from "../../lib/og/routes";
 import { ACCENT_ROTATION } from "../../lib/og/tokens";
@@ -45,6 +46,7 @@ async function buildCardMap(): Promise<Record<string, CardElement>> {
   map["home"] = React.createElement(HomeCard, { years, countries });
   map["retainer"] = React.createElement(RetainerCard, {});
   map["training"] = React.createElement(TrainingCard, {});
+  map["bookshelf"] = React.createElement(BookshelfCard, {});
   map["default"] = React.createElement(FallbackCard, {
     h1: "Guido X Jansen",
     lead: "I build community functions for tech products.",
