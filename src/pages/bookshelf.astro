@@ -1,0 +1,169 @@
+---
+// /bookshelf — Guido's full Bookhive shelf, ingested live: what he's reading
+// now, the "want to read" pile, and recently-read titles — plus a low-friction
+// way for visitors to suggest a book (a Bluesky mention, optionally with a
+// Bookhive book attached via the /api/book-search typeahead). The list stays
+// owned on Bookhive/PDS; this page is an ingested view of it.
+import BaseLayout from "@layouts/BaseLayout.astro";
+import BookGrid from "@components/Reading/BookGrid.astro";
+import SuggestBook from "@components/Reading/SuggestBook.astro";
+import { getBookshelf } from "../lib/bookhive";
+
+// SSR + CDN stale-while-revalidate, mirroring /now: the shelves stay fresh as
+// the Bookhive list changes, without needing a rebuild.
+export const prerender = false;
+Astro.response.headers.set(
+  "Netlify-CDN-Cache-Control",
+  "public, s-maxage=300, stale-while-revalidate=86400",
+);
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=0, must-revalidate",
+);
+
+const { active, wantToRead, finished } = await getBookshelf();
+const bookhiveHref = "https://bookhive.buzz/profile/gui.do";
+const nothing =
+  active.length === 0 && wantToRead.length === 0 && finished.length === 0;
+---
+
+<BaseLayout
+  title="Bookshelf"
+  description="What Guido is reading now, wants to read next, and recently finished, pulled live from Bookhive. Suggest a book while you're here."
+>
+  <section class="mt-24 w-full px-4">
+    <div class="mx-auto max-w-5xl">
+      <header class="mb-10">
+        <p
+          class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.5rem] leading-none"
+        >
+          the whole shelf
+        </p>
+        <h1 class="h1 mt-2">Bookshelf</h1>
+        <p
+          class="text-base-700 dark:text-base-300 mt-3 max-w-2xl text-lg leading-relaxed"
+        >
+          What I&rsquo;m reading now, what I want to read next, and what I
+          recently finished, pulled straight from my Bookhive shelf. Fair
+          warning: the to-read pile grows faster than I get through it. Spot a
+          favourite of yours, or think I&rsquo;m missing an obvious one? Suggest
+          it at the bottom.
+        </p>
+      </header>
+
+      {
+        nothing ? (
+          <p class="text-base-500 dark:text-base-400 text-[.94rem]">
+            The shelf is taking a breather. Check back soon.
+          </p>
+        ) : (
+          <div class="flex flex-col gap-12">
+            {active.length > 0 && (
+              <section
+                id="reading-now"
+                class="shelf-section"
+                aria-labelledby="shelf-reading"
+              >
+                <h2 id="shelf-reading" class="shelf-h">
+                  <a
+                    href="#reading-now"
+                    class="shelf-anchor no-random-underline"
+                  >
+                    Reading now
+                  </a>
+                </h2>
+                <BookGrid books={active} />
+              </section>
+            )}
+
+            {wantToRead.length > 0 && (
+              <section
+                id="want-to-read"
+                class="shelf-section"
+                aria-labelledby="shelf-want"
+              >
+                <h2 id="shelf-want" class="shelf-h">
+                  <a
+                    href="#want-to-read"
+                    class="shelf-anchor no-random-underline"
+                  >
+                    Want to read
+                  </a>
+                </h2>
+                <BookGrid books={wantToRead} />
+              </section>
+            )}
+
+            {finished.length > 0 && (
+              <section
+                id="recently-read"
+                class="shelf-section"
+                aria-labelledby="shelf-read"
+              >
+                <h2 id="shelf-read" class="shelf-h">
+                  <a
+                    href="#recently-read"
+                    class="shelf-anchor no-random-underline"
+                  >
+                    Recently read
+                  </a>
+                </h2>
+                <BookGrid books={finished} showRatings />
+              </section>
+            )}
+          </div>
+        )
+      }
+
+      <a
+        href={bookhiveHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="shelf-more no-random-underline"
+      >
+        <span class="underline underline-offset-2"
+          >See the full shelf on Bookhive</span
+        >
+        <span class="shelf-more-arrow" aria-hidden="true">&rarr;</span>
+        <span class="sr-only">(opens in new tab)</span>
+      </a>
+
+      <SuggestBook />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @reference "../styles/tailwind.css";
+
+  /* Offset the scroll target so a deep-link (#want-to-read) doesn't tuck the
+     heading under the fixed nav. */
+  .shelf-section {
+    scroll-margin-top: 6rem;
+  }
+  .shelf-h {
+    @apply text-base-950 dark:text-base-50 font-display mb-4 text-[1.4rem] font-black tracking-[-0.02em];
+  }
+  /* The heading links to its own section so the anchor is copyable; keep the
+     heading's colour and only surface an underline on hover/focus. */
+  .shelf-anchor {
+    color: inherit;
+  }
+  .shelf-anchor:hover,
+  .shelf-anchor:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    text-decoration-thickness: 2px;
+  }
+  .shelf-more {
+    @apply text-primary-600 dark:text-primary-400 mt-8 inline-flex items-center gap-1 self-start text-[0.9rem] font-semibold;
+    text-decoration: none;
+  }
+  .shelf-more-arrow {
+    transition: transform 0.2s ease;
+  }
+  .shelf-more:hover .shelf-more-arrow,
+  .shelf-more:focus-visible .shelf-more-arrow {
+    transform: translateX(2px);
+  }
+</style>

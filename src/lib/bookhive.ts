@@ -1,5 +1,6 @@
 /**
- * Bookhive reading data for the /now page.
+ * Bookhive reading data for the /now page (currently-reading + recently-read)
+ * and the /bookshelf page (the "want to read" list).
  *
  * Ingests Guido's `buzz.bookhive.book` records from his PDS (read-only, no auth)
  * and resolves genres from the shared Bookhive catalog so the card can show
@@ -18,6 +19,7 @@ const CATALOG_PDS = "https://bluesky.nickthesick.com";
 const BOOK_COLLECTION = "buzz.bookhive.book";
 const STATUS_READING = "buzz.bookhive.defs#reading";
 const STATUS_FINISHED = "buzz.bookhive.defs#finished";
+const STATUS_WANT = "buzz.bookhive.defs#wantToRead";
 
 // Genres that mark a title as fiction (excluded from the non-fiction card).
 const FICTION_GENRES = new Set([
@@ -197,5 +199,54 @@ export async function getReading(): Promise<ReadingData> {
     return { active, recent };
   } catch {
     return { active: [], recent: [] };
+  }
+}
+
+export interface BookshelfData {
+  /** Currently reading, any genre. */
+  active: Book[];
+  /** "Want to read", newest first, any genre — the aspirational shelf. */
+  wantToRead: Book[];
+  /** Recently finished, newest first, any genre (fiction included here). */
+  finished: Book[];
+}
+
+// Caps bound the per-render catalog lookups (covers/genres). Want-to-read is
+// the point of /bookshelf, so it's the most generous; the "read" shelf shows a
+// recent slice with a "See all on Bookhive" link for the rest.
+const WANT_CAP = 60;
+const FINISHED_SHELF_CAP = 24;
+
+// Full bookshelf for /bookshelf: currently-reading + want-to-read + recently
+// read. Genre-agnostic across the board (unlike the /now card, this is the
+// whole shelf). One listBooks call, three buckets, each enriched for covers.
+// The list stays owned on Bookhive/PDS — this is an ingested view of it.
+export async function getBookshelf(): Promise<BookshelfData> {
+  try {
+    const books = await listBooks();
+
+    const byNewest =
+      (key: "createdAt" | "finishedAt") => (a: RawBook, b: RawBook) =>
+        (b.value[key] ?? "").localeCompare(a.value[key] ?? "");
+
+    const reading = books.filter((b) => b.value.status === STATUS_READING);
+    const wanted = books
+      .filter((b) => b.value.status === STATUS_WANT)
+      .sort(byNewest("createdAt"))
+      .slice(0, WANT_CAP);
+    const read = books
+      .filter((b) => b.value.status === STATUS_FINISHED)
+      .sort(byNewest("finishedAt"))
+      .slice(0, FINISHED_SHELF_CAP);
+
+    const [active, wantToRead, finished] = await Promise.all([
+      enrich(reading).then((e) => e.map(mapBook)),
+      enrich(wanted).then((e) => e.map(mapBook)),
+      enrich(read).then((e) => e.map(mapBook)),
+    ]);
+
+    return { active, wantToRead, finished };
+  } catch {
+    return { active: [], wantToRead: [], finished: [] };
   }
 }
