@@ -218,6 +218,24 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
         });
         results.hidden = items.length === 0;
         input.setAttribute("aria-expanded", String(items.length > 0));
+        if (items.length > 0) placeResults();
+      };
+
+      // The suggest box sits near the page bottom, above a footer that lives in
+      // a separate stacking context (it wins over the dropdown no matter its
+      // z-index). Measure the gap to the footer (not just the viewport) and open
+      // the list upward when it wouldn't fit below — so it never tucks under it.
+      const footerEl = document.querySelector("footer");
+      const DROPDOWN_MAX = 340; // ~max-h-80 + margin
+      const placeResults = () => {
+        const inputBottom = input.getBoundingClientRect().bottom;
+        const limit = footerEl
+          ? footerEl.getBoundingClientRect().top
+          : window.innerHeight;
+        results.classList.toggle(
+          "suggest-results--up",
+          limit - inputBottom < DROPDOWN_MAX,
+        );
       };
 
       const search = async (q: string) => {
@@ -309,7 +327,7 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
     @apply text-base-950 dark:text-base-50 font-display mb-2 text-[1.4rem] font-black tracking-[-0.02em];
   }
   .suggest-lede {
-    @apply max-w-2xl text-[.98rem] leading-relaxed;
+    @apply text-[.98rem] leading-relaxed;
   }
 
   .suggest-field {
@@ -319,31 +337,44 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
     @apply border-base-300 dark:border-base-700 bg-base-100 dark:bg-base-950 text-base-900 dark:text-base-100 placeholder:text-base-500 focus:ring-primary-500 w-full rounded-lg border px-4 py-2.5 text-[.95rem] focus:ring-2 focus:outline-hidden;
   }
 
+  /* z-50 keeps the dropdown above the footer (which sits in its own stacking
+     context via backdrop-blur) when the suggest box is near the page bottom. */
   .suggest-results {
-    @apply border-base-200 dark:border-base-700 bg-base-50 dark:bg-base-900 absolute z-20 mt-1 max-h-80 w-full overflow-y-auto rounded-lg border shadow-lg;
+    @apply border-base-200 dark:border-base-700 bg-base-50 dark:bg-base-900 absolute z-50 mt-1 max-h-80 w-full overflow-y-auto rounded-lg border shadow-lg;
     list-style: none;
     padding: 0.25rem;
     margin-bottom: 0;
   }
-  .suggest-option {
+  /* Open above the input when there's no room below (keeps it clear of the
+     footer, which sits in its own stacking context and would otherwise cover
+     the lower results). */
+  .suggest-results--up {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 0.25rem;
+  }
+  /* Options are created in JS, so Astro's scoped selectors don't match them.
+     Scope these globally under the (template-scoped) results container. */
+  .suggest-results :global(.suggest-option) {
     @apply text-base-800 dark:text-base-200 flex cursor-pointer items-center gap-3 rounded-md px-2.5 py-2;
   }
-  .suggest-option[aria-selected="true"],
-  .suggest-option:hover {
+  .suggest-results :global(.suggest-option[aria-selected="true"]),
+  .suggest-results :global(.suggest-option:hover) {
     @apply bg-base-200/70 dark:bg-base-800/70;
   }
-  .suggest-option-cover {
+  .suggest-results :global(.suggest-option-cover) {
     @apply h-12 w-8 flex-none rounded-sm object-cover;
     background: var(--color-base-200);
   }
-  .suggest-option-text {
-    @apply flex min-w-0 flex-col;
+  .suggest-results :global(.suggest-option-text) {
+    @apply flex min-w-0 flex-col gap-0.5;
   }
-  .suggest-option-title {
-    @apply truncate text-[.9rem] font-semibold;
+  .suggest-results :global(.suggest-option-title) {
+    @apply truncate text-[.9rem] leading-tight font-semibold;
   }
-  .suggest-option-author {
-    @apply text-base-500 dark:text-base-400 truncate text-[.78rem];
+  .suggest-results :global(.suggest-option-author) {
+    @apply text-base-500 dark:text-base-400 truncate text-[.78rem] leading-tight;
   }
 
   .suggest-status {

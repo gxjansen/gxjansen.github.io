@@ -6,13 +6,25 @@
  * "read" shelf so finished books surface their star rating.
  */
 import Stars from "./Stars.astro";
-import type { Book } from "../../lib/bookhive";
+import type { Book, BookAccent } from "../../lib/bookhive";
 
 interface Props {
-  books: Book[];
+  books?: Book[];
   showRatings?: boolean;
+  /** Append this many faded "mystery" tiles after the books, in the SAME grid,
+   *  so they read as a continuation of the shelf (there are more on Bookhive). */
+  mystery?: number;
 }
-const { books, showRatings = false } = Astro.props as Props;
+const { books = [], showRatings = false, mystery = 0 } = Astro.props as Props;
+
+const MYSTERY_ACCENTS: BookAccent[] = [
+  "pine",
+  "iris",
+  "gold",
+  "foam",
+  "love",
+  "rose",
+];
 ---
 
 <div class="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-4">
@@ -44,6 +56,17 @@ const { books, showRatings = false } = Astro.props as Props;
       </div>
     ))
   }
+  {
+    Array.from({ length: mystery }).map((_, i) => (
+      <div class="flex flex-col gap-2" aria-hidden="true">
+        <div
+          class={`bk-cover bk-${MYSTERY_ACCENTS[i % MYSTERY_ACCENTS.length]} bk-mystery aspect-[2/3] w-full`}
+        >
+          <span class="bk-q">?</span>
+        </div>
+      </div>
+    ))
+  }
 </div>
 
 <script>
@@ -59,6 +82,21 @@ const { books, showRatings = false } = Astro.props as Props;
 
 <style>
   @reference "../../styles/tailwind.css";
+
+  /* Faded accent tiles with a "?" that trail the real covers in the same grid,
+     implying the shelf continues on Bookhive. Decorative (aria-hidden upstream). */
+  .bk-mystery {
+    align-items: center;
+    justify-content: center;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .bk-q {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: rgb(255 255 255 / 0.6);
+  }
 
   .bk-cover {
     position: relative;

@@ -21,10 +21,22 @@ Astro.response.headers.set(
   "public, max-age=0, must-revalidate",
 );
 
-const { active, wantToRead, finished } = await getBookshelf();
+const { active, wantToRead, finished, finishedCount } = await getBookshelf();
 const bookhiveHref = "https://bookhive.buzz/profile/gui.do";
 const nothing =
   active.length === 0 && wantToRead.length === 0 && finished.length === 0;
+
+// When there are more read books than the shelf shows, replace the last few
+// covers with faded "mystery" tiles (a continuation of the same grid) and point
+// to the full list on Bookhive. Keeps the tile count steady so the widest view
+// stays a clean set of rows.
+const READ_TEASER = 3;
+const moreRead =
+  finishedCount > finished.length && finished.length > READ_TEASER;
+const readCovers = moreRead
+  ? finished.slice(0, finished.length - READ_TEASER)
+  : finished;
+const readMystery = moreRead ? READ_TEASER : 0;
 ---
 
 <BaseLayout
@@ -37,11 +49,11 @@ const nothing =
         <p
           class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.5rem] leading-none"
         >
-          the whole shelf
+          structured streams of thoughts
         </p>
         <h1 class="h1 mt-2">Bookshelf</h1>
         <p
-          class="text-base-700 dark:text-base-300 mt-3 max-w-2xl text-lg leading-relaxed"
+          class="text-base-700 dark:text-base-300 mt-3 text-lg leading-relaxed"
         >
           What I&rsquo;m reading now, what I want to read next, and what I
           recently finished, pulled straight from my Bookhive shelf. Fair
@@ -76,6 +88,44 @@ const nothing =
               </section>
             )}
 
+            {finished.length > 0 && (
+              <section
+                id="recently-read"
+                class="shelf-section"
+                aria-labelledby="shelf-read"
+              >
+                <h2 id="shelf-read" class="shelf-h">
+                  <a
+                    href="#recently-read"
+                    class="shelf-anchor no-random-underline"
+                  >
+                    Recently read
+                  </a>
+                </h2>
+                <BookGrid
+                  books={readCovers}
+                  showRatings
+                  mystery={readMystery}
+                />
+                {moreRead && (
+                  <a
+                    href={bookhiveHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="shelf-more no-random-underline"
+                  >
+                    <span class="underline underline-offset-2">
+                      Check out all my {finishedCount} read books on Bookhive
+                    </span>
+                    <span class="shelf-more-arrow" aria-hidden="true">
+                      &rarr;
+                    </span>
+                    <span class="sr-only">(opens in new tab)</span>
+                  </a>
+                )}
+              </section>
+            )}
+
             {wantToRead.length > 0 && (
               <section
                 id="want-to-read"
@@ -93,40 +143,9 @@ const nothing =
                 <BookGrid books={wantToRead} />
               </section>
             )}
-
-            {finished.length > 0 && (
-              <section
-                id="recently-read"
-                class="shelf-section"
-                aria-labelledby="shelf-read"
-              >
-                <h2 id="shelf-read" class="shelf-h">
-                  <a
-                    href="#recently-read"
-                    class="shelf-anchor no-random-underline"
-                  >
-                    Recently read
-                  </a>
-                </h2>
-                <BookGrid books={finished} showRatings />
-              </section>
-            )}
           </div>
         )
       }
-
-      <a
-        href={bookhiveHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="shelf-more no-random-underline"
-      >
-        <span class="underline underline-offset-2"
-          >See the full shelf on Bookhive</span
-        >
-        <span class="shelf-more-arrow" aria-hidden="true">&rarr;</span>
-        <span class="sr-only">(opens in new tab)</span>
-      </a>
 
       <SuggestBook />
     </div>

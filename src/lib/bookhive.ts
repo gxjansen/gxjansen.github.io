@@ -209,6 +209,8 @@ export interface BookshelfData {
   wantToRead: Book[];
   /** Recently finished, newest first, any genre (fiction included here). */
   finished: Book[];
+  /** Total finished books (before the shelf cap), for the "see all N" link. */
+  finishedCount: number;
 }
 
 // Caps bound the per-render catalog lookups (covers/genres). Want-to-read is
@@ -234,8 +236,8 @@ export async function getBookshelf(): Promise<BookshelfData> {
       .filter((b) => b.value.status === STATUS_WANT)
       .sort(byNewest("createdAt"))
       .slice(0, WANT_CAP);
-    const read = books
-      .filter((b) => b.value.status === STATUS_FINISHED)
+    const finishedAll = books.filter((b) => b.value.status === STATUS_FINISHED);
+    const read = [...finishedAll]
       .sort(byNewest("finishedAt"))
       .slice(0, FINISHED_SHELF_CAP);
 
@@ -245,8 +247,8 @@ export async function getBookshelf(): Promise<BookshelfData> {
       enrich(read).then((e) => e.map(mapBook)),
     ]);
 
-    return { active, wantToRead, finished };
+    return { active, wantToRead, finished, finishedCount: finishedAll.length };
   } catch {
-    return { active: [], wantToRead: [], finished: [] };
+    return { active: [], wantToRead: [], finished: [], finishedCount: 0 };
   }
 }
