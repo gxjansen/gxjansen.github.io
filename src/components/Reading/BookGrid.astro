@@ -6,45 +6,76 @@
  * "read" shelf so finished books surface their star rating.
  */
 import Stars from "./Stars.astro";
-import type { Book } from "../../lib/bookhive";
+import type { Book, BookAccent } from "../../lib/bookhive";
 
 interface Props {
-  books: Book[];
+  books?: Book[];
   showRatings?: boolean;
+  /** Render this many faded "mystery" tiles instead of books, as a teaser that
+   *  there are more books than the shelf shows. */
+  mystery?: number;
 }
-const { books, showRatings = false } = Astro.props as Props;
+const { books = [], showRatings = false, mystery = 0 } = Astro.props as Props;
+
+const MYSTERY_ACCENTS: BookAccent[] = [
+  "pine",
+  "iris",
+  "gold",
+  "foam",
+  "love",
+  "rose",
+];
 ---
 
-<div class="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-4">
-  {
-    books.map((b) => (
-      <div class="flex flex-col gap-2">
-        <a
-          class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
-          href={b.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${b.title} on Bookhive`}
+{
+  mystery > 0 ? (
+    <div
+      class="bookgrid-mystery grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-4"
+      aria-hidden="true"
+    >
+      {Array.from({ length: mystery }).map((_, i) => (
+        <div
+          class={`bk-cover bk-${MYSTERY_ACCENTS[i % MYSTERY_ACCENTS.length]} bk-mystery aspect-[2/3] w-full`}
         >
-          {/* Placeholder always present; the cover image overlays it and, if it
-              fails to load (e.g. a 403 from the catalog's Goodreads URL), the
-              inline script removes it to reveal this. */}
-          <span class="bk-spine" aria-hidden="true" />
-          <div class="bk-meta">
-            <div class="bk-title">{b.title}</div>
-            <div class="bk-author">{b.author}</div>
-          </div>
-          {b.coverUrl && (
-            <img src={b.coverUrl} alt={`Cover of ${b.title}`} loading="lazy" />
+          <span class="bk-q">?</span>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-4">
+      {books.map((b) => (
+        <div class="flex flex-col gap-2">
+          <a
+            class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
+            href={b.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${b.title} on Bookhive`}
+          >
+            {/* Placeholder always present; the cover image overlays it and, if it
+                fails to load (e.g. a 403 from the catalog's Goodreads URL), the
+                inline script removes it to reveal this. */}
+            <span class="bk-spine" aria-hidden="true" />
+            <div class="bk-meta">
+              <div class="bk-title">{b.title}</div>
+              <div class="bk-author">{b.author}</div>
+            </div>
+            {b.coverUrl && (
+              <img
+                src={b.coverUrl}
+                alt={`Cover of ${b.title}`}
+                loading="lazy"
+              />
+            )}
+          </a>
+          {showRatings && typeof b.rating === "number" && (
+            <Stars value={b.rating} />
           )}
-        </a>
-        {showRatings && typeof b.rating === "number" && (
-          <Stars value={b.rating} />
-        )}
-      </div>
-    ))
-  }
-</div>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 <script>
   // Drop any cover image that fails to load so the accent placeholder (with the
@@ -59,6 +90,25 @@ const { books, showRatings = false } = Astro.props as Props;
 
 <style>
   @reference "../../styles/tailwind.css";
+
+  /* Teaser row: faded accent tiles with a "?", dissolving downward to imply the
+     shelf continues on Bookhive. Decorative, so aria-hidden and non-interactive. */
+  .bookgrid-mystery {
+    -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent);
+    mask-image: linear-gradient(to bottom, #000 45%, transparent);
+    pointer-events: none;
+  }
+  .bk-mystery {
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+  }
+  .bk-q {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: rgb(255 255 255 / 0.6);
+  }
 
   .bk-cover {
     position: relative;
