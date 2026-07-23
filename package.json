@@ -83,7 +83,7 @@
     "node-html-markdown": "^2.0.0",
     "prettier-plugin-astro": "^0.14.0",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "svgo": "^2.8.2",
+    "svgo": "^2.8.3",
     "typescript": "^5.9.3",
     "vitest": "^4.1.9"
   },
