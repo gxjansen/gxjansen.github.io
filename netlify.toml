@@ -14,6 +14,25 @@
 [context.branch-deploy]
   command = "npm run build"
 
+# Domain redirects — dutchento.org is a parked domain that must 301 to gui.do.
+# Netlify serves identical content on every domain alias by default, so without
+# these rules the whole site is duplicated on dutchento.org. These must stay the
+# first redirects in this file: rules are evaluated top-down, first match wins,
+# and netlify.toml is processed before public/_redirects. Anything above them
+# (sitemaps, trailing-slash splat, SSR catch-all) would otherwise match first and
+# serve a 200 on the wrong host.
+[[redirects]]
+  from = "https://dutchento.org/*"
+  to = "https://gui.do/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.dutchento.org/*"
+  to = "https://gui.do/:splat"
+  status = 301
+  force = true
+
 # Sitemap handling
 [[redirects]]
   from = "/sitemap.xml"
