@@ -12,14 +12,22 @@ import { getReading } from "../lib/bookhive";
 // SSR + CDN stale-while-revalidate, mirroring the homepage: the feed and the
 // reading shelf stay fresh without a rebuild, queried at most ~once per window.
 export const prerender = false;
+// A page called "Now" should never serve a day-old render, which the previous
+// stale-while-revalidate=86400 permitted whenever revalidation lagged. One hour
+// is the outer bound of acceptable staleness here.
 Astro.response.headers.set(
   "Netlify-CDN-Cache-Control",
-  "public, s-maxage=300, stale-while-revalidate=86400",
+  "public, s-maxage=300, stale-while-revalidate=3600",
 );
-Astro.response.headers.set(
-  "Cache-Control",
-  "public, max-age=0, must-revalidate",
-);
+// `no-cache` means "store it, but revalidate before every reuse". Semantically
+// the same as `public, max-age=0, must-revalidate`, but honoured far more
+// consistently by browsers and proxies — a session-restored tab re-checks with
+// the origin instead of painting whatever it has on disk.
+Astro.response.headers.set("Cache-Control", "no-cache");
+
+// Render timestamp, so a stale copy is identifiable at a glance next time this
+// comes up: compare <meta name="rendered-at"> against the current time.
+const renderedAt = new Date().toISOString();
 
 const activity = await getActivity();
 const reading = await getReading();
@@ -33,6 +41,7 @@ const focusUpdated = "21 June 2026";
   title="Now"
   description="What Guido is posting, reading, and building right now: a live view from across the open social web."
 >
+  <meta slot="head" name="rendered-at" content={renderedAt} />
   <section class="mt-24 w-full px-4">
     <div class="mx-auto max-w-5xl">
       <header class="mb-8">
