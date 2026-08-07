@@ -10,8 +10,9 @@ import { join, relative } from "node:path";
  * function, Astro's router rejects the slash-less URL, and the visitor gets a
  * 404 rather than a redirect — which is how /now and /bookshelf broke.
  *
- * Each on-demand page therefore needs its own forced redirect. This test fails
- * if one is added without it.
+ * Those pages are handled by netlify/edge-functions/trailing-slash.ts, which is
+ * scoped to an explicit list. This test fails if an on-demand page is added
+ * without being listed there.
  */
 
 // vitest runs from the project root (see robots.test.ts); `import.meta.url`
@@ -53,8 +54,15 @@ function onDemandPages(): string[] {
     .filter((route) => !route.includes("["));
 }
 
+const EDGE_FUNCTION = "netlify/edge-functions/trailing-slash.ts";
+
 describe("trailing-slash redirects for on-demand pages", () => {
-  const toml = readFileSync(join(ROOT, "netlify.toml"), "utf8");
+  const edge = readFileSync(join(ROOT, EDGE_FUNCTION), "utf8");
+  /** The `path: [...]` array from the edge function's exported config. */
+  const scopedPaths = (edge.match(/path:\s*\[([^\]]*)\]/)?.[1] ?? "")
+    .split(",")
+    .map((entry) => entry.trim().replace(/^["']|["']$/g, ""))
+    .filter(Boolean);
 
   it("finds the known on-demand pages", () => {
     // Guards the detection itself: if this ever returns nothing, the assertions
@@ -62,32 +70,38 @@ describe("trailing-slash redirects for on-demand pages", () => {
     expect(onDemandPages().sort()).toEqual(["/bookshelf", "/now"]);
   });
 
-  it.each(onDemandPages())(
-    "%s has a forced trailing-slash redirect in netlify.toml",
-    (route) => {
-      // Match the from/to/status/force block for this exact route.
-      const block = new RegExp(
-        `from\\s*=\\s*"${route}"\\s*\\n\\s*to\\s*=\\s*"${route}/"\\s*\\n\\s*status\\s*=\\s*301\\s*\\n\\s*force\\s*=\\s*true`,
-      );
-      expect(
-        block.test(toml),
-        `${route} is rendered on demand, so netlify.toml needs:\n\n` +
-          `[[redirects]]\n  from = "${route}"\n  to = "${route}/"\n` +
-          `  status = 301\n  force = true\n\n` +
-          `Without it ${route} returns 404 instead of redirecting to ${route}/.`,
-      ).toBe(true);
-    },
-  );
+  it.each(onDemandPages())("%s is in the edge function's scope", (route) => {
+    expect(
+      scopedPaths,
+      `${route} is rendered on demand, so it needs to be listed in the ` +
+        `config.path array of ${EDGE_FUNCTION}. Without it, ${route} returns ` +
+        `404 instead of redirecting to ${route}/.`,
+    ).toContain(route);
+  });
 
-  it("keeps the forced rules ahead of the non-forced splat", () => {
-    // Netlify evaluates top-down, first match wins. Anchor to real TOML lines —
-    // the surrounding comments quote these same keys.
-    const lineIndex = (value: string) =>
-      toml.search(new RegExp(`^\\s*from\\s*=\\s*"${value}"\\s*$`, "m"));
-    const firstForced = lineIndex("/now");
-    const splat = lineIndex("/\\*");
-    expect(firstForced).toBeGreaterThan(-1);
-    expect(splat).toBeGreaterThan(-1);
-    expect(firstForced).toBeLessThan(splat);
+  it("passes through paths that already end in a slash", () => {
+    // The bug that killed the netlify.toml approach: an exact `from = "/now"`
+    // rule also matched /now/ and redirected it to itself, looping. The edge
+    // function must inspect the path instead of relying on match semantics.
+    expect(edge).toMatch(/pathname\.endsWith\(["']\/["']\)/);
+    expect(edge).toMatch(/context\.next\(\)/);
+  });
+
+  it("does not redirect methods that carry a body", () => {
+    // A 301 lets the client drop the body and downgrade to GET.
+    expect(edge).toMatch(/method !== ["']GET["']/);
+    expect(edge).toMatch(/method !== ["']HEAD["']/);
+  });
+
+  it("no longer carries the looping forced redirects in netlify.toml", () => {
+    const toml = readFileSync(join(ROOT, "netlify.toml"), "utf8");
+    for (const route of onDemandPages()) {
+      expect(
+        toml,
+        `A forced "${route}" redirect in netlify.toml also matches ${route}/ ` +
+          `and redirects it to itself. Netlify normalises the trailing slash ` +
+          `when matching \`from\`. Use the edge function instead.`,
+      ).not.toMatch(new RegExp(`^\\s*from\\s*=\\s*"${route}"\\s*$`, "m"));
+    }
   });
 });

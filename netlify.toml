@@ -68,43 +68,15 @@
 [functions.newsletter-subscribe]
   timeout = 10
 
-# Trailing slash redirects for on-demand rendered (`prerender = false`) pages.
-#
-# These MUST be forced and MUST come before the splat rule below. The splat rule
-# is `force = false`, so it only fires when nothing else claims the path. That
-# holds for prerendered pages — Netlify serves those from disk and the redirect
-# applies — but not for on-demand routes: the Astro Netlify adapter declares its
-# SSR function at `path: "/*"`, so the function claims `/now`, Astro's router
-# rejects the slash-less URL under `trailingSlash: 'always'`, and the visitor
-# gets a 404 instead of a redirect.
-#
-# Middleware can't fix this: Astro rejects the unmatched URL before the
-# middleware chain runs (verified against the built SSR handler — `/now/` enters
-# middleware, `/now` never does).
-#
-# Exact paths rather than a splat, because a forced `from = "/*"` would also
-# match `/now/` and rewrite it to `/now//`, looping. Only GET-able HTML pages
-# are listed: a forced 301 applies to every method, which would break POST
-# endpoints like /api/ama/submit by dropping the request body.
-#
-# src/test/trailing-slash.test.ts fails the build if a `prerender = false` page
-# is added without a matching entry here.
-[[redirects]]
-  from = "/now"
-  to = "/now/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/bookshelf"
-  to = "/bookshelf/"
-  status = 301
-  force = true
-
 # Trailing slash redirects (must come before function handling)
 # Redirect URLs without trailing slashes to versions with trailing slashes
 # This fixes "Canonical URL Different" warnings in LibreCrawl
-# Covers prerendered pages; see the forced rules above for on-demand ones.
+#
+# This rule only covers prerendered pages. It's `force = false`, so it fires
+# only when nothing else claims the path — true for pages Netlify serves from
+# disk, but not for on-demand (`prerender = false`) routes, which the Astro
+# adapter's SSR function claims at `path: "/*"`. Those are handled by the
+# trailing-slash edge function; see netlify/edge-functions/trailing-slash.ts.
 [[redirects]]
   from = "/*"
   to = "/:splat/"
