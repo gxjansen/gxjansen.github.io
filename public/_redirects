@@ -7,7 +7,12 @@
 /blog/*            /post/:splat           301
 /guidojansen        /about                301
 /persuasive-ecommerce /                   301
-/instagram          /social               301
+# /social has never existed as a page, so /instagram used to chain into a 404.
+# /now is the closest live equivalent: it's where the cross-network activity
+# lands. Targets keep the trailing slash — /now is rendered on demand, so the
+# slash-less form doesn't resolve on its own.
+/social             /now/                 301
+/instagram          /now/                 301
 /howtoweb           /presentation/data-driven-decisions-meets-psychology 301
 /cards              /cognitive-biases     301
 /bigger             /presentation/still-a-b-testing-your-buttons-you-need-to-think-much-bigger 301
