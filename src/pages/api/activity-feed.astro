@@ -10,14 +10,19 @@ export const prerender = false;
 // CDN-cache the fragment with stale-while-revalidate so the upstream AppView is
 // queried at most ~once per window, not per visitor. Mirrors the policy the
 // homepage itself used to carry before it became static.
+//
+// The revalidate window is deliberately short: this is live activity, so a
+// render an hour old is the most staleness that's ever acceptable. The previous
+// 86400 let the CDN keep serving a day-old copy whenever revalidation lagged.
 Astro.response.headers.set(
   "Netlify-CDN-Cache-Control",
-  "public, s-maxage=300, stale-while-revalidate=86400",
+  "public, s-maxage=300, stale-while-revalidate=3600",
 );
-Astro.response.headers.set(
-  "Cache-Control",
-  "public, max-age=0, must-revalidate",
-);
+// `no-cache` (store, but revalidate every time) rather than
+// `public, max-age=0, must-revalidate`: same semantics on paper, but browsers
+// and intermediaries honour it far more consistently — a restored tab or a
+// proxy won't quietly re-render a copy from disk without checking first.
+Astro.response.headers.set("Cache-Control", "no-cache");
 
 const activity = await getActivity();
 ---

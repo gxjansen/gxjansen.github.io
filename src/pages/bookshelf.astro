@@ -14,12 +14,11 @@ import { getBookshelf } from "../lib/bookhive";
 export const prerender = false;
 Astro.response.headers.set(
   "Netlify-CDN-Cache-Control",
-  "public, s-maxage=300, stale-while-revalidate=86400",
+  "public, s-maxage=300, stale-while-revalidate=3600",
 );
-Astro.response.headers.set(
-  "Cache-Control",
-  "public, max-age=0, must-revalidate",
-);
+// See /now: `no-cache` is honoured more consistently than
+// `public, max-age=0, must-revalidate`, so a restored tab always revalidates.
+Astro.response.headers.set("Cache-Control", "no-cache");
 
 const { active, wantToRead, finished, finishedCount } = await getBookshelf();
 const bookhiveHref = "https://bookhive.buzz/profile/gui.do";
