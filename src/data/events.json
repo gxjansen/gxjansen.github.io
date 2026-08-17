@@ -1,5 +1,17 @@
 [
   {
+    "id": "iosp-2026",
+    "name": "IOSP 2026",
+    "date": "2026-10-12",
+    "city": "Leiden",
+    "country": "NL",
+    "url": "https://iosp.science/",
+    "workshop": false,
+    "role": "ATScience team · running the afternoon session",
+    "topic": "",
+    "relatedPresentationSlugs": []
+  },
+  {
     "id": "space-academy-2026",
     "name": "Space Academy",
     "icon": "experimentationelite.png",
