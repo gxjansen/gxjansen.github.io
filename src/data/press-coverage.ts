@@ -2,6 +2,16 @@ import type { PressCoverage } from "../types/press";
 
 export const pressCoverage: PressCoverage[] = [
   {
+    title: "Why community matters now",
+    language: "english",
+    publicationDate: "2026-08-20",
+    youtubeLink: "",
+    spotifyEmbedId: "0eOw7ZbQU9YaeW1FXyWP7u",
+    articleUrl:
+      "https://www.linkedin.com/pulse/why-community-matters-now-open-commerce-consultancy-0kbme/",
+    personOrganization: "Sander Mangel for The Open Podcast",
+  },
+  {
     title: "Best Product Built with n8n - ElevenLabs Worldwide Hackathon",
     language: "english",
     publicationDate: "2025-12-11",
