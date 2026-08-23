@@ -52,6 +52,36 @@
   status = 200
   force = true
 
+# Temporarily hidden pages — /retainer and /training are drafted out of the
+# build (src/pages/_retainer.astro, _training.astro, _training/). These 302
+# (temporary) redirects keep old/inbound links working by sending them to
+# /contact until the pages are restored. They must precede the trailing-slash
+# splat below so the now-missing paths don't 301 into a broken "/path//".
+# To restore: delete this block and un-hide the pages (see restore runbook).
+[[redirects]]
+  from = "/retainer"
+  to = "/contact/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/retainer/*"
+  to = "/contact/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/training"
+  to = "/contact/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/training/*"
+  to = "/contact/"
+  status = 302
+  force = true
+
 # Function configuration
 [build.environment]
   NODE_VERSION = "24.16.0"
@@ -168,12 +198,6 @@
 [[redirects]]
   from = "/contact/"
   to = "/contact.md"
-  status = 308
-  conditions = {Header = {Accept = "text/markdown"}}
-
-[[redirects]]
-  from = "/retainer/"
-  to = "/retainer.md"
   status = 308
   conditions = {Header = {Accept = "text/markdown"}}
 

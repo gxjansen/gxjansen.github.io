@@ -151,22 +151,11 @@ export const pillars: Pillar[] = [
 ];
 
 export const engagements: Engagement[] = [
-  {
-    t: "Retainer",
-    d: "Ongoing community strategy, DevRel leadership or fractional community-function work. Typically 1–2 days/week over 3–6 months.",
-    icon: "tabler/outline/users-group",
-    accent: "pine",
-    cta: "Talk about a retainer",
-    url: "/retainer/",
-  },
-  {
-    t: "Training",
-    d: "Bespoke in-company workshops on Agentic Engineering or Building on AT Protocol. Public cohorts run a few times a year.",
-    icon: "tabler/outline/bolt",
-    accent: "iris",
-    cta: "Book a training",
-    url: "/training/",
-  },
+  // Retainer and Training engagement cards are temporarily hidden while the
+  // /retainer and /training pages are drafted out (see restore runbook).
+  // Restore by re-adding the two objects below (Retainer: pine accent, url
+  // "/retainer/", cta "Talk about a retainer"; Training: iris accent, url
+  // "/training/", cta "Book a training") above the Event speaker card.
   {
     t: "Event speaker",
     d: `Keynotes and workshops at your conference, company event or developer meetup. ${countryCount} countries, ${speakingCount} talks so far.`,
