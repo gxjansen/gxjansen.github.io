@@ -22,7 +22,6 @@ import {
   stats,
   pillars,
   engagements,
-  trainingCards,
   projects,
   talks,
   aboutQuote,
@@ -108,7 +107,7 @@ const ArrowRight = "→";
             <Button
               variant="primary"
               class="font-display rounded-full"
-              href="/retainer/"
+              href="/contact/"
               arrow="right"
               umamiEvent="cta-click"
               umamiEventTarget="hero-work-with-me">Work with me</Button
@@ -368,47 +367,6 @@ const ArrowRight = "→";
                 <span class="st">{p.tag}</span>
               </div>
               <p class="bd">{p.d}</p>
-            </a>
-          ))
-        }
-      </div>
-    </section>
-
-    <!-- ============ TRAINING ============ -->
-    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]" id="training">
-      <div class="sec-head">
-        <div>
-          <span class="hand-note">learn by building</span>
-          <h2>Training</h2>
-        </div>
-        <a href="/training/" class="more"
-          >All training <span aria-hidden="true">{ArrowRight}</span></a
-        >
-      </div>
-      <div class="training-grid">
-        {
-          trainingCards.map((c) => (
-            <a class="tcourse reveal" href={c.url} style={ac(c.accent)}>
-              <span class="tlevel">
-                {c.level} · {c.fmt}
-              </span>
-              <h3>{c.t}</h3>
-              {c.coLed && (
-                <span class="text-base-500 dark:text-base-400 mb-1 inline-block text-[0.8rem] font-bold tracking-[0.01em]">
-                  co-led with {c.coLed.partner}
-                </span>
-              )}
-              <p>{c.sub}</p>
-              <ul class="tcourse-list">
-                {c.points.map((pt) => (
-                  <li>{pt}</li>
-                ))}
-              </ul>
-              <div class="tfoot">
-                <span class="tbook">
-                  Find out more <span aria-hidden="true">↗</span>
-                </span>
-              </div>
             </a>
           ))
         }

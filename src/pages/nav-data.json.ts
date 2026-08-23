@@ -15,11 +15,7 @@ export async function GET() {
     },
     {
       text: "Work with me",
-      dropdown: [
-        { text: "Training", link: "/training" },
-        { text: "Advisory", link: "/retainer" },
-        { text: "Speaking", link: "/speaker" },
-      ],
+      dropdown: [{ text: "Speaking", link: "/speaker" }],
     },
     {
       text: "About",
