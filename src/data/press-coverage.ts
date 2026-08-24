@@ -5,12 +5,12 @@ export const pressCoverage: PressCoverage[] = [
     title: "Why community matters now",
     language: "english",
     publicationDate: "2026-08-20",
-    youtubeLink: "",
+    youtubeLink: "https://www.youtube.com/watch?v=EVBpuLvlzv0",
     spotifyEmbedId: "0eOw7ZbQU9YaeW1FXyWP7u",
     applePodcastsUrl:
       "https://podcasts.apple.com/us/podcast/why-community-matters-now/id1815460909?i=1000784657191",
     articleUrl:
-      "https://www.linkedin.com/pulse/why-community-matters-now-open-commerce-consultancy-0kbme/",
+      "https://www.opencommerce.agency/en/articles/why-community-matters-now",
     personOrganization: "Sander Mangel for The Open Podcast",
   },
   {
