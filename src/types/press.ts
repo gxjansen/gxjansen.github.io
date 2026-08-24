@@ -27,8 +27,6 @@ export interface PressCoverage {
   spotifyEmbedId?: string;
   /** Podcast cover image path */
   coverImage?: string;
-  /** Apple Podcasts URL for fallback links */
-  applePodcastsUrl?: string;
   /** Content category - defaults to 'interview' if not specified */
   category?: ContentCategory;
 }
