@@ -30,6 +30,7 @@ import {
   type Accent,
 } from "@data/homeContent";
 import { getActivity } from "../lib/sifaActivity";
+import { getPhotoActivity } from "../lib/grainPhotos";
 import { readingTimeShort } from "../utils/readingTime";
 
 // The homepage is statically generated so the HTML never blocks on the live
@@ -41,8 +42,13 @@ import { readingTimeShort } from "../utils/readingTime";
 const currLocale = getLocaleFromUrl(Astro.url);
 const siteData = getTranslatedData("siteData", currLocale);
 
-// Build-time gui.do activity from the Sifa AppView (falls back to seed on failure).
-const activity = await getActivity();
+// Build-time gui.do activity from the Sifa AppView (falls back to seed on failure),
+// plus a Photos pill fed by Grain galleries (empty on failure). Merged into one feed.
+const [sifaActivity, photoActivity] = await Promise.all([
+  getActivity(),
+  getPhotoActivity(),
+]);
+const activity = [...sifaActivity, ...photoActivity];
 
 // Recent articles from the post collection (real data, working links).
 // Gold is deliberately omitted: gold leads ONLY on the newsletter, never on a
