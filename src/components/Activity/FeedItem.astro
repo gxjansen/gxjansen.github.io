@@ -14,7 +14,7 @@ interface Props {
 const { item } = Astro.props as Props;
 
 const catOf = (t: ActivityItem["type"]) =>
-  t === "post" || t === "repost" ? "posts" : t;
+  t === "post" || t === "repost" ? "posts" : t === "photo" ? "photos" : t;
 
 const app = (key: string) =>
   APP_REGISTRY[key] ?? { label: key, color: "var(--color-app-fallback)" };

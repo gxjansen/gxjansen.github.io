@@ -1,6 +1,7 @@
 ---
 import ActivityFeed from "@components/Activity/ActivityFeed.astro";
 import { getActivity } from "../../lib/sifaActivity";
+import { getPhotoActivity } from "../../lib/grainPhotos";
 
 // Partial: returns only the <ActivityFeed> fragment (no layout), fetched by the
 // homepage after first paint so the static HTML never blocks on Sifa/Bluesky.
@@ -24,7 +25,10 @@ Astro.response.headers.set(
 // proxy won't quietly re-render a copy from disk without checking first.
 Astro.response.headers.set("Cache-Control", "no-cache");
 
-const activity = await getActivity();
+const [activity, photos] = await Promise.all([
+  getActivity(),
+  getPhotoActivity(),
+]);
 ---
 
-<ActivityFeed items={activity} />
+<ActivityFeed items={[...activity, ...photos]} />

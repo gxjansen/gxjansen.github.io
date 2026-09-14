@@ -1,0 +1,218 @@
+---
+/**
+ * Photos card for /now — the latest Grain galleries as an image grid. Mirrors
+ * ReadingCard's card chrome (rounded panel, hand label, app badge, "See all").
+ * Photos are content Guido authored, served from his own PDS blobs via the
+ * Bluesky image CDN (see lib/grainPhotos). Each tile links to the gallery on
+ * Grain; carousels show a photo-count chip.
+ */
+import { Icon } from "astro-icon/components";
+import type { PhotoGallery } from "../../lib/grainPhotos";
+
+interface Props {
+  galleries: PhotoGallery[];
+  /** Full profile, linked from "See all". */
+  grainHref?: string;
+}
+const { galleries, grainHref = "https://grain.social/profile/gui.do" } =
+  Astro.props as Props;
+
+const monthYear = (iso: string): string => {
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime())
+    ? ""
+    : d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+};
+---
+
+{
+  galleries.length > 0 && (
+    <section
+      class="photos-card bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative overflow-hidden rounded-2xl border p-6 shadow-sm md:p-7"
+      aria-label="Photos"
+    >
+      <div class="mb-5 flex flex-wrap items-start justify-between gap-3">
+        <p class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.15rem] leading-none">
+          through the lens
+        </p>
+        <span class="grain-badge">
+          <Icon
+            name="tabler/outline/grain"
+            class="size-3.5"
+            aria-hidden="true"
+          />
+          Grain
+        </span>
+      </div>
+
+      <h3 class="photos-h">Latest photos</h3>
+
+      <ul class="photo-grid" role="list">
+        {galleries.map((g) => (
+          <li>
+            <a
+              class="photo-tile no-random-underline"
+              href={g.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${g.title || monthYear(g.createdAt) || "Photo gallery"}${g.count > 1 ? ` — ${g.count} photos` : ""} on Grain`}
+            >
+              <img
+                src={g.cover?.thumb}
+                alt={g.cover?.alt || g.title || ""}
+                loading="lazy"
+                decoding="async"
+                width={g.cover?.width || undefined}
+                height={g.cover?.height || undefined}
+              />
+              {g.count > 1 && (
+                <span class="photo-count" aria-hidden="true">
+                  <Icon name="tabler/outline/copy" class="size-3" />
+                  {g.count}
+                </span>
+              )}
+              {g.title && <span class="photo-cap">{g.title}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href={grainHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="photos-more no-random-underline"
+      >
+        <span class="underline underline-offset-2">See all</span>
+        <span class="photos-more-arrow" aria-hidden="true">
+          &rarr;
+        </span>
+        <span class="sr-only">photos on Grain (opens in new tab)</span>
+      </a>
+    </section>
+  )
+}
+
+<style>
+  @reference "../../styles/tailwind.css";
+
+  .photos-h {
+    @apply text-base-950 dark:text-base-50 font-display mb-3 text-[1.4rem] font-black tracking-[-0.02em];
+  }
+
+  .grain-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[.74rem] font-semibold;
+    color: var(--color-app-grain);
+    background: color-mix(in oklab, var(--color-app-grain) 12%, transparent);
+  }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 480px) {
+    .photo-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 768px) {
+    .photo-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  .photo-tile {
+    position: relative;
+    display: block;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 0.6rem;
+    background: var(--color-base-200);
+    box-shadow: 0 4px 12px -8px rgb(0 0 0 / 0.5);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  :global(.dark) .photo-tile {
+    background: var(--color-base-800);
+  }
+  .photo-tile:hover,
+  .photo-tile:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 22px -8px rgb(0 0 0 / 0.55);
+    outline: none;
+  }
+  .photo-tile img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .photo-count {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.1rem 0.35rem;
+    border-radius: 9999px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #fff;
+    background: rgb(0 0 0 / 0.55);
+    backdrop-filter: blur(2px);
+  }
+
+  /* Caption only appears on hover/focus so the grid stays image-forward. */
+  .photo-cap {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    padding: 0.9rem 0.5rem 0.4rem;
+    font-size: 0.72rem;
+    line-height: 1.2;
+    color: #fff;
+    background: linear-gradient(180deg, transparent, rgb(0 0 0 / 0.72));
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .photo-tile:hover .photo-cap,
+  .photo-tile:focus-visible .photo-cap {
+    opacity: 1;
+  }
+
+  .photos-more {
+    @apply text-primary-600 dark:text-primary-400 mt-4 inline-flex items-center gap-1 self-start text-[0.85rem] font-semibold;
+    text-decoration: none;
+  }
+  .photos-more-arrow {
+    transition: transform 0.2s ease;
+  }
+  .photos-more:hover .photos-more-arrow,
+  .photos-more:focus-visible .photos-more-arrow {
+    transform: translateX(2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .photo-tile,
+    .photo-cap,
+    .photos-more-arrow {
+      transition: none;
+    }
+    .photo-tile:hover,
+    .photo-tile:focus-visible {
+      transform: none;
+    }
+  }
+</style>

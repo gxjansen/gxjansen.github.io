@@ -6,8 +6,10 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ActivityBento from "@components/Activity/ActivityBento.astro";
 import ReadingCard from "@components/Reading/ReadingCard.astro";
+import PhotosGallery from "@components/Photos/PhotosGallery.astro";
 import { getActivity } from "../lib/sifaActivity";
 import { getReading } from "../lib/bookhive";
+import { getPhotoGalleries } from "../lib/grainPhotos";
 
 // SSR + CDN stale-while-revalidate, mirroring the homepage: the feed and the
 // reading shelf stay fresh without a rebuild, queried at most ~once per window.
@@ -31,6 +33,7 @@ const renderedAt = new Date().toISOString();
 
 const activity = await getActivity();
 const reading = await getReading();
+const photos = await getPhotoGalleries(15);
 
 // Hand-written focus statement (the actual "/now" bit). Bump this date whenever
 // you edit the copy below.
@@ -146,6 +149,7 @@ const focusUpdated = "21 June 2026";
 
       <div class="flex flex-col gap-10">
         <ActivityBento items={activity} />
+        <PhotosGallery galleries={photos} />
         <ReadingCard data={reading} />
       </div>
     </div>

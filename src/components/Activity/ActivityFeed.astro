@@ -11,13 +11,14 @@ const { items } = Astro.props as Props;
 
 // Map an item type to its filter category.
 const catOf = (t: ActivityItem["type"]) =>
-  t === "post" || t === "repost" ? "posts" : t;
+  t === "post" || t === "repost" ? "posts" : t === "photo" ? "photos" : t;
 
 // Only show filters for categories that actually have items.
 const catsPresent = new Set<string>(items.map((i) => catOf(i.type)));
 const filters = [
   { cat: "all", label: "All" },
   { cat: "posts", label: "Posts" },
+  { cat: "photos", label: "Photos" },
   { cat: "review", label: "Reviews" },
   { cat: "code", label: "Code" },
   { cat: "event", label: "Events" },

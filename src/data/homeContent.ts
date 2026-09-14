@@ -64,7 +64,7 @@ export interface Talk {
 }
 
 export interface ActivityItem {
-  type: "post" | "repost" | "review" | "code" | "event";
+  type: "post" | "repost" | "review" | "code" | "event" | "photo";
   app: string;
   time: string;
   kind: string;
@@ -412,4 +412,5 @@ export const APP_ICON: Record<string, string> = {
   tangled: "apps/tangled",
   smokesignal: "tabler/outline/calendar",
   bookhive: "tabler/outline/book",
+  grain: "tabler/outline/grain",
 };
