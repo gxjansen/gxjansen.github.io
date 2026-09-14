@@ -49,7 +49,9 @@
   /* lists */
   @apply prose-li:text-base-700 dark:prose-li:text-base-300;
   /* anchor links - only set text color, underline handled by global link styles */
-  @apply prose-a:text-primary-500 hover:prose-a:text-primary-600 dark:prose-a:text-primary-400 dark:hover:prose-a:text-primary-300;
+  /* Dark-mode prose links shifted up one step (400->300 / 300->200) for APCA;
+     see components/links.scss. Light mode unchanged. */
+  @apply prose-a:text-primary-500 hover:prose-a:text-primary-600 dark:prose-a:text-primary-300 dark:hover:prose-a:text-primary-200;
   /* images - constrained to container width on mobile */
   @apply prose-img:mx-auto prose-img:h-auto prose-img:w-full prose-img:max-w-full prose-img:rounded-md md:prose-img:max-w-[800px];
   /* video */
