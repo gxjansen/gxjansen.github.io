@@ -29,7 +29,7 @@ export const pressCoverage: PressCoverage[] = [
     youtubeLink: "https://www.youtube.com/watch?v=8pQG86R0_-c",
     spotifyEmbedId: "",
     articleUrl:
-      "https://martechtherapy.substack.com/p/from-psychology-to-spryker-guido",
+      "https://www.martechtherapy.com/from-psychology-to-spryker-guido/",
     personOrganization: "MartechTherapy",
   },
   {
