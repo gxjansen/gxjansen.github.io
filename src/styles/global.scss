@@ -246,7 +246,8 @@
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-primary-500);
+  outline: var(--focus-ring-width, 3px) solid
+    var(--focus-ring-color, var(--color-primary-500));
   outline-offset: 3px;
   animation: focus-ring-expand 0.2s cubic-bezier(0.2, 0.7, 0.2, 1);
 }

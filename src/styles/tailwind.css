@@ -183,6 +183,16 @@
   --color-love-light: #a8505d;
   --color-rose: #ebbcba;
   --color-rose-light: #d7827e;
+
+  /* Focus ring (WCAG 3 "Focus Appearance").
+     Several components reference `var(--focus-ring-color, …)` but the token was
+     never defined, so they all silently fell back. Defining it once here gives
+     every focus style one source of truth. It follows the brand teal, which is
+     brightened for dark mode via the `--color-primary-500` override in
+     `:root.dark`, so the ring keeps ≥3:1 contrast in both themes.
+     Width is 3px (up from 2px) for a more perceptible indicator. */
+  --focus-ring-color: var(--color-primary-500);
+  --focus-ring-width: 3px;
 }
 
 /* Hand font (LiebeHeide). Defined as a utility so every `@apply font-hand` and
@@ -233,10 +243,14 @@
   --color-primary-500: #3e8fb0;
   --color-primary-400: #54a3c2;
 
-  /* Restore the lighter Rosé Pine muted greys for dark mode (the @theme values
-     above are darkened for light-mode AA contrast). */
-  --color-base-500: #908caa; /* Main subtle */
-  --color-base-600: #6e6a86; /* Main muted */
+  /* Dark-mode muted greys, brightened for APCA (WCAG 3 perceptual contrast).
+     The Rosé Pine "subtle"/"muted" greys (#908caa / #6e6a86) pass WCAG 2.x AA
+     but only reach APCA Lc ~41 / ~25 on the Main base — below the readable-text
+     band. These lifted values clear ~Lc 62 / ~52 while keeping the subtle>muted
+     hierarchy and the Rosé Pine hue. (Dark-mode only; light-mode base-500/600
+     in @theme are unchanged.) */
+  --color-base-500: #b8b3cd; /* subtle — APCA Lc ~62 */
+  --color-base-600: #a5a0bd; /* muted  — APCA Lc ~52 */
 }
 
 /* Keyframes for the @theme --animate-marquee custom animation. */

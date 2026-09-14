@@ -7,6 +7,15 @@ interface Window {
 declare const window: Window;
 
 export function initLogoAnimation() {
+  // Respect prefers-reduced-motion: skip the intro timeline and hover
+  // animations entirely. The logo elements are visible at their natural CSS
+  // state, so bailing here leaves a static, fully-legible logo.
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion) return;
+
   utils.remove(".site-logo-text, .site-logo-icon");
 
   createTimeline({ defaults: { ease: "outExpo" } })

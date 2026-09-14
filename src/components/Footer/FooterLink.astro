@@ -10,7 +10,7 @@ const { href, newTab = false, ...rest } = Astro.props as Props;
 
 <a
   href={href}
-  class="text-base-600 hover:text-base-700 focus:ring-primary-500 dark:text-base-400 dark:hover:text-base-300 rounded-sm px-4 py-2 transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
+  class="text-base-600 hover:text-base-700 focus:ring-primary-500 dark:text-base-400 dark:hover:text-base-300 rounded-sm px-4 py-2 transition focus:ring-[3px] focus:ring-offset-2 focus:outline-hidden"
   target={newTab ? "_blank" : undefined}
   rel={newTab ? "noopener noreferrer" : undefined}
   {...rest}
