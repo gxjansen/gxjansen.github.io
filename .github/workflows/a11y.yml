@@ -3,6 +3,8 @@ name: Accessibility
 on:
   pull_request:
     branches: [master, development]
+  # See ci.yml: dispatched by the events-snapshot workflow.
+  workflow_dispatch:
 
 concurrency:
   group: a11y-${{ github.ref }}

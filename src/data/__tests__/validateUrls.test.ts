@@ -13,7 +13,7 @@ import * as path from "path";
 import { indieProjects } from "../indieProjects";
 import { socialLinks } from "../socialLinks";
 import { pressCoverage } from "../press-coverage";
-import events from "../events.json";
+import { eventsData as events } from "../events";
 
 interface UrlToValidate {
   url: string;

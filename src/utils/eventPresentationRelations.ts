@@ -1,9 +1,8 @@
 import type { CollectionEntry } from "astro:content";
-import eventsData from "../data/events.json";
+import { eventsData } from "../data/events";
 import type { Event } from "./eventUtils";
 
-// Type assertion for imported events data
-const events = eventsData as Event[];
+const events = eventsData as unknown as Event[];
 
 /**
  * Get all events related to a presentation
