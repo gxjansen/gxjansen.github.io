@@ -1,0 +1,792 @@
+{
+  "presentationSlugs": {
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlktc2p": "persuasive-e-commerce",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlexd2p": "crystal-ball-session-outlook-for-the-coming-year",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nkza72p": "composable-commerce-packaged-business-capabilities",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlfws2p": "innovate-or-get-kodaked-5-guiding-principles-to-not-f-k-up-modern-commerce",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlktf2p": "still-a-b-testing-your-buttons-you-need-to-think-much-bigger",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlfwp2p": "growth-strategies-for-the-future-of-b2b-commerce",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nllsr2p": "why-becoming-a-marketplace-should-be-your-next-big-initiative",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlexc2p": "cross-cultural-website-optimization",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlexe2p": "data-driven-decisions-meets-psychology",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlexa2p": "creating-an-optimization-culture",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlium2p": "meet-magento-association",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nllsu2p": "your-path-to-becoming-a-more-customer-centric-business",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlfwr2p": "improve-cro-processes-with-evolutionary-ai",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nkyau2p": "a-talk-about-giving-talks",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlkta2p": "meet-magento-association",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nkza42p": "building-your-optimization-dream-team",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nldxx2p": "compute-required-sample-size-for-your-a-b-tests-a-priori",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nkyat2p": "5-ultimate-usability-tips-for-e-commerce",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nllsq2p": "usability-testing",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nliun2p": "magento-community-versus-enterprise",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlhvd2p": "introduction-to-magento",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nllso2p": "the-future-of-the-magento-ecosystem",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentation/3mpyt5nlexb2p": "cross-channel-possibilities-with-magento"
+  },
+  "projectIcons": {
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3k63uai7w2225": "spryker.png",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3izs4t5bg2225": "spryker.png",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3j5dbskz62225": "spryker.png",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3ihprlfaw2225": "spryker.png",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3mq2q4ce4zi2f": "crocafe.jpg",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3mhbvthykvd25": "magento.png",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3mq2q4ce4zh2f": "magento.png",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3mq2q4ce4zf2f": "oro.png",
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3mhbvthylup25": "joomla.png"
+  },
+  "byKey": {
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mtci2jx5ks2n": {
+      "id": "iosp-2026",
+      "role": "ATScience team · running the afternoon session",
+      "url": "https://iosp.science/"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nlmsa2p": {
+      "id": "space-academy-2026",
+      "role": "Advisor & Podcast host · Sifa unconference session",
+      "icon": "experimentationelite.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mi4lhqgg2224": {
+      "id": "atmosphereconf-2026",
+      "role": "Unconference session on Sifa"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3lyi6ojp62223": {
+      "id": "spryker-user-group-2025-09"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3lv6l3udo2223": {
+      "id": "spryker-user-group-2025-07"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3lsj3ako62223": {
+      "id": "spryker-user-group-2025-06"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3lq5nawto2223": {
+      "id": "spryker-user-group-2025-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3lnxa75wo2223": {
+      "id": "spryker-user-group-2025-04"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3ll77uwsg2223": {
+      "id": "spryker-user-group-2025-03"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3lj5tqysw2223": {
+      "id": "spryker-user-group-2025-02"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3lbyzd7uo2223": {
+      "id": "spryker-user-group-2024-11"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3l7q3sjiw2223": {
+      "id": "spryker-user-group-2024-10"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3l52lx7tg2223": {
+      "id": "spryker-user-group-2024-09"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3l2p5xlyw2223": {
+      "id": "spryker-user-group-2024-08"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3kvvrjgv62223": {
+      "id": "spryker-user-group-2024-06"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3ktkdjt2o2223": {
+      "id": "spryker-user-group-2024-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3lznvodmg2223": {
+      "id": "spryker-excite-2025-09"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3lzlf7g5o2223": {
+      "id": "spryker-excite-hackathon-2025-09"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3l4vkzevw2223": {
+      "id": "spryker-excite-hackathon-2024-09"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3kynrtnzg2223": {
+      "id": "nagarro-hackathon-india-2024-08"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3kvbns3762224": {
+      "id": "growth-marketing-summit-2024-06",
+      "role": "Podcast livestream host",
+      "icon": "gms.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3ksemjz5g2223": {
+      "id": "turbine-hackathon-2024-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3krbfz4ow2223": {
+      "id": "spryker-user-group-2024-04"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3kolw5szg2223": {
+      "id": "spryker-user-group-2024-03"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nlwlc2p": {
+      "id": "bikkeldag-2024-03",
+      "icon": "bikkelhart.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3knla3tzo2223": {
+      "id": "spryker-hackathon-2024-03"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3kmhzkxl62223": {
+      "id": "spryker-user-group-2024-02"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3kkbmj6o62223": {
+      "id": "spryker-user-group-2024-01"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3kfaoob662223": {
+      "id": "spryker-user-group-2023-11"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3kcnpbuxg2223": {
+      "id": "spryker-user-group-2023-10"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3kacbcb4w2223": {
+      "id": "spryker-user-group-2023-09"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3k7e3p7lw2223": {
+      "id": "spryker-excite-2023-09"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3k7blac562223": {
+      "id": "spryker-hackathon-2023-09"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3k63uai7w2223": {
+      "id": "spryker-user-group-2023-08"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3jzz3ymaw2223": {
+      "id": "spryker-partner-hackathon-2023-07",
+      "role": "Speaker",
+      "icon": "towa.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nm2il2p": {
+      "id": "towa-office-warming-2023-02",
+      "icon": "towa.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nm2im2p": {
+      "id": "divae-yearly-team-kickoff-2023-02",
+      "icon": "diva-e.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nm2in2p": {
+      "id": "b2b-online-2022-12",
+      "icon": "b2bonline.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3jfvemwaw2223": {
+      "id": "spryker-customer-day-2022-10"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3j5dbskz62223": {
+      "id": "spryker-partner-hackathon-2022-07",
+      "role": "Speaker"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3j3yjuw6g2223": {
+      "id": "spryker-customer-day-2022-06"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3j3jh3ffw2224": {
+      "id": "growth-marketing-summit-2022-06",
+      "role": "Podcast livestream host",
+      "icon": "gms.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nm5gi2p": {
+      "id": "emerce-ecommerce-live-2022-06",
+      "icon": "emerce.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3izs4t5bg2223": {
+      "id": "spryker-excite-2022-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3izpme7so2223": {
+      "id": "spryker-customer-day-2022-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nm5gl2p": {
+      "id": "ecommerce-digital-marketing-expo-greece-se-europe-2022-05",
+      "icon": "ecdm.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nm5gm2p": {
+      "id": "emerce-b2b-2022-05",
+      "icon": "emerce.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nm6fu2p": {
+      "id": "emerce-b2b-dinner-session-2022-05",
+      "icon": "emerce.jpg",
+      "relatedPresentationSlugs": [
+        "innovate-or-get-kodaked-5-guiding-principles-to-not-f-k-up-modern-commerce"
+      ]
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nm6fv2p": {
+      "id": "etail-europe-2022-04",
+      "icon": "etail.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nm6fw2p": {
+      "id": "emerce-retail-2022-04",
+      "icon": "emerce.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nm6fx2p": {
+      "id": "business-online-2022-04",
+      "icon": "businesonline.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3is67ltko2223": {
+      "id": "spryker-customer-day-2022-02"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmaei2p": {
+      "id": "smartosc-devexperience-2021-12",
+      "icon": "smartosc.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3ilawksyo2224": {
+      "id": "conversion-hotel-2021-11",
+      "role": "Podcast livestream host",
+      "icon": "conversion-hotel.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3ihprlfaw2223": {
+      "id": "spryker-customer-day-2021-10",
+      "role": "Speaker",
+      "relatedPresentationSlugs": [
+        "your-path-to-becoming-a-more-customer-centric-business"
+      ]
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmael2p": {
+      "id": "emerce-conversion-2020-12",
+      "icon": "emerce.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmaem2p": {
+      "id": "emercify-2020-11",
+      "icon": "emercify.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmbdu2p": {
+      "id": "shopping-today-2020-10",
+      "icon": "shopping-today.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmbdv2p": {
+      "id": "crossborder-event-2020-10"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmbdw2p": {
+      "id": "contentsquare-champaigne-breakfast-2020-07",
+      "role": "Event host/moderator",
+      "icon": "contentsquare.avif",
+      "name": "Contentsquare Champagne breakfast",
+      "city": "Virtual"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmbdx2p": {
+      "id": "dcongress-2020-03",
+      "icon": "d-congress.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3gyije3a62224": {
+      "id": "google-analytics-user-conference-2020-02",
+      "role": "Podcast livestream host",
+      "icon": "emerce.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmebq2p": {
+      "id": "ecommerce-workshop-2020-02"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3gxufmpk62224": {
+      "id": "marketing-insights-event-2020-02",
+      "role": "Podcast livestream host",
+      "icon": "mie20.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmebs2p": {
+      "id": "webwinkel-vakdagen-2020-01",
+      "icon": "wwd.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmebt2p": {
+      "id": "inhouse-workshop-2019-12"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3gsgvh6qg2224": {
+      "id": "emerce-engage-2019-11",
+      "role": "Podcast livestream host",
+      "icon": "emerce.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmfb42p": {
+      "id": "tio-ecommerce-week-2019-11"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3grxsnnxw2224": {
+      "id": "conversion-hotel-2019-11",
+      "role": "Podcast livestream host",
+      "icon": "conversion-hotel.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmfb62p": {
+      "id": "target-2019-11"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmgag2p": {
+      "id": "startupweek-tallinn-2019-11"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmgah2p": {
+      "id": "how-to-web-2019-10"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmgai2p": {
+      "id": "magento-live-europe-2019-10",
+      "role": "Co-hosting Commerce Sneaks",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmgaj2p": {
+      "id": "t3con19-2019-10-17"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3gp5bujew2224": {
+      "id": "t3con19-2019-10",
+      "relatedPresentationSlugs": [
+        "building-your-optimization-dream-team"
+      ]
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3gognoaa62223": {
+      "id": "crocafe-unconference-2-2019-10"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3gognoaa62224": {
+      "id": "digital-analytics-congres-2019-10",
+      "role": "Podcast livestream host"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3gnii36p62224": {
+      "id": "ddma-dutch-cro-awards-2019-09",
+      "role": "Podcast livestream host"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3giwmzrxo2223": {
+      "id": "crocafe-unconference-1-2019-07"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmh7v2p": {
+      "id": "emerce-ecommerce-live-2019-06",
+      "icon": "emerce.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mqzjfkbtnc2b": {
+      "id": "meet-magento-uk-2019-06",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3gatmyxig2223": {
+      "id": "meet-magento-nl-2019-2019-04"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3gabzqjb62224": {
+      "id": "emerce-conversion-2019-04",
+      "role": "Podcast livestream host",
+      "icon": "emerce.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmi7a2p": {
+      "id": "lets-talk-business-2019-04"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmj6i2p": {
+      "id": "3xe-digital-cro-2019-02"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmj6j2p": {
+      "id": "ing-inhouse-event-2019-01",
+      "icon": "ing.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmj6k2p": {
+      "id": "webwinkel-vakdagen-2019-01",
+      "icon": "wwd.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmj6l2p": {
+      "id": "frmwrk-inhouse-event-2018-12"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmj6m2p": {
+      "id": "shopping-today-2018-09",
+      "icon": "shopping-today.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmj6n2p": {
+      "id": "united-wardrobe-2018-06"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmk5v2p": {
+      "id": "meet-magento-uk-2018-06",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmk5w2p": {
+      "id": "conversion-elite-london-2018-06"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3fhmhdgjo2223": {
+      "id": "meet-magento-the-netherlands-2018-06"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmk5y2p": {
+      "id": "digital-data-tips-tuesday-2018-03"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmk5z2p": {
+      "id": "utrecht-university-2018-02"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nml5b2p": {
+      "id": "conversion-hotel-2017-11",
+      "icon": "conversion-hotel.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nml5c2p": {
+      "id": "measurefest-2017-11"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nml5d2p": {
+      "id": "growthtribe-evening-course-2017-11",
+      "icon": "growthtribe.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nml5e2p": {
+      "id": "retail-arena-2017-10"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nml5f2p": {
+      "id": "nomadmage-2017-10"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nml5g2p": {
+      "id": "meet-magento-romania-2017-10",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmm4o2p": {
+      "id": "meet-magento-greece-2017-10",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmm4p2p": {
+      "id": "bidfood-inhouse-2017-09"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmm4q2p": {
+      "id": "conversioncamp-2017-09"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmm4r2p": {
+      "id": "meet-magento-china-2017-08",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3erovakwg2223": {
+      "id": "magento-unconference-2017-08",
+      "role": "Speaker"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmm4t2p": {
+      "id": "mug-rotterdam-2017-06",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmn432p": {
+      "id": "elite-camp-2017-2017-06"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmn442p": {
+      "id": "pan-european-strategy-forum-retail-2017-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmn452p": {
+      "id": "emerce-conversion-2017-05",
+      "icon": "emerce.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmn462p": {
+      "id": "growth-marketing-conference-2017-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3ej7cv55g2223": {
+      "id": "meet-magento-the-netherlands-2017-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmo3h2p": {
+      "id": "growthtribe-evening-course-2017-02",
+      "icon": "growthtribe.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmo3i2p": {
+      "id": "braingineers-2016-12"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmo3j2p": {
+      "id": "conversion-hotel-2016-11",
+      "icon": "conversion-hotel.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmp2r2p": {
+      "id": "magetitans-2016-11",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mqzj4czmuk2b": {
+      "id": "teleflor-international-conference-2016-11"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmp2t2p": {
+      "id": "magento-2-seminar-2016-10",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3dyubvnbg2223": {
+      "id": "magento-unconference-2016-10",
+      "role": "Speaker"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmq242p": {
+      "id": "conversion-conference-2016-10"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmq252p": {
+      "id": "growthtribe-evening-course-2016-10",
+      "icon": "growthtribe.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmq262p": {
+      "id": "savant-ecommerce-congress-2016-09"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmq272p": {
+      "id": "meet-magento-indonesia-2016-08",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmq2a2p": {
+      "id": "ecommerce-insights-2016-06"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3dmojmwt62223": {
+      "id": "meet-magento-the-netherlands-2016-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmqzj2p": {
+      "id": "annual-conference-of-estonian-ecommerce-2016-04"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmqzk2p": {
+      "id": "developers-paradise-2016-04"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmqzl2p": {
+      "id": "growthtribe-evening-course-2016-04",
+      "icon": "growthtribe.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmryt2p": {
+      "id": "conversion-world-2016-04"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmryu2p": {
+      "id": "meet-magento-czech-2016-03",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmryv2p": {
+      "id": "meet-magento-sweden-2016-03",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmryw2p": {
+      "id": "magento-unconference-2016-03",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmryx2p": {
+      "id": "effective-experiments-2016-02",
+      "city": "Webinar"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmsy72p": {
+      "id": "magento-2-seminar-2016-01",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmsya2p": {
+      "id": "webwinkel-vakdagen-2016-01",
+      "icon": "wwd.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmsyb2p": {
+      "id": "the-talent-institute-2016-01"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmtxj2p": {
+      "id": "euroflorist-2016-01",
+      "icon": "euroflorist.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmtxk2p": {
+      "id": "performance-marketing-update-2015-12"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmtxl2p": {
+      "id": "meet-magento-argentina-2015-12",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmtxm2p": {
+      "id": "conversion-hotel-2015-11",
+      "icon": "conversion-hotel.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmuwu2p": {
+      "id": "growthtribe-evening-course-2015-11",
+      "icon": "growthtribe.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmuwv2p": {
+      "id": "meet-magento-spain-2015-10",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmuww2p": {
+      "id": "optimizely-experience-2015-10"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmuwx2p": {
+      "id": "meet-magento-greece-2015-10",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmuwy2p": {
+      "id": "meet-magento-belarus-2015-09",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmuwz2p": {
+      "id": "meet-magento-vietnam-2015-08",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmvwb2p": {
+      "id": "euroflorist-2015-07-22",
+      "icon": "euroflorist.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmvwc2p": {
+      "id": "euroflorist-2015-07",
+      "icon": "euroflorist.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3cr3vxrzw2223": {
+      "id": "meet-magento-the-netherlands-2015-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmvwe2p": {
+      "id": "belgento-2015-05",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmvwf2p": {
+      "id": "meet-magento-denmark-2015-05",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmwvn2p": {
+      "id": "meet-magento-germany-2015-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmwvo2p": {
+      "id": "adobe-user-group-2015-04",
+      "icon": "adobe.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmwvp2p": {
+      "id": "rockstart-answers-2015-04"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmwvq2p": {
+      "id": "emerce-conversion-2015-04",
+      "icon": "emerce.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmxuy2p": {
+      "id": "sanoma-breeze-2014-11",
+      "icon": "sanoma.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmxuz2p": {
+      "id": "meet-magento-switzerland-2014-10",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmxv22p": {
+      "id": "ism-ecommerce-magento-enterprise-event-2014-10",
+      "icon": "ism.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmxv32p": {
+      "id": "exact-meets-magento-2014-10",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmyud2p": {
+      "id": "meet-magento-new-york-2014-09",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3btzjh5ig2223": {
+      "id": "meet-magento-the-netherlands-2014-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmyuf2p": {
+      "id": "meet-magento-germany-2014-05",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nmztn2p": {
+      "id": "sanoma-breeze-2014-04",
+      "icon": "sanoma.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mqzj6wrye22b": {
+      "id": "joomladays-netherlands-2014-03",
+      "icon": "joomla.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn2sw2p": {
+      "id": "sanoma-breeze-2014-03",
+      "icon": "sanoma.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn2sx2p": {
+      "id": "developers-paradise-2014-01",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn2sy2p": {
+      "id": "meet-magento-poland-2013-11",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn2sz2p": {
+      "id": "tecomm-conference-2013-10"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn3sb2p": {
+      "id": "bargento-2013-06",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn3sc2p": {
+      "id": "meet-magento-germany-2013-06",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3axxsyhwo2223": {
+      "id": "meet-magento-the-netherlands-2013-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn3se2p": {
+      "id": "joomladays-netherlands-2013-04",
+      "icon": "joomla.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mqzlktxd5k2b": {
+      "id": "ism-ecommerce-online-marketing-event-2013-02",
+      "icon": "ism.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn4rn2p": {
+      "id": "webwinkel-vakdagen-2013-01-24",
+      "icon": "wwd.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn4ro2p": {
+      "id": "webwinkel-vakdagen-2013-01",
+      "icon": "wwd.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn4rp2p": {
+      "id": "belgento-2013-01",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn5qx2p": {
+      "id": "nima-expert-class-2012-12"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn5qy2p": {
+      "id": "amsterdam-university-of-applied-science-hva-2012-12"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mqzljk5nic2b": {
+      "id": "ism-ecommerce-online-marketing-event-2012-10",
+      "icon": "ism.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn5r22p": {
+      "id": "joomla-world-conference-2012-10",
+      "icon": "joomla.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn5r32p": {
+      "id": "exact-meets-magento-2012-10",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn7pl2p": {
+      "id": "meet-magento-brazil-2012-10",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn7pm2p": {
+      "id": "exact-meets-magento-2012-08",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn7pn2p": {
+      "id": "ism-ecommerce-crosschannel-event-2012-08",
+      "icon": "ism.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nn7po2p": {
+      "id": "ism-ecommerce-webinar-2012-06",
+      "icon": "ism.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3a3ejbe5o2223": {
+      "id": "orocrm-meetup-2012-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nnaox2p": {
+      "id": "ism-ecommerce-crosschannel-event-2012-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3a3bysgow2223": {
+      "id": "meet-magento-the-netherlands-2012-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nnaoz2p": {
+      "id": "ism-ecommerce-magento-event-2012-05",
+      "icon": "ism.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nnap22p": {
+      "id": "oxillion-lunch-learn-2012-05",
+      "icon": "oxilion.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nnboc2p": {
+      "id": "masterclass-ecommerce-magazine-2012-03"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nnbod2p": {
+      "id": "webwinkel-vakdagen-2012-01-26",
+      "icon": "wwd.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nnboe2p": {
+      "id": "webwinkel-vakdagen-2012-01",
+      "icon": "wwd.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nnbof2p": {
+      "id": "byte-seminar-2012-01"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nnbog2p": {
+      "id": "exact-meets-magento-2011-12",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nncno2p": {
+      "id": "exact-meets-magento-2011-11",
+      "icon": "magento.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nncnp2p": {
+      "id": "oxillion-lunch-learn-2011-09",
+      "icon": "oxilion.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nncnq2p": {
+      "id": "marketingrslt-summerschool-2011-08"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/375nyzdw62223": {
+      "id": "meet-magento-the-netherlands-2011-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nnflj2p": {
+      "id": "oxillion-lunch-learn-2010-12",
+      "icon": "oxilion.jpg"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/36bjs3qvo2223": {
+      "id": "meet-magento-the-netherlands-2010-05"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nnfll2p": {
+      "id": "joomladays-netherlands-2010-04",
+      "icon": "joomla.png"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/35g6pteio2223": {
+      "id": "joomladays-netherlands-2009-12"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/353iqg5so2223": {
+      "id": "meet-magento-the-netherlands-2009-01"
+    },
+    "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3l3xfgdew2223": {
+      "id": "spryker-excite-2024-09",
+      "name": "Spryker EXCITE",
+      "role": "Mainstage event host"
+    }
+  }
+}

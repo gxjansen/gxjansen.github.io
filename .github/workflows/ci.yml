@@ -5,6 +5,9 @@ on:
     branches: [master, development]
   push:
     branches: [master, development]
+  # Lets the events-snapshot workflow run the required checks on the PR it
+  # opens (PRs opened with GITHUB_TOKEN don't trigger pull_request runs).
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}

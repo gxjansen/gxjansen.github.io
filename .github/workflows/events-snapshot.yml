@@ -1,0 +1,58 @@
+name: Events snapshot
+
+# Refreshes src/data/events.snapshot.json from Guido's atproto records (Sifa
+# talks and projects, and the calendar events they reference) and opens a
+# data-only PR that auto-merges once the required checks pass. Merging to
+# master deploys the site, so /events picks up new records within a day.
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+concurrency:
+  group: events-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Refresh snapshot (fails closed on unresolvable refs or shrinkage)
+        run: node scripts/snapshot-events.mjs
+      - name: Open PR when the records changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- src/data/events.snapshot.json; then
+            echo "No record changes."
+            exit 0
+          fi
+          branch="chore/events-snapshot-$(date -u +%Y-%m-%d)"
+          if gh pr list --head "$branch" --state open --json number --jq '.[0].number' | grep -q .; then
+            echo "PR for $branch already open."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add src/data/events.snapshot.json
+          git commit -m "chore(events): refresh snapshot from atproto records"
+          git push -u origin "$branch"
+          gh pr create --base master --head "$branch" \
+            --title "chore(events): refresh snapshot from atproto records" \
+            --body "Automated refresh of \`src/data/events.snapshot.json\` from the Sifa talks, projects and calendar events. Data-only; merges automatically when the required checks pass."
+          gh pr merge "$branch" --auto --squash --delete-branch
+          # PRs opened with GITHUB_TOKEN don't trigger pull_request workflows,
+          # so dispatch the required checks on the branch explicitly.
+          gh workflow run ci.yml --ref "$branch"
+          gh workflow run a11y.yml --ref "$branch"

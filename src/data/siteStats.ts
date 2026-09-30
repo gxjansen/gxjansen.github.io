@@ -6,7 +6,7 @@
  * start date, so every page shows the same figure and it can never drift.
  * Import these instead of hardcoding "200+ talks across 26 countries" anywhere.
  */
-import eventsData from "./events.json";
+import { eventsData } from "./events";
 
 /** Years building communities — since Guido's first community role (2004-11-12). */
 const COMMUNITY_START = Date.UTC(2004, 10, 12); // month is 0-indexed
@@ -21,10 +21,7 @@ export const countryCount = new Set(
     .filter((c): c is string => Boolean(c)),
 ).size;
 
-/** Talks given — on-stage roles (speaker / host / moderator / panel / workshop /
- *  keynote / session), excluding pure organiser roles. */
-const SPEAKING_ROLE =
-  /speak|keynote|talk|workshop|present|panel|host|moderat|session/i;
-export const talksCount = (eventsData as { role?: string }[]).filter((e) =>
-  SPEAKING_ROLE.test(e.role ?? ""),
-).length;
+/** Talks given. Every /events entry counts: they are all role-bearing (talks,
+ *  hosted sessions, events Guido organized), and at the events he organized he
+ *  also spoke, at least the opening. */
+export const talksCount = eventsData.length;

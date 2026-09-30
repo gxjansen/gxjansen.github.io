@@ -70,8 +70,8 @@ export async function loadEventIcons<T extends { icon?: string }>(
   );
 }
 
-// Import events data statically to avoid duplicate imports
-import eventsData from "../data/events.json";
+// Derived from Guido's atproto records via the committed snapshot.
+import { eventsData } from "../data/events";
 
 /**
  * Loads and processes all events with their icons

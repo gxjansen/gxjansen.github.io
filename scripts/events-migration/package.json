@@ -1,0 +1,9 @@
+{
+  "name": "events-migration",
+  "private": true,
+  "type": "module",
+  "description": "One-off migration of src/data/events.json into atproto records (see brand workspace plan 2026-09-30).",
+  "dependencies": {
+    "@atproto/lexicon": "0.7.15"
+  }
+}
