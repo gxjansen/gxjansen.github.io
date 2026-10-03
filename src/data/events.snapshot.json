@@ -3479,7 +3479,7 @@
     {
       "uri": "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3k63uai7w2225",
       "value": {
-        "url": "https://commercequest.space/",
+        "url": "https://github.com/spryker-community",
         "name": "Spryker User Group",
         "role": "Organizer & host",
         "$type": "id.sifa.profile.project",
