@@ -29,10 +29,8 @@ No code change. Add it on sifa.id:
 - A talk or a hosted session: add a talk/session (presentationDelivery). Link
   the event if it exists as a calendar event.
 - An event you organized: create the calendar event (e.g. on atmo.rsvp) and
-  add it to the project's `events[]`. The sifa.id project form only displays
-  linked events, so edit the project record itself (an OAuth record editor
-  such as pdsls.dev); the shape is in `lexicons/id/sifa/profile/project.json`
-  of sifa-lexicons.
+  link it from the project on sifa.id ("Link an event" offers events you
+  created, events you RSVPed to, or a pasted atmo.rsvp URL).
 
 The daily "Events snapshot" workflow picks it up and opens a PR. Until the
 workflow can attach the required checks to its own PR, refresh the snapshot

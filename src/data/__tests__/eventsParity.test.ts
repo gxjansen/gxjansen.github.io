@@ -33,7 +33,10 @@ const EXPECTED: Record<string, Partial<Record<keyof Fixture, unknown>>> = {
   "lets-talk-business-2019-04": { country: "" },
   "iosp-2026": { topic: "ATScience afternoon" },
   "space-academy-2026": { topic: "Unconference session: Sifa ID" },
-  "atmosphereconf-2026": { topic: "Unconference session on Sifa" },
+  "atmosphereconf-2026": {
+    topic: "Unconference session on Sifa",
+    icon: "atmosphereconf.png",
+  },
 };
 for (const id of [
   "meet-magento-nl-2019-2019-04",
