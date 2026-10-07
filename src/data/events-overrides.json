@@ -36,6 +36,11 @@
     "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3mhbvthylup25": "joomla.png"
   },
   "byKey": {
+    "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mxbjcveuoc2a": {
+      "id": "rebuild-2-2026-09",
+      "topic": "Sifa pitch",
+      "icon": "rebuild.png"
+    },
     "at://did:plc:3xewinw4wtimo2lqfy5fm5sw/community.lexicon.calendar.event/3mw74r4r3gsej": {
       "id": "atmosphereconf-2027",
       "role": "Co-organizer",

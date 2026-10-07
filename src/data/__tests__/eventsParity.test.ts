@@ -45,7 +45,11 @@ for (const id of [
   EXPECTED[id] = { topic: "Meet Magento NL Opening Keynote" };
 
 /** Entries that exist only in the records (added via Sifa). */
-const ADDED = new Set(["spryker-excite-2024-09", "atmosphereconf-2027"]);
+const ADDED = new Set([
+  "spryker-excite-2024-09",
+  "atmosphereconf-2027",
+  "rebuild-2-2026-09",
+]);
 
 const byId = new Map(eventsData.map((e) => [e.id, e]));
 
@@ -125,7 +129,7 @@ describe("events derived from atproto records", () => {
 
   it("keeps the headline numbers", () => {
     expect(talksCount).toBe(fixture.length + ADDED.size);
-    expect(countryCount).toBe(27);
+    expect(countryCount).toBe(28);
     expect(eventsData.some((e) => e.country === "IN")).toBe(true);
   });
 });
