@@ -3479,7 +3479,7 @@
     {
       "uri": "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3k63uai7w2225",
       "value": {
-        "url": "https://commercequest.space/",
+        "url": "https://github.com/spryker-community",
         "name": "Spryker User Group",
         "role": "Organizer & host",
         "$type": "id.sifa.profile.project",
@@ -3850,6 +3850,27 @@
         "createdAt": "2026-07-07T13:39:16.184Z",
         "startedAt": "2018-12",
         "description": "Weekly podcast where I interviewed people working on conversion optimization from agencies, client-side or tool vendors, with a total of over 200 episodes. Received the Experimentation Culture Award (2020) for the work on the podcast. Spun off into Dutch, Spanish and German editions hosted by other CRO specialists. Also organized two CRO.CAFE Unconferences (Rotterdam and Utrecht, 2019)."
+      }
+    },
+    {
+      "uri": "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3mxbhp7lgmg2i",
+      "value": {
+        "url": "https://atmosphereconf.org",
+        "name": "Atmosphere Conference",
+        "role": "Co-organizer",
+        "$type": "id.sifa.profile.project",
+        "events": [
+          {
+            "role": "Co-organizer",
+            "event": {
+              "cid": "bafyreihykrqz27n6uundgzqpt7rd3m5fbq2hprk53pbwbol5wuvommicbu",
+              "uri": "at://did:plc:3xewinw4wtimo2lqfy5fm5sw/community.lexicon.calendar.event/3mw74r4r3gsej"
+            }
+          }
+        ],
+        "createdAt": "2026-10-07T12:00:00.000Z",
+        "startedAt": "2026-09",
+        "description": "Co-organizing the annual global gathering of the Atmosphere (AT Protocol) community, run by and for the community."
       }
     }
   ],
@@ -4710,6 +4731,134 @@
     }
   ],
   "events": [
+    {
+      "uri": "at://did:plc:3xewinw4wtimo2lqfy5fm5sw/community.lexicon.calendar.event/3mw74r4r3gsej",
+      "value": {
+        "$type": "community.lexicon.calendar.event",
+        "createdAt": "2026-09-23T16:14:03.817Z",
+        "createdWith": "https://atmo.rsvp",
+        "description": "The third edition of the global gathering for the Atmosphere Community is taking place in Amsterdam, April 29th - May 2nd. \n\nThis includes side-events and main conference days. Please RSVP with your interest, subscribe for updates at https://news.atmosphereconf.org, and watch us build out the website with lots of fun features https://atmosphereconf.org\n\nAs well as in person,  we'll also be streaming and have different ways to participate remotely.\n\nAtmosphere Conference is run by the community, for the community, as an annual global gathering to connect, share, celebrate, and learn from each other. We welcome newcomers and want to engage with new perspectives.\n\nIt's a community home for builders, supporters, and participants in the atproto ecosystem. We maintain collective resources, seed projects, and convene our community to ensure every member has genuine voice in shaping the ecosystem's future.\n\n#atproto #atmosphereconf #atmosphereconf2027 #europe",
+        "endsAt": "2027-05-02T16:00:00.000Z",
+        "facets": [
+          {
+            "features": [
+              {
+                "$type": "app.bsky.richtext.facet#link",
+                "uri": "https://news.atmosphereconf.org"
+              }
+            ],
+            "index": {
+              "byteEnd": 265,
+              "byteStart": 234
+            }
+          },
+          {
+            "features": [
+              {
+                "$type": "app.bsky.richtext.facet#link",
+                "uri": "https://atmosphereconf.org"
+              }
+            ],
+            "index": {
+              "byteEnd": 354,
+              "byteStart": 328
+            }
+          },
+          {
+            "features": [
+              {
+                "$type": "app.bsky.richtext.facet#tag",
+                "tag": "atproto"
+              }
+            ],
+            "index": {
+              "byteEnd": 921,
+              "byteStart": 913
+            }
+          },
+          {
+            "features": [
+              {
+                "$type": "app.bsky.richtext.facet#tag",
+                "tag": "atmosphereconf"
+              }
+            ],
+            "index": {
+              "byteEnd": 937,
+              "byteStart": 922
+            }
+          },
+          {
+            "features": [
+              {
+                "$type": "app.bsky.richtext.facet#tag",
+                "tag": "atmosphereconf2027"
+              }
+            ],
+            "index": {
+              "byteEnd": 957,
+              "byteStart": 938
+            }
+          },
+          {
+            "features": [
+              {
+                "$type": "app.bsky.richtext.facet#tag",
+                "tag": "europe"
+              }
+            ],
+            "index": {
+              "byteEnd": 965,
+              "byteStart": 958
+            }
+          }
+        ],
+        "locations": [
+          {
+            "$type": "community.lexicon.location.address",
+            "country": "Nederland",
+            "locality": "Amsterdam",
+            "region": "Noord-Holland"
+          }
+        ],
+        "media": [
+          {
+            "aspect_ratio": {
+              "height": 739,
+              "width": 739
+            },
+            "content": {
+              "$type": "blob",
+              "mimeType": "image/png",
+              "ref": {
+                "$link": "bafkreihjg6k5gb5khdnkqoqmsmt6nzqymsxxpfddk23xx5qifxigvxngvm"
+              },
+              "size": 257802
+            },
+            "role": "thumbnail"
+          }
+        ],
+        "mode": "community.lexicon.calendar.event#hybrid",
+        "name": "AtmosphereConf 2027",
+        "preferences": {
+          "showInDiscovery": true
+        },
+        "startsAt": "2027-04-29T07:00:00.000Z",
+        "status": "community.lexicon.calendar.event#scheduled",
+        "theme": {
+          "accentColor": "cyan",
+          "baseColor": "mist",
+          "name": "blobs"
+        },
+        "timezone": "Europe/Amsterdam",
+        "uris": [
+          {
+            "name": "",
+            "uri": "https://atmosphereconf.org"
+          }
+        ]
+      }
+    },
     {
       "uri": "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/353iqg5so2223",
       "value": {
