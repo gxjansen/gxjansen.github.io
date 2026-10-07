@@ -183,7 +183,8 @@ export function deriveEvents(snapshot, overrides) {
       date: e.date,
       url: pick(o, "url", e.url),
       city: pick(o, "city", e.city),
-      country: e.country,
+      // Records from other apps may carry a country name; an override gives the ISO code.
+      country: pick(o, "country", e.country),
       topic: pick(o, "topic", e.topic),
       role: pick(o, "role", e.roleLabel),
       workshop: e.workshop,

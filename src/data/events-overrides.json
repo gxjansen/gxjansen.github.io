@@ -36,6 +36,13 @@
     "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.project/3mhbvthylup25": "joomla.png"
   },
   "byKey": {
+    "at://did:plc:3xewinw4wtimo2lqfy5fm5sw/community.lexicon.calendar.event/3mw74r4r3gsej": {
+      "id": "atmosphereconf-2027",
+      "role": "Co-organizer",
+      "country": "NL",
+      "topic": "Third edition of the global Atmosphere community gathering",
+      "icon": "atmosphereconf.png"
+    },
     "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mtci2jx5ks2n": {
       "id": "iosp-2026",
       "role": "ATScience team · running the afternoon session",
