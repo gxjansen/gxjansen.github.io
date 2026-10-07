@@ -3320,6 +3320,30 @@
           "did:plc:2zxlmj2dvub7smpul2lvwqfk"
         ]
       }
+    },
+    {
+      "uri": "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mxbjcveuoc2a",
+      "value": {
+        "date": "2026-09-01",
+        "mode": "community.lexicon.calendar.event#inperson",
+        "role": "id.sifa.defs#presenter",
+        "$type": "id.sifa.profile.presentationDelivery",
+        "links": [
+          {
+            "uri": "https://www.rebuild.net/gatherings/rebuild-2/",
+            "type": "id.sifa.defs#linkEvent"
+          }
+        ],
+        "title": "SIfa pitch",
+        "address": {
+          "region": "Uusimaa",
+          "country": "FI",
+          "locality": "Helsinki"
+        },
+        "location": "Helsinki, Uusimaa, Finland",
+        "createdAt": "2026-10-07T08:22:43.045Z",
+        "eventName": "Rebuild #2"
+      }
     }
   ],
   "projects": [
