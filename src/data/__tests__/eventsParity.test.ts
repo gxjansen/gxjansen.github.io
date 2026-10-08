@@ -40,6 +40,10 @@ const EXPECTED: Record<string, Partial<Record<keyof Fixture, unknown>>> = {
     role: "Advisor & Podcast host",
   },
   "atmosphereconf-2026": {
+    // Linked to the organizer's calendar event on 2026-10-08.
+    name: "ATmosphereConf 2026",
+    date: "2026-03-26",
+    url: "https://atmosphereconf.org",
     topic: "Unconference session on Sifa",
     role: "Speaker",
     icon: "atmosphereconf.png",
