@@ -191,24 +191,29 @@
     {
       "uri": "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mi4lhqgg2224",
       "value": {
-        "date": "2026-03-28",
-        "mode": "community.lexicon.calendar.event#inperson",
+        "date": "2026-03-26",
+        "mode": "community.lexicon.calendar.event#hybrid",
         "role": "id.sifa.defs#presenter",
         "$type": "id.sifa.profile.presentationDelivery",
         "links": [
           {
-            "uri": "https://atmosphereconf.org/",
+            "uri": "https://atmosphereconf.org",
             "type": "id.sifa.defs#linkEvent"
           }
         ],
         "title": "Unconference session on Sifa",
+        "status": "community.lexicon.calendar.event#scheduled",
         "address": {
+          "region": "BC",
           "country": "CA",
           "locality": "Vancouver"
         },
-        "location": "Vancouver, CA",
+        "eventRef": {
+          "uri": "at://did:plc:lehcqqkwzcwvjvw66uthu5oq/community.lexicon.calendar.event/3lte3c7x43l2e"
+        },
+        "location": "Vancouver, BC, Canada",
         "createdAt": "2026-03-28T12:00:00.000Z",
-        "eventName": "ATmosphereConf"
+        "eventName": "ATmosphereConf 2026"
       }
     },
     {
@@ -5849,6 +5854,75 @@
         ],
         "description": "Connected Commerce: Powering the Hybrid Future",
         "rsvpExpected": false
+      }
+    },
+    {
+      "uri": "at://did:plc:lehcqqkwzcwvjvw66uthu5oq/community.lexicon.calendar.event/3lte3c7x43l2e",
+      "value": {
+        "$type": "community.lexicon.calendar.event",
+        "createdAt": "2025-07-07T05:42:48.498Z",
+        "description": "ATmosphereConf is the global AT Protocol community conference\n\nJoin us in Vancouver, BC, Canada, at the UBC campus Nest building.\n\nCome early for two days of extended events, deep dives, and local activities on Thursday and Friday, then gather for two full conference days with topics for everyone on Saturday and Sunday.\n\nWe Can Just Do Things. Together.\n\nEarly bird tickets will be on sale soon! Add your email to this RSVP or enter it in the ticketing system https://atmosphereconf.org",
+        "endsAt": "2026-03-30T01:00:00.000Z",
+        "facets": [
+          {
+            "features": [
+              {
+                "$type": "app.bsky.richtext.facet#link",
+                "uri": "https://atmosphereconf.org"
+              }
+            ],
+            "index": {
+              "byteEnd": 488,
+              "byteStart": 462
+            }
+          }
+        ],
+        "locations": [
+          {
+            "$type": "community.lexicon.location.address",
+            "country": "CA",
+            "locality": "Vancouver",
+            "name": "The Nest UBC",
+            "postalCode": "V6T 1Z1",
+            "region": "BC",
+            "street": "6133 University Blvd."
+          }
+        ],
+        "media": [
+          {
+            "$type": "community.lexicon.calendar.event#media",
+            "alt": "",
+            "aspect_ratio": {
+              "height": 900,
+              "width": 1600
+            },
+            "content": {
+              "$type": "blob",
+              "mimeType": "image/png",
+              "ref": {
+                "$link": "bafkreihzononyuxtdaalbndwwj33brhv5tnosviclfaeolko4aaf77ieli"
+              },
+              "size": 1798720
+            },
+            "role": "header"
+          }
+        ],
+        "mode": "community.lexicon.calendar.event#hybrid",
+        "name": "ATmosphereConf 2026",
+        "startsAt": "2026-03-26T16:00:00.000Z",
+        "status": "community.lexicon.calendar.event#scheduled",
+        "uris": [
+          {
+            "$type": "community.lexicon.calendar.event#uri",
+            "name": "Register Interest",
+            "uri": "https://atmosphereconf.org"
+          },
+          {
+            "$type": "community.lexicon.calendar.event#uri",
+            "name": "News & Updates on Leaflet",
+            "uri": "https://news.atmosphereconf.org"
+          }
+        ]
       }
     }
   ]
