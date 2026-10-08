@@ -37,8 +37,11 @@ const wrapperProps = linkUrl
     }
   : {};
 
-// Determine display text for topic/role
+// Talks show only their topic ("Speaker" is the default role on /events).
+// Any other role is shown next to the topic, so a non-speaking entry never
+// reads as a talk.
 const displayText = topic || role;
+const roleLabel = topic && role && role !== "Speaker" ? role : undefined;
 
 // Define classes based on whether the card is clickable
 const wrapperClasses = linkUrl ? "cursor-pointer" : "";
@@ -142,9 +145,14 @@ const eventDate = new Date(date).toLocaleDateString("en-US", {
     <div class="mt-2 flex items-center gap-2">
       {
         !isOnPresentationPage && displayText && (
-          <em class="text-base-600 dark:text-base-400 line-clamp-1 flex-1 text-sm">
-            {displayText}
-          </em>
+          <p class="text-base-600 dark:text-base-400 line-clamp-1 flex-1 text-sm">
+            {roleLabel && (
+              <span class="text-base-700 dark:text-base-300 font-medium">
+                {roleLabel} ·{" "}
+              </span>
+            )}
+            <em>{displayText}</em>
+          </p>
         )
       }
 

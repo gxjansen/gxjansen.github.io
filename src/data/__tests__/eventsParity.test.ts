@@ -22,7 +22,10 @@ fixture.forEach((e, i) => lastIndex.set(e.id, i));
 const expectedId = (e: Fixture, i: number) =>
   lastIndex.get(e.id) === i ? e.id : `${e.id}-${e.date.slice(8, 10)}`;
 
-/** Deliberate data fixes and "Sifa title wins" topics (Guido, 2026-09-30). */
+/**
+ * Deliberate data fixes and "Sifa title wins" topics (Guido, 2026-09-30).
+ * Roles shortened 2026-10-08 now that cards show non-speaker roles.
+ */
 const EXPECTED: Record<string, Partial<Record<keyof Fixture, unknown>>> = {
   "contentsquare-champaigne-breakfast-2020-07": {
     name: "Contentsquare Champagne breakfast",
@@ -31,10 +34,14 @@ const EXPECTED: Record<string, Partial<Record<keyof Fixture, unknown>>> = {
   "joomladays-netherlands-2009-12": { date: "2009-06-12" },
   // Online event: no invented country.
   "lets-talk-business-2019-04": { country: "" },
-  "iosp-2026": { topic: "ATScience afternoon" },
-  "space-academy-2026": { topic: "Unconference session: Sifa ID" },
+  "iosp-2026": { topic: "ATScience afternoon", role: "ATScience team" },
+  "space-academy-2026": {
+    topic: "Unconference session: Sifa ID",
+    role: "Advisor & Podcast host",
+  },
   "atmosphereconf-2026": {
     topic: "Unconference session on Sifa",
+    role: "Speaker",
     icon: "atmosphereconf.png",
   },
 };

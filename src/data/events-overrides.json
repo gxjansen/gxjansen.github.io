@@ -50,17 +50,17 @@
     },
     "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mtci2jx5ks2n": {
       "id": "iosp-2026",
-      "role": "ATScience team · running the afternoon session",
+      "role": "ATScience team",
       "url": "https://iosp.science/"
     },
     "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mpyt5nlmsa2p": {
       "id": "space-academy-2026",
-      "role": "Advisor & Podcast host · Sifa unconference session",
+      "role": "Advisor & Podcast host",
       "icon": "experimentationelite.png"
     },
     "at://did:plc:45uheisi25szrjvjurfpritx/id.sifa.profile.presentationDelivery/3mi4lhqgg2224": {
       "id": "atmosphereconf-2026",
-      "role": "Unconference session on Sifa",
+      "role": "Speaker",
       "icon": "atmosphereconf.png"
     },
     "at://did:plc:45uheisi25szrjvjurfpritx/community.lexicon.calendar.event/3lyi6ojp62223": {
