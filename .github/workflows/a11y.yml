@@ -3,7 +3,7 @@ name: Accessibility
 on:
   pull_request:
     branches: [master, development]
-  # See ci.yml: dispatched by the events-snapshot workflow.
+  # Manual runs.
   workflow_dispatch:
 
 concurrency:

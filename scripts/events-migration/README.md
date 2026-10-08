@@ -32,7 +32,7 @@ No code change. Add it on sifa.id:
   link it from the project on sifa.id ("Link an event" offers events you
   created, events you RSVPed to, or a pasted atmo.rsvp URL).
 
-The daily "Events snapshot" workflow picks it up and opens a PR. Until the
-workflow can attach the required checks to its own PR, refresh the snapshot
-locally (`node scripts/snapshot-events.mjs`) and ship it in a normal PR. Logo, role wording or presentation-page links for an
+The daily "Events snapshot" workflow picks it up and opens a PR that merges
+itself once CI passes (it needs the `EVENTS_SNAPSHOT_TOKEN` secret). To ship
+sooner, run `node scripts/snapshot-events.mjs` locally and open a normal PR. Logo, role wording or presentation-page links for an
 entry go in `src/data/events-overrides.json` (keyed by the record AT-URI).
