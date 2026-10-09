@@ -4,6 +4,11 @@ name: Events snapshot
 # talks and projects, and the calendar events they reference) and opens a
 # data-only PR that auto-merges once the required checks pass. Merging to
 # master deploys the site, so /events picks up new records within a day.
+#
+# The PR is pushed and opened with EVENTS_SNAPSHOT_TOKEN, a fine-grained
+# personal access token (this repo only; Contents and Pull requests: read and
+# write). A PR opened with GITHUB_TOKEN does not start the pull_request
+# checks, so it could never satisfy branch protection and auto-merge.
 
 on:
   schedule:
@@ -11,9 +16,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
-  actions: write
+  contents: read
 
 concurrency:
   group: events-snapshot
@@ -23,7 +26,17 @@ jobs:
   snapshot:
     runs-on: ubuntu-latest
     steps:
+      - name: Require the snapshot token
+        env:
+          TOKEN: ${{ secrets.EVENTS_SNAPSHOT_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::Secret EVENTS_SNAPSHOT_TOKEN is not set."
+            exit 1
+          fi
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.EVENTS_SNAPSHOT_TOKEN }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -31,17 +44,17 @@ jobs:
         run: node scripts/snapshot-events.mjs
       - name: Open PR when the records changed
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.EVENTS_SNAPSHOT_TOKEN }}
         run: |
           if git diff --quiet -- src/data/events.snapshot.json; then
             echo "No record changes."
             exit 0
           fi
+          # One open snapshot PR at a time: a newer refresh supersedes it.
+          for n in $(gh pr list --state open --search "head:chore/events-snapshot-" --json number --jq '.[].number'); do
+            gh pr close "$n" --delete-branch --comment "Superseded by a newer snapshot refresh."
+          done
           branch="chore/events-snapshot-$(date -u +%Y-%m-%d)"
-          if gh pr list --head "$branch" --state open --json number --jq '.[0].number' | grep -q .; then
-            echo "PR for $branch already open."
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -c "$branch"
@@ -50,9 +63,5 @@ jobs:
           git push -u origin "$branch"
           gh pr create --base master --head "$branch" \
             --title "chore(events): refresh snapshot from atproto records" \
-            --body "Automated refresh of \`src/data/events.snapshot.json\` from the Sifa talks, projects and calendar events. Data-only; merges automatically when the required checks pass."
+            --body-file .github/events-snapshot-pr-body.md
           gh pr merge "$branch" --auto --squash --delete-branch
-          # PRs opened with GITHUB_TOKEN don't trigger pull_request workflows,
-          # so dispatch the required checks on the branch explicitly.
-          gh workflow run ci.yml --ref "$branch"
-          gh workflow run a11y.yml --ref "$branch"
