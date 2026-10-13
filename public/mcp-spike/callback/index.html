@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Returning to your app</title>
+</head>
+<body>
+<main>
+<h1>Returning to your app</h1>
+<p id="msg">Forwarding the sign-in result to the program on this computer.</p>
+</main>
+<script>
+// OAuth relay for a local (native) client. The authorization server redirects
+// here; the state parameter starts with "<port>." and the result is forwarded
+// to http://127.0.0.1:<port>/callback. The code alone is useless: it is bound
+// to the PKCE verifier and DPoP key held by the local process.
+(function () {
+  var msg = document.getElementById('msg');
+  var params = new URLSearchParams(window.location.search);
+  var state = params.get('state') || '';
+  var match = /^(\d{4,5})\./.exec(state);
+  var port = match ? Number(match[1]) : NaN;
+  if (!(port >= 1024 && port <= 65535)) {
+    msg.textContent = 'This sign-in link is not valid. Start the sign-in again from your app.';
+    return;
+  }
+  // Drop the code from this page's history entry before leaving.
+  window.history.replaceState(null, '', window.location.pathname);
+  window.location.replace('http://127.0.0.1:' + port + '/callback?' + params.toString());
+})();
+</script>
+<noscript><p>This step needs JavaScript to hand the sign-in back to your app.</p></noscript>
+</body>
+</html>
