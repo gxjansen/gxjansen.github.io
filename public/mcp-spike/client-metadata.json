@@ -1,1 +1,19 @@
-{}
+{
+  "client_id": "https://deploy-preview-378--gxjansen.netlify.app/mcp-spike/client-metadata.json",
+  "client_name": "Sifa MCP (test)",
+  "client_uri": "https://deploy-preview-378--gxjansen.netlify.app/",
+  "application_type": "native",
+  "grant_types": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "response_types": [
+    "code"
+  ],
+  "redirect_uris": [
+    "https://deploy-preview-378--gxjansen.netlify.app/mcp-spike/callback/"
+  ],
+  "scope": "atproto repo:id.sifa.profile.certification repo:id.sifa.profile.course repo:id.sifa.profile.education repo:id.sifa.profile.externalAccount repo:id.sifa.profile.honor repo:id.sifa.profile.investment repo:id.sifa.profile.involvement repo:id.sifa.profile.language repo:id.sifa.profile.location repo:id.sifa.profile.position repo:id.sifa.profile.presentation repo:id.sifa.profile.presentationDelivery repo:id.sifa.profile.project repo:id.sifa.profile.publication repo:id.sifa.profile.self repo:id.sifa.profile.skill repo:id.sifa.profile.volunteering",
+  "token_endpoint_auth_method": "none",
+  "dpop_bound_access_tokens": true
+}
