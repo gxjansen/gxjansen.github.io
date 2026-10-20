@@ -1,5 +1,5 @@
 # LinkedIn returns 999 for automated requests (includes country subdomains)
-https?://([a-z]{2}\.)?linkedin\.com/.*
+https?://([a-z]{2,3}\.)?linkedin\.com/.*
 
 # Twitter/X rate-limits aggressively
 https?://(www\.)?twitter\.com/.*
@@ -40,8 +40,38 @@ https?://(www\.)?objeqt\.com/.*
 # Netlify serverless functions (not static files)
 \.netlify/functions/
 
-# Bluesky AT Protocol URIs
-at:/did:plc:
+# AT Protocol URIs (at://did:plc:...) are not fetchable over HTTP
+^at://
 
 # Anchor-only links
 ^#
+
+# On-demand (SSR) routes: not present in dist/, so lychee reports file:// misses.
+# Source of truth: grep -rl "prerender = false" src/pages
+file://.*/dist/(now|bookshelf)/?$
+file://.*/dist/(api|internal)/.*
+file://.*/dist/ama/q/.*
+
+# /privacy-policy is a Netlify 301 to /privacy (dist/_redirects); lychee cannot follow redirects on disk
+file://.*/dist/privacy-policy/?$
+
+# Bot-blocking or rate-limiting sites: they answer a browser with 200 but reject lychee
+# (curl with a browser UA confirmed spryker.com and fastercapital.com return 200).
+https?://(www\.)?spryker\.com/.*
+https?://(www\.)?fastercapital\.com/.*
+https?://docs\.paperless-ngx\.com/.*
+https?://fast\.wistia\.com/.*
+https?://(www\.)?npmjs\.com/.*
+https?://(www\.)?academia\.edu/.*
+https?://(www\.)?udemy\.com/.*
+https?://(www\.)?futurelearn\.com/.*
+https?://(www\.)?supernote\.com/.*
+https?://shop\.pimoroni\.com/.*
+https?://(www\.)?firewalla\.com/.*
+
+# Placeholder URLs used as examples in posts
+https://github\.com/YOUR_ORG/YOUR_REPO.*
+https://github\.com/actions/runner/releases/download/vX\.Y\.Z/.*
+
+# bsky.social XRPC endpoints quoted in posts need query parameters; a bare request returns 400
+https://bsky\.social/xrpc/.*
