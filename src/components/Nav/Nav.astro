@@ -43,9 +43,11 @@ const shouldReduceMotion =
 <div
   id="nav__container"
   class={`navbar--initial fixed left-0 top-0 z-30 flex w-full flex-col border-b ${shouldReduceMotion ? "" : "duration-300"}`}
-  style={shouldReduceMotion
-    ? ""
-    : "transition: background-color 0.3s cubic-bezier(0.33, 1, 0.68, 1), border-color 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;"}
+  style={
+    shouldReduceMotion
+      ? ""
+      : "transition: background-color 0.3s cubic-bezier(0.33, 1, 0.68, 1), border-color 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;"
+  }
 >
   <div class="mx-auto flex w-full">
     <div class="site-container flex h-14 w-full items-center px-4">
@@ -62,21 +64,19 @@ const shouldReduceMotion =
             role="menubar"
             aria-label="Primary navigation menu"
           >
-            {
-              navData
-                .filter((navItem) => !("hidden" in navItem && navItem.hidden))
-                .map((navItem) =>
-                  "dropdown" in navItem ? (
-                    <NavDropdown navItem={navItem as navDropdownItem} />
-                  ) : "megaMenuColumns" in navItem ? (
-                    <MegaMenuDropdownToggle
-                      navItem={navItem as navMegaDropdownItem}
-                    />
-                  ) : (
-                    <NavLink navItem={navItem} />
-                  ),
-                )
-            }
+            {navData
+              .filter((navItem) => !("hidden" in navItem && navItem.hidden))
+              .map((navItem) =>
+                "dropdown" in navItem ? (
+                  <NavDropdown navItem={navItem as navDropdownItem} />
+                ) : "megaMenuColumns" in navItem ? (
+                  <MegaMenuDropdownToggle
+                    navItem={navItem as navMegaDropdownItem}
+                  />
+                ) : (
+                  <NavLink navItem={navItem} />
+                ),
+              )}
           </ul>
         </nav>
 
@@ -98,14 +98,12 @@ const shouldReduceMotion =
           </Button>
 
           <!-- Language selector -->
-          {
-            locales.length > 1 && (
-              <LanguageSelect
-                class="hidden md:block"
-                aria-label="Select language"
-              />
-            )
-          }
+          {locales.length > 1 && (
+            <LanguageSelect
+              class="hidden md:block"
+              aria-label="Select language"
+            />
+          )}
 
           <!-- Mobile navigation -->
           <div class="md:hidden" aria-label="Mobile navigation menu">

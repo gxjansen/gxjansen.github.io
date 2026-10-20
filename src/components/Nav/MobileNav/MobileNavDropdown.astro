@@ -50,12 +50,10 @@ if ("dropdown" in navItem) {
     class="mobile-nav__dropdown-content hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
   >
     <ul class="mb-2 transition-[height] duration-300">
-      {
-        dropdownItem.dropdown.map((dropdownItem) => (
-          // no icons for mobile dropdown. I think this looks better
-          <NavLink navItem={dropdownItem} noIcon={true} class="ml-2" />
-        ))
-      }
+      {dropdownItem.dropdown.map((dropdownItem) => (
+        // no icons for mobile dropdown. I think this looks better
+        <NavLink navItem={dropdownItem} noIcon={true} class="ml-2" />
+      ))}
     </ul>
   </div>
 </li>

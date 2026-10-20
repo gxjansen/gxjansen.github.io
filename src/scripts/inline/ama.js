@@ -6,7 +6,9 @@
 (function loadAltchaScript() {
   if (document.querySelector("script[data-altcha]")) return;
   const s = document.createElement("script");
-  s.src = "https://cdn.jsdelivr.net/npm/altcha/dist/altcha.min.js";
+  // Pinned: the server uses the altcha-lib/v1 challenge format, which widget
+  // v2 solves. Widget v3 needs the v2 format, so upgrade both together.
+  s.src = "https://cdn.jsdelivr.net/npm/altcha@2.3.0/dist/altcha.min.js";
   s.type = "module";
   s.async = true;
   s.dataset.altcha = "true";

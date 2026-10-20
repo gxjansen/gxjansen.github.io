@@ -90,7 +90,8 @@ Astro.csp?.insertScriptHash(scriptHash(amaScript));
                 challengeurl={altchaChallengeUrl}
                 hidefooter
                 hidelogo
-                aria-describedby="ama-altcha-desc"></altcha-widget>
+                aria-describedby="ama-altcha-desc"
+              ></altcha-widget>
             </div>
 
             <button
@@ -115,8 +116,7 @@ Astro.csp?.insertScriptHash(scriptHash(amaScript));
             class="ama-status text-sm"
             role="status"
             aria-live="polite"
-          >
-          </div>
+          ></div>
         </form>
       </div>
     </section>
@@ -198,15 +198,16 @@ Astro.csp?.insertScriptHash(scriptHash(amaScript));
           </a>
         </div>
 
-        <div id="ama-feed" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        </div>
+        <div
+          id="ama-feed"
+          class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+        ></div>
       </div>
     </section>
   </div>
 </BaseLayout>
 
 <script is:inline set:html={amaScript} />
-
 <style is:global>
   /* Match the site's altcha sizing from the newsletter form. */
   altcha-widget {

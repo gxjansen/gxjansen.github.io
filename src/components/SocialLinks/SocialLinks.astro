@@ -48,55 +48,51 @@ const navLabel = labelMap[location] ?? "Social media links";
     ]}
     role="list"
   >
-    {
-      visibleLinks.map(({ name, href, icon }) => (
-        <li
-          role="listitem"
+    {visibleLinks.map(({ name, href, icon }) => <li
+      role="listitem"
+      class:list={[
+        "group relative",
+        // Footer is a clipping scroll container, so the tooltip sits in a
+        // reserved space above the icon. Elsewhere there's no clip and a
+        // label often sits right above, so the tooltip goes BELOW instead
+        // (and no top reserve, keeping the icons close to their heading).
+        context === "footer" ? "pt-8" : "",
+      ]}
+    >
+      <div
+        class:list={[
+          "pointer-events-none absolute left-1/2 z-[100] -translate-x-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 [.group:first-child_&]:left-0 [.group:first-child_&]:translate-x-0 [.group:last-child_&]:right-0 [.group:last-child_&]:left-auto [.group:last-child_&]:translate-x-0",
+          context === "footer" ? "top-0" : "top-full",
+        ]}
+      >
+        <div
           class:list={[
-            "group relative",
-            // Footer is a clipping scroll container, so the tooltip sits in a
-            // reserved space above the icon. Elsewhere there's no clip and a
-            // label often sits right above, so the tooltip goes BELOW instead
-            // (and no top reserve, keeping the icons close to their heading).
-            context === "footer" ? "pt-8" : "",
+            "border-base-700/20 bg-base-900/90 text-base-50 relative rounded-md border px-2.5 py-1.5 text-xs whitespace-nowrap shadow-lg backdrop-blur-xs",
+            context === "footer" ? "mb-6" : "mt-2",
           ]}
         >
+          {name}
           <div
             class:list={[
-              "pointer-events-none absolute left-1/2 z-[100] -translate-x-1/2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 [.group:first-child_&]:left-0 [.group:first-child_&]:translate-x-0 [.group:last-child_&]:right-0 [.group:last-child_&]:left-auto [.group:last-child_&]:translate-x-0",
-              context === "footer" ? "top-0" : "top-full",
-            ]}
-          >
-            <div
-              class:list={[
-                "border-base-700/20 bg-base-900/90 text-base-50 relative rounded-md border px-2.5 py-1.5 text-xs whitespace-nowrap shadow-lg backdrop-blur-xs",
-                context === "footer" ? "mb-6" : "mt-2",
-              ]}
-            >
-              {name}
-              <div
-                class:list={[
-                  "absolute left-1/2 -translate-x-1/2 border-4 border-transparent",
-                  context === "footer"
-                    ? "border-t-base-900/90 top-full -mt-px"
-                    : "border-b-base-900/90 bottom-full -mb-px",
-                ]}
-              />
-            </div>
-          </div>
-          <SocialIcon
-            href={href}
-            icon={icon}
-            social={name}
-            class:list={[
-              "transition-transform hover:scale-110",
+              "absolute left-1/2 -translate-x-1/2 border-4 border-transparent",
               context === "footer"
-                ? "h-6 w-6 sm:h-6 sm:w-6"
-                : "h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8",
+                ? "border-t-base-900/90 top-full -mt-px"
+                : "border-b-base-900/90 bottom-full -mb-px",
             ]}
           />
-        </li>
-      ))
-    }
+        </div>
+      </div>
+      <SocialIcon
+        href={href}
+        icon={icon}
+        social={name}
+        class:list={[
+          "transition-transform hover:scale-110",
+          context === "footer"
+            ? "h-6 w-6 sm:h-6 sm:w-6"
+            : "h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8",
+        ]}
+      />
+    </li>)}
   </ul>
 </nav>

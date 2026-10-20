@@ -82,26 +82,25 @@ const columns: {
       </div>
 
       <!-- Link columns -->
-      {
-        columns.map((col) => (
-          <nav class="flex flex-col gap-1" aria-label={`Footer: ${col.title}`}>
-            <h2 class="text-base-500 dark:text-base-500 mb-1 text-xs font-bold tracking-[0.08em] uppercase">
-              {col.title}
-            </h2>
-            {col.links.map((link) => (
-              <a
-                href={link.href}
-                target={link.newTab ? "_blank" : undefined}
-                rel={link.newTab ? "noopener noreferrer" : undefined}
-                class="text-base-600 hover:text-primary-600 dark:text-base-400 dark:hover:text-primary-400 focus:ring-primary-500 -mx-1 rounded-sm px-1 py-1.5 text-[0.95rem] transition focus:ring-2 focus:outline-hidden"
-              >
-                {link.text}
-                {link.newTab && <span class="sr-only">(opens in new tab)</span>}
-              </a>
-            ))}
-          </nav>
-        ))
-      }
+      {columns.map((col) => <nav
+        class="flex flex-col gap-1"
+        aria-label={`Footer: ${col.title}`}
+      >
+        <h2
+          class="text-base-500 dark:text-base-500 mb-1 text-xs font-bold tracking-[0.08em] uppercase"
+        >
+          {col.title}
+        </h2>
+        {col.links.map((link) => <a
+          href={link.href}
+          target={link.newTab ? "_blank" : undefined}
+          rel={link.newTab ? "noopener noreferrer" : undefined}
+          class="text-base-600 hover:text-primary-600 dark:text-base-400 dark:hover:text-primary-400 focus:ring-primary-500 -mx-1 rounded-sm px-1 py-1.5 text-[0.95rem] transition focus:ring-2 focus:outline-hidden"
+        >
+          {link.text}
+          {link.newTab && <span class="sr-only">(opens in new tab)</span>}
+        </a>)}
+      </nav>)}
     </div>
 
     <!-- Bottom bar -->

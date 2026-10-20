@@ -60,24 +60,22 @@ const eventDate = formatShortDate(date);
       <div
         class="bg-base-300 dark:bg-base-800 mr-3 flex h-10 w-10 items-center justify-center rounded-lg"
       >
-        {
-          loadedIcon ? (
-            <Image
-              src={loadedIcon}
-              alt={`${name} Icon`}
-              width={32}
-              height={32}
-              class="opacity-80 contrast-125 dark:opacity-90 dark:contrast-125"
-              loading="lazy"
-            />
-          ) : (
-            <Icon
-              name="tabler/outline/calendar"
-              class="text-base-400 dark:text-base-500 size-7"
-              aria-hidden="true"
-            />
-          )
-        }
+        {loadedIcon ? (
+          <Image
+            src={loadedIcon}
+            alt={`${name} Icon`}
+            width={32}
+            height={32}
+            class="opacity-80 contrast-125 dark:opacity-90 dark:contrast-125"
+            loading="lazy"
+          />
+        ) : (
+          <Icon
+            name="tabler/outline/calendar"
+            class="text-base-400 dark:text-base-500 size-7"
+            aria-hidden="true"
+          />
+        )}
       </div>
       <div class="flex flex-col">
         <div class="flex flex-wrap items-center gap-2">
@@ -87,51 +85,45 @@ const eventDate = formatShortDate(date);
             >
               {name}
             </span>
-            {
-              workshop && (
-                <span class="bg-primary-50 text-primary-600 dark:bg-primary-400/10 dark:text-primary-400 rounded-sm px-2 py-1 text-xs">
-                  Workshop
-                </span>
-              )
-            }
-            {
-              linkUrl && (
-                <span class="text-primary-600 dark:text-primary-400 transition-transform duration-200 group-hover:translate-x-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </span>
-              )
-            }
+            {workshop && <span
+              class="bg-primary-50 text-primary-600 dark:bg-primary-400/10 dark:text-primary-400 rounded-sm px-2 py-1 text-xs"
+            >
+              Workshop
+            </span>}
+            {linkUrl && <span
+              class="text-primary-600 dark:text-primary-400 transition-transform duration-200 group-hover:translate-x-1"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </span>}
           </div>
         </div>
         <div
           class="text-base-600 dark:text-base-300 flex flex-col text-sm sm:flex-row sm:items-center sm:gap-1"
         >
           <div class="flex items-center gap-1">
-            {
-              flagImage ? (
-                <Image
-                  src={flagImage}
-                  alt={`Flag of ${country}`}
-                  width={16}
-                  height={12}
-                  class="mb-0 inline-block rounded-xs mix-blend-multiply dark:mix-blend-screen"
-                  loading="lazy"
-                />
-              ) : (
-                <span>🌎</span>
-              )
-            }
+            {flagImage ? (
+              <Image
+                src={flagImage}
+                alt={`Flag of ${country}`}
+                width={16}
+                height={12}
+                class="mb-0 inline-block rounded-xs mix-blend-multiply dark:mix-blend-screen"
+                loading="lazy"
+              />
+            ) : (
+              <span>🌎</span>
+            )}
             <span>{city}</span>
           </div>
           <span class="hidden sm:inline">&mdash;</span>
@@ -140,36 +132,34 @@ const eventDate = formatShortDate(date);
       </div>
     </div>
     <div class="mt-2 flex items-center gap-2">
-      {
-        !isOnPresentationPage && displayText && (
-          <p class="text-base-600 dark:text-base-400 line-clamp-1 flex-1 text-sm">
-            {roleLabel && (
-              <span class="text-base-700 dark:text-base-300 font-medium">
-                {roleLabel} ·{" "}
-              </span>
-            )}
-            <em>{displayText}</em>
-          </p>
-        )
-      }
+      {!isOnPresentationPage && displayText && <p
+        class="text-base-600 dark:text-base-400 line-clamp-1 flex-1 text-sm"
+      >
+        {roleLabel && <span
+          class="text-base-700 dark:text-base-300 font-medium"
+        >
+          {roleLabel} ·{" "}
+        </span>}
+        <em>{displayText}</em>
+      </p>}
 
-      {
-        linkUrl && !isOnPresentationPage && presentationUrl && (
-          <div class="text-base-500 group-hover:text-primary-600 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center gap-1 text-xs transition-colors duration-200">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="size-4"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M21 3a1 1 0 0 1 0 2v9a3 3 0 0 1 -3 3h-5v2h2a1 1 0 0 1 0 2h-6a1 1 0 0 1 0 -2h2v-2h-5a3 3 0 0 1 -3 -3v-9a1 1 0 1 1 0 -2zm-4.293 4.293a1 1 0 0 0 -1.414 0l-2.293 2.292l-1.293 -1.292a1 1 0 0 0 -1.414 0l-3 3a1 1 0 0 0 0 1.414l.094 .083a1 1 0 0 0 1.32 -.083l2.293 -2.292l1.293 1.292a1 1 0 0 0 1.414 0l3 -3a1 1 0 0 0 0 -1.414" />
-            </svg>
-          </div>
-        )
-      }
+      {linkUrl && !isOnPresentationPage && presentationUrl && <div
+        class="text-base-500 group-hover:text-primary-600 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center gap-1 text-xs transition-colors duration-200"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="size-4"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path
+            d="M21 3a1 1 0 0 1 0 2v9a3 3 0 0 1 -3 3h-5v2h2a1 1 0 0 1 0 2h-6a1 1 0 0 1 0 -2h2v-2h-5a3 3 0 0 1 -3 -3v-9a1 1 0 1 1 0 -2zm-4.293 4.293a1 1 0 0 0 -1.414 0l-2.293 2.292l-1.293 -1.292a1 1 0 0 0 -1.414 0l-3 3a1 1 0 0 0 0 1.414l.094 .083a1 1 0 0 0 1.32 -.083l2.293 -2.292l1.293 1.292a1 1 0 0 0 1.414 0l3 -3a1 1 0 0 0 0 -1.414"
+          />
+        </svg>
+      </div>}
     </div>
   </WrapperTag>
 </article>

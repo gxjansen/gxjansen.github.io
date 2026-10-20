@@ -23,7 +23,8 @@ const shimmerDelay = (Math.random() * 2).toFixed(2);
 >
   <span
     class:list={["throbber-icon", variant === "game" ? "game" : "claude"]}
-    style={`animation-delay: ${iconDelay}s`}></span>
+    style={`animation-delay: ${iconDelay}s`}
+  ></span>
   <span class="throbber-text" style={`animation-delay: ${shimmerDelay}s`}
     >{displayWord}</span
   >

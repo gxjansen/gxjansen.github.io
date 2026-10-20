@@ -172,7 +172,8 @@ const arrowExamples = [
           <a href="#lists" class="primary-link text-lg">Lists</a>
           <ul class="mt-2 ml-4">
             <li class="mt-1">
-              <a href="#unordered-lists" class="primary-link">Unordered Lists</a
+              <a href="#unordered-lists" class="primary-link"
+                >Unordered Lists</a
               >
             </li>
             <li class="mt-1">
@@ -191,11 +192,9 @@ const arrowExamples = [
       <div id="button-variants" class="mb-8">
         <h3 class="h3">Basic Variants</h3>
         <div class="flex flex-wrap gap-4">
-          {
-            buttonExamples.map((button) => (
-              <Button variant={button.variant}>{button.text}</Button>
-            ))
-          }
+          {buttonExamples.map((button) => <Button variant={button.variant}
+            >{button.text}</Button
+          >)}
         </div>
       </div>
 
@@ -213,13 +212,12 @@ const arrowExamples = [
       <div id="button-arrows" class="mb-8">
         <h3 class="h3">With Arrows</h3>
         <div class="flex flex-wrap gap-4">
-          {
-            arrowExamples.map((button) => (
-              <Button variant="primary" arrow={button.arrow}>
-                {button.text}
-              </Button>
-            ))
-          }
+          {arrowExamples.map((button) => <Button
+            variant="primary"
+            arrow={button.arrow}
+          >
+            {button.text}
+          </Button>)}
         </div>
       </div>
 
@@ -296,7 +294,8 @@ const arrowExamples = [
       <div id="links" class="mb-8">
         <h3 class="h3">Links</h3>
         <p>
-          Text with a <a href="#" class="primary-link">primary link</a> styled consistently.
+          Text with a <a href="#" class="primary-link">primary link</a> styled
+          consistently.
         </p>
       </div>
     </section>
@@ -454,7 +453,8 @@ const arrowExamples = [
                     <path
                       d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
                       stroke-width="0"
-                      fill="currentColor"></path>
+                      fill="currentColor"
+                    ></path>
                   </svg>
                 </div>
                 <p class="alert-title">Success</p>
@@ -599,12 +599,12 @@ const arrowExamples = [
                 ready.
               </p>
               <div class="alert-actions">
-                <button class="alert-button alert-button-primary"
-                  >View Updates</button
-                >
-                <button class="alert-button alert-button-secondary"
-                  >Remind me later</button
-                >
+                <button class="alert-button alert-button-primary">
+                  View Updates
+                </button>
+                <button class="alert-button alert-button-secondary">
+                  Remind me later
+                </button>
               </div>
             </div>
           </div>
@@ -671,12 +671,12 @@ const arrowExamples = [
                 ready.
               </p>
               <div class="alert-actions">
-                <button class="alert-button alert-button-accent"
-                  >View Updates</button
-                >
-                <button class="alert-button alert-button-outline"
-                  >Remind me later</button
-                >
+                <button class="alert-button alert-button-accent">
+                  View Updates
+                </button>
+                <button class="alert-button alert-button-outline">
+                  Remind me later
+                </button>
               </div>
             </div>
           </div>

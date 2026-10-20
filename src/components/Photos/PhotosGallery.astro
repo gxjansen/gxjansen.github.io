@@ -19,73 +19,61 @@ const { galleries, grainHref = "https://grain.social/profile/gui.do" } =
   Astro.props as Props;
 ---
 
-{
-  galleries.length > 0 && (
-    <section
-      class="photos-card bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative overflow-hidden rounded-2xl border p-6 shadow-sm md:p-7"
-      aria-label="Photos"
+{galleries.length > 0 && <section
+  class="photos-card bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative overflow-hidden rounded-2xl border p-6 shadow-sm md:p-7"
+  aria-label="Photos"
+>
+  <div class="mb-5 flex flex-wrap items-start justify-between gap-3">
+    <p
+      class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.15rem] leading-none"
     >
-      <div class="mb-5 flex flex-wrap items-start justify-between gap-3">
-        <p class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.15rem] leading-none">
-          through the lens
-        </p>
-        <span class="grain-badge">
-          <Icon
-            name="tabler/outline/grain"
-            class="size-3.5"
-            aria-hidden="true"
-          />
-          Grain
-        </span>
-      </div>
+      through the lens
+    </p>
+    <span class="grain-badge">
+      <Icon name="tabler/outline/grain" class="size-3.5" aria-hidden="true" />
+      Grain
+    </span>
+  </div>
 
-      <h3 class="photos-h">Latest photos</h3>
+  <h3 class="photos-h">Latest photos</h3>
 
-      <ul class="photo-grid" role="list">
-        {galleries.map((g) => (
-          <li>
-            <a
-              class="photo-tile no-random-underline"
-              href={g.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${g.title || formatMonthYearShort(g.createdAt) || "Photo gallery"}${g.count > 1 ? ` — ${g.count} photos` : ""} on Grain`}
-            >
-              <img
-                src={g.cover?.thumb}
-                alt={g.cover?.alt || g.title || ""}
-                loading="lazy"
-                decoding="async"
-                width={g.cover?.width || undefined}
-                height={g.cover?.height || undefined}
-              />
-              {g.count > 1 && (
-                <span class="photo-count" aria-hidden="true">
-                  <Icon name="tabler/outline/copy" class="size-3" />
-                  {g.count}
-                </span>
-              )}
-              {g.title && <span class="photo-cap">{g.title}</span>}
-            </a>
-          </li>
-        ))}
-      </ul>
-
+  <ul class="photo-grid" role="list">
+    {galleries.map((g) => <li>
       <a
-        href={grainHref}
+        class="photo-tile no-random-underline"
+        href={g.href}
         target="_blank"
         rel="noopener noreferrer"
-        class="photos-more no-random-underline"
+        aria-label={`${g.title || formatMonthYearShort(g.createdAt) || "Photo gallery"}${g.count > 1 ? ` — ${g.count} photos` : ""} on Grain`}
       >
-        <span class="underline underline-offset-2">See all</span>
-        <span class="photos-more-arrow" aria-hidden="true">
-          &rarr;
-        </span>
-        <span class="sr-only">photos on Grain (opens in new tab)</span>
+        <img
+          src={g.cover?.thumb}
+          alt={g.cover?.alt || g.title || ""}
+          loading="lazy"
+          decoding="async"
+          width={g.cover?.width || undefined}
+          height={g.cover?.height || undefined}
+        />
+        {g.count > 1 && <span class="photo-count" aria-hidden="true">
+          <Icon name="tabler/outline/copy" class="size-3" />
+          {g.count}
+        </span>}
+        {g.title && <span class="photo-cap">{g.title}</span>}
       </a>
-    </section>
-  )
-}
+    </li>)}
+  </ul>
+
+  <a
+    href={grainHref}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="photos-more no-random-underline"
+  >
+    <span class="underline underline-offset-2">See all</span>
+    <span class="photos-more-arrow" aria-hidden="true"> &rarr; </span>
+    <span class="sr-only">photos on Grain (opens in new tab)</span>
+  </a>
+</section>}
 
 <style>
   @reference "../../styles/tailwind.css";

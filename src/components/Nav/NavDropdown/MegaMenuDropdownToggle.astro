@@ -62,18 +62,16 @@ if (cols >= 5) {
         gridClass,
       ]}
     >
-      {
-        navItem.megaMenuColumns.map((col) => (
-          <div>
-            <p class="border-base-200 text-base-600 dark:border-base-800 dark:text-base-400 mx-4 mb-2 border-b pb-1 text-lg font-medium">
-              {col.title}
-            </p>
-            {col.items.map((navItem) => (
-              <NavLink navItem={navItem} class="w-full" />
-            ))}
-          </div>
-        ))
-      }
+      {navItem.megaMenuColumns.map((col) => <div>
+        <p
+          class="border-base-200 text-base-600 dark:border-base-800 dark:text-base-400 mx-4 mb-2 border-b pb-1 text-lg font-medium"
+        >
+          {col.title}
+        </p>
+        {col.items.map((navItem) => (
+          <NavLink navItem={navItem} class="w-full" />
+        ))}
+      </div>)}
     </ul>
   </div>
 </li>

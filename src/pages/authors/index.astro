@@ -34,50 +34,48 @@ const authorPostCounts = authors
     </p>
 
     <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-      {
-        authorPostCounts.map(({ author, postCount }) => (
-          <article class="border-base-300 dark:border-base-700 rounded-xl border p-6 transition-shadow hover:shadow-lg">
-            <a href={`/authors/${author.id}/`} class="flex gap-6">
-              {author.data.avatar && (
-                <div class="flex-shrink-0">
-                  <Image
-                    src={author.data.avatar}
-                    alt={`${author.data.name}'s avatar`}
-                    width={100}
-                    height={100}
-                    quality="high"
-                    class="h-20 w-20 rounded-full object-cover"
-                  />
-                </div>
-              )}
+      {authorPostCounts.map(({ author, postCount }) => <article
+        class="border-base-300 dark:border-base-700 rounded-xl border p-6 transition-shadow hover:shadow-lg"
+      >
+        <a href={`/authors/${author.id}/`} class="flex gap-6">
+          {author.data.avatar && <div class="flex-shrink-0">
+            <Image
+              src={author.data.avatar}
+              alt={`${author.data.name}'s avatar`}
+              width={100}
+              height={100}
+              quality="high"
+              class="h-20 w-20 rounded-full object-cover"
+            />
+          </div>}
 
-              <div class="flex-1">
-                <h2 class="text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400 text-xl font-bold">
-                  {author.data.name}
-                </h2>
+          <div class="flex-1">
+            <h2
+              class="text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400 text-xl font-bold"
+            >
+              {author.data.name}
+            </h2>
 
-                {(author.data.jobTitle || author.data.organization) && (
-                  <div class="text-base-600 dark:text-base-400 mt-1 text-sm">
-                    {author.data.jobTitle}
-                    {author.data.jobTitle && author.data.organization && " at "}
-                    {author.data.organization}
-                  </div>
-                )}
+            {(author.data.jobTitle || author.data.organization) && <div
+              class="text-base-600 dark:text-base-400 mt-1 text-sm"
+            >
+              {author.data.jobTitle}
+              {author.data.jobTitle && author.data.organization && " at "}
+              {author.data.organization}
+            </div>}
 
-                {author.data.bioShort && (
-                  <p class="text-base-700 dark:text-base-300 mt-2 line-clamp-2 text-sm">
-                    {injectYears(author.data.bioShort)}
-                  </p>
-                )}
+            {author.data.bioShort && <p
+              class="text-base-700 dark:text-base-300 mt-2 line-clamp-2 text-sm"
+            >
+              {injectYears(author.data.bioShort)}
+            </p>}
 
-                <div class="text-primary-600 dark:text-primary-400 mt-3 text-sm">
-                  {postCount} {postCount === 1 ? "article" : "articles"}
-                </div>
-              </div>
-            </a>
-          </article>
-        ))
-      }
+            <div class="text-primary-600 dark:text-primary-400 mt-3 text-sm">
+              {postCount} {postCount === 1 ? "article" : "articles"}
+            </div>
+          </div>
+        </a>
+      </article>)}
     </div>
   </div>
 </BaseLayout>

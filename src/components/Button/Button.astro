@@ -67,78 +67,70 @@ const baseClasses = [
 ];
 ---
 
-<!-- Link button -->{
-  href && (
-    <a
-      id={id}
-      class:list={baseClasses}
-      href={href}
-      target={isExternalLink ? "_blank" : undefined}
-      rel={isExternalLink ? "noopener noreferrer" : undefined}
-      role="button"
-      aria-disabled={disabled}
-      tabindex={disabled ? -1 : undefined}
-      data-umami-event={umamiEvent}
-      data-umami-event-target={umamiEventTarget}
-      data-color={randomColor}
-      {...rest}
-    >
-      {arrow === "left" && (
-        <ArrowLeftIcon
-          class="mr-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:-translate-x-1"
-          aria-hidden="true"
-          role="presentation"
-        />
-      )}
-      <span class="button__text">
-        <slot />
-        {isExternalLink && <span class="sr-only">(opens in new tab)</span>}
-      </span>
-      {arrow === "right" && (
-        <ArrowRightIcon
-          class="ml-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:translate-x-1"
-          aria-hidden="true"
-          role="presentation"
-        />
-      )}
-    </a>
-  )
-}
+<!-- Link button -->{href && <a
+  id={id}
+  class:list={baseClasses}
+  href={href}
+  target={isExternalLink ? "_blank" : undefined}
+  rel={isExternalLink ? "noopener noreferrer" : undefined}
+  role="button"
+  aria-disabled={disabled}
+  tabindex={disabled ? -1 : undefined}
+  data-umami-event={umamiEvent}
+  data-umami-event-target={umamiEventTarget}
+  data-color={randomColor}
+  {...rest}
+>
+  {arrow === "left" && (
+    <ArrowLeftIcon
+      class="mr-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:-translate-x-1"
+      aria-hidden="true"
+      role="presentation"
+    />
+  )}
+  <span class="button__text">
+    <slot />
+    {isExternalLink && <span class="sr-only">(opens in new tab)</span>}
+  </span>
+  {arrow === "right" && (
+    <ArrowRightIcon
+      class="ml-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:translate-x-1"
+      aria-hidden="true"
+      role="presentation"
+    />
+  )}
+</a>}
 
 <!-- Regular button -->
-{
-  !href && (
-    <button
-      id={id}
-      class:list={baseClasses}
-      type={type}
-      disabled={disabled}
-      aria-disabled={disabled}
-      data-umami-event={umamiEvent}
-      data-umami-event-target={umamiEventTarget}
-      data-color={randomColor}
-      {...rest}
-    >
-      {arrow === "left" && (
-        <ArrowLeftIcon
-          class="mr-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:-translate-x-1"
-          aria-hidden="true"
-          role="presentation"
-        />
-      )}
-      <span class="button__text">
-        <slot />
-      </span>
-      {arrow === "right" && (
-        <ArrowRightIcon
-          class="ml-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:translate-x-1"
-          aria-hidden="true"
-          role="presentation"
-        />
-      )}
-    </button>
-  )
-}
+{!href && <button
+  id={id}
+  class:list={baseClasses}
+  type={type}
+  disabled={disabled}
+  aria-disabled={disabled}
+  data-umami-event={umamiEvent}
+  data-umami-event-target={umamiEventTarget}
+  data-color={randomColor}
+  {...rest}
+>
+  {arrow === "left" && (
+    <ArrowLeftIcon
+      class="mr-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:-translate-x-1"
+      aria-hidden="true"
+      role="presentation"
+    />
+  )}
+  <span class="button__text">
+    <slot />
+  </span>
+  {arrow === "right" && (
+    <ArrowRightIcon
+      class="ml-1 h-[1.4em] w-[1.4em] transition-[transform] group-hover:translate-x-1"
+      aria-hidden="true"
+      role="presentation"
+    />
+  )}
+</button>}
 
 <style>
   @reference "../../styles/tailwind.css";

@@ -50,66 +50,66 @@ const nextPost =
   </div>
 
   <div class="mt-8 flex items-center justify-between gap-4">
-    {
-      prevPost && (
-        <a
-          href={`/post/${prevPost.id}/`}
-          class="group border-base-200 hover:border-primary-500 focus:ring-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4 focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
-          aria-label={`Previous article: ${prevPost.data.title}`}
-          data-umami-event="nav-click"
-          data-umami-event-target="blog-prev"
+    {prevPost && <a
+      href={`/post/${prevPost.id}/`}
+      class="group border-base-200 hover:border-primary-500 focus:ring-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4 focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
+      aria-label={`Previous article: ${prevPost.data.title}`}
+      data-umami-event="nav-click"
+      data-umami-event-target="blog-prev"
+    >
+      <span
+        class="text-base-600 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center gap-1 text-sm"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          aria-hidden="true"
+          role="presentation"
         >
-          <span class="text-base-600 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center gap-1 text-sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              aria-hidden="true"
-              role="presentation"
-            >
-              <path d="M15 6l-6 6l6 6" />
-            </svg>
-            <span>Previous</span>
-          </span>
-          <p class="text-base-900 group-hover:text-primary-500 dark:group-hover:text-primary-400 mt-1 line-clamp-2 font-medium dark:text-white">
-            {prevPost.data.title}
-          </p>
-        </a>
-      )
-    }
+          <path d="M15 6l-6 6l6 6" />
+        </svg>
+        <span>Previous</span>
+      </span>
+      <p
+        class="text-base-900 group-hover:text-primary-500 dark:group-hover:text-primary-400 mt-1 line-clamp-2 font-medium dark:text-white"
+      >
+        {prevPost.data.title}
+      </p>
+    </a>}
 
-    {
-      nextPost && (
-        <a
-          href={`/post/${nextPost.id}/`}
-          class="group border-base-200 hover:border-primary-500 focus:ring-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4 text-right focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
-          aria-label={`Next article: ${nextPost.data.title}`}
-          data-umami-event="nav-click"
-          data-umami-event-target="blog-next"
+    {nextPost && <a
+      href={`/post/${nextPost.id}/`}
+      class="group border-base-200 hover:border-primary-500 focus:ring-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4 text-right focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
+      aria-label={`Next article: ${nextPost.data.title}`}
+      data-umami-event="nav-click"
+      data-umami-event-target="blog-next"
+    >
+      <span
+        class="text-base-600 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center justify-end gap-1 text-sm"
+      >
+        <span>Next</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          aria-hidden="true"
+          role="presentation"
         >
-          <span class="text-base-600 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center justify-end gap-1 text-sm">
-            <span>Next</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              aria-hidden="true"
-              role="presentation"
-            >
-              <path d="M9 6l6 6l-6 6" />
-            </svg>
-          </span>
-          <p class="text-base-900 group-hover:text-primary-500 dark:group-hover:text-primary-400 mt-1 line-clamp-2 font-medium dark:text-white">
-            {nextPost.data.title}
-          </p>
-        </a>
-      )
-    }
+          <path d="M9 6l6 6l-6 6" />
+        </svg>
+      </span>
+      <p
+        class="text-base-900 group-hover:text-primary-500 dark:group-hover:text-primary-400 mt-1 line-clamp-2 font-medium dark:text-white"
+      >
+        {nextPost.data.title}
+      </p>
+    </a>}
   </div>
 </nav>

@@ -1,6 +1,6 @@
 import type { Config } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
-import { verifySolution } from "altcha-lib";
+import { verifySolution } from "altcha-lib/v1";
 import { listmonkAuthHeaders, listmonkBaseUrl } from "./_shared/listmonk";
 
 /**

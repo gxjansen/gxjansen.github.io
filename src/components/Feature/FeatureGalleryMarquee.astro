@@ -101,9 +101,7 @@ const marqueeBottom: MarqueeImages = {
         <div
           class="mask-gradient relative flex flex-col gap-6 overflow-hidden md:gap-10"
         >
-          {
-            /* Gradient overlays for fade effect - using multi-step gradients for smoother transition */
-          }
+          {/* Gradient overlays for fade effect - using multi-step gradients for smoother transition */}
           <div class="gradient-fade-left z-dropdown"></div>
           <div class="gradient-fade-right z-dropdown"></div>
 
@@ -114,41 +112,37 @@ const marqueeBottom: MarqueeImages = {
             <div
               class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-6 md:gap-10"
             >
-              {
-                marqueeTop.images.map((item) => (
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    loading="lazy"
-                    width={400}
-                    height={300}
-                    quality={75}
-                    format="webp"
-                    sizes="(max-width: 768px) 10rem, 20rem"
-                    class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
-                  />
-                ))
-              }
+              {marqueeTop.images.map((item) => (
+                <Image
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                  width={400}
+                  height={300}
+                  quality={75}
+                  format="webp"
+                  sizes="(max-width: 768px) 10rem, 20rem"
+                  class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+                />
+              ))}
             </div>
             <div
               aria-hidden="true"
               class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-6 md:gap-10"
             >
-              {
-                marqueeTop.images.map((item) => (
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    loading="lazy"
-                    width={400}
-                    height={300}
-                    quality={75}
-                    format="webp"
-                    sizes="(max-width: 768px) 10rem, 20rem"
-                    class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
-                  />
-                ))
-              }
+              {marqueeTop.images.map((item) => (
+                <Image
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                  width={400}
+                  height={300}
+                  quality={75}
+                  format="webp"
+                  sizes="(max-width: 768px) 10rem, 20rem"
+                  class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+                />
+              ))}
             </div>
           </div>
 
@@ -159,41 +153,37 @@ const marqueeBottom: MarqueeImages = {
             <div
               class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-6 [animation-direction:reverse] md:gap-10"
             >
-              {
-                marqueeMiddle.images.map((item) => (
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    loading="lazy"
-                    width={400}
-                    height={300}
-                    quality={75}
-                    format="webp"
-                    sizes="(max-width: 768px) 10rem, 20rem"
-                    class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
-                  />
-                ))
-              }
+              {marqueeMiddle.images.map((item) => (
+                <Image
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                  width={400}
+                  height={300}
+                  quality={75}
+                  format="webp"
+                  sizes="(max-width: 768px) 10rem, 20rem"
+                  class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+                />
+              ))}
             </div>
             <div
               aria-hidden="true"
               class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-6 [animation-direction:reverse] md:gap-10"
             >
-              {
-                marqueeMiddle.images.map((item) => (
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    loading="lazy"
-                    width={400}
-                    height={300}
-                    quality={75}
-                    format="webp"
-                    sizes="(max-width: 768px) 10rem, 20rem"
-                    class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
-                  />
-                ))
-              }
+              {marqueeMiddle.images.map((item) => (
+                <Image
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                  width={400}
+                  height={300}
+                  quality={75}
+                  format="webp"
+                  sizes="(max-width: 768px) 10rem, 20rem"
+                  class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+                />
+              ))}
             </div>
           </div>
 
@@ -204,41 +194,37 @@ const marqueeBottom: MarqueeImages = {
             <div
               class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-6 md:gap-10"
             >
-              {
-                marqueeBottom.images.map((item) => (
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    loading="lazy"
-                    width={400}
-                    height={300}
-                    quality={75}
-                    format="webp"
-                    sizes="(max-width: 768px) 10rem, 20rem"
-                    class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
-                  />
-                ))
-              }
+              {marqueeBottom.images.map((item) => (
+                <Image
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                  width={400}
+                  height={300}
+                  quality={75}
+                  format="webp"
+                  sizes="(max-width: 768px) 10rem, 20rem"
+                  class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+                />
+              ))}
             </div>
             <div
               aria-hidden="true"
               class="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-6 md:gap-10"
             >
-              {
-                marqueeBottom.images.map((item) => (
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    loading="lazy"
-                    width={400}
-                    height={300}
-                    quality={75}
-                    format="webp"
-                    sizes="(max-width: 768px) 10rem, 20rem"
-                    class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
-                  />
-                ))
-              }
+              {marqueeBottom.images.map((item) => (
+                <Image
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                  width={400}
+                  height={300}
+                  quality={75}
+                  format="webp"
+                  sizes="(max-width: 768px) 10rem, 20rem"
+                  class="aspect-[4/3] max-w-[clamp(10rem,28vmin,20rem)] rounded-md object-cover shadow-md"
+                />
+              ))}
             </div>
           </div>
         </div>

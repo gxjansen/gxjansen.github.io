@@ -124,63 +124,69 @@ const communities = [
     <!-- Communities -->
     <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
       <div class="flex flex-col gap-[clamp(3rem,7vw,5rem)]">
-        {
-          communities.map((community, index) => (
-            <div class="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-              <div class={index % 2 === 1 ? "md:order-2" : ""}>
-                <div class="border-base-200 dark:border-base-800 flex aspect-video min-h-[200px] items-center justify-center rounded-2xl border bg-white p-6 sm:p-8">
-                  <Image
-                    src={community.logo}
-                    alt={`${community.name} logo`}
-                    class="h-auto w-[74%] max-w-[420px] object-contain"
-                  />
-                </div>
-              </div>
-
-              <div class={index % 2 === 1 ? "md:order-1" : ""}>
-                <div class="flex flex-wrap items-center gap-3">
-                  <span class="chip chip--plain">{community.period}</span>
-                  <span class="text-base-500 text-sm">{community.context}</span>
-                </div>
-
-                <h2 class="font-display mt-3 text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-[-0.02em]">
-                  {community.name}
-                </h2>
-                <p class="text-primary-600 dark:text-primary-400 mt-1 font-semibold">
-                  {community.role}
-                </p>
-
-                <p class="text-base-600 dark:text-base-400 mt-3 leading-relaxed">
-                  {community.description}
-                </p>
-
-                <div class="mt-5">
-                  <h3 class="text-base-500 mb-3 text-xs font-bold tracking-[0.08em] uppercase">
-                    Key achievements
-                  </h3>
-                  <ul class="flex flex-col gap-2">
-                    {community.achievements.map((achievement) => (
-                      <li class="text-base-600 dark:text-base-400 flex items-start gap-2.5">
-                        <Icon
-                          name="tabler/outline/check"
-                          class="text-primary-600 dark:text-primary-400 mt-0.5 size-5 shrink-0"
-                          aria-hidden="true"
-                        />
-                        <span>{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {community.quote && (
-                  <blockquote class="border-primary-600/30 dark:border-primary-400/30 text-base-700 dark:text-base-300 mt-6 border-l-4 pl-4 italic">
-                    "{community.quote}"
-                  </blockquote>
-                )}
-              </div>
+        {communities.map((community, index) => <div
+          class="grid items-center gap-8 md:grid-cols-2 md:gap-12"
+        >
+          <div class={index % 2 === 1 ? "md:order-2" : ""}>
+            <div
+              class="border-base-200 dark:border-base-800 flex aspect-video min-h-[200px] items-center justify-center rounded-2xl border bg-white p-6 sm:p-8"
+            >
+              <Image
+                src={community.logo}
+                alt={`${community.name} logo`}
+                class="h-auto w-[74%] max-w-[420px] object-contain"
+              />
             </div>
-          ))
-        }
+          </div>
+
+          <div class={index % 2 === 1 ? "md:order-1" : ""}>
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="chip chip--plain">{community.period}</span>
+              <span class="text-base-500 text-sm">{community.context}</span>
+            </div>
+
+            <h2
+              class="font-display mt-3 text-[clamp(1.6rem,3vw,2.1rem)] font-extrabold tracking-[-0.02em]"
+            >
+              {community.name}
+            </h2>
+            <p
+              class="text-primary-600 dark:text-primary-400 mt-1 font-semibold"
+            >
+              {community.role}
+            </p>
+
+            <p class="text-base-600 dark:text-base-400 mt-3 leading-relaxed">
+              {community.description}
+            </p>
+
+            <div class="mt-5">
+              <h3
+                class="text-base-500 mb-3 text-xs font-bold tracking-[0.08em] uppercase"
+              >
+                Key achievements
+              </h3>
+              <ul class="flex flex-col gap-2">
+                {community.achievements.map((achievement) => <li
+                  class="text-base-600 dark:text-base-400 flex items-start gap-2.5"
+                >
+                  <Icon
+                    name="tabler/outline/check"
+                    class="text-primary-600 dark:text-primary-400 mt-0.5 size-5 shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span>{achievement}</span>
+                </li>)}
+              </ul>
+            </div>
+
+            {community.quote && <blockquote
+              class="border-primary-600/30 dark:border-primary-400/30 text-base-700 dark:text-base-300 mt-6 border-l-4 pl-4 italic"
+            >
+              "{community.quote}"
+            </blockquote>}
+          </div>
+        </div>)}
       </div>
     </section>
 

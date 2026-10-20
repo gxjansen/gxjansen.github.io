@@ -34,156 +34,146 @@ const nothing = active.length === 0 && recent.length === 0;
     </span>
   </div>
 
-  {
-    nothing && (
-      <p class="text-base-500 dark:text-base-400 text-[.94rem]">
-        Reading list is taking a breather.
-      </p>
-    )
-  }
+  {nothing && <p class="text-base-500 dark:text-base-400 text-[.94rem]">
+    Reading list is taking a breather.
+  </p>}
 
   {/* ── Currently reading (any genre) ── */}
-  {
-    active.length === 1 && (
-      <>
-        <h3 class="reading-h">Currently reading</h3>
-        <div class="flex flex-wrap items-stretch gap-5">
+  {active.length === 1 && (
+    <>
+      <h3 class="reading-h">Currently reading</h3>
+      <div class="flex flex-wrap items-stretch gap-5">
+        <a
+          class={`bk-cover bk-${active[0].accent} no-random-underline h-[206px] w-[138px] flex-none`}
+          href={active[0].href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${active[0].title} on Bookhive`}
+        >
+          {active[0].coverUrl ? (
+            <img
+              src={active[0].coverUrl}
+              alt={`Cover of ${active[0].title}`}
+              loading="lazy"
+            />
+          ) : (
+            <>
+              <span class="bk-spine" aria-hidden="true" />
+              <div class="bk-meta">
+                <div class="bk-title">{active[0].title}</div>
+                <div class="bk-author">{active[0].author}</div>
+              </div>
+            </>
+          )}
+        </a>
+        <div
+          class="flex min-w-[200px] flex-[1_1_240px] flex-col justify-center gap-2"
+        >
+          <span class="reading-pill">
+            <span class="reading-pill-dot" aria-hidden="true" /> Reading now
+          </span>
+          <div
+            class="text-base-950 dark:text-base-50 font-display text-[1.5rem] leading-[1.1] font-extrabold tracking-[-0.02em]"
+          >
+            {active[0].title}
+          </div>
+          <div class="text-base-700 dark:text-base-300 text-[.98rem]">
+            {active[0].author}
+          </div>
+          {active[0].startedLabel && <div
+            class="text-base-500 dark:text-base-400 text-[.84rem]"
+          >
+            {active[0].startedLabel}
+          </div>}
+        </div>
+      </div>
+    </>
+  )}
+
+  {active.length > 1 && (
+    <>
+      <h3 class="reading-h">Currently reading</h3>
+      <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
+        {active.map((b) => <div class="flex flex-col gap-2">
           <a
-            class={`bk-cover bk-${active[0].accent} no-random-underline h-[206px] w-[138px] flex-none`}
-            href={active[0].href}
+            class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
+            href={b.href}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${active[0].title} on Bookhive`}
+            aria-label={`${b.title} on Bookhive`}
           >
-            {active[0].coverUrl ? (
+            {b.coverUrl ? (
               <img
-                src={active[0].coverUrl}
-                alt={`Cover of ${active[0].title}`}
+                src={b.coverUrl}
+                alt={`Cover of ${b.title}`}
                 loading="lazy"
               />
             ) : (
               <>
                 <span class="bk-spine" aria-hidden="true" />
                 <div class="bk-meta">
-                  <div class="bk-title">{active[0].title}</div>
-                  <div class="bk-author">{active[0].author}</div>
+                  <div class="bk-title">{b.title}</div>
+                  <div class="bk-author">{b.author}</div>
                 </div>
               </>
             )}
           </a>
-          <div class="flex min-w-[200px] flex-[1_1_240px] flex-col justify-center gap-2">
-            <span class="reading-pill">
-              <span class="reading-pill-dot" aria-hidden="true" /> Reading now
-            </span>
-            <div class="text-base-950 dark:text-base-50 font-display text-[1.5rem] leading-[1.1] font-extrabold tracking-[-0.02em]">
-              {active[0].title}
-            </div>
-            <div class="text-base-700 dark:text-base-300 text-[.98rem]">
-              {active[0].author}
-            </div>
-            {active[0].startedLabel && (
-              <div class="text-base-500 dark:text-base-400 text-[.84rem]">
-                {active[0].startedLabel}
-              </div>
-            )}
+          <div
+            class="text-love flex items-center gap-1.5 text-[.74rem] font-bold"
+          >
+            <span class="reading-pill-dot" aria-hidden="true" /> Reading now
           </div>
-        </div>
-      </>
-    )
-  }
-
-  {
-    active.length > 1 && (
-      <>
-        <h3 class="reading-h">Currently reading</h3>
-        <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
-          {active.map((b) => (
-            <div class="flex flex-col gap-2">
-              <a
-                class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
-                href={b.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${b.title} on Bookhive`}
-              >
-                {b.coverUrl ? (
-                  <img
-                    src={b.coverUrl}
-                    alt={`Cover of ${b.title}`}
-                    loading="lazy"
-                  />
-                ) : (
-                  <>
-                    <span class="bk-spine" aria-hidden="true" />
-                    <div class="bk-meta">
-                      <div class="bk-title">{b.title}</div>
-                      <div class="bk-author">{b.author}</div>
-                    </div>
-                  </>
-                )}
-              </a>
-              <div class="text-love flex items-center gap-1.5 text-[.74rem] font-bold">
-                <span class="reading-pill-dot" aria-hidden="true" /> Reading now
-              </div>
-            </div>
-          ))}
-        </div>
-      </>
-    )
-  }
+        </div>)}
+      </div>
+    </>
+  )}
 
   {/* ── Recently read (non-fiction) ── */}
-  {
-    recent.length > 0 && (
-      <>
-        <h3 class:list={["reading-h", active.length > 0 && "mt-7"]}>
-          Recently read
-        </h3>
-        <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
-          {recent.map((b) => (
-            <div class="flex flex-col gap-2">
-              <a
-                class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
-                href={b.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${b.title} on Bookhive`}
-              >
-                {b.coverUrl ? (
-                  <img
-                    src={b.coverUrl}
-                    alt={`Cover of ${b.title}`}
-                    loading="lazy"
-                  />
-                ) : (
-                  <>
-                    <span class="bk-spine" aria-hidden="true" />
-                    <div class="bk-meta">
-                      <div class="bk-title">{b.title}</div>
-                      <div class="bk-author">{b.author}</div>
-                    </div>
-                  </>
-                )}
-              </a>
-              {typeof b.rating === "number" && <Stars value={b.rating} />}
-            </div>
-          ))}
-        </div>
-        <a
-          href={bookhiveHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="reading-more no-random-underline"
-        >
-          <span class="underline underline-offset-2">See all</span>
-          <span class="reading-more-arrow" aria-hidden="true">
-            &rarr;
-          </span>
-          <span class="sr-only">books on Bookhive (opens in new tab)</span>
-        </a>
-      </>
-    )
-  }
+  {recent.length > 0 && (
+    <>
+      <h3 class:list={["reading-h", active.length > 0 && "mt-7"]}>
+        Recently read
+      </h3>
+      <div class="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
+        {recent.map((b) => <div class="flex flex-col gap-2">
+          <a
+            class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
+            href={b.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${b.title} on Bookhive`}
+          >
+            {b.coverUrl ? (
+              <img
+                src={b.coverUrl}
+                alt={`Cover of ${b.title}`}
+                loading="lazy"
+              />
+            ) : (
+              <>
+                <span class="bk-spine" aria-hidden="true" />
+                <div class="bk-meta">
+                  <div class="bk-title">{b.title}</div>
+                  <div class="bk-author">{b.author}</div>
+                </div>
+              </>
+            )}
+          </a>
+          {typeof b.rating === "number" && <Stars value={b.rating} />}
+        </div>)}
+      </div>
+      <a
+        href={bookhiveHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="reading-more no-random-underline"
+      >
+        <span class="underline underline-offset-2">See all</span>
+        <span class="reading-more-arrow" aria-hidden="true"> &rarr; </span>
+        <span class="sr-only">books on Bookhive (opens in new tab)</span>
+      </a>
+    </>
+  )}
 </section>
 
 <style>

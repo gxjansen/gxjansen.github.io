@@ -10,17 +10,50 @@
  * Runs at render time: on a static build it's fresh per deploy; set
  * `prerender = false` on the homepage to make it live per request.
  */
-import { fetchActivityFeed } from "@singi-labs/sifa-sdk/query/fetchers";
+import {
+  fetchActivityFeed,
+  type ActivityItem as SifaActivityItem,
+} from "@singi-labs/sifa-sdk/query/fetchers";
 import { formatRelativeTime, resolveCardUrl } from "@singi-labs/sifa-sdk";
 import { activitySeed, type ActivityItem } from "@data/homeContent";
 
 const SIFA_BASE = "https://sifa.id";
 const HANDLE = "gui.do";
 
+/** A raw activity item from the Sifa feed. `authorDid` is not part of the
+ *  SDK's per-author feed type, but is read when the server sends it. */
+type RawActivity = SifaActivityItem & { authorDid?: string };
+
+/** The parts of an app.bsky.feed.getPosts embed view this module reads. Kept
+ *  loose (all optional) because embeds are a union of several view types. */
+interface EmbedImage {
+  thumb?: string;
+  alt?: string;
+}
+interface EmbedExternal {
+  uri?: string;
+  title?: string;
+  thumb?: string;
+}
+interface EmbedView {
+  images?: EmbedImage[];
+  external?: EmbedExternal;
+  media?: { images?: EmbedImage[]; external?: EmbedExternal };
+}
+interface GetPostsResponse {
+  posts?: {
+    uri: string;
+    likeCount?: number;
+    repostCount?: number;
+    replyCount?: number;
+    embed?: EmbedView;
+  }[];
+}
+
 /** Source URL for an item via the SDK's resolver. Feed shows a single
  *  profile, so the author is always gui.do (the feed item itself doesn't
  *  carry author identity — see sdk DX notes). Null-safe. */
-function cardUrl(raw: any): string | undefined {
+function cardUrl(raw: RawActivity): string | undefined {
   try {
     return (
       resolveCardUrl({
@@ -63,8 +96,7 @@ interface PostMeta {
 function klipyVideo(
   gifUrl: string,
 ):
-  | { webm?: string; mp4?: string; width?: number; height?: number }
-  | undefined {
+  { webm?: string; mp4?: string; width?: number; height?: number } | undefined {
   try {
     const u = new URL(gifUrl);
     // Exact host or a real subdomain — `.endsWith("klipy.com")` alone would
@@ -97,7 +129,7 @@ function klipyVideo(
  *  get their small WebM/MP4 versions so the feed plays a lightweight <video>;
  *  the animated `.gif` URL stays as the fallback. Other externals use the
  *  static thumbnail. */
-function extractImage(embed: any): {
+function extractImage(embed?: EmbedView): {
   image?: string;
   imageAlt?: string;
   isGif?: boolean;
@@ -146,7 +178,7 @@ async function fetchPostMeta(uris: string[]): Promise<Map<string, PostMeta>> {
         `https://public.api.bsky.app/xrpc/app.bsky.feed.getPosts?${qs}`,
       );
       if (!res.ok) continue;
-      const data: any = await res.json();
+      const data = (await res.json()) as GetPostsResponse;
       for (const p of data.posts ?? []) {
         map.set(p.uri, {
           likes: p.likeCount ?? 0,
@@ -208,7 +240,7 @@ async function fetchRecentNonPosts(): Promise<ActivityItem[]> {
         });
         const seen = new Set<string>();
         return (r?.items ?? [])
-          .map((raw: any) => ({
+          .map((raw: RawActivity) => ({
             at: new Date(raw.indexedAt).getTime() || 0,
             item: mapItem(raw),
           }))
@@ -278,7 +310,7 @@ const blobImage = (did?: string, cid?: string): string | undefined =>
 /** Deep link a review to the actual book/film on its source app, instead of
  *  the generic profile card the SDK resolver returns. */
 function reviewItemUrl(
-  raw: any,
+  raw: RawActivity,
   record: Record<string, unknown>,
 ): string | undefined {
   const coll = str(raw?.collection) ?? "";
@@ -298,7 +330,7 @@ function reviewItemUrl(
 
 /** Map one raw SDK activity item to the display shape, or null to drop it.
  *  `eng` carries real Bluesky engagement counts when available. */
-function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
+function mapItem(raw: RawActivity, meta?: PostMeta): ActivityItem | null {
   const record = (raw?.record ?? {}) as Record<string, unknown>;
   const app = str(raw?.appId) ?? "fallback";
   const time = formatRelativeTime(str(raw?.indexedAt) ?? "");
@@ -344,7 +376,9 @@ function mapItem(raw: any, meta?: PostMeta): ActivityItem | null {
           ? (record.rating as number)
           : undefined;
       const did = didFromUri(str(raw?.uri));
-      const coverCid = (record.cover as any)?.ref?.["$link"];
+      const coverCid = (
+        record.cover as { ref?: { $link?: unknown } } | undefined
+      )?.ref?.$link;
       return {
         ...base,
         // Link straight to the book / film, not the profile card.
@@ -428,27 +462,25 @@ export async function getActivity(): Promise<ActivityItem[]> {
       fetchActivityFeed({ baseUrl: SIFA_BASE }, HANDLE, { limit: 40 }),
       fetchRecentNonPosts(),
     ]);
-    const items = res?.items ?? [];
+    const items: RawActivity[] = res?.items ?? [];
     if (!items.length && !nonPosts.length) return activitySeed;
 
     // Engagement counts + image thumbnails for Bluesky posts (public AppView).
     const bskyUris = items
-      .filter((i: any) => i.collection === "app.bsky.feed.post")
-      .map((i: any) => i.uri);
+      .filter((i) => i.collection === "app.bsky.feed.post")
+      .map((i) => i.uri);
     const meta = await fetchPostMeta(bskyUris);
 
     // The 7-day window applies ONLY to posts (frequent). Rank them by interactions.
     const cutoff = Date.now() - RECENT_DAYS * 86_400_000;
-    const recentEnough = (raw: any) => {
+    const recentEnough = (raw: RawActivity) => {
       const t = new Date(raw.indexedAt).getTime();
       return Number.isNaN(t) || t >= cutoff;
     };
 
     const posts = items
-      .filter(
-        (r: any) => r.collection === "app.bsky.feed.post" && recentEnough(r),
-      )
-      .map((r: any) => mapItem(r, meta.get(r.uri)))
+      .filter((r) => r.collection === "app.bsky.feed.post" && recentEnough(r))
+      .map((r) => mapItem(r, meta.get(r.uri)))
       .filter((x): x is ActivityItem => x !== null)
       .sort((a, b) => interestScore(b) - interestScore(a))
       .slice(0, POST_HIGHLIGHTS);

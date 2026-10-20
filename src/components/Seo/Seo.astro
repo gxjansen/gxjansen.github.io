@@ -219,28 +219,26 @@ const imageUrl =
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type === "blog" ? "article" : "website"} />
 <meta property="og:locale" content={currLocale} />
-{
-  type === "blog" && (
-    <>
-      {toIsoDate(Astro.props.postFrontmatter?.publishDate) && (
-        <meta
-          property="article:published_time"
-          content={toIsoDate(Astro.props.postFrontmatter?.publishDate)}
-        />
-      )}
-      {toIsoDate(Astro.props.postFrontmatter?.updateDate) && (
-        <meta
-          property="article:modified_time"
-          content={toIsoDate(Astro.props.postFrontmatter?.updateDate)}
-        />
-      )}
-      <meta property="article:author" content={siteData.author.name} />
-      {Astro.props.postFrontmatter?.tags?.map((tag: string) => (
-        <meta property="article:tag" content={tag} />
-      ))}
-    </>
-  )
-}
+{type === "blog" && (
+  <>
+    {toIsoDate(Astro.props.postFrontmatter?.publishDate) && (
+      <meta
+        property="article:published_time"
+        content={toIsoDate(Astro.props.postFrontmatter?.publishDate)}
+      />
+    )}
+    {toIsoDate(Astro.props.postFrontmatter?.updateDate) && (
+      <meta
+        property="article:modified_time"
+        content={toIsoDate(Astro.props.postFrontmatter?.updateDate)}
+      />
+    )}
+    <meta property="article:author" content={siteData.author.name} />
+    {Astro.props.postFrontmatter?.tags?.map((tag: string) => (
+      <meta property="article:tag" content={tag} />
+    ))}
+  </>
+)}
 <meta property="og:url" content={canonicalUrl.toString()} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
@@ -267,29 +265,27 @@ const imageUrl =
 <Fragment set:html={jsonLD} />
 
 <!-- Additional Accessibility Meta Tags -->
-{
-  type === "blog" && (
-    <>
+{type === "blog" && (
+  <>
+    <meta
+      name="author"
+      content={
+        Astro.props.authors
+          ?.map((author: { data: { name: string } }) => author.data.name)
+          .join(", ") || siteData.author.name
+      }
+    />
+    {toIsoDate(Astro.props.postFrontmatter?.publishDate) && (
       <meta
-        name="author"
-        content={
-          Astro.props.authors
-            ?.map((author: { data: { name: string } }) => author.data.name)
-            .join(", ") || siteData.author.name
-        }
+        name="date"
+        content={toIsoDate(Astro.props.postFrontmatter?.publishDate)}
       />
-      {toIsoDate(Astro.props.postFrontmatter?.publishDate) && (
-        <meta
-          name="date"
-          content={toIsoDate(Astro.props.postFrontmatter?.publishDate)}
-        />
-      )}
-      {toIsoDate(Astro.props.postFrontmatter?.updateDate) && (
-        <meta
-          name="last-modified"
-          content={toIsoDate(Astro.props.postFrontmatter?.updateDate)}
-        />
-      )}
-    </>
-  )
-}
+    )}
+    {toIsoDate(Astro.props.postFrontmatter?.updateDate) && (
+      <meta
+        name="last-modified"
+        content={toIsoDate(Astro.props.postFrontmatter?.updateDate)}
+      />
+    )}
+  </>
+)}

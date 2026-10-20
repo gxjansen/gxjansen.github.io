@@ -44,23 +44,19 @@ const hasWebsite = website && website.includes("gui.do");
   </h3>
 
   <div class="flex flex-col gap-6 md:flex-row">
-    {
-      avatar && (
-        <div class="flex-shrink-0">
-          <a href={authorUrl}>
-            <Image
-              src={avatar}
-              alt={`${name}'s avatar`}
-              width={120}
-              height={120}
-              densities={[2]}
-              quality="high"
-              class="h-24 w-24 rounded-full object-cover md:h-30 md:w-30"
-            />
-          </a>
-        </div>
-      )
-    }
+    {avatar && <div class="flex-shrink-0">
+      <a href={authorUrl}>
+        <Image
+          src={avatar}
+          alt={`${name}'s avatar`}
+          width={120}
+          height={120}
+          densities={[2]}
+          quality="high"
+          class="h-24 w-24 rounded-full object-cover md:h-30 md:w-30"
+        />
+      </a>
+    </div>}
 
     <div class="flex-1">
       <a
@@ -70,81 +66,67 @@ const hasWebsite = website && website.includes("gui.do");
         {name}
       </a>
 
-      {
-        (jobTitle || organization) && (
-          <div class="text-base-600 dark:text-base-400 mt-1">
-            {jobTitle}
-            {jobTitle && organization && " at "}
-            {organization}
-          </div>
-        )
-      }
+      {(jobTitle || organization) && <div
+        class="text-base-600 dark:text-base-400 mt-1"
+      >
+        {jobTitle}
+        {jobTitle && organization && " at "}
+        {organization}
+      </div>}
 
-      {
-        bio && (
-          <div class="prose prose-sm text-base-700 dark:prose-invert dark:text-base-300 mt-3 max-w-none">
-            <p>{injectYears(bio)}</p>
-          </div>
-        )
-      }
+      {bio && <div
+        class="prose prose-sm text-base-700 dark:prose-invert dark:text-base-300 mt-3 max-w-none"
+      >
+        <p>{injectYears(bio)}</p>
+      </div>}
 
-      {
-        expertise.length > 0 && (
-          <div class="mt-4">
-            <h4 class="text-base-900 dark:text-base-100 mb-2 text-sm font-semibold">
-              Areas of Expertise
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              {expertise.map((topic: string) => (
-                <span class="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 rounded-full px-3 py-1 text-xs">
-                  {topic}
-                </span>
-              ))}
-            </div>
-          </div>
-        )
-      }
+      {expertise.length > 0 && <div class="mt-4">
+        <h4 class="text-base-900 dark:text-base-100 mb-2 text-sm font-semibold">
+          Areas of Expertise
+        </h4>
+        <div class="flex flex-wrap gap-2">
+          {expertise.map((topic: string) => <span
+            class="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 rounded-full px-3 py-1 text-xs"
+          >
+            {topic}
+          </span>)}
+        </div>
+      </div>}
 
-      {
-        credentials.length > 0 && (
-          <div class="mt-4">
-            <h4 class="text-base-900 dark:text-base-100 mb-2 text-sm font-semibold">
-              Credentials
-            </h4>
-            <ul class="text-base-700 dark:text-base-300 list-inside list-disc space-y-1 text-sm">
-              {credentials.map((credential: string) => (
-                <li>{injectYears(credential)}</li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
+      {credentials.length > 0 && <div class="mt-4">
+        <h4 class="text-base-900 dark:text-base-100 mb-2 text-sm font-semibold">
+          Credentials
+        </h4>
+        <ul
+          class="text-base-700 dark:text-base-300 list-inside list-disc space-y-1 text-sm"
+        >
+          {credentials.map((credential: string) => <li>
+            {injectYears(credential)}
+          </li>)}
+        </ul>
+      </div>}
 
-      {
-        (socialLinks.length > 0 || hasWebsite) && (
-          <div class="mt-4 flex flex-wrap items-center gap-2">
-            <SocialLinks
-              location="about"
-              context="about"
-              links={socialLinks.map((l) => ({
-                name: l.label,
-                href: l.url,
-                icon: l.icon,
-              }))}
-            />
-            {hasWebsite && (
-              <a
-                href={website}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 ml-2 text-sm font-medium"
-              >
-                gui.do →
-              </a>
-            )}
-          </div>
-        )
-      }
+      {(socialLinks.length > 0 || hasWebsite) && <div
+        class="mt-4 flex flex-wrap items-center gap-2"
+      >
+        <SocialLinks
+          location="about"
+          context="about"
+          links={socialLinks.map((l) => ({
+            name: l.label,
+            href: l.url,
+            icon: l.icon,
+          }))}
+        />
+        {hasWebsite && <a
+          href={website}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 ml-2 text-sm font-medium"
+        >
+          gui.do →
+        </a>}
+      </div>}
 
       <div class="mt-4">
         <a

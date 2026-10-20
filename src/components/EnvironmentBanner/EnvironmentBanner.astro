@@ -6,38 +6,34 @@ import { Icon } from "astro-icon/components";
 const isProduction = CONFIG.ALLOW_INDEXING;
 ---
 
-{
-  !isProduction && (
-    <div
-      class="environment-banner"
-      role="alert"
-      aria-atomic="true"
-      aria-live="polite"
+{!isProduction && <div
+  class="environment-banner"
+  role="alert"
+  aria-atomic="true"
+  aria-live="polite"
+>
+  <div class="banner-content">
+    <Icon
+      name="tabler/alert-triangle"
+      class="h-4 w-4"
+      aria-hidden="true"
+      role="presentation"
+    />
+    <span>Preview Environment</span>
+    <button
+      type="button"
+      class="banner-close"
+      aria-label="Dismiss preview environment notification"
     >
-      <div class="banner-content">
-        <Icon
-          name="tabler/alert-triangle"
-          class="h-4 w-4"
-          aria-hidden="true"
-          role="presentation"
-        />
-        <span>Preview Environment</span>
-        <button
-          type="button"
-          class="banner-close"
-          aria-label="Dismiss preview environment notification"
-        >
-          <Icon
-            name="tabler/x"
-            class="h-4 w-4"
-            aria-hidden="true"
-            role="presentation"
-          />
-        </button>
-      </div>
-    </div>
-  )
-}
+      <Icon
+        name="tabler/x"
+        class="h-4 w-4"
+        aria-hidden="true"
+        role="presentation"
+      />
+    </button>
+  </div>
+</div>}
 
 <style>
   .environment-banner {

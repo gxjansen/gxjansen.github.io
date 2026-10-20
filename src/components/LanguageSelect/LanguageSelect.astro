@@ -60,23 +60,22 @@ const currLocale = getLocaleFromUrl(Astro.url);
       class="border-base-200 bg-base-50 dark:border-base-800 dark:bg-base-900 mx-auto mt-3 w-fit max-w-xs rounded-md border border-solid px-3 py-1.5 whitespace-nowrap drop-shadow-xs"
       role="menu"
     >
-      {
-        locales.map((lang) => (
-          <li class="flex w-full justify-center" role="menuitem">
-            <a
-              class="primary-focus text-base-600 hover:text-base-700 focus:ring-primary-500 dark:text-base-300 dark:hover:text-base-200 relative block w-full rounded-sm py-1 leading-tight font-medium whitespace-nowrap transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
-              href={getLocalizedPathname(lang, Astro.url)}
-              aria-label={`Change language to ${languageSwitcherMap[lang]}`}
-              lang={lang}
-              hreflang={lang}
-              data-umami-event="lang-change"
-              data-umami-event-value={lang}
-            >
-              {languageSwitcherMap[lang]}
-            </a>
-          </li>
-        ))
-      }
+      {locales.map((lang) => <li
+        class="flex w-full justify-center"
+        role="menuitem"
+      >
+        <a
+          class="primary-focus text-base-600 hover:text-base-700 focus:ring-primary-500 dark:text-base-300 dark:hover:text-base-200 relative block w-full rounded-sm py-1 leading-tight font-medium whitespace-nowrap transition focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
+          href={getLocalizedPathname(lang, Astro.url)}
+          aria-label={`Change language to ${languageSwitcherMap[lang]}`}
+          lang={lang}
+          hreflang={lang}
+          data-umami-event="lang-change"
+          data-umami-event-value={lang}
+        >
+          {languageSwitcherMap[lang]}
+        </a>
+      </li>)}
     </ul>
   </div>
 </div>

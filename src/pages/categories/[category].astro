@@ -121,51 +121,37 @@ const description = `Articles categorized under ${originalCategory}`;
         aria-label="Browse articles by category"
       >
         <a class="fbtn" href="/post/">All articles</a>
-        {
-          processedCategories.map(([slug, original]) => (
-            <a
-              class:list={["fbtn", { active: slug === slugifiedCategory }]}
-              href={`/categories/${slug}/`}
-              aria-current={slug === slugifiedCategory ? "page" : undefined}
-            >
-              {original}
-            </a>
-          ))
-        }
+        {processedCategories.map(([slug, original]) => <a
+          class:list={["fbtn", { active: slug === slugifiedCategory }]}
+          href={`/categories/${slug}/`}
+          aria-current={slug === slugifiedCategory ? "page" : undefined}
+        >
+          {original}
+        </a>)}
       </div>
 
       <!-- Article grid -->
       <div class="grid grid-cols-1 gap-[1.1rem] sm:grid-cols-2 lg:grid-cols-3">
-        {
-          articles.map((a) => (
-            <a
-              class="art reveal"
-              href={a.href}
-              style={`--ac:var(--color-${a.accent})`}
-            >
-              {a.heroImage && (
-                <div class="art-thumb">
-                  <Image src={a.heroImage} alt="" width={520} height={280} />
-                </div>
-              )}
-              <div class="tags">
-                {a.categories.slice(0, 2).map((t) => (
-                  <span class="tg">{t}</span>
-                ))}
-              </div>
-              <h3>{a.title}</h3>
-              {a.description && <p>{a.description}</p>}
-              <div class="m">
-                <span>{a.date}</span>
-                <span aria-hidden="true">·</span>
-                <span class="read-time">{a.read}</span>
-                <span class="read">
-                  Read <span aria-hidden="true">↗</span>
-                </span>
-              </div>
-            </a>
-          ))
-        }
+        {articles.map((a) => <a
+          class="art reveal"
+          href={a.href}
+          style={`--ac:var(--color-${a.accent})`}
+        >
+          {a.heroImage && <div class="art-thumb">
+            <Image src={a.heroImage} alt="" width={520} height={280} />
+          </div>}
+          <div class="tags">
+            {a.categories.slice(0, 2).map((t) => <span class="tg">{t}</span>)}
+          </div>
+          <h3>{a.title}</h3>
+          {a.description && <p>{a.description}</p>}
+          <div class="m">
+            <span>{a.date}</span>
+            <span aria-hidden="true">·</span>
+            <span class="read-time">{a.read}</span>
+            <span class="read"> Read <span aria-hidden="true">↗</span> </span>
+          </div>
+        </a>)}
       </div>
     </section>
   </div>

@@ -51,14 +51,12 @@ const IconComponent = iconMap[icon] || null;
   data-umami-event-target={social.toLowerCase()}
 >
   <p class="sr-only">Follow on {social}</p>
-  {
-    IconComponent ? (
-      <IconComponent
-        class:list={["size-5 transition", className]}
-        aria-hidden="true"
-      />
-    ) : (
-      <span class="size-5">{icon}</span>
-    )
-  }
+  {IconComponent ? (
+    <IconComponent
+      class:list={["size-5 transition", className]}
+      aria-hidden="true"
+    />
+  ) : (
+    <span class="size-5">{icon}</span>
+  )}
 </a>

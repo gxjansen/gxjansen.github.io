@@ -44,16 +44,14 @@ const isCurrentPage = Astro.url.pathname === actualLink;
     aria-current={isCurrentPage ? "page" : undefined}
     role="menuitem"
   >
-    {
-      icon && !noIcon && (
-        <Icon
-          name={icon}
-          aria-hidden="true"
-          role="presentation"
-          class="mt-0.5 size-5 self-start md:size-4"
-        />
-      )
-    }
+    {icon && !noIcon && (
+      <Icon
+        name={icon}
+        aria-hidden="true"
+        role="presentation"
+        class="mt-0.5 size-5 self-start md:size-4"
+      />
+    )}
     <span>{text}</span>
     {newTab && <span class="sr-only">(opens in new tab)</span>}
   </a>

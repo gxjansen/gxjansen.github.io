@@ -44,7 +44,8 @@ const linkClass =
             <h3 class={headingClass}>Blog</h3>
             <a
               class={linkClass}
-              href={getRelativeLocaleUrl(currLocale, "/post")}>Blog Index</a
+              href={getRelativeLocaleUrl(currLocale, "/post")}
+              >Blog Index</a
             >
             <a
               class={linkClass}
@@ -58,15 +59,18 @@ const linkClass =
             <h3 class={headingClass}>Site Pages</h3>
             <a
               class={linkClass}
-              href={getRelativeLocaleUrl(currLocale, "/contact")}>Contact</a
+              href={getRelativeLocaleUrl(currLocale, "/contact")}
+              >Contact</a
             >
             <a
               class={linkClass}
-              href={getRelativeLocaleUrl(currLocale, "/projects")}>Projects</a
+              href={getRelativeLocaleUrl(currLocale, "/projects")}
+              >Projects</a
             >
             <a
               class={linkClass}
-              href={getRelativeLocaleUrl(currLocale, "/podcasts")}>Podcasts</a
+              href={getRelativeLocaleUrl(currLocale, "/podcasts")}
+              >Podcasts</a
             >
           </div>
 
@@ -74,9 +78,9 @@ const linkClass =
           <div class="flex flex-col">
             <h3 class={headingClass}>Widgets</h3>
             <!-- CookieConsent component should be used in BaseLayout.astro if desired -->
-            <button id="test-consent-demo-btn" class={linkClass}
-              >Cookie Consent</button
-            >
+            <button id="test-consent-demo-btn" class={linkClass}>
+              Cookie Consent
+            </button>
           </div>
 
           <!-- Other -->
@@ -84,17 +88,20 @@ const linkClass =
             <h3 class={headingClass}>Other</h3>
             <a
               class={linkClass}
-              href={getRelativeLocaleUrl(currLocale, "/about")}>About</a
+              href={getRelativeLocaleUrl(currLocale, "/about")}
+              >About</a
             >
             <a
               class={linkClass}
-              href={getRelativeLocaleUrl(currLocale, "/press")}>Press</a
+              href={getRelativeLocaleUrl(currLocale, "/press")}
+              >Press</a
             >
             <a
               class={linkClass}
               href="/rss.xml"
               target="_blank"
-              rel="noopener noreferrer">RSS Feed</a
+              rel="noopener noreferrer"
+              >RSS Feed</a
             >
           </div>
         </div>
@@ -113,7 +120,8 @@ const linkClass =
               class="text-base-600 dark:text-base-400 text-sm font-medium lg:text-base"
             >
               We use cookies to improve your experience on this site. To learn
-              more, see our <a
+              more, see our
+              <a
                 href={getRelativeLocaleUrl(currLocale, "/privacy-policy")}
                 class="text-base-700 decoration-primary-500 hover:text-primary-500 dark:text-base-200 underline transition"
                 >Privacy Policy</a
@@ -124,13 +132,15 @@ const linkClass =
             <button
               type="button"
               class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white transition"
-              >Accept</button
             >
+              Accept
+            </button>
             <button
               type="button"
               class="border-base-300 hover:border-primary-600 dark:border-base-500 dark:hover:border-primary-400 bg-base-100 text-base-800 dark:bg-base-700 dark:text-base-100 font-display inline-flex items-center gap-1.5 rounded-full border px-6 py-3 text-sm font-bold transition"
-              >Decline</button
             >
+              Decline
+            </button>
           </div>
         </div>
       </div>

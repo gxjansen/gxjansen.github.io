@@ -39,18 +39,16 @@ const dotColor = onPine
   href={getRelativeLocaleUrl(currLocale)}
   aria-label="gui.do — home"
 >
-  {
-    showAvatar && (
-      <img
-        src="/images/redesign/avatar.png"
-        alt=""
-        width="32"
-        height="32"
-        data-live-avatar
-        class="ring-gold-light/40 dark:ring-gold/40 size-8 shrink-0 rounded-full ring-2"
-      />
-    )
-  }
+  {showAvatar && (
+    <img
+      src="/images/redesign/avatar.png"
+      alt=""
+      width="32"
+      height="32"
+      data-live-avatar
+      class="ring-gold-light/40 dark:ring-gold/40 size-8 shrink-0 rounded-full ring-2"
+    />
+  )}
   <span class="inline-flex items-baseline">
     <span aria-hidden="true">gui</span>
     <span
@@ -58,7 +56,8 @@ const dotColor = onPine
         "inline-block text-[1.15em] transition-transform duration-[220ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.4] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
         dotColor,
       ]}
-      aria-hidden="true">.</span
+      aria-hidden="true"
+      >.</span
     >
     <span aria-hidden="true">do</span>
   </span>

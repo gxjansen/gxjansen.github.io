@@ -110,11 +110,9 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
               role="list"
               aria-label="Article categories"
             >
-              {
-                filteredCategories.map((category) => (
-                  <Category category={category} />
-                ))
-              }
+              {filteredCategories.map((category) => (
+                <Category category={category} />
+              ))}
             </div>
 
             <!-- title -->
@@ -127,48 +125,41 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
             >
               <!-- Author info -->
               <div class="flex flex-wrap items-center gap-4">
-                {
-                  authorsData.map((authorData, index) => (
-                    <>
-                      <AuthorByline
-                        author={authorData}
-                        showBio={false}
-                        variant="compact"
-                      />
-                      {index < authorsData.length - 1 && (
-                        <span class="text-base-600 dark:text-base-400">&</span>
-                      )}
-                    </>
-                  ))
-                }
+                {authorsData.map((authorData, index) => (
+                  <>
+                    <AuthorByline
+                      author={authorData}
+                      showBio={false}
+                      variant="compact"
+                    />
+                    {index < authorsData.length - 1 && <span
+                      class="text-base-600 dark:text-base-400"
+                      >&</span
+                    >}
+                  </>
+                ))}
               </div>
 
-              {
-                authorsData.length > 0 && pubDate && (
-                  <span class="text-base-600 dark:text-base-400 hidden sm:inline">
-                    &bull;
-                  </span>
-                )
-              }
+              {authorsData.length > 0 && pubDate && <span
+                class="text-base-600 dark:text-base-400 hidden sm:inline"
+              >
+                &bull;
+              </span>}
 
               <!-- Date -->
-              {
-                pubDate && (
-                  <time
-                    class="my-auto h-full"
-                    datetime={
-                      (pubDate as unknown) instanceof Date
-                        ? (pubDate as unknown as Date).toISOString()
-                        : String(pubDate)
-                    }
-                    itemprop="datePublished"
-                  >
-                    <span aria-label="Published on">
-                      {formatDate(pubDate, currLocale)}
-                    </span>
-                  </time>
-                )
-              }
+              {pubDate && <time
+                class="my-auto h-full"
+                datetime={
+                  (pubDate as unknown) instanceof Date
+                    ? (pubDate as unknown as Date).toISOString()
+                    : String(pubDate)
+                }
+                itemprop="datePublished"
+              >
+                <span aria-label="Published on">
+                  {formatDate(pubDate, currLocale)}
+                </span>
+              </time>}
 
               <!-- Reading time -->
               <span class="text-base-600 dark:text-base-400">&bull;</span>
@@ -182,7 +173,8 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
               <span class="subscriber-count hidden" data-subscriber-count>
                 <span
                   class="text-base-600 dark:text-base-400 mr-4"
-                  aria-hidden="true">&bull;</span
+                  aria-hidden="true"
+                  >&bull;</span
                 >
                 <a
                   href="#subscribe"
@@ -207,82 +199,76 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
               </span>
 
               <!-- Bluesky comment link (only if linked) -->
-              {
-                blueskyUri && (
-                  <>
-                    <span class="text-base-600 dark:text-base-400">&bull;</span>
-                    <a
-                      href="#juttu-comments"
-                      class="text-foam-light dark:text-foam inline-flex items-center gap-1.5 hover:underline"
+              {blueskyUri && (
+                <>
+                  <span class="text-base-600 dark:text-base-400">&bull;</span>
+                  <a
+                    href="#juttu-comments"
+                    class="text-foam-light dark:text-foam inline-flex items-center gap-1.5 hover:underline"
+                  >
+                    <svg
+                      class="h-4 w-4"
+                      viewBox="0 0 568 501"
+                      fill="currentColor"
+                      aria-hidden="true"
                     >
-                      <svg
-                        class="h-4 w-4"
-                        viewBox="0 0 568 501"
-                        fill="currentColor"
-                        aria-hidden="true"
+                      <path
+                        d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.781C285.169 375.521 284.017 372.502 284 376.101C283.983 372.502 282.831 375.521 280.369 383.781C266.939 422.461 214.527 576.312 94.6667 453.32C31.5556 388.56 60.7778 323.8 175.653 304.249C109.933 315.434 36.0533 296.954 15.7778 224.501C9.94525 203.659 0 75.2916 0 57.9464C0 -28.9064 76.1345 -1.61183 123.121 33.6637Z"
+                      />
+                    </svg>
+                    {bsky && bskyTotal >= 1 ? (
+                      <span
+                        class="bsky-eng inline-flex items-center gap-1"
+                        data-bsky-uri={bsky.atUri}
+                        aria-label={`${bskyTotal} interactions on Bluesky`}
                       >
-                        <path d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.781C285.169 375.521 284.017 372.502 284 376.101C283.983 372.502 282.831 375.521 280.369 383.781C266.939 422.461 214.527 576.312 94.6667 453.32C31.5556 388.56 60.7778 323.8 175.653 304.249C109.933 315.434 36.0533 296.954 15.7778 224.501C9.94525 203.659 0 75.2916 0 57.9464C0 -28.9064 76.1345 -1.61183 123.121 33.6637Z" />
-                      </svg>
-                      {bsky && bskyTotal >= 1 ? (
-                        <span
-                          class="bsky-eng inline-flex items-center gap-1"
-                          data-bsky-uri={bsky.atUri}
-                          aria-label={`${bskyTotal} interactions on Bluesky`}
-                        >
-                          <span class="bsky-eng-n">{bskyTotal}</span>{" "}
-                          interactions
-                        </span>
-                      ) : (
-                        "Comment"
-                      )}
-                    </a>
-                  </>
-                )
-              }
+                        <span class="bsky-eng-n">{bskyTotal}</span>{" "}
+                        interactions
+                      </span>
+                    ) : (
+                      "Comment"
+                    )}
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>
         <!-- blog post main image -->
-        {
-          heroImage && (
-            <div class="mt-6 w-full max-w-2xl overflow-hidden">
-              {heroFormat === "avif" ? (
-                <Picture
-                  src={heroImage}
-                  formats={["avif", "webp"]}
-                  fallbackFormat="webp"
-                  alt={
-                    (heroImage as any).alt ||
-                    `Cover image for article: ${title}`
-                  }
-                  widths={[640, 768, 1024, 1600, 2000]}
-                  sizes="(max-width: 1024px) 100vw, 1000px"
-                  class="max-h-[70vh] w-full rounded-xl object-cover"
-                  loading="eager"
-                  fetchpriority="high"
-                  itemprop="image"
-                  quality={90}
-                />
-              ) : (
-                <Image
-                  src={heroImage}
-                  alt={
-                    (heroImage as any).alt ||
-                    `Cover image for article: ${title}`
-                  }
-                  widths={[640, 768, 1024, 1600, 2000]}
-                  sizes="(max-width: 1024px) 100vw, 1000px"
-                  class="max-h-[70vh] w-full rounded-xl object-cover"
-                  loading="eager"
-                  fetchpriority="high"
-                  itemprop="image"
-                  quality={90}
-                  format={heroFormat ?? "webp"}
-                />
-              )}
-            </div>
-          )
-        }
+        {heroImage && <div class="mt-6 w-full max-w-2xl overflow-hidden">
+          {heroFormat === "avif" ? (
+            <Picture
+              src={heroImage}
+              formats={["avif", "webp"]}
+              fallbackFormat="webp"
+              alt={
+                (heroImage as any).alt || `Cover image for article: ${title}`
+              }
+              widths={[640, 768, 1024, 1600, 2000]}
+              sizes="(max-width: 1024px) 100vw, 1000px"
+              class="max-h-[70vh] w-full rounded-xl object-cover"
+              loading="eager"
+              fetchpriority="high"
+              itemprop="image"
+              quality={90}
+            />
+          ) : (
+            <Image
+              src={heroImage}
+              alt={
+                (heroImage as any).alt || `Cover image for article: ${title}`
+              }
+              widths={[640, 768, 1024, 1600, 2000]}
+              sizes="(max-width: 1024px) 100vw, 1000px"
+              class="max-h-[70vh] w-full rounded-xl object-cover"
+              loading="eager"
+              fetchpriority="high"
+              itemprop="image"
+              quality={90}
+              format={heroFormat ?? "webp"}
+            />
+          )}
+        </div>}
       </div>
     </div>
   </article>
@@ -291,21 +277,17 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
   <div class="mt-10 w-full px-4">
     <div class="mx-auto max-w-2xl">
       <div class="text-base-900 dark:text-base-100 text-base">
-        {
-          updatedDate && (
-            <div class="mb-6 italic">
-              <time
-                datetime={
-                  (updatedDate as unknown) instanceof Date
-                    ? (updatedDate as unknown as Date).toISOString()
-                    : String(updatedDate)
-                }
-              >
-                {t("updated")}: {formatDate(updatedDate, currLocale)}
-              </time>
-            </div>
-          )
-        }
+        {updatedDate && <div class="mb-6 italic">
+          <time
+            datetime={
+              (updatedDate as unknown) instanceof Date
+                ? (updatedDate as unknown as Date).toISOString()
+                : String(updatedDate)
+            }
+          >
+            {t("updated")}: {formatDate(updatedDate, currLocale)}
+          </time>
+        </div>}
         <section
           id="blog-post-content"
           class="prose mx-auto"
@@ -345,18 +327,14 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
         defer
         src="https://comments.gui.do/embed/juttu-embed.js"
         data-api-url="https://comments.gui.do"
-        data-theme="auto"></script>
-
+        data-theme="auto"
+      ></script>
       <!-- Author Bio Box -->
-      {
-        authorsData.length > 0 && (
-          <div class="mx-auto max-w-2xl">
-            {authorsData.map((authorData) => (
-              <AuthorBioBox author={authorData} />
-            ))}
-          </div>
-        )
-      }
+      {authorsData.length > 0 && <div class="mx-auto max-w-2xl">
+        {authorsData.map((authorData) => (
+          <AuthorBioBox author={authorData} />
+        ))}
+      </div>}
     </div>
   </div>
 
@@ -372,7 +350,6 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
     import { initBskyEngagement } from "../scripts/bskyEngagement";
     initBskyEngagement();
   </script>
-
   <style>
     /* Combined subscriber-count link in the byline (paired-dot cue + tooltip). */
     .count-link {

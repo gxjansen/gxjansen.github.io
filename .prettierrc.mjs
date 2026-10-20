@@ -6,6 +6,9 @@ export default {
       files: "*.astro",
       options: {
         parser: "astro",
+        // Match astro.config.mjs (compressHTML: true) so formatting never
+        // changes rendered whitespace.
+        astroCompressHTML: "html",
       },
     },
   ],

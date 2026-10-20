@@ -55,11 +55,13 @@ const grid = "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3";
       <p
         class="text-base-600 dark:text-base-400 max-w-[60ch] text-lg leading-relaxed"
       >
-        A selection of my most-requested talks and workshops. <a
+        A selection of my most-requested talks and workshops.
+        <a
           href="/contact/"
           class="text-primary-600 dark:text-primary-400 font-semibold"
           >Get in touch</a
-        > if you'd like me to speak at your event.
+        >
+        if you'd like me to speak at your event.
       </p>
     </section>
 
@@ -71,26 +73,26 @@ const grid = "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3";
         </div>
       </div>
       <div class={grid}>
-        {featured.map((p) => <PresentationCard presentation={p} />)}
+        {featured.map((p) => (
+          <PresentationCard presentation={p} />
+        ))}
       </div>
     </section>
 
-    {
-      other.length > 0 && (
-        <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
-          <div class="sec-head">
-            <div>
-              <span class="hand-note">more sessions</span>
-              <h2>The full catalogue</h2>
-            </div>
-          </div>
-          <div class={grid}>
-            {other.map((p) => (
-              <PresentationCard presentation={p} />
-            ))}
-          </div>
-        </section>
-      )
-    }
+    {other.length > 0 && <section
+      class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="sec-head">
+        <div>
+          <span class="hand-note">more sessions</span>
+          <h2>The full catalogue</h2>
+        </div>
+      </div>
+      <div class={grid}>
+        {other.map((p) => (
+          <PresentationCard presentation={p} />
+        ))}
+      </div>
+    </section>}
   </div>
 </BaseLayout>

@@ -171,7 +171,6 @@ Astro.csp?.insertScriptHash(scriptHash(errorTracking));
       initReveal();
       document.addEventListener("astro:after-swap", initReveal);
     </script>
-
     <!-- Copy-to-clipboard button on code blocks -->
     <script>
       const COPY_ICON =
@@ -218,7 +217,6 @@ Astro.csp?.insertScriptHash(scriptHash(errorTracking));
 
       addCopyButtons();
     </script>
-
     <!-- Error tracking with Umami -->
     <script is:inline set:html={errorTracking} />
   </body>

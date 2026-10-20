@@ -51,29 +51,33 @@ const podcasts = [
       </div>
 
       <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          podcasts.map((p) => (
-            <a
-              href={p.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 reveal flex flex-col rounded-2xl border p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              <div class="bg-primary-600/10 text-primary-600 dark:bg-primary-400/10 dark:text-primary-400 mb-4 flex size-12 items-center justify-center rounded-xl">
-                <Icon name={p.icon} class="size-6" aria-hidden="true" />
-              </div>
-              <h2 class="font-display group-hover:text-primary-600 dark:group-hover:text-primary-400 text-[1.2rem] font-extrabold transition">
-                {p.title}
-              </h2>
-              <p class="text-base-600 dark:text-base-400 mt-2 text-[0.95rem] leading-relaxed">
-                {p.text}
-              </p>
-              <span class="text-primary-600 dark:text-primary-400 font-display mt-4 inline-flex items-center gap-1.5 text-sm font-bold">
-                Listen <span aria-hidden="true">→</span>
-              </span>
-            </a>
-          ))
-        }
+        {podcasts.map((p) => <a
+          href={p.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 reveal flex flex-col rounded-2xl border p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
+        >
+          <div
+            class="bg-primary-600/10 text-primary-600 dark:bg-primary-400/10 dark:text-primary-400 mb-4 flex size-12 items-center justify-center rounded-xl"
+          >
+            <Icon name={p.icon} class="size-6" aria-hidden="true" />
+          </div>
+          <h2
+            class="font-display group-hover:text-primary-600 dark:group-hover:text-primary-400 text-[1.2rem] font-extrabold transition"
+          >
+            {p.title}
+          </h2>
+          <p
+            class="text-base-600 dark:text-base-400 mt-2 text-[0.95rem] leading-relaxed"
+          >
+            {p.text}
+          </p>
+          <span
+            class="text-primary-600 dark:text-primary-400 font-display mt-4 inline-flex items-center gap-1.5 text-sm font-bold"
+          >
+            Listen <span aria-hidden="true">→</span>
+          </span>
+        </a>)}
       </div>
     </section>
 
@@ -86,51 +90,49 @@ const podcasts = [
       </div>
 
       <div id="podcast-feed-container">
-        {
-          episodes.length > 0 ? (
-            <div class="grid gap-6 sm:grid-cols-2">
-              {episodes.map((episode) => (
-                <div class="bg-base-100 dark:bg-base-900 border-base-200 dark:border-base-800 w-full overflow-hidden rounded-2xl border">
-                  <iframe
-                    class="block w-full overflow-hidden border-0"
-                    width="100%"
-                    height="180"
-                    seamless
-                    src={episode.link}
-                    title={episode.title}
-                    loading="lazy"
-                    allow="encrypted-media"
-                  />
-                </div>
-              ))}
+        {episodes.length > 0 ? (
+          <div class="grid gap-6 sm:grid-cols-2">
+            {episodes.map((episode) => <div
+              class="bg-base-100 dark:bg-base-900 border-base-200 dark:border-base-800 w-full overflow-hidden rounded-2xl border"
+            >
+              <iframe
+                class="block w-full overflow-hidden border-0"
+                width="100%"
+                height="180"
+                seamless
+                src={episode.link}
+                title={episode.title}
+                loading="lazy"
+                allow="encrypted-media"
+              />
+            </div>)}
+          </div>
+        ) : (
+          <div class="bg-base-100 dark:bg-base-900 rounded-2xl p-8 text-center">
+            <p class="text-base-700 dark:text-base-300">
+              Episodes aren't loading right now. You can visit the podcasts
+              directly:
+            </p>
+            <div class="mt-4 space-y-2">
+              <a
+                href="https://sheeptank.transistor.fm/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary-600 dark:text-primary-400 block font-semibold hover:underline"
+              >
+                Sheeptank
+              </a>
+              <a
+                href="https://www.cro.cafe"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary-600 dark:text-primary-400 block font-semibold hover:underline"
+              >
+                CRO.CAFE
+              </a>
             </div>
-          ) : (
-            <div class="bg-base-100 dark:bg-base-900 rounded-2xl p-8 text-center">
-              <p class="text-base-700 dark:text-base-300">
-                Episodes aren't loading right now. You can visit the podcasts
-                directly:
-              </p>
-              <div class="mt-4 space-y-2">
-                <a
-                  href="https://sheeptank.transistor.fm/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-primary-600 dark:text-primary-400 block font-semibold hover:underline"
-                >
-                  Sheeptank
-                </a>
-                <a
-                  href="https://www.cro.cafe"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-primary-600 dark:text-primary-400 block font-semibold hover:underline"
-                >
-                  CRO.CAFE
-                </a>
-              </div>
-            </div>
-          )
-        }
+          </div>
+        )}
       </div>
     </section>
 

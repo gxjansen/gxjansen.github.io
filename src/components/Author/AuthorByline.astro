@@ -20,23 +20,19 @@ const authorUrl = `/authors/${author.id}`;
   itemscope
   itemtype="https://schema.org/Person"
 >
-  {
-    avatar && (
-      <a href={authorUrl} class="flex-shrink-0">
-        <Image
-          src={avatar}
-          alt={`${name}'s avatar`}
-          width={variant === "compact" ? 48 : 64}
-          height={variant === "compact" ? 48 : 64}
-          densities={[2]}
-          quality="high"
-          loading="eager"
-          class={`rounded-full object-cover ${variant === "compact" ? "h-12 w-12" : "h-16 w-16"}`}
-          itemprop="image"
-        />
-      </a>
-    )
-  }
+  {avatar && <a href={authorUrl} class="flex-shrink-0">
+    <Image
+      src={avatar}
+      alt={`${name}'s avatar`}
+      width={variant === "compact" ? 48 : 64}
+      height={variant === "compact" ? 48 : 64}
+      densities={[2]}
+      quality="high"
+      loading="eager"
+      class={`rounded-full object-cover ${variant === "compact" ? "h-12 w-12" : "h-16 w-16"}`}
+      itemprop="image"
+    />
+  </a>}
 
   <div class="flex-1">
     <div class="flex flex-wrap items-baseline gap-2">
@@ -49,15 +45,11 @@ const authorUrl = `/authors/${author.id}`;
       </a>
     </div>
 
-    {
-      showBio && bioShort && (
-        <p
-          class="text-base-700 dark:text-base-300 mt-1 text-sm"
-          itemprop="description"
-        >
-          {injectYears(bioShort)}
-        </p>
-      )
-    }
+    {showBio && bioShort && <p
+      class="text-base-700 dark:text-base-300 mt-1 text-sm"
+      itemprop="description"
+    >
+      {injectYears(bioShort)}
+    </p>}
   </div>
 </div>

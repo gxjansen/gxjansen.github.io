@@ -16,34 +16,28 @@ const { books, showRatings = false } = Astro.props as Props;
 ---
 
 <div class="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-4">
-  {
-    books.map((b) => (
-      <div class="flex flex-col gap-2">
-        <a
-          class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
-          href={b.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${b.title} on Bookhive`}
-        >
-          {/* Placeholder always present; the cover image overlays it and, if it
+  {books.map((b) => <div class="flex flex-col gap-2">
+    <a
+      class={`bk-cover bk-${b.accent} no-random-underline aspect-[2/3] w-full`}
+      href={b.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${b.title} on Bookhive`}
+    >
+      {/* Placeholder always present; the cover image overlays it and, if it
               fails to load (e.g. a 403 from the catalog's Goodreads URL), the
               inline script removes it to reveal this. */}
-          <span class="bk-spine" aria-hidden="true" />
-          <div class="bk-meta">
-            <div class="bk-title">{b.title}</div>
-            <div class="bk-author">{b.author}</div>
-          </div>
-          {b.coverUrl && (
-            <img src={b.coverUrl} alt={`Cover of ${b.title}`} loading="lazy" />
-          )}
-        </a>
-        {showRatings && typeof b.rating === "number" && (
-          <Stars value={b.rating} />
-        )}
+      <span class="bk-spine" aria-hidden="true" />
+      <div class="bk-meta">
+        <div class="bk-title">{b.title}</div>
+        <div class="bk-author">{b.author}</div>
       </div>
-    ))
-  }
+      {b.coverUrl && (
+        <img src={b.coverUrl} alt={`Cover of ${b.title}`} loading="lazy" />
+      )}
+    </a>
+    {showRatings && typeof b.rating === "number" && <Stars value={b.rating} />}
+  </div>)}
 </div>
 
 <script>
