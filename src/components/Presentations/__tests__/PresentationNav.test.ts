@@ -2,21 +2,6 @@ import { describe, it, expect } from "vitest";
 import { parseHTML } from "../../../test/astro-test-utils";
 
 describe("PresentationNav", () => {
-  const _mockPresentations = [
-    {
-      slug: "presentation-1",
-      data: { title: "Presentation 1" },
-    },
-    {
-      slug: "presentation-2",
-      data: { title: "Presentation 2" },
-    },
-    {
-      slug: "presentation-3",
-      data: { title: "Presentation 3" },
-    },
-  ];
-
   it("renders navigation for middle presentation", () => {
     const html = `
       <nav class="border-t border-base-200 dark:border-base-800 mt-12 pt-8">

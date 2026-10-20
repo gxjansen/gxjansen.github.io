@@ -46,7 +46,7 @@ function getYouTubeId(url: string): string {
                   class="h-full w-full object-cover"
                   loading="lazy"
                   decoding="async"
-                  onerror="this.onerror=null; this.src=this.src.replace('maxresdefault', 'hqdefault');"
+                  onerror={`this.onerror=null; this.src=this.src.replace('maxresdefault', 'hqdefault');`}
                 />
 
                 <button

@@ -87,17 +87,6 @@ describe.skipIf(!hasDist)("Robots.txt Validation", () => {
 
     const content = fs.readFileSync(robotsPath, "utf8");
 
-    // These are acceptable specific path blocks
-    const _acceptableBlocks = [
-      "/admin/",
-      "/api/",
-      "/test-",
-      "/_",
-      "/dashboard/",
-      "/color-test/",
-      "/dark-mode-test/",
-    ];
-
     // Should contain Allow: / for general indexing
     expect(content).toMatch(/Allow:\s*\//i);
 
