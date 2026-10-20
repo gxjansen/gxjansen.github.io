@@ -1,7 +1,7 @@
 @layer components {
   /* Card System */
   article[class*="card"]:not(.event-card) {
-    @apply rounded-xl border border-base-200/60 bg-base-50 group-hover:border-primary-500/50 dark:border-base-700/50 dark:bg-base-900 dark:group-hover:border-primary-400/50;
+    @apply border-base-200/60 bg-base-50 group-hover:border-primary-500/50 dark:border-base-700/50 dark:bg-base-900 dark:group-hover:border-primary-400/50 rounded-xl border;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -35,38 +35,38 @@
 
   /* Card Content Structure */
   .card-content {
-    @apply px-4 pt-4 pb-6 flex flex-col flex-1;
+    @apply flex flex-1 flex-col px-4 pt-4 pb-6;
   }
 
   /* Card Media Container */
-  .card-container {  
+  .card-container {
     @apply relative block aspect-[16/9] overflow-hidden;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
     text-decoration: none;
-  }  
+  }
 
-  .card-image {  
-    @apply absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105 opacity-90 dark:opacity-100;  
-  }  
+  .card-image {
+    @apply absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-500 hover:scale-105 dark:opacity-100;
+  }
 
   /* Card Typography */
-  .card-title {  
-    @apply text-base sm:text-lg lg:text-xl font-bold text-base-900 dark:text-base-100 mb-4;
-  }  
+  .card-title {
+    @apply text-base-900 dark:text-base-100 mb-4 text-base font-bold sm:text-lg lg:text-xl;
+  }
 
-  .card-description {  
-    @apply text-sm sm:text-base font-medium text-base-400 dark:text-base-500 mb-4;  
-  }  
+  .card-description {
+    @apply text-base-400 dark:text-base-500 mb-4 text-sm font-medium sm:text-base;
+  }
 
   .card-meta {
-    @apply text-sm font-medium text-base-600 dark:text-base-400 mb-4;
+    @apply text-base-600 dark:text-base-400 mb-4 text-sm font-medium;
   }
 
   /* Card Categories */
-  .card-categories {  
-    @apply mt-3 sm:mt-4 flex flex-wrap gap-2 sm:gap-4;  
-  }  
+  .card-categories {
+    @apply mt-3 flex flex-wrap gap-2 sm:mt-4 sm:gap-4;
+  }
 
   /* Video Card Specifics */
   .video-card .lazy-youtube {
@@ -80,7 +80,7 @@
   }
 
   .video-card .video-container iframe {
-    @apply w-full h-full;
+    @apply h-full w-full;
   }
 
   /* Social Card Specifics */
@@ -89,16 +89,16 @@
   }
 
   .social-card-icon-wrapper {
-    @apply mb-3 flex size-10 sm:size-12 items-center justify-center rounded-lg bg-primary-500/10 text-primary-500 dark:bg-primary-400/10 dark:text-primary-400;
+    @apply bg-primary-500/10 text-primary-500 dark:bg-primary-400/10 dark:text-primary-400 mb-3 flex size-10 items-center justify-center rounded-lg sm:size-12;
   }
 
   .social-card-title {
-    @apply text-base sm:text-lg font-semibold text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400;
+    @apply text-base-900 hover:text-primary-500 dark:text-base-100 dark:hover:text-primary-400 text-base font-semibold sm:text-lg;
   }
 
   /* Event Card Specifics */
   .event-card {
-    @apply rounded-xl border border-base-200/60 bg-base-50 group-hover:border-primary-500/50 dark:border-base-700/50 dark:bg-base-900 dark:group-hover:border-primary-400/50;
+    @apply border-base-200/60 bg-base-50 group-hover:border-primary-500/50 dark:border-base-700/50 dark:bg-base-900 dark:group-hover:border-primary-400/50 rounded-xl border;
     @apply p-4;
     transition:
       border-color 0.3s ease,

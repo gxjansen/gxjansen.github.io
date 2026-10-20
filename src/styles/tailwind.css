@@ -2,9 +2,8 @@
    Migrated from tailwind.config.mjs (v3 JS config) to CSS-first @theme block.
    See: https://tailwindcss.com/docs/upgrade-guide
 
-   Loaded BEFORE global.scss in BaseLayout.astro so that @apply directives
-   inside .scss files (compiled to CSS by Sass before PostCSS runs) can
-   resolve against this theme. */
+   Loaded BEFORE global.css in BaseLayout.astro. global.css pulls this theme
+   in with @reference so its @apply directives resolve. */
 
 @import "tailwindcss";
 

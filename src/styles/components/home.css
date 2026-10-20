@@ -23,7 +23,7 @@
 @layer components {
   /* ---- hero ---- */
   .home .kicker {
-    @apply text-primary-600 dark:text-primary-400 mb-3 inline-block font-hand text-[1.9rem] leading-none;
+    @apply text-primary-600 dark:text-primary-400 font-hand mb-3 inline-block text-[1.9rem] leading-none;
     transform: rotate(-3deg);
     transform-origin: left center;
   }
@@ -89,12 +89,12 @@
   .home .hand-note {
     /* light: deeper love-light rose clears 3:1 on cream (rose-light is only
        ~2.6); dark keeps the bright rose. */
-    @apply text-love-light dark:text-rose mb-3 inline-block font-hand text-[1.5rem] leading-none;
+    @apply text-love-light dark:text-rose font-hand mb-3 inline-block text-[1.5rem] leading-none;
     transform: rotate(-2deg);
     transform-origin: left center;
   }
   .home .more {
-    @apply text-primary-600 dark:text-primary-400 inline-flex items-center gap-1.5 font-display text-[0.95rem] font-bold no-underline;
+    @apply text-primary-600 dark:text-primary-400 font-display inline-flex items-center gap-1.5 text-[0.95rem] font-bold no-underline;
     transition: gap 150ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .more:hover {
@@ -108,12 +108,7 @@
   .home .art {
     @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex h-full flex-col overflow-hidden rounded-2xl border p-6 text-inherit no-underline;
     transition:
-      border-color,
-      background-color,
-      color,
-      transform,
-      box-shadow,
-      opacity;
+      border-color, background-color, color, transform, box-shadow, opacity;
     transition-duration: 220ms;
     transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
@@ -125,7 +120,11 @@
   }
   .home .art:hover {
     @apply -translate-y-0.5 shadow-lg;
-    border-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 50%, var(--color-base-200));
+    border-color: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 50%,
+      var(--color-base-200)
+    );
   }
   .home .art:hover::before {
     @apply opacity-100;
@@ -136,7 +135,11 @@
   .home .art .tg {
     @apply rounded-full px-2 py-1 text-[0.72rem] font-bold whitespace-nowrap;
     color: var(--ac, var(--color-primary-600));
-    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 12%, transparent);
+    background: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 12%,
+      transparent
+    );
   }
   .home .art h3 {
     @apply font-display mb-2 text-[1.2rem] leading-[1.18] font-extrabold tracking-[-0.015em];
@@ -191,12 +194,7 @@
   .home .talk {
     @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 flex items-center gap-4 rounded-2xl border p-4 text-inherit no-underline;
     transition:
-      border-color,
-      background-color,
-      color,
-      transform,
-      box-shadow,
-      opacity;
+      border-color, background-color, color, transform, box-shadow, opacity;
     transition-duration: 220ms;
     transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
@@ -213,7 +211,7 @@
     @apply text-base-500 mt-0.5 text-[0.82rem];
   }
   .home .talk .yr {
-    @apply text-rose-light dark:text-rose ml-auto font-hand text-[1.3rem];
+    @apply text-rose-light dark:text-rose font-hand ml-auto text-[1.3rem];
   }
 
   /* ---- about: portrait + pillars + quote ---- */
@@ -224,7 +222,7 @@
     @apply h-full w-full object-cover;
   }
   .home .portrait .tag {
-    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 text-primary-600 dark:text-primary-400 absolute bottom-3.5 left-3.5 rounded-full border px-3.5 py-1.5 font-hand text-[1.2rem] font-bold shadow-lg;
+    @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 text-primary-600 dark:text-primary-400 font-hand absolute bottom-3.5 left-3.5 rounded-full border px-3.5 py-1.5 text-[1.2rem] font-bold shadow-lg;
   }
   .home .pillars {
     @apply mt-5 flex flex-col gap-3;
@@ -265,18 +263,17 @@
   .home .proj {
     @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 block rounded-2xl border p-6 text-inherit no-underline;
     transition:
-      border-color,
-      background-color,
-      color,
-      transform,
-      box-shadow,
-      opacity;
+      border-color, background-color, color, transform, box-shadow, opacity;
     transition-duration: 220ms;
     transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .proj:hover {
     @apply -translate-y-1 shadow-lg;
-    border-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 50%, var(--color-base-200));
+    border-color: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 50%,
+      var(--color-base-200)
+    );
   }
   .home .proj .top {
     @apply mb-3 flex items-center justify-between;
@@ -291,7 +288,11 @@
   .home .proj .st {
     @apply rounded-full px-2 py-1 text-[0.72rem] font-bold tracking-[0.06em] uppercase;
     color: var(--ac, var(--color-primary-600));
-    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 13%, transparent);
+    background: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 13%,
+      transparent
+    );
   }
 
   /* ---- training course cards ---- */
@@ -301,12 +302,7 @@
   .home .tcourse {
     @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex flex-col overflow-hidden rounded-2xl border p-6 text-inherit no-underline;
     transition:
-      border-color,
-      background-color,
-      color,
-      transform,
-      box-shadow,
-      opacity;
+      border-color, background-color, color, transform, box-shadow, opacity;
     transition-duration: 220ms;
     transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
@@ -317,7 +313,11 @@
   }
   .home .tcourse:hover {
     @apply -translate-y-1 shadow-lg;
-    border-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 40%, var(--color-base-200));
+    border-color: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 40%,
+      var(--color-base-200)
+    );
   }
   .home .tcourse .tlevel {
     /* whitespace-normal (not just dropping nowrap) is required to override the
@@ -328,7 +328,11 @@
        the eyebrow wraps to two lines. */
     @apply mb-3 self-start rounded-2xl px-2.5 py-1 text-[0.72rem] font-bold tracking-[0.07em] whitespace-normal uppercase;
     color: var(--ac, var(--color-primary-600));
-    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 12%, transparent);
+    background: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 12%,
+      transparent
+    );
   }
   .home .tcourse h3 {
     @apply font-display mb-2 text-[1.3rem] leading-[1.18] font-extrabold tracking-[-0.02em];
@@ -359,23 +363,26 @@
   .home .wwm-card {
     @apply bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 relative flex flex-col overflow-hidden rounded-3xl border p-6;
     transition:
-      border-color,
-      background-color,
-      color,
-      transform,
-      box-shadow,
-      opacity;
+      border-color, background-color, color, transform, box-shadow, opacity;
     transition-duration: 220ms;
     transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .home .wwm-card:hover {
     @apply -translate-y-1 shadow-lg;
-    border-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 40%, var(--color-base-200));
+    border-color: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 40%,
+      var(--color-base-200)
+    );
   }
   .home .wwm-ic {
     @apply mb-4 flex size-12 items-center justify-center rounded-xl;
     color: var(--ac, var(--color-primary-600));
-    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 14%, transparent);
+    background: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 14%,
+      transparent
+    );
   }
   .home .wwm-card h3 {
     @apply text-base-900 dark:text-base-100 font-display mb-1.5 text-[1.25rem] font-extrabold tracking-[-0.02em];
@@ -390,12 +397,7 @@
     color: var(--ac-fg, var(--color-base-950));
     background: var(--ac, var(--color-primary-600));
     transition:
-      border-color,
-      background-color,
-      color,
-      transform,
-      box-shadow,
-      opacity,
+      border-color, background-color, color, transform, box-shadow, opacity,
       filter;
     transition-duration: 220ms;
     transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -439,7 +441,7 @@
     @apply relative mt-12 lg:mt-0;
   }
   .feed-note {
-    @apply text-love-light dark:text-love absolute left-4 z-[1] inline-flex items-center gap-1 font-hand text-[1.05rem] leading-none font-bold;
+    @apply text-love-light dark:text-love font-hand absolute left-4 z-[1] inline-flex items-center gap-1 text-[1.05rem] leading-none font-bold;
     top: -2.7rem;
     transform: rotate(-3deg);
   }
@@ -488,14 +490,9 @@
     @apply hidden;
   }
   .fbtn {
-    @apply text-base-600 dark:text-base-400 border-base-200 dark:border-base-700 flex-shrink-0 cursor-pointer rounded-full border bg-transparent px-3 py-1.5 font-display text-[0.82rem] font-semibold whitespace-nowrap;
+    @apply text-base-600 dark:text-base-400 border-base-200 dark:border-base-700 font-display flex-shrink-0 cursor-pointer rounded-full border bg-transparent px-3 py-1.5 text-[0.82rem] font-semibold whitespace-nowrap;
     transition:
-      border-color,
-      background-color,
-      color,
-      transform,
-      box-shadow,
-      opacity;
+      border-color, background-color, color, transform, box-shadow, opacity;
     transition-duration: 220ms;
     transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
@@ -584,7 +581,11 @@
     background: linear-gradient(
       150deg,
       var(--app-c, var(--color-app-fallback)),
-      color-mix(in oklab, var(--app-c, var(--color-app-fallback)) 35%, var(--color-base-200))
+      color-mix(
+        in oklab,
+        var(--app-c, var(--color-app-fallback)) 35%,
+        var(--color-base-200)
+      )
     );
   }
   .poster img {

@@ -7,10 +7,10 @@ import Nav from "@components/Nav/Nav.astro";
 import Footer from "@components/Footer/Footer.astro";
 import EnvironmentBanner from "../components/EnvironmentBanner/EnvironmentBanner.astro";
 
-// style imports — Tailwind v4 entry MUST load before global.scss so that
-// @apply directives in SCSS resolve against the v4 theme.
+// style imports — Tailwind v4 entry MUST load before global.css so that
+// its @reference to the v4 theme stays in sync with the loaded utilities.
 import "../styles/tailwind.css";
-import "../styles/global.scss";
+import "../styles/global.css";
 
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";

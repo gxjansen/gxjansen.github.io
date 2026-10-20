@@ -1,0 +1,67 @@
+@layer utilities {
+  /* Focus Utilities */
+  .primary-focus {
+    @apply focus-visible:outline-primary-500 focus:outline-hidden focus-visible:rounded-xs;
+  }
+
+  /* Animation Controls */
+  .pause {
+    animation-play-state: paused !important;
+  }
+
+  /* Mask Effects */
+  .mask-gradient {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    );
+    mask-size: 100%;
+    mask-repeat: no-repeat;
+  }
+
+  /* Typography Utilities */
+  .text-small {
+    @apply text-base-900 dark:text-base-100 text-sm;
+  }
+
+  .text-regular {
+    @apply text-base-900 dark:text-base-100 text-base;
+  }
+
+  .text-large {
+    @apply text-base-900 dark:text-base-100 text-lg;
+  }
+
+  .weight-normal {
+    @apply text-base-900 dark:text-base-100 font-normal;
+  }
+
+  .weight-medium {
+    @apply text-base-900 dark:text-base-100 font-medium;
+  }
+
+  .weight-semibold {
+    @apply text-base-900 dark:text-base-100 font-semibold;
+  }
+
+  .weight-bold {
+    @apply text-base-900 dark:text-base-100 font-bold;
+  }
+
+  .description {
+    @apply text-base-600 dark:text-base-400 font-normal;
+    letter-spacing: -0.01em;
+    line-height: 1.6;
+  }
+
+  .primary-link {
+    @apply text-primary-500 decoration-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 underline;
+  }
+
+  .code-block {
+    @apply bg-base-100/20 text-base-900 dark:bg-base-800 dark:text-base-100 rounded-sm px-2 py-1 text-sm;
+  }
+}
