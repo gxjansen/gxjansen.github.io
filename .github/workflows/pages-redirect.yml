@@ -46,7 +46,7 @@ jobs:
           # Pages serves 404.html for every unknown path, so deep links redirect too.
           cp site/index.html site/404.html
           touch site/.nojekyll
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
@@ -62,4 +62,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
