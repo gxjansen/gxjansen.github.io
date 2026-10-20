@@ -26,6 +26,8 @@ const ROUTES = [
   "/privacy/",
   "/presentations/",
   "/ama/",
+  "/post/",
+  "/categories/technology/",
   "/post/better-not-waste-it/",
 ];
 

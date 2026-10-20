@@ -29,7 +29,6 @@ const nextPost =
     <a
       href={`/post/`}
       class="text-base-600 hover:text-primary-500 focus:ring-primary-500 dark:text-base-400 dark:hover:text-primary-400 flex items-center gap-2 rounded-sm focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
-      aria-label="Return to article overview"
       data-umami-event="nav-click"
       data-umami-event-target="blog-overview"
     >
@@ -53,7 +52,6 @@ const nextPost =
     {prevPost && <a
       href={`/post/${prevPost.id}/`}
       class="group border-base-200 hover:border-primary-500 focus:ring-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4 focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
-      aria-label={`Previous article: ${prevPost.data.title}`}
       data-umami-event="nav-click"
       data-umami-event-target="blog-prev"
     >
@@ -84,7 +82,6 @@ const nextPost =
     {nextPost && <a
       href={`/post/${nextPost.id}/`}
       class="group border-base-200 hover:border-primary-500 focus:ring-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4 text-right focus:ring-2 focus:ring-offset-2 focus:outline-hidden"
-      aria-label={`Next article: ${nextPost.data.title}`}
       data-umami-event="nav-click"
       data-umami-event-target="blog-next"
     >

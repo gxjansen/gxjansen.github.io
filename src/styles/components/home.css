@@ -134,7 +134,7 @@
   }
   .home .art .tg {
     @apply rounded-full px-2 py-1 text-[0.72rem] font-bold whitespace-nowrap;
-    color: var(--ac, var(--color-primary-600));
+    color: var(--ac-ink, var(--ac, var(--color-primary-600)));
     background: color-mix(
       in oklab,
       var(--ac, var(--color-primary-600)) 12%,
@@ -155,7 +155,7 @@
   }
   .home .art .read {
     @apply ml-auto inline-flex items-center gap-1 font-bold;
-    color: var(--ac, var(--color-primary-600));
+    color: var(--ac-ink, var(--ac, var(--color-primary-600)));
   }
   .home .art .read-time {
     @apply text-base-500 text-[0.8rem];
@@ -211,7 +211,7 @@
     @apply text-base-500 mt-0.5 text-[0.82rem];
   }
   .home .talk .yr {
-    @apply text-rose-light dark:text-rose font-hand ml-auto text-[1.3rem];
+    @apply text-love-light dark:text-rose font-hand ml-auto text-[1.3rem];
   }
 
   /* ---- about: portrait + pillars + quote ---- */
@@ -280,19 +280,28 @@
   }
   .home .proj .nm {
     @apply font-display text-[1.3rem] font-extrabold;
-    color: var(--ac, var(--color-primary-600));
+    color: var(--ac-ink, var(--ac, var(--color-primary-600)));
   }
   .home .proj .bd {
     @apply text-base-600 dark:text-base-400 text-[0.92rem] leading-[1.5];
   }
   .home .proj .st {
     @apply rounded-full px-2 py-1 text-[0.72rem] font-bold tracking-[0.06em] uppercase;
-    color: var(--ac, var(--color-primary-600));
+    color: var(--ac-ink, var(--ac, var(--color-primary-600)));
     background: color-mix(
       in oklab,
       var(--ac, var(--color-primary-600)) 13%,
       transparent
     );
+  }
+  /* Accent text uses a contrast-safe ink (`--ac-ink` / `--ac-ink-dark`, set
+     per card by src/lib/accentInk.ts) instead of the pastel `--ac`, which is
+     below WCAG AA as text on the light cards. The tints keep using `--ac`. */
+  .dark .home .art .tg,
+  .dark .home .art .read,
+  .dark .home .proj .nm,
+  .dark .home .proj .st {
+    color: var(--ac-ink-dark, var(--ac, var(--color-primary-600)));
   }
 
   /* ---- training course cards ---- */
@@ -499,8 +508,11 @@
   .fbtn:hover {
     @apply border-primary-600 text-primary-600 dark:border-primary-400 dark:text-primary-400;
   }
+  /* Same fill as the primary Button in both themes. The brighter dark-mode
+     primary-500 only gave white text 3.7:1, and `dark:text-white` is needed
+     because the base rule's dark:text-base-400 outranks a plain text-white. */
   .fbtn.active {
-    @apply bg-primary-600 dark:bg-primary-500 border-primary-600 dark:border-primary-500 text-white;
+    @apply bg-primary-600 border-primary-600 text-white dark:text-white;
   }
   .feed-list {
     @apply flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto p-1.5;

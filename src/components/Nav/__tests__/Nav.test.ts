@@ -48,7 +48,7 @@ describe("Nav", () => {
                 <button type="button" class="hidden md:block" aria-label="Toggle dark mode">
                   Theme Toggle
                 </button>
-                <a href="/retainer/" class="hidden md:block" aria-label="Work with Guido on a community advisory engagement">
+                <a href="/retainer/" class="hidden md:block" aria-label="Work with me: community advisory engagement">
                   Work with me
                 </a>
               </div>
@@ -93,7 +93,7 @@ describe("Nav", () => {
     expect(themeToggle?.classList.contains("md:block")).toBe(true);
 
     const ctaButton = parsedHtml.querySelector(
-      'a[aria-label="Work with Guido on a community advisory engagement"]',
+      'a[aria-label="Work with me: community advisory engagement"]',
     );
     expect(ctaButton).toBeTruthy();
     expect(ctaButton?.classList.contains("hidden")).toBe(true);
