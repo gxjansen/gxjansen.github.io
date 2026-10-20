@@ -3,7 +3,6 @@
    Each animal is its own Satori-safe SVG (80×80 viewBox). Shared by the
    `personas` roster in ./card. See card.tsx for the rendering contract.
    ===================================================================== */
-import * as React from "react";
 
 /* =====================================================================
    Avatars — every animal is its own SVG, 80×80 viewBox.

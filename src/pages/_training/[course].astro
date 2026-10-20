@@ -16,7 +16,7 @@ export function getStaticPaths() {
 const { course } = Astro.props;
 // --ac is the bright accent (good as a button background / on dark bg).
 // --ac-deep is the darker "dawn" variant, used as text in light mode where the
-// bright pastel would fail contrast. _redesign.scss derives --ac-text from these.
+// bright pastel would fail contrast. redesign.css derives --ac-text from these.
 const ac = `--ac:var(--color-${course.accent});--ac-deep:var(--color-${course.accent}-light)`;
 ---
 
