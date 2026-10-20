@@ -2,8 +2,8 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
-import react from "@astrojs/react";
 import netlify from "@astrojs/netlify";
+import tailwindcss from "@tailwindcss/vite";
 import * as path from 'node:path';
 import { contentValidationPlugin } from './src/utils/content-validation-plugin.ts';
 import { markdownEndpoints } from './src/integrations/markdown-endpoints.ts';
@@ -12,6 +12,9 @@ import { markdownEndpoints } from './src/integrations/markdown-endpoints.ts';
 export default defineConfig({
   site: "https://gui.do",
   output: "static",
+  // Astro 7 defaults to 'jsx', which drops whitespace between inline elements
+  // (e.g. "<a>x</a> <em>y</em>" renders as "xy"). Keep the v6 behaviour.
+  compressHTML: true,
   build: {
     inlineStylesheets: "auto", // Inline critical CSS automatically
   },
@@ -87,7 +90,6 @@ export default defineConfig({
       extendMarkdownConfig: true,
       optimize: false,
     }),
-    react(),
     icon({
       include: {
         tabler: ["chart-bar", "door", "flask", "gauge", "letter-g", "letter-j", "letter-x", "markdown", "message", "question-mark", "speakerphone", "star"],
@@ -133,6 +135,6 @@ export default defineConfig({
     css: {
       devSourcemap: true,
     },
-    plugins: []
+    plugins: [tailwindcss()]
   }
 });

@@ -1,18 +1,18 @@
 /* Import Component Styles
-   Sass requires @use rules to come first, before any other directives. */
-@use "./utilities/utilities";
-@use "./components/alerts";
-@use "./components/cards";
-@use "./components/links";
-@use "./components/random-link-colors";
-@use "./components/redesign";
-@use "./components/home";
-@use "./base/typography";
-@use "./prose";
+   CSS requires @import rules to come first, before any other statements. */
+@import "./utilities/utilities.css";
+@import "./components/alerts.css";
+@import "./components/cards.css";
+@import "./components/links.css";
+@import "./components/random-link-colors.css";
+@import "./components/redesign.css";
+@import "./components/home.css";
+@import "./base/typography.css";
+@import "./prose.css";
 
-/* Reference Tailwind v4 theme so @apply directives in this file resolve
-   without producing utilities twice. Required because PostCSS processes
-   this .scss independently from tailwind.css. */
+/* Reference the Tailwind v4 theme so @apply in this file and the imported
+   partials resolves without emitting utilities twice. The Tailwind Vite
+   plugin processes this file separately from tailwind.css. */
 @reference "./tailwind.css";
 
 /* Base Styles

@@ -19,7 +19,7 @@
 
   /* ---- eyebrow / kicker label ---- */
   .eyebrow {
-    @apply text-primary-600 dark:text-primary-400 inline-flex items-center gap-2 font-display text-[0.8rem] font-bold uppercase tracking-[0.08em];
+    @apply text-primary-600 dark:text-primary-400 font-display inline-flex items-center gap-2 text-[0.8rem] font-bold tracking-[0.08em] uppercase;
   }
 
   /* ---- surface: the standard card panel ----
@@ -45,11 +45,19 @@
       var(--ac-text, var(--ac, var(--color-primary-600))) 72%,
       var(--color-base-950)
     );
-    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 12%, transparent);
+    background: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 12%,
+      transparent
+    );
   }
   :root.dark .tlevel {
     color: color-mix(in oklab, var(--ac, var(--color-primary-400)) 78%, white);
-    background: color-mix(in oklab, var(--ac, var(--color-primary-400)) 16%, transparent);
+    background: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-400)) 16%,
+      transparent
+    );
   }
 
   /* ---- accent button: solid CTA tinted by the page `--ac` accent ----
@@ -64,10 +72,18 @@
   }
   .btn-ac:hover {
     /* Lighten (not darken) on hover so the dark label keeps its contrast. */
-    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 86%, white);
+    background: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 86%,
+      white
+    );
   }
   .btn-ac:focus {
-    --tw-ring-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 70%, transparent);
+    --tw-ring-color: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 70%,
+      transparent
+    );
   }
 
   /* Accent TEXT color, mode-aware: the bright pastel accent reads fine on dark
@@ -85,11 +101,19 @@
   .btn-ac-outline {
     @apply font-display inline-flex items-center justify-center rounded-full border px-6 py-3 font-bold transition;
     color: var(--ac-text, var(--ac, var(--color-primary-600)));
-    border-color: color-mix(in oklab, var(--ac, var(--color-primary-600)) 45%, var(--color-base-300));
+    border-color: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 45%,
+      var(--color-base-300)
+    );
   }
   .btn-ac-outline:hover {
     border-color: var(--ac, var(--color-primary-600));
-    background: color-mix(in oklab, var(--ac, var(--color-primary-600)) 8%, transparent);
+    background: color-mix(
+      in oklab,
+      var(--ac, var(--color-primary-600)) 8%,
+      transparent
+    );
   }
 
   /* ---- pills / chips ---- */
@@ -102,7 +126,7 @@
 
   /* ---- live dot (handwritten "live" label + pulsing blip) ---- */
   .live {
-    @apply text-love-light dark:text-love inline-flex items-center gap-1.5 font-hand text-[1.15rem] font-bold;
+    @apply text-love-light dark:text-love font-hand inline-flex items-center gap-1.5 text-[1.15rem] font-bold;
   }
   .live .blip {
     @apply bg-love-light dark:bg-love size-[9px] rounded-full;
@@ -111,7 +135,8 @@
   }
   @keyframes blip {
     0% {
-      box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-love) 55%, transparent);
+      box-shadow: 0 0 0 0
+        color-mix(in oklab, var(--color-love) 55%, transparent);
     }
     70% {
       box-shadow: 0 0 0 10px transparent;
@@ -145,7 +170,11 @@
     @apply size-[9px] shrink-0 rounded-full;
     background: var(--app-c, var(--color-app-fallback));
     box-shadow: 0 0 0 3px
-      color-mix(in oklab, var(--app-c, var(--color-app-fallback)) 18%, transparent);
+      color-mix(
+        in oklab,
+        var(--app-c, var(--color-app-fallback)) 18%,
+        transparent
+      );
   }
 
   /* ---- reading-progress bar (CSS scroll-timeline; graceful + reduced-motion safe) ---- */
@@ -177,7 +206,7 @@
 
   /* ---- article signature (handwritten sign-off) ---- */
   .article-signature {
-    @apply text-love-light dark:text-rose mt-10 font-hand text-[2rem] leading-none;
+    @apply text-love-light dark:text-rose font-hand mt-10 text-[2rem] leading-none;
   }
 
   /* ---- reveal-on-scroll ----
