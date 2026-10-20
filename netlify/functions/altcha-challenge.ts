@@ -1,4 +1,3 @@
-import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
 import { createChallenge } from "altcha-lib";
 
 /**
@@ -7,88 +6,48 @@ import { createChallenge } from "altcha-lib";
  * Generates cryptographic proof-of-work challenges for spam protection.
  * The challenge expires after 5 minutes (encoded in salt).
  * Uses HMAC signing to verify challenges came from this server.
+ *
+ * Fetched same-origin by the ALTCHA widget on NewsletterForm.astro and
+ * ama.astro, so no CORS headers are sent.
  */
 
 const CHALLENGE_EXPIRY_SECONDS = 300; // 5 minutes
 const MAX_NUMBER = 300000; // Complexity: ~1-2 seconds solve time on average device
 
-const handler: Handler = async (
-  event: HandlerEvent,
-  _context: HandlerContext
-) => {
-  // CORS headers for all responses
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-  };
+function json(status: number, body: unknown): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      "Content-Type": "application/json",
+      // Every challenge is single-use: never let a browser or the CDN reuse one.
+      "Cache-Control": "no-store",
+    },
+  });
+}
 
-  // Handle CORS preflight
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 204,
-      headers: corsHeaders,
-      body: "",
-    };
+export default async (req: Request): Promise<Response> => {
+  if (req.method !== "GET") {
+    return json(405, { error: "Method not allowed" });
   }
 
-  // Only allow GET requests
-  if (event.httpMethod !== "GET") {
-    return {
-      statusCode: 405,
-      headers: {
-        "Content-Type": "application/json",
-        ...corsHeaders,
-      },
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
+  const hmacKey = process.env.ALTCHA_HMAC_KEY;
+  if (!hmacKey) {
+    console.error("Missing ALTCHA_HMAC_KEY environment variable");
+    return json(500, { error: "Server configuration error" });
   }
 
   try {
-    const hmacKey = process.env.ALTCHA_HMAC_KEY;
-
-    if (!hmacKey) {
-      console.error("Missing ALTCHA_HMAC_KEY environment variable");
-      return {
-        statusCode: 500,
-        headers: {
-          "Content-Type": "application/json",
-          ...corsHeaders,
-        },
-        body: JSON.stringify({ error: "Server configuration error" }),
-      };
-    }
-
-    // Create challenge with expiry timestamp in params
-    const expires = new Date(Date.now() + CHALLENGE_EXPIRY_SECONDS * 1000);
-
     const challenge = await createChallenge({
       hmacKey,
       maxNumber: MAX_NUMBER,
-      expires,
+      expires: new Date(Date.now() + CHALLENGE_EXPIRY_SECONDS * 1000),
     });
-
-    return {
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-store, no-cache, must-revalidate",
-        ...corsHeaders,
-      },
-      body: JSON.stringify(challenge),
-    };
+    return json(200, challenge);
   } catch (error) {
-    console.error("ALTCHA challenge generation error:", error);
-
-    return {
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-        ...corsHeaders,
-      },
-      body: JSON.stringify({ error: "Failed to generate challenge" }),
-    };
+    console.error(
+      "ALTCHA challenge generation error:",
+      error instanceof Error ? error.message : error,
+    );
+    return json(500, { error: "Failed to generate challenge" });
   }
 };
-
-export { handler };

@@ -18,13 +18,17 @@
  * Environment variables:
  *   BLUESKY_APP_PASSWORD - App password from https://bsky.app/settings/app-passwords
  *
- * Designed to run as part of the Netlify build command.
+ * Runs as part of the Netlify build command, but only publishes on production
+ * builds: on Netlify (NETLIFY=true) any CONTEXT other than "production"
+ * (deploy previews, branch deploys) logs a skip and exits 0 before credentials
+ * are read. Local manual runs (no NETLIFY env) and --dry-run work as before.
  *
  * --------------------------------------------------------------------------
  * Auth: deliberate app-password exception
  * --------------------------------------------------------------------------
  * The general rule is OAuth, never app passwords, for atproto automation. This
- * script is a conscious, scoped exception, decided 2026-06-15:
+ * script is a conscious, scoped exception, decided 2026-06-15, and limited to
+ * production builds (plus manual local runs) since 2026-10-20:
  *   - It's the site owner's own automation writing the owner's own
  *     site.standard.document records to the owner's own PDS. No third parties.
  *   - The secret lives only in the Netlify build environment, never in this
@@ -35,7 +39,8 @@
  * Hardening expected of BLUESKY_APP_PASSWORD:
  *   - a DEDICATED app password (e.g. named "netlify-standard-site-publish"), so
  *     it can be revoked in isolation, not a shared one.
- *   - set only as a Netlify environment variable.
+ *   - set only as a Netlify environment variable, ideally scoped to the
+ *     Production deploy context so previews never receive it.
  * If this script ever writes on behalf of anyone other than the owner, switch
  * to OAuth.
  */
@@ -46,7 +51,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const SITE_URL = 'https://gui.do';
 const HANDLE = 'gui.do';
 const POSTS_DIR = path.join(__dirname, '..', 'src', 'content', 'post');
 const CONFIG_FILE = path.join(__dirname, '..', 'src', 'config', 'standardSite.json');
@@ -258,6 +262,13 @@ async function main() {
       console.log(`  + ${post.slug}: ${post.title}`);
     }
     console.log('\n[DRY RUN] Would also delete records for posts no longer published.');
+    process.exit(0);
+  }
+
+  // Only production builds publish. Deploy previews and branch deploys must
+  // never write records (or even read the app password).
+  if (process.env.NETLIFY === 'true' && process.env.CONTEXT !== 'production') {
+    console.log(`Netlify ${process.env.CONTEXT || 'unknown'} build, skipping Standard.site publish (production only).`);
     process.exit(0);
   }
 

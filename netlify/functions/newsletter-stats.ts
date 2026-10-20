@@ -1,5 +1,5 @@
-import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
+import { listmonkAuthHeaders, listmonkBaseUrl } from "./_shared/listmonk";
 
 /**
  * Subscriber Stats API
@@ -14,10 +14,12 @@ import { getStore } from "@netlify/blobs";
  * Only the combined total is returned. The per-source breakdown is deliberately
  * not exposed (readers discover the AT Protocol side when they subscribe).
  *
- * Env: LISTMONK_API_USER, LISTMONK_API_KEY, (optional) CF_BYPASS_TOKEN.
+ * Called same-origin from NewsletterForm.astro, so no CORS headers are sent.
+ *
+ * Env: LISTMONK_API_USER, LISTMONK_API_KEY, (optional) LISTMONK_BASE_URL,
+ * CF_BYPASS_TOKEN.
  */
 
-const LISTMONK_API_URL = "https://n.a11y.nl/api";
 const CONSTELLATION_URL = "https://constellation.microcosm.blue";
 
 // gui.do's canonical standard.site publication ("Guido X Jansen" -> gui.do).
@@ -43,30 +45,25 @@ const EMPTY_CACHE: CachedCounts = {
   atprotoUpdatedAt: null,
 };
 
-const commonHeaders: Record<string, string> = {
-  "Content-Type": "application/json",
-  "Access-Control-Allow-Origin": "*",
-};
+function json(
+  status: number,
+  body: Record<string, unknown>,
+  headers: Record<string, string> = {},
+): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json", ...headers },
+  });
+}
 
 /** Listmonk total subscribers. Returns null when not configured; throws on error. */
 async function fetchListmonkCount(): Promise<number | null> {
-  const apiUser = process.env.LISTMONK_API_USER;
-  const apiKey = process.env.LISTMONK_API_KEY;
-  if (!apiUser || !apiKey) return null;
-
-  const authHeader = Buffer.from(`${apiUser}:${apiKey}`).toString("base64");
-  const bypassToken = process.env.CF_BYPASS_TOKEN || "";
+  const headers = listmonkAuthHeaders();
+  if (!headers) return null;
 
   const response = await fetch(
-    `${LISTMONK_API_URL}/subscribers?page=1&per_page=1`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Basic ${authHeader}`,
-        "Content-Type": "application/json",
-        "X-Bypass-Token": bypassToken,
-      },
-    }
+    `${listmonkBaseUrl()}/subscribers?page=1&per_page=1`,
+    { method: "GET", headers },
   );
   if (!response.ok) throw new Error(`Listmonk API returned ${response.status}`);
   const data = (await response.json()) as { data: { total: number } };
@@ -87,16 +84,9 @@ async function fetchAtprotoCount(): Promise<number> {
   return typeof data.total === "number" ? data.total : 0;
 }
 
-const handler: Handler = async (
-  event: HandlerEvent,
-  _context: HandlerContext
-) => {
-  if (event.httpMethod !== "GET") {
-    return {
-      statusCode: 405,
-      headers: { ...commonHeaders },
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
+export default async (req: Request): Promise<Response> => {
+  if (req.method !== "GET") {
+    return json(405, { error: "Method not allowed" });
   }
 
   // Load last-known-good counts (best effort — never let a blob error break the page).
@@ -126,7 +116,10 @@ const handler: Handler = async (
       cache.listmonkUpdatedAt = now;
     }
   } else {
-    console.warn("Subscriber stats: Listmonk fetch failed", listmonkResult.reason);
+    console.warn(
+      "Subscriber stats: Listmonk fetch failed",
+      listmonkResult.reason,
+    );
   }
 
   if (atprotoResult.status === "fulfilled") {
@@ -135,7 +128,7 @@ const handler: Handler = async (
   } else {
     console.warn(
       "Subscriber stats: constellation fetch failed",
-      atprotoResult.reason
+      atprotoResult.reason,
     );
   }
 
@@ -154,14 +147,9 @@ const handler: Handler = async (
     ? (cache.listmonk ?? 0) + (cache.atproto ?? 0)
     : null;
 
-  return {
-    statusCode: 200,
-    headers: { ...commonHeaders, "Cache-Control": "public, max-age=3600" },
-    body: JSON.stringify({
-      success: true,
-      subscriberCount,
-    }),
-  };
+  return json(
+    200,
+    { success: true, subscriberCount },
+    { "Cache-Control": "public, max-age=3600" },
+  );
 };
-
-export { handler };
