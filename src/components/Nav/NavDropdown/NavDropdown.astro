@@ -58,11 +58,9 @@ const shouldReduceMotion =
       class="border-base-200 bg-base-50 dark:border-base-800 dark:bg-base-900 mt-4 w-[14rem] max-w-[20rem] min-w-[12rem] rounded-md border border-solid p-1.5 drop-shadow-xs"
       role="none"
     >
-      {
-        navItem.dropdown.map((dropdownItem) => (
-          <NavLink navItem={dropdownItem} />
-        ))
-      }
+      {navItem.dropdown.map((dropdownItem) => (
+        <NavLink navItem={dropdownItem} />
+      ))}
     </ul>
   </div>
 </li>

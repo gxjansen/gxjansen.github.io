@@ -29,25 +29,20 @@ const bar = "█".repeat(filled) + "░".repeat(empty);
   <div class="flex flex-wrap gap-x-4 gap-y-1">
     <span class="text-foam whitespace-nowrap">{bar} {percent}%</span>
     <span class="text-foam whitespace-nowrap">⏱ {time}</span>
-    {
-      attunementLow && !attunementCritical && (
-        <span class="text-gold whitespace-nowrap">⚠ ATTUNEMENT LOW</span>
-      )
-    }
-    {
-      attunementCritical && (
-        <span class="text-love animate-pulse whitespace-nowrap">
-          ⚠ ATTUNEMENT CRITICAL
-        </span>
-      )
-    }
+    {attunementLow && !attunementCritical && <span
+      class="text-gold whitespace-nowrap"
+      >⚠ ATTUNEMENT LOW</span
+    >}
+    {attunementCritical && <span
+      class="text-love animate-pulse whitespace-nowrap"
+    >
+      ⚠ ATTUNEMENT CRITICAL
+    </span>}
   </div>
-  {
-    depleted && message && (
-      <div class="border-base-700 mt-2 border-t pt-2 text-center">
-        <div class="text-love font-bold">SESSION MANA DEPLETED</div>
-        <div class="text-base-400">{message}</div>
-      </div>
-    )
-  }
+  {depleted && message && <div
+    class="border-base-700 mt-2 border-t pt-2 text-center"
+  >
+    <div class="text-love font-bold">SESSION MANA DEPLETED</div>
+    <div class="text-base-400">{message}</div>
+  </div>}
 </div>

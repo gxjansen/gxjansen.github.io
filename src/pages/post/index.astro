@@ -111,13 +111,13 @@ const categories = [...counts.entries()]
         <button class="fbtn active" data-cat="all" type="button">
           All <span class="opacity-60">({articles.length})</span>
         </button>
-        {
-          categories.map((cat) => (
-            <button class="fbtn" data-cat={cat} type="button">
-              {cat}
-            </button>
-          ))
-        }
+        {categories.map((cat) => <button
+          class="fbtn"
+          data-cat={cat}
+          type="button"
+        >
+          {cat}
+        </button>)}
       </div>
 
       <!-- Article grid -->
@@ -125,56 +125,46 @@ const categories = [...counts.entries()]
         class="grid grid-cols-1 gap-[1.1rem] sm:grid-cols-2 lg:grid-cols-3"
         id="article-grid"
       >
-        {
-          articles.map((a) => (
-            <a
-              class="art reveal"
-              href={a.href}
-              style={`--ac:var(--color-${a.accent})`}
-              data-cats={JSON.stringify(a.categories)}
-            >
-              {a.heroImage && (
-                <div class="art-thumb">
-                  <Image src={a.heroImage} alt="" width={520} height={280} />
-                </div>
-              )}
-              <div class="tags">
-                {a.categories.slice(0, 2).map((t) => (
-                  <span class="tg">{t}</span>
-                ))}
-              </div>
-              <h3>{a.title}</h3>
-              {a.description && <p>{a.description}</p>}
-              <div class="m">
-                <span>{a.date}</span>
+        {articles.map((a) => <a
+          class="art reveal"
+          href={a.href}
+          style={`--ac:var(--color-${a.accent})`}
+          data-cats={JSON.stringify(a.categories)}
+        >
+          {a.heroImage && <div class="art-thumb">
+            <Image src={a.heroImage} alt="" width={520} height={280} />
+          </div>}
+          <div class="tags">
+            {a.categories.slice(0, 2).map((t) => <span class="tg">{t}</span>)}
+          </div>
+          <h3>{a.title}</h3>
+          {a.description && <p>{a.description}</p>}
+          <div class="m">
+            <span>{a.date}</span>
+            <span aria-hidden="true">·</span>
+            <span class="read-time">{a.read}</span>
+            {a.engagement !== null && (
+              <>
                 <span aria-hidden="true">·</span>
-                <span class="read-time">{a.read}</span>
-                {a.engagement !== null && (
-                  <>
-                    <span aria-hidden="true">·</span>
-                    <span
-                      class="bsky-eng text-base-500 inline-flex items-center gap-1 text-[0.8rem]"
-                      data-bsky-uri={a.bskyUri}
-                      aria-label={`${a.engagement} interactions on Bluesky`}
-                    >
-                      <Icon
-                        name="tabler/brand-bluesky"
-                        class="size-3.5"
-                        aria-hidden="true"
-                      />
-                      <span class="bsky-eng-n" aria-hidden="true">
-                        {a.engagement}
-                      </span>
-                    </span>
-                  </>
-                )}
-                <span class="read">
-                  Read <span aria-hidden="true">↗</span>
+                <span
+                  class="bsky-eng text-base-500 inline-flex items-center gap-1 text-[0.8rem]"
+                  data-bsky-uri={a.bskyUri}
+                  aria-label={`${a.engagement} interactions on Bluesky`}
+                >
+                  <Icon
+                    name="tabler/brand-bluesky"
+                    class="size-3.5"
+                    aria-hidden="true"
+                  />
+                  <span class="bsky-eng-n" aria-hidden="true">
+                    {a.engagement}
+                  </span>
                 </span>
-              </div>
-            </a>
-          ))
-        }
+              </>
+            )}
+            <span class="read"> Read <span aria-hidden="true">↗</span> </span>
+          </div>
+        </a>)}
       </div>
       <p
         id="no-results"

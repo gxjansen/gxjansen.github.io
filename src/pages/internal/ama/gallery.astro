@@ -87,76 +87,57 @@ const enc = (s: string) => encodeURIComponent(s);
   <body>
     <h1>AMA card · dev gallery</h1>
     <p class="sub">
-      Each tile hits <code>/internal/ama/card.png</code> with different params. Forced
-      variant/persona for the first two sections; hash-driven for the feed.
+      Each tile hits <code>/internal/ama/card.png</code> with different params.
+      Forced variant/persona for the first two sections; hash-driven for the
+      feed.
     </p>
 
     <h2>Gallery · 7 colour variants (forced)</h2>
     <div class="grid">
-      {
-        variants.map((v) => (
-          <div class="card">
-            <span class="label">{v.id}</span>
-            <img
-              src={`/internal/ama/card.png?q=${enc(SAMPLE_Q)}&variant=${v.id}&persona=${enc(personas[0].name)}`}
-              alt={v.id}
-              loading="lazy"
-            />
-          </div>
-        ))
-      }
+      {variants.map((v) => <div class="card">
+        <span class="label">{v.id}</span>
+        <img
+          src={`/internal/ama/card.png?q=${enc(SAMPLE_Q)}&variant=${v.id}&persona=${enc(personas[0].name)}`}
+          alt={v.id}
+          loading="lazy"
+        />
+      </div>)}
     </div>
 
     <h2>Sizing · pickFontSize across three length tiers</h2>
     <div class="grid">
-      {
-        Object.entries(LENGTHS).map(([id, q]) => (
-          <div class="card">
-            <span class="label">
-              {id} · {q.length} chars
-            </span>
-            <img
-              src={`/internal/ama/card.png?q=${enc(q)}&variant=${variants[0].id}&persona=${enc(personas[1].name)}`}
-              alt={id}
-              loading="lazy"
-            />
-          </div>
-        ))
-      }
+      {Object.entries(LENGTHS).map(([id, q]) => <div class="card">
+        <span class="label"> {id} · {q.length} chars </span>
+        <img
+          src={`/internal/ama/card.png?q=${enc(q)}&variant=${variants[0].id}&persona=${enc(personas[1].name)}`}
+          alt={id}
+          loading="lazy"
+        />
+      </div>)}
     </div>
 
     <h2>Feed · 10 questions (hash-driven, no overrides)</h2>
     <div class="grid">
-      {
-        FEED.map((q, i) => (
-          <div class="card">
-            <span class="label">Q{i + 1}</span>
-            <img
-              src={`/internal/ama/card.png?q=${enc(q)}`}
-              alt={`Q${i + 1}`}
-              loading="lazy"
-            />
-          </div>
-        ))
-      }
+      {FEED.map((q, i) => <div class="card">
+        <span class="label">Q{i + 1}</span>
+        <img
+          src={`/internal/ama/card.png?q=${enc(q)}`}
+          alt={`Q${i + 1}`}
+          loading="lazy"
+        />
+      </div>)}
     </div>
 
     <h2>Personas · all {personas.length} animals on one variant</h2>
     <div class="grid">
-      {
-        personas.map((p) => (
-          <div class="card">
-            <span class="label">
-              {p.adjectives.join(" / ")} {p.name}
-            </span>
-            <img
-              src={`/internal/ama/card.png?q=${enc(`How do you think about ${p.name.toLowerCase()}-style community work in 2026?`)}&variant=${variants[0].id}&persona=${enc(p.name)}`}
-              alt={p.name}
-              loading="lazy"
-            />
-          </div>
-        ))
-      }
+      {personas.map((p) => <div class="card">
+        <span class="label"> {p.adjectives.join(" / ")} {p.name} </span>
+        <img
+          src={`/internal/ama/card.png?q=${enc(`How do you think about ${p.name.toLowerCase()}-style community work in 2026?`)}&variant=${variants[0].id}&persona=${enc(p.name)}`}
+          alt={p.name}
+          loading="lazy"
+        />
+      </div>)}
     </div>
   </body>
 </html>

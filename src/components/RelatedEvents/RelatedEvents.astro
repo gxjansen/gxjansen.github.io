@@ -30,35 +30,33 @@ const firstColumnEvents = sortedEvents.filter((_, i) => i % 2 === 0);
 const secondColumnEvents = sortedEvents.filter((_, i) => i % 2 === 1);
 ---
 
-{
-  sortedEvents.length > 0 && (
-    <div class="border-base-200 dark:border-base-800 mt-12 border-t pt-12">
-      <h2 class="text-base-900 dark:text-base-100 mb-8 text-2xl font-bold">
-        I've given the above session at the following events:
-      </h2>
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
-        {/* First column */}
-        <div class="space-y-6">
-          {firstColumnEvents.map((event) => (
-            <EventCard
-              {...event}
-              showPresentationName={false}
-              isOnPresentationPage={true}
-            />
-          ))}
-        </div>
-
-        {/* Second column - offset as a whole */}
-        <div class="space-y-6 md:mt-24">
-          {secondColumnEvents.map((event) => (
-            <EventCard
-              {...event}
-              showPresentationName={false}
-              isOnPresentationPage={true}
-            />
-          ))}
-        </div>
-      </div>
+{sortedEvents.length > 0 && <div
+  class="border-base-200 dark:border-base-800 mt-12 border-t pt-12"
+>
+  <h2 class="text-base-900 dark:text-base-100 mb-8 text-2xl font-bold">
+    I've given the above session at the following events:
+  </h2>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+    {/* First column */}
+    <div class="space-y-6">
+      {firstColumnEvents.map((event) => (
+        <EventCard
+          {...event}
+          showPresentationName={false}
+          isOnPresentationPage={true}
+        />
+      ))}
     </div>
-  )
-}
+
+    {/* Second column - offset as a whole */}
+    <div class="space-y-6 md:mt-24">
+      {secondColumnEvents.map((event) => (
+        <EventCard
+          {...event}
+          showPresentationName={false}
+          isOnPresentationPage={true}
+        />
+      ))}
+    </div>
+  </div>
+</div>}

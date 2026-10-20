@@ -34,20 +34,20 @@ const companies = [
         <div
           class="grid grid-cols-2 gap-12 md:grid-cols-3 md:gap-16 lg:grid-cols-5"
         >
-          {
-            companies.map((company) => (
-              <div class="flex h-28 items-center justify-center">
-                <div class="flex w-full max-w-[200px] items-center justify-center px-6">
-                  <img
-                    src={company.logo}
-                    alt={`${company.name} logo`}
-                    class="max-h-14 w-auto max-w-[140px] object-contain opacity-50 invert transition-opacity duration-300 hover:opacity-100 dark:invert-0"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            ))
-          }
+          {companies.map((company) => <div
+            class="flex h-28 items-center justify-center"
+          >
+            <div
+              class="flex w-full max-w-[200px] items-center justify-center px-6"
+            >
+              <img
+                src={company.logo}
+                alt={`${company.name} logo`}
+                class="max-h-14 w-auto max-w-[140px] object-contain opacity-50 invert transition-opacity duration-300 hover:opacity-100 dark:invert-0"
+                loading="lazy"
+              />
+            </div>
+          </div>)}
         </div>
       </div>
     </div>

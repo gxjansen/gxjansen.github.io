@@ -153,21 +153,16 @@ Astro.csp?.insertScriptHash(scriptHash(themeInit));
 <link rel="me" href="https://bsky.app/profile/gui.do" />
 
 {/* Standard.site document verification (AT Protocol long-form publishing) */}
-{
-  standardSiteConfig.enabled &&
-    type === "blog" &&
-    (() => {
-      const slug = Astro.url.pathname
-        .replace(/^\/post\//, "")
-        .replace(/\/$/, "");
-      const href = `at://${standardSiteConfig.did}/site.standard.document/${slug}`;
-      return <link rel="site.standard.document" href={href} />;
-    })()
-}
+{standardSiteConfig.enabled &&
+  type === "blog" &&
+  (() => {
+    const slug = Astro.url.pathname.replace(/^\/post\//, "").replace(/\/$/, "");
+    const href = `at://${standardSiteConfig.did}/site.standard.document/${slug}`;
+    return <link rel="site.standard.document" href={href} />;
+  })()}
 
 <!-- Theme change setup. Run early to eliminate Flash of inAccurate coloR Theme (FART) -->
 <script is:inline set:html={themeInit} />
-
 <Seo
   type={type as any}
   title={title}
@@ -185,14 +180,12 @@ Astro.csp?.insertScriptHash(scriptHash(themeInit));
   communities={communities as any}
 />
 
-{
-  /*
+{/*
   Umami Analytics — disabled pending a public endpoint.
   The current host only resolves on the homelab network, so the script
   fails for off-network visitors (and spams Chrome console errors).
   Restore once Umami is reachable via a public hostname.
-*/
-}
+*/}
 {
   /* Self-hosted, cookieless Umami analytics. Production only — never in dev. */
   import.meta.env.PROD && (
@@ -205,7 +198,6 @@ Astro.csp?.insertScriptHash(scriptHash(themeInit));
         defer
         src="https://u.a11y.nl/script.js"
         data-website-id="c5cf1235-9d9d-4543-b0be-2acc2551d8f5"
-      />
-    </>
+      /></>
   )
 }

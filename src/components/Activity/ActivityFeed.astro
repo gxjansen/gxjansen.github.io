@@ -40,29 +40,27 @@ const filters = [
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-1"
-          >Sifa ID<Icon name="sifa" class="size-3.5" aria-hidden="true" /></a
-        >
+          >Sifa ID<Icon name="sifa" class="size-3.5" aria-hidden="true"
+        /></a>
       </span>
     </div>
 
     <div class="feed-filters" role="tablist" aria-label="Filter activity">
-      {
-        filters.map((f, i) => (
-          <button
-            class:list={["fbtn", i === 0 && "active"]}
-            data-cat={f.cat}
-            role="tab"
-            type="button"
-            aria-selected={i === 0 ? "true" : "false"}
-          >
-            {f.label}
-          </button>
-        ))
-      }
+      {filters.map((f, i) => <button
+        class:list={["fbtn", i === 0 && "active"]}
+        data-cat={f.cat}
+        role="tab"
+        type="button"
+        aria-selected={i === 0 ? "true" : "false"}
+      >
+        {f.label}
+      </button>)}
     </div>
 
     <ul class="feed-list" role="list">
-      {items.map((item) => <FeedItem item={item} />)}
+      {items.map((item) => (
+        <FeedItem item={item} />
+      ))}
     </ul>
   </div>
 </section>

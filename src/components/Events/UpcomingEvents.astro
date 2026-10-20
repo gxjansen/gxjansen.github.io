@@ -25,72 +25,65 @@ const firstColumnEvents = upcomingEvents.filter((_, i) => i % 2 === 0);
 const secondColumnEvents = upcomingEvents.filter((_, i) => i % 2 === 1);
 ---
 
-{
-  upcomingEvents.length >= 1 && (
-    <section class="mb-16" aria-labelledby="upcoming-events-heading">
-      <div class="relative">
-        {showTitle && (
-          <div class="sec-head">
-            <div>
-              <span class="hand-note">coming up</span>
-              <h2
-                id="upcoming-events-heading"
-                class="font-display text-[clamp(1.9rem,3.6vw,2.9rem)] leading-[1.1] font-black tracking-[-0.03em]"
-              >
-                Upcoming events
-              </h2>
-            </div>
-            {events.filter((event) => new Date(event.date) >= today).length >
-              maxEvents && (
-              <span class="text-base-500 text-sm" aria-live="polite">
-                Showing {maxEvents} of{" "}
-                {events.filter((event) => new Date(event.date) >= today).length}{" "}
-                upcoming events
-              </span>
-            )}
-          </div>
-        )}
-
-        <div
-          class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8"
-          role="list"
-          aria-label="Upcoming events list"
+{upcomingEvents.length >= 1 && <section
+  class="mb-16"
+  aria-labelledby="upcoming-events-heading"
+>
+  <div class="relative">
+    {showTitle && <div class="sec-head">
+      <div>
+        <span class="hand-note">coming up</span>
+        <h2
+          id="upcoming-events-heading"
+          class="font-display text-[clamp(1.9rem,3.6vw,2.9rem)] leading-[1.1] font-black tracking-[-0.03em]"
         >
-          {/* First column */}
-          <div class="space-y-6">
-            {firstColumnEvents.map((event) => (
-              <EventCard
-                {...event}
-                showPresentationName={true}
-                presentationUrl={getPresentationUrl(event.id)}
-              />
-            ))}
-          </div>
+          Upcoming events
+        </h2>
+      </div>
+      {events.filter((event) => new Date(event.date) >= today).length >
+        maxEvents && <span class="text-base-500 text-sm" aria-live="polite">
+        Showing {maxEvents} of{" "}
+        {events.filter((event) => new Date(event.date) >= today).length}{" "}
+        upcoming events
+      </span>}
+    </div>}
 
-          {/* Second column - offset as a whole */}
-          <div class="space-y-6 md:mt-24">
-            {secondColumnEvents.map((event) => (
-              <EventCard
-                {...event}
-                showPresentationName={true}
-                presentationUrl={getPresentationUrl(event.id)}
-              />
-            ))}
-          </div>
-        </div>
+    <div
+      class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8"
+      role="list"
+      aria-label="Upcoming events list"
+    >
+      {/* First column */}
+      <div class="space-y-6">
+        {firstColumnEvents.map((event) => (
+          <EventCard
+            {...event}
+            showPresentationName={true}
+            presentationUrl={getPresentationUrl(event.id)}
+          />
+        ))}
       </div>
 
-      {upcomingEvents.length > 0 && (
-        <div class="mt-8 flex justify-center">
-          <a
-            href="/events/#past-events"
-            aria-label="View all past speaking events"
-            class="border-base-300 hover:border-primary-600 dark:border-base-500 dark:hover:border-primary-400 bg-base-100 text-base-800 dark:bg-base-700 dark:text-base-100 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
-          >
-            View past events
-          </a>
-        </div>
-      )}
-    </section>
-  )
-}
+      {/* Second column - offset as a whole */}
+      <div class="space-y-6 md:mt-24">
+        {secondColumnEvents.map((event) => (
+          <EventCard
+            {...event}
+            showPresentationName={true}
+            presentationUrl={getPresentationUrl(event.id)}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {upcomingEvents.length > 0 && <div class="mt-8 flex justify-center">
+    <a
+      href="/events/#past-events"
+      aria-label="View all past speaking events"
+      class="border-base-300 hover:border-primary-600 dark:border-base-500 dark:hover:border-primary-400 bg-base-100 text-base-800 dark:bg-base-700 dark:text-base-100 font-display inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition"
+    >
+      View past events
+    </a>
+  </div>}
+</section>}

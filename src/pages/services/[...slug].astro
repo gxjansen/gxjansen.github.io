@@ -32,6 +32,6 @@ const service = Astro.props as Props;
 const { Content } = await render(service);
 ---
 
-<ServiceLayoutCenter {...service.data as any}>
+<ServiceLayoutCenter {...(service.data as any)}>
   <Content components={{ a: ExternalLink }} />
 </ServiceLayoutCenter>

@@ -44,56 +44,56 @@ const nextPresentation =
   </div>
 
   <div class="mt-8 flex items-center justify-between gap-4">
-    {
-      prevPresentation && (
-        <a
-          href={`/presentations/${prevPresentation.id}/`}
-          class="group border-base-200 hover:border-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4"
+    {prevPresentation && <a
+      href={`/presentations/${prevPresentation.id}/`}
+      class="group border-base-200 hover:border-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4"
+    >
+      <span
+        class="text-base-500 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center gap-1 text-sm"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
         >
-          <span class="text-base-500 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center gap-1 text-sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-            >
-              <path d="M15 6l-6 6l6 6" />
-            </svg>
-            Previous
-          </span>
-          <p class="text-base-900 group-hover:text-primary-500 dark:group-hover:text-primary-400 mt-1 line-clamp-2 font-medium dark:text-white">
-            {prevPresentation.data.title}
-          </p>
-        </a>
-      )
-    }
+          <path d="M15 6l-6 6l6 6" />
+        </svg>
+        Previous
+      </span>
+      <p
+        class="text-base-900 group-hover:text-primary-500 dark:group-hover:text-primary-400 mt-1 line-clamp-2 font-medium dark:text-white"
+      >
+        {prevPresentation.data.title}
+      </p>
+    </a>}
 
-    {
-      nextPresentation && (
-        <a
-          href={`/presentations/${nextPresentation.id}/`}
-          class="group border-base-200 hover:border-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4 text-right"
+    {nextPresentation && <a
+      href={`/presentations/${nextPresentation.id}/`}
+      class="group border-base-200 hover:border-primary-500 dark:border-base-800 dark:hover:border-primary-400 flex-1 rounded-lg border p-4 text-right"
+    >
+      <span
+        class="text-base-500 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center justify-end gap-1 text-sm"
+      >
+        Next
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
         >
-          <span class="text-base-500 group-hover:text-primary-500 dark:text-base-400 dark:group-hover:text-primary-400 flex items-center justify-end gap-1 text-sm">
-            Next
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-            >
-              <path d="M9 6l6 6l-6 6" />
-            </svg>
-          </span>
-          <p class="text-base-900 group-hover:text-primary-500 dark:group-hover:text-primary-400 mt-1 line-clamp-2 font-medium dark:text-white">
-            {nextPresentation.data.title}
-          </p>
-        </a>
-      )
-    }
+          <path d="M9 6l6 6l-6 6" />
+        </svg>
+      </span>
+      <p
+        class="text-base-900 group-hover:text-primary-500 dark:group-hover:text-primary-400 mt-1 line-clamp-2 font-medium dark:text-white"
+      >
+        {nextPresentation.data.title}
+      </p>
+    </a>}
   </div>
 </nav>

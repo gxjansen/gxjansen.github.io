@@ -180,7 +180,8 @@ const pageDescription =
             stroke-linejoin="round"
             aria-hidden="true"
           >
-            <path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6z"
+            <path
+              d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6z"
             ></path>
           </svg>
           7-part series · AT Protocol
@@ -205,22 +206,20 @@ const pageDescription =
         <div class="my-7 flex max-w-[540px] flex-col gap-3.5">
           <span
             class="font-hand text-love-light dark:text-rose self-start text-[1.3rem] leading-none"
-            style="transform:rotate(-2deg);transform-origin:left center;"
+            style="transform: rotate(-2deg); transform-origin: left center"
             >{progKicker}</span
           >
           <div class="flex gap-1.5" role="presentation" aria-hidden="true">
-            {
-              Array.from({ length: TOTAL }).map((_, i) => (
-                <div
-                  class:list={[
-                    "h-[9px] flex-1 rounded-full",
-                    i < releasedCount
-                      ? "bg-primary-600 dark:bg-primary-400"
-                      : "bg-base-900/12 dark:bg-base-100/15",
-                  ]}
-                />
-              ))
-            }
+            {Array.from({ length: TOTAL }).map((_, i) => (
+              <div
+                class:list={[
+                  "h-[9px] flex-1 rounded-full",
+                  i < releasedCount
+                    ? "bg-primary-600 dark:bg-primary-400"
+                    : "bg-base-900/12 dark:bg-base-100/15",
+                ]}
+              />
+            ))}
           </div>
           <div class="font-display text-base-800 dark:text-base-100 font-bold">
             {progMain}
@@ -268,162 +267,174 @@ const pageDescription =
         </div>
 
         <ol class="flex list-none flex-col p-0">
-          {
-            episodes.map((e) => (
-              <li
-                style={`--ac:var(--color-${e.accent});--ac-strong:var(--color-${e.accent}-light);--ac2:var(--color-${e.pair})`}
-              >
-                {e.act && (
-                  <div
-                    class:list={[
-                      "mb-4",
-                      e.act.divider &&
-                        "border-base-200 dark:border-base-800 mt-7 border-t pt-6",
-                    ]}
-                  >
-                    <div class="flex flex-wrap items-baseline gap-2.5 sm:pl-[68px]">
-                      <span
-                        class="font-display text-[0.78rem] font-bold tracking-[0.08em] uppercase"
-                        style={`color:var(--color-${e.act.accent})`}
-                      >
-                        {e.act.label}
-                      </span>
-                      <span class="text-base-500 dark:text-base-400 text-[0.85rem]">
-                        {e.act.strap}
-                      </span>
-                    </div>
-                  </div>
-                )}
+          {episodes.map((e) => <li
+            style={`--ac:var(--color-${e.accent});--ac-strong:var(--color-${e.accent}-light);--ac2:var(--color-${e.pair})`}
+          >
+            {e.act && <div
+              class:list={[
+                "mb-4",
+                e.act.divider &&
+                  "border-base-200 dark:border-base-800 mt-7 border-t pt-6",
+              ]}
+            >
+              <div class="flex flex-wrap items-baseline gap-2.5 sm:pl-[68px]">
+                <span
+                  class="font-display text-[0.78rem] font-bold tracking-[0.08em] uppercase"
+                  style={`color:var(--color-${e.act.accent})`}
+                >
+                  {e.act.label}
+                </span>
+                <span class="text-base-500 dark:text-base-400 text-[0.85rem]">
+                  {e.act.strap}
+                </span>
+              </div>
+            </div>}
 
-                <div class="flex items-stretch gap-4 pb-[18px]">
-                  {/* spine column: number badge + connector */}
-                  <div class="flex flex-none basis-[52px] flex-col items-center">
-                    <div
-                      class:list={[
-                        "font-display flex size-[46px] flex-none items-center justify-center rounded-full text-[1.02rem] font-extrabold",
-                        e.released
-                          ? "ep-badge-released text-white"
-                          : "border-base-300 dark:border-base-700 text-base-500 dark:text-base-400 border-[1.5px] bg-transparent",
-                      ]}
-                    >
-                      {e.num}
-                    </div>
-                    {e.notLast && (
-                      <div class="bg-base-200 dark:bg-base-800 mt-2.5 min-h-[18px] w-0.5 flex-1 rounded" />
-                    )}
-                  </div>
-
-                  {/* the card */}
-                  {e.released ? (
-                    <a
-                      href={e.href}
-                      aria-label={`Part ${e.num}: ${e.title}, read article`}
-                      class="ep-card focus-visible:ring-primary-500 border-base-200 dark:border-base-800 dark:hover:border-base-700 bg-base-50 dark:bg-base-900 block min-w-0 flex-1 rounded-2xl border shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden dark:shadow-none dark:hover:shadow-none"
-                    >
-                      <div class="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-4">
-                        <div
-                          aria-hidden="true"
-                          class="ep-thumb h-24 w-full flex-none rounded-xl sm:size-[88px]"
-                        />
-                        <div class="min-w-0 flex-1">
-                          <span class="ep-pill font-display mb-2 inline-block rounded-full px-2.5 py-1 text-[0.7rem] font-bold tracking-[0.02em] uppercase">
-                            {e.pill}
-                          </span>
-                          <h3 class="font-display text-base-800 dark:text-base-50 text-[1.18rem] leading-[1.2] font-extrabold tracking-[-0.015em]">
-                            {e.title}
-                          </h3>
-                          <p class="text-base-600 dark:text-base-400 mt-1.5 text-[0.92rem] leading-[1.5]">
-                            {e.gloss}
-                          </p>
-                          <div class="text-base-500 mt-3 flex items-center gap-2.5 text-[0.82rem]">
-                            <span class="inline-flex items-center gap-1.5">
-                              <svg
-                                viewBox="0 0 24 24"
-                                width="14"
-                                height="14"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                              >
-                                <rect
-                                  x="4"
-                                  y="5"
-                                  width="16"
-                                  height="16"
-                                  rx="2"
-                                />
-                                <path d="M16 3v4M8 3v4M4 11h16" />
-                              </svg>
-                              {e.statusLabel}
-                            </span>
-                            <span class="ep-read font-display ml-auto inline-flex items-center gap-1 font-bold">
-                              Read
-                              <svg
-                                viewBox="0 0 24 24"
-                                width="15"
-                                height="15"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                              >
-                                <path d="M5 12h14M13 6l6 6-6 6" />
-                              </svg>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                  ) : (
-                    <div
-                      aria-disabled="true"
-                      class="border-base-300 dark:border-base-700 bg-base-50/60 dark:bg-base-900/50 block min-w-0 flex-1 rounded-2xl border border-dashed"
-                    >
-                      <div class="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-4">
-                        <div
-                          aria-hidden="true"
-                          class="ep-hatch h-24 w-full flex-none rounded-xl sm:size-[88px]"
-                        />
-                        <div class="min-w-0 flex-1">
-                          <span class="bg-base-200 dark:bg-base-800 text-base-500 dark:text-base-400 font-display mb-2 inline-block rounded-full px-2.5 py-1 text-[0.7rem] font-bold tracking-[0.02em] uppercase">
-                            {e.pill}
-                          </span>
-                          <h3 class="font-display text-base-500 dark:text-base-400 text-[1.18rem] leading-[1.2] font-extrabold tracking-[-0.015em]">
-                            {e.title}
-                          </h3>
-                          <p class="text-base-400 dark:text-base-500 mt-1.5 text-[0.92rem] leading-[1.5]">
-                            {e.gloss}
-                          </p>
-                          <div class="text-base-500 dark:text-base-400 font-display mt-3 flex items-center gap-1.5 text-[0.82rem] font-bold">
-                            <svg
-                              viewBox="0 0 24 24"
-                              width="14"
-                              height="14"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                            >
-                              <rect x="4" y="5" width="16" height="16" rx="2" />
-                              <path d="M16 3v4M8 3v4M4 11h16" />
-                            </svg>
-                            {e.statusLabel}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+            <div class="flex items-stretch gap-4 pb-[18px]">
+              {/* spine column: number badge + connector */}
+              <div class="flex flex-none basis-[52px] flex-col items-center">
+                <div
+                  class:list={[
+                    "font-display flex size-[46px] flex-none items-center justify-center rounded-full text-[1.02rem] font-extrabold",
+                    e.released
+                      ? "ep-badge-released text-white"
+                      : "border-base-300 dark:border-base-700 text-base-500 dark:text-base-400 border-[1.5px] bg-transparent",
+                  ]}
+                >
+                  {e.num}
                 </div>
-              </li>
-            ))
-          }
+                {e.notLast && (
+                  <div
+                    class="bg-base-200 dark:bg-base-800 mt-2.5 min-h-[18px] w-0.5 flex-1 rounded"
+                  />
+                )}
+              </div>
+
+              {/* the card */}
+              {e.released ? (
+                <a
+                  href={e.href}
+                  aria-label={`Part ${e.num}: ${e.title}, read article`}
+                  class="ep-card focus-visible:ring-primary-500 border-base-200 dark:border-base-800 dark:hover:border-base-700 bg-base-50 dark:bg-base-900 block min-w-0 flex-1 rounded-2xl border shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden dark:shadow-none dark:hover:shadow-none"
+                >
+                  <div
+                    class="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-4"
+                  >
+                    <div
+                      aria-hidden="true"
+                      class="ep-thumb h-24 w-full flex-none rounded-xl sm:size-[88px]"
+                    />
+                    <div class="min-w-0 flex-1">
+                      <span
+                        class="ep-pill font-display mb-2 inline-block rounded-full px-2.5 py-1 text-[0.7rem] font-bold tracking-[0.02em] uppercase"
+                      >
+                        {e.pill}
+                      </span>
+                      <h3
+                        class="font-display text-base-800 dark:text-base-50 text-[1.18rem] leading-[1.2] font-extrabold tracking-[-0.015em]"
+                      >
+                        {e.title}
+                      </h3>
+                      <p
+                        class="text-base-600 dark:text-base-400 mt-1.5 text-[0.92rem] leading-[1.5]"
+                      >
+                        {e.gloss}
+                      </p>
+                      <div
+                        class="text-base-500 mt-3 flex items-center gap-2.5 text-[0.82rem]"
+                      >
+                        <span class="inline-flex items-center gap-1.5">
+                          <svg
+                            viewBox="0 0 24 24"
+                            width="14"
+                            height="14"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                          >
+                            <rect x="4" y="5" width="16" height="16" rx="2" />
+                            <path d="M16 3v4M8 3v4M4 11h16" />
+                          </svg>
+                          {e.statusLabel}
+                        </span>
+                        <span
+                          class="ep-read font-display ml-auto inline-flex items-center gap-1 font-bold"
+                        >
+                          Read
+                          <svg
+                            viewBox="0 0 24 24"
+                            width="15"
+                            height="15"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                          >
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              ) : (
+                <div
+                  aria-disabled="true"
+                  class="border-base-300 dark:border-base-700 bg-base-50/60 dark:bg-base-900/50 block min-w-0 flex-1 rounded-2xl border border-dashed"
+                >
+                  <div
+                    class="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-4"
+                  >
+                    <div
+                      aria-hidden="true"
+                      class="ep-hatch h-24 w-full flex-none rounded-xl sm:size-[88px]"
+                    />
+                    <div class="min-w-0 flex-1">
+                      <span
+                        class="bg-base-200 dark:bg-base-800 text-base-500 dark:text-base-400 font-display mb-2 inline-block rounded-full px-2.5 py-1 text-[0.7rem] font-bold tracking-[0.02em] uppercase"
+                      >
+                        {e.pill}
+                      </span>
+                      <h3
+                        class="font-display text-base-500 dark:text-base-400 text-[1.18rem] leading-[1.2] font-extrabold tracking-[-0.015em]"
+                      >
+                        {e.title}
+                      </h3>
+                      <p
+                        class="text-base-400 dark:text-base-500 mt-1.5 text-[0.92rem] leading-[1.5]"
+                      >
+                        {e.gloss}
+                      </p>
+                      <div
+                        class="text-base-500 dark:text-base-400 font-display mt-3 flex items-center gap-1.5 text-[0.82rem] font-bold"
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="14"
+                          height="14"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <rect x="4" y="5" width="16" height="16" rx="2" />
+                          <path d="M16 3v4M8 3v4M4 11h16" />
+                        </svg>
+                        {e.statusLabel}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </li>)}
         </ol>
       </section>
 
@@ -473,7 +484,7 @@ const pageDescription =
         <div class="min-w-[240px] flex-1">
           <h2
             class="font-hand text-primary-600 dark:text-primary-400 mb-2 inline-block text-[1.3rem] leading-none"
-            style="transform:rotate(-2deg);transform-origin:left center;"
+            style="transform: rotate(-2deg); transform-origin: left center"
           >
             Hi, I'm Guido <span aria-hidden="true">👋</span>
           </h2>
@@ -494,11 +505,13 @@ const pageDescription =
               bit much).
             </p>
             <p>
-              Per <a
+              Per
+              <a
                 href="https://bookhive.buzz/books/bk_GOTqVyZtVIMWQOQztXde"
                 class="text-primary-600 dark:text-primary-400 font-semibold underline-offset-2 hover:underline"
                 target="_blank"
-                rel="noopener">Taleb</a
+                rel="noopener"
+                >Taleb</a
               >: writers without skin in the game produce theory; writers with
               skin in the game produce signal. If you'd rather have a neutral
               overview, there are good ones out there. This one comes with a

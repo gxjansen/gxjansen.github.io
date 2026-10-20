@@ -34,34 +34,31 @@ const { items, class: className } = Astro.props;
   class:list={["text-[0.85rem] leading-none", className]}
 >
   <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
-    {
-      items.map((item, i) => {
-        const isLast = i === items.length - 1;
-        return (
-          <li class="flex items-center gap-x-2">
-            {item.href && !isLast ? (
-              <a
-                href={item.href}
-                class="text-base-500 dark:text-base-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-              >
-                {item.label}
-              </a>
-            ) : (
-              <span
-                class="text-base-600 dark:text-base-300 font-medium"
-                aria-current={isLast ? "page" : undefined}
-              >
-                {item.label}
-              </span>
-            )}
-            {!isLast && (
-              <span class="text-base-400 dark:text-base-500" aria-hidden="true">
-                ›
-              </span>
-            )}
-          </li>
-        );
-      })
-    }
+    {items.map((item, i) => {
+      const isLast = i === items.length - 1;
+      return <li class="flex items-center gap-x-2">
+        {item.href && !isLast ? (
+          <a
+            href={item.href}
+            class="text-base-500 dark:text-base-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+          >
+            {item.label}
+          </a>
+        ) : (
+          <span
+            class="text-base-600 dark:text-base-300 font-medium"
+            aria-current={isLast ? "page" : undefined}
+          >
+            {item.label}
+          </span>
+        )}
+        {!isLast && <span
+          class="text-base-400 dark:text-base-500"
+          aria-hidden="true"
+        >
+          ›
+        </span>}
+      </li>;
+    })}
   </ol>
 </nav>

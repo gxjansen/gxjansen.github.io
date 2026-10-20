@@ -95,16 +95,14 @@ const firstVideoIds = videos
     <link rel="dns-prefetch" href="https://open.spotify.com" />
 
     <!-- Preload critical thumbnails -->
-    {
-      firstVideoIds.map((videoId) => (
-        <link
-          rel="preload"
-          href={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
-          as="image"
-          fetchpriority="high"
-        />
-      ))
-    }
+    {firstVideoIds.map((videoId) => (
+      <link
+        rel="preload"
+        href={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+        as="image"
+        fetchpriority="high"
+      />
+    ))}
   </Fragment>
 
   <div class="home press-page">

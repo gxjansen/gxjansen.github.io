@@ -50,8 +50,7 @@ export interface CvLanguage {
 }
 /** A rendered block from a free-text field: a paragraph or a bullet list. */
 export type RichBlock =
-  | { type: "p"; text: string }
-  | { type: "ul"; items: string[] };
+  { type: "p"; text: string } | { type: "ul"; items: string[] };
 
 // Markers Sifa text uses for bullets: → ✭ ★ ☆ ✦ • ▪ ● » plus - * –.
 const BULLET = /^[→✭★☆✦•▪●»\-*–]\s+/u;

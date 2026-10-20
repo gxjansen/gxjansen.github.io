@@ -102,13 +102,9 @@ import { locales } from "@config/siteSettings.json";
       <div class="mt-4 flex items-start justify-between pr-2 pl-4">
         <ThemeToggle />
 
-        {
-          locales.length > 1 && (
-            <div class="flex justify-end">
-              <MobileLanguageSelect />
-            </div>
-          )
-        }
+        {locales.length > 1 && <div class="flex justify-end">
+          <MobileLanguageSelect />
+        </div>}
       </div>
     </div>
   </div>
@@ -117,7 +113,8 @@ import { locales } from "@config/siteSettings.json";
   <button
     id="mobile-nav__backdrop"
     class="mobile-nav__backdrop--fade-out fixed top-0 left-0 z-10 h-screen bg-black"
-    aria-label="close navigation menu"></button>
+    aria-label="close navigation menu"
+  ></button>
 </div>
 
 <script>

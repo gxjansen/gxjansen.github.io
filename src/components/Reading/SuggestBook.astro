@@ -39,7 +39,11 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
       aria-autocomplete="list"
       data-suggest-input
     />
-    <span class="suggest-spinner" hidden aria-hidden="true" data-suggest-spinner
+    <span
+      class="suggest-spinner"
+      hidden
+      aria-hidden="true"
+      data-suggest-spinner
     ></span>
     <ul
       id="book-results"
@@ -48,16 +52,14 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
       aria-label="Book search results"
       hidden
       data-suggest-results
-    >
-    </ul>
+    ></ul>
 
     <p
       class="suggest-status text-base-500 dark:text-base-400"
       hidden
       aria-live="polite"
       data-suggest-status
-    >
-    </p>
+    ></p>
 
     <div class="suggest-selected" hidden data-suggest-selected>
       <img alt="" class="suggest-selected-cover" data-selected-cover hidden />

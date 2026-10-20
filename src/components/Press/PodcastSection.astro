@@ -22,44 +22,35 @@ const { podcasts } = Astro.props;
     </div>
   </div>
   <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3" role="list">
-    {
-      podcasts.map((podcast) => (
-        <article
-          class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 reveal overflow-hidden rounded-2xl border"
-          role="listitem"
+    {podcasts.map((podcast) => <article
+      class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 reveal overflow-hidden rounded-2xl border"
+      role="listitem"
+    >
+      <PodcastLinks spotifyId={podcast.spotifyEmbedId} title={podcast.title} />
+      <div class="p-6">
+        <h3
+          id={`podcast-${podcast.spotifyEmbedId || podcast.title.toLowerCase().replace(/\s+/g, "-")}`}
+          class="text-base-900 dark:text-base-100 mb-2 text-lg font-semibold"
         >
-          <PodcastLinks
-            spotifyId={podcast.spotifyEmbedId}
-            title={podcast.title}
-          />
-          <div class="p-6">
-            <h3
-              id={`podcast-${podcast.spotifyEmbedId || podcast.title.toLowerCase().replace(/\s+/g, "-")}`}
-              class="text-base-900 dark:text-base-100 mb-2 text-lg font-semibold"
-            >
-              {podcast.title}
-            </h3>
-            <p
-              class="text-base-600 dark:text-base-400 text-sm"
-              aria-label={`Published on ${formatMonthYearLong(podcast.publicationDate)}${podcast.personOrganization ? ` by ${podcast.personOrganization}` : ""}`}
-            >
-              {formatMonthYearLong(podcast.publicationDate)}
-              {podcast.personOrganization && ` • ${podcast.personOrganization}`}
-            </p>
-            {podcast.articleUrl && (
-              <a
-                href={podcast.articleUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 mt-3 inline-flex items-center gap-1 text-sm font-semibold"
-                aria-label={`Read article about ${podcast.title} (opens in new tab)`}
-              >
-                View article <span aria-hidden="true">→</span>
-              </a>
-            )}
-          </div>
-        </article>
-      ))
-    }
+          {podcast.title}
+        </h3>
+        <p
+          class="text-base-600 dark:text-base-400 text-sm"
+          aria-label={`Published on ${formatMonthYearLong(podcast.publicationDate)}${podcast.personOrganization ? ` by ${podcast.personOrganization}` : ""}`}
+        >
+          {formatMonthYearLong(podcast.publicationDate)}
+          {podcast.personOrganization && ` • ${podcast.personOrganization}`}
+        </p>
+        {podcast.articleUrl && <a
+          href={podcast.articleUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 mt-3 inline-flex items-center gap-1 text-sm font-semibold"
+          aria-label={`Read article about ${podcast.title} (opens in new tab)`}
+        >
+          View article <span aria-hidden="true">→</span>
+        </a>}
+      </div>
+    </article>)}
   </div>
 </section>

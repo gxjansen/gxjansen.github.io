@@ -79,43 +79,37 @@ const groups = CATS.map((c) => {
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-1"
-        >Sifa ID<Icon name="sifa" class="size-3.5" aria-hidden="true" /></a
-      >
+        >Sifa ID<Icon name="sifa" class="size-3.5" aria-hidden="true"
+      /></a>
     </span>
   </div>
 
   <div class="bento">
-    {
-      groups.map((g) => (
-        <section
-          class:list={["bxcard", `b-${g.key}`]}
-          style={`--bx: var(--color-app-${g.appColor})`}
-          aria-label={g.label}
-        >
-          <div class="bx-head">
-            <span class="bx-dot" aria-hidden="true" />
-            <span class="bx-label">{g.label}</span>
-          </div>
-          <ul class="bx-list" role="list">
-            {g.items.map((item) => (
-              <FeedItem item={item} />
-            ))}
-          </ul>
-          <a
-            href={g.seeAllHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bx-more no-random-underline"
-          >
-            <span class="underline underline-offset-2">See all</span>
-            <span class="bx-more-arrow" aria-hidden="true">
-              &rarr;
-            </span>
-            <span class="sr-only">{g.label} (opens in new tab)</span>
-          </a>
-        </section>
-      ))
-    }
+    {groups.map((g) => <section
+      class:list={["bxcard", `b-${g.key}`]}
+      style={`--bx: var(--color-app-${g.appColor})`}
+      aria-label={g.label}
+    >
+      <div class="bx-head">
+        <span class="bx-dot" aria-hidden="true" />
+        <span class="bx-label">{g.label}</span>
+      </div>
+      <ul class="bx-list" role="list">
+        {g.items.map((item) => (
+          <FeedItem item={item} />
+        ))}
+      </ul>
+      <a
+        href={g.seeAllHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bx-more no-random-underline"
+      >
+        <span class="underline underline-offset-2">See all</span>
+        <span class="bx-more-arrow" aria-hidden="true"> &rarr; </span>
+        <span class="sr-only">{g.label} (opens in new tab)</span>
+      </a>
+    </section>)}
   </div>
 </section>
 

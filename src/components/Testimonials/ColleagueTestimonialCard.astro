@@ -38,11 +38,8 @@ const { name, role, company, workRelationship, quote } =
         </div>
         <div class="text-base-600 dark:text-base-300 mt-1">
           {role}
-          {
-            company && (
-              <span class="text-base-600 dark:text-base-400"> • {company}</span>
-            )
-          }
+          {company && <span class="text-base-600 dark:text-base-400">
+            • {company}</span>}
         </div>
         <div class="text-base-600 dark:text-base-400 mt-1 text-sm">
           {workRelationship}

@@ -96,7 +96,8 @@ const card =
               around, without locking them in.
             </p>
             <p>
-              I've done this from zero <a
+              I've done this from zero
+              <a
                 href="/communities/"
                 class="text-primary-600 dark:text-primary-400 font-semibold"
                 >multiple times</a
@@ -149,38 +150,32 @@ const card =
       </div>
 
       <ol class="mt-10 flex flex-col">
-        {
-          story.map((s) => (
-            <li class="border-base-200 dark:border-base-800 relative border-l-2 pb-8 pl-8 last:pb-0">
-              <span class="bg-primary-600 dark:bg-primary-400 absolute top-0 -left-[15px] flex size-7 items-center justify-center rounded-full ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]">
-                <Icon
-                  name={s.icon}
-                  class="size-4 text-white"
-                  aria-hidden="true"
-                />
-              </span>
-              <h3 class="font-display text-[1.2rem] font-extrabold">
-                {s.title}
-              </h3>
-              <div class="text-base-600 dark:text-base-400 mt-2 max-w-[60ch] space-y-2 text-[0.98rem] leading-relaxed">
-                {s.paras.map((p) => (
-                  <p>{p}</p>
-                ))}
-              </div>
-              {s.cta && (
-                <a
-                  href={s.cta.href}
-                  {...(s.cta.href.startsWith("http")
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
-                  class="text-primary-600 dark:text-primary-400 font-display mt-3 inline-flex items-center gap-1.5 text-sm font-bold"
-                >
-                  {s.cta.label} <span aria-hidden="true">→</span>
-                </a>
-              )}
-            </li>
-          ))
-        }
+        {story.map((s) => <li
+          class="border-base-200 dark:border-base-800 relative border-l-2 pb-8 pl-8 last:pb-0"
+        >
+          <span
+            class="bg-primary-600 dark:bg-primary-400 absolute top-0 -left-[15px] flex size-7 items-center justify-center rounded-full ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"
+          >
+            <Icon name={s.icon} class="size-4 text-white" aria-hidden="true" />
+          </span>
+          <h3 class="font-display text-[1.2rem] font-extrabold">
+            {s.title}
+          </h3>
+          <div
+            class="text-base-600 dark:text-base-400 mt-2 max-w-[60ch] space-y-2 text-[0.98rem] leading-relaxed"
+          >
+            {s.paras.map((p) => <p>{p}</p>)}
+          </div>
+          {s.cta && <a
+            href={s.cta.href}
+            {...(s.cta.href.startsWith("http")
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+            class="text-primary-600 dark:text-primary-400 font-display mt-3 inline-flex items-center gap-1.5 text-sm font-bold"
+          >
+            {s.cta.label} <span aria-hidden="true">→</span>
+          </a>}
+        </li>)}
       </ol>
     </section>
 

@@ -28,36 +28,28 @@ import { courses } from "@data/training";
       </div>
 
       <div class="training-grid mt-10">
-        {
-          courses.map((c) => (
-            <a
-              class="tcourse reveal"
-              href={`/training/${c.slug}/`}
-              style={`--ac:var(--color-${c.accent})`}
-            >
-              <span class="tlevel">
-                {c.level} · {c.fmt}
-              </span>
-              <h3>{c.t}</h3>
-              {c.coLed && (
-                <span class="text-base-500 dark:text-base-400 mb-1 inline-block text-[0.8rem] font-bold tracking-[0.01em]">
-                  co-led with {c.coLed.partner}
-                </span>
-              )}
-              <p>{c.sub}</p>
-              <ul class="tcourse-list">
-                {c.points.map((pt) => (
-                  <li>{pt}</li>
-                ))}
-              </ul>
-              <div class="tfoot">
-                <span class="tbook">
-                  Course details <span aria-hidden="true">↗</span>
-                </span>
-              </div>
-            </a>
-          ))
-        }
+        {courses.map((c) => <a
+          class="tcourse reveal"
+          href={`/training/${c.slug}/`}
+          style={`--ac:var(--color-${c.accent})`}
+        >
+          <span class="tlevel"> {c.level} · {c.fmt} </span>
+          <h3>{c.t}</h3>
+          {c.coLed && <span
+            class="text-base-500 dark:text-base-400 mb-1 inline-block text-[0.8rem] font-bold tracking-[0.01em]"
+          >
+            co-led with {c.coLed.partner}
+          </span>}
+          <p>{c.sub}</p>
+          <ul class="tcourse-list">
+            {c.points.map((pt) => <li>{pt}</li>)}
+          </ul>
+          <div class="tfoot">
+            <span class="tbook">
+              Course details <span aria-hidden="true">↗</span>
+            </span>
+          </div>
+        </a>)}
       </div>
 
       <div

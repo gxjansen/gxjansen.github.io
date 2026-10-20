@@ -15,48 +15,42 @@ const allPresentations = await getCollection("presentations");
 const relatedPresentations = getRelatedPresentations(eventId, allPresentations);
 ---
 
-{
-  relatedPresentations.length > 0 && (
-    <div class="mt-8">
-      <h2 class="mb-4 text-2xl font-bold">Related Presentations</h2>
-      <div class="grid gap-6 md:grid-cols-2">
-        {relatedPresentations.map((presentation) => (
-          <a
-            href={`/presentations/${presentation.id}/`}
-            class="dark:bg-base-900 block rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg"
-          >
-            <div class="relative">
-              {presentation.data.image && (
-                <img
-                  src={presentation.data.image}
-                  alt={presentation.data.title || ""}
-                  class="h-48 w-full rounded-t-lg object-cover"
-                />
-              )}
-              {presentation.data.isWorkshop && (
-                <span class="bg-primary-600 text-base-100 dark:text-base-900 absolute top-2 right-2 rounded-sm px-2 py-1 text-sm">
-                  Workshop
-                </span>
-              )}
-            </div>
-            <div class="p-4">
-              <h3 class="mb-2 text-lg font-semibold">
-                {presentation.data.title}
-              </h3>
-              {presentation.data.duration && (
-                <p class="text-base-600 dark:text-base-400 text-sm">
-                  Duration: {presentation.data.duration}
-                </p>
-              )}
-              {presentation.data.intendedAudience && (
-                <p class="text-base-600 dark:text-base-400 mt-1 text-sm">
-                  For: {presentation.data.intendedAudience}
-                </p>
-              )}
-            </div>
-          </a>
-        ))}
+{relatedPresentations.length > 0 && <div class="mt-8">
+  <h2 class="mb-4 text-2xl font-bold">Related Presentations</h2>
+  <div class="grid gap-6 md:grid-cols-2">
+    {relatedPresentations.map((presentation) => <a
+      href={`/presentations/${presentation.id}/`}
+      class="dark:bg-base-900 block rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg"
+    >
+      <div class="relative">
+        {presentation.data.image && (
+          <img
+            src={presentation.data.image}
+            alt={presentation.data.title || ""}
+            class="h-48 w-full rounded-t-lg object-cover"
+          />
+        )}
+        {presentation.data.isWorkshop && <span
+          class="bg-primary-600 text-base-100 dark:text-base-900 absolute top-2 right-2 rounded-sm px-2 py-1 text-sm"
+        >
+          Workshop
+        </span>}
       </div>
-    </div>
-  )
-}
+      <div class="p-4">
+        <h3 class="mb-2 text-lg font-semibold">
+          {presentation.data.title}
+        </h3>
+        {presentation.data.duration && <p
+          class="text-base-600 dark:text-base-400 text-sm"
+        >
+          Duration: {presentation.data.duration}
+        </p>}
+        {presentation.data.intendedAudience && <p
+          class="text-base-600 dark:text-base-400 mt-1 text-sm"
+        >
+          For: {presentation.data.intendedAudience}
+        </p>}
+      </div>
+    </a>)}
+  </div>
+</div>}

@@ -54,19 +54,15 @@ const currLocale = getLocaleFromUrl(Astro.url);
     class="mobile-lang__dropdown-content hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
   >
     <ul class="mb-2 transition-[height] duration-300">
-      {
-        locales.map((lang) => (
-          <li class="flex w-full">
-            <a
-              class="primary-focus text-base-500 hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 relative block w-full py-1 pl-8 leading-tight font-medium whitespace-nowrap transition"
-              href={getLocalizedPathname(lang, Astro.url)}
-              aria-label={`Change language to ${lang.toUpperCase()}`}
-            >
-              {languageSwitcherMap[lang]}
-            </a>
-          </li>
-        ))
-      }
+      {locales.map((lang) => <li class="flex w-full">
+        <a
+          class="primary-focus text-base-500 hover:text-base-600 dark:text-base-400 dark:hover:text-base-300 relative block w-full py-1 pl-8 leading-tight font-medium whitespace-nowrap transition"
+          href={getLocalizedPathname(lang, Astro.url)}
+          aria-label={`Change language to ${lang.toUpperCase()}`}
+        >
+          {languageSwitcherMap[lang]}
+        </a>
+      </li>)}
     </ul>
   </div>
 </div>

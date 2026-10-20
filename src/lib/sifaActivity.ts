@@ -63,8 +63,7 @@ interface PostMeta {
 function klipyVideo(
   gifUrl: string,
 ):
-  | { webm?: string; mp4?: string; width?: number; height?: number }
-  | undefined {
+  { webm?: string; mp4?: string; width?: number; height?: number } | undefined {
   try {
     const u = new URL(gifUrl);
     // Exact host or a real subdomain — `.endsWith("klipy.com")` alone would

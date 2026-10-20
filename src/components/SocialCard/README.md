@@ -14,7 +14,6 @@ A card component for displaying social media links with icons and hover effects.
 
 ```astro
 import SocialCard from '@components/SocialCard/SocialCard.astro';
-
 <SocialCard
   name="LinkedIn"
   href="https://linkedin.com/in/username"

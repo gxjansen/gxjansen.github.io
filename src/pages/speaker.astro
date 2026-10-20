@@ -90,24 +90,24 @@ const card =
       </div>
 
       <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {
-          overview.map((item) => (
-            <a
-              href={item.href}
-              class={`${card} group reveal hover:border-primary-600/40 dark:hover:border-primary-400/40 block text-center no-underline transition hover:-translate-y-0.5 hover:shadow-lg`}
-            >
-              <div class="text-primary-600 dark:text-primary-400 mx-auto mb-3 flex size-12 items-center justify-center">
-                <Icon name={item.icon} class="size-7" aria-hidden="true" />
-              </div>
-              <h3 class="font-display text-[1rem] leading-snug font-bold">
-                {item.title}
-              </h3>
-              <p class="text-base-600 dark:text-base-400 mt-1.5 text-sm leading-relaxed">
-                {item.desc}
-              </p>
-            </a>
-          ))
-        }
+        {overview.map((item) => <a
+          href={item.href}
+          class={`${card} group reveal hover:border-primary-600/40 dark:hover:border-primary-400/40 block text-center no-underline transition hover:-translate-y-0.5 hover:shadow-lg`}
+        >
+          <div
+            class="text-primary-600 dark:text-primary-400 mx-auto mb-3 flex size-12 items-center justify-center"
+          >
+            <Icon name={item.icon} class="size-7" aria-hidden="true" />
+          </div>
+          <h3 class="font-display text-[1rem] leading-snug font-bold">
+            {item.title}
+          </h3>
+          <p
+            class="text-base-600 dark:text-base-400 mt-1.5 text-sm leading-relaxed"
+          >
+            {item.desc}
+          </p>
+        </a>)}
       </div>
     </section>
 
@@ -152,8 +152,8 @@ const card =
             </p>
             <p>
               I've presented at {talksCount} talks across {countryCount}
-              countries on topics including composable commerce, community building,
-              and digital psychology.
+              countries on topics including composable commerce, community
+              building, and digital psychology.
             </p>
           </div>
         </div>
@@ -369,28 +369,28 @@ const card =
       </div>
 
       <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {
-          testimonials.map((t) => (
-            <div class={card}>
-              <div class="flex items-start gap-4">
-                <div class="shrink-0">
-                  <div class="bg-primary-600/10 dark:bg-primary-400/15 text-primary-600 dark:text-primary-400 font-display flex size-12 items-center justify-center rounded-full font-bold">
-                    {t.initial}
-                  </div>
-                </div>
-                <div>
-                  <blockquote class="text-base-700 dark:text-base-300 mb-4 leading-relaxed">
-                    {t.quote}
-                  </blockquote>
-                  <div>
-                    <div class="font-display font-bold">{t.name}</div>
-                    <div class="text-base-500 text-sm">{t.role}</div>
-                  </div>
-                </div>
+        {testimonials.map((t) => <div class={card}>
+          <div class="flex items-start gap-4">
+            <div class="shrink-0">
+              <div
+                class="bg-primary-600/10 dark:bg-primary-400/15 text-primary-600 dark:text-primary-400 font-display flex size-12 items-center justify-center rounded-full font-bold"
+              >
+                {t.initial}
               </div>
             </div>
-          ))
-        }
+            <div>
+              <blockquote
+                class="text-base-700 dark:text-base-300 mb-4 leading-relaxed"
+              >
+                {t.quote}
+              </blockquote>
+              <div>
+                <div class="font-display font-bold">{t.name}</div>
+                <div class="text-base-500 text-sm">{t.role}</div>
+              </div>
+            </div>
+          </div>
+        </div>)}
       </div>
     </section>
 
@@ -413,37 +413,37 @@ const card =
       </div>
 
       <div class="mb-10 grid gap-6 md:grid-cols-3">
-        {
-          presentations.map((p) => (
-            <a
-              href={p.href}
-              class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 hover:border-primary-600/40 dark:hover:border-primary-400/40 group reveal block overflow-hidden rounded-2xl border text-inherit no-underline transition hover:-translate-y-0.5 hover:shadow-lg"
+        {presentations.map((p) => <a
+          href={p.href}
+          class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 hover:border-primary-600/40 dark:hover:border-primary-400/40 group reveal block overflow-hidden rounded-2xl border text-inherit no-underline transition hover:-translate-y-0.5 hover:shadow-lg"
+        >
+          <div class="aspect-video overflow-hidden">
+            <img
+              src={p.img}
+              alt={p.title}
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="font-display mb-2 text-[1.05rem] font-bold">
+              {p.title}
+            </h3>
+            <p
+              class="text-base-600 dark:text-base-400 mb-4 text-sm leading-relaxed"
             >
-              <div class="aspect-video overflow-hidden">
-                <img
-                  src={p.img}
-                  alt={p.title}
-                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div class="p-6">
-                <h3 class="font-display mb-2 text-[1.05rem] font-bold">
-                  {p.title}
-                </h3>
-                <p class="text-base-600 dark:text-base-400 mb-4 text-sm leading-relaxed">
-                  {p.desc}
-                </p>
-                <div class="flex items-center justify-between">
-                  <span class="text-base-500 text-xs">{p.duration}</span>
-                  <span class="text-primary-600 dark:text-primary-400 font-display inline-flex items-center gap-1.5 text-sm font-bold">
-                    Learn more <span aria-hidden="true">→</span>
-                  </span>
-                </div>
-              </div>
-            </a>
-          ))
-        }
+              {p.desc}
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-base-500 text-xs">{p.duration}</span>
+              <span
+                class="text-primary-600 dark:text-primary-400 font-display inline-flex items-center gap-1.5 text-sm font-bold"
+              >
+                Learn more <span aria-hidden="true">→</span>
+              </span>
+            </div>
+          </div>
+        </a>)}
       </div>
 
       <div class="text-center">
@@ -593,10 +593,9 @@ const card =
                 Guido X Jansen is a Community Builder with {yearsBuilding}+
                 years creating technical ecosystems. Founded Dutchento/Meet
                 Magento, created CRO.CAFE podcast, and led Spryker's enterprise
-                community. Cognitive psychologist turned DevRel leader. {
-                  talksCount
-                } talks across {countryCount} countries. Open source and privacy advocate.
-                Based in the Netherlands.
+                community. Cognitive psychologist turned DevRel leader.
+                {talksCount} talks across {countryCount} countries. Open source
+                and privacy advocate. Based in the Netherlands.
               </p>
             </div>
           </div>
@@ -660,11 +659,11 @@ const card =
                 Guido operates at the intersection of community, product, and
                 customer success. At Spryker, community-driven initiatives
                 influenced 25% of product roadmap decisions. He has presented at
-                {talksCount} talks across {countryCount} countries on topics including
-                composable commerce, community building, and digital psychology. He
-                advocates for open source principles, privacy protection, and building
-                systems that get stronger under pressure instead of barely surviving
-                it.
+                {talksCount} talks across {countryCount} countries on topics
+                including composable commerce, community building, and digital
+                psychology. He advocates for open source principles, privacy
+                protection, and building systems that get stronger under
+                pressure instead of barely surviving it.
               </p>
             </div>
           </div>
@@ -753,33 +752,31 @@ const card =
       </div>
 
       <div class="grid gap-6 md:grid-cols-3">
-        {
-          headshots.map((h) => (
-            <div class="group">
-              <div class="border-base-200 dark:border-base-800 bg-base-50 dark:bg-base-900 aspect-square overflow-hidden rounded-2xl border">
-                <Image
-                  src={h.src}
-                  alt="Guido Jansen headshot"
-                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  widths={[400, 600, 800]}
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  quality={90}
-                  format="webp"
-                />
-              </div>
-              <div class="mt-4 text-center">
-                <a
-                  href={h.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="border-base-300 hover:border-primary-600 dark:border-base-500 dark:hover:border-primary-400 bg-base-100 text-base-800 dark:bg-base-700 dark:text-base-100 font-display inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-bold transition"
-                >
-                  Download High-Res
-                </a>
-              </div>
-            </div>
-          ))
-        }
+        {headshots.map((h) => <div class="group">
+          <div
+            class="border-base-200 dark:border-base-800 bg-base-50 dark:bg-base-900 aspect-square overflow-hidden rounded-2xl border"
+          >
+            <Image
+              src={h.src}
+              alt="Guido Jansen headshot"
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              widths={[400, 600, 800]}
+              sizes="(min-width: 768px) 33vw, 100vw"
+              quality={90}
+              format="webp"
+            />
+          </div>
+          <div class="mt-4 text-center">
+            <a
+              href={h.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="border-base-300 hover:border-primary-600 dark:border-base-500 dark:hover:border-primary-400 bg-base-100 text-base-800 dark:bg-base-700 dark:text-base-100 font-display inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-bold transition"
+            >
+              Download High-Res
+            </a>
+          </div>
+        </div>)}
       </div>
     </section>
 
@@ -798,7 +795,8 @@ const card =
           <p
             class="text-base-700 dark:text-base-300 mb-8 text-[1.05rem] leading-relaxed"
           >
-            If you have more info, you can <a
+            If you have more info, you can
+            <a
               href="/contact/"
               class="text-primary-600 dark:text-primary-400 font-semibold"
               >contact me here</a

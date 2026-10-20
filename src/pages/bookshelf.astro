@@ -54,88 +54,67 @@ const moreRead = finishedCount > finished.length;
         </p>
       </header>
 
-      {
-        nothing ? (
-          <p class="text-base-500 dark:text-base-400 text-[.94rem]">
-            The shelf is taking a breather. Check back soon.
-          </p>
-        ) : (
-          <div class="flex flex-col gap-12">
-            {active.length > 0 && (
-              <section
-                id="reading-now"
-                class="shelf-section"
-                aria-labelledby="shelf-reading"
-              >
-                <h2 id="shelf-reading" class="shelf-h">
-                  <a
-                    href="#reading-now"
-                    class="shelf-anchor no-random-underline"
-                  >
-                    Reading now
-                  </a>
-                </h2>
-                <BookGrid books={active} />
-              </section>
-            )}
+      {nothing ? (
+        <p class="text-base-500 dark:text-base-400 text-[.94rem]">
+          The shelf is taking a breather. Check back soon.
+        </p>
+      ) : (
+        <div class="flex flex-col gap-12">
+          {active.length > 0 && <section
+            id="reading-now"
+            class="shelf-section"
+            aria-labelledby="shelf-reading"
+          >
+            <h2 id="shelf-reading" class="shelf-h">
+              <a href="#reading-now" class="shelf-anchor no-random-underline">
+                Reading now
+              </a>
+            </h2>
+            <BookGrid books={active} />
+          </section>}
 
-            {finished.length > 0 && (
-              <section
-                id="recently-read"
-                class="shelf-section"
-                aria-labelledby="shelf-read"
-              >
-                <h2 id="shelf-read" class="shelf-h">
-                  <a
-                    href="#recently-read"
-                    class="shelf-anchor no-random-underline"
-                  >
-                    Recently read
-                  </a>
-                </h2>
-                <BookGrid books={finished} showRatings />
-                <p class="shelf-caption text-base-500 dark:text-base-400">
-                  {moreRead ? (
-                    <>
-                      The {finished.length} most recent of the {finishedCount}{" "}
-                      books I&rsquo;ve read.{" "}
-                    </>
-                  ) : (
-                    <>All {finishedCount} books I&rsquo;ve read. </>
-                  )}
-                  View them all on my{" "}
-                  <a
-                    href={bookhiveHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Bookhive
-                  </a>{" "}
-                  profile.
-                </p>
-              </section>
-            )}
+          {finished.length > 0 && <section
+            id="recently-read"
+            class="shelf-section"
+            aria-labelledby="shelf-read"
+          >
+            <h2 id="shelf-read" class="shelf-h">
+              <a href="#recently-read" class="shelf-anchor no-random-underline">
+                Recently read
+              </a>
+            </h2>
+            <BookGrid books={finished} showRatings />
+            <p class="shelf-caption text-base-500 dark:text-base-400">
+              {moreRead ? (
+                <>
+                  The {finished.length} most recent of the {finishedCount}{" "}
+                  books I&rsquo;ve read.{" "}
+                </>
+              ) : (
+                <>All {finishedCount} books I&rsquo;ve read. </>
+              )}
+              View them all on my{" "}
+              <a href={bookhiveHref} target="_blank" rel="noopener noreferrer">
+                Bookhive
+              </a
+              >{" "} profile.
+            </p>
+          </section>}
 
-            {wantToRead.length > 0 && (
-              <section
-                id="want-to-read"
-                class="shelf-section"
-                aria-labelledby="shelf-want"
-              >
-                <h2 id="shelf-want" class="shelf-h">
-                  <a
-                    href="#want-to-read"
-                    class="shelf-anchor no-random-underline"
-                  >
-                    Want to read
-                  </a>
-                </h2>
-                <BookGrid books={wantToRead} />
-              </section>
-            )}
-          </div>
-        )
-      }
+          {wantToRead.length > 0 && <section
+            id="want-to-read"
+            class="shelf-section"
+            aria-labelledby="shelf-want"
+          >
+            <h2 id="shelf-want" class="shelf-h">
+              <a href="#want-to-read" class="shelf-anchor no-random-underline">
+                Want to read
+              </a>
+            </h2>
+            <BookGrid books={wantToRead} />
+          </section>}
+        </div>
+      )}
 
       <SuggestBook />
     </div>

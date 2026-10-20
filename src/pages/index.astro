@@ -106,7 +106,8 @@ const ArrowRight = "→";
         <div>
           <span class="kicker">{heroCopy.kicker}</span>
           <h1 class="hero-h1">
-            I build <span class="u">{heroCopy.emphasis}</span> for tech products.
+            I build <span class="u">{heroCopy.emphasis}</span> for tech
+            products.
           </h1>
           <p class="lead" set:html={heroCopy.lead} />
           <div class="cta-row">
@@ -116,33 +117,31 @@ const ArrowRight = "→";
               href="/retainer/"
               arrow="right"
               umamiEvent="cta-click"
-              umamiEventTarget="hero-work-with-me">Work with me</Button
+              umamiEventTarget="hero-work-with-me"
+              >Work with me</Button
             >
             <Button
               variant="outline"
               class="font-display rounded-full"
-              href="/speaker/">Invite me to speak</Button
+              href="/speaker/"
+              >Invite me to speak</Button
             >
             <Button
               variant="ghost"
               class="font-display rounded-full whitespace-nowrap"
               href="https://sifa.id/p/gui.do"
-              >Follow me on Sifa ID <Icon
+              >Follow me on Sifa ID
+              <Icon
                 name="sifa"
                 class="ml-0.5 inline size-4 align-text-bottom"
                 aria-hidden="true"
-              /></Button
-            >
+            /></Button>
           </div>
           <div class="stats">
-            {
-              stats.map((s) => (
-                <div class="stat">
-                  <div class="n">{s.n}</div>
-                  <div class="l">{s.l}</div>
-                </div>
-              ))
-            }
+            {stats.map((s) => <div class="stat">
+              <div class="n">{s.n}</div>
+              <div class="l">{s.l}</div>
+            </div>)}
           </div>
         </div>
 
@@ -159,7 +158,8 @@ const ArrowRight = "→";
             >
             <span
               class="transition-transform duration-200 group-hover:translate-x-1"
-              aria-hidden="true">&rarr;</span
+              aria-hidden="true"
+              >&rarr;</span
             >
           </a>
         </div>
@@ -186,69 +186,48 @@ const ArrowRight = "→";
         >
       </div>
       <div class="art-grid">
-        {
-          featured && (
-            <a
-              class="art feat reveal"
-              href={featured.href}
-              style={ac(featured.accent)}
-            >
-              {featured.heroImage && (
-                <div class="art-thumb">
-                  <Image
-                    src={featured.heroImage}
-                    alt=""
-                    width={840}
-                    height={368}
-                  />
-                </div>
-              )}
-              <div class="tags">
-                {featured.categories.map((t) => (
-                  <span class="tg">{t}</span>
-                ))}
-              </div>
-              <h3>{featured.title}</h3>
-              {featured.description && <p>{featured.description}</p>}
-              <div class="m">
-                <span>{featured.date}</span>
-                <span aria-hidden="true">·</span>
-                <span class="read-time">{featured.read}</span>
-                <span class="read">
-                  Read <span aria-hidden="true">↗</span>
-                </span>
-              </div>
-            </a>
-          )
-        }
+        {featured && <a
+          class="art feat reveal"
+          href={featured.href}
+          style={ac(featured.accent)}
+        >
+          {featured.heroImage && <div class="art-thumb">
+            <Image src={featured.heroImage} alt="" width={840} height={368} />
+          </div>}
+          <div class="tags">
+            {featured.categories.map((t) => <span class="tg">{t}</span>)}
+          </div>
+          <h3>{featured.title}</h3>
+          {featured.description && <p>{featured.description}</p>}
+          <div class="m">
+            <span>{featured.date}</span>
+            <span aria-hidden="true">·</span>
+            <span class="read-time">{featured.read}</span>
+            <span class="read"> Read <span aria-hidden="true">↗</span> </span>
+          </div>
+        </a>}
         <div class="art-col">
-          {
-            rest.map((a) => (
-              <a class="art sm reveal" href={a.href} style={ac(a.accent)}>
-                {a.heroImage && (
-                  <div class="art-thumb">
-                    <Image src={a.heroImage} alt="" width={120} height={120} />
-                  </div>
-                )}
-                <div class="sm-body">
-                  <div class="tags">
-                    {a.categories.map((t) => (
-                      <span class="tg">{t}</span>
-                    ))}
-                  </div>
-                  <h3>{a.title}</h3>
-                  <div class="m">
-                    <span>{a.date}</span>
-                    <span aria-hidden="true">·</span>
-                    <span class="read-time">{a.read}</span>
-                    <span class="read" aria-hidden="true">
-                      ↗
-                    </span>
-                  </div>
-                </div>
-              </a>
-            ))
-          }
+          {rest.map((a) => <a
+            class="art sm reveal"
+            href={a.href}
+            style={ac(a.accent)}
+          >
+            {a.heroImage && <div class="art-thumb">
+              <Image src={a.heroImage} alt="" width={120} height={120} />
+            </div>}
+            <div class="sm-body">
+              <div class="tags">
+                {a.categories.map((t) => <span class="tg">{t}</span>)}
+              </div>
+              <h3>{a.title}</h3>
+              <div class="m">
+                <span>{a.date}</span>
+                <span aria-hidden="true">·</span>
+                <span class="read-time">{a.read}</span>
+                <span class="read" aria-hidden="true"> ↗ </span>
+              </div>
+            </div>
+          </a>)}
         </div>
       </div>
     </section>
@@ -267,26 +246,20 @@ const ArrowRight = "→";
         >
       </div>
       <div class="talks">
-        {
-          talks.map((t) => (
-            <a class="talk reveal" href={t.url}>
-              <div class="ic">
-                <Icon
-                  name="tabler/filled/microphone"
-                  class="size-5"
-                  aria-hidden="true"
-                />
-              </div>
-              <div>
-                <div class="t">{t.t}</div>
-                <div class="v">
-                  {t.fmt} · {t.venue} · {t.loc}
-                </div>
-              </div>
-              <span class="yr">{t.year}</span>
-            </a>
-          ))
-        }
+        {talks.map((t) => <a class="talk reveal" href={t.url}>
+          <div class="ic">
+            <Icon
+              name="tabler/filled/microphone"
+              class="size-5"
+              aria-hidden="true"
+            />
+          </div>
+          <div>
+            <div class="t">{t.t}</div>
+            <div class="v">{t.fmt} · {t.venue} · {t.loc}</div>
+          </div>
+          <span class="yr">{t.year}</span>
+        </a>)}
       </div>
     </section>
 
@@ -315,40 +288,38 @@ const ArrowRight = "→";
           <p
             class="text-base-600 dark:text-base-400 max-w-[52ch] text-[1.05rem] leading-[1.6]"
           >
-            I lean on two things that don't always sit together: a <strong
-              class="text-primary-600 dark:text-primary-400"
+            I lean on two things that don't always sit together: a
+            <strong class="text-primary-600 dark:text-primary-400"
               >cognitive-psychology</strong
-            > read on how developers and customers actually behave, and an experimentation
-            habit (those <strong class="text-primary-600 dark:text-primary-400"
+            >
+            read on how developers and customers actually behave, and an
+            experimentation habit (those
+            <strong class="text-primary-600 dark:text-primary-400"
               >500+ A/B tests</strong
-            > at Randstad &amp; JDE) to check what works instead of guessing. I'm
+            >
+            at Randstad &amp; JDE) to check what works instead of guessing. I'm
             still learning, mostly in the open.
           </p>
           <div class="pillars">
-            {
-              pillars.slice(0, 4).map((p) => (
-                <div class="pillar">
-                  <div class="ic">
-                    <Icon name={p.icon} class="size-5" aria-hidden="true" />
-                  </div>
-                  <div>
-                    <div class="k">{p.k}</div>
-                    <div class="d">{p.d}</div>
-                  </div>
-                </div>
-              ))
-            }
+            {pillars.slice(0, 4).map((p) => <div class="pillar">
+              <div class="ic">
+                <Icon name={p.icon} class="size-5" aria-hidden="true" />
+              </div>
+              <div>
+                <div class="k">{p.k}</div>
+                <div class="d">{p.d}</div>
+              </div>
+            </div>)}
           </div>
           <figure class="quote-card">
             <blockquote>{aboutQuote.q}</blockquote>
             <figcaption class="by">
               <span class="n">{aboutQuote.who}</span>
               <span class="r">
-                {aboutQuote.role}{
-                  aboutQuote.context && (
-                    <span class="text-base-500"> · {aboutQuote.context}</span>
-                  )
-                }
+                {aboutQuote.role}{aboutQuote.context && <span
+                  class="text-base-500"
+                >
+                  · {aboutQuote.context}</span>}
               </span>
             </figcaption>
           </figure>
@@ -365,17 +336,17 @@ const ArrowRight = "→";
         </div>
       </div>
       <div class="projects">
-        {
-          projects.map((p) => (
-            <a class="proj reveal" href={p.url} style={ac(p.accent)}>
-              <div class="top">
-                <span class="nm">{p.t}</span>
-                <span class="st">{p.tag}</span>
-              </div>
-              <p class="bd">{p.d}</p>
-            </a>
-          ))
-        }
+        {projects.map((p) => <a
+          class="proj reveal"
+          href={p.url}
+          style={ac(p.accent)}
+        >
+          <div class="top">
+            <span class="nm">{p.t}</span>
+            <span class="st">{p.tag}</span>
+          </div>
+          <p class="bd">{p.d}</p>
+        </a>)}
       </div>
     </section>
 
@@ -408,27 +379,26 @@ const ArrowRight = "→";
         </p>
       </div>
       <div class="wwm-cards">
-        {
-          engagements.map((w) => (
-            <div class="wwm-card" style={ac(w.accent)}>
-              <div class="wwm-ic">
-                <Icon name={w.icon} class="size-6" aria-hidden="true" />
-              </div>
-              <h3>{w.t}</h3>
-              <p>{w.d}</p>
-              <a href={w.url} class="wbtn">
-                {w.cta} <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          ))
-        }
+        {engagements.map((w) => <div class="wwm-card" style={ac(w.accent)}>
+          <div class="wwm-ic">
+            <Icon name={w.icon} class="size-6" aria-hidden="true" />
+          </div>
+          <h3>{w.t}</h3>
+          <p>{w.d}</p>
+          <a href={w.url} class="wbtn">
+            {w.cta} <span aria-hidden="true">→</span>
+          </a>
+        </div>)}
       </div>
       <p class="text-base-500 mt-6 text-center text-[0.92rem]">
-        or just <a
+        or just
+        <a
           href="mailto:hi@gui.do"
           class="text-primary-600 dark:text-primary-400 font-semibold hover:underline"
           >send me a note</a
-        > · <a
+        >
+        ·
+        <a
           href="https://sifa.id/p/gui.do"
           class="text-primary-600 dark:text-primary-400 font-semibold hover:underline"
           >follow on Sifa ID</a

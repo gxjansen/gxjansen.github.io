@@ -35,26 +35,26 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
 
 <article class={`card group ${className}`} {...rest}>
   <a href={`/post/${post.id}/`}>
-    {
-      heroImage && (
-        <Image
-          src={heroImage}
-          alt={`Cover for ${title}`}
-          widths={[360, 640, 768, 1024, 1600]}
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33.333vw, 400px"
-          class="w-full rounded-t-xl object-cover"
-          style="background: transparent;"
-          quality={85}
-          format="webp"
-        />
-      )
-    }
+    {heroImage && (
+      <Image
+        src={heroImage}
+        alt={`Cover for ${title}`}
+        widths={[360, 640, 768, 1024, 1600]}
+        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33.333vw, 400px"
+        class="w-full rounded-t-xl object-cover"
+        style="background: transparent;"
+        quality={85}
+        format="webp"
+      />
+    )}
   </a>
   <div class="card-content">
     <!-- categories and date -->
     <div class="flex flex-col gap-2">
       <div class="flex flex-wrap gap-2">
-        {filteredCategories.map((category) => <Category category={category} />)}
+        {filteredCategories.map((category) => (
+          <Category category={category} />
+        ))}
       </div>
       <time
         datetime={new Date(pubDate).toISOString()}
@@ -75,11 +75,11 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
     </h2>
 
     <!-- description -->
-    {
-      showDescription && description && (
-        <p class="text-base-600 dark:text-base-300">{description}</p>
-      )
-    }
+    {showDescription && description && <p
+      class="text-base-600 dark:text-base-300"
+    >
+      {description}
+    </p>}
 
     <!-- read post link -->
     <div class="mt-6">

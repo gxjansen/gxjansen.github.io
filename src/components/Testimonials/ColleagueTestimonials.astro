@@ -34,16 +34,12 @@ const initialTestimonials = getTestimonialsWithPinned(4);
     id="testimonials-grid"
     class="grid gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-2 xl:grid-cols-2"
   >
-    {
-      initialTestimonials.map((testimonial) => (
-        <div
-          data-testimonial-id={testimonial.id}
-          class="testimonial-card-wrapper"
-        >
-          <ColleagueTestimonialCard {...testimonial} />
-        </div>
-      ))
-    }
+    {initialTestimonials.map((testimonial) => <div
+      data-testimonial-id={testimonial.id}
+      class="testimonial-card-wrapper"
+    >
+      <ColleagueTestimonialCard {...testimonial} />
+    </div>)}
   </div>
 
   <div class="mt-12 text-center">

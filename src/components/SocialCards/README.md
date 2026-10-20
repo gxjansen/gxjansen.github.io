@@ -6,7 +6,6 @@ A responsive grid layout for displaying social media cards.
 
 ```astro
 import SocialCards from '@components/SocialCards/SocialCards.astro';
-
 <SocialCards />
 ```
 
