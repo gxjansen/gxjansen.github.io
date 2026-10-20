@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { createHmac } from "node:crypto";
 
-// Real altcha-lib by default; individual tests can make it throw.
+// Real altcha-lib (v1 API) by default; individual tests can make it throw.
 const failCreate = { value: false };
-vi.mock("altcha-lib", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("altcha-lib")>();
+vi.mock("altcha-lib/v1", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("altcha-lib/v1")>();
   return {
     ...actual,
     createChallenge: (...args: Parameters<typeof actual.createChallenge>) => {

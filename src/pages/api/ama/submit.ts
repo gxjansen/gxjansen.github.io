@@ -8,7 +8,7 @@
  * Returns { ok: true } on success, or { error: string } with 4xx/5xx.
  */
 import type { APIRoute } from "astro";
-import { verifySolution } from "altcha-lib";
+import { verifySolution } from "altcha-lib/v1";
 import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
 import { renderAmaCard } from "../../../lib/ama/render";

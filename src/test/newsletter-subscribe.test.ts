@@ -11,7 +11,7 @@ vi.mock("@netlify/blobs", () => ({
 }));
 
 const verifySolution = vi.fn();
-vi.mock("altcha-lib", () => ({
+vi.mock("altcha-lib/v1", () => ({
   verifySolution: (...args: unknown[]) => verifySolution(...args),
 }));
 
