@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Vertical lines -->
-  <line x1="0" y1="0" x2="0" y2="40" stroke="#28313d" stroke-width="1"/>
-  <line x1="40" y1="0" x2="40" y2="40" stroke="#28313d" stroke-width="1"/>
-  <!-- Horizontal lines -->
-  <line x1="0" y1="0" x2="40" y2="0" stroke="#28313d" stroke-width="1"/>
-  <line x1="0" y1="40" x2="40" y2="40" stroke="#28313d" stroke-width="1"/>
-</svg>
