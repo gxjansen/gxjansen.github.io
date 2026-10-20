@@ -21,7 +21,6 @@ specification.website agent-readiness spec
 ## Services
 
 - [Retainer / advisory](https://gui.do/retainer/): community + DevRel advisory engagements
-- [Services overview](https://gui.do/services/): the engagement menu
 - [Speaker](https://gui.do/speaker/): conference and event speaking
 
 ## Speaking and presentations
