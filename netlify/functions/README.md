@@ -1,10 +1,47 @@
 # Netlify Functions
 
-This directory contains serverless functions deployed to Netlify.
+This directory contains serverless functions deployed to Netlify. All of them
+use the Functions v2 API (default export taking a web `Request` and returning a
+`Response`) and keep the default `/.netlify/functions/<name>` URL. Don't set a
+custom `path` under `/.netlify`: those paths are reserved.
+
+| Function | Method | Called from |
+|----------|--------|-------------|
+| `altcha-challenge` | GET | ALTCHA widget on `NewsletterForm.astro` and `/ama` |
+| `newsletter-subscribe` | POST | `NewsletterForm.astro` |
+| `newsletter-stats` | GET | `NewsletterForm.astro` (subscriber count) |
+| `getPodcastFeeds` | GET | No caller in this repo; `/podcasts` bakes episodes in at build time via `src/lib/podcastFeeds.ts` |
+
+Shared conventions:
+
+- No CORS headers. Every caller is same-origin.
+- Clients get generic error messages. Details (upstream status, exception messages) only go to the function log.
+- Shared code lives in `_shared/`. Netlify only deploys top-level files, or a subdirectory's `index`/same-named file, as functions, so files in `_shared/` are bundled into their importers and never become functions of their own.
+- `_shared/listmonk.ts` holds the Listmonk base URL (`LISTMONK_BASE_URL`, default `https://n.a11y.nl/api`) and builds the Basic-auth and Cloudflare bypass headers.
+- Tests live in `src/test/<function>.test.ts`.
+- Every env var is listed in the repo's `.env.example`.
+
+## altcha-challenge
+
+`GET /.netlify/functions/altcha-challenge` returns a fresh ALTCHA proof-of-work challenge signed with `ALTCHA_HMAC_KEY`:
+
+```json
+{
+  "algorithm": "SHA-256",
+  "challenge": "<hex>",
+  "maxnumber": 300000,
+  "salt": "<hex>?expires=<unix seconds>&",
+  "signature": "<hex>"
+}
+```
+
+- Challenges expire after 5 minutes and are sent with `Cache-Control: no-store`.
+- Without `ALTCHA_HMAC_KEY` it returns 500 `{"error": "Server configuration error"}`.
+- Methods other than GET return 405.
 
 ## newsletter-subscribe
 
-Proxies newsletter subscription requests to the self-hosted Listmonk instance at `n.a11y.nl`.
+Proxies newsletter subscription requests to the self-hosted Listmonk instance at `n.a11y.nl` (override with `LISTMONK_BASE_URL`).
 
 ### Endpoint
 
@@ -90,6 +127,7 @@ Required in Netlify:
 | `LISTMONK_API_KEY` | Listmonk API key/password |
 | `ALTCHA_HMAC_KEY` | HMAC key shared with `altcha-challenge` |
 | `CF_BYPASS_TOKEN` | Optional. Sent as `X-Bypass-Token` to get past Cloudflare in front of Listmonk |
+| `LISTMONK_BASE_URL` | Optional. Listmonk API base URL, defaults to `https://n.a11y.nl/api` |
 
 ### Listmonk API User Permissions
 
@@ -123,6 +161,38 @@ Each subscriber is created with these attributes for tracking:
 
 ---
 
+## newsletter-stats
+
+`GET /.netlify/functions/newsletter-stats` returns the combined subscriber count (Listmonk subscribers plus standard.site subscribers counted via constellation):
+
+```json
+{ "success": true, "subscriberCount": 1234 }
+```
+
+- Each source is refreshed on every uncached call. If one fails, its last known value from the `subscriber-stats` Netlify Blobs store is used. `subscriberCount` is `null` only if neither source has ever answered.
+- Listmonk is skipped when `LISTMONK_API_USER`/`LISTMONK_API_KEY` are unset.
+- Cached for an hour (`Cache-Control: public, max-age=3600`).
+- The form only shows the count when it is above 10.
+
 ## getPodcastFeeds
 
-Fetches and parses podcast RSS feeds. See function source for details.
+`GET /.netlify/functions/getPodcastFeeds` fetches the Sheeptank, CRO.CAFE and CRO.CAFE NL Transistor feeds and returns the 20 newest episodes that have a Transistor embed:
+
+```json
+[
+  {
+    "title": "Episode title",
+    "description": "<p>Show notes</p>",
+    "pubDate": "Mon, 05 Jan 2026 00:00:00 GMT",
+    "duration": "1234",
+    "link": "https://share.transistor.fm/e/<id>",
+    "podcastName": "CRO.CAFE"
+  }
+]
+```
+
+- Each feed has a 5 second timeout. A failed feed is logged and skipped, so the others still come through.
+- Caching: `Cache-Control: public, max-age=3600` for browsers, and `Netlify-CDN-Cache-Control: public, durable, s-maxage=3600, stale-while-revalidate=86400` so the CDN serves a cached copy for an hour and a stale one for up to a day while it refetches.
+- An empty list (every feed failed) is sent with `no-store` so an outage isn't cached.
+- Unexpected errors return 500 `{"error": "Failed to fetch podcast feeds"}`.
+- `netlify.toml` sets `timeout = 30` under `[functions.getPodcastFeeds]` and lists `fast-xml-parser` in `external_node_modules`.

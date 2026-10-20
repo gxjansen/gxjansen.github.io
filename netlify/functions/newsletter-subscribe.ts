@@ -1,6 +1,7 @@
 import type { Config } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
 import { verifySolution } from "altcha-lib";
+import { listmonkAuthHeaders, listmonkBaseUrl } from "./_shared/listmonk";
 
 /**
  * Newsletter Subscription Proxy
@@ -14,7 +15,6 @@ import { verifySolution } from "altcha-lib";
  * Called same-origin from NewsletterForm.astro, so no CORS headers are sent.
  */
 
-const LISTMONK_BASE_URL = "https://n.a11y.nl/api";
 const DEFAULT_LIST_ID = 3; // Guido's Golden Nuggets
 /** Lists the public form may subscribe to. Anything else is rejected. */
 const ALLOWED_LIST_IDS = new Set([DEFAULT_LIST_ID]);
@@ -172,20 +172,15 @@ export default async (req: Request): Promise<Response> => {
       return fail(400, "Verification expired. Please refresh and try again.");
     }
 
-    const apiUser = process.env.LISTMONK_API_USER;
-    const apiKey = process.env.LISTMONK_API_KEY;
-    if (!apiUser || !apiKey) {
+    const listmonkHeaders = listmonkAuthHeaders();
+    if (!listmonkHeaders) {
       console.error("Missing Listmonk API credentials");
       return fail(500, "Server configuration error. Please try again later.");
     }
-
-    const listmonkHeaders = {
-      Authorization: `Basic ${Buffer.from(`${apiUser}:${apiKey}`).toString("base64")}`,
-      "X-Bypass-Token": process.env.CF_BYPASS_TOKEN || "",
-    };
+    const baseUrl = listmonkBaseUrl();
 
     // Step 1: Create subscriber (without list assignment - separate API call needed)
-    const response = await fetch(`${LISTMONK_BASE_URL}/subscribers`, {
+    const response = await fetch(`${baseUrl}/subscribers`, {
       method: "POST",
       headers: { ...listmonkHeaders, "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -207,7 +202,7 @@ export default async (req: Request): Promise<Response> => {
 
       if (subscriberId) {
         // Step 2: Add subscriber to list using dedicated endpoint
-        await fetch(`${LISTMONK_BASE_URL}/subscribers/lists`, {
+        await fetch(`${baseUrl}/subscribers/lists`, {
           method: "PUT",
           headers: { ...listmonkHeaders, "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -219,7 +214,7 @@ export default async (req: Request): Promise<Response> => {
         });
 
         // Step 3: Send opt-in confirmation email
-        await fetch(`${LISTMONK_BASE_URL}/subscribers/${subscriberId}/optin`, {
+        await fetch(`${baseUrl}/subscribers/${subscriberId}/optin`, {
           method: "POST",
           headers: listmonkHeaders,
         });
