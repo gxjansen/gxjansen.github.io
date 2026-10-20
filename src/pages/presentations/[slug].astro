@@ -50,15 +50,15 @@ const metaImage = image ? new URL(image, Astro.site) : undefined;
   presentation={entry.data}
   presentationSlug={entry.id}
 >
-  <div slot="head">
-    <link rel="preload" as="image" href={image} />
+  <Fragment slot="head">
+    {image && <link rel="preload" as="image" href={image} />}
     {youtubeId && <link rel="preconnect" href="https://www.youtube.com" />}
     {
       slideshareKey && (
         <link rel="preconnect" href="https://www.slideshare.net" />
       )
     }
-  </div>
+  </Fragment>
 
   <div class="home presentation-page">
     <section

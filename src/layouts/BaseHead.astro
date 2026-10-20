@@ -1,4 +1,6 @@
 ---
+import themeInit from "../scripts/inline/theme-init.js?raw";
+import { scriptHash } from "../utils/csp";
 import { type CollectionEntry } from "astro:content";
 
 // component imports
@@ -56,6 +58,8 @@ const {
 } = Astro.props as Props;
 // Use the environment variable to determine noindex
 const noindex = !CONFIG.ALLOW_INDEXING;
+// Inline so it runs before first paint (no theme flash); hash it into the CSP.
+Astro.csp?.insertScriptHash(scriptHash(themeInit));
 ---
 
 <meta charset="utf-8" />
@@ -162,45 +166,7 @@ const noindex = !CONFIG.ALLOW_INDEXING;
 }
 
 <!-- Theme change setup. Run early to eliminate Flash of inAccurate coloR Theme (FART) -->
-<script is:inline>
-  // Mark JS as available before paint so reveal-on-scroll can hide its start
-  // state (it degrades to fully visible when this class is absent).
-  document.documentElement.classList.add("js");
-
-  function initTheme() {
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-    let colorTheme = localStorage.getItem("colorTheme");
-
-    function applyTheme(theme) {
-      if (theme === "dark") {
-        document.documentElement.classList.add("dark");
-        document.documentElement.style.colorScheme = "dark";
-      } else {
-        document.documentElement.classList.remove("dark");
-        document.documentElement.style.colorScheme = "light";
-      }
-    }
-
-    // Initial theme setup
-    if (!colorTheme) {
-      colorTheme = prefersDark.matches ? "dark" : "light";
-      localStorage.setItem("colorTheme", colorTheme);
-    }
-    applyTheme(colorTheme);
-
-    // Listen for system theme changes
-    prefersDark.addEventListener("change", (e) => {
-      if (!localStorage.getItem("colorTheme")) {
-        const newTheme = e.matches ? "dark" : "light";
-        applyTheme(newTheme);
-        localStorage.setItem("colorTheme", newTheme);
-      }
-    });
-  }
-
-  // runs on initial page load
-  initTheme();
-</script>
+<script is:inline set:html={themeInit} />
 
 <Seo
   type={type as any}
