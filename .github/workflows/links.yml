@@ -7,6 +7,8 @@ on:
       - "src/content/**"
       - "src/pages/**"
       - "src/data/**"
+      - ".lycheeignore"
+      - ".github/workflows/links.yml"
   schedule:
     - cron: "0 8 * * 1" # Every Monday at 08:00 UTC
   workflow_dispatch:
@@ -22,6 +24,8 @@ jobs:
   check-links:
     name: Check Links
     runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    outputs:
+      exit_code: ${{ steps.lychee.outputs.exit_code }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -30,7 +34,17 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx astro build
+      # The head carries <link rel="site.standard.document" href="at://...">.
+      # lychee extracts the at:// URI and reports it as an unparsable URL
+      # before .lycheeignore can exclude it. dist/ is a throwaway build output.
+      - name: Strip AT Protocol document links
+        run: find dist -name '*.html' -exec sed -i -E 's#<link rel="site\.standard\.document"[^>]*>##g' {} +
+      # On-demand routes (/now, /bookshelf, /ama/q/*, /api/*) are not in dist/
+      # and are excluded in .lycheeignore. The .md files are copies of the
+      # HTML pages for agents, and llms-full.txt concatenates the posts, so they
+      # would only report every link twice.
       - name: Check links
+        id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
           args: >-
@@ -40,6 +54,60 @@ jobs:
             --timeout 30
             --max-retries 3
             --exclude-path dist/_astro
+            --exclude-path '\.md$'
+            --exclude-path 'llms-full\.txt$'
             --root-dir ${{ github.workspace }}/dist
+            --index-files index.html
             dist
+          format: markdown
+          output: lychee/out.md
+          jobSummary: true
+          # Never block PRs or the schedule; the report job below raises an issue.
           fail: false
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lychee-report
+          path: lychee/out.md
+          if-no-files-found: ignore
+
+  # Weekly: keep one open issue in sync with the latest report. Runs only on
+  # the schedule or a manual dispatch, never on pull requests.
+  report:
+    name: Report broken links
+    needs: check-links
+    if: >-
+      github.event_name != 'pull_request' &&
+      needs.check-links.outputs.exit_code != '0'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: lychee-report
+          path: lychee
+      - name: Create or update the link report issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          body="$RUNNER_TEMP/link-report.md"
+          {
+            echo "Weekly link check found problems. Run: ${RUN_URL}"
+            echo
+            echo "False positives belong in \`.lycheeignore\` with a comment. This issue is updated in place each week and can be closed once the list is clean."
+            echo
+            head -c 60000 lychee/out.md
+          } > "$body"
+          title="Link check: broken links found"
+          number=$(gh issue list --state open --search "\"$title\" in:title" --json number,title \
+            --jq "map(select(.title == \"$title\")) | .[0].number // empty")
+          if [ -n "$number" ]; then
+            gh issue edit "$number" --body-file "$body"
+          else
+            gh issue create --title "$title" --body-file "$body"
+          fi
