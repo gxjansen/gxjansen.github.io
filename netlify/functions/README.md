@@ -10,7 +10,6 @@ custom `path` under `/.netlify`: those paths are reserved.
 | `altcha-challenge` | GET | ALTCHA widget on `NewsletterForm.astro` and `/ama` |
 | `newsletter-subscribe` | POST | `NewsletterForm.astro` |
 | `newsletter-stats` | GET | `NewsletterForm.astro` (subscriber count) |
-| `getPodcastFeeds` | GET | No caller in this repo; `/podcasts` bakes episodes in at build time via `src/lib/podcastFeeds.ts` |
 
 Shared conventions:
 
@@ -173,26 +172,3 @@ Each subscriber is created with these attributes for tracking:
 - Listmonk is skipped when `LISTMONK_API_USER`/`LISTMONK_API_KEY` are unset.
 - Cached for an hour (`Cache-Control: public, max-age=3600`).
 - The form only shows the count when it is above 10.
-
-## getPodcastFeeds
-
-`GET /.netlify/functions/getPodcastFeeds` fetches the Sheeptank, CRO.CAFE and CRO.CAFE NL Transistor feeds and returns the 20 newest episodes that have a Transistor embed:
-
-```json
-[
-  {
-    "title": "Episode title",
-    "description": "<p>Show notes</p>",
-    "pubDate": "Mon, 05 Jan 2026 00:00:00 GMT",
-    "duration": "1234",
-    "link": "https://share.transistor.fm/e/<id>",
-    "podcastName": "CRO.CAFE"
-  }
-]
-```
-
-- Each feed has a 5 second timeout. A failed feed is logged and skipped, so the others still come through.
-- Caching: `Cache-Control: public, max-age=3600` for browsers, and `Netlify-CDN-Cache-Control: public, durable, s-maxage=3600, stale-while-revalidate=86400` so the CDN serves a cached copy for an hour and a stale one for up to a day while it refetches.
-- An empty list (every feed failed) is sent with `no-store` so an outage isn't cached.
-- Unexpected errors return 500 `{"error": "Failed to fetch podcast feeds"}`.
-- `netlify.toml` sets `timeout = 30` under `[functions.getPodcastFeeds]` and lists `fast-xml-parser` in `external_node_modules`.

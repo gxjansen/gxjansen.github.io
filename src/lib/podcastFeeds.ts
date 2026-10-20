@@ -1,11 +1,11 @@
 /**
  * Build-time podcast episode fetcher.
  *
- * Mirrors `netlify/functions/getPodcastFeeds.js` but runs server-side in Astro
- * frontmatter so the /podcasts episode list is baked into the static HTML
- * (visible to crawlers and no-JS browsers, no client fetch required).
+ * Runs server-side in Astro frontmatter so the /podcasts episode list is baked
+ * into the static HTML (visible to crawlers and no-JS browsers, no client fetch
+ * required).
  *
- * Same Transistor feed sources, same parsing, same shape: it returns the latest
+ * Reads the Transistor feeds below and returns the latest
  * episodes as `{ link, title }`-bearing objects where `link` is always a
  * `https://share.transistor.fm/` embed URL. Wrapped so a slow or failed feed
  * NEVER breaks the build — on any error it falls back to an empty list and the
