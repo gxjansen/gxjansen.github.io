@@ -39,26 +39,6 @@ const presentations = defineCollection({
 });
 
 /**
- * Events collection schema
- */
-const events = defineCollection({
-  loader: glob({
-    pattern: "**/*.{md,mdx}",
-    base: "src/content/events",
-    generateId: stripIndexId,
-  }),
-  schema: z.object({
-    title: z.string(),
-    date: z.string(), // ISO date string
-    location: z.string(),
-    url: z.string().optional(),
-    description: z.string().optional(),
-    // Array of related presentation slugs for bi-directional relationship
-    relatedPresentationSlugs: z.array(z.string()).default([]),
-  }),
-});
-
-/**
  * Authors collection schema
  */
 const authors = defineCollection({
@@ -175,18 +155,6 @@ const post = defineCollection({
 });
 
 /**
- * Countries collection schema
- */
-const countries = defineCollection({
-  loader: glob({
-    pattern: "**/*.{md,mdx}",
-    base: "src/content/countries",
-    generateId: stripIndexId,
-  }),
-  schema: z.object({}),
-});
-
-/**
  * Other pages collection schema
  */
 const otherPages = defineCollection({
@@ -216,10 +184,8 @@ const services = defineCollection({
 
 export const collections = {
   presentations,
-  events,
   authors,
   post, // Changed from 'blog' to 'post'
-  countries,
   otherPages,
   services,
 };

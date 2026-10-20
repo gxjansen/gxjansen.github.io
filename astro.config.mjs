@@ -125,7 +125,6 @@ export default defineConfig({
     },
     build: {
       cssCodeSplit: true,
-      cssMinify: 'lightningcss',
       sourcemap: false,
       chunkSizeWarningLimit: 1000,
     },

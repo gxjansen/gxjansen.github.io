@@ -7,7 +7,7 @@
  */
 const WORDS_PER_MINUTE = 220;
 
-export function readingTimeMinutes(raw: string | undefined): number {
+function readingTimeMinutes(raw: string | undefined): number {
   if (!raw) return 1;
   const text = raw
     .replace(/```[\s\S]*?```/g, " ") // fenced code blocks

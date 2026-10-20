@@ -104,9 +104,6 @@ export function createMockNavData(
   ];
 }
 
-/**
- * Create mock podcast episode data for testing
- */
 interface LayoutProps {
   type?: "blog" | "general";
   title: string;
@@ -128,22 +125,6 @@ export function createMockLayoutProps(
     description: "This is a test page description",
     type: "general",
     noindex: false,
-    ...overrides,
-  };
-}
-
-export function createMockPodcastEpisode(
-  overrides: Record<string, unknown> = {},
-) {
-  return {
-    title: "Test Episode",
-    description:
-      "This is a test episode description that is long enough to test truncation functionality in the podcast card component.",
-    link: "https://example.com/episode",
-    pubDate: "2024-01-01T12:00:00Z",
-    duration: "45 min",
-    podcastName: "Test Podcast",
-    imageUrl: "https://example.com/image.jpg",
     ...overrides,
   };
 }
