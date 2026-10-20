@@ -4,9 +4,9 @@ import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
 import netlify from "@astrojs/netlify";
 import tailwindcss from "@tailwindcss/vite";
-import * as path from 'node:path';
-import { contentValidationPlugin } from './src/utils/content-validation-plugin.ts';
-import { markdownEndpoints } from './src/integrations/markdown-endpoints.ts';
+import * as path from "node:path";
+import { contentValidationPlugin } from "./src/utils/content-validation-plugin.ts";
+import { markdownEndpoints } from "./src/integrations/markdown-endpoints.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,23 +22,23 @@ export default defineConfig({
   // Without this, clicking a link on a slow connection sits on the old page
   // until the fetch completes — no native loading spinner under ClientRouter.
   prefetch: {
-    defaultStrategy: 'viewport',
+    defaultStrategy: "viewport",
     prefetchAll: false,
   },
   adapter: netlify({
-    imageCDN: false
+    imageCDN: false,
   }),
   image: {
     responsiveStyles: true,
     breakpoints: [360, 640, 768, 1024, 1280, 1600, 1920],
     service: {
-      entrypoint: 'astro/assets/services/sharp',
+      entrypoint: "astro/assets/services/sharp",
       config: {
         svg: {
-          enabled: true
-        }
-      }
-    }
+          enabled: true,
+        },
+      },
+    },
   },
   // Content Security Policy. Astro hashes every script it emits (including
   // is:inline ones) into a per-page <meta> CSP, so inline scripts no longer
@@ -59,52 +59,71 @@ export default defineConfig({
       styleDirective: {
         resources: ["'self'", "'unsafe-inline'"],
       },
+      // ALTCHA runs its proof-of-work in a blob: worker. Without an explicit
+      // worker-src, workers fall back to script-src, which has no blob:.
+      directives: ["worker-src 'self' blob:"],
     },
   },
 
   // Trailing slash configuration - ensures all URLs have trailing slashes
   // This fixes canonical URL mismatches (e.g., /about vs /about/)
-  trailingSlash: 'always',
+  trailingSlash: "always",
 
   // i18n configuration must match src/config/translations.json.ts
   i18n: {
     defaultLocale: "en",
     locales: ["en"],
     routing: {
-      prefixDefaultLocale: false
-    }
+      prefixDefaultLocale: false,
+    },
   },
   // Redirects configuration using Astro's native redirects
   redirects: {
     // External redirects
-    '/kit': { destination: 'https://kit.co/gxjansen', status: 301 },
-    '/call': { destination: 'https://calendar.app.google/E7mdyvsHvZaJq3Xq6', status: 301 },
-    '/youtube': { destination: 'https://www.youtube.com/c/GuidoJansen', status: 301 },
-    '/video': { destination: 'https://www.youtube.com/c/GuidoJansen', status: 301 },
+    "/kit": { destination: "https://kit.co/gxjansen", status: 301 },
+    "/call": {
+      destination: "https://calendar.app.google/E7mdyvsHvZaJq3Xq6",
+      status: 301,
+    },
+    "/youtube": {
+      destination: "https://www.youtube.com/c/GuidoJansen",
+      status: 301,
+    },
+    "/video": {
+      destination: "https://www.youtube.com/c/GuidoJansen",
+      status: 301,
+    },
 
     // Internal redirects
-    '/categories': { destination: '/post', status: 301 },
-    '/guidojansen': { destination: '/about', status: 301 },
-    '/post/*': { destination: '/post/:splat', status: 301 },
-    '/persuasive-ecommerce': { destination: '/', status: 301 },
-    '/instagram': { destination: '/social', status: 301 },
-    '/howtoweb': { destination: '/presentations/data-driven-decisions-meets-psychology', status: 301 },
-    '/cards': { destination: '/cognitive-biases', status: 301 },
-    '/bigger': { destination: '/presentations/still-a-b-testing-your-buttons-you-need-to-think-much-bigger', status: 301 },
-    '/audio': { destination: '/podcasts', status: 301 },
-    '/index.php': { destination: '/', status: 301 },
-    '/images/*': { destination: '/', status: 301 },
-    '/CV': { destination: '/cv', status: 301 },
-    '/hireme': { destination: '/about', status: 301 },
-    '/theme/contact-us/contact-us': { destination: '/about', status: 301 },
-    '/theme/contact': { destination: '/about', status: 301 },
-    '/presentation/*': { destination: '/presentations/:splat', status: 301 }
+    "/categories": { destination: "/post", status: 301 },
+    "/guidojansen": { destination: "/about", status: 301 },
+    "/post/*": { destination: "/post/:splat", status: 301 },
+    "/persuasive-ecommerce": { destination: "/", status: 301 },
+    "/instagram": { destination: "/social", status: 301 },
+    "/howtoweb": {
+      destination: "/presentations/data-driven-decisions-meets-psychology",
+      status: 301,
+    },
+    "/cards": { destination: "/cognitive-biases", status: 301 },
+    "/bigger": {
+      destination:
+        "/presentations/still-a-b-testing-your-buttons-you-need-to-think-much-bigger",
+      status: 301,
+    },
+    "/audio": { destination: "/podcasts", status: 301 },
+    "/index.php": { destination: "/", status: 301 },
+    "/images/*": { destination: "/", status: 301 },
+    "/CV": { destination: "/cv", status: 301 },
+    "/hireme": { destination: "/about", status: 301 },
+    "/theme/contact-us/contact-us": { destination: "/about", status: 301 },
+    "/theme/contact": { destination: "/about", status: 301 },
+    "/presentation/*": { destination: "/presentations/:splat", status: 301 },
   },
   markdown: {
     shikiConfig: {
       theme: "dracula",
-      wrap: true
-    }
+      wrap: true,
+    },
   },
   integrations: [
     mdx({
@@ -114,26 +133,39 @@ export default defineConfig({
     }),
     icon({
       include: {
-        tabler: ["chart-bar", "door", "flask", "gauge", "letter-g", "letter-j", "letter-x", "markdown", "message", "question-mark", "speakerphone", "star"],
+        tabler: [
+          "chart-bar",
+          "door",
+          "flask",
+          "gauge",
+          "letter-g",
+          "letter-j",
+          "letter-x",
+          "markdown",
+          "message",
+          "question-mark",
+          "speakerphone",
+          "star",
+        ],
       },
     }),
     sitemap({
       // Keep noindex pages out of the sitemap (mixed signal otherwise).
       filter: (page) =>
-        !page.includes('/conference-terms') &&
-        !page.includes('/examples/') &&
-        !page.includes('/categories/') &&
-        !page.includes('/speaker') &&
-        !page.includes('/styleguide') &&
-        !page.includes('/ama/q/'),
-      changefreq: 'weekly',
+        !page.includes("/conference-terms") &&
+        !page.includes("/examples/") &&
+        !page.includes("/categories/") &&
+        !page.includes("/speaker") &&
+        !page.includes("/styleguide") &&
+        !page.includes("/ama/q/"),
+      changefreq: "weekly",
       lastmod: new Date(),
       i18n: {
-        defaultLocale: 'en',
+        defaultLocale: "en",
         locales: {
-          en: 'en'
-        }
-      }
+          en: "en",
+        },
+      },
     }),
     contentValidationPlugin(),
     markdownEndpoints(),
@@ -142,7 +174,7 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '@icons': path.resolve('./src/icons'),
+        "@icons": path.resolve("./src/icons"),
       },
     },
     build: {
@@ -151,11 +183,11 @@ export default defineConfig({
       chunkSizeWarningLimit: 1000,
     },
     ssr: {
-      external: ['sharp']
+      external: ["sharp"],
     },
     css: {
       devSourcemap: true,
     },
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+  },
 });
