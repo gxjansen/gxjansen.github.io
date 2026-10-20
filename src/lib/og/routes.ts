@@ -130,9 +130,9 @@ export function ogImageForPath(pathname: string): string {
 
   // Explicit single-page cards.
   if (p === "/") return "/og/home.png";
-  // /retainer and /training are temporarily hidden (their OG cards are disabled
-  // in /og/[...path].png.ts). Restore these two lines when the pages return:
-  // if (p === "/retainer") return "/og/retainer.png";
+  if (p === "/retainer") return "/og/retainer.png";
+  // /training is temporarily hidden (its OG card is disabled in
+  // /og/[...path].png.ts). Restore this line when the page returns:
   // if (p === "/training") return "/og/training.png";
   if (p === "/bookshelf") return "/og/bookshelf.png";
 

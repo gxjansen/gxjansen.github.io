@@ -16,9 +16,7 @@ const ROUTES = [
   "/about/",
   "/press/",
   "/podcasts/",
-  // /retainer/ is drafted out of the build (src/pages/_retainer.astro) and 302s
-  // to /contact/ via Netlify, so it's not a real page to audit — /contact/ (its
-  // redirect target) is already covered below. Re-add when the page is restored.
+  "/retainer/",
   "/speaker/",
   "/communities/",
   "/contact/",
