@@ -12,7 +12,7 @@ the component specs, brand assets, the avatar studio, and an adherence linter.
 ## This repo is the *implementation*, not the source of truth
 
 The live tokens are in `src/styles/tailwind.css` (`@theme`) and the component
-classes in `src/styles/components/_redesign.scss` / `_home.scss`. When a design
+classes in `src/styles/components/redesign.css` / `home.css`. When a design
 token changes, change it in the skill first, then mirror it here, so the two
 don't drift.
 
