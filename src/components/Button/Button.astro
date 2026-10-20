@@ -179,11 +179,15 @@ const baseClasses = [
        so the button passes WCAG AA regardless of which random accent is
        assigned. Hover state still fills with the brand colour. */
     border-color: var(--btn-color);
-    color: #191724; /* Rose Pine base — passes contrast on every page bg */
+    color: var(
+      --color-base-950
+    ); /* Rose Pine base — passes contrast on every page bg */
   }
 
   :global(.dark) .button--outline {
-    color: #e0def4; /* Rose Pine text — passes contrast on dark page bg */
+    color: var(
+      --color-rp-text
+    ); /* Rose Pine text — passes contrast on dark page bg */
   }
 
   .button--outline:hover {
@@ -193,48 +197,50 @@ const baseClasses = [
 
   /* Rosé Pine accent colors - light mode */
   .button--outline[data-color="love"] {
+    /* Rosé Pine Dawn love. Intentionally not --color-love-light (#a8505d),
+       which is deepened for text contrast. */
     --btn-color: #b4637a;
   }
   .button--outline[data-color="gold"] {
-    --btn-color: #ea9d34;
+    --btn-color: var(--color-gold-light);
   }
   .button--outline[data-color="rose"] {
-    --btn-color: #d7827e;
+    --btn-color: var(--color-rose-light);
   }
   .button--outline[data-color="pine"] {
-    --btn-color: #286983;
+    --btn-color: var(--color-pine-light);
   }
   .button--outline[data-color="foam"] {
-    --btn-color: #56949f;
+    --btn-color: var(--color-foam-light);
   }
   .button--outline[data-color="iris"] {
-    --btn-color: #907aa9;
+    --btn-color: var(--color-iris-light);
   }
 
   /* Rosé Pine accent colors - dark mode */
   :global(.dark) .button--outline[data-color="love"] {
-    --btn-color: #eb6f92;
-    --btn-hover-text: #191724;
+    --btn-color: var(--color-love);
+    --btn-hover-text: var(--color-base-950);
   }
   :global(.dark) .button--outline[data-color="gold"] {
-    --btn-color: #f6c177;
-    --btn-hover-text: #191724;
+    --btn-color: var(--color-gold);
+    --btn-hover-text: var(--color-base-950);
   }
   :global(.dark) .button--outline[data-color="rose"] {
-    --btn-color: #ebbcba;
-    --btn-hover-text: #191724;
+    --btn-color: var(--color-rose);
+    --btn-hover-text: var(--color-base-950);
   }
   :global(.dark) .button--outline[data-color="pine"] {
-    --btn-color: #31748f;
-    --btn-hover-text: #e0def4;
+    --btn-color: var(--color-pine);
+    --btn-hover-text: var(--color-rp-text);
   }
   :global(.dark) .button--outline[data-color="foam"] {
-    --btn-color: #9ccfd8;
-    --btn-hover-text: #191724;
+    --btn-color: var(--color-foam);
+    --btn-hover-text: var(--color-base-950);
   }
   :global(.dark) .button--outline[data-color="iris"] {
-    --btn-color: #c4a7e7;
-    --btn-hover-text: #191724;
+    --btn-color: var(--color-iris);
+    --btn-hover-text: var(--color-base-950);
   }
 
   .button--ghost {

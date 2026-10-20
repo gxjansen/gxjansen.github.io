@@ -45,8 +45,8 @@ const isProduction = CONFIG.ALLOW_INDEXING;
     top: 0;
     left: 0;
     right: 0;
-    background-color: #eb6f92; /* Rosé Pine love */
-    color: #191724; /* Rosé Pine base — dark text passes WCAG AA (6.4:1) on love */
+    background-color: var(--color-love);
+    color: var(--color-base-950); /* dark text passes WCAG AA (6.4:1) on love */
     text-align: center;
     z-index: 9999;
     font-weight: 600;
@@ -68,7 +68,7 @@ const isProduction = CONFIG.ALLOW_INDEXING;
     position: absolute;
     right: 1rem;
     padding: 0.25rem;
-    color: #191724;
+    color: var(--color-base-950);
     border-radius: 0.25rem;
     transition: background-color 0.2s;
   }
@@ -78,12 +78,13 @@ const isProduction = CONFIG.ALLOW_INDEXING;
   }
 
   .banner-close:focus {
-    outline: 2px solid #191724;
+    outline: 2px solid var(--color-base-950);
     outline-offset: 2px;
   }
 
   /* prefers-contrast: more — lighten the pink so the dark text contrast
-     ratio increases further (the point of this media query). */
+     ratio increases further (the point of this media query). One-off tint,
+     no design token. */
   @media (prefers-contrast: more) {
     .environment-banner {
       background-color: #fde4ea;
