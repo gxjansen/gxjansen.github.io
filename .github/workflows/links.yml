@@ -11,6 +11,9 @@ on:
     - cron: "0 8 * * 1" # Every Monday at 08:00 UTC
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 concurrency:
   group: links-${{ github.ref }}
   cancel-in-progress: true
@@ -18,12 +21,12 @@ concurrency:
 jobs:
   check-links:
     name: Check Links
-    runs-on: ${{ vars.CI_RUNNER || 'self-hosted-sifa' }}
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
       - run: npm ci
       - run: npx astro build

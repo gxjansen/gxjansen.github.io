@@ -23,3 +23,15 @@ updates:
     labels:
       - "dependencies"
       - "security"
+
+  # Keep workflow actions current
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      actions:
+        patterns:
+          - "*"
+    labels:
+      - "dependencies"

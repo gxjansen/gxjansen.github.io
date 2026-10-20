@@ -18,10 +18,10 @@ Built with [Astro](https://astro.build/), [React](https://react.dev/), [MDX](htt
 
 ### URL Validation
 
-Blog post URL validation is skipped in CI to avoid 5-minute timeouts hitting external services. Run it locally before publishing new posts:
+The URL checks in `src/data/__tests__/validateUrls.test.ts` hit external sites, so they are opt-in and don't run in `npm test` or CI. Run them locally before publishing new posts:
 
 ```bash
-npm test -- validateUrls
+npm run test:urls
 ```
 
-(The recent-events URL check still runs in CI.)
+The weekly Links workflow (lychee on the built site) catches link rot in between.

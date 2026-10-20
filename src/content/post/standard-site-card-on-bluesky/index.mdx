@@ -28,7 +28,7 @@ Let's get you set up!
 
 For the rich card on an **individual post** (the one with the title, author and reading time), you also need a `site.standard.document` record for that post. Bluesky builds the match by joining `publication.url` with the document's `path` and comparing it to the shared link, so without a matching document a post link won't render the rich card. Bluesky compares publication URLs exactly, it doesn't treat a post as a subpath of your home page, except on the Leaflet / pckt / Offprint hosts. The card's reading time is also derived from the document's stored text, so include the post body in the record if you want it shown.
 
-Either way, Bluesky's AppView indexes these records from the firehose and matches them to post links by URL. It never loads your website. See the matching logic in [`packages/bsky/src/util/standard-site.ts`](https://github.com/bluesky-social/atproto/blob/main/packages/bsky/src/util/standard-site.ts).
+Either way, Bluesky's AppView indexes these records from the firehose and matches them to post links by URL. It never loads your website. See the matching logic in [`packages/bsky/src/util/external/standard-site.ts`](https://github.com/bluesky-social/atproto/blob/ccd16f24b08c16781a7e87a9c05d539ca920dfee/packages/bsky/src/util/external/standard-site.ts).
 
 The good news: every publishing path below (Leaflet, pckt, Offprint, WordPress, Sequoia) creates both records for you. You only have to think about this if you're rolling your own.
 

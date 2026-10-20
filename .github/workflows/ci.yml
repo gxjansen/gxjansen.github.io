@@ -8,6 +8,9 @@ on:
   # Manual runs.
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -15,48 +18,48 @@ concurrency:
 jobs:
   build:
     name: Build
-    runs-on: ${{ vars.CI_RUNNER || 'self-hosted-sifa' }}
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
       - run: npm ci
       - run: npx astro build
 
   test:
     name: Test
-    runs-on: ${{ vars.CI_RUNNER || 'self-hosted-sifa' }}
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
       - run: npm ci
       - run: npx vitest run --reporter=verbose
 
   format:
     name: Format
-    runs-on: ${{ vars.CI_RUNNER || 'self-hosted-sifa' }}
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
       - run: npm ci
       - run: npm run format:check
 
   typecheck:
     name: Type Check
-    runs-on: ${{ vars.CI_RUNNER || 'self-hosted-sifa' }}
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
       - run: npm ci
       - run: npm run typecheck

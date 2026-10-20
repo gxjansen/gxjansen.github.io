@@ -4,7 +4,10 @@
  * Validates that all external URLs in data files and blog posts are reachable (not 404s).
  * This catches broken links before they reach production.
  *
- * Run with: npm test -- src/data/__tests__/validateUrls.test.ts
+ * These hit the live network, so they are opt-in and stay out of `npm test` and CI
+ * (the weekly Links workflow covers link rot on the built site).
+ *
+ * Run with: npm run test:urls
  */
 
 import { describe, it, expect } from "vitest";
@@ -356,7 +359,7 @@ async function validateUrlsWithRateLimit(
   return errors;
 }
 
-describe("Data File URL Validation", () => {
+describe.skipIf(!process.env.RUN_URL_TESTS)("Data File URL Validation", () => {
   it("should have valid URLs in indieProjects", async () => {
     const urls = collectUrls().filter((u) =>
       u.source.startsWith("indieProjects"),
@@ -423,24 +426,20 @@ describe("Data File URL Validation", () => {
     expect(errors).toEqual([]);
   }, 60000);
 
-  it.skipIf(process.env.CI)(
-    "should have valid URLs in blog posts",
-    async () => {
-      const urls = collectBlogPostUrls();
+  it("should have valid URLs in blog posts", async () => {
+    const urls = collectBlogPostUrls();
 
-      console.log(`Validating ${urls.length} URLs from blog posts...`);
+    console.log(`Validating ${urls.length} URLs from blog posts...`);
 
-      const errors = await validateUrlsWithRateLimit(urls, 300);
+    const errors = await validateUrlsWithRateLimit(urls, 300);
 
-      if (errors.length > 0) {
-        console.error("\nBroken URLs found in blog posts:");
-        errors.forEach((err) => console.error(`  - ${err}`));
-      }
+    if (errors.length > 0) {
+      console.error("\nBroken URLs found in blog posts:");
+      errors.forEach((err) => console.error(`  - ${err}`));
+    }
 
-      expect(errors).toEqual([]);
-    },
-    300000,
-  ); // 5 min timeout for all blog posts
+    expect(errors).toEqual([]);
+  }, 300000); // 5 min timeout for all blog posts
 });
 
 // Export for potential use in CLI script

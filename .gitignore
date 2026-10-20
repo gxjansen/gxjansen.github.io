@@ -12,7 +12,6 @@ benchmark/projects/
 benchmark/results/
 test-results/
 *.log
-package-lock.json
 .turbo/
 .eslintcache
 .pnpm-store
@@ -133,3 +132,6 @@ hive-mind-prompt-*.txt
 
 # Playwright
 playwright-report/
+
+# Local brand-workspace notes (not repo content)
+_workspace/
