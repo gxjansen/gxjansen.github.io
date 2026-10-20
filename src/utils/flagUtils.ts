@@ -18,7 +18,7 @@ export async function loadCountryFlag(
   countryCode: string,
 ): Promise<ImageMetadata | null> {
   try {
-    // Special handling for GB which is stored as gb-eng in the package
+    // Special handling for GB, which is stored as gb-eng.svg
     const adjustedCode =
       countryCode === "GB" ? "gb-eng" : countryCode.toLowerCase();
 

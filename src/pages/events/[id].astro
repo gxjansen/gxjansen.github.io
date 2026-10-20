@@ -33,7 +33,7 @@ const { event } = Astro.props as {
 };
 
 // Country helpers. Names come from Intl.DisplayNames; flags are rendered as
-// SVGs via the project's flag utilities (svg-country-flags) — the SAME approach
+// SVGs from src/assets/flags via utils/flagUtils, the same approach
 // used by the events index / EventCard — so flags stay consistent across pages.
 // Both degrade gracefully (no flag / raw code) when the code is invalid.
 const countryNames = new Intl.DisplayNames(["en"], { type: "region" });
