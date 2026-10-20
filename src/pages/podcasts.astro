@@ -92,10 +92,9 @@ const podcasts = [
               {episodes.map((episode) => (
                 <div class="bg-base-100 dark:bg-base-900 border-base-200 dark:border-base-800 w-full overflow-hidden rounded-2xl border">
                   <iframe
+                    class="block w-full overflow-hidden border-0"
                     width="100%"
                     height="180"
-                    frameborder="no"
-                    scrolling="no"
                     seamless
                     src={episode.link}
                     title={episode.title}
