@@ -1,0 +1,65 @@
+name: Pages redirect
+
+# gui.do is served by Netlify. Because this repo is named gxjansen.github.io,
+# GitHub won't let GitHub Pages be switched off, and it kept serving a 2024
+# copy of the site at dev.gui.do and gxjansen.github.io. This replaces that
+# copy with a page that sends every path to the same path on gui.do.
+#
+# Run it by hand (Actions > Pages redirect > Run workflow). There's nothing
+# to rebuild unless the redirect page itself changes.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write redirect page
+        run: |
+          mkdir -p site
+          cat > site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <title>Moved to gui.do</title>
+              <meta name="robots" content="noindex">
+              <link rel="canonical" href="https://gui.do/">
+              <meta http-equiv="refresh" content="0; url=https://gui.do/">
+              <script>
+                location.replace("https://gui.do" + location.pathname + location.search + location.hash);
+              </script>
+            </head>
+            <body>
+              <p>This site lives at <a href="https://gui.do/">gui.do</a>.</p>
+            </body>
+          </html>
+          HTML
+          # Pages serves 404.html for every unknown path, so deep links redirect too.
+          cp site/index.html site/404.html
+          touch site/.nojekyll
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

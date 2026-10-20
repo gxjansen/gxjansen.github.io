@@ -2,7 +2,7 @@ name: Accessibility
 
 on:
   pull_request:
-    branches: [master, development]
+    branches: [master]
   # Manual runs.
   workflow_dispatch:
 
