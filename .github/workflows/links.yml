@@ -2,7 +2,7 @@ name: Links
 
 on:
   pull_request:
-    branches: [master, development]
+    branches: [master]
     paths:
       - "src/content/**"
       - "src/pages/**"
