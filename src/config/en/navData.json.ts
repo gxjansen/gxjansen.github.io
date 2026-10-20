@@ -38,6 +38,11 @@ const navConfig = [
     text: "Work with me",
     dropdown: [
       {
+        text: "Advisory",
+        link: "/retainer",
+        icon: "tabler/outline/briefcase",
+      },
+      {
         text: "Speaking",
         link: "/speaker",
         icon: "tabler/outline/microphone",

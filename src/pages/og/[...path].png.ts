@@ -20,9 +20,9 @@ import {
   ArticleCard,
   LandingCard,
   TalkCard,
-  // RetainerCard, TrainingCard — temporarily unused while /retainer and
-  // /training are hidden. Re-add these imports + the map entries below to
-  // restore their OG cards.
+  RetainerCard,
+  // TrainingCard is temporarily unused while /training is hidden. Re-add this
+  // import + the map entry below to restore its OG card.
   FallbackCard,
   BookshelfCard,
 } from "../../lib/og/cards";
@@ -45,9 +45,9 @@ async function buildCardMap(): Promise<Record<string, CardElement>> {
 
   // Single-page cards.
   map["home"] = React.createElement(HomeCard, { years, countries });
-  // Retainer & Training OG cards are hidden with their pages (restore: re-add
-  // the RetainerCard/TrainingCard imports above and these two lines):
-  // map["retainer"] = React.createElement(RetainerCard, {});
+  map["retainer"] = React.createElement(RetainerCard, {});
+  // The Training OG card is hidden with its page (restore: re-add the
+  // TrainingCard import above and this line):
   // map["training"] = React.createElement(TrainingCard, {});
   map["bookshelf"] = React.createElement(BookshelfCard, {});
   map["default"] = React.createElement(FallbackCard, {
