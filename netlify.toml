@@ -8,12 +8,6 @@
   command = "npm run build"
   publish = "dist"
 
-[context.deploy-preview]
-  command = "npm run build"
-
-[context.branch-deploy]
-  command = "npm run build"
-
 # Domain redirects — dutchento.org is a parked domain that must 301 to gui.do.
 # Netlify serves identical content on every domain alias by default, so without
 # these rules the whole site is duplicated on dutchento.org. These must stay the
@@ -37,18 +31,6 @@
 [[redirects]]
   from = "/sitemap.xml"
   to = "/sitemap-index.xml"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/sitemap-index.xml"
-  to = "/sitemap-index.xml"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/sitemap-0.xml"
-  to = "/sitemap-0.xml"
   status = 200
   force = true
 

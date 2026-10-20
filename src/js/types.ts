@@ -72,44 +72,7 @@ export interface BlogData {
   imageAlt?: string;
 }
 
-export interface SiteDataProps {
-  title: string;
-  description: string;
-  author: {
-    name: string;
-    twitter: string;
-  };
-  language?: string;
-  defaultImage: {
-    src: string;
-    width: number;
-    height: number;
-    format: string;
-  };
-}
-
-export interface AccessibilityFeatures {
-  alternativeText: boolean;
-  readingOrder: boolean;
-  structuralNavigation: boolean;
-  tableOfContents: boolean;
-  highContrastDisplay: boolean;
-  largePrint: boolean;
-  taggedPDF: boolean;
-}
-
-export interface AccessibilityControls {
-  fullKeyboardControl: boolean;
-  fullMouseControl: boolean;
-  fullTouchControl: boolean;
-}
-
 export interface Author {
   id: string;
   data: AuthorData;
-}
-
-export interface BlogPost {
-  id: string;
-  data: BlogData;
 }

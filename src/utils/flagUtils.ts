@@ -138,14 +138,3 @@ export async function getAllFlags(
 
   return flagsWithCountry;
 }
-
-/**
- * Legacy function for backward compatibility - returns only images
- * @deprecated Use getAllFlags instead for better accessibility
- */
-export async function getAllFlagImages(
-  countryCodes: string[],
-): Promise<ImageMetadata[]> {
-  const flagsWithCountry = await getAllFlags(countryCodes);
-  return flagsWithCountry.map((f) => f.image);
-}

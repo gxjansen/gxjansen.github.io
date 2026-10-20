@@ -295,52 +295,6 @@ export const colleagueTestimonials: ColleagueTestimonial[] = [
 ];
 
 /**
- * Get a strategic selection of testimonials (deprecated - deterministic)
- * @deprecated Use getRandomTestimonials for dynamic client-side selection
- */
-export function getSelectedTestimonials(
-  count: number = 4,
-): ColleagueTestimonial[] {
-  // Simplified version without preferredId bias - just get highest priority from each category
-  const selected: ColleagueTestimonial[] = [];
-  const usedPeople = new Set<string>();
-
-  const categories = Array.from(
-    new Set(colleagueTestimonials.map((t) => t.category)),
-  );
-
-  // Select highest priority testimonial from each category
-  for (const category of categories) {
-    if (selected.length >= count) break;
-
-    const categoryTestimonials = colleagueTestimonials
-      .filter((t) => t.category === category && !usedPeople.has(t.name))
-      .sort((a, b) => b.priority - a.priority);
-
-    if (categoryTestimonials.length > 0) {
-      selected.push(categoryTestimonials[0]);
-      usedPeople.add(categoryTestimonials[0].name);
-    }
-  }
-
-  // Fill remaining slots
-  while (selected.length < count) {
-    const remainingTestimonials = colleagueTestimonials
-      .filter((t) => !usedPeople.has(t.name))
-      .sort((a, b) => b.priority - a.priority);
-
-    if (remainingTestimonials.length > 0) {
-      selected.push(remainingTestimonials[0]);
-      usedPeople.add(remainingTestimonials[0].name);
-    } else {
-      break;
-    }
-  }
-
-  return selected.slice(0, count);
-}
-
-/**
  * Fisher-Yates shuffle algorithm for array randomization
  */
 function shuffleArray<T>(array: T[]): T[] {
@@ -353,16 +307,10 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 /**
- * Get a random selection of testimonials with balanced variety
- * Ensures diversity across categories and people (no duplicates)
- * Uses weighted random selection based on priority scores
- * No preferredId bias - all testimonials have equal opportunity within their priority tier
- */
-/**
  * ID of the testimonial that is always shown, pinned to the first slot.
  * Boris Lokschin (Spryker CEO) is the flagship endorsement.
  */
-export const PINNED_TESTIMONIAL_ID = "boris-lokschin";
+const PINNED_TESTIMONIAL_ID = "boris-lokschin";
 
 /**
  * Get testimonials with the pinned one always first, followed by a random
@@ -383,9 +331,13 @@ export function getTestimonialsWithPinned(
   return [pinned, ...others];
 }
 
-export function getRandomTestimonials(
-  count: number = 4,
-): ColleagueTestimonial[] {
+/**
+ * Get a random selection of testimonials with balanced variety
+ * Ensures diversity across categories and people (no duplicates)
+ * Uses weighted random selection based on priority scores
+ * No preferredId bias - all testimonials have equal opportunity within their priority tier
+ */
+function getRandomTestimonials(count: number = 4): ColleagueTestimonial[] {
   const selected: ColleagueTestimonial[] = [];
   const usedPeople = new Set<string>();
 

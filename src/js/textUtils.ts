@@ -44,19 +44,6 @@ export function humanize(text: string): string {
 
 // --------------------------------------------------------
 /**
- * * returns "categorified" text. runs slugify() and then replaces - with space and upper cases everything
- * @param text: string - text to categorify
- * @returns string - categorified text
- */
-export function categorify(text: string): string {
-  const slugifiedText = slugify(text);
-  return slugifiedText
-    .replace(/-/g, " ") // replace "-" with space
-    .toUpperCase();
-}
-
-// --------------------------------------------------------
-/**
  * * returns a nicely formatted string of the date passed
  * @param date: string | number | Date - date to format
  * @param locale: string - locale to format the date in
