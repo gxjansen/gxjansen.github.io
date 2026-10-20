@@ -119,12 +119,20 @@ describe("typeGuards", () => {
     });
 
     it("validates required fields", () => {
-      const stringFields = ["title", "id", "description", "duration", "image"];
-      const booleanFields = ["isWorkshop", "isFeatured"];
+      const stringFields = [
+        "title",
+        "id",
+        "description",
+        "duration",
+        "image",
+      ] as const;
+      const booleanFields = ["isWorkshop", "isFeatured"] as const;
 
       // Test string fields
       stringFields.forEach((field) => {
-        const invalidPresentation = { ...validPresentation };
+        const invalidPresentation: Partial<typeof validPresentation> = {
+          ...validPresentation,
+        };
         delete invalidPresentation[field];
         const errors = validatePresentation(invalidPresentation);
         expect(errors).toContain(
@@ -134,7 +142,9 @@ describe("typeGuards", () => {
 
       // Test boolean fields
       booleanFields.forEach((field) => {
-        const invalidPresentation = { ...validPresentation };
+        const invalidPresentation: Partial<typeof validPresentation> = {
+          ...validPresentation,
+        };
         delete invalidPresentation[field];
         const errors = validatePresentation(invalidPresentation);
         expect(errors).toContain(`${field} field must be a boolean`);

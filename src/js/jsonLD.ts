@@ -234,7 +234,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
       };
     }
 
-    const jsonLD = {
+    const jsonLD: Record<string, any> = {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       mainEntityOfPage: {

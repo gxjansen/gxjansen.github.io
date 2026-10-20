@@ -12,7 +12,6 @@
    the right behind the headline "You ask. Guido answers." — shows the
    AMA system in action.
    ===================================================================== */
-import * as React from "react";
 import { variants, personas, Wordmark } from "./card";
 
 const FONT = '"Poppins", system-ui, sans-serif';

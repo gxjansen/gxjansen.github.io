@@ -111,7 +111,9 @@ export function getLocalizedPathname(locale: LocaleType, url: URL): string {
 
   // if there is a key, then use that key to get the translated route
   const translatedRoute = routeTranslationsKey
-    ? routeTranslations[locale][routeTranslationsKey]
+    ? (routeTranslations[locale] as Record<string, string>)[
+        routeTranslationsKey
+      ]
     : routeStringTrimmed;
 
   return getRelativeLocaleUrl(locale, translatedRoute);
