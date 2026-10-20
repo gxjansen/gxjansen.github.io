@@ -12,6 +12,7 @@ import { countItems, sortByValue } from "@js/blogUtils";
 import { slugify } from "@js/textUtils";
 import { readingTimeShort } from "../../utils/readingTime";
 import { isPublished } from "../../lib/isPublished";
+import { accentInk } from "../../lib/accentInk";
 
 export async function getStaticPaths() {
   // Get all posts
@@ -135,7 +136,7 @@ const description = `Articles categorized under ${originalCategory}`;
         {articles.map((a) => <a
           class="art reveal"
           href={a.href}
-          style={`--ac:var(--color-${a.accent})`}
+          style={`--ac:var(--color-${a.accent});${accentInk(a.accent)}`}
         >
           {a.heroImage && <div class="art-thumb">
             <Image src={a.heroImage} alt="" width={520} height={280} />

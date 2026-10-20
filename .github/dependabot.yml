@@ -19,6 +19,11 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+      # satori stays on 0.26: 0.62+ changes how the OG cards in src/lib/og/
+      # lay out. In 0.x every minor can break, so only take patch releases
+      # until the cards have been checked against a newer version.
+      - dependency-name: "satori"
+        update-types: ["version-update:semver-minor"]
     # Auto-label PRs
     labels:
       - "dependencies"
