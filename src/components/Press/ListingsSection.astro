@@ -1,5 +1,6 @@
 ---
-import { formatDate, getFaviconUrl } from "@utils/pressUtils";
+import { getFaviconUrl } from "@utils/pressUtils";
+import { formatMonthYearLong } from "@utils/dates";
 import type { PressCoverage } from "../../types/press";
 
 interface Props {
@@ -21,7 +22,7 @@ const { listings } = Astro.props;
   >
     {
       listings.map((listing) => {
-        const formattedDate = formatDate(listing.publicationDate);
+        const formattedDate = formatMonthYearLong(listing.publicationDate);
         const listingId = `listing-${listing.articleUrl ? new URL(listing.articleUrl).pathname.replace(/\W/g, "-") : crypto.randomUUID()}`;
 
         return (

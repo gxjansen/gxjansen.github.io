@@ -1,5 +1,5 @@
 ---
-import { formatDate } from "@utils/pressUtils";
+import { formatMonthYearLong } from "@utils/dates";
 import type { PressCoverage } from "../../types/press";
 
 interface Props {
@@ -34,7 +34,7 @@ const getBrandIcon = (org: string | undefined): string | null => {
   >
     {
       awards.map((award) => {
-        const formattedDate = formatDate(award.publicationDate);
+        const formattedDate = formatMonthYearLong(award.publicationDate);
         const awardId = `award-${award.articleUrl ? new URL(award.articleUrl).pathname.replace(/\W/g, "-") : crypto.randomUUID()}`;
         const isNomination = award.category === "nomination";
         const brandIcon = getBrandIcon(award.personOrganization);

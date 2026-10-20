@@ -11,6 +11,8 @@
  * content gui.do owns.
  */
 
+import { formatMonthYearShort } from "../utils/dates";
+
 const GUIDO_DID = "did:plc:45uheisi25szrjvjurfpritx";
 const PDS = "https://chaga.us-west.host.bsky.network";
 const CATALOG_DID = "did:plc:enu2j5xjlqsjaylv3du4myh4";
@@ -79,13 +81,6 @@ interface RawBook {
 }
 
 const accentFor = (i: number): BookAccent => ACCENTS[i % ACCENTS.length];
-
-const monthYear = (iso?: string): string | undefined => {
-  if (!iso) return undefined;
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return undefined;
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
-};
 
 // All book records, following the cursor (listRecords pages at 100). Capped at
 // a few pages so a huge shelf can't run away.
@@ -159,10 +154,10 @@ const mapBook = (e: Enriched, i: number): Book => ({
   accent: accentFor(i),
   rating: typeof e.raw.value.stars === "number" ? e.raw.value.stars : undefined,
   finishedLabel: e.raw.value.finishedAt
-    ? `Finished ${monthYear(e.raw.value.finishedAt)}`
+    ? `Finished ${formatMonthYearShort(e.raw.value.finishedAt)}`
     : undefined,
   startedLabel: e.raw.value.createdAt
-    ? `Started ${monthYear(e.raw.value.createdAt)}`
+    ? `Started ${formatMonthYearShort(e.raw.value.createdAt)}`
     : undefined,
   href: e.raw.value.hiveId
     ? `https://bookhive.buzz/books/${e.raw.value.hiveId}`

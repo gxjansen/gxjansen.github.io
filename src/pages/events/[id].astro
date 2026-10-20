@@ -11,6 +11,7 @@ import RelatedPresentations from "@components/RelatedPresentations/RelatedPresen
 import { getAllEvents } from "@utils/eventUtils";
 import { getPresentationUrl } from "@utils/eventPresentationRelations";
 import { loadCountryFlag } from "@utils/flagUtils";
+import { formatLongDate } from "@utils/dates";
 import type { Event } from "@utils/eventUtils";
 
 // Generate static paths for all events
@@ -53,11 +54,7 @@ const flagImage = event.country ? await loadCountryFlag(event.country) : null;
 const countryName = countryToName(event.country);
 
 // Format date
-const eventDate = new Date(event.date).toLocaleDateString("en-US", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-});
+const eventDate = formatLongDate(event.date);
 
 // Enhanced SEO title with year, city, and country
 const eventYear = new Date(event.date).getFullYear();

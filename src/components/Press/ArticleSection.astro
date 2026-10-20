@@ -1,5 +1,6 @@
 ---
-import { formatDate, getFaviconUrl } from "@utils/pressUtils";
+import { getFaviconUrl } from "@utils/pressUtils";
+import { formatMonthYearLong } from "@utils/dates";
 import type { PressCoverage } from "../../types/press";
 
 interface Props {
@@ -29,7 +30,7 @@ const getBrandIcon = (org: string | undefined): string | null => {
         const domain = article.articleUrl
           ? new URL(article.articleUrl).hostname
           : "";
-        const formattedDate = formatDate(article.publicationDate);
+        const formattedDate = formatMonthYearLong(article.publicationDate);
         const articleId = `article-${article.articleUrl ? new URL(article.articleUrl).pathname.replace(/\W/g, "-") : crypto.randomUUID()}`;
         const brandIcon = getBrandIcon(article.personOrganization);
 

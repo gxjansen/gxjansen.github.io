@@ -1,5 +1,5 @@
 ---
-import { formatDate } from "@utils/pressUtils";
+import { formatMonthYearLong } from "@utils/dates";
 import type { PressCoverage } from "../../types/press";
 
 interface Props {
@@ -95,7 +95,7 @@ function getYouTubeId(url: string): string {
                 {video.title}
               </h3>
               <p class="text-base-600 dark:text-base-400 text-sm">
-                {formatDate(video.publicationDate)}
+                {formatMonthYearLong(video.publicationDate)}
                 {video.personOrganization && ` • ${video.personOrganization}`}
               </p>
               {video.articleUrl && (

@@ -3,18 +3,6 @@
  */
 
 /**
- * Formats a date string into a localized month and year format
- * @param date - ISO date string to format
- * @returns Formatted date string (e.g., "January 2024")
- */
-export function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString("en-US", {
-    month: "long",
-    year: "numeric",
-  });
-}
-
-/**
  * Retrieves a favicon URL for a given website URL with fallback handling
  * @param url - Website URL to get favicon for
  * @returns URL to the website's favicon or fallback icon

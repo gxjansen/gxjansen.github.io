@@ -15,6 +15,7 @@
  */
 
 import type { ActivityItem } from "@data/homeContent";
+import { formatMonthYearShort } from "../utils/dates";
 
 const GUIDO_DID = "did:plc:45uheisi25szrjvjurfpritx";
 const PDS = "https://chaga.us-west.host.bsky.network";
@@ -150,13 +151,6 @@ export async function getPhotoGalleries(limit = 12): Promise<PhotoGallery[]> {
   }
 }
 
-const monthYear = (iso: string): string => {
-  const d = new Date(iso);
-  return Number.isNaN(d.getTime())
-    ? ""
-    : d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
-};
-
 const truncate = (s: string, n: number): string =>
   s.length > n ? s.slice(0, n - 1).trimEnd() + "…" : s;
 
@@ -169,7 +163,7 @@ export async function getPhotoActivity(limit = 8): Promise<ActivityItem[]> {
   return galleries.map((g) => ({
     type: "photo",
     app: "grain",
-    time: monthYear(g.createdAt),
+    time: formatMonthYearShort(g.createdAt) ?? "",
     kind: g.count > 1 ? `Gallery · ${g.count} photos` : "Photo",
     title: truncate(g.title || g.description, 90) || undefined,
     url: g.href,
