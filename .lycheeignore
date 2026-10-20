@@ -68,6 +68,7 @@ https?://(www\.)?futurelearn\.com/.*
 https?://(www\.)?supernote\.com/.*
 https?://shop\.pimoroni\.com/.*
 https?://(www\.)?firewalla\.com/.*
+https?://(www\.)?datacamp\.com/.*
 
 # Placeholder URLs used as examples in posts
 https://github\.com/YOUR_ORG/YOUR_REPO.*

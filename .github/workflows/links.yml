@@ -41,7 +41,8 @@ jobs:
         run: find dist -name '*.html' -exec sed -i -E 's#<link rel="site\.standard\.document"[^>]*>##g' {} +
       # On-demand routes (/now, /bookshelf, /ama/q/*, /api/*) are not in dist/
       # and are excluded in .lycheeignore. The .md files are copies of the
-      # HTML pages for agents, so they would only report every link twice.
+      # HTML pages for agents, and llms-full.txt concatenates the posts, so they
+      # would only report every link twice.
       - name: Check links
         id: lychee
         uses: lycheeverse/lychee-action@v2
@@ -54,6 +55,7 @@ jobs:
             --max-retries 3
             --exclude-path dist/_astro
             --exclude-path '\.md$'
+            --exclude-path 'llms-full\.txt$'
             --root-dir ${{ github.workspace }}/dist
             --index-files index.html
             dist
