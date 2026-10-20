@@ -20,15 +20,26 @@ Accepts both `application/json` and `application/x-www-form-urlencoded`.
   "email": "user@example.com",
   "name": "Optional Name",
   "listId": 3,
-  "signupPage": "/newsletter"
+  "signupPage": "/newsletter",
+  "altcha": "<solved ALTCHA payload>"
 }
 ```
 
 **Form data:**
 - `email` (required): Subscriber email address
 - `name` (optional): Subscriber name
-- `l` or `listId` (optional): Listmonk list ID (default: 3 for "Guido's Golden Nuggets")
+- `l` or `listId` (optional): Listmonk list ID (default: 3 for "Guido's Golden Nuggets"). Only ids in `ALLOWED_LIST_IDS` are accepted; anything else returns 400.
 - `signupPage` (optional): Page where signup occurred (for tracking)
+- `altcha` (required): Solved ALTCHA challenge from `altcha-challenge`
+
+### Abuse protection
+
+- ALTCHA is mandatory. If `ALTCHA_HMAC_KEY` is unset the function returns 500 instead of skipping verification.
+- Each solved challenge works once. Redeemed payloads are hashed into the `altcha-used-challenges` Netlify Blobs store.
+- Netlify rate limit: 5 requests per minute per IP and domain (`config.rateLimit` in the function).
+- Length caps: email 254, name 100, signupPage 200 characters.
+- No CORS headers: the form calls the function same-origin.
+- Listmonk error details stay in the function log; clients get a generic message.
 
 ### Subscription Flow
 
@@ -77,6 +88,8 @@ Required in Netlify:
 |----------|-------------|
 | `LISTMONK_API_USER` | Listmonk API username (e.g., `netlify-builds`) |
 | `LISTMONK_API_KEY` | Listmonk API key/password |
+| `ALTCHA_HMAC_KEY` | HMAC key shared with `altcha-challenge` |
+| `CF_BYPASS_TOKEN` | Optional. Sent as `X-Bypass-Token` to get past Cloudflare in front of Listmonk |
 
 ### Listmonk API User Permissions
 
@@ -102,6 +115,8 @@ Each subscriber is created with these attributes for tracking:
 ```
 
 ### Related Files
+
+- `src/test/newsletter-subscribe.test.ts` - Unit tests
 
 - `src/components/Newsletter/NewsletterForm.astro` - Frontend form component
 - `src/pages/newsletter.astro` - Newsletter signup page
