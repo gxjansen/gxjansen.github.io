@@ -122,28 +122,15 @@ async function createBlueskyPost(agent, title, url) {
   const rt = new RichText({ text });
   await rt.detectFacets(agent);
 
-  // Fetch link card data for embed
-  let embed = undefined;
-  try {
-    // Use Bluesky's link card resolver
-    const _cardData = await agent.app.bsky.embed.external.main({
-      external: {
-        uri: url,
-        title: title,
-        description: `Read the full article at ${SITE_URL}`
-      }
-    });
-    embed = {
-      $type: 'app.bsky.embed.external',
-      external: {
-        uri: url,
-        title: title,
-        description: `Read the full article at ${SITE_URL}`
-      }
-    };
-  } catch (err) {
-    console.log('Note: Could not create link card embed, posting without it');
-  }
+  // Link card embed (no thumbnail)
+  const embed = {
+    $type: 'app.bsky.embed.external',
+    external: {
+      uri: url,
+      title: title,
+      description: `Read the full article at ${SITE_URL}`
+    }
+  };
 
   // Create the post
   const response = await agent.post({

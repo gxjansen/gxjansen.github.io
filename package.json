@@ -35,7 +35,7 @@
     "@astrojs/react": "^5.0.7",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
-    "@atproto/api": "^0.20.18",
+    "@atproto/api": "^0.28.1",
     "@iconify-json/tabler": "^1.2.35",
     "@netlify/blobs": "^10.7.9",
     "@resvg/resvg-js": "^2.6.2",

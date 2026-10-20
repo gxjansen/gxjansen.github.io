@@ -287,7 +287,7 @@ async function main() {
   const existingRecords = new Map();
   let cursor;
   do {
-    const res = await agent.api.com.atproto.repo.listRecords({
+    const res = await agent.com.atproto.repo.listRecords({
       repo: did,
       collection: 'site.standard.document',
       limit: 100,
@@ -367,7 +367,7 @@ async function main() {
     }
 
     try {
-      await agent.api.com.atproto.repo.putRecord({
+      await agent.com.atproto.repo.putRecord({
         repo: did,
         collection: 'site.standard.document',
         rkey,
@@ -391,7 +391,7 @@ async function main() {
   for (const [rkey] of existingRecords) {
     if (!publishedSlugs.has(rkey)) {
       try {
-        await agent.api.com.atproto.repo.deleteRecord({
+        await agent.com.atproto.repo.deleteRecord({
           repo: did,
           collection: 'site.standard.document',
           rkey,

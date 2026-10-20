@@ -114,7 +114,7 @@ async function main() {
   // Check if a publication record already exists
   console.log('\nChecking for existing publication records...');
   try {
-    const existing = await agent.api.com.atproto.repo.listRecords({
+    const existing = await agent.com.atproto.repo.listRecords({
       repo: did,
       collection: 'site.standard.publication',
       limit: 10,
@@ -141,7 +141,7 @@ async function main() {
 
   // Create the publication record
   console.log('\nCreating publication record...');
-  const response = await agent.api.com.atproto.repo.createRecord({
+  const response = await agent.com.atproto.repo.createRecord({
     repo: did,
     collection: 'site.standard.publication',
     record: {
