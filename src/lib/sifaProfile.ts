@@ -4,12 +4,14 @@
  * normalizes it for the /cv page. Falls back to a minimal representative set on
  * any failure so the page always renders. Never throws.
  */
+import type { LocationValue } from "@singi-labs/sifa-sdk";
 import { fetchProfile } from "@singi-labs/sifa-sdk/query/fetchers";
 import { format } from "date-fns";
 
 export interface CvExperience {
   title: string;
-  company: string;
+  // Optional in the SDK: a position can name its organisation via entityName only.
+  company?: string;
   description?: string;
   period: string;
   location?: string;
@@ -146,21 +148,21 @@ const PROFICIENCY_LABELS: Record<string, string> = {
   limited_working: "Limited working",
   elementary: "Elementary",
 };
-const proficiencyLabel = (v: any): string | undefined => {
+const proficiencyLabel = (v?: string): string | undefined => {
   const decoded = decodeEntities(v);
   if (!decoded) return undefined;
   return PROFICIENCY_LABELS[defKey(decoded)] ?? decoded;
 };
 
 const defKey = (v: string) => v.split("#").pop() ?? v;
-const openToLabels = (arr: any): string[] =>
+const openToLabels = (arr?: string[]): string[] =>
   Array.isArray(arr)
     ? arr
         .map((v) => OPEN_TO_LABELS[defKey(String(v))])
         .filter((x): x is string => Boolean(x))
     : [];
 // Pick the most permissive workplace preference for a single clean label.
-const workplaceLabel = (arr: any): string | undefined => {
+const workplaceLabel = (arr?: string[]): string | undefined => {
   if (!Array.isArray(arr)) return undefined;
   const keys = arr.map((v) => defKey(String(v)));
   for (const k of [
@@ -189,7 +191,8 @@ function fmtDate(s?: string): string {
 const period = (start?: string, end?: string) =>
   [fmtDate(start), end ? fmtDate(end) : "Present"].filter(Boolean).join(" – ");
 
-const locOf = (loc: any): string | undefined => {
+// The SDK types locations as LocationValue; older records stored a plain string.
+const locOf = (loc?: LocationValue | string | null): string | undefined => {
   if (!loc) return undefined;
   if (typeof loc === "string") return loc;
   return (
@@ -312,15 +315,13 @@ const FALLBACK: CvData = {
 
 export async function getCV(): Promise<CvData> {
   try {
-    const p: any = await fetchProfile({ baseUrl: "https://sifa.id" }, "gui.do");
+    const p = await fetchProfile({ baseUrl: "https://sifa.id" }, "gui.do");
     if (!p) return FALLBACK;
 
     const experience: CvExperience[] = (p.positions ?? [])
-      .filter((x: any) => !x.hidden)
-      .sort((a: any, b: any) =>
-        String(b.startedAt).localeCompare(String(a.startedAt)),
-      )
-      .map((x: any) => ({
+      .filter((x) => !x.hidden)
+      .sort((a, b) => String(b.startedAt).localeCompare(String(a.startedAt)))
+      .map((x) => ({
         title: decodeEntities(x.title) ?? x.title,
         company: decodeEntities(x.company) ?? x.company,
         description: decodeEntities(x.description),
@@ -329,11 +330,9 @@ export async function getCV(): Promise<CvData> {
       }));
 
     const education: CvEducation[] = (p.education ?? [])
-      .filter((x: any) => !x.hidden)
-      .sort((a: any, b: any) =>
-        String(b.startedAt).localeCompare(String(a.startedAt)),
-      )
-      .map((x: any) => ({
+      .filter((x) => !x.hidden)
+      .sort((a, b) => String(b.startedAt).localeCompare(String(a.startedAt)))
+      .map((x) => ({
         institution: x.institution,
         detail:
           [x.degree, x.fieldOfStudy].filter(Boolean).join(" · ") || undefined,
@@ -345,11 +344,11 @@ export async function getCV(): Promise<CvData> {
     const skills: string[] = (p.skills ?? [])
       .slice()
       .sort(
-        (a: any, b: any) =>
+        (a, b) =>
           Number(!!b.activityBacked) - Number(!!a.activityBacked) ||
           (b.endorsementCount ?? 0) - (a.endorsementCount ?? 0),
       )
-      .map((s: any) => s.name)
+      .map((s) => s.name)
       .filter((n: string) => {
         const key = n?.toLowerCase().trim();
         if (!n || seen.has(key)) return false;
@@ -359,11 +358,11 @@ export async function getCV(): Promise<CvData> {
       .slice(0, 24);
 
     const projects: CvProject[] = (p.projects ?? [])
-      .filter((x: any) => !x.hidden)
-      .sort((a: any, b: any) =>
+      .filter((x) => !x.hidden)
+      .sort((a, b) =>
         String(b.startDate ?? "").localeCompare(String(a.startDate ?? "")),
       )
-      .map((x: any) => ({
+      .map((x) => ({
         name: decodeEntities(x.name) ?? x.name,
         description: decodeEntities(x.description),
         url: x.url || undefined,
@@ -371,23 +370,24 @@ export async function getCV(): Promise<CvData> {
       }));
 
     const certifications: CvCertification[] = (p.certifications ?? [])
-      .filter((x: any) => !x.hidden)
-      .sort((a: any, b: any) =>
+      .filter((x) => !x.hidden)
+      .sort((a, b) =>
         String(b.issueDate ?? "").localeCompare(String(a.issueDate ?? "")),
       )
-      .map((x: any) => ({
+      .map((x) => ({
         name: decodeEntities(x.name) ?? x.name,
-        issuingOrg: decodeEntities(x.issuingOrg),
+        // `authority` is the canonical field; `issuingOrg` is its deprecated alias.
+        issuingOrg: decodeEntities(x.authority ?? x.issuingOrg),
         date: fmtDate(x.issueDate),
         credentialUrl: x.credentialUrl || undefined,
       }));
 
     const volunteering: CvVolunteering[] = (p.volunteering ?? [])
-      .filter((x: any) => !x.hidden)
-      .sort((a: any, b: any) =>
+      .filter((x) => !x.hidden)
+      .sort((a, b) =>
         String(b.startDate ?? "").localeCompare(String(a.startDate ?? "")),
       )
-      .map((x: any) => ({
+      .map((x) => ({
         organization: decodeEntities(x.organization) ?? x.organization,
         role: decodeEntities(x.role),
         cause: decodeEntities(x.cause),
@@ -396,11 +396,9 @@ export async function getCV(): Promise<CvData> {
       }));
 
     const awards: CvAward[] = (p.honors ?? [])
-      .filter((x: any) => !x.hidden)
-      .sort((a: any, b: any) =>
-        String(b.date ?? "").localeCompare(String(a.date ?? "")),
-      )
-      .map((x: any) => ({
+      .filter((x) => !x.hidden)
+      .sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")))
+      .map((x) => ({
         title: decodeEntities(x.title) ?? x.title,
         issuer: decodeEntities(x.issuer),
         description: decodeEntities(x.description),
@@ -408,8 +406,8 @@ export async function getCV(): Promise<CvData> {
       }));
 
     const languages: CvLanguage[] = (p.languages ?? [])
-      .filter((x: any) => !x.hidden)
-      .map((x: any) => ({
+      .filter((x) => !x.hidden)
+      .map((x) => ({
         language: decodeEntities(x.language) ?? x.language,
         proficiency: proficiencyLabel(x.proficiency),
       }));
