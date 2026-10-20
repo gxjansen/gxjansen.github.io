@@ -8,7 +8,7 @@
 
 /* Card-style links must never pick up the global content-link underline.
    Kept UNLAYERED (outside @layer) so it overrides the unlayered global
-   `a:not(...)` underline rule in links.scss — layered rules always lose to
+   `a:not(...)` underline rule in links.css — layered rules always lose to
    unlayered ones regardless of specificity. */
 .home .art,
 .home .talk,
@@ -321,7 +321,7 @@
   }
   .home .tcourse .tlevel {
     /* whitespace-normal (not just dropping nowrap) is required to override the
-       global `.tlevel` rule in _redesign.scss, which sets nowrap at lower
+       global `.tlevel` rule in redesign.css, which sets nowrap at lower
        specificity. The longest home label ("For engineering teams of 5–12 ·
        Workshop · in-company or cohort") otherwise clips inside the card's
        overflow-hidden box on mobile. rounded-2xl reads better than a pill once

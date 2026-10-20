@@ -458,7 +458,7 @@ const fallbackHref = `https://bsky.app/intent/compose?text=${encodeURIComponent(
   /* Primary CTA — mirrors the site's Button--primary (bg-primary-600 + white),
      kept local because those styles are scoped to the Button component. The
      "button" in the class name also opts it out of the global link-colouring
-     rule in links.scss (its :not([class*="button"]) carve-out). */
+     rule in links.css (its :not([class*="button"]) carve-out). */
   .suggest-button {
     @apply bg-primary-600 hover:bg-primary-700 focus-visible:ring-primary-500 dark:bg-primary-500 dark:hover:bg-primary-400 dark:text-base-100 mt-5 inline-flex items-center justify-center rounded-md px-7 py-3 font-medium text-white shadow-md transition focus:outline-hidden focus-visible:ring-2;
   }

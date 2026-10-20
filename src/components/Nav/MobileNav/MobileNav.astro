@@ -230,9 +230,9 @@ import { locales } from "@config/siteSettings.json";
   });
 </script>
 
-<style lang="scss">
+<style>
   @reference "../../../styles/tailwind.css";
-  // backdrop button to close mobile nav
+  /* backdrop button to close mobile nav */
   .mobile-nav__backdrop--fade-in {
     animation: MobileNavFadeInAnimation ease-in-out 0.3s forwards;
     @apply block w-screen;
@@ -251,7 +251,7 @@ import { locales } from "@config/siteSettings.json";
     }
   }
 
-  // mobile nav content drawer
+  /* mobile nav content drawer */
   .mobile-nav--slide-in {
     animation: mobileNavSlideInAnimation cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s
       forwards;
