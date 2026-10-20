@@ -16,7 +16,6 @@ interface Props {
   target?: string; // the target for the link, ex "_blank"
   rel?: string; // the rel for the link, ex "noopener"
   arrow?: "left" | "right" | "none";
-  onclick?: any; // any onclick events
   class?: string; // any additional classes
   disabled?: boolean; // disabled state
   loading?: boolean; // loading state
@@ -31,7 +30,6 @@ const {
   variant = "primary",
   href,
   arrow = "none",
-  onclick,
   disabled = false,
   umamiEvent,
   umamiEventTarget,
@@ -77,7 +75,6 @@ const baseClasses = [
       href={href}
       target={isExternalLink ? "_blank" : undefined}
       rel={isExternalLink ? "noopener noreferrer" : undefined}
-      onclick={onclick}
       role="button"
       aria-disabled={disabled}
       tabindex={disabled ? -1 : undefined}
@@ -115,7 +112,6 @@ const baseClasses = [
       id={id}
       class:list={baseClasses}
       type={type}
-      onclick={onclick}
       disabled={disabled}
       aria-disabled={disabled}
       data-umami-event={umamiEvent}

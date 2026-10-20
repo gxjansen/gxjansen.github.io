@@ -46,36 +46,13 @@ function getYouTubeId(url: string): string {
                   class="h-full w-full object-cover"
                   loading="lazy"
                   decoding="async"
-                  onerror="this.onerror=null; this.src=this.src.replace('maxresdefault', 'hqdefault');"
+                  data-yt-thumb
                 />
 
                 <button
                   type="button"
                   class="play-btn absolute inset-0 flex h-full w-full items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-primary-500)]"
                   aria-label={`Play video: ${video.title}`}
-                  onclick={`
-                  const container = this.closest('.lazy-youtube');
-                  const videoContainer = container.querySelector('.video-container');
-                  const thumbnail = container.querySelector('img');
-                  const button = this;
-                  const videoId = container.dataset.videoId;
-                  const title = container.dataset.title;
-                  
-                  // Create iframe only when clicked
-                  if (!videoContainer.querySelector('iframe')) {
-                    const iframe = document.createElement('iframe');
-                    iframe.src = 'https://www.youtube.com/embed/' + videoId + '?rel=0&autoplay=1';
-                    iframe.title = title;
-                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-                    iframe.allowFullscreen = true;
-                    iframe.className = 'w-full h-full border-0';
-                    videoContainer.appendChild(iframe);
-                  }
-                  
-                  videoContainer.classList.remove('hidden');
-                  thumbnail.classList.add('hidden');
-                  button.classList.add('hidden');
-                `}
                 >
                   <div class="flex h-12 w-16 items-center justify-center rounded-lg bg-red-600 transition-colors group-hover:bg-red-700 motion-reduce:transition-none forced-colors:border-2 forced-colors:border-[currentColor]">
                     <svg
@@ -115,3 +92,52 @@ function getYouTubeId(url: string): string {
     }
   </div>
 </section>
+
+<script>
+  // Click-to-load YouTube embeds and the thumbnail fallback. Listeners instead
+  // of inline onclick/onerror attributes, which a hash-based CSP blocks.
+  function useFallbackThumb(img: HTMLImageElement) {
+    if (img.src.includes("maxresdefault")) {
+      img.src = img.src.replace("maxresdefault", "hqdefault");
+    }
+  }
+
+  document
+    .querySelectorAll<HTMLImageElement>("img[data-yt-thumb]")
+    .forEach((img) => {
+      // The image may already have failed before this module ran.
+      if (img.complete && img.naturalWidth === 0) useFallbackThumb(img);
+      else
+        img.addEventListener("error", () => useFallbackThumb(img), {
+          once: true,
+        });
+    });
+
+  document
+    .querySelectorAll<HTMLButtonElement>(".lazy-youtube .play-btn")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        const container = button.closest<HTMLElement>(".lazy-youtube");
+        const videoContainer =
+          container?.querySelector<HTMLElement>(".video-container");
+        const thumbnail = container?.querySelector("img");
+        if (!container || !videoContainer) return;
+
+        // Create the iframe only when clicked
+        if (!videoContainer.querySelector("iframe")) {
+          const iframe = document.createElement("iframe");
+          iframe.src = `https://www.youtube.com/embed/${container.dataset.videoId}?rel=0&autoplay=1`;
+          iframe.title = container.dataset.title ?? "";
+          iframe.allow =
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+          iframe.allowFullscreen = true;
+          iframe.className = "w-full h-full border-0";
+          videoContainer.appendChild(iframe);
+        }
+
+        videoContainer.classList.remove("hidden");
+        thumbnail?.classList.add("hidden");
+        button.classList.add("hidden");
+      });
+    });
+</script>

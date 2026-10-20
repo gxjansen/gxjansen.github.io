@@ -40,6 +40,28 @@ export default defineConfig({
       }
     }
   },
+  // Content Security Policy. Astro hashes every script it emits (including
+  // is:inline ones) into a per-page <meta> CSP, so inline scripts no longer
+  // need 'unsafe-inline'. The CSP header in netlify.toml still applies on top
+  // (both policies are enforced) and covers directives a <meta> CSP can't set,
+  // such as frame-ancestors. Styles stay on 'unsafe-inline': Shiki code blocks
+  // and third-party widgets inject inline styles.
+  security: {
+    csp: {
+      scriptDirective: {
+        resources: [
+          "'self'",
+          "https://u.a11y.nl",
+          "https://cdn.jsdelivr.net",
+          "https://comments.gui.do",
+        ],
+      },
+      styleDirective: {
+        resources: ["'self'", "'unsafe-inline'"],
+      },
+    },
+  },
+
   // Trailing slash configuration - ensures all URLs have trailing slashes
   // This fixes canonical URL mismatches (e.g., /about vs /about/)
   trailingSlash: 'always',
