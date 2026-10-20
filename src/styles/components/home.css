@@ -151,7 +151,11 @@
     @apply text-base-600 dark:text-base-400 mb-3.5 text-[0.95rem] leading-[1.5];
   }
   .home .art .m {
-    @apply text-base-500 mt-auto flex items-center gap-2.5 pt-2 text-[0.8rem];
+    @apply text-base-500 mt-auto flex flex-wrap items-center gap-x-2.5 gap-y-1 pt-2 text-[0.8rem];
+  }
+  /* On narrow cards, wrap between items rather than inside "Jun 1, 2026". */
+  .home .art .m > * {
+    white-space: nowrap;
   }
   .home .art .read {
     @apply ml-auto inline-flex items-center gap-1 font-bold;
