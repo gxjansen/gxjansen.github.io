@@ -54,13 +54,13 @@
     "fast-xml-parser": "^5.9.3",
     "node-html-parser": "^9.0.5",
     "react": "^19.3.1",
-    "satori": "^0.26.0",
+    "satori": "^0.62.0",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.11",
-    "@axe-core/playwright": "~4.11.3",
-    "@playwright/test": "~1.61.0",
+    "@axe-core/playwright": "~4.14.0",
+    "@playwright/test": "~1.64.1",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
