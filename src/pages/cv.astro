@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 import { getCV, richText } from "../lib/sifaProfile";
 import { stats } from "@data/homeContent";
 import { colleagueTestimonials } from "@config/colleagueTestimonialData";
+import { FEATURED, FEATURED_EXCERPT, FOCUS_AREAS } from "@data/cv";
 
 const cv = await getCV();
 
@@ -22,21 +23,7 @@ const speaking = (await getCollection("presentations"))
   }));
 
 // Endorsements: a few featured quotes, then a names wall for breadth.
-const FEATURED = [
-  "boris-lokschin",
-  "eric-schreiner",
-  "svitlana-1",
-  "michael-tuerk-1",
-];
 const byId = Object.fromEntries(colleagueTestimonials.map((t) => [t.id, t]));
-// Shorter verbatim excerpts for the featured cards (the full versions still
-// run on /about). One clean sentence each reads better here.
-const FEATURED_EXCERPT: Record<string, string> = {
-  "svitlana-1":
-    "Guido has a rare ability to translate community insights into tangible business intelligence, and to bring the business closer to the community.",
-  "michael-tuerk-1":
-    "At Spryker, Guido became one of the key figures driving our community's success.",
-};
 const featured = FEATURED.map((id) => byId[id])
   .filter(Boolean)
   .map((t) => ({ ...t, quote: FEATURED_EXCERPT[t.id] ?? t.quote }));
@@ -50,19 +37,6 @@ const wall = colleagueTestimonials.filter((t) => {
 });
 const LINKEDIN_RECS =
   "https://www.linkedin.com/in/gxjansen/details/recommendations/";
-
-// Curated focus areas (from the jobsearch CV master), AT Protocol + Agentic
-// Engineering included.
-const FOCUS_AREAS = [
-  "Community strategy",
-  "Developer relations",
-  "Cognitive psychology",
-  "Business experimentation",
-  "AT Protocol",
-  "Agentic engineering",
-  "Open-source ecosystems",
-  "C-suite advisory",
-];
 
 const box =
   "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-5";
