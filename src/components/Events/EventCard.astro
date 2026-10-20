@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import type { Event } from "../../utils/eventUtils";
 import { loadCountryFlag } from "../../utils/flagUtils";
+import { formatShortDate } from "../../utils/dates";
 
 interface Props extends Event {
   showPresentationName?: boolean; // Whether to show the presentation name
@@ -50,11 +51,7 @@ const wrapperClasses = linkUrl ? "cursor-pointer" : "";
 const flagImage = country ? await loadCountryFlag(country) : null;
 
 // Format date
-const eventDate = new Date(date).toLocaleDateString("en-US", {
-  month: "short",
-  day: "numeric",
-  year: "numeric",
-});
+const eventDate = formatShortDate(date);
 ---
 
 <article class="event-card group" role="listitem">

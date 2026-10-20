@@ -5,6 +5,7 @@ import { type CollectionEntry } from "astro:content";
 // utils
 import { getLocaleFromUrl } from "@js/localeUtils";
 import { getTranslatedData } from "@js/translationUtils";
+import { toIsoDate } from "@utils/dates";
 
 // data
 const currLocale = getLocaleFromUrl(Astro.url);
@@ -196,11 +197,6 @@ const imageUrl =
   optimizedImage && !preferCard
     ? new URL(optimizedImage.src, siteUrl).toString()
     : ogCardUrl;
-
-// Helper function to safely format dates
-const formatDate = (date: Date | undefined) => {
-  return date instanceof Date ? date.toISOString() : undefined;
-};
 ---
 
 <!-- Primary Meta Tags -->
@@ -226,16 +222,16 @@ const formatDate = (date: Date | undefined) => {
 {
   type === "blog" && (
     <>
-      {formatDate(Astro.props.postFrontmatter?.publishDate) && (
+      {toIsoDate(Astro.props.postFrontmatter?.publishDate) && (
         <meta
           property="article:published_time"
-          content={formatDate(Astro.props.postFrontmatter?.publishDate)}
+          content={toIsoDate(Astro.props.postFrontmatter?.publishDate)}
         />
       )}
-      {formatDate(Astro.props.postFrontmatter?.updateDate) && (
+      {toIsoDate(Astro.props.postFrontmatter?.updateDate) && (
         <meta
           property="article:modified_time"
-          content={formatDate(Astro.props.postFrontmatter?.updateDate)}
+          content={toIsoDate(Astro.props.postFrontmatter?.updateDate)}
         />
       )}
       <meta property="article:author" content={siteData.author.name} />
@@ -282,16 +278,16 @@ const formatDate = (date: Date | undefined) => {
             .join(", ") || siteData.author.name
         }
       />
-      {formatDate(Astro.props.postFrontmatter?.publishDate) && (
+      {toIsoDate(Astro.props.postFrontmatter?.publishDate) && (
         <meta
           name="date"
-          content={formatDate(Astro.props.postFrontmatter?.publishDate)}
+          content={toIsoDate(Astro.props.postFrontmatter?.publishDate)}
         />
       )}
-      {formatDate(Astro.props.postFrontmatter?.updateDate) && (
+      {toIsoDate(Astro.props.postFrontmatter?.updateDate) && (
         <meta
           name="last-modified"
-          content={formatDate(Astro.props.postFrontmatter?.updateDate)}
+          content={toIsoDate(Astro.props.postFrontmatter?.updateDate)}
         />
       )}
     </>

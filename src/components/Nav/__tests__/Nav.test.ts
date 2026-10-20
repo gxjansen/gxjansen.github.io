@@ -101,18 +101,6 @@ describe("Nav", () => {
   });
 
   it("handles dropdown navigation items", () => {
-    const _navData = createMockNavData([
-      {
-        title: "Services",
-        href: "/services",
-        dropdown: [
-          { title: "Consulting", href: "/services/consulting" },
-          { title: "Training", href: "/services/training" },
-        ],
-        hidden: false,
-      },
-    ]);
-
     const html = `
       <div class="nav-dropdown" role="none">
         <button 

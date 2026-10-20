@@ -220,11 +220,10 @@ const shouldReduceMotion =
     }
   }
 
-  let navigationManager: NavigationManager;
-
-  // Initialize on page load
+  // Initialize on page load. The manager keeps itself alive through the
+  // listeners it registers, so the instance needn't be stored.
   document.addEventListener("DOMContentLoaded", () => {
-    navigationManager = new NavigationManager();
+    new NavigationManager();
   });
 
   // Navigation is full-page (CSS-native view transitions, no SPA router), so

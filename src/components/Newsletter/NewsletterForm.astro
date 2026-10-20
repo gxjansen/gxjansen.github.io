@@ -936,7 +936,7 @@ const signupPage = Astro.url.pathname;
     /* CTA sits on a fixed teal (primary-500) background in both themes, so the
        ALTCHA label text must be light for WCAG AA contrast. `color` inherits
        across the widget (and its shadow root). */
-    color: #faf4ed;
+    color: var(--color-base-100);
   }
 
   /* Make ALTCHA widget blend with form design - remove border per UX recommendation */
@@ -946,7 +946,7 @@ const signupPage = Astro.url.pathname;
     --altcha-border-radius: 0;
     --altcha-color-border: transparent;
     --altcha-color-border-focus: transparent;
-    --altcha-color-active: #f6c177;
+    --altcha-color-active: var(--color-gold);
   }
 
   /* ALTCHA checkbox - gold checkmark (high specificity to override defaults) */
@@ -957,7 +957,7 @@ const signupPage = Astro.url.pathname;
       .altcha-checkbox
       input[type="checkbox"]
   ) {
-    accent-color: #f6c177;
+    accent-color: var(--color-gold);
   }
 
   /* Filter to colorize checkbox to rosé-pine gold (#ea9d34 / #f6c177) */
@@ -991,24 +991,24 @@ const signupPage = Astro.url.pathname;
 
   /* Gold hover for newsletter subscribe buttons (high specificity to override Button component) */
   .newsletter-form :global(button.button.button--primary:hover) {
-    background-color: #ea9d34;
+    background-color: var(--color-gold-light);
   }
   :global(.dark) .newsletter-form :global(button.button.button--primary:hover) {
-    background-color: #f6c177;
-    color: #191724;
+    background-color: var(--color-gold);
+    color: var(--color-base-950);
   }
 
   /* On-color variant (CTA) - gold hover */
   .newsletter-form :global(button.button.button--on-color:hover) {
-    background-color: #ea9d34;
-    border-color: #ea9d34;
-    color: #191724;
+    background-color: var(--color-gold-light);
+    border-color: var(--color-gold-light);
+    color: var(--color-base-950);
   }
   :global(.dark)
     .newsletter-form
     :global(button.button.button--on-color:hover) {
-    background-color: #f6c177;
-    border-color: #f6c177;
-    color: #191724;
+    background-color: var(--color-gold);
+    border-color: var(--color-gold);
+    color: var(--color-base-950);
   }
 </style>

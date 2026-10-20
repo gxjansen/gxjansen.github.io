@@ -1,5 +1,5 @@
 ---
-import { formatDate } from "@utils/pressUtils";
+import { formatMonthYearLong } from "@utils/dates";
 import PodcastLinks from "./PodcastLinks.astro";
 import type { PressCoverage } from "../../types/press";
 
@@ -41,9 +41,9 @@ const { podcasts } = Astro.props;
             </h3>
             <p
               class="text-base-600 dark:text-base-400 text-sm"
-              aria-label={`Published on ${formatDate(podcast.publicationDate)}${podcast.personOrganization ? ` by ${podcast.personOrganization}` : ""}`}
+              aria-label={`Published on ${formatMonthYearLong(podcast.publicationDate)}${podcast.personOrganization ? ` by ${podcast.personOrganization}` : ""}`}
             >
-              {formatDate(podcast.publicationDate)}
+              {formatMonthYearLong(podcast.publicationDate)}
               {podcast.personOrganization && ` • ${podcast.personOrganization}`}
             </p>
             {podcast.articleUrl && (

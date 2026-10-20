@@ -1,39 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { formatDate, getFaviconUrl } from "../pressUtils";
+import { getFaviconUrl } from "../pressUtils";
 
 describe("pressUtils", () => {
-  describe("formatDate", () => {
-    it("formats date into month and year", () => {
-      const result = formatDate("2024-01-15");
-      expect(result).toBe("January 2024");
-    });
-
-    it("handles different months correctly", () => {
-      expect(formatDate("2023-12-01")).toBe("December 2023");
-      expect(formatDate("2024-03-15")).toBe("March 2024");
-      expect(formatDate("2024-07-30")).toBe("July 2024");
-    });
-
-    it("handles ISO date strings", () => {
-      const result = formatDate("2024-01-15T12:00:00.000Z");
-      expect(result).toBe("January 2024");
-    });
-
-    it("uses English locale", () => {
-      // Test with a few different months to ensure English names
-      const months = [
-        { date: "2024-01-01", expected: "January 2024" },
-        { date: "2024-04-01", expected: "April 2024" },
-        { date: "2024-08-01", expected: "August 2024" },
-        { date: "2024-12-01", expected: "December 2024" },
-      ];
-
-      months.forEach(({ date, expected }) => {
-        expect(formatDate(date)).toBe(expected);
-      });
-    });
-  });
-
   describe("getFaviconUrl", () => {
     it("returns Google favicon service URL for valid URLs", () => {
       const url = "https://example.com/page";

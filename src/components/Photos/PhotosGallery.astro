@@ -8,6 +8,7 @@
  */
 import { Icon } from "astro-icon/components";
 import type { PhotoGallery } from "../../lib/grainPhotos";
+import { formatMonthYearShort } from "../../utils/dates";
 
 interface Props {
   galleries: PhotoGallery[];
@@ -16,13 +17,6 @@ interface Props {
 }
 const { galleries, grainHref = "https://grain.social/profile/gui.do" } =
   Astro.props as Props;
-
-const monthYear = (iso: string): string => {
-  const d = new Date(iso);
-  return Number.isNaN(d.getTime())
-    ? ""
-    : d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
-};
 ---
 
 {
@@ -55,7 +49,7 @@ const monthYear = (iso: string): string => {
               href={g.href}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${g.title || monthYear(g.createdAt) || "Photo gallery"}${g.count > 1 ? ` — ${g.count} photos` : ""} on Grain`}
+              aria-label={`${g.title || formatMonthYearShort(g.createdAt) || "Photo gallery"}${g.count > 1 ? ` — ${g.count} photos` : ""} on Grain`}
             >
               <img
                 src={g.cover?.thumb}

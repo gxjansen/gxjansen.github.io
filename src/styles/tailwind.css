@@ -40,7 +40,8 @@
      Display / headings  → Schibsted Grotesk (700–900).
      Body / reading      → Atkinson Hyperlegible Next (WCAG-AAA legibility).
      Handwritten accents → LiebeHeide Fineliner (licensed, self-hosted).
-     All self-hosted under /public/fonts (see scripts/fetch-redesign-fonts.mjs);
+     All self-hosted under /public/fonts (fetched once by
+     scripts/fetch-redesign-fonts.mjs, since removed; see git history);
      @font-face rules live in public/fonts/redesign-fonts.css, linked from BaseHead. */
   --font-sans:
     "Atkinson Hyperlegible Next", system-ui, -apple-system, BlinkMacSystemFont,

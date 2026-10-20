@@ -1,5 +1,6 @@
 import { locales, localeMap } from "@config/siteSettings.json";
 import { yearsBuilding } from "@data/siteStats";
+import { formatShortDateUTC } from "@utils/dates";
 
 /**
  * Replace the `{years}` placeholder with the live years-building figure (the
@@ -59,10 +60,5 @@ export function formatDate(
     localeString = localeMap[locale];
   }
 
-  return new Date(date).toLocaleDateString(localeString, {
-    timeZone: "UTC",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  return formatShortDateUTC(date, localeString);
 }

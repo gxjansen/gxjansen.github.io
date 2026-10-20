@@ -1,7 +1,7 @@
 /* Rotating accent colors for content links (Rosé Pine palette).
    Replaces the previous runtime JS with pure CSS — see issue #124.
 
-   The exclusion list mirrors src/styles/components/links.scss exactly —
+   The exclusion list mirrors src/styles/components/links.css exactly —
    any link not covered by the base rule there should not get a color here. */
 
 /* Light mode (Dawn variants) ------------------------------------------ */

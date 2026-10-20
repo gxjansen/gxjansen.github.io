@@ -4,8 +4,6 @@ import { createMockLayoutProps } from "../../test/utils";
 
 describe("BaseHead", () => {
   it("includes required meta tags", () => {
-    const _props = createMockLayoutProps();
-
     const markup = `
       <head>
         <meta charset="utf-8" />

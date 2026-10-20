@@ -58,12 +58,7 @@
 
 [functions]
   directory = "netlify/functions"
-  external_node_modules = ["fast-xml-parser"]
   node_bundler = "esbuild"
-  included_files = ["src/types/**"]
-
-[functions.getPodcastFeeds]
-  timeout = 30
 
 [functions.newsletter-subscribe]
   timeout = 10
