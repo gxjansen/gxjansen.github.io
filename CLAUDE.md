@@ -23,7 +23,7 @@ Guido X Jansen's personal site. Astro 7, Tailwind v4 (Vite plugin), MDX, React i
 
 - Posts: `src/content/post/<slug>/index.mdx`. Other collections: `src/content/{authors,otherPages,presentations,services}`.
 - Structured site data: `src/data/` (`events.snapshot.json`, `events-overrides.json`, `homeContent.ts`, `press-coverage.ts`, `socialLinks.ts`, `training.ts`, ...).
-- Pages: `src/pages/`. Files prefixed `_` (`_retainer.astro`, `_training*`) are not routed.
+- Pages: `src/pages/`. Files prefixed `_` (`_training.astro`, `_training/`) are not routed; `/training` 302s to `/contact/` until it is restored.
 - Styles: `src/styles/` (`tailwind.css` has the `@theme` tokens). Design notes: `DESIGN.md`.
 - Netlify Functions: `netlify/functions/` (newsletter via Listmonk, ALTCHA challenge).
 - Redirects and headers: `netlify.toml`, `public/_redirects`.
