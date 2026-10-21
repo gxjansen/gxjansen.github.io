@@ -17,11 +17,6 @@ import svitlanaImage from "@assets/images/testimonials/svitlana.webp";
 
 import { talksCount, countryCount, yearsBuilding } from "@data/siteStats";
 
-// Live seat availability. Edit these two values when seats fill, both hero
-// and Apply CTAs update from the same source.
-const seatsTotal = 5;
-const seatsOpen = 3;
-
 // Next intake close date, computed at build time. End of current month, rolling
 // to end of next month if fewer than 7 days remain (avoids fake-urgency
 // "closes tomorrow" surprises). Netlify rebuilds on a schedule, so this stays
@@ -39,28 +34,23 @@ const nextIntakeLabel = nextIntakeClose.toLocaleDateString("en-GB", {
   month: "long",
 });
 
-const seatAvailabilityLabel = `${seatsOpen} of ${seatsTotal} seats open · Next intake closes ${nextIntakeLabel}`;
+const intakeLabel = `Next intake closes ${nextIntakeLabel}`;
 
 // Pricing anchor line, reused in hero + Apply section so wording stays in sync.
 const pricingAnchor =
-  "Less than a quarter of the loaded cost of a senior community hire. Starts next week, not month four.";
+  "The advisory retainer costs less than a quarter of a senior community hire. Starts next week, not month four.";
 
 // FAQ data, locked from retainer-page-plan.md §9
 const faqs = [
   {
-    question: "How many open seats?",
-    answer:
-      "Five concurrent at most. Waitlist when full. One company per competitive space, the rest queue.",
-  },
-  {
     question: "How does this fit alongside your other work?",
     answer:
-      "Advisory, speaking, and selective full-time leadership conversations are separate tracks. The advisory engagement has a defined six-month minimum scope, with the written commitments below covering what happens if anything changes mid-engagement.",
+      "Retainers, speaking and selective full-time leadership conversations are separate tracks. Both retainer levels have a six-month minimum, with the written commitments below covering what happens if anything changes mid-engagement.",
   },
   {
     question: "How long can the engagement run?",
     answer:
-      "The first six months are a fixed commitment, long enough to cover the Week 1 baseline, the Month 3 review, and the Month 6 synthesis. After that the engagement runs month-to-month with thirty days' notice from either side. No forced renewal conversation, no cliff.",
+      "Typically 6–9 months. The first six months are a fixed commitment, long enough to cover the Week 1 baseline, the Month 3 review and the Month 6 synthesis. After that it runs month-to-month with thirty days' notice from either side. No forced renewal conversation, no cliff.",
   },
   {
     question: "What if the engagement isn't delivering value?",
@@ -85,7 +75,7 @@ const faqs = [
   {
     question: "Can we do weekly calls instead?",
     answer:
-      "The default cadence is one call every two weeks. During specific intensive windows like migrations, launches, or hiring sprints, we can switch to weekly. No additional fee.",
+      "On the advisory retainer the default is one call every two weeks, and we switch to weekly during intensive windows like migrations, launches or hiring sprints. On the hands-on retainer we check in every week or two, depending on how much is moving. No additional fee either way.",
   },
   {
     question: "Can we talk to a past advisee?",
@@ -94,12 +84,12 @@ const faqs = [
   {
     question: "What if our community lead quits in month three?",
     answer:
-      "The advisory continues. Hiring the replacement is a conversation we have together, using the hiring scorecard built during the engagement.",
+      "The retainer continues. Hiring the replacement is a conversation we have together, using the hiring scorecard built during the engagement.",
   },
   {
     question: "Do you do implementation?",
     answer:
-      "No. The advisory works on the design and the decisions; your team or contractors run the execution. It keeps the offer clean and avoids the conflict of interest where I'd be advising on work I also bill to deliver.",
+      "On the hands-on retainer, yes: that's the 1–2 days a week. On the advisory retainer, no: I work on the design and the decisions, and your team or contractors run the execution.",
   },
   {
     question: "What if our IC is too junior to operationalize the advice?",
@@ -113,10 +103,10 @@ const faqs = [
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Community and Ecosystem Advisory Retainer",
+  name: "Community and Ecosystem Retainer",
   url: "https://gui.do/retainer/",
   description:
-    "A six-month minimum advisory engagement on community, ecosystem, and DevRel strategy for technical companies. Five concurrent seats. Application or 30-min scoping call.",
+    "A community, ecosystem and DevRel retainer for technical companies, as an advisor or hands-on for 1–2 days a week. Typically 6–9 months, six-month minimum. Application or 30-min scoping call.",
   serviceType: "Strategic advisory",
   category: ["Community strategy", "Developer relations", "Ecosystem strategy"],
   provider: {
@@ -182,7 +172,7 @@ const testimonials = [
 
 <BaseLayout
   title="Retainer: Senior community leadership for companies not yet ready to hire one"
-  description="A community and ecosystem advisory engagement. Six-month minimum, then rolling. Five concurrent seats. Apply or schedule a 30-min scoping call."
+  description="A community and ecosystem retainer, as an advisor or hands-on for 1–2 days a week. Typically 6–9 months, six-month minimum. Apply or book a 30-min scoping call."
 >
   <script
     type="application/ld+json"
@@ -246,7 +236,7 @@ const testimonials = [
             </a>
             <span class="text-base-600 dark:text-base-400 text-sm">
               <strong class="text-base-700 dark:text-base-300"
-                >{seatAvailabilityLabel}</strong
+                >{intakeLabel}</strong
               >
               · Application or 30-min scoping call
             </span>
@@ -364,6 +354,55 @@ const testimonials = [
         </div>
       </div>
 
+      <!-- Two retainer levels -->
+      <div class="mt-12">
+        <h3
+          class="font-display mb-6 text-[clamp(1.4rem,2.6vw,1.8rem)] font-bold"
+        >
+          Two levels: advisory or hands-on.
+        </h3>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div
+            class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-6"
+          >
+            <h4 class="font-display mb-3 text-lg font-bold">
+              Advisory retainer
+            </h4>
+            <p class="text-base-700 dark:text-base-300 leading-relaxed">
+              I'm the senior thinking partner for whoever is doing the work
+              today. You get a strategy call every two weeks, a monthly written
+              brief and an async channel for the questions in between, and your
+              team runs the execution.
+            </p>
+            <p class="text-base-800 dark:text-base-200 mt-4 text-sm">
+              <strong>Loaded cost:</strong> less than a quarter of a senior
+              community hire.
+            </p>
+          </div>
+          <div
+            class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-6"
+          >
+            <h4 class="font-display mb-3 text-lg font-bold">
+              Hands-on retainer
+            </h4>
+            <p class="text-base-700 dark:text-base-300 leading-relaxed">
+              I also do part of the work myself, typically 1–2 days a week:
+              setting up a DevRel function, running a community program or
+              organizing an event or conference. Most of that work happens at my
+              desk rather than in meetings, so we align in a check-in every week
+              or two.
+            </p>
+            <p class="text-base-800 dark:text-base-200 mt-4 text-sm">
+              <strong>Loaded cost:</strong> a fraction of a senior hire, without
+              the 3–4 months it takes to land one.
+            </p>
+          </div>
+        </div>
+        <p class="text-base-700 dark:text-base-300 mt-6 text-lg">
+          Both levels typically run 6–9 months, with a six-month minimum.
+        </p>
+      </div>
+
       <!-- Hire-vs-retainer comparison panel -->
       <div class="mt-12 grid gap-6 md:grid-cols-2">
         <div
@@ -430,7 +469,7 @@ const testimonials = [
             The retainer
           </p>
           <h3 class="font-display mb-6 text-xl font-bold">
-            Six-month advisory
+            Advisory or hands-on
           </h3>
           <dl class="space-y-5 text-base">
             <div>
@@ -440,7 +479,8 @@ const testimonials = [
                 Loaded cost
               </dt>
               <dd class="text-base-900 dark:text-base-100 mt-1 font-medium">
-                Less than a quarter of the hire.
+                Advisory: less than a quarter of the hire. Hands-on: a fraction
+                of it.
               </dd>
             </div>
             <div>
@@ -833,7 +873,7 @@ const testimonials = [
           id="how-it-runs-heading"
           class="font-display mt-2 mb-12 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
         >
-          A structured six months. Rolling thereafter.
+          Six months minimum, usually six to nine.
         </h2>
 
         <div class="space-y-12">
@@ -879,15 +919,15 @@ const testimonials = [
                   Recurring cadence
                 </p>
                 <h3 class="font-display mb-2 text-xl font-bold">
-                  Every two weeks: a standing strategy call
+                  Every week or two: a standing check-in
                 </h3>
                 <p
                   class="text-base-700 dark:text-base-300 text-base leading-relaxed"
                 >
-                  Twelve sessions of sixty minutes each, across the first six
-                  months. The one place on the calendar where community strategy
-                  gets senior attention without fighting for it against
-                  everything else on your team's plate.
+                  On the advisory retainer that's twelve sixty-minute strategy
+                  calls across the first six months. On the hands-on retainer
+                  it's a shorter check-in every week or two, because the work
+                  itself happens in between.
                 </p>
               </li>
 
@@ -965,7 +1005,7 @@ const testimonials = [
             <p
               class="text-base-600 dark:text-base-400 mb-6 text-xs font-semibold tracking-wider uppercase"
             >
-              Phase 2 · Beyond six months, if it's working
+              Phase 2 · Beyond six months
             </p>
             <ol
               class="border-base-200 dark:border-base-800 relative space-y-10 border-l-2 border-dashed pl-12"
@@ -978,14 +1018,14 @@ const testimonials = [
                   ↻
                 </span>
                 <h3 class="font-display mb-2 text-xl font-bold">
-                  Beyond month 6: rolling cadence
+                  Beyond month 6: month-to-month
                 </h3>
                 <p
                   class="text-base-700 dark:text-base-300 text-base leading-relaxed"
                 >
-                  Same rhythm, no fixed end. Calls, monthly briefs, async
-                  channel: nothing changes about the cadence. Either side gives
-                  thirty days' notice when the engagement no longer fits.
+                  Same rhythm. Most engagements wrap up between month six and
+                  nine. If it's still useful after that, it runs month-to-month
+                  with thirty days' notice from either side.
                 </p>
               </li>
             </ol>
@@ -1057,6 +1097,11 @@ const testimonials = [
               Coaching the existing person currently holding this responsibility
               (often a junior IC, or someone wearing it as 30% of their job)
             </li>
+            <li>
+              Running the community or DevRel program, 1–2 days a week (hands-on
+              retainer)
+            </li>
+            <li>Event and conference work (hands-on retainer)</li>
           </ul>
         </div>
         <div
@@ -1064,7 +1109,10 @@ const testimonials = [
         >
           <h3 class="font-display mb-4 text-xl font-bold">Out of scope</h3>
           <ul class="text-base-700 dark:text-base-300 list-disc space-y-2 pl-5">
-            <li>Implementation or hands-on community management</li>
+            <li>
+              Full-time community management (the hands-on retainer tops out at
+              two days a week)
+            </li>
             <li>Content production for your community</li>
             <li>Hands-on engineering, SDK work, or demo coding</li>
             <li>Pure marketing or social media management</li>
@@ -1098,8 +1146,8 @@ const testimonials = [
           <h3 class="font-display mb-4 text-xl font-bold">Not a fit</h3>
           <ul class="text-base-700 dark:text-base-300 list-disc space-y-2 pl-5">
             <li>
-              Need someone to <em>run</em> community ops. This is advisory, not
-              fractional execution.
+              Need someone in the role full time: even the hands-on retainer is
+              1–2 days a week.
             </li>
             <li>Want guaranteed traffic, signups, or community-size growth</li>
             <li>AI-content-at-scale community plays</li>
@@ -1164,7 +1212,7 @@ const testimonials = [
         <p
           class="text-base-900 dark:text-base-100 mb-4 text-base font-semibold"
         >
-          {seatAvailabilityLabel} · Application or 30-min scoping call.
+          {intakeLabel} · Application or 30-min scoping call.
         </p>
         <p
           class="text-base-700 dark:text-base-300 mb-4 text-lg leading-relaxed"

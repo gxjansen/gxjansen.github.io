@@ -153,7 +153,7 @@ export const pillars: Pillar[] = [
 export const engagements: Engagement[] = [
   {
     t: "Retainer",
-    d: "Ongoing community strategy, DevRel leadership or fractional community-function work. Typically 1–2 days/week over 3–6 months.",
+    d: "Community strategy, DevRel leadership or running an event or conference, as an advisor or hands-on for 1–2 days a week. Typically 6–9 months.",
     icon: "tabler/outline/users-group",
     accent: "pine",
     cta: "Talk about a retainer",
