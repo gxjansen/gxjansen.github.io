@@ -56,6 +56,8 @@ file://.*/dist/ama/q/.*
 file://.*/dist/privacy-policy/?$
 # /categories is a Netlify redirect to /post/ (astro.config.mjs), so dist has no page for it.
 file://.*/dist/categories/?$
+# The 404 page's canonical/og:url is /404/, but the build writes 404.html.
+file://.*/dist/404/?$
 
 # Bot-blocking or rate-limiting sites: they answer a browser with 200 but reject lychee
 # (curl with a browser UA confirmed spryker.com and fastercapital.com return 200).
@@ -78,3 +80,5 @@ https://github\.com/actions/runner/releases/download/vX\.Y\.Z/.*
 
 # bsky.social XRPC endpoints quoted in posts need query parameters; a bare request returns 400
 https://bsky\.social/xrpc/.*
+# cxl.com (formerly conversionxl.com) returns 403 to non-browser clients; pages load fine in a browser.
+https?://(www\.)?cxl\.com/.*
