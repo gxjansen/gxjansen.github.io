@@ -58,6 +58,7 @@ jobs:
             --exclude-path 'llms-full\.txt$'
             --root-dir ${{ github.workspace }}/dist
             --index-files index.html
+            --remap 'https://gui\.do/(.*) file://${{ github.workspace }}/dist/$1'
             dist
           format: markdown
           output: lychee/out.md
