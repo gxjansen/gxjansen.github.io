@@ -29,3 +29,23 @@ don't drift.
 
 Fonts, accent colours (love/gold/rose/foam/iris) and the atproto app-source
 accents all match.
+
+## Accent text ink (light mode)
+
+Pastel accents fail WCAG AA as small text on the cream background, so card
+tags, status labels and "Read" links use a darker "ink" of the same hue in
+light mode (`src/lib/accentInk.ts`). Dark mode keeps the Main accent, except
+pine, which uses `#54a3c2`.
+
+| Accent | Light-mode ink |
+|---|---|
+| foam | pine `#31748f` |
+| pine | pine Dawn `#286983` |
+| love, rose | love Dawn `#a8505d` |
+| iris | `--color-iris-ink` `#7a6492` |
+| gold | `--color-gold-ink` `#a55d00` |
+
+Iris and gold inks are the Dawn colour darkened in OKLCH with chroma kept, to
+at least 4.5:1 on a 12% accent tint. Mirrored in the guido-design skill
+(`SKILL.md`, "Accent text ink").
+

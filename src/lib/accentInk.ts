@@ -15,9 +15,10 @@ import type { Accent } from "../data/homeContent";
  * - love: love Dawn (#a8505d).
  * - rose: love Dawn as well; a darkened rose Dawn that clears AA lands on
  *   practically the same colour (#a25250).
- * - iris, gold: no palette token is dark enough, so the Dawn variant is mixed
- *   toward the Main base (#191724) just far enough to clear AA while keeping
- *   the hue (iris ≈ #76648c, gold ≈ #8e6439).
+ * - iris, gold: no palette token is dark enough, so they get their own ink
+ *   tokens (`--color-iris-ink` #7a6492, `--color-gold-ink` #a55d00): the Dawn
+ *   colour darkened in OKLCH with its chroma kept, just far enough to clear
+ *   AA. Mixing toward the dark base instead greyed gold out into brown.
  *
  * Dark mode keeps the Main accent, except pine (2.8:1 on the dark card), which
  * moves to the dark-mode brand teal step `--color-primary-400` (#54a3c2).
@@ -31,8 +32,8 @@ const LIGHT_INK: Record<Accent, string> = {
   pine: "var(--color-pine-light)",
   love: "var(--color-love-light)",
   rose: "var(--color-love-light)",
-  iris: "color-mix(in oklab, var(--color-iris-light) 80%, var(--color-base-950))",
-  gold: "color-mix(in oklab, var(--color-gold-light) 60%, var(--color-base-950))",
+  iris: "var(--color-iris-ink)",
+  gold: "var(--color-gold-ink)",
 };
 
 const DARK_INK: Record<Accent, string> = {
