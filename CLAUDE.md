@@ -21,7 +21,7 @@ Guido X Jansen's personal site. Astro 7, Tailwind v4 (Vite plugin), MDX, React i
 
 ## Where things live
 
-- Posts: `src/content/post/<slug>/index.mdx`. Other collections: `src/content/{authors,countries,otherPages,presentations,services}`.
+- Posts: `src/content/post/<slug>/index.mdx`. Other collections: `src/content/{authors,otherPages,presentations,services}`.
 - Structured site data: `src/data/` (`events.snapshot.json`, `events-overrides.json`, `homeContent.ts`, `press-coverage.ts`, `socialLinks.ts`, `training.ts`, ...).
 - Pages: `src/pages/`. Files prefixed `_` (`_retainer.astro`, `_training*`) are not routed.
 - Styles: `src/styles/` (`tailwind.css` has the `@theme` tokens). Design notes: `DESIGN.md`.
