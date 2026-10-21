@@ -123,6 +123,12 @@
   --color-iris: #c4a7e7;
   --color-iris-light: #907aa9;
 
+  /* Accent text ink for light mode: iris and gold Dawn stay under WCAG AA as
+     small text on cream, so text uses the same hue darkened in OKLCH (chroma
+     kept) to >= 4.5:1 on a 12% accent tint. See src/lib/accentInk.ts. */
+  --color-iris-ink: #7a6492;
+  --color-gold-ink: #a55d00;
+
   /* Text colors for direct use */
   --color-rp-text: #e0def4;
   --color-rp-text-light: #575279;
@@ -193,6 +199,8 @@
      Width is 3px (up from 2px) for a more perceptible indicator. */
   --focus-ring-color: var(--color-primary-500);
   --focus-ring-width: 3px;
+  --color-iris-ink: #7a6492;
+  --color-gold-ink: #a55d00;
 }
 
 /* Hand font (LiebeHeide). Defined as a utility so every `@apply font-hand` and
