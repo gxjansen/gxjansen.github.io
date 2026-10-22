@@ -82,7 +82,7 @@ export default defineConfig({
     // External redirects
     "/kit": { destination: "https://kit.co/gxjansen", status: 301 },
     "/call": {
-      destination: "https://calendar.app.google/E7mdyvsHvZaJq3Xq6",
+      destination: "https://cal.gui.do/u/gxjansen",
       status: 301,
     },
     "/youtube": {
