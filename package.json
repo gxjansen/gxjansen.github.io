@@ -35,20 +35,20 @@
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.10",
-    "@astrojs/mdx": "^8.1.0",
+    "@astrojs/mdx": "^8.1.1",
     "@astrojs/netlify": "^8.2.10",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
-    "@atproto/api": "^0.28.1",
+    "@atproto/api": "^0.29.1",
     "@iconify-json/tabler": "^1.2.42",
-    "@netlify/blobs": "^11.1.4",
+    "@netlify/blobs": "^11.1.6",
     "@resvg/resvg-js": "^2.6.2",
-    "@singi-labs/sifa-sdk": "^0.19.110",
+    "@singi-labs/sifa-sdk": "^0.20.0",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
-    "altcha-lib": "^2.6.0",
-    "astro": "^7.4.1",
+    "altcha-lib": "^2.7.0",
+    "astro": "^7.4.2",
     "astro-icon": "^1.2.0",
     "date-fns": "^4.4.0",
     "fast-xml-parser": "^5.9.3",
@@ -58,7 +58,7 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.11",
+    "@astrojs/check": "^0.9.12",
     "@axe-core/playwright": "~4.14.0",
     "@playwright/test": "~1.64.1",
     "@testing-library/dom": "^10.4.2",
@@ -77,7 +77,7 @@
     "vitest": "^5.0.5"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.64.12",
+    "@rollup/rollup-linux-x64-gnu": "^4.65.0",
     "lightningcss-linux-x64-gnu": "^1.33.0"
   },
   "overrides": {
