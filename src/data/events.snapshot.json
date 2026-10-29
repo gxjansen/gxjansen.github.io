@@ -4764,7 +4764,7 @@
         "$type": "community.lexicon.calendar.event",
         "createdAt": "2026-09-23T16:14:03.817Z",
         "createdWith": "https://atmo.rsvp",
-        "description": "The third edition of the global gathering for the Atmosphere Community is taking place in Amsterdam, April 29th - May 2nd. \n\nThis includes side-events and main conference days. Please RSVP with your interest, subscribe for updates at https://news.atmosphereconf.org, and watch us build out the website with lots of fun features https://atmosphereconf.org\n\nAs well as in person,  we'll also be streaming and have different ways to participate remotely.\n\nAtmosphere Conference is run by the community, for the community, as an annual global gathering to connect, share, celebrate, and learn from each other. We welcome newcomers and want to engage with new perspectives.\n\nIt's a community home for builders, supporters, and participants in the atproto ecosystem. We maintain collective resources, seed projects, and convene our community to ensure every member has genuine voice in shaping the ecosystem's future.\n\n#atproto #atmosphereconf #atmosphereconf2027 #europe",
+        "description": "The third edition of the global gathering for the Atmosphere Community is taking place in the Netherlands, April 29th - May 2nd. \n\nThis includes side-events and main conference days. Please RSVP with your interest, subscribe for updates at https://news.atmosphereconf.org, and watch us build out the website with lots of fun features https://atmosphereconf.org\n\nAs well as in person,  we'll also be streaming and have different ways to participate remotely.\n\nAtmosphere Conference is run by the community, for the community, as an annual global gathering to connect, share, celebrate, and learn from each other. We welcome newcomers and want to engage with new perspectives.\n\nIt's a community home for builders, supporters, and participants in the atproto ecosystem. We maintain collective resources, seed projects, and convene our community to ensure every member has genuine voice in shaping the ecosystem's future.\n\n#atproto #atmosphereconf #atmosphereconf2027 #europe",
         "endsAt": "2027-05-02T16:00:00.000Z",
         "facets": [
           {
@@ -4775,8 +4775,8 @@
               }
             ],
             "index": {
-              "byteEnd": 265,
-              "byteStart": 234
+              "byteEnd": 271,
+              "byteStart": 240
             }
           },
           {
@@ -4787,8 +4787,8 @@
               }
             ],
             "index": {
-              "byteEnd": 354,
-              "byteStart": 328
+              "byteEnd": 360,
+              "byteStart": 334
             }
           },
           {
@@ -4799,8 +4799,8 @@
               }
             ],
             "index": {
-              "byteEnd": 921,
-              "byteStart": 913
+              "byteEnd": 927,
+              "byteStart": 919
             }
           },
           {
@@ -4811,8 +4811,8 @@
               }
             ],
             "index": {
-              "byteEnd": 937,
-              "byteStart": 922
+              "byteEnd": 943,
+              "byteStart": 928
             }
           },
           {
@@ -4823,8 +4823,8 @@
               }
             ],
             "index": {
-              "byteEnd": 957,
-              "byteStart": 938
+              "byteEnd": 963,
+              "byteStart": 944
             }
           },
           {
@@ -4835,32 +4835,32 @@
               }
             ],
             "index": {
-              "byteEnd": 965,
-              "byteStart": 958
+              "byteEnd": 971,
+              "byteStart": 964
             }
           }
         ],
         "locations": [
           {
             "$type": "community.lexicon.location.address",
-            "country": "Nederland",
-            "locality": "Amsterdam",
-            "region": "Noord-Holland"
+            "country": "NL",
+            "locality": "Amersfoort",
+            "region": "Utrecht"
           }
         ],
         "media": [
           {
             "aspect_ratio": {
-              "height": 739,
-              "width": 739
+              "height": 512,
+              "width": 512
             },
             "content": {
               "$type": "blob",
               "mimeType": "image/png",
               "ref": {
-                "$link": "bafkreihjg6k5gb5khdnkqoqmsmt6nzqymsxxpfddk23xx5qifxigvxngvm"
+                "$link": "bafkreicrmhimiqdm6d6y3njjpmhwwpfv5gzbwnrawq7ij4f25iac5yxuau"
               },
-              "size": 257802
+              "size": 119552
             },
             "role": "thumbnail"
           }
