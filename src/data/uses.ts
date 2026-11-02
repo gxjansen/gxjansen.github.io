@@ -178,27 +178,6 @@ export const items: UsesItem[] = [
 
   // Home and network
   {
-    name: "Firewalla",
-    url: "https://firewalla.com",
-    kind: "device",
-    area: "tech",
-    category: "Home and network",
-    status: "using",
-    reason:
-      "A router and firewall with per-device rules and domain blocking, without needing a cloud account for the basics.",
-    downside: "Ad and domain blocking only helps at home.",
-    storyUrl: STORY_2025,
-  },
-  {
-    name: "UniFi access points and switch",
-    url: "https://ui.com",
-    kind: "device",
-    area: "tech",
-    category: "Home and network",
-    status: "using",
-    reason: "Solid Wi-Fi and PoE. I run the controller myself.",
-  },
-  {
     name: "Home Assistant Green with a Zigbee and Thread stick",
     url: "https://www.home-assistant.io",
     kind: "device",
@@ -228,8 +207,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Home and network",
     status: "using",
-    reason:
-      "A small always-on box for monitoring and the media apps, so the NAS disks can rest.",
+    reason: "A small always-on box for a few home services.",
   },
 
   // OS and desktop
