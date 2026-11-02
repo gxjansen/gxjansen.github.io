@@ -17,6 +17,7 @@ specification.website agent-readiness spec
 - [Contact](https://gui.do/contact/): how to reach Guido
 - [Press kit](https://gui.do/press/): bio, headshots, brand assets
 - [Author profile](https://gui.do/authors/gxjansen/): canonical author page with all social profiles
+- [Uses](https://gui.do/uses/): the hardware, software and services Guido uses, and what he dropped
 
 ## Services
 

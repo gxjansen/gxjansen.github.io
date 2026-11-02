@@ -1,0 +1,244 @@
+---
+// /uses: the hardware, software and services Guido uses, why, and what he
+// dropped along the way. Static; the data lives in src/data/uses.ts.
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import {
+  categoryOrder,
+  currentItems,
+  droppedItems,
+  lastReviewed,
+  principles,
+  replacedBy,
+  type UsesItem,
+} from "@data/uses";
+
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+/** "2026-10" -> "October 2026", "2026" -> "2026". */
+const partialDate = (value: string) => {
+  const [year, month] = value.split("-");
+  return month ? `${MONTHS[Number(month) - 1]} ${year}` : year;
+};
+
+/** "2026-11-01" -> "1 November 2026". */
+const fullDate = (value: string) => {
+  const [year, month, day] = value.split("-");
+  return `${Number(day)} ${MONTHS[Number(month) - 1]} ${year}`;
+};
+
+const slugify = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+const itemId = (item: UsesItem) => `use-${slugify(item.name)}`;
+
+// Story links point at posts on this site; show the post title as link text
+// and link relatively so previews stay on their own host.
+const posts = await getCollection("post");
+const postTitles = new Map(posts.map((p) => [p.id, p.data.title]));
+const story = (url: string | undefined) => {
+  if (!url) return undefined;
+  const match = url.match(/\/post\/([^/]+)\/?$/);
+  if (!match) return { href: url, title: "the story behind it" };
+  const id = match[1];
+  return { href: `/post/${id}/`, title: postTitles.get(id) ?? id };
+};
+
+const groups = categoryOrder
+  .map((name) => ({
+    name,
+    id: slugify(name),
+    items: currentItems.filter((i) => i.category === name),
+  }))
+  .filter((g) => g.items.length > 0);
+
+const dropped = droppedItems.map((item) => ({
+  item,
+  by: replacedBy(item),
+}));
+---
+
+<BaseLayout
+  title="Uses"
+  description="The hardware, software and services Guido X Jansen uses, why he picked them, what they cost him, and what he dropped along the way."
+>
+  <section class="mt-24 w-full px-4">
+    <div class="mx-auto max-w-3xl">
+      <header class="mb-8">
+        <p
+          class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.5rem] leading-none"
+        >
+          what I actually use
+        </p>
+        <h1 class="h1 mt-2">Uses</h1>
+        <p class="text-base-500 dark:text-base-400 mt-2 text-[.85rem]">
+          Last reviewed
+          <time datetime={lastReviewed}>{fullDate(lastReviewed)}</time>
+        </p>
+      </header>
+
+      <div
+        class="text-base-700 dark:text-base-300 max-w-2xl space-y-4 text-lg leading-relaxed"
+      >
+        <p>
+          This is the hardware, software and services I use every week, and why.
+          Most of it is here because it replaced something that annoyed me:
+          price hikes, lock-in, or a vendor deciding what happens to my data.
+        </p>
+        <p>
+          Every pick has a cost, so where there's a real downside I list it.
+          Some items link to the post where I wrote about the switch, and
+          further down is what I dropped and why.
+        </p>
+        <p>I never act on unsolicited email about any of these tools.</p>
+      </div>
+
+      <section
+        id="principles"
+        class="uses-section mt-14"
+        aria-labelledby="uses-principles"
+      >
+        <h2 id="uses-principles" class="uses-h">How I pick tools</h2>
+        <ol class="principles">
+          {principles.map((p) => <li>
+            <p class="principle-title">{p.title}</p>
+            <p class="principle-text">{p.text}</p>
+          </li>)}
+        </ol>
+      </section>
+
+      {groups.map((group) => <section
+        id={group.id}
+        class="uses-section mt-14"
+        aria-labelledby={`${group.id}-h`}
+      >
+        <h2 id={`${group.id}-h`} class="uses-h">{group.name}</h2>
+        <ul class="uses-list">
+          {group.items.map((item) => {
+            const s = story(item.storyUrl);
+            const meta = [
+              item.startedAt ? `Since ${partialDate(item.startedAt)}` : null,
+              item.replaces?.length
+                ? `Replaced ${item.replaces.map((r) => r.name).join(" and ")}`
+                : null,
+            ].filter(Boolean);
+            return <li id={itemId(item)} class="uses-item">
+              <p class="item-name">
+                {item.url ? (
+                  <a href={item.url}>{item.name}</a>
+                ) : (
+                  <span>{item.name}</span>
+                )}
+                {item.status === "trying" && <span class="trying">Trying</span>}
+              </p>
+              {item.reason && <p class="item-reason">{item.reason}</p>}
+              {item.downside && <p class="item-downside">
+                <span class="font-semibold">Downside:</span>{" "}
+                {item.downside}
+              </p>}
+              {(meta.length > 0 || s) && <p class="item-meta">
+                {meta.join(". ")}
+                {meta.length > 0 && s && ". "}
+                {s && <> Story: <a href={s.href}>{s.title}</a> </>}
+              </p>}
+            </li>;
+          })}
+        </ul>
+      </section>)}
+
+      <section
+        id="dropped"
+        class="uses-section mt-14"
+        aria-labelledby="uses-dropped"
+      >
+        <h2 id="uses-dropped" class="uses-h">What I dropped</h2>
+        <p class="text-base-700 dark:text-base-300 mb-6 leading-relaxed">
+          Stuff I stopped using, and what replaced it.
+        </p>
+        <ul class="uses-list">
+          {dropped.map(({ item, by }) => <li class="uses-item">
+            <p class="item-name">
+              <span>{item.name}</span>
+              {item.endedAt && <span class="item-when">
+                until{" "}
+                <time datetime={item.endedAt}>{partialDate(item.endedAt)}</time>
+              </span>}
+            </p>
+            {by.length > 0 && <p class="item-meta">
+              Replaced by{" "}
+              {by.map((b, i) => (
+                <>
+                  {i > 0 && (i === by.length - 1 ? " and " : ", ")}
+                  <a href={`#${itemId(b)}`}>{b.name}</a>
+                </>
+              ))}
+            </p>}
+            {item.reason && <p class="item-reason">{item.reason}</p>}
+          </li>)}
+        </ul>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @reference "../styles/tailwind.css";
+
+  /* Keep deep-linked headings and items clear of the fixed nav. */
+  .uses-section,
+  .uses-item {
+    scroll-margin-top: 6rem;
+  }
+  .uses-h {
+    @apply text-base-950 dark:text-base-50 font-display mb-5 text-[1.4rem] font-black tracking-[-0.02em];
+  }
+  .principles {
+    @apply grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2;
+  }
+  .principle-title {
+    @apply text-base-950 dark:text-base-50 font-display font-bold;
+  }
+  .principle-text {
+    @apply text-base-700 dark:text-base-300 mt-1 leading-relaxed;
+  }
+  .uses-list {
+    @apply border-base-200 dark:border-base-800 divide-base-200 dark:divide-base-800 divide-y border-y;
+  }
+  .uses-item {
+    @apply py-4;
+  }
+  .item-name {
+    @apply text-base-950 dark:text-base-50 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-bold;
+  }
+  .item-reason {
+    @apply text-base-700 dark:text-base-300 mt-1 leading-relaxed;
+  }
+  .item-downside {
+    @apply text-base-600 dark:text-base-400 mt-1 leading-relaxed;
+  }
+  .item-meta {
+    @apply text-base-600 dark:text-base-400 mt-1 text-[0.95rem];
+  }
+  .item-when {
+    @apply text-base-600 dark:text-base-400 text-[0.95rem] font-normal;
+  }
+  .trying {
+    @apply text-gold-ink dark:text-gold border-gold-light dark:border-gold rounded-md border px-2 py-0.5 text-xs font-bold tracking-[0.06em] uppercase;
+  }
+</style>

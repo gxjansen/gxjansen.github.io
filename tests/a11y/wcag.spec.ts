@@ -24,6 +24,7 @@ const ROUTES = [
   "/newsletter/",
   "/projects/",
   "/privacy/",
+  "/uses/",
   "/presentations/",
   "/ama/",
   "/post/",
