@@ -126,6 +126,7 @@ export const categoryOrder = [
   "AI (local and hosted)",
   "Notes, media and self-hosted services",
   "Photo, video and streaming",
+  "Studio and presenting",
   "Communication and privacy",
 ] as const;
 
@@ -192,6 +193,43 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
 
+  {
+    name: "Fully Jarvis L-shaped standing desk",
+    icon: "tabler:desk",
+    url: "https://www.fully.com",
+    kind: "product",
+    area: "home",
+    category: "Personal hardware",
+    status: "using",
+  },
+  {
+    name: "Interstuhl TWENTYFOUR",
+    icon: "tabler:armchair",
+    url: "https://www.interstuhl.com",
+    kind: "product",
+    area: "home",
+    category: "Personal hardware",
+    status: "using",
+  },
+  {
+    name: "Sony WH-1000XM5",
+    icon: "tabler:headphones",
+    url: "https://www.sony.com",
+    kind: "device",
+    area: "tech",
+    category: "Personal hardware",
+    status: "using",
+  },
+  {
+    name: "Garmin Epix Pro",
+    icon: "simple-icons:garmin",
+    url: "https://www.garmin.com",
+    kind: "device",
+    area: "tech",
+    category: "Personal hardware",
+    status: "using",
+  },
+
   // Home
   {
     name: "Firewalla",
@@ -233,14 +271,35 @@ export const items: UsesItem[] = [
       "Without the cloud connection their own app loses history and remote access.",
   },
   {
-    name: "Raspberry Pi",
+    name: "Raspberry Pi 5",
     icon: "simple-icons:raspberrypi",
     url: "https://www.raspberrypi.com",
     kind: "device",
     area: "tech",
     category: "Home",
     status: "using",
-    reason: "A small always-on box for a few home services.",
+    reason:
+      "It runs some of my containers to take the load off the NAS. The NAS CPU and memory are running out.",
+  },
+  {
+    name: "Raspberry Pi 4 with Batocera",
+    icon: "tabler:device-gamepad-2",
+    url: "https://batocera.org",
+    kind: "device",
+    area: "home",
+    category: "Home",
+    status: "using",
+    reason:
+      "I use this for retro console games with the kids on the TV: it runs Batocera (open source) and needs no store account.",
+  },
+  {
+    name: "Stages SB20",
+    icon: "tabler:bike",
+    url: "https://www.stagescycling.com",
+    kind: "device",
+    area: "home",
+    category: "Home",
+    status: "using",
   },
 
   // OS and desktop
@@ -290,6 +349,16 @@ export const items: UsesItem[] = [
     status: "trying",
     reason: "Local speech-to-text, so my voice never leaves the machine.",
     replaces: [{ name: "MacWhisper" }],
+  },
+  {
+    name: "Steam",
+    icon: "simple-icons:steam",
+    url: "https://store.steampowered.com",
+    kind: "software",
+    area: "tech",
+    category: "OS and desktop",
+    status: "using",
+    reason: "As companies go, Valve seems pretty great.",
   },
 
   // Development
@@ -440,6 +509,16 @@ export const items: UsesItem[] = [
     replaces: [{ name: "Google Drive" }, { name: "Dropbox" }],
   },
   {
+    name: "Home lab tools",
+    icon: "tabler:box-multiple",
+    kind: "software",
+    area: "tech",
+    category: "Notes, media and self-hosted services",
+    status: "using",
+    reason:
+      "These are small tools not worth one entry each: Portainer CE, Homepage, Glances, Uptime Kuma, Diun, WireGuard, Paperless-ngx, Calibre-web, Kiwix, NocoDB, n8n, and a Minecraft server. All are open source except for the Minecraft server.",
+  },
+  {
     name: "Immich",
     icon: "simple-icons:immich",
     url: "https://immich.app",
@@ -499,6 +578,18 @@ export const items: UsesItem[] = [
       "One client for YouTube and other video sources, on desktop and phone. I turned off playtime tracking.",
     replaces: [{ name: "YouTube app" }],
     storyUrl: STORY_2025,
+  },
+  {
+    name: "NPO Start",
+    icon: "tabler:device-tv",
+    url: "https://npo.nl/start",
+    kind: "service",
+    area: "tech",
+    category: "Notes, media and self-hosted services",
+    status: "using",
+    reason:
+      "My kids want Dutch programming. Netflix and Disney+ are too weak on that. I'm using the free tier.",
+    replaces: [{ name: "Streaming subscriptions (Netflix, Disney+, Prime)" }],
   },
   {
     name: "Hetzner",
@@ -605,6 +696,64 @@ export const items: UsesItem[] = [
     status: "using",
     reason:
       "Recording, calls and streaming from one scene collection, native on Linux.",
+  },
+
+  // Studio and presenting
+  {
+    name: "Canon R6 Mark II with 24-105, 70-200, 50 and 35mm lenses",
+    icon: "tabler:camera",
+    url: "https://www.canon-europe.com",
+    kind: "device",
+    area: "creative",
+    category: "Studio and presenting",
+    status: "using",
+    reason:
+      "Great lenses and great pictures and videos. I mainly use these for family events.",
+    downside:
+      "Once you've started with Canon, it's really hard to escape the ecosystem lock-in.",
+  },
+  {
+    name: "Sony RX100 V as webcam",
+    icon: "simple-icons:sony",
+    url: "https://www.sony.com",
+    kind: "device",
+    area: "creative",
+    category: "Studio and presenting",
+    status: "using",
+    reason:
+      "Much better than any webcam, especially in lower light conditions.",
+    downside:
+      "Runs hot, but I solved that with a heatsink and a bolted-on mini fan.",
+  },
+  {
+    name: "Røde Procaster and Wireless Pro with Elgato Wave XLR",
+    icon: "tabler:microphone",
+    url: "https://rode.com",
+    kind: "device",
+    area: "creative",
+    category: "Studio and presenting",
+    status: "using",
+    reason: "Everything they make is great.",
+  },
+  {
+    name: "Elgato Key Light, Key Light Air and Prompter",
+    icon: "tabler:bulb",
+    url: "https://www.elgato.com",
+    kind: "device",
+    area: "creative",
+    category: "Studio and presenting",
+    status: "using",
+    reason: "Mainly great for the Stream Deck integration.",
+  },
+  {
+    name: "Elgato Stream Deck and Stream Deck XL",
+    icon: "simple-icons:elgato",
+    url: "https://www.elgato.com",
+    kind: "device",
+    area: "tech",
+    category: "Studio and presenting",
+    status: "using",
+    reason: "Great for additional control for customized scenes.",
   },
 
   // Communication and privacy
