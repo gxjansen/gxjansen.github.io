@@ -145,26 +145,26 @@ export const items: UsesItem[] = [
     replaces: [{ name: "Mac mini as daily workstation" }],
   },
   {
-    name: "ThinkPad X1 Carbon (second-hand)",
+    name: "ThinkPad X1 Carbon",
     icon: "simple-icons:lenovo",
     kind: "device",
     area: "tech",
     category: "Personal hardware",
     status: "using",
     reason:
-      "A second-hand laptop that runs Linux without fuss. It's my mobile machine and attaches to the same sessions as the desktop.",
+      "A second-hand laptop that runs Linux without fuss. It syncs with the desktop and attaches to the same tmux sessions.",
     storyUrl: STORY_LOCAL_AI,
   },
   {
     name: "Fairphone 6",
     icon: "simple-icons:fairphone",
-    url: "https://www.fairphone.com",
+    url: "https://www.fairphone.com/the-fairphone-gen-6",
     kind: "device",
     area: "tech",
     category: "Personal hardware",
     status: "using",
     reason:
-      "Repairable and ethically sourced. The phone it replaced was dying.",
+      "Repairable and ethically sourced. The phone it replaced was dying (well, mainly its battery).",
     replaces: [{ name: "Samsung Galaxy S21 Ultra" }],
     storyUrl: STORY_2025,
   },
@@ -183,7 +183,7 @@ export const items: UsesItem[] = [
   {
     name: "Supernote Manta",
     photo: "supernote-manta.jpg",
-    url: "https://supernote.com",
+    url: "https://supernote.com/products/supernote-manta",
     kind: "device",
     area: "tech",
     category: "Personal hardware",
@@ -205,7 +205,7 @@ export const items: UsesItem[] = [
   {
     name: "Interstuhl TWENTYFOUR",
     icon: "tabler:armchair",
-    url: "https://www.interstuhl.com",
+    url: "https://www.interstuhl.com/ia-en/products/twentyfour",
     kind: "product",
     area: "home",
     category: "Personal hardware",
@@ -214,7 +214,7 @@ export const items: UsesItem[] = [
   {
     name: "Sony WH-1000XM5",
     icon: "tabler:headphones",
-    url: "https://www.sony.com",
+    url: "https://www.sony.co.uk/electronics/headband-headphones/wh-1000xm5",
     kind: "device",
     area: "tech",
     category: "Personal hardware",
@@ -223,7 +223,7 @@ export const items: UsesItem[] = [
   {
     name: "Garmin Epix Pro",
     icon: "simple-icons:garmin",
-    url: "https://www.garmin.com",
+    url: "https://www.garmin.com/nl-NL/p/884292/",
     kind: "device",
     area: "tech",
     category: "Personal hardware",
@@ -234,7 +234,7 @@ export const items: UsesItem[] = [
   {
     name: "Firewalla",
     icon: "simple-icons:firewalla",
-    url: "https://firewalla.com",
+    url: "https://firewalla.com/products/firewalla-gold-pro",
     model: "Gold Pro",
     kind: "device",
     area: "tech",
@@ -248,7 +248,7 @@ export const items: UsesItem[] = [
   {
     name: "Home Assistant Green with a Zigbee and Thread stick",
     photo: "home-assistant-green.jpg",
-    url: "https://www.home-assistant.io",
+    url: "https://www.home-assistant.io/green/",
     kind: "device",
     area: "home",
     category: "Home",
@@ -273,7 +273,7 @@ export const items: UsesItem[] = [
   {
     name: "Raspberry Pi 5",
     icon: "simple-icons:raspberrypi",
-    url: "https://www.raspberrypi.com",
+    url: "https://www.raspberrypi.com/products/raspberry-pi-5/",
     kind: "device",
     area: "tech",
     category: "Home",
@@ -295,7 +295,7 @@ export const items: UsesItem[] = [
   {
     name: "Stages SB20",
     icon: "tabler:bike",
-    url: "https://www.stagescycling.com",
+    url: "https://stagescycling.com/en_global/product/indoor-cycling/smart-bikes",
     kind: "device",
     area: "home",
     category: "Home",
@@ -349,6 +349,16 @@ export const items: UsesItem[] = [
     status: "trying",
     reason: "Local speech-to-text, so my voice never leaves the machine.",
     replaces: [{ name: "MacWhisper" }],
+  },
+  {
+    name: "LibreOffice",
+    icon: "simple-icons:libreoffice",
+    url: "https://www.libreoffice.org",
+    kind: "software",
+    area: "tech",
+    category: "OS and desktop",
+    status: "using",
+    replaces: [{ name: "Microsoft Office" }],
   },
   {
     name: "Steam",
@@ -702,7 +712,7 @@ export const items: UsesItem[] = [
   {
     name: "Canon R6 Mark II with 24-105, 70-200, 50 and 35mm lenses",
     icon: "tabler:camera",
-    url: "https://www.canon-europe.com",
+    url: "https://www.canon-europe.com/cameras/eos-r6-mark-ii/",
     kind: "device",
     area: "creative",
     category: "Studio and presenting",
@@ -715,7 +725,7 @@ export const items: UsesItem[] = [
   {
     name: "Sony RX100 V as webcam",
     icon: "simple-icons:sony",
-    url: "https://www.sony.com",
+    url: "https://www.sony.co.uk/electronics/cyber-shot-compact-cameras/dsc-rx100m5",
     kind: "device",
     area: "creative",
     category: "Studio and presenting",
@@ -728,7 +738,7 @@ export const items: UsesItem[] = [
   {
     name: "Røde Procaster and Wireless Pro with Elgato Wave XLR",
     icon: "tabler:microphone",
-    url: "https://rode.com",
+    url: "https://rode.com/en-nl/products/procaster",
     kind: "device",
     area: "creative",
     category: "Studio and presenting",
@@ -738,7 +748,7 @@ export const items: UsesItem[] = [
   {
     name: "Elgato Key Light, Key Light Air and Prompter",
     icon: "tabler:bulb",
-    url: "https://www.elgato.com",
+    url: "https://www.elgato.com/eu/en/p/key-light",
     kind: "device",
     area: "creative",
     category: "Studio and presenting",
@@ -748,7 +758,7 @@ export const items: UsesItem[] = [
   {
     name: "Elgato Stream Deck and Stream Deck XL",
     icon: "simple-icons:elgato",
-    url: "https://www.elgato.com",
+    url: "https://www.elgato.com/eu/en/p/stream-deck-xl",
     kind: "device",
     area: "tech",
     category: "Studio and presenting",

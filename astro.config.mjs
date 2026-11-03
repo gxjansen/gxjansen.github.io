@@ -186,6 +186,7 @@ export default defineConfig({
           "hetzner",
           "immich",
           "lenovo",
+          "libreoffice",
           "listmonk",
           "obsidian",
           "obsstudio",
