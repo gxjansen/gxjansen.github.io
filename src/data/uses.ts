@@ -418,6 +418,24 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
   {
+    name: "Audiobookshelf with Symfonium",
+    url: "https://www.audiobookshelf.org",
+    kind: "software",
+    area: "tech",
+    category: "Notes, media and self-hosted services",
+    status: "using",
+    replaces: [{ name: "Audible" }],
+  },
+  {
+    name: "Plexamp",
+    url: "https://www.plex.tv/plexamp/",
+    kind: "software",
+    area: "tech",
+    category: "Notes, media and self-hosted services",
+    status: "using",
+    replaces: [{ name: "YouTube Music" }],
+  },
+  {
     name: "Grayjay",
     url: "https://grayjay.app",
     kind: "software",
@@ -631,7 +649,16 @@ export const items: UsesItem[] = [
     endedAt: "2024",
   },
   {
-    name: "Audible and YouTube Music",
+    name: "Audible",
+    kind: "service",
+    area: "tech",
+    status: "dropped",
+    droppedReason: "replaced",
+    reason:
+      "Fewer subscriptions, and I keep what I buy. Audiobooks and music now come from my own library.",
+  },
+  {
+    name: "YouTube Music",
     kind: "service",
     area: "tech",
     status: "dropped",
