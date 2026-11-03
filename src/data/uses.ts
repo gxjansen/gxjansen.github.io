@@ -635,6 +635,18 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
   {
+    name: "Marque",
+    icon: "tabler:world-www",
+    url: "https://marque.at",
+    kind: "service",
+    area: "tech",
+    category: "Communication and privacy",
+    status: "using",
+    reason:
+      "Almost all my domains are at Marque. I picked it because the registrar runs on AT Protocol. My registrations are public in my own PDS.",
+    downside: "The company behind it is not in the EU.",
+  },
+  {
     name: "Fastmail",
     icon: "tabler:mail",
     url: "https://www.fastmail.com",

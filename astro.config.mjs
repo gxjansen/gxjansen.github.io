@@ -134,6 +134,7 @@ export default defineConfig({
     icon({
       include: {
         tabler: [
+          "world-www",
           "aperture",
           "calendar",
           "calendar-time",
