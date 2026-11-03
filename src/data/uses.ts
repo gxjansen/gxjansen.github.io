@@ -531,7 +531,7 @@ export const items: UsesItem[] = [
     area: "tech",
     status: "using",
     reason:
-      "I host static feeds and audio files on my own server to cut out the vendor between me and my listeners. It costs less than my old Transistor subscription.",
+      "I host static feeds and audio files on my own server to cut out the vendor between me and my listeners. It costs much less than my old Transistor subscription because it's just a small share of a VPS that runs other things too.",
     startedAt: "2026-10",
     replaces: [{ name: "Transistor" }],
   },
