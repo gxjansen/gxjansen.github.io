@@ -350,6 +350,16 @@ export const items: UsesItem[] = [
     reason: "Local speech-to-text, so my voice never leaves the machine.",
     replaces: [{ name: "MacWhisper" }],
   },
+  {
+    name: "Steam",
+    icon: "simple-icons:steam",
+    url: "https://store.steampowered.com",
+    kind: "software",
+    area: "tech",
+    category: "OS and desktop",
+    status: "using",
+    reason: "As companies go, Valve seems pretty great.",
+  },
 
   // Development
   {

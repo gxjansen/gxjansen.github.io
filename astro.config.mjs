@@ -195,6 +195,7 @@ export default defineConfig({
           "raspberrypi",
           "signal",
           "sony",
+          "steam",
           "synology",
           "tangled",
           "umami",
