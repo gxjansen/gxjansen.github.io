@@ -631,7 +631,8 @@ export const items: UsesItem[] = [
     status: "using",
     reason:
       "Email, calendar and contacts on open protocols (IMAP, CalDAV, CardDAV) with my own domains.",
-    downside: "It's Australian, so not in the EU.",
+    downside:
+      "Fastmail is an Australian company outside the EU. In June 2024, it laid off most of its US union's bargaining unit during contract talks. I want to move to a European provider eventually. But I only just moved here and migrating all my email domains takes a lot of time. There weren't many good EU options back then, so I'm staying for now and might look at cirrux.co later.",
     replaces: [{ name: "Google Workspace" }, { name: "Proton" }],
     storyUrl: STORY_ANTIFRAGILE,
   },

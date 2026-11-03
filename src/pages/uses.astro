@@ -54,7 +54,7 @@ const itemId = (item: UsesItem) => `use-${slugify(item.name)}`;
 // Bare domains in the texts ("atproto.nl") become links. The split keeps the
 // matches at odd indexes. This site's own domain stays plain text.
 const DOMAIN =
-  /\b((?:[a-z0-9-]+\.)+(?:nl|eu|io|com|org|net|app|dev|cafe|do))\b/i;
+  /\b((?:[a-z0-9-]+\.)+(?:nl|eu|io|co|com|org|net|app|dev|cafe|do))\b/i;
 const SELF = "gui.do";
 // The item's link shows as its domain under the text, not on the name.
 const host = (url: string) => new URL(url).hostname.replace(/^www\./, "");
