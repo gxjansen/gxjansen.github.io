@@ -126,6 +126,7 @@ export const categoryOrder = [
   "AI (local and hosted)",
   "Notes, media and self-hosted services",
   "Photo, video and streaming",
+  "Studio and presenting",
   "Communication and privacy",
 ] as const;
 
@@ -192,6 +193,43 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
 
+  {
+    name: "Fully Jarvis L-shaped standing desk",
+    icon: "tabler:desk",
+    url: "https://www.fully.com",
+    kind: "product",
+    area: "home",
+    category: "Personal hardware",
+    status: "using",
+  },
+  {
+    name: "Interstuhl TWENTYFOUR",
+    icon: "tabler:armchair",
+    url: "https://www.interstuhl.com",
+    kind: "product",
+    area: "home",
+    category: "Personal hardware",
+    status: "using",
+  },
+  {
+    name: "Sony WH-1000XM5",
+    icon: "tabler:headphones",
+    url: "https://www.sony.com",
+    kind: "device",
+    area: "tech",
+    category: "Personal hardware",
+    status: "using",
+  },
+  {
+    name: "Garmin Epix Pro",
+    icon: "simple-icons:garmin",
+    url: "https://www.garmin.com",
+    kind: "device",
+    area: "tech",
+    category: "Personal hardware",
+    status: "using",
+  },
+
   // Home
   {
     name: "Firewalla",
@@ -233,14 +271,35 @@ export const items: UsesItem[] = [
       "Without the cloud connection their own app loses history and remote access.",
   },
   {
-    name: "Raspberry Pi",
+    name: "Raspberry Pi 5",
     icon: "simple-icons:raspberrypi",
     url: "https://www.raspberrypi.com",
     kind: "device",
     area: "tech",
     category: "Home",
     status: "using",
-    reason: "A small always-on box for a few home services.",
+    reason:
+      "It runs some of my containers to take the load off the NAS. The NAS CPU and memory are running out.",
+  },
+  {
+    name: "Raspberry Pi 4 with Batocera",
+    icon: "tabler:device-gamepad-2",
+    url: "https://batocera.org",
+    kind: "device",
+    area: "home",
+    category: "Home",
+    status: "using",
+    reason:
+      "I use this for retro console games with the kids on the TV: it runs Batocera (open source) and needs no store account.",
+  },
+  {
+    name: "Stages SB20",
+    icon: "tabler:bike",
+    url: "https://www.stagescycling.com",
+    kind: "device",
+    area: "home",
+    category: "Home",
+    status: "using",
   },
 
   // OS and desktop
@@ -440,7 +499,7 @@ export const items: UsesItem[] = [
     replaces: [{ name: "Google Drive" }, { name: "Dropbox" }],
   },
   {
-    name: "Small NAS containers",
+    name: "Home lab tools",
     icon: "tabler:box-multiple",
     kind: "software",
     area: "tech",
@@ -627,6 +686,53 @@ export const items: UsesItem[] = [
     status: "using",
     reason:
       "Recording, calls and streaming from one scene collection, native on Linux.",
+  },
+
+  // Studio and presenting
+  {
+    name: "Canon R6 Mark II with 24-105, 70-200, 50 and 35mm lenses",
+    icon: "tabler:camera",
+    url: "https://www.canon-europe.com",
+    kind: "device",
+    area: "creative",
+    category: "Studio and presenting",
+    status: "using",
+  },
+  {
+    name: "Sony RX100 V as webcam",
+    icon: "simple-icons:sony",
+    url: "https://www.sony.com",
+    kind: "device",
+    area: "creative",
+    category: "Studio and presenting",
+    status: "using",
+  },
+  {
+    name: "Røde Procaster with Elgato Wave XLR",
+    icon: "tabler:microphone",
+    url: "https://rode.com",
+    kind: "device",
+    area: "creative",
+    category: "Studio and presenting",
+    status: "using",
+  },
+  {
+    name: "Elgato Key Light, Key Light Air and Prompter",
+    icon: "tabler:bulb",
+    url: "https://www.elgato.com",
+    kind: "device",
+    area: "creative",
+    category: "Studio and presenting",
+    status: "using",
+  },
+  {
+    name: "Elgato Stream Deck and Stream Deck XL",
+    icon: "simple-icons:elgato",
+    url: "https://www.elgato.com",
+    kind: "device",
+    area: "tech",
+    category: "Studio and presenting",
+    status: "using",
   },
 
   // Communication and privacy
