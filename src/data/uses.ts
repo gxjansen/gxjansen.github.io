@@ -697,6 +697,10 @@ export const items: UsesItem[] = [
     area: "creative",
     category: "Studio and presenting",
     status: "using",
+    reason:
+      "Great lenses and great pictures and videos. I mainly use these for family events.",
+    downside:
+      "Once you've started with Canon, it's really hard to escape the ecosystem lock-in.",
   },
   {
     name: "Sony RX100 V as webcam",
@@ -706,15 +710,20 @@ export const items: UsesItem[] = [
     area: "creative",
     category: "Studio and presenting",
     status: "using",
+    reason:
+      "Much better than any webcam, especially in lower light conditions.",
+    downside:
+      "Runs hot, but I solved that with a heatsink and a bolted-on mini fan.",
   },
   {
-    name: "Røde Procaster with Elgato Wave XLR",
+    name: "Røde Procaster and Wireless Pro with Elgato Wave XLR",
     icon: "tabler:microphone",
     url: "https://rode.com",
     kind: "device",
     area: "creative",
     category: "Studio and presenting",
     status: "using",
+    reason: "Everything they make is great.",
   },
   {
     name: "Elgato Key Light, Key Light Air and Prompter",
@@ -724,6 +733,7 @@ export const items: UsesItem[] = [
     area: "creative",
     category: "Studio and presenting",
     status: "using",
+    reason: "Mainly great for the Stream Deck integration.",
   },
   {
     name: "Elgato Stream Deck and Stream Deck XL",
@@ -733,6 +743,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Studio and presenting",
     status: "using",
+    reason: "Great for additional control for customized scenes.",
   },
 
   // Communication and privacy
