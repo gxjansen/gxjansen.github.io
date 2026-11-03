@@ -145,14 +145,14 @@ export const items: UsesItem[] = [
     replaces: [{ name: "Mac mini as daily workstation" }],
   },
   {
-    name: "ThinkPad X1 Carbon (second-hand)",
+    name: "ThinkPad X1 Carbon",
     icon: "simple-icons:lenovo",
     kind: "device",
     area: "tech",
     category: "Personal hardware",
     status: "using",
     reason:
-      "A second-hand laptop that runs Linux without fuss. It's my mobile machine and attaches to the same sessions as the desktop.",
+      "A second-hand laptop that runs Linux without fuss. It syncs with the desktop and attaches to the same tmux sessions.",
     storyUrl: STORY_LOCAL_AI,
   },
   {
@@ -164,7 +164,7 @@ export const items: UsesItem[] = [
     category: "Personal hardware",
     status: "using",
     reason:
-      "Repairable and ethically sourced. The phone it replaced was dying.",
+      "Repairable and ethically sourced. The phone it replaced was dying (well, mainly its battery).",
     replaces: [{ name: "Samsung Galaxy S21 Ultra" }],
     storyUrl: STORY_2025,
   },
