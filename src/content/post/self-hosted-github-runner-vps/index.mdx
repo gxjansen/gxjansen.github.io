@@ -14,6 +14,13 @@ categories:
   - Open Source
 ---
 
+import Admonition from "@components/Admonition/Admonition.astro";
+
+<Admonition variant="info">
+  This post describes my setup as of June 2026. What I use today:
+  [/uses](/uses/).
+</Admonition>
+
 I spent $60 on GitHub Actions minutes last month. The CI run on my biggest repo was crawling at ~12 minutes per PR, long enough that I'd context-switch and lose the thread before it finished.
 
 So instead of throwing more money at GitHub, I rented a small VPS for about half the price and pointed my workflows at it. CI now finishes in ~3 minutes. Same workflows, same tests, just running on a different box. As a bonus, that same VPS can now also double as an encrypted backup target.

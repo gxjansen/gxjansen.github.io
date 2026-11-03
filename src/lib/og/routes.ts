@@ -101,6 +101,12 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     lead: "Field notes, essays and how-tos from building community functions.",
     hand: "field notes",
   },
+  uses: {
+    url: "gui.do/uses",
+    title: "The tools I actually use",
+    lead: "Hardware, software and services, why I picked them, and what I dropped.",
+    hand: "my setup",
+  },
   contact: {
     url: "gui.do/contact",
     title: "Get in touch",
