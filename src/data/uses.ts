@@ -74,42 +74,42 @@ export const lastReviewed = "2026-11-01";
 export const principles: UsesPrinciple[] = [
   {
     title: "Own the data, or be able to leave",
-    text: "Before I adopt a tool I check how hard it is to export everything. Plain files (Markdown) and open protocols (CalDAV) beat a nicer app that holds my data hostage.",
+    text: "Before I adopt a tool I check how hard it is to export everything. If available, an app that allows me to export plain files (e.g. Markdown) and uses open protocols (e.g. CalDAV) will always beat a nicer app that holds my data hostage.",
   },
   {
     title: "Open source first, open standards second",
-    text: "I prefer tools where I can read the code. When that's not possible, I want formats and protocols that more than one tool speaks.",
+    text: "I prefer tools where I can read (and adjust) the code. When that's not possible, I'd want formats and protocols that more than one tool speaks.",
   },
   {
     title: "Local-first, cloud optional",
-    text: "The house, the media and the photos should keep working when the internet (or a vendor) doesn't. Cloud services are a nice extra on top.",
+    text: "Home automations, media players, family photos are things that should keep working when the internet (or a vendor) doesn't. Cloud services are a nice extra on top as a facilitator or accelerator, but not as a foundation you depend on.",
   },
   {
     title: "The bankruptcy test",
-    text: "For hardware I ask what happens if the company disappears. A device with a local API keeps working. A cloud-only one becomes e-waste.",
+    text: "For hardware I ask what happens if the company disappears. A device with a local API keeps working. A cloud-only one (e.g. Sonos, most voice assistants) becomes e-waste.",
   },
   {
     title: "Subscriptions only on purpose",
-    text: "I pick a one-time purchase when one exists. The subscriptions I do keep pay for convenience, and not for access to my own files.",
+    text: "I pick a one-time purchase when one exists. The subscriptions I have usually pay for convenience, or to support the people behind it. Not for access to my own data.",
   },
   {
     title: "EU and privacy-respecting where it's practical",
-    text: "GDPR exists for a reason, so I lean towards European providers. I'm pragmatic about it though: I use a US service when lock-in is low and I can leave.",
+    text: "GDPR exists for a reason, so I lean towards European providers. I'm pragmatic about it though: I'm ok with using a non-EU service when lock-in is low and I can still easily leave. Avoiding every piece of software or hardware that phones home is not practical, so I disable telemetry or block it.",
   },
   {
     title: "Own my identity",
-    text: "My own email domain makes every later migration easier: the provider behind it can change while my address stays the same.",
+    text: "My own email domain makes every later migration easier: the provider behind it can change while my address stays the same. I use my own domain as my handle (gui.do) on Bluesky via AT Protocol and keep my account data in a repository on a PDS. This means I can swap out the PDS host whenever I want while my handle and followers stay where they are.",
   },
   {
     title: "Replace gradually",
-    text: "I run old and new side by side and switch when the new setup is boringly reliable. And when I install something, I turn off its telemetry first.",
+    text: "I run old and new side by side and switch when the new setup is boringly reliable.",
   },
 ];
 
 /** Display order of the item groups on the page. */
 export const categoryOrder = [
-  "Hardware",
-  "Home and network",
+  "Personal hardware",
+  "Home",
   "OS and desktop",
   "Development",
   "AI (local and hosted)",
@@ -119,12 +119,12 @@ export const categoryOrder = [
 ] as const;
 
 export const items: UsesItem[] = [
-  // Hardware
+  // Personal hardware
   {
     name: "Desktop PC (AMD Ryzen, RTX 5070)",
     kind: "device",
     area: "tech",
-    category: "Hardware",
+    category: "Personal hardware",
     status: "using",
     reason:
       "My main workstation since October 2026. One machine for code, calls, streaming and most games, and the one my other devices attach to.",
@@ -135,7 +135,7 @@ export const items: UsesItem[] = [
     name: "ThinkPad X1 Carbon (second-hand)",
     kind: "device",
     area: "tech",
-    category: "Hardware",
+    category: "Personal hardware",
     status: "using",
     reason:
       "A second-hand laptop that runs Linux without fuss. It's my mobile machine and attaches to the same sessions as the desktop.",
@@ -146,7 +146,7 @@ export const items: UsesItem[] = [
     url: "https://www.fairphone.com",
     kind: "device",
     area: "tech",
-    category: "Hardware",
+    category: "Personal hardware",
     status: "using",
     reason:
       "Repairable and ethically sourced. The phone it replaced was dying.",
@@ -158,7 +158,7 @@ export const items: UsesItem[] = [
     url: "https://www.zsa.io/voyager",
     kind: "device",
     area: "tech",
-    category: "Hardware",
+    category: "Personal hardware",
     status: "trying",
     reason:
       "A split, programmable keyboard that I'm still learning Colemak DH on.",
@@ -169,20 +169,20 @@ export const items: UsesItem[] = [
     url: "https://supernote.com",
     kind: "device",
     area: "tech",
-    category: "Hardware",
+    category: "Personal hardware",
     status: "using",
     reason:
       "An e-ink tablet for handwritten notes and e-books that syncs to my own server instead of the vendor cloud.",
     storyUrl: STORY_2025,
   },
 
-  // Home and network
+  // Home
   {
     name: "Home Assistant Green with a Zigbee and Thread stick",
     url: "https://www.home-assistant.io",
     kind: "device",
     area: "home",
-    category: "Home and network",
+    category: "Home",
     status: "using",
     reason:
       "Lights and automations keep running when the internet is down. It's a dedicated box, so I can reboot my other machines freely.",
@@ -193,7 +193,7 @@ export const items: UsesItem[] = [
     url: "https://www.homewizard.com",
     kind: "device",
     area: "home",
-    category: "Home and network",
+    category: "Home",
     status: "using",
     reason:
       "They have a local API, so Home Assistant reads them directly. I switched off their cloud connection.",
@@ -205,7 +205,7 @@ export const items: UsesItem[] = [
     url: "https://www.raspberrypi.com",
     kind: "device",
     area: "tech",
-    category: "Home and network",
+    category: "Home",
     status: "using",
     reason: "A small always-on box for a few home services.",
   },
@@ -222,17 +222,6 @@ export const items: UsesItem[] = [
       "A fast Arch-based Linux that I manage with config in git. On my laptop since early 2026 and on my desktop since October 2026.",
     downside: "A few games and the iOS tooling still need other systems.",
     replaces: [{ name: "macOS" }],
-  },
-  {
-    name: "Ghostty and tmux, with sesh and workmux",
-    url: "https://ghostty.org",
-    kind: "software",
-    area: "tech",
-    category: "OS and desktop",
-    status: "using",
-    reason:
-      "A fast terminal with sane defaults, and tmux sessions that live on the desktop. I attach from the laptop or my phone and continue where I left off.",
-    replaces: [{ name: "cmux" }],
   },
   {
     name: "chezmoi with metapac",
@@ -267,6 +256,17 @@ export const items: UsesItem[] = [
   },
 
   // Development
+  {
+    name: "Ghostty and tmux, with sesh and workmux",
+    url: "https://ghostty.org",
+    kind: "software",
+    area: "tech",
+    category: "Development",
+    status: "using",
+    reason:
+      "A fast terminal with sane defaults, and tmux sessions that live on the desktop. I attach from the laptop or my phone and continue where I left off.",
+    replaces: [{ name: "cmux" }],
+  },
   {
     name: "Zed",
     url: "https://zed.dev",
@@ -325,18 +325,6 @@ export const items: UsesItem[] = [
   },
 
   // AI (local and hosted)
-  {
-    name: "Claude Code",
-    url: "https://www.claude.com/product/claude-code",
-    kind: "software",
-    area: "tech",
-    category: "AI (local and hosted)",
-    status: "using",
-    reason:
-      "My main coding agent. It lets me build small tools myself instead of subscribing to yet another service. Its telemetry is off.",
-    downside: "Closed source, and a flat-fee subscription with a quota.",
-    storyUrl: STORY_2025,
-  },
   {
     name: "Ollama",
     url: "https://ollama.com",
@@ -469,7 +457,7 @@ export const items: UsesItem[] = [
     area: "tech",
     status: "using",
     reason:
-      "Static feeds and files on my own server instead of a podcast host. Cheaper, and no vendor between me and my listeners.",
+      "I host static feeds and audio files on my own server to cut out the vendor between me and my listeners. It costs less than my old Transistor subscription.",
     startedAt: "2026-10",
     replaces: [{ name: "Transistor" }],
   },
@@ -579,17 +567,6 @@ export const items: UsesItem[] = [
     storyUrl: STORY_ANTIFRAGILE,
   },
   {
-    name: "Cirrux",
-    url: "https://www.cirrux.co",
-    kind: "service",
-    area: "tech",
-    category: "Communication and privacy",
-    status: "trying",
-    reason:
-      "EU-hosted email that I'm watching as a possible Fastmail replacement.",
-    downside: "No web calendar yet, only third-party CalDAV clients.",
-  },
-  {
     name: "Bitwarden",
     url: "https://bitwarden.com",
     kind: "software",
@@ -617,15 +594,6 @@ export const items: UsesItem[] = [
     category: "Communication and privacy",
     status: "using",
     reason: "A hardware security key for the accounts that matter most.",
-  },
-  {
-    name: "Telemetry off everywhere",
-    area: "tech",
-    category: "Communication and privacy",
-    status: "using",
-    reason:
-      "One shared file of environment opt-outs plus per-app policies. I log each opt-out when I install something.",
-    startedAt: "2026-10",
   },
 
   // Dropped. "Replaced by" comes from the `replaces` lists above.
@@ -660,7 +628,7 @@ export const items: UsesItem[] = [
     area: "tech",
     status: "dropped",
     droppedReason: "replaced",
-    reason: "I stopped using them more than a year before my 2025 post.",
+    endedAt: "2024",
   },
   {
     name: "Audible and YouTube Music",
@@ -715,23 +683,13 @@ export const items: UsesItem[] = [
       "Development ended and it isn't open source. I went to Firefox first, then Zen.",
   },
   {
-    name: "Synology Drive for notes",
-    kind: "software",
-    area: "tech",
-    status: "dropped",
-    droppedReason: "replaced",
-    reason:
-      "It lost updates when the NAS acted as the hub. My notes sync with Obsidian Sync now.",
-    endedAt: "2026-06",
-  },
-  {
     name: "Transistor",
     kind: "service",
     area: "tech",
     status: "dropped",
     droppedReason: "replaced",
     reason:
-      "Cheaper, and no vendor between me and my listeners. The subscription is cancelled.",
+      "I cancelled this paid podcast hosting subscription because self-hosting is cheaper. There is no vendor between me and my listeners anymore.",
     endedAt: "2026-10",
   },
   {
