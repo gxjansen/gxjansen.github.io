@@ -501,6 +501,18 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
   {
+    name: "NPO Start",
+    icon: "tabler:device-tv",
+    url: "https://npo.nl/start",
+    kind: "service",
+    area: "tech",
+    category: "Notes, media and self-hosted services",
+    status: "using",
+    reason:
+      "My kids want Dutch programming. Netflix and Disney+ are too weak on that. I'm using the free tier.",
+    replaces: [{ name: "Streaming subscriptions (Netflix, Disney+, Prime)" }],
+  },
+  {
     name: "Hetzner",
     icon: "simple-icons:hetzner",
     url: "https://www.hetzner.com",

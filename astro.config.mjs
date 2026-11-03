@@ -140,6 +140,7 @@ export default defineConfig({
           "calendar-time",
           "chart-bar",
           "device-desktop",
+          "device-tv",
           "door",
           "file-settings",
           "flask",
