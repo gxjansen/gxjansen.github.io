@@ -2,6 +2,8 @@
 // /uses: the hardware, software and services Guido uses, why, and what he
 // dropped along the way. Static; the data lives in src/data/uses.ts.
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import {
   categoryOrder,
@@ -47,6 +49,19 @@ const slugify = (s: string) =>
     .replace(/^-|-$/g, "");
 
 const itemId = (item: UsesItem) => `use-${slugify(item.name)}`;
+
+// Item photos live in src/assets/images/uses/; the data holds the file name.
+// A name without a file fails the build instead of rendering a broken image.
+const photoFiles = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/images/uses/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+const photo = (item: UsesItem) => {
+  if (!item.photo) return undefined;
+  const file = photoFiles[`../assets/images/uses/${item.photo}`];
+  if (!file) throw new Error(`uses: no photo file "${item.photo}"`);
+  return file.default;
+};
 
 // Story links point at posts on this site; show the post title as link text
 // and link relatively so previews stay on their own host.
@@ -138,25 +153,41 @@ const dropped = droppedItems.map((item) => ({
                 ? `Replaced ${item.replaces.map((r) => r.name).join(" and ")}`
                 : null,
             ].filter(Boolean);
-            return <li id={itemId(item)} class="uses-item">
-              <p class="item-name">
-                {item.url ? (
-                  <a href={item.url}>{item.name}</a>
-                ) : (
-                  <span>{item.name}</span>
-                )}
-                {item.status === "trying" && <span class="trying">Trying</span>}
-              </p>
-              {item.reason && <p class="item-reason">{item.reason}</p>}
-              {item.downside && <p class="item-downside">
-                <span class="font-semibold">Downside:</span>{" "}
-                {item.downside}
-              </p>}
-              {(meta.length > 0 || s) && <p class="item-meta">
-                {meta.join(". ")}
-                {meta.length > 0 && s && ". "}
-                {s && <> Story: <a href={s.href}>{s.title}</a> </>}
-              </p>}
+            const img = photo(item);
+            return <li
+              id={itemId(item)}
+              class:list={["uses-item", img && "has-photo"]}
+            >
+              {img && (
+                <Image
+                  src={img}
+                  alt=""
+                  widths={[320, 480, 640]}
+                  sizes="(min-width: 640px) 12rem, 100vw"
+                  class="item-photo"
+                />
+              )}
+              <div class="item-body">
+                <p class="item-name">
+                  {item.url ? (
+                    <a href={item.url}>{item.name}</a>
+                  ) : (
+                    <span>{item.name}</span>
+                  )}
+                  {item.status === "trying" && <span class="trying"
+                    >Trying</span
+                  >}
+                </p>
+                {item.reason && <p class="item-reason">{item.reason}</p>}
+                {item.downside && <p class="item-downside">
+                  <span class="font-semibold">Downside:</span>{" "}
+                  {item.downside}
+                </p>}
+                {(meta.length > 0 || s) && <p class="item-meta">
+                  {meta.join(". ") + (meta.length > 0 && s ? ". " : "")}
+                  {s && <>Story: <a href={s.href}>{s.title}</a></>}
+                </p>}
+              </div>
             </li>;
           })}
         </ul>
@@ -222,6 +253,16 @@ const dropped = droppedItems.map((item) => ({
   }
   .uses-item {
     @apply py-4;
+  }
+  /* Photo on the right from sm up, above the text on small screens. */
+  .has-photo {
+    @apply flex flex-col gap-4 sm:flex-row-reverse sm:items-start;
+  }
+  .has-photo .item-body {
+    @apply min-w-0 flex-1;
+  }
+  .item-photo {
+    @apply aspect-[3/2] w-full rounded-lg object-cover sm:w-48 sm:shrink-0;
   }
   .item-name {
     @apply text-base-950 dark:text-base-50 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-bold;

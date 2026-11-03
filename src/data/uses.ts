@@ -48,6 +48,11 @@ export interface UsesItem {
   droppedReason?: UsesDroppedReason;
   replaces?: UsesReplacement[];
   storyUrl?: string;
+  /**
+   * Site-only, not a record field: file name in src/assets/images/uses/.
+   * Own photos only, with metadata stripped and nothing personal in frame.
+   */
+  photo?: string;
 }
 
 export interface UsesPrinciple {
@@ -155,6 +160,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "ZSA Voyager",
+    photo: "zsa-voyager.jpg",
     url: "https://www.zsa.io/voyager",
     kind: "device",
     area: "tech",
@@ -166,6 +172,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Supernote Manta",
+    photo: "supernote-manta.jpg",
     url: "https://supernote.com",
     kind: "device",
     area: "tech",
@@ -179,6 +186,7 @@ export const items: UsesItem[] = [
   // Home
   {
     name: "Home Assistant Green with a Zigbee and Thread stick",
+    photo: "home-assistant-green.jpg",
     url: "https://www.home-assistant.io",
     kind: "device",
     area: "home",
