@@ -351,6 +351,16 @@ export const items: UsesItem[] = [
     replaces: [{ name: "MacWhisper" }],
   },
   {
+    name: "LibreOffice",
+    icon: "simple-icons:libreoffice",
+    url: "https://www.libreoffice.org",
+    kind: "software",
+    area: "tech",
+    category: "OS and desktop",
+    status: "using",
+    replaces: [{ name: "Microsoft Office" }],
+  },
+  {
     name: "Steam",
     icon: "simple-icons:steam",
     url: "https://store.steampowered.com",
