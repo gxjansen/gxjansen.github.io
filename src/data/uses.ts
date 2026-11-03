@@ -440,6 +440,16 @@ export const items: UsesItem[] = [
     replaces: [{ name: "Google Drive" }, { name: "Dropbox" }],
   },
   {
+    name: "Small NAS containers",
+    icon: "tabler:box-multiple",
+    kind: "software",
+    area: "tech",
+    category: "Notes, media and self-hosted services",
+    status: "using",
+    reason:
+      "These are small tools not worth one entry each: Portainer CE, Homepage, Glances, Uptime Kuma, Diun, WireGuard, Paperless-ngx, Calibre-web, Kiwix, NocoDB, n8n, and a Minecraft server. All are open source except for the Minecraft server.",
+  },
+  {
     name: "Immich",
     icon: "simple-icons:immich",
     url: "https://immich.app",

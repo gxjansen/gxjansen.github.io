@@ -136,6 +136,7 @@ export default defineConfig({
         tabler: [
           "world-www",
           "aperture",
+          "box-multiple",
           "calendar",
           "calendar-time",
           "chart-bar",
