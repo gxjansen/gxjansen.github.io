@@ -448,8 +448,9 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Notes, media and self-hosted services",
     status: "using",
-    reason: "I own a lifetime pass, so I use it.",
-    downside: "Plex is closed source and I wouldn't buy it again.",
+    reason:
+      "Wouldn't start using it today, but I bought a lifetime pass when it was very cheap and the combination with Plexamp is also convenient. With telemetry and ads blocked it's fine for now. Ideally I'll replace it with an open source alternative at some point (Jellyfin?) but it's not high on my todo list.",
+    downside: "Plex is closed source.",
     replaces: [{ name: "Streaming subscriptions (Netflix, Disney+, Prime)" }],
     storyUrl: STORY_2025,
   },
