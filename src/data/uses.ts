@@ -53,6 +53,12 @@ export interface UsesItem {
    * Own photos only, with metadata stripped and nothing personal in frame.
    */
   photo?: string;
+  /**
+   * Site-only: iconify name ("simple-icons:astro", "tabler:rss") shown next to
+   * the name when there is no photo. Add new names to the astro-icon include
+   * list in astro.config.mjs.
+   */
+  icon?: string;
 }
 
 export interface UsesPrinciple {
@@ -127,17 +133,19 @@ export const items: UsesItem[] = [
   // Personal hardware
   {
     name: "Desktop PC (AMD Ryzen, RTX 5070)",
+    icon: "tabler:device-desktop",
     kind: "device",
     area: "tech",
     category: "Personal hardware",
     status: "using",
     reason:
-      "My main workstation since October 2026. One machine for code, calls, streaming and most games, and the one my other devices attach to.",
+      "One machine for code, calls, streaming and most games, and the one my other devices attach to.",
     startedAt: "2026-10",
     replaces: [{ name: "Mac mini as daily workstation" }],
   },
   {
     name: "ThinkPad X1 Carbon (second-hand)",
+    icon: "simple-icons:lenovo",
     kind: "device",
     area: "tech",
     category: "Personal hardware",
@@ -148,6 +156,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Fairphone 6",
+    icon: "simple-icons:fairphone",
     url: "https://www.fairphone.com",
     kind: "device",
     area: "tech",
@@ -198,6 +207,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "HomeWizard energy meters and plugs",
+    icon: "tabler:plug",
     url: "https://www.homewizard.com",
     kind: "device",
     area: "home",
@@ -210,6 +220,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Raspberry Pi",
+    icon: "simple-icons:raspberrypi",
     url: "https://www.raspberrypi.com",
     kind: "device",
     area: "tech",
@@ -221,6 +232,7 @@ export const items: UsesItem[] = [
   // OS and desktop
   {
     name: "CachyOS with KDE Plasma",
+    icon: "simple-icons:cachyos",
     url: "https://cachyos.org",
     kind: "software",
     area: "tech",
@@ -233,6 +245,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "chezmoi with metapac",
+    icon: "tabler:file-settings",
     url: "https://www.chezmoi.io",
     kind: "software",
     area: "tech",
@@ -243,6 +256,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Zen browser",
+    icon: "simple-icons:zenbrowser",
     url: "https://zen-browser.app",
     kind: "software",
     area: "tech",
@@ -254,6 +268,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Handy",
+    icon: "tabler:microphone",
     url: "https://handy.computer",
     kind: "software",
     area: "tech",
@@ -266,6 +281,7 @@ export const items: UsesItem[] = [
   // Development
   {
     name: "Ghostty and tmux, with sesh and workmux",
+    icon: "simple-icons:ghostty",
     url: "https://ghostty.org",
     kind: "software",
     area: "tech",
@@ -277,6 +293,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Zed",
+    icon: "simple-icons:zedindustries",
     url: "https://zed.dev",
     kind: "software",
     area: "tech",
@@ -287,6 +304,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Astro",
+    icon: "simple-icons:astro",
     url: "https://astro.build",
     kind: "software",
     area: "tech",
@@ -299,6 +317,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "GitHub Actions on my own runner",
+    icon: "simple-icons:githubactions",
     url: "https://docs.github.com/en/actions/hosting-your-own-runners",
     kind: "service",
     area: "tech",
@@ -313,6 +332,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Codeberg",
+    icon: "simple-icons:codeberg",
     url: "https://codeberg.org",
     kind: "service",
     area: "tech",
@@ -323,6 +343,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Tangled",
+    icon: "simple-icons:tangled",
     url: "https://tangled.org",
     kind: "service",
     area: "tech",
@@ -335,6 +356,7 @@ export const items: UsesItem[] = [
   // AI (local and hosted)
   {
     name: "Ollama",
+    icon: "simple-icons:ollama",
     url: "https://ollama.com",
     kind: "software",
     area: "tech",
@@ -348,6 +370,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "OpenRouter",
+    icon: "simple-icons:openrouter",
     url: "https://openrouter.ai",
     kind: "service",
     area: "tech",
@@ -362,13 +385,14 @@ export const items: UsesItem[] = [
   // Notes, media and self-hosted services
   {
     name: "Obsidian",
+    icon: "simple-icons:obsidian",
     url: "https://obsidian.md",
     kind: "software",
     area: "tech",
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "Everything is plain Markdown on my disk. I pay for Obsidian Sync for the mobile convenience, not for access.",
+      "Everything is plain Markdown on my disk. I pay for Obsidian Sync for the mobile convenience and to support the developer.",
     downside:
       "The sync service is a monthly subscription, even though the app itself is free.",
     replaces: [{ name: "Evernote and Notion" }],
@@ -376,6 +400,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "FreshRSS",
+    icon: "simple-icons:freshrss",
     url: "https://freshrss.org",
     kind: "software",
     area: "tech",
@@ -387,26 +412,29 @@ export const items: UsesItem[] = [
   },
   {
     name: "Synology NAS",
+    icon: "simple-icons:synology",
     url: "https://www.synology.com",
     kind: "device",
     area: "tech",
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "It replaced paid Google Drive and Dropbox storage and runs my containers. I wouldn't buy one today, but I see no reason to replace one that works.",
+      "It runs my containers. I wouldn't buy a Synology today, but I see no reason to replace one that works.",
     downside:
       "With more containers, its CPU and memory are starting to run out.",
     storyUrl: STORY_2025,
+    replaces: [{ name: "Google Drive" }, { name: "Dropbox" }],
   },
   {
     name: "Immich",
+    icon: "simple-icons:immich",
     url: "https://immich.app",
     kind: "software",
     area: "tech",
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "My photo library without Google Photos. The heavy machine-learning work runs on my desktop GPU instead of the NAS.",
+      "The heavy machine-learning work runs on my desktop GPU instead of the NAS.",
     downside:
       "The first import and face recognition crushed the NAS CPU for days.",
     replaces: [{ name: "Google Photos" }],
@@ -414,19 +442,20 @@ export const items: UsesItem[] = [
   },
   {
     name: "Plex with the *arr apps",
+    icon: "simple-icons:plex",
     url: "https://www.plex.tv",
     kind: "software",
     area: "tech",
     category: "Notes, media and self-hosted services",
     status: "using",
-    reason:
-      "I own a lifetime pass, so I use it. The *arr apps replaced a pile of streaming subscriptions.",
+    reason: "I own a lifetime pass, so I use it.",
     downside: "Plex is closed source and I wouldn't buy it again.",
     replaces: [{ name: "Streaming subscriptions (Netflix, Disney+, Prime)" }],
     storyUrl: STORY_2025,
   },
   {
     name: "Audiobookshelf with Symfonium",
+    icon: "simple-icons:audiobookshelf",
     url: "https://www.audiobookshelf.org",
     kind: "software",
     area: "tech",
@@ -436,6 +465,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Plexamp",
+    icon: "tabler:headphones",
     url: "https://www.plex.tv/plexamp/",
     kind: "software",
     area: "tech",
@@ -445,6 +475,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Grayjay",
+    icon: "tabler:player-play",
     url: "https://grayjay.app",
     kind: "software",
     area: "tech",
@@ -457,6 +488,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Hetzner",
+    icon: "simple-icons:hetzner",
     url: "https://www.hetzner.com",
     kind: "service",
     area: "tech",
@@ -468,6 +500,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "cal.rs booking page",
+    icon: "tabler:calendar",
     kind: "software",
     area: "tech",
     category: "Notes, media and self-hosted services",
@@ -479,6 +512,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Self-hosted podcast feeds",
+    icon: "tabler:rss",
     category: "Notes, media and self-hosted services",
     area: "tech",
     status: "using",
@@ -489,6 +523,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Umami",
+    icon: "simple-icons:umami",
     url: "https://umami.is",
     kind: "software",
     area: "tech",
@@ -499,6 +534,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Listmonk",
+    icon: "simple-icons:listmonk",
     url: "https://listmonk.app",
     kind: "software",
     area: "tech",
@@ -509,6 +545,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Kairos (my own scheduler)",
+    icon: "tabler:calendar-time",
     kind: "software",
     area: "tech",
     category: "Notes, media and self-hosted services",
@@ -521,6 +558,7 @@ export const items: UsesItem[] = [
   // Photo, video and streaming
   {
     name: "darktable and RawTherapee",
+    icon: "tabler:aperture",
     url: "https://www.darktable.org",
     kind: "software",
     area: "creative",
@@ -534,16 +572,18 @@ export const items: UsesItem[] = [
   },
   {
     name: "Affinity",
+    icon: "simple-icons:affinity",
     url: "https://affinity.studio",
     kind: "software",
     area: "creative",
     category: "Photo, video and streaming",
     status: "using",
-    reason: "Photo and design editing without an Adobe subscription.",
+    reason: "Photo and design editing.",
     replaces: [{ name: "Adobe Creative Cloud" }],
   },
   {
     name: "OBS Studio",
+    icon: "simple-icons:obsstudio",
     url: "https://obsproject.com",
     kind: "software",
     area: "creative",
@@ -556,6 +596,7 @@ export const items: UsesItem[] = [
   // Communication and privacy
   {
     name: "Bluesky",
+    icon: "simple-icons:bluesky",
     url: "https://bsky.app",
     kind: "service",
     area: "tech",
@@ -568,32 +609,34 @@ export const items: UsesItem[] = [
   },
   {
     name: "Signal",
+    icon: "simple-icons:signal",
     url: "https://signal.org",
     kind: "software",
     area: "tech",
     category: "Communication and privacy",
     status: "using",
-    reason:
-      "Encrypted messaging. I keep moving chat groups over from WhatsApp.",
+    reason: "Encrypted messaging.",
     downside: "Some groups are still stuck on WhatsApp.",
     replaces: [{ name: "WhatsApp" }],
     storyUrl: STORY_2025,
   },
   {
     name: "Fastmail",
+    icon: "tabler:mail",
     url: "https://www.fastmail.com",
     kind: "service",
     area: "tech",
     category: "Communication and privacy",
     status: "using",
     reason:
-      "Email, calendar and contacts on open protocols (IMAP, CalDAV, CardDAV) with my own domains. I left Proton because its calendar was hard to automate.",
+      "Email, calendar and contacts on open protocols (IMAP, CalDAV, CardDAV) with my own domains.",
     downside: "It's Australian, so not in the EU.",
     replaces: [{ name: "Google Workspace" }, { name: "Proton" }],
     storyUrl: STORY_ANTIFRAGILE,
   },
   {
     name: "Bitwarden",
+    icon: "simple-icons:bitwarden",
     url: "https://bitwarden.com",
     kind: "software",
     area: "tech",
@@ -603,6 +646,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Aegis Authenticator",
+    icon: "tabler:shield-lock",
     url: "https://getaegis.app",
     kind: "software",
     area: "tech",
@@ -614,6 +658,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "YubiKey",
+    icon: "simple-icons:yubico",
     url: "https://www.yubico.com",
     kind: "device",
     area: "tech",
@@ -629,8 +674,7 @@ export const items: UsesItem[] = [
     area: "tech",
     status: "dropped",
     droppedReason: "replaced",
-    reason:
-      "Mail, calendar and contacts moved. Untangling the Google sign-ins is still in progress.",
+    reason: "Untangling the Google sign-ins is still in progress.",
   },
   {
     name: "Google Photos",
@@ -646,7 +690,6 @@ export const items: UsesItem[] = [
     area: "tech",
     status: "dropped",
     droppedReason: "replaced",
-    reason: "One client for several video sources, with tracking switched off.",
   },
   {
     name: "Twitter and Instagram",
@@ -734,7 +777,7 @@ export const items: UsesItem[] = [
     status: "dropped",
     droppedReason: "replaced",
     reason:
-      "The hosted EU service closed on 1 November 2026 and the project went closed source, so I moved to a small self-hosted booking page.",
+      "The hosted EU service closed on 1 November 2026 and the project went closed source.",
     endedAt: "2026-10",
   },
   {

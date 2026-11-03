@@ -40,6 +40,7 @@
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "@atproto/api": "^0.28.1",
+    "@iconify-json/simple-icons": "^1.2.101",
     "@iconify-json/tabler": "^1.2.42",
     "@netlify/blobs": "^11.1.4",
     "@resvg/resvg-js": "^2.6.2",
