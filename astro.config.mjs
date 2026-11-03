@@ -160,6 +160,7 @@ export default defineConfig({
           "star",
         ],
         "simple-icons": [
+          "firewalla",
           "affinity",
           "astro",
           "audiobookshelf",

@@ -194,6 +194,20 @@ export const items: UsesItem[] = [
 
   // Home
   {
+    name: "Firewalla",
+    icon: "simple-icons:firewalla",
+    url: "https://firewalla.com",
+    model: "Gold Pro",
+    kind: "device",
+    area: "tech",
+    category: "Home",
+    status: "using",
+    reason:
+      "A router and firewall with per-device rules and domain blocking, without needing a cloud account for the basics.",
+    downside: "Ad and domain blocking only helps at home.",
+    storyUrl: STORY_2025,
+  },
+  {
     name: "Home Assistant Green with a Zigbee and Thread stick",
     photo: "home-assistant-green.jpg",
     url: "https://www.home-assistant.io",
@@ -434,14 +448,14 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "The heavy machine-learning work runs on my desktop GPU instead of the NAS.",
+      "I host my family photos and videos on my own NAS, backed up from my phone. The heavy machine-learning work runs on my desktop GPU instead of the NAS.",
     downside:
       "The first import and face recognition crushed the NAS CPU for days.",
     replaces: [{ name: "Google Photos" }],
     storyUrl: STORY_2025,
   },
   {
-    name: "Plex with the *arr apps",
+    name: "Plex",
     icon: "simple-icons:plex",
     url: "https://www.plex.tv",
     kind: "software",
@@ -451,7 +465,6 @@ export const items: UsesItem[] = [
     reason:
       "Wouldn't start using it today, but I bought a lifetime pass when it was very cheap and the combination with Plexamp is also convenient. With telemetry and ads blocked it's fine for now. Ideally I'll replace it with an open source alternative at some point (Jellyfin?) but it's not high on my todo list.",
     downside: "Plex is closed source.",
-    replaces: [{ name: "Streaming subscriptions (Netflix, Disney+, Prime)" }],
     storyUrl: STORY_2025,
   },
   {
