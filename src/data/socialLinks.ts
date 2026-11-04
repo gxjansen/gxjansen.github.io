@@ -89,17 +89,6 @@ export const socialLinks: SocialLink[] = [
     },
   },
   {
-    name: "Instagram",
-    href: "https://www.instagram.com/gxjansen",
-    icon: "instagram",
-    visibility: {
-      footer: false,
-      hero: false,
-      about: false,
-      contact: false,
-    },
-  },
-  {
     name: "RSS Feed",
     href: "/rss.xml",
     icon: "rss",
