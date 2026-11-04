@@ -146,7 +146,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "ThinkPad X1 Carbon",
-    icon: "simple-icons:lenovo",
+    photo: "thinkpad-x1-carbon.jpg",
     kind: "device",
     area: "tech",
     category: "Personal hardware",
@@ -300,6 +300,17 @@ export const items: UsesItem[] = [
     area: "home",
     category: "Home",
     status: "using",
+  },
+  {
+    name: "DYMO LabelManager 160",
+    photo: "dymo-labelmanager-160.jpg",
+    url: "https://www.dymo.com/label-makers-printers/labelmanager-label-makers/dymo-labelmanager-160-portable-label-maker/SP_95477.html",
+    kind: "device",
+    area: "home",
+    category: "Home",
+    status: "using",
+    reason: "I love it.",
+    downside: "My girlfriend hates it (when labels are visible anywhere).",
   },
 
   // OS and desktop

@@ -184,7 +184,6 @@ export default defineConfig({
           "githubactions",
           "hetzner",
           "immich",
-          "lenovo",
           "libreoffice",
           "listmonk",
           "obsidian",
