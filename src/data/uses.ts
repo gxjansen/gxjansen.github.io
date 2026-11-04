@@ -50,7 +50,8 @@ export interface UsesItem {
   storyUrl?: string;
   /**
    * Site-only, not a record field: file name in src/assets/images/uses/.
-   * Own photos only, with metadata stripped and nothing personal in frame.
+   * Own photos, with metadata stripped and nothing personal in frame. A vendor
+   * image only where Guido chose one (interstuhl-twentyfour.jpg).
    */
   photo?: string;
   /**
@@ -201,15 +202,30 @@ export const items: UsesItem[] = [
     area: "home",
     category: "Personal hardware",
     status: "using",
+    reason:
+      "I like standing up for calls and for some of the work, but not all day. So I needed a desk that can reliably go up and down and gives me a lot of space. Since I'm in the corner of my home office, the L shape makes perfect sense and works great. It's a very stable frame on which I could put my own custom tabletop. Combined with the Aeris Muvmat it's great for alternating between sitting and standing.",
+  },
+  {
+    name: "Aeris Muvmat",
+    icon: "tabler:shoe",
+    url: "https://www.aeris.de/en/products/aeris-muvmat-schwarz-ohne-bezug",
+    kind: "product",
+    area: "home",
+    category: "Personal hardware",
+    status: "using",
   },
   {
     name: "Interstuhl TWENTYFOUR",
-    icon: "tabler:armchair",
+    photo: "interstuhl-twentyfour.jpg",
     url: "https://www.interstuhl.com/ia-en/products/twentyfour",
     kind: "product",
     area: "home",
     category: "Personal hardware",
     status: "using",
+    reason:
+      "I sit at my desk a lot. Not 24 hours, but I still really needed this to be a good one. I like my back not hurting all the time ;) The seat and back covers come off for cleaning!",
+    downside:
+      "More boring compared to those hip gaming chairs, but if I sit in it I don't see the chair anyway, but do feel it ;)",
   },
   {
     name: "Sony WH-1000XM5",
@@ -219,6 +235,9 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Personal hardware",
     status: "using",
+    reason:
+      "I bought it because I was quite happy with my XM3, but lost that at an airport.",
+    replaces: [{ name: "Sony WH-1000XM3" }],
   },
   {
     name: "Garmin Epix Pro",
@@ -230,7 +249,7 @@ export const items: UsesItem[] = [
     status: "using",
     reason: "A very good product and fun to customize the dials yourself.",
     downside:
-      "Their app ecosystem has some weird quirks and they are starting to behave like a monopolist. I would go for an EU-based alternative next time.",
+      "Their app ecosystem has some weird quirks and they are starting to behave like a monopolist. Especially on a watch priced like this, I'd expect to be able to use all features, not have some locked behind a paywall. I would go for an EU-based alternative next time.",
   },
 
   // Home
@@ -303,6 +322,8 @@ export const items: UsesItem[] = [
     area: "home",
     category: "Home",
     status: "using",
+    reason:
+      "I chose it because it's the best complete and compact indoor bike (as in: not a roller for an outdoor bike) I could find that didn't require a subscription to ride. It needed to fit in my home office, so it couldn't be too long. The customizations make it great.",
   },
   {
     name: "DYMO LabelManager 160",
