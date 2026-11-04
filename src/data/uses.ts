@@ -86,7 +86,7 @@ export const lastReviewed = "2026-11-04";
 export const principles: UsesPrinciple[] = [
   {
     title: "Own the data, or be able to leave",
-    text: "Before I adopt a tool I check how hard it is to export everything. If available, an app that allows me to export plain files (e.g. Markdown) and uses open protocols (e.g. CalDAV) will always beat a nicer app that holds my data hostage.",
+    text: "Before I adopt a tool I assume I will one day want to leave it again, so I want to confirm the available exit strategy. If available, an app that allows me to export plain files (e.g. Markdown) and uses open protocols (e.g. CalDAV) will always beat a nicer app that holds my data hostage.",
   },
   {
     title: "Open source first, open standards second",
