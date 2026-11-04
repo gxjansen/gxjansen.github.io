@@ -128,6 +128,7 @@ export const categoryOrder = [
   "Notes, media and self-hosted services",
   "Photo, video and streaming",
   "Studio and presenting",
+  "Gaming",
   "Communication and privacy",
 ] as const;
 
@@ -304,17 +305,6 @@ export const items: UsesItem[] = [
       "It runs some of my containers to take the load off the NAS. The NAS CPU and memory are running out.",
   },
   {
-    name: "Raspberry Pi 4 with Batocera",
-    icon: "tabler:device-gamepad-2",
-    url: "https://batocera.org",
-    kind: "device",
-    area: "home",
-    category: "Home",
-    status: "using",
-    reason:
-      "I use this for retro console games with the kids on the TV: it runs Batocera (open source) and needs no store account.",
-  },
-  {
     name: "Stages SB20",
     icon: "tabler:bike",
     url: "https://stagescycling.com/en_global/product/indoor-cycling/smart-bikes",
@@ -394,16 +384,6 @@ export const items: UsesItem[] = [
     category: "OS and desktop",
     status: "using",
     replaces: [{ name: "Microsoft Office" }],
-  },
-  {
-    name: "Steam",
-    icon: "simple-icons:steam",
-    url: "https://store.steampowered.com",
-    kind: "software",
-    area: "tech",
-    category: "OS and desktop",
-    status: "using",
-    reason: "As companies go, Valve seems pretty great.",
   },
 
   // Development
@@ -561,7 +541,7 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "These are small tools not worth one entry each: Portainer CE, Homepage, Glances, Uptime Kuma, Diun, WireGuard, Paperless-ngx, Calibre-web, Kiwix, NocoDB, n8n, and a Minecraft server. All are open source except for the Minecraft server.",
+      "These are small tools not worth one entry each: Portainer CE, Homepage, Glances, Uptime Kuma, Diun, WireGuard, Paperless-ngx, Calibre-web, Kiwix, NocoDB, and n8n. All are open source.",
   },
   {
     name: "Immich",
@@ -799,6 +779,38 @@ export const items: UsesItem[] = [
     category: "Studio and presenting",
     status: "using",
     reason: "Great for additional control for customized scenes.",
+  },
+
+  // Gaming
+  {
+    name: "Steam",
+    icon: "simple-icons:steam",
+    url: "https://store.steampowered.com",
+    kind: "software",
+    area: "tech",
+    category: "Gaming",
+    status: "using",
+    reason: "As companies go, Valve seems pretty great.",
+  },
+  {
+    name: "Raspberry Pi 4 with Batocera",
+    icon: "tabler:device-gamepad-2",
+    url: "https://batocera.org",
+    kind: "device",
+    area: "home",
+    category: "Gaming",
+    status: "using",
+    reason:
+      "I use this for retro console games with the kids on the TV: it runs Batocera (open source) and needs no store account.",
+  },
+  {
+    name: "Minecraft Bedrock server",
+    icon: "simple-icons:minecraft",
+    url: "https://www.minecraft.net/en-us/download/server/bedrock",
+    kind: "software",
+    area: "home",
+    category: "Gaming",
+    status: "using",
   },
 
   // Communication and privacy

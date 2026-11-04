@@ -186,6 +186,7 @@ export default defineConfig({
           "immich",
           "libreoffice",
           "listmonk",
+          "minecraft",
           "obsidian",
           "obsstudio",
           "ollama",
