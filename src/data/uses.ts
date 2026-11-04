@@ -228,6 +228,9 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Personal hardware",
     status: "using",
+    reason: "A very good product and fun to customize the dials yourself.",
+    downside:
+      "Their app ecosystem has some weird quirks and they are starting to behave like a monopolist. I would go for an EU-based alternative next time.",
   },
 
   // Home
