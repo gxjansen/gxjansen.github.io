@@ -50,7 +50,8 @@ export interface UsesItem {
   storyUrl?: string;
   /**
    * Site-only, not a record field: file name in src/assets/images/uses/.
-   * Own photos only, with metadata stripped and nothing personal in frame.
+   * Own photos, with metadata stripped and nothing personal in frame. A vendor
+   * image only where Guido chose one (interstuhl-twentyfour.jpg).
    */
   photo?: string;
   /**
@@ -215,14 +216,14 @@ export const items: UsesItem[] = [
   },
   {
     name: "Interstuhl TWENTYFOUR",
-    icon: "tabler:armchair",
+    photo: "interstuhl-twentyfour.jpg",
     url: "https://www.interstuhl.com/ia-en/products/twentyfour",
     kind: "product",
     area: "home",
     category: "Personal hardware",
     status: "using",
     reason:
-      "I sit at my desk a lot. Not 24 hours, but I still really needed this to be a good one. I like my back not hurting all the time ;)",
+      "I sit at my desk a lot. Not 24 hours, but I still really needed this to be a good one. I like my back not hurting all the time ;) The seat and back covers come off for cleaning!",
     downside:
       "More boring compared to those hip gaming chairs, but if I sit in it I don't see the chair anyway, but do feel it ;)",
   },

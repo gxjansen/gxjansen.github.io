@@ -136,7 +136,6 @@ export default defineConfig({
         tabler: [
           "world-www",
           "aperture",
-          "armchair",
           "bike",
           "box-multiple",
           "bulb",
