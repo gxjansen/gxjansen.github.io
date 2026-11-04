@@ -81,7 +81,7 @@ const STORY_RUNNER = post("self-hosted-github-runner-vps");
 /** Last content edit (YYYY-MM-DD). */
 export const updated = "2026-11-01";
 /** Last time the whole list was checked against reality (YYYY-MM-DD). */
-export const lastReviewed = "2026-11-01";
+export const lastReviewed = "2026-11-04";
 
 export const principles: UsesPrinciple[] = [
   {
