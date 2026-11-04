@@ -146,7 +146,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "ThinkPad X1 Carbon",
-    icon: "simple-icons:lenovo",
+    photo: "thinkpad-x1-carbon.jpg",
     kind: "device",
     area: "tech",
     category: "Personal hardware",
@@ -157,7 +157,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Fairphone 6",
-    icon: "simple-icons:fairphone",
+    photo: "fairphone-6.jpg",
     url: "https://www.fairphone.com/the-fairphone-gen-6",
     kind: "device",
     area: "tech",
@@ -228,6 +228,9 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Personal hardware",
     status: "using",
+    reason: "A very good product and fun to customize the dials yourself.",
+    downside:
+      "Their app ecosystem has some weird quirks and they are starting to behave like a monopolist. I would go for an EU-based alternative next time.",
   },
 
   // Home
@@ -272,7 +275,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Raspberry Pi 5",
-    icon: "simple-icons:raspberrypi",
+    photo: "raspberry-pi-5.jpg",
     url: "https://www.raspberrypi.com/products/raspberry-pi-5/",
     kind: "device",
     area: "tech",
@@ -300,6 +303,17 @@ export const items: UsesItem[] = [
     area: "home",
     category: "Home",
     status: "using",
+  },
+  {
+    name: "DYMO LabelManager 160",
+    photo: "dymo-labelmanager-160.jpg",
+    url: "https://www.dymo.com/label-makers-printers/labelmanager-label-makers/dymo-labelmanager-160-portable-label-maker/SP_95477.html",
+    kind: "device",
+    area: "home",
+    category: "Home",
+    status: "using",
+    reason: "I love it.",
+    downside: "My girlfriend hates it (when labels are visible anywhere).",
   },
 
   // OS and desktop
