@@ -164,6 +164,7 @@ export default defineConfig({
           "plug",
           "question-mark",
           "rss",
+          "shoe",
           "shield-lock",
           "speakerphone",
           "star",
