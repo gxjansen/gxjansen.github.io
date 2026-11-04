@@ -246,7 +246,7 @@ export const items: UsesItem[] = [
     status: "using",
     reason: "A very good product and fun to customize the dials yourself.",
     downside:
-      "Their app ecosystem has some weird quirks and they are starting to behave like a monopolist. I would go for an EU-based alternative next time.",
+      "Their app ecosystem has some weird quirks and they are starting to behave like a monopolist. Especially on a watch priced like this, I'd expect to be able to use all features, not have some locked behind a paywall. I would go for an EU-based alternative next time.",
   },
 
   // Home
