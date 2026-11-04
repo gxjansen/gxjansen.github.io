@@ -223,6 +223,8 @@ export const items: UsesItem[] = [
     status: "using",
     reason:
       "I sit at my desk a lot. Not 24 hours, but I still really needed this to be a good one. I like my back not hurting all the time ;)",
+    downside:
+      "More boring compared to those hip gaming chairs, but if I sit in it I don't see the chair anyway, but do feel it ;)",
   },
   {
     name: "Sony WH-1000XM5",
