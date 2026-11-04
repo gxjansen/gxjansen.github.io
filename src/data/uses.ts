@@ -157,7 +157,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Fairphone 6",
-    icon: "simple-icons:fairphone",
+    photo: "fairphone-6.jpg",
     url: "https://www.fairphone.com/the-fairphone-gen-6",
     kind: "device",
     area: "tech",
@@ -272,7 +272,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Raspberry Pi 5",
-    icon: "simple-icons:raspberrypi",
+    photo: "raspberry-pi-5.jpg",
     url: "https://www.raspberrypi.com/products/raspberry-pi-5/",
     kind: "device",
     area: "tech",
