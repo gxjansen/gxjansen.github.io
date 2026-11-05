@@ -376,7 +376,7 @@ export const items: UsesItem[] = [
     category: "OS and desktop",
     status: "trying",
     reason: "Local speech-to-text, so my voice never leaves the machine.",
-    replaces: [{ name: "MacWhisper" }],
+    replaces: [{ name: "MacWhisper" }, { name: "typing by hand" }],
   },
   {
     name: "LibreOffice",
@@ -399,7 +399,7 @@ export const items: UsesItem[] = [
     category: "Development",
     status: "using",
     reason:
-      "A fast terminal with sane defaults, and tmux sessions that live on the desktop. I attach from the laptop or my phone and continue where I left off.",
+      "tmux sessions that live on the desktop. I attach from the laptop or my phone and continue where I left off.",
     replaces: [{ name: "cmux" }],
   },
   {
