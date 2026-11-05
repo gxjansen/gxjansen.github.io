@@ -826,6 +826,7 @@ export const items: UsesItem[] = [
     area: "home",
     category: "Gaming",
     status: "using",
+    reason: "Kids' favourite game before dinner.",
   },
 
   // Communication and privacy
