@@ -9,10 +9,34 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import SubscribeBox from "@components/Newsletter/SubscribeBox.astro";
 import { socialLinks } from "@data/socialLinks";
 
-// Signal is for messages, not following; RSS is already in SubscribeBox.
-const profiles = socialLinks.filter(
-  (l) => l.name !== "Signal" && l.name !== "RSS Feed",
-);
+// Only profiles on the open social web (AT Protocol). LinkedIn, GitHub and
+// YouTube still exist but are left out on purpose: Guido is moving away from
+// them. Bluesky and Sifa ID come from socialLinks so their URLs stay in one place.
+const fromSocial = (name: string) => {
+  const link = socialLinks.find((l) => l.name === name);
+  if (!link) throw new Error(`follow: no socialLinks entry "${name}"`);
+  return { name: link.name, href: link.href, icon: link.icon };
+};
+const profiles = [
+  fromSocial("Bluesky"),
+  fromSocial("Sifa ID"),
+  {
+    name: "Grain",
+    href: "https://grain.social/profile/gui.do",
+    icon: "tabler:camera",
+  },
+  { name: "Tangled", href: "https://tangled.org/gui.do", icon: "apps/tangled" },
+  {
+    name: "Popfeed",
+    href: "https://popfeed.social/profile/gui.do",
+    icon: "apps/popfeed",
+  },
+  {
+    name: "Bookhive",
+    href: "https://bookhive.buzz/profile/gui.do",
+    icon: "tabler:books",
+  },
+];
 const host = (href: string) => new URL(href).hostname.replace(/^(www\.)/, "");
 ---
 
@@ -51,8 +75,8 @@ const host = (href: string) => new URL(href).hostname.replace(/^(www\.)/, "");
           Elsewhere
         </h2>
         <p class="text-base-600 dark:text-base-400 mt-1 mb-6 leading-relaxed">
-          The social profiles where I actually show up: Bluesky as my main spot,
-          my Sifa ID, LinkedIn, GitHub and YouTube.
+          My profiles live on the open social web now, built on AT Protocol, as
+          I deliberately move away from LinkedIn, GitHub and YouTube.
         </p>
         <ul class="grid gap-4 sm:grid-cols-2">
           {profiles.map((p) => <li>
