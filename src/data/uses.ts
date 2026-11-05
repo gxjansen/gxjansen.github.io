@@ -18,6 +18,12 @@ export type UsesKind = "software" | "hardware" | "service";
 export type UsesArea = "tech" | "home" | "creative" | "other";
 export type UsesStatus = "using" | "trying" | "dropped";
 export type UsesContext = "professional" | "personal";
+/**
+ * Site-only filter tags, not a record field. eu: maker or provider based in
+ * the EU. openSource: the software is open source. selfHosted: Guido runs it
+ * himself.
+ */
+export type UsesTrait = "eu" | "openSource" | "selfHosted";
 export type UsesDroppedReason =
   "replaced" | "wornOut" | "lost" | "sold" | "outgrown";
 
@@ -61,6 +67,8 @@ export interface UsesItem {
   droppedReason?: UsesDroppedReason;
   replaces?: UsesReplacement[];
   storyUrl?: string;
+  /** Site-only, not a record field: filter tags, see `UsesTrait`. */
+  traits?: UsesTrait[];
   /**
    * Site-only, not a record field: file name in src/assets/images/uses/.
    * Own photos, with metadata stripped and nothing personal in frame. A vendor
@@ -147,6 +155,13 @@ export const categoryOrder = [
   "Communication and privacy",
 ] as const;
 
+/** Filter labels on the page, in display order. */
+export const traitLabels: Record<UsesTrait, string> = {
+  eu: "EU",
+  openSource: "Open source",
+  selfHosted: "I host it myself",
+};
+
 /**
  * Site-only, not a record field: items shown as photo tiles at the top of the
  * page, in this order. The first gets the big tile. Each needs a `photo`.
@@ -186,6 +201,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Fairphone 6",
+    traits: ["eu"],
     photo: "fairphone-6.jpg",
     url: "https://www.fairphone.com/the-fairphone-gen-6",
     kind: "hardware",
@@ -211,6 +227,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Supernote Manta",
+    traits: ["selfHosted"],
     photo: "supernote-manta.jpg",
     url: "https://supernote.com/products/supernote-manta",
     kind: "hardware",
@@ -235,6 +252,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Aeris Muvmat",
+    traits: ["eu"],
     icon: "tabler:shoe",
     url: "https://www.aeris.de/en/products/aeris-muvmat-schwarz-ohne-bezug",
     kind: "hardware",
@@ -246,6 +264,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Interstuhl TWENTYFOUR",
+    traits: ["eu"],
     photo: "interstuhl-twentyfour.jpg",
     url: "https://www.interstuhl.com/ia-en/products/twentyfour",
     kind: "hardware",
@@ -298,6 +317,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Home Assistant Green with a Zigbee and Thread (Matter) stick",
+    traits: ["openSource", "selfHosted"],
     includes: [
       { name: "Home Assistant Green", brand: "Home Assistant", model: "Green" },
       { name: "Zigbee and Thread (Matter) USB stick" },
@@ -314,6 +334,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "HomeWizard P1 meter, water meter and plugs",
+    traits: ["eu"],
     includes: [
       { name: "HomeWizard P1 meter", brand: "HomeWizard", model: "P1 meter" },
       {
@@ -336,6 +357,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Raspberry Pi 5",
+    traits: ["selfHosted"],
     photo: "raspberry-pi-5.jpg",
     url: "https://www.raspberrypi.com/products/raspberry-pi-5/",
     kind: "hardware",
@@ -372,6 +394,7 @@ export const items: UsesItem[] = [
   // OS and desktop
   {
     name: "CachyOS with KDE Plasma",
+    traits: ["openSource"],
     includes: [{ name: "CachyOS" }, { name: "KDE Plasma" }],
     icon: "simple-icons:cachyos",
     url: "https://cachyos.org",
@@ -387,6 +410,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "chezmoi with metapac",
+    traits: ["openSource"],
     includes: [{ name: "chezmoi" }, { name: "metapac" }],
     icon: "tabler:file-settings",
     url: "https://www.chezmoi.io",
@@ -399,6 +423,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Zen browser",
+    traits: ["openSource"],
     icon: "simple-icons:zenbrowser",
     url: "https://zen-browser.app",
     kind: "software",
@@ -411,6 +436,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Handy",
+    traits: ["openSource"],
     icon: "tabler:microphone",
     url: "https://handy.computer",
     kind: "software",
@@ -422,6 +448,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "LibreOffice",
+    traits: ["eu", "openSource"],
     icon: "simple-icons:libreoffice",
     url: "https://www.libreoffice.org",
     kind: "software",
@@ -434,6 +461,7 @@ export const items: UsesItem[] = [
   // Development
   {
     name: "Ghostty and tmux, with sesh and workmux",
+    traits: ["openSource"],
     includes: [
       { name: "Ghostty" },
       { name: "tmux" },
@@ -452,6 +480,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Zed",
+    traits: ["openSource"],
     icon: "simple-icons:zedindustries",
     url: "https://zed.dev",
     kind: "software",
@@ -462,6 +491,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Astro",
+    traits: ["openSource"],
     icon: "simple-icons:astro",
     url: "https://astro.build",
     kind: "software",
@@ -475,6 +505,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "GitHub + GitHub Actions on my own runner",
+    traits: ["selfHosted"],
     icon: "simple-icons:githubactions",
     url: "https://docs.github.com/en/actions/hosting-your-own-runners",
     kind: "service",
@@ -490,6 +521,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Codeberg",
+    traits: ["eu", "openSource"],
     icon: "simple-icons:codeberg",
     url: "https://codeberg.org",
     kind: "service",
@@ -501,6 +533,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Tangled",
+    traits: ["openSource"],
     icon: "simple-icons:tangled",
     url: "https://tangled.org",
     kind: "service",
@@ -514,6 +547,7 @@ export const items: UsesItem[] = [
   // AI (local and hosted)
   {
     name: "Ollama",
+    traits: ["openSource", "selfHosted"],
     icon: "simple-icons:ollama",
     url: "https://ollama.com",
     kind: "software",
@@ -559,6 +593,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "FreshRSS",
+    traits: ["openSource", "selfHosted"],
     icon: "simple-icons:freshrss",
     url: "https://freshrss.org",
     kind: "software",
@@ -571,6 +606,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Synology NAS",
+    traits: ["selfHosted"],
     icon: "simple-icons:synology",
     url: "https://www.synology.com",
     kind: "hardware",
@@ -586,6 +622,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Home lab tools",
+    traits: ["openSource", "selfHosted"],
     includes: [
       { name: "Portainer CE" },
       { name: "Homepage" },
@@ -609,6 +646,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Immich",
+    traits: ["openSource", "selfHosted"],
     icon: "simple-icons:immich",
     url: "https://immich.app",
     kind: "software",
@@ -624,6 +662,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Plex",
+    traits: ["selfHosted"],
     icon: "simple-icons:plex",
     url: "https://www.plex.tv",
     kind: "software",
@@ -638,6 +677,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Audiobookshelf",
+    traits: ["openSource", "selfHosted"],
     icon: "simple-icons:audiobookshelf",
     url: "https://www.audiobookshelf.org",
     kind: "software",
@@ -681,6 +721,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "NPO Start",
+    traits: ["eu"],
     icon: "tabler:device-tv",
     url: "https://npo.nl/start",
     kind: "service",
@@ -693,6 +734,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Hetzner",
+    traits: ["eu"],
     icon: "simple-icons:hetzner",
     url: "https://www.hetzner.com",
     kind: "service",
@@ -705,6 +747,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "cal.rs booking page",
+    traits: ["selfHosted"],
     icon: "tabler:calendar",
     kind: "software",
     area: "tech",
@@ -717,6 +760,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Self-hosted podcast feeds",
+    traits: ["selfHosted"],
     icon: "tabler:rss",
     category: "Self-hosted and web",
     area: "tech",
@@ -728,6 +772,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Umami",
+    traits: ["openSource", "selfHosted"],
     icon: "simple-icons:umami",
     url: "https://umami.is",
     kind: "software",
@@ -739,6 +784,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Listmonk",
+    traits: ["openSource", "selfHosted"],
     icon: "simple-icons:listmonk",
     url: "https://listmonk.app",
     kind: "software",
@@ -750,6 +796,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Kairos (my own scheduler)",
+    traits: ["selfHosted"],
     icon: "tabler:calendar-time",
     kind: "software",
     area: "tech",
@@ -763,6 +810,7 @@ export const items: UsesItem[] = [
   // Photo, video and streaming
   {
     name: "darktable and RawTherapee",
+    traits: ["openSource"],
     includes: [{ name: "darktable" }, { name: "RawTherapee" }],
     icon: "tabler:aperture",
     url: "https://www.darktable.org",
@@ -789,6 +837,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "OBS Studio",
+    traits: ["openSource"],
     icon: "simple-icons:obsstudio",
     url: "https://obsproject.com",
     kind: "software",
@@ -898,6 +947,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Raspberry Pi 4 with Batocera",
+    traits: ["openSource"],
     includes: [
       { name: "Raspberry Pi 4", brand: "Raspberry Pi", model: "4" },
       { name: "Batocera" },
@@ -913,6 +963,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Minecraft Bedrock server",
+    traits: ["selfHosted"],
     icon: "simple-icons:minecraft",
     url: "https://www.minecraft.net/en-us/download/server/bedrock",
     kind: "software",
@@ -925,6 +976,7 @@ export const items: UsesItem[] = [
   // Communication and privacy
   {
     name: "Bluesky",
+    traits: ["openSource"],
     icon: "simple-icons:bluesky",
     url: "https://bsky.app",
     kind: "service",
@@ -938,6 +990,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Signal",
+    traits: ["openSource"],
     icon: "simple-icons:signal",
     url: "https://signal.org",
     kind: "software",
@@ -979,6 +1032,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Bitwarden",
+    traits: ["openSource"],
     icon: "simple-icons:bitwarden",
     url: "https://bitwarden.com",
     kind: "software",
@@ -989,6 +1043,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Aegis Authenticator",
+    traits: ["eu", "openSource"],
     icon: "tabler:shield-lock",
     url: "https://getaegis.app",
     kind: "software",
@@ -1001,6 +1056,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "YubiKey",
+    traits: ["eu"],
     icon: "simple-icons:yubico",
     url: "https://www.yubico.com",
     kind: "hardware",

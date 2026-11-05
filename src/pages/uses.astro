@@ -15,7 +15,9 @@ import {
   lastReviewed,
   principles,
   replacedBy,
+  traitLabels,
   type UsesItem,
+  type UsesTrait,
 } from "@data/uses";
 
 const MONTHS = [
@@ -165,6 +167,23 @@ const alternatives = [...alternativesMap.values()].sort((a, b) =>
   a.name.localeCompare(b.name, "en", { sensitivity: "base" }),
 );
 
+// Filter chips, with the number of current items per trait. Principles that
+// match a trait link to its filter.
+const traits = (Object.keys(traitLabels) as UsesTrait[])
+  .map((trait) => ({
+    trait,
+    label: traitLabels[trait],
+    count: currentItems.filter((i) => i.traits?.includes(trait)).length,
+  }))
+  .filter((t) => t.count > 0);
+const principleTrait: Record<string, UsesTrait> = {
+  "Open source first, open standards second": "openSource",
+  "Local-first, cloud optional": "selfHosted",
+  "EU and privacy-respecting where it's practical": "eu",
+};
+const traitCount = (trait: UsesTrait | undefined) =>
+  traits.find((t) => t.trait === trait)?.count ?? 0;
+
 const index = [
   { id: "principles", name: "How I pick tools" },
   ...groups.map((g) => ({ id: g.id, name: g.name })),
@@ -258,14 +277,38 @@ const index = [
                     href ? <a href={href}>{part}</a> : part,
                   )}
                 </p>
+                {traitCount(principleTrait[p.title]) > 0 && <p
+                  class="principle-more"
+                >
+                  <a
+                    href={`?f=${principleTrait[p.title]}#uses-filter`}
+                    data-trait={principleTrait[p.title]}
+                    >Show the {traitCount(principleTrait[p.title])} items</a
+                  >
+                </p>}
               </details>
             </li>)}
           </ol>
         </section>
 
+        {traits.length > 0 && <div id="uses-filter" class="uses-filter" hidden>
+          <p id="uses-filter-h" class="uses-filter-h">Show only</p>
+          <div class="chips" role="group" aria-labelledby="uses-filter-h">
+            {traits.map(({ trait, label, count }) => <button
+              type="button"
+              class="chip"
+              data-trait={trait}
+              aria-pressed="false"
+            >
+              {label} <span class="chip-count">{count}</span>
+            </button>)}
+          </div>
+          <p class="uses-filter-status" aria-live="polite"></p>
+        </div>}
+
         {groups.map((group) => <section
           id={group.id}
-          class="uses-section mt-14"
+          class="uses-section uses-group mt-14"
           aria-labelledby={`${group.id}-h`}
         >
           <h2 id={`${group.id}-h`} class="uses-h">{group.name}</h2>
@@ -281,6 +324,7 @@ const index = [
               const img = photo(item);
               return <li
                 id={itemId(item)}
+                data-traits={(item.traits ?? []).join(" ")}
                 class:list={[
                   "uses-item",
                   img && "has-photo",
@@ -425,6 +469,7 @@ const index = [
     const line = window.innerHeight * 0.3;
     let active: HTMLElement | undefined;
     for (const s of sections) {
+      if (s.hidden) continue;
       if (s.getBoundingClientRect().top <= line) active = s;
     }
     const link = active
@@ -454,6 +499,79 @@ const index = [
     window.addEventListener("scroll", queue, { passive: true });
     window.addEventListener("resize", queue);
     update();
+  }
+
+  // Filter chips: show only the items with one trait. The chips stay hidden
+  // without JS, and the choice lives in the URL (?f=eu) so it can be shared.
+  const filter = document.getElementById("uses-filter");
+  const chips = [
+    ...(filter?.querySelectorAll<HTMLButtonElement>(".chip") ?? []),
+  ];
+  const status = filter?.querySelector<HTMLElement>(".uses-filter-status");
+  const groupSections = [
+    ...document.querySelectorAll<HTMLElement>(".uses-group"),
+  ];
+  const otherSections = ["alternatives", "dropped"]
+    .map((id) => document.getElementById(id))
+    .filter((s): s is HTMLElement => s !== null);
+
+  const apply = (trait: string | null) => {
+    const chip = chips.find((c) => c.dataset.trait === trait);
+    if (!chip) trait = null;
+    let shown = 0;
+    for (const section of groupSections) {
+      let visible = 0;
+      for (const li of section.querySelectorAll<HTMLElement>(
+        "li[data-traits]",
+      )) {
+        const match = !trait || li.dataset.traits!.split(" ").includes(trait);
+        li.hidden = !match;
+        if (match) visible++;
+      }
+      section.hidden = visible === 0;
+      shown += visible;
+    }
+    for (const section of otherSections) section.hidden = trait !== null;
+    for (const a of links) {
+      const target = document.getElementById(a.hash.slice(1));
+      a.parentElement!.hidden = target?.hidden ?? false;
+    }
+    for (const c of chips) {
+      c.setAttribute("aria-pressed", String(c.dataset.trait === trait));
+    }
+    if (status) {
+      status.textContent = chip
+        ? `${shown} ${shown === 1 ? "item" : "items"}: ${chip.firstChild?.textContent?.trim()}`
+        : "";
+    }
+    const url = new URL(window.location.href);
+    if (trait) url.searchParams.set("f", trait);
+    else url.searchParams.delete("f");
+    history.replaceState(null, "", url);
+    queue();
+  };
+
+  if (filter && chips.length > 0) {
+    filter.hidden = false;
+    for (const c of chips) {
+      c.addEventListener("click", () =>
+        apply(
+          c.getAttribute("aria-pressed") === "true" ? null : c.dataset.trait!,
+        ),
+      );
+    }
+    for (const a of document.querySelectorAll<HTMLAnchorElement>(
+      ".principle-more a[data-trait]",
+    )) {
+      a.addEventListener("click", (event) => {
+        event.preventDefault();
+        apply(a.dataset.trait!);
+        filter.scrollIntoView();
+        chips.find((c) => c.dataset.trait === a.dataset.trait)?.focus();
+      });
+    }
+    const initial = new URL(window.location.href).searchParams.get("f");
+    if (initial) apply(initial);
   }
 </script>
 
@@ -539,6 +657,43 @@ const index = [
   }
   .principle-text {
     @apply text-base-700 dark:text-base-300 mt-1 mb-3 leading-relaxed;
+  }
+
+  .principle-more {
+    @apply mb-3 text-[0.95rem];
+  }
+
+  /* Filter chips; [hidden] beats the display utilities. */
+  .uses-filter {
+    @apply mt-10 scroll-mt-28;
+  }
+  .uses-filter[hidden],
+  .uses-group[hidden],
+  .uses-item[hidden],
+  .uses-index li[hidden] {
+    display: none;
+  }
+  .uses-filter-h {
+    @apply text-base-600 dark:text-base-400 mb-2 text-xs font-bold tracking-[0.08em] uppercase;
+  }
+  .chips {
+    @apply flex flex-wrap gap-2;
+  }
+  .chip {
+    @apply border-base-300 dark:border-base-700 text-base-800 dark:text-base-200 hover:border-primary-500 dark:hover:border-primary-400 bg-base-50 dark:bg-base-900 hover:bg-base-100 dark:hover:bg-base-800 inline-flex cursor-pointer items-center gap-2 rounded-full border px-3 py-1 text-[0.95rem] font-semibold transition-colors;
+  }
+  .chip[aria-pressed="true"],
+  .chip[aria-pressed="true"]:hover {
+    @apply bg-base-900 dark:bg-base-100 text-base-50 dark:text-base-950 border-base-900 dark:border-base-100;
+  }
+  .chip-count {
+    @apply text-base-600 dark:text-base-400 text-[0.8rem] font-normal;
+  }
+  .chip[aria-pressed="true"] .chip-count {
+    @apply text-base-300 dark:text-base-700;
+  }
+  .uses-filter-status {
+    @apply text-base-600 dark:text-base-400 mt-2 min-h-[1.5em] text-[0.95rem];
   }
 
   .alternatives {
