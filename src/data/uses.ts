@@ -340,7 +340,8 @@ export const items: UsesItem[] = [
     status: "using",
     reason:
       "A fast Arch-based Linux that I manage with config in git. On my laptop since early 2026 and on my desktop since October 2026.",
-    downside: "A few games and the iOS tooling still need other systems.",
+    downside:
+      "A few games and the iOS tooling still need other systems. Wanted niri, but it didn't play nice with my Elgato Prompter (DisplayLink, NVIDIA) and swiping... so KDE Plasma for now.",
     replaces: [{ name: "macOS" }],
   },
   {
@@ -363,7 +364,7 @@ export const items: UsesItem[] = [
     category: "OS and desktop",
     status: "using",
     reason:
-      "My main browser. Firefox-based, with workspaces, and its telemetry is off by default.",
+      "My main browser. Firefox-based, with workspaces, and all tabs sync live between machines.",
     replaces: [{ name: "Arc" }],
   },
   {
