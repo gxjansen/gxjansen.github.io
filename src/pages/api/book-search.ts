@@ -57,7 +57,7 @@ function json(body: unknown): Response {
       // Short edge cache: identical queries are cheap to reuse, but the shelf
       // stays fresh as Bookhive's catalog grows.
       "Netlify-CDN-Cache-Control":
-        "public, s-maxage=600, stale-while-revalidate=3600",
+        "public, durable, s-maxage=600, stale-while-revalidate=3600",
     },
   });
 }
