@@ -28,8 +28,8 @@ export interface SlashAlias {
 export interface SlashPage {
   /** Path segment without slashes, e.g. "cv". */
   slug: string;
-  /** Listed under the slashpages.net-convention group on /slashes/. */
-  convention?: boolean;
+  /** Listed in the top group on /slashes/ instead of "Also on gui.do". */
+  featured?: boolean;
   /** One-line description shown on /slashes/. */
   description: string;
   /**
@@ -42,39 +42,65 @@ export interface SlashPage {
 }
 
 export const slashPages: SlashPage[] = [
-  // Pages that follow the slashpages.net convention.
+  // Featured on /slashes: the slashpages.net ones plus a few of my own.
   {
     slug: "about",
-    convention: true,
+    featured: true,
     description: "Who I am: community builder, cognitive psychologist, DevRel.",
   },
   {
-    slug: "contact",
-    convention: true,
-    description: "Book a call, DM me, or invite me to speak.",
-    aliases: [{ slug: "hello" }],
-  },
-  {
     slug: "now",
-    convention: true,
+    featured: true,
     description:
       "What I'm reading, building and posting lately, live from the open social web.",
   },
   {
     slug: "uses",
-    convention: true,
+    featured: true,
     description:
       "My gear, apps and services, why I picked them, what I dropped.",
   },
   {
+    slug: "cv",
+    featured: true,
+    description: "My résumé, auto-generated from my Sifa ID.",
+    aliases: [{ slug: "languages", anchor: "languages" }],
+  },
+  {
+    slug: "appearances",
+    featured: true,
+    description: "Media appearances and interviews.",
+  },
+  {
+    slug: "bookshelf",
+    featured: true,
+    description:
+      "What I'm reading, what's next, what's finished, via my Bookhive feed.",
+  },
+  {
+    slug: "ama",
+    featured: true,
+    description: "Ask me anything anonymously; I answer on Bluesky.",
+  },
+  {
+    slug: "contact",
+    featured: true,
+    description: "Book a call, DM me, or invite me to speak.",
+    aliases: [{ slug: "hello" }],
+  },
+  {
     slug: "follow",
-    convention: true,
+    featured: true,
     description: "Every way to keep up: newsletter, RSS, socials.",
-    aliases: [{ slug: "subscribe" }, { slug: "feeds" }],
+    aliases: [
+      { slug: "subscribe" },
+      { slug: "feeds" },
+      { slug: "elsewhere", anchor: "elsewhere" },
+    ],
   },
   {
     slug: "self-hosting",
-    convention: true,
+    featured: true,
     description: `The ${selfHostedCount} things I run myself, filtered from /uses.`,
     redirectTo: "/uses/?f=selfHosted#uses-filter",
     aliases: [{ slug: "self-hosted" }, { slug: "hosted" }],
@@ -83,7 +109,7 @@ export const slashPages: SlashPage[] = [
     // /photos is itself a 302 to Grain (public/_redirects) until it becomes a
     // real page; pointing at /photos/ means this follows along automatically.
     slug: "photo",
-    convention: true,
+    featured: true,
     description:
       "My photos, ~7,200 since 2005, on Grain for now, gui.do later.",
     redirectTo: "/photos/",
@@ -91,26 +117,12 @@ export const slashPages: SlashPage[] = [
   },
   {
     slug: "slashes",
-    convention: true,
+    featured: true,
     description: "You're looking at it.",
     aliases: [{ slug: "slash" }],
   },
 
   // Other top-level pages on gui.do.
-  {
-    slug: "cv",
-    description: "My résumé, auto-generated from my Sifa ID.",
-    aliases: [{ slug: "languages", anchor: "languages" }],
-  },
-  {
-    slug: "ama",
-    description: "Ask me anything anonymously; I answer on Bluesky.",
-  },
-  {
-    slug: "bookshelf",
-    description:
-      "What I'm reading, what's next, what's finished, via my Bookhive feed.",
-  },
   {
     slug: "projects",
     description:
@@ -135,7 +147,6 @@ export const slashPages: SlashPage[] = [
     slug: "podcasts",
     description: "Sheeptank and CRO.CAFE: 250+ episodes as host and producer.",
   },
-  { slug: "press", description: "Media appearances and interviews." },
   {
     slug: "newsletter",
     description:

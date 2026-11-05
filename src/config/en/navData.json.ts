@@ -68,8 +68,8 @@ const navConfig = [
         icon: "tabler/outline/file-text",
       },
       {
-        text: "Press & Media",
-        link: "/press",
+        text: "Appearances",
+        link: "/appearances",
         icon: "tabler/outline/news",
       },
       {

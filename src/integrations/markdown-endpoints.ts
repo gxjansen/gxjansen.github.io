@@ -128,7 +128,7 @@ function isContentPage(pathname: string): boolean {
     "communities/",
     "projects/",
     "speaker/",
-    "press/",
+    "appearances/",
     "contact/",
     "retainer/",
     "post/",
