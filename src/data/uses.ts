@@ -81,12 +81,12 @@ const STORY_RUNNER = post("self-hosted-github-runner-vps");
 /** Last content edit (YYYY-MM-DD). */
 export const updated = "2026-11-01";
 /** Last time the whole list was checked against reality (YYYY-MM-DD). */
-export const lastReviewed = "2026-11-01";
+export const lastReviewed = "2026-11-04";
 
 export const principles: UsesPrinciple[] = [
   {
     title: "Own the data, or be able to leave",
-    text: "Before I adopt a tool I check how hard it is to export everything. If available, an app that allows me to export plain files (e.g. Markdown) and uses open protocols (e.g. CalDAV) will always beat a nicer app that holds my data hostage.",
+    text: "Before I adopt a tool I assume I will one day want to leave it again, so I want to confirm the available exit strategy. An app that lets me export plain files (e.g. Markdown) and uses open protocols (e.g. CalDAV) will beat a nicer app that holds my data hostage.",
   },
   {
     title: "Open source first, open standards second",
@@ -94,15 +94,15 @@ export const principles: UsesPrinciple[] = [
   },
   {
     title: "Local-first, cloud optional",
-    text: "Home automations, media players, family photos are things that should keep working when the internet (or a vendor) doesn't. Cloud services are a nice extra on top as a facilitator or accelerator, but not as a foundation you depend on.",
+    text: "Home automations, media players and family photos should keep working when the internet (or a vendor) doesn't. Cloud is a nice extra, but things shouldn't break when it's gone.",
   },
   {
     title: "The bankruptcy test",
-    text: "For hardware I ask what happens if the company disappears. A device with a local API keeps working. A cloud-only one (e.g. Sonos, most voice assistants) becomes e-waste.",
+    text: "For hardware I ask what happens if the company disappears: a device with a local API keeps working, while a cloud-only one (e.g. most voice assistants) becomes e-waste.",
   },
   {
     title: "Subscriptions only on purpose",
-    text: "I pick a one-time purchase when one exists. The subscriptions I have usually pay for convenience, or to support the people behind it. Not for access to my own data.",
+    text: "I pick a one-time purchase when one exists. The subscriptions I have are mostly for convenience or to support the makers, not for access to my own data.",
   },
   {
     title: "EU and privacy-respecting where it's practical",
@@ -110,7 +110,7 @@ export const principles: UsesPrinciple[] = [
   },
   {
     title: "Own my identity",
-    text: "My own email domain makes every later migration easier: the provider behind it can change while my address stays the same. I use my own domain as my handle (gui.do) on Bluesky via AT Protocol and keep my account data in a repository on a PDS. This means I can swap out the PDS host whenever I want while my handle and followers stay where they are.",
+    text: "My own email domain makes later migration easier: the provider behind it can change while my address stays the same. I use my own domain as my handle (gui.do) on Bluesky via AT Protocol and keep my account data on a PDS, the server that stores it, so I can swap out the PDS host whenever I want while my handle and followers stay where they are.",
   },
   {
     title: "Replace gradually",
