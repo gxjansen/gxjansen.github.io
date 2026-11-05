@@ -4,7 +4,7 @@
  * The list and the alias redirects both come from src/data/slashes.ts.
  */
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { slashPages } from "@data/slashes";
+import { slashPages, pageHref } from "@data/slashes";
 
 const conventionPages = slashPages.filter((p) => p.convention);
 const otherPages = slashPages.filter((p) => !p.convention);
@@ -51,7 +51,7 @@ const otherPages = slashPages.filter((p) => !p.convention);
             class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 hover:border-primary-400 relative rounded-2xl border p-5 transition hover:-translate-y-0.5 hover:shadow-lg sm:p-6"
           >
             <a
-              href={`/${page.slug}/`}
+              href={pageHref(page)}
               class="font-display text-primary-600 dark:text-primary-400 text-[1.6rem] leading-tight font-black tracking-[-0.02em] after:absolute after:inset-0 after:rounded-2xl after:content-['']"
             >
               /{page.slug}
@@ -76,7 +76,7 @@ const otherPages = slashPages.filter((p) => !p.convention);
         </h2>
         <ul class="grid gap-x-10 gap-y-4 sm:grid-cols-2">
           {otherPages.map((page) => <li>
-            <a href={`/${page.slug}/`} class="font-semibold">/{page.slug}</a>
+            <a href={pageHref(page)} class="font-semibold">/{page.slug}</a>
             <p class="text-base-500 text-sm leading-snug">
               {page.description}
             </p>
