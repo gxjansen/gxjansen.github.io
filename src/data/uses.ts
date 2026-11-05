@@ -147,6 +147,18 @@ export const categoryOrder = [
   "Communication and privacy",
 ] as const;
 
+/**
+ * Site-only, not a record field: items shown as photo tiles at the top of the
+ * page, in this order. The first gets the big tile. Each needs a `photo`.
+ */
+export const featured = [
+  "ZSA Voyager",
+  "Fairphone 6",
+  "Supernote Manta",
+  "ThinkPad X1 Carbon",
+  "Home Assistant Green with a Zigbee and Thread (Matter) stick",
+];
+
 export const items: UsesItem[] = [
   // Personal hardware
   {

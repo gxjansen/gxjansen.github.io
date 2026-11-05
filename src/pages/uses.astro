@@ -11,6 +11,7 @@ import {
   currentItems,
   displayName,
   droppedItems,
+  featured,
   lastReviewed,
   principles,
   replacedBy,
@@ -110,7 +111,18 @@ const groups = categoryOrder
     id: slugify(name),
     items: currentItems.filter((i) => i.category === name),
   }))
-  .filter((g) => g.items.length > 0);
+  .filter((g) => g.items.length > 0)
+  // Groups without photos render as a compact card grid.
+  .map((g) => ({ ...g, cards: !g.items.some((i) => i.photo) }));
+
+// Photo tiles at the top. A name that isn't a current item with a photo
+// fails the build instead of leaving a gap.
+const tiles = featured.map((name) => {
+  const item = currentItems.find((i) => i.name === name);
+  const img = item && photo(item);
+  if (!item || !img) throw new Error(`uses: featured "${name}" needs a photo`);
+  return { item, img };
+});
 
 // "Replaced YouTube Music, which in itself had replaced Spotify": follow one
 // step back when the replaced thing is a dropped item with its own replaces.
@@ -183,8 +195,29 @@ const index = [
           </p>
         </header>
 
+        {tiles.length > 0 && <ul class="bento" aria-label="Highlights">
+          {tiles.map(({ item, img }, i) => <li
+            class:list={["bento-tile", i === 0 && "bento-big"]}
+          >
+            <a href={`#${itemId(item)}`} class="no-random-underline">
+              <Image
+                src={img}
+                alt=""
+                widths={i === 0 ? [480, 640, 960] : [320, 480]}
+                sizes={
+                  i === 0
+                    ? "(min-width: 48rem) 24rem, 100vw"
+                    : "(min-width: 48rem) 12rem, 50vw"
+                }
+                class="bento-img"
+              />
+              <span class="bento-name">{displayName(item)}</span>
+            </a>
+          </li>)}
+        </ul>}
+
         <div
-          class="text-base-700 dark:text-base-300 max-w-2xl space-y-4 text-lg leading-relaxed"
+          class="text-base-700 dark:text-base-300 mt-8 max-w-2xl space-y-4 text-lg leading-relaxed"
         >
           <p>
             This is the hardware, software and services I use every week, and
@@ -236,7 +269,7 @@ const index = [
           aria-labelledby={`${group.id}-h`}
         >
           <h2 id={`${group.id}-h`} class="uses-h">{group.name}</h2>
-          <ul class="uses-list">
+          <ul class:list={[group.cards ? "uses-cards" : "uses-list"]}>
             {group.items.map((item) => {
               const s = story(item.storyUrl);
               const meta = [
@@ -248,7 +281,11 @@ const index = [
               const img = photo(item);
               return <li
                 id={itemId(item)}
-                class:list={["uses-item", img && "has-photo"]}
+                class:list={[
+                  "uses-item",
+                  img && "has-photo",
+                  group.cards && "uses-card",
+                ]}
               >
                 {img && (
                   <Image
@@ -268,7 +305,7 @@ const index = [
                         aria-hidden="true"
                       />
                     )}
-                    <span>{displayName(item)}</span>
+                    <span class="item-label">{displayName(item)}</span>
                     {item.status === "trying" && <span class="trying"
                       >Evaluating</span
                     >}
@@ -295,7 +332,9 @@ const index = [
                     {s && (
                       <>
                         {(item.url || meta.length > 0) && " · "}
-                        Story: <a href={s.href}>{s.title}</a>
+                        <a href={s.href}
+                          >Story<span class="sr-only">: {s.title}</span></a
+                        >
                       </>
                     )}
                   </p>}
@@ -520,6 +559,52 @@ const index = [
   .uses-item {
     @apply py-4;
   }
+
+  /* Photo tiles: one big, four small. Two columns on small screens, four
+     from md, where the big tile takes two by two. */
+  .bento {
+    @apply m-0 grid list-none auto-cols-[42%] grid-flow-col gap-3 overflow-x-auto p-0 md:auto-cols-auto md:grid-flow-row md:grid-cols-4 md:overflow-visible;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .bento-tile {
+    scroll-snap-align: start;
+  }
+  .bento-big {
+    @apply md:col-span-2 md:row-span-2;
+  }
+  .bento-tile a {
+    @apply border-base-200 dark:border-base-800 bg-base-50 dark:bg-base-900 hover:border-primary-400 dark:hover:border-primary-500 flex h-full flex-col overflow-hidden rounded-lg border no-underline transition-colors;
+  }
+  .bento-img {
+    @apply aspect-[3/2] w-full object-cover;
+  }
+  .bento-big .bento-img {
+    @apply flex-1;
+    @apply md:aspect-auto md:h-0 md:min-h-0;
+  }
+  .bento-name {
+    @apply text-base-950 dark:text-base-50 px-3 py-2 text-sm leading-snug font-bold;
+  }
+  .bento-big .bento-name {
+    @apply md:text-base;
+  }
+
+  /* Groups without photos: compact cards, two columns from sm. */
+  /* Below sm they read as the plain list. */
+  .uses-cards {
+    @apply border-base-200 dark:border-base-800 m-0 grid list-none grid-cols-1 border-t p-0 sm:grid-cols-2 sm:gap-3 sm:border-t-0;
+  }
+  .uses-card {
+    @apply sm:border-base-200 sm:dark:border-base-800 sm:bg-base-50/70 sm:dark:bg-base-900/50 border-base-200 dark:border-base-800 border-b sm:rounded-lg sm:border sm:p-4;
+  }
+  .uses-card .item-reason,
+  .uses-card .item-downside {
+    @apply text-[0.95rem] leading-relaxed;
+  }
+  .uses-card .item-meta {
+    @apply text-[0.875rem];
+  }
   /* Photo on the right from sm up, above the text on small screens. */
   .has-photo {
     @apply flex flex-col gap-4 sm:flex-row-reverse sm:items-start;
@@ -533,9 +618,15 @@ const index = [
   .item-name {
     @apply text-base-950 dark:text-base-50 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-bold;
   }
+  .item-label {
+    @apply min-w-0 flex-[1_1_0];
+  }
+  .item-name:has(.trying) .item-label {
+    @apply flex-[0_1_auto];
+  }
   /* Brand or generic icon, in the text colour so it stays quiet. */
   .item-icon {
-    @apply text-base-500 dark:text-base-400 -mr-1 size-[1.1em] shrink-0 self-center;
+    @apply text-base-500 dark:text-base-400 mt-[0.2em] -mr-1 size-[1.1em] shrink-0 self-start;
   }
   .item-reason {
     @apply text-base-700 dark:text-base-300 mt-1 leading-relaxed;
