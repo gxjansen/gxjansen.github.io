@@ -214,6 +214,8 @@ export const items: UsesItem[] = [
     area: "home",
     category: "Personal hardware",
     status: "using",
+    reason:
+      'Nice "forest pebbles" surface for standing work/calls that is both soft and makes you move around (so you don\'t lock yourself into a single position too long).',
   },
   {
     name: "Interstuhl TWENTYFOUR",
