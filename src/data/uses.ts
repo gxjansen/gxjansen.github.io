@@ -140,7 +140,7 @@ export const principles: UsesPrinciple[] = [
   },
   {
     title: "Replace gradually",
-    text: "I run old and new side by side and switch when the new setup is boringly reliable.",
+    text: "My selection criteria evolve over time, but that doesn't mean that I throw out all my gear the moment it no longer fits: I try to make practical and environmentally conscious decisions and (re)use what I can. It's about making decisions that take me in the right direction and form good future foundations, not about having it all perfect right now.",
   },
 ];
 
