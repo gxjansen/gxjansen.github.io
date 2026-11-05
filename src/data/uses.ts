@@ -112,9 +112,9 @@ export const principles: UsesPrinciple[] = [
     text: "Before I adopt a tool I assume I will one day want to leave it again, so I want to confirm the available exit strategy. An app that lets me export plain files (e.g. Markdown) and uses open protocols (e.g. CalDAV) will beat a nicer app that holds my data hostage.",
   },
   {
-    title: "Open source first, open standards second",
+    title: "Open standards first, open source second",
     trait: "openSource",
-    text: "I prefer tools where I can read (and adjust) the code. When that's not possible, I'd want formats and protocols that more than one tool speaks.",
+    text: "I start with open protocols and formats that more than one tool speaks - AT Protocol, CalDAV, IMAP, Markdown - because that's what lets me actually leave. Open source is the bonus: I can read the code, adjust it if I need to. But I'll take a closed app on an open protocol over an open app that locks my data in.",
   },
   {
     title: "Local-first, cloud optional",
@@ -126,7 +126,7 @@ export const principles: UsesPrinciple[] = [
     text: "For hardware I ask what happens if the company disappears: a device with a local API keeps working, while a cloud-only one (e.g. most voice assistants) becomes e-waste.",
   },
   {
-    title: "Subscriptions only on purpose",
+    title: "Buy once, never rent your own data",
     text: "I pick a one-time purchase when one exists. The subscriptions I have are mostly for convenience or to support the makers, not for access to my own data.",
   },
   {
