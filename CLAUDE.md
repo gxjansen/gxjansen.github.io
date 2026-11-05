@@ -38,6 +38,7 @@ Guido X Jansen's personal site. Astro 7, Tailwind v4 (Vite plugin), MDX, React i
 - Testimonials on `/` and `/about/` are randomized per build, so those pages differ between builds.
 - `scripts/standard-site-publish.mjs` runs inside `npm run build` but only publishes on Netlify production builds (`CONTEXT=production`) or local manual runs. Previews and branch deploys skip it before reading credentials.
 - `src/icons/` holds only the icons the site uses. astro-icon loads and optimizes every file in it on each build, which is why the full Tabler set was removed. To add an icon, copy its SVG from https://tabler.io/icons into `src/icons/tabler/...` (or use one from the `tabler` iconify set listed in `astro.config.mjs`). A missing icon name fails the build.
+- Netlify redirect `conditions` only match Language, Country, Role and Cookie, never headers. `Accept: text/markdown` negotiation is the edge function `netlify/edge-functions/markdown-negotiation.ts`, which serves the page's built `index.md`.
 - `src/data/events.snapshot.json` is generated. Edit `events-overrides.json` for manual corrections, not the snapshot.
 
 ## Events snapshot
