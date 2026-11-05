@@ -152,6 +152,7 @@ export default defineConfig({
           "flask",
           "gauge",
           "headphones",
+          "id-badge-2",
           "letter-g",
           "letter-j",
           "letter-x",

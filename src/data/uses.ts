@@ -994,6 +994,19 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
   {
+    name: "Sifa ID",
+    traits: ["eu"],
+    icon: "tabler:id-badge-2",
+    url: "https://sifa.id",
+    kind: "service",
+    area: "tech",
+    category: "Communication and privacy",
+    status: "using",
+    reason:
+      "Sifa ID replaced LinkedIn for me: a professional profile on AT Protocol, so the data lives in my own PDS and moves with me. Built by my own company, Singi Labs (so yes, biased).",
+    replaces: [{ name: "LinkedIn" }],
+  },
+  {
     name: "Signal",
     traits: ["openSource"],
     icon: "simple-icons:signal",
@@ -1068,7 +1081,8 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
-    reason: "A hardware security key for the accounts that matter most.",
+    reason:
+      "A hardware security key for MFA or passwordless login where supported.",
   },
 
   // Dropped. "Replaced by" comes from the `replaces` lists above.
