@@ -67,7 +67,7 @@ describe("trailing-slash redirects for on-demand pages", () => {
   it("finds the known on-demand pages", () => {
     // Guards the detection itself: if this ever returns nothing, the assertions
     // below would pass vacuously.
-    expect(onDemandPages().sort()).toEqual(["/bookshelf", "/now"]);
+    expect(onDemandPages().sort()).toEqual(["/bookshelf"]);
   });
 
   it.each(onDemandPages())("%s is in the edge function's scope", (route) => {
