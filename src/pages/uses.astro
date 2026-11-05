@@ -167,8 +167,8 @@ const alternatives = [...alternativesMap.values()].sort((a, b) =>
   a.name.localeCompare(b.name, "en", { sensitivity: "base" }),
 );
 
-// Filter chips, with the number of current items per trait. Principles that
-// match a trait link to its filter.
+// Filter chips, with the number of current items per trait. Principles with
+// a `trait` link to its filter.
 const traits = (Object.keys(traitLabels) as UsesTrait[])
   .map((trait) => ({
     trait,
@@ -176,11 +176,6 @@ const traits = (Object.keys(traitLabels) as UsesTrait[])
     count: currentItems.filter((i) => i.traits?.includes(trait)).length,
   }))
   .filter((t) => t.count > 0);
-const principleTrait: Record<string, UsesTrait> = {
-  "Open source first, open standards second": "openSource",
-  "Local-first, cloud optional": "selfHosted",
-  "EU and privacy-respecting where it's practical": "eu",
-};
 const traitCount = (trait: UsesTrait | undefined) =>
   traits.find((t) => t.trait === trait)?.count ?? 0;
 
@@ -277,13 +272,9 @@ const index = [
                     href ? <a href={href}>{part}</a> : part,
                   )}
                 </p>
-                {traitCount(principleTrait[p.title]) > 0 && <p
-                  class="principle-more"
-                >
-                  <a
-                    href={`?f=${principleTrait[p.title]}#uses-filter`}
-                    data-trait={principleTrait[p.title]}
-                    >Show the {traitCount(principleTrait[p.title])} items</a
+                {traitCount(p.trait) > 0 && <p class="principle-more">
+                  <a href={`?f=${p.trait}#uses-filter`} data-trait={p.trait}
+                    >Show the {traitCount(p.trait)} items</a
                   >
                 </p>}
               </details>

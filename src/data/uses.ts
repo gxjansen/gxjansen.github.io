@@ -86,6 +86,8 @@ export interface UsesItem {
 export interface UsesPrinciple {
   title: string;
   text: string;
+  /** Site-only, not a record field: the filter this principle links to. */
+  trait?: UsesTrait;
 }
 
 const post = (slug: string) => `https://gui.do/post/${slug}/`;
@@ -110,11 +112,13 @@ export const principles: UsesPrinciple[] = [
     text: "Before I adopt a tool I assume I will one day want to leave it again, so I want to confirm the available exit strategy. An app that lets me export plain files (e.g. Markdown) and uses open protocols (e.g. CalDAV) will beat a nicer app that holds my data hostage.",
   },
   {
-    title: "Open source first, open standards second",
-    text: "I prefer tools where I can read (and adjust) the code. When that's not possible, I'd want formats and protocols that more than one tool speaks.",
+    title: "Open standards first, open source second",
+    trait: "openSource",
+    text: "I start with open protocols and formats that more than one tool speaks - AT Protocol, CalDAV, IMAP, Markdown - because that's what lets me actually leave. Open source is the bonus: I can read the code, adjust it if I need to. But I'll take a closed app on an open protocol over an open app that locks my data in.",
   },
   {
     title: "Local-first, cloud optional",
+    trait: "selfHosted",
     text: "Home automations, media players and family photos should keep working when the internet (or a vendor) doesn't. Cloud is a nice extra, but things shouldn't break when it's gone.",
   },
   {
@@ -122,12 +126,13 @@ export const principles: UsesPrinciple[] = [
     text: "For hardware I ask what happens if the company disappears: a device with a local API keeps working, while a cloud-only one (e.g. most voice assistants) becomes e-waste.",
   },
   {
-    title: "Subscriptions only on purpose",
+    title: "Buy once, never rent your own data",
     text: "I pick a one-time purchase when one exists. The subscriptions I have are mostly for convenience or to support the makers, not for access to my own data.",
   },
   {
-    title: "EU and privacy-respecting where it's practical",
-    text: "GDPR exists for a reason, so I lean towards European providers. I'm pragmatic about it though: I'm ok with using a non-EU service when lock-in is low and I can still easily leave. Avoiding every piece of software or hardware that phones home is not practical, so I disable telemetry or block it.",
+    title: "EU law-respecting, EU-hosted preferred",
+    trait: "eu",
+    text: "GDPR exists for a reason, so I lean towards European providers. I'm an EU citizen, so non-EU tools still have to respect my rights under GDPR, and when they do, using them is fine. Avoiding every piece of software or hardware that phones home is not practical, so I disable telemetry or block it.",
   },
   {
     title: "Own my identity",
@@ -135,7 +140,7 @@ export const principles: UsesPrinciple[] = [
   },
   {
     title: "Replace gradually",
-    text: "I run old and new side by side and switch when the new setup is boringly reliable.",
+    text: "My selection criteria evolve over time, but that doesn't mean that I throw out all my gear the moment it no longer fits: I try to make practical and environmentally conscious decisions and (re)use what I can. It's about making decisions that take me in the right direction and form good future foundations, not about having it all perfect right now.",
   },
 ];
 
