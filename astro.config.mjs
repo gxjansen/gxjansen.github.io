@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 import * as path from "node:path";
 import { contentValidationPlugin } from "./src/utils/content-validation-plugin.ts";
 import { markdownEndpoints } from "./src/integrations/markdown-endpoints.ts";
+import { slashRedirects } from "./src/data/slashes.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -118,6 +119,9 @@ export default defineConfig({
     "/theme/contact-us/contact-us": { destination: "/about", status: 301 },
     "/theme/contact": { destination: "/about", status: 301 },
     "/presentation/*": { destination: "/presentations/:splat", status: 301 },
+
+    // Slash page aliases (302), generated from src/data/slashes.ts
+    ...slashRedirects(),
   },
   markdown: {
     shikiConfig: {

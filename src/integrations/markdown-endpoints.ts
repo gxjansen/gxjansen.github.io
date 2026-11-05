@@ -135,6 +135,7 @@ function isContentPage(pathname: string): boolean {
     "events/",
     "presentations/",
     "podcasts/",
+    "slashes/",
   ];
 
   // Top-level static pages written as plain "name/index.html"
