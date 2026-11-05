@@ -9,6 +9,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import {
   categoryOrder,
   currentItems,
+  displayName,
   droppedItems,
   lastReviewed,
   principles,
@@ -49,7 +50,7 @@ const slugify = (s: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-const itemId = (item: UsesItem) => `use-${slugify(item.name)}`;
+const itemId = (item: UsesItem) => `use-${slugify(displayName(item))}`;
 
 // Bare domains in the texts ("atproto.nl") become links. The split keeps the
 // matches at odd indexes. This site's own domain stays plain text.
@@ -113,13 +114,15 @@ const groups = categoryOrder
 
 // "Replaced YouTube Music, which in itself had replaced Spotify": follow one
 // step back when the replaced thing is a dropped item with its own replaces.
+// A dropped item with usedAs shows as "Mac mini as daily workstation".
 const replacedName = (r: { name: string }) => {
   const prev = droppedItems.find(
-    (d) => d.name.toLowerCase() === r.name.toLowerCase() && d.replaces?.length,
+    (d) => d.name.toLowerCase() === r.name.toLowerCase(),
   );
-  return prev
-    ? `${r.name}, which in itself had replaced ${prev.replaces!.map((x) => x.name).join(" and ")}`
-    : r.name;
+  const name = prev ? displayName(prev) : r.name;
+  return prev?.replaces?.length
+    ? `${name}, which in itself had replaced ${prev.replaces.map((x) => x.name).join(" and ")}`
+    : name;
 };
 
 const dropped = droppedItems.map((item) => ({
@@ -229,7 +232,7 @@ const dropped = droppedItems.map((item) => ({
                       aria-hidden="true"
                     />
                   )}
-                  <span>{item.name}</span>
+                  <span>{displayName(item)}</span>
                   {item.status === "trying" && <span class="trying"
                     >Evaluating</span
                   >}
@@ -278,7 +281,7 @@ const dropped = droppedItems.map((item) => ({
         <ul class="uses-list">
           {dropped.map(({ item, by }) => <li class="uses-item">
             <p class="item-name">
-              <span>{item.name}</span>
+              <span>{displayName(item)}</span>
               {item.endedAt && <span class="item-when">
                 until{" "}
                 <time datetime={item.endedAt}>{partialDate(item.endedAt)}</time>
@@ -289,7 +292,7 @@ const dropped = droppedItems.map((item) => ({
               {by.map((b, i) => (
                 <>
                   {i > 0 && (i === by.length - 1 ? " and " : ", ")}
-                  <a href={`#${itemId(b)}`}>{b.name}</a>
+                  <a href={`#${itemId(b)}`}>{displayName(b)}</a>
                 </>
               ))}
             </p>}

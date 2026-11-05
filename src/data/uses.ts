@@ -14,7 +14,7 @@
  *   hostname or IP. No versions, network layout or home-security details.
  */
 
-export type UsesKind = "software" | "device" | "product" | "service";
+export type UsesKind = "software" | "hardware" | "service";
 export type UsesArea = "tech" | "home" | "creative" | "other";
 export type UsesStatus = "using" | "trying" | "dropped";
 export type UsesContext = "professional" | "personal";
@@ -29,8 +29,21 @@ export interface UsesReplacement {
   url?: string;
 }
 
-export interface UsesItem {
+/** One named thing inside a bundled item (a camera and its lenses). */
+export interface UsesPart {
   name: string;
+  brand?: string;
+  model?: string;
+  url?: string;
+}
+
+export interface UsesItem {
+  /** The thing, or the bundle as a whole. Not the use: that goes in `usedAs`. */
+  name: string;
+  /** What it is used as, when that differs from what it is ("webcam"). */
+  usedAs?: string;
+  /** The parts of a bundled item, when `name` covers more than one thing. */
+  includes?: UsesPart[];
   url?: string;
   brand?: string;
   model?: string;
@@ -137,19 +150,19 @@ export const items: UsesItem[] = [
   {
     name: "Desktop PC (AMD Ryzen, RTX 5070)",
     icon: "tabler:device-desktop",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Personal hardware",
     status: "using",
     reason:
       "One machine for code, calls, streaming and most games, and the one my other devices attach to.",
     startedAt: "2026-10",
-    replaces: [{ name: "Mac mini as daily workstation" }],
+    replaces: [{ name: "Mac mini" }],
   },
   {
     name: "ThinkPad X1 Carbon",
     photo: "thinkpad-x1-carbon.jpg",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Personal hardware",
     status: "using",
@@ -161,7 +174,7 @@ export const items: UsesItem[] = [
     name: "Fairphone 6",
     photo: "fairphone-6.jpg",
     url: "https://www.fairphone.com/the-fairphone-gen-6",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Personal hardware",
     status: "using",
@@ -174,7 +187,7 @@ export const items: UsesItem[] = [
     name: "ZSA Voyager",
     photo: "zsa-voyager.jpg",
     url: "https://www.zsa.io/voyager",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Personal hardware",
     status: "trying",
@@ -186,7 +199,7 @@ export const items: UsesItem[] = [
     name: "Supernote Manta",
     photo: "supernote-manta.jpg",
     url: "https://supernote.com/products/supernote-manta",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Personal hardware",
     status: "using",
@@ -199,7 +212,7 @@ export const items: UsesItem[] = [
     name: "Fully Jarvis L-shaped standing desk",
     icon: "tabler:desk",
     url: "https://www.fully.com",
-    kind: "product",
+    kind: "hardware",
     area: "home",
     category: "Personal hardware",
     status: "using",
@@ -210,7 +223,7 @@ export const items: UsesItem[] = [
     name: "Aeris Muvmat",
     icon: "tabler:shoe",
     url: "https://www.aeris.de/en/products/aeris-muvmat-schwarz-ohne-bezug",
-    kind: "product",
+    kind: "hardware",
     area: "home",
     category: "Personal hardware",
     status: "using",
@@ -221,7 +234,7 @@ export const items: UsesItem[] = [
     name: "Interstuhl TWENTYFOUR",
     photo: "interstuhl-twentyfour.jpg",
     url: "https://www.interstuhl.com/ia-en/products/twentyfour",
-    kind: "product",
+    kind: "hardware",
     area: "home",
     category: "Personal hardware",
     status: "using",
@@ -234,7 +247,7 @@ export const items: UsesItem[] = [
     name: "Sony WH-1000XM5",
     icon: "tabler:headphones",
     url: "https://www.sony.co.uk/electronics/headband-headphones/wh-1000xm5",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Personal hardware",
     status: "using",
@@ -246,7 +259,7 @@ export const items: UsesItem[] = [
     name: "Garmin Epix Pro",
     icon: "simple-icons:garmin",
     url: "https://www.garmin.com/nl-NL/p/884292/",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Personal hardware",
     status: "using",
@@ -261,7 +274,7 @@ export const items: UsesItem[] = [
     icon: "simple-icons:firewalla",
     url: "https://firewalla.com/products/firewalla-gold-pro",
     model: "Gold Pro",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Home",
     status: "using",
@@ -271,9 +284,13 @@ export const items: UsesItem[] = [
   },
   {
     name: "Home Assistant Green with a Zigbee and Thread (Matter) stick",
+    includes: [
+      { name: "Home Assistant Green", brand: "Home Assistant", model: "Green" },
+      { name: "Zigbee and Thread (Matter) USB stick" },
+    ],
     photo: "home-assistant-green.jpg",
     url: "https://www.home-assistant.io/green/",
-    kind: "device",
+    kind: "hardware",
     area: "home",
     category: "Home",
     status: "using",
@@ -283,9 +300,18 @@ export const items: UsesItem[] = [
   },
   {
     name: "HomeWizard P1 meter, water meter and plugs",
+    includes: [
+      { name: "HomeWizard P1 meter", brand: "HomeWizard", model: "P1 meter" },
+      {
+        name: "HomeWizard water meter",
+        brand: "HomeWizard",
+        model: "Water meter",
+      },
+      { name: "HomeWizard plugs", brand: "HomeWizard" },
+    ],
     icon: "tabler:plug",
     url: "https://www.homewizard.com",
-    kind: "device",
+    kind: "hardware",
     area: "home",
     category: "Home",
     status: "using",
@@ -298,7 +324,7 @@ export const items: UsesItem[] = [
     name: "Raspberry Pi 5",
     photo: "raspberry-pi-5.jpg",
     url: "https://www.raspberrypi.com/products/raspberry-pi-5/",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Home",
     status: "using",
@@ -309,7 +335,7 @@ export const items: UsesItem[] = [
     name: "Stages SB20",
     icon: "tabler:bike",
     url: "https://stagescycling.com/en_global/product/indoor-cycling/smart-bikes",
-    kind: "device",
+    kind: "hardware",
     area: "home",
     category: "Home",
     status: "using",
@@ -320,7 +346,7 @@ export const items: UsesItem[] = [
     name: "DYMO LabelManager 160",
     photo: "dymo-labelmanager-160.jpg",
     url: "https://www.dymo.com/label-makers-printers/labelmanager-label-makers/dymo-labelmanager-160-portable-label-maker/SP_95477.html",
-    kind: "device",
+    kind: "hardware",
     area: "home",
     category: "Home",
     status: "using",
@@ -332,6 +358,7 @@ export const items: UsesItem[] = [
   // OS and desktop
   {
     name: "CachyOS with KDE Plasma",
+    includes: [{ name: "CachyOS" }, { name: "KDE Plasma" }],
     icon: "simple-icons:cachyos",
     url: "https://cachyos.org",
     kind: "software",
@@ -346,6 +373,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "chezmoi with metapac",
+    includes: [{ name: "chezmoi" }, { name: "metapac" }],
     icon: "tabler:file-settings",
     url: "https://www.chezmoi.io",
     kind: "software",
@@ -392,6 +420,12 @@ export const items: UsesItem[] = [
   // Development
   {
     name: "Ghostty and tmux, with sesh and workmux",
+    includes: [
+      { name: "Ghostty" },
+      { name: "tmux" },
+      { name: "sesh" },
+      { name: "workmux" },
+    ],
     icon: "simple-icons:ghostty",
     url: "https://ghostty.org",
     kind: "software",
@@ -525,7 +559,7 @@ export const items: UsesItem[] = [
     name: "Synology NAS",
     icon: "simple-icons:synology",
     url: "https://www.synology.com",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Notes, media and self-hosted services",
     status: "using",
@@ -538,6 +572,19 @@ export const items: UsesItem[] = [
   },
   {
     name: "Home lab tools",
+    includes: [
+      { name: "Portainer CE" },
+      { name: "Homepage" },
+      { name: "Glances" },
+      { name: "Uptime Kuma" },
+      { name: "Diun" },
+      { name: "WireGuard" },
+      { name: "Paperless-ngx" },
+      { name: "Calibre-web" },
+      { name: "Kiwix" },
+      { name: "NocoDB" },
+      { name: "n8n" },
+    ],
     icon: "tabler:box-multiple",
     kind: "software",
     area: "tech",
@@ -702,6 +749,7 @@ export const items: UsesItem[] = [
   // Photo, video and streaming
   {
     name: "darktable and RawTherapee",
+    includes: [{ name: "darktable" }, { name: "RawTherapee" }],
     icon: "tabler:aperture",
     url: "https://www.darktable.org",
     kind: "software",
@@ -740,9 +788,16 @@ export const items: UsesItem[] = [
   // Studio and presenting
   {
     name: "Canon R6 Mark II with 24-105, 70-200, 50 and 35mm lenses",
+    includes: [
+      { name: "Canon EOS R6 Mark II", brand: "Canon", model: "EOS R6 Mark II" },
+      { name: "Canon 24-105mm lens", brand: "Canon" },
+      { name: "Canon 70-200mm lens", brand: "Canon" },
+      { name: "Canon 50mm lens", brand: "Canon" },
+      { name: "Canon 35mm lens", brand: "Canon" },
+    ],
     icon: "tabler:camera",
     url: "https://www.canon-europe.com/cameras/eos-r6-mark-ii/",
-    kind: "device",
+    kind: "hardware",
     area: "creative",
     category: "Studio and presenting",
     status: "using",
@@ -752,10 +807,11 @@ export const items: UsesItem[] = [
       "Once you've started with Canon, it's really hard to escape the ecosystem lock-in.",
   },
   {
-    name: "Sony RX100 V as webcam",
+    name: "Sony RX100 V",
+    usedAs: "webcam",
     icon: "simple-icons:sony",
     url: "https://www.sony.co.uk/electronics/cyber-shot-compact-cameras/dsc-rx100m5",
-    kind: "device",
+    kind: "hardware",
     area: "creative",
     category: "Studio and presenting",
     status: "using",
@@ -766,9 +822,14 @@ export const items: UsesItem[] = [
   },
   {
     name: "Røde Procaster and Wireless Pro with Elgato Wave XLR",
+    includes: [
+      { name: "Røde Procaster", brand: "Røde", model: "Procaster" },
+      { name: "Røde Wireless Pro", brand: "Røde", model: "Wireless Pro" },
+      { name: "Elgato Wave XLR", brand: "Elgato", model: "Wave XLR" },
+    ],
     icon: "tabler:microphone",
     url: "https://rode.com/en-nl/products/procaster",
-    kind: "device",
+    kind: "hardware",
     area: "creative",
     category: "Studio and presenting",
     status: "using",
@@ -776,9 +837,14 @@ export const items: UsesItem[] = [
   },
   {
     name: "Elgato Key Light, Key Light Air and Prompter",
+    includes: [
+      { name: "Elgato Key Light", brand: "Elgato", model: "Key Light" },
+      { name: "Elgato Key Light Air", brand: "Elgato", model: "Key Light Air" },
+      { name: "Elgato Prompter", brand: "Elgato", model: "Prompter" },
+    ],
     icon: "tabler:bulb",
     url: "https://www.elgato.com/eu/en/p/key-light",
-    kind: "device",
+    kind: "hardware",
     area: "creative",
     category: "Studio and presenting",
     status: "using",
@@ -787,9 +853,17 @@ export const items: UsesItem[] = [
   },
   {
     name: "Elgato Stream Deck and Stream Deck XL",
+    includes: [
+      { name: "Elgato Stream Deck", brand: "Elgato", model: "Stream Deck" },
+      {
+        name: "Elgato Stream Deck XL",
+        brand: "Elgato",
+        model: "Stream Deck XL",
+      },
+    ],
     icon: "simple-icons:elgato",
     url: "https://www.elgato.com/eu/en/p/stream-deck-xl",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Studio and presenting",
     status: "using",
@@ -810,9 +884,13 @@ export const items: UsesItem[] = [
   },
   {
     name: "Raspberry Pi 4 with Batocera",
+    includes: [
+      { name: "Raspberry Pi 4", brand: "Raspberry Pi", model: "4" },
+      { name: "Batocera" },
+    ],
     icon: "tabler:device-gamepad-2",
     url: "https://batocera.org",
-    kind: "device",
+    kind: "hardware",
     area: "home",
     category: "Gaming",
     status: "using",
@@ -911,7 +989,7 @@ export const items: UsesItem[] = [
     name: "YubiKey",
     icon: "simple-icons:yubico",
     url: "https://www.yubico.com",
-    kind: "device",
+    kind: "hardware",
     area: "tech",
     category: "Communication and privacy",
     status: "using",
@@ -945,6 +1023,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Twitter and Instagram",
+    includes: [{ name: "Twitter" }, { name: "Instagram" }],
     kind: "service",
     area: "tech",
     status: "dropped",
@@ -972,6 +1051,11 @@ export const items: UsesItem[] = [
   },
   {
     name: "Streaming subscriptions (Netflix, Disney+, Prime)",
+    includes: [
+      { name: "Netflix" },
+      { name: "Disney+" },
+      { name: "Prime Video" },
+    ],
     kind: "service",
     area: "tech",
     status: "dropped",
@@ -980,6 +1064,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Evernote and Notion",
+    includes: [{ name: "Evernote" }, { name: "Notion" }],
     kind: "software",
     area: "tech",
     status: "dropped",
@@ -1044,8 +1129,9 @@ export const items: UsesItem[] = [
     endedAt: "2025",
   },
   {
-    name: "Mac mini as daily workstation",
-    kind: "device",
+    name: "Mac mini",
+    usedAs: "daily workstation",
+    kind: "hardware",
     area: "tech",
     status: "dropped",
     droppedReason: "replaced",
@@ -1061,6 +1147,10 @@ export const currentItems = items.filter((i) => i.status !== "dropped");
 
 /** Dropped items, in data order. */
 export const droppedItems = items.filter((i) => i.status === "dropped");
+
+/** Name as shown on the page: "Sony RX100 V as webcam". */
+export const displayName = (item: UsesItem) =>
+  item.usedAs ? `${item.name} as ${item.usedAs}` : item.name;
 
 /** Current items whose `replaces` names the given dropped item. */
 export function replacedBy(dropped: UsesItem): UsesItem[] {
