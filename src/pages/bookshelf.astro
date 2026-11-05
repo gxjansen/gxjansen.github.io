@@ -9,14 +9,16 @@ import BookGrid from "@components/Reading/BookGrid.astro";
 import SuggestBook from "@components/Reading/SuggestBook.astro";
 import { getBookshelf } from "../lib/bookhive";
 
-// SSR + CDN stale-while-revalidate, mirroring /now: the shelves stay fresh as
-// the Bookhive list changes, without needing a rebuild.
+// SSR + CDN stale-while-revalidate: the shelves stay fresh as the Bookhive list
+// changes, without needing a rebuild. `durable` shares one cached copy across
+// all Netlify edge nodes; without it each node keeps its own, so most visitors
+// hit a cold node and wait for Bookhive.
 export const prerender = false;
 Astro.response.headers.set(
   "Netlify-CDN-Cache-Control",
-  "public, s-maxage=300, stale-while-revalidate=3600",
+  "public, durable, s-maxage=300, stale-while-revalidate=3600",
 );
-// See /now: `no-cache` is honoured more consistently than
+// `no-cache` is honoured more consistently than
 // `public, max-age=0, must-revalidate`, so a restored tab always revalidates.
 Astro.response.headers.set("Cache-Control", "no-cache");
 
