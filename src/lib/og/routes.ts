@@ -107,6 +107,12 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     lead: "Hardware, software and services, why I picked them, and what I dropped.",
     hand: "my setup",
   },
+  slashes: {
+    url: "gui.do/slashes",
+    title: "Every slash page on this site",
+    lead: "An index of /now, /uses and friends, plus the short aliases that get you there.",
+    hand: "slash index",
+  },
   contact: {
     url: "gui.do/contact",
     title: "Get in touch",

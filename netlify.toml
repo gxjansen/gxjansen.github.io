@@ -179,6 +179,12 @@
   conditions = {Header = {Accept = "text/markdown"}}
 
 [[redirects]]
+  from = "/slashes/"
+  to = "/slashes.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
   from = "/post/*"
   to = "/post/:splat.md"
   status = 308
