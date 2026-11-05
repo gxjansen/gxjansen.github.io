@@ -16,7 +16,7 @@
 
 export type UsesKind = "software" | "hardware" | "service";
 export type UsesArea = "tech" | "home" | "creative" | "other";
-export type UsesStatus = "using" | "trying" | "dropped";
+export type UsesStatus = "planned" | "using" | "trying" | "dropped";
 export type UsesContext = "professional" | "personal";
 /**
  * Site-only filter tags, not a record field. eu: maker or provider based in
@@ -294,6 +294,16 @@ export const items: UsesItem[] = [
     replaces: [{ name: "Sony WH-1000XM3" }],
   },
   {
+    name: "Samsung Galaxy Buds Pro",
+    icon: "tabler:headphones",
+    brand: "Samsung",
+    model: "Galaxy Buds Pro",
+    kind: "hardware",
+    area: "tech",
+    category: "Personal hardware",
+    status: "using",
+  },
+  {
     name: "Garmin Epix Pro",
     icon: "simple-icons:garmin",
     url: "https://www.garmin.com/nl-NL/p/884292/",
@@ -394,6 +404,25 @@ export const items: UsesItem[] = [
     reason:
       "I love it because (afterwards) it helps me find things much faster.",
     downside: "My girlfriend hates it (when labels are visible anywhere).",
+  },
+  {
+    name: "Brother color laser printer",
+    icon: "tabler:printer",
+    brand: "Brother",
+    kind: "hardware",
+    area: "home",
+    category: "Home",
+    status: "using",
+  },
+  {
+    name: "Canon SELPHY photo printer",
+    icon: "tabler:printer",
+    brand: "Canon",
+    model: "SELPHY",
+    kind: "hardware",
+    area: "home",
+    category: "Home",
+    status: "using",
   },
 
   // OS and desktop
@@ -537,6 +566,18 @@ export const items: UsesItem[] = [
       "A non-profit, EU-based forge for private repos and my synced dotfiles. Planning to move to Tangled once it supports private repos.",
   },
   {
+    name: "Termux",
+    traits: ["openSource"],
+    icon: "tabler:terminal-2",
+    url: "https://termux.dev",
+    kind: "software",
+    area: "tech",
+    category: "Development",
+    status: "using",
+    reason:
+      "Android terminal. I use it to SSH from my phone into the tmux sessions where my AI coding sessions run.",
+  },
+  {
     name: "Tangled",
     traits: ["openSource"],
     icon: "simple-icons:tangled",
@@ -578,6 +619,18 @@ export const items: UsesItem[] = [
     downside:
       "A US service, and not self-hosted. And depending on the model/provider, they might train on your data.",
     storyUrl: STORY_2025,
+  },
+  {
+    name: "Mistral Vibe",
+    traits: ["eu"],
+    icon: "simple-icons:mistralai",
+    url: "https://mistral.ai",
+    kind: "service",
+    area: "tech",
+    category: "AI (local and hosted)",
+    status: "trying",
+    reason:
+      "For mobile one-off questions an AI answers better than a search engine. Mistral is French/EU.",
   },
 
   // Notes and reading, Media, Self-hosted and web
@@ -681,6 +734,20 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
   {
+    name: "NVIDIA Shield TV",
+    icon: "simple-icons:nvidia",
+    url: "https://www.nvidia.com/en-us/shield/",
+    brand: "NVIDIA",
+    model: "Shield TV",
+    kind: "hardware",
+    area: "home",
+    category: "Media",
+    status: "using",
+    reason:
+      "Android TV box; much better than the bloatware that ships with TVs.",
+    downside: "Old; no update from NVIDIA in sight.",
+  },
+  {
     name: "Audiobookshelf",
     traits: ["openSource", "selfHosted"],
     icon: "simple-icons:audiobookshelf",
@@ -690,6 +757,17 @@ export const items: UsesItem[] = [
     category: "Notes and reading",
     status: "using",
     replaces: [{ name: "Audible" }],
+  },
+  {
+    name: "RedReader",
+    traits: ["openSource"],
+    icon: "simple-icons:reddit",
+    url: "https://github.com/QuantumBadger/RedReader",
+    kind: "software",
+    area: "tech",
+    category: "Notes and reading",
+    status: "using",
+    replaces: [{ name: "Reddit app" }],
   },
   {
     name: "Symfonium",
@@ -810,6 +888,19 @@ export const items: UsesItem[] = [
     reason:
       "A small service I wrote that plans tasks and habits into free time in my Fastmail calendar, based on all kinds of weekly time goals, recurring tasks, todo trackers etc.",
     replaces: [{ name: "Reclaim.ai" }],
+  },
+  {
+    name: "Netlify",
+    icon: "simple-icons:netlify",
+    url: "https://www.netlify.com",
+    kind: "service",
+    area: "tech",
+    category: "Self-hosted and web",
+    status: "using",
+    reason:
+      "Hosts several of my websites. US company, but pretty good and cheap, and I'm not locked in at all: all code lives on GitHub and locally, so I can move away anytime.",
+    downside:
+      "I might move the sites to a VPS eventually, but that's not high prio.",
   },
 
   // Photo, video and streaming
@@ -981,6 +1072,10 @@ export const items: UsesItem[] = [
   // Communication and privacy
   {
     name: "Bluesky",
+    includes: [
+      { name: "Bluesky app" },
+      { name: "mu", url: "https://mu.social" },
+    ],
     traits: ["openSource"],
     icon: "simple-icons:bluesky",
     url: "https://bsky.app",
@@ -989,7 +1084,7 @@ export const items: UsesItem[] = [
     category: "Communication and privacy",
     status: "using",
     reason:
-      "My main social account. I own the handle, and the data lives in a repo I can move.",
+      "My main social account. I own the handle, and the data lives in a repo I can move. I have many Bluesky accounts and use both the Bluesky app and mu (Eurosky's Android app), since each has features the other lacks. mu is needed to verify accounts with atproto.nl.",
     replaces: [{ name: "Twitter and Instagram" }],
     storyUrl: STORY_2025,
   },
@@ -1020,6 +1115,27 @@ export const items: UsesItem[] = [
       "Some groups are still stuck on WhatsApp, and the (sub)group/community function on Signal is not developed yet.",
     replaces: [{ name: "WhatsApp" }],
     storyUrl: STORY_2025,
+  },
+  {
+    name: "WhatsApp",
+    icon: "simple-icons:whatsapp",
+    url: "https://www.whatsapp.com",
+    kind: "software",
+    area: "tech",
+    category: "Communication and privacy",
+    status: "using",
+    reason: "Honestly, still pretty much needed for some school parent groups.",
+  },
+  {
+    name: "Telegram",
+    icon: "simple-icons:telegram",
+    url: "https://telegram.org",
+    kind: "software",
+    area: "tech",
+    category: "Communication and privacy",
+    status: "using",
+    reason:
+      "Not for messaging any actual person. It's my default notification channel for self-hosted tools like Uptime Kuma and for Home Assistant.",
   },
   {
     name: "Marque",
@@ -1085,6 +1201,53 @@ export const items: UsesItem[] = [
       "A hardware security key for MFA or passwordless login where supported.",
   },
 
+  // Planned: not in use yet. `replaces` is what it would replace.
+  {
+    name: "Fairphone Fairbuds XL",
+    url: "https://www.fairphone.com/fairbuds-xl",
+    brand: "Fairphone",
+    model: "Fairbuds XL",
+    kind: "hardware",
+    area: "tech",
+    category: "Personal hardware",
+    status: "planned",
+    reason: "Planned for when the XM5 needs replacing.",
+    replaces: [{ name: "Sony WH-1000XM5" }],
+  },
+  {
+    name: "Fairphone Fairbuds",
+    brand: "Fairphone",
+    model: "Fairbuds",
+    kind: "hardware",
+    area: "tech",
+    category: "Personal hardware",
+    status: "planned",
+    reason: "Planned as in-ear, if/when the Galaxy Buds Pro die.",
+    replaces: [{ name: "Samsung Galaxy Buds Pro" }],
+  },
+  {
+    name: "Tangled",
+    url: "https://tangled.org",
+    kind: "service",
+    area: "tech",
+    category: "Development",
+    status: "planned",
+    reason:
+      "Planned: move my GitHub and Codeberg repos once Tangled supports private repos (and project boards).",
+    replaces: [{ name: "GitHub" }, { name: "Codeberg" }],
+  },
+  {
+    name: "Jellyfin",
+    traits: ["openSource", "selfHosted"],
+    url: "https://jellyfin.org",
+    kind: "software",
+    area: "tech",
+    category: "Media",
+    status: "planned",
+    reason:
+      "Planned as open source replacement for Plex, but not high on the todo list.",
+    replaces: [{ name: "Plex" }],
+  },
   // Dropped. "Replaced by" comes from the `replaces` lists above.
   {
     name: "Google Workspace",
@@ -1231,8 +1394,13 @@ export const items: UsesItem[] = [
 
 const norm = (s: string) => s.trim().toLowerCase();
 
-/** Items still in use or being tried, in data order. */
-export const currentItems = items.filter((i) => i.status !== "dropped");
+/** Items in use or being tried, in data order. */
+export const currentItems = items.filter(
+  (i) => i.status === "using" || i.status === "trying",
+);
+
+/** Items planned but not in use yet, in data order. */
+export const plannedItems = items.filter((i) => i.status === "planned");
 
 /** Dropped items, in data order. */
 export const droppedItems = items.filter((i) => i.status === "dropped");

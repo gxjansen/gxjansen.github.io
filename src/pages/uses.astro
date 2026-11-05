@@ -13,6 +13,7 @@ import {
   droppedItems,
   featured,
   lastReviewed,
+  plannedItems,
   principles,
   replacedBy,
   traitLabels,
@@ -139,6 +140,20 @@ const replacedName = (r: { name: string }) => {
     : name;
 };
 
+// Planned items: "Would replace Plex", linking to the current item when the
+// name matches one. Own id prefix, so a planned "Tangled" doesn't clash with
+// the current one.
+const currentByName = (name: string) =>
+  currentItems.find((i) => i.name.toLowerCase() === name.toLowerCase());
+const planned = plannedItems.map((item) => ({
+  item,
+  id: `plan-${slugify(displayName(item))}`,
+  replaces: (item.replaces ?? []).map((r) => ({
+    name: r.name,
+    current: currentByName(r.name),
+  })),
+}));
+
 const dropped = droppedItems.map((item) => ({
   item,
   by: replacedBy(item),
@@ -182,6 +197,7 @@ const traitCount = (trait: UsesTrait | undefined) =>
 const index = [
   { id: "principles", name: "How I pick tools" },
   ...groups.map((g) => ({ id: g.id, name: g.name })),
+  ...(planned.length > 0 ? [{ id: "planned", name: "Next on my list" }] : []),
   ...(alternatives.length > 0
     ? [{ id: "alternatives", name: "Alternatives to…" }]
     : []),
@@ -378,6 +394,51 @@ const index = [
             })}
           </ul>
         </section>)}
+
+        {planned.length > 0 && <section
+          id="planned"
+          class="uses-section mt-14"
+          aria-labelledby="uses-planned"
+        >
+          <h2 id="uses-planned" class="uses-h">Next on my list</h2>
+          <p class="text-base-700 dark:text-base-300 mb-6 leading-relaxed">
+            Things I plan to switch to, and what they would replace.
+          </p>
+          <ul class="uses-list">
+            {planned.map(({ item, id, replaces }) => <li
+              id={id}
+              class="uses-item"
+            >
+              <p class="item-name">
+                <span>{displayName(item)}</span>
+              </p>
+              {item.reason && <p class="item-reason">
+                {linkify(item.reason).map(({ part, href }) =>
+                  href ? <a href={href}>{part}</a> : part,
+                )}
+              </p>}
+              {(item.url || replaces.length > 0) && <p class="item-meta">
+                {item.url && <a href={item.url}>{host(item.url)}</a>}
+                {replaces.length > 0 && (
+                  <>
+                    {item.url && " · "}
+                    Would replace{" "}
+                    {replaces.map((r, i) => (
+                      <>
+                        {i > 0 && (i === replaces.length - 1 ? " and " : ", ")}
+                        {r.current ? (
+                          <a href={`#${itemId(r.current)}`}>{r.name}</a>
+                        ) : (
+                          r.name
+                        )}
+                      </>
+                    ))}
+                  </>
+                )}
+              </p>}
+            </li>)}
+          </ul>
+        </section>}
 
         {alternatives.length > 0 && <section
           id="alternatives"
