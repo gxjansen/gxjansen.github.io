@@ -17,7 +17,7 @@ export const prerender = false;
 // 86400 let the CDN keep serving a day-old copy whenever revalidation lagged.
 Astro.response.headers.set(
   "Netlify-CDN-Cache-Control",
-  "public, s-maxage=300, stale-while-revalidate=3600",
+  "public, durable, s-maxage=300, stale-while-revalidate=3600",
 );
 // `no-cache` (store, but revalidate every time) rather than
 // `public, max-age=0, must-revalidate`: same semantics on paper, but browsers

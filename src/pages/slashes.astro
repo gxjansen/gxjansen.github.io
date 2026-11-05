@@ -1,0 +1,88 @@
+---
+/**
+ * /slashes: index of the site's slash pages (https://slashpages.net).
+ * The list and the alias redirects both come from src/data/slashes.ts.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { slashPages, pageHref } from "@data/slashes";
+
+const featuredPages = slashPages.filter((p) => p.featured);
+const otherPages = slashPages.filter((p) => !p.featured);
+---
+
+<BaseLayout
+  title="Slashes"
+  description="Slash pages are a convention from slashpages.net: common paths on personal sites like /now and /uses. This is my full list."
+>
+  <div class="home slashes-page">
+    <section
+      class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">the index</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Slashes
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
+          Slash pages are a convention from
+          <a
+            href="https://slashpages.net/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >slashpages.net</a
+          >: common paths on personal sites like /now and /uses. This is my full
+          list, including short aliases like /languages that jump straight to a
+          section of my CV.
+        </p>
+      </div>
+
+      <!-- Primary: featured pages (src/data/slashes.ts) -->
+      <section class="mt-14 max-w-3xl" aria-labelledby="slash-pages">
+        <h2
+          id="slash-pages"
+          class="font-display mb-6 text-[1.6rem] font-extrabold tracking-[-0.02em]"
+        >
+          Slash pages
+        </h2>
+        <ul class="grid gap-4 sm:grid-cols-2">
+          {featuredPages.map((page) => <li
+            class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 hover:border-primary-400 relative rounded-2xl border p-5 transition hover:-translate-y-0.5 hover:shadow-lg sm:p-6"
+          >
+            <a
+              href={pageHref(page)}
+              class="font-display text-primary-600 dark:text-primary-400 text-[1.6rem] leading-tight font-black tracking-[-0.02em] after:absolute after:inset-0 after:rounded-2xl after:content-['']"
+            >
+              /{page.slug}
+            </a>
+            <p class="text-base-600 dark:text-base-400 mt-2 leading-relaxed">
+              {page.description}
+            </p>
+          </li>)}
+        </ul>
+      </section>
+
+      <!-- Secondary: other top-level pages, compact -->
+      <section
+        class="border-base-200 dark:border-base-800 mt-24 max-w-3xl border-t pt-10"
+        aria-labelledby="also-on-gui-do"
+      >
+        <h2
+          id="also-on-gui-do"
+          class="text-base-500 mb-6 text-xs font-bold tracking-[0.08em] uppercase"
+        >
+          Also on gui.do
+        </h2>
+        <ul class="grid gap-x-10 gap-y-4 sm:grid-cols-2">
+          {otherPages.map((page) => <li>
+            <a href={pageHref(page)} class="font-semibold">/{page.slug}</a>
+            <p class="text-base-500 text-sm leading-snug">
+              {page.description}
+            </p>
+          </li>)}
+        </ul>
+      </section>
+    </section>
+  </div>
+</BaseLayout>

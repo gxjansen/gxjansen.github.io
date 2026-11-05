@@ -70,11 +70,11 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     lead: "Sifa, Barazo, n8n Pulse and more. Most open source on GitHub.",
     hand: "mostly open source",
   },
-  press: {
-    url: "gui.do/press",
-    title: "In the press",
-    lead: "Media appearances, interviews and articles.",
-    hand: "media & interviews",
+  appearances: {
+    url: "gui.do/appearances",
+    title: "Where I've shown up",
+    lead: "Podcasts, panels, blogs and videos I was invited into, plus a few articles and awards.",
+    hand: "said things",
   },
   newsletter: {
     url: "gui.do/newsletter",
@@ -101,11 +101,29 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     lead: "Field notes, essays and how-tos from building community functions.",
     hand: "field notes",
   },
+  now: {
+    url: "gui.do/now",
+    title: "What I'm doing right now",
+    lead: "Posts, reading and building, pulled live from the open social web.",
+    hand: "right now",
+  },
   uses: {
     url: "gui.do/uses",
     title: "The tools I actually use",
     lead: "Hardware, software and services, why I picked them, and what I dropped.",
     hand: "my setup",
+  },
+  follow: {
+    url: "gui.do/follow",
+    title: "Follow Guido",
+    lead: "Newsletter, RSS and the places I post. Pick what works.",
+    hand: "keep up",
+  },
+  slashes: {
+    url: "gui.do/slashes",
+    title: "Every slash page on this site",
+    lead: "An index of /now, /uses and friends, plus the short aliases that get you there.",
+    hand: "slash index",
   },
   contact: {
     url: "gui.do/contact",

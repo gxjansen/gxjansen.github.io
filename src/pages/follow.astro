@@ -1,0 +1,107 @@
+---
+/**
+ * /follow: every way to keep up (https://slashpages.net). The newsletter and
+ * public-feed options come from SubscribeBox; the profiles from socialLinks.
+ * /subscribe and /feeds redirect here (src/data/slashes.ts).
+ */
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import SubscribeBox from "@components/Newsletter/SubscribeBox.astro";
+import { socialLinks } from "@data/socialLinks";
+
+// Only profiles on the open social web (AT Protocol). LinkedIn, GitHub and
+// YouTube still exist but are left out on purpose: Guido is moving away from
+// them. Bluesky and Sifa ID come from socialLinks so their URLs stay in one place.
+const fromSocial = (name: string) => {
+  const link = socialLinks.find((l) => l.name === name);
+  if (!link) throw new Error(`follow: no socialLinks entry "${name}"`);
+  return { name: link.name, href: link.href, icon: link.icon };
+};
+const profiles = [
+  fromSocial("Bluesky"),
+  fromSocial("Sifa ID"),
+  {
+    name: "Grain",
+    href: "https://grain.social/profile/gui.do",
+    icon: "tabler:camera",
+  },
+  { name: "Tangled", href: "https://tangled.org/gui.do", icon: "apps/tangled" },
+  {
+    name: "Popfeed",
+    href: "https://popfeed.social/profile/gui.do",
+    icon: "apps/popfeed",
+  },
+  {
+    name: "Bookhive",
+    href: "https://bookhive.buzz/profile/gui.do",
+    icon: "tabler:books",
+  },
+];
+const host = (href: string) => new URL(href).hostname.replace(/^(www\.)/, "");
+---
+
+<BaseLayout
+  title="Follow"
+  description="All the ways to follow what I write and build: newsletter, Standard Reader, RSS and social profiles."
+>
+  <div class="home follow-page">
+    <section
+      class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">keep up</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Follow
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
+          All the ways to follow what I write and build. Email gets the richer,
+          more private notes. Everything public is below.
+        </p>
+      </div>
+
+      <SubscribeBox class="mt-10 max-w-3xl" />
+
+      <section
+        id="elsewhere"
+        class="mt-16 max-w-3xl scroll-mt-24"
+        aria-labelledby="elsewhere-h"
+      >
+        <h2
+          id="elsewhere-h"
+          class="font-display text-[1.6rem] font-extrabold tracking-[-0.02em]"
+        >
+          Elsewhere
+        </h2>
+        <p class="text-base-600 dark:text-base-400 mt-1 mb-6 leading-relaxed">
+          My profiles live on the open social web now, built on AT Protocol, as
+          I deliberately move away from LinkedIn, GitHub and YouTube.
+        </p>
+        <ul class="grid gap-4 sm:grid-cols-2">
+          {profiles.map((p) => <li>
+            <a
+              href={p.href}
+              rel="me noopener noreferrer"
+              target="_blank"
+              class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 hover:border-primary-400 no-random-underline flex items-center gap-4 rounded-2xl border p-4 transition hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              <Icon
+                name={p.icon}
+                class="text-primary-600 dark:text-primary-400 size-7 shrink-0"
+                aria-hidden="true"
+              />
+              <span>
+                <span class="font-display block font-bold">{p.name}</span>
+                <span class="text-base-500 block text-sm">
+                  {host(p.href)}
+                </span>
+              </span>
+              <span class="sr-only">(opens in new tab)</span>
+            </a>
+          </li>)}
+        </ul>
+      </section>
+    </section>
+  </div>
+</BaseLayout>

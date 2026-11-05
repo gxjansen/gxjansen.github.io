@@ -128,13 +128,15 @@ function isContentPage(pathname: string): boolean {
     "communities/",
     "projects/",
     "speaker/",
-    "press/",
+    "appearances/",
     "contact/",
     "retainer/",
     "post/",
     "events/",
     "presentations/",
     "podcasts/",
+    "slashes/",
+    "follow/",
   ];
 
   // Top-level static pages written as plain "name/index.html"

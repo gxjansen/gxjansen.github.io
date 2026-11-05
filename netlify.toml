@@ -155,8 +155,8 @@
   conditions = {Header = {Accept = "text/markdown"}}
 
 [[redirects]]
-  from = "/press/"
-  to = "/press.md"
+  from = "/appearances/"
+  to = "/appearances.md"
   status = 308
   conditions = {Header = {Accept = "text/markdown"}}
 
@@ -175,6 +175,18 @@
 [[redirects]]
   from = "/podcasts/"
   to = "/podcasts.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/follow/"
+  to = "/follow.md"
+  status = 308
+  conditions = {Header = {Accept = "text/markdown"}}
+
+[[redirects]]
+  from = "/slashes/"
+  to = "/slashes.md"
   status = 308
   conditions = {Header = {Accept = "text/markdown"}}
 
