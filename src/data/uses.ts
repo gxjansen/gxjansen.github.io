@@ -276,7 +276,7 @@ export const items: UsesItem[] = [
     category: "Home",
     status: "using",
     reason:
-      "Lights and automations keep running when the internet is down. It's a dedicated box, so I can reboot my other machines freely.",
+      "Central hub for all home-based automations, without any reliance on the internet. It's a dedicated box, so I can reboot my other machines freely.",
     storyUrl: STORY_ANTIFRAGILE,
   },
   {
