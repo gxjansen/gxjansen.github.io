@@ -1003,7 +1003,7 @@ export const items: UsesItem[] = [
     category: "Communication and privacy",
     status: "using",
     reason:
-      "Sifa ID replaced LinkedIn for me: a professional profile on AT Protocol, so the data lives in my own PDS and moves with me. Built by my own company, Singi Labs (so yes, biased).",
+      "Sifa ID replaced LinkedIn for me: a professional profile on AT Protocol, so the data lives in my own PDS and moves with me. I might be biased though as I'm building Sifa myself ;)",
     replaces: [{ name: "LinkedIn" }],
   },
   {
