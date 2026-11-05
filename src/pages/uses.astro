@@ -129,6 +129,38 @@ const dropped = droppedItems.map((item) => ({
   item,
   by: replacedBy(item),
 }));
+
+// "Alternatives to": every replaced name, A-Z, with the current items that
+// replaced it. A dropped item's own replaces count too (Spotify -> YouTube
+// Music -> Plexamp lists Spotify -> Plexamp).
+const alternativesMap = new Map<string, { name: string; by: UsesItem[] }>();
+const addAlternative = (name: string, item: UsesItem) => {
+  const key = name.toLowerCase();
+  const entry = alternativesMap.get(key) ?? { name, by: [] };
+  if (!entry.by.includes(item)) entry.by.push(item);
+  alternativesMap.set(key, entry);
+};
+for (const item of currentItems) {
+  for (const r of item.replaces ?? []) {
+    addAlternative(r.name, item);
+    const prev = droppedItems.find(
+      (d) => d.name.toLowerCase() === r.name.toLowerCase(),
+    );
+    for (const older of prev?.replaces ?? []) addAlternative(older.name, item);
+  }
+}
+const alternatives = [...alternativesMap.values()].sort((a, b) =>
+  a.name.localeCompare(b.name, "en", { sensitivity: "base" }),
+);
+
+const index = [
+  { id: "principles", name: "How I pick tools" },
+  ...groups.map((g) => ({ id: g.id, name: g.name })),
+  ...(alternatives.length > 0
+    ? [{ id: "alternatives", name: "Alternatives to…" }]
+    : []),
+  ...(dropped.length > 0 ? [{ id: "dropped", name: "What I dropped" }] : []),
+];
 ---
 
 <BaseLayout
@@ -136,206 +168,351 @@ const dropped = droppedItems.map((item) => ({
   description="The hardware, software and services Guido X Jansen uses, why he picked them, what they cost him, and what he dropped along the way."
 >
   <section class="mt-24 w-full px-4">
-    <div class="mx-auto max-w-3xl">
-      <header class="mb-8">
-        <p
-          class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.5rem] leading-none"
-        >
-          what I actually use
-        </p>
-        <h1 class="h1 mt-2">Uses</h1>
-        <p class="text-base-500 dark:text-base-400 mt-2 text-[.85rem]">
-          Last reviewed
-          <time datetime={lastReviewed}>{fullDate(lastReviewed)}</time>
-        </p>
-      </header>
+    <div class="uses-layout mx-auto max-w-3xl">
+      <div class="uses-head">
+        <header class="mb-8">
+          <p
+            class="text-gold-light dark:text-gold font-hand -rotate-2 text-[1.5rem] leading-none"
+          >
+            what I actually use
+          </p>
+          <h1 class="h1 mt-2">Uses</h1>
+          <p class="text-base-500 dark:text-base-400 mt-2 text-[.85rem]">
+            Last reviewed
+            <time datetime={lastReviewed}>{fullDate(lastReviewed)}</time>
+          </p>
+        </header>
 
-      <div
-        class="text-base-700 dark:text-base-300 max-w-2xl space-y-4 text-lg leading-relaxed"
-      >
-        <p>
-          This is the hardware, software and services I use every week, and what
-          I (dis)like about them. These are the tools that stood the test of
-          time and best match my principles, plus some new items I'm trying out.
-        </p>
-        <p>
-          Every pick has pros and cons. I tried explaining why I picked
-          something over something else and how I handle/accept the downsides.
-          Some items link to the post where I wrote about the switch.
-        </p>
+        <div
+          class="text-base-700 dark:text-base-300 max-w-2xl space-y-4 text-lg leading-relaxed"
+        >
+          <p>
+            This is the hardware, software and services I use every week, and
+            what I (dis)like about them. These are the tools that stood the test
+            of time and best match my principles, plus some new items I'm trying
+            out.
+          </p>
+          <p>
+            Every pick has pros and cons. I tried explaining why I picked
+            something over something else and how I handle/accept the downsides.
+            Some items link to the post where I wrote about the switch.
+          </p>
+        </div>
       </div>
 
-      <nav class="uses-index mt-10" aria-labelledby="uses-index-h">
+      <nav class="uses-index" aria-labelledby="uses-index-h">
         <p id="uses-index-h" class="uses-index-h">On this page</p>
         <ul>
-          <li><a href="#principles">How I pick tools</a></li>
-          {groups.map((group) => <li>
-            <a href={`#${group.id}`}>{group.name}</a>
+          {index.map((entry) => <li>
+            <a href={`#${entry.id}`}>{entry.name}</a>
           </li>)}
-          {dropped.length > 0 && <li><a href="#dropped">What I dropped</a></li>}
         </ul>
       </nav>
 
-      <section
-        id="principles"
-        class="uses-section mt-14"
-        aria-labelledby="uses-principles"
-      >
-        <h2 id="uses-principles" class="uses-h">How I pick tools</h2>
-        <ol class="principles">
-          {principles.map((p) => <li>
-            <p class="principle-title">{p.title}</p>
-            <p class="principle-text">
-              {linkify(p.text).map(({ part, href }) =>
-                href ? <a href={href}>{part}</a> : part,
-              )}
-            </p>
-          </li>)}
-        </ol>
-      </section>
-
-      {groups.map((group) => <section
-        id={group.id}
-        class="uses-section mt-14"
-        aria-labelledby={`${group.id}-h`}
-      >
-        <h2 id={`${group.id}-h`} class="uses-h">{group.name}</h2>
-        <ul class="uses-list">
-          {group.items.map((item) => {
-            const s = story(item.storyUrl);
-            const meta = [
-              item.startedAt ? `Since ${partialDate(item.startedAt)}` : null,
-              item.replaces?.length
-                ? `Replaced ${item.replaces.map(replacedName).join(" and ")}`
-                : null,
-            ].filter(Boolean);
-            const img = photo(item);
-            return <li
-              id={itemId(item)}
-              class:list={["uses-item", img && "has-photo"]}
-            >
-              {img && (
-                <Image
-                  src={img}
-                  alt=""
-                  widths={[320, 480, 640]}
-                  sizes="(min-width: 640px) 12rem, 100vw"
-                  class="item-photo"
-                />
-              )}
-              <div class="item-body">
-                <p class="item-name">
-                  {item.icon && !img && (
-                    <Icon
-                      name={item.icon}
-                      class="item-icon"
-                      aria-hidden="true"
-                    />
+      <div class="uses-main">
+        <section
+          id="principles"
+          class="uses-section mt-10"
+          aria-labelledby="uses-principles"
+        >
+          <h2 id="uses-principles" class="uses-h">How I pick tools</h2>
+          <ol class="principles">
+            {principles.map((p) => <li>
+              <details class="principle">
+                <summary class="principle-title">{p.title}</summary>
+                <p class="principle-text">
+                  {linkify(p.text).map(({ part, href }) =>
+                    href ? <a href={href}>{part}</a> : part,
                   )}
-                  <span>{displayName(item)}</span>
-                  {item.status === "trying" && <span class="trying"
-                    >Evaluating</span
-                  >}
                 </p>
-                {item.reason && <p class="item-reason">
-                  {linkify(item.reason).map(({ part, href }) =>
-                    href ? <a href={href}>{part}</a> : part,
-                  )}
-                </p>}
-                {item.downside && <p class="item-downside">
-                  <span class="font-semibold">Downside:</span>{" "}
-                  {linkify(item.downside).map(({ part, href }) =>
-                    href ? <a href={href}>{part}</a> : part,
-                  )}
-                </p>}
-                {(item.url || meta.length > 0 || s) && <p class="item-meta">
-                  {item.url && <a href={item.url}>{host(item.url)}</a>}
-                  {meta.map((m, i) => (
-                    <>
-                      {(item.url || i > 0) && " · "}
-                      {m}
-                    </>
-                  ))}
-                  {s && (
-                    <>
-                      {(item.url || meta.length > 0) && " · "}
-                      Story: <a href={s.href}>{s.title}</a>
-                    </>
-                  )}
-                </p>}
-              </div>
-            </li>;
-          })}
-        </ul>
-      </section>)}
+              </details>
+            </li>)}
+          </ol>
+        </section>
 
-      <section
-        id="dropped"
-        class="uses-section mt-14"
-        aria-labelledby="uses-dropped"
-      >
-        <h2 id="uses-dropped" class="uses-h">What I dropped</h2>
-        <p class="text-base-700 dark:text-base-300 mb-6 leading-relaxed">
-          Stuff I stopped using, and what replaced it.
-        </p>
-        <ul class="uses-list">
-          {dropped.map(({ item, by }) => <li class="uses-item">
-            <p class="item-name">
-              <span>{displayName(item)}</span>
-              {item.endedAt && <span class="item-when">
-                until{" "}
-                <time datetime={item.endedAt}>{partialDate(item.endedAt)}</time>
-              </span>}
-            </p>
-            {by.length > 0 && <p class="item-meta">
-              Replaced by{" "}
-              {by.map((b, i) => (
-                <>
-                  {i > 0 && (i === by.length - 1 ? " and " : ", ")}
-                  <a href={`#${itemId(b)}`}>{displayName(b)}</a>
-                </>
-              ))}
-            </p>}
-            {item.reason && <p class="item-reason">
-              {linkify(item.reason).map(({ part, href }) =>
-                href ? <a href={href}>{part}</a> : part,
-              )}
-            </p>}
-          </li>)}
-        </ul>
-      </section>
+        {groups.map((group) => <section
+          id={group.id}
+          class="uses-section mt-14"
+          aria-labelledby={`${group.id}-h`}
+        >
+          <h2 id={`${group.id}-h`} class="uses-h">{group.name}</h2>
+          <ul class="uses-list">
+            {group.items.map((item) => {
+              const s = story(item.storyUrl);
+              const meta = [
+                item.startedAt ? `Since ${partialDate(item.startedAt)}` : null,
+                item.replaces?.length
+                  ? `Replaced ${item.replaces.map(replacedName).join(" and ")}`
+                  : null,
+              ].filter(Boolean);
+              const img = photo(item);
+              return <li
+                id={itemId(item)}
+                class:list={["uses-item", img && "has-photo"]}
+              >
+                {img && (
+                  <Image
+                    src={img}
+                    alt=""
+                    widths={[320, 480, 640]}
+                    sizes="(min-width: 640px) 12rem, 100vw"
+                    class="item-photo"
+                  />
+                )}
+                <div class="item-body">
+                  <p class="item-name">
+                    {item.icon && !img && (
+                      <Icon
+                        name={item.icon}
+                        class="item-icon"
+                        aria-hidden="true"
+                      />
+                    )}
+                    <span>{displayName(item)}</span>
+                    {item.status === "trying" && <span class="trying"
+                      >Evaluating</span
+                    >}
+                  </p>
+                  {item.reason && <p class="item-reason">
+                    {linkify(item.reason).map(({ part, href }) =>
+                      href ? <a href={href}>{part}</a> : part,
+                    )}
+                  </p>}
+                  {item.downside && <p class="item-downside">
+                    <span class="font-semibold">Downside:</span>{" "}
+                    {linkify(item.downside).map(({ part, href }) =>
+                      href ? <a href={href}>{part}</a> : part,
+                    )}
+                  </p>}
+                  {(item.url || meta.length > 0 || s) && <p class="item-meta">
+                    {item.url && <a href={item.url}>{host(item.url)}</a>}
+                    {meta.map((m, i) => (
+                      <>
+                        {(item.url || i > 0) && " · "}
+                        {m}
+                      </>
+                    ))}
+                    {s && (
+                      <>
+                        {(item.url || meta.length > 0) && " · "}
+                        Story: <a href={s.href}>{s.title}</a>
+                      </>
+                    )}
+                  </p>}
+                </div>
+              </li>;
+            })}
+          </ul>
+        </section>)}
+
+        {alternatives.length > 0 && <section
+          id="alternatives"
+          class="uses-section mt-14"
+          aria-labelledby="uses-alternatives"
+        >
+          <h2 id="uses-alternatives" class="uses-h">Alternatives to…</h2>
+          <ul class="alternatives">
+            {alternatives.map(({ name, by }) => <li>
+              <span class="alt-old">{name}</span>
+              <span aria-hidden="true" class="alt-arrow">→</span>
+              <span class="sr-only">: replaced by</span>
+              <span>
+                {by.map((b, i) => (
+                  <>
+                    {i > 0 && (i === by.length - 1 ? " and " : ", ")}
+                    <a href={`#${itemId(b)}`}>{displayName(b)}</a>
+                  </>
+                ))}
+              </span>
+            </li>)}
+          </ul>
+        </section>}
+
+        <section
+          id="dropped"
+          class="uses-section mt-14"
+          aria-labelledby="uses-dropped"
+        >
+          <h2 id="uses-dropped" class="uses-h">What I dropped</h2>
+          <p class="text-base-700 dark:text-base-300 mb-6 leading-relaxed">
+            Stuff I stopped using, and what replaced it.
+          </p>
+          <ul class="uses-list">
+            {dropped.map(({ item, by }) => <li class="uses-item">
+              <p class="item-name">
+                <span>{displayName(item)}</span>
+                {item.endedAt && <span class="item-when">
+                  until{" "}
+                  <time datetime={item.endedAt}
+                    >{partialDate(item.endedAt)}</time
+                  >
+                </span>}
+              </p>
+              {by.length > 0 && <p class="item-meta">
+                Replaced by{" "}
+                {by.map((b, i) => (
+                  <>
+                    {i > 0 && (i === by.length - 1 ? " and " : ", ")}
+                    <a href={`#${itemId(b)}`}>{displayName(b)}</a>
+                  </>
+                ))}
+              </p>}
+              {item.reason && <p class="item-reason">
+                {linkify(item.reason).map(({ part, href }) =>
+                  href ? <a href={href}>{part}</a> : part,
+                )}
+              </p>}
+            </li>)}
+          </ul>
+        </section>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
+<script>
+  // Marks the index link of the section in view, and keeps it visible in
+  // the horizontal strip on small screens. Without JS the index still works.
+  const nav = document.querySelector<HTMLElement>(".uses-index");
+  const links = [...(nav?.querySelectorAll<HTMLAnchorElement>("a") ?? [])];
+  const sections = links
+    .map((a) => document.getElementById(a.hash.slice(1)))
+    .filter((s): s is HTMLElement => s !== null);
+  let current: HTMLAnchorElement | undefined;
+  let queued = false;
+
+  const update = () => {
+    queued = false;
+    const line = window.innerHeight * 0.3;
+    let active: HTMLElement | undefined;
+    for (const s of sections) {
+      if (s.getBoundingClientRect().top <= line) active = s;
+    }
+    const link = active
+      ? links.find((a) => a.hash === `#${active.id}`)
+      : undefined;
+    if (link === current) return;
+    current?.removeAttribute("aria-current");
+    current = link;
+    if (!link || !nav) return;
+    link.setAttribute("aria-current", "location");
+    const strip = nav.querySelector("ul");
+    if (strip && strip.scrollWidth > strip.clientWidth) {
+      strip.scrollTo({
+        left: link.offsetLeft - strip.clientWidth / 2 + link.offsetWidth / 2,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const queue = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(update);
+  };
+
+  if (nav && sections.length > 0) {
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+    update();
+  }
+</script>
+
 <style>
   @reference "../styles/tailwind.css";
 
-  /* Keep deep-linked headings and items clear of the fixed nav. */
+  /* Keep deep-linked headings and items clear of the fixed nav and, below
+     xl, the sticky index strip under it. */
   .uses-section,
   .uses-item {
-    scroll-margin-top: 6rem;
+    scroll-margin-top: 7rem;
   }
   .uses-h {
     @apply text-base-950 dark:text-base-50 font-display mb-5 text-[1.4rem] font-black tracking-[-0.02em];
   }
+
+  /* Index: a sticky strip of links under the site nav on small screens, a
+     sticky rail left of the content from xl up. */
+  .uses-index {
+    @apply bg-base-50/95 dark:bg-base-950/95 border-base-200 dark:border-base-800 sticky top-16 z-20 mt-6 flex flex-col rounded-lg border px-3 backdrop-blur;
+  }
   .uses-index-h {
-    @apply text-base-600 dark:text-base-400 mb-2 text-xs font-bold tracking-[0.08em] uppercase;
+    @apply sr-only;
   }
   .uses-index ul {
-    @apply flex flex-wrap gap-x-4 gap-y-1.5;
+    @apply m-0 flex gap-x-5 overflow-x-auto py-2 whitespace-nowrap;
+    scrollbar-width: none;
+    /* Fade the right edge so the strip reads as scrollable. */
+    mask-image: linear-gradient(to right, #000 85%, transparent);
   }
   .uses-index a {
-    @apply text-base-700 dark:text-base-300 hover:text-primary-700 dark:hover:text-primary-300 decoration-base-300 dark:decoration-base-700 underline underline-offset-4;
+    @apply text-base-700 dark:text-base-300 hover:text-primary-700 dark:hover:text-primary-300 text-[0.95rem] underline decoration-transparent underline-offset-4;
   }
+  .uses-index a[aria-current] {
+    @apply text-base-950 dark:text-base-50 decoration-gold-light dark:decoration-gold decoration-2;
+  }
+  @media (min-width: 80rem) {
+    .uses-layout {
+      @apply grid max-w-[64rem] grid-cols-[13rem_minmax(0,48rem)] gap-x-12;
+      grid-template-areas: "rail head" "rail main";
+    }
+    .uses-head {
+      grid-area: head;
+    }
+    .uses-main {
+      grid-area: main;
+    }
+    .uses-section,
+    .uses-item {
+      scroll-margin-top: 6rem;
+    }
+    .uses-index {
+      @apply top-24 mt-0 block self-start rounded-none border-0 bg-transparent px-0 backdrop-blur-none dark:bg-transparent;
+      grid-area: rail;
+    }
+    .uses-index-h {
+      @apply text-base-600 dark:text-base-400 not-sr-only mb-2 block text-xs font-bold tracking-[0.08em] uppercase;
+    }
+    .uses-index ul {
+      @apply flex-col gap-y-1.5 overflow-visible py-0 whitespace-normal;
+      mask-image: none;
+    }
+    .uses-index a[aria-current] {
+      @apply decoration-transparent;
+    }
+    .uses-index li:has(a[aria-current]) {
+      @apply border-gold-light dark:border-gold;
+    }
+    .uses-index li {
+      @apply border-l-2 border-transparent pl-3;
+    }
+  }
+
+  /* Principles collapse to their titles; the text opens on demand. */
   .principles {
-    @apply grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2;
+    @apply grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2;
   }
   .principle-title {
-    @apply text-base-950 dark:text-base-50 font-display font-bold;
+    @apply text-base-950 dark:text-base-50 font-display hover:text-primary-700 dark:hover:text-primary-300 cursor-pointer py-1 font-bold;
+  }
+  .principle-title::marker {
+    @apply text-base-400 dark:text-base-600;
   }
   .principle-text {
-    @apply text-base-700 dark:text-base-300 mt-1 leading-relaxed;
+    @apply text-base-700 dark:text-base-300 mt-1 mb-3 leading-relaxed;
+  }
+
+  .alternatives {
+    @apply grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2;
+  }
+  .alternatives li {
+    @apply text-base-700 dark:text-base-300 leading-snug;
+  }
+  .alt-old {
+    @apply text-base-950 dark:text-base-50 font-semibold;
+  }
+  .alt-arrow {
+    @apply text-base-400 dark:text-base-600 mx-1;
   }
   .uses-list {
     @apply border-base-200 dark:border-base-800 divide-base-200 dark:divide-base-800 divide-y border-y;

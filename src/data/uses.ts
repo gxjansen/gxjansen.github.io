@@ -138,7 +138,9 @@ export const categoryOrder = [
   "OS and desktop",
   "Development",
   "AI (local and hosted)",
-  "Notes, media and self-hosted services",
+  "Notes and reading",
+  "Media",
+  "Self-hosted and web",
   "Photo, video and streaming",
   "Studio and presenting",
   "Gaming",
@@ -527,14 +529,14 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
 
-  // Notes, media and self-hosted services
+  // Notes and reading, Media, Self-hosted and web
   {
     name: "Obsidian",
     icon: "simple-icons:obsidian",
     url: "https://obsidian.md",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Notes and reading",
     status: "using",
     reason:
       "Everything is plain Markdown on my disk. I pay for Obsidian Sync for the mobile convenience and to support the developer.",
@@ -549,7 +551,7 @@ export const items: UsesItem[] = [
     url: "https://freshrss.org",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Notes and reading",
     status: "using",
     reason:
       "RSS back in my life after the Google Reader shutdown, on my own server.",
@@ -561,7 +563,7 @@ export const items: UsesItem[] = [
     url: "https://www.synology.com",
     kind: "hardware",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Self-hosted and web",
     status: "using",
     reason:
       "It runs my containers. I wouldn't buy a Synology today, but I see no reason to replace one that works.",
@@ -588,7 +590,7 @@ export const items: UsesItem[] = [
     icon: "tabler:box-multiple",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Self-hosted and web",
     status: "using",
     reason:
       "These are small tools not worth one entry each: Portainer CE, Homepage, Glances, Uptime Kuma, Diun, WireGuard, Paperless-ngx, Calibre-web, Kiwix, NocoDB, and n8n. All are open source except n8n (fair-code license).",
@@ -599,7 +601,7 @@ export const items: UsesItem[] = [
     url: "https://immich.app",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Media",
     status: "using",
     reason:
       "I host my family photos and videos on my own NAS, backed up from my phone. The heavy machine-learning work runs on my desktop GPU instead of the NAS.",
@@ -614,7 +616,7 @@ export const items: UsesItem[] = [
     url: "https://www.plex.tv",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Media",
     status: "using",
     reason:
       "Wouldn't start using it today, but I bought a lifetime pass when it was very cheap and the combination with Plexamp is also convenient. Ideally I'll replace it with an open source alternative at some point (Jellyfin?) but it's not high on my todo list.",
@@ -628,7 +630,7 @@ export const items: UsesItem[] = [
     url: "https://www.audiobookshelf.org",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Notes and reading",
     status: "using",
     replaces: [{ name: "Audible" }],
   },
@@ -638,7 +640,7 @@ export const items: UsesItem[] = [
     url: "https://symfonium.app",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Media",
     status: "using",
     replaces: [{ name: "Audible" }],
   },
@@ -648,7 +650,7 @@ export const items: UsesItem[] = [
     url: "https://www.plex.tv/plexamp/",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Media",
     status: "using",
     replaces: [{ name: "YouTube Music" }],
   },
@@ -658,7 +660,7 @@ export const items: UsesItem[] = [
     url: "https://grayjay.app",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Media",
     status: "using",
     reason:
       "One client for YouTube and other video sources, on desktop and phone.",
@@ -671,7 +673,7 @@ export const items: UsesItem[] = [
     url: "https://npo.nl/start",
     kind: "service",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Media",
     status: "using",
     reason:
       "My kids want Dutch programming. Netflix and Disney+ are too weak on that.",
@@ -683,7 +685,7 @@ export const items: UsesItem[] = [
     url: "https://www.hetzner.com",
     kind: "service",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Self-hosted and web",
     status: "using",
     reason:
       "German hosting for the few things that need a server outside my house, and for CI runners.",
@@ -694,7 +696,7 @@ export const items: UsesItem[] = [
     icon: "tabler:calendar",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Self-hosted and web",
     status: "using",
     reason:
       "A small self-hosted booking page that writes into my own calendar.",
@@ -704,7 +706,7 @@ export const items: UsesItem[] = [
   {
     name: "Self-hosted podcast feeds",
     icon: "tabler:rss",
-    category: "Notes, media and self-hosted services",
+    category: "Self-hosted and web",
     area: "tech",
     status: "using",
     reason:
@@ -718,7 +720,7 @@ export const items: UsesItem[] = [
     url: "https://umami.is",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Self-hosted and web",
     status: "using",
     reason:
       "Privacy-friendly, cookie-free website analytics that I host myself.",
@@ -729,7 +731,7 @@ export const items: UsesItem[] = [
     url: "https://listmonk.app",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Self-hosted and web",
     status: "using",
     reason:
       "An open source newsletter tool that I run myself, so my subscriber list stays with me.",
@@ -739,7 +741,7 @@ export const items: UsesItem[] = [
     icon: "tabler:calendar-time",
     kind: "software",
     area: "tech",
-    category: "Notes, media and self-hosted services",
+    category: "Self-hosted and web",
     status: "trying",
     reason:
       "A small service I wrote that plans tasks and habits into free time in my Fastmail calendar, based on all kinds of weekly time goals, recurring tasks, todo trackers etc.",
