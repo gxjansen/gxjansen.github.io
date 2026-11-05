@@ -768,7 +768,8 @@ export const items: UsesItem[] = [
     area: "creative",
     category: "Studio and presenting",
     status: "using",
-    reason: "Mainly great for the Stream Deck integration.",
+    reason:
+      "All great to improve call quality and the Stream Deck integration makes it even easier. Works well on Linux with the StreamController app.",
   },
   {
     name: "Elgato Stream Deck and Stream Deck XL",
