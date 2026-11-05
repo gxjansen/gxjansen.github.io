@@ -572,6 +572,7 @@ export const items: UsesItem[] = [
     reason:
       "Wouldn't start using it today, but I bought a lifetime pass when it was very cheap and the combination with Plexamp is also convenient. Ideally I'll replace it with an open source alternative at some point (Jellyfin?) but it's not high on my todo list.",
     downside: "Plex is closed source.",
+    replaces: [{ name: "Streaming subscriptions (Netflix, Disney+, Prime)" }],
     storyUrl: STORY_2025,
   },
   {
@@ -826,6 +827,7 @@ export const items: UsesItem[] = [
     area: "home",
     category: "Gaming",
     status: "using",
+    reason: "Kids' favourite game before dinner.",
   },
 
   // Communication and privacy
@@ -851,7 +853,8 @@ export const items: UsesItem[] = [
     category: "Communication and privacy",
     status: "using",
     reason: "Encrypted messaging.",
-    downside: "Some groups are still stuck on WhatsApp.",
+    downside:
+      "Some groups are still stuck on WhatsApp, and the (sub)group/community function on Signal is not developed yet.",
     replaces: [{ name: "WhatsApp" }],
     storyUrl: STORY_2025,
   },
@@ -879,7 +882,7 @@ export const items: UsesItem[] = [
       "Email, calendar and contacts on open protocols (IMAP, CalDAV, CardDAV) with my own domains.",
     downside:
       "Fastmail is an Australian company outside the EU. In June 2024, it laid off most of its US union's bargaining unit during contract talks. I want to move to a European provider eventually. But I only just moved here and migrating all my email domains takes a lot of time. There weren't many good EU options back then, so I'm staying for now and might look at cirrux.co later.",
-    replaces: [{ name: "Google Workspace" }, { name: "Proton" }],
+    replaces: [{ name: "Google Workspace" }],
     storyUrl: STORY_ANTIFRAGILE,
   },
   {
@@ -922,7 +925,7 @@ export const items: UsesItem[] = [
     area: "tech",
     status: "dropped",
     droppedReason: "replaced",
-    reason: "Untangling the Google sign-ins is still in progress.",
+    reason: "The Google sign-ins are completely untangled.",
   },
   {
     name: "Google Photos",
@@ -930,7 +933,8 @@ export const items: UsesItem[] = [
     area: "tech",
     status: "dropped",
     droppedReason: "replaced",
-    reason: "I wanted my photo library on hardware I own.",
+    reason:
+      "I want my valuable photo/video library memories in full resolution on hardware I own, and not dependent on a Big Tech monthly subscription.",
   },
   {
     name: "YouTube app",
@@ -991,15 +995,6 @@ export const items: UsesItem[] = [
     reason: "Content in files and a static build instead of a hosted builder.",
   },
   {
-    name: "Proton",
-    kind: "service",
-    area: "tech",
-    status: "dropped",
-    droppedReason: "replaced",
-    reason:
-      "I used it for email and calendar, but calendar automation was too limited. I need CalDAV.",
-  },
-  {
     name: "Arc",
     url: "https://arc.net",
     kind: "software",
@@ -1037,7 +1032,7 @@ export const items: UsesItem[] = [
     droppedReason: "replaced",
     reason:
       "No more subscription for creative tools. RAW goes through darktable and RawTherapee, and for video I'm still learning DaVinci Resolve.",
-    endedAt: "2026-11",
+    endedAt: "2025",
   },
   {
     name: "Reclaim.ai",
@@ -1046,7 +1041,7 @@ export const items: UsesItem[] = [
     status: "dropped",
     droppedReason: "replaced",
     reason: "I wanted a scheduler I control that writes into my own calendar.",
-    endedAt: "2026-10",
+    endedAt: "2025",
   },
   {
     name: "Mac mini as daily workstation",
