@@ -4,20 +4,10 @@
  * The list and the alias redirects both come from src/data/slashes.ts.
  */
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { slashPages, aliasTarget, type SlashPage } from "@data/slashes";
+import { slashPages, aliasTarget } from "@data/slashes";
 
-const groups: { heading: string; id: string; pages: SlashPage[] }[] = [
-  {
-    heading: "Slash pages",
-    id: "slash-pages",
-    pages: slashPages.filter((p) => p.convention),
-  },
-  {
-    heading: "Also on gui.do",
-    id: "also-on-gui-do",
-    pages: slashPages.filter((p) => !p.convention),
-  },
-];
+const conventionPages = slashPages.filter((p) => p.convention);
+const otherPages = slashPages.filter((p) => !p.convention);
 ---
 
 <BaseLayout
@@ -48,28 +38,30 @@ const groups: { heading: string; id: string; pages: SlashPage[] }[] = [
         </p>
       </div>
 
-      {groups.map((group) => <section
-        class="mt-12 max-w-[60ch]"
-        aria-labelledby={group.id}
-      >
+      <!-- Primary: pages that follow the slashpages.net convention -->
+      <section class="mt-14 max-w-3xl" aria-labelledby="slash-pages">
         <h2
-          id={group.id}
-          class="text-base-500 mb-4 text-xs font-bold tracking-[0.08em] uppercase"
+          id="slash-pages"
+          class="font-display mb-6 text-[1.6rem] font-extrabold tracking-[-0.02em]"
         >
-          {group.heading}
+          Slash pages
         </h2>
-        <ul class="flex flex-col gap-4">
-          {group.pages.map((page) => <li>
+        <ul class="grid gap-4 sm:grid-cols-2">
+          {conventionPages.map((page) => <li
+            class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 hover:border-primary-400 relative rounded-2xl border p-5 transition hover:-translate-y-0.5 hover:shadow-lg sm:p-6"
+          >
             <a
               href={`/${page.slug}/`}
-              class="font-display text-lg font-semibold"
+              class="font-display text-primary-600 dark:text-primary-400 text-[1.6rem] leading-tight font-black tracking-[-0.02em] after:absolute after:inset-0 after:rounded-2xl after:content-['']"
             >
               /{page.slug}
             </a>
-            <p class="text-base-600 dark:text-base-400 leading-relaxed">
+            <p class="text-base-600 dark:text-base-400 mt-2 leading-relaxed">
               {page.description}
             </p>
-            {page.aliases && <p class="text-base-500 text-sm">
+            {page.aliases && <p
+              class="text-base-500 relative z-10 mt-3 text-sm"
+            >
               also:{" "}
               {page.aliases.map((alias, i) => (
                 <>
@@ -80,7 +72,37 @@ const groups: { heading: string; id: string; pages: SlashPage[] }[] = [
             </p>}
           </li>)}
         </ul>
-      </section>)}
+      </section>
+
+      <!-- Secondary: other top-level pages, compact -->
+      <section
+        class="border-base-200 dark:border-base-800 mt-24 max-w-3xl border-t pt-10"
+        aria-labelledby="also-on-gui-do"
+      >
+        <h2
+          id="also-on-gui-do"
+          class="text-base-500 mb-6 text-xs font-bold tracking-[0.08em] uppercase"
+        >
+          Also on gui.do
+        </h2>
+        <ul class="grid gap-x-10 gap-y-4 sm:grid-cols-2">
+          {otherPages.map((page) => <li>
+            <a href={`/${page.slug}/`} class="font-semibold">/{page.slug}</a>
+            <p class="text-base-500 text-sm leading-snug">
+              {page.description}
+            </p>
+            {page.aliases && <p class="text-base-500 text-xs">
+              also:{" "}
+              {page.aliases.map((alias, i) => (
+                <>
+                  {i > 0 && ", "}
+                  <a href={aliasTarget(page, alias)}>/{alias.slug}</a>
+                </>
+              ))}
+            </p>}
+          </li>)}
+        </ul>
+      </section>
     </section>
   </div>
 </BaseLayout>
