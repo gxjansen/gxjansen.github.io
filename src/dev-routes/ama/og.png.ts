@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { renderAmaOg } from "../../../lib/ama/render";
+import { renderAmaOg } from "../../lib/ama/render";
 
 export const prerender = false;
 
