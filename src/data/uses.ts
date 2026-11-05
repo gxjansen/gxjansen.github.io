@@ -322,7 +322,8 @@ export const items: UsesItem[] = [
     area: "home",
     category: "Home",
     status: "using",
-    reason: "I love it.",
+    reason:
+      "I love it because (afterwards) it helps me find things much faster.",
     downside: "My girlfriend hates it (when labels are visible anywhere).",
   },
 
