@@ -532,7 +532,7 @@ export const items: UsesItem[] = [
     reason:
       "It runs my containers. I wouldn't buy a Synology today, but I see no reason to replace one that works.",
     downside:
-      "With more containers, its CPU and memory are starting to run out.",
+      "HDD noise, current HDD prices, and Synology locking down its systems more and more.",
     storyUrl: STORY_2025,
     replaces: [{ name: "Google Drive" }, { name: "Dropbox" }],
   },
@@ -544,7 +544,7 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "These are small tools not worth one entry each: Portainer CE, Homepage, Glances, Uptime Kuma, Diun, WireGuard, Paperless-ngx, Calibre-web, Kiwix, NocoDB, and n8n. All are open source.",
+      "These are small tools not worth one entry each: Portainer CE, Homepage, Glances, Uptime Kuma, Diun, WireGuard, Paperless-ngx, Calibre-web, Kiwix, NocoDB, and n8n. All are open source except n8n (fair-code license).",
   },
   {
     name: "Immich",
