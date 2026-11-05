@@ -34,7 +34,7 @@ export const socialLinks: SocialLink[] = [
     },
   },
   {
-    name: "BlueSky",
+    name: "Bluesky",
     href: "https://bsky.app/profile/gui.do",
     icon: "bluesky",
     visibility: {

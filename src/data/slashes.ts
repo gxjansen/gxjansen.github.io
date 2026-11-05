@@ -12,6 +12,12 @@
  * it here, without browsers holding on to a cached 301.
  */
 
+import { currentItems } from "./uses";
+
+const selfHostedCount = currentItems.filter((i) =>
+  i.traits?.includes("selfHosted"),
+).length;
+
 export interface SlashAlias {
   /** Path segment without slashes, e.g. "languages". */
   slug: string;
@@ -26,6 +32,12 @@ export interface SlashPage {
   convention?: boolean;
   /** One-line description shown on /slashes/. */
   description: string;
+  /**
+   * Listed like a page, but the slug redirects (302) to this path instead of
+   * having its own route: a filtered or sectioned view of another page, e.g.
+   * "/uses/?f=selfHosted#uses-filter". Aliases redirect here too.
+   */
+  redirectTo?: string;
   aliases?: SlashAlias[];
 }
 
@@ -53,6 +65,29 @@ export const slashPages: SlashPage[] = [
     convention: true,
     description:
       "My gear, apps and services, why I picked them, what I dropped.",
+  },
+  {
+    slug: "follow",
+    convention: true,
+    description: "Every way to keep up: newsletter, RSS, socials.",
+    aliases: [{ slug: "subscribe" }, { slug: "feeds" }],
+  },
+  {
+    slug: "self-hosting",
+    convention: true,
+    description: `The ${selfHostedCount} things I run myself, filtered from /uses.`,
+    redirectTo: "/uses/?f=selfHosted#uses-filter",
+    aliases: [{ slug: "self-hosted" }, { slug: "hosted" }],
+  },
+  {
+    // /photos is itself a 302 to Grain (public/_redirects) until it becomes a
+    // real page; pointing at /photos/ means this follows along automatically.
+    slug: "photo",
+    convention: true,
+    description:
+      "My photos, ~7,200 since 2005, on Grain for now, gui.do later.",
+    redirectTo: "/photos/",
+    aliases: [{ slug: "pic" }],
   },
   {
     slug: "slashes",
@@ -117,8 +152,14 @@ export const slashPages: SlashPage[] = [
   },
 ];
 
+/** Where a listed page lives: its own route, or its redirect target. */
+export function pageHref(page: SlashPage): string {
+  return page.redirectTo ?? `/${page.slug}/`;
+}
+
 /** Target URL for an alias: the canonical page, plus the anchor if set. */
 export function aliasTarget(page: SlashPage, alias: SlashAlias): string {
+  if (page.redirectTo) return page.redirectTo;
   return `/${page.slug}/${alias.anchor ? `#${alias.anchor}` : ""}`;
 }
 
@@ -129,6 +170,12 @@ export function slashRedirects(): Record<
 > {
   const redirects: Record<string, { destination: string; status: 302 }> = {};
   for (const page of slashPages) {
+    if (page.redirectTo) {
+      redirects[`/${page.slug}`] = {
+        destination: page.redirectTo,
+        status: 302,
+      };
+    }
     for (const alias of page.aliases ?? []) {
       redirects[`/${alias.slug}`] = {
         destination: aliasTarget(page, alias),
