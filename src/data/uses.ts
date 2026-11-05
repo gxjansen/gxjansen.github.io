@@ -269,7 +269,7 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
   {
-    name: "Home Assistant Green with a Zigbee and Thread stick",
+    name: "Home Assistant Green with a Zigbee and Thread (Matter) stick",
     photo: "home-assistant-green.jpg",
     url: "https://www.home-assistant.io/green/",
     kind: "device",
