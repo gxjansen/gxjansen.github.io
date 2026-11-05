@@ -924,7 +924,7 @@ export const items: UsesItem[] = [
     area: "tech",
     status: "dropped",
     droppedReason: "replaced",
-    reason: "Untangling the Google sign-ins is still in progress.",
+    reason: "The Google sign-ins are completely untangled.",
   },
   {
     name: "Google Photos",
