@@ -111,6 +111,17 @@ const groups = categoryOrder
   }))
   .filter((g) => g.items.length > 0);
 
+// "Replaced YouTube Music, which in itself had replaced Spotify": follow one
+// step back when the replaced thing is a dropped item with its own replaces.
+const replacedName = (r: { name: string }) => {
+  const prev = droppedItems.find(
+    (d) => d.name.toLowerCase() === r.name.toLowerCase() && d.replaces?.length,
+  );
+  return prev
+    ? `${r.name}, which in itself had replaced ${prev.replaces!.map((x) => x.name).join(" and ")}`
+    : r.name;
+};
+
 const dropped = droppedItems.map((item) => ({
   item,
   by: replacedBy(item),
@@ -192,7 +203,7 @@ const dropped = droppedItems.map((item) => ({
             const meta = [
               item.startedAt ? `Since ${partialDate(item.startedAt)}` : null,
               item.replaces?.length
-                ? `Replaced ${item.replaces.map((r) => r.name).join(" and ")}`
+                ? `Replaced ${item.replaces.map(replacedName).join(" and ")}`
                 : null,
             ].filter(Boolean);
             const img = photo(item);

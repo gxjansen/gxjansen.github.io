@@ -626,7 +626,7 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "My kids want Dutch programming. Netflix and Disney+ are too weak on that. I'm using the free tier.",
+      "My kids want Dutch programming. Netflix and Disney+ are too weak on that.",
     replaces: [{ name: "Streaming subscriptions (Netflix, Disney+, Prime)" }],
   },
   {
@@ -962,6 +962,7 @@ export const items: UsesItem[] = [
     area: "tech",
     status: "dropped",
     droppedReason: "replaced",
+    replaces: [{ name: "Spotify" }],
     reason:
       "Fewer subscriptions, and I keep what I buy. Audiobooks and music now come from my own library.",
   },
