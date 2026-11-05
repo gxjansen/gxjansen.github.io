@@ -312,7 +312,7 @@ export const items: UsesItem[] = [
     category: "Home",
     status: "using",
     reason:
-      "I chose it because it's the best complete and compact indoor bike (as in: not a roller for an outdoor bike) I could find that didn't require a subscription to ride. It needed to fit in my home office, so it couldn't be too long. The customizations make it great.",
+      "I chose it because it's the best complete and compact indoor bike (as in: not a roller for an outdoor bike) I could find that didn't require a subscription to ride. It needed to fit in my home office, so it couldn't be too long. You can adjust the handlebars and seat up, down, forward, or back, which makes it great.",
   },
   {
     name: "DYMO LabelManager 160",
