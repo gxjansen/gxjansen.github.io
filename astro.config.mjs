@@ -227,6 +227,7 @@ export default defineConfig({
         !page.includes("/categories/") &&
         !page.includes("/speaker") &&
         !page.includes("/styleguide") &&
+        !page.endsWith("/blank/") &&
         !page.includes("/ama/q/") &&
         !page.includes("/internal/"),
       changefreq: "weekly",
