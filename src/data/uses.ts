@@ -239,7 +239,7 @@ export const items: UsesItem[] = [
     category: "Personal hardware",
     status: "using",
     reason:
-      "I bought it because I was quite happy with my XM3, but lost that at an airport.",
+      "I bought it because I was quite happy with my XM3, but lost that at an airport. If I need to replace these, I'll probably go for the [Fairphone Fairbuds XL](https://www.fairphone.com/fairbuds-xl).",
     replaces: [{ name: "Sony WH-1000XM3" }],
   },
   {

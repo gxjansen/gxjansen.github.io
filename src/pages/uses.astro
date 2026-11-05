@@ -58,11 +58,25 @@ const DOMAIN =
 const SELF = "gui.do";
 // The item's link shows as its domain under the text, not on the name.
 const host = (url: string) => new URL(url).hostname.replace(/^www\./, "");
-const linkify = (text: string) =>
+const linkDomains = (text: string) =>
   text.split(new RegExp(DOMAIN.source, "gi")).map((part, i) => ({
     part,
     href: i % 2 && part !== SELF ? `https://${part}` : undefined,
   }));
+// Markdown-style links ("[Fairbuds XL](https://...)") keep their label; the
+// text around them still gets bare-domain linking.
+const MD_LINK = /\[([^\]]+)\]\((https:\/\/[^)\s]+)\)/g;
+const linkify = (text: string) => {
+  const out: { part: string; href?: string }[] = [];
+  let last = 0;
+  for (const m of text.matchAll(MD_LINK)) {
+    out.push(...linkDomains(text.slice(last, m.index)));
+    out.push({ part: m[1], href: m[2] });
+    last = m.index! + m[0].length;
+  }
+  out.push(...linkDomains(text.slice(last)));
+  return out;
+};
 
 // Item photos live in src/assets/images/uses/; the data holds the file name.
 // A name without a file fails the build instead of rendering a broken image.
