@@ -214,6 +214,8 @@ export const items: UsesItem[] = [
     area: "home",
     category: "Personal hardware",
     status: "using",
+    reason:
+      'Nice "forest pebbles" surface for standing work/calls that is both soft and makes you move around (so you don\'t lock yourself into a single position too long).',
   },
   {
     name: "Interstuhl TWENTYFOUR",
@@ -237,7 +239,7 @@ export const items: UsesItem[] = [
     category: "Personal hardware",
     status: "using",
     reason:
-      "I bought it because I was quite happy with my XM3, but lost that at an airport.",
+      "I bought it because I was quite happy with my XM3, but lost that at an airport. If I need to replace these, I'll probably go for the [Fairphone Fairbuds XL](https://www.fairphone.com/fairbuds-xl).",
     replaces: [{ name: "Sony WH-1000XM3" }],
   },
   {
@@ -264,12 +266,11 @@ export const items: UsesItem[] = [
     category: "Home",
     status: "using",
     reason:
-      "A router and firewall with per-device rules and domain blocking, without needing a cloud account for the basics.",
-    downside: "Ad and domain blocking only helps at home.",
+      "A router and firewall with per-device rules and domain blocking, without needing a cloud account for the basics. I use it for custom DNS rules, network insights and blocking ads and trackers across the whole network.",
     storyUrl: STORY_2025,
   },
   {
-    name: "Home Assistant Green with a Zigbee and Thread stick",
+    name: "Home Assistant Green with a Zigbee and Thread (Matter) stick",
     photo: "home-assistant-green.jpg",
     url: "https://www.home-assistant.io/green/",
     kind: "device",
@@ -277,11 +278,11 @@ export const items: UsesItem[] = [
     category: "Home",
     status: "using",
     reason:
-      "Lights and automations keep running when the internet is down. It's a dedicated box, so I can reboot my other machines freely.",
+      "Central hub for all home-based automations, without any reliance on the internet. It's a dedicated box, so I can reboot my other machines freely.",
     storyUrl: STORY_ANTIFRAGILE,
   },
   {
-    name: "HomeWizard energy meters and plugs",
+    name: "HomeWizard P1 meter, water meter and plugs",
     icon: "tabler:plug",
     url: "https://www.homewizard.com",
     kind: "device",
@@ -291,7 +292,7 @@ export const items: UsesItem[] = [
     reason:
       "They have a local API, so Home Assistant reads them directly. I switched off their cloud connection.",
     downside:
-      "Without the cloud connection their own app loses history and remote access.",
+      "Without the cloud connection their own app loses history and remote access. The HomeWizard plugs are overpriced, so the new plugs I buy now are IKEA GRILLPLATS.",
   },
   {
     name: "Raspberry Pi 5",
@@ -302,7 +303,7 @@ export const items: UsesItem[] = [
     category: "Home",
     status: "using",
     reason:
-      "It runs some of my containers to take the load off the NAS. The NAS CPU and memory are running out.",
+      "It runs some of my containers to take the load off the NAS. Especially for write-heavy containers it's nice to be able to bring down the HDD noise from the NAS (the RPi has an NVMe drive that doesn't make any noise).",
   },
   {
     name: "Stages SB20",
@@ -313,7 +314,7 @@ export const items: UsesItem[] = [
     category: "Home",
     status: "using",
     reason:
-      "I chose it because it's the best complete and compact indoor bike (as in: not a roller for an outdoor bike) I could find that didn't require a subscription to ride. It needed to fit in my home office, so it couldn't be too long. The customizations make it great.",
+      "I chose it because it's the best complete and compact indoor bike (as in: not a roller for an outdoor bike) I could find that didn't require a subscription to ride. It needed to fit in my home office, so it couldn't be too long. You can adjust the handlebars and seat up, down, forward, or back, which makes it great.",
   },
   {
     name: "DYMO LabelManager 160",
@@ -323,7 +324,8 @@ export const items: UsesItem[] = [
     area: "home",
     category: "Home",
     status: "using",
-    reason: "I love it.",
+    reason:
+      "I love it because (afterwards) it helps me find things much faster.",
     downside: "My girlfriend hates it (when labels are visible anywhere).",
   },
 
@@ -338,7 +340,8 @@ export const items: UsesItem[] = [
     status: "using",
     reason:
       "A fast Arch-based Linux that I manage with config in git. On my laptop since early 2026 and on my desktop since October 2026.",
-    downside: "A few games and the iOS tooling still need other systems.",
+    downside:
+      "A few games and the iOS tooling still need other systems. Wanted niri, but it didn't play nice with my Elgato Prompter (DisplayLink, NVIDIA) and swiping... so KDE Plasma for now.",
     replaces: [{ name: "macOS" }],
   },
   {
@@ -350,7 +353,7 @@ export const items: UsesItem[] = [
     category: "OS and desktop",
     status: "using",
     reason:
-      "Dotfiles and package lists synced across my Linux machines from one git repo, with secrets encrypted.",
+      "Dotfiles and package lists synced across my Linux machines from one git repo, with secrets encrypted. This, combined with Obsidian Sync and a WireGuard connection ensures that it makes no difference whatsoever if I work on my Linux machine at home, or on my laptop while traveling.",
   },
   {
     name: "Zen browser",
@@ -361,7 +364,7 @@ export const items: UsesItem[] = [
     category: "OS and desktop",
     status: "using",
     reason:
-      "My main browser. Firefox-based, with workspaces, and its telemetry is off by default.",
+      "My main browser. Firefox-based, with workspaces, and all tabs sync live between machines.",
     replaces: [{ name: "Arc" }],
   },
   {
@@ -373,7 +376,7 @@ export const items: UsesItem[] = [
     category: "OS and desktop",
     status: "trying",
     reason: "Local speech-to-text, so my voice never leaves the machine.",
-    replaces: [{ name: "MacWhisper" }],
+    replaces: [{ name: "MacWhisper" }, { name: "typing by hand" }],
   },
   {
     name: "LibreOffice",
@@ -396,7 +399,7 @@ export const items: UsesItem[] = [
     category: "Development",
     status: "using",
     reason:
-      "A fast terminal with sane defaults, and tmux sessions that live on the desktop. I attach from the laptop or my phone and continue where I left off.",
+      "tmux sessions that live on the desktop. I attach from the laptop or my phone and continue where I left off.",
     replaces: [{ name: "cmux" }],
   },
   {
@@ -407,8 +410,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Development",
     status: "using",
-    reason:
-      "A fast, open source editor. I keep its diagnostics and metrics off.",
+    reason: "A fast, open source editor.",
   },
   {
     name: "Astro",
@@ -419,12 +421,12 @@ export const items: UsesItem[] = [
     category: "Development",
     status: "using",
     reason:
-      "Static-first sites with the content in files. It runs gui.do and cro.cafe.",
+      "Great to build fast static-first sites with the content in markdown files. You are looking at it :).",
     replaces: [{ name: "Webflow" }],
     storyUrl: STORY_2025,
   },
   {
-    name: "GitHub Actions on my own runner",
+    name: "GitHub + GitHub Actions on my own runner",
     icon: "simple-icons:githubactions",
     url: "https://docs.github.com/en/actions/hosting-your-own-runners",
     kind: "service",
@@ -432,9 +434,9 @@ export const items: UsesItem[] = [
     category: "Development",
     status: "using",
     reason:
-      "CI on a small Hetzner server is about four times faster and costs about half of the hosted minutes I was buying.",
+      "CI on a small Hetzner server is about four times faster and costs about half of the hosted minutes I was buying. Once Tangled covers the bits I still use GitHub for (private repos, project boards, the Actions marketplace), I'm switching.",
     downside:
-      "Only safe for private repos, because a runner executes whatever the workflow says.",
+      "It's Microsoft. A self-hosted runner executes whatever the workflow says, so it's only safe for private repos unless you require approval for outside contributors' workflows. Ephemeral runners (fresh container or VM per job) make this safer.",
     replaces: [{ name: "GitHub-hosted runners" }],
     storyUrl: STORY_RUNNER,
   },
@@ -447,7 +449,7 @@ export const items: UsesItem[] = [
     category: "Development",
     status: "using",
     reason:
-      "A non-profit, EU-based forge for private repos and my synced dotfiles.",
+      "A non-profit, EU-based forge for private repos and my synced dotfiles. Planning to move to Tangled once it supports private repos.",
   },
   {
     name: "Tangled",
@@ -486,7 +488,8 @@ export const items: UsesItem[] = [
     status: "using",
     reason:
       "One API for many models, so I can swap models without changing tools. Lock-in is low, so I accept a US service here.",
-    downside: "A US service, and not self-hosted.",
+    downside:
+      "A US service, and not self-hosted. And depending on the model/provider, they might train on your data.",
     storyUrl: STORY_2025,
   },
 
@@ -529,7 +532,7 @@ export const items: UsesItem[] = [
     reason:
       "It runs my containers. I wouldn't buy a Synology today, but I see no reason to replace one that works.",
     downside:
-      "With more containers, its CPU and memory are starting to run out.",
+      "HDD noise, current HDD prices, and Synology locking down its systems more and more.",
     storyUrl: STORY_2025,
     replaces: [{ name: "Google Drive" }, { name: "Dropbox" }],
   },
@@ -541,7 +544,7 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "These are small tools not worth one entry each: Portainer CE, Homepage, Glances, Uptime Kuma, Diun, WireGuard, Paperless-ngx, Calibre-web, Kiwix, NocoDB, and n8n. All are open source.",
+      "These are small tools not worth one entry each: Portainer CE, Homepage, Glances, Uptime Kuma, Diun, WireGuard, Paperless-ngx, Calibre-web, Kiwix, NocoDB, and n8n. All are open source except n8n (fair-code license).",
   },
   {
     name: "Immich",
@@ -567,14 +570,24 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "Wouldn't start using it today, but I bought a lifetime pass when it was very cheap and the combination with Plexamp is also convenient. With telemetry and ads blocked it's fine for now. Ideally I'll replace it with an open source alternative at some point (Jellyfin?) but it's not high on my todo list.",
+      "Wouldn't start using it today, but I bought a lifetime pass when it was very cheap and the combination with Plexamp is also convenient. Ideally I'll replace it with an open source alternative at some point (Jellyfin?) but it's not high on my todo list.",
     downside: "Plex is closed source.",
     storyUrl: STORY_2025,
   },
   {
-    name: "Audiobookshelf with Symfonium",
+    name: "Audiobookshelf",
     icon: "simple-icons:audiobookshelf",
     url: "https://www.audiobookshelf.org",
+    kind: "software",
+    area: "tech",
+    category: "Notes, media and self-hosted services",
+    status: "using",
+    replaces: [{ name: "Audible" }],
+  },
+  {
+    name: "Symfonium",
+    icon: "tabler:headphones",
+    url: "https://symfonium.app",
     kind: "software",
     area: "tech",
     category: "Notes, media and self-hosted services",
@@ -600,7 +613,7 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "One client for YouTube and other video sources, on desktop and phone. I turned off playtime tracking.",
+      "One client for YouTube and other video sources, on desktop and phone.",
     replaces: [{ name: "YouTube app" }],
     storyUrl: STORY_2025,
   },
@@ -613,7 +626,7 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "My kids want Dutch programming. Netflix and Disney+ are too weak on that. I'm using the free tier.",
+      "My kids want Dutch programming. Netflix and Disney+ are too weak on that.",
     replaces: [{ name: "Streaming subscriptions (Netflix, Disney+, Prime)" }],
   },
   {
@@ -681,7 +694,7 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "trying",
     reason:
-      "A small service I wrote that plans tasks and habits into free time in my Fastmail calendar.",
+      "A small service I wrote that plans tasks and habits into free time in my Fastmail calendar, based on all kinds of weekly time goals, recurring tasks, todo trackers etc.",
     replaces: [{ name: "Reclaim.ai" }],
   },
 
@@ -768,7 +781,8 @@ export const items: UsesItem[] = [
     area: "creative",
     category: "Studio and presenting",
     status: "using",
-    reason: "Mainly great for the Stream Deck integration.",
+    reason:
+      "All great to improve call quality and the Stream Deck integration makes it even easier. Works well on Linux with the StreamController app.",
   },
   {
     name: "Elgato Stream Deck and Stream Deck XL",
@@ -778,7 +792,8 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Studio and presenting",
     status: "using",
-    reason: "Great for additional control for customized scenes.",
+    reason:
+      "Great for macros/automations, easily opening apps, showing custom graphs/data, media control, lights, audio, Home Assistant...",
   },
 
   // Gaming
@@ -947,6 +962,7 @@ export const items: UsesItem[] = [
     area: "tech",
     status: "dropped",
     droppedReason: "replaced",
+    replaces: [{ name: "Spotify" }],
     reason:
       "Fewer subscriptions, and I keep what I buy. Audiobooks and music now come from my own library.",
   },
