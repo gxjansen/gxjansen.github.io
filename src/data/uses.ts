@@ -436,7 +436,7 @@ export const items: UsesItem[] = [
     reason:
       "CI on a small Hetzner server is about four times faster and costs about half of the hosted minutes I was buying. Once Tangled covers the bits I still use GitHub for (private repos, project boards, the Actions marketplace), I'm switching.",
     downside:
-      "Only safe for private repos, because a runner executes whatever the workflow says.",
+      "It's Microsoft. A self-hosted runner executes whatever the workflow says, so it's only safe for private repos unless you require approval for outside contributors' workflows. Ephemeral runners (fresh container or VM per job) make this safer.",
     replaces: [{ name: "GitHub-hosted runners" }],
     storyUrl: STORY_RUNNER,
   },
@@ -570,7 +570,7 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "Wouldn't start using it today, but I bought a lifetime pass when it was very cheap and the combination with Plexamp is also convenient. With telemetry and ads blocked it's fine for now. Ideally I'll replace it with an open source alternative at some point (Jellyfin?) but it's not high on my todo list.",
+      "Wouldn't start using it today, but I bought a lifetime pass when it was very cheap and the combination with Plexamp is also convenient. Ideally I'll replace it with an open source alternative at some point (Jellyfin?) but it's not high on my todo list.",
     downside: "Plex is closed source.",
     storyUrl: STORY_2025,
   },
@@ -613,7 +613,7 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "using",
     reason:
-      "One client for YouTube and other video sources, on desktop and phone. I turned off playtime tracking.",
+      "One client for YouTube and other video sources, on desktop and phone.",
     replaces: [{ name: "YouTube app" }],
     storyUrl: STORY_2025,
   },
