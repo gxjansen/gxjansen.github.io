@@ -1,0 +1,86 @@
+---
+/**
+ * /slashes: index of the site's slash pages (https://slashpages.net).
+ * The list and the alias redirects both come from src/data/slashes.ts.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { slashPages, aliasTarget, type SlashPage } from "@data/slashes";
+
+const groups: { heading: string; id: string; pages: SlashPage[] }[] = [
+  {
+    heading: "Slash pages",
+    id: "slash-pages",
+    pages: slashPages.filter((p) => p.convention),
+  },
+  {
+    heading: "Also on gui.do",
+    id: "also-on-gui-do",
+    pages: slashPages.filter((p) => !p.convention),
+  },
+];
+---
+
+<BaseLayout
+  title="Slashes"
+  description="Slash pages are a convention from slashpages.net: common paths on personal sites like /now and /uses. This is my full list."
+>
+  <div class="home slashes-page">
+    <section
+      class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">the index</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Slashes
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
+          Slash pages are a convention from
+          <a
+            href="https://slashpages.net/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >slashpages.net</a
+          >: common paths on personal sites like /now and /uses. This is my full
+          list, including short aliases like /languages that jump straight to a
+          section of my CV.
+        </p>
+      </div>
+
+      {groups.map((group) => <section
+        class="mt-12 max-w-[60ch]"
+        aria-labelledby={group.id}
+      >
+        <h2
+          id={group.id}
+          class="text-base-500 mb-4 text-xs font-bold tracking-[0.08em] uppercase"
+        >
+          {group.heading}
+        </h2>
+        <ul class="flex flex-col gap-4">
+          {group.pages.map((page) => <li>
+            <a
+              href={`/${page.slug}/`}
+              class="font-display text-lg font-semibold"
+            >
+              /{page.slug}
+            </a>
+            <p class="text-base-600 dark:text-base-400 leading-relaxed">
+              {page.description}
+            </p>
+            {page.aliases && <p class="text-base-500 text-sm">
+              also:{" "}
+              {page.aliases.map((alias, i) => (
+                <>
+                  {i > 0 && ", "}
+                  <a href={aliasTarget(page, alias)}>/{alias.slug}</a>
+                </>
+              ))}
+            </p>}
+          </li>)}
+        </ul>
+      </section>)}
+    </section>
+  </div>
+</BaseLayout>
