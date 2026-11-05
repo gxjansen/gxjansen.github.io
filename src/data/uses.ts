@@ -1017,7 +1017,7 @@ export const items: UsesItem[] = [
     category: "Communication and privacy",
     status: "using",
     reason:
-      "Almost all my domains are at Marque. I picked it because the registrar runs on AT Protocol. My registrations are public in my own PDS.",
+      "Almost all my domains are at Marque. I picked it because the registrar runs on AT Protocol.",
     downside: "The company behind it is not in the EU.",
   },
   {
