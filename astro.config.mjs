@@ -179,7 +179,6 @@ export default defineConfig({
         ],
         "simple-icons": [
           "firewalla",
-          "affinity",
           "astro",
           "audiobookshelf",
           "bitwarden",
@@ -191,6 +190,7 @@ export default defineConfig({
           "garmin",
           "ghostty",
           "githubactions",
+          "grafana",
           "hetzner",
           "immich",
           "libreoffice",

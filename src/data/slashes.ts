@@ -99,6 +99,13 @@ export const slashPages: SlashPage[] = [
     ],
   },
   {
+    slug: "defaults",
+    featured: true,
+    description:
+      "My default app per category: mail, notes, browser, code, music.",
+    redirectTo: "/uses/#defaults",
+  },
+  {
     slug: "self-hosting",
     featured: true,
     description: `The ${selfHostedCount} things I run myself, filtered from /uses.`,
