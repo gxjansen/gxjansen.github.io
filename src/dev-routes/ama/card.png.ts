@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
-import { renderAmaCard } from "../../../lib/ama/render";
-import { variants, personas } from "../../../lib/ama/card";
+import { renderAmaCard } from "../../lib/ama/render";
+import { variants, personas } from "../../lib/ama/card";
 
 export const prerender = false;
 

@@ -1,6 +1,6 @@
 # gui.do (gxjansen.github.io)
 
-Guido X Jansen's personal site. Astro 7, Tailwind v4 (Vite plugin), MDX, React islands, Netlify. Static output plus a few on-demand routes (`prerender = false`: `/bookshelf`, `/ama/q/[id]`, `/api/*`, `/internal/*`). `/now` is static with a server island (`server:defer`) for its live half. Default branch is `master`.
+Guido X Jansen's personal site. Astro 7, Tailwind v4 (Vite plugin), MDX, React islands, Netlify. Static output plus a few on-demand routes (`prerender = false`: `/bookshelf`, `/ama/q/[id]`, `/api/*`). `/now` is static with a server island (`server:defer`) for its live half. Default branch is `master`.
 
 ## Workflow
 
@@ -25,6 +25,7 @@ Guido X Jansen's personal site. Astro 7, Tailwind v4 (Vite plugin), MDX, React i
 - Structured site data: `src/data/` (`events.snapshot.json`, `events-overrides.json`, `homeContent.ts`, `press-coverage.ts`, `socialLinks.ts`, `training.ts`, ...).
 - Pages: `src/pages/`. Files prefixed `_` (`_training.astro`, `_training/`) are not routed; `/training` 302s to `/contact/` until it is restored.
 - Styles: `src/styles/` (`tailwind.css` has the `@theme` tokens). Design notes: `DESIGN.md`.
+- Dev-only routes (`/internal/ama/*`, the AMA card gallery and renderers): `src/dev-routes/`, injected by `src/integrations/dev-routes.ts` on every build except Netlify production, where they 404.
 - Netlify Functions: `netlify/functions/` (newsletter via Listmonk, ALTCHA challenge).
 - Redirects and headers: `netlify.toml`, `public/_redirects`.
 

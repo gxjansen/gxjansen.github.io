@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 import * as path from "node:path";
 import { contentValidationPlugin } from "./src/utils/content-validation-plugin.ts";
 import { markdownEndpoints } from "./src/integrations/markdown-endpoints.ts";
+import { devRoutes } from "./src/integrations/dev-routes.ts";
 import { slashRedirects } from "./src/data/slashes.ts";
 
 // https://astro.build/config
@@ -217,7 +218,8 @@ export default defineConfig({
         !page.includes("/categories/") &&
         !page.includes("/speaker") &&
         !page.includes("/styleguide") &&
-        !page.includes("/ama/q/"),
+        !page.includes("/ama/q/") &&
+        !page.includes("/internal/"),
       changefreq: "weekly",
       lastmod: new Date(),
       i18n: {
@@ -229,6 +231,7 @@ export default defineConfig({
     }),
     contentValidationPlugin(),
     markdownEndpoints(),
+    devRoutes(),
   ],
 
   vite: {
