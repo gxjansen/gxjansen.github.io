@@ -86,6 +86,8 @@ export interface UsesItem {
 export interface UsesPrinciple {
   title: string;
   text: string;
+  /** Site-only, not a record field: the filter this principle links to. */
+  trait?: UsesTrait;
 }
 
 const post = (slug: string) => `https://gui.do/post/${slug}/`;
@@ -111,10 +113,12 @@ export const principles: UsesPrinciple[] = [
   },
   {
     title: "Open source first, open standards second",
+    trait: "openSource",
     text: "I prefer tools where I can read (and adjust) the code. When that's not possible, I'd want formats and protocols that more than one tool speaks.",
   },
   {
     title: "Local-first, cloud optional",
+    trait: "selfHosted",
     text: "Home automations, media players and family photos should keep working when the internet (or a vendor) doesn't. Cloud is a nice extra, but things shouldn't break when it's gone.",
   },
   {
@@ -126,8 +130,9 @@ export const principles: UsesPrinciple[] = [
     text: "I pick a one-time purchase when one exists. The subscriptions I have are mostly for convenience or to support the makers, not for access to my own data.",
   },
   {
-    title: "EU and privacy-respecting where it's practical",
-    text: "GDPR exists for a reason, so I lean towards European providers. I'm pragmatic about it though: I'm ok with using a non-EU service when lock-in is low and I can still easily leave. Avoiding every piece of software or hardware that phones home is not practical, so I disable telemetry or block it.",
+    title: "EU law-respecting, EU-hosted preferred",
+    trait: "eu",
+    text: "GDPR exists for a reason, so I lean towards European providers. I'm an EU citizen, so non-EU tools still have to respect my rights under GDPR, and when they do, using them is fine. Avoiding every piece of software or hardware that phones home is not practical, so I disable telemetry or block it.",
   },
   {
     title: "Own my identity",
