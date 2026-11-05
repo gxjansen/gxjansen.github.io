@@ -352,7 +352,7 @@ export const items: UsesItem[] = [
     category: "OS and desktop",
     status: "using",
     reason:
-      "Dotfiles and package lists synced across my Linux machines from one git repo, with secrets encrypted.",
+      "Dotfiles and package lists synced across my Linux machines from one git repo, with secrets encrypted. This, combined with Obsidian Sync and a WireGuard connection ensures that it makes no difference whatsoever if I work on my Linux machine at home, or on my laptop while traveling.",
   },
   {
     name: "Zen browser",
