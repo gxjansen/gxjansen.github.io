@@ -142,6 +142,7 @@ export default defineConfig({
           "world-www",
           "aperture",
           "bike",
+          "books",
           "box-multiple",
           "bulb",
           "camera",

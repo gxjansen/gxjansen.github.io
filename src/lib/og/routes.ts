@@ -70,11 +70,11 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     lead: "Sifa, Barazo, n8n Pulse and more. Most open source on GitHub.",
     hand: "mostly open source",
   },
-  press: {
-    url: "gui.do/press",
-    title: "In the press",
-    lead: "Media appearances, interviews and articles.",
-    hand: "media & interviews",
+  appearances: {
+    url: "gui.do/appearances",
+    title: "Where I've shown up",
+    lead: "Podcasts, panels, blogs and videos I was invited into, plus a few articles and awards.",
+    hand: "said things",
   },
   newsletter: {
     url: "gui.do/newsletter",
@@ -100,6 +100,12 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     title: "Writing on community, experimentation & open tech",
     lead: "Field notes, essays and how-tos from building community functions.",
     hand: "field notes",
+  },
+  now: {
+    url: "gui.do/now",
+    title: "What I'm doing right now",
+    lead: "Posts, reading and building, pulled live from the open social web.",
+    hand: "right now",
   },
   uses: {
     url: "gui.do/uses",

@@ -14,7 +14,7 @@ import fs from "node:fs";
 const ROUTES = [
   "/",
   "/about/",
-  "/press/",
+  "/appearances/",
   "/podcasts/",
   "/retainer/",
   "/speaker/",

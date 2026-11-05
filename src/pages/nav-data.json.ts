@@ -25,7 +25,7 @@ export async function GET() {
       dropdown: [
         { text: "About Me", link: "/about" },
         { text: "CV", link: "/cv" },
-        { text: "Press & Media", link: "/press" },
+        { text: "Appearances", link: "/appearances" },
         { text: "Contact", link: "/contact" },
       ],
     },

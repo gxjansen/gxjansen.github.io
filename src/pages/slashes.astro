@@ -6,8 +6,8 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { slashPages, pageHref } from "@data/slashes";
 
-const conventionPages = slashPages.filter((p) => p.convention);
-const otherPages = slashPages.filter((p) => !p.convention);
+const featuredPages = slashPages.filter((p) => p.featured);
+const otherPages = slashPages.filter((p) => !p.featured);
 ---
 
 <BaseLayout
@@ -38,7 +38,7 @@ const otherPages = slashPages.filter((p) => !p.convention);
         </p>
       </div>
 
-      <!-- Primary: pages that follow the slashpages.net convention -->
+      <!-- Primary: featured pages (src/data/slashes.ts) -->
       <section class="mt-14 max-w-3xl" aria-labelledby="slash-pages">
         <h2
           id="slash-pages"
@@ -47,7 +47,7 @@ const otherPages = slashPages.filter((p) => !p.convention);
           Slash pages
         </h2>
         <ul class="grid gap-4 sm:grid-cols-2">
-          {conventionPages.map((page) => <li
+          {featuredPages.map((page) => <li
             class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 hover:border-primary-400 relative rounded-2xl border p-5 transition hover:-translate-y-0.5 hover:shadow-lg sm:p-6"
           >
             <a
