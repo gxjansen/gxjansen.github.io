@@ -21,9 +21,9 @@ export type UsesContext = "professional" | "personal";
 /**
  * Site-only filter tags, not a record field. eu: maker or provider based in
  * the EU. openSource: the software is open source. selfHosted: Guido runs it
- * himself. oneTime: paid once, no subscription.
+ * himself.
  */
-export type UsesTrait = "eu" | "openSource" | "selfHosted" | "oneTime";
+export type UsesTrait = "eu" | "openSource" | "selfHosted";
 export type UsesDroppedReason =
   "replaced" | "wornOut" | "lost" | "sold" | "outgrown";
 
@@ -160,7 +160,6 @@ export const traitLabels: Record<UsesTrait, string> = {
   eu: "EU",
   openSource: "Open source",
   selfHosted: "I host it myself",
-  oneTime: "Paid once",
 };
 
 /**
@@ -228,7 +227,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Supernote Manta",
-    traits: ["selfHosted", "oneTime"],
+    traits: ["selfHosted"],
     photo: "supernote-manta.jpg",
     url: "https://supernote.com/products/supernote-manta",
     kind: "hardware",
@@ -370,7 +369,6 @@ export const items: UsesItem[] = [
   },
   {
     name: "Stages SB20",
-    traits: ["oneTime"],
     icon: "tabler:bike",
     url: "https://stagescycling.com/en_global/product/indoor-cycling/smart-bikes",
     kind: "hardware",
@@ -664,7 +662,7 @@ export const items: UsesItem[] = [
   },
   {
     name: "Plex",
-    traits: ["selfHosted", "oneTime"],
+    traits: ["selfHosted"],
     icon: "simple-icons:plex",
     url: "https://www.plex.tv",
     kind: "software",
@@ -690,7 +688,6 @@ export const items: UsesItem[] = [
   },
   {
     name: "Symfonium",
-    traits: ["oneTime"],
     icon: "tabler:headphones",
     url: "https://symfonium.app",
     kind: "software",
