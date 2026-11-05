@@ -694,7 +694,7 @@ export const items: UsesItem[] = [
     category: "Notes, media and self-hosted services",
     status: "trying",
     reason:
-      "A small service I wrote that plans tasks and habits into free time in my Fastmail calendar.",
+      "A small service I wrote that plans tasks and habits into free time in my Fastmail calendar, based on all kinds of weekly time goals, recurring tasks, todo trackers etc.",
     replaces: [{ name: "Reclaim.ai" }],
   },
 
