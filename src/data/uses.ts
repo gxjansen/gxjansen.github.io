@@ -410,8 +410,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Development",
     status: "using",
-    reason:
-      "A fast, open source editor. I keep its diagnostics and metrics off.",
+    reason: "A fast, open source editor.",
   },
   {
     name: "Astro",
@@ -422,7 +421,7 @@ export const items: UsesItem[] = [
     category: "Development",
     status: "using",
     reason:
-      "Static-first sites with the content in files. It runs gui.do and cro.cafe.",
+      "Great to build fast static-first sites with the content in markdown files. You are looking at it :).",
     replaces: [{ name: "Webflow" }],
     storyUrl: STORY_2025,
   },
