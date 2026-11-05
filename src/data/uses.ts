@@ -264,8 +264,7 @@ export const items: UsesItem[] = [
     category: "Home",
     status: "using",
     reason:
-      "A router and firewall with per-device rules and domain blocking, without needing a cloud account for the basics.",
-    downside: "Ad and domain blocking only helps at home.",
+      "A router and firewall with per-device rules and domain blocking, without needing a cloud account for the basics. I use it for custom DNS rules, network insights and blocking ads and trackers across the whole network.",
     storyUrl: STORY_2025,
   },
   {
