@@ -994,6 +994,19 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
   {
+    name: "Sifa ID",
+    traits: ["eu"],
+    icon: "tabler:id-badge-2",
+    url: "https://sifa.id",
+    kind: "service",
+    area: "tech",
+    category: "Communication and privacy",
+    status: "using",
+    reason:
+      "Sifa ID replaced LinkedIn for me: a professional profile on AT Protocol, so the data lives in my own PDS and moves with me. I might be biased though as I'm building Sifa myself ;)",
+    replaces: [{ name: "LinkedIn" }],
+  },
+  {
     name: "Signal",
     traits: ["openSource"],
     icon: "simple-icons:signal",
@@ -1017,7 +1030,7 @@ export const items: UsesItem[] = [
     category: "Communication and privacy",
     status: "using",
     reason:
-      "Almost all my domains are at Marque. I picked it because the registrar runs on AT Protocol. My registrations are public in my own PDS.",
+      "Almost all my domains are at Marque. I picked it because the registrar runs on AT Protocol.",
     downside: "The company behind it is not in the EU.",
   },
   {
@@ -1029,7 +1042,7 @@ export const items: UsesItem[] = [
     category: "Communication and privacy",
     status: "using",
     reason:
-      "Email, calendar and contacts on open protocols (IMAP, CalDAV, CardDAV) with my own domains.",
+      "Email, calendar and contacts on open protocols (IMAP, CalDAV, CardDAV) with my own domains. Fastmail has servers in the EU, and my account data sits on those.",
     downside:
       "Fastmail is an Australian company outside the EU. In June 2024, it laid off most of its US union's bargaining unit during contract talks. I want to move to a European provider eventually. But I only just moved here and migrating all my email domains takes a lot of time. There weren't many good EU options back then, so I'm staying for now and might look at cirrux.co later.",
     replaces: [{ name: "Google Workspace" }],
@@ -1068,7 +1081,8 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
-    reason: "A hardware security key for the accounts that matter most.",
+    reason:
+      "A hardware security key for MFA or passwordless login where supported.",
   },
 
   // Dropped. "Replaced by" comes from the `replaces` lists above.
