@@ -851,7 +851,8 @@ export const items: UsesItem[] = [
     category: "Communication and privacy",
     status: "using",
     reason: "Encrypted messaging.",
-    downside: "Some groups are still stuck on WhatsApp.",
+    downside:
+      "Some groups are still stuck on WhatsApp, and the (sub)group/community function on Signal is not developed yet.",
     replaces: [{ name: "WhatsApp" }],
     storyUrl: STORY_2025,
   },
