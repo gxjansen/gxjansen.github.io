@@ -932,7 +932,8 @@ export const items: UsesItem[] = [
     area: "tech",
     status: "dropped",
     droppedReason: "replaced",
-    reason: "I wanted my photo library on hardware I own.",
+    reason:
+      "I want my valuable photo/video library memories in full resolution on hardware I own, and not dependent on a Big Tech monthly subscription.",
   },
   {
     name: "YouTube app",
