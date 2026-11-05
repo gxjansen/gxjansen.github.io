@@ -9,6 +9,8 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import {
   categoryOrder,
   currentItems,
+  defaultItem,
+  defaults,
   displayName,
   droppedItems,
   featured,
@@ -179,8 +181,16 @@ const traits = (Object.keys(traitLabels) as UsesTrait[])
 const traitCount = (trait: UsesTrait | undefined) =>
   traits.find((t) => t.trait === trait)?.count ?? 0;
 
+// Defaults: each name links to its item, or stays plain text when it isn't
+// on this page (see `plainDefaults`).
+const defaultRows = defaults.map((d) => ({
+  slot: d.slot,
+  uses: d.use.map((name) => ({ name, item: defaultItem(name) })),
+}));
+
 const index = [
   { id: "principles", name: "How I pick tools" },
+  { id: "defaults", name: "Defaults" },
   ...groups.map((g) => ({ id: g.id, name: g.name })),
   ...(alternatives.length > 0
     ? [{ id: "alternatives", name: "Alternatives to…" }]
@@ -296,6 +306,27 @@ const index = [
           </div>
           <p class="uses-filter-status" aria-live="polite"></p>
         </div>}
+
+        <section
+          id="defaults"
+          class="uses-section mt-14"
+          aria-labelledby="uses-defaults"
+        >
+          <h2 id="uses-defaults" class="uses-h">Defaults</h2>
+          <dl class="defaults">
+            {defaultRows.map(({ slot, uses }) => <div>
+              <dt>{slot}</dt>
+              <dd>
+                {uses.map(({ name, item }, i) => (
+                  <>
+                    {i > 0 && " and "}
+                    {item ? <a href={`#${itemId(item)}`}>{name}</a> : name}
+                  </>
+                ))}
+              </dd>
+            </div>)}
+          </dl>
+        </section>
 
         {groups.map((group) => <section
           id={group.id}
@@ -502,7 +533,7 @@ const index = [
   const groupSections = [
     ...document.querySelectorAll<HTMLElement>(".uses-group"),
   ];
-  const otherSections = ["alternatives", "dropped"]
+  const otherSections = ["defaults", "alternatives", "dropped"]
     .map((id) => document.getElementById(id))
     .filter((s): s is HTMLElement => s !== null);
 
@@ -685,6 +716,19 @@ const index = [
   }
   .uses-filter-status {
     @apply text-base-600 dark:text-base-400 mt-2 min-h-[1.5em] text-[0.95rem];
+  }
+
+  .defaults {
+    @apply grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2;
+  }
+  .defaults div {
+    @apply flex items-baseline justify-between gap-4 leading-snug;
+  }
+  .defaults dt {
+    @apply text-base-600 dark:text-base-400;
+  }
+  .defaults dd {
+    @apply text-base-950 dark:text-base-50 text-right font-semibold;
   }
 
   .alternatives {

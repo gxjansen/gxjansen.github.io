@@ -102,7 +102,7 @@ const STORY_LOCAL_AI = post(
 const STORY_RUNNER = post("self-hosted-github-runner-vps");
 
 /** Last content edit (YYYY-MM-DD). */
-export const updated = "2026-11-01";
+export const updated = "2026-11-06";
 /** Last time the whole list was checked against reality (YYYY-MM-DD). */
 export const lastReviewed = "2026-11-04";
 
@@ -114,7 +114,7 @@ export const principles: UsesPrinciple[] = [
   {
     title: "Open standards first, open source second",
     trait: "openSource",
-    text: "I start with open protocols and formats that more than one tool speaks - AT Protocol, CalDAV, IMAP, Markdown - because that's what lets me actually leave. Open source is the bonus: I can read the code, adjust it if I need to. But I'll take a closed app on an open protocol over an open app that locks my data in.",
+    text: "I start with open protocols and formats that more than one tool speaks - AT Protocol, CalDAV, IMAP, Markdown - because that's what lets me actually leave. Open source is the bonus: I can read the code, adjust it if I need to. But I'll take a closed app on an open protocol over an open app that locks my data in. Closed is fine if my data stays mine and leaving costs nothing: Plex is closed, but my library is plain files on my NAS, so I could switch to Jellyfin tomorrow like nothing happened.",
   },
   {
     title: "Local-first, cloud optional",
@@ -239,6 +239,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Personal hardware",
     status: "using",
+    isDefault: true,
     reason:
       "An e-ink tablet for handwritten notes and e-books that syncs to my own server instead of the vendor cloud.",
     storyUrl: STORY_2025,
@@ -407,6 +408,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "OS and desktop",
     status: "using",
+    isDefault: true,
     reason:
       "A fast Arch-based Linux that I manage with config in git. On my laptop since early 2026 and on my desktop since October 2026.",
     downside:
@@ -435,6 +437,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "OS and desktop",
     status: "using",
+    isDefault: true,
     reason:
       "My main browser. Firefox-based, with workspaces, and all tabs sync live between machines.",
     replaces: [{ name: "Arc" }],
@@ -460,6 +463,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "OS and desktop",
     status: "using",
+    isDefault: true,
     replaces: [{ name: "Microsoft Office" }],
   },
 
@@ -479,9 +483,10 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Development",
     status: "using",
+    isDefault: true,
     reason:
       "tmux sessions that live on the desktop. I attach from the laptop or my phone and continue where I left off.",
-    replaces: [{ name: "cmux" }],
+    replaces: [{ name: "Alacritty" }],
   },
   {
     name: "Zed",
@@ -492,6 +497,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Development",
     status: "using",
+    isDefault: true,
     reason: "A fast, open source editor.",
   },
   {
@@ -545,6 +551,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Development",
     status: "trying",
+    isDefault: true,
     reason:
       "A git forge built on AT Protocol. My atproto.nl site deploys from there.",
   },
@@ -559,6 +566,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "AI (local and hosted)",
     status: "using",
+    isDefault: true,
     reason:
       "Local models on my own GPU for when I'm offline, out of quota, or the data is private.",
     downside:
@@ -573,6 +581,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "AI (local and hosted)",
     status: "using",
+    isDefault: true,
     reason:
       "One API for many models, so I can swap models without changing tools. Lock-in is low, so I accept a US service here.",
     downside:
@@ -589,6 +598,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Notes and reading",
     status: "using",
+    isDefault: true,
     reason:
       "Everything is plain Markdown on my disk. I pay for Obsidian Sync for the mobile convenience and to support the developer.",
     downside:
@@ -605,6 +615,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Notes and reading",
     status: "using",
+    isDefault: true,
     reason:
       "RSS back in my life after the Google Reader shutdown, on my own server.",
     storyUrl: STORY_LOCAL_AI,
@@ -658,6 +669,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Media",
     status: "using",
+    isDefault: true,
     reason:
       "I host my family photos and videos on my own NAS, backed up from my phone. The heavy machine-learning work runs on my desktop GPU instead of the NAS.",
     downside:
@@ -689,6 +701,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Notes and reading",
     status: "using",
+    isDefault: true,
     replaces: [{ name: "Audible" }],
   },
   {
@@ -709,6 +722,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Media",
     status: "using",
+    isDefault: true,
     replaces: [{ name: "YouTube Music" }],
   },
   {
@@ -719,6 +733,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Media",
     status: "using",
+    isDefault: true,
     reason:
       "One client for YouTube and other video sources, on desktop and phone.",
     replaces: [{ name: "YouTube app" }],
@@ -784,6 +799,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Self-hosted and web",
     status: "using",
+    isDefault: true,
     reason:
       "Privacy-friendly, cookie-free website analytics that I host myself.",
   },
@@ -796,8 +812,21 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Self-hosted and web",
     status: "using",
+    isDefault: true,
     reason:
       "An open source newsletter tool that I run myself, so my subscriber list stays with me.",
+  },
+  {
+    name: "Grafana",
+    traits: ["openSource", "selfHosted"],
+    icon: "simple-icons:grafana",
+    url: "https://grafana.com",
+    kind: "software",
+    area: "tech",
+    category: "Self-hosted and web",
+    status: "using",
+    reason:
+      "Open source dashboards I host myself, for Singi server monitoring and keeping my Garmin health data at home.",
   },
   {
     name: "Kairos (my own scheduler)",
@@ -823,22 +852,12 @@ export const items: UsesItem[] = [
     area: "creative",
     category: "Photo, video and streaming",
     status: "using",
+    isDefault: true,
     reason:
       "Open source RAW processing on Linux. A script culls the day's shots, RawTherapee exports them, and darktable is for the keepers.",
     downside:
       "RawTherapee has no profile for the R6 Mark II, so I borrow one from a sibling camera.",
     replaces: [{ name: "Adobe Lightroom" }],
-  },
-  {
-    name: "Affinity",
-    icon: "simple-icons:affinity",
-    url: "https://affinity.studio",
-    kind: "software",
-    area: "creative",
-    category: "Photo, video and streaming",
-    status: "using",
-    reason: "Photo and design editing.",
-    replaces: [{ name: "Adobe Creative Cloud" }],
   },
   {
     name: "OBS Studio",
@@ -988,6 +1007,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
+    isDefault: true,
     reason:
       "My main social account. I own the handle, and the data lives in a repo I can move.",
     replaces: [{ name: "Twitter and Instagram" }],
@@ -1015,6 +1035,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
+    isDefault: true,
     reason: "Encrypted messaging.",
     downside:
       "Some groups are still stuck on WhatsApp, and the (sub)group/community function on Signal is not developed yet.",
@@ -1041,6 +1062,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
+    isDefault: true,
     reason:
       "Email, calendar and contacts on open protocols (IMAP, CalDAV, CardDAV) with my own domains. Fastmail has servers in the EU, and my account data sits on those.",
     downside:
@@ -1057,6 +1079,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
+    isDefault: true,
     reason: "An open source password manager with an export I can leave with.",
   },
   {
@@ -1068,6 +1091,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
+    isDefault: true,
     reason:
       "An open source, offline authenticator app that isn't tied to a vendor account.",
     replaces: [{ name: "Authy" }],
@@ -1081,6 +1105,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
+    isDefault: true,
     reason:
       "A hardware security key for MFA or passwordless login where supported.",
   },
@@ -1227,12 +1252,76 @@ export const items: UsesItem[] = [
     reason: "One machine for everything, and no macOS lock-in.",
     endedAt: "2026-10",
   },
+  {
+    name: "Affinity",
+    url: "https://affinity.studio",
+    kind: "software",
+    area: "creative",
+    status: "dropped",
+    reason: "I'm on CachyOS now and Affinity still doesn't run on Linux.",
+    endedAt: "2026-10",
+    replaces: [{ name: "Adobe Creative Cloud" }],
+  },
 ];
 
 const norm = (s: string) => s.trim().toLowerCase();
 
 /** Items still in use or being tried, in data order. */
 export const currentItems = items.filter((i) => i.status !== "dropped");
+
+/**
+ * Site-only: one app per slot, the "app defaults" list (gui.do/defaults, a
+ * slashpages.net page). A name links to the current item with that name or
+ * with a part (`includes`) of that name. Names that are not on /uses must be
+ * listed in `plainDefaults`; the test checks both, and that `isDefault` is set
+ * on exactly the items used here.
+ */
+export interface UsesDefault {
+  slot: string;
+  use: string[];
+}
+
+export const defaults: UsesDefault[] = [
+  { slot: "Mail service", use: ["Fastmail"] },
+  { slot: "Mail client", use: ["Fastmail"] },
+  { slot: "Calendar", use: ["Fastmail"] },
+  { slot: "Contacts", use: ["Fastmail"] },
+  { slot: "Notes", use: ["Obsidian"] },
+  { slot: "Handwritten notes", use: ["Supernote Manta"] },
+  { slot: "RSS", use: ["FreshRSS"] },
+  { slot: "Browser", use: ["Zen browser"] },
+  { slot: "Search", use: ["DuckDuckGo"] },
+  { slot: "Chat", use: ["Signal"] },
+  { slot: "Social", use: ["Bluesky"] },
+  { slot: "Passwords", use: ["Bitwarden"] },
+  { slot: "2FA", use: ["Aegis Authenticator", "YubiKey"] },
+  { slot: "Code editor", use: ["Zed"] },
+  { slot: "Terminal", use: ["Ghostty"] },
+  { slot: "Code hosting", use: ["Tangled"] },
+  { slot: "Photo library", use: ["Immich"] },
+  { slot: "Photo editing", use: ["darktable"] },
+  { slot: "Music", use: ["Plexamp"] },
+  { slot: "Audiobooks", use: ["Audiobookshelf"] },
+  { slot: "Video", use: ["Grayjay"] },
+  { slot: "Office", use: ["LibreOffice"] },
+  { slot: "Analytics", use: ["Umami"] },
+  { slot: "Newsletter", use: ["Listmonk"] },
+  { slot: "Local AI", use: ["Ollama"] },
+  { slot: "Hosted AI", use: ["OpenRouter"] },
+  { slot: "OS", use: ["CachyOS"] },
+];
+
+/** Defaults that are not items on /uses: shown as plain text. */
+export const plainDefaults = ["DuckDuckGo"];
+
+/** The current item a defaults name refers to: by name, or by part name. */
+export function defaultItem(name: string): UsesItem | undefined {
+  const key = norm(name);
+  return (
+    currentItems.find((i) => norm(i.name) === key) ??
+    currentItems.find((i) => i.includes?.some((p) => norm(p.name) === key))
+  );
+}
 
 /** Dropped items, in data order. */
 export const droppedItems = items.filter((i) => i.status === "dropped");
