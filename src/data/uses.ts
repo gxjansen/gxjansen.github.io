@@ -281,7 +281,7 @@ export const items: UsesItem[] = [
     storyUrl: STORY_ANTIFRAGILE,
   },
   {
-    name: "HomeWizard energy meters and plugs",
+    name: "HomeWizard P1 meter, water meter and plugs",
     icon: "tabler:plug",
     url: "https://www.homewizard.com",
     kind: "device",
@@ -291,7 +291,7 @@ export const items: UsesItem[] = [
     reason:
       "They have a local API, so Home Assistant reads them directly. I switched off their cloud connection.",
     downside:
-      "Without the cloud connection their own app loses history and remote access.",
+      "Without the cloud connection their own app loses history and remote access. The HomeWizard plugs are overpriced, so the new plugs I buy now are IKEA GRILLPLATS.",
   },
   {
     name: "Raspberry Pi 5",
@@ -779,7 +779,8 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Studio and presenting",
     status: "using",
-    reason: "Great for additional control for customized scenes.",
+    reason:
+      "Great for macros/automations, easily opening apps, showing custom graphs/data, media control, lights, audio, Home Assistant...",
   },
 
   // Gaming
