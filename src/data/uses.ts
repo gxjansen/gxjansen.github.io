@@ -572,6 +572,7 @@ export const items: UsesItem[] = [
     reason:
       "Wouldn't start using it today, but I bought a lifetime pass when it was very cheap and the combination with Plexamp is also convenient. Ideally I'll replace it with an open source alternative at some point (Jellyfin?) but it's not high on my todo list.",
     downside: "Plex is closed source.",
+    replaces: [{ name: "Streaming subscriptions (Netflix, Disney+, Prime)" }],
     storyUrl: STORY_2025,
   },
   {
@@ -1040,7 +1041,7 @@ export const items: UsesItem[] = [
     droppedReason: "replaced",
     reason:
       "No more subscription for creative tools. RAW goes through darktable and RawTherapee, and for video I'm still learning DaVinci Resolve.",
-    endedAt: "2026-11",
+    endedAt: "2025",
   },
   {
     name: "Reclaim.ai",
