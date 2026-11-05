@@ -882,7 +882,7 @@ export const items: UsesItem[] = [
       "Email, calendar and contacts on open protocols (IMAP, CalDAV, CardDAV) with my own domains.",
     downside:
       "Fastmail is an Australian company outside the EU. In June 2024, it laid off most of its US union's bargaining unit during contract talks. I want to move to a European provider eventually. But I only just moved here and migrating all my email domains takes a lot of time. There weren't many good EU options back then, so I'm staying for now and might look at cirrux.co later.",
-    replaces: [{ name: "Google Workspace" }, { name: "Proton" }],
+    replaces: [{ name: "Google Workspace" }],
     storyUrl: STORY_ANTIFRAGILE,
   },
   {
@@ -995,15 +995,6 @@ export const items: UsesItem[] = [
     reason: "Content in files and a static build instead of a hosted builder.",
   },
   {
-    name: "Proton",
-    kind: "service",
-    area: "tech",
-    status: "dropped",
-    droppedReason: "replaced",
-    reason:
-      "I used it for email and calendar, but calendar automation was too limited. I need CalDAV.",
-  },
-  {
     name: "Arc",
     url: "https://arc.net",
     kind: "software",
@@ -1050,7 +1041,7 @@ export const items: UsesItem[] = [
     status: "dropped",
     droppedReason: "replaced",
     reason: "I wanted a scheduler I control that writes into my own calendar.",
-    endedAt: "2026-10",
+    endedAt: "2025",
   },
   {
     name: "Mac mini as daily workstation",
