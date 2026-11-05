@@ -449,7 +449,7 @@ export const items: UsesItem[] = [
     category: "Development",
     status: "using",
     reason:
-      "A non-profit, EU-based forge for private repos and my synced dotfiles.",
+      "A non-profit, EU-based forge for private repos and my synced dotfiles. Planning to move to Tangled once it supports private repos.",
   },
   {
     name: "Tangled",
