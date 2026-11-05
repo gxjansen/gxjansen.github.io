@@ -426,7 +426,7 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
   {
-    name: "GitHub Actions on my own runner",
+    name: "GitHub + GitHub Actions on my own runner",
     icon: "simple-icons:githubactions",
     url: "https://docs.github.com/en/actions/hosting-your-own-runners",
     kind: "service",
@@ -434,7 +434,7 @@ export const items: UsesItem[] = [
     category: "Development",
     status: "using",
     reason:
-      "CI on a small Hetzner server is about four times faster and costs about half of the hosted minutes I was buying.",
+      "CI on a small Hetzner server is about four times faster and costs about half of the hosted minutes I was buying. Once Tangled covers the bits I still use GitHub for (private repos, project boards, the Actions marketplace), I'm switching.",
     downside:
       "Only safe for private repos, because a runner executes whatever the workflow says.",
     replaces: [{ name: "GitHub-hosted runners" }],
@@ -488,7 +488,8 @@ export const items: UsesItem[] = [
     status: "using",
     reason:
       "One API for many models, so I can swap models without changing tools. Lock-in is low, so I accept a US service here.",
-    downside: "A US service, and not self-hosted.",
+    downside:
+      "A US service, and not self-hosted. And depending on the model/provider, they might train on your data.",
     storyUrl: STORY_2025,
   },
 
