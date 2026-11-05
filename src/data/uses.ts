@@ -301,7 +301,7 @@ export const items: UsesItem[] = [
     category: "Home",
     status: "using",
     reason:
-      "It runs some of my containers to take the load off the NAS. The NAS CPU and memory are running out.",
+      "It runs some of my containers to take the load off the NAS. Especially for write-heavy containers it's nice to be able to bring down the HDD noise from the NAS (the RPi has an NVMe drive that doesn't make any noise).",
   },
   {
     name: "Stages SB20",
