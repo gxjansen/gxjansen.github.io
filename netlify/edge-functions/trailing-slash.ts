@@ -49,5 +49,5 @@ export default async (request: Request, context: Context) => {
  * if a `prerender = false` page is added without being listed here.
  */
 export const config: Config = {
-  path: ["/now", "/bookshelf"],
+  path: ["/bookshelf"],
 };

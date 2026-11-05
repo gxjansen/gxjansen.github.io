@@ -1,0 +1,34 @@
+---
+// The live half of /now (Sifa activity, Grain photos, Bookhive reading), rendered
+// as a server island: now.astro ships the hand-written intro as static HTML and
+// this component streams in after load via `server:defer`. The three upstream
+// fetches take seconds, so they no longer hold back the first paint.
+import ActivityBento from "@components/Activity/ActivityBento.astro";
+import ReadingCard from "@components/Reading/ReadingCard.astro";
+import PhotosGallery from "@components/Photos/PhotosGallery.astro";
+import { getActivity } from "../../lib/sifaActivity";
+import { getReading } from "../../lib/bookhive";
+import { getPhotoGalleries } from "../../lib/grainPhotos";
+
+// CDN-cache the island response. `durable` shares one cached copy across all
+// Netlify edge nodes; without it each node keeps its own, so most visitors hit
+// a cold node and wait for the upstream fetches. A page called "Now" should
+// never be more than an hour stale.
+Astro.response.headers.set(
+  "Netlify-CDN-Cache-Control",
+  "public, durable, s-maxage=300, stale-while-revalidate=3600",
+);
+Astro.response.headers.set("Cache-Control", "no-cache");
+
+const [activity, reading, photos] = await Promise.all([
+  getActivity(),
+  getReading(),
+  getPhotoGalleries(15),
+]);
+---
+
+<div class="flex flex-col gap-10" data-rendered-at={new Date().toISOString()}>
+  <ActivityBento items={activity} />
+  <PhotosGallery galleries={photos} />
+  <ReadingCard data={reading} />
+</div>

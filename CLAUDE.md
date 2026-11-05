@@ -1,6 +1,6 @@
 # gui.do (gxjansen.github.io)
 
-Guido X Jansen's personal site. Astro 7, Tailwind v4 (Vite plugin), MDX, React islands, Netlify. Static output plus a few on-demand routes (`prerender = false`: `/now`, `/bookshelf`, `/ama/q/[id]`, `/api/*`, `/internal/*`). Default branch is `master`.
+Guido X Jansen's personal site. Astro 7, Tailwind v4 (Vite plugin), MDX, React islands, Netlify. Static output plus a few on-demand routes (`prerender = false`: `/bookshelf`, `/ama/q/[id]`, `/api/*`, `/internal/*`). `/now` is static with a server island (`server:defer`) for its live half. Default branch is `master`.
 
 ## Workflow
 
