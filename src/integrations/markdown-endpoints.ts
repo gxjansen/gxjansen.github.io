@@ -16,10 +16,13 @@
  * Conversion drops on-screen-only UI (buttons, forms, decorative images,
  * anything marked `data-md-skip`), uses the page's own H1 as the title, and
  * makes relative links absolute so they work from the .md and llms-full.txt.
+ * Elements with `hidden` are still converted, so `<p hidden data-md-only>`
+ * carries text meant only for the Markdown. Definition lists become bullet
+ * lists ("**term**: description").
  *
  * Excluded: /ama, /api/*, *.xml, *.json, nav-data, rss,
  * 404, /styleguide, /categories/*, /authors/*, /examples/*,
- * /internal/*, /overview, /newsletter, /privacy, /conference-terms.
+ * /internal/*, /overview, /conference-terms.
  *
  * It ALSO generates dist/_headers with one exact-path rule per built page,
  * advertising machine-readable resources through an HTTP `Link:` header
@@ -110,8 +113,6 @@ function isContentPage(pathname: string): boolean {
     "styleguide/index.html",
     "ama/index.html",
     "overview/index.html",
-    "newsletter/index.html",
-    "privacy/index.html",
     "conference-terms/index.html",
   ]);
   if (excluded.has(p)) return false;
@@ -148,6 +149,10 @@ function isContentPage(pathname: string): boolean {
     "follow/",
     "colophon/",
     "where/",
+    "uses/",
+    "cv/",
+    "privacy/",
+    "newsletter/",
     "canon/",
     "green/",
     "verify/",
@@ -242,6 +247,7 @@ export function extractMarkdown(
     }
   }
 
+  definitionListsToLists(main);
   absolutizeUrls(main, pageUrl);
   collapseLineBreaks(main);
 
@@ -265,12 +271,38 @@ function tidyLines(md: string): string {
         .replace(/^ (?=\S)/, "")
         .replace(/(?<=\S) $/, "")
         .replace(/^(#{1,6}) {2,}/, "$1 ")
+        .replace(/(?<=\S) {2,}(?=\S)/g, " ")
         .replace(
           /\[ +([^\]\n]*?) *\]\(|\[([^\]\n]*?) +\]\(/g,
           (_, a, b) => `[${a ?? b}](`,
         );
     })
     .join("\n");
+}
+
+/**
+ * node-html-markdown prints `<dl>` terms and descriptions as loose lines.
+ * Rewrites each list as `<ul>` with one "**term**: description" item per
+ * term; several descriptions for one term are joined with commas.
+ */
+function definitionListsToLists(main: HTMLElement): void {
+  for (const dl of main.querySelectorAll("dl")) {
+    const rows: { term: string; descs: string[] }[] = [];
+    for (const el of dl.querySelectorAll("dt, dd")) {
+      if (el.rawTagName.toLowerCase() === "dt") {
+        rows.push({ term: el.innerHTML.trim(), descs: [] });
+      } else if (rows.length > 0) {
+        rows[rows.length - 1].descs.push(el.innerHTML.trim());
+      }
+    }
+    if (rows.length === 0) continue;
+    const items = rows.map(({ term, descs }) =>
+      descs.length > 0
+        ? `<li><strong>${term}</strong>: ${descs.join(", ")}</li>`
+        : `<li><strong>${term}</strong></li>`,
+    );
+    dl.replaceWith(`<ul>${items.join("")}</ul>`);
+  }
 }
 
 /** Resolves relative `href`/`src` values against the page URL. */

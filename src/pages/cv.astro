@@ -84,10 +84,11 @@ const awards = split(cv.awards);
           <h1
             class="font-display text-[clamp(2rem,4.5vw,2.9rem)] leading-none font-black tracking-[-0.03em]"
           >
-            {cv.name}<span
+            {cv.name}<span class="sr-only"> (</span
+            ><span
               class="text-base-500 ml-2 align-middle text-base font-normal tracking-normal"
               >he/him</span
-            >
+            ><span class="sr-only">)</span>
           </h1>
           {cv.headline && <p
             class="text-base-700 dark:text-base-300 font-display mt-2 max-w-2xl text-lg font-semibold"
@@ -222,7 +223,7 @@ const awards = split(cv.awards);
               </li>)}
             </ol>
             {xp.rest.length > 0 && <details class="group mt-1">
-              <summary class={summary}>
+              <summary class={summary} data-md-skip>
                 <span class="group-open:hidden">
                   + Show all {cv.experience.length} positions
                 </span>
@@ -334,7 +335,7 @@ const awards = split(cv.awards);
               </li>)}
             </ul>
             {proj.rest.length > 0 && <details class="group mt-1">
-              <summary class={summary}>
+              <summary class={summary} data-md-skip>
                 <span class="group-open:hidden">
                   + Show all {cv.projects.length} projects
                 </span>
@@ -407,7 +408,7 @@ const awards = split(cv.awards);
               </li>)}
             </ul>
             {certs.rest.length > 0 && <details class="group mt-1">
-              <summary class={summary}>
+              <summary class={summary} data-md-skip>
                 <span class="group-open:hidden">
                   + Show all {cv.certifications.length} credentials
                 </span>
@@ -470,7 +471,7 @@ const awards = split(cv.awards);
               </li>)}
             </ul>
             {vol.rest.length > 0 && <details class="group mt-1">
-              <summary class={summary}>
+              <summary class={summary} data-md-skip>
                 <span class="group-open:hidden">
                   + Show all {cv.volunteering.length} roles
                 </span>
@@ -524,7 +525,7 @@ const awards = split(cv.awards);
               </li>)}
             </ul>
             {awards.rest.length > 0 && <details class="group mt-1">
-              <summary class={summary}>
+              <summary class={summary} data-md-skip>
                 <span class="group-open:hidden">
                   + Show all {cv.awards.length} awards
                 </span>

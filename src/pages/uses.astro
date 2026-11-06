@@ -232,7 +232,11 @@ const index = [
           </p>
         </header>
 
-        {tiles.length > 0 && <ul class="bento" aria-label="Highlights">
+        {tiles.length > 0 && <ul
+          class="bento"
+          aria-label="Highlights"
+          data-md-skip
+        >
           {tiles.map(({ item, img }, i) => <li
             class:list={["bento-tile", i === 0 && "bento-big"]}
           >
@@ -295,7 +299,10 @@ const index = [
                     href ? <a href={href}>{part}</a> : part,
                   )}
                 </p>
-                {traitCount(p.trait) > 0 && <p class="principle-more">
+                {traitCount(p.trait) > 0 && <p
+                  class="principle-more"
+                  data-md-skip
+                >
                   <a href={`?f=${p.trait}#uses-filter`} data-trait={p.trait}
                     >Show the {traitCount(p.trait)} items</a
                   >
@@ -305,7 +312,12 @@ const index = [
           </ol>
         </section>
 
-        {traits.length > 0 && <div id="uses-filter" class="uses-filter" hidden>
+        {traits.length > 0 && <div
+          id="uses-filter"
+          class="uses-filter"
+          hidden
+          data-md-skip
+        >
           <p id="uses-filter-h" class="uses-filter-h">Show only</p>
           <div class="chips" role="group" aria-labelledby="uses-filter-h">
             {traits.map(({ trait, label, count }) => <button
@@ -384,11 +396,20 @@ const index = [
                         aria-hidden="true"
                       />
                     )}
-                    <span class="item-label">{displayName(item)}</span>
+                    <strong class="item-label font-bold"
+                      >{displayName(item)}</strong
+                    >
                     {item.status === "trying" && <span class="trying"
-                      >Evaluating</span
+                      ><span class="sr-only"> (</span
+                      >Evaluating<span class="sr-only">)</span></span
                     >}
                   </p>
+                  {item.traits && item.traits.length > 0 && <p
+                    hidden
+                    data-md-only
+                  >
+                    Tags: {item.traits.map((t) => traitLabels[t]).join(", ")}
+                  </p>}
                   {item.reason && <p class="item-reason">
                     {linkify(item.reason).map(({ part, href }) =>
                       href ? <a href={href}>{part}</a> : part,
@@ -438,7 +459,7 @@ const index = [
               class="uses-item"
             >
               <p class="item-name">
-                <span>{displayName(item)}</span>
+                <strong class="font-bold">{displayName(item)}</strong>
               </p>
               {item.reason && <p class="item-reason">
                 {linkify(item.reason).map(({ part, href }) =>
@@ -503,7 +524,7 @@ const index = [
           <ul class="uses-list">
             {dropped.map(({ item, by }) => <li class="uses-item">
               <p class="item-name">
-                <span>{displayName(item)}</span>
+                <strong class="font-bold">{displayName(item)}</strong>
                 {item.endedAt && <span class="item-when">
                   until{" "}
                   <time datetime={item.endedAt}
