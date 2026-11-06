@@ -20,6 +20,7 @@ specification.website agent-readiness spec
 - [Uses](https://gui.do/uses/): the hardware, software and services Guido uses, and what he dropped
 - [Follow](https://gui.do/follow/): ways to follow Guido: newsletter, Standard Reader, RSS or social profiles
 - [Canon](https://gui.do/canon/): personal canon of Guido: books, comics, thinkers and shows that shaped his thinking.
+- [Green](https://gui.do/green/): what Guido does to waste less energy, water and stuff
 - [Colophon](https://gui.do/colophon/): how gui.do is built: tools, fonts, data sources, self-hosted parts, and hosting
 - [Slashes](https://gui.do/slashes/): an index of every slash page on gui.do, following the slashpages.net convention
 
