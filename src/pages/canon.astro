@@ -1,0 +1,60 @@
+---
+/**
+ * /canon: the books, people and screen stuff that shaped how Guido thinks
+ * (https://slashpages.net). Data in src/data/canon.ts.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { canon } from "@data/canon";
+
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+---
+
+<BaseLayout
+  title="Canon"
+  description="Books, comics, thinkers, TV and one podcast that shaped how I think."
+>
+  <div class="home canon-page">
+    <section
+      class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">the good stuff</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Canon
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
+          Books, comics, thinkers, TV and one podcast that shaped how I think.
+          From Kahneman to Knight Rider. Not a best-of list, just what stuck.
+        </p>
+      </div>
+
+      <div class="mt-12 grid max-w-3xl gap-10">
+        {canon.map((group) => <section
+          aria-labelledby={`canon-${slug(group.name)}`}
+        >
+          <h2
+            id={`canon-${slug(group.name)}`}
+            class="font-display mb-3 text-[1.35rem] font-extrabold tracking-[-0.02em]"
+          >
+            {group.name}
+          </h2>
+          <ul class="grid gap-x-8 gap-y-2 sm:grid-cols-2">
+            {group.items.map((item) => <li class="leading-snug">
+              <span class="text-base-950 dark:text-base-50 font-semibold">
+                {item.name}
+              </span>
+              {item.by && <span class="text-base-500"> · {item.by}</span>}
+              {item.why && <p
+                class="text-base-600 dark:text-base-400 mt-0.5 text-sm"
+              >
+                {item.why}
+              </p>}
+            </li>)}
+          </ul>
+        </section>)}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
