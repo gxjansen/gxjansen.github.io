@@ -117,7 +117,7 @@ export const canon: CanonGroup[] = [
       {
         name: "The Cathedral and the Bazaar",
         by: "Eric S. Raymond",
-        url: "https://bookhive.buzz/books/bk_b0aYi1milOdUsJOkygik",
+        url: "http://www.catb.org/~esr/writings/cathedral-bazaar/",
       },
       {
         name: "Utopia for Realists",
