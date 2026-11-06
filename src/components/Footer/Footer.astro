@@ -83,23 +83,27 @@ const columns: {
   aria-label="Site footer"
 >
   <div class="site-container px-4">
-    <!-- Brand -->
-    <div class="flex flex-col gap-4">
-      <SiteLogo showAvatar />
-      <p
-        class="text-base-600 dark:text-base-400 max-w-sm text-sm leading-relaxed"
-      >
-        For {yearsBuilding}+ years I've helped tech teams turn developer &amp;
-        customer intelligence into product strategy, grounded in cognitive
-        psychology and a habit of testing my assumptions. I help build
-        communities, and the teams that run them.
-      </p>
-      <SocialLinks location="footer" context="footer" class="mt-1" />
+    <!-- Brand: stacked on small screens, blurb left and socials right from md -->
+    <div
+      class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-12"
+    >
+      <div class="flex flex-col gap-4">
+        <SiteLogo showAvatar />
+        <p
+          class="text-base-600 dark:text-base-400 max-w-sm text-sm leading-relaxed"
+        >
+          For {yearsBuilding}+ years I've helped tech teams turn developer &amp;
+          customer intelligence into product strategy, grounded in cognitive
+          psychology and a habit of testing my assumptions. I help build
+          communities, and the teams that run them.
+        </p>
+      </div>
+      <SocialLinks location="footer" context="footer" class="mt-1 md:mt-0" />
     </div>
 
     <!-- Link columns -->
     <div
-      class="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-5"
+      class="border-base-200/60 dark:border-base-800/60 mt-10 grid grid-cols-2 gap-x-8 gap-y-10 border-t pt-10 sm:grid-cols-3 md:grid-cols-5 md:gap-x-6"
     >
       {columns.map((col) => <nav
         class="flex flex-col gap-1"
