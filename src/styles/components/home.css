@@ -21,6 +21,13 @@
 }
 
 @layer components {
+  /* ---- page frame ----
+     Same content box as /now, /uses and /bookshelf (section.px-4 > max-w-5xl),
+     so every `.home` page keeps real side margins on laptop-sized screens. */
+  .home {
+    @apply mx-auto box-border w-full max-w-5xl px-4;
+  }
+
   /* ---- hero ---- */
   .home .kicker {
     @apply text-primary-600 dark:text-primary-400 font-hand mb-3 inline-block text-[1.9rem] leading-none;
