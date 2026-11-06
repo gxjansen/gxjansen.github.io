@@ -99,6 +99,12 @@ export const slashPages: SlashPage[] = [
     ],
   },
   {
+    slug: "where",
+    featured: true,
+    description:
+      "Which country I'm in right now, and the flags of everywhere I've been.",
+  },
+  {
     slug: "defaults",
     featured: true,
     description:

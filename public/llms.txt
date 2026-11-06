@@ -20,6 +20,7 @@ specification.website agent-readiness spec
 - [Uses](https://gui.do/uses/): the hardware, software and services Guido uses, and what he dropped
 - [Follow](https://gui.do/follow/): ways to follow Guido: newsletter, Standard Reader, RSS or social profiles
 - [Colophon](https://gui.do/colophon/): how gui.do is built: tools, fonts, data sources, self-hosted parts, and hosting
+- [Where](https://gui.do/where/): which country Guido is in right now, reported by his home server, plus the flags of everywhere he's been
 - [Slashes](https://gui.do/slashes/): an index of every slash page on gui.do, following the slashpages.net convention
 
 ## Services
