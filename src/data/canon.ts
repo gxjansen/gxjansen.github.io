@@ -217,6 +217,11 @@ export const canon: CanonGroup[] = [
     name: "On screen",
     items: [
       { name: "Marvel's Avengers saga", by: "Phases 1 to 3" },
+      {
+        name: "Doctor Who",
+        by: "2005 onward",
+        url: "https://popfeed.social/tv_show/57243",
+      },
       { name: "Silicon Valley", url: "https://popfeed.social/tv_show/60573" },
       { name: "Black Mirror", url: "https://popfeed.social/tv_show/42009" },
       { name: "Mr. Robot", url: "https://popfeed.social/tv_show/62560" },
