@@ -55,9 +55,11 @@ const {
   presentations,
   presentationSlugs,
   communities,
+  noindex: noindexProp = false,
 } = Astro.props as Props;
-// Use the environment variable to determine noindex
-const noindex = !CONFIG.ALLOW_INDEXING;
+// A page can opt out of indexing (noindex prop); the ALLOW_INDEXING env
+// switch turns indexing off site-wide (previews, staging).
+const noindex = noindexProp || !CONFIG.ALLOW_INDEXING;
 // Inline so it runs before first paint (no theme flash); hash it into the CSP.
 Astro.csp?.insertScriptHash(scriptHash(themeInit));
 ---
