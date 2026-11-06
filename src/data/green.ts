@@ -12,9 +12,7 @@ export const green: GreenGroup[] = [
   {
     name: "This site",
     items: [
-      "Static pages, very little JavaScript",
-      "No trackers, no ads",
-      "Images optimized at build time",
+      "Small pages: static, little JavaScript, no trackers or ads, optimized images",
       "Hosted on Netlify, which can't show its energy is green (no verified green hosting, runs on AWS/Google Cloud) - a tradeoff I know about",
     ],
   },
