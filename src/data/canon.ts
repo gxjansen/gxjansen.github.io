@@ -33,6 +33,7 @@ export const canon: CanonGroup[] = [
         by: "Brian Christian and Tom Griffiths",
       },
       { name: "The Egg", by: "Andy Weir" },
+      { name: "Project Hail Mary", by: "Andy Weir" },
     ],
   },
   {
@@ -75,6 +76,7 @@ export const canon: CanonGroup[] = [
       { name: "Jurassic Park", by: "1993" },
       { name: "Silicon Valley" },
       { name: "The Expanse", by: "TV series" },
+      { name: "Project Hail Mary", by: "2026" },
     ],
   },
   {
