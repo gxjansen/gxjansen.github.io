@@ -136,7 +136,6 @@ export const canon: CanonGroup[] = [
     name: "Thinkers",
     items: [
       { name: "Nassim Nicholas Taleb" },
-      { name: "Robert Cialdini" },
       { name: "Daniel Kahneman" },
       { name: "Simon Sinek" },
     ],
@@ -147,9 +146,9 @@ export const canon: CanonGroup[] = [
       { name: "Frans Verstraten" },
       { name: "Neil deGrasse Tyson" },
       { name: "Randall Munroe", by: "xkcd" },
-      { name: "Veritasium" },
+      { name: "Derek Muller", by: "Veritasium" },
       { name: "Kurzgesagt" },
-      { name: "Vsauce" },
+      { name: "Michael Stevens", by: "Vsauce" },
       { name: "Cleo Abram" },
       { name: "EposVox" },
       { name: "Hannah Fry" },
@@ -158,7 +157,7 @@ export const canon: CanonGroup[] = [
       { name: "Kyle Hill" },
       { name: "Steve Mould" },
       { name: "Matt Parker", by: "Stand-up Maths" },
-      { name: "Vlogbrothers" },
+      { name: "John and Hank Green", by: "Vlogbrothers" },
     ],
   },
   {
