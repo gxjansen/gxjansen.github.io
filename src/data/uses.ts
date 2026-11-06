@@ -927,9 +927,7 @@ export const items: UsesItem[] = [
     category: "Self-hosted and web",
     status: "using",
     reason:
-      "Hosts several of my websites. US company, but pretty good and cheap, and I'm not locked in at all: all code lives on GitHub and locally, so I can move away anytime.",
-    downside:
-      "I might move the sites to a VPS eventually, but that's not high prio.",
+      "Hosts several of my websites. US company, but pretty good and cheap, and I'm not locked in at all: all code lives on GitHub and locally, so I can move away anytime. I might move the sites to a VPS eventually, but that's not high prio.",
   },
 
   // Photo, video and streaming
@@ -1156,7 +1154,7 @@ export const items: UsesItem[] = [
     category: "Communication and privacy",
     status: "using",
     reason:
-      "Not for messaging any actual person. It's my default notification channel for self-hosted tools like Uptime Kuma and for Home Assistant.",
+      "I'm actually not using this for messaging any people, but it's my default notification channel for self-hosted tools like Uptime Kuma and for Home Assistant.",
   },
   {
     name: "Marque",
