@@ -31,14 +31,6 @@ const hasNotes = (rows: DomainRow[]) => rows.some((r) => r.note);
         >
           Domains
         </h1>
-        <p class={`${muted} text-lg leading-relaxed`}>
-          I own more domains than I can justify. This is the honest list: most
-          registered through
-          <a href="https://marque.at/" rel="noopener noreferrer">Marque</a>
-          (marque.at), which writes a record per domain into my own PDS, and
-          this page is generated from those records on every site build. A few
-          are left off on purpose. Private use.
-        </p>
       </div>
 
       {pinned.map((d) => <div class={`${card} mt-12 max-w-3xl`}>
