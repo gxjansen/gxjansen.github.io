@@ -170,7 +170,6 @@ export default defineConfig({
           "plug",
           "printer",
           "question-mark",
-          "robot",
           "rss",
           "shoe",
           "shield-lock",

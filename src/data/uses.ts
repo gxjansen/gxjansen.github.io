@@ -644,17 +644,6 @@ export const items: UsesItem[] = [
       "Open alternative to the other CLI tools. For development I can't really get used to doing this through their apps, terminals rule for me.",
   },
   {
-    name: "Hermes Agent",
-    brand: "Nous Research",
-    traits: ["openSource"],
-    icon: "tabler:robot",
-    url: "https://github.com/NousResearch/hermes-agent",
-    kind: "software",
-    area: "tech",
-    category: "AI (local and hosted)",
-    status: "trying",
-  },
-  {
     name: "Mistral Vibe",
     traits: ["eu"],
     icon: "simple-icons:mistralai",
