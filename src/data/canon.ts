@@ -75,6 +75,7 @@ export const canon: CanonGroup[] = [
       {
         name: "The Egg",
         by: "Andy Weir",
+        why: "In this universe, there’s just you and me.",
         url: "https://bookhive.buzz/books/bk_qGwT4nERDa8XW65PjDUD",
       },
       {
