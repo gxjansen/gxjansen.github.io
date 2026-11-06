@@ -33,7 +33,11 @@ export const canon: CanonGroup[] = [
         by: "Brian Christian and Tom Griffiths",
       },
       { name: "The Egg", by: "Andy Weir" },
-      { name: "Project Hail Mary", by: "Andy Weir" },
+      {
+        name: "Project Hail Mary",
+        by: "Andy Weir",
+        why: "Listened to the audiobook multiple times. Beautiful story, and the alien bromance was a great unexpected plot surprise (in the book at least).",
+      },
     ],
   },
   {
