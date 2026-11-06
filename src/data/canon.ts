@@ -68,6 +68,13 @@ export const canon: CanonGroup[] = [
       { name: "Knight Rider" },
       { name: "Airwolf" },
       { name: "The A-Team" },
+      { name: "MacGyver" },
+      { name: "The X-Files" },
+      { name: "Star Trek: The Next Generation" },
+      { name: "The Matrix", by: "1999" },
+      { name: "Jurassic Park", by: "1993" },
+      { name: "Silicon Valley" },
+      { name: "The Expanse", by: "TV series" },
     ],
   },
   {
