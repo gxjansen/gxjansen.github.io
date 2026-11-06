@@ -110,6 +110,11 @@ export const slashPages: SlashPage[] = [
     description: "Proof that accounts elsewhere are really mine.",
   },
   {
+    slug: "domains",
+    featured: true,
+    description: "The domains I own, and what each one is for.",
+  },
+  {
     slug: "defaults",
     featured: true,
     description:

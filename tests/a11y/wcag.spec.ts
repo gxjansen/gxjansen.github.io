@@ -26,6 +26,7 @@ const ROUTES = [
   "/privacy/",
   "/uses/",
   "/verify/",
+  "/domains/",
   "/presentations/",
   "/ama/",
   "/post/",

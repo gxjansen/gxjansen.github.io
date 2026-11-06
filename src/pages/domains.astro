@@ -1,0 +1,97 @@
+---
+/**
+ * /domains: the domains I own (https://slashpages.net). Built at build time
+ * from Guido's Marque records in his PDS plus src/data/domains.ts (groups,
+ * notes, links, gui.do, hidden domains). See src/lib/marque.ts.
+ */
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { loadDomainSections, type DomainRow } from "../lib/marque";
+
+const { pinned, sections } = await loadDomainSections();
+
+const card =
+  "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 text-base-900 dark:text-base-100 rounded-2xl border p-5";
+const muted = "text-base-600 dark:text-base-400";
+const hasNotes = (rows: DomainRow[]) => rows.some((r) => r.note);
+---
+
+<BaseLayout
+  title="Domains"
+  description="The domains I own and what each one is actually for, generated on each site build from records written into my own PDS on AT Protocol."
+>
+  <div class="home domains-page">
+    <section
+      class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">the registrar trail</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Domains
+        </h1>
+        <p class={`${muted} text-lg leading-relaxed`}>
+          I own more domains than I can justify. This is the honest list: most
+          registered through
+          <a href="https://marque.at/" rel="noopener noreferrer">Marque</a>
+          (marque.at), which writes a record per domain into my own PDS, and
+          this page is generated from those records on every site build. A few
+          are left off on purpose. Private use.
+        </p>
+      </div>
+
+      {pinned.map((d) => <div class={`${card} mt-12 max-w-3xl`}>
+        <p class="font-display text-[1.6rem] font-extrabold tracking-[-0.02em]">
+          {d.url ? <a href={d.url}>{d.domain}</a> : d.domain}
+        </p>
+        {d.note && <p class={`${muted} mt-1`}>{d.note}</p>}
+      </div>)}
+
+      {sections.map((s) => <section
+        id={`domains-${s.id}`}
+        class="mt-14 max-w-3xl scroll-mt-24"
+        aria-labelledby={`domains-${s.id}-h`}
+      >
+        <h2
+          id={`domains-${s.id}-h`}
+          class="font-display text-[1.6rem] font-extrabold tracking-[-0.02em]"
+        >
+          {s.label}
+        </h2>
+        {s.text && <p class={`${muted} mt-1 leading-relaxed`}>{s.text}</p>}
+        {hasNotes(s.rows) ? (
+          <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+            {s.rows.map((d) => <li class={card}>
+              <p
+                class="font-display flex flex-wrap items-center gap-2 font-bold"
+              >
+                {d.url ? (
+                  <a href={d.url} rel="noopener noreferrer">
+                    {d.domain}
+                  </a>
+                ) : (
+                  d.domain
+                )}
+                {d.dnssec && <span class="chip chip--plain text-xs font-normal">
+                  <Icon
+                    name="tabler:shield-lock"
+                    class="size-3.5"
+                    aria-hidden="true"
+                  />
+                  DNSSEC
+                </span>}
+              </p>
+              {d.note && <p class={`${muted} mt-1 text-sm`}>{d.note}</p>}
+              {d.handle && <p class={`${muted} mt-1 text-sm`}>@{d.handle}</p>}
+            </li>)}
+          </ul>
+        ) : (
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {s.rows.map((d) => <li class="chip chip--plain">{d.domain}</li>)}
+          </ul>
+        )}
+      </section>)}
+    </section>
+  </div>
+</BaseLayout>
