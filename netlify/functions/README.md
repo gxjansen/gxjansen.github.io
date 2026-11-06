@@ -10,6 +10,7 @@ custom `path` under `/.netlify`: those paths are reserved.
 | `altcha-challenge` | GET | ALTCHA widget on `NewsletterForm.astro` and `/ama` |
 | `newsletter-subscribe` | POST | `NewsletterForm.astro` |
 | `newsletter-stats` | GET | `NewsletterForm.astro` (subscriber count) |
+| `where` | POST | bsky-avatar on the NAS (current country for `/where`) |
 
 Shared conventions:
 
@@ -172,3 +173,12 @@ Each subscriber is created with these attributes for tracking:
 - Listmonk is skipped when `LISTMONK_API_USER`/`LISTMONK_API_KEY` are unset.
 - Cached for an hour (`Cache-Control: public, max-age=3600`).
 - The form only shows the count when it is above 10.
+
+## where
+
+`POST /.netlify/functions/where` with `Authorization: Bearer $WHERE_TOKEN` and `{"country": "be"}` (ISO 3166-1 alpha-2, any case). bsky-avatar sends it whenever the country it resolved for the avatar changes.
+
+- Stores the report in the `where` Netlify Blobs store (key `state`): current country, when the current trip abroad started, and every country seen with its first-seen time. Logic lives in `src/lib/where.ts`.
+- The `/where` server island reads the same key. Leaving the Netherlands shows publicly 6 hours after the departure; coming home shows straight away. New countries join the flag overview after the same 6 hours.
+- Returns 200 `{"ok": true}`, 400 for a missing or malformed code, 401 for a wrong token, 500 without `WHERE_TOKEN`, 503 when Blobs fails, 405 for other methods.
+- Rate limited to 10 requests per minute per IP.

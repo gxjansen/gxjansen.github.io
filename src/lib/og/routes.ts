@@ -119,6 +119,12 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     lead: "Newsletter, RSS and the places I post. Pick what works.",
     hand: "keep up",
   },
+  where: {
+    url: "gui.do/where",
+    title: "Where Guido is right now",
+    lead: "Country reported by my own server, plus the flags of everywhere I've been.",
+    hand: "right here",
+  },
   canon: {
     url: "gui.do/canon",
     title: "My personal canon",

@@ -1,0 +1,73 @@
+---
+// The live half of /where, rendered as a server island (see where.astro): the
+// current country from Netlify Blobs, and the flag overview extended with every
+// country bsky-avatar has reported. src/lib/where.ts decides what is public.
+import { getStore } from "@netlify/blobs";
+import WhereOverview from "./WhereOverview.astro";
+import { flagSrc, staticCountries } from "./whereCountries";
+import {
+  HOME_COUNTRY,
+  WHERE_KEY,
+  WHERE_STORE,
+  countryName,
+  publicView,
+  type WhereState,
+} from "../../lib/where";
+
+// Same caching as the /now island: one shared CDN copy, refreshed every five
+// minutes. The public delay is hours, so this adds nothing worth worrying about.
+Astro.response.headers.set(
+  "Netlify-CDN-Cache-Control",
+  "public, durable, s-maxage=300, stale-while-revalidate=3600",
+);
+Astro.response.headers.set("Cache-Control", "no-cache");
+
+let state: WhereState | null = null;
+try {
+  state = (await getStore(WHERE_STORE).get(WHERE_KEY, {
+    type: "json",
+  })) as WhereState | null;
+} catch (error) {
+  console.warn("where: blob store unavailable", error);
+}
+
+const view = publicView(state, new Date());
+const current = view.country;
+const currentFlag = current ? flagSrc(current) : null;
+---
+
+<div data-rendered-at={new Date().toISOString()}>
+  <section aria-labelledby="where-now" class="mb-14">
+    <h2 id="where-now" class="sr-only">Where I am now</h2>
+    {current ? (
+      <div class="flex items-center gap-5">
+        {currentFlag && (
+          <img
+            src={currentFlag}
+            alt=""
+            width="120"
+            height="80"
+            class="aspect-[3/2] w-30 rounded-md object-cover shadow-[inset_0_0_0_1px] shadow-black/10"
+          />
+        )}
+        <p
+          class="font-display text-[clamp(1.6rem,4vw,2.4rem)] leading-tight font-black tracking-[-0.02em]"
+        >
+          {countryName(current)}
+          {current === HOME_COUNTRY && <span
+            class="text-base-500 dark:text-base-400 block text-base font-medium tracking-normal"
+          >
+            home base
+          </span>}
+        </p>
+      </div>
+    ) : (
+      <p class="text-base-600 dark:text-base-400">
+        No country reported yet, so either the setup hasn't reported anything or
+        the report can't be read.
+      </p>
+    )}
+  </section>
+
+  <WhereOverview countries={[...staticCountries, ...view.seen]} />
+</div>

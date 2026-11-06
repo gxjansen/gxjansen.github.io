@@ -1,0 +1,23 @@
+---
+// Flag overview section on /where, shared by the prerendered fallback and the
+// server island so both render the same heading and copy.
+import FlagGrid from "./FlagGrid.astro";
+
+interface Props {
+  countries: Iterable<string>;
+}
+---
+
+<section aria-labelledby="where-overview">
+  <h2
+    id="where-overview"
+    class="font-display mb-2 text-[1.35rem] font-extrabold tracking-[-0.02em]"
+  >
+    Where I've been
+  </h2>
+  <p class="text-base-600 dark:text-base-400 mb-6 max-w-[60ch]">
+    Countries I've given talks in, others I visited, and new ones picked up
+    automatically from trips.
+  </p>
+  <FlagGrid countries={Astro.props.countries} />
+</section>

@@ -22,6 +22,7 @@ specification.website agent-readiness spec
 - [Canon](https://gui.do/canon/): personal canon of Guido: books, comics, thinkers and shows that shaped his thinking.
 - [Green](https://gui.do/green/): what Guido does to waste less energy, water and stuff
 - [Colophon](https://gui.do/colophon/): how gui.do is built: tools, fonts, data sources, self-hosted parts, and hosting
+- [Where](https://gui.do/where/): which country Guido is in right now, reported by his home server, plus the flags of everywhere he's been
 - [Slashes](https://gui.do/slashes/): an index of every slash page on gui.do, following the slashpages.net convention
 
 ## Services

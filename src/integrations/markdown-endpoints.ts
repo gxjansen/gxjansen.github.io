@@ -138,6 +138,7 @@ function isContentPage(pathname: string): boolean {
     "slashes/",
     "follow/",
     "colophon/",
+    "where/",
     "canon/",
     "green/",
     "verify/",
