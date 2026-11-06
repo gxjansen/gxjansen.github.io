@@ -746,11 +746,11 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
   {
-    name: "NVIDIA Shield TV",
+    name: "NVIDIA Shield TV Pro",
     icon: "simple-icons:nvidia",
     url: "https://www.nvidia.com/en-us/shield/",
     brand: "NVIDIA",
-    model: "Shield TV",
+    model: "Shield TV Pro",
     kind: "hardware",
     area: "home",
     category: "Media",
