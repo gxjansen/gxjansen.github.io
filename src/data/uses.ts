@@ -1494,6 +1494,19 @@ export function defaultItem(name: string): UsesItem | undefined {
 /** Dropped items, in data order. */
 export const droppedItems = items.filter((i) => i.status === "dropped");
 
+/** Anchor id of an item on /uses: "use-sony-rx100-v-as-webcam". */
+export const usesItemId = (item: UsesItem) =>
+  `use-${displayName(item)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")}`;
+
+/** Current items whose `storyUrl` is the given post (by post id). */
+export const itemsForPost = (postId: string) =>
+  currentItems.filter((i) =>
+    i.storyUrl?.replace(/\/$/, "").endsWith(`/post/${postId}`),
+  );
+
 /** Name as shown on the page: "Sony RX100 V as webcam". */
 export const displayName = (item: UsesItem) =>
   item.usedAs ? `${item.name} as ${item.usedAs}` : item.name;

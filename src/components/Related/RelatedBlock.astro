@@ -1,0 +1,60 @@
+---
+/**
+ * One extra block at the end of a post, at most. BlogLayoutCenter decides
+ * which: the /uses items that cite this post as their story ("Tools in this
+ * post"), else the colophon for posts about the site itself. Posts with
+ * neither get the one-line AMA prompt above the comments instead.
+ */
+import { Icon } from "astro-icon/components";
+import { displayName, usesItemId, type UsesItem } from "@data/uses";
+
+interface Props {
+  tools?: UsesItem[];
+  colophon?: boolean;
+}
+
+const { tools = [], colophon = false } = Astro.props;
+const card =
+  "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-6";
+const heading =
+  "font-display text-base-950 dark:text-base-50 text-[1.2rem] font-extrabold tracking-[-0.02em]";
+const more = "text-primary-600 dark:text-primary-400 font-semibold";
+---
+
+{tools.length > 0 ? (
+  <aside class={card} aria-labelledby="related-tools">
+    <h2 id="related-tools" class={heading}>Tools in this post</h2>
+    <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+      {tools.map((item) => <li>
+        <a
+          href={`/uses/#${usesItemId(item)}`}
+          class="no-random-underline flex items-center gap-2"
+        >
+          {item.icon ? (
+            <Icon
+              name={item.icon}
+              class="text-primary-600 dark:text-primary-400 size-5 shrink-0"
+              aria-hidden="true"
+            />
+          ) : (
+            <span class="size-5 shrink-0" aria-hidden="true" />
+          )}
+          <span class="underline">{displayName(item)}</span>
+        </a>
+      </li>)}
+    </ul>
+    <p class="mt-4 text-sm">
+      <a href="/uses/" class={more}> Everything I use now </a>
+    </p>
+  </aside>
+) : colophon ? (
+  <aside class={card} aria-labelledby="related-colophon">
+    <h2 id="related-colophon" class={heading}>How this site is built</h2>
+    <p class="text-base-600 dark:text-base-400 mt-2 leading-relaxed">
+      This is the current setup, not necessarily what the post describes.
+    </p>
+    <p class="mt-3 text-sm">
+      <a href="/colophon/" class={more}> Full colophon </a>
+    </p>
+  </aside>
+) : null}

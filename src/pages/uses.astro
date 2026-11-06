@@ -19,6 +19,7 @@ import {
   principles,
   replacedBy,
   traitLabels,
+  usesItemId,
   type UsesItem,
   type UsesTrait,
 } from "@data/uses";
@@ -56,7 +57,7 @@ const slugify = (s: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-const itemId = (item: UsesItem) => `use-${slugify(displayName(item))}`;
+const itemId = usesItemId;
 
 // Bare domains in the texts ("atproto.nl") become links. The split keeps the
 // matches at odd indexes. This site's own domain stays plain text.
