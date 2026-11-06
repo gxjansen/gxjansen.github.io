@@ -1,47 +1,53 @@
 /**
- * The /uses "Defaults" list: every name resolves to a current item or is an
- * allowed plain name, and `isDefault` is set on exactly the items it uses.
+ * The /uses "Defaults" list is built from `defaultFor` on items and bundle
+ * parts. Every slot in `defaultSlots` gets at least one app, every slot an
+ * item names is listed, and only current items fill slots.
  */
 import { describe, it, expect } from "vitest";
-import {
-  currentItems,
-  defaultItem,
-  defaults,
-  items,
-  plainDefaults,
-} from "../uses";
+import { defaultSlots, defaults, items, plainDefaults } from "../uses";
+
+const norm = (s: string) => s.trim().toLowerCase();
+const slotKeys = new Set(defaultSlots.map(norm));
+
+const claimed = items.flatMap((item) => [
+  ...(item.defaultFor ?? []).map((slot) => ({ slot, item, name: item.name })),
+  ...(item.includes ?? []).flatMap((part) =>
+    (part.defaultFor ?? []).map((slot) => ({ slot, item, name: part.name })),
+  ),
+]);
 
 describe("uses defaults", () => {
-  const used = new Set(
-    defaults.flatMap((d) => d.use.map(defaultItem)).filter((i) => i),
-  );
-
-  it("every name is a current item, a part of one, or a plain default", () => {
+  it("every slot has at least one app", () => {
     for (const d of defaults) {
-      for (const name of d.use) {
-        const ok = defaultItem(name) || plainDefaults.includes(name);
-        expect(ok, `${d.slot}: ${name}`).toBeTruthy();
-      }
+      expect(d.use.length, d.slot).toBeGreaterThan(0);
+    }
+  });
+
+  it("every slot an item or part names is in defaultSlots", () => {
+    for (const c of claimed) {
+      expect(slotKeys.has(norm(c.slot)), `${c.name}: ${c.slot}`).toBe(true);
+    }
+    for (const p of plainDefaults) {
+      expect(slotKeys.has(norm(p.slot)), `${p.name}: ${p.slot}`).toBe(true);
+    }
+  });
+
+  it("only current items fill slots", () => {
+    for (const c of claimed) {
+      expect(["using", "trying"], `${c.name}: ${c.slot}`).toContain(
+        c.item.status,
+      );
     }
   });
 
   it("plain defaults are not items on /uses", () => {
-    for (const name of plainDefaults) {
-      expect(defaultItem(name), name).toBeUndefined();
-    }
-  });
-
-  it("isDefault is set on exactly the items used as defaults", () => {
-    for (const item of currentItems) {
-      expect(!!item.isDefault, item.name).toBe(used.has(item));
-    }
-    for (const item of items.filter((i) => i.status === "dropped")) {
-      expect(!!item.isDefault, item.name).toBe(false);
+    for (const p of plainDefaults) {
+      const asItem = items.some((i) => norm(i.name) === norm(p.name));
+      expect(asItem, p.name).toBe(false);
     }
   });
 
   it("has no duplicate slots", () => {
-    const slots = defaults.map((d) => d.slot);
-    expect(new Set(slots).size).toBe(slots.length);
+    expect(slotKeys.size).toBe(defaultSlots.length);
   });
 });

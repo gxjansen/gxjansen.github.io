@@ -41,6 +41,8 @@ export interface UsesPart {
   brand?: string;
   model?: string;
   url?: string;
+  /** Slots this part fills, when the default is one part of a bundle. */
+  defaultFor?: string[];
 }
 
 export interface UsesItem {
@@ -59,7 +61,8 @@ export interface UsesItem {
   category?: string;
   contexts?: UsesContext[];
   status: UsesStatus;
-  isDefault?: boolean;
+  /** Slots on the defaults list this item fills ("Mail client"). */
+  defaultFor?: string[];
   reason?: string;
   downside?: string;
   startedAt?: PartialDate;
@@ -239,7 +242,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Personal hardware",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Handwritten notes"],
     reason:
       "An e-ink tablet for handwritten notes and e-books that syncs to my own server instead of the vendor cloud.",
     storyUrl: STORY_2025,
@@ -430,14 +433,13 @@ export const items: UsesItem[] = [
   {
     name: "CachyOS with KDE Plasma",
     traits: ["openSource"],
-    includes: [{ name: "CachyOS" }, { name: "KDE Plasma" }],
+    includes: [{ name: "CachyOS", defaultFor: ["OS"] }, { name: "KDE Plasma" }],
     icon: "simple-icons:cachyos",
     url: "https://cachyos.org",
     kind: "software",
     area: "tech",
     category: "OS and desktop",
     status: "using",
-    isDefault: true,
     reason:
       "A fast Arch-based Linux that I manage with config in git. On my laptop since early 2026 and on my desktop since October 2026.",
     downside:
@@ -466,7 +468,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "OS and desktop",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Browser"],
     reason:
       "My main browser. Firefox-based, with workspaces, and all tabs sync live between machines.",
     replaces: [{ name: "Arc" }],
@@ -492,7 +494,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "OS and desktop",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Office"],
     replaces: [{ name: "Microsoft Office" }],
   },
 
@@ -501,7 +503,7 @@ export const items: UsesItem[] = [
     name: "Ghostty and tmux, with sesh and workmux",
     traits: ["openSource"],
     includes: [
-      { name: "Ghostty" },
+      { name: "Ghostty", defaultFor: ["Terminal"] },
       { name: "tmux" },
       { name: "sesh" },
       { name: "workmux" },
@@ -512,7 +514,6 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Development",
     status: "using",
-    isDefault: true,
     reason:
       "tmux sessions that live on the desktop. I attach from the laptop or my phone and continue where I left off.",
     replaces: [{ name: "Alacritty" }],
@@ -526,7 +527,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Development",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Code editor"],
     reason: "A fast, open source editor.",
   },
   {
@@ -592,7 +593,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Development",
     status: "trying",
-    isDefault: true,
+    defaultFor: ["Code hosting"],
     reason:
       "A git forge built on AT Protocol. My atproto.nl site deploys from there.",
   },
@@ -607,7 +608,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "AI (local and hosted)",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Local AI"],
     reason:
       "Local models on my own GPU for when I'm offline, out of quota, or the data is private.",
     downside:
@@ -622,7 +623,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "AI (local and hosted)",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Hosted AI"],
     reason:
       "One API for many models, so I can swap models without changing tools. Lock-in is low, so I accept a US service here.",
     downside:
@@ -651,7 +652,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Notes and reading",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Notes"],
     reason:
       "Everything is plain Markdown on my disk. I pay for Obsidian Sync for the mobile convenience and to support the developer.",
     downside:
@@ -668,7 +669,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Notes and reading",
     status: "using",
-    isDefault: true,
+    defaultFor: ["RSS"],
     reason:
       "RSS back in my life after the Google Reader shutdown, on my own server.",
     storyUrl: STORY_LOCAL_AI,
@@ -722,7 +723,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Media",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Photo library"],
     reason:
       "I host my family photos and videos on my own NAS, backed up from my phone. The heavy machine-learning work runs on my desktop GPU instead of the NAS.",
     downside:
@@ -768,7 +769,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Notes and reading",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Audiobooks"],
     replaces: [{ name: "Audible" }],
   },
   {
@@ -800,7 +801,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Media",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Music"],
     replaces: [{ name: "YouTube Music" }],
   },
   {
@@ -811,7 +812,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Media",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Video"],
     reason:
       "One client for YouTube and other video sources, on desktop and phone.",
     replaces: [{ name: "YouTube app" }],
@@ -877,7 +878,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Self-hosted and web",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Analytics"],
     reason:
       "Privacy-friendly, cookie-free website analytics that I host myself.",
   },
@@ -890,7 +891,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Self-hosted and web",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Newsletter"],
     reason:
       "An open source newsletter tool that I run myself, so my subscriber list stays with me.",
   },
@@ -934,14 +935,16 @@ export const items: UsesItem[] = [
   {
     name: "darktable and RawTherapee",
     traits: ["openSource"],
-    includes: [{ name: "darktable" }, { name: "RawTherapee" }],
+    includes: [
+      { name: "darktable", defaultFor: ["Photo editing"] },
+      { name: "RawTherapee" },
+    ],
     icon: "tabler:aperture",
     url: "https://www.darktable.org",
     kind: "software",
     area: "creative",
     category: "Photo, video and streaming",
     status: "using",
-    isDefault: true,
     reason:
       "Open source RAW processing on Linux. A script culls the day's shots, RawTherapee exports them, and darktable is for the keepers.",
     downside:
@@ -1100,7 +1103,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Social"],
     reason:
       "My main social account. I own the handle, and the data lives in a repo I can move. I have many Bluesky accounts and use both the Bluesky app and mu (Eurosky's Android app), since each has features the other lacks. mu is needed to verify accounts with atproto.nl.",
     replaces: [{ name: "Twitter and Instagram" }],
@@ -1128,7 +1131,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Chat"],
     reason: "Encrypted messaging.",
     downside:
       "Some groups are still stuck on WhatsApp, and the (sub)group/community function on Signal is not developed yet.",
@@ -1176,7 +1179,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Mail service", "Mail client", "Calendar", "Contacts"],
     reason:
       "Email, calendar and contacts on open protocols (IMAP, CalDAV, CardDAV) with my own domains. Fastmail has servers in the EU, and my account data sits on those.",
     downside:
@@ -1193,7 +1196,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
-    isDefault: true,
+    defaultFor: ["Passwords"],
     reason: "An open source password manager with an export I can leave with.",
   },
   {
@@ -1205,7 +1208,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
-    isDefault: true,
+    defaultFor: ["2FA"],
     reason:
       "An open source, offline authenticator app that isn't tied to a vendor account.",
     replaces: [{ name: "Authy" }],
@@ -1219,7 +1222,7 @@ export const items: UsesItem[] = [
     area: "tech",
     category: "Communication and privacy",
     status: "using",
-    isDefault: true,
+    defaultFor: ["2FA"],
     reason:
       "A hardware security key for MFA or passwordless login where supported.",
   },
@@ -1436,58 +1439,69 @@ export const currentItems = items.filter(
 export const plannedItems = items.filter((i) => i.status === "planned");
 
 /**
- * Site-only: one app per slot, the "app defaults" list (gui.do/defaults, a
- * slashpages.net page). A name links to the current item with that name or
- * with a part (`includes`) of that name. Names that are not on /uses must be
- * listed in `plainDefaults`; the test checks both, and that `isDefault` is set
- * on exactly the items used here.
+ * The "app defaults" list (gui.do/defaults, a slashpages.net page). Each slot
+ * is filled by the items and bundle parts whose `defaultFor` names it, in
+ * data order. `defaultSlots` (site-only) sets the order; `plainDefaults`
+ * (site-only) covers apps that are not items on /uses.
  */
-export interface UsesDefault {
-  slot: string;
-  use: string[];
-}
-
-export const defaults: UsesDefault[] = [
-  { slot: "Mail service", use: ["Fastmail"] },
-  { slot: "Mail client", use: ["Fastmail"] },
-  { slot: "Calendar", use: ["Fastmail"] },
-  { slot: "Contacts", use: ["Fastmail"] },
-  { slot: "Notes", use: ["Obsidian"] },
-  { slot: "Handwritten notes", use: ["Supernote Manta"] },
-  { slot: "RSS", use: ["FreshRSS"] },
-  { slot: "Browser", use: ["Zen browser"] },
-  { slot: "Search", use: ["DuckDuckGo"] },
-  { slot: "Chat", use: ["Signal"] },
-  { slot: "Social", use: ["Bluesky"] },
-  { slot: "Passwords", use: ["Bitwarden"] },
-  { slot: "2FA", use: ["Aegis Authenticator", "YubiKey"] },
-  { slot: "Code editor", use: ["Zed"] },
-  { slot: "Terminal", use: ["Ghostty"] },
-  { slot: "Code hosting", use: ["Tangled"] },
-  { slot: "Photo library", use: ["Immich"] },
-  { slot: "Photo editing", use: ["darktable"] },
-  { slot: "Music", use: ["Plexamp"] },
-  { slot: "Audiobooks", use: ["Audiobookshelf"] },
-  { slot: "Video", use: ["Grayjay"] },
-  { slot: "Office", use: ["LibreOffice"] },
-  { slot: "Analytics", use: ["Umami"] },
-  { slot: "Newsletter", use: ["Listmonk"] },
-  { slot: "Local AI", use: ["Ollama"] },
-  { slot: "Hosted AI", use: ["OpenRouter"] },
-  { slot: "OS", use: ["CachyOS"] },
+export const defaultSlots = [
+  "Mail service",
+  "Mail client",
+  "Calendar",
+  "Contacts",
+  "Notes",
+  "Handwritten notes",
+  "RSS",
+  "Browser",
+  "Search",
+  "Chat",
+  "Social",
+  "Passwords",
+  "2FA",
+  "Code editor",
+  "Terminal",
+  "Code hosting",
+  "Photo library",
+  "Photo editing",
+  "Music",
+  "Audiobooks",
+  "Video",
+  "Office",
+  "Analytics",
+  "Newsletter",
+  "Local AI",
+  "Hosted AI",
+  "OS",
 ];
 
 /** Defaults that are not items on /uses: shown as plain text. */
-export const plainDefaults = ["DuckDuckGo"];
+export const plainDefaults: { slot: string; name: string }[] = [
+  { slot: "Search", name: "DuckDuckGo" },
+];
 
-/** The current item a defaults name refers to: by name, or by part name. */
-export function defaultItem(name: string): UsesItem | undefined {
-  const key = norm(name);
-  return (
-    currentItems.find((i) => norm(i.name) === key) ??
-    currentItems.find((i) => i.includes?.some((p) => norm(p.name) === key))
-  );
+export interface UsesDefault {
+  slot: string;
+  use: { name: string; item?: UsesItem }[];
 }
+
+export const defaults: UsesDefault[] = defaultSlots.map((slot) => {
+  const key = norm(slot);
+  const use: UsesDefault["use"] = [];
+  for (const item of currentItems) {
+    if (item.defaultFor?.some((s) => norm(s) === key)) {
+      use.push({ name: item.name, item });
+    }
+    for (const part of item.includes ?? []) {
+      if (part.defaultFor?.some((s) => norm(s) === key)) {
+        use.push({ name: part.name, item });
+      }
+    }
+  }
+  for (const p of plainDefaults) {
+    if (norm(p.slot) === key) use.push({ name: p.name });
+  }
+  return { slot, use };
+});
 
 /** Dropped items, in data order. */
 export const droppedItems = items.filter((i) => i.status === "dropped");
