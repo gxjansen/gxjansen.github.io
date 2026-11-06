@@ -3,6 +3,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import { getCV, richText } from "../lib/sifaProfile";
+import CvInline from "../components/CvInline.astro";
 import { stats } from "@data/homeContent";
 import { colleagueTestimonials } from "@config/colleagueTestimonialData";
 import { FEATURED, FEATURED_EXCERPT, FOCUS_AREAS } from "@data/cv";
@@ -130,12 +131,12 @@ const awards = split(cv.awards);
       >
         {richText(cv.about).map((b) =>
           b.type === "p" ? (
-            <p>{b.text}</p>
+            <p><CvInline text={b.text} /></p>
           ) : (
             <ul
               class="marker:text-primary-600 dark:marker:text-primary-400 ml-5 list-disc space-y-1"
             >
-              {b.items.map((i) => <li>{i}</li>)}
+              {b.items.map((i) => <li><CvInline text={i} /></li>)}
             </ul>
           ),
         )}
@@ -208,12 +209,12 @@ const awards = split(cv.awards);
                 >
                   {richText(x.description).map((b) =>
                     b.type === "p" ? (
-                      <p>{b.text}</p>
+                      <p><CvInline text={b.text} /></p>
                     ) : (
                       <ul
                         class="marker:text-primary-600 dark:marker:text-primary-400 ml-4 list-disc space-y-0.5"
                       >
-                        {b.items.map((i) => <li>{i}</li>)}
+                        {b.items.map((i) => <li><CvInline text={i} /></li>)}
                       </ul>
                     ),
                   )}
@@ -260,12 +261,12 @@ const awards = split(cv.awards);
                   >
                     {richText(x.description).map((b) =>
                       b.type === "p" ? (
-                        <p>{b.text}</p>
+                        <p><CvInline text={b.text} /></p>
                       ) : (
                         <ul
                           class="marker:text-primary-600 dark:marker:text-primary-400 ml-4 list-disc space-y-0.5"
                         >
-                          {b.items.map((i) => <li>{i}</li>)}
+                          {b.items.map((i) => <li><CvInline text={i} /></li>)}
                         </ul>
                       ),
                     )}
