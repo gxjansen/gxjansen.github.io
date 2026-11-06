@@ -1,1 +1,1 @@
-Automated refresh of `src/data/events.snapshot.json` from the Sifa talks, projects and calendar events. Data-only. Merges automatically when the required checks pass.
+Automated refresh of two data files: `src/data/events.snapshot.json` from the Sifa talks, projects and calendar events, and `src/data/pds-fingerprints.json` (hashes of the PDS collections /verify and /domains load at build time) from the Keytrace claims and Marque domains on my PDS. Data-only. Merges automatically when the required checks pass.

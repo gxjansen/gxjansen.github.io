@@ -1,0 +1,10 @@
+{
+  "at.marque.domain": {
+    "records": 21,
+    "sha256": "485a8ec43559d6897884c60b8a3405cf26fb25322c8a2e5e2bd1b10cf2c022d5"
+  },
+  "dev.keytrace.claim": {
+    "records": 5,
+    "sha256": "c68a704a253e975d139efd88f2598af21aa186950ee66c5e550235d1175a8848"
+  }
+}
