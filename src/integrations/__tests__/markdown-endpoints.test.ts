@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { extractMarkdown } from "../markdown-endpoints";
+import * as fs from "node:fs";
+import * as os from "node:os";
+import * as path from "node:path";
+import { extractMarkdown, writeHeadersFile } from "../markdown-endpoints";
 
 const page = (main: string, title = "Now | Guido X Jansen") =>
   `<!doctype html><html><head><title>${title}</title></head><body>` +
@@ -109,5 +112,20 @@ describe("extractMarkdown spacing", () => {
   it("collapses double spaces inside a line", () => {
     const md = convert(`<h1>Canon</h1><p><span>Bobiverse </span> · Taylor</p>`);
     expect(md).toContain("Bobiverse · Taylor");
+  });
+});
+
+describe("writeHeadersFile", () => {
+  it("replaces a generated block left by an earlier build", () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "md-headers-"));
+    const logger = { info: () => {} };
+    fs.writeFileSync(path.join(dir, "_headers"), "/manual/\n  X-Test: 1\n");
+    writeHeadersFile(dir, [{ urlPath: "/cv/", mdAlternate: null }], logger);
+    writeHeadersFile(dir, [{ urlPath: "/cv/", mdAlternate: "/cv.md" }], logger);
+    const out = fs.readFileSync(path.join(dir, "_headers"), "utf-8");
+    expect(out.match(/^\/cv\/$/gm)).toHaveLength(1);
+    expect(out).toContain("</cv.md>");
+    expect(out.startsWith("/manual/\n  X-Test: 1\n")).toBe(true);
+    fs.rmSync(dir, { recursive: true });
   });
 });
