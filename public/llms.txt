@@ -14,6 +14,7 @@ specification.website agent-readiness spec
 ## About
 
 - [About Guido](https://gui.do/about/): biography, expertise, credentials, awards
+- [CV](https://gui.do/cv/): work history, projects, credentials and awards, from Guido's Sifa ID profile
 - [Contact](https://gui.do/contact/): how to reach Guido
 - [Appearances](https://gui.do/appearances/): podcasts, panels, videos and articles where Guido appeared as a guest
 - [Author profile](https://gui.do/authors/gxjansen/): canonical author page with all social profiles
@@ -22,6 +23,9 @@ specification.website agent-readiness spec
 - [Canon](https://gui.do/canon/): personal canon of Guido: books, comics, thinkers and shows that shaped his thinking.
 - [Green](https://gui.do/green/): what Guido does to waste less energy, water and stuff
 - [Colophon](https://gui.do/colophon/): how gui.do is built: tools, fonts, data sources, self-hosted parts, and hosting
+- [Now](https://gui.do/now/): what Guido is focused on right now, plus live activity, photos and reading from his AT Protocol accounts
+- [Bookshelf](https://gui.do/bookshelf/): what Guido is reading, wants to read and recently read, live from Bookhive
+- [Where](https://gui.do/where/): which country Guido is in right now, reported by his home server, plus the flags of everywhere he's been
 - [Slashes](https://gui.do/slashes/): an index of every slash page on gui.do, following the slashpages.net convention
 
 ## Services

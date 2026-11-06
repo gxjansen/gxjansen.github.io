@@ -1,0 +1,45 @@
+---
+/**
+ * Flag overview for /where: one flag + name per country, no dates. Used both
+ * in the prerendered fallback (build-time countries) and in the server island
+ * (plus countries bsky-avatar reported).
+ */
+import { countryName } from "../../lib/where";
+import { flagSrc, sortCountries } from "./whereCountries";
+
+interface Props {
+  countries: Iterable<string>;
+}
+
+const items = sortCountries(Astro.props.countries).map((cc) => ({
+  cc,
+  name: countryName(cc),
+  src: flagSrc(cc),
+}));
+---
+
+<ul
+  class="grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-[repeat(auto-fill,minmax(7.5rem,1fr))] sm:gap-x-4"
+>
+  {items.map((item) => <li class="flex min-w-0 flex-col items-start gap-2">
+    {item.src ? (
+      <img
+        src={item.src}
+        alt=""
+        width="60"
+        height="40"
+        loading="lazy"
+        decoding="async"
+        class="aspect-[3/2] w-full rounded-sm object-cover sm:w-15 shadow-[inset_0_0_0_1px] shadow-black/10"
+      />
+    ) : (
+      <span
+        aria-hidden="true"
+        class="bg-base-200 dark:bg-base-800 aspect-[3/2] w-full rounded-sm sm:w-15"
+      />
+    )}
+    <span class="text-base-700 dark:text-base-300 text-[.9rem] leading-tight">
+      {item.name}
+    </span>
+  </li>)}
+</ul>

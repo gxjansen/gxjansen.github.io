@@ -13,9 +13,16 @@
  * since "/.md" is meaningless). All generated markdown is additionally
  * concatenated into dist/llms-full.txt (llmstxt.org full companion).
  *
+ * Conversion drops on-screen-only UI (buttons, forms, decorative images,
+ * anything marked `data-md-skip`), uses the page's own H1 as the title, and
+ * makes relative links absolute so they work from the .md and llms-full.txt.
+ * Elements with `hidden` are still converted, so `<p hidden data-md-only>`
+ * carries text meant only for the Markdown. Definition lists become bullet
+ * lists ("**term**: description").
+ *
  * Excluded: /ama, /api/*, *.xml, *.json, nav-data, rss,
  * 404, /styleguide, /categories/*, /authors/*, /examples/*,
- * /internal/*, /overview, /newsletter, /privacy, /conference-terms.
+ * /internal/*, /overview, /conference-terms.
  *
  * It ALSO generates dist/_headers with one exact-path rule per built page,
  * advertising machine-readable resources through an HTTP `Link:` header
@@ -37,37 +44,20 @@ import type { AstroIntegration } from "astro";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { NodeHtmlMarkdown } from "node-html-markdown";
-import { parse as parseHtml } from "node-html-parser";
+import {
+  HTMLElement,
+  Node,
+  TextNode,
+  parse as parseHtml,
+} from "node-html-parser";
+import { buildLinkValue } from "../lib/linkHeader";
 
 // ---------------------------------------------------------------------------
 // HTTP Link header (agent resource discovery — issue #190)
 // ---------------------------------------------------------------------------
 
-/**
- * Site-wide resources advertised on every static page. Kept in sync with the
- * historical netlify.toml `/*` Link header (the Link line was moved out of
- * netlify.toml so this integration is the single source of truth — see the
- * file header for why). Each entry is one RFC 8288 link-value.
- */
-const SITE_LINK_RESOURCES = [
-  '</sitemap-index.xml>; rel="sitemap"',
-  '</llms.txt>; rel="alternate"; type="text/plain"',
-  '<https://gui.do/about/#guido>; rel="describedby"; type="application/ld+json"',
-];
-
-/**
- * Builds the comma-joined `Link` header value for a page. When the page has a
- * markdown source endpoint, its `.md` alternate is appended. Comma-joining
- * multiple link-values in one header line is valid per RFC 7230/8288 and
- * matches what netlify.toml previously emitted.
- */
-function buildLinkValue(mdAlternate: string | null): string {
-  const values = [...SITE_LINK_RESOURCES];
-  if (mdAlternate) {
-    values.push(`<${mdAlternate}>; rel="alternate"; type="text/markdown"`);
-  }
-  return values.join(", ");
-}
+// buildLinkValue lives in src/lib/linkHeader.ts so on-demand pages, which
+// _headers does not reach, can send the same header.
 
 /**
  * Renders a Netlify `_headers` rule block for a single exact path.
@@ -101,8 +91,6 @@ function isContentPage(pathname: string): boolean {
     "styleguide/index.html",
     "ama/index.html",
     "overview/index.html",
-    "newsletter/index.html",
-    "privacy/index.html",
     "conference-terms/index.html",
   ]);
   if (excluded.has(p)) return false;
@@ -138,9 +126,16 @@ function isContentPage(pathname: string): boolean {
     "slashes/",
     "follow/",
     "colophon/",
+    "now/",
+    "where/",
+    "uses/",
+    "cv/",
+    "privacy/",
+    "newsletter/",
     "canon/",
     "green/",
     "verify/",
+    "domains/",
   ];
 
   // Top-level static pages written as plain "name/index.html"
@@ -150,6 +145,14 @@ function isContentPage(pathname: string): boolean {
 
   return false;
 }
+
+/**
+ * Prerendered pages with a live half (a server island) whose `.md` is served
+ * by an on-demand endpoint instead: src/pages/now.md.ts and
+ * src/pages/now/index.md.ts. /bookshelf is fully on demand and never reaches
+ * this integration.
+ */
+const LIVE_MD_ROUTES = new Set(["now"]);
 
 // ---------------------------------------------------------------------------
 // HTML → Markdown conversion
@@ -164,7 +167,16 @@ const nhm = new NodeHtmlMarkdown(
   /* customCodeBlockTranslators */ undefined,
 );
 
-function extractMarkdown(htmlContent: string, filePath: string): string {
+/**
+ * Converts a built page to Markdown. `pageUrl` is the page's absolute URL;
+ * relative links and image sources are resolved against it, so they still
+ * work from the flat `/<route>.md` alias and from llms-full.txt.
+ */
+export function extractMarkdown(
+  htmlContent: string,
+  filePath: string,
+  pageUrl: string,
+): string {
   const root = parseHtml(htmlContent, { comment: false });
 
   // Extract <title>
@@ -199,12 +211,119 @@ function extractMarkdown(htmlContent: string, filePath: string): string {
     // Noise / decorative
     ".page-wash",
     "[aria-hidden]",
+    // Interactive UI means nothing in Markdown
+    "button",
+    "form",
+    // Decorative images (empty alt)
+    'img[alt=""]',
+    // Per-component opt-out for anything else that only makes sense on screen
+    "[data-md-skip]",
   ]) {
     main.querySelectorAll(sel).forEach((el) => el.remove());
   }
 
-  const md = nhm.translate(main.outerHTML);
-  return buildOutput(title, md);
+  // The page's own H1 is the Markdown title. Whatever sits before it in its
+  // header (the handwritten kicker line) goes, so the output starts with the H1.
+  const h1 = main.querySelector("h1");
+  if (h1) {
+    let prev = h1.previousElementSibling;
+    while (prev) {
+      const next = prev.previousElementSibling;
+      prev.remove();
+      prev = next;
+    }
+  }
+
+  definitionListsToLists(main);
+  absolutizeUrls(main, pageUrl);
+  collapseLineBreaks(main);
+
+  const md = tidyLines(nhm.translate(main.outerHTML));
+  return h1 ? md.trim() + "\n" : buildOutput(title, md);
+}
+
+/**
+ * Drops the single stray space that collapsed line breaks leave at the start
+ * and end of lines. Deeper indents (nested lists) and two-space hard breaks
+ * stay, and so does anything inside a code fence.
+ */
+function tidyLines(md: string): string {
+  let inFence = false;
+  return md
+    .split("\n")
+    .map((line) => {
+      if (/^\s*(```|~~~)/.test(line)) inFence = !inFence;
+      if (inFence) return line;
+      return line
+        .replace(/^ (?=\S)/, "")
+        .replace(/(?<=\S) $/, "")
+        .replace(/^(#{1,6}) {2,}/, "$1 ")
+        .replace(/(?<=\S) {2,}(?=\S)/g, " ")
+        .replace(
+          /\[ +([^\]\n]*?) *\]\(|\[([^\]\n]*?) +\]\(/g,
+          (_, a, b) => `[${a ?? b}](`,
+        );
+    })
+    .join("\n");
+}
+
+/**
+ * node-html-markdown prints `<dl>` terms and descriptions as loose lines.
+ * Rewrites each list as `<ul>` with one "**term**: description" item per
+ * term; several descriptions for one term are joined with commas.
+ */
+function definitionListsToLists(main: HTMLElement): void {
+  for (const dl of main.querySelectorAll("dl")) {
+    const rows: { term: string; descs: string[] }[] = [];
+    for (const el of dl.querySelectorAll("dt, dd")) {
+      if (el.rawTagName.toLowerCase() === "dt") {
+        rows.push({ term: el.innerHTML.trim(), descs: [] });
+      } else if (rows.length > 0) {
+        rows[rows.length - 1].descs.push(el.innerHTML.trim());
+      }
+    }
+    if (rows.length === 0) continue;
+    const items = rows.map(({ term, descs }) =>
+      descs.length > 0
+        ? `<li><strong>${term}</strong>: ${descs.join(", ")}</li>`
+        : `<li><strong>${term}</strong></li>`,
+    );
+    dl.replaceWith(`<ul>${items.join("")}</ul>`);
+  }
+}
+
+/** Resolves relative `href`/`src` values against the page URL. */
+function absolutizeUrls(main: HTMLElement, pageUrl: string): void {
+  for (const [sel, attr] of [
+    ["a[href]", "href"],
+    ["img[src]", "src"],
+  ] as const) {
+    for (const el of main.querySelectorAll(sel)) {
+      const value = el.getAttribute(attr);
+      if (!value || /^[a-z][a-z0-9+.-]*:/i.test(value)) continue;
+      try {
+        el.setAttribute(attr, new URL(value, pageUrl).href);
+      } catch {
+        // Leave unparseable values alone
+      }
+    }
+  }
+}
+
+/**
+ * Replaces line breaks in text with a single space. node-html-markdown drops
+ * a text node's leading whitespace when it contains a newline, so
+ * `<strong>A.</strong>\n B` would become `**A.**B`. Code keeps its newlines.
+ */
+function collapseLineBreaks(node: Node): void {
+  for (const child of node.childNodes) {
+    if (child instanceof TextNode) {
+      child.rawText = child.rawText.replace(/[ \t]*\r?\n\s*/g, " ");
+    } else if (child instanceof HTMLElement) {
+      const tag = child.rawTagName?.toLowerCase();
+      if (tag !== "pre" && tag !== "code") collapseLineBreaks(child);
+    }
+  }
 }
 
 function buildOutput(title: string, body: string): string {
@@ -285,10 +404,23 @@ export function markdownEndpoints(): AstroIntegration {
             continue;
           }
 
-          const md = extractMarkdown(html, rel);
+          const md = extractMarkdown(html, rel, `https://gui.do${urlPath}`);
 
           // Collect for the llms-full.txt companion (full content concat).
           fullParts.push({ url: `https://gui.do${urlPath}`, md });
+
+          // Pages with live data get on-demand .md endpoints (see
+          // LIVE_MD_ROUTES). A static index.md would shadow them, so only the
+          // prerendered part is written, as intro.md, for the endpoint to read.
+          if (LIVE_MD_ROUTES.has(routeSegment)) {
+            fs.writeFileSync(
+              path.join(path.dirname(absPath), "intro.md"),
+              md,
+              "utf-8",
+            );
+            written++;
+            continue;
+          }
 
           // Write dist/<route>/index.md  (sibling to index.html)
           const indexMdPath = path.join(path.dirname(absPath), "index.md");
@@ -326,7 +458,10 @@ export function markdownEndpoints(): AstroIntegration {
  * Any content already present in dist/_headers (e.g. copied from public/) is
  * preserved as a prefix so we never clobber hand-authored rules.
  */
-function writeHeadersFile(
+const HEADERS_MARKER =
+  "# Generated by the markdown-endpoints integration (issue #190).";
+
+export function writeHeadersFile(
   distDir: string,
   routes: { urlPath: string; mdAlternate: string | null }[],
   logger: { info(msg: string): void },
@@ -339,7 +474,7 @@ function writeHeadersFile(
   );
 
   const generated =
-    "# Generated by the markdown-endpoints integration (issue #190).\n" +
+    `${HEADERS_MARKER}\n` +
     "# Advertises sitemap, llms.txt, the Person @id, and per-page .md\n" +
     "# alternates via HTTP Link headers. Do not edit by hand — see\n" +
     "# src/integrations/markdown-endpoints.ts.\n\n" +
@@ -348,7 +483,18 @@ function writeHeadersFile(
   const headersPath = path.join(distDir, "_headers");
   let existing = "";
   if (fs.existsSync(headersPath)) {
-    existing = fs.readFileSync(headersPath, "utf-8").trimEnd() + "\n\n";
+    let current = fs.readFileSync(headersPath, "utf-8");
+    // A _headers file left over from an earlier build already holds a
+    // generated block. Its rules come first, so for a page whose Link changed
+    // Netlify kept serving the old value. Keep only the hand-written part.
+    const stale = current.indexOf(HEADERS_MARKER);
+    if (stale !== -1) {
+      current = current.slice(0, stale);
+      logger.info(
+        "markdown-endpoints: replaced a stale generated _headers block.",
+      );
+    }
+    if (current.trim()) existing = current.trimEnd() + "\n\n";
   }
 
   fs.writeFileSync(headersPath, existing + generated, "utf-8");

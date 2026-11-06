@@ -1,0 +1,42 @@
+---
+// /where: the country Guido is in right now, plus a flag overview of where he
+// has been (https://slashpages.net). The intro is prerendered; the live part
+// is a server island (WhereLive.astro) reading what bsky-avatar reports to
+// netlify/functions/where.ts. Delay and privacy rules: src/lib/where.ts.
+import BaseLayout from "@layouts/BaseLayout.astro";
+import WhereLive from "@components/Where/WhereLive.astro";
+import WhereOverview from "@components/Where/WhereOverview.astro";
+import { staticCountries } from "@components/Where/whereCountries";
+---
+
+<BaseLayout
+  title="Where"
+  description="Which country Guido is in right now, reported by his own home server, plus the flags of everywhere he's been. Country only, never city."
+>
+  <div class="home where-page">
+    <section
+      class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="mb-6 max-w-[60ch]">
+        <span class="hand-note">right here</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Where I am
+        </h1>
+      </div>
+
+      <WhereLive server:defer>
+        <div slot="fallback">
+          <p
+            class="text-base-500 dark:text-base-400 mb-14 flex min-h-20 items-center text-[.9rem]"
+            role="status"
+          >
+            Checking where I am...
+          </p>
+          <WhereOverview countries={staticCountries} />
+        </div>
+      </WhereLive>
+    </section>
+  </div>
+</BaseLayout>

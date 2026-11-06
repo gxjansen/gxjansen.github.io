@@ -96,6 +96,48 @@ export function richText(s?: string | null): RichBlock[] {
   return blocks;
 }
 
+/** A piece of inline text: plain, or a link when `href` is set. */
+export interface InlineSegment {
+  text: string;
+  href?: string;
+}
+
+// Inline Markdown link: [text](url). URL has no whitespace; one level of
+// balanced parentheses is allowed (e.g. Wikipedia URLs).
+const MD_LINK = /\[([^\[\]]+)\]\((\S+?(?:\([^\s()]*\)\S*?)*)\)/g;
+
+function safeHttpUrl(raw: string): string | undefined {
+  try {
+    const u = new URL(raw);
+    return u.protocol === "http:" || u.protocol === "https:"
+      ? u.href
+      : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+/**
+ * Split a line of text into plain and link segments. Only inline Markdown
+ * links with http(s) URLs become links; anything else (other schemes, empty
+ * text, malformed syntax) stays as literal text. Segments are plain strings,
+ * so the caller's template escapes them: no HTML is ever produced here.
+ */
+export function inlineLinks(s: string): InlineSegment[] {
+  const out: InlineSegment[] = [];
+  let last = 0;
+  for (const m of s.matchAll(MD_LINK)) {
+    const href = safeHttpUrl(m[2]);
+    if (!href || !m[1].trim()) continue;
+    const start = m.index ?? 0;
+    if (start > last) out.push({ text: s.slice(last, start) });
+    out.push({ text: m[1], href });
+    last = start + m[0].length;
+  }
+  if (last < s.length) out.push({ text: s.slice(last) });
+  return out;
+}
+
 export interface CvData {
   name: string;
   headline?: string;
