@@ -43,7 +43,6 @@ const muted = "text-base-600 dark:text-base-400";
         <p class={`${muted} text-lg leading-relaxed`}>
           Proof that accounts elsewhere are really me. My identity on the open
           social web is this DID: <code class="break-all">{GUIDO_DID}</code>.
-          Everything else hangs off that.
         </p>
       </div>
 
@@ -62,8 +61,10 @@ const muted = "text-base-600 dark:text-base-400";
           gui.do resolves to that DID two ways: a DNS TXT record at
           <code>_atproto.gui.do</code>, and a file at
           <code>gui.do/.well-known/atproto-did</code>. Both contain the same
-          DID. You don't have to take my word for it: the dig and curl commands
-          below do the lookup on your own machine.
+          DID. For AT Protocol, this means any app that uses Atmosphere accounts
+          shows me as @gui.do: Popfeed, Bookhive, mu.social, you name it. You
+          don't have to take my word for it: the dig and curl commands below do
+          the lookup on your own machine.
         </p>
         <div class={card}>
           <pre
@@ -104,7 +105,7 @@ $ curl https://gui.do/.well-known/atproto-did
             <span class="font-display block font-bold">Sifa ID</span>
             <span class={`${muted} block text-sm`}>
               My Sifa ID profile at sifa.id/p/gui.do uses the same DID, so it's
-              the same identity. No separate proof needed.
+              the same identity.
             </span>
           </span>
         </a>
