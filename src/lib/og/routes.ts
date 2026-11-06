@@ -119,6 +119,16 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     lead: "Newsletter, RSS and the places I post. Pick what works.",
     hand: "keep up",
   },
+  colophon: {
+    url: "gui.do/colophon",
+    title: "Colophon",
+    lead: "How gui.do is built, and the open source work it stands on.",
+    hand: "the plumbing",
+  },
+  blank: {
+    url: "gui.do/blank",
+    title: "A page intentionally left blank.",
+  },
   slashes: {
     url: "gui.do/slashes",
     title: "Every slash page on this site",

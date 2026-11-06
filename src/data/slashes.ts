@@ -123,6 +123,16 @@ export const slashPages: SlashPage[] = [
     aliases: [{ slug: "pic" }],
   },
   {
+    slug: "colophon",
+    featured: true,
+    description: "How this site is built, and who I owe.",
+  },
+  {
+    slug: "blank",
+    featured: true,
+    description: "A page intentionally left blank.",
+  },
+  {
     slug: "slashes",
     featured: true,
     description: "You're looking at it.",

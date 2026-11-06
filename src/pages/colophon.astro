@@ -1,0 +1,79 @@
+---
+/**
+ * /colophon: how gui.do is built (https://slashpages.net). Groups come from
+ * src/data/colophon.ts; the package count is read from package.json at build
+ * time so it never goes stale.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { colophon, REPO_URL } from "@data/colophon";
+import pkg from "../../package.json";
+
+const packageCount =
+  Object.keys(pkg.dependencies ?? {}).length +
+  Object.keys(pkg.devDependencies ?? {}).length;
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+---
+
+<BaseLayout
+  title="Colophon"
+  description="How gui.do is built: tools, fonts, data sources, self-hosted parts, and hosting."
+>
+  <div class="home colophon-page">
+    <section
+      class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">the plumbing</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Colophon
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
+          How this site is built: the tools, fonts, data sources and self-hosted
+          parts behind it. A good part of the content comes straight from my own
+          AT Protocol data (pages like my CV, events, /now and the bookshelf),
+          and the source code is public on GitHub.
+        </p>
+      </div>
+
+      <div class="mt-12 grid max-w-3xl gap-10">
+        {colophon.map((group) => <section
+          aria-labelledby={`colophon-${slug(group.name)}`}
+        >
+          <h2
+            id={`colophon-${slug(group.name)}`}
+            class="font-display mb-3 text-[1.35rem] font-extrabold tracking-[-0.02em]"
+          >
+            {group.name}
+          </h2>
+          <ul class="flex flex-wrap gap-2">
+            {group.items.map((item) => <li class="chip chip--plain">
+              {item.url ? (
+                <a href={item.url} target="_blank" rel="noopener noreferrer">
+                  {item.name}
+                  <span class="sr-only">(opens in new tab)</span>
+                </a>
+              ) : (
+                item.name
+              )}
+            </li>)}
+          </ul>
+        </section>)}
+      </div>
+
+      <p
+        class="text-base-600 dark:text-base-400 mt-12 max-w-[60ch] leading-relaxed"
+      >
+        Standing on the shoulders of {packageCount} open source packages, thanks
+        to everyone maintaining them. Full list in
+        <a
+          href={`${REPO_URL}/blob/master/package.json`}
+          target="_blank"
+          rel="noopener noreferrer"
+          >package.json on GitHub</a
+        >.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

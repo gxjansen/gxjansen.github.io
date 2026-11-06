@@ -1,0 +1,16 @@
+---
+/**
+ * /blank: a page intentionally left blank (https://slashpages.net). Only a
+ * visually hidden heading, for screen readers. Kept out of search results.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Blank"
+  description="A page intentionally left blank."
+  noindex
+>
+  <h1 class="sr-only">A page intentionally left blank.</h1>
+  <div class="min-h-[60vh]" aria-hidden="true"></div>
+</BaseLayout>
