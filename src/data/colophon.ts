@@ -36,7 +36,10 @@ export const colophon: ColophonGroup[] = [
         name: "Schibsted Grotesk",
         url: "https://fonts.google.com/specimen/Schibsted+Grotesk",
       },
-      { name: "LiebeHeide" },
+      {
+        name: "LiebeHeide",
+        url: "https://liebefonts.com/fonts/liebeheide-vector",
+      },
       { name: "Rosé Pine", url: "https://rosepinetheme.com" },
       { name: "Tabler Icons", url: "https://tabler.io/icons" },
       { name: "Simple Icons", url: "https://simpleicons.org" },
@@ -59,7 +62,7 @@ export const colophon: ColophonGroup[] = [
     items: [
       { name: "Umami", url: "https://umami.is" },
       { name: "Listmonk", url: "https://listmonk.app" },
-      { name: "Juttu" },
+      { name: "Juttu", url: "https://juttu.app" },
       { name: "ALTCHA", url: "https://altcha.org" },
     ],
   },
