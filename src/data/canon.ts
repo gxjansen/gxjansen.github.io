@@ -128,6 +128,8 @@ export const canon: CanonGroup[] = [
         url: "https://popfeed.social/movie/329",
       },
       { name: "Caesar III", by: "1998" },
+      { name: "Civilization" },
+      { name: "Mario Kart" },
     ],
   },
   {
@@ -179,8 +181,6 @@ export const canon: CanonGroup[] = [
   {
     name: "Games",
     items: [
-      { name: "Mario Kart" },
-      { name: "Civilization" },
       { name: "Minecraft" },
       { name: "Factorio" },
       { name: "Satisfactory" },
