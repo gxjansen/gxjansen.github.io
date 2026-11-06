@@ -139,6 +139,9 @@ const post = defineCollection({
       description: z.string().optional(),
       authors: z.array(z.string()).default([]),
       categories: z.array(z.string()).default([]),
+      // Extra block at the end of the post; see RelatedBlock.astro. Posts in
+      // the "Website Update(s)" category get the colophon block without it.
+      related: z.array(z.enum(["colophon"])).default([]),
       // Optional series membership — lets episodes be queried as an ordered set
       // (used by /series/atproto/). Optional so standalone posts keep validating.
       series: z
