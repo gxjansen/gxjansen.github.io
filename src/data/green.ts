@@ -24,12 +24,12 @@ export const green: GreenGroup[] = [
       "A lot runs on my own NAS at home",
       "Home Assistant measures its power use",
       "Singi Labs VPS runs at Hetzner in Germany, where data centers use hydropower",
-      "Local AI (Ollama) is for privacy, not the climate: datacenters are probably more efficient per token than my PC",
     ],
   },
   {
     name: "At home",
     items: [
+      "Fully insulated",
       "Green electricity from Greenchoice, no solar panels yet",
       "Air conditioning already heats part of the house, hybrid heat pump for the rest planned next year",
       "Home Assistant tracks device power and presence, so no heating or lights in empty rooms",
@@ -41,6 +41,7 @@ export const green: GreenGroup[] = [
       "Cycling for local trips",
       "Train for longer distances when possible",
       "Hybrid car for the rest",
+      "Minimize flying",
     ],
   },
   {
