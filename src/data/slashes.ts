@@ -117,8 +117,7 @@ export const slashPages: SlashPage[] = [
     // real page; pointing at /photos/ means this follows along automatically.
     slug: "photo",
     featured: true,
-    description:
-      "My photos, ~7,200 since 2005, on Grain for now, gui.do later.",
+    description: "My photos since 2005, about 7,200 of them, on Grain.",
     redirectTo: "/photos/",
     aliases: [{ slug: "pic" }],
   },

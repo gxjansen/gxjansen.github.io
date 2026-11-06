@@ -62,7 +62,7 @@ export const colophon: ColophonGroup[] = [
     items: [
       { name: "Umami", url: "https://umami.is" },
       { name: "Listmonk", url: "https://listmonk.app" },
-      { name: "Juttu" },
+      { name: "Juttu", url: "https://juttu.app" },
       { name: "ALTCHA", url: "https://altcha.org" },
     ],
   },
