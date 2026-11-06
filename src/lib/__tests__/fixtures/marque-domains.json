@@ -1,0 +1,441 @@
+[
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/svl2.nl",
+    "cid": "bafyreif3iyj7ckid74a7u4bj6jsuo35s7goaj6qhz462ckyvxwlnc2kgci",
+    "rkey": "svl2.nl",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": false,
+      "domain": "svl2.nl",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-01T20:31:03Z",
+      "expiresAt": "2026-12-29T11:04:40Z",
+      "nameServers": [
+        "lady.ns.cloudflare.com",
+        "brad.ns.cloudflare.com"
+      ],
+      "registeredAt": "2026-09-01T20:31:03Z",
+      "whoisPrivacy": "gdpr"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/spryker.nl",
+    "cid": "bafyreiguoql5ssto6igzgoi2wd47ey3i7da6gzo2y5zoxeeftlkpevrhyy",
+    "rkey": "spryker.nl",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "spryker.nl",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-08-15T23:08:58Z",
+      "expiresAt": "2027-08-20T12:13:06Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-08-15T23:08:58Z",
+      "whoisPrivacy": "gdpr"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/singi.dev",
+    "cid": "bafyreib3eq32ktdcfnbtzxbwmabmpruewmzmrubq6ym4cycfxdr5pnhjzy",
+    "rkey": "singi.dev",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "singi.dev",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-08T22:01:50Z",
+      "expiresAt": "2028-03-05T00:00:00Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-08T22:01:50Z",
+      "whoisPrivacy": "registry"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/sifa.work",
+    "cid": "bafyreigfhxg57ahb7iemi73lsqer63skah5jnpb2tedip54w6nyhtsxebq",
+    "rkey": "sifa.work",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "sifa.work",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-08T22:01:22Z",
+      "expiresAt": "2028-03-04T00:00:00Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-08T22:01:22Z",
+      "whoisPrivacy": "on"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/magento.nl",
+    "cid": "bafyreigo6xkb2krqnmsmxwowf4dxvmunzfeoi5vkeuoas3nm6ejgaiqrcq",
+    "rkey": "magento.nl",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "magento.nl",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-08T21:52:37Z",
+      "expiresAt": "2027-05-31T23:59:59Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-08T21:52:37Z",
+      "whoisPrivacy": "gdpr"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/kutana.social",
+    "cid": "bafyreidkfcubs5576r43max3jqpcwvgcz2ubt5l6kn3bcxxflhcau4vhui",
+    "rkey": "kutana.social",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "kutana.social",
+      "status": "active",
+      "autoRenew": false,
+      "createdAt": "2026-09-15T18:19:17Z",
+      "expiresAt": "2027-09-15T18:19:17Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-15T18:19:17Z",
+      "whoisPrivacy": "on"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/kootana.social",
+    "cid": "bafyreigqxbg4jesotypfj3qewgrabovxvhy45u7z3aqa6lulq5odyg3wwu",
+    "rkey": "kootana.social",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "kootana.social",
+      "status": "active",
+      "autoRenew": false,
+      "createdAt": "2026-09-15T18:19:05Z",
+      "expiresAt": "2027-09-15T18:19:05Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-15T18:19:05Z",
+      "whoisPrivacy": "on"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/gxjansen.org",
+    "cid": "bafyreig5664cpqop54xhhafjldfordaj7wtvy3mjne2q2cvigct5l74jnu",
+    "rkey": "gxjansen.org",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "gxjansen.org",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-01T20:31:48Z",
+      "expiresAt": "2028-09-28T00:00:00Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-01T20:31:48Z",
+      "whoisPrivacy": "on"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/gxjansen.nl",
+    "cid": "bafyreih2beaz4ohvua2flz5io3m3vrfpyydy5qgg3hatetpuonstf2yfxq",
+    "rkey": "gxjansen.nl",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "gxjansen.nl",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-01T20:31:39Z",
+      "expiresAt": "2027-09-30T23:59:59Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-01T20:31:39Z",
+      "whoisPrivacy": "gdpr"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/gxjansen.com",
+    "cid": "bafyreicjvigtfcbq4stzx4rylxkmobt54hjqsjmeihtfp5hutnmgankohe",
+    "rkey": "gxjansen.com",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "gxjansen.com",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-01T20:14:42Z",
+      "expiresAt": "2028-09-28T00:00:00Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-01T20:14:42Z",
+      "whoisPrivacy": "on"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/guidojansen.org",
+    "cid": "bafyreidly6mhmjgrramp7pbtsr3znha3gbh3b22r2dm7vzodsofketc53i",
+    "rkey": "guidojansen.org",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "guidojansen.org",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-26T07:29:43Z",
+      "expiresAt": "2028-07-14T00:00:00Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-26T07:29:43Z",
+      "whoisPrivacy": "on"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/guidojansen.nl",
+    "cid": "bafyreicbwmcskd5xzgqevxtrcvr5y7f4zbras4jjdzsbziqgdri7emurjm",
+    "rkey": "guidojansen.nl",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "guidojansen.nl",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-01T20:31:28Z",
+      "expiresAt": "2027-09-30T23:59:59Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-01T20:31:28Z",
+      "whoisPrivacy": "gdpr"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/guidojansen.com",
+    "cid": "bafyreigmtsppx32qjm5oa25cxqoybcjnh2ghriwe6tubo3b43rolqjn4xy",
+    "rkey": "guidojansen.com",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "guidojansen.com",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-26T07:30:00Z",
+      "expiresAt": "2027-11-20T00:00:00Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-26T07:30:00Z",
+      "whoisPrivacy": "on"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/dutchento.org",
+    "cid": "bafyreiaffveduwfdpi2ahwhsz2qlapvf2kaz3k7ybsrdfeim6rayu34pxa",
+    "rkey": "dutchento.org",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "dutchento.org",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-07-30T03:55:25Z",
+      "expiresAt": "2027-07-31T00:00:00Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-07-30T03:55:25Z",
+      "whoisPrivacy": "on"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/devroede.nl",
+    "cid": "bafyreiespaf4xvy2lk662frmonuice5t7gows5c2hgnvksl3ymvierumpu",
+    "rkey": "devroede.nl",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "devroede.nl",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-08T21:52:47Z",
+      "expiresAt": "2027-02-28T23:59:59Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-08T21:52:47Z",
+      "whoisPrivacy": "gdpr"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/cro.cafe",
+    "cid": "bafyreif3iziw73ne4wjv53oju5uiwj3pzxkwj6nqann2ucoxfxcqsy3u2i",
+    "rkey": "cro.cafe",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "cro.cafe",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-01T20:31:59Z",
+      "expiresAt": "2027-11-05T00:00:00Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-01T20:31:59Z",
+      "whoisPrivacy": "on"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/atproto.pl",
+    "cid": "bafyreihua3kzxxjuu6yhnl467nzzk5w7xryrf5bqnqhzsa47dmy7lcvocu",
+    "rkey": "atproto.pl",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "atproto.pl",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-17T13:03:26Z",
+      "expiresAt": "2027-09-17T00:00:00Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-17T13:03:26Z",
+      "whoisPrivacy": "gdpr"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/atproto.ch",
+    "cid": "bafyreicq55rcg7lbvsimb6wveot4xxnkybbgblcjgmejhqeodb5veqhiny",
+    "rkey": "atproto.ch",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "atproto.ch",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-15T18:19:29Z",
+      "expiresAt": "2027-09-14T00:00:00Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-15T18:19:29Z",
+      "whoisPrivacy": "gdpr"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/atcommons.eu",
+    "cid": "bafyreibjgtw2qmbd7cmnjiifydtpp5f76mbdr2x6qablsccut2e5w6ywi4",
+    "rkey": "atcommons.eu",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "atcommons.eu",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-01T18:47:29Z",
+      "expiresAt": "2027-09-01T00:00:00Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-01T18:47:29Z",
+      "whoisPrivacy": "gdpr"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/a11y.nl",
+    "cid": "bafyreifjimhjj4a2v7f7rfyi7veefpdgnug7mvaczbivtmkpab2hmzwyue",
+    "rkey": "a11y.nl",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": false,
+      "domain": "a11y.nl",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-01T20:31:18Z",
+      "expiresAt": "2027-03-31T23:59:59Z",
+      "nameServers": [
+        "lady.ns.cloudflare.com",
+        "brad.ns.cloudflare.com"
+      ],
+      "registeredAt": "2026-09-01T20:31:18Z",
+      "whoisPrivacy": "gdpr"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/at.marque.domain/2048.social",
+    "cid": "bafyreiangrvvh7jbuj5vs53viak3payjvu55ftrvqo5cgxgjzo2aey47q4",
+    "rkey": "2048.social",
+    "value": {
+      "$type": "at.marque.domain",
+      "dnssec": true,
+      "domain": "2048.social",
+      "status": "active",
+      "autoRenew": true,
+      "createdAt": "2026-09-03T10:46:11Z",
+      "expiresAt": "2027-09-03T10:46:11Z",
+      "nameServers": [
+        "stratus.mqdns.de",
+        "cirrus.mqdns.at",
+        "nimbus.mqdns.app"
+      ],
+      "registeredAt": "2026-09-03T10:46:11Z",
+      "whoisPrivacy": "on"
+    }
+  }
+]
