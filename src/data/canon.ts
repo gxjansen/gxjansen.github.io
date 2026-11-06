@@ -144,6 +144,9 @@ export const canon: CanonGroup[] = [
       { name: "Frans Verstraten" },
       { name: "Neil deGrasse Tyson" },
       { name: "Randall Munroe" },
+      { name: "Veritasium" },
+      { name: "Kurzgesagt" },
+      { name: "Vsauce" },
     ],
   },
   {
