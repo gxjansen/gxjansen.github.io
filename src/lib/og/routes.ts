@@ -128,7 +128,7 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
   canon: {
     url: "gui.do/canon",
     title: "My personal canon",
-    lead: "The books, thinkers and shows that shaped how I think.",
+    lead: "The books, thinkers, shows and games that shaped how I think.",
     hand: "the good stuff",
   },
   green: {

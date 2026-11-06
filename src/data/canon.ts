@@ -1,7 +1,7 @@
 /**
  * Data for /canon (https://slashpages.net): the books, people and screen
- * stuff that shaped how Guido thinks. Names only for now; a `why` per item
- * can be added later.
+ * stuff that shaped how Guido thinks. Most things released before 2000 go
+ * under "Growing up". A `why` per item is optional.
  */
 
 export interface CanonItem {
@@ -102,29 +102,6 @@ export const canon: CanonGroup[] = [
         by: "Hotze de Roos",
         url: "https://bookhive.buzz/books/bk_oALK35A1J8QeNvo4zKxm",
       },
-    ],
-  },
-  {
-    name: "Thinkers",
-    items: [
-      { name: "Nassim Nicholas Taleb" },
-      { name: "Robert Cialdini" },
-      { name: "Daniel Kahneman" },
-      { name: "Simon Sinek" },
-    ],
-  },
-  {
-    name: "Explainers",
-    items: [
-      { name: "Frans Verstraten" },
-      { name: "Neil deGrasse Tyson" },
-      { name: "Randall Munroe" },
-    ],
-  },
-  {
-    name: "On screen",
-    items: [
-      { name: "Marvel's Avengers saga", by: "Phases 1 to 3" },
       {
         name: "Ghostbusters II",
         by: "1989",
@@ -134,6 +111,7 @@ export const canon: CanonGroup[] = [
       { name: "Airwolf", url: "https://popfeed.social/tv_show/2119" },
       { name: "The A-Team", url: "https://popfeed.social/tv_show/1516" },
       { name: "MacGyver", url: "https://popfeed.social/tv_show/2875" },
+      { name: "Miami Vice", url: "https://popfeed.social/tv_show/1908" },
       { name: "The X-Files", url: "https://popfeed.social/tv_show/4087" },
       {
         name: "Star Trek: The Next Generation",
@@ -149,6 +127,43 @@ export const canon: CanonGroup[] = [
         by: "1993",
         url: "https://popfeed.social/movie/329",
       },
+      { name: "Caesar III", by: "1998" },
+      { name: "Civilization" },
+      { name: "Mario Kart" },
+    ],
+  },
+  {
+    name: "Thinkers",
+    items: [
+      { name: "Nassim Nicholas Taleb" },
+      { name: "Daniel Kahneman" },
+      { name: "Simon Sinek" },
+    ],
+  },
+  {
+    name: "Explainers",
+    items: [
+      { name: "Frans Verstraten" },
+      { name: "Neil deGrasse Tyson" },
+      { name: "Randall Munroe", by: "xkcd" },
+      { name: "Derek Muller", by: "Veritasium" },
+      { name: "Kurzgesagt" },
+      { name: "Michael Stevens", by: "Vsauce" },
+      { name: "Cleo Abram" },
+      { name: "EposVox" },
+      { name: "Hannah Fry" },
+      { name: "Jeff Geerling" },
+      { name: "Jono Bacon" },
+      { name: "Kyle Hill" },
+      { name: "Steve Mould" },
+      { name: "Matt Parker", by: "Stand-up Maths" },
+      { name: "John and Hank Green", by: "Vlogbrothers" },
+    ],
+  },
+  {
+    name: "On screen",
+    items: [
+      { name: "Marvel's Avengers saga", by: "Phases 1 to 3" },
       { name: "Silicon Valley", url: "https://popfeed.social/tv_show/60573" },
       {
         name: "The Expanse",
@@ -160,6 +175,15 @@ export const canon: CanonGroup[] = [
         by: "2026",
         url: "https://popfeed.social/movie/687163",
       },
+    ],
+  },
+  {
+    name: "Games",
+    items: [
+      { name: "Minecraft" },
+      { name: "Factorio" },
+      { name: "Satisfactory" },
+      { name: "Timberborn" },
     ],
   },
 ];
