@@ -8,6 +8,8 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import BookGrid from "@components/Reading/BookGrid.astro";
 import SuggestBook from "@components/Reading/SuggestBook.astro";
 import { getBookshelf } from "../lib/bookhive";
+import { bookhiveHref, bookshelfIntro } from "@data/bookshelf";
+import { buildLinkValue } from "../lib/linkHeader";
 
 // SSR + CDN stale-while-revalidate: the shelves stay fresh as the Bookhive list
 // changes, without needing a rebuild. `durable` shares one cached copy across
@@ -21,9 +23,11 @@ Astro.response.headers.set(
 // `no-cache` is honoured more consistently than
 // `public, max-age=0, must-revalidate`, so a restored tab always revalidates.
 Astro.response.headers.set("Cache-Control", "no-cache");
+// dist/_headers only covers prerendered pages, so the Link header (with the
+// Markdown alternate) is set here.
+Astro.response.headers.set("Link", buildLinkValue("/bookshelf.md"));
 
 const { active, wantToRead, finished, finishedCount } = await getBookshelf();
-const bookhiveHref = "https://bookhive.buzz/profile/gui.do";
 const nothing =
   active.length === 0 && wantToRead.length === 0 && finished.length === 0;
 
@@ -48,11 +52,7 @@ const moreRead = finishedCount > finished.length;
         <p
           class="text-base-700 dark:text-base-300 mt-3 text-lg leading-relaxed"
         >
-          What I&rsquo;m reading now, what I want to read next, and what I
-          recently finished, pulled straight from my Bookhive shelf. Fair
-          warning: the to-read pile grows faster than I get through it. Spot a
-          favourite of yours, or think I&rsquo;m missing an obvious one? Suggest
-          it at the bottom.
+          {bookshelfIntro}
         </p>
       </header>
 

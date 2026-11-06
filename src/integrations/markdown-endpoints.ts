@@ -50,36 +50,14 @@ import {
   TextNode,
   parse as parseHtml,
 } from "node-html-parser";
+import { buildLinkValue } from "../lib/linkHeader";
 
 // ---------------------------------------------------------------------------
 // HTTP Link header (agent resource discovery — issue #190)
 // ---------------------------------------------------------------------------
 
-/**
- * Site-wide resources advertised on every static page. Kept in sync with the
- * historical netlify.toml `/*` Link header (the Link line was moved out of
- * netlify.toml so this integration is the single source of truth — see the
- * file header for why). Each entry is one RFC 8288 link-value.
- */
-const SITE_LINK_RESOURCES = [
-  '</sitemap-index.xml>; rel="sitemap"',
-  '</llms.txt>; rel="alternate"; type="text/plain"',
-  '<https://gui.do/about/#guido>; rel="describedby"; type="application/ld+json"',
-];
-
-/**
- * Builds the comma-joined `Link` header value for a page. When the page has a
- * markdown source endpoint, its `.md` alternate is appended. Comma-joining
- * multiple link-values in one header line is valid per RFC 7230/8288 and
- * matches what netlify.toml previously emitted.
- */
-function buildLinkValue(mdAlternate: string | null): string {
-  const values = [...SITE_LINK_RESOURCES];
-  if (mdAlternate) {
-    values.push(`<${mdAlternate}>; rel="alternate"; type="text/markdown"`);
-  }
-  return values.join(", ");
-}
+// buildLinkValue lives in src/lib/linkHeader.ts so on-demand pages, which
+// _headers does not reach, can send the same header.
 
 /**
  * Renders a Netlify `_headers` rule block for a single exact path.
@@ -148,6 +126,7 @@ function isContentPage(pathname: string): boolean {
     "slashes/",
     "follow/",
     "colophon/",
+    "now/",
     "where/",
     "uses/",
     "cv/",
@@ -166,6 +145,14 @@ function isContentPage(pathname: string): boolean {
 
   return false;
 }
+
+/**
+ * Prerendered pages with a live half (a server island) whose `.md` is served
+ * by an on-demand endpoint instead: src/pages/now.md.ts and
+ * src/pages/now/index.md.ts. /bookshelf is fully on demand and never reaches
+ * this integration.
+ */
+const LIVE_MD_ROUTES = new Set(["now"]);
 
 // ---------------------------------------------------------------------------
 // HTML → Markdown conversion
@@ -421,6 +408,19 @@ export function markdownEndpoints(): AstroIntegration {
 
           // Collect for the llms-full.txt companion (full content concat).
           fullParts.push({ url: `https://gui.do${urlPath}`, md });
+
+          // Pages with live data get on-demand .md endpoints (see
+          // LIVE_MD_ROUTES). A static index.md would shadow them, so only the
+          // prerendered part is written, as intro.md, for the endpoint to read.
+          if (LIVE_MD_ROUTES.has(routeSegment)) {
+            fs.writeFileSync(
+              path.join(path.dirname(absPath), "intro.md"),
+              md,
+              "utf-8",
+            );
+            written++;
+            continue;
+          }
 
           // Write dist/<route>/index.md  (sibling to index.html)
           const indexMdPath = path.join(path.dirname(absPath), "index.md");

@@ -67,6 +67,11 @@ export default async (request: Request, context: Context) => {
   if (!md.ok) return context.next();
 
   const headers = new Headers(md.headers);
+  // On-demand .md endpoints (/now, /bookshelf) send CDN cache rules for their
+  // own URL. This response varies on Accept at the page URL, so it must not
+  // be cached under the page URL by those rules.
+  headers.delete("Netlify-CDN-Cache-Control");
+  headers.delete("CDN-Cache-Control");
   headers.set("Content-Type", "text/markdown; charset=utf-8");
   headers.set("Content-Location", mdPath);
   headers.set("Vary", "Accept");
