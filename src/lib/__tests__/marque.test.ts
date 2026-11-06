@@ -50,6 +50,23 @@ describe("marque domains", () => {
     }
   });
 
+  it("folds aliases into the domain they redirect to", () => {
+    const result = toDomainSections(records);
+    const rows = result.sections.flatMap((s) => s.rows);
+    const byDomain = (d: string) => rows.find((r) => r.domain === d);
+    expect(byDomain("kootana.social")?.aliases).toEqual(["kutana.social"]);
+    expect(byDomain("sifa.id")?.aliases).toEqual(["sifa.page", "sifa.work"]);
+    expect(allDomains(result)).not.toContain("kutana.social");
+    expect(allDomains(result)).not.toContain("sifa.work");
+  });
+
+  it("every aliasOf points at a listed domain", () => {
+    const shown = new Set(allDomains(toDomainSections(records)));
+    for (const [domain, o] of Object.entries(domainOverrides)) {
+      if (o.aliasOf) expect(shown.has(o.aliasOf), domain).toBe(true);
+    }
+  });
+
   it("puts a new domain without override under other", () => {
     const { sections } = toDomainSections([record("new-thing.social")]);
     const other = sections.find((s) => s.id === "other");
