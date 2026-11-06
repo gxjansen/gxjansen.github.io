@@ -1,6 +1,6 @@
 /**
  * Data for /canon (https://slashpages.net): the books, people and screen
- * stuff that shaped how Guido thinks. Anything released before 2000 goes
+ * stuff that shaped how Guido thinks. Most things released before 2000 go
  * under "Growing up". A `why` per item is optional.
  */
 
@@ -41,6 +41,11 @@ export const canon: CanonGroup[] = [
         name: "Made to Stick",
         by: "Chip Heath and Dan Heath",
         url: "https://bookhive.buzz/books/bk_PSStcppRZ6zVu2inqCMH",
+      },
+      {
+        name: "Influence",
+        by: "Robert Cialdini",
+        url: "https://bookhive.buzz/books/bk_cZ07xDAyoVccvZGGA3y2",
       },
       {
         name: "The God Delusion",
@@ -96,11 +101,6 @@ export const canon: CanonGroup[] = [
         name: "De Schippers van de Kameleon",
         by: "Hotze de Roos",
         url: "https://bookhive.buzz/books/bk_oALK35A1J8QeNvo4zKxm",
-      },
-      {
-        name: "Influence",
-        by: "Robert Cialdini",
-        url: "https://bookhive.buzz/books/bk_cZ07xDAyoVccvZGGA3y2",
       },
       {
         name: "Ghostbusters II",
