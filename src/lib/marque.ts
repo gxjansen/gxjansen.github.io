@@ -43,6 +43,8 @@ export interface DomainRow {
   /** Set when the domain is an AT Protocol handle (verified via DNS). */
   handle?: string;
   pinned: boolean;
+  /** Domains that redirect here, shown as small print instead of own rows. */
+  aliases: string[];
 }
 
 export interface DomainSection {
@@ -69,6 +71,7 @@ export function toDomainSections(records: PdsRecord<MarqueDomainRecord>[]): {
       dnssec: v.dnssec ?? false,
       handle: v.atprotoVerified ? v.atprotoHandle : undefined,
       pinned: false,
+      aliases: [],
     });
   }
   // Domains not registered through Marque; a Marque record wins if both exist.
@@ -79,6 +82,7 @@ export function toDomainSections(records: PdsRecord<MarqueDomainRecord>[]): {
         group: "other",
         dnssec: extra.dnssec ?? false,
         pinned: false,
+        aliases: [],
       });
     }
   }
@@ -95,6 +99,15 @@ export function toDomainSections(records: PdsRecord<MarqueDomainRecord>[]): {
       url: o.url,
       pinned: o.pinned ?? false,
     });
+  }
+  // Fold aliases into the domain they redirect to. An alias whose target
+  // isn't listed keeps its own row, so it never silently disappears.
+  for (const [domain, o] of Object.entries(domainOverrides)) {
+    const target = o.aliasOf && rows.get(o.aliasOf);
+    if (!target || !rows.has(domain)) continue;
+    target.aliases.push(domain);
+    target.aliases.sort();
+    rows.delete(domain);
   }
 
   const all = [...rows.values()].sort((a, b) =>
