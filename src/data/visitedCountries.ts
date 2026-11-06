@@ -9,9 +9,13 @@
 export const visitedCountries: string[] = [
   "CW",
   "EG",
+  "HK",
   "HU",
+  "IT",
   "LA",
   "LU",
   "PT",
+  "RU",
+  "SG",
   "TH",
 ];

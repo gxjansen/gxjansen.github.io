@@ -95,8 +95,12 @@ export function publicView(
 
 const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
+// Names that should differ from Intl's. Hong Kong was visited before 1997.
+const NAME_OVERRIDES: Record<string, string> = { HK: "Hong Kong" };
+
 /** English country name for a code, falling back to the code itself. */
 export function countryName(cc: string): string {
+  if (NAME_OVERRIDES[cc]) return NAME_OVERRIDES[cc];
   try {
     return regionNames.of(cc) ?? cc;
   } catch {

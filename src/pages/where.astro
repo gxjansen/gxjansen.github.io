@@ -17,20 +17,13 @@ import { staticCountries } from "@components/Where/whereCountries";
     <section
       class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
     >
-      <div class="mb-12 max-w-[60ch]">
+      <div class="mb-6 max-w-[60ch]">
         <span class="hand-note">right here</span>
         <h1
           class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
         >
           Where I am
         </h1>
-        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
-          My Bluesky avatar already swaps in the flag of whatever country I'm in
-          (bsky-avatar, running on my home server), and that same setup reports
-          the country to this page. When I leave the Netherlands it keeps saying
-          home for 6 hours; coming home shows right away. Below: the flags of
-          everywhere I've been, no dates.
-        </p>
       </div>
 
       <WhereLive server:defer>
