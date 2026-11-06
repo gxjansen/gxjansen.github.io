@@ -19,7 +19,8 @@ const today = new Date();
 
 const rel = (path: string) => getRelativeLocaleUrl(currLocale, path);
 
-// Footer link columns. Every kept page has a home here.
+// Footer link columns, grouped like the header nav. Pages not listed here
+// (domains, verify, defaults, ...) are on /slashes.
 const columns: {
   title: string;
   links: { text: string; href: string; newTab?: boolean }[];
@@ -28,13 +29,19 @@ const columns: {
     title: "Creations",
     links: [
       { text: "Articles", href: rel("/post") },
+      { text: "Newsletter", href: rel("/newsletter") },
       { text: "Podcasts", href: rel("/podcasts") },
       { text: "Presentations", href: rel("/presentations") },
-      { text: "Events", href: rel("/events") },
       { text: "Projects", href: rel("/projects") },
       { text: "Communities", href: rel("/communities") },
-      { text: "Bookshelf", href: rel("/bookshelf") },
-      { text: "Uses", href: rel("/uses") },
+    ],
+  },
+  {
+    title: "Out and about",
+    links: [
+      { text: "Events", href: rel("/events") },
+      { text: "Appearances", href: rel("/appearances") },
+      { text: "Where", href: rel("/where") },
     ],
   },
   {
@@ -42,26 +49,31 @@ const columns: {
     links: [
       { text: "Advisory", href: rel("/retainer") },
       { text: "Speaking", href: rel("/speaker") },
+      { text: "CV", href: rel("/cv") },
+      { text: "Contact", href: rel("/contact") },
     ],
   },
   {
-    title: "More",
+    title: "About me",
     links: [
       { text: "About", href: rel("/about") },
-      { text: "Appearances", href: rel("/appearances") },
-      { text: "Contact", href: rel("/contact") },
-      { text: "CV", href: rel("/cv") },
+      { text: "Now", href: rel("/now") },
+      { text: "Uses", href: rel("/uses") },
+      { text: "Bookshelf", href: rel("/bookshelf") },
+      { text: "Canon", href: rel("/canon") },
+      { text: "Green", href: rel("/green") },
       { text: "Ask me anything", href: rel("/ama") },
-      { text: "Newsletter", href: rel("/newsletter") },
     ],
   },
-];
-
-// Bottom bar, next to the copyright.
-const bottomLinks = [
-  { text: "Colophon", href: rel("/colophon") },
-  { text: "Privacy", href: rel("/privacy") },
-  { text: "Slashes", href: rel("/slashes") },
+  {
+    title: "This site",
+    links: [
+      { text: "Follow", href: rel("/follow") },
+      { text: "Slashes", href: rel("/slashes") },
+      { text: "Colophon", href: rel("/colophon") },
+      { text: "Privacy", href: rel("/privacy") },
+    ],
+  },
 ];
 ---
 
@@ -71,24 +83,24 @@ const bottomLinks = [
   aria-label="Site footer"
 >
   <div class="site-container px-4">
-    <div
-      class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]"
-    >
-      <!-- Brand column -->
-      <div class="flex flex-col gap-4">
-        <SiteLogo showAvatar />
-        <p
-          class="text-base-600 dark:text-base-400 max-w-sm text-sm leading-relaxed"
-        >
-          For {yearsBuilding}+ years I've helped tech teams turn developer &amp;
-          customer intelligence into product strategy, grounded in cognitive
-          psychology and a habit of testing my assumptions. I help build
-          communities, and the teams that run them.
-        </p>
-        <SocialLinks location="footer" context="footer" class="mt-1" />
-      </div>
+    <!-- Brand -->
+    <div class="flex flex-col gap-4">
+      <SiteLogo showAvatar />
+      <p
+        class="text-base-600 dark:text-base-400 max-w-sm text-sm leading-relaxed"
+      >
+        For {yearsBuilding}+ years I've helped tech teams turn developer &amp;
+        customer intelligence into product strategy, grounded in cognitive
+        psychology and a habit of testing my assumptions. I help build
+        communities, and the teams that run them.
+      </p>
+      <SocialLinks location="footer" context="footer" class="mt-1" />
+    </div>
 
-      <!-- Link columns -->
+    <!-- Link columns -->
+    <div
+      class="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:grid-cols-5"
+    >
       {columns.map((col) => <nav
         class="flex flex-col gap-1"
         aria-label={`Footer: ${col.title}`}
@@ -112,22 +124,11 @@ const bottomLinks = [
 
     <!-- Bottom bar -->
     <div
-      class="border-base-200/60 dark:border-base-800/60 text-base-500 dark:text-base-500 mt-12 flex flex-col gap-2 border-t pt-6 text-sm sm:flex-row sm:items-center sm:justify-between"
+      class="border-base-200/60 dark:border-base-800/60 text-base-500 dark:text-base-500 mt-12 border-t pt-6 text-sm"
     >
       <p>
         &copy; {today.getFullYear()}{" "}{siteData.name}. All rights reserved.
       </p>
-      <nav aria-label="Site information">
-        <ul class="flex flex-wrap gap-x-4 gap-y-1">
-          {bottomLinks.map((link) => <li>
-            <a
-              href={link.href}
-              class="hover:text-primary-600 dark:hover:text-primary-400 transition"
-              >{link.text}</a
-            >
-          </li>)}
-        </ul>
-      </nav>
     </div>
   </div>
 </footer>

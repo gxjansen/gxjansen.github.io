@@ -8,6 +8,11 @@ const navConfig = [
         icon: "tabler/outline/article",
       },
       {
+        text: "Newsletter",
+        link: "/newsletter",
+        icon: "tabler/outline/mail",
+      },
+      {
         text: "Podcasts",
         link: "/podcasts",
         icon: "tabler/outline/microphone",
@@ -18,11 +23,6 @@ const navConfig = [
         icon: "tabler/outline/presentation",
       },
       {
-        text: "Events",
-        link: "/events",
-        icon: "tabler/outline/calendar",
-      },
-      {
         text: "Projects",
         link: "/projects",
         icon: "tabler/outline/code",
@@ -31,6 +31,26 @@ const navConfig = [
         text: "Communities",
         link: "/communities",
         icon: "tabler/outline/users-group",
+      },
+    ],
+  },
+  {
+    text: "Out and about",
+    dropdown: [
+      {
+        text: "Events",
+        link: "/events",
+        icon: "tabler/outline/calendar",
+      },
+      {
+        text: "Appearances",
+        link: "/appearances",
+        icon: "tabler/outline/news",
+      },
+      {
+        text: "Where",
+        link: "/where",
+        icon: "tabler/outline/map-pin",
       },
     ],
   },
@@ -47,13 +67,23 @@ const navConfig = [
         link: "/speaker",
         icon: "tabler/outline/microphone",
       },
+      {
+        text: "CV",
+        link: "/cv",
+        icon: "tabler/outline/file-text",
+      },
+      {
+        text: "Contact",
+        link: "/contact",
+        icon: "tabler/outline/messages",
+      },
     ],
   },
   {
     text: "About",
     dropdown: [
       {
-        text: "About Me",
+        text: "About me",
         link: "/about",
         icon: "tabler/outline/user",
       },
@@ -63,19 +93,24 @@ const navConfig = [
         icon: "tabler/clock",
       },
       {
-        text: "CV",
-        link: "/cv",
-        icon: "tabler/outline/file-text",
+        text: "Uses",
+        link: "/uses",
+        icon: "tabler/outline/tools",
       },
       {
-        text: "Appearances",
-        link: "/appearances",
-        icon: "tabler/outline/news",
+        text: "Bookshelf",
+        link: "/bookshelf",
+        icon: "tabler/outline/book",
       },
       {
-        text: "Contact",
-        link: "/contact",
-        icon: "tabler/outline/messages",
+        text: "Canon",
+        link: "/canon",
+        icon: "tabler/outline/heart",
+      },
+      {
+        text: "All pages",
+        link: "/slashes",
+        icon: "tabler/outline/sparkles",
       },
     ],
   },
