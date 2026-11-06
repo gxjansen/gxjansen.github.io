@@ -85,3 +85,29 @@ describe("extractMarkdown line tidying", () => {
     expect(md).toContain("[View details](https://gui.do/b/)");
   });
 });
+
+describe("extractMarkdown structure", () => {
+  it("turns definition lists into term: description bullets", () => {
+    const md = convert(
+      `<h1>Uses</h1><dl><div><dt>Mail</dt><dd><a href="#use-fastmail">Fastmail</a></dd></div>` +
+        `<div><dt>2FA</dt><dd>Aegis</dd><dd>YubiKey</dd></div></dl>`,
+      "https://gui.do/uses/",
+    );
+    expect(md).toContain(
+      "* **Mail**: [Fastmail](https://gui.do/uses/#use-fastmail)",
+    );
+    expect(md).toContain("* **2FA**: Aegis, YubiKey");
+  });
+
+  it("keeps hidden data-md-only text", () => {
+    const md = convert(`<h1>Uses</h1><p hidden data-md-only>Tags: EU</p>`);
+    expect(md).toContain("Tags: EU");
+  });
+});
+
+describe("extractMarkdown spacing", () => {
+  it("collapses double spaces inside a line", () => {
+    const md = convert(`<h1>Canon</h1><p><span>Bobiverse </span> · Taylor</p>`);
+    expect(md).toContain("Bobiverse · Taylor");
+  });
+});

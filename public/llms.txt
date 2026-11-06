@@ -14,6 +14,7 @@ specification.website agent-readiness spec
 ## About
 
 - [About Guido](https://gui.do/about/): biography, expertise, credentials, awards
+- [CV](https://gui.do/cv/): work history, projects, credentials and awards, from Guido's Sifa ID profile
 - [Contact](https://gui.do/contact/): how to reach Guido
 - [Appearances](https://gui.do/appearances/): podcasts, panels, videos and articles where Guido appeared as a guest
 - [Author profile](https://gui.do/authors/gxjansen/): canonical author page with all social profiles

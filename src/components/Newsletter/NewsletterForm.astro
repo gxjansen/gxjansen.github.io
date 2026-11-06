@@ -115,6 +115,7 @@ const signupPage = Astro.url.pathname;
       {showSubscriberCount && <p
         class="subscriber-count text-base-600 dark:text-base-400 mt-3 hidden text-sm"
         data-subscriber-count
+        data-md-skip
       >
         Join <span class="subscriber-number" /> subscribers
       </p>}
@@ -366,6 +367,7 @@ const signupPage = Astro.url.pathname;
         {showSubscriberCount && <p
           class="subscriber-count text-base-50 hidden font-medium"
           data-subscriber-count
+          data-md-skip
         >
           Join <span class="subscriber-number" /> subscribers
         </p>}
