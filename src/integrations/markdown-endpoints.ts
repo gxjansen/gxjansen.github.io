@@ -13,6 +13,10 @@
  * since "/.md" is meaningless). All generated markdown is additionally
  * concatenated into dist/llms-full.txt (llmstxt.org full companion).
  *
+ * Conversion drops on-screen-only UI (buttons, forms, decorative images,
+ * anything marked `data-md-skip`), uses the page's own H1 as the title, and
+ * makes relative links absolute so they work from the .md and llms-full.txt.
+ *
  * Excluded: /ama, /api/*, *.xml, *.json, nav-data, rss,
  * 404, /styleguide, /categories/*, /authors/*, /examples/*,
  * /internal/*, /overview, /newsletter, /privacy, /conference-terms.
@@ -37,7 +41,12 @@ import type { AstroIntegration } from "astro";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { NodeHtmlMarkdown } from "node-html-markdown";
-import { parse as parseHtml } from "node-html-parser";
+import {
+  HTMLElement,
+  Node,
+  TextNode,
+  parse as parseHtml,
+} from "node-html-parser";
 
 // ---------------------------------------------------------------------------
 // HTTP Link header (agent resource discovery — issue #190)
@@ -162,7 +171,16 @@ const nhm = new NodeHtmlMarkdown(
   /* customCodeBlockTranslators */ undefined,
 );
 
-function extractMarkdown(htmlContent: string, filePath: string): string {
+/**
+ * Converts a built page to Markdown. `pageUrl` is the page's absolute URL;
+ * relative links and image sources are resolved against it, so they still
+ * work from the flat `/<route>.md` alias and from llms-full.txt.
+ */
+export function extractMarkdown(
+  htmlContent: string,
+  filePath: string,
+  pageUrl: string,
+): string {
   const root = parseHtml(htmlContent, { comment: false });
 
   // Extract <title>
@@ -197,12 +215,92 @@ function extractMarkdown(htmlContent: string, filePath: string): string {
     // Noise / decorative
     ".page-wash",
     "[aria-hidden]",
+    // Interactive UI means nothing in Markdown
+    "button",
+    "form",
+    // Decorative images (empty alt)
+    'img[alt=""]',
+    // Per-component opt-out for anything else that only makes sense on screen
+    "[data-md-skip]",
   ]) {
     main.querySelectorAll(sel).forEach((el) => el.remove());
   }
 
-  const md = nhm.translate(main.outerHTML);
-  return buildOutput(title, md);
+  // The page's own H1 is the Markdown title. Whatever sits before it in its
+  // header (the handwritten kicker line) goes, so the output starts with the H1.
+  const h1 = main.querySelector("h1");
+  if (h1) {
+    let prev = h1.previousElementSibling;
+    while (prev) {
+      const next = prev.previousElementSibling;
+      prev.remove();
+      prev = next;
+    }
+  }
+
+  absolutizeUrls(main, pageUrl);
+  collapseLineBreaks(main);
+
+  const md = tidyLines(nhm.translate(main.outerHTML));
+  return h1 ? md.trim() + "\n" : buildOutput(title, md);
+}
+
+/**
+ * Drops the single stray space that collapsed line breaks leave at the start
+ * and end of lines. Deeper indents (nested lists) and two-space hard breaks
+ * stay, and so does anything inside a code fence.
+ */
+function tidyLines(md: string): string {
+  let inFence = false;
+  return md
+    .split("\n")
+    .map((line) => {
+      if (/^\s*(```|~~~)/.test(line)) inFence = !inFence;
+      if (inFence) return line;
+      return line
+        .replace(/^ (?=\S)/, "")
+        .replace(/(?<=\S) $/, "")
+        .replace(/^(#{1,6}) {2,}/, "$1 ")
+        .replace(
+          /\[ +([^\]\n]*?) *\]\(|\[([^\]\n]*?) +\]\(/g,
+          (_, a, b) => `[${a ?? b}](`,
+        );
+    })
+    .join("\n");
+}
+
+/** Resolves relative `href`/`src` values against the page URL. */
+function absolutizeUrls(main: HTMLElement, pageUrl: string): void {
+  for (const [sel, attr] of [
+    ["a[href]", "href"],
+    ["img[src]", "src"],
+  ] as const) {
+    for (const el of main.querySelectorAll(sel)) {
+      const value = el.getAttribute(attr);
+      if (!value || /^[a-z][a-z0-9+.-]*:/i.test(value)) continue;
+      try {
+        el.setAttribute(attr, new URL(value, pageUrl).href);
+      } catch {
+        // Leave unparseable values alone
+      }
+    }
+  }
+}
+
+/**
+ * Replaces line breaks in text with a single space. node-html-markdown drops
+ * a text node's leading whitespace when it contains a newline, so
+ * `<strong>A.</strong>\n B` would become `**A.**B`. Code keeps its newlines.
+ */
+function collapseLineBreaks(node: Node): void {
+  for (const child of node.childNodes) {
+    if (child instanceof TextNode) {
+      child.rawText = child.rawText.replace(/[ \t]*\r?\n\s*/g, " ");
+    } else if (child instanceof HTMLElement) {
+      const tag = child.rawTagName?.toLowerCase();
+      if (tag !== "pre" && tag !== "code") collapseLineBreaks(child);
+    }
+  }
 }
 
 function buildOutput(title: string, body: string): string {
@@ -283,7 +381,7 @@ export function markdownEndpoints(): AstroIntegration {
             continue;
           }
 
-          const md = extractMarkdown(html, rel);
+          const md = extractMarkdown(html, rel, `https://gui.do${urlPath}`);
 
           // Collect for the llms-full.txt companion (full content concat).
           fullParts.push({ url: `https://gui.do${urlPath}`, md });
