@@ -69,7 +69,10 @@ const isHttpUrl = (s: string | undefined): s is string =>
 function proofLink(v: KeytraceClaimRecord): string | undefined {
   if (!isHttpUrl(v.claimUri)) return undefined;
   const url = new URL(v.claimUri);
-  if (url.hostname.endsWith("linkedin.com")) url.search = "";
+  const host = url.hostname;
+  if (host === "linkedin.com" || host.endsWith(".linkedin.com")) {
+    url.search = "";
+  }
   const proof = url.toString();
   return proof === v.identity.profileUrl ? undefined : proof;
 }
