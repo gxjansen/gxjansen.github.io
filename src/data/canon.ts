@@ -1,7 +1,7 @@
 /**
  * Data for /canon (https://slashpages.net): the books, people and screen
- * stuff that shaped how Guido thinks. Names only for now; a `why` per item
- * can be added later.
+ * stuff that shaped how Guido thinks. Anything released before 2000 goes
+ * under "Growing up". A `why` per item is optional.
  */
 
 export interface CanonItem {
@@ -41,11 +41,6 @@ export const canon: CanonGroup[] = [
         name: "Made to Stick",
         by: "Chip Heath and Dan Heath",
         url: "https://bookhive.buzz/books/bk_PSStcppRZ6zVu2inqCMH",
-      },
-      {
-        name: "Influence",
-        by: "Robert Cialdini",
-        url: "https://bookhive.buzz/books/bk_cZ07xDAyoVccvZGGA3y2",
       },
       {
         name: "The God Delusion",
@@ -102,6 +97,36 @@ export const canon: CanonGroup[] = [
         by: "Hotze de Roos",
         url: "https://bookhive.buzz/books/bk_oALK35A1J8QeNvo4zKxm",
       },
+      {
+        name: "Influence",
+        by: "Robert Cialdini",
+        url: "https://bookhive.buzz/books/bk_cZ07xDAyoVccvZGGA3y2",
+      },
+      {
+        name: "Ghostbusters II",
+        by: "1989",
+        url: "https://popfeed.social/movie/2978",
+      },
+      { name: "Knight Rider", url: "https://popfeed.social/tv_show/2384" },
+      { name: "Airwolf", url: "https://popfeed.social/tv_show/2119" },
+      { name: "The A-Team", url: "https://popfeed.social/tv_show/1516" },
+      { name: "MacGyver", url: "https://popfeed.social/tv_show/2875" },
+      { name: "Miami Vice", url: "https://popfeed.social/tv_show/1908" },
+      { name: "The X-Files", url: "https://popfeed.social/tv_show/4087" },
+      {
+        name: "Star Trek: The Next Generation",
+        url: "https://popfeed.social/tv_show/655",
+      },
+      {
+        name: "The Matrix",
+        by: "1999",
+        url: "https://popfeed.social/movie/603",
+      },
+      {
+        name: "Jurassic Park",
+        by: "1993",
+        url: "https://popfeed.social/movie/329",
+      },
     ],
   },
   {
@@ -125,30 +150,6 @@ export const canon: CanonGroup[] = [
     name: "On screen",
     items: [
       { name: "Marvel's Avengers saga", by: "Phases 1 to 3" },
-      {
-        name: "Ghostbusters II",
-        by: "1989",
-        url: "https://popfeed.social/movie/2978",
-      },
-      { name: "Knight Rider", url: "https://popfeed.social/tv_show/2384" },
-      { name: "Airwolf", url: "https://popfeed.social/tv_show/2119" },
-      { name: "The A-Team", url: "https://popfeed.social/tv_show/1516" },
-      { name: "MacGyver", url: "https://popfeed.social/tv_show/2875" },
-      { name: "The X-Files", url: "https://popfeed.social/tv_show/4087" },
-      {
-        name: "Star Trek: The Next Generation",
-        url: "https://popfeed.social/tv_show/655",
-      },
-      {
-        name: "The Matrix",
-        by: "1999",
-        url: "https://popfeed.social/movie/603",
-      },
-      {
-        name: "Jurassic Park",
-        by: "1993",
-        url: "https://popfeed.social/movie/329",
-      },
       { name: "Silicon Valley", url: "https://popfeed.social/tv_show/60573" },
       {
         name: "The Expanse",
