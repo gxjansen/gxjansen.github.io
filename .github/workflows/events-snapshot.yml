@@ -5,6 +5,11 @@ name: Events snapshot
 # data-only PR that auto-merges once the required checks pass. Merging to
 # master deploys the site, so /events picks up new records within a day.
 #
+# The same PR carries src/data/pds-fingerprints.json: hashes of the PDS
+# collections that pages load at build time (/verify, /domains). A changed
+# record there changes its hash, so those pages also refresh within a day,
+# without a build on days nothing changed.
+#
 # The PR is pushed and opened with EVENTS_SNAPSHOT_TOKEN, a fine-grained
 # personal access token (this repo only; Contents and Pull requests: read and
 # write). A PR opened with GITHUB_TOKEN does not start the pull_request
@@ -42,11 +47,13 @@ jobs:
           node-version-file: .nvmrc
       - name: Refresh snapshot (fails closed on unresolvable refs or shrinkage)
         run: node scripts/snapshot-events.mjs
+      - name: Refresh PDS fingerprints (/verify, /domains)
+        run: node scripts/pds-fingerprints.mjs
       - name: Open PR when the records changed
         env:
           GH_TOKEN: ${{ secrets.EVENTS_SNAPSHOT_TOKEN }}
         run: |
-          if git diff --quiet -- src/data/events.snapshot.json; then
+          if git diff --quiet -- src/data/events.snapshot.json src/data/pds-fingerprints.json; then
             echo "No record changes."
             exit 0
           fi
@@ -58,10 +65,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -c "$branch"
-          git add src/data/events.snapshot.json
-          git commit -m "chore(events): refresh snapshot from atproto records"
+          git add src/data/events.snapshot.json src/data/pds-fingerprints.json
+          git commit -m "chore(data): refresh snapshots from atproto records"
           git push -u origin "$branch"
           gh pr create --base master --head "$branch" \
-            --title "chore(events): refresh snapshot from atproto records" \
+            --title "chore(data): refresh snapshots from atproto records" \
             --body-file .github/events-snapshot-pr-body.md
           gh pr merge "$branch" --auto --squash --delete-branch
