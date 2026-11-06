@@ -631,6 +631,30 @@ export const items: UsesItem[] = [
     storyUrl: STORY_2025,
   },
   {
+    name: "OpenCode",
+    traits: ["openSource"],
+    icon: "simple-icons:opencode",
+    url: "https://opencode.ai",
+    kind: "software",
+    area: "tech",
+    category: "AI (local and hosted)",
+    status: "using",
+    defaultFor: ["AI coding agent"],
+    reason:
+      "Open alternative to the other CLI tools. For development I can't really get used to doing this through their apps, terminals rule for me.",
+  },
+  {
+    name: "Hermes Agent",
+    brand: "Nous Research",
+    traits: ["openSource"],
+    icon: "tabler:robot",
+    url: "https://github.com/NousResearch/hermes-agent",
+    kind: "software",
+    area: "tech",
+    category: "AI (local and hosted)",
+    status: "trying",
+  },
+  {
     name: "Mistral Vibe",
     traits: ["eu"],
     icon: "simple-icons:mistralai",
@@ -1471,6 +1495,7 @@ export const defaultSlots = [
   "Newsletter",
   "Local AI",
   "Hosted AI",
+  "AI coding agent",
   "OS",
 ];
 
