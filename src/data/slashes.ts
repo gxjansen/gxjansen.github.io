@@ -99,6 +99,11 @@ export const slashPages: SlashPage[] = [
     ],
   },
   {
+    slug: "verify",
+    featured: true,
+    description: "Proof that accounts elsewhere are really mine.",
+  },
+  {
     slug: "defaults",
     featured: true,
     description:

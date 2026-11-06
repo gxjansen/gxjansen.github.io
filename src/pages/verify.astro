@@ -1,0 +1,171 @@
+---
+/**
+ * /verify: proof that accounts elsewhere are mine (https://slashpages.net).
+ * The gui.do handle and Sifa ID part is static (both are the same DID; a unit
+ * test checks public/.well-known/atproto-did). The linked accounts are Guido's
+ * Keytrace claims, loaded from his PDS at build time (src/lib/keytrace.ts).
+ */
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { socialLinks } from "@data/socialLinks";
+import { GUIDO_DID } from "../lib/pds/loader";
+import { KEYTRACE_PROFILE, loadVerifiedClaims } from "../lib/keytrace";
+import { formatShortDateUTC } from "../utils/dates";
+
+const claims = await loadVerifiedClaims();
+// The DNS claim for gui.do is shown with the handle, not as a separate account.
+const dnsClaim = claims.find((c) => c.type === "dns" && c.account === "gui.do");
+const accounts = claims.filter((c) => c !== dnsClaim);
+
+const sifa = socialLinks.find((l) => l.name === "Sifa ID");
+if (!sifa) throw new Error('verify: no socialLinks entry "Sifa ID"');
+
+const card =
+  "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 text-base-900 dark:text-base-100 rounded-2xl border p-5";
+const muted = "text-base-600 dark:text-base-400";
+---
+
+<BaseLayout
+  title="Verify"
+  description="Proof that accounts elsewhere are really me: how gui.do resolves to my DID, and which other accounts are verified against it."
+>
+  <div class="home verify-page">
+    <section
+      class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">proof of person</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Verify
+        </h1>
+        <p class={`${muted} text-lg leading-relaxed`}>
+          Proof that accounts elsewhere are really me. My identity on the open
+          social web is this DID: <code class="break-all">{GUIDO_DID}</code>.
+          Everything else hangs off that.
+        </p>
+      </div>
+
+      <section
+        id="handle"
+        class="mt-14 max-w-3xl scroll-mt-24"
+        aria-labelledby="handle-h"
+      >
+        <h2
+          id="handle-h"
+          class="font-display text-[1.6rem] font-extrabold tracking-[-0.02em]"
+        >
+          gui.do
+        </h2>
+        <p class={`${muted} mt-1 mb-6 leading-relaxed`}>
+          gui.do resolves to that DID two ways: a DNS TXT record at
+          <code>_atproto.gui.do</code>, and a file at
+          <code>gui.do/.well-known/atproto-did</code>. Both contain the same
+          DID. You don't have to take my word for it: the dig and curl commands
+          below do the lookup on your own machine.
+        </p>
+        <div class={card}>
+          <pre
+            class="overflow-x-auto bg-transparent text-sm leading-relaxed text-inherit"
+          ><code>$ dig +short TXT _atproto.gui.do
+"did={GUIDO_DID}"
+
+$ curl https://gui.do/.well-known/atproto-did
+{GUIDO_DID}</code></pre>
+          {dnsClaim && <p
+            class="mt-4 flex flex-wrap items-center gap-2 text-sm"
+          >
+            <Icon
+              name="tabler/circle-check"
+              class="text-primary-600 dark:text-primary-400 size-5"
+              aria-hidden="true"
+            />
+            <a href={KEYTRACE_PROFILE} rel="noopener noreferrer"> Keytrace </a>
+            <span class={muted}>
+              <time datetime={dnsClaim.verifiedAt}>
+                {formatShortDateUTC(dnsClaim.verifiedAt)}
+              </time>
+            </span>
+          </p>}
+        </div>
+
+        <a
+          href={sifa.href}
+          rel="me noopener noreferrer"
+          class={`${card} hover:border-primary-400 no-random-underline mt-4 flex items-center gap-4 transition hover:-translate-y-0.5 hover:shadow-lg`}
+        >
+          <Icon
+            name={sifa.icon}
+            class="text-primary-600 dark:text-primary-400 size-7 shrink-0"
+            aria-hidden="true"
+          />
+          <span>
+            <span class="font-display block font-bold">Sifa ID</span>
+            <span class={`${muted} block text-sm`}>
+              My Sifa ID profile at sifa.id/p/gui.do uses the same DID, so it's
+              the same identity. No separate proof needed.
+            </span>
+          </span>
+        </a>
+      </section>
+
+      <section
+        id="accounts"
+        class="mt-16 max-w-3xl scroll-mt-24"
+        aria-labelledby="accounts-h"
+      >
+        <h2
+          id="accounts-h"
+          class="font-display text-[1.6rem] font-extrabold tracking-[-0.02em]"
+        >
+          Other accounts
+        </h2>
+        <p class={`${muted} mt-1 mb-6 leading-relaxed`}>
+          For the rest I use
+          <a href={KEYTRACE_PROFILE} rel="noopener noreferrer">Keytrace</a>
+          (keytrace.dev). I post a proof on the service in question (a gist, a
+          post, a DNS record), Keytrace checks it and signs the claim, and the
+          claim record lives in my own PDS, my own data store. This page lists
+          only claims that currently verify, and the list is rebuilt from my PDS
+          on every build. If a check starts failing, the account drops off.
+        </p>
+        <ul class="grid gap-4 sm:grid-cols-2">
+          {accounts.map((c) => <li class={`${card} flex items-start gap-4`}>
+            <Icon
+              name={c.icon}
+              class="text-primary-600 dark:text-primary-400 mt-0.5 size-7 shrink-0"
+              aria-hidden="true"
+            />
+            <div class="min-w-0">
+              <h3 class="font-display font-bold">{c.label}</h3>
+              {c.profileUrl ? (
+                <a
+                  href={c.profileUrl}
+                  rel="me noopener noreferrer"
+                  class="block text-sm break-all"
+                >
+                  {c.account}
+                </a>
+              ) : (
+                <span class="block text-sm break-all">{c.account}</span>
+              )}
+              <p class={`${muted} mt-2 flex flex-wrap gap-x-3 text-sm`}>
+                {c.proofUrl && <a href={c.proofUrl} rel="noopener noreferrer">
+                  Proof
+                  <span class="sr-only"> for {c.label}</span>
+                </a>}
+                <time datetime={c.verifiedAt}>
+                  {formatShortDateUTC(c.verifiedAt)}
+                </time>
+              </p>
+            </div>
+          </li>)}
+        </ul>
+        <p class="font-display mt-8 text-lg font-bold">
+          Not on this page? Then it isn't me.
+        </p>
+      </section>
+    </section>
+  </div>
+</BaseLayout>

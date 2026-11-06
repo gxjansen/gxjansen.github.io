@@ -24,6 +24,13 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      # Last good PDS data, so a PDS outage doesn't fail the build
+      # (src/lib/pds/loader.ts).
+      - uses: actions/cache@v6
+        with:
+          path: .pds-cache
+          key: pds-cache-${{ github.run_id }}
+          restore-keys: pds-cache-
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
       - name: Run axe accessibility gate

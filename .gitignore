@@ -133,3 +133,6 @@ playwright-report/
 
 # Local brand-workspace notes (not repo content)
 _workspace/
+
+# Last good PDS data for the slash pages (src/lib/pds/loader.ts)
+.pds-cache/

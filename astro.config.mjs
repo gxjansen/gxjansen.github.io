@@ -216,6 +216,7 @@ export default defineConfig({
           "nvidia",
           "netlify",
           "mistralai",
+      "mastodon",
         ],
       },
     }),
