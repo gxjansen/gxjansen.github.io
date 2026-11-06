@@ -15,6 +15,7 @@ export const green: GreenGroup[] = [
       "Static pages, very little JavaScript",
       "No trackers, no ads",
       "Images optimized at build time",
+      "Hosted on Netlify, which can't show its energy is green (no verified green hosting, runs on AWS/Google Cloud) - a tradeoff I know about",
     ],
   },
   {
@@ -22,6 +23,7 @@ export const green: GreenGroup[] = [
     items: [
       "A lot runs on my own NAS at home",
       "Home Assistant measures its power use",
+      "Singi Labs VPS runs at Hetzner in Germany, where data centers use hydropower",
       "Local AI (Ollama) is for privacy, not the climate: datacenters are probably more efficient per token than my PC",
     ],
   },
