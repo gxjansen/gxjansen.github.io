@@ -1,0 +1,88 @@
+---
+/**
+ * The three most recent guest spots from press-coverage.ts, for /events.
+ * Awards, nominations and listings are left out: this is about where Guido
+ * talked, not where he was mentioned.
+ */
+import { pressCoverage } from "@data/press-coverage";
+import { filterAvailableContent } from "../../utils/content-availability";
+import type { PressCoverage } from "../../types/press";
+
+interface Props {
+  count?: number;
+}
+const { count = 3 } = Astro.props;
+
+const kind = (p: PressCoverage) =>
+  p.youtubeLink ? "Video" : p.spotifyEmbedId ? "Podcast" : "Article";
+
+const href = (p: PressCoverage) => {
+  if (p.articleUrl) return p.articleUrl;
+  if (p.youtubeLink)
+    return p.youtubeLink.startsWith("http")
+      ? p.youtubeLink
+      : `https://www.youtube.com/watch?v=${p.youtubeLink}`;
+  if (p.spotifyEmbedId)
+    return `https://open.spotify.com/episode/${p.spotifyEmbedId}`;
+  return "/appearances/";
+};
+
+const latest = filterAvailableContent(pressCoverage)
+  .filter((p) => (p.category ?? "interview") === "interview")
+  .sort(
+    (a, b) =>
+      new Date(b.publicationDate).getTime() -
+      new Date(a.publicationDate).getTime(),
+  )
+  .slice(0, count);
+
+const date = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-GB", {
+    month: "long",
+    year: "numeric",
+  });
+---
+
+{latest.length > 0 && <section aria-labelledby="latest-appearances-h">
+  <span class="hand-note">out there</span>
+  <h2
+    id="latest-appearances-h"
+    class="font-display mt-1 text-[clamp(1.9rem,3.6vw,2.9rem)] leading-[1.1] font-black tracking-[-0.03em]"
+  >
+    Where I showed up
+  </h2>
+  <ul class="mt-6 grid gap-4 md:grid-cols-3">
+    {latest.map((p) => <li
+      class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-5"
+    >
+      <p class="text-base-500 text-xs font-bold tracking-[0.08em] uppercase">
+        {kind(p)} · {date(p.publicationDate)}
+      </p>
+      <a
+        href={href(p)}
+        {...(href(p).startsWith("http")
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+        class="font-display mt-2 block leading-snug font-bold"
+      >
+        {p.title}
+        {href(p).startsWith("http") && <span class="sr-only"
+          >(opens in new tab)</span
+        >}
+      </a>
+      {p.personOrganization && <p
+        class="text-base-600 dark:text-base-400 mt-1 text-sm"
+      >
+        {p.personOrganization}
+      </p>}
+    </li>)}
+  </ul>
+  <p class="mt-5">
+    <a
+      href="/appearances/"
+      class="text-primary-600 dark:text-primary-400 font-semibold"
+    >
+      All my guest spots
+    </a>
+  </p>
+</section>}

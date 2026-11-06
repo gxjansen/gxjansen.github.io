@@ -6,6 +6,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import EventCard from "@components/Events/EventCard.astro";
 import RecurringEventCard from "@components/Events/RecurringEventCard.astro";
 import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
+import LatestAppearances from "@components/Press/LatestAppearances.astro";
 import FeatureFlagsMarquee from "@components/Feature/FeatureFlagsMarquee.astro";
 
 // utils
@@ -121,6 +122,11 @@ const sprykerIcon = await getEventIcon("spryker.png");
     {/* Upcoming Events Section */}
     <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
       <UpcomingEvents events={sortedEvents} />
+    </section>
+
+    {/* Latest guest spots, from /appearances */}
+    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+      <LatestAppearances />
     </section>
 
     {/* Countries Flags Section */}
