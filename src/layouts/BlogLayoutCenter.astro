@@ -9,6 +9,8 @@ import BaseLayout from "./BaseLayout.astro";
 import Category from "@components/Category/Category.astro";
 import BlogNav from "@components/Blog/BlogNav.astro";
 import SubscribeBox from "@components/Newsletter/SubscribeBox.astro";
+import RelatedBlock from "@components/Related/RelatedBlock.astro";
+import { itemsForPost } from "@data/uses";
 import AuthorByline from "@components/Author/AuthorByline.astro";
 import AuthorBioBox from "@components/Author/AuthorBioBox.astro";
 import Breadcrumb from "@components/Breadcrumb/Breadcrumb.astro";
@@ -28,6 +30,15 @@ interface Props {
 }
 
 const { post, allPosts } = Astro.props;
+
+// At most one extra block per post: the /uses items that cite this post,
+// else the colophon for posts about the site, else an AMA prompt.
+const relatedTools = itemsForPost(post.id);
+const relatedColophon =
+  relatedTools.length === 0 &&
+  (post.data.related.includes("colophon") ||
+    post.data.categories.some((c: string) => /^website updates?$/i.test(c)));
+const showAmaPrompt = relatedTools.length === 0 && !relatedColophon;
 const {
   title,
   description,
@@ -299,6 +310,12 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
         <p class="article-signature" aria-hidden="true">— Guido</p>
       </div>
 
+      {(relatedTools.length > 0 || relatedColophon) && <div
+        class="mx-auto mt-12 max-w-2xl"
+      >
+        <RelatedBlock tools={relatedTools} colophon={relatedColophon} />
+      </div>}
+
       <!-- Subscribe: email (Listmonk) + open-social-web referral. id="subscribe"
            is the anchor target for the byline count link. -->
       <div class="mx-auto mt-12 max-w-2xl">
@@ -318,6 +335,17 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
             <h3 class="text-base-900 dark:text-base-100 mb-4 text-xl font-bold">
               Comments
             </h3>
+            {showAmaPrompt && <p
+              class="text-base-600 dark:text-base-400 mb-4 text-sm leading-relaxed"
+            >
+              Got a question about this post? Ask it anonymously, I answer on
+              Bluesky.
+              <a
+                href="/ama/"
+                class="text-primary-600 dark:text-primary-400 font-semibold"
+                >Ask anonymously</a
+              >
+            </p>}
             <div id="juttu-comments"></div>
           </aside>
         </section>
