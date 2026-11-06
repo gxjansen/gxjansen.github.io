@@ -10,6 +10,8 @@ import PodcastSection from "@components/Press/PodcastSection.astro";
 import ArticleSection from "@components/Press/ArticleSection.astro";
 import ListingsSection from "@components/Press/ListingsSection.astro";
 import SifaCTA from "@components/Press/SifaCTA.astro";
+import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
+import { getAllEvents } from "@utils/eventUtils";
 
 // data
 import { pressCoverage } from "../data/press-coverage";
@@ -76,6 +78,10 @@ const firstVideoIds = videos
     return match ? match[1] : "";
   })
   .filter(Boolean);
+const events = await getAllEvents();
+const startOfToday = new Date();
+startOfToday.setHours(0, 0, 0, 0);
+const hasUpcoming = events.some((e) => new Date(e.date) >= startOfToday);
 ---
 
 <BaseLayout
@@ -145,6 +151,11 @@ const firstVideoIds = videos
       <ArticleSection articles={articles} />
       {listings.length > 0 && <ListingsSection listings={listings} />}
     </div>
+
+    <!-- Next on stage, from /events -->
+    {hasUpcoming && <section class="relative z-10 mt-16">
+      <UpcomingEvents events={events} maxEvents={2} />
+    </section>}
 
     <SifaCTA />
   </div>
