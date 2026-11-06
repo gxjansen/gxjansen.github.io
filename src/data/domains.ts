@@ -70,7 +70,7 @@ export const domainOverrides: Record<string, DomainOverride> = {
   "sifa.page": { aliasOf: "sifa.id" },
   "barazo.forum": {
     group: "projects",
-    note: "Barazo, federated forums on AT Protocol. Open source Discourse/Flarum alternative, on hold.",
+    note: "Barazo, federated forums on AT Protocol. Open source Discourse/Flarum alternative.",
     url: "https://barazo.forum/",
   },
   "atgora.forum": { aliasOf: "barazo.forum" },
