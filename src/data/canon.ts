@@ -220,6 +220,7 @@ export const canon: CanonGroup[] = [
       {
         name: "Doctor Who",
         by: "2005 onward",
+        why: "Spoilers",
         url: "https://popfeed.social/tv_show/57243",
       },
       { name: "Silicon Valley", url: "https://popfeed.social/tv_show/60573" },
