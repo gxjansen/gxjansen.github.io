@@ -50,4 +50,5 @@ Guido X Jansen's personal site. Astro 7, Tailwind v4 (Vite plugin), MDX, React i
 
 - `ci.yml`: build, test, format, typecheck. `a11y.yml`: axe. `lighthouse.yml`: Lighthouse CI. `codeql.yml`: CodeQL.
 - `links.yml`: lychee on `dist/`, weekly. Never blocks. Opens or updates one issue when links break. False positives go in `.lycheeignore` with a comment.
+- `daily-rebuild.yml`: daily (06:07 UTC) POST to the `NETLIFY_BUILD_HOOK` secret, so PDS-driven pages (/verify, /domains) refresh without a merge.
 - `pages-redirect.yml`: manual. Replaces the GitHub Pages copy (dev.gui.do, gxjansen.github.io) with a redirect to gui.do.

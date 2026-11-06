@@ -1,0 +1,33 @@
+name: Daily rebuild
+
+# Triggers one Netlify production build a day, so pages built from Guido's PDS
+# at build time (/verify, /domains; src/lib/pds/loader.ts) pick up record
+# changes even on days nothing is merged. Runs after the events snapshot
+# (05:17 UTC); a second build on a day that snapshot also deployed is harmless.
+#
+# NETLIFY_BUILD_HOOK is a Netlify build hook URL for the master branch
+# (Netlify: Project configuration > Build & deploy > Build hooks). It can only
+# start a build, so it is the narrowest credential that does the job.
+
+on:
+  schedule:
+    - cron: "7 6 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger the Netlify build hook
+        env:
+          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::error::NETLIFY_BUILD_HOOK secret is not set"
+            exit 1
+          fi
+          curl -fsS --retry 3 --retry-all-errors -X POST -d '{}' \
+            "${HOOK}?trigger_title=Daily+rebuild+for+PDS-driven+pages"
