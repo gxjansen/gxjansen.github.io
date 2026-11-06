@@ -234,6 +234,7 @@ export const canon: CanonGroup[] = [
       {
         name: "Project Hail Mary",
         by: "2026",
+        why: "Grace Rocky Save Stars",
         url: "https://popfeed.social/movie/687163",
       },
     ],
