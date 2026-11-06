@@ -32,7 +32,7 @@ export interface DomainOverride {
   url?: string;
   /** Shown on top, outside the groups. */
   pinned?: boolean;
-  /** Private use: left off the page. */
+  /** Left off the page (private use, or not mine). */
   hidden?: boolean;
   /**
    * Redirects to another listed domain: shown as small print under that
@@ -92,7 +92,7 @@ export const domainOverrides: Record<string, DomainOverride> = {
   },
 
   "cro.cafe": {
-    group: "community",
+    group: "projects",
     note: "CRO.CAFE, my podcast and community on experimentation.",
     url: "https://www.cro.cafe/",
   },
@@ -103,16 +103,6 @@ export const domainOverrides: Record<string, DomainOverride> = {
   "dutchento.com": { aliasOf: "dutchento.org" },
   "magento.nl": { group: "community", url: "https://gui.do/communities/" },
   "spryker.nl": { group: "community", url: "https://gui.do/communities/" },
-  "atproto.ch": {
-    group: "community",
-    note: "Local AT Protocol community site for Switzerland.",
-    url: "https://atproto.ch/",
-  },
-  "atproto.pl": {
-    group: "community",
-    note: "Local AT Protocol community site for Poland.",
-    url: "https://atproto.pl/",
-  },
   "atcommons.eu": {
     group: "community",
     note: "Home of the shared code and lexicons for the atproto.* community sites.",
@@ -127,6 +117,10 @@ export const domainOverrides: Record<string, DomainOverride> = {
   "guidojansen.org": { group: "name" },
 
   // Left off the page.
+  // Managed for the local communities, not mine.
+  "atproto.ch": { hidden: true },
+  "atproto.pl": { hidden: true },
+  // Private use.
   "svl2.nl": { hidden: true },
   "devroede.nl": { hidden: true },
   "a11y.nl": { hidden: true },
