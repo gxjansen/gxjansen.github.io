@@ -141,6 +141,7 @@ function isContentPage(pathname: string): boolean {
     "where/",
     "canon/",
     "green/",
+    "verify/",
   ];
 
   // Top-level static pages written as plain "name/index.html"

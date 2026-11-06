@@ -8,6 +8,10 @@
   command = "npm run build"
   publish = "dist"
 
+# Keeps .pds-cache/ (last good PDS data for the slash pages) between builds.
+[[plugins]]
+  package = "./netlify/plugins/pds-cache"
+
 # Domain redirects — dutchento.org is a parked domain that must 301 to gui.do.
 # Netlify serves identical content on every domain alias by default, so without
 # these rules the whole site is duplicated on dutchento.org. These must stay the

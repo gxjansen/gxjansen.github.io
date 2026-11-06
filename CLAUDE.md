@@ -28,6 +28,7 @@ Guido X Jansen's personal site. Astro 7, Tailwind v4 (Vite plugin), MDX, React i
 - Dev-only routes (`/internal/ama/*`, the AMA card gallery and renderers): `src/dev-routes/`, injected by `src/integrations/dev-routes.ts` on every build except Netlify production, where they 404.
 - Netlify Functions: `netlify/functions/` (newsletter via Listmonk, ALTCHA challenge).
 - Redirects and headers: `netlify.toml`, `public/_redirects`.
+- PDS-driven slash pages (`/verify`): `src/lib/pds/loader.ts` loads one collection at build time and validates it with zod. A schema mismatch fails the build; a PDS outage falls back to `.pds-cache/` (kept between builds by `netlify/plugins/pds-cache` and `actions/cache` in CI) with a deploy warning.
 
 ## Known traps
 

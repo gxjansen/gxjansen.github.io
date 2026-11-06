@@ -105,6 +105,11 @@ export const slashPages: SlashPage[] = [
       "Which country I'm in right now, and the flags of everywhere I've been.",
   },
   {
+    slug: "verify",
+    featured: true,
+    description: "Proof that accounts elsewhere are really mine.",
+  },
+  {
     slug: "defaults",
     featured: true,
     description:
