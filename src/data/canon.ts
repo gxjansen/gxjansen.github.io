@@ -167,6 +167,7 @@ export const canon: CanonGroup[] = [
       { name: "The X-Files", url: "https://popfeed.social/tv_show/4087" },
       {
         name: "Star Trek: The Next Generation",
+        why: "Engage",
         url: "https://popfeed.social/tv_show/655",
       },
       {
