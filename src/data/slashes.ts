@@ -125,7 +125,7 @@ export const slashPages: SlashPage[] = [
   {
     slug: "colophon",
     featured: true,
-    description: "How this site is built, and who I owe.",
+    description: "How I built this site, the tools and open source behind it.",
   },
   {
     slug: "blank",
