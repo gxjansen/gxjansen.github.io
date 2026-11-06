@@ -44,11 +44,10 @@ Guido X Jansen's personal site. Astro 7, Tailwind v4 (Vite plugin), MDX, React i
 
 ## Events snapshot
 
-`.github/workflows/events-snapshot.yml` runs daily (05:17 UTC), runs `npm run events:snapshot` to refresh the snapshot from Guido's AT Protocol records, and opens a data-only PR that auto-merges after checks. It needs the `EVENTS_SNAPSHOT_TOKEN` secret.
+`.github/workflows/events-snapshot.yml` runs daily (05:17 UTC), runs `npm run events:snapshot` to refresh the snapshot from Guido's AT Protocol records, and opens a data-only PR that auto-merges after checks. The same run refreshes `src/data/pds-fingerprints.json` (`scripts/pds-fingerprints.mjs`, hashes of the collections /verify and /domains load at build time), so a changed record there also produces that PR and a deploy. A new PDS-driven page adds its collection as a key in that file. It needs the `EVENTS_SNAPSHOT_TOKEN` secret.
 
 ## CI
 
 - `ci.yml`: build, test, format, typecheck. `a11y.yml`: axe. `lighthouse.yml`: Lighthouse CI. `codeql.yml`: CodeQL.
 - `links.yml`: lychee on `dist/`, weekly. Never blocks. Opens or updates one issue when links break. False positives go in `.lycheeignore` with a comment.
-- `daily-rebuild.yml`: daily (06:07 UTC) POST to the `NETLIFY_BUILD_HOOK` secret, so PDS-driven pages (/verify, /domains) refresh without a merge.
 - `pages-redirect.yml`: manual. Replaces the GitHub Pages copy (dev.gui.do, gxjansen.github.io) with a redirect to gui.do.
