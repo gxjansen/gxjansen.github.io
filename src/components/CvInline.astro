@@ -1,0 +1,23 @@
+---
+import { inlineLinks } from "../lib/sifaProfile";
+
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+const segments = inlineLinks(text);
+---
+
+{segments.map((seg) =>
+  seg.href ? (
+    <a
+      href={seg.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-primary-600 dark:text-primary-400 underline underline-offset-2 hover:no-underline"
+      >{seg.text}</a
+    >
+  ) : (
+    seg.text
+  ),
+)}
