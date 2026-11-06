@@ -83,6 +83,46 @@ export const canon: CanonGroup[] = [
         why: "Listened to the audiobook multiple times. Beautiful story, and the alien bromance was a great unexpected plot surprise (in the book at least).",
         url: "https://bookhive.buzz/books/bk_8W2yvFBhN0NOAWoMzmOm",
       },
+      {
+        name: "Antifragile",
+        by: "Nassim Nicholas Taleb",
+        url: "https://bookhive.buzz/books/bk_CJO4kSiRcYwXYO7Qn1l2",
+      },
+      {
+        name: "Mythos",
+        by: "Stephen Fry",
+        url: "https://bookhive.buzz/books/bk_bPD2GkFbCdOG12pQeuvQ",
+      },
+      {
+        name: "Norse Mythology",
+        by: "Neil Gaiman",
+        url: "https://bookhive.buzz/books/bk_U4IyoK0JDTv9d5uiqb28",
+      },
+      {
+        name: "Thinking in Bets",
+        by: "Annie Duke",
+        url: "https://bookhive.buzz/books/bk_8pH1waTjO4eieDceWn9B",
+      },
+      {
+        name: "Factfulness",
+        by: "Hans Rosling",
+        url: "https://bookhive.buzz/books/bk_n8mocwZKoc9iRobrsr2s",
+      },
+      {
+        name: "Je hebt wél iets te verbergen",
+        by: "Maurits Martijn and Dimitri Tokmetzis",
+        url: "https://bookhive.buzz/books/bk_T19N2FgVMEO4ax5KGlRS",
+      },
+      {
+        name: "The Cathedral and the Bazaar",
+        by: "Eric S. Raymond",
+        url: "https://bookhive.buzz/books/bk_b0aYi1milOdUsJOkygik",
+      },
+      {
+        name: "Utopia for Realists",
+        by: "Rutger Bregman",
+        url: "https://bookhive.buzz/books/bk_gplY5XOhHczYCeLXtYQz",
+      },
     ],
   },
   {
@@ -97,11 +137,23 @@ export const canon: CanonGroup[] = [
         name: "Donald Duck",
         url: "https://bookhive.buzz/books/bk_KddqdPWSRpy7q8jsmiSq",
       },
+      { name: "Asterix and Obelix", by: "Goscinny and Uderzo" },
+      {
+        name: "User Friendly",
+        by: "J.D. Frazer",
+        url: "https://en.wikipedia.org/wiki/User_Friendly",
+      },
       {
         name: "De Schippers van de Kameleon",
         by: "Hotze de Roos",
         url: "https://bookhive.buzz/books/bk_oALK35A1J8QeNvo4zKxm",
       },
+      {
+        name: "De Fabeltjeskrant",
+        url: "https://popfeed.social/tv_show/35007",
+      },
+      { name: "Sesamstraat", url: "https://popfeed.social/tv_show/19240" },
+      { name: "Het Klokhuis", url: "https://popfeed.social/tv_show/12080" },
       {
         name: "Ghostbusters II",
         by: "1989",
@@ -130,6 +182,7 @@ export const canon: CanonGroup[] = [
       { name: "Caesar III", by: "1998" },
       { name: "Civilization" },
       { name: "Mario Kart" },
+      { name: "SimCity" },
     ],
   },
   {
@@ -165,6 +218,8 @@ export const canon: CanonGroup[] = [
     items: [
       { name: "Marvel's Avengers saga", by: "Phases 1 to 3" },
       { name: "Silicon Valley", url: "https://popfeed.social/tv_show/60573" },
+      { name: "Black Mirror", url: "https://popfeed.social/tv_show/42009" },
+      { name: "Mr. Robot", url: "https://popfeed.social/tv_show/62560" },
       {
         name: "The Expanse",
         by: "TV series",
