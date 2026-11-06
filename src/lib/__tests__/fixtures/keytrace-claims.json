@@ -1,0 +1,223 @@
+[
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/dev.keytrace.claim/3mqzs6sft4e2t",
+    "cid": "bafyreicdt4hlhhgvmkka3jjdfljjm2jhwt3ng6fouip47cyf2qx6dl4o6u",
+    "rkey": "3mqzs6sft4e2t",
+    "value": {
+      "sigs": [
+        {
+          "kid": "attest:activitypub",
+          "src": "at://did:plc:hcwfdlmprcc335oixyfsw7u3/dev.keytrace.serverPublicKey/2026-07-19",
+          "signedAt": "2026-07-19T22:09:01.361Z",
+          "attestation": "…",
+          "signedFields": [
+            "claimUri",
+            "did",
+            "identity.subject",
+            "type"
+          ]
+        },
+        {
+          "kid": "status",
+          "src": "at://did:plc:hcwfdlmprcc335oixyfsw7u3/dev.keytrace.serverPublicKey/2026-07-19",
+          "signedAt": "2026-07-19T22:09:01.412Z",
+          "attestation": "…",
+          "signedFields": [
+            "claimUri",
+            "did",
+            "lastVerifiedAt",
+            "status"
+          ]
+        }
+      ],
+      "type": "activitypub",
+      "$type": "dev.keytrace.claim",
+      "status": "verified",
+      "claimUri": "https://mstdn.social/@gxjansen",
+      "identity": {
+        "subject": "gxjansen",
+        "profileUrl": "https://mstdn.social/@gxjansen",
+        "displayName": "Guido X Jansen"
+      },
+      "createdAt": "2026-07-19T22:09:01.412Z",
+      "lastVerifiedAt": "2026-07-19T22:09:01.412Z"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/dev.keytrace.claim/3mgb65loa3l2e",
+    "cid": "bafyreig3bsom3h2az7eseqsctmd4ff6bechncyzwgg5tlbwylq4d2fbp34",
+    "rkey": "3mgb65loa3l2e",
+    "value": {
+      "sigs": [
+        {
+          "kid": "attest:linkedin",
+          "src": "at://did:plc:hcwfdlmprcc335oixyfsw7u3/dev.keytrace.serverPublicKey/2026-03-04",
+          "signedAt": "2026-03-04T20:54:35.887Z",
+          "attestation": "…",
+          "signedFields": [
+            "claimUri",
+            "did",
+            "identity.subject",
+            "type"
+          ]
+        },
+        {
+          "kid": "status",
+          "src": "at://did:plc:hcwfdlmprcc335oixyfsw7u3/dev.keytrace.serverPublicKey/2026-03-04",
+          "signedAt": "2026-03-04T20:54:35.967Z",
+          "attestation": "…",
+          "signedFields": [
+            "claimUri",
+            "did",
+            "lastVerifiedAt",
+            "status"
+          ]
+        }
+      ],
+      "type": "linkedin",
+      "$type": "dev.keytrace.claim",
+      "status": "verified",
+      "claimUri": "https://www.linkedin.com/posts/gxjansen_im-linking-my-keytracedev-didplc45uheisi25szrjvjurfpritx-activity-7435065112966729728-dDVF?rcm=ACoAAAE9x28BO40Y0LuH7MU4xYpqyiNKwcq4d4M",
+      "identity": {
+        "subject": "gxjansen",
+        "profileUrl": "https://www.linkedin.com/in/gxjansen",
+        "displayName": "Guido X Jansen"
+      },
+      "createdAt": "2026-03-04T20:54:35.967Z",
+      "prerelease": true,
+      "lastVerifiedAt": "2026-03-04T20:54:35.967Z"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/dev.keytrace.claim/3mgb63ljdeh2a",
+    "cid": "bafyreieve3us5srn7mckuo7shbd4t62ayradlkiz73ywnubivmlnbusahe",
+    "rkey": "3mgb63ljdeh2a",
+    "value": {
+      "sigs": [
+        {
+          "kid": "attest:tangled",
+          "src": "at://did:plc:hcwfdlmprcc335oixyfsw7u3/dev.keytrace.serverPublicKey/2026-03-04",
+          "signedAt": "2026-03-04T20:53:28.675Z",
+          "attestation": "…",
+          "signedFields": [
+            "claimUri",
+            "did",
+            "identity.subject",
+            "type"
+          ]
+        },
+        {
+          "kid": "status",
+          "src": "at://did:plc:hcwfdlmprcc335oixyfsw7u3/dev.keytrace.serverPublicKey/2026-03-04",
+          "signedAt": "2026-03-04T20:55:33.865Z",
+          "attestation": "…",
+          "signedFields": [
+            "claimUri",
+            "did",
+            "lastVerifiedAt",
+            "status"
+          ]
+        }
+      ],
+      "type": "tangled",
+      "$type": "dev.keytrace.claim",
+      "status": "verified",
+      "claimUri": "https://tangled.org/strings/did:plc:45uheisi25szrjvjurfpritx/3mgb6345idu22",
+      "identity": {
+        "subject": "did:plc:45uheisi25szrjvjurfpritx",
+        "profileUrl": "https://tangled.org/did:plc:45uheisi25szrjvjurfpritx"
+      },
+      "createdAt": "2026-03-04T20:53:28.736Z",
+      "prerelease": true,
+      "lastVerifiedAt": "2026-03-04T20:55:33.865Z"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/dev.keytrace.claim/3mgb5zpmr752w",
+    "cid": "bafyreighprkof7mi5plldhjogqn4y6xerv5jgabgw67eet4hkci2fsgseu",
+    "rkey": "3mgb5zpmr752w",
+    "value": {
+      "sigs": [
+        {
+          "kid": "attest:dns",
+          "src": "at://did:plc:hcwfdlmprcc335oixyfsw7u3/dev.keytrace.serverPublicKey/2026-03-04",
+          "signedAt": "2026-03-04T20:52:25.894Z",
+          "attestation": "…",
+          "signedFields": [
+            "claimUri",
+            "did",
+            "identity.subject",
+            "type"
+          ]
+        },
+        {
+          "kid": "status",
+          "src": "at://did:plc:hcwfdlmprcc335oixyfsw7u3/dev.keytrace.serverPublicKey/2026-03-04",
+          "signedAt": "2026-03-04T20:52:25.952Z",
+          "attestation": "…",
+          "signedFields": [
+            "claimUri",
+            "did",
+            "lastVerifiedAt",
+            "status"
+          ]
+        }
+      ],
+      "type": "dns",
+      "$type": "dev.keytrace.claim",
+      "status": "verified",
+      "claimUri": "dns:gui.do",
+      "identity": {
+        "subject": "gui.do",
+        "profileUrl": "https://gui.do"
+      },
+      "createdAt": "2026-03-04T20:52:25.952Z",
+      "prerelease": true,
+      "lastVerifiedAt": "2026-03-04T20:52:25.952Z"
+    }
+  },
+  {
+    "uri": "at://did:plc:45uheisi25szrjvjurfpritx/dev.keytrace.claim/3mgb5twfnor2z",
+    "cid": "bafyreieeg76hqlmb6vieipaizitcugjvxezfzpyekitljzkihe6zyzh57q",
+    "rkey": "3mgb5twfnor2z",
+    "value": {
+      "sigs": [
+        {
+          "kid": "attest:github",
+          "src": "at://did:plc:hcwfdlmprcc335oixyfsw7u3/dev.keytrace.serverPublicKey/2026-03-04",
+          "signedAt": "2026-03-04T20:49:11.435Z",
+          "attestation": "…",
+          "signedFields": [
+            "claimUri",
+            "did",
+            "identity.subject",
+            "type"
+          ]
+        },
+        {
+          "kid": "status",
+          "src": "at://did:plc:hcwfdlmprcc335oixyfsw7u3/dev.keytrace.serverPublicKey/2026-03-04",
+          "signedAt": "2026-03-04T20:49:11.674Z",
+          "attestation": "…",
+          "signedFields": [
+            "claimUri",
+            "did",
+            "lastVerifiedAt",
+            "status"
+          ]
+        }
+      ],
+      "type": "github",
+      "$type": "dev.keytrace.claim",
+      "status": "verified",
+      "claimUri": "https://gist.github.com/gxjansen/0dd29902dd9e57adcae72598bfdb772e",
+      "identity": {
+        "subject": "gxjansen",
+        "profileUrl": "https://github.com/gxjansen"
+      },
+      "createdAt": "2026-03-04T20:49:11.674Z",
+      "prerelease": true,
+      "lastVerifiedAt": "2026-03-04T20:49:11.674Z"
+    }
+  }
+]

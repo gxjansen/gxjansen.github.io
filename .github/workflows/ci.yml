@@ -26,6 +26,13 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      # Last good PDS data, so a PDS outage doesn't fail the build
+      # (src/lib/pds/loader.ts). A fresh key per run always saves the newest copy.
+      - uses: actions/cache@v6
+        with:
+          path: .pds-cache
+          key: pds-cache-${{ github.run_id }}
+          restore-keys: pds-cache-
       - run: npx astro build
 
   test:

@@ -131,6 +131,12 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     lead: "What I do to waste less energy, water and stuff. Honestly.",
     hand: "trying, not perfect",
   },
+  verify: {
+    url: "gui.do/verify",
+    title: "Check an account is really me",
+    lead: "Proof that accounts elsewhere are really me.",
+    hand: "check it's me",
+  },
   colophon: {
     url: "gui.do/colophon",
     title: "Colophon",
