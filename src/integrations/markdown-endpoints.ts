@@ -139,6 +139,7 @@ function isContentPage(pathname: string): boolean {
     "follow/",
     "colophon/",
     "where/",
+    "canon/",
   ];
 
   // Top-level static pages written as plain "name/index.html"

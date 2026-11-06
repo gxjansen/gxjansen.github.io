@@ -9,7 +9,6 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import {
   categoryOrder,
   currentItems,
-  defaultItem,
   defaults,
   displayName,
   droppedItems,
@@ -199,10 +198,7 @@ const traitCount = (trait: UsesTrait | undefined) =>
 
 // Defaults: each name links to its item, or stays plain text when it isn't
 // on this page (see `plainDefaults`).
-const defaultRows = defaults.map((d) => ({
-  slot: d.slot,
-  uses: d.use.map((name) => ({ name, item: defaultItem(name) })),
-}));
+const defaultRows = defaults.map((d) => ({ slot: d.slot, uses: d.use }));
 
 const index = [
   { id: "principles", name: "How I pick tools" },

@@ -128,6 +128,11 @@ export const slashPages: SlashPage[] = [
     aliases: [{ slug: "pic" }],
   },
   {
+    slug: "canon",
+    featured: true,
+    description: "Books, comics, thinkers and TV that shaped how I think.",
+  },
+  {
     slug: "colophon",
     featured: true,
     description: "How I built this site, the tools and open source behind it.",

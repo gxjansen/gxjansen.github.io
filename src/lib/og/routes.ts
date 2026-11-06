@@ -125,6 +125,12 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     lead: "Country reported by my own server, plus the flags of everywhere I've been.",
     hand: "right here",
   },
+  canon: {
+    url: "gui.do/canon",
+    title: "My personal canon",
+    lead: "The books, thinkers and shows that shaped how I think.",
+    hand: "the good stuff",
+  },
   colophon: {
     url: "gui.do/colophon",
     title: "Colophon",
