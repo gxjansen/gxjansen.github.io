@@ -230,6 +230,7 @@ export const canon: CanonGroup[] = [
       {
         name: "The Expanse",
         by: "TV series",
+        why: "Space is too fucking big",
         url: "https://popfeed.social/tv_show/63639",
       },
       {
