@@ -140,7 +140,8 @@ export const slashPages: SlashPage[] = [
   {
     slug: "canon",
     featured: true,
-    description: "Books, comics, thinkers and TV that shaped how I think.",
+    description:
+      "Books, comics, thinkers, TV and games that shaped how I think.",
   },
   {
     slug: "green",
