@@ -1,0 +1,52 @@
+---
+/**
+ * /green: what Guido does to waste less energy, water and stuff
+ * (https://slashpages.net). Data in src/data/green.ts.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { green } from "@data/green";
+
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+---
+
+<BaseLayout
+  title="Green"
+  description="What I do to waste less energy, water and stuff."
+>
+  <div class="home green-page">
+    <section
+      class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="max-w-[60ch]">
+        <span class="hand-note">trying, not perfect</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Green
+        </h1>
+        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
+          What I do to waste less energy, water and stuff. I'm not perfect at
+          this, and I'll try to name the tradeoffs as I go.
+        </p>
+      </div>
+
+      <div class="mt-12 grid max-w-3xl gap-10 sm:grid-cols-2">
+        {green.map((group) => <section
+          aria-labelledby={`green-${slug(group.name)}`}
+        >
+          <h2
+            id={`green-${slug(group.name)}`}
+            class="font-display mb-3 text-[1.35rem] font-extrabold tracking-[-0.02em]"
+          >
+            {group.name}
+          </h2>
+          <ul
+            class="text-base-700 dark:text-base-300 list-disc space-y-1.5 pl-5 leading-snug"
+          >
+            {group.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>)}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

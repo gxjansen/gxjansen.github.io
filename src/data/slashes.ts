@@ -133,6 +133,11 @@ export const slashPages: SlashPage[] = [
     description: "Books, comics, thinkers and TV that shaped how I think.",
   },
   {
+    slug: "green",
+    featured: true,
+    description: "What I do to waste less energy, water and stuff.",
+  },
+  {
     slug: "colophon",
     featured: true,
     description: "How I built this site, the tools and open source behind it.",

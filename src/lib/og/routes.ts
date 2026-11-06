@@ -131,6 +131,12 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     lead: "The books, thinkers and shows that shaped how I think.",
     hand: "the good stuff",
   },
+  green: {
+    url: "gui.do/green",
+    title: "Trying to waste less",
+    lead: "What I do to waste less energy, water and stuff. Honestly.",
+    hand: "trying, not perfect",
+  },
   colophon: {
     url: "gui.do/colophon",
     title: "Colophon",
