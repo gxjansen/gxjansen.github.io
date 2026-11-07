@@ -76,7 +76,7 @@ export const domainOverrides: Record<string, DomainOverride> = {
   "atgora.forum": { aliasOf: "barazo.forum" },
   "singi.dev": {
     group: "projects",
-    note: "Singi Labs, my company behind Sifa and Barazo.",
+    note: "Singi Labs, where I'm building on the Atmosphere, the next generation of the internet.",
     url: "https://singi.dev/",
   },
   "kootana.social": {
