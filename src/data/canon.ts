@@ -28,6 +28,8 @@ export const canon: CanonGroup[] = [
       {
         name: "Bobiverse",
         by: "Dennis E. Taylor",
+        quote:
+          "Hey, with IPv8, we should be able to address every galaxy in the universe.",
         url: "https://bookhive.buzz/books/bk_QpAYHDvWcvppAypChYHy",
       },
       {
@@ -38,6 +40,7 @@ export const canon: CanonGroup[] = [
       {
         name: "The Three-Body Problem",
         by: "Liu Cixin",
+        quote: "Do not answer!",
         url: "https://bookhive.buzz/books/bk_q8k17tKuKqKAPDybYQmj",
       },
       {
@@ -90,6 +93,8 @@ export const canon: CanonGroup[] = [
       {
         name: "Antifragile",
         by: "Nassim Nicholas Taleb",
+        quote:
+          "Antifragility is beyond resilience or robustness. The resilient resists shocks and stays the same; the antifragile gets better.",
         url: "https://bookhive.buzz/books/bk_CJO4kSiRcYwXYO7Qn1l2",
       },
       {
@@ -115,6 +120,8 @@ export const canon: CanonGroup[] = [
       {
         name: "Factfulness",
         by: "Hans Rosling",
+        quote:
+          "When we have a fact-based worldview, we can see that the world is not as bad as it seems—and we can see what we have to do to keep making it better.",
         url: "https://bookhive.buzz/books/bk_n8mocwZKoc9iRobrsr2s",
       },
       {
@@ -171,7 +178,11 @@ export const canon: CanonGroup[] = [
       { name: "Knight Rider", url: "https://popfeed.social/tv_show/2384" },
       { name: "Airwolf", url: "https://popfeed.social/tv_show/2119" },
       { name: "The A-Team", url: "https://popfeed.social/tv_show/1516" },
-      { name: "MacGyver", url: "https://popfeed.social/tv_show/2875" },
+      {
+        name: "MacGyver",
+        quote: "The best way to beat a problem is to make it work for you.",
+        url: "https://popfeed.social/tv_show/2875",
+      },
       {
         name: "Miami Vice",
         why: "Even just the soundtrack! The intro, In the Air Tonight, Crockett’s Theme, Take Me Home...",
@@ -191,6 +202,8 @@ export const canon: CanonGroup[] = [
       {
         name: "The Matrix",
         by: "1999",
+        quote:
+          "Unfortunately, no one can be told what the Matrix is. You have to see it for yourself.",
         url: "https://popfeed.social/movie/603",
       },
       {
