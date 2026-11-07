@@ -7,6 +7,7 @@ export const pressCoverage: PressCoverage[] = [
     publicationDate: "2026-08-20",
     youtubeLink: "https://www.youtube.com/watch?v=EVBpuLvlzv0",
     spotifyEmbedId: "0eOw7ZbQU9YaeW1FXyWP7u",
+    coverImage: "/images/podcasts/open-podcast-community-episode.jpg",
     articleUrl:
       "https://www.opencommerce.agency/en/articles/why-community-matters-now",
     personOrganization: "Sander Mangel for The Open Podcast",
