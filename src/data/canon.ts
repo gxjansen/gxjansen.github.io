@@ -284,8 +284,8 @@ export const canon: CanonGroup[] = [
     name: "Games",
     items: [
       { name: "Minecraft" },
-      { name: "Factorio" },
-      { name: "Satisfactory" },
+      { name: "Factorio", quote: "The factory must grow." },
+      { name: "Satisfactory", quote: "FICSIT does not waste." },
       { name: "Timberborn" },
     ],
   },
