@@ -28,6 +28,8 @@ export const canon: CanonGroup[] = [
       {
         name: "Bobiverse",
         by: "Dennis E. Taylor",
+        quote:
+          "Hey, with IPv8, we should be able to address every galaxy in the universe.",
         url: "https://bookhive.buzz/books/bk_QpAYHDvWcvppAypChYHy",
       },
       {
@@ -90,6 +92,8 @@ export const canon: CanonGroup[] = [
       {
         name: "Antifragile",
         by: "Nassim Nicholas Taleb",
+        quote:
+          "Antifragility is beyond resilience or robustness. The resilient resists shocks and stays the same; the antifragile gets better.",
         url: "https://bookhive.buzz/books/bk_CJO4kSiRcYwXYO7Qn1l2",
       },
       {
@@ -115,6 +119,8 @@ export const canon: CanonGroup[] = [
       {
         name: "Factfulness",
         by: "Hans Rosling",
+        quote:
+          "When we have a fact-based worldview, we can see that the world is not as bad as it seems—and we can see what we have to do to keep making it better.",
         url: "https://bookhive.buzz/books/bk_n8mocwZKoc9iRobrsr2s",
       },
       {
