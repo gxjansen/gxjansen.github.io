@@ -26,6 +26,15 @@ const { podcasts } = Astro.props;
       class="bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 reveal overflow-hidden rounded-2xl border"
       role="listitem"
     >
+      {podcast.coverImage && (
+        <img
+          src={podcast.coverImage}
+          alt=""
+          class="bg-base-200 dark:bg-base-800 aspect-square w-full object-contain"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
       <PodcastLinks spotifyId={podcast.spotifyEmbedId} title={podcast.title} />
       <div class="p-6">
         <h3
