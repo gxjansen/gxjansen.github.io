@@ -56,6 +56,11 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
                 </span>
               )}
               {item.by && <span class="text-base-500"> · {item.by}</span>}
+              {item.quote && <p
+                class="text-base-600 dark:text-base-400 mt-0.5 text-sm italic"
+              >
+                <q>{item.quote}</q>
+              </p>}
               {item.why && <p
                 class="text-base-600 dark:text-base-400 mt-0.5 text-sm"
               >
