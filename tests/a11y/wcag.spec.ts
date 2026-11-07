@@ -15,6 +15,7 @@ const ROUTES = [
   "/",
   "/about/",
   "/appearances/",
+  "/awards/",
   "/podcasts/",
   "/retainer/",
   "/speaker/",

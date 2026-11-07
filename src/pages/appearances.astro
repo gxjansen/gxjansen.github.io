@@ -4,7 +4,6 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
 import ContentTypeSelector from "@components/Press/ContentTypeSelector.astro";
-import AwardsSection from "@components/Press/AwardsSection.astro";
 import VideoSection from "@components/Press/VideoSection.astro";
 import PodcastSection from "@components/Press/PodcastSection.astro";
 import ArticleSection from "@components/Press/ArticleSection.astro";
@@ -28,9 +27,6 @@ const sortedCoverage = [...availableCoverage].sort(
 );
 
 // Separate content by category
-const awards = sortedCoverage.filter(
-  (item) => item.category === "award" || item.category === "nomination",
-);
 const listings = sortedCoverage.filter((item) => item.category === "listing");
 
 // For remaining content (interviews/default), separate by media type
@@ -52,7 +48,6 @@ if (filteredCount > 0) {
 // Debug: Log content counts
 console.log("Content counts:", {
   total: sortedCoverage.length,
-  awards: awards.length,
   videos: videos.length,
   podcasts: podcasts.length,
   articles: articles.length,
@@ -135,7 +130,12 @@ const hasUpcoming = events.some((e) => new Date(e.date) >= startOfToday);
             href="/events/"
             class="text-primary-600 dark:text-primary-400 font-semibold"
             >/events</a
-          >.
+          >. Looking for the awards? They've moved to their own page:
+          <a
+            href="/awards/"
+            class="text-primary-600 dark:text-primary-400 font-semibold"
+            >/awards</a
+          >
         </p>
       </div>
 
@@ -144,7 +144,6 @@ const hasUpcoming = events.some((e) => new Date(e.date) >= startOfToday);
 
     <!-- Use view transitions for smooth content switching -->
     <div class="view-transition-group:media-content">
-      {awards.length > 0 && <AwardsSection awards={awards} />}
       <VideoSection videos={videos} />
       <PodcastSection podcasts={podcasts} />
       <ArticleSection articles={articles} />

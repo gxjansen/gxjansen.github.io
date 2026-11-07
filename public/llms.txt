@@ -17,6 +17,7 @@ specification.website agent-readiness spec
 - [CV](https://gui.do/cv/): work history, projects, credentials and awards, from Guido's Sifa ID profile
 - [Contact](https://gui.do/contact/): how to reach Guido
 - [Appearances](https://gui.do/appearances/): podcasts, panels, videos and articles where Guido appeared as a guest
+- [Awards](https://gui.do/awards/): awards and nominations for Guido's work, plus competitive swimming results
 - [Author profile](https://gui.do/authors/gxjansen/): canonical author page with all social profiles
 - [Uses](https://gui.do/uses/): the hardware, software and services Guido uses, and what he dropped
 - [Follow](https://gui.do/follow/): ways to follow Guido: newsletter, Standard Reader, RSS or social profiles
