@@ -283,10 +283,16 @@ export const canon: CanonGroup[] = [
   {
     name: "Games",
     items: [
-      { name: "Minecraft" },
+      {
+        name: "Minecraft",
+        why: "Selfhosting my kids’ Minecraft worlds with all of teh mods",
+      },
       { name: "Factorio", quote: "The factory must grow." },
       { name: "Satisfactory", quote: "FICSIT does not waste." },
-      { name: "Timberborn" },
+      {
+        name: "Timberborn",
+        why: "A post-apocalyptic lumberpunk beaver colony builder and terraforming sim",
+      },
     ],
   },
 ];
