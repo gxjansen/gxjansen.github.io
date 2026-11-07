@@ -73,8 +73,14 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
   appearances: {
     url: "gui.do/appearances",
     title: "Where I've shown up",
-    lead: "Podcasts, panels, blogs and videos I was invited into, plus a few articles and awards.",
+    lead: "Podcasts, panels, blogs and videos I was invited into, plus a few articles.",
     hand: "said things",
+  },
+  awards: {
+    url: "gui.do/awards",
+    title: "Sometimes I even win things",
+    lead: "Awards, nominations, and a few swimming medals.",
+    hand: "look, trophies",
   },
   newsletter: {
     url: "gui.do/newsletter",

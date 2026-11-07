@@ -183,6 +183,10 @@ export const slashPages: SlashPage[] = [
   },
   { slug: "presentations", description: "Talks and workshops I've given." },
   {
+    slug: "awards",
+    description: "Awards, nominations, and a few swimming medals.",
+  },
+  {
     slug: "events",
     description: "Where I'm speaking, organising or just showing up.",
   },

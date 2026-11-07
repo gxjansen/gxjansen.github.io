@@ -26,6 +26,7 @@ export async function GET() {
         { text: "About Me", link: "/about" },
         { text: "CV", link: "/cv" },
         { text: "Appearances", link: "/appearances" },
+        { text: "Awards", link: "/awards" },
         { text: "Contact", link: "/contact" },
       ],
     },

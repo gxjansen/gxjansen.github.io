@@ -93,6 +93,11 @@ const navConfig = [
         icon: "tabler/clock",
       },
       {
+        text: "Awards",
+        link: "/awards",
+        icon: "tabler/outline/trophy",
+      },
+      {
         text: "Uses",
         link: "/uses",
         icon: "tabler/outline/tools",
