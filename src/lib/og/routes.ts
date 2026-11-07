@@ -146,7 +146,6 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
   domains: {
     url: "gui.do/domains",
     title: "The domains I own",
-    lead: "The honest list, generated from records in my own PDS.",
     hand: "domain receipts",
   },
   colophon: {
