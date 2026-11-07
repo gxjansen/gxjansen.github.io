@@ -1,7 +1,7 @@
 /**
  * Data for /canon (https://slashpages.net): the books, people and screen
  * stuff that shaped how Guido thinks. Most things released before 2000 go
- * under "Growing up". A `why` per item is optional.
+ * under "Growing up". A `quote` and a `why` per item are optional.
  */
 
 export interface CanonItem {
@@ -10,6 +10,9 @@ export interface CanonItem {
   by?: string;
   /** Item page on Bookhive (books) or Popfeed (screen). */
   url?: string;
+  /** A line from the work itself, without quote marks: shown as a quote. */
+  quote?: string;
+  /** Guido's own comment, shown as plain text. */
   why?: string;
 }
 
@@ -75,7 +78,7 @@ export const canon: CanonGroup[] = [
       {
         name: "The Egg",
         by: "Andy Weir",
-        why: "In this universe, there’s just you and me.",
+        quote: "In this universe, there’s just you and me.",
         url: "https://bookhive.buzz/books/bk_qGwT4nERDa8XW65PjDUD",
       },
       {
@@ -88,6 +91,11 @@ export const canon: CanonGroup[] = [
         name: "Antifragile",
         by: "Nassim Nicholas Taleb",
         url: "https://bookhive.buzz/books/bk_CJO4kSiRcYwXYO7Qn1l2",
+      },
+      {
+        name: "Meditations",
+        by: "Marcus Aurelius",
+        url: "https://bookhive.buzz/books/bk_ZgElfE6VQl6NKVF9hJ5X",
       },
       {
         name: "Mythos",
@@ -164,17 +172,32 @@ export const canon: CanonGroup[] = [
       { name: "Airwolf", url: "https://popfeed.social/tv_show/2119" },
       { name: "The A-Team", url: "https://popfeed.social/tv_show/1516" },
       { name: "MacGyver", url: "https://popfeed.social/tv_show/2875" },
-      { name: "Miami Vice", url: "https://popfeed.social/tv_show/1908" },
-      { name: "The X-Files", url: "https://popfeed.social/tv_show/4087" },
+      {
+        name: "Miami Vice",
+        why: "Even just the soundtrack! The intro, In the Air Tonight, Crockett’s Theme, Take Me Home...",
+        url: "https://popfeed.social/tv_show/1908",
+      },
+      {
+        name: "The X-Files",
+        quote:
+          "I’ve seen the life on this planet, Scully, and that is exactly why I’m looking elsewhere.",
+        url: "https://popfeed.social/tv_show/4087",
+      },
       {
         name: "Star Trek: The Next Generation",
-        why: "Engage",
+        quote: "Engage",
         url: "https://popfeed.social/tv_show/655",
       },
       {
         name: "The Matrix",
         by: "1999",
         url: "https://popfeed.social/movie/603",
+      },
+      {
+        name: "Fight Club",
+        by: "1999",
+        quote: "This is your life, and it’s ending one minute at a time.",
+        url: "https://popfeed.social/movie/550",
       },
       {
         name: "Jurassic Park",
@@ -209,7 +232,7 @@ export const canon: CanonGroup[] = [
       { name: "Hannah Fry" },
       { name: "Jeff Geerling" },
       { name: "Jono Bacon" },
-      { name: "Kyle Hill" },
+      { name: "Kyle Hill", why: "Roko’s basilisk" },
       { name: "Steve Mould" },
       { name: "Matt Parker", by: "Stand-up Maths" },
       { name: "John and Hank Green", by: "Vlogbrothers" },
@@ -218,16 +241,40 @@ export const canon: CanonGroup[] = [
   {
     name: "On screen",
     items: [
-      { name: "Marvel's Avengers saga", by: "Phases 1 to 3" },
+      {
+        name: "Marvel's Avengers saga",
+        by: "Phases 1 to 3",
+        quote: "Perfectly balanced, as all things should be.",
+      },
       {
         name: "Doctor Who",
         by: "2005 onward",
-        why: "Spoilers",
+        quote: "Spoilers",
         url: "https://popfeed.social/tv_show/57243",
       },
-      { name: "Silicon Valley", url: "https://popfeed.social/tv_show/60573" },
-      { name: "Black Mirror", url: "https://popfeed.social/tv_show/42009" },
-      { name: "Mr. Robot", url: "https://popfeed.social/tv_show/62560" },
+      {
+        name: "Memento",
+        by: "2000",
+        quote: "Memory can change the shape of a room.",
+        url: "https://popfeed.social/movie/77",
+      },
+      {
+        name: "Silicon Valley",
+        quote: "It’s not magic, it’s talent and sweat.",
+        url: "https://popfeed.social/tv_show/60573",
+      },
+      {
+        name: "Black Mirror",
+        quote:
+          "Thanks to the technological revolution, we have the power to rage and accuse, spout bile without consequence.",
+        url: "https://popfeed.social/tv_show/42009",
+      },
+      {
+        name: "Mr. Robot",
+        quote:
+          "The world is a dangerous place, Elliot, not because of those who do evil, but because of those who look on and do nothing.",
+        url: "https://popfeed.social/tv_show/62560",
+      },
       {
         name: "The Expanse",
         by: "TV series",
@@ -245,10 +292,16 @@ export const canon: CanonGroup[] = [
   {
     name: "Games",
     items: [
-      { name: "Minecraft" },
-      { name: "Factorio" },
-      { name: "Satisfactory" },
-      { name: "Timberborn" },
+      {
+        name: "Minecraft",
+        why: "Selfhosting my kids’ Minecraft worlds with all of teh mods",
+      },
+      { name: "Factorio", quote: "The factory must grow." },
+      { name: "Satisfactory", quote: "FICSIT does not waste." },
+      {
+        name: "Timberborn",
+        why: "A post-apocalyptic lumberpunk beaver colony builder and terraforming sim",
+      },
     ],
   },
 ];
