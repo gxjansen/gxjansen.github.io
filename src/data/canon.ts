@@ -40,6 +40,7 @@ export const canon: CanonGroup[] = [
       {
         name: "The Three-Body Problem",
         by: "Liu Cixin",
+        quote: "Do not answer!",
         url: "https://bookhive.buzz/books/bk_q8k17tKuKqKAPDybYQmj",
       },
       {
