@@ -172,8 +172,17 @@ export const canon: CanonGroup[] = [
       { name: "Airwolf", url: "https://popfeed.social/tv_show/2119" },
       { name: "The A-Team", url: "https://popfeed.social/tv_show/1516" },
       { name: "MacGyver", url: "https://popfeed.social/tv_show/2875" },
-      { name: "Miami Vice", url: "https://popfeed.social/tv_show/1908" },
-      { name: "The X-Files", url: "https://popfeed.social/tv_show/4087" },
+      {
+        name: "Miami Vice",
+        why: "Even just the soundtrack! The intro, In the Air Tonight, Crockett’s Theme, Take Me Home...",
+        url: "https://popfeed.social/tv_show/1908",
+      },
+      {
+        name: "The X-Files",
+        quote:
+          "I’ve seen the life on this planet, Scully, and that is exactly why I’m looking elsewhere.",
+        url: "https://popfeed.social/tv_show/4087",
+      },
       {
         name: "Star Trek: The Next Generation",
         quote: "Engage",
