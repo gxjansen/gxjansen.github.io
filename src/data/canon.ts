@@ -177,7 +177,11 @@ export const canon: CanonGroup[] = [
       { name: "Knight Rider", url: "https://popfeed.social/tv_show/2384" },
       { name: "Airwolf", url: "https://popfeed.social/tv_show/2119" },
       { name: "The A-Team", url: "https://popfeed.social/tv_show/1516" },
-      { name: "MacGyver", url: "https://popfeed.social/tv_show/2875" },
+      {
+        name: "MacGyver",
+        quote: "The best way to beat a problem is to make it work for you.",
+        url: "https://popfeed.social/tv_show/2875",
+      },
       {
         name: "Miami Vice",
         why: "Even just the soundtrack! The intro, In the Air Tonight, Crockett’s Theme, Take Me Home...",
@@ -197,6 +201,8 @@ export const canon: CanonGroup[] = [
       {
         name: "The Matrix",
         by: "1999",
+        quote:
+          "Unfortunately, no one can be told what the Matrix is. You have to see it for yourself.",
         url: "https://popfeed.social/movie/603",
       },
       {
