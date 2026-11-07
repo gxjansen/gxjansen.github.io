@@ -1,0 +1,118 @@
+---
+/**
+ * /awards: awards and nominations for my work (press-coverage.ts entries with
+ * category "award" or "nomination") plus competitive swimming results
+ * (src/data/swimming.ts).
+ */
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import AwardsSection from "@components/Press/AwardsSection.astro";
+import { pressCoverage } from "../data/press-coverage";
+import { swimmingResults, type SwimMedal } from "../data/swimming";
+import { filterAvailableContent } from "../utils/content-availability";
+
+const awards = filterAvailableContent(pressCoverage)
+  .filter((i) => i.category === "award" || i.category === "nomination")
+  .sort(
+    (a, b) =>
+      new Date(b.publicationDate).getTime() -
+      new Date(a.publicationDate).getTime(),
+  );
+
+const swims = [...swimmingResults].sort((a, b) => b.year - a.year);
+
+const medalLabel: Record<SwimMedal, string> = {
+  gold: "Gold",
+  silver: "Silver",
+  bronze: "Bronze",
+};
+const medalClass: Record<SwimMedal, string> = {
+  gold: "bg-gold/25 text-gold-ink dark:text-gold",
+  silver: "bg-base-200 text-base-800 dark:bg-base-700 dark:text-base-100",
+  bronze: "bg-gold-light/20 text-base-900 dark:text-base-100",
+};
+const courseLabel = { short: "25m pool", long: "50m pool" };
+
+const card =
+  "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-5";
+const muted = "text-base-600 dark:text-base-400";
+---
+
+<BaseLayout
+  title="Awards"
+  description="Awards and nominations Guido Jansen received for his work, plus a look back at his competitive swimming years."
+>
+  <div class="home awards-page">
+    <section
+      class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(2rem,5vw,4rem)]"
+    >
+      <div class="mb-12 max-w-2xl">
+        <span class="hand-note">look, trophies</span>
+        <h1
+          class="font-display mt-2 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Awards
+        </h1>
+        <p class={`${muted} text-lg leading-relaxed`}>
+          Sometimes I'm even awarded for what I do! A small collection of awards
+          and nominations, plus a throwback to my competitive swimming days.
+        </p>
+      </div>
+
+      {awards.length > 0 && (
+        <AwardsSection awards={awards} heading="For my work" />
+      )}
+
+      {swims.length > 0 && <section
+        id="swimming"
+        class="mb-16 scroll-mt-24"
+        aria-labelledby="swimming-heading"
+      >
+        <h2 id="swimming-heading" class="h2 mb-4 flex items-center gap-3">
+          <Icon
+            name="tabler/outline/swimming"
+            class="text-primary-600 dark:text-primary-400 size-8 shrink-0"
+            aria-hidden="true"
+          />
+          Swimming
+        </h2>
+        <p class={`${muted} mb-6`}>
+          <a
+            href="/about/"
+            class="text-primary-600 dark:text-primary-400 font-semibold"
+            >The athletic years on /about</a
+          >
+        </p>
+        <ul class="grid gap-4 md:grid-cols-2">
+          {swims.map((r) => <li class={card}>
+            <div class="flex flex-wrap items-center gap-2">
+              {r.medal && <span
+                class={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${medalClass[r.medal]}`}
+              >
+                {medalLabel[r.medal]}
+              </span>}
+              <span class={`${muted} text-sm`}>{r.year}</span>
+            </div>
+            <p class="text-base-900 dark:text-base-100 mt-2 font-semibold">
+              {r.event}
+              {r.time && <span class={`${muted} font-normal`}>
+                · {r.time}</span>}
+            </p>
+            <p class={`${muted} text-sm`}>
+              {r.competition} · {courseLabel[r.course]}
+            </p>
+            {r.source && <a
+              href={r.source}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary-600 dark:text-primary-400 mt-2 inline-block text-sm font-medium"
+              aria-label={`Source for ${r.year} ${r.event} (opens in new tab)`}
+            >
+              Source <span aria-hidden="true">→</span>
+            </a>}
+          </li>)}
+        </ul>
+      </section>}
+    </section>
+  </div>
+</BaseLayout>
