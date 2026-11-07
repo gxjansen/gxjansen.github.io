@@ -31,6 +31,11 @@ const medalClass: Record<SwimMedal, string> = {
   silver: "bg-base-200 text-base-800 dark:bg-base-700 dark:text-base-100",
   bronze: "bg-gold-light/20 text-base-900 dark:text-base-100",
 };
+const ordinal = (n: number) => {
+  const teen = n % 100 >= 11 && n % 100 <= 13;
+  const suffix = teen ? "th" : ({ 1: "st", 2: "nd", 3: "rd" }[n % 10] ?? "th");
+  return `${n}${suffix}`;
+};
 const courseLabel = { short: "25m pool", long: "50m pool" };
 
 const card =
@@ -91,6 +96,11 @@ const muted = "text-base-600 dark:text-base-400";
               >
                 {medalLabel[r.medal]}
               </span>}
+              {!r.medal && r.place && <span
+                class="bg-base-200 text-base-800 dark:bg-base-700 dark:text-base-100 rounded-full px-2.5 py-0.5 text-xs font-semibold"
+              >
+                {ordinal(r.place)}
+              </span>}
               <span class={`${muted} text-sm`}>{r.year}</span>
             </div>
             <p class="text-base-900 dark:text-base-100 mt-2 font-semibold">
@@ -98,6 +108,9 @@ const muted = "text-base-600 dark:text-base-400";
               {r.time && <span class={`${muted} font-normal`}>
                 · {r.time}</span>}
             </p>
+            {r.team && <p class={`${muted} text-sm`}>
+              with {r.team.join(", ")}
+            </p>}
             <p class={`${muted} text-sm`}>
               {r.competition} · {courseLabel[r.course]}
             </p>

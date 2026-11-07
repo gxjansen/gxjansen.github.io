@@ -10,6 +10,10 @@ export interface SwimResult {
   /** Year of the championship. */
   year: number;
   medal?: SwimMedal;
+  /** Final place when there was no medal, e.g. 4. */
+  place?: number;
+  /** Relay teammates, in swimming order. */
+  team?: string[];
   /** Event, e.g. "50m breaststroke". */
   event: string;
   /** Championship, e.g. "Dutch Championships". */
@@ -54,6 +58,17 @@ export const swimmingResults: SwimResult[] = [
   },
   {
     year: 2001,
+    place: 6,
+    event: "4x50m medley relay (Netherlands), breaststroke leg",
+    team: ["Bastiaan Tamminga", "Ewout Holst", "Johan Kenkhuis"],
+    competition: "European Short Course Championships, Antwerp",
+    course: "short",
+    time: "1:38.36",
+    source:
+      "https://www.sportuitslagen.org/zwemmen-ek-korte-baan-25m-uitslagen-2001-heren-epm30024.html",
+  },
+  {
+    year: 2001,
     medal: "gold",
     event: "50m breaststroke",
     competition: "Dutch Championships",
@@ -81,6 +96,14 @@ export const swimmingResults: SwimResult[] = [
     time: "28.69",
     source:
       "https://web.archive.org/web/2023/http://test.zwemkroniek.com/documenten/voorbeschouwingnkkbamsterdam05dag3.pdf",
+  },
+  {
+    // Place from Guido; no public source found for places 4-8.
+    year: 2000,
+    place: 4,
+    event: "50m breaststroke",
+    competition: "European Junior Championships, Dunkirk",
+    course: "long",
   },
   {
     year: 2000,
