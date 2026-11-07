@@ -75,6 +75,7 @@ export const canon: CanonGroup[] = [
       {
         name: "The Egg",
         by: "Andy Weir",
+        why: "In this universe, there’s just you and me.",
         url: "https://bookhive.buzz/books/bk_qGwT4nERDa8XW65PjDUD",
       },
       {
@@ -116,7 +117,7 @@ export const canon: CanonGroup[] = [
       {
         name: "The Cathedral and the Bazaar",
         by: "Eric S. Raymond",
-        url: "https://bookhive.buzz/books/bk_b0aYi1milOdUsJOkygik",
+        url: "http://www.catb.org/~esr/writings/cathedral-bazaar/",
       },
       {
         name: "Utopia for Realists",
@@ -167,6 +168,7 @@ export const canon: CanonGroup[] = [
       { name: "The X-Files", url: "https://popfeed.social/tv_show/4087" },
       {
         name: "Star Trek: The Next Generation",
+        why: "Engage",
         url: "https://popfeed.social/tv_show/655",
       },
       {
@@ -217,17 +219,25 @@ export const canon: CanonGroup[] = [
     name: "On screen",
     items: [
       { name: "Marvel's Avengers saga", by: "Phases 1 to 3" },
+      {
+        name: "Doctor Who",
+        by: "2005 onward",
+        why: "Spoilers",
+        url: "https://popfeed.social/tv_show/57243",
+      },
       { name: "Silicon Valley", url: "https://popfeed.social/tv_show/60573" },
       { name: "Black Mirror", url: "https://popfeed.social/tv_show/42009" },
       { name: "Mr. Robot", url: "https://popfeed.social/tv_show/62560" },
       {
         name: "The Expanse",
         by: "TV series",
+        why: "Space is too fucking big",
         url: "https://popfeed.social/tv_show/63639",
       },
       {
         name: "Project Hail Mary",
         by: "2026",
+        why: "Grace Rocky Save Stars",
         url: "https://popfeed.social/movie/687163",
       },
     ],
