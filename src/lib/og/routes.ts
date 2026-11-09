@@ -79,7 +79,7 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
   awards: {
     url: "gui.do/awards",
     title: "Sometimes I even win things",
-    lead: "Awards, nominations, and a few swimming medals.",
+    lead: "Awards and a few swimming medals.",
     hand: "look, trophies",
   },
   newsletter: {

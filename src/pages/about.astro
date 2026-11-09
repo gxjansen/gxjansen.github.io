@@ -9,22 +9,23 @@ import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.ast
 import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 import SocialCards from "@components/SocialCards/SocialCards.astro";
 
-import { pressCoverage } from "../data/press-coverage";
-import { filterAvailableContent } from "../utils/content-availability";
+import { loadHonors } from "../lib/honors";
 import { yearsBuilding, countryCount, talksCount } from "@data/siteStats";
 
-// Awards & nominations, newest first.
-const awards = [...filterAvailableContent(pressCoverage)]
-  .sort(
-    (a, b) =>
-      new Date(b.publicationDate).getTime() -
-      new Date(a.publicationDate).getTime(),
-  )
-  .filter((i) => i.category === "award" || i.category === "nomination");
+// Work awards and nominations from Sifa (src/lib/honors.ts), newest first.
+const awards = (await loadHonors()).filter((h) => h.area === "work");
 
 // Biography, told as a short timeline instead of stock photos.
+const slug = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
 const story = [
   {
+    // Stable anchor: /awards links to /about/#athletic-years.
+    id: "athletic-years",
     icon: "tabler/outline/swimming",
     title: "The athletic years",
     paras: [
@@ -151,7 +152,8 @@ const card =
 
       <ol class="mt-10 flex flex-col">
         {story.map((s) => <li
-          class="border-base-200 dark:border-base-800 relative border-l-2 pb-8 pl-8 last:pb-0"
+          id={"id" in s && s.id ? s.id : slug(s.title)}
+          class="border-base-200 dark:border-base-800 relative scroll-mt-24 border-l-2 pb-8 pl-8 last:pb-0"
         >
           <span
             class="bg-primary-600 dark:bg-primary-400 absolute top-0 -left-[15px] flex size-7 items-center justify-center rounded-full ring-4 ring-[var(--color-background)] dark:ring-[var(--color-background-dark)]"

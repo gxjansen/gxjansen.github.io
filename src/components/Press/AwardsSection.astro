@@ -1,27 +1,21 @@
 ---
-import { formatMonthYearLong } from "@utils/dates";
-import type { PressCoverage } from "../../types/press";
+import { formatHonorDate, type Honor } from "../../lib/honors";
 
 interface Props {
-  awards: PressCoverage[];
+  awards: Honor[];
   heading?: string;
 }
 
-const { awards, heading = "Awards & Nominations" } = Astro.props;
+const { awards, heading = "Awards" } = Astro.props;
 
-// Brand icon mapping based on organization
-const getBrandIcon = (org: string | undefined): string | null => {
-  if (!org) return null;
-  const orgLower = org.toLowerCase();
-
-  if (orgLower.includes("elevenlabs") || orgLower.includes("n8n"))
-    return "elevenlabs";
-  if (orgLower.includes("adobe") || orgLower.includes("magento"))
-    return "adobe";
-  if (orgLower.includes("ebay")) return "ebay";
-  if (orgLower.includes("experimentation culture")) return "experiment";
-  if (orgLower.includes("digital elite")) return "trophy";
-
+// Brand icon from the issuer and title of a Sifa honor.
+const getBrandIcon = (award: Honor): string | null => {
+  const text = `${award.issuer ?? ""} ${award.title}`.toLowerCase();
+  if (text.includes("elevenlabs") || text.includes("n8n")) return "elevenlabs";
+  if (text.includes("x.commerce") || text.includes("ebay")) return "ebay";
+  if (text.includes("adobe") || text.includes("magento")) return "adobe";
+  if (text.includes("experimentation culture")) return "experiment";
+  if (text.includes("cro personality")) return "trophy";
   return null;
 };
 ---
@@ -31,13 +25,14 @@ const getBrandIcon = (org: string | undefined): string | null => {
   <div
     class="grid gap-4 md:grid-cols-2"
     role="list"
-    aria-label="List of awards and nominations"
+    aria-label="List of awards"
   >
     {awards.map((award) => {
-      const formattedDate = formatMonthYearLong(award.publicationDate);
-      const awardId = `award-${award.articleUrl ? new URL(award.articleUrl).pathname.replace(/\W/g, "-") : crypto.randomUUID()}`;
-      const isNomination = award.category === "nomination";
-      const brandIcon = getBrandIcon(award.personOrganization);
+      const formattedDate = formatHonorDate(award.date);
+      const awardId = `award-${award.rkey}`;
+      const isNomination = award.kind === "nomination";
+      const brandIcon = getBrandIcon(award);
+      const link = award.links[0];
 
       return <article
         class={`award-card rounded-xl p-6 transition-shadow hover:shadow-lg ${
@@ -134,26 +129,26 @@ const getBrandIcon = (org: string | undefined): string | null => {
             <div
               class="text-base-600 dark:text-base-400 flex flex-wrap items-center gap-2 text-sm"
             >
-              <time datetime={new Date(award.publicationDate).toISOString()}>
+              {formattedDate && <time datetime={award.date}>
                 <span class="sr-only">
-                  {isNomination ? "Nominated in " : "Received on "}
+                  {isNomination ? "Nominated in " : "Received in "}
                 </span>
                 {formattedDate}
-              </time>
-              {award.personOrganization && (
+              </time>}
+              {award.issuer && (
                 <>
-                  <span aria-hidden="true">•</span>
+                  {formattedDate && <span aria-hidden="true">•</span>}
                   <span>
                     <span class="sr-only">
                       {isNomination ? "Nominated by " : "Awarded by "}
                     </span>
-                    {award.personOrganization}
+                    {award.issuer}
                   </span>
                 </>
               )}
             </div>
-            {award.articleUrl && <a
-              href={award.articleUrl}
+            {link && <a
+              href={link.url}
               target="_blank"
               rel="noopener noreferrer"
               class="text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 mt-3 inline-flex items-center gap-1 text-sm font-medium"

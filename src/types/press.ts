@@ -1,11 +1,9 @@
 /**
  * Content category type
- * - 'award': Awards and recognitions
- * - 'nomination': Award nominations
  * - 'listing': Mentioned in a list (e.g., "Best podcasts", "Top experts")
  * - 'interview': True interviews, articles with contributed content (default)
  */
-export type ContentCategory = "award" | "nomination" | "listing" | "interview";
+export type ContentCategory = "listing" | "interview";
 
 /**
  * Represents a single press coverage item (video, podcast, or article)
