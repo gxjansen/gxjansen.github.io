@@ -1,6 +1,6 @@
 /**
  * Competitive swimming results for /awards: senior gold medals and
- * international finals (no silver or bronze, no age-group titles). Add a
+ * international finals, plus youth (age-group) gold medals. No silver or bronze. Add a
  * source URL when a public source exists (Zwemkroniek, KNZB, Swimming World);
  * rows without one come from Guido's own medal list. Clubs: De Rijn, AZ&PC
  * (Amersfoort) until September 2003, then XLence Swimteam.
@@ -20,8 +20,10 @@ export interface SwimResult {
   event: string;
   /** Championship, e.g. "Dutch Championships". */
   competition: string;
-  /** "short" = 25m pool, "long" = 50m pool. */
-  course: "short" | "long";
+  /** "short" = 25m pool, "long" = 50m pool; omit when unknown. */
+  course?: "short" | "long";
+  /** Age group for youth titles, e.g. "boys born 1982". Omit for senior. */
+  ageGroup?: string;
   /** Final time as swum, e.g. "28.69" or "1:05.42". */
   time?: string;
   source?: string;
@@ -110,5 +112,68 @@ export const swimmingResults: SwimResult[] = [
     event: "4x200m freestyle relay",
     competition: "Dutch Championships",
     course: "short",
+  },
+  // Youth titles, from Guido's medal list.
+  {
+    year: 2000,
+    medal: "gold",
+    event: "50m breaststroke",
+    competition: "Dutch Championships",
+    course: "long",
+    ageGroup: "boys born 1982 and later",
+  },
+  {
+    year: 2000,
+    medal: "gold",
+    event: "100m medley",
+    competition: "Dutch Sprint Championships",
+    course: "short",
+    ageGroup: "boys born 1982/83",
+  },
+  {
+    year: 1999,
+    medal: "gold",
+    event: "50m breaststroke",
+    competition: "Dutch Sprint Championships",
+    course: "short",
+    ageGroup: "boys born 1980-82",
+  },
+  {
+    year: 1999,
+    medal: "gold",
+    event: "50m breaststroke",
+    competition: "Dutch Winter Championships",
+    ageGroup: "youth",
+  },
+  {
+    year: 1998,
+    medal: "gold",
+    event: "100m breaststroke",
+    competition: "Dutch Championships",
+    course: "long",
+    ageGroup: "boys born 1982",
+  },
+  {
+    year: 1998,
+    medal: "gold",
+    event: "100m breaststroke",
+    competition: "Dutch Winter Championships",
+    ageGroup: "boys born 1982",
+  },
+  {
+    year: 1997,
+    medal: "gold",
+    event: "100m breaststroke",
+    competition: "Dutch Championships",
+    course: "long",
+    ageGroup: "boys born 1982",
+  },
+  {
+    year: 1993,
+    medal: "gold",
+    event: "100m breaststroke",
+    competition: "Speedo Finals",
+    ageGroup: "boys born 1982",
+    time: "1:25.2",
   },
 ];
