@@ -1,7 +1,9 @@
 /**
- * Competitive swimming results for /awards. Only results confirmed by a
- * public source (Zwemkroniek, KNZB, Swimming World) or by Guido; add the source URL so they
- * stay checkable. Swum for AZ&PC (Amersfoort).
+ * Competitive swimming results for /awards: senior gold medals and
+ * international finals (no silver or bronze, no age-group titles). Add a
+ * source URL when a public source exists (Zwemkroniek, KNZB, Swimming World);
+ * rows without one come from Guido's own medal list. Clubs: De Rijn, AZ&PC
+ * (Amersfoort) until September 2003, then XLence Swimteam.
  */
 
 export type SwimMedal = "gold" | "silver" | "bronze";
@@ -27,14 +29,12 @@ export interface SwimResult {
 
 export const swimmingResults: SwimResult[] = [
   {
+    // From Guido's medal list; no public source found yet.
     year: 2003,
-    medal: "silver",
+    medal: "gold",
     event: "50m breaststroke",
-    competition: "Dutch Championships",
-    course: "long",
-    time: "29.68",
-    source:
-      "https://www.swimmingworldmagazine.com/news/inge-de-bruijn-thijs-van-valekengoed-sparkle-on-final-two-days-of-dutch-champs/",
+    competition: "Dutch Sprint Championships",
+    course: "short",
   },
   {
     year: 2002,
@@ -47,14 +47,12 @@ export const swimmingResults: SwimResult[] = [
       "https://www.swimmingworldmagazine.com/news/tamminga-sets-national-mark-at-dutch-nationals/",
   },
   {
+    // From Guido's medal list; no public source found yet.
     year: 2002,
-    medal: "bronze",
-    event: "4x100m freestyle relay (AZ&PC)",
-    competition: "Dutch Championships",
-    course: "long",
-    time: "3:29.34",
-    source:
-      "https://www.swimmingworldmagazine.com/news/a-tie-in-the-womens-50-free-as-dutch-nationals-end/",
+    medal: "gold",
+    event: "100m medley",
+    competition: "Dutch Sprint Championships",
+    course: "short",
   },
   {
     year: 2001,
@@ -106,12 +104,11 @@ export const swimmingResults: SwimResult[] = [
     course: "long",
   },
   {
+    // From Guido's medal list; probably with De Rijn.
     year: 2000,
-    event: "100m breaststroke",
-    competition: "European Junior Championships, Dunkirk",
-    course: "long",
-    time: "1:05.42",
-    source:
-      "https://web.archive.org/web/2024/https://www.zwemkroniek.com/eeuwige_ranglijst_schoolslag_lange_baan",
+    medal: "gold",
+    event: "4x200m freestyle relay",
+    competition: "Dutch Championships",
+    course: "short",
   },
 ];
