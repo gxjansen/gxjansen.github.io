@@ -1,9 +1,9 @@
 ---
 // layout
+import PageIndexNav from "@components/PageIndex/PageIndexNav.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
-import ContentTypeSelector from "@components/Press/ContentTypeSelector.astro";
 import VideoSection from "@components/Press/VideoSection.astro";
 import PodcastSection from "@components/Press/PodcastSection.astro";
 import ArticleSection from "@components/Press/ArticleSection.astro";
@@ -38,6 +38,13 @@ const podcasts = interviewContent.filter((item) => item.spotifyEmbedId);
 const articles = interviewContent.filter(
   (item) => !item.youtubeLink && !item.spotifyEmbedId,
 );
+
+const index = [
+  ...(videos.length > 0 ? [{ id: "videos", name: "Videos" }] : []),
+  ...(podcasts.length > 0 ? [{ id: "podcasts", name: "Podcasts" }] : []),
+  ...(articles.length > 0 ? [{ id: "articles", name: "Articles" }] : []),
+  ...(listings.length > 0 ? [{ id: "listings", name: "Featured in" }] : []),
+];
 
 // Log if any content was filtered out
 const filteredCount = pressCoverage.length - availableCoverage.length;
@@ -138,9 +145,9 @@ const hasUpcoming = events.some((e) => new Date(e.date) >= startOfToday);
           >
         </p>
       </div>
-
-      <ContentTypeSelector />
     </section>
+
+    <PageIndexNav items={index} class="mb-12" />
 
     <!-- Use view transitions for smooth content switching -->
     <div class="view-transition-group:media-content">

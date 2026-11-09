@@ -1,22 +1,18 @@
 ---
 /**
- * Page layout with an "On this page" index for long pages: a sticky strip
- * of section links under the site nav on small screens, a sticky rail left
- * of the content from xl up. The link of the section in view is marked.
- *
- * Put the page header in the `head` slot and the sections in the default
- * slot; each item's `id` must match a section's id. Without JS the links
- * still work. Scripts that hide sections dispatch `page-index:refresh` on
- * `document` so hidden sections drop out of the index too.
+ * Page layout with a PageIndexNav: the sticky strip on small screens, a
+ * sticky rail left of the content from xl up. Put the page header in the
+ * `head` slot and the sections in the default slot.
  */
+import PageIndexNav from "./PageIndexNav.astro";
+
 interface Props {
   items: { id: string; name: string }[];
   label?: string;
   class?: string;
 }
 
-const { items, label = "On this page", class: className } = Astro.props;
-const headingId = "page-index-h";
+const { items, label, class: className } = Astro.props;
 ---
 
 <div class:list={["page-index-layout", className]}>
@@ -24,109 +20,15 @@ const headingId = "page-index-h";
     <slot name="head" />
   </div>
 
-  <nav class="page-index" aria-labelledby={headingId} data-page-index>
-    <p id={headingId} class="page-index-h">{label}</p>
-    <ul>
-      {items.map((item) => <li>
-        <a href={`#${item.id}`} class="no-underline">{item.name}</a>
-      </li>)}
-    </ul>
-  </nav>
+  <PageIndexNav items={items} label={label} rail class="mt-6 xl:mt-0" />
 
   <div class="page-index-main">
     <slot />
   </div>
 </div>
 
-<script>
-  const nav = document.querySelector<HTMLElement>("[data-page-index]");
-  const links = [...(nav?.querySelectorAll<HTMLAnchorElement>("a") ?? [])];
-  const sections = links
-    .map((a) => document.getElementById(a.hash.slice(1)))
-    .filter((s): s is HTMLElement => s !== null);
-  let current: HTMLAnchorElement | undefined;
-  let queued = false;
-
-  const update = () => {
-    queued = false;
-    const line = window.innerHeight * 0.3;
-    let active: HTMLElement | undefined;
-    for (const s of sections) {
-      if (s.hidden) continue;
-      if (s.getBoundingClientRect().top <= line) active = s;
-    }
-    const link = active
-      ? links.find((a) => a.hash === `#${active.id}`)
-      : undefined;
-    if (link === current) return;
-    current?.removeAttribute("aria-current");
-    current = link;
-    if (!link || !nav) return;
-    link.setAttribute("aria-current", "location");
-    // Keep the marked link visible in the horizontal strip.
-    const strip = nav.querySelector("ul");
-    if (strip && strip.scrollWidth > strip.clientWidth) {
-      strip.scrollTo({
-        left: link.offsetLeft - strip.clientWidth / 2 + link.offsetWidth / 2,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const queue = () => {
-    if (queued) return;
-    queued = true;
-    requestAnimationFrame(update);
-  };
-
-  const refresh = () => {
-    for (const a of links) {
-      const target = document.getElementById(a.hash.slice(1));
-      a.parentElement!.hidden = target?.hidden ?? false;
-    }
-    queue();
-  };
-
-  if (nav && sections.length > 0) {
-    window.addEventListener("scroll", queue, { passive: true });
-    window.addEventListener("resize", queue);
-    document.addEventListener("page-index:refresh", refresh);
-    update();
-  }
-</script>
-
 <style>
   @reference "../../styles/tailwind.css";
-
-  /* Keep deep-linked sections clear of the fixed nav and, below xl, the
-     sticky strip under it. */
-  .page-index-main :global([id]) {
-    scroll-margin-top: 7rem;
-  }
-
-  .page-index {
-    @apply bg-base-50/95 dark:bg-base-950/95 border-base-200 dark:border-base-800 sticky top-16 z-20 mt-6 flex flex-col rounded-lg border px-3 backdrop-blur;
-  }
-  .page-index-h {
-    @apply sr-only;
-  }
-  .page-index ul {
-    @apply m-0 flex gap-x-5 overflow-x-auto py-2 whitespace-nowrap;
-    scrollbar-width: none;
-    /* Fade the right edge so the strip reads as scrollable. */
-    mask-image: linear-gradient(to right, #000 85%, transparent);
-  }
-  .page-index li[hidden] {
-    display: none;
-  }
-  /* `li a` and the no-underline class keep the content-link underline and
-     colour rules for `.home` pages off these links. */
-  .page-index li a {
-    @apply text-base-700 dark:text-base-300 hover:text-primary-700 dark:hover:text-primary-300 text-[0.95rem] underline decoration-transparent decoration-auto underline-offset-4;
-  }
-  .page-index li a[aria-current] {
-    @apply text-base-950 dark:text-base-50 decoration-gold-light dark:decoration-gold decoration-2;
-  }
 
   @media (min-width: 80rem) {
     .page-index-layout {
@@ -138,29 +40,6 @@ const headingId = "page-index-h";
     }
     .page-index-main {
       grid-area: main;
-    }
-    .page-index-main :global([id]) {
-      scroll-margin-top: 6rem;
-    }
-    .page-index {
-      @apply top-24 mt-0 block self-start rounded-none border-0 bg-transparent px-0 backdrop-blur-none dark:bg-transparent;
-      grid-area: rail;
-    }
-    .page-index-h {
-      @apply text-base-600 dark:text-base-400 not-sr-only mb-2 block text-xs font-bold tracking-[0.08em] uppercase;
-    }
-    .page-index ul {
-      @apply flex-col gap-y-1.5 overflow-visible py-0 whitespace-normal;
-      mask-image: none;
-    }
-    .page-index li a[aria-current] {
-      @apply decoration-transparent;
-    }
-    .page-index li {
-      @apply border-l-2 border-transparent pl-3;
-    }
-    .page-index li:has(a[aria-current]) {
-      @apply border-gold-light dark:border-gold;
     }
   }
 </style>
