@@ -1,0 +1,45 @@
+---
+/**
+ * Page layout with a PageIndexNav: the sticky strip on small screens, a
+ * sticky rail left of the content from xl up. Put the page header in the
+ * `head` slot and the sections in the default slot.
+ */
+import PageIndexNav from "./PageIndexNav.astro";
+
+interface Props {
+  items: { id: string; name: string }[];
+  label?: string;
+  class?: string;
+}
+
+const { items, label, class: className } = Astro.props;
+---
+
+<div class:list={["page-index-layout", className]}>
+  <div class="page-index-head">
+    <slot name="head" />
+  </div>
+
+  <PageIndexNav items={items} label={label} rail class="mt-6 xl:mt-0" />
+
+  <div class="page-index-main">
+    <slot />
+  </div>
+</div>
+
+<style>
+  @reference "../../styles/tailwind.css";
+
+  @media (min-width: 80rem) {
+    .page-index-layout {
+      @apply grid max-w-[64rem] grid-cols-[13rem_minmax(0,48rem)] gap-x-12;
+      grid-template-areas: "rail head" "rail main";
+    }
+    .page-index-head {
+      grid-area: head;
+    }
+    .page-index-main {
+      grid-area: main;
+    }
+  }
+</style>
