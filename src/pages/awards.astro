@@ -27,6 +27,11 @@ const byYear = [...swimmingResults].sort((a, b) => b.year - a.year);
 const swims = byYear.filter((r) => !r.ageGroup);
 const youthTitles = byYear.filter((r) => r.ageGroup);
 
+const medalEmoji: Record<SwimMedal, string> = {
+  gold: "🥇",
+  silver: "🥈",
+  bronze: "🥉",
+};
 const medalLabel: Record<SwimMedal, string> = {
   gold: "Gold",
   silver: "Silver",
@@ -106,7 +111,9 @@ const muted = "text-base-600 dark:text-base-400";
             </h3>
             <ul class="grid gap-4 md:grid-cols-3">
               {swimmingRecords.map((rec) => <li class={card}>
-                <span class={recordBadge}>{rec.title}</span>
+                <span class={recordBadge}>
+                  <span aria-hidden="true">🏆</span> {rec.title}
+                </span>
                 <p class="text-base-900 dark:text-base-100 mt-2 font-semibold">
                   {rec.event}
                   <span class={`${muted} font-normal`}> · {rec.time}</span>
@@ -154,6 +161,7 @@ const muted = "text-base-600 dark:text-base-400";
               {r.medal && <span
                 class={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${medalClass[r.medal]}`}
               >
+                <span aria-hidden="true">{medalEmoji[r.medal]}</span>
                 {medalLabel[r.medal]}
               </span>}
               {!r.medal && r.place && <span
@@ -162,7 +170,9 @@ const muted = "text-base-600 dark:text-base-400";
                 {ordinal(r.place)}
               </span>}
               <span class={`${muted} text-sm`}>{r.year}</span>
-              {r.record && <span class={recordBadge}>{r.record}</span>}
+              {r.record && <span class={recordBadge}>
+                <span aria-hidden="true">🏆</span> {r.record}
+              </span>}
             </div>
             <p class="text-base-900 dark:text-base-100 mt-2 font-semibold">
               {r.event}
@@ -202,6 +212,7 @@ const muted = "text-base-600 dark:text-base-400";
                 {r.medal && <span
                   class={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${medalClass[r.medal]}`}
                 >
+                  <span aria-hidden="true">{medalEmoji[r.medal]}</span>
                   {medalLabel[r.medal]}
                 </span>}
                 <span class={`${muted} text-sm tabular-nums`}>{r.year}</span>
