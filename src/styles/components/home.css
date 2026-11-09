@@ -35,6 +35,17 @@
     @apply max-w-none;
   }
 
+  /* ---- page hero (eyebrow + h1 + intro on inner pages) ----
+     The heading runs the full content width. Intro text keeps a reading
+     measure on normal pages; on the wide tier it lines up with the card grid
+     below instead of stopping short of it. */
+  .home .page-hero p {
+    @apply max-w-[75ch] text-pretty;
+  }
+  .home.home--wide .page-hero p {
+    @apply max-w-none;
+  }
+
   /* ---- hero ---- */
   .home .kicker {
     @apply text-primary-600 dark:text-primary-400 font-hand mb-3 inline-block text-[1.9rem] leading-none;
