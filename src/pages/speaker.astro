@@ -1,6 +1,7 @@
 ---
 // layout
 import BaseLayout from "@layouts/BaseLayout.astro";
+import PageIndexNav from "@components/PageIndex/PageIndexNav.astro";
 
 // components
 import { Image } from "astro:assets";
@@ -19,6 +20,21 @@ import {
 
 const card =
   "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-6";
+
+const index = [
+  { id: "bio", name: "About" },
+  { id: "fit", name: "Right fit?" },
+  { id: "talk-format", name: "Talk format" },
+  { id: "fee", name: "Fee" },
+  { id: "payment-terms", name: "Payment terms" },
+  { id: "testimonials", name: "Testimonials" },
+  { id: "presentations", name: "Presentations" },
+  { id: "travel", name: "Travel" },
+  { id: "av-tech", name: "AV/tech" },
+  { id: "biography", name: "Biography" },
+  { id: "marketing", name: "Marketing" },
+  { id: "headshots", name: "Headshots" },
+];
 ---
 
 <BaseLayout
@@ -110,6 +126,8 @@ const card =
         </a>)}
       </div>
     </section>
+
+    <PageIndexNav items={index} />
 
     <!-- ============ BIO ============ -->
     <section id="bio" class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">

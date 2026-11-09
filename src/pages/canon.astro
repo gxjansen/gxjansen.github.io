@@ -4,9 +4,14 @@
  * (https://slashpages.net). Data in src/data/canon.ts.
  */
 import BaseLayout from "@layouts/BaseLayout.astro";
+import PageIndex from "@components/PageIndex/PageIndex.astro";
 import { canon } from "@data/canon";
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+const index = canon.map((group) => ({
+  id: slug(group.name),
+  name: group.name,
+}));
 ---
 
 <BaseLayout
@@ -17,59 +22,62 @@ const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
     <section
       class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
     >
-      <div class="max-w-[60ch]">
-        <span class="hand-note">the good stuff</span>
-        <h1
-          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
-        >
-          Canon
-        </h1>
-        <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
-          Books, comics, thinkers, movies, TV series and games that shaped how
-          (or at least made me) think. From Munroe to MacGyver and The Egg. Not
-          necessarily a "best-of" list, just some things that stuck or I
-          consumed way too much of.
-        </p>
-      </div>
-
-      <div class="mt-12 grid max-w-3xl gap-10">
-        {canon.map((group) => <section
-          aria-labelledby={`canon-${slug(group.name)}`}
-        >
-          <h2
-            id={`canon-${slug(group.name)}`}
-            class="font-display mb-3 text-[1.35rem] font-extrabold tracking-[-0.02em]"
+      <PageIndex items={index} class="max-w-3xl">
+        <div slot="head" class="max-w-[60ch]">
+          <span class="hand-note">the good stuff</span>
+          <h1
+            class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
           >
-            {group.name}
-          </h2>
-          <ul class="grid gap-x-8 gap-y-2 sm:grid-cols-2">
-            {group.items.map((item) => <li class="leading-snug">
-              {item.url ? (
-                <a
-                  href={item.url}
-                  class="text-base-950 dark:text-base-50 hover:text-primary-600 dark:hover:text-primary-400 font-semibold underline decoration-base-300 underline-offset-2 transition dark:decoration-base-700"
-                  >{item.name}</a
+            Canon
+          </h1>
+          <p class="text-base-600 dark:text-base-400 text-lg leading-relaxed">
+            Books, comics, thinkers, movies, TV series and games that shaped how
+            (or at least made me) think. From Munroe to MacGyver and The Egg.
+            Not necessarily a "best-of" list, just some things that stuck or I
+            consumed way too much of.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-10">
+          {canon.map((group) => <section
+            id={slug(group.name)}
+            aria-labelledby={`canon-${slug(group.name)}`}
+          >
+            <h2
+              id={`canon-${slug(group.name)}`}
+              class="font-display mb-3 text-[1.35rem] font-extrabold tracking-[-0.02em]"
+            >
+              {group.name}
+            </h2>
+            <ul class="grid gap-x-8 gap-y-2 sm:grid-cols-2">
+              {group.items.map((item) => <li class="leading-snug">
+                {item.url ? (
+                  <a
+                    href={item.url}
+                    class="text-base-950 dark:text-base-50 hover:text-primary-600 dark:hover:text-primary-400 font-semibold underline decoration-base-300 underline-offset-2 transition dark:decoration-base-700"
+                    >{item.name}</a
+                  >
+                ) : (
+                  <span class="text-base-950 dark:text-base-50 font-semibold">
+                    {item.name}
+                  </span>
+                )}
+                {item.by && <span class="text-base-500"> · {item.by}</span>}
+                {item.quote && <p
+                  class="text-base-600 dark:text-base-400 mt-0.5 text-sm italic"
                 >
-              ) : (
-                <span class="text-base-950 dark:text-base-50 font-semibold">
-                  {item.name}
-                </span>
-              )}
-              {item.by && <span class="text-base-500"> · {item.by}</span>}
-              {item.quote && <p
-                class="text-base-600 dark:text-base-400 mt-0.5 text-sm italic"
-              >
-                <q>{item.quote}</q>
-              </p>}
-              {item.why && <p
-                class="text-base-600 dark:text-base-400 mt-0.5 text-sm"
-              >
-                {item.why}
-              </p>}
-            </li>)}
-          </ul>
-        </section>)}
-      </div>
+                  <q>{item.quote}</q>
+                </p>}
+                {item.why && <p
+                  class="text-base-600 dark:text-base-400 mt-0.5 text-sm"
+                >
+                  {item.why}
+                </p>}
+              </li>)}
+            </ul>
+          </section>)}
+        </div>
+      </PageIndex>
     </section>
   </div>
 </BaseLayout>

@@ -4,7 +4,8 @@
 // country bsky-avatar has reported. src/lib/where.ts decides what is public.
 import { getStore } from "@netlify/blobs";
 import WhereOverview from "./WhereOverview.astro";
-import { flagSrc, staticCountries } from "./whereCountries";
+import { flagSrc } from "../../lib/flags";
+import { staticCountries } from "./whereCountries";
 import {
   HOME_COUNTRY,
   WHERE_KEY,

@@ -4,8 +4,8 @@
  * in the prerendered fallback (build-time countries) and in the server island
  * (plus countries bsky-avatar reported).
  */
-import { countryName } from "../../lib/where";
-import { flagSrc, sortCountries } from "./whereCountries";
+import { flagName, flagSrc } from "../../lib/flags";
+import { sortCountries } from "./whereCountries";
 
 interface Props {
   countries: Iterable<string>;
@@ -13,7 +13,7 @@ interface Props {
 
 const items = sortCountries(Astro.props.countries).map((cc) => ({
   cc,
-  name: countryName(cc),
+  name: flagName(cc),
   src: flagSrc(cc),
 }));
 ---

@@ -40,10 +40,6 @@ export const colophon: ColophonGroup[] = [
         name: "LiebeHeide",
         url: "https://liebefonts.com/fonts/liebeheide-vector",
       },
-      {
-        name: "Twemoji flags (CC BY 4.0)",
-        url: "https://github.com/talkjs/country-flag-emoji-polyfill",
-      },
       { name: "Rosé Pine", url: "https://rosepinetheme.com" },
       { name: "Tabler Icons", url: "https://tabler.io/icons" },
       { name: "Simple Icons", url: "https://simpleicons.org" },

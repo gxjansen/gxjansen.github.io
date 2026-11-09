@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import PageIndexNav from "@components/PageIndex/PageIndexNav.astro";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import { getCV, richText } from "../lib/sifaProfile";
@@ -61,6 +62,16 @@ const proj = split(cv.projects);
 const certs = split(cv.certifications);
 const vol = split(cv.volunteering);
 const awards = split(cv.awards);
+
+const index = [
+  { id: "experience", name: "Experience" },
+  { id: "education", name: "Education" },
+  { id: "projects", name: "Projects" },
+  { id: "credentials", name: "Credentials" },
+  { id: "volunteering", name: "Volunteering" },
+  { id: "awards", name: "Awards" },
+  { id: "endorsements", name: "Endorsements" },
+];
 ---
 
 <BaseLayout
@@ -170,6 +181,8 @@ const awards = split(cv.awards);
         </a>
       </div>
 
+      <PageIndexNav items={index} class="mb-8" />
+
       <!-- ===== Grid: main + sidebar ===== -->
       <div
         class="grid grid-cols-1 gap-[clamp(1.5rem,4vw,3rem)] lg:grid-cols-[1fr_280px]"
@@ -177,7 +190,7 @@ const awards = split(cv.awards);
         <!-- Main column -->
         <div>
           <!-- Experience -->
-          <section class="mb-10">
+          <section id="experience" class="mb-10">
             <h2 class={sectionTitle}>Experience</h2>
             <ol class="flex flex-col">
               {xp.head.map((x) => <li
@@ -278,7 +291,7 @@ const awards = split(cv.awards);
           </section>
 
           <!-- Education -->
-          <section class="mb-10">
+          <section id="education" class="mb-10">
             <h2 class={sectionTitle}>Education &amp; background</h2>
             <ul class="flex flex-col gap-4">
               {cv.education.map((e) => <li>
@@ -302,7 +315,7 @@ const awards = split(cv.awards);
           </section>
 
           <!-- Projects -->
-          <section class="mb-10">
+          <section id="projects" class="mb-10">
             <h2 class={sectionTitle}>Projects</h2>
             <ul class="flex flex-col gap-4">
               {proj.head.map((x) => <li>
@@ -375,7 +388,7 @@ const awards = split(cv.awards);
           </section>
 
           <!-- Credentials -->
-          <section class="mb-10">
+          <section id="credentials" class="mb-10">
             <h2 class={sectionTitle}>Credentials</h2>
             <ul class="flex flex-col gap-4">
               {certs.head.map((x) => <li>
@@ -448,7 +461,7 @@ const awards = split(cv.awards);
           </section>
 
           <!-- Volunteering -->
-          <section class="mb-10">
+          <section id="volunteering" class="mb-10">
             <h2 class={sectionTitle}>Volunteering</h2>
             <ul class="flex flex-col gap-4">
               {vol.head.map((x) => <li>
@@ -501,7 +514,7 @@ const awards = split(cv.awards);
           </section>
 
           <!-- Awards -->
-          <section class="mb-10">
+          <section id="awards" class="mb-10">
             <h2 class={sectionTitle}>Awards</h2>
             <ul class="flex flex-col gap-4">
               {awards.head.map((x) => <li>
@@ -556,7 +569,7 @@ const awards = split(cv.awards);
           </section>
 
           <!-- Endorsements -->
-          <section>
+          <section id="endorsements">
             <h2 class={`${sectionTitle} flex flex-wrap items-baseline gap-2`}>
               Endorsements
               <span

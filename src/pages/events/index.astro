@@ -1,5 +1,6 @@
 ---
 // layout
+import PageIndexNav from "@components/PageIndex/PageIndexNav.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 
 // components
@@ -26,6 +27,14 @@ const today = new Date();
 today.setHours(0, 0, 0, 0);
 
 const pastEvents = sortedEvents.filter((event) => new Date(event.date) < today);
+const hasUpcoming = pastEvents.length < sortedEvents.length;
+
+const index = [
+  ...(hasUpcoming ? [{ id: "upcoming", name: "Upcoming" }] : []),
+  { id: "guest-spots", name: "Guest spots" },
+  { id: "past-events", name: "Past events" },
+  { id: "invite", name: "Invite me" },
+];
 
 // Identify recurring event patterns (Spryker User Group monthly events)
 const RECURRING_EVENT_PATTERN = /^spryker-user-group-\d{4}-\d{2}$/;
@@ -119,13 +128,15 @@ const sprykerIcon = await getEventIcon("spryker.png");
       </div>
     </section>
 
+    <PageIndexNav items={index} class="mb-12" />
+
     {/* Upcoming Events Section */}
-    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+    <section id="upcoming" class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
       <UpcomingEvents events={sortedEvents} />
     </section>
 
     {/* Latest guest spots, from /appearances */}
-    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+    <section id="guest-spots" class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
       <LatestAppearances />
     </section>
 
@@ -246,7 +257,7 @@ const sprykerIcon = await getEventIcon("spryker.png");
     </section>
 
     {/* CTA band */}
-    <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
+    <section id="invite" class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
       <div
         class="bg-primary-600/[0.06] dark:bg-primary-400/[0.06] border-primary-600/15 dark:border-primary-400/20 flex flex-wrap items-center gap-x-8 gap-y-5 rounded-3xl border p-[clamp(1.75rem,4vw,2.75rem)]"
       >
