@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import type { Event } from "../../utils/eventUtils";
-import { loadCountryFlag } from "../../utils/flagUtils";
+import { flagImage as loadFlag } from "../../lib/flags";
 import { formatShortDate } from "../../utils/dates";
 
 interface Props extends Event {
@@ -48,7 +48,7 @@ const roleLabel = topic && role && role !== "Speaker" ? role : undefined;
 const wrapperClasses = linkUrl ? "cursor-pointer" : "";
 
 // Load country flag if country code is provided
-const flagImage = country ? await loadCountryFlag(country) : null;
+const flagImage = country ? loadFlag(country) : null;
 
 // Format date
 const eventDate = formatShortDate(date);

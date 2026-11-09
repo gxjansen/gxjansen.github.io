@@ -1,0 +1,33 @@
+---
+/**
+ * Inline flag image, sized to the surrounding text. Use instead of a flag
+ * emoji (Windows shows those as letter pairs). Source: src/lib/flags.ts.
+ */
+import { flagName, flagSrc } from "../../lib/flags";
+
+interface Props {
+  /** Country or region code: "NL", "eu", "gb-sct". */
+  code: string;
+  /** Alt text; defaults to the English name. Pass "" when a name is next to it. */
+  alt?: string;
+  class?: string;
+}
+
+const { code, alt, class: className } = Astro.props;
+const src = flagSrc(code);
+---
+
+{src && (
+  <img
+    src={src}
+    alt={alt ?? flagName(code)}
+    width="18"
+    height="12"
+    loading="lazy"
+    decoding="async"
+    class:list={[
+      "inline-block h-[0.8em] w-auto rounded-[2px] align-[-0.05em] shadow-[0_0_0_1px] shadow-black/10",
+      className,
+    ]}
+  />
+)}

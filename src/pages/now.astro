@@ -4,6 +4,7 @@
 // "currently reading" card. Linked from the homepage activity box and the About
 // nav. See the "now page" convention: https://nownownow.com/about
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Flag from "@components/Flag/Flag.astro";
 import NowLive from "@components/Now/NowLive.astro";
 
 // Static page: the hand-written intro is prerendered and served straight from
@@ -143,7 +144,7 @@ const focusUpdated = "5 November 2026";
         </p>
         <p class="mt-4">
           <strong class="text-base-900 dark:text-base-100">Where:</strong> the
-          Netherlands 🇪🇺.
+          Netherlands <Flag code="eu" />.
         </p>
       </div>
 
