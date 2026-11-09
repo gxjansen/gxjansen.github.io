@@ -98,12 +98,15 @@ export const swimmingResults: SwimResult[] = [
       "https://web.archive.org/web/2023/http://test.zwemkroniek.com/documenten/voorbeschouwingnkkbamsterdam05dag3.pdf",
   },
   {
-    // Place from Guido; no public source found for places 4-8.
+    // Place from Guido; time from the all-time list (bronze was 1:04.57).
     year: 2000,
     place: 4,
-    event: "50m breaststroke",
+    event: "100m breaststroke",
     competition: "European Junior Championships, Dunkirk",
     course: "long",
+    time: "1:05.42",
+    source:
+      "https://web.archive.org/web/2024/https://www.zwemkroniek.com/eeuwige_ranglijst_schoolslag_lange_baan",
   },
   {
     // From Guido's medal list; club unclear (AZ&PC or De Rijn).
