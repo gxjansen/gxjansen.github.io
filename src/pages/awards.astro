@@ -19,7 +19,9 @@ const awards = filterAvailableContent(pressCoverage)
       new Date(a.publicationDate).getTime(),
   );
 
-const swims = [...swimmingResults].sort((a, b) => b.year - a.year);
+const byYear = [...swimmingResults].sort((a, b) => b.year - a.year);
+const swims = byYear.filter((r) => !r.ageGroup);
+const youthTitles = byYear.filter((r) => r.ageGroup);
 
 const medalLabel: Record<SwimMedal, string> = {
   gold: "Gold",
@@ -30,6 +32,11 @@ const medalClass: Record<SwimMedal, string> = {
   gold: "bg-gold/10 text-gold-ink dark:bg-gold/25 dark:text-gold",
   silver: "bg-base-200 text-base-800 dark:bg-base-700 dark:text-base-100",
   bronze: "bg-gold-light/20 text-base-900 dark:text-base-100",
+};
+const ordinal = (n: number) => {
+  const teen = n % 100 >= 11 && n % 100 <= 13;
+  const suffix = teen ? "th" : ({ 1: "st", 2: "nd", 3: "rd" }[n % 10] ?? "th");
+  return `${n}${suffix}`;
 };
 const courseLabel = { short: "25m pool", long: "50m pool" };
 
@@ -91,6 +98,11 @@ const muted = "text-base-600 dark:text-base-400";
               >
                 {medalLabel[r.medal]}
               </span>}
+              {!r.medal && r.place && <span
+                class="bg-base-200 text-base-800 dark:bg-base-700 dark:text-base-100 rounded-full px-2.5 py-0.5 text-xs font-semibold"
+              >
+                {ordinal(r.place)}
+              </span>}
               <span class={`${muted} text-sm`}>{r.year}</span>
             </div>
             <p class="text-base-900 dark:text-base-100 mt-2 font-semibold">
@@ -98,8 +110,12 @@ const muted = "text-base-600 dark:text-base-400";
               {r.time && <span class={`${muted} font-normal`}>
                 · {r.time}</span>}
             </p>
+            {r.team && <p class={`${muted} text-sm`}>
+              with {r.team.join(", ")}
+            </p>}
             <p class={`${muted} text-sm`}>
-              {r.competition} · {courseLabel[r.course]}
+              {r.competition}
+              {r.course && ` · ${courseLabel[r.course]}`}
             </p>
             {r.source && <a
               href={r.source}
@@ -112,6 +128,37 @@ const muted = "text-base-600 dark:text-base-400";
             </a>}
           </li>)}
         </ul>
+        {youthTitles.length > 0 && (
+          <>
+            <h3
+              id="swimming-youth"
+              class="font-display mt-10 mb-3 text-xl font-bold"
+            >
+              Youth titles
+            </h3>
+            <ul class={`${card} divide-base-200 dark:divide-base-800 divide-y`}>
+              {youthTitles.map((r) => <li
+                class="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-2.5 first:pt-0 last:pb-0"
+              >
+                {r.medal && <span
+                  class={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${medalClass[r.medal]}`}
+                >
+                  {medalLabel[r.medal]}
+                </span>}
+                <span class={`${muted} text-sm tabular-nums`}>{r.year}</span>
+                <span class="text-base-900 dark:text-base-100 font-semibold">
+                  {r.event}
+                  {r.time && <span class={`${muted} font-normal`}>
+                    · {r.time}</span>}
+                </span>
+                <span class={`${muted} text-sm`}>
+                  {r.competition}, {r.ageGroup}
+                  {r.course && ` · ${courseLabel[r.course]}`}
+                </span>
+              </li>)}
+            </ul>
+          </>
+        )}
       </section>}
     </section>
   </div>
