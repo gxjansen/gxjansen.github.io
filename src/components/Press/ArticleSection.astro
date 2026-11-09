@@ -34,7 +34,7 @@ const getBrandIcon = (org: string | undefined): string | null => {
       const brandIcon = getBrandIcon(article.personOrganization);
 
       return <article
-        class="article-card border-base-200 from-base-50 to-base-100 dark:border-base-600 dark:from-base-800/50 dark:to-base-700/50 rounded-xl border bg-gradient-to-br p-6 transition-shadow hover:shadow-lg"
+        class="article-card min-w-0 border-base-200 from-base-50 to-base-100 dark:border-base-600 dark:from-base-800/50 dark:to-base-700/50 rounded-xl border bg-gradient-to-br p-6 transition-shadow hover:shadow-lg"
         role="listitem"
         aria-labelledby={articleId}
       >
@@ -86,7 +86,7 @@ const getBrandIcon = (org: string | undefined): string | null => {
               {article.title}
             </h3>
             <div
-              class="text-base-600 dark:text-base-400 flex flex-wrap items-center gap-2 text-sm"
+              class="text-base-600 dark:text-base-400 flex flex-wrap items-center gap-2 text-sm [overflow-wrap:anywhere]"
               aria-label="Article details"
             >
               <time datetime={new Date(article.publicationDate).toISOString()}>

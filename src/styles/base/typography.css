@@ -20,6 +20,12 @@
     @apply font-display text-base-900 dark:text-base-100 font-bold;
     letter-spacing: -0.02em;
     text-wrap: balance;
+    /* Long single words ("Accommodation", "Experimentation") at display
+       sizes are wider than a phone column. Hyphenate only long words, and
+       break as a last resort so a heading never forces horizontal scroll. */
+    hyphens: auto;
+    hyphenate-limit-chars: 10 4 4;
+    overflow-wrap: break-word;
   }
 
   /* Default margins and colors for text elements, excluding components */
@@ -64,7 +70,7 @@
 
   /* Heading utility classes */
   .h1 {
-    @apply font-display text-base-900 dark:text-base-100 my-3 text-5xl leading-[1.1] font-extrabold;
+    @apply font-display text-base-900 dark:text-base-100 my-3 text-[2rem] leading-[1.1] font-extrabold sm:text-5xl;
     letter-spacing: -0.025em;
   }
 
