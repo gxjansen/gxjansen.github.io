@@ -1,0 +1,16 @@
+---
+/**
+ * Renders text with any flag emoji swapped for <Flag> images, for text that
+ * comes from elsewhere (Grain titles, Bluesky posts). See src/lib/flags.ts.
+ */
+import { splitFlagEmoji } from "../../lib/flags";
+import Flag from "./Flag.astro";
+
+interface Props {
+  text: string;
+}
+
+const parts = splitFlagEmoji(Astro.props.text);
+---
+
+{parts.map((p) => (p.type === "flag" ? <Flag code={p.code} /> : p.value))}

@@ -10,7 +10,7 @@ import RelatedPresentations from "@components/RelatedPresentations/RelatedPresen
 // utils
 import { getAllEvents } from "@utils/eventUtils";
 import { getPresentationUrl } from "@utils/eventPresentationRelations";
-import { loadCountryFlag } from "@utils/flagUtils";
+import { flagImage as loadFlag, flagName } from "../../lib/flags";
 import { formatLongDate } from "@utils/dates";
 import type { Event } from "@utils/eventUtils";
 
@@ -32,26 +32,9 @@ const { event } = Astro.props as {
   presentationUrl?: string;
 };
 
-// Country helpers. Names come from Intl.DisplayNames; flags are rendered as
-// SVGs from src/assets/flags via utils/flagUtils, the same approach
-// used by the events index / EventCard — so flags stay consistent across pages.
-// Both degrade gracefully (no flag / raw code) when the code is invalid.
-const countryNames = new Intl.DisplayNames(["en"], { type: "region" });
-
-function countryToName(code?: string): string | null {
-  if (!code) return null;
-  const cc = code.trim().toUpperCase();
-  if (!/^[A-Z]{2}$/.test(cc)) return null;
-  try {
-    return countryNames.of(cc) ?? cc;
-  } catch {
-    return cc;
-  }
-}
-
-// Load the country flag SVG at build time (ImageMetadata) — null if unavailable.
-const flagImage = event.country ? await loadCountryFlag(event.country) : null;
-const countryName = countryToName(event.country);
+// Flag and country name from src/lib/flags, shared with /where and EventCard.
+const flagImage = event.country ? loadFlag(event.country) : null;
+const countryName = event.country ? flagName(event.country) : null;
 
 // Format date
 const eventDate = formatLongDate(event.date);
