@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getImage } from "astro:assets";
+import { getImage, Image } from "astro:assets";
+import croCafeArt from "@assets/images/podcasts/cro-cafe.webp";
+import sheeptankArt from "@assets/images/podcasts/sheeptank.webp";
 import { Icon } from "astro-icon/components";
 import { getPodcastEpisodes } from "../lib/podcastFeeds";
 import { formatShortDateUTC } from "../utils/dates";
@@ -38,12 +40,14 @@ const thumbs = await Promise.all(
 const podcasts = [
   {
     icon: "sheep",
+    image: sheeptankArt,
     title: "Sheeptank",
     text: "A lighthearted, fast-paced format: one interesting business case (pitched by the sheep) and a final verdict (from the wolves).",
     href: "https://media.spryker.com/podcasts/187220417647/rss.xml",
   },
   {
     icon: "tabler/outline/a-b",
+    image: croCafeArt,
     title: "CRO.CAFE",
     text: "Conversion rate optimization and business experimentation, with episodes in English, Dutch, Spanish and German.",
     href: "https://www.cro.cafe",
@@ -85,11 +89,21 @@ const podcasts = [
           rel="noopener noreferrer"
           class="group bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 reveal flex flex-col rounded-2xl border p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
         >
-          <div
-            class="bg-primary-600/10 text-primary-600 dark:bg-primary-400/10 dark:text-primary-400 mb-4 flex size-12 items-center justify-center rounded-xl"
-          >
-            <Icon name={p.icon} class="size-6" aria-hidden="true" />
-          </div>
+          {p.image ? (
+            <Image
+              src={p.image}
+              alt=""
+              width={160}
+              height={160}
+              class="border-base-200 dark:border-base-800 mb-4 size-20 rounded-xl border object-cover"
+            />
+          ) : (
+            <div
+              class="bg-primary-600/10 text-primary-600 dark:bg-primary-400/10 dark:text-primary-400 mb-4 flex size-20 items-center justify-center rounded-xl"
+            >
+              <Icon name={p.icon} class="size-9" aria-hidden="true" />
+            </div>
+          )}
           <h2
             class="font-display group-hover:text-primary-600 dark:group-hover:text-primary-400 text-[1.2rem] font-extrabold transition"
           >
@@ -101,7 +115,7 @@ const podcasts = [
             {p.text}
           </p>
           <span
-            class="text-primary-600 dark:text-primary-400 font-display mt-4 inline-flex items-center gap-1.5 text-sm font-bold"
+            class="text-primary-600 dark:text-primary-400 font-display mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-bold"
           >
             Listen <span aria-hidden="true">→</span>
           </span>
