@@ -5,35 +5,37 @@
  * into the static HTML (visible to crawlers and no-JS browsers, no client fetch
  * required).
  *
- * Reads the Transistor feeds below and returns the latest
- * episodes as `{ link, title }`-bearing objects where `link` is always a
- * `https://share.transistor.fm/` embed URL. Wrapped so a slow or failed feed
- * NEVER breaks the build — on any error it falls back to an empty list and the
- * page renders the static "visit the podcasts directly" block. Never throws.
+ * Reads the feeds below and returns the latest episodes with their audio file
+ * URL (played with a native <audio> element) and, when the feed has one, the
+ * episode page link. Wrapped so a slow or failed feed NEVER breaks the build —
+ * on any error it falls back to an empty list and the page renders the static
+ * "visit the podcasts directly" block. Never throws.
  */
 import { XMLParser } from "fast-xml-parser";
 
-const PODCAST_FEEDS = [
-  "https://feeds.transistor.fm/sheeptank",
-  "https://feeds.transistor.fm/cro-cafe",
-  "https://feeds.transistor.fm/cro-cafe-nl",
+export const PODCAST_FEEDS = [
+  "https://media.spryker.com/podcasts/187220417647/rss.xml", // Sheeptank
+  "https://podcasts.gui.do/cro-cafe/feed.xml",
+  "https://podcasts.gui.do/cro-cafe-nl/feed.xml",
 ];
 
-const FETCH_TIMEOUT = 5000; // 5s per-feed timeout, matches the Netlify function
+const FETCH_TIMEOUT = 5000; // 5s per-feed timeout
 const MAX_EPISODES = 20;
-const TRANSISTOR_EMBED_PREFIX = "https://share.transistor.fm/";
 
 export interface PodcastEpisode {
   title: string;
-  link: string;
+  /** Episode web page, if the feed provides one. */
+  link?: string;
+  audioUrl: string;
   pubDate: string;
   podcastName: string;
 }
 
 interface FeedItem {
-  title?: string;
-  pubDate?: string;
-  enclosure?: { "@_url"?: string };
+  title?: unknown;
+  link?: unknown;
+  pubDate?: unknown;
+  enclosure?: { "@_url"?: unknown; "@_type"?: unknown };
 }
 
 const fetchWithTimeout = async (
@@ -49,53 +51,67 @@ const fetchWithTimeout = async (
   }
 };
 
-// Extract the Transistor episode id from an item's media enclosure URL.
-const getEpisodeId = (item: FeedItem): string | null => {
-  const url = item.enclosure?.["@_url"];
-  if (!url) return null;
-  const match = url.match(/https:\/\/media\.transistor\.fm\/([^/]+)/);
-  return match ? match[1] : null;
+// Only accept absolute https URLs from the feed; anything else is dropped.
+const httpsUrl = (value: unknown): string | undefined => {
+  if (typeof value !== "string") return undefined;
+  try {
+    const url = new URL(value.trim());
+    return url.protocol === "https:" ? url.href : undefined;
+  } catch {
+    return undefined;
+  }
 };
 
-// Parse a single feed. Any failure resolves to [] so one bad feed can't break
-// the others (or the build).
-const parseFeed = async (feedUrl: string): Promise<PodcastEpisode[]> => {
+/**
+ * Turn the items of one parsed RSS document into episodes. Items without an
+ * https audio enclosure are skipped.
+ */
+export const parseEpisodes = (xml: string): PodcastEpisode[] => {
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+    attributeNamePrefix: "@_",
+    // Keep titles like "2024" or "#8 - VanMoof" as strings.
+    parseTagValue: false,
+  });
+
+  const channel = parser.parse(xml)?.rss?.channel;
+  if (!channel) return [];
+
+  const rawItems = channel.item;
+  const items: FeedItem[] = Array.isArray(rawItems)
+    ? rawItems
+    : rawItems
+      ? [rawItems]
+      : [];
+  const podcastName = typeof channel.title === "string" ? channel.title : "";
+
+  return items
+    .map((item): PodcastEpisode | null => {
+      const audioUrl = httpsUrl(item.enclosure?.["@_url"]);
+      if (!audioUrl) return null;
+      return {
+        title:
+          typeof item.title === "string" && item.title.trim()
+            ? item.title.trim()
+            : "Episode",
+        link: httpsUrl(item.link),
+        audioUrl,
+        pubDate: typeof item.pubDate === "string" ? item.pubDate : "",
+        podcastName,
+      };
+    })
+    .filter((item): item is PodcastEpisode => item !== null);
+};
+
+// Fetch and parse a single feed. Any failure resolves to [] so one bad feed
+// can't break the others (or the build).
+const fetchFeed = async (feedUrl: string): Promise<PodcastEpisode[]> => {
   try {
     const response = await fetchWithTimeout(feedUrl, FETCH_TIMEOUT);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
-    const xml = await response.text();
-    const parser = new XMLParser({
-      ignoreAttributes: false,
-      attributeNamePrefix: "@_",
-    });
-
-    const result = parser.parse(xml);
-    const channel = result?.rss?.channel;
-    if (!channel) return [];
-
-    const rawItems = channel.item;
-    const items: FeedItem[] = Array.isArray(rawItems)
-      ? rawItems
-      : rawItems
-        ? [rawItems]
-        : [];
-    const podcastName: string = channel.title ?? "";
-
-    return items
-      .map((item): PodcastEpisode | null => {
-        const episodeId = getEpisodeId(item);
-        if (!episodeId) return null; // only episodes with a valid embed link
-        return {
-          title: typeof item.title === "string" ? item.title : "Episode",
-          link: `${TRANSISTOR_EMBED_PREFIX}e/${episodeId}`,
-          pubDate: item.pubDate ?? "",
-          podcastName,
-        };
-      })
-      .filter((item): item is PodcastEpisode => item !== null);
+    return parseEpisodes(await response.text());
   } catch (error) {
     // Swallow and degrade — never let a feed failure escape to the build.
     console.error(
@@ -106,22 +122,24 @@ const parseFeed = async (feedUrl: string): Promise<PodcastEpisode[]> => {
   }
 };
 
+const timestamp = (pubDate: string): number => {
+  const time = new Date(pubDate).getTime();
+  return Number.isNaN(time) ? 0 : time;
+};
+
 /**
- * Fetch + merge all configured Transistor feeds, newest first, capped at
+ * Fetch + merge all configured feeds, newest first, capped at
  * {@link MAX_EPISODES}. Returns `[]` on total failure — never throws, so the
  * page's static fallback renders instead of breaking the build.
  */
 export async function getPodcastEpisodes(): Promise<PodcastEpisode[]> {
   try {
     const allEpisodes = (
-      await Promise.all(PODCAST_FEEDS.map((url) => parseFeed(url)))
+      await Promise.all(PODCAST_FEEDS.map((url) => fetchFeed(url)))
     ).flat();
 
     return allEpisodes
-      .filter((episode) => episode.link.startsWith(TRANSISTOR_EMBED_PREFIX))
-      .sort(
-        (a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
-      )
+      .sort((a, b) => timestamp(b.pubDate) - timestamp(a.pubDate))
       .slice(0, MAX_EPISODES);
   } catch (error) {
     console.error(
