@@ -4,8 +4,8 @@
  * source: add or change an honor on sifa.id and the daily fingerprint run
  * (scripts/pds-fingerprints.mjs) redeploys the site.
  *
- * `kind` and `links` are optional honor fields (sifa-lexicons#134). Records
- * without `kind` fall back to the title ("nominated", "record", "champion").
+ * `kind` and `links` are optional honor fields (sifa-lexicons#134). An honor
+ * without a known `kind` renders as a plain honor: no guessing from the title.
  */
 import { z } from "astro/zod";
 import { loadCollection, type PdsRecord } from "./pds/loader";
@@ -66,17 +66,13 @@ const KINDS: HonorKind[] = [
 ];
 
 function kindOf(r: HonorRecord): HonorKind | undefined {
-  if (r.kind?.startsWith(KIND_PREFIX)) {
-    const k = r.kind.slice(KIND_PREFIX.length).toLowerCase() as HonorKind;
-    if (KINDS.includes(k)) return k;
-  }
-  if (/\bnominated\b/i.test(r.title)) return "nomination";
-  if (/\brecord\b/i.test(r.title)) return "record";
-  if (/\bchampion\b/i.test(r.title)) return "championship";
-  return undefined;
+  if (!r.kind?.startsWith(KIND_PREFIX)) return undefined;
+  const k = r.kind.slice(KIND_PREFIX.length).toLowerCase() as HonorKind;
+  return KINDS.includes(k) ? k : undefined;
 }
 
-const SWIMMING_ISSUER = /KNZB|zwembond|speedo/i;
+// Swimming federations and meets: KNZB (Dutch), LEN / European Aquatics, Speedo.
+const SWIMMING_ISSUER = /KNZB|zwembond|speedo|\bLEN\b|european aquatics/i;
 
 const hostLabel = (url: string) => {
   try {

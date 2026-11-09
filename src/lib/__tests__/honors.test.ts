@@ -20,15 +20,17 @@ describe("toHonor", () => {
     ).toBe("record");
   });
 
-  it("falls back to the title when kind is missing or unknown", () => {
+  it("leaves kind unset when it is missing or unknown", () => {
     expect(
       toHonor(rec({ title: "CRO personality 2020 (nominated)" })).kind,
-    ).toBe("nomination");
+    ).toBeUndefined();
     expect(
       toHonor(rec({ title: "Dutch National Champion 50m", kind: "x#other" }))
         .kind,
-    ).toBe("championship");
-    expect(toHonor(rec({ title: "Magento Master 2019" })).kind).toBeUndefined();
+    ).toBeUndefined();
+    expect(
+      toHonor(rec({ title: "X", kind: "id.sifa.defs#honorSomethingNew" })).kind,
+    ).toBeUndefined();
   });
 
   it("puts swimming issuers in the swimming area", () => {
@@ -38,6 +40,10 @@ describe("toHonor", () => {
       "swimming",
     );
     expect(toHonor(rec({ issuer: "Speedo" })).area).toBe("swimming");
+    expect(toHonor(rec({ issuer: "LEN (European Aquatics)" })).area).toBe(
+      "swimming",
+    );
+    expect(toHonor(rec({ issuer: "Lenovo" })).area).toBe("work");
     expect(toHonor(rec({ issuer: "Adobe" })).area).toBe("work");
   });
 

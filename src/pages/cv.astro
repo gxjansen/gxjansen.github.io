@@ -522,6 +522,9 @@ const index = [
                   <h3 class="font-display text-[1.05rem] font-extrabold">
                     {x.title}
                   </h3>
+                  {x.kindLabel && <span class="text-base-500 text-[0.82rem]">
+                    {x.kindLabel}
+                  </span>}
                   {x.date && <span
                     class="text-base-500 ml-auto text-[0.82rem] tabular-nums"
                   >
@@ -534,6 +537,18 @@ const index = [
                   {x.issuer && <span class="text-base-500">{x.issuer}</span>}
                   {x.issuer && x.description ? " · " : ""}
                   {x.description}
+                </p>}
+                {x.links.length > 0 && <p
+                  class="mt-0.5 flex flex-wrap gap-x-3 text-[0.85rem]"
+                >
+                  {x.links.map((l) => <a
+                    href={l.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-primary-600 dark:text-primary-400"
+                  >
+                    {l.label}
+                  </a>)}
                 </p>}
               </li>)}
             </ul>
@@ -550,6 +565,9 @@ const index = [
                     <h3 class="font-display text-[1.05rem] font-extrabold">
                       {x.title}
                     </h3>
+                    {x.kindLabel && <span class="text-base-500 text-[0.82rem]">
+                      {x.kindLabel}
+                    </span>}
                     {x.date && <span
                       class="text-base-500 ml-auto text-[0.82rem] tabular-nums"
                     >
@@ -562,6 +580,18 @@ const index = [
                     {x.issuer && <span class="text-base-500">{x.issuer}</span>}
                     {x.issuer && x.description ? " · " : ""}
                     {x.description}
+                  </p>}
+                  {x.links.length > 0 && <p
+                    class="mt-0.5 flex flex-wrap gap-x-3 text-[0.85rem]"
+                  >
+                    {x.links.map((l) => <a
+                      href={l.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-primary-600 dark:text-primary-400"
+                    >
+                      {l.label}
+                    </a>)}
                   </p>}
                 </li>)}
               </ul>

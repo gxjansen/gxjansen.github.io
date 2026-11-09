@@ -5,6 +5,7 @@
  * any failure so the page always renders. Never throws.
  */
 import type { LocationValue } from "@singi-labs/sifa-sdk";
+import { getHonorKindLabel } from "@singi-labs/sifa-sdk";
 import { fetchProfile } from "@singi-labs/sifa-sdk/query/fetchers";
 import { format } from "date-fns";
 
@@ -45,6 +46,9 @@ export interface CvAward {
   issuer?: string;
   description?: string;
   date: string;
+  /** Label for kinds worth showing next to the title (only "Nominated" for now). */
+  kindLabel?: string;
+  links: { url: string; label: string }[];
 }
 export interface CvLanguage {
   language: string;
@@ -338,6 +342,7 @@ const FALLBACK: CvData = {
       title: "Experimentation Culture Award",
       issuer: "Community vote",
       date: "2021",
+      links: [],
     },
   ],
   languages: [
@@ -353,6 +358,14 @@ const FALLBACK: CvData = {
     "Open standards (AT Protocol)",
   ],
   live: false,
+};
+
+const hostOf = (url: string) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
 };
 
 export async function getCV(): Promise<CvData> {
@@ -445,6 +458,13 @@ export async function getCV(): Promise<CvData> {
         issuer: decodeEntities(x.issuer),
         description: decodeEntities(x.description),
         date: fmtDate(x.date),
+        kindLabel:
+          x.kind === "id.sifa.defs#honorNomination"
+            ? getHonorKindLabel(x.kind)
+            : undefined,
+        links: (x.links ?? [])
+          .filter((l) => /^https?:\/\//.test(l.url))
+          .map((l) => ({ url: l.url, label: l.label || hostOf(l.url) })),
       }));
 
     const languages: CvLanguage[] = (p.languages ?? [])
