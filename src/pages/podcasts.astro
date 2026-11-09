@@ -2,6 +2,7 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getImage, Image } from "astro:assets";
 import croCafeArt from "@assets/images/podcasts/cro-cafe.webp";
+import dutchentoArt from "@assets/images/podcasts/dutchento.webp";
 import sheeptankArt from "@assets/images/podcasts/sheeptank.webp";
 import { Icon } from "astro-icon/components";
 import { getPodcastEpisodes } from "../lib/podcastFeeds";
@@ -42,6 +43,7 @@ const podcasts = [
     icon: "sheep",
     image: sheeptankArt,
     title: "Sheeptank",
+    years: "2022",
     text: "A lighthearted, fast-paced format: one interesting business case (pitched by the sheep) and a final verdict (from the wolves).",
     href: "https://media.spryker.com/podcasts/187220417647/rss.xml",
   },
@@ -49,14 +51,17 @@ const podcasts = [
     icon: "tabler/outline/a-b",
     image: croCafeArt,
     title: "CRO.CAFE",
+    years: "2018–2026",
     text: "Conversion rate optimization and business experimentation, with episodes in English, Dutch, Spanish and German.",
     href: "https://www.cro.cafe",
   },
   {
-    icon: "tabler/outline/friends",
-    title: "Spryker Community",
-    text: "Stories from the community, sharing insights and best practices.",
-    href: "https://www.youtube.com/results?search_query=spryker",
+    icon: "tabler/outline/microphone",
+    image: dutchentoArt,
+    title: "Dutchento",
+    years: "2017–2021",
+    text: "Dutch-language conversations with merchants, developers and e-commerce people from the Magento community I started, covering the platform, Meet Magento, user groups and Unconference events.",
+    href: "https://podcasts.gui.do/dutchento/feed.xml",
   },
 ];
 ---
@@ -109,6 +114,11 @@ const podcasts = [
           >
             {p.title}
           </h2>
+          {p.years && <p
+            class="text-base-500 dark:text-base-400 mt-0.5 text-sm"
+          >
+            {p.years}
+          </p>}
           <p
             class="text-base-600 dark:text-base-400 mt-2 text-[0.95rem] leading-relaxed"
           >
@@ -212,6 +222,14 @@ const podcasts = [
                 class="text-primary-600 dark:text-primary-400 block font-semibold hover:underline"
               >
                 CRO.CAFE
+              </a>
+              <a
+                href="https://podcasts.gui.do/dutchento/feed.xml"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary-600 dark:text-primary-400 block font-semibold hover:underline"
+              >
+                Dutchento
               </a>
             </div>
           </div>
