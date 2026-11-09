@@ -14,7 +14,7 @@ export interface SwimResult {
   medal?: SwimMedal;
   /** Final place when there was no medal, e.g. 4. */
   place?: number;
-  /** Relay teammates, in swimming order. */
+  /** Relay teammates, in swimming order when known. */
   team?: string[];
   /** Event, e.g. "50m breaststroke". */
   event: string;
@@ -109,10 +109,11 @@ export const swimmingResults: SwimResult[] = [
       "https://web.archive.org/web/2024/https://www.zwemkroniek.com/eeuwige_ranglijst_schoolslag_lange_baan",
   },
   {
-    // From Guido's medal list; club unclear (AZ&PC or De Rijn).
+    // From Guido's medal list; teammates from Guido (AZ&PC), order unknown.
     year: 2000,
     medal: "gold",
     event: "4x200m freestyle relay",
+    team: ["Patrick Martens", "Robin van Aggele", "Casper Tichelaar"],
     competition: "Dutch Championships",
     course: "short",
   },
