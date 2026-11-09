@@ -104,7 +104,7 @@ export const swimmingResults: SwimResult[] = [
     course: "long",
   },
   {
-    // From Guido's medal list; probably with De Rijn.
+    // From Guido's medal list; club unclear (AZ&PC or De Rijn).
     year: 2000,
     medal: "gold",
     event: "4x200m freestyle relay",
