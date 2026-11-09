@@ -6,5 +6,9 @@
   "dev.keytrace.claim": {
     "records": 5,
     "sha256": "c68a704a253e975d139efd88f2598af21aa186950ee66c5e550235d1175a8848"
+  },
+  "id.sifa.profile.honor": {
+    "records": 27,
+    "sha256": "12877623572455a163db50fd6fc18187e8f4b5c77624b872639150efe8960775"
   }
 }

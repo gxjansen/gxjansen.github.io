@@ -1,64 +1,45 @@
 ---
 /**
- * /awards: awards and nominations for my work (press-coverage.ts entries with
- * category "award" or "nomination") plus competitive swimming results
- * (src/data/swimming.ts).
+ * /awards: Guido's Sifa honor records (src/lib/honors.ts), loaded from his PDS
+ * at build time. Work honors render as award cards; swimming honors are split
+ * into Dutch records, senior titles, youth titles and other honors.
  */
 import { Icon } from "astro-icon/components";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import AwardsSection from "@components/Press/AwardsSection.astro";
-import { pressCoverage } from "../data/press-coverage";
-import {
-  swimmingRecords,
-  swimmingResults,
-  type SwimMedal,
-} from "../data/swimming";
-import { filterAvailableContent } from "../utils/content-availability";
+import { formatHonorDate, loadHonors, type Honor } from "../lib/honors";
 
-const awards = filterAvailableContent(pressCoverage)
-  .filter((i) => i.category === "award" || i.category === "nomination")
-  .sort(
-    (a, b) =>
-      new Date(b.publicationDate).getTime() -
-      new Date(a.publicationDate).getTime(),
-  );
+const honors = await loadHonors();
+const work = honors.filter((h) => h.area === "work");
+const swimming = honors.filter((h) => h.area === "swimming");
+const records = swimming.filter((h) => h.kind === "record");
+const titles = swimming.filter((h) => h.kind === "championship");
+const seniorTitles = titles.filter((h) => !h.youth);
+const youthTitles = titles.filter((h) => h.youth);
+const otherSwimming = swimming.filter(
+  (h) => h.kind !== "record" && h.kind !== "championship",
+);
 
-const byYear = [...swimmingResults].sort((a, b) => b.year - a.year);
-const swims = byYear.filter((r) => !r.ageGroup);
-const youthTitles = byYear.filter((r) => r.ageGroup);
-
-const medalEmoji: Record<SwimMedal, string> = {
-  gold: "🥇",
-  silver: "🥈",
-  bronze: "🥉",
-};
-const medalLabel: Record<SwimMedal, string> = {
-  gold: "Gold",
-  silver: "Silver",
-  bronze: "Bronze",
-};
-const medalClass: Record<SwimMedal, string> = {
-  gold: "bg-gold/10 text-gold-ink dark:bg-gold/25 dark:text-gold",
-  silver: "bg-base-200 text-base-800 dark:bg-base-700 dark:text-base-100",
-  bronze: "bg-gold-light/20 text-base-900 dark:text-base-100",
-};
-const ordinal = (n: number) => {
-  const teen = n % 100 >= 11 && n % 100 <= 13;
-  const suffix = teen ? "th" : ({ 1: "st", 2: "nd", 3: "rd" }[n % 10] ?? "th");
-  return `${n}${suffix}`;
-};
+const goldBadge =
+  "bg-gold/10 text-gold-ink dark:bg-gold/25 dark:text-gold rounded-full px-2.5 py-0.5 text-xs font-semibold";
 const recordBadge =
   "bg-primary-100 text-primary-800 dark:bg-primary-900/50 dark:text-primary-100 rounded-full px-2.5 py-0.5 text-xs font-semibold";
-const courseLabel = { short: "25m pool", long: "50m pool" };
-
 const card =
   "bg-base-50 dark:bg-base-900 border-base-200 dark:border-base-800 rounded-2xl border p-5";
 const muted = "text-base-600 dark:text-base-400";
+const h3 = "font-display mt-10 mb-3 text-xl font-bold";
+
+const badgeFor = (h: Honor) =>
+  h.kind === "record"
+    ? { emoji: "🏆", label: "Record", cls: recordBadge }
+    : h.kind === "championship"
+      ? { emoji: "🥇", label: "Gold", cls: goldBadge }
+      : null;
 ---
 
 <BaseLayout
   title="Awards"
-  description="Awards and nominations Guido Jansen received for his work, plus a look back at his competitive swimming years."
+  description="Awards Guido Jansen received for his work, plus a look back at his competitive swimming years."
 >
   <div class="home awards-page">
     <section
@@ -72,16 +53,14 @@ const muted = "text-base-600 dark:text-base-400";
           Awards
         </h1>
         <p class={`${muted} text-lg leading-relaxed`}>
-          Sometimes I'm even awarded for what I do! A small collection of awards
-          and nominations, plus a throwback to my competitive swimming days.
+          Sometimes I'm even awarded for what I do! A small collection of
+          awards, plus a throwback to my competitive swimming days.
         </p>
       </div>
 
-      {awards.length > 0 && (
-        <AwardsSection awards={awards} heading="For my work" />
-      )}
+      {work.length > 0 && <AwardsSection awards={work} heading="For my work" />}
 
-      {swims.length > 0 && <section
+      {swimming.length > 0 && <section
         id="swimming"
         class="mb-16 scroll-mt-24"
         aria-labelledby="swimming-heading"
@@ -96,135 +75,93 @@ const muted = "text-base-600 dark:text-base-400";
         </h2>
         <p class={`${muted} mb-6`}>
           <a
-            href="/about/"
+            href="/about/#athletic-years"
             class="text-primary-600 dark:text-primary-400 font-semibold"
             >The athletic years on /about</a
           >
         </p>
-        {swimmingRecords.length > 0 && (
-          <>
-            <h3
-              id="swimming-records"
-              class="font-display mb-3 text-xl font-bold"
-            >
-              Dutch records
-            </h3>
-            <ul class="grid gap-4 md:grid-cols-3">
-              {swimmingRecords.map((rec) => <li class={card}>
-                <span class={recordBadge}>
-                  <span aria-hidden="true">🏆</span> {rec.title}
-                </span>
-                <p class="text-base-900 dark:text-base-100 mt-2 font-semibold">
-                  {rec.event}
-                  <span class={`${muted} font-normal`}> · {rec.time}</span>
-                </p>
-                {rec.heatsTime && <p class={`${muted} text-sm`}>
-                  heats {rec.heatsTime}
-                </p>}
-                {rec.team && <p class={`${muted} text-sm`}>
-                  with {rec.team.join(", ")}
-                </p>}
-                <p class={`${muted} text-sm`}>
-                  {rec.club && `${rec.club} · `}
-                  {rec.competition}, {rec.date}
-                  {rec.course && ` · ${courseLabel[rec.course]}`}
-                </p>
-                {(rec.timesImproved || rec.heldUntil) && <p
-                  class={`${muted} text-sm`}
-                >
-                  {rec.timesImproved && `improved ${rec.timesImproved} times`}
-                  {rec.timesImproved && rec.heldUntil && " · "}
-                  {rec.heldUntil && `held until ${rec.heldUntil}`}
-                </p>}
-                <a
-                  href={rec.source}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-primary-600 dark:text-primary-400 mt-2 inline-block text-sm font-medium"
-                  aria-label={`Source for ${rec.title}, ${rec.event} (opens in new tab)`}
-                >
-                  Source <span aria-hidden="true">→</span>
-                </a>
-              </li>)}
-            </ul>
-          </>
-        )}
-        <h3
-          id="swimming-senior"
-          class="font-display mt-10 mb-3 text-xl font-bold"
-        >
-          Senior titles and finals
-        </h3>
-        <ul class="grid gap-4 md:grid-cols-2">
-          {swims.map((r) => <li class={card}>
-            <div class="flex flex-wrap items-center gap-2">
-              {r.medal && <span
-                class={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${medalClass[r.medal]}`}
+
+        {[
+          { id: "swimming-records", heading: "Dutch records", items: records },
+          {
+            id: "swimming-senior",
+            heading: "Senior titles",
+            items: seniorTitles,
+          },
+          {
+            id: "swimming-other",
+            heading: "Other honors",
+            items: otherSwimming,
+          },
+        ]
+          .filter((g) => g.items.length > 0)
+          .map((g, i) => (
+            <>
+              <h3
+                id={g.id}
+                class={i === 0 ? "font-display mb-3 text-xl font-bold" : h3}
               >
-                <span aria-hidden="true">{medalEmoji[r.medal]}</span>
-                {medalLabel[r.medal]}
-              </span>}
-              {!r.medal && r.place && <span
-                class="bg-base-200 text-base-800 dark:bg-base-700 dark:text-base-100 rounded-full px-2.5 py-0.5 text-xs font-semibold"
-              >
-                {ordinal(r.place)}
-              </span>}
-              <span class={`${muted} text-sm`}>{r.year}</span>
-              {r.record && <span class={recordBadge}>
-                <span aria-hidden="true">🏆</span> {r.record}
-              </span>}
-            </div>
-            <p class="text-base-900 dark:text-base-100 mt-2 font-semibold">
-              {r.event}
-              {r.time && <span class={`${muted} font-normal`}>
-                · {r.time}</span>}
-            </p>
-            {r.team && <p class={`${muted} text-sm`}>
-              with {r.team.join(", ")}
-            </p>}
-            <p class={`${muted} text-sm`}>
-              {r.competition}
-              {r.course && ` · ${courseLabel[r.course]}`}
-            </p>
-            {r.source && <a
-              href={r.source}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-primary-600 dark:text-primary-400 mt-2 inline-block text-sm font-medium"
-              aria-label={`Source for ${r.year} ${r.event} (opens in new tab)`}
-            >
-              Source <span aria-hidden="true">→</span>
-            </a>}
-          </li>)}
-        </ul>
+                {g.heading}
+              </h3>
+              <ul class="grid gap-4 md:grid-cols-2">
+                {g.items.map((h) => {
+                  const badge = badgeFor(h);
+                  return <li class={card}>
+                    <div class="flex flex-wrap items-center gap-2">
+                      {badge && <span class={badge.cls}>
+                        <span aria-hidden="true">{badge.emoji}</span>{" "}
+                        {badge.label}
+                      </span>}
+                      {h.date && <span class={`${muted} text-sm`}>
+                        {formatHonorDate(h.date)}
+                      </span>}
+                    </div>
+                    <p
+                      class="text-base-900 dark:text-base-100 mt-2 font-semibold"
+                    >
+                      {h.title}
+                    </p>
+                    {h.description && <p class={`${muted} mt-1 text-sm`}>
+                      {h.description}
+                    </p>}
+                    {h.links.length > 0 && <p
+                      class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm"
+                    >
+                      {h.links.map((l) => <a
+                        href={l.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-primary-600 dark:text-primary-400 font-medium"
+                      >
+                        {l.label} <span aria-hidden="true">→</span>
+                        <span class="sr-only"> (opens in new tab)</span>
+                      </a>)}
+                    </p>}
+                  </li>;
+                })}
+              </ul>
+            </>
+          ))}
+
         {youthTitles.length > 0 && (
           <>
-            <h3
-              id="swimming-youth"
-              class="font-display mt-10 mb-3 text-xl font-bold"
-            >
-              Youth titles
-            </h3>
+            <h3 id="swimming-youth" class={h3}>Youth titles</h3>
             <ul class={`${card} divide-base-200 dark:divide-base-800 divide-y`}>
-              {youthTitles.map((r) => <li
+              {youthTitles.map((h) => <li
                 class="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-2.5 first:pt-0 last:pb-0"
               >
-                {r.medal && <span
-                  class={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${medalClass[r.medal]}`}
-                >
-                  <span aria-hidden="true">{medalEmoji[r.medal]}</span>
-                  {medalLabel[r.medal]}
-                </span>}
-                <span class={`${muted} text-sm tabular-nums`}>{r.year}</span>
+                <span class={goldBadge}>
+                  <span aria-hidden="true">🥇</span> Gold
+                </span>
+                <span class={`${muted} text-sm tabular-nums`}>
+                  {h.date?.slice(0, 4)}
+                </span>
                 <span class="text-base-900 dark:text-base-100 font-semibold">
-                  {r.event}
-                  {r.time && <span class={`${muted} font-normal`}>
-                    · {r.time}</span>}
+                  {h.title}
                 </span>
-                <span class={`${muted} text-sm`}>
-                  {r.competition}, {r.ageGroup}
-                  {r.course && ` · ${courseLabel[r.course]}`}
-                </span>
+                {h.description && <span class={`${muted} text-sm`}
+                  >{h.description}</span
+                >}
               </li>)}
             </ul>
           </>
