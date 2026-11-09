@@ -28,6 +28,13 @@
     @apply mx-auto box-border w-full max-w-5xl px-4;
   }
 
+  /* Wide tier for card-grid pages (home, listings). Drops the 5xl cap so the
+     content fills .site-container like the nav does; prose inside keeps its
+     own ch limits. */
+  .home.home--wide {
+    @apply max-w-none;
+  }
+
   /* ---- hero ---- */
   .home .kicker {
     @apply text-primary-600 dark:text-primary-400 font-hand mb-3 inline-block text-[1.9rem] leading-none;
