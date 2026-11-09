@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { getImage } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import { getPodcastEpisodes } from "../lib/podcastFeeds";
 import { formatShortDateUTC } from "../utils/dates";
@@ -7,6 +8,32 @@ import { formatShortDateUTC } from "../utils/dates";
 // Build-time fetch: episodes are baked into the static HTML so crawlers and
 // no-JS browsers see the full list. Never throws — falls back to [] on failure.
 const episodes = await getPodcastEpisodes();
+
+// Download and shrink each episode's artwork at build time (feeds ship
+// 1400-3000px images), so visitors load small local WebP files instead of
+// hotlinking the feed hosts. An image that fails just renders without art.
+const THUMB = 256;
+const thumbs = await Promise.all(
+  episodes.map(async (episode) => {
+    if (!episode.imageUrl) return undefined;
+    try {
+      const image = await getImage({
+        src: episode.imageUrl,
+        width: THUMB,
+        height: THUMB,
+        fit: "cover",
+        format: "webp",
+      });
+      return image.src;
+    } catch (error) {
+      console.error(
+        `[podcasts] Could not optimize artwork ${episode.imageUrl}:`,
+        error instanceof Error ? error.message : error,
+      );
+      return undefined;
+    }
+  }),
+);
 
 const podcasts = [
   {
@@ -93,36 +120,53 @@ const podcasts = [
       <div id="podcast-feed-container">
         {episodes.length > 0 ? (
           <div class="grid gap-6 sm:grid-cols-2">
-            {episodes.map((episode) => <article
+            {episodes.map((episode, i) => <article
               class="bg-base-100 dark:bg-base-900 border-base-200 dark:border-base-800 flex flex-col gap-3 rounded-2xl border p-5"
             >
-              <p class="text-base-600 dark:text-base-400 text-sm">
-                {episode.podcastName}
-                {episode.pubDate && (
-                  <>
-                    {" · "}
-                    <time datetime={new Date(episode.pubDate).toISOString()}>
-                      {formatShortDateUTC(episode.pubDate)}
-                    </time>
-                  </>
+              <div class="flex items-start gap-4">
+                {thumbs[i] && (
+                  <img
+                    src={thumbs[i]}
+                    alt=""
+                    width={THUMB}
+                    height={THUMB}
+                    loading="lazy"
+                    decoding="async"
+                    class="border-base-200 dark:border-base-800 size-[4.5rem] shrink-0 rounded-xl border object-cover"
+                  />
                 )}
-              </p>
-              <h3
-                class="font-display text-[1.05rem] leading-snug font-extrabold"
-              >
-                {episode.link ? (
-                  <a
-                    href={episode.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="hover:text-primary-600 dark:hover:text-primary-400 transition"
+                <div class="min-w-0">
+                  <p class="text-base-600 dark:text-base-400 text-sm">
+                    {episode.podcastName}
+                    {episode.pubDate && (
+                      <>
+                        {" · "}
+                        <time
+                          datetime={new Date(episode.pubDate).toISOString()}
+                        >
+                          {formatShortDateUTC(episode.pubDate)}
+                        </time>
+                      </>
+                    )}
+                  </p>
+                  <h3
+                    class="font-display text-[1.05rem] leading-snug font-extrabold"
                   >
-                    {episode.title}
-                  </a>
-                ) : (
-                  episode.title
-                )}
-              </h3>
+                    {episode.link ? (
+                      <a
+                        href={episode.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="hover:text-primary-600 dark:hover:text-primary-400 transition"
+                      >
+                        {episode.title}
+                      </a>
+                    ) : (
+                      episode.title
+                    )}
+                  </h3>
+                </div>
+              </div>
               <audio
                 class="mt-auto w-full"
                 controls

@@ -19,6 +19,7 @@ describe("parseEpisodes", () => {
         title: "From CRO to AXO",
         link: "https://www.cro.cafe/en/episodes/from-cro-to-axo/",
         audioUrl: "https://podcasts.gui.do/cro-cafe/audio/448b345b.mp3",
+        imageUrl: undefined,
         pubDate: "Tue, 03 Nov 2026 06:00:00 GMT",
         podcastName: "CRO.CAFE",
       },
@@ -52,6 +53,33 @@ describe("parseEpisodes", () => {
     expect(episodes).toHaveLength(1);
     expect(episodes[0].title).toBe("Bad link");
     expect(episodes[0].link).toBeUndefined();
+  });
+
+  it("uses the episode image, else the show image, and drops non-https ones", () => {
+    const episodes = parseEpisodes(`<?xml version="1.0"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"><channel>
+  <title>CRO.CAFE</title>
+  <itunes:image href="https://podcasts.gui.do/cro-cafe/assets/show.jpg"/>
+  <item>
+    <title>Own art</title>
+    <itunes:image href="https://podcasts.gui.do/cro-cafe/assets/ep.jpg"/>
+    <enclosure url="https://podcasts.gui.do/a.mp3"/>
+  </item>
+  <item>
+    <title>No art</title>
+    <enclosure url="https://podcasts.gui.do/b.mp3"/>
+  </item>
+  <item>
+    <title>Http art</title>
+    <itunes:image href="http://example.com/ep.jpg"/>
+    <enclosure url="https://podcasts.gui.do/c.mp3"/>
+  </item>
+</channel></rss>`);
+    expect(episodes.map((e) => e.imageUrl)).toEqual([
+      "https://podcasts.gui.do/cro-cafe/assets/ep.jpg",
+      "https://podcasts.gui.do/cro-cafe/assets/show.jpg",
+      "https://podcasts.gui.do/cro-cafe/assets/show.jpg",
+    ]);
   });
 
   it("returns [] for non-RSS input", () => {
