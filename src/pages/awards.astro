@@ -8,7 +8,11 @@ import { Icon } from "astro-icon/components";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import AwardsSection from "@components/Press/AwardsSection.astro";
 import { pressCoverage } from "../data/press-coverage";
-import { swimmingResults, type SwimMedal } from "../data/swimming";
+import {
+  swimmingRecords,
+  swimmingResults,
+  type SwimMedal,
+} from "../data/swimming";
 import { filterAvailableContent } from "../utils/content-availability";
 
 const awards = filterAvailableContent(pressCoverage)
@@ -23,6 +27,11 @@ const byYear = [...swimmingResults].sort((a, b) => b.year - a.year);
 const swims = byYear.filter((r) => !r.ageGroup);
 const youthTitles = byYear.filter((r) => r.ageGroup);
 
+const medalEmoji: Record<SwimMedal, string> = {
+  gold: "🥇",
+  silver: "🥈",
+  bronze: "🥉",
+};
 const medalLabel: Record<SwimMedal, string> = {
   gold: "Gold",
   silver: "Silver",
@@ -38,6 +47,8 @@ const ordinal = (n: number) => {
   const suffix = teen ? "th" : ({ 1: "st", 2: "nd", 3: "rd" }[n % 10] ?? "th");
   return `${n}${suffix}`;
 };
+const recordBadge =
+  "bg-primary-100 text-primary-800 dark:bg-primary-900/50 dark:text-primary-100 rounded-full px-2.5 py-0.5 text-xs font-semibold";
 const courseLabel = { short: "25m pool", long: "50m pool" };
 
 const card =
@@ -90,7 +101,58 @@ const muted = "text-base-600 dark:text-base-400";
             >The athletic years on /about</a
           >
         </p>
-        <h3 id="swimming-senior" class="font-display mb-3 text-xl font-bold">
+        {swimmingRecords.length > 0 && (
+          <>
+            <h3
+              id="swimming-records"
+              class="font-display mb-3 text-xl font-bold"
+            >
+              Dutch records
+            </h3>
+            <ul class="grid gap-4 md:grid-cols-3">
+              {swimmingRecords.map((rec) => <li class={card}>
+                <span class={recordBadge}>
+                  <span aria-hidden="true">🏆</span> {rec.title}
+                </span>
+                <p class="text-base-900 dark:text-base-100 mt-2 font-semibold">
+                  {rec.event}
+                  <span class={`${muted} font-normal`}> · {rec.time}</span>
+                </p>
+                {rec.heatsTime && <p class={`${muted} text-sm`}>
+                  heats {rec.heatsTime}
+                </p>}
+                {rec.team && <p class={`${muted} text-sm`}>
+                  with {rec.team.join(", ")}
+                </p>}
+                <p class={`${muted} text-sm`}>
+                  {rec.club && `${rec.club} · `}
+                  {rec.competition}, {rec.date}
+                  {rec.course && ` · ${courseLabel[rec.course]}`}
+                </p>
+                {(rec.timesImproved || rec.heldUntil) && <p
+                  class={`${muted} text-sm`}
+                >
+                  {rec.timesImproved && `improved ${rec.timesImproved} times`}
+                  {rec.timesImproved && rec.heldUntil && " · "}
+                  {rec.heldUntil && `held until ${rec.heldUntil}`}
+                </p>}
+                <a
+                  href={rec.source}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-primary-600 dark:text-primary-400 mt-2 inline-block text-sm font-medium"
+                  aria-label={`Source for ${rec.title}, ${rec.event} (opens in new tab)`}
+                >
+                  Source <span aria-hidden="true">→</span>
+                </a>
+              </li>)}
+            </ul>
+          </>
+        )}
+        <h3
+          id="swimming-senior"
+          class="font-display mt-10 mb-3 text-xl font-bold"
+        >
           Senior titles and finals
         </h3>
         <ul class="grid gap-4 md:grid-cols-2">
@@ -99,6 +161,7 @@ const muted = "text-base-600 dark:text-base-400";
               {r.medal && <span
                 class={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${medalClass[r.medal]}`}
               >
+                <span aria-hidden="true">{medalEmoji[r.medal]}</span>
                 {medalLabel[r.medal]}
               </span>}
               {!r.medal && r.place && <span
@@ -107,6 +170,9 @@ const muted = "text-base-600 dark:text-base-400";
                 {ordinal(r.place)}
               </span>}
               <span class={`${muted} text-sm`}>{r.year}</span>
+              {r.record && <span class={recordBadge}>
+                <span aria-hidden="true">🏆</span> {r.record}
+              </span>}
             </div>
             <p class="text-base-900 dark:text-base-100 mt-2 font-semibold">
               {r.event}
@@ -146,6 +212,7 @@ const muted = "text-base-600 dark:text-base-400";
                 {r.medal && <span
                   class={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${medalClass[r.medal]}`}
                 >
+                  <span aria-hidden="true">{medalEmoji[r.medal]}</span>
                   {medalLabel[r.medal]}
                 </span>}
                 <span class={`${muted} text-sm tabular-nums`}>{r.year}</span>

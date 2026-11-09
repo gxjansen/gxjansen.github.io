@@ -1,13 +1,13 @@
 ---
 /**
  * Dynamic country flags marquee based on events data
- * Flag SVGs come from src/assets/flags (see src/utils/flagUtils.ts)
+ * Flag SVGs and names come from src/lib/flags
  * Features smooth multi-step fade-out edges that blend into the page background
  */
 
 import { Image } from "astro:assets";
 import { eventsData } from "../../data/events";
-import { getAllFlags } from "../../utils/flagUtils";
+import { flagImage, flagName } from "../../lib/flags";
 
 // Get unique countries from events
 const uniqueCountries = [
@@ -15,7 +15,12 @@ const uniqueCountries = [
 ].filter(Boolean);
 
 // Load all flags during build
-const allFlags = await getAllFlags(uniqueCountries);
+const allFlags = uniqueCountries.flatMap((countryCode) => {
+  const image = flagImage(countryCode);
+  return image
+    ? [{ image, countryCode, countryName: flagName(countryCode) }]
+    : [];
+});
 
 // Split flags into three roughly equal groups
 const totalFlags = allFlags.length;

@@ -14,6 +14,8 @@ export interface SwimResult {
   medal?: SwimMedal;
   /** Final place when there was no medal, e.g. 4. */
   place?: number;
+  /** Record set with this swim, shown as a badge, e.g. "Dutch record". */
+  record?: string;
   /** Relay teammates, in swimming order when known. */
   team?: string[];
   /** Event, e.g. "50m breaststroke". */
@@ -31,12 +33,14 @@ export interface SwimResult {
 
 export const swimmingResults: SwimResult[] = [
   {
-    // From Guido's medal list; no public source found yet.
     year: 2003,
     medal: "gold",
     event: "50m breaststroke",
     competition: "Dutch Sprint Championships",
     course: "short",
+    time: "29.16",
+    source:
+      "https://web.archive.org/web/20030730132624/http://www.zwemkroniek.com:80/nieuws.php3?item=1935",
   },
   {
     year: 2002,
@@ -64,8 +68,9 @@ export const swimmingResults: SwimResult[] = [
     competition: "European Short Course Championships, Antwerp",
     course: "short",
     time: "1:38.36",
+    record: "Dutch record",
     source:
-      "https://www.sportuitslagen.org/zwemmen-ek-korte-baan-25m-uitslagen-2001-heren-epm30024.html",
+      "https://web.archive.org/web/20030918091717/http://www.zwemkroniek.com:80/nieuws.php3?item=979",
   },
   {
     year: 2001,
@@ -179,5 +184,65 @@ export const swimmingResults: SwimResult[] = [
     competition: "Speedo Finals",
     ageGroup: "boys born 1982",
     time: "1:25.2",
+  },
+];
+
+export interface SwimRecord {
+  /** Kind of record, e.g. "Dutch junior record". */
+  title: string;
+  event: string;
+  course?: "short" | "long";
+  time: string;
+  /** Earlier record time in the same meet, e.g. the heats. */
+  heatsTime?: string;
+  competition: string;
+  /** Month and year, as displayed, e.g. "December 2001". */
+  date: string;
+  team?: string[];
+  club?: string;
+  /** How often Guido improved this record. */
+  timesImproved?: number;
+  /** Year the record was broken. */
+  heldUntil?: number;
+  source: string;
+}
+
+export const swimmingRecords: SwimRecord[] = [
+  {
+    title: "Dutch record",
+    event: "4x50m medley relay",
+    course: "short",
+    time: "1:38.36",
+    heatsTime: "1:38.44",
+    competition: "European Short Course Championships, Antwerp",
+    date: "December 2001",
+    team: ["Bastiaan Tamminga", "Ewout Holst", "Johan Kenkhuis"],
+    heldUntil: 2003,
+    source:
+      "https://web.archive.org/web/20030918091717/http://www.zwemkroniek.com:80/nieuws.php3?item=979",
+  },
+  {
+    title: "Dutch junior record",
+    event: "50m breaststroke",
+    course: "long",
+    time: "29.29",
+    competition: "European Junior Championships, Dunkirk",
+    date: "July 2000",
+    timesImproved: 5,
+    heldUntil: 2003,
+    source:
+      "https://web.archive.org/web/20030803094945/http://zwemkroniek.com:80/nieuws.php3?item=2073",
+  },
+  {
+    title: "Dutch youth record for club teams",
+    event: "4x100m freestyle relay",
+    time: "3:41.15",
+    competition: "Amersfoort",
+    date: "June 1999",
+    team: ["Alex van Leendert", "Tim Peters", "Stefan Oosting"],
+    club: "De Rijn Wageningen",
+    heldUntil: 2002,
+    source:
+      "https://web.archive.org/web/20021224201803/http://www.zwemkroniek.com:80/nieuws.php3?item=1582",
   },
 ];
