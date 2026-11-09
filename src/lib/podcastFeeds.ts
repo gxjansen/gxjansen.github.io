@@ -17,6 +17,7 @@ export const PODCAST_FEEDS = [
   "https://media.spryker.com/podcasts/187220417647/rss.xml", // Sheeptank
   "https://podcasts.gui.do/cro-cafe/feed.xml",
   "https://podcasts.gui.do/cro-cafe-nl/feed.xml",
+  "https://podcasts.gui.do/dutchento/feed.xml",
 ];
 
 const FETCH_TIMEOUT = 5000; // 5s per-feed timeout
