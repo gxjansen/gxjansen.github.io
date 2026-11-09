@@ -31,6 +31,9 @@ export default defineConfig({
     imageCDN: false,
   }),
   image: {
+    // Remote hosts Astro may download and optimize at build time
+    // (podcast episode artwork on /podcasts).
+    domains: ["podcasts.gui.do", "2770802.fs1.hubspotusercontent-na1.net"],
     responsiveStyles: true,
     breakpoints: [360, 640, 768, 1024, 1280, 1600, 1920],
     service: {

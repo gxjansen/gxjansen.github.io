@@ -6,8 +6,8 @@
  * required).
  *
  * Reads the feeds below and returns the latest episodes with their audio file
- * URL (played with a native <audio> element) and, when the feed has one, the
- * episode page link. Wrapped so a slow or failed feed NEVER breaks the build —
+ * URL (played with a native <audio> element) and, when the feed has them, the
+ * episode page link and artwork (episode image, else the show image). Wrapped so a slow or failed feed NEVER breaks the build —
  * on any error it falls back to an empty list and the page renders the static
  * "visit the podcasts directly" block. Never throws.
  */
@@ -27,6 +27,8 @@ export interface PodcastEpisode {
   /** Episode web page, if the feed provides one. */
   link?: string;
   audioUrl: string;
+  /** Episode artwork (`itunes:image`), falling back to the show artwork. */
+  imageUrl?: string;
   pubDate: string;
   podcastName: string;
 }
@@ -36,6 +38,7 @@ interface FeedItem {
   link?: unknown;
   pubDate?: unknown;
   enclosure?: { "@_url"?: unknown; "@_type"?: unknown };
+  "itunes:image"?: { "@_href"?: unknown };
 }
 
 const fetchWithTimeout = async (
@@ -84,6 +87,9 @@ export const parseEpisodes = (xml: string): PodcastEpisode[] => {
       ? [rawItems]
       : [];
   const podcastName = typeof channel.title === "string" ? channel.title : "";
+  const showImage =
+    httpsUrl(channel["itunes:image"]?.["@_href"]) ??
+    httpsUrl(channel.image?.url);
 
   return items
     .map((item): PodcastEpisode | null => {
@@ -96,6 +102,7 @@ export const parseEpisodes = (xml: string): PodcastEpisode[] => {
             : "Episode",
         link: httpsUrl(item.link),
         audioUrl,
+        imageUrl: httpsUrl(item["itunes:image"]?.["@_href"]) ?? showImage,
         pubDate: typeof item.pubDate === "string" ? item.pubDate : "",
         podcastName,
       };
