@@ -35,6 +35,8 @@ export const canon: CanonGroup[] = [
       {
         name: "The Expanse",
         by: "James S.A. Corey",
+        quote:
+          "My life has become a single, ongoing revelation that I haven’t been cynical enough.",
         url: "https://bookhive.buzz/books/bk_9DGGSjrdm6u2GUHePsCe",
       },
       {
@@ -291,9 +293,7 @@ export const canon: CanonGroup[] = [
       {
         name: "The Expanse",
         by: "TV series",
-        quote:
-          "My life has become a single, ongoing revelation that I haven’t been cynical enough.",
-        why: "Space is too fucking big",
+        quote: "Space is too fucking big.",
         url: "https://popfeed.social/tv_show/63639",
       },
       {
