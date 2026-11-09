@@ -44,14 +44,17 @@
      scripts/fetch-redesign-fonts.mjs, since removed; see git history);
      @font-face rules live in public/fonts/redesign-fonts.css, linked from BaseHead. */
   --font-sans:
-    "Atkinson Hyperlegible Next", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    "Twemoji Country Flags", "Atkinson Hyperlegible Next", system-ui,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
   --font-display:
-    "Schibsted Grotesk", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-hand: "LiebeHeide", "Caveat", "Segoe Script", cursive;
+    "Twemoji Country Flags", "Schibsted Grotesk", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-hand:
+    "Twemoji Country Flags", "LiebeHeide", "Caveat", "Segoe Script", cursive;
   --font-serif:
-    "Schibsted Grotesk", Georgia, Cambria, "Times New Roman", Times, serif;
+    "Twemoji Country Flags", "Schibsted Grotesk", Georgia, Cambria,
+    "Times New Roman", Times, serif;
   --font-mono:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
