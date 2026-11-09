@@ -32,11 +32,11 @@ const communities = [
     context: "AT Protocol community",
     logo: atmosphereLogo,
     description:
-      "I'm hired by the Atmosphere Community Cooperative, a co-op for AT Protocol work that fits neither Bluesky (the company) nor the IETF (the standard). The co-op runs AtmosphereConf each year, pays community members to speak about atproto at industry events, and funds developers maintaining core infrastructure, all governed through sociocratic circles and consent decisions. I co-organize AtmosphereConf 2027 in the Netherlands (April 29 - May 2), focusing on European sponsors, the CfP and program, and an attendee city guide. It builds on my 11 editions as main organizer of Meet Magento Netherlands, now applied to an open protocol community.",
+      'I\'m hired by the Atmosphere Community Cooperative, a co-op for AT Protocol work that fits neither Bluesky (the company) nor the IETF (the standard). The co-op runs <a href="https://atmosphereconf.org/" target="_blank" rel="noopener noreferrer">AtmosphereConf</a> each year, pays community members to speak about atproto at industry events, and funds developers maintaining core infrastructure, all governed through sociocratic circles and consent decisions. I co-organize AtmosphereConf 2027 in the Netherlands (April 29 - May 2), focusing on European sponsors, the CfP and program, and an attendee city guide. It builds on my 11 editions as main organizer of Meet Magento Netherlands, now applied to an open protocol community.',
     achievements: [
       "Co-organizing AtmosphereConf 2027 in the Netherlands, April 29 - May 2",
       "Growing the European sponsor base beyond today's mostly US list",
-      "Building Sifa ID (LinkedIn but on AT Protocol) via my company Singi Labs, and the atproto.eu community sites for AT Protocol people in Europe (NL, BE, NO, HU, PL), separate from the co-op",
+      'Building <a href="https://sifa.id/" target="_blank" rel="noopener noreferrer">Sifa ID</a> (LinkedIn but on AT Protocol) via my company <a href="https://singi.dev/" target="_blank" rel="noopener noreferrer">Singi Labs</a>, and the <a href="https://atproto.eu/" target="_blank" rel="noopener noreferrer">atproto.eu</a> community sites for AT Protocol people in Europe (NL, BE, NO, HU, PL), separate from the co-op',
       "Attended AtmosphereConf 2026 in Vancouver, ran an unconference session on Sifa",
     ],
   },
@@ -56,8 +56,18 @@ const communities = [
       "Community-driven initiatives now influence 25% of product roadmap decisions",
       "Multiple hackathon projects adopted into core product",
     ],
-    quote:
-      "Unlike consumer communities where you can grow through free trials, enterprise B2B community requires different strategies. I learned to create value for a smaller, higher-stakes audience.",
+    quotes: [
+      {
+        text: "Guido built the community function from the ground up, crafting not just a team, but a true movement.",
+        name: "Elise Mueller-Bischoff",
+        context: "EVP People & Culture, Spryker",
+      },
+      {
+        text: "With a small, high-performing team, Guido created a developer and customer community from scratch and turned it into a real asset for the business.",
+        name: "Eric Schreiner",
+        context: "Chief Customer Officer, Spryker (my manager)",
+      },
+    ],
   },
   {
     name: "CRO.CAFE",
@@ -74,6 +84,13 @@ const communities = [
       "Expanded to four languages with other hosts",
       "Built sustainable sponsorship model",
       "Created multi-language network reaching global CRO community",
+    ],
+    quotes: [
+      {
+        text: "He is a great podcast host who asks the right questions and is capable of creating an atmosphere/learning environment which entices you to learn more about CRO.",
+        name: "Daniël van de Poppe",
+        context: "Podcaster, Spraakmaker Media (CRO.CAFE partner)",
+      },
     ],
   },
   {
@@ -92,6 +109,18 @@ const communities = [
       "Co-created a model replicated by Meet Magento events worldwide",
       "Founding Board Member of the global Magento Association",
     ],
+    quotes: [
+      {
+        text: 'Guido is one of the best "connectors" I know. He headed an amazing Magento community day in Holland which I was a part of in January 2009.',
+        name: "Yoav Kutner",
+        context: "Co-founder, Magento",
+      },
+      {
+        text: "Guido has a big heart for the community and is always very innovative when it comes to taking the community to bigger heights.",
+        name: "Roy de Vries",
+        context: "Dutchento team member",
+      },
+    ],
   },
   {
     name: "Mambo/Joomla!",
@@ -106,6 +135,18 @@ const communities = [
       "Early contributor to what became one of the world's most popular CMS platforms",
       "Learned open source community dynamics firsthand",
       "Ran the local Dutch community portal, organized meetups and the yearly Joomladays conference.",
+    ],
+    quotes: [
+      {
+        text: "He knew what the wishes of the community were and managed to turn those to features on the forum or website.",
+        name: "Robbie van Riet",
+        context: "Joomla community member",
+      },
+      {
+        text: "Guido managed to get the nicest team ever for the joomladays, I'm glad I was one of them.",
+        name: "Meta Kruijs",
+        context: "Joomladays team member",
+      },
     ],
   },
 ];
@@ -143,7 +184,7 @@ const communities = [
     <section class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]">
       <div class="flex flex-col gap-[clamp(3rem,7vw,5rem)]">
         {communities.map((community, index) => <div
-          class="grid items-center gap-8 md:grid-cols-2 md:gap-12"
+          class="grid items-start gap-8 md:grid-cols-2 md:gap-12"
         >
           <div class={index % 2 === 1 ? "md:order-2" : ""}>
             <div
@@ -174,9 +215,10 @@ const communities = [
               {community.role}
             </p>
 
-            <p class="text-base-600 dark:text-base-400 mt-3 leading-relaxed">
-              {community.description}
-            </p>
+            <p
+              class="text-base-600 dark:text-base-400 mt-3 leading-relaxed"
+              set:html={community.description}
+            />
 
             <div class="mt-5">
               <h3
@@ -193,16 +235,35 @@ const communities = [
                     class="text-primary-600 dark:text-primary-400 mt-0.5 size-5 shrink-0"
                     aria-hidden="true"
                   />
-                  <span>{achievement}</span>
+                  {/* Achievements are trusted strings from this file; some carry links. */}
+                  <span set:html={achievement} />
                 </li>)}
               </ul>
             </div>
 
-            {community.quote && <blockquote
-              class="border-primary-600/30 dark:border-primary-400/30 text-base-700 dark:text-base-300 mt-6 border-l-4 pl-4 italic"
-            >
-              "{community.quote}"
-            </blockquote>}
+            {community.quotes && <div class="mt-6">
+              <h3
+                class="text-base-500 mb-3 text-xs font-bold tracking-[0.08em] uppercase"
+              >
+                Recommendations
+              </h3>
+              <div class="flex flex-col gap-4">
+                {community.quotes.map((quote) => <figure
+                  class="border-primary-600/30 dark:border-primary-400/30 border-l-4 pl-4"
+                >
+                  <blockquote
+                    class="text-base-700 dark:text-base-300 leading-relaxed italic"
+                  >
+                    &ldquo;{quote.text}&rdquo;
+                  </blockquote>
+                  <figcaption class="text-base-500 mt-1.5 text-sm">
+                    <span class="text-base-700 dark:text-base-300 font-semibold"
+                      >{quote.name}</span
+                    >, {quote.context}
+                  </figcaption>
+                </figure>)}
+              </div>
+            </div>}
           </div>
         </div>)}
       </div>
