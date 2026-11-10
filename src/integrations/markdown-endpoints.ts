@@ -134,6 +134,7 @@ function isContentPage(pathname: string): boolean {
     "newsletter/",
     "canon/",
     "green/",
+    "pfp/",
     "verify/",
     "domains/",
   ];
