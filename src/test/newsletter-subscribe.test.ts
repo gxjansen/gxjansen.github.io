@@ -1,13 +1,17 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 const used = new Map<string, string>();
+const blobsDown = { value: false };
 vi.mock("@netlify/blobs", () => ({
-  getStore: () => ({
-    get: async (key: string) => used.get(key) ?? null,
-    set: async (key: string, value: string) => {
-      used.set(key, value);
-    },
-  }),
+  getStore: () => {
+    if (blobsDown.value) throw new Error("blobs unavailable");
+    return {
+      get: async (key: string) => used.get(key) ?? null,
+      set: async (key: string, value: string) => {
+        used.set(key, value);
+      },
+    };
+  },
 }));
 
 const verifySolution = vi.fn();
@@ -20,10 +24,26 @@ const { default: handler, resolveListId } =
 
 const ENDPOINT = "https://gui.do/.netlify/functions/newsletter-subscribe";
 
-function post(body: Record<string, unknown>): Request {
+const BROWSER_HEADERS = {
+  "Content-Type": "application/json",
+  "User-Agent":
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+  Origin: "https://gui.do",
+  "Sec-Fetch-Site": "same-origin",
+};
+
+function post(
+  body: Record<string, unknown>,
+  headers: Record<string, string | undefined> = {},
+): Request {
+  const merged = Object.fromEntries(
+    Object.entries({ ...BROWSER_HEADERS, ...headers }).filter(
+      (entry): entry is [string, string] => entry[1] !== undefined,
+    ),
+  );
   return new Request(ENDPOINT, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: merged,
     body: JSON.stringify(body),
   });
 }
@@ -32,13 +52,17 @@ const valid = {
   email: "reader@example.com",
   listId: "3",
   altcha: "solved-payload",
+  elapsedMs: 12000,
 };
+
+const SUCCESS = "Thanks! Please check your email to confirm your subscription.";
 
 describe("newsletter-subscribe", () => {
   let fetchMock: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
     used.clear();
+    blobsDown.value = false;
     verifySolution.mockReset().mockResolvedValue(true);
     vi.stubEnv("ALTCHA_HMAC_KEY", "test-key");
     vi.stubEnv("LISTMONK_API_USER", "user");
@@ -132,6 +156,114 @@ describe("newsletter-subscribe", () => {
     );
     const res = await handler(post(valid));
     expect(res.status).toBe(200);
+    // Same reply as a new signup, so the form can't enumerate subscribers.
+    expect((await res.json()).message).toBe(SUCCESS);
+  });
+
+  describe("bot checks", () => {
+    async function expectSilentDrop(res: Response) {
+      expect(res.status).toBe(200);
+      expect((await res.json()).message).toBe(SUCCESS);
+      expect(fetchMock).not.toHaveBeenCalled();
+    }
+
+    it("silently drops a filled-in honeypot", async () => {
+      await expectSilentDrop(
+        await handler(post({ ...valid, hp_note: "https://spam.example" })),
+      );
+    });
+
+    it("silently drops a quoted or missing User-Agent", async () => {
+      await expectSilentDrop(
+        await handler(
+          post(valid, { "User-Agent": `"${BROWSER_HEADERS["User-Agent"]}"` }),
+        ),
+      );
+      await expectSilentDrop(
+        await handler(post(valid, { "User-Agent": undefined })),
+      );
+    });
+
+    it("silently drops Gmail addresses with many dots", async () => {
+      await expectSilentDrop(
+        await handler(post({ ...valid, email: "l.u.y.i.w.azi49@gmail.com" })),
+      );
+    });
+
+    it("rejects a missing or foreign Origin", async () => {
+      expect((await handler(post(valid, { Origin: undefined }))).status).toBe(
+        400,
+      );
+      expect(
+        (await handler(post(valid, { Origin: "https://evil.example" }))).status,
+      ).toBe(400);
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it("rejects a cross-site Sec-Fetch-Site", async () => {
+      const res = await handler(
+        post(valid, { "Sec-Fetch-Site": "cross-site" }),
+      );
+      expect(res.status).toBe(400);
+    });
+
+    it("rejects a submit that is too fast or has no timing", async () => {
+      expect((await handler(post({ ...valid, elapsedMs: 800 }))).status).toBe(
+        400,
+      );
+      const { elapsedMs: _omit, ...untimed } = valid;
+      expect((await handler(post(untimed))).status).toBe(400);
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it("fails closed when the replay store is unavailable", async () => {
+      blobsDown.value = true;
+      const res = await handler(post(valid));
+      expect(res.status).toBe(400);
+      expect(fetchMock).not.toHaveBeenCalled();
+    });
+
+    it("skips a Gmail inbox that is already on the list", async () => {
+      fetchMock.mockImplementation(async (url: string) =>
+        url.includes("/subscribers?")
+          ? new Response(JSON.stringify({ data: { total: 1 } }), {
+              status: 200,
+            })
+          : new Response("{}", { status: 200 }),
+      );
+      const res = await handler(
+        post({ ...valid, email: "Luyi.Wazi49+news@googlemail.com" }),
+      );
+      expect((await res.json()).message).toBe(SUCCESS);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      const lookup = new URL(fetchMock.mock.calls[0][0]);
+      expect(lookup.searchParams.get("list_id")).toBe("3");
+      expect(lookup.searchParams.get("query")).toContain("= 'luyiwazi49'");
+    });
+
+    it("subscribes a new Gmail inbox after the lookup", async () => {
+      fetchMock.mockImplementation(async (url: string) => {
+        if (url.includes("/subscribers?"))
+          return new Response(JSON.stringify({ data: { total: 0 } }));
+        if (url.endsWith("/subscribers"))
+          return new Response(JSON.stringify({ data: { id: 7 } }));
+        return new Response("{}");
+      });
+      const res = await handler(post({ ...valid, email: "j.doe@gmail.com" }));
+      expect(res.status).toBe(200);
+      expect(fetchMock.mock.calls.some(([url]) => url.endsWith("/optin"))).toBe(
+        true,
+      );
+    });
+
+    it("pauses signups once the hourly cap is reached", async () => {
+      used.set(new Date().toISOString().slice(0, 13), "30");
+      const res = await handler(post(valid));
+      expect(res.status).toBe(429);
+      expect(
+        fetchMock.mock.calls.some(([url]) => url.endsWith("/subscribers")),
+      ).toBe(false);
+    });
   });
 
   it("sends no wildcard CORS header", async () => {

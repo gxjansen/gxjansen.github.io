@@ -138,6 +138,14 @@ const signupPage = Astro.url.pathname;
         data-newsletter-form
       >
         <input type="hidden" name="nonce" />
+        {/* Honeypot: never shown, so only bots fill it in. */}
+        <input
+          type="text"
+          name="hp_note"
+          hidden
+          tabindex="-1"
+          autocomplete="off"
+        />
         <input type="hidden" name="l" value={listId} />
         <input type="hidden" name="signupPage" value={signupPage} />
 
@@ -249,6 +257,14 @@ const signupPage = Astro.url.pathname;
       data-newsletter-form
     >
       <input type="hidden" name="nonce" />
+      {/* Honeypot: never shown, so only bots fill it in. */}
+      <input
+        type="text"
+        name="hp_note"
+        hidden
+        tabindex="-1"
+        autocomplete="off"
+      />
       <input type="hidden" name="l" value={listId} />
       <input type="hidden" name="signupPage" value={signupPage} />
 
@@ -383,6 +399,14 @@ const signupPage = Astro.url.pathname;
           data-newsletter-form
         >
           <input type="hidden" name="nonce" />
+          {/* Honeypot: never shown, so only bots fill it in. */}
+          <input
+            type="text"
+            name="hp_note"
+            hidden
+            tabindex="-1"
+            autocomplete="off"
+          />
           <input type="hidden" name="l" value={listId} />
           <input type="hidden" name="signupPage" value={signupPage} />
 
@@ -471,6 +495,8 @@ const signupPage = Astro.url.pathname;
   data-newsletter-form
 >
   <input type="hidden" name="nonce" />
+  {/* Honeypot: never shown, so only bots fill it in. */}
+  <input type="text" name="hp_note" hidden tabindex="-1" autocomplete="off" />
   <input type="hidden" name="l" value={listId} />
   <input type="hidden" name="signupPage" value={signupPage} />
 
@@ -542,6 +568,8 @@ const signupPage = Astro.url.pathname;
   data-newsletter-form
 >
   <input type="hidden" name="nonce" />
+  {/* Honeypot: never shown, so only bots fill it in. */}
+  <input type="text" name="hp_note" hidden tabindex="-1" autocomplete="off" />
   <input type="hidden" name="l" value={listId} />
   <input type="hidden" name="signupPage" value={signupPage} />
 
@@ -753,6 +781,11 @@ const signupPage = Astro.url.pathname;
             ) as HTMLInputElement
           )?.value || undefined,
         altcha: altchaSolution,
+        hp_note:
+          (this.form.querySelector('input[name="hp_note"]') as HTMLInputElement)
+            ?.value || undefined,
+        // Time on the page; the server rejects submits faster than a person.
+        elapsedMs: Math.round(performance.now()),
       };
 
       try {

@@ -2,6 +2,12 @@ import type { Config } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
 import { verifySolution } from "altcha-lib/v1";
 import { listmonkAuthHeaders, listmonkBaseUrl } from "./_shared/listmonk";
+import {
+  HONEYPOT_FIELD,
+  checkSignupSignals,
+  gmailDuplicateQuery,
+  parseGmail,
+} from "./_shared/signup-guards";
 
 /**
  * Newsletter Subscription Proxy
@@ -9,7 +15,10 @@ import { listmonkAuthHeaders, listmonkBaseUrl } from "./_shared/listmonk";
  * This function proxies subscription requests to our self-hosted Listmonk instance.
  * Uses the Listmonk API to enable custom attributes for subscriber tracking.
  * Validates ALTCHA proof-of-work challenges for spam protection; a solved
- * challenge can only be used once (tracked in Netlify Blobs).
+ * challenge can only be used once (tracked in Netlify Blobs). On top of that,
+ * request-level bot checks (_shared/signup-guards.ts), a Gmail duplicate check
+ * and an hourly cap stop list-bombing: every fake signup sends an opt-in mail
+ * to someone who never asked for it.
  * API credentials are stored securely in Netlify environment variables.
  *
  * Called same-origin from NewsletterForm.astro, so no CORS headers are sent.
@@ -26,6 +35,17 @@ const MAX_ALTCHA_LENGTH = 2000;
 
 /** Store of ALTCHA payload hashes that have already been redeemed. */
 const USED_CHALLENGES_STORE = "altcha-used-challenges";
+/** Store of accepted-signup counts per UTC hour. */
+const SIGNUP_COUNTS_STORE = "newsletter-signup-counts";
+/**
+ * Accepted signups per hour before the form pauses. Real signups come in at a
+ * few a month; this only trips when something gets past the other checks.
+ */
+const MAX_SIGNUPS_PER_HOUR = 30;
+
+/** Same reply for new, existing and silently dropped signups. */
+const SUCCESS_MESSAGE =
+  "Thanks! Please check your email to confirm your subscription.";
 
 interface SubscriptionRequest {
   email?: unknown;
@@ -33,6 +53,8 @@ interface SubscriptionRequest {
   listId?: unknown;
   signupPage?: unknown;
   altcha?: unknown;
+  elapsedMs?: unknown;
+  [HONEYPOT_FIELD]?: unknown;
 }
 
 function json(status: number, body: Record<string, unknown>): Response {
@@ -68,6 +90,7 @@ async function parseBody(req: Request): Promise<SubscriptionRequest> {
     listId: params.get("l") ?? params.get("listId") ?? undefined,
     signupPage: params.get("signupPage") ?? undefined,
     altcha: params.get("altcha") ?? undefined,
+    [HONEYPOT_FIELD]: params.get(HONEYPOT_FIELD) ?? undefined,
   };
 }
 
@@ -90,13 +113,19 @@ async function sha256Hex(input: string): Promise<string> {
 }
 
 /**
- * Marks an ALTCHA payload as used. Returns false if it was already redeemed.
- * Blob errors don't block a signup: the proof-of-work was already verified,
- * this check only stops reuse within the challenge's 5-minute lifetime.
+ * Marks an ALTCHA payload as used. Returns false if it was already redeemed,
+ * or if the store can't be reached (fail closed: the bomber replayed one
+ * solution from several Tor exits within seconds).
+ *
+ * Strong consistency matters: with the default eventual consistency a read
+ * can be up to 60 seconds stale, which let those replays through.
  */
 async function redeemChallenge(altcha: string): Promise<boolean> {
   try {
-    const store = getStore(USED_CHALLENGES_STORE);
+    const store = getStore({
+      name: USED_CHALLENGES_STORE,
+      consistency: "strong",
+    });
     const key = await sha256Hex(altcha);
     if (await store.get(key)) return false;
     await store.set(key, new Date().toISOString());
@@ -106,7 +135,66 @@ async function redeemChallenge(altcha: string): Promise<boolean> {
       "ALTCHA replay check unavailable:",
       error instanceof Error ? error.message : error,
     );
+    return false;
+  }
+}
+
+/**
+ * Counts an accepted signup against the hourly cap. Returns false when the cap
+ * is reached. The read-then-write isn't atomic, which is fine for a soft cap.
+ * Blob errors don't block a signup: the cap is a backstop, not the main check.
+ */
+async function withinHourlyCap(): Promise<boolean> {
+  try {
+    const store = getStore({
+      name: SIGNUP_COUNTS_STORE,
+      consistency: "strong",
+    });
+    const key = new Date().toISOString().slice(0, 13); // YYYY-MM-DDTHH
+    const count = Number((await store.get(key)) ?? 0);
+    if (count >= MAX_SIGNUPS_PER_HOUR) return false;
+    await store.set(key, String(count + 1));
     return true;
+  } catch (error) {
+    console.error(
+      "Signup cap unavailable:",
+      error instanceof Error ? error.message : error,
+    );
+    return true;
+  }
+}
+
+/**
+ * True when another spelling of this Gmail inbox (dots, +tag, googlemail.com)
+ * is already on the list. Lookup errors count as "not found".
+ */
+async function gmailAlreadyOnList(
+  email: string,
+  listId: number,
+  baseUrl: string,
+  headers: Record<string, string>,
+): Promise<boolean> {
+  const gmail = parseGmail(email);
+  if (!gmail) return false;
+  try {
+    const params = new URLSearchParams({
+      list_id: String(listId),
+      per_page: "1",
+      query: gmailDuplicateQuery(gmail.canonicalLocal),
+    });
+    const res = await fetch(`${baseUrl}/subscribers?${params}`, { headers });
+    if (!res.ok) {
+      console.error("Gmail duplicate check failed:", res.status);
+      return false;
+    }
+    const data = await res.json();
+    return Number(data?.data?.total ?? 0) > 0;
+  } catch (error) {
+    console.error(
+      "Gmail duplicate check unavailable:",
+      error instanceof Error ? error.message : error,
+    );
+    return false;
   }
 }
 
@@ -144,6 +232,22 @@ export default async (req: Request): Promise<Response> => {
       return fail(400, "Unknown newsletter.");
     }
 
+    const verdict = checkSignupSignals({
+      email,
+      honeypot: requestData[HONEYPOT_FIELD],
+      elapsedMs: requestData.elapsedMs,
+      userAgent: req.headers.get("user-agent"),
+      origin: req.headers.get("origin"),
+      secFetchSite: req.headers.get("sec-fetch-site"),
+      expectedOrigin: new URL(req.url).origin,
+    });
+    if (!verdict.ok) {
+      console.log("Signup blocked:", verdict.reason);
+      return verdict.silent
+        ? json(200, { success: true, message: SUCCESS_MESSAGE })
+        : fail(400, "Verification failed. Please refresh and try again.");
+    }
+
     // ALTCHA is mandatory: without the key we can't verify, so refuse (fail closed).
     const altchaKey = process.env.ALTCHA_HMAC_KEY;
     if (!altchaKey) {
@@ -178,6 +282,18 @@ export default async (req: Request): Promise<Response> => {
       return fail(500, "Server configuration error. Please try again later.");
     }
     const baseUrl = listmonkBaseUrl();
+
+    if (
+      await gmailAlreadyOnList(email, targetListId, baseUrl, listmonkHeaders)
+    ) {
+      console.log("Signup blocked: gmail-duplicate");
+      return json(200, { success: true, message: SUCCESS_MESSAGE });
+    }
+
+    if (!(await withinHourlyCap())) {
+      console.log("Signup blocked: hourly-cap");
+      return fail(429, "Too many signups right now. Please try again later.");
+    }
 
     // Step 1: Create subscriber (without list assignment - separate API call needed)
     const response = await fetch(`${baseUrl}/subscribers`, {
@@ -220,19 +336,13 @@ export default async (req: Request): Promise<Response> => {
         });
       }
 
-      return json(200, {
-        success: true,
-        message:
-          "Thanks! Please check your email to confirm your subscription.",
-      });
+      return json(200, { success: true, message: SUCCESS_MESSAGE });
     }
 
     if (response.status === 409 || responseData?.message?.includes("already")) {
-      // Already subscribed - treat as success
-      return json(200, {
-        success: true,
-        message: "You're already subscribed! Check your inbox for updates.",
-      });
+      // Already subscribed: same reply as a new signup, so the form can't be
+      // used to find out who is on the list.
+      return json(200, { success: true, message: SUCCESS_MESSAGE });
     }
 
     // Log status and Listmonk's message only; the full body can echo the email address.
