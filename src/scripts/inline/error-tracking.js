@@ -37,23 +37,29 @@
     });
   });
 
-  // Track resource load failures
+  // Track script and stylesheet load failures. Images are left out: they
+  // only fail for clients that block or abort image loads (scrapers, data
+  // savers), which flooded the stats with noise. Broken image links are
+  // caught by the weekly lychee run instead.
+  var MAX_RESOURCE_ERRORS = 3;
+  var reported = {};
+  var resourceErrors = 0;
   window.addEventListener(
     "error",
     function (event) {
       var target = event.target;
-      if (
-        target &&
-        (target.tagName === "IMG" ||
-          target.tagName === "SCRIPT" ||
-          target.tagName === "LINK")
-      ) {
-        trackError("resource-error", {
-          type: target.tagName.toLowerCase(),
-          src: (target.src || target.href || "").slice(0, 200),
-          url: window.location.pathname,
-        });
-      }
+      if (!target || (target.tagName !== "SCRIPT" && target.tagName !== "LINK"))
+        return;
+      var src = (target.src || target.href || "").slice(0, 200);
+      if (!src || reported[src] || resourceErrors >= MAX_RESOURCE_ERRORS)
+        return;
+      reported[src] = true;
+      resourceErrors++;
+      trackError("resource-error", {
+        type: target.tagName.toLowerCase(),
+        src: src,
+        url: window.location.pathname,
+      });
     },
     true,
   );
