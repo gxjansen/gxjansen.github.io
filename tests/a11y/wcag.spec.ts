@@ -27,6 +27,7 @@ const ROUTES = [
   "/privacy/",
   "/uses/",
   "/verify/",
+  "/pfp/",
   "/domains/",
   "/presentations/",
   "/ama/",

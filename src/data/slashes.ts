@@ -138,6 +138,13 @@ export const slashPages: SlashPage[] = [
     aliases: [{ slug: "pic" }],
   },
   {
+    slug: "pfp",
+    featured: true,
+    description:
+      "Every profile picture I've used or could have used since 2008, grouped by year.",
+    aliases: [{ slug: "avatar" }, { slug: "avatars" }],
+  },
+  {
     slug: "canon",
     featured: true,
     description:

@@ -53,6 +53,25 @@ export interface LoadOptions<S extends z.ZodType> {
   attempts?: number;
   retryDelayMs?: number;
   timeoutMs?: number;
+  /**
+   * Only records created at or after this time (ISO 8601), judged by the
+   * TID rkey, not the record's own createdAt (which can be backdated).
+   * listRecords returns newest first, so paging stops at the first older
+   * record: cheap reads of the recent end of a large collection.
+   */
+  since?: string;
+  /** Stop after this many records (newest first). */
+  limit?: number;
+}
+
+const TID_CHARS = "234567abcdefghijklmnopqrstuvwxyz";
+
+/** Creation time encoded in a TID record key, or null for other rkeys. */
+export function tidToDate(rkey: string): Date | null {
+  if (!/^[2-7a-j][2-7a-z]{12}$/.test(rkey)) return null;
+  let n = 0n;
+  for (const c of rkey) n = n * 32n + BigInt(TID_CHARS.indexOf(c));
+  return new Date(Number(n >> 10n) / 1000);
 }
 
 /** A record failed validation. Never falls back to the cache. */
@@ -80,8 +99,17 @@ interface CacheFile {
 const defaultCacheDir = () =>
   process.env.PDS_CACHE_DIR ?? path.join(process.cwd(), ".pds-cache");
 
-const cacheFileFor = (dir: string, did: string, collection: string) =>
-  path.join(dir, `${did.replaceAll(":", "_")}--${collection}.json`);
+/** One cache file per DID + collection, plus a suffix for partial reads. */
+const cacheFileFor = (
+  dir: string,
+  did: string,
+  collection: string,
+  variant = "",
+) =>
+  path.join(
+    dir,
+    `${did.replaceAll(":", "_")}--${collection}${variant ? `--${variant}` : ""}.json`,
+  );
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -154,6 +182,8 @@ async function fetchAll(
   did: string,
   collection: string,
   ctx: Ctx,
+  sinceMs?: number,
+  limit?: number,
 ): Promise<PdsRecord<unknown>[]> {
   const pds = await resolvePds(did, ctx);
   const out: PdsRecord<unknown>[] = [];
@@ -171,12 +201,13 @@ async function fetchAll(
       );
     }
     for (const r of body.records) {
-      out.push({
-        uri: r.uri,
-        cid: r.cid,
-        rkey: r.uri.split("/").pop() ?? "",
-        value: r.value,
-      });
+      const rkey = r.uri.split("/").pop() ?? "";
+      if (sinceMs !== undefined) {
+        const created = tidToDate(rkey);
+        if (created && created.getTime() < sinceMs) return out;
+      }
+      out.push({ uri: r.uri, cid: r.cid, rkey, value: r.value });
+      if (limit !== undefined && out.length >= limit) return out;
     }
     if (!body.cursor || body.records.length === 0) return out;
     cursor = body.cursor;
@@ -271,7 +302,7 @@ export function loadCollection<S extends z.ZodType>(
 ): Promise<LoadResult<z.output<S>>> {
   const did = opts.did ?? GUIDO_DID;
   const cacheDir = opts.cacheDir ?? defaultCacheDir();
-  const key = `${cacheDir}|${did}|${opts.collection}`;
+  const key = `${cacheDir}|${did}|${opts.collection}|${opts.since ?? ""}|${opts.limit ?? ""}`;
   let p = inFlight.get(key);
   if (!p) {
     p = load({ ...opts, did, cacheDir });
@@ -291,11 +322,23 @@ async function load<S extends z.ZodType>(
     retryDelayMs: opts.retryDelayMs ?? 2000,
     timeoutMs: opts.timeoutMs ?? 15000,
   };
-  const file = cacheFileFor(cacheDir, did, collection);
+  const variant = [
+    opts.since ? `since-${opts.since.replace(/[^0-9]/g, "")}` : "",
+    opts.limit ? `limit-${opts.limit}` : "",
+  ]
+    .filter(Boolean)
+    .join("-");
+  const file = cacheFileFor(cacheDir, did, collection, variant);
 
   let raw: PdsRecord<unknown>[];
   try {
-    raw = await fetchAll(did, collection, ctx);
+    raw = await fetchAll(
+      did,
+      collection,
+      ctx,
+      opts.since ? Date.parse(opts.since) : undefined,
+      opts.limit,
+    );
   } catch (err) {
     if (!(err instanceof PdsOutageError)) throw err;
     const cached = await readCache(file);

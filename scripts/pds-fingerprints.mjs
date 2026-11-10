@@ -9,6 +9,11 @@
 // so any created, edited or deleted record changes it. The collections are the
 // keys of the JSON file itself; a unit test checks the loader's collections
 // are all in it. Any fetch error exits non-zero and leaves the file untouched.
+//
+// An entry with a `since` (ISO 8601) only covers records created after it,
+// judged by the TID rkey. listRecords is newest first, so paging stops at the
+// first older record: /pfp only reads the recent end of the large Grain
+// collections (src/lib/pfp.ts).
 
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
@@ -29,7 +34,18 @@ async function pdsFor(did) {
   return svc.serviceEndpoint.replace(/\/$/, "");
 }
 
-async function fingerprint(pds, collection) {
+const TID_CHARS = "234567abcdefghijklmnopqrstuvwxyz";
+
+/** Creation time (ms) encoded in a TID rkey, or null for other rkeys. */
+function tidMs(rkey) {
+  if (!/^[2-7a-j][2-7a-z]{12}$/.test(rkey)) return null;
+  let n = 0n;
+  for (const c of rkey) n = n * 32n + BigInt(TID_CHARS.indexOf(c));
+  return Number(n >> 10n) / 1000;
+}
+
+async function fingerprint(pds, collection, since) {
+  const sinceMs = since ? Date.parse(since) : undefined;
   const pairs = [];
   let cursor;
   for (let page = 0; page < 50; page++) {
@@ -39,10 +55,20 @@ async function fingerprint(pds, collection) {
     url.searchParams.set("limit", "100");
     if (cursor) url.searchParams.set("cursor", cursor);
     const body = await getJson(url);
-    for (const r of body.records ?? []) pairs.push(`${r.uri} ${r.cid}`);
-    if (!body.cursor || !body.records?.length) {
+    let done = false;
+    for (const r of body.records ?? []) {
+      const created =
+        sinceMs === undefined ? null : tidMs(r.uri.split("/").pop());
+      if (created !== null && created < sinceMs) {
+        done = true;
+        break;
+      }
+      pairs.push(`${r.uri} ${r.cid}`);
+    }
+    if (done || !body.cursor || !body.records?.length) {
       pairs.sort();
       return {
+        ...(since ? { since } : {}),
         records: pairs.length,
         sha256: createHash("sha256").update(pairs.join("\n")).digest("hex"),
       };
@@ -56,7 +82,11 @@ const current = JSON.parse(await readFile(FILE, "utf8"));
 const pds = await pdsFor(DID);
 const next = {};
 for (const collection of Object.keys(current).sort()) {
-  next[collection] = await fingerprint(pds, collection);
+  next[collection] = await fingerprint(
+    pds,
+    collection,
+    current[collection].since,
+  );
 }
 await writeFile(FILE, JSON.stringify(next, null, 2) + "\n");
 for (const [c, f] of Object.entries(next)) {

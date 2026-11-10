@@ -137,6 +137,12 @@ export const LANDING_PAGES: Record<string, LandingCardContent> = {
     lead: "The books, thinkers, shows and games that shaped how I think.",
     hand: "the good stuff",
   },
+  pfp: {
+    url: "gui.do/pfp",
+    title: "Profile pictures",
+    lead: "Mostly selfies from travel, conferences, notable places and some cats.",
+    hand: "yes, really",
+  },
   green: {
     url: "gui.do/green",
     title: "Trying to waste less",
