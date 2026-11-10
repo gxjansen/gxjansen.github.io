@@ -1,5 +1,6 @@
 ---
 import themeInit from "../scripts/inline/theme-init.js?raw";
+import umamiBeforeSend from "../scripts/inline/umami-before-send.js?raw";
 import { scriptHash } from "../utils/csp";
 import { type CollectionEntry } from "astro:content";
 
@@ -182,24 +183,26 @@ Astro.csp?.insertScriptHash(scriptHash(themeInit));
   communities={communities as any}
 />
 
-{/*
-  Umami Analytics — disabled pending a public endpoint.
-  The current host only resolves on the homelab network, so the script
-  fails for off-network visitors (and spams Chrome console errors).
-  Restore once Umami is reachable via a public hostname.
-*/}
 {
-  /* Self-hosted, cookieless Umami analytics. Production only — never in dev. */
+  /*
+    Self-hosted, cookieless Umami analytics. Production builds only.
+    data-domains keeps CI (axe, Lighthouse), local previews and copies of the
+    site on other hosts out of the stats; umamiBeforeSend drops automated
+    browsers.
+  */
   import.meta.env.PROD && (
     <>
       <link rel="dns-prefetch" href="https://u.a11y.nl" />
       <link rel="preconnect" href="https://u.a11y.nl" crossorigin />
+      <script is:inline set:html={umamiBeforeSend} />
       <script
         is:inline
         async
         defer
         src="https://u.a11y.nl/script.js"
         data-website-id="c5cf1235-9d9d-4543-b0be-2acc2551d8f5"
+        data-domains="gui.do,www.gui.do"
+        data-before-send="umamiBeforeSend"
       /></>
   )
 }
