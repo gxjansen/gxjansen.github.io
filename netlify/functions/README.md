@@ -58,7 +58,8 @@ Accepts both `application/json` and `application/x-www-form-urlencoded`.
   "name": "Optional Name",
   "listId": 3,
   "signupPage": "/newsletter",
-  "altcha": "<solved ALTCHA payload>"
+  "altcha": "<solved ALTCHA payload>",
+  "elapsedMs": 8421
 }
 ```
 
@@ -68,11 +69,18 @@ Accepts both `application/json` and `application/x-www-form-urlencoded`.
 - `l` or `listId` (optional): Listmonk list ID (default: 3 for "Guido's Golden Nuggets"). Only ids in `ALLOWED_LIST_IDS` are accepted; anything else returns 400.
 - `signupPage` (optional): Page where signup occurred (for tracking)
 - `altcha` (required): Solved ALTCHA challenge from `altcha-challenge`
+- `elapsedMs` (required, JSON only): milliseconds since page load, set by the form
+- `hp_note`: honeypot, hidden in the form; must be empty
 
 ### Abuse protection
 
 - ALTCHA is mandatory. If `ALTCHA_HMAC_KEY` is unset the function returns 500 instead of skipping verification.
-- Each solved challenge works once. Redeemed payloads are hashed into the `altcha-used-challenges` Netlify Blobs store.
+- Each solved challenge works once. Redeemed payloads are hashed into the `altcha-used-challenges` Netlify Blobs store, read with strong consistency. If the store is unreachable the signup is refused.
+- Bot checks in `_shared/signup-guards.ts` (added after list-bombing in 2026: a script solved ALTCHA itself and posted dotted Gmail variants through Tor exits):
+  - Answered with the normal success message, nothing sent: filled honeypot, missing or quoted `User-Agent`, Gmail local part with more than 2 dots.
+  - 400: `Origin` not the site's own origin, `Sec-Fetch-Site` other than `same-origin`, `elapsedMs` missing or under 3 seconds.
+- Gmail duplicates: before creating a subscriber, the list is searched for the same inbox with dots, `+tags` and `googlemail.com` stripped. A match gets the success message and no new opt-in mail. Needs `subscribers:get` on the Listmonk API user; lookup errors let the signup through.
+- Hourly cap: at most 30 accepted signups per UTC hour (`newsletter-signup-counts` Blobs store), then 429.
 - Netlify rate limit: 5 requests per minute per IP and domain (`config.rateLimit` in the function).
 - Length caps: email 254, name 100, signupPage 200 characters.
 - No CORS headers: the form calls the function same-origin.
@@ -101,13 +109,7 @@ Accepts both `application/json` and `application/x-www-form-urlencoded`.
 }
 ```
 
-**Already subscribed (200):**
-```json
-{
-  "success": true,
-  "message": "You're already subscribed! Check your inbox for updates."
-}
-```
+Already-subscribed addresses and silently dropped bot requests get the same reply, so the form can't be used to check who is on the list.
 
 **Error (400/500):**
 ```json
