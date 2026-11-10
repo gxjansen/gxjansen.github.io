@@ -779,6 +779,12 @@ const signupPage = Astro.url.pathname;
 
           this.form.reset();
 
+          // Lets other scripts react (NextStep stops offering the newsletter
+          // and logs the conversion).
+          this.form.dispatchEvent(
+            new CustomEvent("newsletter:subscribed", { bubbles: true }),
+          );
+
           // Reset button after delay
           setTimeout(() => {
             this.setButtonState(false);

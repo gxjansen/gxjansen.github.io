@@ -4,7 +4,6 @@ import { Picture } from "astro:assets";
 import { format } from "date-fns";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Button from "@components/Button/Button.astro";
-import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 import { isPublished } from "../../lib/isPublished";
 import appsAsViews from "@images/series/apps-as-views.png";
 import seriesCard from "@images/series/series-card.png";
@@ -227,7 +226,7 @@ const pageDescription =
         </div>
 
         <div class="flex flex-wrap items-center gap-2.5">
-          <Button href="#subscribe" variant="primary" arrow="right">
+          <Button href="#next" variant="primary" arrow="right">
             Get each part in your inbox
           </Button>
           <Button href="#series" variant="secondary" arrow="right">
@@ -452,22 +451,6 @@ const pageDescription =
           quality={90}
         />
       </figure>
-
-      {/* ============ NEWSLETTER ============ */}
-      <section
-        id="subscribe"
-        class="my-16 scroll-mt-24"
-        aria-label="Newsletter"
-      >
-        <NewsletterForm
-          variant="card"
-          title="Get each episode in your inbox"
-          cadence="weekly, for 7 weeks"
-          description="I'll send each part the morning it goes live, no checking back. After the series it settles into a periodic newsletter. If this resonates, you'll probably like the rest."
-          note="No spam, no tracking, unsubscribe in one click."
-        />
-      </section>
-
       {/* ============ ABOUT THE WRITER ============ */}
       <section
         id="about"

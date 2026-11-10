@@ -6,8 +6,6 @@ import { Icon } from "astro-icon/components";
 import AwardsSection from "@components/Press/AwardsSection.astro";
 import ColleagueTestimonials from "@components/Testimonials/ColleagueTestimonials.astro";
 import FeatureGalleryMarquee from "@components/Feature/FeatureGalleryMarquee.astro";
-import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
-import SocialCards from "@components/SocialCards/SocialCards.astro";
 
 import { loadHonors } from "../lib/honors";
 import { yearsBuilding, countryCount, talksCount } from "@data/siteStats";
@@ -229,36 +227,5 @@ const card =
         </div>
       </div>
     </section>
-
-    <!-- ============ CONNECT ============ -->
-    <section class="relative z-10 py-[clamp(3rem,7vw,5.5rem)]">
-      <div class="mx-auto max-w-2xl text-center">
-        <span class={eyebrow}>Connect with me</span>
-        <h2
-          class="font-display my-2 text-[clamp(1.9rem,3.6vw,2.7rem)] font-black tracking-[-0.03em]"
-        >
-          Let's connect
-        </h2>
-        <p
-          class="text-base-600 dark:text-base-400 mt-3 text-lg leading-relaxed"
-        >
-          I share thoughts on community building, developer ecosystems, and the
-          psychology behind what makes people contribute.
-        </p>
-      </div>
-      <div class="mt-10">
-        <SocialCards />
-      </div>
-      <p class="text-base-600 dark:text-base-400 mt-6 text-center text-sm">
-        Not sure that's really me? Check which accounts are mine on
-        <a href="/verify/">gui.do/verify</a>
-      </p>
-    </section>
-
-    <NewsletterForm
-      variant="card"
-      title="Subscribe to Guido's <span class='text-golden'>Golden</span> Nuggets"
-      description="Occasional field notes on <strong>community, experimentation, AI & open tech</strong>. The things I'd tell a friend over coffee, not a content calendar."
-    />
   </div>
 </BaseLayout>

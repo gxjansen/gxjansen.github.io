@@ -7,8 +7,6 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import WhereLive from "@components/Where/WhereLive.astro";
 import WhereOverview from "@components/Where/WhereOverview.astro";
 import { staticCountries } from "@components/Where/whereCountries";
-import { Icon } from "astro-icon/components";
-import { countryCount, talksCount } from "@data/siteStats";
 ---
 
 <BaseLayout
@@ -39,35 +37,6 @@ import { countryCount, talksCount } from "@data/siteStats";
           <WhereOverview countries={staticCountries} />
         </div>
       </WhereLive>
-
-      <aside
-        aria-labelledby="where-events"
-        class="border-primary-200 dark:border-primary-800 bg-primary-50/60 dark:bg-primary-950/40 mt-14 flex flex-col gap-5 rounded-2xl border p-6 sm:flex-row sm:items-center sm:p-8"
-      >
-        <Icon
-          name="tabler/outline/microphone"
-          class="text-primary-600 dark:text-primary-400 size-10 shrink-0"
-          aria-hidden="true"
-        />
-        <div class="flex-1">
-          <h2
-            id="where-events"
-            class="font-display mb-1 text-[1.2rem] font-extrabold tracking-[-0.02em]"
-          >
-            Most flags are from talks
-          </h2>
-          <p class="text-base-600 dark:text-base-400">
-            I've given {talksCount} talks across {countryCount} countries.
-            Conferences and meetups, mostly.
-          </p>
-        </div>
-        <a
-          href="/events/"
-          class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display inline-flex shrink-0 items-center gap-1.5 self-start rounded-full px-6 py-3 text-sm font-bold text-white no-underline transition sm:self-auto"
-        >
-          See all events <span aria-hidden="true">→</span>
-        </a>
-      </aside>
     </section>
   </div>
 </BaseLayout>

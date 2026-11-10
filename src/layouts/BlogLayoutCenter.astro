@@ -7,8 +7,8 @@ import BaseLayout from "./BaseLayout.astro";
 
 // components
 import Category from "@components/Category/Category.astro";
-import BlogNav from "@components/Blog/BlogNav.astro";
-import SubscribeBox from "@components/Newsletter/SubscribeBox.astro";
+import NextStep from "@components/NextStep/NextStep.astro";
+import { stepsForPost } from "@data/paths";
 import RelatedBlock from "@components/Related/RelatedBlock.astro";
 import { itemsForPost } from "@data/uses";
 import AuthorByline from "@components/Author/AuthorByline.astro";
@@ -90,6 +90,7 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
   image={heroImage}
   authorsData={authorsData}
   postFrontmatter={post.data}
+  nextStep={false}
 >
   <!-- Reading progress (pure-CSS scroll-timeline; hidden where unsupported) -->
   <div class="reading-progress" aria-hidden="true"></div>
@@ -175,39 +176,6 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
               <!-- Reading time -->
               <span class="text-base-600 dark:text-base-400">&bull;</span>
               <span aria-label="Estimated reading time">{readTime}</span>
-
-              <!-- Combined subscriber count (newsletter + AT Protocol).
-                   Filled client-side by NewsletterForm's fetchSubscriberCount()
-                   (the SubscribeBox at the foot of the post loads that script);
-                   stays hidden until the count resolves, so no layout shift.
-                   To remove from the byline, delete this block. -->
-              <span class="subscriber-count hidden" data-subscriber-count>
-                <span
-                  class="text-base-600 dark:text-base-400 mr-4"
-                  aria-hidden="true"
-                  >&bull;</span
-                >
-                <a
-                  href="#subscribe"
-                  class="count-link no-random-underline group/sc relative inline-flex items-center gap-2 align-middle"
-                >
-                  <span class="count-dots" aria-hidden="true">
-                    <span class="count-dot count-dot--gold"></span>
-                    <span class="count-dot count-dot--bsky"></span>
-                  </span>
-                  <span>
-                    <span
-                      class="subscriber-number text-base-700 dark:text-base-300 font-bold"
-                    ></span>
-                    <span class="text-base-500 dark:text-base-400"
-                      >subscribers</span
-                    >
-                  </span>
-                  <span class="count-tip" role="tooltip"
-                    >Email and open-web subscribers, combined.</span
-                  >
-                </a>
-              </span>
 
               <!-- Bluesky comment link (only if linked) -->
               {blueskyUri && (
@@ -316,10 +284,11 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
         <RelatedBlock tools={relatedTools} colophon={relatedColophon} />
       </div>}
 
-      <!-- Subscribe: email (Listmonk) + open-social-web referral. id="subscribe"
-           is the anchor target for the byline count link. -->
+      <!-- Next step (src/data/paths.ts): one CTA, chosen per session. -->
       <div class="mx-auto mt-12 max-w-2xl">
-        <SubscribeBox />
+        <NextStep
+          steps={stepsForPost(post.id, post.data.categories, post.data.next)}
+        />
       </div>
 
       <!-- Bluesky-powered comments (Juttu, self-hosted at comments.gui.do).
@@ -365,11 +334,6 @@ const filteredCategories = filterCategoriesByCount(categories, allPosts);
       </div>}
     </div>
   </div>
-
-  <!-- Navigation -->
-  <nav class="mx-auto max-w-2xl" aria-label="Blog post navigation">
-    <BlogNav currentSlug={post.id} posts={allPosts} />
-  </nav>
 
   <script>
     // Live Bluesky engagement count in the byline (stale-while-revalidate),

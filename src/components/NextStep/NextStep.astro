@@ -1,0 +1,87 @@
+---
+/**
+ * The single "next step" CTA at the end of a slashpage or post. Renders every
+ * candidate from src/data/paths.ts with only the first visible;
+ * src/scripts/paths-session.ts (loaded by BaseLayout) then shows the first one
+ * this tab hasn't seen yet. Each card carries a preview (NextStepMedia); the
+ * newsletter candidate is the Golden Nuggets signup card itself, so
+ * subscribing needs no extra click.
+ */
+import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
+import NextStepMedia from "./NextStepMedia.astro";
+import type { ResolvedStep } from "@data/paths";
+
+interface Props {
+  steps: ResolvedStep[];
+  class?: string;
+}
+
+const { steps, class: className } = Astro.props;
+const from = Astro.url.pathname;
+---
+
+{steps.length > 0 && <aside
+  id="next"
+  data-next-step
+  aria-label="Next step"
+  class:list={["scroll-mt-24", className]}
+>
+  {steps.map((step, i) => <div
+    data-next-item
+    data-key={step.key}
+    data-href={step.href}
+    hidden={i > 0}
+  >
+    {step.key === "newsletter" ? (
+      <NewsletterForm
+        variant="card"
+        title={step.heading}
+        description={step.body}
+        buttonText={step.button}
+      />
+    ) : (
+      <div
+        class="border-base-200 dark:border-base-800 from-gold/15 @container rounded-3xl border bg-gradient-to-br to-transparent p-[clamp(1.25rem,4vw,2.5rem)]"
+      >
+        <div
+          class="grid gap-6 @lg:grid-cols-[minmax(0,14rem)_1fr] @lg:items-center @lg:gap-8"
+        >
+          <a
+            href={step.href}
+            tabindex="-1"
+            aria-hidden="true"
+            class="block no-underline transition hover:opacity-90"
+          >
+            <NextStepMedia targetKey={step.key} href={step.href} />
+          </a>
+          <div class="min-w-0">
+            <span
+              class="text-love-light dark:text-rose font-hand mb-3 inline-block origin-left -rotate-2 text-[1.5rem] leading-none"
+              >what's next</span
+            >
+            <h2
+              class="font-display mt-1 text-[clamp(1.5rem,3.2vw,2.2rem)] leading-[1.1] font-black tracking-[-0.03em]"
+            >
+              {step.heading}
+            </h2>
+            <p
+              class="text-base-600 dark:text-base-400 mt-2 max-w-[48ch] leading-relaxed"
+            >
+              {step.body}
+            </p>
+            <a
+              href={step.href}
+              data-next-link
+              data-umami-event="next-step-click"
+              data-umami-event-from={from}
+              data-umami-event-to={step.key}
+              class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-400 font-display mt-5 inline-flex items-center gap-1.5 rounded-full px-6 py-3 text-sm font-bold text-white no-underline transition"
+            >
+              {step.button} <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>)}
+</aside>}

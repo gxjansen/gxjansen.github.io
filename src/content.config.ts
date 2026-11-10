@@ -151,6 +151,9 @@ const post = defineCollection({
           total: z.number(), // total episodes, for "Part N of M" labelling
         })
         .optional(),
+      // Next-step CTA override: ordered target keys from src/data/paths.ts.
+      // Without it the post uses its cluster's chain.
+      next: z.array(z.string()).optional(),
       draft: z.boolean().default(false),
       // Bluesky AT URI for comments (e.g., "at://did:plc:xxx/app.bsky.feed.post/yyy")
       blueskyUri: z.string().optional(),
