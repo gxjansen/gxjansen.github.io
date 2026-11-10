@@ -1,0 +1,126 @@
+---
+/**
+ * /pfp: profile pictures Guido has used over the years (https://slashpages.net).
+ * All photos live on Grain and load from the Bluesky CDN (src/lib/pfp.ts):
+ * a fixed list plus galleries tagged #pfp after a cutoff. Each avatar is a
+ * round crop centred on the face; the link opens its Grain gallery. All rights
+ * reserved: reusable headshots live on /speaker.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Flag from "@components/Flag/Flag.astro";
+import {
+  loadPfps,
+  loadRecentPhotos,
+  groupByYear,
+  thumbUrl,
+  galleryUrl,
+} from "../lib/pfp";
+
+const [pfps, recent] = await Promise.all([loadPfps(), loadRecentPhotos(12)]);
+const years = groupByYear(pfps).map(([year, items]) => ({ year, items }));
+const total = pfps.length;
+const muted = "text-base-600 dark:text-base-400";
+---
+
+<BaseLayout
+  title="Profile pictures"
+  description="Every profile picture I've used or could have used since 2008, grouped by year. Round crops, click for the full photo. Mostly selfies, some cats."
+>
+  <div class="home pfp-page">
+    <section
+      class="relative z-10 pt-[clamp(6rem,9vw,7rem)] pb-[clamp(3rem,7vw,5.5rem)]"
+    >
+      <div class="page-hero">
+        <span class="hand-note">yes, really</span>
+        <h1
+          class="font-display mt-1 mb-4 text-[clamp(2.2rem,5vw,3.2rem)] leading-[1.05] font-black tracking-[-0.03em]"
+        >
+          Profile pictures
+        </h1>
+        <p class={`${muted} text-lg leading-relaxed`}>
+          Photos I used, or could have used, as my profile picture, from 2008 to
+          now. Mostly selfies from travel, conferences, notable places and some
+          cats. Watch the hairline retreat and the beard negotiate.
+        </p>
+        <p class={`${muted} mt-4 leading-relaxed`} id="rights">
+          All rights reserved, these are not for reuse. Need a photo of me for
+          an event or article? Grab one of the
+          <a href="/speaker/#headshots">headshots on my speaker page</a>.
+        </p>
+      </div>
+
+      {years.map(({ year, items }) => <section
+        class="mt-12"
+        aria-labelledby={`pfp-${year}`}
+      >
+        <h2
+          id={`pfp-${year}`}
+          class="font-display mb-5 text-[1.35rem] font-extrabold tracking-[-0.02em]"
+        >
+          {year}
+        </h2>
+        <ul
+          class="grid grid-cols-[repeat(auto-fill,minmax(8.5rem,1fr))] gap-6"
+          role="list"
+        >
+          {items.map((p) => <li>
+            <a
+              href={galleryUrl(p)}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group no-random-underline block"
+              aria-label={`${p.alt} (on Grain, opens in a new tab)`}
+            >
+              <img
+                src={thumbUrl(p)}
+                alt={p.alt}
+                width={p.width}
+                height={p.height}
+                loading="lazy"
+                decoding="async"
+                class="border-base-200 dark:border-base-800 aspect-square w-full rounded-full border object-cover shadow-sm transition duration-300 group-hover:scale-105 group-hover:shadow-lg"
+                style={`object-position: ${p.focus}`}
+              />
+            </a>
+            {(p.place || p.country) && <p
+              class="text-base-600 dark:text-base-400 mt-2 text-center text-sm"
+            >
+              {p.country && <Flag code={p.country} class="mr-1" />}
+              {p.place}
+            </p>}
+          </li>)}
+        </ul>
+      </section>)}
+
+      <section class="mt-16" aria-label="More photos on Grain">
+        <ul
+          class="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6"
+          role="list"
+        >
+          {recent.map((r) => <li>
+            <a
+              href={galleryUrl(r)}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group no-random-underline block overflow-hidden rounded-lg"
+              aria-label={`${r.alt || "Photo"} (on Grain, opens in a new tab)`}
+            >
+              <img
+                src={thumbUrl(r)}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="aspect-square w-full object-cover transition duration-300 group-hover:scale-105"
+              />
+            </a>
+          </li>)}
+        </ul>
+        <p class={`${muted} mt-4`}>
+          Want more? <a href="/photos/">All my photos since 2005</a> - around
+          7,200 of them.
+        </p>
+      </section>
+      <p class={`${muted} mt-2 text-sm`}>{total} photos, © Guido X Jansen.</p>
+    </section>
+  </div>
+</BaseLayout>
