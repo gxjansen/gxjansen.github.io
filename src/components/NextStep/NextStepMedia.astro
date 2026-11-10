@@ -15,6 +15,8 @@ import headshotSpeaker from "@images/headshot/08.02.2022_Spryker_CEO_0278.jpg";
 import headshotContact from "@images/headshot/08.02.2022_Spryker_CEO_2669.jpg";
 import crocafe from "@images/crocafe.webp";
 import couch from "@images/guido-couch.jpg";
+import { getReading } from "../../lib/bookhive";
+import { getPhotoGalleries } from "../../lib/grainPhotos";
 import { domainOverrides } from "@data/domains";
 import { slashPages } from "@data/slashes";
 import { canon } from "@data/canon";
@@ -29,6 +31,10 @@ interface Props {
 
 const { targetKey, href } = Astro.props;
 
+// Old-commerce topics stay off the paths (see paths design notes).
+const legacy =
+  /magento|spryker|dutchento|joomla|sheeptank|meet ?magento|mm\d\d/i;
+
 const photos: Partial<Record<TargetKey, ImageMetadata>> = {
   about: headshotAbout,
   speaker: headshotSpeaker,
@@ -37,9 +43,6 @@ const photos: Partial<Record<TargetKey, ImageMetadata>> = {
   now: couch,
   crocafe,
 };
-
-// Old-commerce topics stay off the paths (see paths design notes).
-const legacy = /magento|spryker|dutchento|joomla|sheeptank/i;
 
 // Real content from the target page, shown as chips.
 const chips: Partial<Record<TargetKey, string[]>> = {
@@ -59,6 +62,39 @@ const chips: Partial<Record<TargetKey, string[]>> = {
     .map((i) => i.name)
     .filter((n) => n.length <= 22),
 };
+
+// Galleries the text filter can't catch (legacy branding in the photo itself).
+const HIDDEN_GALLERIES = new Set(["3mwiuo62a3o2t"]); // Magento clogs
+
+// Live previews, fetched once per build and shared by every page (both
+// helpers return empty data when the network fails, so the card still renders).
+const g = globalThis as {
+  __nextStepBooks?: ReturnType<typeof getReading>;
+  __nextStepPhotos?: ReturnType<typeof getPhotoGalleries>;
+};
+const bookCovers =
+  targetKey === "bookshelf"
+    ? await (g.__nextStepBooks ??= getReading()).then(({ active, recent }) =>
+        [...active, ...recent]
+          .map((b) => b.coverUrl)
+          .filter((u): u is string => Boolean(u))
+          .slice(0, 4),
+      )
+    : [];
+const photoThumbs =
+  targetKey === "photos"
+    ? await (g.__nextStepPhotos ??= getPhotoGalleries(12)).then((galleries) =>
+        galleries
+          .filter(
+            (gal) =>
+              !HIDDEN_GALLERIES.has(gal.rkey) &&
+              !legacy.test(`${gal.title} ${gal.description}`),
+          )
+          .flatMap((gal) => gal.photos.slice(0, 1))
+          .map((ph) => ph.thumb)
+          .slice(0, 4),
+      )
+    : [];
 
 // Hand-picked: most covers are from the commerce era and some show old
 // employers, so the newest list isn't usable as is.
@@ -100,6 +136,8 @@ const icons: Partial<Record<TargetKey, string>> = {
   appearances: "tabler/outline/microphone",
   retainer: "tabler/outline/briefcase",
   follow: "tabler/brand-bluesky",
+  bookshelf: "tabler/outline/book",
+  photos: "tabler/outline/grain",
 };
 
 const postSlug = href.match(/^\/post\/([^/]+)\/$/)?.[1];
@@ -166,6 +204,38 @@ const frame = "aspect-[4/3] w-full overflow-hidden rounded-2xl";
       />
     </li>)}
   </ul>
+) : bookCovers.length > 0 ? (
+  <div class="grid grid-cols-4 items-end gap-2" aria-hidden="true">
+    {bookCovers.map((src, i) => (
+      <img
+        src={src}
+        alt=""
+        width="90"
+        height="135"
+        loading="lazy"
+        decoding="async"
+        referrerpolicy="no-referrer"
+        class:list={[
+          "aspect-[2/3] w-full rounded-md object-cover shadow-md",
+          i % 2 ? "-rotate-2" : "rotate-1",
+        ]}
+      />
+    ))}
+  </div>
+) : photoThumbs.length > 0 ? (
+  <div class="grid grid-cols-2 gap-2" aria-hidden="true">
+    {photoThumbs.map((src) => (
+      <img
+        src={src}
+        alt=""
+        width="160"
+        height="160"
+        loading="lazy"
+        decoding="async"
+        class="aspect-square w-full rounded-xl object-cover shadow-sm"
+      />
+    ))}
+  </div>
 ) : covers.length > 0 ? (
   <div class="grid grid-cols-2 gap-2" aria-hidden="true">
     {covers.map((src) => (

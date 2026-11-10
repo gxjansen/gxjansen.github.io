@@ -35,6 +35,18 @@ export interface PagePath {
 }
 
 export const targets = {
+  bookshelf: {
+    href: "/bookshelf/",
+    heading: "What I'm reading",
+    body: "My current, finished, and to-read books, synced from Bookhive.",
+    button: "Browse my bookshelf",
+  },
+  photos: {
+    href: "/photos/",
+    heading: "Every photo I've taken since 2005",
+    body: "Travel and events, all of it on Grain, AT Protocol photo app.",
+    button: "See the photos",
+  },
   about: {
     href: "/about/",
     heading: "Who's behind this site",
@@ -127,7 +139,7 @@ export const targets = {
   },
   "post-atmosphere-conf": {
     href: "/post/atmosphere-conf-2026/",
-    heading: "370 people in Vancouver, 1000+ online",
+    heading: "370 people in Vancouver, 500 online",
     body: "I went to ATmosphere Conf 2026 and wrote up the highlights: an internet where users own their data.",
     button: "Read my notes",
   },
@@ -225,7 +237,7 @@ export const pages: Record<string, PagePath> = {
   // Discover: side doors.
   "/where/": {
     stage: "discover",
-    next: ["events", "speaker", "newsletter"],
+    next: ["events", "photos", "speaker", "newsletter"],
     overrides: {
       events: {
         heading: "Most flags are from talks",
@@ -251,9 +263,15 @@ export const pages: Record<string, PagePath> = {
     stage: "discover",
     next: ["post-identity", "projects", "follow"],
   },
-  "/pfp/": { stage: "discover", next: ["about", "now", "newsletter"] },
+  "/pfp/": {
+    stage: "discover",
+    next: ["about", "photos", "now", "newsletter"],
+  },
   "/bookshelf/": { stage: "discover", next: ["canon", "now", "newsletter"] },
-  "/canon/": { stage: "discover", next: ["about", "now", "newsletter"] },
+  "/canon/": {
+    stage: "discover",
+    next: ["about", "bookshelf", "now", "newsletter"],
+  },
   "/ama/": { stage: "discover", next: ["now", "about", "newsletter"] },
   "/blank/": { stage: "discover", next: ["slashes", "about", "newsletter"] },
   "/slashes/": { stage: "discover", next: ["now", "about", "newsletter"] },
@@ -274,7 +292,10 @@ export const pages: Record<string, PagePath> = {
 
   // Know: who Guido is and what he does now.
   "/about/": { stage: "know", next: ["now", "projects", "newsletter"] },
-  "/now/": { stage: "know", next: ["projects", "events", "follow"] },
+  "/now/": {
+    stage: "know",
+    next: ["projects", "events", "bookshelf", "follow"],
+  },
   "/projects/": {
     stage: "know",
     next: ["post-barazo", "post-own-network", "follow"],

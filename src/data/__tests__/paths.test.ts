@@ -25,14 +25,20 @@ import { slashPages, pageHref } from "../slashes";
 const SRC = path.resolve(__dirname, "../..");
 const PAGES_DIR = path.join(SRC, "pages");
 const POSTS_DIR = path.join(SRC, "content/post");
+const REDIRECTS = fs.readFileSync(
+  path.resolve(SRC, "../public/_redirects"),
+  "utf8",
+);
 const ORDER: Record<Stage, number> = { discover: 0, know: 1, trust: 2, act: 3 };
 
 /** Pages that are the action themselves, or keep their own CTAs. */
 const NO_NEXT_STEP = new Set(["/", "/follow/", "/contact/", "/retainer/"]);
 
-/** True when a route exists: a page file, or a post folder. */
+/** True when a route exists: a page file, a post folder, or a redirect rule. */
 function routeExists(href: string): boolean {
   const p = href.replace(/^\/|\/$/g, "");
+  if (REDIRECTS.split("\n").some((l) => l.split(/\s+/)[0] === `/${p}`))
+    return true;
   const post = p.match(/^post\/(.+)$/);
   if (post) return fs.existsSync(path.join(POSTS_DIR, post[1]));
   if (p.endsWith("*"))
