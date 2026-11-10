@@ -251,6 +251,7 @@ export const pages: Record<string, PagePath> = {
     stage: "discover",
     next: ["post-identity", "projects", "follow"],
   },
+  "/pfp/": { stage: "discover", next: ["about", "now", "newsletter"] },
   "/bookshelf/": { stage: "discover", next: ["canon", "now", "newsletter"] },
   "/canon/": { stage: "discover", next: ["about", "now", "newsletter"] },
   "/ama/": { stage: "discover", next: ["now", "about", "newsletter"] },
