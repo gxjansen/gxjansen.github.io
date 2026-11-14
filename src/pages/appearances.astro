@@ -8,7 +8,6 @@ import VideoSection from "@components/Press/VideoSection.astro";
 import PodcastSection from "@components/Press/PodcastSection.astro";
 import ArticleSection from "@components/Press/ArticleSection.astro";
 import ListingsSection from "@components/Press/ListingsSection.astro";
-import SifaCTA from "@components/Press/SifaCTA.astro";
 import UpcomingEvents from "@components/Events/UpcomingEvents.astro";
 import { getAllEvents } from "@utils/eventUtils";
 
@@ -161,8 +160,6 @@ const hasUpcoming = events.some((e) => new Date(e.date) >= startOfToday);
     {hasUpcoming && <section class="relative z-10 mt-16">
       <UpcomingEvents events={events} maxEvents={2} />
     </section>}
-
-    <SifaCTA />
   </div>
 </BaseLayout>
 

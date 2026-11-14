@@ -10,7 +10,6 @@ import { fetchEngagement } from "../../lib/sifaActivity";
 
 // components
 import BaseLayout from "@layouts/BaseLayout.astro";
-import NewsletterForm from "@components/Newsletter/NewsletterForm.astro";
 import { isPublished } from "../../lib/isPublished";
 import { accentInk } from "../../lib/accentInk";
 
@@ -174,17 +173,6 @@ const categories = [...counts.entries()]
       >
         No articles in this category yet.
       </p>
-    </section>
-
-    <section
-      class="relative z-10 pb-[clamp(3rem,7vw,5.5rem)]"
-      aria-label="Newsletter"
-    >
-      <NewsletterForm
-        variant="card"
-        title="Subscribe to Guido's <span class='text-golden'>Golden</span> Nuggets"
-        description="Occasional field notes on <strong>community, experimentation, AI & open tech</strong>. The things I'd tell a friend over coffee, not a content calendar."
-      />
     </section>
   </div>
 </BaseLayout>
