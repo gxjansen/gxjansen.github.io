@@ -2,6 +2,15 @@ import type { PressCoverage } from "../types/press";
 
 export const pressCoverage: PressCoverage[] = [
   {
+    title: "Tu reputación digital es un activo. ¿En el balance de quién está?",
+    language: "spanish",
+    publicationDate: "2026-11-21",
+    youtubeLink: "",
+    spotifyEmbedId: "",
+    articleUrl: "https://jorgesegura.com/at-protocol-reputacion-digital/",
+    personOrganization: "Jorge Segura",
+  },
+  {
     title: "Why community matters now",
     language: "english",
     publicationDate: "2026-08-20",
