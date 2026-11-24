@@ -49,7 +49,7 @@
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
     "altcha-lib": "^2.6.0",
-    "astro": "^7.4.1",
+    "astro": "^7.4.12",
     "astro-icon": "^1.2.0",
     "date-fns": "^4.4.0",
     "fast-xml-parser": "^5.9.3",
